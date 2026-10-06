@@ -1,0 +1,3250 @@
+{
+  "strict_gan_top_verdict": {
+    "status": "FAIL",
+    "older_passed": 13,
+    "older_required": 19,
+    "older_failed": 6,
+    "native_skipped": 3,
+    "auxiliary_compatibility_controls_excluded": true
+  },
+  "candidate": "h_n05r06_mixup_c0p01_lr15",
+  "verification_status": "FAIL",
+  "completed_at_utc": "2026-09-24T17:26:54.284273+00:00",
+  "scope": "Frozen older-toy cold baseline; exact archived candidate plus explicit faithful host plumbing. Native tests skipped after older failures.",
+  "candidate_declaration": {
+    "config": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 2048,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "conditioning": "scalar",
+      "d_hidden": 128,
+      "d_lr_mult": 1.0,
+      "device": "cpu",
+      "distance_reduction": "sum",
+      "early_eval_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100
+      ],
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "eval_interval": 250,
+      "eval_samples": 20000,
+      "fourier": 3,
+      "fused_adam": false,
+      "g_hidden": 128,
+      "gan_mode": "rp",
+      "input_noise_anneal_end": 1.0,
+      "input_noise_std": 0.5,
+      "log_interval": 250,
+      "loss_type": "logistic",
+      "lr": 0.0015,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 1.0,
+      "model": "gan",
+      "n_hidden": 3,
+      "name": "h_n05r06_mixup_c0p01_lr15",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.2,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.6,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "seed": 1234,
+      "sigma_rel": 0.0,
+      "snapshot_interval": 250,
+      "snapshot_samples": 4096,
+      "stable_evals": 5,
+      "standardize": true,
+      "steps": 7000,
+      "threads": 1,
+      "total_steps": 7000,
+      "toy100_model": "affine_square_v1",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "options": {
+      "consistency": "mixup",
+      "consistency_coeff": 0.01,
+      "consistency_sigma": 0.1,
+      "noise": "fixed",
+      "sigma": 0.05,
+      "smooth": 0.0
+    },
+    "tag": "h_n05r06_mixup_c0p01_lr15"
+  },
+  "cold_replay": {
+    "passed": 10,
+    "required": 10,
+    "seconds": 77.2201676890254,
+    "all_live_metrics_exactly_match_original": true,
+    "source_count": 125,
+    "audit": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-evidence-audit.json",
+    "sample_regraded": 9,
+    "sample_missing": [
+      "residual_student"
+    ]
+  },
+  "strict_fail_fast_22": {
+    "passed": 10,
+    "failed": 1,
+    "skipped": 11,
+    "first_failure": "unipolar",
+    "cases": [
+      {
+        "task": "trajectory",
+        "status": "PASS",
+        "budget": 400,
+        "passing_suffix": 22,
+        "required_suffix": 5,
+        "live": {
+          "identity_mse": 0.002905043074861169
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.2925,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.3904342709574848,
+            "confirmed_step": 117,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 22,
+            "passing_suffix": 22,
+            "stable_from_seconds": 1.1731004789471626,
+            "stable_from_step": 50
+          },
+          "metrics": [
+            {
+              "margin": 0.01709495692513883,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.002905043074861169
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 2.4958376279100776,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/episodes/h_n05r06_mixup_c0p01_lr15__trajectory.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/signal-policy.json.gz"
+      },
+      {
+        "task": "mode_hold",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 5,
+        "required_suffix": 5,
+        "live": {
+          "hq": 0.999267578125,
+          "modes": 8
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 1.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 7.586279727052897,
+            "confirmed_step": 1200,
+            "first_pass_step": 700,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 8,
+            "passing_suffix": 5,
+            "stable_from_seconds": 6.285874668043107,
+            "stable_from_step": 1000
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 8,
+              "value": 8
+            },
+            {
+              "margin": 0.09926757812499998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.999267578125
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 7.728531718021259,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/episodes/h_n05r06_mixup_c0p01_lr15__mode_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/signal-policy.json.gz"
+      },
+      {
+        "task": "residual_student",
+        "status": "PASS",
+        "budget": 400,
+        "passing_suffix": 22,
+        "required_suffix": 5,
+        "live": {
+          "identity_mse": 0.0029311643447726965,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.2925,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 0.4065726329572499,
+            "confirmed_step": 117,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 22,
+            "passing_suffix": 22,
+            "stable_from_seconds": 0.17545936605893075,
+            "stable_from_step": 50
+          },
+          "metrics": [
+            {
+              "margin": 0.017068835655227304,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.0029311643447726965
+            },
+            {
+              "margin": 0.0,
+              "metric": "success_rate",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 1.0
+            },
+            {
+              "margin": 0.0,
+              "metric": "wrong_pad_rate",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.0,
+              "value": 0.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 1.4810718530789018,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/episodes/h_n05r06_mixup_c0p01_lr15__residual_student.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/signal-policy.json.gz"
+      },
+      {
+        "task": "img_stripes2",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 20,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.0,
+          "hq": 0.96875,
+          "mean_rmse": 0.03971010074019432,
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.46875,
+            0.5
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.375,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.2584907130803913,
+            "confirmed_step": 225,
+            "first_pass_step": 125,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 20,
+            "stable_from_seconds": 1.2599991189781576,
+            "stable_from_step": 125
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.200263592181727,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/episodes/h_n05r06_mixup_c0p01_lr15__img_stripes2.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/signal-policy.json.gz"
+      },
+      {
+        "task": "img_bars4",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 18,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.0,
+          "hq": 1.0,
+          "mean_rmse": 0.030437761917710304,
+          "mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.4583333333333333,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.8437789231538773,
+            "confirmed_step": 275,
+            "first_pass_step": 175,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 18,
+            "passing_suffix": 18,
+            "stable_from_seconds": 1.7946479651145637,
+            "stable_from_step": 175
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.306658036075532,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/episodes/h_n05r06_mixup_c0p01_lr15__img_bars4.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_overlap",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 14,
+        "required_suffix": 5,
+        "live": {
+          "covariance_error": 0.16221539676189423,
+          "mean_error": 0.022280681878328323,
+          "sample_count": 4096,
+          "sw1_normalized": 0.0558607225876382,
+          "target_scale": 0.8501437306404114
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.625,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 5.313141366001219,
+            "confirmed_step": 750,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 21,
+            "passing_suffix": 14,
+            "stable_from_seconds": 3.9119449520949274,
+            "stable_from_step": 550
+          },
+          "metrics": [
+            {
+              "margin": 0.1241392774123618,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.0558607225876382
+            },
+            {
+              "margin": 0.12771931812167167,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.022280681878328323
+            },
+            {
+              "margin": 0.2877846032381058,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.16221539676189423
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 8.723123108036816,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/episodes/h_n05r06_mixup_c0p01_lr15__vector_overlap.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/signal-policy.json.gz"
+      },
+      {
+        "task": "img_blobs4",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 12,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 1.0,
+          "mean_rmse": 0.030816933140158653,
+          "mode_fractions": [
+            0.25,
+            0.25,
+            0.21875,
+            0.28125
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.25,
+            0.25,
+            0.21875,
+            0.28125
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.7083333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.25562573201023,
+            "confirmed_step": 425,
+            "first_pass_step": 325,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 12,
+            "passing_suffix": 12,
+            "stable_from_seconds": 3.265821465989575,
+            "stable_from_step": 325
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.223722527967766,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/episodes/h_n05r06_mixup_c0p01_lr15__img_blobs4.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/signal-policy.json.gz"
+      },
+      {
+        "task": "img_intensity2",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 9,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 0.96875,
+          "mean_rmse": 0.04345317929983139,
+          "mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.53125,
+            0.4375
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.8333333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.9639373200479895,
+            "confirmed_step": 500,
+            "first_pass_step": 275,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 11,
+            "passing_suffix": 9,
+            "stable_from_seconds": 3.976267390884459,
+            "stable_from_step": 400
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.161604217020795,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/episodes/h_n05r06_mixup_c0p01_lr15__img_intensity2.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_unequal_mass",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 14,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            2423,
+            1226,
+            380,
+            67
+          ],
+          "component_covariance_error": 0.41707606986165047,
+          "component_covariance_errors": [
+            0.19064335525035858,
+            0.28675827383995056,
+            0.29806995391845703,
+            0.8928326964378357
+          ],
+          "component_mass": [
+            0.591552734375,
+            0.29931640625,
+            0.0927734375,
+            0.016357421875
+          ],
+          "component_min_eigen_ratio": 0.5786148905754089,
+          "covariance_error": 0.05248043313622475,
+          "hq": 0.98779296875,
+          "mass_tv": 0.04155272990465164,
+          "mean_error": 0.05446142330765724,
+          "min_mass_ratio": 0.713641881942749,
+          "sample_count": 4096,
+          "sw1_normalized": 0.054239543613519826,
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "target_scale": 1.7593294382095337
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.625,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 13.266232670051977,
+            "confirmed_step": 750,
+            "first_pass_step": 550,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 14,
+            "passing_suffix": 14,
+            "stable_from_seconds": 9.665781163144857,
+            "stable_from_step": 550
+          },
+          "metrics": [
+            {
+              "margin": 0.12576045638648017,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.054239543613519826
+            },
+            {
+              "margin": 0.10844727009534835,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.04155272990465164
+            },
+            {
+              "margin": 0.13779296875000002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.98779296875
+            },
+            {
+              "margin": 0.4329239301383495,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.41707606986165047
+            },
+            {
+              "margin": 0.4286148905754089,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.5786148905754089
+            },
+            {
+              "margin": 0.463641881942749,
+              "metric": "min_mass_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.25,
+              "value": 0.713641881942749
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 21.450751119991764,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/episodes/h_n05r06_mixup_c0p01_lr15__vector_unequal_mass.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_unequal_width",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 16,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            1084,
+            920,
+            1096,
+            996
+          ],
+          "component_covariance_error": 0.30726394802331924,
+          "component_covariance_errors": [
+            0.16137725114822388,
+            0.55451500415802,
+            0.3428144156932831,
+            0.17034912109375
+          ],
+          "component_mass": [
+            0.2646484375,
+            0.224609375,
+            0.267578125,
+            0.2431640625
+          ],
+          "component_min_eigen_ratio": 0.3596749007701874,
+          "covariance_error": 0.031100142747163773,
+          "hq": 0.966064453125,
+          "mass_tv": 0.0322265625,
+          "mean_error": 0.011034850031137466,
+          "min_mass_ratio": 0.8984375,
+          "sample_count": 4096,
+          "sw1_normalized": 0.02992012586927343,
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "target_scale": 2.1343955993652344
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5416666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 5.517780018039048,
+            "confirmed_step": 650,
+            "first_pass_step": 450,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": 3.8147500690538436,
+            "stable_from_step": 450
+          },
+          "metrics": [
+            {
+              "margin": 0.15007987413072657,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.02992012586927343
+            },
+            {
+              "margin": 0.1177734375,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.0322265625
+            },
+            {
+              "margin": 0.11606445312500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.966064453125
+            },
+            {
+              "margin": 0.5427360519766807,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.30726394802331924
+            },
+            {
+              "margin": 0.20967490077018738,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.3596749007701874
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 10.394028584938496,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/episodes/h_n05r06_mixup_c0p01_lr15__vector_unequal_width.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/signal-policy.json.gz"
+      },
+      {
+        "task": "unipolar",
+        "status": "FAIL",
+        "budget": 400,
+        "passing_suffix": 1,
+        "required_suffix": 5,
+        "live": {
+          "cover": 0.9221509485515078,
+          "neu_hold": 0.8503267019987106,
+          "off_caption": 2.3800328610086637e-05
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 400,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 1,
+            "passing_suffix": 1,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.07215094855150783,
+              "metric": "cover",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9221509485515078
+            },
+            {
+              "margin": 0.049976199671389915,
+              "metric": "off_caption",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 2.3800328610086637e-05
+            },
+            {
+              "margin": 0.00032670199871065453,
+              "metric": "neu_hold",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.8503267019987106
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 2.889198988908902,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/episodes/h_n05r06_mixup_c0p01_lr15__unipolar.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/signal-policy.json.gz"
+      },
+      {
+        "task": "two_pole",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "cover_leftover",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "mid_scale_identity",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "vector_anisotropic",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "vector_two_broad",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "vector_spiral",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "unused_token_hold",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "ae_gan_hold",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "grid100",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "rotated100",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      },
+      {
+        "task": "staggered100",
+        "status": "SKIPPED",
+        "reason": "Strict expansion stopped after unipolar sustained-gate FAIL; any later older-host diagnostic is separately labeled."
+      }
+    ]
+  },
+  "authorized_post_failure_diagnostic": {
+    "passed": 3,
+    "failed": 5,
+    "cases": [
+      {
+        "task": "two_pole",
+        "status": "FAIL",
+        "budget": 80,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "grad_med": 0.023560509085655212,
+          "mean_abs": 0.032636743038892746
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.26736325696110724,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.032636743038892746
+            },
+            {
+              "margin": 0.9764394909143448,
+              "metric": "grad_med",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 0.023560509085655212
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.44560542826851207,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 1.8397736509796232,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/episodes/h_n05r06_mixup_c0p01_lr15__two_pole.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/signal-policy.json.gz"
+      },
+      {
+        "task": "cover_leftover",
+        "status": "FAIL",
+        "budget": 800,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "content_kept": 0.44192427135136014,
+          "leak_ratio": 0.010603182094918425,
+          "pole_rel_err_minus": 0.454183965921402,
+          "pole_rel_err_plus": 0.4156089723110199,
+          "same_dir": 0.07286213454282496,
+          "u_kept": 0.4491127684504617
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.40088723154953826,
+              "metric": "u_kept",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.4491127684504617
+            },
+            {
+              "margin": -0.30807572864863986,
+              "metric": "content_kept",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.75,
+              "value": 0.44192427135136014
+            },
+            {
+              "margin": 0.1893968179050816,
+              "metric": "leak_ratio",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.2,
+              "value": 0.010603182094918425
+            },
+            {
+              "margin": -0.2156089723110199,
+              "metric": "pole_rel_err_plus",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.2,
+              "value": 0.4156089723110199
+            },
+            {
+              "margin": -0.25418396592140197,
+              "metric": "pole_rel_err_minus",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.2,
+              "value": 0.454183965921402
+            },
+            {
+              "margin": 0.17713786545717503,
+              "metric": "same_dir",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.25,
+              "value": 0.07286213454282496
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.5385607277462332,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 5.698647012002766,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/episodes/h_n05r06_mixup_c0p01_lr15__cover_leftover.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/signal-policy.json.gz"
+      },
+      {
+        "task": "mid_scale_identity",
+        "status": "FAIL",
+        "budget": 800,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "concept_cos_minus": 0.9888538122177124,
+          "concept_cos_plus": 0.9914860129356384,
+          "concept_mag_minus": 0.9039037227630615,
+          "concept_mag_plus": 0.9282889366149902,
+          "identity_at_0": 0.8062138743042017,
+          "identity_at_mid": 0.9901884256285347
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.14148601293563845,
+              "metric": "concept_cos_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9914860129356384
+            },
+            {
+              "margin": 0.13885381221771242,
+              "metric": "concept_cos_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9888538122177124
+            },
+            {
+              "margin": 0.17828893661499023,
+              "metric": "concept_mag_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9282889366149902
+            },
+            {
+              "margin": 0.32171106338500977,
+              "metric": "concept_mag_plus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9282889366149902
+            },
+            {
+              "margin": 0.15390372276306152,
+              "metric": "concept_mag_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9039037227630615
+            },
+            {
+              "margin": 0.3460962772369385,
+              "metric": "concept_mag_minus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9039037227630615
+            },
+            {
+              "margin": -0.04378612569579832,
+              "metric": "identity_at_0",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.8062138743042017
+            },
+            {
+              "margin": 0.14018842562853473,
+              "metric": "identity_at_mid",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9901884256285347
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.006439136131735047,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 9.557817183900625,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/episodes/h_n05r06_mixup_c0p01_lr15__mid_scale_identity.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_anisotropic",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 18,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            1333,
+            1298,
+            1465
+          ],
+          "component_covariance_error": 0.27509061495463055,
+          "component_covariance_errors": [
+            0.19204339385032654,
+            0.30763325095176697,
+            0.3255952000617981
+          ],
+          "component_mass": [
+            0.325439453125,
+            0.31689453125,
+            0.357666015625
+          ],
+          "component_min_eigen_ratio": 0.3512115478515625,
+          "covariance_error": 0.05937659367918968,
+          "hq": 0.982177734375,
+          "mass_tv": 0.024332687258720398,
+          "mean_error": 0.08043099194765091,
+          "min_mass_ratio": 0.95068359375,
+          "sample_count": 4096,
+          "sw1_normalized": 0.05886664414600428,
+          "target_mass": [
+            0.3333333432674408,
+            0.3333333432674408,
+            0.3333333432674408
+          ],
+          "target_scale": 2.032285690307617
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.4583333333333333,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 6.209144610911608,
+            "confirmed_step": 550,
+            "first_pass_step": 350,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 18,
+            "passing_suffix": 18,
+            "stable_from_seconds": 4.521219899877906,
+            "stable_from_step": 350
+          },
+          "metrics": [
+            {
+              "margin": 0.1211333558539957,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.05886664414600428
+            },
+            {
+              "margin": 0.1256673127412796,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.024332687258720398
+            },
+            {
+              "margin": 0.13217773437500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.982177734375
+            },
+            {
+              "margin": 0.5749093850453695,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.27509061495463055
+            },
+            {
+              "margin": 0.2012115478515625,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.3512115478515625
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 12.062739932909608,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/episodes/h_n05r06_mixup_c0p01_lr15__vector_anisotropic.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_two_broad",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 23,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            2087,
+            2009
+          ],
+          "component_covariance_error": 0.13363225758075714,
+          "component_covariance_errors": [
+            0.16604630649089813,
+            0.10121820867061615
+          ],
+          "component_mass": [
+            0.509521484375,
+            0.490478515625
+          ],
+          "component_min_eigen_ratio": 0.8253279328346252,
+          "covariance_error": 0.09456690400838852,
+          "hq": 0.996337890625,
+          "mass_tv": 0.009521484375,
+          "mean_error": 0.029293308034539223,
+          "min_mass_ratio": 0.98095703125,
+          "sample_count": 4096,
+          "sw1_normalized": 0.04008360435801821,
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "target_scale": 1.0555585622787476
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.25,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.8173313280567527,
+            "confirmed_step": 300,
+            "first_pass_step": 100,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": 1.741561264032498,
+            "stable_from_step": 100
+          },
+          "metrics": [
+            {
+              "margin": 0.13991639564198177,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.04008360435801821
+            },
+            {
+              "margin": 0.140478515625,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.009521484375
+            },
+            {
+              "margin": 0.14633789062500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.996337890625
+            },
+            {
+              "margin": 0.7163677424192428,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.13363225758075714
+            },
+            {
+              "margin": 0.6753279328346252,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.8253279328346252
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 7.85694431187585,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/episodes/h_n05r06_mixup_c0p01_lr15__vector_two_broad.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_spiral",
+        "status": "PASS",
+        "budget": 1600,
+        "passing_suffix": 23,
+        "required_suffix": 5,
+        "live": {
+          "covariance_error": 0.06957034021615982,
+          "mean_error": 0.03792315348982811,
+          "sample_count": 4096,
+          "sw1_normalized": 0.03665300463436468,
+          "target_scale": 1.224178433418274
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.25,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 3.3239945340901613,
+            "confirmed_step": 400,
+            "first_pass_step": 134,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": 1.9061380750499666,
+            "stable_from_step": 134
+          },
+          "metrics": [
+            {
+              "margin": 0.1433469953656353,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.03665300463436468
+            },
+            {
+              "margin": 0.11207684651017188,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.03792315348982811
+            },
+            {
+              "margin": 0.3804296597838402,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.06957034021615982
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 9.669592656195164,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/episodes/h_n05r06_mixup_c0p01_lr15__vector_spiral.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/signal-policy.json.gz"
+      },
+      {
+        "task": "unused_token_hold",
+        "status": "FAIL",
+        "budget": 200,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "concept_move": 0.5404034285611488,
+          "unused_hold": 0.729775607585907
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.120224392414093,
+              "metric": "unused_hold",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.729775607585907
+            },
+            {
+              "margin": -0.3095965714388512,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.5404034285611488
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.2528358610899672,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 1.7310044600162655,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/episodes/h_n05r06_mixup_c0p01_lr15__unused_token_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/signal-policy.json.gz"
+      },
+      {
+        "task": "ae_gan_hold",
+        "status": "FAIL",
+        "budget": 250,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "hold": 0.0022318409755825996,
+          "recon_mse": 3.917919397354126
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -3.867919397354126,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 3.917919397354126
+            },
+            {
+              "margin": 0.3477681590244174,
+              "metric": "hold",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.35,
+              "value": 0.0022318409755825996
+            }
+          ],
+          "passed": false,
+          "shortfall": 1.0,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 2.172373754903674,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/signal-policy.json.gz"
+      }
+    ]
+  },
+  "all_measured_older_19": {
+    "passed": 13,
+    "failed": 6,
+    "cases": [
+      {
+        "task": "trajectory",
+        "status": "PASS",
+        "budget": 400,
+        "passing_suffix": 22,
+        "required_suffix": 5,
+        "live": {
+          "identity_mse": 0.002905043074861169
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.2925,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.3904342709574848,
+            "confirmed_step": 117,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 22,
+            "passing_suffix": 22,
+            "stable_from_seconds": 1.1731004789471626,
+            "stable_from_step": 50
+          },
+          "metrics": [
+            {
+              "margin": 0.01709495692513883,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.002905043074861169
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 2.4958376279100776,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/episodes/h_n05r06_mixup_c0p01_lr15__trajectory.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/trajectory/signal-policy.json.gz"
+      },
+      {
+        "task": "mode_hold",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 5,
+        "required_suffix": 5,
+        "live": {
+          "hq": 0.999267578125,
+          "modes": 8
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 1.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 7.586279727052897,
+            "confirmed_step": 1200,
+            "first_pass_step": 700,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 8,
+            "passing_suffix": 5,
+            "stable_from_seconds": 6.285874668043107,
+            "stable_from_step": 1000
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 8,
+              "value": 8
+            },
+            {
+              "margin": 0.09926757812499998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.999267578125
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 7.728531718021259,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/episodes/h_n05r06_mixup_c0p01_lr15__mode_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/mode_hold/signal-policy.json.gz"
+      },
+      {
+        "task": "residual_student",
+        "status": "PASS",
+        "budget": 400,
+        "passing_suffix": 22,
+        "required_suffix": 5,
+        "live": {
+          "identity_mse": 0.0029311643447726965,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.2925,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 0.4065726329572499,
+            "confirmed_step": 117,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 22,
+            "passing_suffix": 22,
+            "stable_from_seconds": 0.17545936605893075,
+            "stable_from_step": 50
+          },
+          "metrics": [
+            {
+              "margin": 0.017068835655227304,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.0029311643447726965
+            },
+            {
+              "margin": 0.0,
+              "metric": "success_rate",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 1.0
+            },
+            {
+              "margin": 0.0,
+              "metric": "wrong_pad_rate",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.0,
+              "value": 0.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 1.4810718530789018,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/episodes/h_n05r06_mixup_c0p01_lr15__residual_student.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/residual_student/signal-policy.json.gz"
+      },
+      {
+        "task": "img_stripes2",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 20,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.0,
+          "hq": 0.96875,
+          "mean_rmse": 0.03971010074019432,
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.46875,
+            0.5
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.375,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.2584907130803913,
+            "confirmed_step": 225,
+            "first_pass_step": 125,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 20,
+            "stable_from_seconds": 1.2599991189781576,
+            "stable_from_step": 125
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.200263592181727,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/episodes/h_n05r06_mixup_c0p01_lr15__img_stripes2.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_stripes2/signal-policy.json.gz"
+      },
+      {
+        "task": "img_bars4",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 18,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.0,
+          "hq": 1.0,
+          "mean_rmse": 0.030437761917710304,
+          "mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.4583333333333333,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.8437789231538773,
+            "confirmed_step": 275,
+            "first_pass_step": 175,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 18,
+            "passing_suffix": 18,
+            "stable_from_seconds": 1.7946479651145637,
+            "stable_from_step": 175
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.306658036075532,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/episodes/h_n05r06_mixup_c0p01_lr15__img_bars4.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_bars4/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_overlap",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 14,
+        "required_suffix": 5,
+        "live": {
+          "covariance_error": 0.16221539676189423,
+          "mean_error": 0.022280681878328323,
+          "sample_count": 4096,
+          "sw1_normalized": 0.0558607225876382,
+          "target_scale": 0.8501437306404114
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.625,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 5.313141366001219,
+            "confirmed_step": 750,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 21,
+            "passing_suffix": 14,
+            "stable_from_seconds": 3.9119449520949274,
+            "stable_from_step": 550
+          },
+          "metrics": [
+            {
+              "margin": 0.1241392774123618,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.0558607225876382
+            },
+            {
+              "margin": 0.12771931812167167,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.022280681878328323
+            },
+            {
+              "margin": 0.2877846032381058,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.16221539676189423
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 8.723123108036816,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/episodes/h_n05r06_mixup_c0p01_lr15__vector_overlap.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_overlap/signal-policy.json.gz"
+      },
+      {
+        "task": "img_blobs4",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 12,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 1.0,
+          "mean_rmse": 0.030816933140158653,
+          "mode_fractions": [
+            0.25,
+            0.25,
+            0.21875,
+            0.28125
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.25,
+            0.25,
+            0.21875,
+            0.28125
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.7083333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.25562573201023,
+            "confirmed_step": 425,
+            "first_pass_step": 325,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 12,
+            "passing_suffix": 12,
+            "stable_from_seconds": 3.265821465989575,
+            "stable_from_step": 325
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.223722527967766,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/episodes/h_n05r06_mixup_c0p01_lr15__img_blobs4.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_blobs4/signal-policy.json.gz"
+      },
+      {
+        "task": "img_intensity2",
+        "status": "PASS",
+        "budget": 600,
+        "passing_suffix": 9,
+        "required_suffix": 5,
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 0.96875,
+          "mean_rmse": 0.04345317929983139,
+          "mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.53125,
+            0.4375
+          ]
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.8333333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.9639373200479895,
+            "confirmed_step": 500,
+            "first_pass_step": 275,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 11,
+            "passing_suffix": 9,
+            "stable_from_seconds": 3.976267390884459,
+            "stable_from_step": 400
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 6.161604217020795,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/episodes/h_n05r06_mixup_c0p01_lr15__img_intensity2.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/img_intensity2/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_unequal_mass",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 14,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            2423,
+            1226,
+            380,
+            67
+          ],
+          "component_covariance_error": 0.41707606986165047,
+          "component_covariance_errors": [
+            0.19064335525035858,
+            0.28675827383995056,
+            0.29806995391845703,
+            0.8928326964378357
+          ],
+          "component_mass": [
+            0.591552734375,
+            0.29931640625,
+            0.0927734375,
+            0.016357421875
+          ],
+          "component_min_eigen_ratio": 0.5786148905754089,
+          "covariance_error": 0.05248043313622475,
+          "hq": 0.98779296875,
+          "mass_tv": 0.04155272990465164,
+          "mean_error": 0.05446142330765724,
+          "min_mass_ratio": 0.713641881942749,
+          "sample_count": 4096,
+          "sw1_normalized": 0.054239543613519826,
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "target_scale": 1.7593294382095337
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.625,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 13.266232670051977,
+            "confirmed_step": 750,
+            "first_pass_step": 550,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 14,
+            "passing_suffix": 14,
+            "stable_from_seconds": 9.665781163144857,
+            "stable_from_step": 550
+          },
+          "metrics": [
+            {
+              "margin": 0.12576045638648017,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.054239543613519826
+            },
+            {
+              "margin": 0.10844727009534835,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.04155272990465164
+            },
+            {
+              "margin": 0.13779296875000002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.98779296875
+            },
+            {
+              "margin": 0.4329239301383495,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.41707606986165047
+            },
+            {
+              "margin": 0.4286148905754089,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.5786148905754089
+            },
+            {
+              "margin": 0.463641881942749,
+              "metric": "min_mass_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.25,
+              "value": 0.713641881942749
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 21.450751119991764,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/episodes/h_n05r06_mixup_c0p01_lr15__vector_unequal_mass.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_mass/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_unequal_width",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 16,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            1084,
+            920,
+            1096,
+            996
+          ],
+          "component_covariance_error": 0.30726394802331924,
+          "component_covariance_errors": [
+            0.16137725114822388,
+            0.55451500415802,
+            0.3428144156932831,
+            0.17034912109375
+          ],
+          "component_mass": [
+            0.2646484375,
+            0.224609375,
+            0.267578125,
+            0.2431640625
+          ],
+          "component_min_eigen_ratio": 0.3596749007701874,
+          "covariance_error": 0.031100142747163773,
+          "hq": 0.966064453125,
+          "mass_tv": 0.0322265625,
+          "mean_error": 0.011034850031137466,
+          "min_mass_ratio": 0.8984375,
+          "sample_count": 4096,
+          "sw1_normalized": 0.02992012586927343,
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "target_scale": 2.1343955993652344
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5416666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 5.517780018039048,
+            "confirmed_step": 650,
+            "first_pass_step": 450,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": 3.8147500690538436,
+            "stable_from_step": 450
+          },
+          "metrics": [
+            {
+              "margin": 0.15007987413072657,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.02992012586927343
+            },
+            {
+              "margin": 0.1177734375,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.0322265625
+            },
+            {
+              "margin": 0.11606445312500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.966064453125
+            },
+            {
+              "margin": 0.5427360519766807,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.30726394802331924
+            },
+            {
+              "margin": 0.20967490077018738,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.3596749007701874
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 10.394028584938496,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/episodes/h_n05r06_mixup_c0p01_lr15__vector_unequal_width.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-replay/h_n05r06_mixup_c0p01_lr15/vector_unequal_width/signal-policy.json.gz"
+      },
+      {
+        "task": "unipolar",
+        "status": "FAIL",
+        "budget": 400,
+        "passing_suffix": 1,
+        "required_suffix": 5,
+        "live": {
+          "cover": 0.9221509485515078,
+          "neu_hold": 0.8503267019987106,
+          "off_caption": 2.3800328610086637e-05
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 400,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 1,
+            "passing_suffix": 1,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.07215094855150783,
+              "metric": "cover",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9221509485515078
+            },
+            {
+              "margin": 0.049976199671389915,
+              "metric": "off_caption",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 2.3800328610086637e-05
+            },
+            {
+              "margin": 0.00032670199871065453,
+              "metric": "neu_hold",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.8503267019987106
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 2.889198988908902,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/episodes/h_n05r06_mixup_c0p01_lr15__unipolar.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar/signal-policy.json.gz"
+      },
+      {
+        "task": "two_pole",
+        "status": "FAIL",
+        "budget": 80,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "grad_med": 0.023560509085655212,
+          "mean_abs": 0.032636743038892746
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.26736325696110724,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.032636743038892746
+            },
+            {
+              "margin": 0.9764394909143448,
+              "metric": "grad_med",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 0.023560509085655212
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.44560542826851207,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 1.8397736509796232,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/episodes/h_n05r06_mixup_c0p01_lr15__two_pole.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/signal-policy.json.gz"
+      },
+      {
+        "task": "cover_leftover",
+        "status": "FAIL",
+        "budget": 800,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "content_kept": 0.44192427135136014,
+          "leak_ratio": 0.010603182094918425,
+          "pole_rel_err_minus": 0.454183965921402,
+          "pole_rel_err_plus": 0.4156089723110199,
+          "same_dir": 0.07286213454282496,
+          "u_kept": 0.4491127684504617
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.40088723154953826,
+              "metric": "u_kept",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.4491127684504617
+            },
+            {
+              "margin": -0.30807572864863986,
+              "metric": "content_kept",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.75,
+              "value": 0.44192427135136014
+            },
+            {
+              "margin": 0.1893968179050816,
+              "metric": "leak_ratio",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.2,
+              "value": 0.010603182094918425
+            },
+            {
+              "margin": -0.2156089723110199,
+              "metric": "pole_rel_err_plus",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.2,
+              "value": 0.4156089723110199
+            },
+            {
+              "margin": -0.25418396592140197,
+              "metric": "pole_rel_err_minus",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.2,
+              "value": 0.454183965921402
+            },
+            {
+              "margin": 0.17713786545717503,
+              "metric": "same_dir",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.25,
+              "value": 0.07286213454282496
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.5385607277462332,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 5.698647012002766,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/episodes/h_n05r06_mixup_c0p01_lr15__cover_leftover.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover/signal-policy.json.gz"
+      },
+      {
+        "task": "mid_scale_identity",
+        "status": "FAIL",
+        "budget": 800,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "concept_cos_minus": 0.9888538122177124,
+          "concept_cos_plus": 0.9914860129356384,
+          "concept_mag_minus": 0.9039037227630615,
+          "concept_mag_plus": 0.9282889366149902,
+          "identity_at_0": 0.8062138743042017,
+          "identity_at_mid": 0.9901884256285347
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.14148601293563845,
+              "metric": "concept_cos_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9914860129356384
+            },
+            {
+              "margin": 0.13885381221771242,
+              "metric": "concept_cos_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9888538122177124
+            },
+            {
+              "margin": 0.17828893661499023,
+              "metric": "concept_mag_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9282889366149902
+            },
+            {
+              "margin": 0.32171106338500977,
+              "metric": "concept_mag_plus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9282889366149902
+            },
+            {
+              "margin": 0.15390372276306152,
+              "metric": "concept_mag_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9039037227630615
+            },
+            {
+              "margin": 0.3460962772369385,
+              "metric": "concept_mag_minus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9039037227630615
+            },
+            {
+              "margin": -0.04378612569579832,
+              "metric": "identity_at_0",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.8062138743042017
+            },
+            {
+              "margin": 0.14018842562853473,
+              "metric": "identity_at_mid",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9901884256285347
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.006439136131735047,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 9.557817183900625,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/episodes/h_n05r06_mixup_c0p01_lr15__mid_scale_identity.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_anisotropic",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 18,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            1333,
+            1298,
+            1465
+          ],
+          "component_covariance_error": 0.27509061495463055,
+          "component_covariance_errors": [
+            0.19204339385032654,
+            0.30763325095176697,
+            0.3255952000617981
+          ],
+          "component_mass": [
+            0.325439453125,
+            0.31689453125,
+            0.357666015625
+          ],
+          "component_min_eigen_ratio": 0.3512115478515625,
+          "covariance_error": 0.05937659367918968,
+          "hq": 0.982177734375,
+          "mass_tv": 0.024332687258720398,
+          "mean_error": 0.08043099194765091,
+          "min_mass_ratio": 0.95068359375,
+          "sample_count": 4096,
+          "sw1_normalized": 0.05886664414600428,
+          "target_mass": [
+            0.3333333432674408,
+            0.3333333432674408,
+            0.3333333432674408
+          ],
+          "target_scale": 2.032285690307617
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.4583333333333333,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 6.209144610911608,
+            "confirmed_step": 550,
+            "first_pass_step": 350,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 18,
+            "passing_suffix": 18,
+            "stable_from_seconds": 4.521219899877906,
+            "stable_from_step": 350
+          },
+          "metrics": [
+            {
+              "margin": 0.1211333558539957,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.05886664414600428
+            },
+            {
+              "margin": 0.1256673127412796,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.024332687258720398
+            },
+            {
+              "margin": 0.13217773437500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.982177734375
+            },
+            {
+              "margin": 0.5749093850453695,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.27509061495463055
+            },
+            {
+              "margin": 0.2012115478515625,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.3512115478515625
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 12.062739932909608,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/episodes/h_n05r06_mixup_c0p01_lr15__vector_anisotropic.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_two_broad",
+        "status": "PASS",
+        "budget": 1200,
+        "passing_suffix": 23,
+        "required_suffix": 5,
+        "live": {
+          "component_counts": [
+            2087,
+            2009
+          ],
+          "component_covariance_error": 0.13363225758075714,
+          "component_covariance_errors": [
+            0.16604630649089813,
+            0.10121820867061615
+          ],
+          "component_mass": [
+            0.509521484375,
+            0.490478515625
+          ],
+          "component_min_eigen_ratio": 0.8253279328346252,
+          "covariance_error": 0.09456690400838852,
+          "hq": 0.996337890625,
+          "mass_tv": 0.009521484375,
+          "mean_error": 0.029293308034539223,
+          "min_mass_ratio": 0.98095703125,
+          "sample_count": 4096,
+          "sw1_normalized": 0.04008360435801821,
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "target_scale": 1.0555585622787476
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.25,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 2.8173313280567527,
+            "confirmed_step": 300,
+            "first_pass_step": 100,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": 1.741561264032498,
+            "stable_from_step": 100
+          },
+          "metrics": [
+            {
+              "margin": 0.13991639564198177,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.04008360435801821
+            },
+            {
+              "margin": 0.140478515625,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.009521484375
+            },
+            {
+              "margin": 0.14633789062500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.996337890625
+            },
+            {
+              "margin": 0.7163677424192428,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.13363225758075714
+            },
+            {
+              "margin": 0.6753279328346252,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.8253279328346252
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 7.85694431187585,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/episodes/h_n05r06_mixup_c0p01_lr15__vector_two_broad.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad/signal-policy.json.gz"
+      },
+      {
+        "task": "vector_spiral",
+        "status": "PASS",
+        "budget": 1600,
+        "passing_suffix": 23,
+        "required_suffix": 5,
+        "live": {
+          "covariance_error": 0.06957034021615982,
+          "mean_error": 0.03792315348982811,
+          "sample_count": 4096,
+          "sw1_normalized": 0.03665300463436468,
+          "target_scale": 1.224178433418274
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.25,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 3.3239945340901613,
+            "confirmed_step": 400,
+            "first_pass_step": 134,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": 1.9061380750499666,
+            "stable_from_step": 134
+          },
+          "metrics": [
+            {
+              "margin": 0.1433469953656353,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.03665300463436468
+            },
+            {
+              "margin": 0.11207684651017188,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.03792315348982811
+            },
+            {
+              "margin": 0.3804296597838402,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.06957034021615982
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "elapsed_seconds": 9.669592656195164,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/episodes/h_n05r06_mixup_c0p01_lr15__vector_spiral.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral/signal-policy.json.gz"
+      },
+      {
+        "task": "unused_token_hold",
+        "status": "FAIL",
+        "budget": 200,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "concept_move": 0.5404034285611488,
+          "unused_hold": 0.729775607585907
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -0.120224392414093,
+              "metric": "unused_hold",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.729775607585907
+            },
+            {
+              "margin": -0.3095965714388512,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.5404034285611488
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.2528358610899672,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 1.7310044600162655,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/episodes/h_n05r06_mixup_c0p01_lr15__unused_token_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/signal-policy.json.gz"
+      },
+      {
+        "task": "ae_gan_hold",
+        "status": "FAIL",
+        "budget": 250,
+        "passing_suffix": 0,
+        "required_suffix": 5,
+        "live": {
+          "hold": 0.0022318409755825996,
+          "recon_mse": 3.917919397354126
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -3.867919397354126,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 3.917919397354126
+            },
+            {
+              "margin": 0.3477681590244174,
+              "metric": "hold",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.35,
+              "value": 0.0022318409755825996
+            }
+          ],
+          "passed": false,
+          "shortfall": 1.0,
+          "status": "FAIL"
+        },
+        "elapsed_seconds": 2.172373754903674,
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+        "evidence_directory": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/source.tar.gz",
+        "signal_policy_receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/signal-policy.json.gz"
+      }
+    ]
+  },
+  "native_100": {
+    "passed": 0,
+    "failed": 0,
+    "skipped": 3,
+    "cases": [
+      {
+        "task": "grid100",
+        "status": "SKIPPED",
+        "reason": "Older-host strict and diagnostic failures; no 100-mode training authorized after those failures."
+      },
+      {
+        "task": "rotated100",
+        "status": "SKIPPED",
+        "reason": "Older-host strict and diagnostic failures; no 100-mode training authorized after those failures."
+      },
+      {
+        "task": "staggered100",
+        "status": "SKIPPED",
+        "reason": "Older-host strict and diagnostic failures; no 100-mode training authorized after those failures."
+      }
+    ]
+  },
+  "separate_continuation": {
+    "status": "PRIOR_REPORTED_FAIL",
+    "freshly_replayed_here": false,
+    "additional_updates": 1200,
+    "final_modes": 5,
+    "final_hq": 0.209228515625,
+    "source": "/ml2/hypergan/gan-attempts/batch-20260924T153037Z/critic_signal/20260924T153037Z-1298555/repo/reports/toy100/critic_signal_attempt/h-own-hold/diagnostic-summary.json"
+  },
+  "training_receipts": {
+    "source_config_episode_audits_passed": 19,
+    "constant_actual_lrs": {
+      "g": 0.0015,
+      "d": 0.0015,
+      "prior": 0.003
+    },
+    "adam_betas": [
+      0.0,
+      0.999
+    ],
+    "input_noise_sigma": 0.05,
+    "additional_updates": 0,
+    "fixed_seed_older": 0,
+    "native_seed_declared": 1234,
+    "no_seed_sweeps": true,
+    "max_training_workers": 4,
+    "threads_per_worker": 1,
+    "python": "/tmp/pr38-default-env/bin/python",
+    "cpu_capability": "avx2"
+  },
+  "host_plumbing": {
+    "script": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/reports/toy100/selected_h_remaining.py",
+    "extension": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/reports/toy100/selected_h_extension.py",
+    "fixture_audit": "/ml2/hypergan/gan-attempts/selected-h-verification/plumbing-audit.json",
+    "conditional_critic": "Expose the existing critic and its NoisePolicy stream; same callable forward, gradients, and RNG, no extra forward/update.",
+    "auxiliary_removal": {
+      "ae_gan_hold": {
+        "reconstruction_weight": 0.0
+      },
+      "unused_token_hold": {
+        "hold_weight": 0.0
+      }
+    },
+    "grading_architecture_budgets_seeds_unchanged": true
+  },
+  "source_inferences": {
+    "source_lines": {
+      "unused_parameters": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/unused_token_hold.py:141",
+      "unused_embedding": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/unused_token_hold.py:147",
+      "unused_adversarial_path": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/unused_token_hold.py:259",
+      "unused_hold_loss": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/unused_token_hold.py:270",
+      "unused_metrics": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/unused_token_hold.py:167",
+      "ae_encoder_and_optimizers": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/ae_gan_hold.py:163",
+      "ae_encoder_reconstruction_path": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/ae_gan_hold.py:210",
+      "ae_loss_paths": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/ae_gan_hold.py:219",
+      "ae_evaluation": "/ml2/hypergan/gan-attempts/selected-h-verification/repo/benchmarks/locked_shared/hosts/ae_gan_hold.py:115"
+    },
+    "unused_token_hold": "With the hold term zero, shared and concept-slot parameters have identical gradients/Adam settings and zero initialization; the unused correction receives zero gradients. Thus concept displacement is twice unused displacement. concept_move>=0.85 requires normalized concept norm>=0.85, hence unused_hold<=0.575, incompatible with the frozen >=0.85 gate. This is a source-level invariant under the preserved optimizer/host, not a general GAN impossibility claim.",
+    "ae_gan_hold": "With reconstruction_weight=0 and cover/fm/particle fits zero, the encoder has no adversarial path: GAN generation samples the prior directly. The frozen reconstruction metric still evaluates that untrained encoder. This identifies disconnected training, not a proof that no accidental initialization can pass."
+  },
+  "setup_errors": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/selected-h-verification/cold",
+      "training_updates": 0,
+      "reason": "Supplied replay packaging omitted frozen leading_profile.json; exact dependency copied before replay."
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining",
+      "training_updates": 0,
+      "reason": "Conditional lambda lacks modules(); fixed in separately archived interface-only extension."
+    }
+  ],
+  "evidence": {
+    "cold-parity.json": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-parity.json",
+    "cold-evidence-audit.json": "/ml2/hypergan/gan-attempts/selected-h-verification/cold-evidence-audit.json",
+    "remaining-evidence-audit.json": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-evidence-audit.json",
+    "isolation.json": "/ml2/hypergan/gan-attempts/selected-h-verification/isolation.json",
+    "frozen-reference-receipt.json": "/ml2/hypergan/gan-attempts/selected-h-verification/frozen-reference-receipt.json",
+    "plumbing-audit.json": "/ml2/hypergan/gan-attempts/selected-h-verification/plumbing-audit.json",
+    "tests.jsonl": "/ml2/hypergan/gan-attempts/selected-h-verification/tests.jsonl",
+    "diagnostic-tests.jsonl": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostic-tests.jsonl",
+    "run-cold.sh": "/ml2/hypergan/gan-attempts/selected-h-verification/run-cold.sh",
+    "run-remaining-replay.sh": "/ml2/hypergan/gan-attempts/selected-h-verification/run-remaining-replay.sh",
+    "run-diagnostics.py": "/ml2/hypergan/gan-attempts/selected-h-verification/run-diagnostics.py",
+    "run-compatibility-controls.py": "/ml2/hypergan/gan-attempts/selected-h-verification/run-compatibility-controls.py",
+    "compatibility-controls-audit.json": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls-audit.json",
+    "compatibility-control-tests.jsonl": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-control-tests.jsonl",
+    "run-audits.sh": "/ml2/hypergan/gan-attempts/selected-h-verification/run-audits.sh",
+    "run-one-host.sh": "/ml2/hypergan/gan-attempts/selected-h-verification/run-one-host.sh"
+  },
+  "original_auxiliary_compatibility_controls": {
+    "track": "Original-required-auxiliary benchmark compatibility controls, not pure-GAN qualification",
+    "integrity": "PASS",
+    "passed": 1,
+    "failed": 1,
+    "cases": [
+      {
+        "task": "ae_gan_hold",
+        "status": "PASS",
+        "integrity": "PASS",
+        "exclusively_adversarial": false,
+        "original_auxiliary_weights": {
+          "cover_weight": 0.0,
+          "fm_weight": 0.0,
+          "host": "ae_gan_hold",
+          "particle_l2": 0.0,
+          "reconstruction_weight": 1.0
+        },
+        "budget": 250,
+        "passing_suffix": 20,
+        "live": {
+          "hold": 0.004224264528602362,
+          "recon_mse": 0.0029136501252651215
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.376,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.5969914169982076,
+            "confirmed_step": 94,
+            "first_pass_step": 53,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 20,
+            "stable_from_seconds": 1.452435159822926,
+            "stable_from_step": 53
+          },
+          "metrics": [
+            {
+              "margin": 0.04708634987473488,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 0.0029136501252651215
+            },
+            {
+              "margin": 0.3457757354713976,
+              "metric": "hold",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.35,
+              "value": 0.004224264528602362
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "generator_objective": "GANLoss.g_loss plus original required host reconstruction or unused-token hold; NOT exclusively adversarial",
+        "unchanged_H_signal_options": {
+          "consistency": "mixup",
+          "consistency_coeff": 0.01,
+          "consistency_sigma": 0.1,
+          "noise": "fixed",
+          "sigma": 0.05,
+          "smooth": 0.0
+        },
+        "actual_lrs": {
+          "g": 0.0015,
+          "d": 0.0015,
+          "prior": 0.003
+        },
+        "source_config_episode_and_receipt_regrade": "PASS",
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+        "episode_sha256": "593eb6fdab145f4d01f878f1084e0eaf6a97b4b1a3f6a7e72ea1d11b371f47a6",
+        "receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/signal-policy.json.gz",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/source.tar.gz"
+      },
+      {
+        "task": "unused_token_hold",
+        "status": "FAIL",
+        "integrity": "PASS",
+        "exclusively_adversarial": false,
+        "original_auxiliary_weights": {
+          "cover_weight": 0.0,
+          "fm_weight": 0.0,
+          "hold_weight": 1.0,
+          "host": "unused_token_hold",
+          "particle_l2": 0.0
+        },
+        "budget": 200,
+        "passing_suffix": 0,
+        "live": {
+          "concept_move": 0.5404501031349653,
+          "unused_hold": 0.9990084950113669
+        },
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.14900849501136693,
+              "metric": "unused_hold",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9990084950113669
+            },
+            {
+              "margin": -0.30954989686503465,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.5404501031349653
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.18208817462649096,
+          "status": "FAIL"
+        },
+        "generator_objective": "GANLoss.g_loss plus original required host reconstruction or unused-token hold; NOT exclusively adversarial",
+        "unchanged_H_signal_options": {
+          "consistency": "mixup",
+          "consistency_coeff": 0.01,
+          "consistency_sigma": 0.1,
+          "noise": "fixed",
+          "sigma": 0.05,
+          "smooth": 0.0
+        },
+        "actual_lrs": {
+          "g": 0.0015,
+          "d": 0.0015,
+          "prior": 0.003
+        },
+        "source_config_episode_and_receipt_regrade": "PASS",
+        "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/episodes/h_n05r06_mixup_c0p01_lr15__unused_token_hold.json.gz",
+        "episode_sha256": "aabf58eff403d7147d612c93fd643d377f048d952fa578ff8d1a8cefbbb9792f",
+        "receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/signal-policy.json.gz",
+        "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/source.tar.gz"
+      }
+    ]
+  },
+  "final_artifact_validation": {
+    "status": "PASS",
+    "archived_training_sources_unchanged": true,
+    "all_19_episode_paths_exist": true,
+    "controls_labeled_separately": true,
+    "complete_unique_22_case_table": true
+  }
+}

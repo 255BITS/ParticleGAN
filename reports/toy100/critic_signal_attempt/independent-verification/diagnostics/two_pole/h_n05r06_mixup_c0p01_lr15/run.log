@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "two_pole"}
+START two_pole route=public primitives custom host + shared noise policy steps=80
+{"event": "DONE", "task": "two_pole", "status": "FAIL", "suffix": 0, "live": {"mean_abs": 0.032636743038892746, "grad_med": 0.023560509085655212}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "two_pole", "status": "FAIL", "seconds": 1.8397736509796232, "live": {"grad_med": 0.023560509085655212, "mean_abs": 0.032636743038892746}}

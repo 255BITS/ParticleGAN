@@ -1,0 +1,217 @@
+[
+  {
+    "gate": "trajectory",
+    "status": "PASS",
+    "seconds": 2.1494783197995275,
+    "metrics": {
+      "identity_mse": 0.002905043074861169
+    },
+    "passing_suffix": 22
+  },
+  {
+    "gate": "mode_hold",
+    "status": "PASS",
+    "seconds": 11.51849500508979,
+    "metrics": {
+      "hq": 0.999267578125,
+      "modes": 8
+    },
+    "passing_suffix": 5
+  },
+  {
+    "gate": "residual_student",
+    "status": "PASS",
+    "seconds": 2.1022899579256773,
+    "metrics": {
+      "identity_mse": 0.0029311643447726965,
+      "success_rate": 1.0,
+      "wrong_pad_rate": 0.0
+    },
+    "passing_suffix": 22
+  },
+  {
+    "gate": "img_stripes2",
+    "status": "PASS",
+    "seconds": 8.76635687588714,
+    "metrics": {
+      "distribution_tv": 0.0,
+      "hq": 0.96875,
+      "mean_rmse": 0.03971010074019432,
+      "mode_fractions": [
+        0.5,
+        0.5
+      ],
+      "modes": 2,
+      "quality_mode_fractions": [
+        0.46875,
+        0.5
+      ]
+    },
+    "passing_suffix": 20
+  },
+  {
+    "gate": "img_bars4",
+    "status": "PASS",
+    "seconds": 7.765533298021182,
+    "metrics": {
+      "distribution_tv": 0.0,
+      "hq": 1.0,
+      "mean_rmse": 0.030437761917710304,
+      "mode_fractions": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "modes": 4,
+      "quality_mode_fractions": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "passing_suffix": 18
+  },
+  {
+    "gate": "vector_overlap",
+    "status": "PASS",
+    "seconds": 9.915959482081234,
+    "metrics": {
+      "covariance_error": 0.16221539676189423,
+      "mean_error": 0.022280681878328323,
+      "sample_count": 4096,
+      "sw1_normalized": 0.0558607225876382,
+      "target_scale": 0.8501437306404114
+    },
+    "passing_suffix": 14
+  },
+  {
+    "gate": "img_blobs4",
+    "status": "PASS",
+    "seconds": 6.960732972016558,
+    "metrics": {
+      "distribution_tv": 0.03125,
+      "hq": 1.0,
+      "mean_rmse": 0.030816933140158653,
+      "mode_fractions": [
+        0.25,
+        0.25,
+        0.21875,
+        0.28125
+      ],
+      "modes": 4,
+      "quality_mode_fractions": [
+        0.25,
+        0.25,
+        0.21875,
+        0.28125
+      ]
+    },
+    "passing_suffix": 12
+  },
+  {
+    "gate": "img_intensity2",
+    "status": "PASS",
+    "seconds": 7.070599494036287,
+    "metrics": {
+      "distribution_tv": 0.03125,
+      "hq": 0.96875,
+      "mean_rmse": 0.04345317929983139,
+      "mode_fractions": [
+        0.53125,
+        0.46875
+      ],
+      "modes": 2,
+      "quality_mode_fractions": [
+        0.53125,
+        0.4375
+      ]
+    },
+    "passing_suffix": 9
+  },
+  {
+    "gate": "vector_unequal_mass",
+    "status": "PASS",
+    "seconds": 24.266701909946278,
+    "metrics": {
+      "component_counts": [
+        2423,
+        1226,
+        380,
+        67
+      ],
+      "component_covariance_error": 0.41707606986165047,
+      "component_covariance_errors": [
+        0.19064335525035858,
+        0.28675827383995056,
+        0.29806995391845703,
+        0.8928326964378357
+      ],
+      "component_mass": [
+        0.591552734375,
+        0.29931640625,
+        0.0927734375,
+        0.016357421875
+      ],
+      "component_min_eigen_ratio": 0.5786148905754089,
+      "covariance_error": 0.05248043313622475,
+      "hq": 0.98779296875,
+      "mass_tv": 0.04155272990465164,
+      "mean_error": 0.05446142330765724,
+      "min_mass_ratio": 0.713641881942749,
+      "sample_count": 4096,
+      "sw1_normalized": 0.054239543613519826,
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "target_scale": 1.7593294382095337
+    },
+    "passing_suffix": 14
+  },
+  {
+    "gate": "vector_unequal_width",
+    "status": "PASS",
+    "seconds": 12.07064938498661,
+    "metrics": {
+      "component_counts": [
+        1084,
+        920,
+        1096,
+        996
+      ],
+      "component_covariance_error": 0.30726394802331924,
+      "component_covariance_errors": [
+        0.16137725114822388,
+        0.55451500415802,
+        0.3428144156932831,
+        0.17034912109375
+      ],
+      "component_mass": [
+        0.2646484375,
+        0.224609375,
+        0.267578125,
+        0.2431640625
+      ],
+      "component_min_eigen_ratio": 0.3596749007701874,
+      "covariance_error": 0.031100142747163773,
+      "hq": 0.966064453125,
+      "mass_tv": 0.0322265625,
+      "mean_error": 0.011034850031137466,
+      "min_mass_ratio": 0.8984375,
+      "sample_count": 4096,
+      "sw1_normalized": 0.02992012586927343,
+      "target_mass": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "target_scale": 2.1343955993652344
+    },
+    "passing_suffix": 16
+  }
+]

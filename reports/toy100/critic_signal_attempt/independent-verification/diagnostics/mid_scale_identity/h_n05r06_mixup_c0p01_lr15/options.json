@@ -1,0 +1,8 @@
+{
+  "consistency": "mixup",
+  "consistency_coeff": 0.01,
+  "consistency_sigma": 0.1,
+  "noise": "fixed",
+  "sigma": 0.05,
+  "smooth": 0.0
+}

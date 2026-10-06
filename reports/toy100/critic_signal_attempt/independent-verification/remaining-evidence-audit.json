@@ -1,0 +1,335 @@
+{
+  "integrity": "PASS",
+  "episodes": 9,
+  "rows": [
+    {
+      "task": "unipolar",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 400,
+        "d": 400
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 800,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 800,
+        "consistency_forwards": 2400
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/remaining-replay/h_n05r06_mixup_c0p01_lr15/unipolar",
+      "episode_sha256": "498c984bba4121cee43e16a0f52b93d7f90226911510c1e88e8aa8437432a515"
+    },
+    {
+      "task": "ae_gan_hold",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 250,
+        "d": 250
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [
+          {
+            "after": {
+              "cover_weight": 0.0,
+              "fm_weight": 0.0,
+              "particle_l2": 0.0,
+              "reconstruction_weight": 0.0
+            },
+            "before": {
+              "cover_weight": 0.0,
+              "fm_weight": 0.0,
+              "particle_l2": 0.0,
+              "reconstruction_weight": 1.0
+            },
+            "host": "ae_gan_hold"
+          }
+        ],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 250,
+        "consistency_forwards": 750
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold",
+      "episode_sha256": "61969a7d05c0118a7e4f58684fe174c8c4d4fb9b5261f53fa4090ba5d93a0750"
+    },
+    {
+      "task": "cover_leftover",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 800,
+        "d": 800
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 800,
+        "consistency_forwards": 2400
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/cover_leftover",
+      "episode_sha256": "632fe97033c9ab34fe1f321c2d6137a384a8cae37c61423a27d45dd2b0c8b2b6"
+    },
+    {
+      "task": "mid_scale_identity",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 800,
+        "d": 800
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 3200,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 3200,
+        "consistency_forwards": 9600
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity",
+      "episode_sha256": "8e8073f361ef6b44015bcf2c3b57a4ca2bb8c66f2ee120b556b68e3c01e2fd60"
+    },
+    {
+      "task": "two_pole",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 80,
+        "d": 80
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 80,
+        "consistency_forwards": 240
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole",
+      "episode_sha256": "787ff99baaf3be1ffba19298d50258cdee1d3e8d989aaa20c7bd118dee8453e3"
+    },
+    {
+      "task": "unused_token_hold",
+      "integrity": "PASS",
+      "frozen_verdict": "FAIL",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 200,
+        "d": 200
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [
+          {
+            "after": {
+              "cover_weight": 0.0,
+              "fm_weight": 0.0,
+              "hold_weight": 0.0,
+              "particle_l2": 0.0
+            },
+            "before": {
+              "cover_weight": 0.0,
+              "fm_weight": 0.0,
+              "hold_weight": 1.0,
+              "particle_l2": 0.0
+            },
+            "host": "unused_token_hold"
+          }
+        ],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 200,
+        "consistency_forwards": 600
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold",
+      "episode_sha256": "c4ff7638f47f96c895e3cd6766c5a97f285b285b656cf66c01b2d4e1246184fb"
+    },
+    {
+      "task": "vector_anisotropic",
+      "integrity": "PASS",
+      "frozen_verdict": "PASS",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 1200,
+        "d": 1200
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 1200,
+        "consistency_forwards": 3600
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/vector_anisotropic",
+      "episode_sha256": "4bb63c252d1f80d46caa2252cc2ace400900867f9a5159aad2d89276beea166e"
+    },
+    {
+      "task": "vector_spiral",
+      "integrity": "PASS",
+      "frozen_verdict": "PASS",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 1600,
+        "d": 1600
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 1600,
+        "consistency_forwards": 4800
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/vector_spiral",
+      "episode_sha256": "807b7401f5c77d0781a57645352b36ece7a24d2ca6f6cc6b50d6b0bba0595522"
+    },
+    {
+      "task": "vector_two_broad",
+      "integrity": "PASS",
+      "frozen_verdict": "PASS",
+      "source_config_episode_regrade": "PASS",
+      "actual_update_counts": {
+        "g": 1200,
+        "d": 1200
+      },
+      "actual_learning_rates_constant": true,
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "fixed_input_noise_sigma": 0.05,
+      "options_match_selected_candidate": true,
+      "extension": {
+        "additional_optimizer_updates": 0,
+        "additional_training_forwards": 0,
+        "archived_candidate_unchanged": true,
+        "auxiliary_overrides": [],
+        "conditional_callable_views": 0,
+        "conditional_stream_reuse": "existing host NoisePolicy.input_stream",
+        "policy": "selected_h_faithful_host_plumbing_v1"
+      },
+      "consistency": {
+        "consistency_applications": 1200,
+        "consistency_forwards": 3600
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/vector_two_broad",
+      "episode_sha256": "37df7fccc0393cfa14c3f9e2671c733cb852c9906f0260357b4fbc42603cc052"
+    }
+  ]
+}
