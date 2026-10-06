@@ -40,9 +40,9 @@ inference from the single controlled comparison, not a general family result.
 
 ## Reproduction and verification
 
-Maintained Forge API candidate `atlas-two-pole-particle-amsgrad-off 927-v1`,
-view `atlas_two_pole_particle_amsgrad_off 927_v1`, READY Study
-`atlas-two-pole-particle-amsgrad-off 927-study-v1`, CPU backend, through tier 1.
+Maintained Forge API candidate `atlas-two-pole-particle-amsgrad-off927-v1`,
+view `atlas_two_pole_particle_amsgrad_off927_v1`, READY Study
+`atlas-two-pole-particle-amsgrad-off927-study-v1`, CPU backend, through tier 1.
 Original Task digest: `2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b`.
 Base 79-rule Recipe provenance: `d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95`.
 Distinct effective optimizer variant:
