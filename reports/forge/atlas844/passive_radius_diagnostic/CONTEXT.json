@@ -1,0 +1,709 @@
+{
+  "attempt_id": "d8e09d6b541a4b6aa31f175ecc53a4e5",
+  "binary_artifacts": "RETAINED_LOCALLY_NOT_UPLOADED",
+  "byte_pins_verified": 33,
+  "coverage_status": "UNKNOWN",
+  "downstream_legacy_decision": "UNKNOWN",
+  "full_live_leaf_scope": "UNKNOWN",
+  "historical_exposure": "UNKNOWN",
+  "purity_checks": 575,
+  "purity_failures": 0,
+  "schema": "forge_atlas844_retained_context_index_v1",
+  "snapshots": [
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 42,
+      "label": "observation-42",
+      "partitions": {
+        "control": "4899c39231d4e1c3aed42f9fea4859f091f89bfb6cfc0fef4ee01cdd04af87a9",
+        "gradients": "8c045a29f39cf32dcd75d430045d27d15ee836e46e751e36f820aded9fa2f66b",
+        "identity": "922508a82c5dad77189e7a07925f36523ef042fb7523a940e5ec44cad9b7ddbd",
+        "learned_values": "8faf9bf75cb804251e1cb76e7cd3817b53f9f9f40492fe523c781fc8a8c5e3ad",
+        "optimizer": "c35edb39af1f2d2a94971b47568d1048e5fc48aa5488f24ac70e8afbd175fc5e",
+        "rng": "f5f1425e4e828baf2557fe0e728e806fb8a24d485b5df635253008a39b4554d8"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 404047,
+        "path": "radius-observer844/observation-42.pt",
+        "sha256": "77e262152433e246e9739a338e4d3a67cdea6c39f67d6d5e5f6063ae28fe5d8b"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 84,
+      "label": "observation-84",
+      "partitions": {
+        "control": "dc2d1b30ffcb5101887517520d3ff0a95365fe4a518faa2755c881a34099c26a",
+        "gradients": "7d008b5c259712c0317df7705637d06b9d4536944613075639a58a7e1e12a892",
+        "identity": "d8b242208d577f9488d220b90b68d3e98e7fd392328a6cfe4401d853eb0c0b18",
+        "learned_values": "39d84086c00a95b51ea28761ab22b04948e2252b1ed001d4949c356e313e6dda",
+        "optimizer": "d3692834691b46d1ba9f832d6852ec2ef267bbf96abf28fda011a17279338259",
+        "rng": "8083e9575f044f2feae1f42aef4efddfbb4344e003b9344b594b7587ed7d4d4c"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 413167,
+        "path": "radius-observer844/observation-84.pt",
+        "sha256": "5e2b39c6c26c744ac4d654bc97a66d9c89b69aa2cf613cd8cb88fc5ff20f1ae5"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 125,
+      "label": "observation-125",
+      "partitions": {
+        "control": "e04b267ef031281cd4c2804254ba92d36aebc3d05f7cb49282a090cc69288408",
+        "gradients": "a047a87128b562e65cb1a1ecd1d375d693f58e419148c7451926c43b4275d030",
+        "identity": "85b94a62bb11406f55cd8f3752e7e89f87818d5165dac8d1eddd1cc7359dd19d",
+        "learned_values": "88cfcb3a57abf61635c1d5ff0bd416e5f7d9cf9fd09c9ea0edd21138a7ed7220",
+        "optimizer": "406e6e907a39cc8ce09deda50621126bbdf3f88d8f425d9288788aa8ac6bca34",
+        "rng": "656e7b0539e0f5f7cc269cd9b5b3a2086efe0ee8a2a129280180e4880cbfc7b0"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 410901,
+        "path": "radius-observer844/observation-125.pt",
+        "sha256": "9c0df98156fdb6648ff4f932daf69ab3609877a31f53760591ff06f0d04c66ec"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 167,
+      "label": "observation-167",
+      "partitions": {
+        "control": "f56b9ceeb1460cd503fe08667042fa4897e4fd0f954ac14929ea2b639849e2c3",
+        "gradients": "2bd51c22f6cb0133cf2d07da256db89a60fb1d2982622a7c390e54a1646a1109",
+        "identity": "11bf915e448c5757b24b40ba226de39309d298382b4bbb14f867e44446e4188c",
+        "learned_values": "878a927c094bead6f6340ca0e8b124f0a1f04c2f6510531a8ee7c4fa589a0d83",
+        "optimizer": "e3aa62025fbe660f30890fd3e351dc38694f401bcd76df2c46b0879a0e0322e5",
+        "rng": "37b01c4ebd25ebcee2f4f86c3c31ce3a44b7080e0eb2f5123a73a5f1db09398e"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 466561,
+        "path": "radius-observer844/observation-167.pt",
+        "sha256": "2eb36218ae3b40d42c502db20177b2f1c455a75b25dc0c91632ad8c58b4df641"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 209,
+      "label": "observation-209",
+      "partitions": {
+        "control": "4d4dfc52dae0a643c55cc9eceb20b56fe3958051ce7c6238d8be9fd5a23a3695",
+        "gradients": "b3ba70cdb7ab5ef7b50704fbd759c311adb71c1b188bda0e220e93aa5739f23d",
+        "identity": "ce4731cf594a5224425e92afb007e94a02e1dcdcc71b9af460a2d922cc9f9b52",
+        "learned_values": "a8fb04d8d64b3efbf080dd7f02838c20864c7ff65e9e5e2978a907042f956f59",
+        "optimizer": "98c47f888b65bd66e0d2c6c6002192d48fee2a4cd77df6b6b0bd2f5107d2a49d",
+        "rng": "3278e60b68e6efab977e04ba27a8e0f00fa9c8d1c9129f94370b4caf4ca58f8c"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 401321,
+        "path": "radius-observer844/observation-209.pt",
+        "sha256": "94e2266c26110341eb335023f481d2e6e42a3cf84b16cbe4d0ff60d7ddf745ba"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 250,
+      "label": "observation-250",
+      "partitions": {
+        "control": "34695fb2b6b1fd9c911f1f02c8a7dd0ec4f67bf8bb80fba1fecb7aa5cb96d4c2",
+        "gradients": "d0e1f3e7de1cb986141e57ff867d1245051d25eeec1f7be2883ddc1f14065241",
+        "identity": "65d13c3858fb8b36989abda70455777fcbd62022f2e5d2134f0747d22ca2ae62",
+        "learned_values": "d3284b7e01a396aad7c52ee487ca575fcfb260209bb58e04d771c6e2023218d1",
+        "optimizer": "a9c55a5e2f182aa306c6a561ca140251e62ee514699eb8304b0e47afde26ecf7",
+        "rng": "46bf0fe16fef067c4f2fcb7e60c81135ed3f16d97fc07abd9b596e6b061e5522"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 415323,
+        "path": "radius-observer844/observation-250.pt",
+        "sha256": "cf27c7b4e168a8c0e2cac5ba6285b6da5e06adcc799db569d179b740d7e99873"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 292,
+      "label": "observation-292",
+      "partitions": {
+        "control": "ba3981e61abd5602f4f035291133ec87d974bad9365508de98e5db0de9c36b35",
+        "gradients": "6203f560bf61dac73801b97fe7637f52aa8da4f53f4eeacd6726f3e3269543d4",
+        "identity": "59d271e6e3acf6f55ac51a8300918b5b603a765ce7c40001398c5ce67ecfd7b8",
+        "learned_values": "d789892169b2454831b5b14815589a4a0e801309a73149c1e473460e31d0533f",
+        "optimizer": "9d34f236892aa6c706e2f44fce06214dfad4a89db41f2357401a82659a1c422c",
+        "rng": "7a01cd494b574c0e6acf6c5c2256e69ab57492f248de4b29cada01349de470be"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 433807,
+        "path": "radius-observer844/observation-292.pt",
+        "sha256": "8a3aff953d4cedf13c4d87bdb4faa4f4f7ad4e8bbfe1e46acb42eb73cd6dc1ed"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 334,
+      "label": "observation-334",
+      "partitions": {
+        "control": "d3657ccfc612633dada25c639cec594ed8b0d033a2b7b04aa054135d70907b6c",
+        "gradients": "1f4e3d902260b5aee7eaa1fa81d7ed557abb6fb25c6a9535931297408b9a6d84",
+        "identity": "b506e4301ca956486e04ca30263429a4b34f5ae269351fe17e22826f4830f783",
+        "learned_values": "cf6f3927d7814be11fc74b21177ba884101d95c48ab9fed067609df993723990",
+        "optimizer": "e4b3fdbbe8d1b28f8e94a692f10ecbb4478cd5e8a1c25dd77ae5565b04d73242",
+        "rng": "6c6c8aa64e867b0293dc50fdb8a0d4e50c08a7bea56ab73739b11ed6c1a93915"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 427555,
+        "path": "radius-observer844/observation-334.pt",
+        "sha256": "3342aee3ec76d3106ac5f21d21bcb6ccb02cb69de376a8691143c550e246fb96"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 375,
+      "label": "observation-375",
+      "partitions": {
+        "control": "8f577662db82365031bb8550ef6bc4eb87e40fa70860e0f8d4cd80fda8fed775",
+        "gradients": "7d387c285e75a03fe9cc94e7324803c51f5bf8813a371195b2195e31eb91ed72",
+        "identity": "dc6048458c192029f73c5392f24a3b414ddd102c88b29b78d454dd24f3c6c9c6",
+        "learned_values": "3d6ab86152d0e9e11d4a7be397a772fc4da20100a140b7992b4875b1a1048c98",
+        "optimizer": "9ca117d02284e6764398786b81f7cdbcbd4c137d2269a35e7d2ac5af8235f5ac",
+        "rng": "1a3a656118af6dfeec2462114ced180fe66d14703278799c10318abdbd5f79c4"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 415971,
+        "path": "radius-observer844/observation-375.pt",
+        "sha256": "8a9dd779e24388f1b86b96927531dda186ba471896e99663cb26fcd6cfce59a8"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 417,
+      "label": "observation-417",
+      "partitions": {
+        "control": "2fd38d772549538d2c9a3b4f279b7d4ac2e2549e4bf28eedbb6e7267141a060b",
+        "gradients": "8629fd02b9e97d12cbd5e29614c16d641c5451865d0e095b93bd668fb62fb7b2",
+        "identity": "47d13fdb89d34c2d8b96791ba633d2d9a2f7e9e17842c59a9466ec64974e404f",
+        "learned_values": "6aae5b0d92078518133fac653a7276b8c72880d5078cbb14e7cf4fdd548a605e",
+        "optimizer": "35fd8b2c40c820e8fd5c39e304104e30fab0cc5b26a7c3020a56aff4df58acdc",
+        "rng": "a793a99cb0d5e791d58ed4d9a1e72b199696ca332cb3869a55a10f1d0d1700b0"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 435857,
+        "path": "radius-observer844/observation-417.pt",
+        "sha256": "8cf063c7a7867ae079948db297cac5c456a8e1601e83d51abad67a24a62ce8f2"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 459,
+      "label": "observation-459",
+      "partitions": {
+        "control": "1a56bca24ef3a14e5f2b433655e3124df8e133f13922571398434d2d7122eb9b",
+        "gradients": "ed79aeb54c4fdcc2f3c707afcbae2f36da600fd7024c95f040d69bc2bd4c920a",
+        "identity": "adb48437fc051467bac708bfabfa1c2051dc63852b8d8799cfcd22ce661486fe",
+        "learned_values": "16d6e7b826e86f35207081315879abac81cd6d35cbe386d10a40f9ee0d9c7171",
+        "optimizer": "74f4ae80b468ce1f2cdd5f61e4ae062b99657d36e190e9d25247ca78ecf4a635",
+        "rng": "174d0f40a14e6e611c0a9e200200046c9bf4acf85edbc54e5ab8ba31695cb065"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 431873,
+        "path": "radius-observer844/observation-459.pt",
+        "sha256": "b72f961cbbc642fde0051b48daaa4e08ff7e64cf84d62c88a0786eef73997a84"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 500,
+      "label": "observation-500",
+      "partitions": {
+        "control": "743eb41cfeb1edd2eec3fbb35a83112a54b536a3122a97b0c33fa1553ab58472",
+        "gradients": "856163e9b7e95a7b9ccfac0a9af023097d0b14475b06a0eaf6f909b991d2a14b",
+        "identity": "1a6b47c2230c39f1dbd1b8f4bf30dfbcb89d0fea30918fb4f423843822b9fa19",
+        "learned_values": "ba985d3eb09ea9e6cfdb60bef43e399cfeff49c508440282d4981c0dc69e4171",
+        "optimizer": "e392c971435dc16e68f5de5114af6965a86570902668d6c6b05b82a56a0b0dcf",
+        "rng": "d520d8bb5d7d1cdadae3f0b25bc400b146eecf9334b961520e83cc666464dcf3"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 440183,
+        "path": "radius-observer844/observation-500.pt",
+        "sha256": "09d5f19e46de43b97479fe4afa4bcd6d7a4ca23059f6ed354dbe2e88dfb9054b"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 542,
+      "label": "observation-542",
+      "partitions": {
+        "control": "db92606fbda5567513f836966d45653b0da85310f53e413841ab520f7d582058",
+        "gradients": "24a22052f9cbd3586383f99af17e62c99ab77999c76ceee2c2cd578ec7e314e4",
+        "identity": "0b9d6a7ba4c98f1b7ca1155b59a9f99030075990de7d3690d17907ed6560eb0d",
+        "learned_values": "79ccdd4fa2f4b013c5443d2f9affd6d07eba01640d7623c63edccf4aeeae431f",
+        "optimizer": "ceede63fee076dd56b161c06d145299544616d6b92933f677e9a7ff7b468a74f",
+        "rng": "8bad8b117ba7b82c93ac6b40ce3b7b42774e1834ed60f9c7ff1ab732912e374e"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 459415,
+        "path": "radius-observer844/observation-542.pt",
+        "sha256": "8af9ae8e39ca9ae63991665da5fa6bfc2dcc5773b8033dcf07f7cbbc535170c8"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 584,
+      "label": "observation-584",
+      "partitions": {
+        "control": "a6fba96214e8911ab06384ea617ff7347a3d8d9c8caa8d1b3c73cc911d80b360",
+        "gradients": "21c3990018bee5d28fa4640edcc659e433e37e198f67196e998764638685494e",
+        "identity": "ca2ea9b7b3c315a40e2ad06178bd243c7161aa16947a2b2a0ef9aad4824ebd8e",
+        "learned_values": "1de87859887195836a83e3cff840364a0063502a60c50c92db34d7545167d120",
+        "optimizer": "5632ff5d413e2e1efc67425819367180c904ca826aeaa93d71007463f3c5c194",
+        "rng": "10bd87758bed88369b4e104e080b9041fe5691c9410fbd51ae788250742b7c1d"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 413983,
+        "path": "radius-observer844/observation-584.pt",
+        "sha256": "a891aea391ab74faf59675f83ea6ee849d3ba58c980619415e065d19055e2325"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 625,
+      "label": "observation-625",
+      "partitions": {
+        "control": "e81c15d7a7b916939a3eb4208662f9226dbf80abd43ec9083da164e19cdf70b4",
+        "gradients": "3724c8f1cba8316f9555e8bad9984bbda7cb6b18a36497419adf884da7b26087",
+        "identity": "f10fa1d1e62d2b69c32ada7437ad059d65f484eb81f96de3d94329bbf6de3b8d",
+        "learned_values": "f5af5349df8823110821929c0b3e21fd577f1d676b4227252b0d7f308e313d90",
+        "optimizer": "6e8f6008bfc311026d7d32e9353ea61396da9ef293870fbcb8633083fd7aa2b6",
+        "rng": "f7adcd0c7a8a5158b6947ec0bb3091f57989c8e427ee06367a6dbfd9a7748b8f"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 403445,
+        "path": "radius-observer844/observation-625.pt",
+        "sha256": "7fa71e2b57e6586737275d8426f9685f6149483a23f1dda9b4afd263739ce2b8"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 667,
+      "label": "observation-667",
+      "partitions": {
+        "control": "b419587e6df7438a98c7f3062949474c84b81f67641a0cbb14412ad85fd4e1bb",
+        "gradients": "8ecb71c03e79df0cff2ef2856af8048bfbea57bb5b3459d0c6d8925f07ddce9c",
+        "identity": "93b1a5c48c9beb50c041e3fbef97422a47ece7c2019730348606387b3d5fdb34",
+        "learned_values": "86009bd8bd38b1f7d1e607300fcf99013cabb2de49c5884943911991e5be0b0e",
+        "optimizer": "51efe00945fb52b6435fb59fb373d8d9a53594407d20b3a0233906a1f62fe7ec",
+        "rng": "1ca1b4c6f3d1c16b6096515267af3e3d3badb6d0d59d02c989cbcd785c153253"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 417365,
+        "path": "radius-observer844/observation-667.pt",
+        "sha256": "46986e3de33157dff22ab7fb4243a7c6c2106edf64957c2dabc51bde5a46ab9f"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 709,
+      "label": "observation-709",
+      "partitions": {
+        "control": "9cdfd7946dda2d8e40985eeb562a6498cfb4e4831161e9f7d12ecb112d750991",
+        "gradients": "28f38d5c420def641338570d3db13f5d530c2340babf5e4f8ca2ea925c8bad82",
+        "identity": "b73928ce20ff55599ae67cbd0f41f660c0671ceeb7417c8fab77210043c1289b",
+        "learned_values": "1a5821a61318b9e358fb3bca6444ecea4fff06bfb7725e96d272dd8043278e4c",
+        "optimizer": "6b1fbf3f96fee421d0a0010ca986a075a0e9857292ad0dba4961f8b68a34eaa5",
+        "rng": "7c1ba63c53503a29f2b265d4ed27068ab8d0a0c03b14c9bcc8d263e1720bb159"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 412049,
+        "path": "radius-observer844/observation-709.pt",
+        "sha256": "f6fbebb7961a88fe789344218c688f1ebef5ff6c5dabe8ee9008e5400b67c114"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 750,
+      "label": "observation-750",
+      "partitions": {
+        "control": "2eee2d80694018381ed85733814cb68af153de221648d0dc951bf53270319e9e",
+        "gradients": "efe1645df471e3ba9197e64a420f58d3f13c07b4c898e3925d1e58fe3978df4c",
+        "identity": "f75831ec2b728337fc654fa249c9cfdfdcc5c4339678a569d8aa52990172f5a3",
+        "learned_values": "b16bc89150a05da6daf0d63fe344d1c2694ca6902a6b52b97b25cc1f9ca79cc9",
+        "optimizer": "f66931656e04b7ce3fc28ba416d8434d41cfa64ab85e51ed3acbe58764b93512",
+        "rng": "838241776a9b9e65ad2b3bdaeec1669f372777724145c4f18a847286a86841b5"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 417641,
+        "path": "radius-observer844/observation-750.pt",
+        "sha256": "b5e21c285b5bf720701c6c99883b0c33b9656c5d073ad673e93e452038961555"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 792,
+      "label": "observation-792",
+      "partitions": {
+        "control": "2b8ed12ccef0952f1134f8f96e87493179e888a215b7d588915fc658fad30442",
+        "gradients": "e007f7f8e7afbb757fb42b10f7a8b92222f5010fb477dee16df5197a910f00a0",
+        "identity": "c3d2b13489afd2b18b084babba322c96c99e7c56d25e06f1735f1c342bbdf88b",
+        "learned_values": "31ebd6108912c17a55130c14b26866bf0808cae3445e14fcb1e8ec00feb11a08",
+        "optimizer": "e43f28b493ac6d75cf460449bb227c2946e7f9c4b1fd6694227d87f917001b12",
+        "rng": "b24b1f4dfbb9bdd29a53c4260899952db41d33d9bf59e855bdc1f27b7bd43908"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 423651,
+        "path": "radius-observer844/observation-792.pt",
+        "sha256": "68e8bb41b5b2d17b48778843e4f0d8888d83725becccbae5b31ef5005a3f04d1"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 834,
+      "label": "observation-834",
+      "partitions": {
+        "control": "7fc82144da0d62e5587a9a0b4e71cf0899358aa19fdb69686d472b56a9bb2540",
+        "gradients": "b89788db5c52cb24037f40c13c3561297a2b4999904dc84796adca300b8afb4e",
+        "identity": "a8e3740e7060d5887f7136e1602b80b8c1671b6ac28ad83501b0734cf91783a3",
+        "learned_values": "444854da5832c1648199a9b883ddac2cfab170985a2bbcc6a436ae8b8825083c",
+        "optimizer": "09a8de9396b46ce380979b8c2edd7d882fe6fa55f7e4e9fef337efeae5ea439e",
+        "rng": "a6a984b030fb6730b9bf2e57c598e9cb82729f059f2211b2d32c77e71608f05c"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 416459,
+        "path": "radius-observer844/observation-834.pt",
+        "sha256": "cc5090c71866f9cfe53167ad56afe7eec3510c5d7b372803689ada498a89127f"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 875,
+      "label": "observation-875",
+      "partitions": {
+        "control": "b73990e46c8a0a00b5e9589e0651d0a5c5829b174b2e58c46a8dda7ef3504c5c",
+        "gradients": "cb0e9ee7b32be93cedf20122ba021ce846759ee0a5ef7ad97fa6b55c8e71916c",
+        "identity": "53bda2a9ca6b7577476c9140f49ce387bd09975eefdf8340b89be5282baa8c3f",
+        "learned_values": "2271b64d9eb3716a250e2bfe582a9797c38fe456cb4a00e41fdc514d223b9426",
+        "optimizer": "acdd860cd83adbbac3ea176ee932c041882a0028473cf66a322dcf582375f8f9",
+        "rng": "a4f58eae5c7c6d2b14d751ab516b0932acb1b1f3fcfc2c73cdac6c30aa4e0836"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 415131,
+        "path": "radius-observer844/observation-875.pt",
+        "sha256": "6c0bd89945cc9f8bf3f15d63b57da25c2b68adc38097b05ed24cea1fca8ef67e"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 917,
+      "label": "observation-917",
+      "partitions": {
+        "control": "51e590468453bd61c87c5462a508eaa7ae642d4640d4e965c0b92d4d074f66a5",
+        "gradients": "431c195d90b24956960f3c10597e597865a57086befc32d61d94449e421294ed",
+        "identity": "70fddb455eaaa4ba7a8e40361174679c6cefd34771dc02a0819d64f476c8c5b3",
+        "learned_values": "c05b7e8e45ada18ae00725a81ac4b6188dc8733da83bf86fe72f22ce1b92cddc",
+        "optimizer": "509d97af86383367aac15312f6db5577d500236d748b15622182fb49331d8b0d",
+        "rng": "8989a388fa9108d42f0857cc83e05794939da7cad9634812e77b76c8367b4da3"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 424407,
+        "path": "radius-observer844/observation-917.pt",
+        "sha256": "5f9dfcbe0eba56094f41430c35c29de45ba0ea2536b62a1b5ef6fc5bf5e43425"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 959,
+      "label": "observation-959",
+      "partitions": {
+        "control": "ba0b30e77c149ab8526d20989af191290bdf27acca23062698a54eec9a544dbe",
+        "gradients": "92b55a848f9e6b9293a3a006e753276749936eae8631a6cc40210e83c4a72fed",
+        "identity": "6403982e8d4a3f48a5b23ed05ed995436f1af3e878edb4c47a969f58fd81be79",
+        "learned_values": "e0dd7cd26f20bd5b3bb4abb88176733d6fecc870045f483b722d20e166e3ef5f",
+        "optimizer": "d71c625452b53d16dfa7d7a50c95be848151f76e8dc1f97cf7b27a96fe769aa3",
+        "rng": "5db11c2209a0ac775a2638e6a064d00ac9d2dc37c8df93885e7f457f91a59d5c"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 440523,
+        "path": "radius-observer844/observation-959.pt",
+        "sha256": "4bbdb64679ab86114eb8708b602eb526d3328ec2072760670ea3e880d69cbf36"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 1000,
+      "label": "observation-1000",
+      "partitions": {
+        "control": "7a1dc6c4fef14031777b28e2237715f880a843d8b6c5883a1151ae6b52415941",
+        "gradients": "43814392a0d22934201f7cbdf54ea72024cefed8970a77f0e62fa0027b5e479e",
+        "identity": "78fcaa6005c19c39047a54f2fa970c3eebdaa750b0bf5b3a621b102956d5c3c4",
+        "learned_values": "329ea38aed2bddcfd6cead6212ed86869bdfed8e9f01a2937d27bdcfdad6313f",
+        "optimizer": "2f525102191517716463f1bb61c10502f3fa6a9e72c23fe3ac18346588ed5b61",
+        "rng": "87c84216a8f192269d0df23d93b3542b3b00f39a904b09d6a593bd24b008dc32"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 442245,
+        "path": "radius-observer844/observation-1000.pt",
+        "sha256": "e10f1b1a8632fb33492f69e8621d07e6c63d79e748c81cc079cc4de74f22af70"
+      },
+      "scheduled_update": null,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 832,
+      "label": "pre_update-833",
+      "partitions": {
+        "control": "d8a1edf5bcbfdede0e3afef5e894ba1256f8a25c2b477d55492bcf33906ca8de",
+        "gradients": "a6212b20feb18fa7b509afeb157245f6c354e724dcc520e367c7b5b5561dc4c0",
+        "identity": "eb143fd65b7285034e136fc674226189311182c41bb59af8eeb2ac559a7959e7",
+        "learned_values": "1ebde8a436994dbe77ed59deccd537c19271557947d3e47b25aae7605b0c810c",
+        "optimizer": "95c0f6b4eacb705ce8835276682b39a0ff96275ab86a65398090ec58d19225bd",
+        "rng": "587efbdc6af9fc9275f08ae4f798d17558c2c7759f8af09e5f2588cecbd0426c"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 421955,
+        "path": "radius-observer844/pre_update-833.pt",
+        "sha256": "4b311da5eb72a8ddefa695d653d870813d4ac3450a3e108bfefffaaa39e28986"
+      },
+      "scheduled_update": 833,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 832,
+      "label": "after_generator_backward-833",
+      "partitions": {
+        "control": "7fd03f177e9defbee713c00ea8eb4b5abfd8fb84a6b7da0f703ec4c4847acf2f",
+        "gradients": "3813ae48657ac21fc899bd455a24fe9f92a8bdc5a071da8772bb8e5706025efc",
+        "identity": "dccd4a1a925da83411a74fce157c433d7a20982dd998085fd1231c4aaebf1134",
+        "learned_values": "cbb94266a3956620618f51a3cd86fb60b4d2072e11f74665916de0e5817044d6",
+        "optimizer": "f8dd73186baa0d2d5cb1d2d11c85b025ef4b92ab5266753db3356354f1f76ed1",
+        "rng": "1cb3af44d654d8337a29c73c04d4b294c940b82dce4ede5cb49505bc83c788ea"
+      },
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 421255,
+        "path": "radius-observer844/after_generator_backward-833.pt",
+        "sha256": "75a6cd2eb3ca56a3eab749f347c6416cf1379815a71db227a0f9eefab17e304f"
+      },
+      "scheduled_update": 833,
+      "unknown_leaf_count": 13
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 833,
+      "label": "post_update-833",
+      "partitions": {
+        "control": "acea1004226428e4d5282f03edfadcc6f7302c5ee1fef51e3741833b692b0832",
+        "gradients": "32d2ce6a7ddc92232c469c96263a8d842b9aefd8433c3d302a93c2ea9d97721b",
+        "identity": "c964e7b9c5f6963fa326f2507a4e138614e9849ae01678b64ab2a2dd9f4624e5",
+        "learned_values": "b41a0e146089fd0272035e06c0d14b67c30d0acb330d549a09c2fa741ae0731e",
+        "optimizer": "675890a087f9992b75e9e7585304012039cc7c9819a278fc23b866b560be9d0a",
+        "rng": "180d48fbb7f8a169dd0bf6e74093cba88223a74e45a28f8b0afefec8f328f482"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 422083,
+        "path": "radius-observer844/post_update-833.pt",
+        "sha256": "0ce8cfc785c9aa7bae68f60be489e94e191d47a556e099ad4cb7a89d494c6c52"
+      },
+      "scheduled_update": 833,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 833,
+      "label": "pre_update-834",
+      "partitions": {
+        "control": "acea1004226428e4d5282f03edfadcc6f7302c5ee1fef51e3741833b692b0832",
+        "gradients": "32d2ce6a7ddc92232c469c96263a8d842b9aefd8433c3d302a93c2ea9d97721b",
+        "identity": "40e6a181c27a4ca25f3a3b7d1af3746f7d14d1528c58a6541ac6cf04c580e8b3",
+        "learned_values": "b41a0e146089fd0272035e06c0d14b67c30d0acb330d549a09c2fa741ae0731e",
+        "optimizer": "675890a087f9992b75e9e7585304012039cc7c9819a278fc23b866b560be9d0a",
+        "rng": "83a984809e5b9d9591d3a3532d253f1fb794c439b46c61b0024bfd7b541f72be"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 422083,
+        "path": "radius-observer844/pre_update-834.pt",
+        "sha256": "798597f5b2bc10cf78195eece170e9989aa6b1f5e3b0d988627f56d00f1f6779"
+      },
+      "scheduled_update": 834,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 833,
+      "label": "after_generator_backward-834",
+      "partitions": {
+        "control": "3492d8a537df1460429d627df367b386423c2f40440a85125bc4231edb2133e9",
+        "gradients": "3bb53ccc18fe951d9796a81ee9e12bb773c18b9c9fa434a99eddbc5f97db5f41",
+        "identity": "09230f937d082d2cc598a1f8242350fba0ddbb98fff7ab394eecf92f7166af6c",
+        "learned_values": "6ccfc2483dd6afb8e72d346e1533bb6869483c527715015d674e456409fa8c8d",
+        "optimizer": "703ec9ba0aa4bc2b39c6fca9b499a540764336da426846781c193b8d87011b1f",
+        "rng": "bee4d713ca6b03040143b2705b9d69ebc219984df47ddfba714fd3fe43f85ab0"
+      },
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 421511,
+        "path": "radius-observer844/after_generator_backward-834.pt",
+        "sha256": "aef898c275149a0ed1ec2eb13b45bbf75a1a4ecf94d4235930497c330a0d1097"
+      },
+      "scheduled_update": 834,
+      "unknown_leaf_count": 13
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 834,
+      "label": "post_update-834",
+      "partitions": {
+        "control": "7fc82144da0d62e5587a9a0b4e71cf0899358aa19fdb69686d472b56a9bb2540",
+        "gradients": "f21ee66d77975e6d397d1f7a94c5a9a986adc60ee0b4cd1be6f53913d4779d96",
+        "identity": "ceb54f1049a993c2b02f97a75c701a8cf417611c92eef0f8e57470b8b31b3a72",
+        "learned_values": "444854da5832c1648199a9b883ddac2cfab170985a2bbcc6a436ae8b8825083c",
+        "optimizer": "6464e341aa22fab24c9b6dc78d781c4db673dd3d230883164b37ce42255f7862",
+        "rng": "50d50508c0e91e3af66ffce68a29b1ff4a7e40c3ef7f9fde144dab30a114d9ce"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 423423,
+        "path": "radius-observer844/post_update-834.pt",
+        "sha256": "05ffd46a8c96dfe058ecfbdbf034f95fcf9d71578bcf6369de1ee73c5573931d"
+      },
+      "scheduled_update": 834,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 834,
+      "label": "pre_update-835",
+      "partitions": {
+        "control": "7fc82144da0d62e5587a9a0b4e71cf0899358aa19fdb69686d472b56a9bb2540",
+        "gradients": "b89788db5c52cb24037f40c13c3561297a2b4999904dc84796adca300b8afb4e",
+        "identity": "547aef4b03e5b5e7eb356070282b22e5218fb9869495c4024b59dc654eaae0ee",
+        "learned_values": "444854da5832c1648199a9b883ddac2cfab170985a2bbcc6a436ae8b8825083c",
+        "optimizer": "09a8de9396b46ce380979b8c2edd7d882fe6fa55f7e4e9fef337efeae5ea439e",
+        "rng": "275d3125182c93a968e16feef9c3b24a36a35c64cec577a8d46949ff4ed83edc"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 416459,
+        "path": "radius-observer844/pre_update-835.pt",
+        "sha256": "2a6aba53d82ad403be1479ceafe192b5fb4113748603668f6a481ab79274402d"
+      },
+      "scheduled_update": 835,
+      "unknown_leaf_count": 12
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 834,
+      "label": "after_generator_backward-835",
+      "partitions": {
+        "control": "3fdaa8db783159643e5edc2812ecc9b89af2c6da6a862d4699d2e57834fc66ab",
+        "gradients": "a05e450ff8e06f90092e5576968e0ea4d7d31e62cafd7a79f5d55902c68d30a4",
+        "identity": "c4ea51014a216245d5821880bce7e50ded5b1021a7f73cfad05225d3c8c1b63e",
+        "learned_values": "5322e4f9ac28db940d29598a8d4fb0559079012704d49dd9045791ca44d7e967",
+        "optimizer": "2309811d64ac60eca631e7744776ad16ef5f62b94b91c89a8bdc7020941e0b81",
+        "rng": "b9719473e4ec1a3aafce3f5b3d4b971078ae55b717c09a9f8299d1b9ff03e7bc"
+      },
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 422723,
+        "path": "radius-observer844/after_generator_backward-835.pt",
+        "sha256": "c92d853a1671e963a1b11d5c0eac869016935088194e4364815cb4963688ec58"
+      },
+      "scheduled_update": 835,
+      "unknown_leaf_count": 13
+    },
+    {
+      "complete_live_leaf_scope": false,
+      "completed_steps": 835,
+      "label": "post_update-835",
+      "partitions": {
+        "control": "fa4101a543c55b1f7ffd92876eed6cb0bb36b48faeb3096bb8f258e23836e7e4",
+        "gradients": "95fadad648640c17e7fc73bdafaae9d4b39caa5240f819387c598a9fa4dd728e",
+        "identity": "2993fedab98dae458ff7827b2688cade5d5ff31c132dfe030866e7054c7c69e3",
+        "learned_values": "5f196e6bd659de57344675b61e65ae875a3dea15dc0d25bcba2a46aa65978020",
+        "optimizer": "1fc16dd39dcf5e2120e1ecfe9bc02b9b8518227b2d69a6a5e5fa1438ac092459",
+        "rng": "33155e858d436360a912296003e1a6a427aab9c07f3eb807e961f7f18abf0e8d"
+      },
+      "phase": "ready",
+      "pin": {
+        "bytes": 424061,
+        "path": "radius-observer844/post_update-835.pt",
+        "sha256": "170ff573eaf11dc9f9cdbe491c0ff5658ba6681e47bc7d4e821c77ac2c8400b7"
+      },
+      "scheduled_update": 835,
+      "unknown_leaf_count": 12
+    }
+  ],
+  "source_digest": "97090a2e439964e4110df92a22b4d452317dc35f7ebe1b3ddce133c5f8babe98",
+  "total_bytes": 13978433
+}
