@@ -412,6 +412,7 @@ class UpdatePolicy:
                         tester.rows = len(table)
         elif recipe.particle_birth_death:
             from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
+            from .particle_prior import MoGParticlePrior
             features = critic_features
             if recipe.birth_death_space == "critic" and features is None:
                 features = ScalarHeadFeatures(self.D)
@@ -422,7 +423,8 @@ class UpdatePolicy:
                                 evaluation_modules=tuple(module for module in (self.G, encoder, router)
                                                          if module is not None),
                                 controller=self.controller, completed_steps=lambda: self.completed_steps,
-                                semantics=row_semantics)
+                                semantics=row_semantics,
+                                mog_prior=prior if type(prior) is MoGParticlePrior else None)
             self.birth_death = ParticleBirthDeath(
                 rows, seed + 6, space=recipe.birth_death_space,
                 isolation=recipe.birth_death_isolation,

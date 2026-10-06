@@ -11,8 +11,8 @@ import os
 from pathlib import Path
 import sys
 
-SCHEMA = "forge_atlas_existing_mog_ae_initializer_preflight_v1"
-ADAPTER_SHA256 = '179ef8632da9d6f03d9561f276c86ad2ce87848c90db89251b4ccb7a88fee42b'
+SCHEMA = "forge_atlas760_existing_mog_ae_initializer_preflight_v1"
+ADAPTER_SHA256 = '2b0f4df2579731286d7e93d4505e304e3f928c6033bf1e63826e4abc6ff68fc5'
 TASK_ID = "ae_gan_hold"
 
 

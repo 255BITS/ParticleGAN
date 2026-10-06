@@ -1,7 +1,7 @@
 """Render actual saved training observations; no model, sampler or rescoring.
 
 The exporter consumes a certified request/result envelope and verifies retained
-arrays against the adapter's descriptor. It adds zero training or sampling. Track B keeps the original task priors;
+arrays against the adapter's descriptor. It adds zero training or sampling. Atlas760 corrected MoG keeps the original task priors;
 this module does not substitute NoisyParticlePrior or transfer Track A credit.
 """
 import argparse
@@ -17,11 +17,9 @@ import torch
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 
 
-EXPECTED_VIEW = {'assignments': [{'importance': 'required', 'order': 0, 'qualification_tier': 1, 'task': 'gaussian1d_acquisition'}, {'importance': 'required', 'order': 1, 'qualification_tier': 1, 'task': 'two_pole'}, {'importance': 'required', 'order': 2, 'qualification_tier': 1, 'task': 'unused_token_hold'}, {'importance': 'required', 'order': 3, 'qualification_tier': 1, 'task': 'ae_gan_hold'}, {'importance': 'required', 'order': 4, 'qualification_tier': 1, 'task': 'ring16_acquisition'}, {'importance': 'required', 'order': 5, 'qualification_tier': 1, 'task': 'five_word_joint_acquisition'}], 'calibration': {'adoption_blocker': 'Isolated Atlas717 existing-prior compatibility scope; no prior evidence transfer or default qualification.', 'status': 'provisional'}, 'eligibility': {'claim_contract': {'experimental_track': 'atlas717_existing_mog'}}, 'evidence_scope': 'original_task_existing_mog_compatibility', 'goal': 'discriminator_stability', 'id': 'atlas_existing_mog_tier1_717_v1', 'ranking': {'compare_compatible_cohorts': True, 'cost_separate': True, 'policy': 'qualified_tier_only_with_raw_metrics'}, 'reporting': {'family_totals': False}, 'revision': 1, 'schema_version': 1}
-EXPECTED_CLAIM_CONTRACT = {'experimental_track': 'atlas717_existing_mog', 'sampling_law': 'task_declared', 'schedule': 'schedule_free', 'scoring_weights': 'live'}
-OWNER_PINS = {'atlas_existing_mog': 'b852cd1eeba6dace69e300a80f21892c9511c7603c84c81f2d7118e98bfaa132',
-              'atlas_existing_mog_ae': '179ef8632da9d6f03d9561f276c86ad2ce87848c90db89251b4ccb7a88fee42b',
-              'atlas_two_pole': '5f3d6c8acecf6a2cb72c45245922818478900a3b5c0fe90af4ef0b4d09cdfc90'}
+EXPECTED_VIEW = {'assignments': [{'importance': 'required', 'order': 0, 'qualification_tier': 1, 'task': 'gaussian1d_acquisition'}, {'importance': 'required', 'order': 1, 'qualification_tier': 1, 'task': 'two_pole'}, {'importance': 'required', 'order': 2, 'qualification_tier': 1, 'task': 'unused_token_hold'}, {'importance': 'required', 'order': 3, 'qualification_tier': 1, 'task': 'ae_gan_hold'}, {'importance': 'required', 'order': 4, 'qualification_tier': 1, 'task': 'ring16_acquisition'}, {'importance': 'required', 'order': 5, 'qualification_tier': 1, 'task': 'five_word_joint_acquisition'}], 'calibration': {'adoption_blocker': 'Isolated Atlas760 corrected MoG reaction-kernel validation; no baseline grade transfer or default qualification.', 'status': 'provisional'}, 'eligibility': {'claim_contract': {'experimental_track': 'atlas760_existing_mog_kernel'}}, 'evidence_scope': 'original_task_existing_mog_compatibility', 'goal': 'discriminator_stability', 'id': 'atlas_existing_mog_kernel760_v1', 'ranking': {'compare_compatible_cohorts': True, 'cost_separate': True, 'policy': 'qualified_tier_only_with_raw_metrics'}, 'reporting': {'family_totals': False}, 'revision': 1, 'schema_version': 1}
+EXPECTED_CLAIM_CONTRACT = {'experimental_track': 'atlas760_existing_mog_kernel', 'sampling_law': 'task_declared', 'schedule': 'schedule_free', 'scoring_weights': 'live'}
+OWNER_PINS = {'atlas_existing_mog': 'c04db8875742ca5658919be94d76dae294fa0d1008208a3732ef96c68cc63479', 'atlas_existing_mog_ae': '2b0f4df2579731286d7e93d4505e304e3f928c6033bf1e63826e4abc6ff68fc5', 'atlas_two_pole': '4159eaa0d8d370615374baa460780e12a100640f22c352488ee6c5ed3ace65f9'}
 
 def _indices(count):
     if count < 1:
@@ -30,21 +28,21 @@ def _indices(count):
 
 
 def _validate_request_scope(request):
-    """Keep this exporter confined to one separately certified Track B request."""
+    """Keep this exporter confined to one separately certified Atlas760 corrected MoG request."""
     from .atlas_existing_mog import PARENTS, supports_candidate, validate
     for name, expected in OWNER_PINS.items():
         module = importlib.import_module('.' + name, __package__)
         if not getattr(module, '__file__', None) or file_hash(Path(module.__file__)) != expected:
-            raise ValueError('Track B media owner Source differs: ' + name)
+            raise ValueError('Atlas760 corrected MoG media owner Source differs: ' + name)
     if (not isinstance(request, dict) or not supports_candidate(request.get('candidate', {}))
             or request['candidate'].get('claim_contract') != EXPECTED_CLAIM_CONTRACT
             or request.get('view') != EXPECTED_VIEW or request.get('through_tier') != 1
             or not isinstance(request.get('tasks'), dict)
             or set(request['tasks']) != set(PARENTS)):
-        raise ValueError('Track B media requires its exact candidate, view and six original tasks')
+        raise ValueError('Atlas760 corrected MoG media requires its exact candidate, view and six original tasks')
     for name, task in request['tasks'].items():
         if not isinstance(task, dict) or task.get('id') != name:
-            raise ValueError('Track B task-map keys differ from their original identities')
+            raise ValueError('Atlas760 corrected MoG task-map keys differ from their original identities')
         validate(task)
 
 
@@ -57,13 +55,13 @@ def _existing_mog_media_binding(task, evidence):
         raise ValueError('a blocked owner has no certified scientific goal media')
     invalid = validate_evidence(task, evidence)
     if invalid is not None:
-        raise ValueError('Track B media requires complete original owner evidence: ' + invalid['reason'])
+        raise ValueError('Atlas760 corrected MoG media requires complete original owner evidence: ' + invalid['reason'])
     observations = evidence.get('observations', [])
     clocks = sorted({math.ceil(i * task['execution']['steps'] / 24) for i in range(1, 25)})
     if (not isinstance(observations, list) or len(observations) != 24
             or any(not isinstance(row, dict) or type(row.get('step')) is not int for row in observations)
             or [row['step'] for row in observations] != clocks):
-        raise ValueError('Track B media requires exactly the original24 scored clocks')
+        raise ValueError('Atlas760 corrected MoG media requires exactly the original24 scored clocks')
     sampled = parent in {'gaussian1d_acquisition', 'ring16_acquisition', 'ae_gan_hold'}
     if parent in {'gaussian1d_acquisition', 'ring16_acquisition'}:
         descriptor = evidence.get('saved_observer_outputs', {})
@@ -77,11 +75,11 @@ def _existing_mog_media_binding(task, evidence):
                 or not isinstance(descriptor.get('sha256'), str)
                 or len(descriptor['sha256']) != 64
                 or any(c not in '0123456789abcdef' for c in descriptor['sha256'])):
-            raise ValueError('Track B media requires the original retained scored-output descriptor')
+            raise ValueError('Atlas760 corrected MoG media requires the original retained scored-output descriptor')
         if evidence.get('host', {}).get('definition') != task['execution']['host_definition']:
-            raise ValueError('Track B target geometry differs from the fixed original host')
+            raise ValueError('Atlas760 corrected MoG target geometry differs from the fixed original host')
     if parent == 'two_pole' and not evidence.get('saved_particle_observations'):
-        raise ValueError('Track B direct control requires saved actual live coordinates')
+        raise ValueError('Atlas760 corrected MoG direct control requires saved actual live coordinates')
     if parent == 'ae_gan_hold':
         _validate_ae_records(observations, evidence.get('saved_ae_observations'))
     if parent == 'two_pole':
@@ -107,7 +105,7 @@ def _validate_scored_records(task, observations, records):
                    or not row['samples'].is_floating_point()
                    or not bool(torch.isfinite(row['samples']).all()) for row in records)
             or [row['step'] for row in records] != [row['step'] for row in observations]):
-        raise ValueError('Track B media requires the original24 scored4096 tensors and exact clocks')
+        raise ValueError('Atlas760 corrected MoG media requires the original24 scored4096 tensors and exact clocks')
 
 
 def _validate_ae_records(observations, records):
@@ -115,7 +113,7 @@ def _validate_ae_records(observations, records):
     shapes = {'generated': (1024, 2), 'reconstructed': (1024, 2),
               'target': (1024, 2), 'prior': (12, 2), 'anchors': (2, 2)}
     if not isinstance(records, list) or len(records) != 24 or len(observations) != 24:
-        raise ValueError('Track B AE media requires all original24 saved reads')
+        raise ValueError('Atlas760 corrected MoG AE media requires all original24 saved reads')
     for row, measured in zip(records, observations):
         if (not isinstance(row, dict) or type(row.get('step')) is not int
                 or type(measured.get('step')) is not int
@@ -131,21 +129,22 @@ def _validate_ae_records(observations, records):
 def _validate_particle_records(observations, records):
     """Join all original direct coordinates, targets and gradients to scored reads."""
     if not isinstance(records, list) or len(records) != 24 or len(observations) != 24:
-        raise ValueError('Track B direct media requires all original24 saved reads')
+        raise ValueError('Atlas760 corrected MoG direct media requires all original24 saved reads')
     for row, measured in zip(records, observations):
         if (not isinstance(row, dict) or type(row.get('step')) is not int
                 or row['step'] != measured['step'] or row.get('metrics') != measured):
             raise ValueError('saved direct arrays differ from original scored clocks/metrics')
         for key in ('particles', 'target', 'critic_gradient'):
             values = np.asarray(row.get(key), dtype=float)
-            if values.shape != (12, 1) or not np.isfinite(values).all():
+            shape = (24, 1) if key == 'critic_gradient' else (12, 1)
+            if values.shape != shape or not np.isfinite(values).all():
                 raise ValueError('saved original finite direct ' + key + ' shape differs')
 
 
 def render(request, task, row, local, output):
     _validate_request_scope(request)
     if task != request['tasks'].get(task.get('id')) or row.get('task_id') != task.get('id'):
-        raise ValueError('Track B717 media task/result differs from the exact admitted request')
+        raise ValueError('Atlas760 corrected MoG media task/result differs from the exact admitted request')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -248,7 +247,7 @@ def render(request, task, row, local, output):
             top.set_title('Original live generation + reconstruction, with scheduled output noise', fontsize=10)
             top.legend(loc='upper right', fontsize=7)
         else:
-            raise ValueError('Track B media requires original scored distributions or direct coordinates')
+            raise ValueError('Atlas760 corrected MoG media requires original scored distributions or direct coordinates')
         if thresholds:
             for name, operator, bound in thresholds:
                 values = [point[name] for point in observations]
@@ -265,9 +264,9 @@ def render(request, task, row, local, output):
         caption = f"{task['id']} · update {observations[index]['step']} · recorded {row['gate_status']}\n{evidence.get('scoring_weights', 'live')} / {evidence['sampling_law']}"
         if existing['latent_prior_sampled']:
             kernel = f"fixed latent sigma {existing['sigma']:g} in raw units" if existing['latent_prior_sampled'] else 'sigma0 direct coordinates; no prior draw'
-            caption += '\nTrack B717 · original MoGParticlePrior · ' + kernel + '; original observer retained'
+            caption += '\nAtlas760 corrected MoG · original MoGParticlePrior · ' + kernel + '; original observer retained'
         if not existing['latent_prior_sampled']:
-            caption += '\nTrack B717 · unchanged direct Parameter control; no latent kernel draw'
+            caption += '\nAtlas760 corrected MoG · unchanged direct Parameter control; no latent kernel draw'
         figure.suptitle(caption, fontsize=9 if existing else 10)
         buffer = BytesIO(); figure.savefig(buffer, format='png', dpi=100); plt.close(figure)
         buffer.seek(0); frames.append(Image.open(buffer).convert('RGB'))
