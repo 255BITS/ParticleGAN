@@ -28,13 +28,13 @@ def _noisy_media_binding(task, evidence):
     numeric grades are carried by the certified envelope, never recomputed.
     """
     prior = task.get('execution', {}).get('prior', {})
-    if not (task.get('task_cohort') == 'noisy_particle_prior_tier1_686_v1'
-            or str(task.get('id', '')).endswith('_noisy_prior686_v1')
+    if not (task.get('task_cohort') == 'atlas_noisy_particle025_tier1_717_v1'
+            or str(task.get('id', '')).endswith('_noisy025717_v1')
             or prior.get('kind') == 'noisy_particle_cloud'
             or 'prior_substitution_parent' in task):
         return None
-    from .noisy_prior_tier1 import validate
-    from .noisy_prior_adapters import validate_evidence
+    from .atlas_noisy025_tier1 import validate
+    from .atlas_noisy025_adapters import validate_evidence
     binding = validate(task)
     invalid = validate_evidence(task, evidence)
     if invalid is not None:
@@ -104,7 +104,11 @@ def _validate_noisy_ae_records(observations, records):
                 raise ValueError('saved original finite AE ' + key + ' shape differs')
 
 
-def render(task, row, local, output):
+def render(request, task, row, local, output):
+    from .atlas_noisy025_tier1 import validate_request_scope
+    validate_request_scope(request)
+    if task != request['tasks'].get(task.get('id')) or row.get('task_id') != task.get('id'):
+        raise ValueError('Track A717 media task/result differs from the exact admitted request')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -267,7 +271,9 @@ def render(task, row, local, output):
         caption = f"{task['id']} · update {observations[index]['step']} · recorded {row['gate_status']}\n{evidence.get('scoring_weights', 'live')} / {evidence['sampling_law']}"
         if noisy:
             kernel = f"fixed latent sigma {noisy['sigma']:g} in raw units" if noisy['latent_prior_sampled'] else 'sigma0 direct coordinates; no prior draw'
-            caption += '\nIsolated686 · NoisyParticlePrior · ' + kernel + '; parent width and observer retained'
+            caption += '\nTrack A717 · NoisyParticlePrior · ' + kernel + '; declared .025 kernel; original observer retained'
+        if task.get('id') in {'two_pole', 'unused_token_hold'}:
+            caption += '\nTrack A717 · unchanged direct Parameter control; no latent kernel draw'
         figure.suptitle(caption, fontsize=9 if noisy else 10)
         buffer = BytesIO(); figure.savefig(buffer, format='png', dpi=100); plt.close(figure)
         buffer.seek(0); frames.append(Image.open(buffer).convert('RGB'))
@@ -303,6 +309,8 @@ def export_attempt(directory, output):
     directory = Path(directory)
     envelope, result, certificate = [read_json(directory / (name + '.json')) for name in ('request', 'result', 'evidence')]
     request = envelope.get('request', envelope)
+    from .atlas_noisy025_tier1 import validate_request_scope
+    validate_request_scope(request)
     if certificate['result_hash'] != stable_hash(result) or certificate['source'] != request['source']:
         raise ValueError('original source/result certificate differs')
     if result['candidate_revision'] != request['candidate_revision']:
@@ -310,7 +318,7 @@ def export_attempt(directory, output):
     local = Path(certificate['local_artifact_root'])
     if read_json(local / 'result.json') != result:
         raise ValueError('local result differs from certified envelope')
-    return [render(request['tasks'][row['task_id']], row, local,
+    return [render(request, request['tasks'][row['task_id']], row, local,
                    Path(output) / (row['task_id'] + '.gif')) for row in result['task_results']
             if row['gate_status'] in {'PASS', 'FAIL', 'BLOCKED'} and row.get('evidence')]
 

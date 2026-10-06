@@ -1,0 +1,27 @@
+{
+  "gif_bytes": 127155,
+  "gif_sha256": "f4abe125bfb02597f42b438227b066f96abb3570228af9a1c9476f94593e60f1",
+  "observation_count": 24,
+  "observations_sha256": "f07c19d965f2ae788577aafcd0112a41ed5c073c73cf1720bdd2553c576b05e8",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "13feb9193576eb8357e43f9029a62d482c2bfd89d1dc41fafa0cd7a4416ad05d",
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "5d468023bd9908762167096151dd4c52aefd2e684764e50bb7db52b6e1540ce4",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [],
+  "task_id": "ae_gan_hold_noisy025717_v1"
+}

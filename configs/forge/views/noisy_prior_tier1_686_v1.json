@@ -1,0 +1,58 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_acquisition_noisy_prior686_v1"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole_noisy_prior686_v1"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold_noisy_prior686_v1"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold_noisy_prior686_v1"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition_noisy_prior686_v1"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_acquisition_noisy_prior686_v1"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Isolated prior-type branch; no main-parent or default qualification.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "prior_substitution_variant",
+  "goal": "discriminator_stability",
+  "id": "noisy_prior_tier1_686_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

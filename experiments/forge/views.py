@@ -187,6 +187,14 @@ def load_tasks(root: Path | str) -> dict:
     for name, task in load_variants(root, tasks).items():
         _validate_task(task)
         tasks[name] = task
+    from .noisy_prior_tier1 import load_variants as load_noisy_variants
+    for name, task in load_noisy_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
+    from .atlas_noisy025_tier1 import load_variants as load_atlas717_variants
+    for name, task in load_atlas717_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
     return tasks
 
 
@@ -560,6 +568,16 @@ def grade_result(task: dict, result: dict | None) -> dict:
         policy_grade = validate_evidence(task, evidence)
         if policy_grade is not None:
             return _verdict(policy_grade["status"], policy_grade["reason"])
+    if task.get("task_cohort") == "noisy_particle_prior_tier1_686_v1":
+        from .noisy_prior_adapters import validate_evidence as validate_noisy_evidence
+        noisy_grade = validate_noisy_evidence(task, evidence)
+        if noisy_grade is not None:
+            return _verdict(noisy_grade["status"], noisy_grade["reason"])
+    if task.get('task_cohort') == 'atlas_noisy_particle025_tier1_717_v1':
+        from .atlas_noisy025_adapters import validate_evidence as validate_atlas717_evidence
+        invalid = validate_atlas717_evidence(task, evidence)
+        if invalid is not None:
+            return _verdict(invalid['status'], invalid['reason'])
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
