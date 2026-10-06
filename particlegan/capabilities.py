@@ -4,6 +4,7 @@ Capabilities describe the actual module, not a recipe label. In particular,
 standardizing a mixture's reads couples all rows and is not a sparse A2 table.
 """
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior
+from .noisy_particle_prior import NoisyParticlePrior
 
 
 def prior_capabilities(prior):
@@ -12,12 +13,13 @@ def prior_capabilities(prior):
     Unknown modules remain usable by component APIs, but do not acquire an A2
     capability merely by having an attribute called ``z``.
     """
-    known = type(prior) in (ParticlePrior, MoGParticlePrior)
-    mog = type(prior) is MoGParticlePrior
+    noisy = type(prior) is NoisyParticlePrior
+    known = type(prior) in (ParticlePrior, MoGParticlePrior, NoisyParticlePrior)
+    mog = type(prior) in (MoGParticlePrior, NoisyParticlePrior)
     learned = known and prior.z.requires_grad
     standardize = mog and prior.standardize
-    return {
-        "kind": "mog" if mog else "particle_cloud" if known else
+    result = {
+        "kind": "noisy_particle_cloud" if noisy else "mog" if mog else "particle_cloud" if known else
                 "gaussian" if type(prior) is GaussianPrior else "unknown",
         "learned_locations": bool(learned),
         "learned_width": False if known else None,
@@ -27,6 +29,9 @@ def prior_capabilities(prior):
         "row_local_gradients": bool(known and not standardize),
         "a2_eligible": bool(learned and not standardize),
     }
+    if noisy:
+        result["kernel"] = prior.kernel_contract()
+    return result
 
 
 def prior_mechanisms(prior, *, latent_damping_max_rate, prior_beta1):

@@ -1,0 +1,37 @@
+{
+  "api_changes": [
+    "Add one pass-through, source-bound Gaussian radius observer; unchanged ParticleGAN core."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Passive event recording only. Original prior/kernel, full79 Atlas controls, network, seed, data, output noise, gates, resources, 1000 updates and24 scoring reads are unchanged."
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas844_existing_mog_radius_observer",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-existing-mog-radius-observer844-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Measure the actual fake-pool and primary/isolation support-radius call paths using exact legacy shadows on owned clones and the already drawn noise. No counterfactual decision, recovery, winning configuration or default claim. Full live leaf scope remains UNKNOWN where unproven.",
+  "parent": "atlas",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  ],
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}
