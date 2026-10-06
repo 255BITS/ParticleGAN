@@ -216,6 +216,9 @@ class _Run:
         trainer.sample = measured_sample
 
     def step(self, real):
+        observer = getattr(self.context, '_radius_observer844', None)
+        if observer is not None:
+            observer.update_boundary('pre_update', observer.scheduled_update)
         before = self.trainer.completed_steps
         with self.timing.measure("training_updates"):
             self.last_update = self.trainer.step(real, collect_stats=True)
@@ -225,6 +228,8 @@ class _Run:
         if self.noisy_task:
             from .noisy_prior_adapters import restore_live_owner
             restore_live_owner(self.trainer)
+        if observer is not None:
+            observer.update_boundary('post_update', observer.scheduled_update)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
         if self.trainer.completed_steps != before + 1:
             raise RuntimeError("public trainer did not complete one update")
@@ -313,6 +318,8 @@ class _Run:
             controls = controls_receipt(trainer.policy, trainer.completed_steps)
             if self.existing_mog_task:
                 from .atlas_existing_mog import COHORT, vector_receipt
+                if getattr(self.context, '_radius_observer844', None) is not None:
+                    from .atlas844_radius_owner import COHORT
                 controls["cohort"] = COHORT
                 evidence["existing_mog717"] = vector_receipt(self.context, trainer, self.task)
             else:
@@ -379,11 +386,16 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             records.append({"step": step, "samples": samples.detach().clone()})
         return score_samples(samples, spec, step)
     for step in range(1, task["execution"]["steps"] + 1):
+        observer = getattr(context, '_radius_observer844', None)
+        if observer is not None:
+            observer.scheduled_update = step
         run.step(sample_target(spec, context.recipe.batch_size, data, step - 1).to(device))
         if step in checkpoints:
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
+            if observer is not None:
+                observer.scheduled_observation(step)
     evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
     if retain_scored_outputs:
         evidence["saved_observer_outputs"] = _save_observer_outputs(

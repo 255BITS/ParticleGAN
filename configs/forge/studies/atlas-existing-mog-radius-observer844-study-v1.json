@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 120,
+    "candidate_budget_seconds": 120,
+    "id": "atlas-existing-mog-radius-observer844-study-v1"
+  },
+  "candidate": "atlas-existing-mog-radius-observer844-v1",
+  "competing_explanation": "The previous760/79124 scored outputs and gates coincide; this does not establish inactive radius exposure or a state/RNG cause. A radius-only difference may have no effective input/write effect. The scalar Study signature is metadata only; the unchanged original1000/24 five-suffix Gaussian verdict remains mandatory. Unknown leaf scope or overflow remains UNKNOWN.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "hypothesis": "The same original Gaussian run can expose whether the reviewed support-radius branch is reached and whether its cap/displacement/rounded-input or same-pair commit differs from exact legacy arithmetic on the same pre-call table/query/already-drawn noise. Recording is passive, with no production decision changes or recovery prediction.",
+  "id": "atlas-existing-mog-radius-observer844-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_existing_mog_radius_observer844_v1"
+  },
+  "status": "draft",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -390,7 +390,12 @@ class FormulationContext:
         self.execution_path = execution_path
         self.policy_task = deepcopy(policy_task)
         from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
-        self._existing_mog = candidate_id == CANDIDATE_ID
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1'}
+        if candidate_id == 'atlas-existing-mog-radius-observer844-v1':
+            self.candidate_id = candidate_id
+        if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
+            from .atlas844_radius_owner import validate as validate844
+            validate844(self.policy_task)
         if self._existing_mog:
             if recipe_preset != "atlas" or extensions or initializer != "deterministic_orthogonal":
                 raise CapabilityError(["Track B permits only the unchanged Atlas preset"])

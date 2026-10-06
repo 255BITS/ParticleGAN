@@ -339,6 +339,10 @@ def validate_screening_submission(request: dict) -> None:
     from .atlas_existing_mog import CANDIDATE_ID, VIEW_ID, supports_candidate
     existing_mog_id = (CANDIDATE_ID if supports_candidate(candidate)
                        and request.get("view", {}).get("id") == VIEW_ID else None)
+    if candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_radius_observer844_v1':
+        from .atlas844_radius_owner import supports_candidate as supports844
+        if supports844(candidate):
+            existing_mog_id = candidate['id']
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), seed=SCREENING_SEED,

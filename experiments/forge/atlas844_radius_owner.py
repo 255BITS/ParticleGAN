@@ -1,4 +1,4 @@
-"""Atlas791 nearest-positive MoG: original task priors and live observation laws.
+"""Atlas844 passive Gaussian observation: original task priors and live observation laws.
 
 Only the exact new candidate owns this compatibility bridge. Original TaskSpecs,
 public MoG class/kernel, numerical gates, host loops and named streams remain
@@ -13,10 +13,10 @@ import os
 
 from .contracts import atomic_json, stable_hash
 
-CANDIDATE_ID = 'atlas-existing-mog-nearest-positive791-v1'
-VIEW_ID = 'atlas_existing_mog_nearest_positive791_v1'
-COHORT = 'atlas_existing_task_mog_nearest_positive791_v1'
-TRACK_ID = 'atlas791_existing_mog_nearest_positive'
+CANDIDATE_ID = 'atlas-existing-mog-radius-observer844-v1'
+VIEW_ID = 'atlas_existing_mog_radius_observer844_v1'
+COHORT = 'atlas_existing_task_mog_radius_observer844_v1'
+TRACK_ID = 'atlas844_existing_mog_radius_observer'
 PROTOCOL_PATH = 'configs/forge/protocols/screening.json'
 PROTOCOL_SHA256 = '3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803'
 PARENTS = {'gaussian1d_acquisition': {'raw_sha256': 'b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13', 'bytes': 3668, 'payload_sha256': '2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c', 'prior_kind': 'mog', 'sigma': 0.025}, 'two_pole': {'raw_sha256': '55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5', 'bytes': 3099, 'payload_sha256': '2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b', 'prior_kind': 'particle_cloud', 'sigma': 0.0}, 'unused_token_hold': {'raw_sha256': 'ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8', 'bytes': 3032, 'payload_sha256': '925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169', 'prior_kind': 'particle_cloud', 'sigma': 0.0}, 'ae_gan_hold': {'raw_sha256': '53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79', 'bytes': 2897, 'payload_sha256': 'd7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103', 'prior_kind': 'mog', 'sigma': 0.025}, 'ring16_acquisition': {'raw_sha256': 'e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1', 'bytes': 7835, 'payload_sha256': '6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c', 'prior_kind': 'mog', 'sigma': 0.025}, 'five_word_joint_acquisition': {'raw_sha256': '5987d782efdc36ba9bb44bb03dfcd9c6aa321d29dc83dc56d184a9677c081e34', 'bytes': 4904, 'payload_sha256': 'a7f6b8df63d8145abda8a7aff0beab8c3c81fa1585d6c328291948e3cd12c3c8', 'prior_kind': 'particle_cloud', 'sigma': 0.0}}
@@ -32,16 +32,10 @@ ALLOWANCES = dict(gaussian1d_acquisition=120, two_pole=300, unused_token_hold=30
 
 
 def is_candidate(candidate):
-    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import is_candidate as owned
-        return owned(candidate)
     return isinstance(candidate, dict) and candidate.get('id') == CANDIDATE_ID
 
 
 def supports_candidate(candidate):
-    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import supports_candidate as owned
-        return owned(candidate)
     return (is_candidate(candidate) and candidate.get('claim_contract', {}).get('experimental_track') == TRACK_ID
             and candidate.get('recipe_preset') == 'atlas'
             and candidate.get('recipe_overrides', {}) == {}
@@ -77,8 +71,8 @@ def validate(task, root=None):
     """Original payload identity; administrative caches are not science."""
     actual = declaration(task)
     name = actual.get('id')
-    if name not in PARENTS or stable_hash(actual) != PARENTS[name]['payload_sha256']:
-        raise ValueError('Atlas791 nearest-positive MoG requires one exact original Tier 1 task, without substitutions')
+    if name != 'gaussian1d_acquisition' or stable_hash(actual) != PARENTS[name]['payload_sha256']:
+        raise ValueError('Atlas844 nearest-positive MoG requires one exact original Tier 1 task, without substitutions')
     prior = actual['execution']['prior']
     if (prior['kind'] != PARENTS[name]['prior_kind'] or prior['sigma'] != PARENTS[name]['sigma']
             or prior['standardize'] is not False or prior['learnable'] is not True):
@@ -94,19 +88,10 @@ def validate(task, root=None):
 
 
 def blockers(task, candidate, root=None):
-    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import blockers as owned
-        return owned(task, candidate, root=root)
     try:
-        metadata = validate(task, root=root)
+        validate(task, root=root)
         if not supports_candidate(candidate):
-            raise ValueError('the exact Atlas791 nearest-positive MoG candidate and unchanged Atlas preset are required')
-        name = metadata['task_id']
-        if name in BLOCKED:
-            return [name + ': ' + BLOCKED[name]]
-        if name == 'ae_gan_hold':
-            from .atlas_existing_mog_ae import blockers as ae_blockers
-            return ae_blockers(task, candidate, root=root)
+            raise ValueError('exact Gaussian-only Atlas844 passive diagnostic identity required')
         return []
     except (ValueError, KeyError, TypeError, OSError) as error:
         return [task.get('id', '<task>') + ': ' + str(error)]
@@ -125,26 +110,23 @@ def task_resources(task):
 
 
 def supporting_source_paths(task, candidate, root=None):
-    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import supporting_source_paths as owned
-        return owned(task, candidate, root=root)
-    if not is_candidate(candidate) or task.get('id') not in PARENTS:
+    if not is_candidate(candidate):
         return ()
-    name = validate(task)['task_id']
+    validate(task)
     catalog = ()
     if root is not None:
         base = Path(root).resolve()
         catalog = tuple(sorted({p.relative_to(base).as_posix()
             for directory in ('configs/forge/tasks', 'configs/forge/task-variants')
             for p in (base / directory).rglob('*.json') if p.is_file()}))
-    return (*catalog, *('configs/forge/tasks/' + parent + '.json' for parent in PARENTS), PROTOCOL_PATH,
-            'configs/forge/defaults.json', 'configs/forge/ideas/atlas.json',
-            'configs/forge/legacy-ideas-v1.json',
-            'configs/forge/views/' + VIEW_ID + '.json',
-            'configs/forge/ideas/' + CANDIDATE_ID + '.json',
-            'configs/forge/ideas/ka2.json',
-            'configs/forge/studies/atlas-existing-mog-nearest-positive791-study-v1.json',
-            'reports/forge/prior-evidence/atlas-type-only686.json')
+    return (*catalog, PROTOCOL_PATH, 'configs/forge/defaults.json',
+        'configs/forge/legacy-ideas-v1.json', 'configs/forge/ideas/atlas.json',
+        'configs/forge/ideas/ka2.json', 'configs/forge/views/' + VIEW_ID + '.json',
+        'configs/forge/ideas/' + CANDIDATE_ID + '.json',
+        'configs/forge/studies/atlas-existing-mog-radius-observer844-study-v1.json',
+        'reports/forge/prior-evidence/atlas-type-only686.json',
+        'tests/test_forge_atlas844_radius_observer.py',
+        'experiments/forge/atlas844_software_controls.py')
 
 
 def prior_contract(prior, *, kernel_stream=None):
@@ -226,12 +208,9 @@ def vector_admission_contract(request, task, output, device, resolved, *, cuda_v
 
 def admitted_vector_context(request, task, context, output, device):
     """Join ordinary request.json and inherited lease before the first constructor."""
-    if request['candidate'].get('id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import admitted_vector_context as owned
-        return owned(request, task, context, output, device)
     if not is_candidate(request['candidate']):
         return
-    from .atlas_two_pole import source_guard
+    from .atlas844_radius_owner import source_guard
     from .contracts import read_json
     root = Path(request['source']['snapshot_path']).resolve()
     source_guard(request, root)
@@ -253,9 +232,6 @@ def admitted_vector_context(request, task, context, output, device):
 
 
 def initialize_vector_receipts(context, trainer, output, task):
-    if getattr(context, 'candidate_id', None) == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import initialize_vector_receipts as owned
-        return owned(context, trainer, output, task)
     from dataclasses import asdict
     from particlegan.particle_prior import MoGParticlePrior
     from particlegan.policy import UpdatePolicy
@@ -283,7 +259,7 @@ def initialize_vector_receipts(context, trainer, output, task):
     recipe = asdict(context.recipe)
     if stable_hash(recipe) != stable_hash(EXPECTED_RECIPES[task['id']]):
         raise ValueError('full current Atlas79 differs from fixed original task binding')
-    source = dict(schema='forge_atlas791_existing_mog_nearest_positive_initialization_v1',
+    source = dict(schema='forge_atlas844_existing_mog_radius_observer_initialization_v1',
         candidate_id=CANDIDATE_ID, task_id=task['id'], pid=os.getpid(),
         recipe=recipe, recipe_sha256=stable_hash(recipe), prior=kernel, object_bindings=bindings,
         reaction_kernel=reaction_kernel_receipt(policy),
@@ -293,16 +269,17 @@ def initialize_vector_receipts(context, trainer, output, task):
         initial_state_sha256=typed_state_digest(context.state_dict()))
     context.existing_mog_initialization = deepcopy(source)
     atomic_json(Path(output) / 'INITIALIZATION.json', source)
-    start = dict(schema='forge_atlas791_existing_mog_nearest_positive_model_started_v1', task_id=task['id'],
+    start = dict(schema='forge_atlas844_existing_mog_radius_observer_model_started_v1', task_id=task['id'],
         candidate_id=CANDIDATE_ID, pid=os.getpid(), completed_steps=0, initialization_sha256=stable_hash(source))
     atomic_json(Path(output) / 'MODEL_STARTED.json', start)
     print(json.dumps(dict(event='actual_model_started', **start), sort_keys=True), flush=True)
+    from .atlas844_radius_observer import RadiusObserver
+    observer = RadiusObserver(context, trainer, Path(output).resolve()).install()
+    context._radius_observer844 = observer
+    trainer.policy._radius_observer844 = observer
 
 
 def observation_receipt(task, policy):
-    if getattr(policy, '_radius_observer844', None) is not None:
-        from .atlas844_radius_owner import observation_receipt as owned
-        return owned(task, policy)
     validate(task)
     if (policy.table is not policy.prior.z or policy._phase != 'ready'
             or policy.row_policy != 'independent' or policy._fast is not None):
@@ -315,26 +292,24 @@ def observation_receipt(task, policy):
 
 
 def vector_receipt(context, trainer, task):
-    if getattr(context, 'candidate_id', None) == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import vector_receipt as owned
-        return owned(context, trainer, task)
     from dataclasses import asdict
     initial = context.existing_mog_initialization
-    return dict(schema='forge_atlas791_existing_mog_nearest_positive_evidence_v1', candidate_id=CANDIDATE_ID,
+    return dict(schema='forge_atlas844_existing_mog_radius_observer_evidence_v1', candidate_id=CANDIDATE_ID,
         cohort=COHORT, task_id=task['id'], task_payload_sha256=validate(task)['task_payload_sha256'],
         full_recipe=asdict(trainer.recipe), full_recipe_sha256=stable_hash(asdict(trainer.recipe)),
         actual_prior=prior_contract(trainer.prior), initialization=deepcopy(initial),
         reaction_kernel=reaction_kernel_receipt(trainer.policy),
         admission=deepcopy(context.existing_mog_admission), original_task_credit_transferred=False,
         policy_table_alias=trainer.policy.table is trainer.prior.z,
-        table_optimizer_alias=trainer.policy.table_optimizer is trainer.opt_g)
+        table_optimizer_alias=trainer.policy.table_optimizer is trainer.opt_g,
+        radius_observation844=context._radius_observer844.finish())
 
 
 def validate_reaction_kernel_receipt(receipt, prior, *, completed_steps):
     """Validate measured implementation metadata, without sampling or grading."""
     if (type(completed_steps) is not int or completed_steps < 0
             or not isinstance(receipt, dict)
-            or receipt.get('schema') != 'forge_atlas791_mog_nearest_positive_v1'
+            or receipt.get('schema') != 'forge_atlas844_mog_nearest_positive_v1'
             or receipt.get('candidate_id') != CANDIDATE_ID
             or type(receipt.get('completed_steps')) is not int
             or receipt['completed_steps'] != completed_steps
@@ -376,7 +351,7 @@ def reaction_kernel_receipt(policy):
         raise ValueError('corrected raw MoG reaction owner and same table are required')
     selection = policy._feature_selection.state_dict() if policy._feature_selection is not None else None
     actual = selection['actual_backend'] if selection is not None else 'knn'
-    receipt = dict(schema='forge_atlas791_mog_nearest_positive_v1', candidate_id=CANDIDATE_ID,
+    receipt = dict(schema='forge_atlas844_mog_nearest_positive_v1', candidate_id=CANDIDATE_ID,
         completed_steps=policy.completed_steps,
         core_pins={name: deepcopy(CORE_PINS[name]) for name in
             ('particlegan/birth_death.py', 'particlegan/policy.py')},
@@ -392,9 +367,6 @@ def reaction_kernel_receipt(policy):
 
 def validate_evidence(task, evidence):
     """Ownership check only. Numerical grading uses the untouched original scorer."""
-    if evidence.get('existing_mog717', {}).get('candidate_id') == 'atlas-existing-mog-radius-observer844-v1':
-        from .atlas844_radius_owner import validate_evidence as owned
-        return owned(task, evidence)
     try:
         validate(task)
         if task['id'] == 'ae_gan_hold':
@@ -405,7 +377,15 @@ def validate_evidence(task, evidence):
         if task['id'] == 'two_pole':
             return validate_direct_evidence(task, evidence)
         marker = evidence['existing_mog717']
-        if (marker['schema'] != 'forge_atlas791_existing_mog_nearest_positive_evidence_v1'
+        diagnostic = marker['radius_observation844']
+        if (diagnostic.get('schema') != 'forge_atlas844_passive_radius_evidence_v1'
+                or diagnostic.get('candidate_id') != CANDIDATE_ID
+                or diagnostic.get('task_id') != 'gaussian1d_acquisition'
+                or diagnostic.get('completed_steps') != 1000
+                or type(diagnostic.get('purity_failures')) is not int
+                or diagnostic['purity_failures'] != 0):
+            raise ValueError('actual844 passive diagnostic binding/purity differs')
+        if (marker['schema'] != 'forge_atlas844_existing_mog_radius_observer_evidence_v1'
                 or marker['candidate_id'] != CANDIDATE_ID or marker['cohort'] != COHORT
                 or marker['task_id'] != task['id'] or marker['task_payload_sha256'] != validate(task)['task_payload_sha256']
                 or marker['full_recipe_sha256'] != stable_hash(marker['full_recipe'])
@@ -459,7 +439,7 @@ def direct_control_receipt(task, result):
     if task['id'] != 'two_pole':
         raise ValueError('only unchanged two_pole uses direct control receipt')
     applied = result['applied']
-    return dict(schema='forge_atlas791_original_direct_control_v1', candidate_id=CANDIDATE_ID,
+    return dict(schema='forge_atlas844_original_direct_control_v1', candidate_id=CANDIDATE_ID,
         cohort=COHORT, task_id=task['id'], initial_owner=deepcopy(applied['initialization']),
         recipe=deepcopy(applied['recipe']), recipe_sha256=stable_hash(applied['recipe']),
         source_contract_sha256=applied['source_contract_sha256'],
@@ -472,7 +452,7 @@ def direct_control_receipt(task, result):
 def validate_direct_evidence(task, evidence):
     from .atlas_two_pole import CLOCKS, validate_effective_recipe
     receipt = evidence['existing_mog717']
-    if (receipt['schema'] != 'forge_atlas791_original_direct_control_v1'
+    if (receipt['schema'] != 'forge_atlas844_original_direct_control_v1'
             or receipt['candidate_id'] != CANDIDATE_ID or receipt['cohort'] != COHORT
             or receipt['task_id'] != 'two_pole' or receipt['actual_sampled_prior'] is not None
             or receipt['evaluation_sampler_calls'] != 0 or receipt['a2_inapplicable'] is not True
@@ -492,3 +472,37 @@ def validate_direct_evidence(task, evidence):
             or initial['optimizer_state_entries'] != dict(prior=0, discriminator=0)):
         raise ValueError('original zero12x1/stored-critic initialization is absent')
     return None
+
+
+def source_guard(request, root):
+    """Full copied index plus immutable original core and truthful module origins.
+
+    Shared Forge changes are authenticated by their full request Source index,
+    and independently reviewed literal pins at the ROOT admission boundary.
+    No baseline owner guard is bypassed for its own candidate.
+    """
+    import sys
+    from .sources import verify_snapshot
+    root = Path(root)
+    if root.resolve() != root or request['source']['snapshot_path'] != str(root):
+        raise ValueError('exact copied844 Source namespace required')
+    if (request['candidate']['id'] != CANDIDATE_ID
+            or request['view']['id'] != VIEW_ID
+            or request['study']['id'] != 'atlas-existing-mog-radius-observer844-study-v1'
+            or not supports_candidate(request['candidate'])):
+        raise ValueError('exact844 candidate/view/Study marker required')
+    verify_snapshot(root, request['source'])
+    for relative, pin in CORE_PINS.items():
+        _pin(root, relative, pin)
+    for name, module in tuple(sys.modules.items()):
+        if name == 'particlegan' or name.startswith(('particlegan.', 'experiments.forge')):
+            origin = getattr(module, '__file__', None)
+            if origin is None:
+                raise ValueError('owned844 scientific module has no declared Source origin: ' + name)
+            path = Path(origin)
+            if path.resolve() != path:
+                raise ValueError('owned844 scientific module origin is aliased: ' + name)
+            relative = path.relative_to(root).as_posix()
+            expected = request['source']['files'].get(relative)
+            if expected is None or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                raise ValueError('owned844 scientific module is foreign/unpinned: ' + name)
