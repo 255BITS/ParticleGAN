@@ -6,6 +6,11 @@ updates, with six consecutive terminal passes. The sigma-.025 ring passes
 intermediate 800/1,200-update cuts, then loses sustained local spread by 1,600.
 The closest Gaussian remains FAIL at 4,000 updates and regresses in width.
 
+The user subsequently selected the passing ring conditions; the
+[adopted GPU smoke](../ring16-smoke-v2/README.md) records the current task/caller
+and preserves this original diagnostic. Gaussian work continues from
+[the handoff](GAUSSIAN_HANDOFF.md) after compaction.
+
 This is the user-requested follow-up to [PR #316’s prior grid](../tier1-prior-smoke/README.md).
 It changes the execution allowance only. Original 400/1,000-update failures,
 protocols, receipts, archive identities and leaderboard results remain intact.

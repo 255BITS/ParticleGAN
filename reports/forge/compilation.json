@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "bf9710d00fb18b8e23558a3864b7cab53c90fe57b57aa73e066b269fbcd67d21",
+  "input_digest": "427a5f19ec8f5164b072ae935f12da01deaa3e2ea508113438e204ce672b782c",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -578,7 +578,7 @@
     "configs/forge/tasks/mid_scale_identity.json": "f84f25e04f159bc3926af48c9243bc999832e166854fba63e90d6e7c62c0bc7f",
     "configs/forge/tasks/mode_hold.json": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5",
     "configs/forge/tasks/residual_student.json": "dfebe28e3bafb0aea298678894524ea7b182481980f4854351bbd4252facd285",
-    "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
     "configs/forge/tasks/ring_extension.json": "19361e1a0817f90a7fe13c1c4b35fff644745258063e87371099936df7461f50",
     "configs/forge/tasks/ring_hold.json": "7d3e33f19db943f6f55016b9cbf2fe93221cc3e202c4c86190d5ff981b1fdfc9",
     "configs/forge/tasks/rotated100.json": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d",
@@ -614,7 +614,7 @@
     "configs/forge/view-history/discriminator_stability-v3.json": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/views/clockfree_continuous.json": "30d62d0f1a11181bc50dd041985cc4be52587ce7abe901114c8e0f2f27fd3d6f",
-    "configs/forge/views/discriminator_stability.json": "584c73bed0a5bab6db1112cb3b2d68c9c05475d6382d1477c3cc5ee583114871",
+    "configs/forge/views/discriminator_stability.json": "bf02930783724614c892bb3a9c7f3c9e08dd66c19f906b0374415267407872b5",
     "configs/forge/views/formulation_comparison.json": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25",
     "configs/forge/views/host_profile_transfer.json": "41b16932d4d186e4e2e0504d2ff696faad4ec02b493ac5874abd1d7f8be6b993",
     "configs/forge/views/k3p_two_pole_horizon.json": "9355ce6ef0db6e9321641056c1eecf1dd90b057cf6a72315d9755fdbfff99e23",
@@ -2085,16 +2085,16 @@
     "reports/forge/technique-receipts/ff80b61b84c646c2a54350d42c323917.json": "0861086effdfb8888aa3a0e2e4fe133236344060f6a6dbe446c73e4b0709893b"
   },
   "inventory_coverage": {
-    "declared_count": 11765,
+    "declared_count": 11766,
     "missing": [],
     "stale": [],
-    "tracked_count": 11765,
+    "tracked_count": 11766,
     "unclassified": [],
     "valid": true
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "e7dfa48b40d3142f6426d988c7b7a1cacb8a079745377805a4caf93a581431e8",
+    "reports/forge/EXPERIMENT_MEMORY.md": "f6f4649b44fedc533912418344a212a398d2cffe3c41fe3f6643354449979692",
     "reports/forge/publication-records.json": "a31129dc1cabdac6168664f1aeb4c643546156359c6b39234cea5e8cfad25e9b"
   },
   "pending_readout": [

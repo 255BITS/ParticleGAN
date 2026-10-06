@@ -5,10 +5,10 @@
   "execution": {
     "initializer": "deterministic_orthogonal",
     "host": "ring16_acquisition",
-    "steps": 1600,
+    "steps": 400,
     "prior": {
       "kind": "mog",
-      "sigma": 0.1,
+      "sigma": 0.025,
       "standardize": false,
       "learnable": true
     },
@@ -22,7 +22,7 @@
       "z_dim": 4,
       "particles": 256,
       "batch": 128,
-      "steps": 1600,
+      "steps": 400,
       "lr": 0.00425,
       "d_lr_mult": 1.0,
       "prior_lr_mult": 2.0,
@@ -287,16 +287,15 @@
         0.0625
       ],
       "identifiable": true
-    },
-    "original_schedule_horizon": 400
+    }
   },
   "evaluation": {
     "sampling_contract_version": 1,
     "eval_output_noise": "clean",
     "kind": "transfer_sustained",
-    "evaluator": "experiments.forge.transfer_cadence:test_verdict",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "gate_policy": {
-      "id": "ring16-acquisition-smoke-v2",
+      "id": "ring16-acquisition-smoke-v1",
       "finite_atom_exemptions": false,
       "rationale": "Provisional broad acquisition bounds: every cluster receives at least one quarter of its target mass; balance, 3-sigma precision and all-component spread reject collapsed surrogates. Thresholds are validated by independent target/destructive samples, not tuned to training."
     },
@@ -333,15 +332,14 @@
         0.15
       ]
     ],
-    "observations": 96,
+    "observations": 24,
     "minimum_stable_checks": 5,
     "scoring_weights": "live",
     "sources": {
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
       "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
       "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
-      "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
-      "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6"
     },
     "sample_evaluator": "benchmarks.toy_audit.ring16_quality:score_samples",
     "evaluator_revision": {
@@ -368,11 +366,8 @@
     "mog_prior"
   ],
   "dependencies": [],
-  "description": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 1600 updates. No extended hold phase.",
+  "description": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.",
   "research_artifacts": {
-    "api_publication": "reports/toy_audit/api_contract/ring16/publication.json",
-    "current_api_case": "api-ring16-acquisition-v2",
-    "parameter_evidence": "reports/forge/tier1-prior-duration/results.json",
-    "previous_task": "reports/forge/tier1-prior-smoke/frozen-tasks/ring16_acquisition.json"
+    "api_publication": "reports/toy_audit/api_contract/ring16/publication.json"
   }
 }

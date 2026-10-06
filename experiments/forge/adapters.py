@@ -289,7 +289,10 @@ class _Run:
 
 
 def _checkpoints(task):
-    return sorted({math.ceil(i * task["execution"]["steps"] / 24) for i in range(1, 25)})
+    count = task["evaluation"].get("observations", 24)
+    if type(count) is not int or count < 1:
+        raise ValueError("evaluation observations must be a positive integer")
+    return sorted({math.ceil(i * task["execution"]["steps"] / count) for i in range(1, count + 1)})
 
 
 def _save_observer_outputs(output, filename, records, *, kind):

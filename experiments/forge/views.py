@@ -109,8 +109,14 @@ def _validate_measurement_contract(task):
         fixed["scoring_weights"] = "state_selected"
     if kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
-        fixed.update(evaluator="benchmarks.transfer_suite.protocol:test_verdict",
-                     observations=OBSERVATIONS, minimum_stable_checks=MIN_STABLE_CHECKS)
+        declared = evaluation.get("evaluator") == "experiments.forge.transfer_cadence:test_verdict"
+        if declared:
+            count = evaluation.get("observations")
+            if type(count) is not int or not MIN_STABLE_CHECKS <= count <= task["execution"]["steps"]:
+                raise ValueError(f"{task['id']}: declared observations must fit the full update budget")
+        fixed.update(evaluator="experiments.forge.transfer_cadence:test_verdict" if declared else "benchmarks.transfer_suite.protocol:test_verdict",
+                     observations=evaluation["observations"] if declared else OBSERVATIONS,
+                     minimum_stable_checks=MIN_STABLE_CHECKS)
     elif kind == "native_accuracy":
         from benchmarks.toy100.accuracy import LIMITS
         from benchmarks.toy100.accuracy_gate import HOLDOUT_N
@@ -337,21 +343,24 @@ def _guards(task, evidence):
 
 def _transfer(task, evidence):
     from benchmarks.transfer_suite.protocol import test_verdict
+    from .transfer_cadence import test_verdict as test_verdict_declared
 
     evaluation = task["evaluation"]
-    spec = {"steps": task["execution"]["steps"], "thresholds": evaluation["thresholds"]}
-    expected = [math.ceil(i * spec["steps"] / 24) for i in range(1, 25)]
+    declared = evaluation.get("evaluator") == "experiments.forge.transfer_cadence:test_verdict"
+    count = evaluation["observations"] if declared else 24
+    spec = {"steps": task["execution"]["steps"], "thresholds": evaluation["thresholds"], "observations": count}
+    expected = [math.ceil(i * spec["steps"] / count) for i in range(1, count + 1)]
     points = evidence.get("observations", evidence.get("curve"))
     try:
         _curve(points, spec["thresholds"])
     except ValueError as exc:
         return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
     if [p["step"] for p in points] != expected:
-        return _verdict("INCOMPLETE", "all 24 declared observation checkpoints are required")
+        return _verdict("INCOMPLETE", f"all {count} declared observation checkpoints are required")
     live = evidence.get("live")
     if not isinstance(live, dict) or any(not _finite(live.get(key)) for key, _, _ in spec["thresholds"]):
         return _verdict("INCOMPLETE", "missing finite final live metrics")
-    grade = test_verdict(spec, {"observations": points, "live": live})
+    grade = (test_verdict_declared if declared else test_verdict)(spec, {"observations": points, "live": live})
     return _verdict(grade["status"], "recomputed complete live curve and terminal suffix",
                     metrics=live, evaluator_result=grade)
 

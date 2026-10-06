@@ -7,13 +7,14 @@ import pytest
 import torch
 
 from benchmarks.toy_audit import api_contract
-from benchmarks.toy_audit.api_ring16 import CASE_ID, list_cases
+from benchmarks.toy_audit.api_ring16 import CASE_ID, CURRENT_CASE_ID, list_cases
 from benchmarks.toy_audit.ring16_controls import run_controls
 from experiments.forge.adapters import adapter_preflight
 from experiments.forge.views import load_tasks, load_view
 from particlegan import GANTrainer, MoGParticlePrior
 
 ROOT = Path(__file__).resolve().parents[1]
+pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="ring16 tests require CUDA")
 
 
 @pytest.fixture(autouse=True)
@@ -25,7 +26,7 @@ def one_thread():
 
 
 def test_target_and_destructive_controls_validate_acquisition_bounds():
-    report = run_controls()
+    report = run_controls(device="cuda:0")
     assert report["training_updates"] == 0
     assert report["passed"], report["controls"]
     rows = {row["control"]: row for row in report["controls"]}
@@ -44,10 +45,15 @@ def test_shared_declaration_is_required_smoke_and_preserves_original_mode_hold()
     task = tasks["ring16_acquisition"]
     case = list_cases()[0]
     assert case["thresholds"] == task["evaluation"]["thresholds"]
-    assert case["default_steps"] == task["execution"]["steps"] == 400
-    means = torch.tensor(case["law"]["means"])
+    assert case["default_steps"] == task["execution"]["steps"] == 1600
+    assert case["evaluation_observations"] == task["evaluation"]["observations"] == 96
+    assert case["prior_options"]["sigma"] == task["execution"]["prior"]["sigma"] == .1
+    legacy = next(row for row in list_cases() if row["id"] == CASE_ID)
+    assert legacy["default_steps"] == 400 and legacy["prior_options"]["sigma"] == .025
+    assert legacy["thresholds"] == case["thresholds"]
+    means = torch.tensor(case["law"]["means"], device="cuda:0")
     assert means.shape == (16, 2)
-    assert torch.allclose(means.norm(dim=1), torch.full((16,), 3.))
+    assert torch.allclose(means.norm(dim=1), torch.full((16,), 3., device="cuda:0"))
     assert case["law"]["masses"] == [1/16]*16
     view = load_view(ROOT, "discriminator_stability")
     assert view["calibration"]["status"] == "provisional"
@@ -60,13 +66,20 @@ def test_shared_declaration_is_required_smoke_and_preserves_original_mode_hold()
 
 
 def test_shared_public_caller_has_exact_mog_and_clean_live_sampling():
-    case = api_contract.discover()[CASE_ID]
-    fixture = api_contract.build(case, seed=0, max_steps=1)
+    case = api_contract.discover()[CURRENT_CASE_ID]
+    with pytest.raises(ValueError, match="requires CUDA"):
+        api_contract.build(case, device="cpu", seed=0, max_steps=1)
+    fixture = api_contract.build(case, device="cuda:0", seed=0, max_steps=1)
     assert isinstance(fixture.trainer, GANTrainer)
     assert isinstance(fixture.trainer.prior, MoGParticlePrior)
-    assert float(fixture.trainer.prior.sigma) == pytest.approx(.025)
+    assert float(fixture.trainer.prior.sigma) == pytest.approx(.1)
     assert fixture.recipe.standardize is False
     assert fixture.recipe.total_steps == 400 and fixture.recipe.num_particles == 256
+    assert fixture.recipe.lr_floor == fixture.recipe.network_lr_floor == 1.
+    assert fixture.recipe.optimizer_family == "dualnorm"
+    assert fixture.recipe.lr == .012
+    assert fixture.recipe.d_lr_mult == 1.5 and fixture.recipe.prior_lr_mult == 2.5
+    assert fixture.trainer.prior.z.device.type == "cuda"
     assert fixture.completed_steps == 0
     result = fixture.observe(n=4096, seed=10000)
     assert not result["passed"]
@@ -94,6 +107,45 @@ def rendering_failure_receipt():
                               metric_evaluation_steps=scoring, evaluation_steps=schedule),
                 observations=[dict(step=step, metrics=metrics, passed=False, failed_bounds=bounds,
                                    views=[dict(kind="scatter", title="Actual output")]) for step in schedule])
+
+
+def test_named_stream_checkpoint_roundtrip_and_observer_purity():
+    from experiments.forge.state import state_digest
+    case = api_contract.discover()[CURRENT_CASE_ID]
+    fixture = api_contract.build(case, device="cuda:0", max_steps=2)
+    fixture.step()
+    state = deepcopy(fixture.state_dict())
+    fixture.observe()
+    assert state_digest(fixture.state_dict()) == state_digest(state)
+    restored = api_contract.build(case, device="cuda:0", max_steps=2)
+    restored.load_state_dict(state)
+    fixture.step()
+    restored.step()
+    assert state_digest(fixture.state_dict()) == state_digest(restored.state_dict())
+
+
+def test_declared_cadence_requires_all_checks_and_preserves_legacy_evaluator():
+    from experiments.forge.adapters import _checkpoints
+    from experiments.forge.views import _transfer, _validate_task
+    task = load_tasks(ROOT)["ring16_acquisition"]
+    _validate_task(task)
+    metric = float(torch.tensor(.5, device="cuda:0"))
+    task = deepcopy(task)
+    task["evaluation"]["thresholds"] = [["quality", "<=", 1.]]
+    evidence = dict(live=dict(quality=metric),
+                    observations=[dict(step=step, quality=metric) for step in _checkpoints(task)])
+    assert len(evidence["observations"]) == 96
+    assert [point["step"] for point in evidence["observations"]][-5:] == [1534, 1550, 1567, 1584, 1600]
+    assert _transfer(task, evidence)["gate_status"] == "PASS"
+    partial = deepcopy(evidence)
+    partial["observations"].pop(3)
+    assert _transfer(task, partial)["gate_status"] == "INCOMPLETE"
+    evidence["observations"][-3]["quality"] = 2.
+    assert _transfer(task, evidence)["gate_status"] == "FAIL"
+    legacy = deepcopy(task)
+    legacy["evaluation"]["evaluator"] = "benchmarks.transfer_suite.protocol:test_verdict"
+    with pytest.raises(ValueError, match="unsupported override"):
+        _validate_task(legacy)
 
 
 def test_renderer_recovery_preserves_original_error_and_numeric_fail():

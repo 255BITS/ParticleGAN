@@ -34,7 +34,13 @@ def declaration():
     protocol = json.loads(PROTOCOL.read_text())
     for binding in protocol["tasks"].values():
         if file_hash(ROOT / binding["path"]) != binding["sha256"]:
-            raise ValueError("task changed after protocol freeze; declare a new study")
+            # Current tasks can advance; diagnostics retain the exact original
+            # bytes, never the revised conditions. The frozen protocol hash is
+            # unchanged and the archive must match its original task digest.
+            archive = ROOT / "reports/forge/tier1-prior-smoke/frozen-tasks" / Path(binding["path"]).name
+            if not archive.is_file() or file_hash(archive) != binding["sha256"]:
+                raise ValueError("task changed after protocol freeze; declare a new study")
+            binding["path"] = str(archive.relative_to(ROOT))
     if file_hash(ROOT / protocol["candidate_path"]) != protocol["candidate_sha256"]:
         raise ValueError("selected trainer changed after protocol freeze")
     return protocol

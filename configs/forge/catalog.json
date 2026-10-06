@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 82,
+      "forge_engine": 83,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 82,
+      "engine_support": 83,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11765
+    "files": 11766
   },
   "coverage": {
-    "declared_count": 11765,
+    "declared_count": 11766,
     "missing": [],
     "stale": [],
-    "tracked_count": 11765,
+    "tracked_count": 11766,
     "unclassified": [],
     "valid": true
   },
@@ -7686,6 +7686,13 @@
       "family": "forge_engine",
       "git_blob": "205b0ca85aa023fc2d360b2054b7ac0c8ba82f6e",
       "path": "experiments/forge/trainer_families.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "a58bce2d0ef155be57ef1614b0b6223e483efdba",
+      "path": "experiments/forge/transfer_cadence.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

@@ -75,7 +75,7 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert smoke == ["gaussian1d_acquisition", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_acquisition"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 5
+    assert stability["revision"] == 6
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "clockfree_audit_measurement_v1"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
@@ -110,7 +110,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 1}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_acquisition", 1000, 120),
-                                   ("ring16_acquisition", 400, 300),
+                                   ("ring16_acquisition", 1600, 300),
                                    ("five_word_joint_acquisition", 20001, 900)):
         assert planned[name]["qualification_tier"] == 1
         assert planned[name]["importance"] == "required" and planned[name]["permitted_by_tier_cap"]
