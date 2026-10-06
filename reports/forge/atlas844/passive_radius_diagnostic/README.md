@@ -31,3 +31,5 @@ CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiment
 The separate READY Study selects only the unchanged `gaussian1d_acquisition` through the maintained Forge API. [RESULTS.json](RESULTS.json) records the full admitted identity, original observations, actual controls and site readout; [SOURCE.json](SOURCE.json) records the copied Source manifest. Parent [PR308](https://github.com/255BITS/ParticleGAN/pull/308) holds the protected original four-case suite and earlier debugging plan.
 
 The follow-up [retained833-835 diagnosis](NEIGHBORHOOD_DIAGNOSIS.md) distinguishes active particle/network updates, the no-move834 event, live-clean serving and evaluation RNG from unproved distribution/sampling causes. It includes a bounded future replay PLAN; no new evaluation was performed.
+
+See [cause and valid-fix requirements](CAUSE_AND_VALID_FIX.md) for the current empty behavioral delta, the evidence required for a correction, and the refined diagnostic PLAN.
