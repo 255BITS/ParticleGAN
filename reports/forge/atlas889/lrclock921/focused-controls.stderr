@@ -1,0 +1,13 @@
+test_adam_exception_restores_group_and_cannot_publish_completed_ratio (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_adam_exception_restores_group_and_cannot_publish_completed_ratio) ... ok
+test_boosted_and_unboosted_ratio_only_q_and_other_groups_preserved (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_boosted_and_unboosted_ratio_only_q_and_other_groups_preserved) ... ok
+test_closure_exception_is_same_object_and_clears_capture (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_closure_exception_is_same_object_and_clears_capture) ... ok
+test_current_adam_values_versions_moments_aliases_rng_and_return_match (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_current_adam_values_versions_moments_aliases_rng_and_return_match) ... ok
+test_current_clock_one_shot_and_missing_restoration_fail_closed (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_current_clock_one_shot_and_missing_restoration_fail_closed) ... ok
+test_no_gradient_token_preserves_original_consumer_without_stale_gain (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_no_gradient_token_preserves_original_consumer_without_stale_gain) ... ok
+test_real_owner_checkpoint_recorder_and_load_refresh_live_group (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_real_owner_checkpoint_recorder_and_load_refresh_live_group) ... ok
+test_wrong_owner_alias_rejected_before_installation (test_atlas921_completed_lr_clock.CompletedLRClockControls.test_wrong_owner_alias_rejected_before_installation) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.923s
+
+OK

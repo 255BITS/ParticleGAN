@@ -1,0 +1,93 @@
+{
+  "authored_controls": {
+    "fail_closed": "No gradient, missing/stale/duplicate capture, closure and Adam exceptions, invalid table alias and missing restoration witness.",
+    "genuine_checkpoint": "Hydrated actual TwoPoleOwner plus the installed new helper and unchanged recorder; four original synthetic policy updates, strict owner checkpoint, wrapper identity check, recorder detachment, original strict load and subsequent valid update.",
+    "matched_step": "Populated AMSGrad/history state with boosted and unboosted gradients; current Adam return/tensors/versions/moments/aliases/RNG compare; original 52f fixture semantics retained.",
+    "methods": [
+      "test_current_adam_values_versions_moments_aliases_rng_and_return_match",
+      "test_boosted_and_unboosted_ratio_only_q_and_other_groups_preserved",
+      "test_no_gradient_token_preserves_original_consumer_without_stale_gain",
+      "test_closure_exception_is_same_object_and_clears_capture",
+      "test_adam_exception_restores_group_and_cannot_publish_completed_ratio",
+      "test_current_clock_one_shot_and_missing_restoration_fail_closed",
+      "test_real_owner_checkpoint_recorder_and_load_refresh_live_group",
+      "test_wrong_owner_alias_rejected_before_installation"
+    ],
+    "q_clock": "Checks actual recorded completed LR/base, original restored beta/raw-v q and unchanged other-group consumer.",
+    "status": "AUTHORED_NOT_RUN"
+  },
+  "callback_and_checkpoint_findings": [
+    "Only completed successful original optimizer.step can publish the captured pre-restoration LR; attempted finally-end capture alone does not qualify.",
+    "One original step/end call and original loss return or exception are forwarded; no added draw, forward, backward or optimizer call.",
+    "Only the exact owned table tester ratio changes to completed LR/original base; original other-group loop and surprise/q on restored groups remain.",
+    "No new instance callback is placed on vars-serialized tester or surprise objects. New optimizer/response/policy shims are excluded by their unchanged explicit serializers.",
+    "Capture is one-shot and cleared on failure, consumption and load; ordinary checkpoint requires a completed ready boundary.",
+    "Successful original load refreshes the exact live table group and tester index after Adam replaces group dictionaries.",
+    "Recorder0c207 and its capacities, strict typed_digest, task, core, beta/q/AMSGrad and all original numerical owner definitions are unchanged."
+  ],
+  "measurement_status": "UNMEASURED",
+  "metadata_review": {
+    "bytes": 2619,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-declaration-independent-review-source-20261006/v1/review.json",
+    "sha256": "b3cba9eacb3b2f26f2e039ec46a32bcd14c9fd7560ec8274ce7c04a172c5884e"
+  },
+  "original_definitions_restored_after_one_constructor_call_removed": 30,
+  "schema": "atlas921_lr_clock_callback_independent_review_source_v1",
+  "scope_limits": [
+    "Raw frozen Source/hash/AST/in-memory compile only; no project imports, semantic tests, actual artifacts, Git, network, queues or admission.",
+    "M is the primary independent owner/code reviewer; this is a bounded supplemental callback/checkpoint and control Source review.",
+    "Intentional tester-clock change may change future LRs/trajectory; current matched-state Adam equivalence is not whole-run equivalence.",
+    "Active-recorder resume is not claimed: detach unchanged recorder before its original strict controller restore. Authorized run is from initialization.",
+    "Arbitrary ambient callable scope and causal or numerical recovery conclusions remain unproved.",
+    "ROOT must execute actual focused controls and bind fresh Source/full admitted request/proof and full300 fit; no old request/proof/grade/cost credit."
+  ],
+  "status": "CLEAR_SOURCE_ONLY",
+  "subject_handoff": {
+    "bytes": 4577,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/handoff.json",
+    "sha256": "f7cfcc44b3d2fc6ab215d3d53661653e15d59c25ec4df8efcce9b0a33c7d6d43"
+  },
+  "top_level_delta": "Only one new helper, one constructor call and the exact Idea Source pin; all remaining original top-level nodes exact.",
+  "verified_predecessor_owner": {
+    "bytes": 58663,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v1/baseline/experiments/forge/atlas889_two_pole_owner.py",
+    "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+  },
+  "verified_subject_files": [
+    {
+      "bytes": 64151,
+      "path": "repo/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    {
+      "bytes": 13934,
+      "path": "repo/tests/test_atlas921_completed_lr_clock.py",
+      "sha256": "3da79006816bcb88488333c200f55077af5d6e3c97f2dafbbedd863fc7279a40"
+    },
+    {
+      "bytes": 1550,
+      "path": "repo/configs/forge/ideas/atlas-original-two-pole-passive889-v1.json",
+      "sha256": "253800cb61c8cb89da2331654b641191931cc02b15ad96f9d4e9da2299dd96a9"
+    },
+    {
+      "bytes": 2904,
+      "path": "repo/configs/forge/studies/atlas-original-two-pole-passive889-study-v1.json",
+      "sha256": "fd8c7d42a4d0abcddc2356e24a119dc4d6d7498011fd704998b6cac794994b72"
+    },
+    {
+      "bytes": 26086,
+      "path": "owner.patch",
+      "sha256": "7c6a96279777307beb5eb6482b13c8794f7129f12864ff37aa3d1765fa2d3096"
+    },
+    {
+      "bytes": 11706,
+      "path": "source-declaration.json",
+      "sha256": "757f2627062eabc7ff1f733dfc1cbd8fb91f22ffd9dcf3bcf9df5ea6b9a394e2"
+    },
+    {
+      "bytes": 2226,
+      "path": "SOURCE_PROOF.json",
+      "sha256": "c404e2108531743ce37c5ee9774134bc71a412de540797d9c135176d9b581c7e"
+    }
+  ]
+}

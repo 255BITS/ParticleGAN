@@ -5,7 +5,7 @@
     "id": "atlas-original-two-pole-passive889-study-v1"
   },
   "candidate": "atlas-original-two-pole-passive889-v1",
-  "competing_explanation": "The actual gradients, other optimizer state, hot/settle/birth-death actions or horizon may explain the failure without the proposed beta seam. Trace incompleteness and changed outputs block a purity/causal claim. No repair is installed or replayed.",
+  "competing_explanation": "A weak original Adam push or later hot/settle/birth-death writes may dominate travel despite correcting the table tester LR clock. Restored beta/q normalization and AMSGrad behavior are unchanged and can remain separate explanations. The completed918 baseline has mean_abs0.002445647493004799 and grad_med0.010896995663642883; reports/forge/atlas889/causal918/RESULTS.json and raw-result.json.gz are retained references only. Incomplete trace cannot establish action or trajectory identity. Historical791 motivation/control and original889 INVALID remain separate; no control replay, grade transfer, retuning or broader recovery claim.",
   "control": {
     "candidate_id": "atlas-existing-mog-nearest-positive791-v1",
     "task_map": {
@@ -19,7 +19,7 @@
     "task_id": "two_pole",
     "threshold": 0.3
   },
-  "hypothesis": "The read-only observer preserves all24 original791 retained outputs while recording the actually applied Adam fields and the later q/controller fields. A temporary-versus-restored beta mismatch is a falsifiable input seam, not a demonstrated cause or repair.",
+  "hypothesis": "This fixed case tests one owner-side correction: the existing table settle tester receives the completed direct Adam LR divided by the original table base LR, rather than the restored group LR/base. q, beta, AMSGrad and the optimizer remain unchanged. The comparison is the completed918 baseline: request785f646f831607b6f7f0ee4f, attempt e79460aaac2a42508904ff119906891c, Source6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36, original80 updates/24 scored reads, independently graded FAIL. Retain the final mean_abs<0.30 prediction and >=0.30 falsifier; original full-task gates and final-five stability determine PASS. Identical complete recorded actions, trajectory and scores mean no observed effect on this case; changed behavior but FAIL means relevant but insufficient; PASS supports this fixed-case repair only. Comparisons require complete, joined evidence.",
   "id": "atlas-original-two-pole-passive889-study-v1",
   "max_rounds": 1,
   "prediction": {
@@ -53,3 +53,4 @@
     "prediction_observed": "review_saved_diagnostics"
   }
 }
+

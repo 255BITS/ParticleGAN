@@ -4,7 +4,7 @@
   ],
   "api_version": "forge-api-v1",
   "changed_factors": [
-    "Only passive recording and a fresh diagnostic identity. Original task, effective79 Recipe, initialization, seed, 80 updates, 24 reads, resources, measurements and gates are preserved."
+    "One owner-side correction passes the LR consumed by the completed direct Adam step, divided by the original table base LR, to the existing table settle tester. Passive recording remains. q, beta, AMSGrad, optimizer and core Source, original Task, effective79 Recipe, initializer, seed, 80 updates, 24 reads, resources, measurements and gates are preserved. The tester input intentionally changes; numerical recovery and cause remain unproven."
   ],
   "claim_contract": {
     "experimental_track": "atlas889_original_two_pole_passive",
@@ -30,3 +30,4 @@
   ],
   "schema_version": 3
 }
+

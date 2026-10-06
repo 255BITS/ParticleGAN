@@ -1,0 +1,61 @@
+{
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_atlas921_completed_lr_clock.py",
+    "-v"
+  ],
+  "cpu_threads": 1,
+  "cwd": "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+  "elapsed_seconds": 3.506812605075538,
+  "gpus": 0,
+  "passed_tests": [
+    "test_adam_exception_restores_group_and_cannot_publish_completed_ratio",
+    "test_boosted_and_unboosted_ratio_only_q_and_other_groups_preserved",
+    "test_closure_exception_is_same_object_and_clears_capture",
+    "test_current_adam_values_versions_moments_aliases_rng_and_return_match",
+    "test_current_clock_one_shot_and_missing_restoration_fail_closed",
+    "test_no_gradient_token_preserves_original_consumer_without_stale_gain",
+    "test_real_owner_checkpoint_recorder_and_load_refresh_live_group",
+    "test_wrong_owner_alias_rejected_before_installation"
+  ],
+  "returncode": 0,
+  "schema": "pg921_actual_eight_focused_clock_controls_v1",
+  "scope": "New LR consumer shim with matched current Adam and genuine checkpoint/restore controls; no original target/evaluator/case executed; valid916 original11/checkpoint7 reused separately.",
+  "source_files": [
+    {
+      "bytes": 64151,
+      "destination": "experiments/forge/atlas889_two_pole_owner.py",
+      "path": "repo/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    {
+      "bytes": 13934,
+      "destination": "tests/test_atlas921_completed_lr_clock.py",
+      "path": "repo/tests/test_atlas921_completed_lr_clock.py",
+      "sha256": "3da79006816bcb88488333c200f55077af5d6e3c97f2dafbbedd863fc7279a40"
+    },
+    {
+      "bytes": 1550,
+      "destination": "configs/forge/ideas/atlas-original-two-pole-passive889-v1.json",
+      "path": "repo/configs/forge/ideas/atlas-original-two-pole-passive889-v1.json",
+      "sha256": "253800cb61c8cb89da2331654b641191931cc02b15ad96f9d4e9da2299dd96a9"
+    },
+    {
+      "bytes": 2904,
+      "destination": "configs/forge/studies/atlas-original-two-pole-passive889-study-v1.json",
+      "path": "repo/configs/forge/studies/atlas-original-two-pole-passive889-study-v1.json",
+      "sha256": "fd8c7d42a4d0abcddc2356e24a119dc4d6d7498011fd704998b6cac794994b72"
+    }
+  ],
+  "status": "PASS",
+  "stderr_sha256": "3e36d8612536cc04c7ba1e5e0c87303729caa1345ef13f6effcd169d0bc3b753",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests_run": 8
+}
