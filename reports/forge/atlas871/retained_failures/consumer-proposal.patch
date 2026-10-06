@@ -1,0 +1,57 @@
+--- a/particlegan/k3p.py
++++ b/particlegan/k3p.py
+@@ -553,12 +553,20 @@
+         return state
+ 
+     def step(self, closure=None):
++        # Transient metadata for the immediately completed direct Adam step.
++        # Clear before the closure/step so failures or no-gradient calls cannot
++        # expose an older step; checkpoint/pickle schemas remain unchanged.
++        self._direct_step_group = None
+         loss = _closure_loss(closure)
+         latent = None if self.latent_damping is None else self.latent_damping.begin(self)
+         try:
+             direct = None if self.direct_response is None else self.direct_response.begin(self)
+             try:
++                applied = None if direct is None else (
++                    direct[0], direct[0]["lr"], tuple(direct[0]["betas"]))
+                 _adam_step(self)
++                # Capture only a successful physical step, before restoration.
++                self._direct_step_group = applied
+             finally:
+                 if self.direct_response is not None:
+                     self.direct_response.end(direct)
+@@ -599,6 +607,8 @@
+                 owner.load_state_dict(dict(part["state"]))
+                 with torch.no_grad():
+                     history.copy_(part["history"])
++        # A restored checkpoint has no immediately applied step receipt.
++        self._direct_step_group = None
+ 
+ 
+ def _no_anchor(x):
+--- a/particlegan/policy.py
++++ b/particlegan/policy.py
+@@ -853,12 +853,19 @@
+         return (None if hold else evidence.flag), hold, tester
+ 
+     def _settle_observe(self, index):
+-        for j, (group, rate, tester) in enumerate(zip(self.optimizers[index].param_groups,
++        optimizer = self.optimizers[index]
++        applied = getattr(optimizer, "_direct_step_group", None)
++        for j, (group, rate, tester) in enumerate(zip(optimizer.param_groups,
+                                                      self.initial_lrs[index], self.lr_settle.testers[index])):
+             if tester is not None:
+-                tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
++                # DirectParticleResponse has restored scheduled LR/betas by
++                # this hook. Supply its actual successful-step values without
++                # mutating live optimizer groups or changing the q formula.
++                observed = (dict(group, lr=applied[1], betas=applied[2])
++                            if applied is not None and applied[0] is group else group)
++                tester.observe(observed["params"], observed["lr"] / rate, step=self.completed_steps + 1)
+                 if self.surprise is not None:
+-                    self.surprise.observe(f"{index}.{j}", self.optimizers[index], group)
++                    self.surprise.observe(f"{index}.{j}", optimizer, observed)
+ 
+     def _contracted_network(self):
+         return {f"{i}.{j}": {"role": role, "scale": tester.s}

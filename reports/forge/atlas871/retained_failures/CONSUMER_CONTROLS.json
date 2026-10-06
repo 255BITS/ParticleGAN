@@ -1,0 +1,73 @@
+{
+  "actual_tests_owner": "ROOT_ISOLATED_PAID_REPORTING",
+  "causal_recovery_established": false,
+  "errors": 0,
+  "failures": 0,
+  "gpu_used": false,
+  "independent_review": {
+    "bytes": 7472,
+    "reviewer_actual_tests": "NOT_RUN",
+    "sha256": "a9963c362538749e4b4c25cf78bb69401393eb04b4192f06de840a4e494f0c67",
+    "status": "CLEAR_SOURCE_ONLY"
+  },
+  "numerical_case_admitted": false,
+  "original_parent_commit": "2fce44a5adc54266f568d1a5a2260336c8d56852",
+  "proposal_patch_pin": {
+    "bytes": 2934,
+    "sha256": "2183b785c38f089b816d3257510d5be7aed031888d9737b0a7a5a5352427bcb1"
+  },
+  "published_parent_preimages": {
+    "particlegan/k3p.py": {
+      "bytes": 33012,
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81173,
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    }
+  },
+  "schema": "pg_atlas884_isolated_synthetic_consumer_controls_v1",
+  "scope": "Synthetic CPU optimizer/consumer software controls; no scientific task",
+  "shared_core_installed": false,
+  "shared_owner": "UNKNOWN",
+  "skipped": 0,
+  "source_provenance": {
+    "particlegan.continuous": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "particlegan.grad_regularizers": {
+      "bytes": 14853,
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan.k3p": {
+      "bytes": 33656,
+      "sha256": "988b95709ca2fd1664a51b0fd14cfd4e0764e09d15c29085797237a4fb54c310"
+    },
+    "particlegan.policy": {
+      "bytes": 81654,
+      "sha256": "5c76c3ffca76697dcb8ff56a4648e79792c4d95cfb87d830230e9884befc8e74"
+    },
+    "particlegan.recipes": {
+      "bytes": 56022,
+      "sha256": "79905bb948cb967f80a087063960ea72e72c04d3b572b4b90ff4fa1dda5f299f"
+    },
+    "private_consumer_controls": {
+      "bytes": 9502,
+      "sha256": "01c7f7e8a9a9ef9343305244ebd1a296fd822b2dd49ccd9669e29743364c307f"
+    }
+  },
+  "status": "PASS",
+  "test_ids": [
+    "private_consumer_controls.DirectStepConsumers.test_actual_adam_and_rng_are_unchanged_before_controller_consumption",
+    "private_consumer_controls.DirectStepConsumers.test_amsgrad_surprise_remains_raw_second_moment_not_actual_move",
+    "private_consumer_controls.DirectStepConsumers.test_completed_checkpoint_wire_stays_original_and_load_clears_transient",
+    "private_consumer_controls.DirectStepConsumers.test_existing_consumers_receive_applied_gain_and_beta_without_group_writes",
+    "private_consumer_controls.DirectStepConsumers.test_no_gradient_or_failed_step_cannot_reuse_an_old_receipt",
+    "private_consumer_controls.DirectStepConsumers.test_nondirect_optimizer_retains_original_consumer_group_and_values",
+    "private_consumer_controls.DirectStepConsumers.test_only_the_identical_direct_group_uses_the_receipt",
+    "private_consumer_controls.DirectStepConsumers.test_variable_beta_fixture_preserves_current_power_adam_convention"
+  ],
+  "tests_run": 8,
+  "trajectory_effect": "UNKNOWN; corrected controller inputs may change future decisions"
+}
