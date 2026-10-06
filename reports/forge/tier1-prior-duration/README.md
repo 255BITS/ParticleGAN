@@ -6,6 +6,11 @@ updates, with six consecutive terminal passes. The sigma-.025 ring passes
 intermediate 800/1,200-update cuts, then loses sustained local spread by 1,600.
 The closest Gaussian remains FAIL at 4,000 updates and regresses in width.
 
+The subsequent [Gaussian saved-state diagnosis](../gaussian1d-diagnosis/README.md)
+documents the actual z_dim=2, width-32 architecture, an affine capacity control
+and the output/prior drift. It adds zero training updates and retains this
+duration study's exact evidence and verdicts.
+
 The user subsequently selected the passing ring conditions; the
 [adopted GPU smoke](../ring16-smoke-v2/README.md) records the current task/caller
 and preserves this original diagnostic. Gaussian work continues from

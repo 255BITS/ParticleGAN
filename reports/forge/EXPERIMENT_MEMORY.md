@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 554. Inventory coverage: complete. Unresolved import items: 7.
+Records: 555. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Close scalar fit after 4.953 CPU seconds: mean 2.02749, std .52790 for target me
 **Next:** Keep the provisional fast Tier 1 test and its FAIL. Before a more complex target, preregister one substantive stability hypothesis with explicit recipe/budget/source binding; no seed-only repeat, ordinary qualification or default adoption.
 
 [Evidence](../../reports/toy_audit/api_contract/gaussian1d/results.json) · [Record](records/gaussian1d-api-8e7f8be3b998d3daf08a0b50.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · gaussian1d-saved-state-diagnosis-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+Does the scalar failure reflect insufficient architecture/prior capacity, or loss of an already acquired fit?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_and_fixed_representation_diagnostic`.
+
+
+
+Actual scalar host is z_dim2, width32/depth2 (G1185/D1281 parameters), correcting the 4/64 handoff typo. All 97 saved sample metrics reproduce and all three CUDA contexts restore exactly. An affine map in the unchanged MLP with unchanged initial 256-location sigma-.1 MoG passes 24/24 numerical checks; conservative exact mixture KS bound .005086. Trained fresh 32768-sample KS is .04160 at1000 and .09307 at4000; fitted-normal shape KS worsens .03613 to .16831, skew1.602. At4000 only .47% of output variance is within components; prior displacement from initialization averages1.403. Constant normalized .012/.018/.03 steps and moving inputs support a stability hypothesis without assigning causality. Zero training updates, no task/gate revision or qualification credit.
+
+**Next:** Propose a separately bounded global BCAP late-step-decay comparison with network/prior floors .1 vs1, matching task conditions and preserved schedule horizons across Gaussian and ring; reject if the full terminal window fails. No new training candidate or admitted study is created by this report.
+
+[Evidence](../../reports/forge/gaussian1d-diagnosis/results.json) · [Record](records/gaussian1d-saved-state-diagnosis-v1-readout.json)
 
 ### cf1-bdpair · history-cf1-bdpair-21ac56b45896
 
@@ -4730,4 +4746,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `427a5f19ec8f5164b072ae935f12da01deaa3e2ea508113438e204ce672b782c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `aa847534bd90cd1a3d7c48bbb72d86226c7a6133b2cab0143bf2263bab5a53b7`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

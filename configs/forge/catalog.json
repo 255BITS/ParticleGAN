@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 73,
+      "benchmark/toy_audit": 74,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1533,
+      "support": 1534,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11766
+    "files": 11767
   },
   "coverage": {
-    "declared_count": 11766,
+    "declared_count": 11767,
     "missing": [],
     "stale": [],
-    "tracked_count": 11766,
+    "tracked_count": 11767,
     "unclassified": [],
     "valid": true
   },
@@ -1069,6 +1069,13 @@
       "family": "benchmark/toy_audit",
       "git_blob": "7226a7a979e24ded2a9d9c12a6e7fbd3c0b1df77",
       "path": "benchmarks/toy_audit/forge_selection_readiness.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "bdd244778ea39e6032e083fa86a081f4cf0719d6",
+      "path": "benchmarks/toy_audit/gaussian1d_diagnosis.py",
       "role": "support",
       "suggested_tiers": []
     },

@@ -30,9 +30,9 @@ Evidence already complete:
   sample count >=4096 and finite fraction 1, with five terminal passes.
   A moments-only smoke can accept non-Gaussian impostors and cannot replace it.
 
-Exact baseline: target N(2,.5²), z_dim 4, 256 learned uniform MoG locations,
+Exact baseline: target N(2,.5²), z_dim 2, 256 learned uniform MoG locations,
 sigma .1, initialization scale 1, no standardization, batch 128, MLP width
-64/depth 2, critic Fourier 2. Selected candidate is
+32/depth 2, critic Fourier 2. Selected candidate is
 `bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9`.
 Rates .012/.018/.03 for G/D/prior, zero momentum, both LR floors 1,
 no training noise, no prior regularizer or EMA. The original task-bound recipe
@@ -48,6 +48,15 @@ the existing evidence does not isolate optimizer, prior motion or critic as
 the cause. Inspect saved moments, prior movement and critic behavior before
 declaring a small rate/schedule or role-isolation experiment. Any such change
 is a new bounded trainer comparison, not a continuation of the unchanged recipe.
+
+The user has now requested further investigation on PR #316. The
+[saved-state diagnosis](../gaussian1d-diagnosis/README.md) verifies the dimensions
+above against checkpoint tensors, correcting this handoff's earlier 4/64 typo.
+Its same-network/unchanged-initial-prior affine capacity control passes 24/24
+checks with zero training. Saved states show increasing skew and mostly
+between-component output variance; a late normalized-step decay remains an
+unexecuted hypothesis. The current Gaussian task and all historical verdicts
+remain unchanged.
 
 Local evidence:
 
