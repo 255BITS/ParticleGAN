@@ -46,7 +46,7 @@
     "through_tier": 1,
     "view": "atlas_existing_mog_radius_observer844_v1"
   },
-  "status": "draft",
+  "status": "ready",
   "terminal_rules": {
     "falsified": "stop_revision",
     "incomplete": "request_missing_evidence",

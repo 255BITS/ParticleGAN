@@ -110,7 +110,7 @@ def task_resources(task):
 
 
 def supporting_source_paths(task, candidate, root=None):
-    if not is_candidate(candidate):
+    if not is_candidate(candidate) or task.get('id') != 'gaussian1d_acquisition':
         return ()
     validate(task)
     catalog = ()
