@@ -591,7 +591,7 @@ def partial_display_section(root, page):
             or "selection" in result):
         raise ValueError("Partial Pure BCAP display differs from its non-selecting readout")
     link = os.path.relpath(root / REPORT / "README.md", page.resolve().parent)
-    return (f"\n[Pure BCAP initial readout]({link}): {result['unique_paid_attempts']} original paid attempts cost "
+    return (f"\n[BCAP initial Adam study]({link}): {result['unique_paid_attempts']} original paid attempts cost "
         f"{result['paid_wall_seconds']:.3f} seconds, counted once. The original two relativistic recipes are complete; "
         "the other loss variants were cancelled after the word host's missing encoder gradient was found. "
         "The corrected study awaits GPU execution. Existing family rows retain their original source and task contracts; "
@@ -620,7 +620,7 @@ def display_section(root, page):
     link = os.path.relpath(root / REPORT / "README.md", page.resolve().parent)
     selected = receipt["selection"]
     sources_text = ", ".join("`" + cohort["source_commit"] + "`" for cohort in cohorts)
-    return (f"\n[Pure BCAP initial readout]({link}): five adversarial losses at two constant Adam rates; "
+    return (f"\n[BCAP initial Adam study]({link}): five adversarial losses at two constant Adam rates; "
             f"{selected['required_pass_count']}/{selected['required_total']} required Tier 1 passes for one "
             f"selected whole recipe. {receipt['unique_paid_attempts']} unique attempts cost "
             f"{receipt['paid_wall_seconds']:.3f} paid seconds, counted once across the shared campaign. "

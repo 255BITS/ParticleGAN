@@ -61,6 +61,64 @@ def generate(report):
     return publication["family_progress"]["families"][0]["cohorts"][0]
 
 
+def test_optimizer_alias_selects_whole_best_configuration_and_preserves_evidence(report):
+    root, publication = report
+    variant = deepcopy(publication["rows"][0])
+    variant.update(candidate_id="k3p-optimizer-config", trainer_family="k3p-optimizer", attempt_ids=[])
+    variant["bindings"]["source_digest"] = "source-two"
+    variant["bindings"]["recipe_sha256"] = "recipe-two"
+    variant["tasks"] = [{"task_id": name, "status": status} for name, status in
+                        (("shared", "PASS"), ("failed", "PASS"), ("missing", "PASS"), ("held", "FAIL"))]
+    publication["rows"].append(variant)
+    publication["recipe_contracts"] = {"recipe-two": {
+        "optimizer_family": "dualnorm", "optimizer_momentum": 0, "lr": .012,
+        "d_lr_mult": 1.5, "prior_lr_mult": 2.5, "reg_arm": "b_cap"}}
+    atomic_json(root / "configs/forge/trainer-families.json", {"families": [
+        {"id": "k3p"}, {"id": "k3p-optimizer", "reporting_family": "k3p"}]})
+    original = deepcopy(publication["rows"])
+    cohort = generate(report)
+    progress = publication["family_progress"]
+    assert len(progress["families"]) == 1
+    assert cohort["row_index"] == 1 and score(cohort["total"]) == "4/5"
+    assert cohort["tasks"]["held"]["status"] == "FAIL"  # Cannot borrow the baseline PASS.
+    assert publication["rows"] == original
+    assert len(progress["configuration_families"]) == 2
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "Best recorded configuration" in page
+    assert "optimizer_family=dualnorm" in page and "optimizer_momentum=0" in page
+    assert "critic rate: **0.018**" in page and "prior rate: **0.03**" in page
+    assert "source-two" in page and "source-one" in page
+
+
+def test_optimizer_alias_keeps_exact_runtime_groups_and_stable_ties(report):
+    root, publication = report
+    variant = deepcopy(publication["rows"][0])
+    variant.update(candidate_id="variant", trainer_family="optimizer", attempt_ids=[])
+    publication["rows"].append(variant)
+    atomic_json(root / "configs/forge/trainer-families.json", {"families": [
+        {"id": "k3p"}, {"id": "optimizer", "reporting_family": "k3p"}]})
+    assert generate(report)["row_index"] == 0  # Existing solution wins a complete tie.
+    variant["runtime_cohort"] = {"execution_backend": "cpu"}
+    generate(report)
+    cohorts = publication["family_progress"]["families"][0]["cohorts"]
+    assert {item["backend"]: item["row_index"] for item in cohorts} == {"cuda": 0, "cpu": 1}
+
+
+def test_hidden_inventory_entry_preserves_numerical_rows_without_navigation(report):
+    root, publication = report
+    hidden = deepcopy(publication["rows"][0])
+    hidden.update(candidate_id="legacy", trainer_family="legacy", technique="Legacy", attempt_ids=[])
+    publication["rows"].append(hidden)
+    atomic_json(root / "configs/forge/trainer-families.json", {"families": [
+        {"id": "k3p"}, {"id": "legacy", "inventory_visible": False}]})
+    original = deepcopy(publication["rows"])
+    generate(report)
+    assert publication["rows"] == original
+    assert len(publication["family_progress"]["families"]) == 1
+    assert "Legacy" not in render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert root / "reports/forge/families/legacy.md" not in generated_pages(root, publication)
+
+
 def test_shared_tasks_count_per_view_and_diagnostics_never_fill_required_totals(report):
     cohort = generate(report)
     assert {tier: score(count) for tier, count in cohort["tiers"].items()} == {
@@ -417,7 +475,8 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
     assert progress["qualification_input"] is False
     round_definition = read_json(root / "configs/forge/rounds/tier1-completion-v1.json")
     original_families = {row["family"] for row in round_definition["candidate_roster"]}
-    cohorts = {family["id"]: family["cohorts"][0] for family in progress["families"]
+    cohorts = {family["id"]: family["cohorts"][0] for family in
+               progress["families"] + progress["configuration_families"]
                if family["id"] in original_families}
     assert set(cohorts) == original_families
     for name, cohort in cohorts.items():
@@ -452,7 +511,8 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
     original_families = {pin["trainer_family"] for pin in selection["selections"]
                          if pin["selection_kind"] != "current_measurement"} - {"atlas", "e22"}
-    ordinary = [family for family in progress["families"] if family["id"] in original_families]
+    ordinary = [family for family in progress["families"] + progress["configuration_families"]
+                if family["id"] in original_families]
     assert {family["id"] for family in ordinary} == original_families
     for family in ordinary:
         for cohort in family["cohorts"]:
@@ -473,11 +533,12 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
     pins = {pin["trainer_family"]: pin for pin in selection["selections"]}
     progress = build_progress(root, publication)
-    families = {family["id"]: family for family in progress["families"]}
+    families = {family["id"]: family for family in progress["families"] + progress["configuration_families"]}
     unmeasured = {row["trainer_family"] for row in rows
                   if row["selection"]["selection_kind"] == "unmeasured_declaration"}
-    assert set(families) == set(pins) | unmeasured
     registry = read_json(root / "configs/forge/trainer-families.json")["families"]
+    hidden = {family["id"] for family in registry if family.get("inventory_visible") is False}
+    assert set(families) == (set(pins) | unmeasured) - hidden
     assert unmeasured == {family["id"] for family in registry
                           if family.get("unmeasured_display_backend")}
     for row in rows:

@@ -382,7 +382,7 @@ def test_current_generator_adds_only_bound_readout_navigation(completed, monkeyp
     before = deepcopy(result)
     text = publication.inventory._current_markdown(result, root, root / "reports/forge/technique-inventory.md")
     assert text.count("| One current family table |") == 1
-    assert "[Pure BCAP initial readout](pure-bcap/README.md)" in text
+    assert "[BCAP initial Adam study](pure-bcap/README.md)" in text
     assert "2/6" in text and result == before
     receipt["paid_wall_seconds"] = 50
     atomic_json(root / publication.REPORT / "publication.json", receipt)
@@ -721,7 +721,7 @@ def test_current_generator_links_partial_readout_without_selection(completed, mo
     text = publication.inventory._current_markdown({"family_progress": {"fixture": True}}, root,
                                                  root / "reports/forge/technique-inventory.md")
     assert text.count("| One current family table |") == 1
-    assert "[Pure BCAP initial readout](pure-bcap/README.md)" in text
+    assert "[BCAP initial Adam study](pure-bcap/README.md)" in text
     assert "53 original paid attempts" in text and "no new selection" in text
     assert not (root / publication.REPORT / "publication.json").exists()
 

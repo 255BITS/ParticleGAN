@@ -87,7 +87,7 @@ For each training update:
 - The pseudocode describes the family mechanism; the selected configuration and each task determine architectures, initialization, prior, sampling, update count and task-owned auxiliary losses.
 - The cap is a soft penalty on gradients with respect to critic inputs, not a hard bound on model-parameter gradients. Its L2 norm is not divided by input dimension.
 - Configuration alternatives are complete recipes; passing cells from different recipes or sources are not combined.
-- BCAP with K3P is an editorial rename of family ID bcap; the candidate remains k3p-bcap-matched-v1. It is distinct from the native-Adam BCAP family (ID bcap-pure).
+- BCAP with K3P combines the fixed cap penalty with the additional K3P training mechanisms. It is a separate formulation from BCAP; optimizer and hyperparameter choices within BCAP remain configurations.
 - Canonical values describe the reusable baseline. Selected historical configurations can change penalty coefficient and role rates; source-bound measurement receipts remain authoritative.
 - The declared A2 capability may be blocked on an incompatible host; do not infer that damping ran merely from the family name.
 

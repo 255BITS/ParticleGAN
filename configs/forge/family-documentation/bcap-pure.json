@@ -1,17 +1,17 @@
 {
-  "overview": "BCAP trains an adversarial generator with one extra critic loss: a squared penalty whenever the critic input-gradient norm exceeds a threshold, evaluated separately on real and generated data. The simple family uses native Adam at constant rates, with no clipping, A2 damping or additive training noise.",
+  "overview": "BCAP adds a fixed critic penalty whenever the input-gradient norm exceeds a threshold, evaluated separately on real and generated data. This high-level formulation defines the family. Adam, normalized-gradient and dualnorm optimizers, learning rates, momentum and loss settings are configuration choices. The best recorded whole configuration and its exact settings appear below; BCAP with K3P remains a separate formulation with its additional training mechanisms.",
   "symbols": "$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\\epsilon_{\\mathrm{in}})$ with a fresh draw. $\\mathbb E$ means a sample mean, $\\lVert\\cdot\\rVert_2$ is the Euclidean norm, $(a)_+=\\max(a,0)$ and $\\operatorname{softplus}(a)=\\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\\nabla_x C(x)$ and $g_f=\\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\\lambda$ is penalty strength and $\\kappa$ the cap threshold. $\\eta_0$ is the global base LR, $m_D$ and $m_P$ the role multipliers. A joint host also has an encoder $E$, whose adversarial objective must train both joint critic streams.",
   "pseudocode": [
-    "Choose an adversarial loss and constant Adam learning rates for G, D and P.",
-    "For each training update:",
-    "  Sample real x and latent z from P; compute y=G(z).",
-    "  Critic objective = adversarial_D(D(x), D(stop_gradient(y))) + BCAP.",
-    "  Compute BCAP from the real and fake input-gradient norms using the coefficient and cap shown above.",
-    "  For penalty derivatives, detach samples from G and treat them as differentiable critic inputs; the penalty updates D only.",
-    "  Backpropagate the critic objective and take a native Adam step on D.",
-    "  With D fixed, resample latent z, recompute differentiable fake y and scores; backpropagate adversarial_G + task-owned auxiliary losses.",
-    "  Take native Adam steps on G and trainable prior locations P (and encoder E on joint hosts).",
-    "  On joint encoder/generator hosts, reverse labels on both critic streams so E also receives a gradient."
+    "Choose an adversarial loss, optimizer and its configuration.",
+    "For each task-owned training update:",
+    "  Sample real x and latent z from the task prior P; compute y=G(z).",
+    "  Critic objective = adversarial_D(D(x), D(stop_gradient(y))) + fixed BCAP penalty.",
+    "  Compute BCAP from real and fake input-gradient norms; the penalty updates D only.",
+    "  Backpropagate the critic objective and step D using the configured optimizer.",
+    "  With D fixed, recompute differentiable fake samples and scores.",
+    "  Backpropagate adversarial_G plus task-owned auxiliary objectives.",
+    "  Step G, trainable prior P and encoder E when present using their configured rates.",
+    "  Joint encoder/generator hosts reverse labels on both critic streams."
   ],
   "training_details": {
     "loss": "Selectable paired relativistic logistic (canonical/default), non-saturating logistic, hinge, Wasserstein or least squares. The scalar losses are minimized. Relativistic $D$: $\\mathbb E[\\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Joint hosts use the explicit generator/encoder objective.",
@@ -24,11 +24,12 @@
     "averaging": "Canonical generator EMA decay=$0$ and no critic-anchor penalty; the reported round scores clean live weights."
   },
   "configuration_notes": [
-    "The pseudocode describes the family mechanism; the selected configuration and each task determine architectures, initialization, prior, sampling, update count and task-owned auxiliary losses.",
-    "The cap is a soft penalty on gradients with respect to critic inputs, not a hard bound on model-parameter gradients. Its L2 norm is not divided by input dimension.",
-    "Configuration alternatives are complete recipes; passing cells from different recipes or sources are not combined.",
-    "The original v1 non-relativistic joint-host implementations omitted the encoder-side adversarial term. Corrected v2 candidates use joint_g_loss; original receipts and source identities remain historical evidence.",
-    "The family ID remains bcap-pure and the public recipe preset is get_recipe(\"bcap\"). The report label BCAP distinguishes it from BCAP with K3P."
+    "The fixed capped input-gradient penalty defines BCAP. Optimizer choice, learning rates, momentum, numerical floors and adversarial-loss settings stay within this solution family.",
+    "The selected configuration table reports the executed trainer recipe. Task-owned architecture, initialization, prior, sampling, update budget and auxiliary objectives remain bound to each experiment.",
+    "One whole recorded configuration supplies every displayed result. Passing cells from different recipes or sources are never combined.",
+    "The cap is a soft loss penalty on critic input gradients, not a hard bound on parameter gradients. The L2 norm is not divided by input dimension.",
+    "Corrected joint-host candidates use both generator and encoder adversarial terms. Earlier incompatible receipts preserve their original source and verdicts.",
+    "BCAP with K3P retains its additional K3P training mechanisms and is reported as a separate formulation."
   ],
   "references": [
     {
@@ -73,7 +74,8 @@
     "particlegan/grad_regularizers.py",
     "particlegan/recipe_schedules.py",
     "configs/forge/ideas/bcap-pure-adam-v2.json",
-    "reports/forge/pure-bcap/README.md"
+    "reports/forge/pure-bcap/README.md",
+    "particlegan/optim/dualnorm.py"
   ],
   "equations": [
     {
@@ -85,11 +87,6 @@
       "label": "Fixed capped input-gradient penalty",
       "latex": "R_{\\mathrm{BCAP}}=\\frac{\\lambda}{2}\\left\\{\\mathbb E\\!\\left[(\\lVert g_r\\rVert_2-\\kappa)_+^2\\right]+\\mathbb E\\!\\left[(\\lVert g_f\\rVert_2-\\kappa)_+^2\\right]\\right\\}.",
       "explanation": "The cap is a soft loss penalty on real and fake critic input-gradient norms, without division by input dimension. It does not directly clip critic parameter gradients or weights. The canonical BCAP cards use $\\lambda=1$ and $\\kappa=1$; source-bound selected recipes may differ."
-    },
-    {
-      "label": "Constant native-Adam learning rates",
-      "latex": "\\eta_G(t)=\\eta_0,\\qquad \\eta_D(t)=m_D\\eta_0,\\qquad \\eta_P(t)=m_P\\eta_0.",
-      "explanation": "The public pure-BCAP defaults are $\\eta_0=0.00425$, $m_D=1$, $m_P=2$, $\\beta_1=0$ and $\\beta_2=0.999$. Rates and moments remain constant. The recorded search also tests $\\eta_0=0.0010625$; the exact candidate sets its rates. No guard, A2, anchor, additive training noise or EMA is enabled."
     }
   ],
   "illustration": {

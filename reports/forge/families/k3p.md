@@ -76,18 +76,6 @@ For each training iteration:
   Take the generator/prior Adam step; maintain configured averages; score with the task's declared law.
 ```
 
-## Training details
-
-| Characteristic | Behavior |
-| --- | --- |
-| Adversarial loss | Paired relativistic logistic on raw scores: $D$ minimizes $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Input noise wraps the critic in both losses and the penalty; fresh noise is drawn per forward. Joint and auxiliary losses are host-owned. |
-| Optimizer | K3PCriticAdam and K3PGeneratorAdam wrap PyTorch Adam. Selected moments are $\beta_1=0$, $\beta_2=0.999$, AMSGrad off. The wrappers include critic observation/anchor updates, spike guarding, eligible A2 and optional direct-particle response. |
-| Learning rates and annealing | The public base rate is $0.00425$, critic multiplier $1$ and latent-prior multiplier $2$. The selected whole configuration uses $0.006375$ and prior multiplier $1$. $G$ and $D$ hold through $60\%$ of min(resolved task horizon,$1600$), then cosine-decay to $1\%$; the prior follows its full resolved horizon to $5\%$. Hosts may explicitly bind another horizon or transition. |
-| Parameter-gradient clipping | The spike guard is adaptive per-tensor clipping: after $200$ prior Adam steps, scale a critic tensor's gradient down when its RMS exceeds $5$ times the RMS predicted by Adam's bias-corrected second moment. It is separate from the input-gradient loss. The family adds no fixed global norm clip. |
-| Critic penalties and anchors | $\lambda=1$ and $\kappa=1$ in the public/selected base. $A$ uses RMS input-gradient units: real squared norm divided by $d$ and fake excess norm divided by $\sqrt d$. The late term adds L2 caps $B_{\mathrm{cap}}$ to weighted dimension-normalized proximity $wP_{\mathrm{anchor}}$. The applied critic LR controls their handover; constant LR keeps $A$ active. |
-| Damping and update guards | A2 is sparse latent-row damping, with $\rho_i$ in $[0.5,1]$ and $\texttt{max\_rate}=0.5$. It changes the row's Adam response while preserving the raw second-moment update. Nonstandardized row-local priors can expose this hook; standardized or unsupported hosts cannot. Direct sample-particle gain is a separate host-bound rule, up to $2$ times LR when centered gradients agree. |
-| Training and sampling noise | Base critic-input standard deviation $0.5$ decreases linearly to zero over the first $10\%$ of the resolved horizon. Generated-output training noise rises from zero to $0.029$ over its first $20\%$. Latent MoG sampling noise is task-owned. Clean gates remove generated-output noise according to their declared sampling law. |
-| Parameter averaging and serving | The critic anchor starts at the first blended penalty call, then its parameter EMA has decay $0.999$. Generator/prior averaging is configured at $0.995$ where the host implements it; selected ordinary gates use live weights, not an automatic EMA score. |
 
 ## Configuration differences
 
@@ -130,6 +118,39 @@ Source digest: `21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f
 [Frozen numerical evidence](../technique-evidence/ddde64ee936114becac42863847a51e88ec0301bad9f7f69767d0a2fbc3f3d69.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
 Selection: historical_incumbent. Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.
+
+</details>
+
+## Best recorded configuration
+
+Selected by recorded required passes, then completed measurements. Each count comes from this one complete configuration. Source differences preserve separate evidence contracts; the selection does not establish a controlled win or default adoption.
+
+Recorded trainer recipe; task-owned architecture, prior, initialization, budget and sampling remain in the experiment receipts below. Null role overrides inherit the shared value. Optimizer parameters only apply to optimizers that consume them.
+
+| Setting | Selected value |
+| --- | --- |
+| Optimizer | optimizer_family=formulation |
+| Learning rates | lr=0.006375; d_lr_mult=1.0; prior_lr_mult=1.0 |
+| Rate schedule | lr_floor=0.05; network_lr_floor=0.01; network_lr_horizon_cap=1600 |
+| Critic penalty | reg_arm=None; reg_coeff=1.0; reg_kappa=1.0; reg_every=1; reg_anchor_weight=1.0 |
+| Damping and guards | d_guard_ratio=5.0; latent_damping_max_rate=0.5; direct_particle_gain=True |
+| Training noise | input_noise_std=0.5; output_noise_std=0.029; output_noise_mode=fixed |
+| Averaging | ema_decay=0.995; serve_average=0.0 |
+
+Base network rate: **0.006375**; critic rate: **0.006375**; prior rate: **0.006375** before any declared schedule or host adaptation.
+
+Selected optimizer rule: K3PCriticAdam and K3PGeneratorAdam wrap PyTorch Adam. Selected moments are $\beta_1=0$, $\beta_2=0.999$, AMSGrad off. The wrappers include critic observation/anchor updates, spike guarding, eligible A2 and optional direct-particle response.
+
+<details>
+<summary>Other recorded configurations in this family</summary>
+
+These are whole configurations under their original sources. Their individual passing cells do not contribute to the selected result.
+
+| Configuration | Required passes | Executed source | Display selection |
+| --- | ---: | --- | --- |
+| [k3p · 0b37e98a01e3](k3p.md) | 19(*)/150 | `21ec7e3f8940` | Selected |
+| [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 13(*)/150 | `21ec7e3f8940` | Alternative |
+| [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 12(*)/150 | `21ec7e3f8940` | Alternative |
 
 </details>
 

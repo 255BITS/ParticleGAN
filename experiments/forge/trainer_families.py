@@ -183,6 +183,13 @@ def load_families(root: Path | str) -> dict:
         raise ValueError("historical trainer family identities must be distinct")
     referenced = []
     for family in result.values():
+        reporting = family.get("reporting_family", family["id"])
+        identifier(reporting, "reporting family")
+        if (reporting not in result or result[reporting].get("reporting_family", reporting) != reporting
+                or (reporting != family["id"] and result[reporting].get("inventory_visible") is False)):
+            raise ValueError("reporting family must reference a visible registered solution without another alias")
+        if not isinstance(family.get("inventory_visible", True), bool):
+            raise ValueError("inventory visibility must be boolean")
         aliases = family.get("historical_family_ids", [])
         if not isinstance(aliases, list) or len(set(aliases)) != len(aliases) or set(aliases) - set(historical_ids):
             raise ValueError("trainer family aliases require exact registered historical identities")

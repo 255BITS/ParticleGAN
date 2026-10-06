@@ -1798,12 +1798,14 @@ def _declaration_only_configuration(row):
 
 
 def _family_registry_structure(registry):
-    """Only labels and categorization tags are editable without reselection."""
+    """Editorial grouping is independent of immutable evidence selection."""
     value = deepcopy(registry)
     for key in ("families", "historical_families"):
         for family in value.get(key, []):
             family.pop("label", None)
             family.pop("tags", None)
+            family.pop("reporting_family", None)
+            family.pop("inventory_visible", None)
     return value
 
 
