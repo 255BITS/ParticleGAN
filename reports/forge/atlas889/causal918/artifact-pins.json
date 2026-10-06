@@ -1,0 +1,49 @@
+{
+  "files": [
+    {
+      "bytes": 17760,
+      "path": "reports/forge/atlas889/causal918/RESULTS.json",
+      "sha256": "0e5e6b4432bbf7825224a808a0502ab8a613a7a8a708b418678335df834a4506"
+    },
+    {
+      "bytes": 4758,
+      "path": "reports/forge/atlas889/causal918/RESULTS.md",
+      "sha256": "c148b7c12a0f01a161535867e725f657a90ee786458a6b58d16d52d6cd672cbb"
+    },
+    {
+      "bytes": 225493,
+      "path": "reports/forge/atlas889/causal918/admitted-request.json",
+      "sha256": "276a995db54c1ad5e7f66e25c30897628a752a285574e62c486373306f2af993"
+    },
+    {
+      "bytes": 2032,
+      "path": "reports/forge/atlas889/causal918/graded-result.json",
+      "sha256": "1d3b3ff9d9b11611afe84d3544404aece64aa360f7f81eb44cbde49a2dcc1760"
+    },
+    {
+      "bytes": 389193,
+      "path": "reports/forge/atlas889/causal918/partial-trace-analysis.json",
+      "sha256": "4aca2b60cdb7a59da31cbf8cb0d9f925ecd19d07c862992842c0645391bbcd61"
+    },
+    {
+      "bytes": 424267,
+      "path": "reports/forge/atlas889/causal918/raw-result.json.gz",
+      "sha256": "ae9ef1494a125d2f6b76e3dc61eec5b336514e829d904870d6debbc31d636cf9"
+    },
+    {
+      "bytes": 2639,
+      "path": "reports/forge/atlas889/causal918/software-proof.json",
+      "sha256": "6d41845941cc8187f9ea147263afbc82695c0e0ac8bc9a1aefd0c2258ae40fe4"
+    },
+    {
+      "bytes": 13552,
+      "path": "reports/forge/atlas889/causal918/successor-source-declaration.json",
+      "sha256": "7a44d456d2c567705bbe0ac4b71e83c50b68129e109d569b1c2d3dfd89b512ae"
+    }
+  ],
+  "raw_uncompressed_pin": {
+    "bytes": 13001967,
+    "sha256": "7ebad2464c4c58f29d3f45076ad63e740dbfb48f8a907f2f58153f9e6ed6d583"
+  },
+  "schema": "pg918_public_evidence_pins_v1"
+}

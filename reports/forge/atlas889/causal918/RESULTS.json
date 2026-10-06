@@ -1,0 +1,588 @@
+{
+  "admission": {
+    "attempt_id": "e79460aaac2a42508904ff119906891c",
+    "authority_seq": 918,
+    "budget_seconds": 300,
+    "candidate_revision": "1cd9dd021b22ab8e564d1b8f5b518acec8e1e59d9af48f4a1059fd40eaee2863",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "fresh_successor": true,
+    "gpus": 0,
+    "old889_replayed": false,
+    "request_id": "785f646f831607b6f7f0ee4f",
+    "request_sha256": "4a9c739701a3f9a1ca0adc39ed3bcb67228adb45ee97f07fa86b87cd3729d139",
+    "request_source_file_count": 1270,
+    "reused_software_controls": {
+      "actual_execution": {
+        "bytes": 5989,
+        "sha256": "e37e441a26347990ac336653bad87a11bf20996b5ac85eb60abf327e211a97d9"
+      },
+      "checkpoint_controls": {
+        "bytes": 236,
+        "sha256": "f12895517de9f80d0602f219c16490128d17001ac7c589b4ab0d1f9c4569ed41"
+      },
+      "observer_controls": {
+        "bytes": 1116,
+        "sha256": "c7e3431be20564e4e69a4b0b660e6501551f3adc9adb88ddaf26958d6d7616f5"
+      }
+    },
+    "schema": "pg918_one_original_case_admission_v1",
+    "software_proof_pin": {
+      "bytes": 2639,
+      "sha256": "6d41845941cc8187f9ea147263afbc82695c0e0ac8bc9a1aefd0c2258ae40fe4"
+    },
+    "source_digest": "6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36"
+  },
+  "authority_id": "ember-two-pole-cause-bounded-trial-20261006-v1",
+  "authority_seq": 918,
+  "causal_answers": {
+    "adam_movement": {
+      "absolute_mean_signed_displacement": 0.006428249937016517,
+      "common_negative_gradient_steps": [
+        14,
+        18,
+        21,
+        24,
+        25,
+        28,
+        32,
+        38,
+        40,
+        43,
+        44,
+        46,
+        49,
+        51,
+        53,
+        56,
+        58,
+        60,
+        62,
+        64
+      ],
+      "common_positive_gradient_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        61,
+        63
+      ],
+      "conclusion": "Adam makes small changes whose directions later reverse; raw optimizer motion explains the captured position curve. This is observed dynamics, not a counterfactual optimizer fix.",
+      "cumulative_absolute_travel_mean": 0.05886454439799612,
+      "reversal_or_cancellation_fraction": 0.89079589415398,
+      "scope": "steps1-64"
+    },
+    "controller_settings": {
+      "actual_adam_betas": [
+        0.0,
+        0.9
+      ],
+      "applied_gain_max": 1.9635372161865234,
+      "applied_gain_min": 1.0,
+      "beta_mismatches": 65,
+      "causal_limit": "All65 captured surprise decisions are false; the tester returns drift at24 and otherwise None. No universal warmup prevents activity. No claim that the input inconsistencies caused numerical FAIL.",
+      "conclusion": "The consumers read restored settings. q uses raw exp_avg_sq/restored beta2 while AMSGrad uses max_exp_avg_sq/applied beta2. Changing only beta2 would not automatically make q equal the actual optimizer statistic. The trace does not prove a corrected controller would converge.",
+      "first_step": {
+        "actual_adam_v_diagnostic": 0.9999978932472892,
+        "applied_beta_raw_v_diagnostic": 0.9999978932472892,
+        "q_returned": 0.09999997168779373
+      },
+      "lr_and_tester_ratio_mismatches": 39,
+      "max_q_formula_reconstruction_error": 4.6014563881424664e-08,
+      "observed_callback_returns": {
+        "captured_decisions": 65,
+        "surprise_false_returns": 65,
+        "surprise_true_returns": 0,
+        "tester_nonnull_returns": [
+          {
+            "returned": "drift",
+            "step": 24
+          }
+        ]
+      },
+      "q_consumer_betas": [
+        0.0,
+        0.999
+      ],
+      "restored_table_lr": 0.00425,
+      "scope": "steps1-65",
+      "tester_ratio_set": [
+        1.0
+      ]
+    },
+    "later_overwrite": {
+      "average_or_birth_death_max_position_change": 0.0,
+      "before_adam_max_position_change": 0.0,
+      "begin_max_position_change": 0.0,
+      "between_step_max_position_change": 0.0,
+      "conclusion": "No positional undo by those later stages in the captured steps. Birth/death event counters alone do not demonstrate live-table moves.",
+      "hot_or_settle_max_position_change": 0.0,
+      "moment_gradient_or_optimizer_step_changes_after_adam": [],
+      "scope": "steps1-64"
+    }
+  },
+  "cost": {
+    "attempt_id": "e79460aaac2a42508904ff119906891c",
+    "authority_id": "ember-two-pole-cause-bounded-trial-20261006-v1",
+    "authority_seq": 918,
+    "candidate_revision": "1cd9dd021b22ab8e564d1b8f5b518acec8e1e59d9af48f4a1059fd40eaee2863",
+    "collected_count": 1,
+    "compatibility_key": "0f43973f8e79d9ca1831f4065d20c7be7a0dae419ab1813f82bb779dbf9512b8",
+    "conservative_case_debit_seconds": 300.0,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "exact_all_inclusive_measured_cost": false,
+    "full_case_allowance_seconds": 300.0,
+    "grade_pin": {
+      "bytes": 2032,
+      "sha256": "1d3b3ff9d9b11611afe84d3544404aece64aa360f7f81eb44cbde49a2dcc1760"
+    },
+    "independently_graded": true,
+    "old889_costs_in_existing_closed_predecessor_once": true,
+    "paid_scientific_elapsed_seconds": 24.626392818056047,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "qualification": "300 remains a conservative declared debit; measured elapsed overlaps launch setup slightly and is not an all-inclusive proof.",
+    "request_id": "785f646f831607b6f7f0ee4f",
+    "request_sha256": "4a9c739701a3f9a1ca0adc39ed3bcb67228adb45ee97f07fa86b87cd3729d139",
+    "schema": "pg918_separate_single_case_cost_v1",
+    "software_916_charged_separately_without_reset": true,
+    "source_digest": "6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36",
+    "status": "FAIL",
+    "supervisor_returncode": 0,
+    "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+    "task_id": "two_pole",
+    "terminal_elapsed_seconds": 23.931461208034307,
+    "terminal_pin": {
+      "bytes": 13812427,
+      "sha256": "8d1825182905e6bfedbbc341d82b00dbf85371a2eb92019641ca5772457fc797"
+    },
+    "unused_allowance_retained_as_declared_reserve_seconds": 275.37360718194395
+  },
+  "initialization": "unchanged zero-initialized direct12x1 table; no sampled latent prior",
+  "no_additional_case_or_replay": true,
+  "no_consumer_or_model_repair_done": true,
+  "no_early_stop": true,
+  "no_new_core_or_default_changes": true,
+  "numerical_evidence_all24_pure": true,
+  "old889_unchanged": {
+    "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+    "full_case_debit_seconds": 300,
+    "status": "INVALID"
+  },
+  "original_final_five_steps": [
+    67,
+    70,
+    74,
+    77,
+    80
+  ],
+  "original_metrics": {
+    "grad_med": 0.010896995663642883,
+    "mean_abs": 0.002445647493004799
+  },
+  "passing_observations": 0,
+  "peak_scored_mean_abs": {
+    "grad_med": 0.0055864304304122925,
+    "mean_abs": 0.02892938256263733,
+    "step": 10
+  },
+  "qualifications": [
+    "The software accounting cut precedes this report preparation/publication tail. Later software costs remain in the same916ledger.",
+    "Separate full300 case debit remains reserved; predecessor includes old889/prior costs once.",
+    "UNKNOWN_NOT_ZERO tails and declared reserve are not measured elapsed or certified upper bounds.",
+    "No complete80-step causal trace or full ambient purity claim."
+  ],
+  "recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "schema": "pg918_original_two_pole_causal_successor_report_v1",
+  "scientific_completed_steps": 80,
+  "scientific_gate_status": "FAIL",
+  "scored_observations": 24,
+  "scored_particle_banks": [
+    {
+      "grad_med": 0.04465809464454651,
+      "live_range": [
+        -0.021334148943424225,
+        -0.020623523741960526
+      ],
+      "mean_abs": 0.02093585580587387,
+      "mean_position": -0.0209358559610943,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 4
+    },
+    {
+      "grad_med": 0.018433749675750732,
+      "live_range": [
+        -0.028528030961751938,
+        -0.026562649756669998
+      ],
+      "mean_abs": 0.027456970885396004,
+      "mean_position": -0.02745696933319171,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 7
+    },
+    {
+      "grad_med": 0.0055864304304122925,
+      "live_range": [
+        -0.02985137328505516,
+        -0.02766667865216732
+      ],
+      "mean_abs": 0.02892938256263733,
+      "mean_position": -0.02892938194175561,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 10
+    },
+    {
+      "grad_med": 0.0006943419575691223,
+      "live_range": [
+        -0.030289845541119576,
+        -0.02708936110138893
+      ],
+      "mean_abs": 0.028831355273723602,
+      "mean_position": -0.028831356670707464,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 14
+    },
+    {
+      "grad_med": 0.0008931756019592285,
+      "live_range": [
+        -0.03032107837498188,
+        -0.026427702978253365
+      ],
+      "mean_abs": 0.0284650269895792,
+      "mean_position": -0.02846502683435877,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 17
+    },
+    {
+      "grad_med": 0.0017879679799079895,
+      "live_range": [
+        -0.02943171188235283,
+        -0.025534577667713165
+      ],
+      "mean_abs": 0.027551069855690002,
+      "mean_position": -0.027551072494437296,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 20
+    },
+    {
+      "grad_med": 0.0026259496808052063,
+      "live_range": [
+        -0.0288681723177433,
+        -0.024073736742138863
+      ],
+      "mean_abs": 0.025973567739129066,
+      "mean_position": -0.025973567739129066,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 24
+    },
+    {
+      "grad_med": 0.0003476962447166443,
+      "live_range": [
+        -0.027617989107966423,
+        -0.023045005276799202
+      ],
+      "mean_abs": 0.024923011660575867,
+      "mean_position": -0.02492301135013501,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 27
+    },
+    {
+      "grad_med": 0.001745857298374176,
+      "live_range": [
+        -0.025773031637072563,
+        -0.021714357659220695
+      ],
+      "mean_abs": 0.02341039478778839,
+      "mean_position": -0.023410396184772253,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 30
+    },
+    {
+      "grad_med": 0.00209006667137146,
+      "live_range": [
+        -0.024292921647429466,
+        -0.019362030550837517
+      ],
+      "mean_abs": 0.021536609157919884,
+      "mean_position": -0.021536608692258596,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 34
+    },
+    {
+      "grad_med": 0.0017118826508522034,
+      "live_range": [
+        -0.02281132899224758,
+        -0.018324818462133408
+      ],
+      "mean_abs": 0.02020333893597126,
+      "mean_position": -0.020203339401632547,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 37
+    },
+    {
+      "grad_med": 0.003949709236621857,
+      "live_range": [
+        -0.02122863195836544,
+        -0.01659027859568596
+      ],
+      "mean_abs": 0.018975792452692986,
+      "mean_position": -0.018975793694456417,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 40
+    },
+    {
+      "grad_med": 0.0046768635511398315,
+      "live_range": [
+        -0.01932092383503914,
+        -0.014570164494216442
+      ],
+      "mean_abs": 0.016934894025325775,
+      "mean_position": -0.01693489495664835,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 44
+    },
+    {
+      "grad_med": 0.00460314005613327,
+      "live_range": [
+        -0.018578652292490005,
+        -0.01340566761791706
+      ],
+      "mean_abs": 0.015498911030590534,
+      "mean_position": -0.015498910642539462,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 47
+    },
+    {
+      "grad_med": 0.0024081170558929443,
+      "live_range": [
+        -0.01703086495399475,
+        -0.012157963588833809
+      ],
+      "mean_abs": 0.01462677400559187,
+      "mean_position": -0.014626772919048866,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 50
+    },
+    {
+      "grad_med": 0.005347900092601776,
+      "live_range": [
+        -0.014471982605755329,
+        -0.009142671711742878
+      ],
+      "mean_abs": 0.012000396847724915,
+      "mean_position": -0.012000396304453412,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 54
+    },
+    {
+      "grad_med": 0.0007317215204238892,
+      "live_range": [
+        -0.013600260950624943,
+        -0.007856515236198902
+      ],
+      "mean_abs": 0.010657607577741146,
+      "mean_position": -0.010657607500130931,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 57
+    },
+    {
+      "grad_med": 0.013383179903030396,
+      "live_range": [
+        -0.011042315512895584,
+        -0.0041047739796340466
+      ],
+      "mean_abs": 0.00807318463921547,
+      "mean_position": -0.00807318448399504,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 60
+    },
+    {
+      "grad_med": 0.016158729791641235,
+      "live_range": [
+        -0.00914758164435625,
+        -0.0025624630507081747
+      ],
+      "mean_abs": 0.006428249645978212,
+      "mean_position": -0.006428249937016517,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 64
+    },
+    {
+      "grad_med": 0.007640309631824493,
+      "live_range": [
+        -0.00935312733054161,
+        -0.0020045579876750708
+      ],
+      "mean_abs": 0.0061850822530686855,
+      "mean_position": -0.006185082020238042,
+      "negative_count": 12,
+      "positive_count": 0,
+      "step": 67
+    },
+    {
+      "grad_med": 0.019415415823459625,
+      "live_range": [
+        -0.0064238193444907665,
+        0.0012341159163042903
+      ],
+      "mean_abs": 0.003405646188184619,
+      "mean_position": -0.0031402132929846025,
+      "negative_count": 10,
+      "positive_count": 2,
+      "step": 70
+    },
+    {
+      "grad_med": 0.024445369839668274,
+      "live_range": [
+        -0.004705826751887798,
+        0.003895884845405817
+      ],
+      "mean_abs": 0.002630456117913127,
+      "mean_position": -0.0015578556340187788,
+      "negative_count": 9,
+      "positive_count": 3,
+      "step": 74
+    },
+    {
+      "grad_med": 0.005400151014328003,
+      "live_range": [
+        -0.003357178997248411,
+        0.005593555048108101
+      ],
+      "mean_abs": 0.00218302384018898,
+      "mean_position": -0.00042402452042248723,
+      "negative_count": 7,
+      "positive_count": 5,
+      "step": 77
+    },
+    {
+      "grad_med": 0.010896995663642883,
+      "live_range": [
+        -0.0016904491931200027,
+        0.008075281046330929
+      ],
+      "mean_abs": 0.002445647493004799,
+      "mean_position": 0.0020370358834043145,
+      "negative_count": 5,
+      "positive_count": 7,
+      "step": 80
+    }
+  ],
+  "seed": 0,
+  "smallest_justified_next_changes": [
+    "Before another complete diagnostic, reduce passive record duplication or increase the explicitly bounded record allowance so80stages fit; preserve UNKNOWN on overflow.",
+    "Then expose immutable actual-step LR/betas to controller consumers and define whether their q represents raw-v normalization or actual AMSGrad normalization. Validate that contract before a separately authorized numerical comparison."
+  ],
+  "software_accounting_cut": {
+    "cap_seconds": 41288.0,
+    "charged_seconds": 15607.213688367267,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_additional_work": false,
+    "measurement_cut": "ACTIVE",
+    "metadata_cap_seconds": 120.0,
+    "metadata_charged_seconds": 30.026545227970928,
+    "metadata_paid_seconds": 30.026545227970928,
+    "metadata_remaining_seconds": 89.97345477202907,
+    "metadata_reserved_seconds": 0.0,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_added_once": true,
+    "predecessor_inclusive_seconds": 15577.187143139296,
+    "remaining_seconds": 25680.786311632735,
+    "retained_reporting_must_fit": true,
+    "schema": "pg_recorder916_software_inclusive_v1",
+    "scientific_allocation_seconds": 0
+  },
+  "software_controls_reused": {
+    "checkpoint": 7,
+    "observer": 11,
+    "status": "PASS",
+    "total": 18
+  },
+  "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+  "thresholds": {
+    "grad_med_maximum": 1.0,
+    "mean_abs_minimum": 0.3
+  },
+  "trace": {
+    "adam_and_q_steps": [
+      1,
+      65
+    ],
+    "captures": 1039,
+    "complete": false,
+    "extra_algorithm_calls": 0,
+    "extra_state_getter_calls": 0,
+    "full_stage_steps": [
+      1,
+      64
+    ],
+    "missing_full_stage_steps": [
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "original_call_counts": {
+      "after_generator_backward": 80,
+      "after_generator_step": 80,
+      "begin_step": 80,
+      "direct_begin": 80,
+      "direct_end": 80,
+      "finish_step": 80,
+      "optimizer_step": 80,
+      "surprise_decide": 80,
+      "table_group_q": 80,
+      "table_tester_observe": 80
+    },
+    "purity_failures": 0,
+    "reason": [
+      "trace overflow; no truncation counted as complete"
+    ],
+    "retained_events_pure": true,
+    "scope": "declared owner roots only; external callback closures unknown",
+    "status": "UNKNOWN"
+  }
+}

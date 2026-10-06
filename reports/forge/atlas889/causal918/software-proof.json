@@ -1,0 +1,67 @@
+{
+  "added_operations": {
+    "extra_backward_calls": 0,
+    "extra_decision_evaluations": 0,
+    "extra_model_forwards": 0,
+    "extra_optimizer_steps": 0,
+    "extra_prior_samples": 0,
+    "extra_rng_draws": 0,
+    "foreign_device_initializations": 0,
+    "state_getter_calls": 0,
+    "state_mutations": 0
+  },
+  "candidate_id": "atlas-original-two-pole-passive889-v1",
+  "candidate_revision": "1cd9dd021b22ab8e564d1b8f5b518acec8e1e59d9af48f4a1059fd40eaee2863",
+  "checks": {
+    "actual_beta_lr_q_inputs_and_return": "PASS",
+    "adam_exception_and_restore_passthrough": "PASS",
+    "bounded_records_and_declared_scope_unknown": "PASS",
+    "capture_fault_marks_unknown": "PASS",
+    "closure_exception_passthrough": "PASS",
+    "observer_fault_does_not_replace_q": "PASS",
+    "original_adam_off_on_populated_moments": "PASS",
+    "original_finish_event_identity": "PASS",
+    "original_policy_hooks_off_on": "PASS",
+    "original_recipe_task_registry_binding": "PASS",
+    "private_source_origin_no884_patch": "PASS"
+  },
+  "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "request_id": "785f646f831607b6f7f0ee4f",
+  "request_sha256": "4a9c739701a3f9a1ca0adc39ed3bcb67228adb45ee97f07fa86b87cd3729d139",
+  "resources": {
+    "backend": "cpu",
+    "budget_seconds": 300,
+    "cpu_threads": 1,
+    "gpus": 0
+  },
+  "schema": "forge_atlas889_two_pole_passive_software_proof_v1",
+  "source_digest": "6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36",
+  "source_pins": {
+    "experiments/forge/atlas889_contract.py": {
+      "bytes": 5520,
+      "sha256": "e4850919918d913600dce641f1c1e421c4e1fe483a4dedac74a520c03458043d"
+    },
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81173,
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    "tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    }
+  },
+  "status": "PASS",
+  "study_id": "atlas-original-two-pole-passive889-study-v1",
+  "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+  "task_id": "two_pole",
+  "track_marker": "atlas889_original_two_pole_passive",
+  "view_id": "atlas_original_two_pole_passive889_v1"
+}

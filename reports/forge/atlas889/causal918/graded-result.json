@@ -1,0 +1,66 @@
+{
+  "grades": {
+    "two_pole": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.2975543525069952,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.002445647493004799
+          },
+          {
+            "margin": 0.9891030043363571,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.010896995663642883
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.495923920844992,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.010896995663642883,
+        "mean_abs": 0.002445647493004799
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "raw_hash": "1c8f784436003d890402127c54804af94849c7d2201b63ecb7b26ed37e017d5e",
+  "schema_version": 1,
+  "source_digest": "6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36",
+  "telemetry": {
+    "independent_grading_seconds": 2.637987548019737,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 638836736
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}
