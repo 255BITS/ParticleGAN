@@ -133,7 +133,7 @@ def _validate_candidate_identity(request):
     # Carry the already validated exact Track B metadata identity. The public
     # context retains all prior, Recipe, ownership and other-family guards.
     from .atlas_existing_mog import CANDIDATE_ID, VIEW_ID, supports_candidate
-    existing_mog_id = (CANDIDATE_ID if supports_candidate(candidate)
+    existing_mog_id = (CANDIDATE_ID if candidate.get('id') == CANDIDATE_ID and supports_candidate(candidate)
                        and request.get("view", {}).get("id") == VIEW_ID else None)
     if candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_radius_observer844_v1':
         from .atlas844_radius_owner import supports_candidate as supports844
@@ -142,6 +142,10 @@ def _validate_candidate_identity(request):
     if candidate.get('id') == 'atlas-existing-mog-longer871-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_longer871_v1':
         from .atlas871_longer_owner import supports_candidate as supports871
         if supports871(candidate):
+            existing_mog_id = candidate['id']
+    if candidate.get('id') == 'atlas-original-two-pole-passive889-v1' and request.get('view', {}).get('id') == 'atlas_original_two_pole_passive889_v1':
+        from .atlas889_two_pole_owner import supports_candidate as supports889
+        if supports889(candidate):
             existing_mog_id = candidate['id']
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
