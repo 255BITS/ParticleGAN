@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 300,
+    "candidate_budget_seconds": 300,
+    "id": "atlas-original-two-pole-passive889-study-v1"
+  },
+  "candidate": "atlas-original-two-pole-passive889-v1",
+  "competing_explanation": "The actual gradients, other optimizer state, hot/settle/birth-death actions or horizon may explain the failure without the proposed beta seam. Trace incompleteness and changed outputs block a purity/causal claim. No repair is installed or replayed.",
+  "control": {
+    "candidate_id": "atlas-existing-mog-nearest-positive791-v1",
+    "task_map": {
+      "two_pole": "two_pole"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "hypothesis": "The read-only observer preserves all24 original791 retained outputs while recording the actually applied Adam fields and the later q/controller fields. A temporary-versus-restored beta mismatch is a falsifiable input seam, not a demonstrated cause or repair.",
+  "id": "atlas-original-two-pole-passive889-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "original791-two-pole-f3140adaffd14f4a8974d25874d345d4"
+      },
+      "path": "experiments/forge/prior_evidence/atlas889-original791-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cpu",
+    "through_tier": 1,
+    "view": "atlas_original_two_pole_passive889_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

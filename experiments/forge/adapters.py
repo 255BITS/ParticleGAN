@@ -624,6 +624,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if request['candidate'].get('id') == 'atlas-original-two-pole-passive889-v1':
+        from .atlas889_two_pole_owner import run_behavior as run889
+        return run889(request, task, output_dir, device)
     from .noisy_prior_tier1 import is_noisy_task
     if is_noisy_task(task):
         from .noisy_prior_adapters import blockers as noisy_blockers

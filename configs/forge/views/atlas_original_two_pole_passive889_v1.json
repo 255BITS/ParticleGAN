@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "One passive original-problem diagnostic. No default qualification or winner credit; the proposed consumer-input repair is uninstalled.",
+    "status": "provisional"
+  },
+  "eligibility": {
+    "claim_contract": {
+      "experimental_track": "atlas889_original_two_pole_passive"
+    }
+  },
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "atlas_original_two_pole_passive889_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

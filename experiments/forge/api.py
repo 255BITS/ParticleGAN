@@ -155,7 +155,17 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         reasons = existing_mog_blockers(task, bound, root=root)
         if reasons:
             raise CapabilityError(reasons)
-    from .atlas_two_pole import supports, resolve_binding, validate_effective_recipe
+    from .atlas_two_pole import is_task as original_two_pole_task
+    if (bound.get('id') == 'atlas-original-two-pole-passive889-v1'
+            or (bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1'
+                and original_two_pole_task(task))):
+        from .atlas889_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+        if bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1':
+            from .atlas_existing_mog import supports_candidate as original791_candidate
+            if not original791_candidate(bound):
+                raise CapabilityError(['only the unchanged original791 declaration can be a direct metadata reference'])
+    else:
+        from .atlas_two_pole import supports, resolve_binding, validate_effective_recipe
     from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
     noisy_task = is_noisy_task(task)
     if noisy_task:
@@ -202,6 +212,15 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if ordinary_two_pole:
         validate_effective_recipe(asdict(context.recipe))
         context.ordinary_two_pole_binding = ordinary_binding
+        if bound.get('id') == 'atlas-original-two-pole-passive889-v1':
+            context.passive889_host_entry = {
+                'owner': 'experiments.forge.atlas889_two_pole_owner.run_behavior',
+                'observer': 'experiments.forge.atlas889_two_pole_observer.PassiveTwoPoleRecorder',
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'observer_source': deepcopy(ordinary_binding['source_contract']['files'][
+                    'experiments/forge/atlas889_two_pole_observer.py']),
+                'task_science_changed': False, 'consumer_patch_installed': False,
+                'measurement': 'original80/24 plus bounded passive actual Adam/controller fields'}
         blockers = []
     elif existing_mog:
         if existing_mog_ae_binding is not None:
@@ -396,7 +415,7 @@ class FormulationContext:
                     and candidate_id != 'atlas-existing-mog-longer871-v1')):
             raise CapabilityError(['longer871 context requires its exact candidate/task pair'])
         from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
-        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1'}
         if candidate_id in {'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}:
             self.candidate_id = candidate_id
         if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
@@ -744,6 +763,10 @@ class FormulationContext:
             from .boundaries import ownership_receipt
             ownership["field_ownership"] = ownership_receipt(**self.ownership_contract,
                 resolved_recipe=asdict(self.recipe), initializer=self.initializer)
+        if getattr(self, 'passive889_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'passive_observation': deepcopy(self.passive889_host_entry)}
         policy = None
         if (self._trainer is not None or self._policy is not None) and policy_controls(self.recipe):
             owner = self._trainer if self._trainer is not None else self._policy
