@@ -1,0 +1,105 @@
+{
+  "artifact_read_by_author": false,
+  "author_cost": "UNMEASURED",
+  "control_roster": {
+    "checkpoint7": 7,
+    "original11": 11,
+    "status": "AUTHORED_NOT_RUN",
+    "total": 18
+  },
+  "core_defaults_merge_changes": false,
+  "files": {
+    "README.md": {
+      "bytes": 3805,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/README.md",
+      "sha256": "65b435c2afcd75a32179038625e697cfad1f70fc4a50d4a3ff701106a5785550"
+    },
+    "SOURCE_PROOF.json": {
+      "bytes": 2723,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/SOURCE_PROOF.json",
+      "sha256": "da1ed69f7905cdfe4c921bde891998e2db7cefafe5cbff50a70e6d7bcdebb49a"
+    },
+    "SUBJECT_PINS.json": {
+      "bytes": 978,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/SUBJECT_PINS.json",
+      "sha256": "975f87597faf9c7a8ceb8fe9ab2cd20d226d2d8ad1a9f62e4bf77de964c3a7ca"
+    },
+    "preimages/experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 21116,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/preimages/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "7037d2aecd8e6305fb25adeb753ceeff679bd1e27ef45e4171c9d9daca31c0db"
+    },
+    "preimages/tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/preimages/tests/test_atlas889_two_pole_observer.py",
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    },
+    "repo/tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/repo/tests/test_atlas889_two_pole_observer.py",
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    },
+    "run_original11.py": {
+      "bytes": 2320,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/run_original11.py",
+      "sha256": "b86575cd84e1695b4225f957c68ce60a7963c59e95dffddcea7c4dc164dd3d8d"
+    },
+    "selection.patch": {
+      "bytes": 660,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/selection.patch",
+      "sha256": "b22ace74b9b0150ba7791eecafb7ac0d3766ebbb1a813d3ac35d27c2a1ac8b72"
+    },
+    "subjects/experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/subjects/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "subjects/experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/subjects/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    },
+    "tests/test_checkpoint_compatibility.py": {
+      "bytes": 13746,
+      "path": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/tests/test_checkpoint_compatibility.py",
+      "sha256": "fa4607d03720da0fdc482fb652629c857b232e12c8bf6b982cef98725bf59fd8"
+    }
+  },
+  "manual_entrypoints": [
+    [
+      "python",
+      "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/run_original11.py",
+      "--checkout",
+      "ROOT_OWNED_ISOLATED_CHECKOUT",
+      "--controls-json",
+      "ROOT_PRIVATE/original11-repaired-subject-controls.json"
+    ],
+    [
+      "python",
+      "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/tests/test_checkpoint_compatibility.py",
+      "--checkout",
+      "ROOT_OWNED_ISOLATED_CHECKOUT",
+      "--controls-json",
+      "ROOT_PRIVATE/installed-checkpoint7-controls.json"
+    ]
+  ],
+  "old_request_proof_rebind": false,
+  "original11_test_installation": "no test modification required; retain byte-identical52f/29610",
+  "paid_boundary": "ROOT runs fresh CPU processes inside authorized separately finite120 software/setup/reporting window and matching full-fit command deadlines; old889 carry/INVALID300 intact",
+  "parent_proposal_handoff": {
+    "bytes": 5239,
+    "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/handoff.json",
+    "sha256": "e35ed1ba18b5f7f2bd6500eb3ab0477e21f66ffd6a2b52a5f58a2d117fd7726e"
+  },
+  "parent_source_review": {
+    "bytes": 9043,
+    "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-independent-review-source-20261006/v1/review.json",
+    "sha256": "26ff22ca72cfe41a5d94adf8b12323a3fa9e548ae7b940f078b6867fc835061a"
+  },
+  "root": "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1",
+  "schema": "pg_atlas916_checkpoint_software_control_selection_handoff_v1",
+  "science_admission": false,
+  "status": "SOURCE_ONLY_AUTHORED_NOT_RUN",
+  "subject_installations": "ROOT alone applies exactly e35e observer0c207 and ownerfa49; no other production files changed",
+  "unmeasured_source_authoring": true
+}

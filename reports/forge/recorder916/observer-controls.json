@@ -1,0 +1,31 @@
+{
+  "added_operations": {
+    "extra_backward_calls": 0,
+    "extra_decision_evaluations": 0,
+    "extra_model_forwards": 0,
+    "extra_optimizer_steps": 0,
+    "extra_prior_samples": 0,
+    "extra_rng_draws": 0,
+    "foreign_device_initializations": 0,
+    "state_getter_calls": 0,
+    "state_mutations": 0
+  },
+  "checks": {
+    "actual_beta_lr_q_inputs_and_return": "PASS",
+    "adam_exception_and_restore_passthrough": "PASS",
+    "bounded_records_and_declared_scope_unknown": "PASS",
+    "capture_fault_marks_unknown": "PASS",
+    "closure_exception_passthrough": "PASS",
+    "observer_fault_does_not_replace_q": "PASS",
+    "original_adam_off_on_populated_moments": "PASS",
+    "original_finish_event_identity": "PASS",
+    "original_policy_hooks_off_on": "PASS",
+    "original_recipe_task_registry_binding": "PASS",
+    "private_source_origin_no884_patch": "PASS"
+  },
+  "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "original_target_run": false,
+  "schema": "forge_atlas889_two_pole_passive_control_result_v1",
+  "software_only": true,
+  "status": "PASS"
+}

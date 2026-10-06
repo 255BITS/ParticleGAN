@@ -1,0 +1,101 @@
+{
+  "accounting_cut_note": "Publication/reporting costs after this cut are charged in the append-only private916 ledger; inherited and persistence-tail UNKNOWN_NOT_ZERO qualifiers retained; no exact all-inclusive measured claim.",
+  "arbitrary_ambient_callable_integrity_proven": false,
+  "authority_message_id": "ember-recorder-checkpoint-repair-task-20261006-v1",
+  "checkpoint_controls": {
+    "errors": 0,
+    "failures": 0,
+    "fresh_scientific_admission": false,
+    "original_target_run": false,
+    "schema": "forge_atlas889_checkpoint_compatibility_controls_v1",
+    "software_only": true,
+    "status": "PASS",
+    "tests_run": 7
+  },
+  "closed_post_controls_accounting": {
+    "cap_seconds": 41288,
+    "charged_seconds": 15588.468413579498,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_additional_work": false,
+    "measurement_cut": "CLOSED_MEMORY",
+    "metadata_cap_seconds": 120,
+    "metadata_charged_seconds": 11.281270440202206,
+    "metadata_paid_seconds": 11.281270440202206,
+    "metadata_remaining_seconds": 108.7187295597978,
+    "metadata_reserved_seconds": 0,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "phases": [
+      {
+        "index": 0,
+        "kind": "work",
+        "name": "setup_verify_and_apply_exact_reviewed_recorder_pair",
+        "paid_seconds": 0.035771879367530346,
+        "reserved_seconds": 0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 1,
+        "kind": "work",
+        "name": "execute_original11_and_genuine_checkpoint7_on_installed_source",
+        "paid_seconds": 11.245498560834676,
+        "reserved_seconds": 0,
+        "status": "COMPLETE"
+      }
+    ],
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_added_once": true,
+    "predecessor_inclusive_seconds": 15577.187143139296,
+    "remaining_seconds": 25699.531586420504,
+    "retained_reporting_must_fit": true,
+    "schema": "pg_recorder916_software_inclusive_v1",
+    "scientific_allocation_seconds": 0
+  },
+  "control_source_handoff_sha256": "f99a6f68483bb2440f8aa862874c5e565948d42a59671fed9b9079d1997d32d3",
+  "convergence_evidence": null,
+  "independent_source_review_sha256": "ad10cdf2fdf534e7691a2395a59c983b31e5102bbd9d3448a5c4806fffff807b",
+  "merge_or_deployment": false,
+  "old_scientific_attempt": {
+    "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+    "conservative_charge_seconds": 300,
+    "grade": null,
+    "rebound": false,
+    "replayed": false,
+    "request_id": "84aead29da2ee1938a5b981e",
+    "status": "INVALID"
+  },
+  "original_observer_controls": {
+    "all_nine_added_operation_counters_zero": true,
+    "original_assertions": 68,
+    "original_file_sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145",
+    "status": "PASS",
+    "tests": 11,
+    "unchanged": true
+  },
+  "production_source": {
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    }
+  },
+  "resources": {
+    "cpu_threads": 1,
+    "device": "cpu",
+    "gpus": 0,
+    "matching_deadline_per_suite_seconds": 25
+  },
+  "returned_copy_alias_topology_proven": false,
+  "schema": "recorder916_software_checkpoint_compatibility_result_v1",
+  "scientific_allocation_seconds": 0,
+  "scope": "SOFTWARE_COMPATIBILITY_ONLY",
+  "shared_core_changed": false,
+  "status": "PASS",
+  "synthetic_populated_cpu_fixture": true,
+  "total_controls": 18,
+  "winner_or_default_credit": false
+}

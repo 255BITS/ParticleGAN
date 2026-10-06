@@ -1,0 +1,86 @@
+{
+  "executions": [
+    {
+      "command": [
+        "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+        "-B",
+        "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/run_original11.py",
+        "--checkout",
+        "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+        "--controls-json",
+        "/ml2/hypergan/pg-recorder916-software-runtime-20261006/v1/observer-controls.json"
+      ],
+      "controls": {
+        "added_operations": {
+          "extra_backward_calls": 0,
+          "extra_decision_evaluations": 0,
+          "extra_model_forwards": 0,
+          "extra_optimizer_steps": 0,
+          "extra_prior_samples": 0,
+          "extra_rng_draws": 0,
+          "foreign_device_initializations": 0,
+          "state_getter_calls": 0,
+          "state_mutations": 0
+        },
+        "checks": {
+          "actual_beta_lr_q_inputs_and_return": "PASS",
+          "adam_exception_and_restore_passthrough": "PASS",
+          "bounded_records_and_declared_scope_unknown": "PASS",
+          "capture_fault_marks_unknown": "PASS",
+          "closure_exception_passthrough": "PASS",
+          "observer_fault_does_not_replace_q": "PASS",
+          "original_adam_off_on_populated_moments": "PASS",
+          "original_finish_event_identity": "PASS",
+          "original_policy_hooks_off_on": "PASS",
+          "original_recipe_task_registry_binding": "PASS",
+          "private_source_origin_no884_patch": "PASS"
+        },
+        "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+        "original_target_run": false,
+        "schema": "forge_atlas889_two_pole_passive_control_result_v1",
+        "software_only": true,
+        "status": "PASS"
+      },
+      "gpu_allocation": 0,
+      "returncode": 0,
+      "stderr": "test_actual_beta_lr_q_inputs_and_return (_atlas916_unchanged_original11_controls.ObserverControls.test_actual_beta_lr_q_inputs_and_return) ... ok\ntest_adam_exception_and_restore_passthrough (_atlas916_unchanged_original11_controls.ObserverControls.test_adam_exception_and_restore_passthrough) ... ok\ntest_bounded_records_and_declared_scope_unknown (_atlas916_unchanged_original11_controls.ObserverControls.test_bounded_records_and_declared_scope_unknown) ... ok\ntest_capture_fault_marks_unknown (_atlas916_unchanged_original11_controls.ObserverControls.test_capture_fault_marks_unknown) ... ok\ntest_closure_exception_passthrough (_atlas916_unchanged_original11_controls.ObserverControls.test_closure_exception_passthrough) ... ok\ntest_observer_fault_does_not_replace_q (_atlas916_unchanged_original11_controls.ObserverControls.test_observer_fault_does_not_replace_q) ... ok\ntest_original_adam_off_on_populated_moments (_atlas916_unchanged_original11_controls.ObserverControls.test_original_adam_off_on_populated_moments) ... ok\ntest_original_finish_event_identity (_atlas916_unchanged_original11_controls.ObserverControls.test_original_finish_event_identity) ... ok\ntest_original_policy_hooks_off_on (_atlas916_unchanged_original11_controls.ObserverControls.test_original_policy_hooks_off_on) ... ok\ntest_original_recipe_task_registry_binding (_atlas916_unchanged_original11_controls.ObserverControls.test_original_recipe_task_registry_binding) ... ok\ntest_private_source_origin_no884_patch (_atlas916_unchanged_original11_controls.ObserverControls.test_private_source_origin_no884_patch) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 4.261s\n\nOK\n",
+      "stdout": "",
+      "suite": "original11",
+      "supervised_elapsed_seconds": 4.974568439181894,
+      "timeout_seconds": 25
+    },
+    {
+      "command": [
+        "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+        "-B",
+        "/ml2/hypergan/pg-atlas916-checkpoint-controls-source-20261006/v1/tests/test_checkpoint_compatibility.py",
+        "--checkout",
+        "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+        "--controls-json",
+        "/ml2/hypergan/pg-recorder916-software-runtime-20261006/v1/checkpoint-controls.json"
+      ],
+      "controls": {
+        "errors": 0,
+        "failures": 0,
+        "fresh_scientific_admission": false,
+        "original_target_run": false,
+        "schema": "forge_atlas889_checkpoint_compatibility_controls_v1",
+        "software_only": true,
+        "status": "PASS",
+        "tests_run": 7
+      },
+      "gpu_allocation": 0,
+      "returncode": 0,
+      "stderr": "test_measure_exception_keeps_original_owner_behavior (__main__.CheckpointControls.test_measure_exception_keeps_original_owner_behavior) ... ok\ntest_original_failure_precedes_first_measure (__main__.CheckpointControls.test_original_failure_precedes_first_measure) ... ok\ntest_original_getter_exception_identity_and_wrapper_restoration (__main__.CheckpointControls.test_original_getter_exception_identity_and_wrapper_restoration) ... ok\ntest_populated_complete_state_digest_and_real_checkpoint_off_on (__main__.CheckpointControls.test_populated_complete_state_digest_and_real_checkpoint_off_on) ... ok\ntest_prevalidation_does_not_hide_changed_hook (__main__.CheckpointControls.test_prevalidation_does_not_hide_changed_hook) ... ok\ntest_unexpected_original_hook_write_is_not_overwritten (__main__.CheckpointControls.test_unexpected_original_hook_write_is_not_overwritten) ... ok\ntest_unrelated_callable_state_still_rejected (__main__.CheckpointControls.test_unrelated_callable_state_still_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 5.566s\n\nOK\n",
+      "stdout": "",
+      "suite": "checkpoint7",
+      "supervised_elapsed_seconds": 6.247540352866054,
+      "timeout_seconds": 25
+    }
+  ],
+  "old_case_replayed": false,
+  "schema": "recorder916_root_actual_software_execution_v1",
+  "scientific_allocation_seconds": 0,
+  "source_applied": true,
+  "synthetic_populated_cpu_fixture": true
+}

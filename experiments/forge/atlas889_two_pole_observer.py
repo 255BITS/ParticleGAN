@@ -2,7 +2,8 @@
 
 Importing this file constructs no torch objects. Original calls are made once;
 their return objects and exceptions are passed through. Observer faults only
-make the diagnostic incomplete. No state_dict or served-state getters are used.
+make the diagnostic incomplete. No state getter is added. Existing checkpoint calls suspend only verified
+observer method bookkeeping; no served-state getter is added.
 """
 from __future__ import annotations
 
@@ -32,6 +33,7 @@ class PassiveTwoPoleRecorder:
         self.owner, self.torch = owner, owner.torch
         self.records, self.unknown, self.scope_unknown = [], [], []
         self.hooks, self.current = [], None
+        self.serialized_hooks = []
         self.bytes, self.capture_calls, self.purity_checks = 0, 0, 0
         self.purity_failures, self.disabled = 0, False
         self.calls = {name: 0 for name in ('begin_step', 'after_generator_backward',
@@ -238,12 +240,47 @@ class PassiveTwoPoleRecorder:
     def _count(self, name):
         self.calls[name] += 1
 
-    def _hook(self, obj, name, make):
+    def _hook(self, obj, name, make, *, serialized=False):
         original = getattr(obj, name)
         previous = vars(obj).get(name, _ABSENT)
         wrapped = make(original)
         setattr(obj, name, wrapped)
         self.hooks.append((obj, name, previous))
+        if serialized:
+            self.serialized_hooks.append((vars(obj), name, previous, wrapped))
+
+    def _checkpoint_state(self, original, *args, **kwargs):
+        """Pass one existing getter through its exact original instance state.
+
+        Only the three installed hooks on vars-based controller serializers
+        are suspended. Arbitrary callable state remains visible to the owner's
+        unchanged strict typed digest. This boundary performs no state getter
+        or serving call beyond the single original caller's getter.
+        """
+        entries = tuple(self.serialized_hooks)
+        if len(entries) != 3 or any(
+                attributes.get(name, _ABSENT) is not wrapped
+                for attributes, name, previous, wrapped in entries):
+            self._unknown('checkpoint hook identity mismatch; original state retained')
+            return original(*args, **kwargs)
+        # Prevalidation precedes every mutation. These are the exact plain
+        # instance dictionaries of SettleTest and OptimizerSurprise.
+        suspended = []
+        try:
+            for attributes, name, previous, wrapped in entries:
+                if previous is _ABSENT:
+                    del attributes[name]
+                else:
+                    attributes[name] = previous
+                suspended.append((attributes, name, previous, wrapped))
+            return original(*args, **kwargs)
+        finally:
+            for attributes, name, previous, wrapped in reversed(suspended):
+                if attributes.get(name, _ABSENT) is previous:
+                    attributes[name] = wrapped
+                else:
+                    # Never silently overwrite an unexpected original write.
+                    self._unknown('checkpoint hook changed during original getter: ' + name)
 
     def install(self):
         """Only this owner instance is wrapped; no class/module patches."""
@@ -372,10 +409,12 @@ class PassiveTwoPoleRecorder:
             self._hook(policy, 'after_generator_step', after_step)
             group = self._group()
             tester = policy.lr_settle.testers[0][owner.opt_g.param_groups.index(group)]
-            self._hook(tester, 'observe', table_observe)
-            self._hook(policy.surprise, 'group_q', group_q)
-            self._hook(policy.surprise, 'decide', decide)
+            self._hook(tester, 'observe', table_observe, serialized=True)
+            self._hook(policy.surprise, 'group_q', group_q, serialized=True)
+            self._hook(policy.surprise, 'decide', decide, serialized=True)
             self._hook(policy, 'finish_step', finish)
+            self._hook(policy, 'state_dict', lambda original:
+                lambda *args, **kwargs: self._checkpoint_state(original, *args, **kwargs))
         except Exception as error:
             self._unknown('observer install failed: ' + type(error).__name__)
             self.uninstall()
@@ -391,6 +430,7 @@ class PassiveTwoPoleRecorder:
             except Exception as error:
                 self._unknown('observer bookkeeping removal failed: ' + type(error).__name__)
         self.hooks.clear()
+        self.serialized_hooks.clear()
 
     def receipt(self, *, completed_steps, scored_clocks):
         expected = {name: 80 for name in self.calls}
