@@ -144,13 +144,19 @@ def _validate_candidate_identity(request):
     # Rebuild from declarations, not candidate-provided resolved_recipe echoes.
     # Recipe resolution has no model construction or training draw and does not
     # depend on promotion seed; the registered RNG protocol is checked separately.
+    # Carry the already validated exact Track B metadata identity. The public
+    # context retains all prior, Recipe, ownership and other-family guards.
+    from .atlas_existing_mog import CANDIDATE_ID, VIEW_ID, supports_candidate
+    existing_mog_id = (CANDIDATE_ID if supports_candidate(candidate)
+                       and request.get("view", {}).get("id") == VIEW_ID else None)
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), device="cpu",
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
-        execution_path=candidate.get("execution_path", "public_trainer"))
+        execution_path=candidate.get("execution_path", "public_trainer"),
+        candidate_id=existing_mog_id)
     resolved_recipe = asdict(context.recipe)
     if "configuration_id" in candidate:
         from .configuration_search import recipe_identity_fields, validate_configuration_declaration

@@ -1,9 +1,11 @@
 """Render actual saved training observations; no model, sampler or rescoring.
 
 The exporter consumes a certified request/result envelope and verifies retained
-arrays against the adapter's descriptor. It adds zero training or sampling.
+arrays against the adapter's descriptor. It adds zero training or sampling. Track B keeps the original task priors;
+this module does not substitute NoisyParticlePrior or transfer Track A credit.
 """
 import argparse
+import importlib
 from io import BytesIO
 import math
 from pathlib import Path
@@ -15,37 +17,54 @@ import torch
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 
 
+EXPECTED_VIEW = {'assignments': [{'importance': 'required', 'order': 0, 'qualification_tier': 1, 'task': 'gaussian1d_acquisition'}, {'importance': 'required', 'order': 1, 'qualification_tier': 1, 'task': 'two_pole'}, {'importance': 'required', 'order': 2, 'qualification_tier': 1, 'task': 'unused_token_hold'}, {'importance': 'required', 'order': 3, 'qualification_tier': 1, 'task': 'ae_gan_hold'}, {'importance': 'required', 'order': 4, 'qualification_tier': 1, 'task': 'ring16_acquisition'}, {'importance': 'required', 'order': 5, 'qualification_tier': 1, 'task': 'five_word_joint_acquisition'}], 'calibration': {'adoption_blocker': 'Isolated Atlas717 existing-prior compatibility scope; no prior evidence transfer or default qualification.', 'status': 'provisional'}, 'eligibility': {'claim_contract': {'experimental_track': 'atlas717_existing_mog'}}, 'evidence_scope': 'original_task_existing_mog_compatibility', 'goal': 'discriminator_stability', 'id': 'atlas_existing_mog_tier1_717_v1', 'ranking': {'compare_compatible_cohorts': True, 'cost_separate': True, 'policy': 'qualified_tier_only_with_raw_metrics'}, 'reporting': {'family_totals': False}, 'revision': 1, 'schema_version': 1}
+EXPECTED_CLAIM_CONTRACT = {'experimental_track': 'atlas717_existing_mog', 'sampling_law': 'task_declared', 'schedule': 'schedule_free', 'scoring_weights': 'live'}
+OWNER_PINS = {'atlas_existing_mog': 'b852cd1eeba6dace69e300a80f21892c9511c7603c84c81f2d7118e98bfaa132',
+              'atlas_existing_mog_ae': '179ef8632da9d6f03d9561f276c86ad2ce87848c90db89251b4ccb7a88fee42b',
+              'atlas_two_pole': '5f3d6c8acecf6a2cb72c45245922818478900a3b5c0fe90af4ef0b4d09cdfc90'}
+
 def _indices(count):
     if count < 1:
         raise ValueError('actual observations are required for training media')
     return sorted({round(i * (count - 1) / min(8, count - 1)) for i in range(min(9, count))}) if count > 1 else [0]
 
 
-def _noisy_media_binding(task, evidence):
-    """Validate the isolated prior substitution before illustrating saved reads.
+def _validate_request_scope(request):
+    """Keep this exporter confined to one separately certified Track B request."""
+    from .atlas_existing_mog import PARENTS, supports_candidate, validate
+    for name, expected in OWNER_PINS.items():
+        module = importlib.import_module('.' + name, __package__)
+        if not getattr(module, '__file__', None) or file_hash(Path(module.__file__)) != expected:
+            raise ValueError('Track B media owner Source differs: ' + name)
+    if (not isinstance(request, dict) or not supports_candidate(request.get('candidate', {}))
+            or request['candidate'].get('claim_contract') != EXPECTED_CLAIM_CONTRACT
+            or request.get('view') != EXPECTED_VIEW or request.get('through_tier') != 1
+            or not isinstance(request.get('tasks'), dict)
+            or set(request['tasks']) != set(PARENTS)):
+        raise ValueError('Track B media requires its exact candidate, view and six original tasks')
+    for name, task in request['tasks'].items():
+        if not isinstance(task, dict) or task.get('id') != name:
+            raise ValueError('Track B task-map keys differ from their original identities')
+        validate(task)
 
-    This invokes only the source-bound metadata/owner receipt guards. Original
-    numeric grades are carried by the certified envelope, never recomputed.
-    """
-    prior = task.get('execution', {}).get('prior', {})
-    if not (task.get('task_cohort') == 'noisy_particle_prior_tier1_686_v1'
-            or str(task.get('id', '')).endswith('_noisy_prior686_v1')
-            or prior.get('kind') == 'noisy_particle_cloud'
-            or 'prior_substitution_parent' in task):
-        return None
-    from .noisy_prior_tier1 import validate
-    from .noisy_prior_adapters import validate_evidence
+
+def _existing_mog_media_binding(task, evidence):
+    """Bind original scored outputs to the actual existing-prior owner receipt."""
+    from .atlas_existing_mog import CANDIDATE_ID, COHORT, SUPPORTED, validate, validate_evidence
     binding = validate(task)
+    parent = binding['task_id']
+    if parent not in SUPPORTED:
+        raise ValueError('a blocked owner has no certified scientific goal media')
     invalid = validate_evidence(task, evidence)
     if invalid is not None:
-        raise ValueError('Noisy media requires the original complete owner evidence: ' + invalid['reason'])
+        raise ValueError('Track B media requires complete original owner evidence: ' + invalid['reason'])
     observations = evidence.get('observations', [])
     clocks = sorted({math.ceil(i * task['execution']['steps'] / 24) for i in range(1, 25)})
-    if (len(observations) != 24
-            or any(type(row.get('step')) is not int for row in observations)
+    if (not isinstance(observations, list) or len(observations) != 24
+            or any(not isinstance(row, dict) or type(row.get('step')) is not int for row in observations)
             or [row['step'] for row in observations] != clocks):
-        raise ValueError('Noisy media requires exactly the original24 scored clocks')
-    parent = binding['parent_task_id']
+        raise ValueError('Track B media requires exactly the original24 scored clocks')
+    sampled = parent in {'gaussian1d_acquisition', 'ring16_acquisition', 'ae_gan_hold'}
     if parent in {'gaussian1d_acquisition', 'ring16_acquisition'}:
         descriptor = evidence.get('saved_observer_outputs', {})
         if (descriptor.get('path') != 'observed-samples.pt'
@@ -58,22 +77,26 @@ def _noisy_media_binding(task, evidence):
                 or not isinstance(descriptor.get('sha256'), str)
                 or len(descriptor['sha256']) != 64
                 or any(c not in '0123456789abcdef' for c in descriptor['sha256'])):
-            raise ValueError('Noisy distribution media requires the original retained scored-output descriptor')
+            raise ValueError('Track B media requires the original retained scored-output descriptor')
         if evidence.get('host', {}).get('definition') != task['execution']['host_definition']:
-            raise ValueError('Noisy media target geometry differs from the fixed original host')
+            raise ValueError('Track B target geometry differs from the fixed original host')
     if parent == 'two_pole' and not evidence.get('saved_particle_observations'):
-        raise ValueError('Noisy two-pole media requires saved actual live coordinates')
+        raise ValueError('Track B direct control requires saved actual live coordinates')
     if parent == 'ae_gan_hold':
-        _validate_noisy_ae_records(observations, evidence.get('saved_ae_observations'))
-    return {**binding, 'public_prior_type': 'particlegan.noisy_particle_prior.NoisyParticlePrior',
-            'sigma_units': 'raw_latent_coordinates',
-            'latent_prior_sampled': parent != 'two_pole',
+        _validate_ae_records(observations, evidence.get('saved_ae_observations'))
+    if parent == 'two_pole':
+        _validate_particle_records(observations, evidence.get('saved_particle_observations'))
+    return {**binding, 'parent_task_id': parent, 'candidate_id': CANDIDATE_ID,
+            'cohort': COHORT, 'public_prior_type': 'particlegan.particle_prior.MoGParticlePrior' if sampled else None,
+            'sigma': binding['prior']['sigma'], 'sigma_units': 'raw_latent_coordinates',
+            'latent_prior_sampled': sampled,
             'weights': task['evaluation']['scoring_weights'],
             'sampling_law': task['evaluation']['sampling_law'],
-            'eval_output_noise': task['evaluation']['eval_output_noise']}
+            'eval_output_noise': task['evaluation']['eval_output_noise'],
+            'prior_substituted': False, 'cross_track_credit': False}
 
 
-def _validate_noisy_scored_records(task, observations, records):
+def _validate_scored_records(task, observations, records):
     """Join original retained tensors to their scored clocks without a draw."""
     dimensions = len(task['execution']['host_definition']['means'][0])
     if (not isinstance(records, list) or len(records) != 24
@@ -81,17 +104,18 @@ def _validate_noisy_scored_records(task, observations, records):
                    or type(row['step']) is not int
                    or not isinstance(row['samples'], torch.Tensor)
                    or tuple(row['samples'].shape) != (4096, dimensions)
-                   or not row['samples'].is_floating_point() for row in records)
+                   or not row['samples'].is_floating_point()
+                   or not bool(torch.isfinite(row['samples']).all()) for row in records)
             or [row['step'] for row in records] != [row['step'] for row in observations]):
-        raise ValueError('Noisy media requires the original24 scored4096 tensors and exact clocks')
+        raise ValueError('Track B media requires the original24 scored4096 tensors and exact clocks')
 
 
-def _validate_noisy_ae_records(observations, records):
+def _validate_ae_records(observations, records):
     """Bind the original two decoder outputs and paired target from each read."""
     shapes = {'generated': (1024, 2), 'reconstructed': (1024, 2),
               'target': (1024, 2), 'prior': (12, 2), 'anchors': (2, 2)}
     if not isinstance(records, list) or len(records) != 24 or len(observations) != 24:
-        raise ValueError('Noisy AE media requires all original24 saved reads')
+        raise ValueError('Track B AE media requires all original24 saved reads')
     for row, measured in zip(records, observations):
         if (not isinstance(row, dict) or type(row.get('step')) is not int
                 or type(measured.get('step')) is not int
@@ -104,45 +128,48 @@ def _validate_noisy_ae_records(observations, records):
                 raise ValueError('saved original finite AE ' + key + ' shape differs')
 
 
-def render(task, row, local, output):
+def _validate_particle_records(observations, records):
+    """Join all original direct coordinates, targets and gradients to scored reads."""
+    if not isinstance(records, list) or len(records) != 24 or len(observations) != 24:
+        raise ValueError('Track B direct media requires all original24 saved reads')
+    for row, measured in zip(records, observations):
+        if (not isinstance(row, dict) or type(row.get('step')) is not int
+                or row['step'] != measured['step'] or row.get('metrics') != measured):
+            raise ValueError('saved direct arrays differ from original scored clocks/metrics')
+        for key, shape in (('particles', (12, 1)), ('target', (12, 1)),
+                           ('critic_gradient', (24, 1))):
+            values = np.asarray(row.get(key), dtype=float)
+            if values.shape != shape or not np.isfinite(values).all():
+                raise ValueError('saved original finite direct ' + key + ' shape differs')
+
+
+def render(request, task, row, local, output):
+    _validate_request_scope(request)
+    if task != request['tasks'].get(task.get('id')) or row.get('task_id') != task.get('id'):
+        raise ValueError('Track B717 media task/result differs from the exact admitted request')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     local, output = Path(local), Path(output)
+    if row.get('gate_status') not in {'PASS', 'FAIL'}:
+        raise ValueError('only certified numerical outcomes have scientific goal media')
     evidence = row['evidence']
     observations = evidence.get('observations', [])
-    noisy = _noisy_media_binding(task, evidence)
+    existing = _existing_mog_media_binding(task, evidence)
     frames, inputs = [], {}
     samples = None
     descriptor = evidence.get('saved_observer_outputs')
     if descriptor:
         path = (local / descriptor['path']).resolve()
-        if not path.is_relative_to(local.resolve()) or file_hash(path) != descriptor['sha256'] or path.stat().st_size != descriptor['bytes']:
+        if path != local.resolve() / descriptor['path'] or path.is_symlink() or file_hash(path) != descriptor['sha256'] or path.stat().st_size != descriptor['bytes']:
             raise ValueError('retained scored-output descriptor differs from saved bytes')
         samples = torch.load(path, map_location='cpu', weights_only=True)
         if [point['step'] for point in samples] != [point['step'] for point in observations]:
             raise ValueError('scored output and numerical observation schedules differ')
-        if noisy and noisy['parent_task_id'] in {'gaussian1d_acquisition', 'ring16_acquisition'}:
-            _validate_noisy_scored_records(task, observations, samples)
-        inputs[str(path)] = file_hash(path)
-    if task['adapter'] == 'clockfree_audit':
-        from .artifacts import verify_artifacts
-        from .clockfree import learning_state
-        root = Path(evidence['artifact_root'])
-        verify_artifacts(root, evidence['artifact_manifest'])
-        proof_path = root / 'comparisons.pt'
-        proof = torch.load(proof_path, map_location='cpu', weights_only=True)
-        inputs[str(proof_path)] = file_hash(proof_path)
-        # The saved digest comparisons are the declared numerical gate. Every
-        # frame also shows actual learned G parameter movement in each branch.
-        names = list(proof['trajectories'])
-        initial = proof['initial']['trainer']['models']['G']
-        parameter = next(key for key, value in initial.items() if value.is_floating_point() and value.numel())
-        observations = [{'step': i + 1, **{name: float((proof['trajectories'][name][i]['trainer']['models']['G'][parameter] - initial[parameter]).abs().mean()) for name in names}} for i in range(task['execution']['probe_steps'])]
-        thresholds = []
-    else:
-        thresholds = task['evaluation']['thresholds']
-        names = [name for name, _, _ in thresholds]
+        if existing and existing['parent_task_id'] in {'gaussian1d_acquisition', 'ring16_acquisition'}:
+            _validate_scored_records(task, observations, samples)
+        inputs[descriptor['path']] = {'sha256': file_hash(path), 'bytes': path.stat().st_size}
+    thresholds = task['evaluation']['thresholds']
     if not observations:
         raise ValueError('no saved actual training observations')
     indices = _indices(len(observations))
@@ -167,7 +194,7 @@ def render(task, row, local, output):
                 centers = np.asarray(spec['means'])
                 top.scatter(values[:, 0], values[:, 1], s=2, alpha=.25, label='Saved scored samples')
                 top.scatter(centers[:, 0], centers[:, 1], marker='+', color='black', label='Declared target centers')
-                if noisy:
+                if existing:
                     from matplotlib.patches import Ellipse
                     for i, (center, covariance) in enumerate(zip(centers, spec['covariances'])):
                         eigenvalues, vectors = np.linalg.eigh(np.asarray(covariance, dtype=float))
@@ -182,7 +209,7 @@ def render(task, row, local, output):
             top.legend(loc='upper right', fontsize=8)
         elif evidence.get('saved_particle_observations'):
             retained = evidence['saved_particle_observations']
-            if ((task['id'] != 'two_pole' and not (noisy and noisy['parent_task_id'] == 'two_pole'))
+            if ((task['id'] != 'two_pole' and not (existing and existing['parent_task_id'] == 'two_pole'))
                     or len(retained) != len(observations)
                     or [point['step'] for point in retained] != x
                     or any(point['metrics'] != measured
@@ -206,7 +233,7 @@ def render(task, row, local, output):
             top.set_xlabel('Live coordinate'); top.set_ylabel('Particle row')
             top.set_title('Travel from zero + bounded critic gradient; both-pole balance is ungated', fontsize=10)
             top.legend(loc='upper right', fontsize=7)
-        elif noisy and noisy['parent_task_id'] == 'ae_gan_hold':
+        elif existing and existing['parent_task_id'] == 'ae_gan_hold':
             retained = evidence['saved_ae_observations']
             record = retained[index]
             target, generated, reconstructed = [np.asarray(record[key], dtype=float)
@@ -221,31 +248,8 @@ def render(task, row, local, output):
             top.set_xlim(-extent, extent); top.set_ylim(-extent, extent); top.set_aspect('equal')
             top.set_title('Original live generation + reconstruction, with scheduled output noise', fontsize=10)
             top.legend(loc='upper right', fontsize=7)
-        elif samples and 'views' in samples[index]:
-            # Established public API word renderer consumes the already retained
-            # generated and paired-reconstructed views, without querying models.
-            from benchmarks.toy_audit.api_run import render_gif
-            records = []
-            for i in indices:
-                record = samples[i]
-                records.append({'step': observations[i]['step'], 'metrics': record['metrics'],
-                                'views': record['views'], 'passed': record['passed'],
-                                'failed_bounds': record['failed_bounds']})
-            case = {'id': task['id'], 'goal': task.get('description', task['id']),
-                    'default_steps': task['execution']['steps'], 'sampling': evidence['sampling_law']}
-            output.parent.mkdir(parents=True, exist_ok=True)
-            render_gif(case, records, output, full_budget=True, requested_steps=task['execution']['steps'], final_verdict=row['gate_status'])
-            plt.close(figure)
-            break
         else:
-            for name in names:
-                top.plot(x[:index+1], [point[name] for point in observations[:index+1]], label=name)
-            all_values = [point[name] for point in observations for name in names]
-            low, high = min(all_values), max(all_values)
-            padding = max(.01, (high-low)*.05)
-            top.set_ylim(low-padding, high+padding)
-            top.set_xlim(0, max(x)); top.set_title('Actual training measurements' if thresholds else 'Actual G parameter movement from the shared saved start')
-            top.legend(fontsize=7)
+            raise ValueError('Track B media requires original scored distributions or direct coordinates')
         if thresholds:
             for name, operator, bound in thresholds:
                 values = [point[name] for point in observations]
@@ -258,17 +262,14 @@ def render(task, row, local, output):
             bottom.axhline(0, color='black', lw=1)
             bottom.set_title('Measured distance from numerical bounds; direction follows each listed inequality')
             bottom.legend(fontsize=7, ncol=2)
-        else:
-            comparisons = evidence['comparisons']
-            labels = [point['condition'] for point in comparisons]
-            bottom.bar(labels, [int(point['reference_sha256'] != point['changed_sha256']) for point in comparisons])
-            bottom.set_ylim(0, 1.2); bottom.set_title('Full saved-state parity: 0 equal / 1 different')
         bottom.set_xlim(0, max(x)) if thresholds else None
         caption = f"{task['id']} · update {observations[index]['step']} · recorded {row['gate_status']}\n{evidence.get('scoring_weights', 'live')} / {evidence['sampling_law']}"
-        if noisy:
-            kernel = f"fixed latent sigma {noisy['sigma']:g} in raw units" if noisy['latent_prior_sampled'] else 'sigma0 direct coordinates; no prior draw'
-            caption += '\nIsolated686 · NoisyParticlePrior · ' + kernel + '; parent width and observer retained'
-        figure.suptitle(caption, fontsize=9 if noisy else 10)
+        if existing['latent_prior_sampled']:
+            kernel = f"fixed latent sigma {existing['sigma']:g} in raw units" if existing['latent_prior_sampled'] else 'sigma0 direct coordinates; no prior draw'
+            caption += '\nTrack B717 · original MoGParticlePrior · ' + kernel + '; original observer retained'
+        if not existing['latent_prior_sampled']:
+            caption += '\nTrack B717 · unchanged direct Parameter control; no latent kernel draw'
+        figure.suptitle(caption, fontsize=9 if existing else 10)
         buffer = BytesIO(); figure.savefig(buffer, format='png', dpi=100); plt.close(figure)
         buffer.seek(0); frames.append(Image.open(buffer).convert('RGB'))
     if frames:
@@ -283,36 +284,65 @@ def render(task, row, local, output):
     if evidence.get('saved_particle_observations'):
         receipt['saved_particle_observations_sha256'] = stable_hash(evidence['saved_particle_observations'])
         receipt['illustrated_goal'] = 'Live coordinate travel >=0.30 and critic gradient median <=1.0 at the final five observations; no pole-balance gate.'
-    if noisy and noisy['parent_task_id'] == 'ae_gan_hold':
+    if existing and existing['parent_task_id'] == 'ae_gan_hold':
         receipt['saved_ae_observations_sha256'] = stable_hash(evidence['saved_ae_observations'])
         receipt['illustrated_goal'] = 'Original live unconditional hold <=0.35 and paired reconstruction MSE <=0.05 at the final five observations; both saved decoder outputs shown.'
-    if noisy:
-        receipt['prior_substitution'] = noisy
-        receipt['target_geometry_sha256'] = stable_hash(task['execution']['host_definition'])
+    if existing:
+        receipt['existing_prior_contract'] = existing
+        receipt['candidate_revision'] = request['candidate_revision']
+        receipt['source'] = {key: request['source'][key] for key in ('commit', 'origin_commit', 'digest')
+                             if key in request['source']}
+        receipt['protocol_sha256'] = stable_hash(request['protocol'])
+        receipt['request_sha256'] = stable_hash(request)
+        if existing['parent_task_id'] in {'gaussian1d_acquisition', 'ring16_acquisition'}:
+            receipt['target_geometry_sha256'] = stable_hash(task['execution']['host_definition'])
         receipt['illustrated_distribution'] = ('original_scored4096_samples_and_declared_target_geometry'
-            if noisy['parent_task_id'] in {'gaussian1d_acquisition', 'ring16_acquisition'}
-            else 'original_saved_live_coordinates' if noisy['parent_task_id'] == 'two_pole'
-            else 'original_saved_unconditional_generation_paired_reconstruction_and_target' if noisy['parent_task_id'] == 'ae_gan_hold'
+            if existing['parent_task_id'] in {'gaussian1d_acquisition', 'ring16_acquisition'}
+            else 'original_saved_live_coordinates' if existing['parent_task_id'] == 'two_pole'
+            else 'original_saved_unconditional_generation_paired_reconstruction_and_target' if existing['parent_task_id'] == 'ae_gan_hold'
             else 'original_saved_numeric_observations')
+        receipt['prior_substituted'] = False
+        receipt['cross_track_credit'] = False
         receipt['extra_noise_assumed'] = False
     atomic_json(output.with_suffix('.json'), receipt)
     return receipt
 
 
 def export_attempt(directory, output):
+    """Use the maintained collected certificate; never evaluate or launch a case."""
     directory = Path(directory)
     envelope, result, certificate = [read_json(directory / (name + '.json')) for name in ('request', 'result', 'evidence')]
-    request = envelope.get('request', envelope)
-    if certificate['result_hash'] != stable_hash(result) or certificate['source'] != request['source']:
-        raise ValueError('original source/result certificate differs')
-    if result['candidate_revision'] != request['candidate_revision']:
-        raise ValueError('candidate revision differs')
+    request, job, worker = envelope['request'], envelope['job'], envelope['worker']
+    _validate_request_scope(request)
+    if (certificate['result_hash'] != stable_hash(result) or certificate['source'] != request['source']
+            or certificate.get('runtime') != request.get('runtime')
+            or result['candidate_revision'] != request['candidate_revision']
+            or result['attempt_id'] != worker['attempt']):
+        raise ValueError('original source/request/result certificate differs')
+    raw = result['raw']
+    if (raw.get('attempt_status') != 'completed' or raw.get('token') != worker['token']
+            or raw.get('grading', {}).get('raw_hash') != stable_hash(raw.get('result', {}))
+            or raw.get('grading', {}).get('source_digest') != request['source']['digest']):
+        raise ValueError('a matching completed terminal and frozen grader certificate are required')
+    rows = result['task_results']
+    expected_tasks = job.get('task_ids', [job['task_id']])
+    if ([row['task_id'] for row in rows] != expected_tasks
+            or len(set(expected_tasks)) != len(expected_tasks)
+            or any(name not in request['tasks'] for name in expected_tasks)):
+        raise ValueError('collected task rows differ from the original admitted job')
+    for row in rows:
+        if row.get('gate_status') in {'PASS', 'FAIL'}:
+            grade = raw['grading']['grades'].get(row['task_id'], {})
+            if (row.get('raw_status') != 'completed'
+                    or row['gate_status'] != grade.get('gate_status', grade.get('status', 'INVALID'))):
+                raise ValueError('scientific media status differs from the original frozen grade')
     local = Path(certificate['local_artifact_root'])
-    if read_json(local / 'result.json') != result:
-        raise ValueError('local result differs from certified envelope')
-    return [render(request['tasks'][row['task_id']], row, local,
-                   Path(output) / (row['task_id'] + '.gif')) for row in result['task_results']
-            if row['gate_status'] in {'PASS', 'FAIL', 'BLOCKED'} and row.get('evidence')]
+    if (local.resolve() != local or local != Path(worker['directory'])
+            or read_json(local / 'result.json') != result):
+        raise ValueError('local original artifact root/result differs from the certified attempt')
+    return [render(request, request['tasks'][row['task_id']], row, local,
+                   Path(output) / (row['task_id'] + '.gif')) for row in rows
+            if row['gate_status'] in {'PASS', 'FAIL'} and row.get('evidence')]
 
 
 def main():
