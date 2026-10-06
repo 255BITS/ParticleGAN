@@ -156,7 +156,9 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         if reasons:
             raise CapabilityError(reasons)
     from .atlas_two_pole import is_task as original_two_pole_task
-    if (bound.get('id') == 'atlas-original-two-pole-passive889-v1'
+    if bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+    elif (bound.get('id') == 'atlas-original-two-pole-passive889-v1'
             or (bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1'
                 and original_two_pole_task(task))):
         from .atlas889_two_pole_owner import supports, resolve_binding, validate_effective_recipe
@@ -212,6 +214,16 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if ordinary_two_pole:
         validate_effective_recipe(asdict(context.recipe))
         context.ordinary_two_pole_binding = ordinary_binding
+        if bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+            context.particle_amsgrad927_host_entry = {
+                'owner': 'experiments.forge.atlas927_two_pole_owner.run_behavior',
+                'base_recipe_sha256': ordinary_binding['base_recipe_sha256'],
+                'effective_optimizer_variant': deepcopy(ordinary_binding['effective_optimizer_variant']),
+                'effective_optimizer_variant_sha256': ordinary_binding['effective_optimizer_variant_sha256'],
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'task_science_changed': False, 'optimizer_law_changed': True,
+                'table_only_amsgrad': False, 'completed_lr_clock_preserved': True,
+                'observer': 'experiments.forge.atlas889_two_pole_observer.PassiveTwoPoleRecorder'}
         if bound.get('id') == 'atlas-original-two-pole-passive889-v1':
             context.passive889_host_entry = {
                 'owner': 'experiments.forge.atlas889_two_pole_owner.run_behavior',
@@ -415,7 +427,7 @@ class FormulationContext:
                     and candidate_id != 'atlas-existing-mog-longer871-v1')):
             raise CapabilityError(['longer871 context requires its exact candidate/task pair'])
         from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
-        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1'}
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1', 'atlas-two-pole-particle-amsgrad-off927-v1'}
         if candidate_id in {'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}:
             self.candidate_id = candidate_id
         if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
@@ -767,6 +779,10 @@ class FormulationContext:
             host = ownership['field_ownership']['task_contract']['host']
             host['value'] = {**deepcopy(host['value']),
                 'passive_observation': deepcopy(self.passive889_host_entry)}
+        if getattr(self, 'particle_amsgrad927_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'optimizer_ablation': deepcopy(self.particle_amsgrad927_host_entry)}
         policy = None
         if (self._trainer is not None or self._policy is not None) and policy_controls(self.recipe):
             owner = self._trainer if self._trainer is not None else self._policy

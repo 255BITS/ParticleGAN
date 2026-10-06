@@ -1,0 +1,3465 @@
+{
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "baseline921": {
+    "attempt_id": "6a64afbc99b742889fedefeaf3d2b7e1",
+    "authority_seq": 921,
+    "baseline918_rerun": false,
+    "budget_seconds": 300,
+    "candidate_revision": "19344b170308e8db3818acb5fbbd20be103a0e0d36086fec56ae8624c14eedc6",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "directory": "/ml2/hypergan/pg-atlas921-two-pole-lr-clock-runtime-20261006/v1/runs/forge/atlas-original-two-pole-passive889-study-v1/6a64afbc99b742889fedefeaf3d2b7e1",
+    "fresh_successor": true,
+    "gpus": 0,
+    "new_controls_actual_elapsed_seconds": 3.506812605075538,
+    "new_eight_focused_controls_pin": {
+      "bytes": 2589,
+      "sha256": "6a47329bfe1b961f5c39f8317640dd8f526d732a2330e2dcc8c36f827e296ec4"
+    },
+    "old889_replayed": false,
+    "only_lr_clock_intervention": true,
+    "pid": 3310336,
+    "request_id": "d9fbd5fa5a55b4af405035a3",
+    "request_sha256": "b5967e908cb0f8a950cc3a8e90e704e709c1dbf26422b77bf42645c53b426eba",
+    "request_source_file_count": 1270,
+    "reused_software_controls": {
+      "actual_execution": {
+        "bytes": 5989,
+        "sha256": "e37e441a26347990ac336653bad87a11bf20996b5ac85eb60abf327e211a97d9"
+      },
+      "checkpoint_controls": {
+        "bytes": 236,
+        "sha256": "f12895517de9f80d0602f219c16490128d17001ac7c589b4ab0d1f9c4569ed41"
+      },
+      "observer_controls": {
+        "bytes": 1116,
+        "sha256": "c7e3431be20564e4e69a4b0b660e6501551f3adc9adb88ddaf26958d6d7616f5"
+      }
+    },
+    "schema": "pg921_one_lr_clock_case_admission_v1",
+    "software_proof_pin": {
+      "bytes": 2639,
+      "sha256": "c8179a69596fd6e00486465258813ff78b750ca13983c912d7165f714a749f15"
+    },
+    "source_digest": "2868968d572545047911bd7445a51a6bbcf6b723312606bae5db1af45512a43b"
+  },
+  "comparable_only_one_fixed_seed_case": true,
+  "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+  "interpretation": "Table-only AMSGrad variant FAIL under original gates, distinct optimizer law from baseD5. Actual retained results only; original FAIL unchanged. No general family/default/winner or speed conclusion.",
+  "no_baseline_rerun": true,
+  "observations": {
+    "baseline": [
+      {
+        "grad_med": 0.04465809464454651,
+        "mean_abs": 0.02093585580587387,
+        "step": 4
+      },
+      {
+        "grad_med": 0.018433749675750732,
+        "mean_abs": 0.027456970885396004,
+        "step": 7
+      },
+      {
+        "grad_med": 0.0055864304304122925,
+        "mean_abs": 0.02892938256263733,
+        "step": 10
+      },
+      {
+        "grad_med": 0.0006943419575691223,
+        "mean_abs": 0.028831355273723602,
+        "step": 14
+      },
+      {
+        "grad_med": 0.0008931756019592285,
+        "mean_abs": 0.0284650269895792,
+        "step": 17
+      },
+      {
+        "grad_med": 0.0017879679799079895,
+        "mean_abs": 0.027551069855690002,
+        "step": 20
+      },
+      {
+        "grad_med": 0.0026259496808052063,
+        "mean_abs": 0.025973567739129066,
+        "step": 24
+      },
+      {
+        "grad_med": 0.0003476962447166443,
+        "mean_abs": 0.024923011660575867,
+        "step": 27
+      },
+      {
+        "grad_med": 0.001745857298374176,
+        "mean_abs": 0.02341039478778839,
+        "step": 30
+      },
+      {
+        "grad_med": 0.00209006667137146,
+        "mean_abs": 0.021536609157919884,
+        "step": 34
+      },
+      {
+        "grad_med": 0.0017118826508522034,
+        "mean_abs": 0.02020333893597126,
+        "step": 37
+      },
+      {
+        "grad_med": 0.003949709236621857,
+        "mean_abs": 0.018975792452692986,
+        "step": 40
+      },
+      {
+        "grad_med": 0.0046768635511398315,
+        "mean_abs": 0.016934894025325775,
+        "step": 44
+      },
+      {
+        "grad_med": 0.00460314005613327,
+        "mean_abs": 0.015498911030590534,
+        "step": 47
+      },
+      {
+        "grad_med": 0.0024081170558929443,
+        "mean_abs": 0.01462677400559187,
+        "step": 50
+      },
+      {
+        "grad_med": 0.005347900092601776,
+        "mean_abs": 0.012000396847724915,
+        "step": 54
+      },
+      {
+        "grad_med": 0.0007317215204238892,
+        "mean_abs": 0.010657607577741146,
+        "step": 57
+      },
+      {
+        "grad_med": 0.013383179903030396,
+        "mean_abs": 0.00807318463921547,
+        "step": 60
+      },
+      {
+        "grad_med": 0.016158729791641235,
+        "mean_abs": 0.006428249645978212,
+        "step": 64
+      },
+      {
+        "grad_med": 0.007640309631824493,
+        "mean_abs": 0.0061850822530686855,
+        "step": 67
+      },
+      {
+        "grad_med": 0.019415415823459625,
+        "mean_abs": 0.003405646188184619,
+        "step": 70
+      },
+      {
+        "grad_med": 0.024445369839668274,
+        "mean_abs": 0.002630456117913127,
+        "step": 74
+      },
+      {
+        "grad_med": 0.005400151014328003,
+        "mean_abs": 0.00218302384018898,
+        "step": 77
+      },
+      {
+        "grad_med": 0.010896995663642883,
+        "mean_abs": 0.002445647493004799,
+        "step": 80
+      }
+    ],
+    "new": [
+      {
+        "grad_med": 0.04465830326080322,
+        "mean_abs": 0.02094957046210766,
+        "step": 4
+      },
+      {
+        "grad_med": 0.018435686826705933,
+        "mean_abs": 0.027867568656802177,
+        "step": 7
+      },
+      {
+        "grad_med": 0.005562350153923035,
+        "mean_abs": 0.029632844030857086,
+        "step": 10
+      },
+      {
+        "grad_med": 0.0006497129797935486,
+        "mean_abs": 0.029315317049622536,
+        "step": 14
+      },
+      {
+        "grad_med": 0.0010033771395683289,
+        "mean_abs": 0.028612984344363213,
+        "step": 17
+      },
+      {
+        "grad_med": 0.0018894821405410767,
+        "mean_abs": 0.026697510853409767,
+        "step": 20
+      },
+      {
+        "grad_med": 0.002609759569168091,
+        "mean_abs": 0.023054951801896095,
+        "step": 24
+      },
+      {
+        "grad_med": 0.0007835105061531067,
+        "mean_abs": 0.020471857860684395,
+        "step": 27
+      },
+      {
+        "grad_med": 0.0017045140266418457,
+        "mean_abs": 0.016315555199980736,
+        "step": 30
+      },
+      {
+        "grad_med": 0.0018439888954162598,
+        "mean_abs": 0.01111645344644785,
+        "step": 34
+      },
+      {
+        "grad_med": 0.0012745559215545654,
+        "mean_abs": 0.0075585804879665375,
+        "step": 37
+      },
+      {
+        "grad_med": 0.0031910836696624756,
+        "mean_abs": 0.004901107866317034,
+        "step": 40
+      },
+      {
+        "grad_med": 0.00367552787065506,
+        "mean_abs": 0.00364669063128531,
+        "step": 44
+      },
+      {
+        "grad_med": 0.0030911117792129517,
+        "mean_abs": 0.006193880457431078,
+        "step": 47
+      },
+      {
+        "grad_med": 0.0015556961297988892,
+        "mean_abs": 0.005381420720368624,
+        "step": 50
+      },
+      {
+        "grad_med": 0.0037786737084388733,
+        "mean_abs": 0.009802167303860188,
+        "step": 54
+      },
+      {
+        "grad_med": 0.004956960678100586,
+        "mean_abs": 0.009186794981360435,
+        "step": 57
+      },
+      {
+        "grad_med": 0.013617031276226044,
+        "mean_abs": 0.014409276656806469,
+        "step": 60
+      },
+      {
+        "grad_med": 0.016767695546150208,
+        "mean_abs": 0.01178888138383627,
+        "step": 64
+      },
+      {
+        "grad_med": 0.012849651277065277,
+        "mean_abs": 0.011698484420776367,
+        "step": 67
+      },
+      {
+        "grad_med": 0.017182767391204834,
+        "mean_abs": 0.013209536671638489,
+        "step": 70
+      },
+      {
+        "grad_med": 0.02232128381729126,
+        "mean_abs": 0.013743198476731777,
+        "step": 74
+      },
+      {
+        "grad_med": 0.011558271944522858,
+        "mean_abs": 0.014224312268197536,
+        "step": 77
+      },
+      {
+        "grad_med": 0.009985171258449554,
+        "mean_abs": 0.01502314954996109,
+        "step": 80
+      }
+    ]
+  },
+  "original_gates": {
+    "grad_med": "<=1",
+    "mean_abs": ">=0.30",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "updates": 80
+  },
+  "recorded_motion": {
+    "baseline": {
+      "actual_table_amsgrad_flags": [
+        {
+          "amsgrad": true,
+          "maximum_present": false,
+          "step": 1
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 2
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 3
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 4
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 5
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 6
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 7
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 8
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 9
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 10
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 11
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 12
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 13
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 14
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 15
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 16
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 17
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 18
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 19
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 20
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 21
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 22
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 23
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 24
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 25
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 26
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 27
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 28
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 29
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 30
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 31
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 32
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 33
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 34
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 35
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 36
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 37
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 38
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 39
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 40
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 41
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 42
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 43
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 44
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 45
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 46
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 47
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 48
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 49
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 50
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 51
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 52
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 53
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 54
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 55
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 56
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 57
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 58
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 59
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 60
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 61
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 62
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 63
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 64
+        },
+        {
+          "amsgrad": true,
+          "maximum_present": true,
+          "step": 65
+        }
+      ],
+      "covered_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "covered_update_count": 65,
+      "interpretation": "Offline retained actual before/after Adam arithmetic over common captured prefix; not extra training, a counterfactual, or all80 trace evidence.",
+      "per_update": [
+        {
+          "common_translation_delta": -0.004249991422208647,
+          "mean_absolute_adam_travel": 0.004249991422208647,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 1
+        },
+        {
+          "common_translation_delta": -0.0070430463723217445,
+          "mean_absolute_adam_travel": 0.0070430463723217445,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 2
+        },
+        {
+          "common_translation_delta": -0.005516605606923501,
+          "mean_absolute_adam_travel": 0.005516605606923501,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 3
+        },
+        {
+          "common_translation_delta": -0.0041262125596404076,
+          "mean_absolute_adam_travel": 0.0041262125596404076,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 4
+        },
+        {
+          "common_translation_delta": -0.0030676284804940224,
+          "mean_absolute_adam_travel": 0.0030676284804940224,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 5
+        },
+        {
+          "common_translation_delta": -0.0021626176312565804,
+          "mean_absolute_adam_travel": 0.0021626176312565804,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 6
+        },
+        {
+          "common_translation_delta": -0.00129086726034681,
+          "mean_absolute_adam_travel": 0.00129086726034681,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 7
+        },
+        {
+          "common_translation_delta": -0.0007938902514676253,
+          "mean_absolute_adam_travel": 0.0007938902514676253,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 8
+        },
+        {
+          "common_translation_delta": -0.00048600959902008373,
+          "mean_absolute_adam_travel": 0.00048600959902008373,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 9
+        },
+        {
+          "common_translation_delta": -0.00019251275807619095,
+          "mean_absolute_adam_travel": 0.00021565395096937814,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 10
+        },
+        {
+          "common_translation_delta": -0.00033948834364612895,
+          "mean_absolute_adam_travel": 0.00033948834364612895,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 11
+        },
+        {
+          "common_translation_delta": -6.762876485784848e-05,
+          "mean_absolute_adam_travel": 0.00023752621685465178,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 12
+        },
+        {
+          "common_translation_delta": 1.7202614496151607e-05,
+          "mean_absolute_adam_travel": 0.0001937313936650753,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 13
+        },
+        {
+          "common_translation_delta": 0.0004879397650559743,
+          "mean_absolute_adam_travel": 0.0004879397650559743,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 14
+        },
+        {
+          "common_translation_delta": 7.160349438587825e-05,
+          "mean_absolute_adam_travel": 0.00019611138850450516,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 15
+        },
+        {
+          "common_translation_delta": 8.761386076609294e-05,
+          "mean_absolute_adam_travel": 0.00016576703637838364,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 16
+        },
+        {
+          "common_translation_delta": 0.0002071124811967214,
+          "mean_absolute_adam_travel": 0.00027749532212813693,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 17
+        },
+        {
+          "common_translation_delta": 0.0002716624488433202,
+          "mean_absolute_adam_travel": 0.0002716624488433202,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 18
+        },
+        {
+          "common_translation_delta": 0.00023338105529546738,
+          "mean_absolute_adam_travel": 0.0002710828557610512,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 19
+        },
+        {
+          "common_translation_delta": 0.0004089108357826869,
+          "mean_absolute_adam_travel": 0.00045678454140822094,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 20
+        },
+        {
+          "common_translation_delta": 0.0004852733885248502,
+          "mean_absolute_adam_travel": 0.0004852733885248502,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 21
+        },
+        {
+          "common_translation_delta": 0.000621455100675424,
+          "mean_absolute_adam_travel": 0.0006705361107985178,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 22
+        },
+        {
+          "common_translation_delta": 0.000109043437987566,
+          "mean_absolute_adam_travel": 0.00019709874565402666,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 23
+        },
+        {
+          "common_translation_delta": 0.0003617328281203906,
+          "mean_absolute_adam_travel": 0.0003617328281203906,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 24
+        },
+        {
+          "common_translation_delta": 0.0005786227993667126,
+          "mean_absolute_adam_travel": 0.0005786227993667126,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 25
+        },
+        {
+          "common_translation_delta": 0.00033851635331908864,
+          "mean_absolute_adam_travel": 0.0003413969340423743,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 26
+        },
+        {
+          "common_translation_delta": 0.00013341723630825678,
+          "mean_absolute_adam_travel": 0.0001594647765159607,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 27
+        },
+        {
+          "common_translation_delta": 0.00057347413773338,
+          "mean_absolute_adam_travel": 0.00057347413773338,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 28
+        },
+        {
+          "common_translation_delta": 0.00037774350494146347,
+          "mean_absolute_adam_travel": 0.00039529241621494293,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 29
+        },
+        {
+          "common_translation_delta": 0.000561397522687912,
+          "mean_absolute_adam_travel": 0.0006348655248681704,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 30
+        },
+        {
+          "common_translation_delta": 0.00038271599138776463,
+          "mean_absolute_adam_travel": 0.00040618283674120903,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 31
+        },
+        {
+          "common_translation_delta": 0.0005028389083842436,
+          "mean_absolute_adam_travel": 0.0005028389083842436,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 32
+        },
+        {
+          "common_translation_delta": 0.0005712172326942285,
+          "mean_absolute_adam_travel": 0.0005740586978693804,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 33
+        },
+        {
+          "common_translation_delta": 0.00041701536004741985,
+          "mean_absolute_adam_travel": 0.00042309751734137535,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 34
+        },
+        {
+          "common_translation_delta": 0.0004229616994659106,
+          "mean_absolute_adam_travel": 0.00043554604053497314,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 35
+        },
+        {
+          "common_translation_delta": 0.0003580508443216483,
+          "mean_absolute_adam_travel": 0.0003605079837143421,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 36
+        },
+        {
+          "common_translation_delta": 0.0005522567468384901,
+          "mean_absolute_adam_travel": 0.0005543599836528301,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 37
+        },
+        {
+          "common_translation_delta": 0.00045139466722806293,
+          "mean_absolute_adam_travel": 0.00045139466722806293,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 38
+        },
+        {
+          "common_translation_delta": 0.00012987883140643439,
+          "mean_absolute_adam_travel": 0.0002726449941595395,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 39
+        },
+        {
+          "common_translation_delta": 0.0006462722085416317,
+          "mean_absolute_adam_travel": 0.0006462722085416317,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 40
+        },
+        {
+          "common_translation_delta": 0.00044346507638692856,
+          "mean_absolute_adam_travel": 0.0005166692038377126,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 41
+        },
+        {
+          "common_translation_delta": 0.0005322073120623827,
+          "mean_absolute_adam_travel": 0.0005357494422545036,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 42
+        },
+        {
+          "common_translation_delta": 0.0005797390670826038,
+          "mean_absolute_adam_travel": 0.0005797390670826038,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 43
+        },
+        {
+          "common_translation_delta": 0.00048548728227615356,
+          "mean_absolute_adam_travel": 0.00048548728227615356,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 44
+        },
+        {
+          "common_translation_delta": 0.00028963619843125343,
+          "mean_absolute_adam_travel": 0.0003368331429859002,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 45
+        },
+        {
+          "common_translation_delta": 0.0005920579812179009,
+          "mean_absolute_adam_travel": 0.0005920579812179009,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 46
+        },
+        {
+          "common_translation_delta": 0.000554290134459734,
+          "mean_absolute_adam_travel": 0.0005560754798352718,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 47
+        },
+        {
+          "common_translation_delta": 7.75398996969064e-05,
+          "mean_absolute_adam_travel": 0.00025174999609589577,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 48
+        },
+        {
+          "common_translation_delta": 0.0005179392173886299,
+          "mean_absolute_adam_travel": 0.0005179392173886299,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 49
+        },
+        {
+          "common_translation_delta": 0.0002766586064050595,
+          "mean_absolute_adam_travel": 0.0002966314398994048,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 50
+        },
+        {
+          "common_translation_delta": 0.0009159917632738749,
+          "mean_absolute_adam_travel": 0.0009159917632738749,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 51
+        },
+        {
+          "common_translation_delta": 0.0005005792093773683,
+          "mean_absolute_adam_travel": 0.000503193431844314,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 52
+        },
+        {
+          "common_translation_delta": 0.0007373829527447621,
+          "mean_absolute_adam_travel": 0.0007373829527447621,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 53
+        },
+        {
+          "common_translation_delta": 0.00047242268919944763,
+          "mean_absolute_adam_travel": 0.0004895259626209736,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 54
+        },
+        {
+          "common_translation_delta": 0.00046083594982822734,
+          "mean_absolute_adam_travel": 0.000494662361840407,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 55
+        },
+        {
+          "common_translation_delta": 0.0008255795110017061,
+          "mean_absolute_adam_travel": 0.0008255795110017061,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 56
+        },
+        {
+          "common_translation_delta": 5.637334349254767e-05,
+          "mean_absolute_adam_travel": 0.0003880202615012725,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 57
+        },
+        {
+          "common_translation_delta": 0.001078541235377391,
+          "mean_absolute_adam_travel": 0.001078541235377391,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 58
+        },
+        {
+          "common_translation_delta": -0.00028031882053862017,
+          "mean_absolute_adam_travel": 0.00036039626381049555,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 59
+        },
+        {
+          "common_translation_delta": 0.0017862006012971203,
+          "mean_absolute_adam_travel": 0.0017862006012971203,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 60
+        },
+        {
+          "common_translation_delta": -0.0009053701069205999,
+          "mean_absolute_adam_travel": 0.0009053701069205999,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 61
+        },
+        {
+          "common_translation_delta": 0.0019421186686183016,
+          "mean_absolute_adam_travel": 0.0019421186686183016,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 62
+        },
+        {
+          "common_translation_delta": -0.0011428345460444689,
+          "mean_absolute_adam_travel": 0.0011428345460444689,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 63
+        },
+        {
+          "common_translation_delta": 0.0017510205313252907,
+          "mean_absolute_adam_travel": 0.0017510205313252907,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 64
+        },
+        {
+          "common_translation_delta": -0.0007471748782942692,
+          "mean_absolute_adam_travel": 0.0007471748782942692,
+          "other_recorded_stage_travel": {
+            "before_begin->after_begin": 0.0
+          },
+          "step": 65
+        }
+      ],
+      "recorded_adam_cancellation_fraction": 0.8796306346734626,
+      "recorded_adam_cumulative_mean_absolute_travel": 0.05961171927629037,
+      "recorded_adam_net_mean_absolute_displacement": 0.0071754248153107865,
+      "recorded_common_translation_travel_fraction": 0.9670744391989591
+    },
+    "new": {
+      "actual_table_amsgrad_flags": [
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 1
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 2
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 3
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 4
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 5
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 6
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 7
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 8
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 9
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 10
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 11
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 12
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 13
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 14
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 15
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 16
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 17
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 18
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 19
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 20
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 21
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 22
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 23
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 24
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 25
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 26
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 27
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 28
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 29
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 30
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 31
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 32
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 33
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 34
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 35
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 36
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 37
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 38
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 39
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 40
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 41
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 42
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 43
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 44
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 45
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 46
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 47
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 48
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 49
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 50
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 51
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 52
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 53
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 54
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 55
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 56
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 57
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 58
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 59
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 60
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 61
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 62
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 63
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 64
+        },
+        {
+          "amsgrad": false,
+          "maximum_present": false,
+          "step": 65
+        }
+      ],
+      "covered_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "covered_update_count": 65,
+      "interpretation": "Offline retained actual before/after Adam arithmetic over common captured prefix; not extra training, a counterfactual, or all80 trace evidence.",
+      "per_update": [
+        {
+          "common_translation_delta": -0.004249991422208647,
+          "mean_absolute_adam_travel": 0.004249991422208647,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 1
+        },
+        {
+          "common_translation_delta": -0.0070430463723217445,
+          "mean_absolute_adam_travel": 0.0070430463723217445,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 2
+        },
+        {
+          "common_translation_delta": -0.005516605606923501,
+          "mean_absolute_adam_travel": 0.005516605606923501,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 3
+        },
+        {
+          "common_translation_delta": -0.004139925974110763,
+          "mean_absolute_adam_travel": 0.004139925974110763,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 4
+        },
+        {
+          "common_translation_delta": -0.003161260082075993,
+          "mean_absolute_adam_travel": 0.003161260082075993,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 5
+        },
+        {
+          "common_translation_delta": -0.00231447396799922,
+          "mean_absolute_adam_travel": 0.00231447396799922,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 6
+        },
+        {
+          "common_translation_delta": -0.0014422666281461716,
+          "mean_absolute_adam_travel": 0.0014422666281461716,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 7
+        },
+        {
+          "common_translation_delta": -0.0009284239883224169,
+          "mean_absolute_adam_travel": 0.0009284239883224169,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 8
+        },
+        {
+          "common_translation_delta": -0.0005941518271962801,
+          "mean_absolute_adam_travel": 0.0005941518271962801,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 9
+        },
+        {
+          "common_translation_delta": -0.00024269583324591318,
+          "mean_absolute_adam_travel": 0.0002744169905781746,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 10
+        },
+        {
+          "common_translation_delta": -0.0004498281826575597,
+          "mean_absolute_adam_travel": 0.0004521661127607028,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 11
+        },
+        {
+          "common_translation_delta": -8.48799633483092e-05,
+          "mean_absolute_adam_travel": 0.000342871838559707,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 12
+        },
+        {
+          "common_translation_delta": 4.116926963130633e-05,
+          "mean_absolute_adam_travel": 0.00029948710774381954,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 13
+        },
+        {
+          "common_translation_delta": 0.0008110622875392437,
+          "mean_absolute_adam_travel": 0.0008110622875392437,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 14
+        },
+        {
+          "common_translation_delta": 0.00013437323893109956,
+          "mean_absolute_adam_travel": 0.00033558082456390065,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 15
+        },
+        {
+          "common_translation_delta": 0.00016860027487079302,
+          "mean_absolute_adam_travel": 0.00029804262643059093,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 16
+        },
+        {
+          "common_translation_delta": 0.00039936012278000516,
+          "mean_absolute_adam_travel": 0.0005236892029643059,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 17
+        },
+        {
+          "common_translation_delta": 0.0005437317304313183,
+          "mean_absolute_adam_travel": 0.0005437317304313183,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 18
+        },
+        {
+          "common_translation_delta": 0.0004871394485235214,
+          "mean_absolute_adam_travel": 0.0005643501256903013,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 19
+        },
+        {
+          "common_translation_delta": 0.000884602777659893,
+          "mean_absolute_adam_travel": 0.000990392950673898,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 20
+        },
+        {
+          "common_translation_delta": 0.0010889374340573947,
+          "mean_absolute_adam_travel": 0.0010889374340573947,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 21
+        },
+        {
+          "common_translation_delta": 0.0014489151847859223,
+          "mean_absolute_adam_travel": 0.0015865860817333062,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 22
+        },
+        {
+          "common_translation_delta": 0.00021143102397521338,
+          "mean_absolute_adam_travel": 0.0004777942473689715,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 23
+        },
+        {
+          "common_translation_delta": 0.0008932724595069885,
+          "mean_absolute_adam_travel": 0.0008932724595069885,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 24
+        },
+        {
+          "common_translation_delta": 0.0014815079048275948,
+          "mean_absolute_adam_travel": 0.0014815079048275948,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 25
+        },
+        {
+          "common_translation_delta": 0.0008563877393802007,
+          "mean_absolute_adam_travel": 0.0008870372548699379,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 26
+        },
+        {
+          "common_translation_delta": 0.0002451996939877669,
+          "mean_absolute_adam_travel": 0.00043398126338919,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 27
+        },
+        {
+          "common_translation_delta": 0.0015789521858096123,
+          "mean_absolute_adam_travel": 0.0015789521858096123,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 28
+        },
+        {
+          "common_translation_delta": 0.0009885748537878196,
+          "mean_absolute_adam_travel": 0.001096907847871383,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 29
+        },
+        {
+          "common_translation_delta": 0.0015887788031250238,
+          "mean_absolute_adam_travel": 0.001916416532670458,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 30
+        },
+        {
+          "common_translation_delta": 0.0010632392174253862,
+          "mean_absolute_adam_travel": 0.0012731518751631181,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 31
+        },
+        {
+          "common_translation_delta": 0.0014210871110359828,
+          "mean_absolute_adam_travel": 0.0015049250796437263,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 32
+        },
+        {
+          "common_translation_delta": 0.001609469880349934,
+          "mean_absolute_adam_travel": 0.001741537475027144,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 33
+        },
+        {
+          "common_translation_delta": 0.0011053031388049324,
+          "mean_absolute_adam_travel": 0.0012627258353556197,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 34
+        },
+        {
+          "common_translation_delta": 0.0009300600504502654,
+          "mean_absolute_adam_travel": 0.0015308010624721646,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 35
+        },
+        {
+          "common_translation_delta": 0.0009142571749786536,
+          "mean_absolute_adam_travel": 0.0011944455715517204,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 36
+        },
+        {
+          "common_translation_delta": 0.0017135557912600536,
+          "mean_absolute_adam_travel": 0.001894542423542589,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 37
+        },
+        {
+          "common_translation_delta": 0.0012896798240641754,
+          "mean_absolute_adam_travel": 0.0014077085070312023,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 38
+        },
+        {
+          "common_translation_delta": -0.0004010139285431554,
+          "mean_absolute_adam_travel": 0.0013946901211359848,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 39
+        },
+        {
+          "common_translation_delta": 0.002222034459312757,
+          "mean_absolute_adam_travel": 0.0023149255818376937,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 40
+        },
+        {
+          "common_translation_delta": 0.0011400349612813443,
+          "mean_absolute_adam_travel": 0.002278301641733075,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 41
+        },
+        {
+          "common_translation_delta": 0.001626556118329366,
+          "mean_absolute_adam_travel": 0.002278094800810019,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 42
+        },
+        {
+          "common_translation_delta": 0.0018486229528207332,
+          "mean_absolute_adam_travel": 0.002106049631644661,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 43
+        },
+        {
+          "common_translation_delta": 0.0011426726705394685,
+          "mean_absolute_adam_travel": 0.0016588849054339032,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 44
+        },
+        {
+          "common_translation_delta": -0.00034578770282678306,
+          "mean_absolute_adam_travel": 0.0017753654877499987,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 45
+        },
+        {
+          "common_translation_delta": 0.0018896206553714971,
+          "mean_absolute_adam_travel": 0.0018978667406675716,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 46
+        },
+        {
+          "common_translation_delta": 0.001091624260880053,
+          "mean_absolute_adam_travel": 0.00232472912951683,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 47
+        },
+        {
+          "common_translation_delta": -0.001999012960974748,
+          "mean_absolute_adam_travel": 0.002001481121017908,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 48
+        },
+        {
+          "common_translation_delta": 0.0013345500240878512,
+          "mean_absolute_adam_travel": 0.0017521533591207117,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 49
+        },
+        {
+          "common_translation_delta": -0.0007596759630056719,
+          "mean_absolute_adam_travel": 0.00220467516919598,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 50
+        },
+        {
+          "common_translation_delta": 0.0032677606116825095,
+          "mean_absolute_adam_travel": 0.003703715522230292,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 51
+        },
+        {
+          "common_translation_delta": 0.0006338636255046973,
+          "mean_absolute_adam_travel": 0.0017675015163452674,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 52
+        },
+        {
+          "common_translation_delta": 0.0022308497961300113,
+          "mean_absolute_adam_travel": 0.003273451254547884,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 53
+        },
+        {
+          "common_translation_delta": 0.00010783611408745249,
+          "mean_absolute_adam_travel": 0.0024001229903660715,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 54
+        },
+        {
+          "common_translation_delta": -0.0005682799577092131,
+          "mean_absolute_adam_travel": 0.0029213403273994723,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 55
+        },
+        {
+          "common_translation_delta": 0.0028388029895722866,
+          "mean_absolute_adam_travel": 0.0028388029895722866,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 56
+        },
+        {
+          "common_translation_delta": -0.004062756275137265,
+          "mean_absolute_adam_travel": 0.004183867558216055,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 57
+        },
+        {
+          "common_translation_delta": 0.005262525529057409,
+          "mean_absolute_adam_travel": 0.005262525529057409,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 58
+        },
+        {
+          "common_translation_delta": -0.0071790547129542874,
+          "mean_absolute_adam_travel": 0.0071790547129542874,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 59
+        },
+        {
+          "common_translation_delta": 0.009356403723359108,
+          "mean_absolute_adam_travel": 0.009356403723359108,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 60
+        },
+        {
+          "common_translation_delta": -0.008699046486678222,
+          "mean_absolute_adam_travel": 0.008699046486678222,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 61
+        },
+        {
+          "common_translation_delta": 0.008189838767672578,
+          "mean_absolute_adam_travel": 0.008189838767672578,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 62
+        },
+        {
+          "common_translation_delta": -0.010095999498541156,
+          "mean_absolute_adam_travel": 0.010095999498541156,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 63
+        },
+        {
+          "common_translation_delta": 0.006423679878935218,
+          "mean_absolute_adam_travel": 0.006423679878935218,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 64
+        },
+        {
+          "common_translation_delta": -0.0056840732383231325,
+          "mean_absolute_adam_travel": 0.0056840732383231325,
+          "other_recorded_stage_travel": {
+            "after_direct_group_restore->after_hot_and_settle": 0.0,
+            "before_average_and_birth_death->after_average_and_birth_death": 0.0,
+            "before_begin->after_begin": 0.0
+          },
+          "step": 65
+        }
+      ],
+      "recorded_adam_cancellation_fraction": 0.9323374609768595,
+      "recorded_adam_cumulative_mean_absolute_travel": 0.16404381039319557,
+      "recorded_adam_net_mean_absolute_displacement": 0.011099620722234249,
+      "recorded_common_translation_travel_fraction": 0.8806682555567305
+    }
+  },
+  "schema": "pg927_amsgrad_vs921_retained_comparison_v1",
+  "scoring": {
+    "baseline": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.2975543525069952,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.002445647493004799
+          },
+          {
+            "margin": 0.9891030043363571,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1,
+            "value": 0.010896995663642883
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.495923920844992,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.010896995663642883,
+        "mean_abs": 0.002445647493004799
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    },
+    "new": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.2849768504500389,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.01502314954996109
+          },
+          {
+            "margin": 0.9900148287415504,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1,
+            "value": 0.009985171258449554
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.47496141741673154,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.009985171258449554,
+        "mean_abs": 0.01502314954996109
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "spread": {
+    "baseline": [
+      {
+        "maximum": -0.020623523741960526,
+        "mean": -0.0209358559610943,
+        "mean_abs": 0.0209358559610943,
+        "minimum": -0.021334148943424225,
+        "negative_rows": 12,
+        "population_std": 0.0002330454330609378,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0007106252014636993,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 4,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.026562649756669998,
+        "mean": -0.02745696933319171,
+        "mean_abs": 0.02745696933319171,
+        "minimum": -0.028528030961751938,
+        "negative_rows": 12,
+        "population_std": 0.0005452164810428786,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0019653812050819397,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 7,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.02766667865216732,
+        "mean": -0.02892938194175561,
+        "mean_abs": 0.02892938194175561,
+        "minimum": -0.02985137328505516,
+        "negative_rows": 12,
+        "population_std": 0.0006893077829533817,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0021846946328878403,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 10,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.02708936110138893,
+        "mean": -0.028831356670707464,
+        "mean_abs": 0.028831356670707464,
+        "minimum": -0.030289845541119576,
+        "negative_rows": 12,
+        "population_std": 0.0009553054150190823,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0032004844397306442,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 14,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.026427702978253365,
+        "mean": -0.02846502683435877,
+        "mean_abs": 0.02846502683435877,
+        "minimum": -0.03032107837498188,
+        "negative_rows": 12,
+        "population_std": 0.0010630864801022036,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0038933753967285156,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 17,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.025534577667713165,
+        "mean": -0.027551072494437296,
+        "mean_abs": 0.027551072494437296,
+        "minimum": -0.02943171188235283,
+        "negative_rows": 12,
+        "population_std": 0.0011137914066208544,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0038971342146396637,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 20,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.024073736742138863,
+        "mean": -0.025973567739129066,
+        "mean_abs": 0.025973567739129066,
+        "minimum": -0.0288681723177433,
+        "negative_rows": 12,
+        "population_std": 0.001377861426728789,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004794435575604439,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 24,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.023045005276799202,
+        "mean": -0.02492301135013501,
+        "mean_abs": 0.02492301135013501,
+        "minimum": -0.027617989107966423,
+        "negative_rows": 12,
+        "population_std": 0.0013419576789129159,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004572983831167221,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 27,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.021714357659220695,
+        "mean": -0.023410396184772253,
+        "mean_abs": 0.023410396184772253,
+        "minimum": -0.025773031637072563,
+        "negative_rows": 12,
+        "population_std": 0.0013324481912151795,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004058673977851868,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 30,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.019362030550837517,
+        "mean": -0.021536608692258596,
+        "mean_abs": 0.021536608692258596,
+        "minimum": -0.024292921647429466,
+        "negative_rows": 12,
+        "population_std": 0.001568465394516572,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0049308910965919495,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 34,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.018324818462133408,
+        "mean": -0.020203339401632547,
+        "mean_abs": 0.020203339401632547,
+        "minimum": -0.02281132899224758,
+        "negative_rows": 12,
+        "population_std": 0.0013965905920190031,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004486510530114174,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 37,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.01659027859568596,
+        "mean": -0.018975793694456417,
+        "mean_abs": 0.018975793694456417,
+        "minimum": -0.02122863195836544,
+        "negative_rows": 12,
+        "population_std": 0.0013339220269608242,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0046383533626794815,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 40,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.014570164494216442,
+        "mean": -0.01693489495664835,
+        "mean_abs": 0.01693489495664835,
+        "minimum": -0.01932092383503914,
+        "negative_rows": 12,
+        "population_std": 0.0014974014824429259,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004750759340822697,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 44,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.01340566761791706,
+        "mean": -0.015498910642539462,
+        "mean_abs": 0.015498910642539462,
+        "minimum": -0.018578652292490005,
+        "negative_rows": 12,
+        "population_std": 0.0016372208083401398,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.005172984674572945,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 47,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.012157963588833809,
+        "mean": -0.014626772919048866,
+        "mean_abs": 0.014626772919048866,
+        "minimum": -0.01703086495399475,
+        "negative_rows": 12,
+        "population_std": 0.0015950247638619498,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.004872901365160942,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 50,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.009142671711742878,
+        "mean": -0.012000396304453412,
+        "mean_abs": 0.012000396304453412,
+        "minimum": -0.014471982605755329,
+        "negative_rows": 12,
+        "population_std": 0.001629989155813613,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.005329310894012451,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 54,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.007856515236198902,
+        "mean": -0.010657607500130931,
+        "mean_abs": 0.010657607500130931,
+        "minimum": -0.013600260950624943,
+        "negative_rows": 12,
+        "population_std": 0.001645772410213028,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.005743745714426041,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 57,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.0041047739796340466,
+        "mean": -0.00807318448399504,
+        "mean_abs": 0.00807318448399504,
+        "minimum": -0.011042315512895584,
+        "negative_rows": 12,
+        "population_std": 0.0018412187834718557,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0069375415332615376,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 60,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.0025624630507081747,
+        "mean": -0.006428249937016517,
+        "mean_abs": 0.006428249937016517,
+        "minimum": -0.00914758164435625,
+        "negative_rows": 12,
+        "population_std": 0.0020134877103002826,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.006585118593648076,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 64,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.0020045579876750708,
+        "mean": -0.006185082020238042,
+        "mean_abs": 0.006185082020238042,
+        "minimum": -0.00935312733054161,
+        "negative_rows": 12,
+        "population_std": 0.0021856780110029025,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.00734856934286654,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 67,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.0012341159163042903,
+        "mean": -0.0031402132929846025,
+        "mean_abs": 0.003405646057217382,
+        "minimum": -0.0064238193444907665,
+        "negative_rows": 10,
+        "population_std": 0.0022705036000164568,
+        "positive_negative_centroid_separation": 0.0047238139028195295,
+        "positive_rows": 2,
+        "range": 0.007657935260795057,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 70,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.003895884845405817,
+        "mean": -0.0015578556340187788,
+        "mean_abs": 0.0026304557686671615,
+        "minimum": -0.004705826751887798,
+        "negative_rows": 9,
+        "population_std": 0.002454240591683741,
+        "positive_negative_centroid_separation": 0.004937407871087393,
+        "positive_rows": 3,
+        "range": 0.008601711597293615,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 74,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.005593555048108101,
+        "mean": -0.00042402452042248723,
+        "mean_abs": 0.0021830240366398357,
+        "minimum": -0.003357178997248411,
+        "negative_rows": 7,
+        "population_std": 0.0026334754174460006,
+        "positive_negative_centroid_separation": 0.004345412468371381,
+        "positive_rows": 5,
+        "range": 0.008950734045356512,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 77,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.008075281046330929,
+        "mean": 0.0020370358834043145,
+        "mean_abs": 0.0024456475706150136,
+        "minimum": -0.0016904491931200027,
+        "negative_rows": 5,
+        "population_std": 0.0027198366052662805,
+        "positive_negative_centroid_separation": 0.004332634128097977,
+        "positive_rows": 7,
+        "range": 0.009765730239450932,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 80,
+        "zero_rows": 0
+      }
+    ],
+    "new": [
+      {
+        "maximum": -0.0206544678658247,
+        "mean": -0.020949569375564654,
+        "mean_abs": 0.020949569375564654,
+        "minimum": -0.021334148943424225,
+        "negative_rows": 12,
+        "population_std": 0.00022640275700883372,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0006796810775995255,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 4,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.02702256850898266,
+        "mean": -0.02786757005378604,
+        "mean_abs": 0.02786757005378604,
+        "minimum": -0.028914624825119972,
+        "negative_rows": 12,
+        "population_std": 0.0005264665135467097,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.0018920563161373138,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 7,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.028250981122255325,
+        "mean": -0.02963284170255065,
+        "mean_abs": 0.02963284170255065,
+        "minimum": -0.03057529218494892,
+        "negative_rows": 12,
+        "population_std": 0.0007122299151883284,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.002324311062693596,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 10,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.027251476421952248,
+        "mean": -0.029315318291385967,
+        "mean_abs": 0.029315318291385967,
+        "minimum": -0.031186765059828758,
+        "negative_rows": 12,
+        "population_std": 0.001192682018559233,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.003935288637876511,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 14,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.02601039968430996,
+        "mean": -0.02861298465480407,
+        "mean_abs": 0.02861298465480407,
+        "minimum": -0.03124026395380497,
+        "negative_rows": 12,
+        "population_std": 0.001370993479084031,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.00522986426949501,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 17,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.024163004010915756,
+        "mean": -0.026697510698189337,
+        "mean_abs": 0.026697510698189337,
+        "minimum": -0.02972470596432686,
+        "negative_rows": 12,
+        "population_std": 0.0016044661117707245,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.005561701953411102,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 20,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.020708376541733742,
+        "mean": -0.02305495459586382,
+        "mean_abs": 0.02305495459586382,
+        "minimum": -0.028568247333168983,
+        "negative_rows": 12,
+        "population_std": 0.002434348381755106,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.007859870791435242,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 24,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.018000097945332527,
+        "mean": -0.020471859257668257,
+        "mean_abs": 0.020471859257668257,
+        "minimum": -0.02536677196621895,
+        "negative_rows": 12,
+        "population_std": 0.0024293377738895338,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.007366674020886421,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 27,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.011799578554928303,
+        "mean": -0.0163155534149458,
+        "mean_abs": 0.0163155534149458,
+        "minimum": -0.021310174837708473,
+        "negative_rows": 12,
+        "population_std": 0.003155730108665801,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.00951059628278017,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 30,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.004441689699888229,
+        "mean": -0.011116454067329565,
+        "mean_abs": 0.011116454067329565,
+        "minimum": -0.018776893615722656,
+        "negative_rows": 12,
+        "population_std": 0.004349444322393036,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.014335203915834427,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 34,
+        "zero_rows": 0
+      },
+      {
+        "maximum": -0.0011944184079766273,
+        "mean": -0.007558581050640593,
+        "mean_abs": 0.007558581050640593,
+        "minimum": -0.013516933657228947,
+        "negative_rows": 12,
+        "population_std": 0.0039678029126927515,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 0,
+        "range": 0.01232251524925232,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 37,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.001379848225042224,
+        "mean": -0.004447880695806816,
+        "mean_abs": 0.004901107584980006,
+        "minimum": -0.008605346083641052,
+        "negative_rows": 10,
+        "population_std": 0.003440962822271156,
+        "positive_negative_centroid_separation": 0.006969073635991663,
+        "positive_rows": 2,
+        "range": 0.009985194308683276,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 40,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.010894774459302425,
+        "mean": 0.0013100060071640958,
+        "mean_abs": 0.003646691048440213,
+        "minimum": -0.005849095061421394,
+        "negative_rows": 4,
+        "population_std": 0.004568716780370692,
+        "positive_negative_centroid_separation": 0.007222550353617407,
+        "positive_rows": 8,
+        "range": 0.01674386952072382,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 44,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.012879399582743645,
+        "mean": 0.003945463220588863,
+        "mean_abs": 0.006193880961897473,
+        "minimum": -0.00868965033441782,
+        "negative_rows": 2,
+        "population_std": 0.006033923223866852,
+        "positive_negative_centroid_separation": 0.01282885973341763,
+        "positive_rows": 10,
+        "range": 0.021569049917161465,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 47,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.017803452908992767,
+        "mean": 0.0025213243206962943,
+        "mean_abs": 0.0053814208367839456,
+        "minimum": -0.00963637512177229,
+        "negative_rows": 3,
+        "population_std": 0.006643529888712274,
+        "positive_negative_centroid_separation": 0.010988689803828795,
+        "positive_rows": 9,
+        "range": 0.027439828030765057,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 50,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.029093746095895767,
+        "mean": 0.008761634468100965,
+        "mean_abs": 0.009802167129237205,
+        "minimum": -0.004398332443088293,
+        "negative_rows": 2,
+        "population_std": 0.009030318603907529,
+        "positive_negative_centroid_separation": 0.014259878941811622,
+        "positive_rows": 10,
+        "range": 0.03349207853898406,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 54,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.027127694338560104,
+        "mean": 0.006969401224826773,
+        "mean_abs": 0.009186795524631938,
+        "minimum": -0.005568348802626133,
+        "negative_rows": 5,
+        "population_std": 0.009773648499880936,
+        "positive_negative_centroid_separation": 0.016509041802159376,
+        "positive_rows": 7,
+        "range": 0.03269604314118624,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 57,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.046608343720436096,
+        "mean": 0.014409275764289001,
+        "mean_abs": 0.014409275764289001,
+        "minimum": 0.0012476379051804543,
+        "negative_rows": 0,
+        "population_std": 0.012455266474589374,
+        "positive_negative_centroid_separation": null,
+        "positive_rows": 12,
+        "range": 0.04536070581525564,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 60,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.043798644095659256,
+        "mean": 0.010227748425677419,
+        "mean_abs": 0.011788881771887342,
+        "minimum": -0.003442793618887663,
+        "negative_rows": 5,
+        "population_std": 0.013296161587034555,
+        "positive_negative_centroid_separation": 0.020744757327650274,
+        "positive_rows": 7,
+        "range": 0.04724143771454692,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 64,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.04024992883205414,
+        "mean": 0.004869675807033976,
+        "mean_abs": 0.011698484420776367,
+        "minimum": -0.008897971361875534,
+        "negative_rows": 5,
+        "population_std": 0.014302828594803503,
+        "positive_negative_centroid_separation": 0.022395850531756877,
+        "positive_rows": 7,
+        "range": 0.04914790019392967,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 67,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.04557104781270027,
+        "mean": 0.011010538747844597,
+        "mean_abs": 0.013209536865664026,
+        "minimum": -0.0041875168681144714,
+        "negative_rows": 5,
+        "population_std": 0.014464373861124213,
+        "positive_negative_centroid_separation": 0.023398862552962134,
+        "positive_rows": 7,
+        "range": 0.04975856468081474,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 70,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.0425882413983345,
+        "mean": 0.008491228295800587,
+        "mean_abs": 0.013743199136418601,
+        "minimum": -0.008509941399097443,
+        "negative_rows": 5,
+        "population_std": 0.015277505760985393,
+        "positive_negative_centroid_separation": 0.025360445664929496,
+        "positive_rows": 7,
+        "range": 0.051098182797431946,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 74,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.042429905384778976,
+        "mean": 0.0070742204746541875,
+        "mean_abs": 0.014224310347344726,
+        "minimum": -0.013681718148291111,
+        "negative_rows": 5,
+        "population_std": 0.016405015453140697,
+        "positive_negative_centroid_separation": 0.026835991408942002,
+        "positive_rows": 7,
+        "range": 0.05611162353307009,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 77,
+        "zero_rows": 0
+      },
+      {
+        "maximum": 0.044173307716846466,
+        "mean": 0.010179559137516966,
+        "mean_abs": 0.015023148288795104,
+        "minimum": -0.011610360816121101,
+        "negative_rows": 4,
+        "population_std": 0.016676383304872307,
+        "positive_negative_centroid_separation": 0.02616741429665126,
+        "positive_rows": 8,
+        "range": 0.05578366853296757,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 80,
+        "zero_rows": 0
+      }
+    ]
+  },
+  "spread_and_pole_neighborhood_metrics_are_ungated_diagnostics": true,
+  "trace_scope": {
+    "baseline": {
+      "adam_before_after_covered_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "call_counts": {
+        "after_generator_backward": 80,
+        "after_generator_step": 80,
+        "begin_step": 80,
+        "direct_begin": 80,
+        "direct_end": 80,
+        "finish_step": 80,
+        "optimizer_step": 80,
+        "surprise_decide": 80,
+        "table_group_q": 80,
+        "table_tester_observe": 80
+      },
+      "capture_calls": 1035,
+      "complete": false,
+      "purity_checks": 1035,
+      "purity_failures": 0,
+      "records": 80,
+      "status": "UNKNOWN",
+      "unknown": [
+        "trace overflow; no truncation counted as complete"
+      ]
+    },
+    "new": {
+      "adam_before_after_covered_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71
+      ],
+      "call_counts": {
+        "after_generator_backward": 80,
+        "after_generator_step": 80,
+        "begin_step": 80,
+        "direct_begin": 80,
+        "direct_end": 80,
+        "finish_step": 80,
+        "optimizer_step": 80,
+        "surprise_decide": 80,
+        "table_group_q": 80,
+        "table_tester_observe": 80
+      },
+      "capture_calls": 1129,
+      "complete": false,
+      "purity_checks": 1129,
+      "purity_failures": 0,
+      "records": 80,
+      "status": "UNKNOWN",
+      "unknown": [
+        "trace overflow; no truncation counted as complete"
+      ]
+    }
+  },
+  "variant927": {
+    "actual_controls_pin": {
+      "bytes": 2786,
+      "sha256": "bea1b6729afb9cfd250df66d21f6dbda4bec40e010e9fba1f26427afafb445bc"
+    },
+    "actual_software_execution_pin": {
+      "bytes": 4647,
+      "sha256": "38cea63f4acb3b2e3403c927f430e4bd3476165fddfac911433dc403afc4546f"
+    },
+    "attempt_id": "05d5b90ed0334a7d835582b8a43b8194",
+    "authority_seq": 927,
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "baseline918_rerun": false,
+    "baseline921_rerun": false,
+    "budget_seconds": 300,
+    "candidate_revision": "9b0d1cb654e208162e8e641feb353bbf97536216df3f7c463869dfff06a17e5b",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "directory": "/ml2/hypergan/pg-atlas927-particle-amsgrad-runtime-20261006/v1/runs/forge/atlas-two-pole-particle-amsgrad-off927-study-v1/05d5b90ed0334a7d835582b8a43b8194",
+    "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+    "fresh_successor": true,
+    "gpus": 0,
+    "old889_replayed": false,
+    "only_table_amsgrad_intervention": true,
+    "optimizer_variant_honestly_changed": true,
+    "pid": 3514855,
+    "request_id": "ea7dabbbd6bd9fa1781dcd7a",
+    "request_sha256": "60ce288b84517dfc8d86454fdb61b767a20118f00e5d721a4e3f14a10be36adb",
+    "request_source_file_count": 1277,
+    "schema": "pg927_one_particle_amsgrad_case_admission_v1",
+    "software_proof_pin": {
+      "bytes": 4779,
+      "sha256": "415c595824055c5ab9f0e3222c7686d90245eb4746da24e83bde27d42e08398c"
+    },
+    "source_application_pin": {
+      "bytes": 5289,
+      "sha256": "5f2dc4403c057c301906e62f576ec14e54e4eda77734ce0a1ba719ad92acadbc"
+    },
+    "source_digest": "a515e30f7de19dc84be907522b653a6fb9b1991b7cde48159ef680a5cb446b91"
+  }
+}

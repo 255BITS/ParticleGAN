@@ -1,0 +1,319 @@
+{
+  "actual_actions": {
+    "constructor_calls": 0,
+    "queue_actions": 0,
+    "scientific_attempts": 0,
+    "semantic_imports": 0,
+    "tests_run": 0
+  },
+  "baseline": {
+    "bytes": 64151,
+    "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/baseline/experiments/forge/atlas889_two_pole_owner.py",
+    "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+  },
+  "count_unchanged_definitions": 19,
+  "critical_numerical_and_boundary_nodes_ast_exact": [
+    "derive_host_function",
+    "typed_digest",
+    "TwoPoleOwner",
+    "install_completed_table_lr_clock",
+    "_penalty",
+    "_admitted_ordinary_attempt",
+    "_OrdinaryFreshOwner",
+    "run_behavior"
+  ],
+  "focused_controls": {
+    "assertion_nodes": 75,
+    "methods": [
+      "test_registry_base_recipe_and_task_bound",
+      "test_fresh_owned_table_only_group_override",
+      "test_populated_adam_denominator_branch",
+      "test_completed_lr_clock_and_q_preserved",
+      "test_checkpoint_recorder_and_roundtrip_flags",
+      "test_closure_and_failure_forwarding",
+      "test_wrong_variant_or_role_rejected",
+      "test_original_task_gate_and_core_scope"
+    ],
+    "status": "AUTHORED_NOT_RUN_SOURCE_INSPECTED_ONLY"
+  },
+  "functional_map_count": 72,
+  "limitations": [
+    "Source review is not softwarePASS or numerical admission. ROOT must run focused8, verify retained recorder receipts/copiedSource/proof and full300/global fit.",
+    "Original active-recorder resume compatibility is not claimed; tested restore detaches recorder first.",
+    "Numerical relevance/winner/default/speed/causal recovery remain unproven.",
+    "All historical INVALID/errors/costs/qualifiedUNKNOWN remain immutable."
+  ],
+  "lr_clock_full_text_exact": true,
+  "m_crosspins_verified": {
+    "configs/forge/ideas/atlas-two-pole-particle-amsgrad-off927-v1.json": {
+      "bytes": 2284,
+      "sha256": "a64c72cec3c12f127c15e07fab155564a37b62e1f2432215553ad88618557517"
+    },
+    "configs/forge/views/atlas_two_pole_particle_amsgrad_off927_v1.json": {
+      "bytes": 1627,
+      "sha256": "54d0afcf2443ed06851230de15986d3b59def59c301425d204910d56253fad8a"
+    },
+    "experiments/forge/adapters.py": {
+      "bytes": 40019,
+      "sha256": "7757e74b16f916adf42b1b2b3bcc595085e5d7ea7d2fa78c5fb87db6ff5c94f0"
+    },
+    "experiments/forge/api.py": {
+      "bytes": 52201,
+      "sha256": "671e12770c9a6fed73bcbf58de0354f9003e21c380826e90580ccd70bd727e18"
+    },
+    "experiments/forge/atlas927_contract.py": {
+      "bytes": 10860,
+      "sha256": "7a2be1b94d723776a4a938868cefc8cc6962fd37946d5b41e1fe0c49ea15e01d"
+    },
+    "experiments/forge/atlas927_reference.py": {
+      "bytes": 8247,
+      "sha256": "f582b24ef950b065e48618300176161488a0174955af337a1c8495a2a663421e"
+    },
+    "experiments/forge/atlas_existing_mog.py": {
+      "bytes": 49246,
+      "sha256": "bc6ef1f03b623560762c0f1555eebdf08818c9796f0e7b3002e5ffe64105a387"
+    },
+    "experiments/forge/studies.py": {
+      "bytes": 18047,
+      "sha256": "23180555910bee7ac3bf0f8465dc5e0bb4d222a3ad6fc763dcfbefaf2c2c49a0"
+    }
+  },
+  "m_declaration_handoff": {
+    "bytes": 21791,
+    "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/handoff.json",
+    "sha256": "4648c2a8b2e77a38f3dab2f6f000f0f1fa04362401baca243277298e76f6b6be"
+  },
+  "optimizer_descriptor": {
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "groups": [
+      {
+        "amsgrad": false,
+        "group_index": 0,
+        "optimizer": "generator",
+        "role": "table"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 1,
+        "optimizer": "generator",
+        "role": "noise"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 0,
+        "optimizer": "critic",
+        "role": "critic"
+      }
+    ],
+    "schema": "forge_atlas927_two_pole_particle_amsgrad_variant_v1",
+    "table_lr_clock": "completed_direct_adam_lr/base_lr"
+  },
+  "optimizer_descriptor_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+  "proof_map_count": 10,
+  "review_cost": "SOURCE_ONLY_UNMEASURED",
+  "reviewer": "merge_readiness",
+  "schema": "pg_atlas927_particle_amsgrad_primary_source_review_v1",
+  "source_findings": [
+    "Only the table param-group amsgrad=False override occurs before optimizer-state construction; public Recipe/defaults remain True. Noise attaches under the unchanged True defaults; critic construction and original mechanism guards remain exact.",
+    "Fresh binding strictly accepts exact927 descriptor/candidate plus original raw Task. Constructor re-resolves pinned new Idea and rejects forged bindings before model construction. Actual group receipt checks exact table/noise/critic aliases, bool flags/defaults and full baseD5.",
+    "Binding/source_contract/initial/final/direct evidence label baseD5 separately from the effective variant; evidence validates the exact descriptor and preserved initial/final laws. MechanismAudit scratch probes remain explicitly base-Recipe scoped.",
+    "Original host math, loss/L2, event order, count schedule80/24/final5, typed checkpoint/purity serializers, strict copied-file origins, ordinary CPU300 lease and original numerical helper bodies remain unchanged.",
+    "Focused controls use genuine new constructor and populated moments, compare raw-v and running-max synthetic Adam branches, retain q/beta/gain/LR behavior, checkpoint/roundtrip flags, callable exception identity and wrong group/role/variant negatives. These synthetic branch comparisons are not a baseline scientific rerun.",
+    "Fresh proof map joins the ten copied members and report captures six actual controlled pins. No old proof/grade/scientific outcome is transferred."
+  ],
+  "subject_handoff": {
+    "bytes": 5007,
+    "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/handoff.json",
+    "sha256": "175a3303079eddec2245481a1074daf14f5c6a9c2dcd1ef363946752292dce17"
+  },
+  "unchanged_core31": {
+    "particlegan/__init__.py": {
+      "bytes": 1886,
+      "sha256": "18506efd720327de46f4bd5f4f66dab6e1b0574c5388e5496795400a45aa4070"
+    },
+    "particlegan/_qr.py": {
+      "bytes": 1951,
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    "particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "particlegan/birth_death.py": {
+      "bytes": 48741,
+      "sha256": "7482b29f0065be446a6b5e087a4b55d0961c8a6f2602cf9919ca502edca78c91"
+    },
+    "particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    "particlegan/capabilities.py": {
+      "bytes": 2548,
+      "sha256": "74f57e8485bd72193e535c4f78978b5f908a6c965bb417c2fd57b2cf446720a0"
+    },
+    "particlegan/conditioning.py": {
+      "bytes": 4878,
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "particlegan/diffusion.py": {
+      "bytes": 5100,
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    "particlegan/discriminators.py": {
+      "bytes": 5833,
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    "particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    "particlegan/gan_loss.py": {
+      "bytes": 3203,
+      "sha256": "2ba031aa3c162bc6c4666c7dd43a2aac295ed2a841f7855e6b0a28b29eca6b2f"
+    },
+    "particlegan/grad_regularizers.py": {
+      "bytes": 14853,
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan/init.py": {
+      "bytes": 24559,
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    "particlegan/k3p.py": {
+      "bytes": 33012,
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "particlegan/ka2.py": {
+      "bytes": 16551,
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    "particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    "particlegan/noisy_particle_prior.py": {
+      "bytes": 3328,
+      "sha256": "a59eb7340cae67b0f8f40729bd89cd2071bba63c7ae66d516246554b6c621316"
+    },
+    "particlegan/output_moments.py": {
+      "bytes": 8387,
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    "particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81173,
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    "particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    "particlegan/recipe_schedules.py": {
+      "bytes": 6044,
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 56022,
+      "sha256": "79905bb948cb967f80a087063960ea72e72c04d3b572b4b90ff4fa1dda5f299f"
+    },
+    "particlegan/routing.py": {
+      "bytes": 64904,
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    "particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    "particlegan/training.py": {
+      "bytes": 40093,
+      "sha256": "740c01b14ce4542f5fcef43c59f9eed09b122f349a2308fb17bcc87e97786eb2"
+    },
+    "particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "unchanged_definitions": [
+    "canonical",
+    "digest",
+    "_source",
+    "_declaration",
+    "is_task",
+    "is_noisy_task",
+    "_recipe_fields",
+    "serialized_recipe",
+    "derive_host_function",
+    "typed_digest",
+    "TwoPoleOwner",
+    "install_completed_table_lr_clock",
+    "_PolicyNoise",
+    "_loaded_source",
+    "_penalty",
+    "_admitted_ordinary_attempt",
+    "_OrdinaryFreshOwner",
+    "run_behavior",
+    "is_candidate"
+  ],
+  "verdict": "CLEAR_SOURCE_ONLY",
+  "verified_subject_pins": [
+    {
+      "bytes": 68998,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/repo/experiments/forge/atlas927_two_pole_owner.py",
+      "sha256": "0fdd73021ab38f660b8c1ee4b292e32ef9fa39077751ba85d7679a64d283a587"
+    },
+    {
+      "bytes": 19154,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/repo/tests/test_atlas927_particle_amsgrad.py",
+      "sha256": "64e562da2a8fe3a5412f78c8fcf23eaeaa86ddf4b5b7b693ca508bc6d1ded2e5"
+    },
+    {
+      "bytes": 64151,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/baseline/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    {
+      "bytes": 577,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/OPTIMIZER_VARIANT.json",
+      "sha256": "af9241470fb63ea895d49af01fabf6636026f502cdeb629aec3bda5b482c7364"
+    },
+    {
+      "bytes": 14990,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/source-binding.json",
+      "sha256": "cf6be39742dc58659287bc4feb66fc33da715e53f6c63d551f1c9cb8af2ef85f"
+    },
+    {
+      "bytes": 2731,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/source-proof.json",
+      "sha256": "5f39b795397439da9cb277053bd29366810df698e7a40275a8c5651e9894f88b"
+    },
+    {
+      "bytes": 39296,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/owner-derivation.patch",
+      "sha256": "c670fdfbe3813352d8d7b76f697a169080344375beb88507f030fd8b791178fa"
+    },
+    {
+      "bytes": 1245,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/README.md",
+      "sha256": "66a0fe6772bf8945149c3f1d49588ed40577e07af80a24f88cb9a2ab31288226"
+    }
+  ]
+}

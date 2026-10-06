@@ -32,6 +32,9 @@ ALLOWANCES = dict(gaussian1d_acquisition=120, two_pole=300, unused_token_hold=30
 
 
 def is_candidate(candidate):
+    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import is_candidate as owned927
+        return owned927(candidate)
     if isinstance(candidate, dict) and candidate.get('id') == 'atlas-original-two-pole-passive889-v1':
         from .atlas889_two_pole_owner import is_candidate as owned889
         return owned889(candidate)
@@ -45,6 +48,9 @@ def is_candidate(candidate):
 
 
 def supports_candidate(candidate):
+    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import supports_candidate as owned927
+        return owned927(candidate)
     if isinstance(candidate, dict) and candidate.get('id') == 'atlas-original-two-pole-passive889-v1':
         from .atlas889_two_pole_owner import supports_candidate as owned889
         return owned889(candidate)
@@ -109,6 +115,9 @@ def validate(task, root=None):
 
 
 def blockers(task, candidate, root=None):
+    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import blockers as owned927
+        return owned927(task, candidate, root=root)
     if isinstance(candidate, dict) and candidate.get('id') == 'atlas-original-two-pole-passive889-v1':
         from .atlas889_two_pole_owner import blockers as owned889
         return owned889(task, candidate, root=root)
@@ -152,6 +161,9 @@ def task_resources(task):
 
 
 def supporting_source_paths(task, candidate, root=None):
+    if isinstance(candidate, dict) and candidate.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import supporting_source_paths as owned927
+        return owned927(task, candidate, root=root)
     if isinstance(candidate, dict) and candidate.get('id') == 'atlas-original-two-pole-passive889-v1':
         from .atlas889_two_pole_owner import supporting_source_paths as owned889
         return owned889(task, candidate, root=root)
@@ -437,6 +449,9 @@ def reaction_kernel_receipt(policy):
 
 def validate_evidence(task, evidence):
     """Ownership check only. Numerical grading uses the untouched original scorer."""
+    if evidence.get('existing_mog717', {}).get('candidate_id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import validate_evidence as owned927
+        return owned927(task, evidence)
     if evidence.get('existing_mog717', {}).get('candidate_id') == 'atlas-original-two-pole-passive889-v1':
         from .atlas889_two_pole_owner import validate_evidence as owned889
         return owned889(task, evidence)

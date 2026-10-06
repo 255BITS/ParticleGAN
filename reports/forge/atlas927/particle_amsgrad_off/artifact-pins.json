@@ -1,0 +1,82 @@
+{
+  "files": {
+    "FOCUSED927_CONTROLS.json": {
+      "bytes": 2786,
+      "sha256": "bea1b6729afb9cfd250df66d21f6dbda4bec40e010e9fba1f26427afafb445bc"
+    },
+    "RESULTS.json": {
+      "bytes": 10400,
+      "sha256": "24575b0ddeeadf34778b127436a8f83970de451bbb6fab182f885d1d6d2516bc"
+    },
+    "RESULTS.md": {
+      "bytes": 4237,
+      "sha256": "eb235d771a82538c8278c4072776bb7ae4a058ab63378ad9a5e2815f4d23a764"
+    },
+    "admitted-request.json": {
+      "bytes": 328778,
+      "sha256": "498b0533abd940fff95cfec30730ef3d138122882e3a4ea6529bf6fdb31cb461"
+    },
+    "comparison.json": {
+      "bytes": 110167,
+      "sha256": "f09f83819d3fca3682e14274bba51b97a0c5f20aa122c6502c850383214f9c88"
+    },
+    "declaration.stderr": {
+      "bytes": 658,
+      "sha256": "ef0ad553e0a603305a43bde99139c2d25de9b7bbaf87d55be82aaba9c20a0801"
+    },
+    "declaration.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "focused.stderr": {
+      "bytes": 1072,
+      "sha256": "c95d6afc275d6734406f1602af0df680fcc27a4a14ed547edf6c8eaa53f08ab0"
+    },
+    "focused.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "graded-result.json": {
+      "bytes": 2033,
+      "sha256": "640ac013e0ef689cf01d9564ae7ced40bcc512c4d02ef9fa4920ea363e30bd36"
+    },
+    "joined-source-review.json": {
+      "bytes": 10603,
+      "sha256": "97a7f117b3dad225311eb1154457bc7e1f4f96dac4b9f905e968ef917318e6e5"
+    },
+    "primary-source-review.json": {
+      "bytes": 12929,
+      "sha256": "f727b66ec4a33e1039a6dd13d4772a918a6549f48cee0814fb1aefa735d3cc81"
+    },
+    "publication-validation.json": {
+      "bytes": 1054,
+      "sha256": "3aa298931337931020caadea66a8208d5d7962ea0bbdf6af892dfe4c0e22cdd6"
+    },
+    "raw-result.json.gz": {
+      "bytes": 428579,
+      "sha256": "e49e732707a130251758437d109b0a686a6ad9061c9a27b3baada6beb5bcc908"
+    },
+    "software-execution.json": {
+      "bytes": 4647,
+      "sha256": "38cea63f4acb3b2e3403c927f430e4bd3476165fddfac911433dc403afc4546f"
+    },
+    "software-proof.json": {
+      "bytes": 4779,
+      "sha256": "415c595824055c5ab9f0e3222c7686d90245eb4746da24e83bde27d42e08398c"
+    },
+    "source-application.json": {
+      "bytes": 5289,
+      "sha256": "5f2dc4403c057c301906e62f576ec14e54e4eda77734ce0a1ba719ad92acadbc"
+    },
+    "successor-source-declaration.json": {
+      "bytes": 17733,
+      "sha256": "479c36fb9467832d4e3e0d8a26c7580620b87d735524f31ac00d1c239ce4e971"
+    }
+  },
+  "full_request_sha256": "60ce288b84517dfc8d86454fdb61b767a20118f00e5d721a4e3f14a10be36adb",
+  "raw_uncompressed": {
+    "bytes": 12661412,
+    "sha256": "ced43d418d9ba1052f3809a6a7eea24dc2cbb93d7ca9f46950871a3048065cc7"
+  },
+  "schema": "pg927_curated_artifact_pins_v1"
+}
