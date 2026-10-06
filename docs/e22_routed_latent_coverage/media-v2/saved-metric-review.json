@@ -1,0 +1,601 @@
+{
+  "task": "routed_latent_coverage_v2",
+  "complete": true,
+  "qualification": "PASS",
+  "producer_scientific_status_unchanged": "PASS",
+  "science_regraded": false,
+  "numerical_gate_recomputed": true,
+  "native_state_reexecuted": false,
+  "observed_training_sha256": "4da8f30dc1c9aad5cdfe574e0d7c7c11c12ed87e92844842e34c332bced4e61f",
+  "producer_report_sha256": "b3e926090f7eef219bbcba015dc819b57ef30d21d6b86505f35dc15b9b8317b7",
+  "producer_completion_sha256": "b8c782286b5b106bcec6f054c1eb0ec385cc2d67a2fc84186969e83db549eee7",
+  "checks": 1984,
+  "check_count_law": "Each executed require() assertion counts once, including close() prerequisites.",
+  "quality": {
+    "two_seed": {
+      "896": {
+        "count": 240,
+        "mse": 0.0043388484479713295,
+        "rmse": 0.06586993584307889,
+        "by_source": {
+          "0": 0.05742023447099278,
+          "1": 0.0725022923977029,
+          "2": 0.04755682125803915,
+          "3": 0.07539165616568747,
+          "4": 0.07348340760154516,
+          "5": 0.06429666163878987
+        },
+        "by_seed": {
+          "39001": 0.06505847547094992,
+          "39002": 0.06667152064666342
+        }
+      },
+      "928": {
+        "count": 240,
+        "mse": 0.003814496277542635,
+        "rmse": 0.06176160844361677,
+        "by_source": {
+          "0": 0.058579078906322836,
+          "1": 0.06566215492964089,
+          "2": 0.04696342712482923,
+          "3": 0.0694568140971568,
+          "4": 0.06128454222142962,
+          "5": 0.06601774733063916
+        },
+        "by_seed": {
+          "39001": 0.06129994371032302,
+          "39002": 0.06221984776738448
+        }
+      },
+      "960": {
+        "count": 240,
+        "mse": 0.0034633082652970374,
+        "rmse": 0.0588498790593238,
+        "by_source": {
+          "0": 0.05471720140805809,
+          "1": 0.06162022535436547,
+          "2": 0.046015818089839046,
+          "3": 0.06752195889601995,
+          "4": 0.05589977821741545,
+          "5": 0.06470988824546249
+        },
+        "by_seed": {
+          "39001": 0.058996640742775844,
+          "39002": 0.05870275046079116
+        }
+      },
+      "992": {
+        "count": 240,
+        "mse": 0.0031345582277461028,
+        "rmse": 0.05598712555352438,
+        "by_source": {
+          "0": 0.05081608234321817,
+          "1": 0.05812116693786421,
+          "2": 0.044712325031814555,
+          "3": 0.06529147568575802,
+          "4": 0.05281261913298925,
+          "5": 0.06160895672614546
+        },
+        "by_seed": {
+          "39001": 0.056654906131321424,
+          "39002": 0.05531128335831093
+        }
+      },
+      "1024": {
+        "count": 240,
+        "mse": 0.0028483830920975335,
+        "rmse": 0.05337024538165,
+        "by_source": {
+          "0": 0.04987233863845151,
+          "1": 0.05711084546629682,
+          "2": 0.042345810691134245,
+          "3": 0.06269193355194855,
+          "4": 0.048164760028450146,
+          "5": 0.05742916852325201
+        },
+        "by_seed": {
+          "39001": 0.054297726691201864,
+          "39002": 0.052426358450331174
+        }
+      }
+    },
+    "eight_seed": {
+      "896": {
+        "count": 240,
+        "mse": 0.0028470187469916194,
+        "rmse": 0.053357461961675234,
+        "by_source": {
+          "0": 0.05119679272875935,
+          "1": 0.06467610917367901,
+          "2": 0.03834820804253575,
+          "3": 0.06676043401844535,
+          "4": 0.049377512873814436,
+          "5": 0.043730108739677455
+        },
+        "by_seed": {
+          "39001": 0.05407990879437453,
+          "39002": 0.05262509818304733
+        }
+      },
+      "928": {
+        "count": 240,
+        "mse": 0.002352017352380503,
+        "rmse": 0.048497601511626354,
+        "by_source": {
+          "0": 0.05092473177935194,
+          "1": 0.05749734601897513,
+          "2": 0.03783142230981258,
+          "3": 0.05730986701075406,
+          "4": 0.04201851912691314,
+          "5": 0.04161295096320203
+        },
+        "by_seed": {
+          "39001": 0.04953686707433924,
+          "39002": 0.04743557215023605
+        }
+      },
+      "960": {
+        "count": 240,
+        "mse": 0.002037048457697509,
+        "rmse": 0.04513367321299596,
+        "by_source": {
+          "0": 0.04645198772008256,
+          "1": 0.054728632658794754,
+          "2": 0.03602183218639286,
+          "3": 0.05320827893909404,
+          "4": 0.03749291968236135,
+          "5": 0.03917739121360648
+        },
+        "by_seed": {
+          "39001": 0.046055008733178165,
+          "39002": 0.044193133923516904
+        }
+      },
+      "992": {
+        "count": 240,
+        "mse": 0.0018585011132504457,
+        "rmse": 0.043110336501243476,
+        "by_source": {
+          "0": 0.043932032448792464,
+          "1": 0.052111516969061494,
+          "2": 0.03519450132280866,
+          "3": 0.050490006348535524,
+          "4": 0.03619101518930356,
+          "5": 0.03751919187209924
+        },
+        "by_seed": {
+          "39001": 0.04420773297982369,
+          "39002": 0.04198426575856127
+        }
+      },
+      "1024": {
+        "count": 240,
+        "mse": 0.00168479247768979,
+        "rmse": 0.04104622367148761,
+        "by_source": {
+          "0": 0.0422707684818681,
+          "1": 0.05058377222256357,
+          "2": 0.033501712687287355,
+          "3": 0.04672365734364206,
+          "4": 0.033582989126048325,
+          "5": 0.036468300188505415
+        },
+        "by_seed": {
+          "39001": 0.042056315657039434,
+          "39002": 0.040010639444215824
+        }
+      }
+    }
+  },
+  "fit_quality": {
+    "two_seed": {
+      "896": {
+        "count": 240,
+        "mse": 0.003674949186056744,
+        "rmse": 0.06062135915712171,
+        "by_source": {
+          "0": 0.05304239617903758,
+          "1": 0.06631832308710518,
+          "2": 0.03704236327451003,
+          "3": 0.07495890549936617,
+          "4": 0.06527077983077746,
+          "5": 0.05989015325159317
+        },
+        "by_seed": {
+          "7063": 0.06248923129158581,
+          "7064": 0.05869407418726511
+        }
+      },
+      "928": {
+        "count": 240,
+        "mse": 0.003170689437386796,
+        "rmse": 0.05630887529854238,
+        "by_source": {
+          "0": 0.05480222216499249,
+          "1": 0.059865296378638196,
+          "2": 0.03676020703594855,
+          "3": 0.06739369317981277,
+          "4": 0.05277680023325279,
+          "5": 0.06130567685782594
+        },
+        "by_seed": {
+          "7063": 0.058404663046214056,
+          "7064": 0.054132007252934836
+        }
+      },
+      "960": {
+        "count": 240,
+        "mse": 0.002830830845237503,
+        "rmse": 0.05320555276695754,
+        "by_source": {
+          "0": 0.05061914870533962,
+          "1": 0.05604069311526453,
+          "2": 0.03595585298939738,
+          "3": 0.06465506200242671,
+          "4": 0.04798183700529302,
+          "5": 0.05921799120028615
+        },
+        "by_seed": {
+          "7063": 0.055121258889458,
+          "7064": 0.05121824390699425
+        }
+      },
+      "992": {
+        "count": 240,
+        "mse": 0.00254513422757708,
+        "rmse": 0.050449323360943904,
+        "by_source": {
+          "0": 0.04638616335315877,
+          "1": 0.05329648162145834,
+          "2": 0.03485721853009616,
+          "3": 0.06232681632530827,
+          "4": 0.04575049510989279,
+          "5": 0.0555504162172183
+        },
+        "by_seed": {
+          "7063": 0.05205808867207673,
+          "7064": 0.04878753794735247
+        }
+      },
+      "1024": {
+        "count": 240,
+        "mse": 0.002293837200037947,
+        "rmse": 0.04789402050400391,
+        "by_source": {
+          "0": 0.04577007866032871,
+          "1": 0.05309351843775276,
+          "2": 0.032950986094509575,
+          "3": 0.05903905785601757,
+          "4": 0.041176504110710145,
+          "5": 0.05081652360845764
+        },
+        "by_seed": {
+          "7063": 0.048946766815070604,
+          "7064": 0.04681760799557147
+        }
+      }
+    },
+    "eight_seed": {
+      "896": {
+        "count": 240,
+        "mse": 0.00287572333471921,
+        "rmse": 0.05362577118064793,
+        "by_source": {
+          "0": 0.052327742746192014,
+          "1": 0.06631033988142612,
+          "2": 0.037365132927316504,
+          "3": 0.06525083072967741,
+          "4": 0.05103667035869595,
+          "5": 0.04313374991027465
+        },
+        "by_seed": {
+          "7063": 0.05318713257782044,
+          "7064": 0.05406085087739344
+        }
+      },
+      "928": {
+        "count": 240,
+        "mse": 0.0023822300219931915,
+        "rmse": 0.048808093816427534,
+        "by_source": {
+          "0": 0.052022416574223594,
+          "1": 0.059381335484666446,
+          "2": 0.03708209444741897,
+          "3": 0.05600766725020777,
+          "4": 0.043359630895246075,
+          "5": 0.04085226053727399
+        },
+        "by_seed": {
+          "7063": 0.04820530297507722,
+          "7064": 0.049403530330001666
+        }
+      },
+      "960": {
+        "count": 240,
+        "mse": 0.0020790927964039695,
+        "rmse": 0.045597070041878456,
+        "by_source": {
+          "0": 0.0479318023805981,
+          "1": 0.05647526487734493,
+          "2": 0.03550905318368591,
+          "3": 0.052772706403972545,
+          "4": 0.03854204668671041,
+          "5": 0.03816153552993581
+        },
+        "by_seed": {
+          "7063": 0.04516236973586344,
+          "7064": 0.046027665079266235
+        }
+      },
+      "992": {
+        "count": 240,
+        "mse": 0.0019138451015725602,
+        "rmse": 0.0437475153759909,
+        "by_source": {
+          "0": 0.04534611428442654,
+          "1": 0.054007106484997285,
+          "2": 0.03443251143338253,
+          "3": 0.05051285617431368,
+          "4": 0.03738228866954127,
+          "5": 0.037087073073881434
+        },
+        "by_seed": {
+          "7063": 0.04352736483607507,
+          "7064": 0.043966563586120035
+        }
+      },
+      "1024": {
+        "count": 240,
+        "mse": 0.0017522339209819998,
+        "rmse": 0.041859693273864296,
+        "by_source": {
+          "0": 0.043485455054877255,
+          "1": 0.0529752442908704,
+          "2": 0.03285830148689151,
+          "3": 0.04740169164542488,
+          "4": 0.034741614524712264,
+          "5": 0.035811647402063954
+        },
+        "by_seed": {
+          "7063": 0.04169743970338806,
+          "7064": 0.04202132035224877
+        }
+      }
+    }
+  },
+  "zero_code_quality": {
+    "count": 240,
+    "mse": 0.008018126823705517,
+    "rmse": 0.08954399378911752,
+    "by_source": {
+      "0": 0.08532134229648945,
+      "1": 0.09205171609168941,
+      "2": 0.07490528196283,
+      "3": 0.09720986149607534,
+      "4": 0.10344446169993758,
+      "5": 0.08120465479962537
+    },
+    "by_seed": {
+      "39001": 0.08971714804934315,
+      "39002": 0.08937050404525688
+    }
+  },
+  "common_games": {
+    "two_seed_final": {
+      "two_seed": {
+        "896": 1.430492959668239,
+        "928": 1.3584501994152864,
+        "960": 1.2944484802583853,
+        "992": 1.232359332529207,
+        "1024": 1.1811095530788103
+      },
+      "eight_seed": {
+        "896": 1.1805625380327305,
+        "928": 1.1119770440583427,
+        "960": 1.0604166268060604,
+        "992": 1.0262889755889772,
+        "1024": 1.001399233068029
+      },
+      "eight_seed_zero_code": {
+        "1024": 2.234889075656732
+      }
+    },
+    "eight_seed_final": {
+      "two_seed": {
+        "896": 1.3783950723707676,
+        "928": 1.3251561945925157,
+        "960": 1.2706549915174643,
+        "992": 1.2189181776096423,
+        "1024": 1.1782975082596143
+      },
+      "eight_seed": {
+        "896": 1.1892017309864362,
+        "928": 1.1371696665262183,
+        "960": 1.0802254278833667,
+        "992": 1.0430562193195025,
+        "1024": 1.0156280441209673
+      },
+      "eight_seed_zero_code": {
+        "1024": 2.197434951737523
+      }
+    }
+  },
+  "baseline_final_TEST_minus_originalFIT_MSE": 0.0005545458920595864,
+  "candidate_final_TEST_minus_originalFIT_MSE": -6.744144329220991e-05,
+  "recomputed_saved_array_gates": {
+    "phenotype_TEST_MSE_gte_1_10_originalFIT_MSE": true,
+    "TEST_accuracy_each_endpoint": {
+      "896": {
+        "relative_TEST_RMSE_lte_0_999": true,
+        "source_harm_lte_1e_minus6": true,
+        "seed_harm_lte_1e_minus6": true
+      },
+      "928": {
+        "relative_TEST_RMSE_lte_0_999": true,
+        "source_harm_lte_1e_minus6": true,
+        "seed_harm_lte_1e_minus6": true
+      },
+      "960": {
+        "relative_TEST_RMSE_lte_0_999": true,
+        "source_harm_lte_1e_minus6": true,
+        "seed_harm_lte_1e_minus6": true
+      },
+      "992": {
+        "relative_TEST_RMSE_lte_0_999": true,
+        "source_harm_lte_1e_minus6": true,
+        "seed_harm_lte_1e_minus6": true
+      },
+      "1024": {
+        "relative_TEST_RMSE_lte_0_999": true,
+        "source_harm_lte_1e_minus6": true,
+        "seed_harm_lte_1e_minus6": true
+      }
+    },
+    "positive_baseline_gap_and_candidate_gap_lte_0_90": true,
+    "common_game_improvement_each_endpoint": {
+      "two_seed_final": {
+        "896": true,
+        "928": true,
+        "960": true,
+        "992": true,
+        "1024": true
+      },
+      "eight_seed_final": {
+        "896": true,
+        "928": true,
+        "960": true,
+        "992": true,
+        "1024": true
+      }
+    },
+    "final_zero_code_RMSE_harm_gt_1e_minus6": true,
+    "final_zero_code_source_harm_strict_all_six": true,
+    "final_zero_code_game_harm_gt_1e_minus6_both_judges": true
+  },
+  "saved_array_gates_pass": true,
+  "recomputed_complete_gate_checks": {
+    "baseline_fit_test_phenotype": true,
+    "held_RMSE_improved_all_five": true,
+    "no_source_harmed_all_five": true,
+    "no_TEST_seed_harmed_all_five": true,
+    "common_originalFIT_gap_reduced": true,
+    "both_common_games_improved_all_five": true,
+    "code_RMSE_beneficial": true,
+    "code_RMSE_beneficial_each_source": true,
+    "code_game_beneficial_both_judges": true,
+    "particles_retained_both_arms": true,
+    "native_KA2_phase_qualified": true
+  },
+  "recomputed_complete_gate_pass": true,
+  "producer_retention_witness": {
+    "two_seed": {
+      "bank_live": 1023,
+      "dense_rows_live": 1023,
+      "query_live": 1023,
+      "proposal_events": 10,
+      "accepted_proposals": 0,
+      "accepted_moves": 0,
+      "KA2_phase": {
+        "799": "a",
+        "800": "blend",
+        "801": "blend",
+        "1024": "blend"
+      },
+      "bank_changed": true,
+      "router_changed": true,
+      "finite": true,
+      "eligible_updates": 1023,
+      "C_norms": {
+        "input": 1.0340684652328491,
+        "edit": 1.0425734519958496
+      },
+      "Up_norms": {
+        "input": 0.9124241471290588,
+        "edit": 0.5261521339416504
+      }
+    },
+    "eight_seed": {
+      "bank_live": 1023,
+      "dense_rows_live": 1023,
+      "query_live": 1023,
+      "proposal_events": 10,
+      "accepted_proposals": 0,
+      "accepted_moves": 0,
+      "KA2_phase": {
+        "799": "a",
+        "800": "blend",
+        "801": "blend",
+        "1024": "blend"
+      },
+      "bank_changed": true,
+      "router_changed": true,
+      "finite": true,
+      "eligible_updates": 1023,
+      "C_norms": {
+        "input": 0.9833191633224487,
+        "edit": 1.0439083576202393
+      },
+      "Up_norms": {
+        "input": 0.9218162894248962,
+        "edit": 0.5257385969161987
+      }
+    }
+  },
+  "verified_scope": "Saved original-FIT/TEST/camera metrics, common-game means, gate arithmetic and bound native counters; no new native state qualification.",
+  "not_verified_here": [
+    "Game-score model provenance beyond producer hash binding",
+    "learned owner/gradient/moment finiteness and live-state prerequisites",
+    "native exact recovery and source/sampling/software prerequisites"
+  ],
+  "verified_provenance": {
+    "protocol_path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/docs/e22_routed_latent_coverage_v2.json",
+    "protocol_sha256": "edbf56db270d378234be899cb022aa94c882cba686819eaa243301dbb43a6567",
+    "source_root": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop",
+    "source_identity": {
+      "examples/e22_routed_latent_coverage.py": "d95c8cb007c46d0c5c7ec5b7fb91cb3789ba4adaba57299e48460d52c6fe6105",
+      "examples/render_e22_routed_latent_coverage.py": "717173aff64751025a3324e80d184b59b5925ad8e9dad84c55581d647020ea35",
+      "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3"
+    },
+    "native_package": {
+      "imported_package": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/particlegan",
+      "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+    },
+    "native_python_files": {
+      "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "native_digest_law": "SHA256 of sorted UTF8 particlegan-relative paths followed by raw file bytes"
+  },
+  "native_updates": 0,
+  "optimizer_steps": 0,
+  "model_forwards": 0,
+  "ParticleGAN_API_calls": 0
+}
