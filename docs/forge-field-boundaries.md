@@ -20,12 +20,19 @@ can change the technique even though the field accepts a number.
 The formulation family is the reusable solution axis; the technique signature
 is the stricter boundary for numerical configuration search. An ordinary idea
 may change existing controls within its formulation family with explicit
-structural provenance, but a changed optimizer/loss formulation needs a new
-family. Each candidate supplies one global recipe across eligible tasks.
+structural provenance. Changing optimizer or loss implementations can require
+a new technique card and a separately registered comparison; it does not by
+itself create a new solution family. Publication families follow the high-level
+training formulation, grouping optimizer and hyperparameter configurations with
+editorial `reporting_family` aliases. BCAP with K3P has additional training
+mechanisms and remains a separate formulation from BCAP.
+Each candidate supplies one global recipe across eligible tasks.
 Task applicability can make a role or control inactive; it cannot silently
 choose a bespoke optimizer recipe. Publication pins one complete ordinary
-candidate/cohort row per family and retains other cohorts unranked. A family
-label never authorizes pooling source, runtime, prior or sampling identities.
+candidate/cohort row per original evidence identity. The inventory displays the
+whole configuration with the most recorded required passes per solution/runtime,
+with its exact recipe and diagnostics; other configurations retain their evidence.
+A family label never authorizes pooling source, runtime, prior or sampling identities.
 
 | Owner | Binding |
 | --- | --- |

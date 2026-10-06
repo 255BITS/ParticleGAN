@@ -164,6 +164,7 @@
       "id": "k3p-no-a2",
       "label": "K3P without A2",
       "rationale": "Removing A2 is a structural ablation.",
+      "reporting_family": "k3p",
       "tags": [
         "adversarial-training",
         "critic-gradient-penalty",
@@ -179,6 +180,7 @@
       "id": "k3p-no-training-noise",
       "label": "K3P without training output noise",
       "rationale": "Removing training output noise changes the training law and remains a separate technique.",
+      "reporting_family": "k3p",
       "tags": [
         "adversarial-training",
         "critic-gradient-penalty",
@@ -209,9 +211,7 @@
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
-        "constant-learning-rate",
         "critic-gradient-penalty",
-        "native-adam",
         "selectable-loss"
       ]
     },
@@ -226,6 +226,7 @@
       "id": "bcap-sgda",
       "label": "BCAP sgda",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -244,6 +245,7 @@
       "id": "bcap-nsgda-global",
       "label": "BCAP nsgda_global",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -262,6 +264,7 @@
       "id": "bcap-nsgda-layer",
       "label": "BCAP nsgda_layer",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -280,6 +283,7 @@
       "id": "bcap-ada-nsgda",
       "label": "BCAP ada_nsgda",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -299,6 +303,7 @@
       "id": "bcap-dualnorm",
       "label": "BCAP dualnorm (experimental starting point)",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -317,6 +322,7 @@
       "id": "bcap-dualnorm-d-only",
       "label": "BCAP dualnorm_D_only",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -335,6 +341,7 @@
       "id": "bcap-particle-rownorm-only",
       "label": "BCAP particle_rownorm_only",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -348,6 +355,7 @@
       ],
       "canonical_candidate": "halloween-optimizer-loss-v1",
       "id": "halloween",
+      "inventory_visible": false,
       "label": "Halloween optimizer/loss transfer",
       "rationale": "Explicit dense legacy-Adam and [-1,1,1] least-squares transfer. Unmeasured; original HyperGAN execution and schedule remain unbound.",
       "tags": [

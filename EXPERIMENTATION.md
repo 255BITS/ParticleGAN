@@ -449,6 +449,18 @@ and selects one complete configuration for each formulation family. The generic
 pins its exact measured revision, recipe, source, runtime and task identities.
 Alternative configurations retain their recorded results and source identities
 as unranked alternatives in the companion JSON and evidence snapshots.
+For publication, a family is the high-level implementation and formulation;
+optimizer choice, momentum, rates and other hyperparameters are configuration
+details. The registry's editorial `reporting_family` aliases group earlier
+optimizer-specific evidence identities without changing their receipts or pins.
+The displayed whole configuration maximizes recorded required passes within
+each exact runtime, then completed measurements; ties retain the solution's
+existing selection before a stable identity tie-break. This is a best-observed
+display across recorded sources, not controlled scientific superiority or
+default adoption. BCAP and BCAP with K3P remain separate formulations. Detail
+pages show the selected recipe, configuration alternatives and diagnostics.
+`inventory_visible: false` excludes a declaration from generated navigation
+while preserving its evidence and original registry identity.
 The generated leaderboard has bold family totals followed by view rows, with
 Tier 1, Tier 2, Tier 3 and total passes/required. Family totals sum the views;
 shared experiments count once per requiring view, rather than as unique runs.

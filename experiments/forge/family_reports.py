@@ -353,6 +353,82 @@ def certified_retry_successors(summaries: dict) -> dict:
     return successors
 
 
+def _solution_families(root, families, load):
+    """Select whole recorded configurations for display, preserving evidence IDs.
+
+    Optimizer and tuning registries may predate the solution taxonomy. Their
+    original identities still bind receipts; reporting aliases only group the
+    navigation. This is a best-observed display, not scientific qualification.
+    """
+    registry_path = Path("configs/forge/trainer-families.json")
+    registry = load(registry_path) if (root / registry_path).is_file() else {}
+    definitions = {item["id"]: item for item in registry.get("families", [])}
+    groups, configurations = {}, []
+    for family in families.values():
+        definition = definitions.get(family["id"], {})
+        if definition.get("inventory_visible", True) is False:
+            continue
+        target = definition.get("reporting_family", family["id"])
+        identifier(target, "reporting family")
+        if target != family["id"]:
+            if target not in definitions or definitions[target].get("reporting_family", target) != target:
+                raise ValueError("reporting family must reference a registered solution without another alias")
+            if definitions[target].get("inventory_visible", True) is False:
+                raise ValueError("reporting family cannot reference a hidden solution")
+        groups.setdefault(target, []).append(family)
+    solutions = []
+    for target, members in groups.items():
+        base = next((family for family in members if family["id"] == target), None)
+        if base is None:
+            raise ValueError("reporting family needs its own recorded solution row")
+        solution = deepcopy(base)
+        if len(members) > 1:
+            solution["cohorts"] = []
+            runtimes = {}
+            for member in members:
+                for cohort in member["cohorts"]:
+                    runtimes.setdefault(cohort["anchor"], []).append((member, cohort))
+            for candidates in runtimes.values():
+                # All candidates share the displayed required denominator.
+                # Choose a complete row; never assemble passing task cells.
+                def rank(item):
+                    member, cohort = item
+                    counts = cohort["total"]
+                    return (-counts["passed"],
+                            -sum(counts["counts"].get(status, 0) for status in COMPLETE),
+                            member["id"] != target, member["id"])
+
+                ordered = sorted(candidates, key=rank)
+                winner, cohort = ordered[0]
+                selected = deepcopy(cohort)
+                selected["configuration_family"] = winner["id"]
+                selected["configuration_documentation"] = winner.get("documentation")
+                selected["configuration_alternatives"] = [
+                    {"family": member["id"], "page": member["page"], "row_index": candidate["row_index"],
+                     "total": deepcopy(candidate["total"]), "selected": candidate is cohort}
+                    for member, candidate in ordered]
+                solution["cohorts"].append(selected)
+            solution["configuration_selection"] = "best_recorded_required_passes"
+            if any(cohort["configuration_family"] != target for cohort in solution["cohorts"]):
+                configuration = deepcopy(base)
+                configuration["page"] = (FAMILY_DIRECTORY / (target + "-configuration.md")).as_posix()
+                configuration["solution_page"] = base["page"]
+                configuration["solution_label"] = base["label"]
+                configurations.append(configuration)
+                for cohort in solution["cohorts"]:
+                    for alternative in cohort["configuration_alternatives"]:
+                        if alternative["family"] == target:
+                            alternative["page"] = configuration["page"]
+            for member in members:
+                if member["id"] != target:
+                    configuration = deepcopy(member)
+                    configuration["solution_page"] = base["page"]
+                    configuration["solution_label"] = base["label"]
+                    configurations.append(configuration)
+        solutions.append(solution)
+    return solutions, configurations
+
+
 def build_progress(root: Path, publication: dict) -> dict:
     """Project current view placement over immutable selected task outcomes."""
     root = Path(root)
@@ -539,6 +615,8 @@ def build_progress(root: Path, publication: dict) -> dict:
         illustration = (family.get("documentation") or {}).get("illustration")
         if illustration is not None:
             inputs[illustration["path"]] = file_hash(root / illustration["path"])
+    active, configurations = _solution_families(
+        root, {name: family for name, family in families.items() if not family["historical_only"]}, load)
     atlas_navigation = _atlas_evidence_navigation(root, load)
     next_steps = Path("reports/forge/atlas-inventory-next-steps-20261005.md")
     if atlas_navigation is not None and (root / next_steps).is_file():
@@ -549,7 +627,8 @@ def build_progress(root: Path, publication: dict) -> dict:
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped],
-                "families": [family for family in families.values() if not family["historical_only"]],
+                "families": active,
+                "configuration_families": configurations,
                 "historical_families": [family for family in families.values() if family["historical_only"]],
                 "tag_definitions": tag_definitions,
                 "task_paths": task_paths,
@@ -586,6 +665,11 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
              "pseudocode and training details; click any count for the experiment results. "
              "Each family/runtime uses one complete selected configuration and source.", "",
+             "A family is the high-level implementation and formulation. Optimizers, learning rates, momentum "
+             "and other configuration choices stay within that family. BCAP and BCAP with K3P have different "
+             "formulations and remain separate. The displayed configuration has the most recorded required passes; "
+             "ties prefer more completed measurements, then the existing family selection. "
+             "Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.", "",
              "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
              "these totals measure requirements across views, not unique training runs or scientific rank.", "",
              *_table_header()]
@@ -671,11 +755,11 @@ def _technique_description(root, page, family):
         lines += ["## Simplified pseudocode", ""]
     else:
         lines += ["## Simplified pseudocode", "", documentation["symbols"], ""]
-    lines += ["```text",
-             *documentation["pseudocode"], "```", "",
-             "## Training details", "", "| Characteristic | Behavior |", "| --- | --- |"]
-    lines += ["| " + label + " | " + cell(documentation["training_details"][key]) + " |"
-              for key, label in family_documentation.TRAINING_DETAILS]
+    lines += ["```text", *documentation["pseudocode"], "```", ""]
+    if not family.get("configuration_selection"):
+        lines += ["## Training details", "", "| Characteristic | Behavior |", "| --- | --- |"]
+        lines += ["| " + label + " | " + cell(documentation["training_details"][key]) + " |"
+                  for key, label in family_documentation.TRAINING_DETAILS]
     lines += ["", "## Configuration differences", ""]
     lines += ["- " + note for note in documentation["configuration_notes"]]
     lines += ["", "<details>", "<summary>Implementation and recipe sources</summary>", "",
@@ -728,6 +812,63 @@ def _metric_values(metrics, prefix=""):
             yield key, value
 
 
+def _selected_configuration_details(root, page, publication, family, cohort, row):
+    if not family.get("configuration_selection"):
+        return []
+    lines = ["## Best recorded configuration", "",
+             "Selected by recorded required passes, then completed measurements. Each count comes from this "
+             "one complete configuration. Source differences preserve separate evidence contracts; the selection "
+             "does not establish a controlled win or default adoption.", ""]
+    recipe = publication.get("recipe_contracts", {}).get(row.get("bindings", {}).get("recipe_sha256"))
+    if recipe is not None:
+        fields = (
+            ("Adversarial loss", ("loss", "loss_labels")),
+            ("Optimizer", ("optimizer_family", "optimizer_momentum", "optimizer_adam_lr", "adam_variant")),
+            ("Adam parameters (when used)", ("betas", "d_betas", "prior_betas", "eps", "d_eps", "prior_eps")),
+            ("Learning rates", ("lr", "d_lr_mult", "prior_lr_mult")),
+            ("Rate schedule", ("lr_schedule", "lr_floor", "network_lr_floor", "network_lr_horizon_cap")),
+            ("Critic penalty", ("reg_arm", "reg_coeff", "reg_kappa", "reg_every", "reg_anchor_weight")),
+            ("Damping and guards", ("d_guard_ratio", "latent_damping_max_rate", "direct_particle_gain")),
+            ("Training noise", ("input_noise_std", "output_noise_std", "output_noise_mode")),
+            ("Averaging", ("ema_decay", "serve_average")),
+        )
+        lines += ["Recorded trainer recipe; task-owned architecture, prior, initialization, budget and sampling "
+                  "remain in the experiment receipts below. Null role overrides inherit the shared value. "
+                  "Optimizer parameters only apply to optimizers that consume them.", "",
+                  "| Setting | Selected value |", "| --- | --- |"]
+        for label, keys in fields:
+            optimizer = recipe.get("optimizer_family", "adam")
+            if label.startswith("Adam parameters") and optimizer not in {"adam", "ada_nsgda", "dualnorm_d_only", "particle_rownorm_only"}:
+                continue
+            if label == "Optimizer" and optimizer not in {"adam", "ada_nsgda", "dualnorm_d_only", "particle_rownorm_only"}:
+                keys = ("optimizer_family", "optimizer_momentum")
+            values = "; ".join(f"{key}={recipe[key]}" for key in keys if key in recipe)
+            if values:
+                lines.append("| " + label + " | " + cell(values) + " |")
+        lines.append("")
+        if recipe.get("lr") is not None:
+            lr = recipe["lr"]
+            lines += [f"Base network rate: **{lr:g}**; critic rate: **{lr * recipe.get('d_lr_mult', 1):g}**; "
+                      f"prior rate: **{lr * recipe.get('prior_lr_mult', 1):g}** before any declared schedule or host adaptation.", ""]
+    documentation = cohort.get("configuration_documentation")
+    if documentation:
+        lines += ["Selected optimizer rule: " + documentation["training_details"]["optimizer"], ""]
+    lines += ["<details>", "<summary>Other recorded configurations in this family</summary>", "",
+              "These are whole configurations under their original sources. Their individual passing cells "
+              "do not contribute to the selected result.", "",
+              "| Configuration | Required passes | Executed source | Display selection |", "| --- | ---: | --- | --- |"]
+    rows = publication["rows"] + publication.get("historical_family_rows", [])
+    for alternative in cohort["configuration_alternatives"]:
+        candidate = rows[alternative["row_index"]]
+        label = candidate["candidate_id"].rsplit("--", 1)
+        label = " · ".join([label[0], label[1][:12]]) if len(label) == 2 else label[0]
+        lines.append("| " + " | ".join([
+            link(root, page, label, alternative["page"]), score(alternative["total"]),
+            "`" + str(candidate.get("bindings", {}).get("source_digest", "unbound"))[:12] + "`",
+            "Selected" if alternative["selected"] else "Alternative"]) + " |")
+    return lines + ["", "</details>", ""]
+
+
 def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
@@ -741,6 +882,10 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         lines += ["**Historical cohort navigation.** This original recipe/prior row is retained for existing links. " +
                   link(root, page, "Current GAN v3 solution family", FAMILY_DIRECTORY / "release07-gan-v3.md") +
                   " uses one whole selected configuration and task-declared priors; these historical cells are not pooled into it.", ""]
+    if family.get("solution_page"):
+        lines += ["**Configuration detail for " + link(root, page, family["solution_label"], family["solution_page"]) +
+                  ".** Its optimizer or settings do not create a separate solution family. "
+                  "This page preserves the original configuration evidence and diagnostics.", ""]
     if family["id"] == "atlas":
         lines += _full_original_atlas_status(root, page, progress)
     for cohort in family["cohorts"]:
@@ -778,6 +923,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                             ("; additional scoped probes: " + ", ".join(row["selection"]["measurement_tasks"])
                              if row["selection"].get("measurement_tasks") else "") +
                             ". PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.", ""]
+        details = _selected_configuration_details(root, page, publication, family, cohort, row)
+        if details:
+            lines[-2:-2] = details
         for view in cohort["views"]:
             lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                             *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
@@ -989,4 +1137,5 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
 def generated_pages(root: Path, publication: dict) -> dict[Path, str]:
     return {root / family["page"]: render_family(root, publication, family)
             for family in (publication["family_progress"]["families"] +
+                           publication["family_progress"].get("configuration_families", []) +
                            publication["family_progress"].get("historical_families", []))}

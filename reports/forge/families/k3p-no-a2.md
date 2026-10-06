@@ -108,6 +108,8 @@ These links support the explanation. Recorded results below remain bound to thei
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
+**Configuration detail for [K3P](k3p.md).** Its optimizer or settings do not create a separate solution family. This page preserves the original configuration evidence and diagnostics.
+
 <a name="cohort-cuda-0d83d78027c5"></a>
 
 ## CUDA results
