@@ -496,3 +496,74 @@ raw logs, traces, states, original failures and recovery history outside Git.
 records segmented test scopes and retained output hashes; overlapping counts
 are not a single final-HEAD suite total. The screening profile remains
 provisional, so this study supplies measurements rather than default adoption.
+
+## BCAP-pure — dualnorm pacing follow-up (2026-10-06)
+
+**The new experimental starting recipe passes 4/6 required Tier 1 tasks, up
+from 3/6 for the matched starter.** Use full dualnorm with G/E step .012,
+D/G=1.5 (D step .018), sampled-prior step .03 and network momentum 0:
+
+```python
+get_recipe("bcap", optimizer_family="dualnorm", lr=.012,
+           d_lr_mult=1.5, prior_lr_mult=2.5, optimizer_momentum=0.)
+```
+
+Only optimizer settings changed. BCAP-pure loss, cap/coefficient, task
+auxiliaries, initialization, architecture, data/prior laws, sampling, schedule,
+update budgets and grading retain their existing contracts. This is one
+global recipe at protocol seed 0, with no task-specific winner mixing. The
+public BCAP default remains Adam. The [single current leaderboard](reports/forge/technique-inventory.md)
+uses this new experimental measurement; the [completed readout](reports/forge/dualnorm-pacing-v2/README.md),
+[exact results](reports/forge/dualnorm-pacing-v2/results.json),
+[verified analysis](reports/forge/dualnorm-pacing-v2/analysis.json) and
+[selection receipt](reports/forge/dualnorm-pacing-v2/measurement-selection.json)
+preserve the complete recipe and remaining failures. The original 41-recipe
+screen above retains its original conclusions and source.
+
+All 25 configurations completed their seven actual attempts: six required
+tasks plus a separate clock diagnostic. There were 52 required PASS and 98
+FAIL cells, 25 diagnostic passes, no numerical errors or retries. Both GPUs
+were used. The finite search finished in approximately three hours for
+19,655.90 worker seconds; its 12-hour and 63,000-worker-second ceilings were
+not targets to exhaust. Completion verified all worker/child/lease exits,
+zero reservations and delivery of the assistant callback.
+
+Independent D/prior pacing at G=.01 did not improve the best complete count
+beyond 3/6. The predeclared intermediate-rate stage found .012, which adds
+two-pole: its terminal passing suffix grows from four to 17, above the required
+five. Unused-token hold, AE hold and joint words retain their passes. Positive
+network momenta .5/.9 at that winning pace reach at most 2/6. No larger search
+or positive-momentum rescue follows automatically.
+
+**The two remaining failures concern distribution shape.** Gaussian mean
+error .12788 sigma and std ratio 1.05499 meet their bounds, but CDF KS .11428
+exceeds .05. Its width improves while KS worsens relative to the current
+.01 control. Ring retains all 16 modes and improves HQ .93018 to .94385,
+but full nearest-assigned component covariance error 9.61552 exceeds .85.
+Its mass TV .09302 and full minimum eigenvalue ratio .29107 pass. Core-only
+covariance error .48050 and overall covariance error .09988 cannot replace
+the full-component gate: all assigned tail samples count. Better HQ is not
+evidence that the complete ring test passes.
+
+The scientific execution is commit
+`a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be`, digest
+`f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226`.
+Historical `15eb7cb0` receipts are not reused as this current-source control.
+The scalar/ring hosts' critic-phase input-gradient probes are usable. The word
+fixture leaves its critic in training mode during generator forwards, which
+can still contaminate the observer's input labels; those word curves are
+excluded. Actual update, weight, spectral and sampled-row traces remain usable.
+Matrix spectral products exclude Fourier/input maps and nonlinearities and do
+not bound the complete critic. [Actual-training GIFs](reports/forge/dualnorm-pacing-v2/media-index.json)
+render saved observations without new training. [New archive provenance](reports/forge/dualnorm-pacing-v2/artifact-inventory.json)
+preserves the raw evidence separately from the original archive.
+
+**Magnitude or direction?** This follow-up improves performance by changing
+pace while keeping dualnorm's direction rule fixed. Combined with the earlier
+normalized-SGD ties, it supports continued normalization/pacing work, but
+does not isolate the reason Adam works. No matched Adam/graft comparison ran
+in this new source cohort. Dualnorm has one reusable update form; optimal-rate
+transfer across width/depth remains untested. P1-P6 retain their original
+native/five-seed scope and remain unscored. Before another paid study, analyze
+the saved Gaussian CDF and ring assigned tails alongside the update diagnostics;
+the remaining errors are not explained by mode count or two moments alone.

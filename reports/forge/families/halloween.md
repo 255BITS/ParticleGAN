@@ -69,7 +69,7 @@ Recorded qualification: **tier 0**, discriminator_stability revision 5. Other vi
 
 Source digest: `f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226`. Candidate revision: `eb6eab2ed6830732ede0a6bc4b5bcf7f2a4b2601fa0c02289ab27ea305904f35`. Runtime cohort: `6eb583d8a5cb02dadd9fc8ec05b2539ac46db398328701dcada9f31fd06930c8`.
 
-Frozen numerical evidence · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/e09c650155820e13454549d67238e1ea27df10061265a297c3311087afbcf921.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
 Selection: unmeasured_declaration. Declaration-only placeholder in the CUDA view used by all current measurement pins; no execution or qualification credit.
 
