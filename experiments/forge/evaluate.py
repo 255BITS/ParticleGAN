@@ -24,7 +24,15 @@ def evaluate(path: Path):
     grades = {}
     for task_id in job.get("task_ids", [job["task_id"]]):
         member = raw.get("task_results", {}).get(task_id, raw)
-        grades[task_id] = grade_result(request["tasks"][task_id], member)
+        from .atlas_existing_mog import is_candidate as existing_mog_candidate
+        evidence = member.get("evidence", member.get("metrics")) if isinstance(member, dict) else None
+        if (existing_mog_candidate(request["candidate"])
+                and isinstance(member, dict) and not member.get("error")
+                and member.get("gate_status", member.get("status")) not in {"BLOCKED", "ERROR", "error", "timeout", "cancelled", "INVALID", "INCOMPLETE"}
+                and (not isinstance(evidence, dict) or "existing_mog717" not in evidence)):
+            grades[task_id] = {"status": "INVALID", "reason": "Track B actual owner/control receipt is missing"}
+        else:
+            grades[task_id] = grade_result(request["tasks"][task_id], member)
     result = {"schema_version": 1, "grades": grades, "raw_hash": stable_hash(raw),
               "source_digest": request["source"]["digest"],
               "telemetry": {"independent_grading_seconds": time.monotonic() - started,

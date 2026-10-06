@@ -42,6 +42,12 @@ def _context(request, task, device, resources):
 
 def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
+    from .noisy_prior_tier1 import is_noisy_task as recognized_noisy
+    if recognized_noisy(task):
+        from .noisy_prior_adapters import blockers as original_noisy_blockers
+        reasons = original_noisy_blockers(task, candidate, root=root)
+        if reasons:
+            return reasons
     try:
         task_prior(task)
         task_initializer(task, candidate)
@@ -49,6 +55,19 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers
+    existing_mog = existing_mog_candidate(candidate)
+    if existing_mog:
+        reasons = existing_mog_blockers(task, candidate, root=root)
+        if reasons:
+            return reasons
+    from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
+    noisy_task = is_noisy_task(task)
+    if noisy_task:
+        from .noisy_prior_adapters import blockers as noisy_blockers
+        reasons = noisy_blockers(task, candidate, root=root)
+        if reasons:
+            return reasons
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import validate
         try:
@@ -76,7 +95,7 @@ def adapter_preflight(task, candidate, *, root=None):
     policy_blockers = task_policy_blockers(task, candidate)
     if policy_blockers:
         return policy_blockers
-    if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
+    if not noisy_task and not existing_mog and adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, candidate)
         if blockers:
@@ -167,6 +186,9 @@ class _Run:
         self.rng_audits = []
         self.last_update = {}
         self.policy_audit = None
+        from .noisy_prior_tier1 import is_noisy_task
+        self.noisy_task = is_noisy_task(task)
+        self.existing_mog_task = getattr(context, "_existing_mog", False)
         self.policy_purity, self.policy_observations = [], []
         from .optimizer_diagnostics import attach
         self.optimizer_diagnostics = attach({"G": trainer.opt_g, "D": trainer.opt_d},
@@ -176,6 +198,12 @@ class _Run:
             self.policy_audit = PolicyLifecycleAudit(trainer.policy)
             self.sampling_policy = executed_receipt(task["evaluation"]["sampling_law"],
                 eval_output_noise=task["evaluation"]["eval_output_noise"])
+        if self.existing_mog_task:
+            from .atlas_existing_mog import initialize_vector_receipts
+            initialize_vector_receipts(context, trainer, self.output, task)
+        if self.noisy_task:
+            from .noisy_prior_adapters import initialize_vector_receipts
+            initialize_vector_receipts(context, trainer, self.output, task)
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
                                 if context.device.type == "cuda" else None)
@@ -194,6 +222,12 @@ class _Run:
         before = self.trainer.completed_steps
         with self.timing.measure("training_updates"):
             self.last_update = self.trainer.step(real, collect_stats=True)
+        if self.existing_mog_task:
+            from .atlas_existing_mog import restore_live_owner
+            restore_live_owner(self.trainer)
+        if self.noisy_task:
+            from .noisy_prior_adapters import restore_live_owner
+            restore_live_owner(self.trainer)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
         if self.trainer.completed_steps != before + 1:
             raise RuntimeError("public trainer did not complete one update")
@@ -205,7 +239,14 @@ class _Run:
         policy_before = None
         if self.policy_audit is not None:
             from .policy_adapters import evaluation_state, typed_state_digest
-            policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
+            if self.existing_mog_task:
+                from .atlas_existing_mog import live_evaluation_state
+                policy_before = typed_state_digest(live_evaluation_state(self.context, self.trainer))
+            elif self.noisy_task:
+                from .noisy_prior_adapters import live_evaluation_state
+                policy_before = typed_state_digest(live_evaluation_state(self.context, self.trainer))
+            else:
+                policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
         before = self.context.streams.audit()
         cpu = torch.get_rng_state().clone()
         cuda = torch.cuda.get_rng_state(self.context.device).clone() if self.context.device.type == "cuda" else None
@@ -223,8 +264,15 @@ class _Run:
             audit["unintended_streams"].append("global_cuda")
         self.rng_audits.append(audit)
         if policy_before is not None:
-            from .policy_adapters import observation_receipt
-            after_digest = typed_state_digest(evaluation_state(self.context.state_dict()))
+            if self.existing_mog_task:
+                from .atlas_existing_mog import observation_receipt, live_evaluation_state
+                after_digest = typed_state_digest(live_evaluation_state(self.context, self.trainer))
+            elif self.noisy_task:
+                from .noisy_prior_adapters import observation_receipt, live_evaluation_state
+                after_digest = typed_state_digest(live_evaluation_state(self.context, self.trainer))
+            else:
+                from .policy_adapters import observation_receipt
+                after_digest = typed_state_digest(evaluation_state(self.context.state_dict()))
             pure = policy_before == after_digest
             self.policy_purity.append({"completed_steps": self.trainer.completed_steps,
                 "before_sha256": policy_before, "after_sha256": after_digest, "pure": pure})
@@ -268,8 +316,13 @@ class _Run:
         if self.policy_audit is not None:
             from .policy_adapters import controls_receipt
             controls = controls_receipt(trainer.policy, trainer.completed_steps)
-            controls["cohort"] = self.task["task_cohort"]
-            evidence.update(scoring_weights="state_selected", policy_controls=controls,
+            if self.existing_mog_task:
+                from .atlas_existing_mog import COHORT, vector_receipt
+                controls["cohort"] = COHORT
+                evidence["existing_mog717"] = vector_receipt(self.context, trainer, self.task)
+            else:
+                controls["cohort"] = self.task["task_cohort"]
+            evidence.update(scoring_weights="live" if self.noisy_task or self.existing_mog_task else "state_selected", policy_controls=controls,
                 policy_purity=self.policy_purity, policy_observations=self.policy_observations)
             guards["hooks_exercised"] = guards["hooks_exercised"] and controls["implementation_observed"]
         if evidence.get("artifact_root"):
@@ -315,6 +368,8 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     spec = resolve_vector_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
+    from .atlas_existing_mog import admitted_vector_context
+    admitted_vector_context(request, task, context, output, device)
     g, d = build_vector_models(context, spec)
     trainer = context.build_trainer(g, d)
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
@@ -556,10 +611,34 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    from .noisy_prior_tier1 import is_noisy_task
+    if is_noisy_task(task):
+        from .noisy_prior_adapters import blockers as noisy_blockers
+        reasons = noisy_blockers(task, request["candidate"], root=request["source"]["snapshot_path"])
+        if reasons:
+            raise CapabilityError(reasons)
+        if task["execution"].get("host") == "ae_gan_hold":
+            from .atlas_noisy_ae import run_behavior as run_noisy_ae
+            return run_noisy_ae(request, task, output_dir, device)
+    from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers
+    if existing_mog_candidate(request["candidate"]):
+        reasons = existing_mog_blockers(task, request["candidate"], root=request["source"]["snapshot_path"])
+        if reasons:
+            raise CapabilityError(reasons)
+        if task["id"] == "ae_gan_hold":
+            from .atlas_existing_mog_ae import run_behavior as run_existing_mog_ae
+            return run_existing_mog_ae(request, task, output_dir, device)
     if adapter == "word_joint":
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device)
     if adapter == "transfer_behavior":
+        from .atlas_two_pole import supports, run_behavior as run_atlas_two_pole
+        if supports(task, request["candidate"]):
+            result = run_atlas_two_pole(request, task, output_dir, device)
+            if existing_mog_candidate(request["candidate"]):
+                from .atlas_existing_mog import direct_control_receipt
+                result["evidence"]["existing_mog717"] = direct_control_receipt(task, result)
+            return result
         if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
             from .policy_behavior_adapters import run_behavior
             return run_behavior(request, task, output_dir, device)

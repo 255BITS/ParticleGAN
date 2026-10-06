@@ -334,12 +334,18 @@ def validate_screening_submission(request: dict) -> None:
     factors = candidate.get("changed_factors", [])
     if factors and all(isinstance(f, str) and f.strip().lower() in {"seed", "random_seed", "rng_seed"} for f in factors):
         _block("seed-only screening ideas are forbidden")
+    # Preserve Track B's existing raw-MoG eligibility at this metadata boundary.
+    # Other candidates/views retain the original context identity and guards.
+    from .atlas_existing_mog import CANDIDATE_ID, VIEW_ID, supports_candidate
+    existing_mog_id = (CANDIDATE_ID if supports_candidate(candidate)
+                       and request.get("view", {}).get("id") == VIEW_ID else None)
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), seed=SCREENING_SEED,
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
-        execution_path=candidate.get("execution_path", "public_trainer"))
+        execution_path=candidate.get("execution_path", "public_trainer"),
+        candidate_id=existing_mog_id)
     expected_rng = context.streams.manifest()
     if canonical(request.get("rng")) != canonical(expected_rng):
         _block("screening RNG manifest must match the fixed named-stream seed and bindings")

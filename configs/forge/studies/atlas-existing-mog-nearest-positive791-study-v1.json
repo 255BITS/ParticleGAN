@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 2220,
+    "candidate_budget_seconds": 2220,
+    "id": "atlas-existing-mog-nearest-positive791-study-v1"
+  },
+  "candidate": "atlas-existing-mog-nearest-positive791-v1",
+  "competing_explanation": "Baseline717 and kernel760 outcomes remain separate. The retained Gaussian width/CDF excursion and ring tails do not establish duplicate latent centers or a lifecycle cause; no such historical states were retained. The unchanged direct control has no sampled MoG, and word/unused retain genuine ownership blockers. Original686 evidence is motivation only, without grade/checkpoint/output reuse. KA2 is a maintained metadata binding reference, with no control pilot. The final mean-error Study signature is one scalar only; the original full24 sustained numerical verdict remains mandatory.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "hypothesis": "For the exact original raw-MoG tasks, excluding all coincident support before the nearest-positive minimum restores the public DV12 local-support radius in the birth/death move path. All other fixed task, prior/kernel, network, seed, data, full79 Recipe and measurement inputs are retained. A distinct finite run can measure the unchanged original gates; mathematical and software correctness do not predict recovery.",
+  "id": "atlas-existing-mog-nearest-positive791-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_existing_mog_nearest_positive791_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

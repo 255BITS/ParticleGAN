@@ -1,0 +1,37 @@
+{
+  "api_changes": [
+    "Bind the corrected reaction kernel/checkpoint law to source-pinned actual MoG/table and knn owner metadata."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Correct the reference/knn reaction fake pool to call the same owned raw MoG public sampler before existing DV12/output perturbations. All task priors, widths, networks, seeds, data, full79 Atlas Recipe, observers, numerical gates and horizons are unchanged."
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas760_existing_mog_kernel",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-existing-mog-kernel760-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "The original reference reaction path drew only location centres, omitting the fixed kernel used by the public MoG sampler. The scoped correction uses that same actual prior and private reaction stream; unchanged original Tier1 gates remain the quality criterion. Feature-cell correction or causal quality recovery is not claimed.",
+  "parent": "atlas",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  ],
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}

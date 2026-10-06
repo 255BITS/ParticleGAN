@@ -1,0 +1,529 @@
+{
+  "causal_failure_explanation_claim": false,
+  "direct_saved_state_projection": {
+    "observation_count": 24,
+    "per_field_exact_saved_identity": {
+      "critic_gradient": true,
+      "metrics": true,
+      "particles": true,
+      "step": true,
+      "target": true
+    },
+    "row_metadata_identity": false,
+    "scope": "complete saved particles, targets and critic gradients at original scored observations only; no per-update optimizer/state proof",
+    "task_id": "two_pole"
+  },
+  "grades_created_or_changed": 0,
+  "hash_scope_source_review": {
+    "authoring_measurement": "UNMEASURED_SOURCE_ONLY",
+    "changed_hash_leaf_identified": false,
+    "observer_caution": "Do not call trainer/policy/context state_dict inside a strict tensor-version-pure event observer; served-state release/reapply can use copy_. Read explicit detached live fields instead.",
+    "parameter_identity_from_hash_mismatch_inferred": false,
+    "snapshot_hashes_include": [
+      "model parameters and optimizer state",
+      "control and birth/death state and counters",
+      "global CPU/CUDA RNG",
+      "named and private RNG state",
+      "configuration"
+    ]
+  },
+  "next_step": "See DEBUGGING_PLAN.md for one proposed deterministic passive-observer Gaussian execution with finite fit; numerical admission has not occurred.",
+  "optimizer_updates_added": 0,
+  "original_six_case_counts": {
+    "BLOCKED": 2,
+    "FAIL": 3,
+    "PASS": 1
+  },
+  "published_results": {
+    "current": {
+      "bytes": 56665,
+      "relative_path": "RESULTS.json",
+      "sha256": "207ad7295aefbcdab8ca6f01d875ab35850a5b25406be30aa477d01f0f8067de"
+    },
+    "previous": {
+      "bytes": 51565,
+      "relative_path": "../../atlas760/corrected_mog/RESULTS.json",
+      "sha256": "6c7817b8c07016d3d41ffc613418e95d42455467f1901f07a4abf6fc2414511a"
+    }
+  },
+  "quality_recovery_claim": false,
+  "reported_configuration_equality": [
+    {
+      "actual_prior_identity": true,
+      "full_recipe_identity": true,
+      "reported_metadata_equality": {
+        "extensions": true,
+        "initialization": true,
+        "prior": true,
+        "recipe": true,
+        "rng": true
+      },
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "actual_prior_identity": true,
+      "full_recipe_identity": true,
+      "reported_metadata_equality": {
+        "extensions": true,
+        "initialization": true,
+        "prior": true,
+        "recipe": true,
+        "rng": true
+      },
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "actual_sampled_prior_identity": true,
+      "direct_first_purity_difference_fields": [
+        "after_sha256",
+        "before_sha256",
+        "global_after_sha256",
+        "global_before_sha256"
+      ],
+      "reported_metadata_equality": {
+        "extensions": true,
+        "initialization": true,
+        "prior": true,
+        "recipe": true,
+        "rng": true
+      },
+      "task_id": "two_pole"
+    }
+  ],
+  "rows": [
+    {
+      "current_attempt_id": "1398dbfbb37040deae2d507862c6b06d",
+      "current_terminal_pin": {
+        "bytes": 7537157,
+        "sha256": "c09ed42f668c1a31db8427e0e6c1e4d90dee7b4352834bcd09e191fdd8c3e49e"
+      },
+      "curve_cells_same_verified": true,
+      "earliest_failed_cells": {
+        "failure_cell_counts": {
+          "hold<=0.35": 1,
+          "recon_mse<=0.05": 4
+        },
+        "first_failure_after_first_passing_observation": null,
+        "first_observation": {
+          "failed_original_cells": [
+            "recon_mse<=0.05",
+            "hold<=0.35"
+          ],
+          "step": 11
+        },
+        "original_thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ],
+        "task_id": "ae_gan_hold",
+        "terminal_five_observations": [
+          {
+            "failed_original_cells": [],
+            "step": 209
+          },
+          {
+            "failed_original_cells": [],
+            "step": 219
+          },
+          {
+            "failed_original_cells": [],
+            "step": 230
+          },
+          {
+            "failed_original_cells": [],
+            "step": 240
+          },
+          {
+            "failed_original_cells": [],
+            "step": 250
+          }
+        ]
+      },
+      "new_draws": 0,
+      "new_updates": 0,
+      "observations": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "previous_attempt_id": "6e5223c5968f45e5b1d6ad97a1a4330d",
+      "previous_terminal_pin": {
+        "bytes": 7537059,
+        "sha256": "b3bf4f6b29403f640fe17ee2e2c5023b817ab3ada3119ffc7681f793319e8ae7"
+      },
+      "saved_ae_observations": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "current_attempt_id": "193782839bda49f79fffd4e9bc0747ef",
+      "current_terminal_pin": {
+        "bytes": 187214,
+        "sha256": "f57a7ed48038c82c8e2fd085ef1d0d0abe66886c5cb5519e39d255fb77a382a6"
+      },
+      "curve_cells_same_verified": true,
+      "earliest_failed_cells": {
+        "failure_cell_counts": {
+          "cdf_ks<=0.05": 9,
+          "finite_fraction==1.0": 0,
+          "mean_error_sigma<=0.2": 1,
+          "sample_count>=4096": 0,
+          "std_ratio<=1.2": 2,
+          "std_ratio>=0.8": 0
+        },
+        "first_failure_after_first_passing_observation": {
+          "failed_original_cells": [
+            "cdf_ks<=0.05"
+          ],
+          "step": 250
+        },
+        "first_observation": {
+          "failed_original_cells": [
+            "mean_error_sigma<=0.2",
+            "std_ratio<=1.2",
+            "cdf_ks<=0.05"
+          ],
+          "step": 42
+        },
+        "original_thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "finite_fraction",
+            "==",
+            1.0
+          ],
+          [
+            "mean_error_sigma",
+            "<=",
+            0.2
+          ],
+          [
+            "std_ratio",
+            ">=",
+            0.8
+          ],
+          [
+            "std_ratio",
+            "<=",
+            1.2
+          ],
+          [
+            "cdf_ks",
+            "<=",
+            0.05
+          ]
+        ],
+        "task_id": "gaussian1d_acquisition",
+        "terminal_five_observations": [
+          {
+            "failed_original_cells": [
+              "cdf_ks<=0.05"
+            ],
+            "step": 834
+          },
+          {
+            "failed_original_cells": [],
+            "step": 875
+          },
+          {
+            "failed_original_cells": [],
+            "step": 917
+          },
+          {
+            "failed_original_cells": [],
+            "step": 959
+          },
+          {
+            "failed_original_cells": [],
+            "step": 1000
+          }
+        ]
+      },
+      "final_private_rng_binding_identity": true,
+      "initial_state_scope": "as defined by frozen adapter; not a saved recoverable full checkpoint",
+      "new_draws": 0,
+      "new_updates": 0,
+      "observations": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "policy_purity": {
+        "count": 24,
+        "exact_saved_value_identity": false
+      },
+      "previous_attempt_id": "fbb11dff05814678b0c886d5b8253b0a",
+      "previous_terminal_pin": {
+        "bytes": 186601,
+        "sha256": "da47f821600d96a7330b124dee622c1c1f0a0c87ab4f9dd1b907b887b51c007c"
+      },
+      "recorded_initial_state_hash_identity": false,
+      "rng_audits": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "saved_scored_output_container": {
+        "current_pin": {
+          "bytes": 401001,
+          "sha256": "55b1a929bb7e85e4a302f1cc0c7436cbdba725a6588a77bfe7ff518a958812ce"
+        },
+        "exact_byte_identity": true,
+        "observation_count": 24,
+        "previous_pin": {
+          "bytes": 401001,
+          "sha256": "55b1a929bb7e85e4a302f1cc0c7436cbdba725a6588a77bfe7ff518a958812ce"
+        },
+        "scope": "complete originally saved scored sample/target container; no latent or per-update state proof"
+      },
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "current_attempt_id": "17a40eeeb2df4463a5dede0289716236",
+      "current_terminal_pin": {
+        "bytes": 316660,
+        "sha256": "6fb40becc62ef6134c51cf38abe5bf8dedc5a369d516c02ea5e8c64badcb52a5"
+      },
+      "curve_cells_same_verified": true,
+      "earliest_failed_cells": {
+        "failure_cell_counts": {
+          "component_covariance_error<=0.85": 24,
+          "component_min_eigen_ratio>=0.15": 1,
+          "hq>=0.85": 20,
+          "mass_tv<=0.15": 4,
+          "modes>=16": 12,
+          "sample_count>=4096": 0
+        },
+        "first_failure_after_first_passing_observation": null,
+        "first_observation": {
+          "failed_original_cells": [
+            "modes>=16",
+            "mass_tv<=0.15",
+            "hq>=0.85",
+            "component_covariance_error<=0.85",
+            "component_min_eigen_ratio>=0.15"
+          ],
+          "step": 17
+        },
+        "original_thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "modes",
+            ">=",
+            16
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "task_id": "ring16_acquisition",
+        "terminal_five_observations": [
+          {
+            "failed_original_cells": [
+              "component_covariance_error<=0.85"
+            ],
+            "step": 334
+          },
+          {
+            "failed_original_cells": [
+              "component_covariance_error<=0.85"
+            ],
+            "step": 350
+          },
+          {
+            "failed_original_cells": [
+              "component_covariance_error<=0.85"
+            ],
+            "step": 367
+          },
+          {
+            "failed_original_cells": [
+              "component_covariance_error<=0.85"
+            ],
+            "step": 384
+          },
+          {
+            "failed_original_cells": [
+              "hq>=0.85",
+              "component_covariance_error<=0.85"
+            ],
+            "step": 400
+          }
+        ]
+      },
+      "final_private_rng_binding_identity": true,
+      "initial_state_scope": "as defined by frozen adapter; not a saved recoverable full checkpoint",
+      "new_draws": 0,
+      "new_updates": 0,
+      "observations": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "policy_purity": {
+        "count": 24,
+        "exact_saved_value_identity": false
+      },
+      "previous_attempt_id": "e586953c7c7d47f892683aab6255fad1",
+      "previous_terminal_pin": {
+        "bytes": 316044,
+        "sha256": "a67b03840ce6cf972f67b3d85ccbeb75a745f59739f7f987fbf745b0123395c7"
+      },
+      "recorded_initial_state_hash_identity": false,
+      "rng_audits": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "saved_scored_output_container": {
+        "current_pin": {
+          "bytes": 794217,
+          "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+        },
+        "exact_byte_identity": true,
+        "observation_count": 24,
+        "previous_pin": {
+          "bytes": 794217,
+          "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+        },
+        "scope": "complete originally saved scored sample/target container; no latent or per-update state proof"
+      },
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "current_attempt_id": "f3140adaffd14f4a8974d25874d345d4",
+      "current_terminal_pin": {
+        "bytes": 200658,
+        "sha256": "57516933dd6f06a08497ce5428991de1494c154a45a754b152543a829dd98996"
+      },
+      "curve_cells_same_verified": true,
+      "earliest_failed_cells": {
+        "failure_cell_counts": {
+          "grad_med<=1.0": 0,
+          "mean_abs>=0.3": 24
+        },
+        "first_failure_after_first_passing_observation": null,
+        "first_observation": {
+          "failed_original_cells": [
+            "mean_abs>=0.3"
+          ],
+          "step": 4
+        },
+        "original_thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "task_id": "two_pole",
+        "terminal_five_observations": [
+          {
+            "failed_original_cells": [
+              "mean_abs>=0.3"
+            ],
+            "step": 67
+          },
+          {
+            "failed_original_cells": [
+              "mean_abs>=0.3"
+            ],
+            "step": 70
+          },
+          {
+            "failed_original_cells": [
+              "mean_abs>=0.3"
+            ],
+            "step": 74
+          },
+          {
+            "failed_original_cells": [
+              "mean_abs>=0.3"
+            ],
+            "step": 77
+          },
+          {
+            "failed_original_cells": [
+              "mean_abs>=0.3"
+            ],
+            "step": 80
+          }
+        ]
+      },
+      "new_draws": 0,
+      "new_updates": 0,
+      "observations": {
+        "count": 24,
+        "exact_saved_value_identity": true
+      },
+      "previous_attempt_id": "add8fba7566e4482a84424e9a8e372bd",
+      "previous_terminal_pin": {
+        "bytes": 200604,
+        "sha256": "73c34028b179d751f7cb074e39d7c5aafcadff6af85af6f2d6fdccd00c9d040b"
+      },
+      "saved_particle_observations": {
+        "count": 24,
+        "exact_saved_value_identity": false
+      },
+      "task_id": "two_pole"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema": "forge_atlas826_retained_observability_diagnosis_v1",
+  "scientific_attempts_added": 0,
+  "scope": "original four completed 791 cases compared with retained760; original six-case outcomes preserved",
+  "source_reachability_review": {
+    "authoring_measurement": "UNMEASURED_SOURCE_ONLY",
+    "conditional_radius_sites": [
+      "maybe_apply fake-pool jitter before generated F",
+      "_move parent-centre jitter before child table write"
+    ],
+    "fake_pool_displacement_difference_proves_downstream_decision_change": false,
+    "metric_or_exported_curve_identity_proves_no_effect": false,
+    "owner_receipts_prove_site_execution": false,
+    "same_pair_clone_displacement_difference_proves_pair_selection_change": false
+  },
+  "unresolved_mechanism_evidence": [
+    "per-call legacy/current conditional radii",
+    "actual original jitter noise at each call",
+    "birth/death pair/commit records",
+    "per-update latent state and full gradients",
+    "recoverable complete optimizer/RNG checkpoint"
+  ],
+  "winner_or_default_qualification": false
+}

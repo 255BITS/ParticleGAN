@@ -78,6 +78,16 @@ def _behavior_host(task):
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
     if (_behavior_host(task) == "two_pole"
+            and task.get("task_cohort") == "noisy_particle_prior_tier1_686_v1"):
+        from .noisy_prior_tier1 import validate
+        validate(task)
+        return {"representation": "direct_sample_coordinates", "latent_table_controls": False,
+                "construction": "same original zero12x1 nn.Parameter wrapped by NoisyParticlePrior.from_table(sigma=0); no sampling",
+                "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+                "base_lr": "Recipe.lr", "base_betas": "Recipe.betas",
+                "lr_schedule": "public_UpdatePolicy_stationarity",
+                "note": "Only prior owner/type changes; direct_response controls and no latent A2/prior multipliers remain explicit."}
+    if (_behavior_host(task) == "two_pole"
             and task.get("task_cohort") == "tier1_policy_selected_cloud_v1"):
         return {"representation": "policy_owned_direct_sample_coordinates",
                 "latent_table_controls": True, "construction": "public ParticlePrior with the original zero initialization",
@@ -186,9 +196,9 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         raise ValueError("extension ownership receipt contains unknown public Recipe fields")
     execution = task.get("execution", {})
     prior = execution.get("prior")
-    if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
+    if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud", "noisy_particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
-    expected_prior = {"prior_kind": "mog" if prior["kind"] == "mog" else "particles",
+    expected_prior = {"prior_kind": {"mog": "mog", "particle_cloud": "particles", "noisy_particle_cloud": "noisy_particles"}[prior["kind"]],
                       "sigma_rel": 0., "standardize": prior["standardize"]}
     for name, value in expected_prior.items():
         if resolved_recipe[name] != value:
@@ -267,7 +277,8 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if "initialization" in host_definition:
         initialization["component_policies"] = _json_value(host_definition["initialization"])
     prior_record = _record(prior, "task", "task.execution.prior")
-    prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
+    prior_record["code_path"] = {"mog": "MoGParticlePrior", "particle_cloud": "ParticlePrior",
+                                 "noisy_particle_cloud": "NoisyParticlePrior"}[prior["kind"]]
     if not prior_binding["latent_table_controls"]:
         prior_record["declared_code_path"] = prior_record["code_path"]
         prior_record["code_path"] = None
