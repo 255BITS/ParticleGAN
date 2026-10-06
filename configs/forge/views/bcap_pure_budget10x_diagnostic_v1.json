@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "bcap_pure_budget10x_diagnostic_v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "gaussian1d_acquisition_budget10x_v1",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 0
+    },
+    {
+      "task": "ring16_acquisition_budget10x_v1",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 1
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Two explicit budget diagnostics supply no ordinary Tier 1 qualification, calibration, default adoption or replacement of the original six-task evidence."
+  },
+  "ranking": {
+    "policy": "raw_metrics_only",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "User-authorized exactly two fresh 10x trajectories of one unchanged selected whole optimizer configuration, testing budget insufficiency. Preserve original gates/cadence and report 1x/2x/4x/10x prefixes; both independent diagnostics run despite numerical gate failure. No seed work, search, automatic retries or expansion."
+}

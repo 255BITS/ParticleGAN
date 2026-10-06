@@ -289,6 +289,9 @@ class _Run:
 
 
 def _checkpoints(task):
+    if task.get("evaluation", {}).get("kind") == "transfer_budget_diagnostic":
+        from .budget_diagnostics import checkpoint_steps
+        return checkpoint_steps(task)
     return sorted({math.ceil(i * task["execution"]["steps"] / 24) for i in range(1, 25)})
 
 
@@ -316,7 +319,9 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer_options = ({"max_steps": task["execution"]["steps"]}
+                       if task["evaluation"]["kind"] == "transfer_budget_diagnostic" else {})
+    trainer = context.build_trainer(g, d, **trainer_options)
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)

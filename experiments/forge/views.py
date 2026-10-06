@@ -111,6 +111,9 @@ def _validate_measurement_contract(task):
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         fixed.update(evaluator="benchmarks.transfer_suite.protocol:test_verdict",
                      observations=OBSERVATIONS, minimum_stable_checks=MIN_STABLE_CHECKS)
+    elif kind == "transfer_budget_diagnostic":
+        from .budget_diagnostics import validate_declaration as validate_budget_declaration
+        validate_budget_declaration(task)
     elif kind == "native_accuracy":
         from benchmarks.toy100.accuracy import LIMITS
         from benchmarks.toy100.accuracy_gate import HOLDOUT_N
@@ -356,6 +359,14 @@ def _transfer(task, evidence):
                     metrics=live, evaluator_result=grade)
 
 
+def _transfer_budget(task, evidence):
+    from .budget_diagnostics import test_verdict
+
+    grade = test_verdict(task, evidence)
+    return _verdict(grade["status"], grade["reason"],
+                    metrics=evidence.get("live", {}), evaluator_result=grade)
+
+
 def _native(task, evidence):
     from benchmarks.toy100.accuracy_gate import evaluate_suite
     from .artifacts import verify_artifacts
@@ -563,7 +574,8 @@ def grade_result(task: dict, result: dict | None) -> dict:
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
-    graders = {"transfer_sustained": _transfer, "native_accuracy": _native,
+    graders = {"transfer_sustained": _transfer, "transfer_budget_diagnostic": _transfer_budget,
+               "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree}
     grader = graders.get(task["evaluation"]["kind"])

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "id": "bcap-pure-budget10x-v1",
+  "status": "ready",
+  "candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "control": {
+    "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "task_map": {
+      "gaussian1d_acquisition_budget10x_v1": "gaussian1d_acquisition",
+      "ring16_acquisition_budget10x_v1": "ring16_acquisition"
+    }
+  },
+  "hypothesis": "The remaining distribution-shape failures may reflect insufficient training allowance. Hold the selected full BCAP-pure dualnorm optimizer and every host/data/prior/sampling law fixed, start exactly two public seed 0 trajectories from scratch, and test the unchanged Gaussian and ring conjunctions through 10x updates. The preregistered numerical prediction is ring full component covariance error <= 0.85 at 10x; Gaussian CDF KS and all original gates remain independently reported. Prefix summaries at 1x/2x/4x/10x are dependent slices of the two trajectories, not independent replications.",
+  "scope": {
+    "view": "bcap_pure_budget10x_diagnostic_v1",
+    "through_tier": 1,
+    "execution_backend": "cuda"
+  },
+  "campaign": {
+    "id": "bcap-pure-budget10x-v1",
+    "candidate_budget_seconds": 4200,
+    "budget_seconds": 4200
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+      "selector": [
+        "source"
+      ],
+      "identity": {
+        "commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be",
+        "digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+      },
+      "use": "motivation_only"
+    },
+    {
+      "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+      "selector": [
+        "configurations",
+        21
+      ],
+      "identity": {
+        "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+        "configuration_id": "7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+        "required_passes": 4
+      },
+      "use": "motivation_only"
+    },
+    {
+      "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+      "selector": [
+        "configurations",
+        21,
+        "tasks",
+        "gaussian1d_acquisition"
+      ],
+      "identity": {
+        "attempt_id": "2f3251483c684806a8f54c30aa360eca",
+        "result_hash": "45b8d0b7c4e5dfecfae26b27800a0d66a39d7cd6b6b7b768de16bc44f68c2a52",
+        "gate_status": "FAIL"
+      },
+      "use": "motivation_only"
+    },
+    {
+      "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+      "selector": [
+        "configurations",
+        21,
+        "tasks",
+        "ring16_acquisition"
+      ],
+      "identity": {
+        "attempt_id": "e7a839160d7a4095990c034557ec1d24",
+        "result_hash": "6ddb71b40bd4fbeed2b1413d55f51a4d8eb1213a687e03ee7e56ecb22cb89d53",
+        "gate_status": "FAIL"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "ring16_acquisition_budget10x_v1",
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "threshold": 0.85,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "ring16_acquisition_budget10x_v1",
+    "metric": "component_covariance_error",
+    "op": ">",
+    "threshold": 0.85,
+    "phase": "final"
+  },
+  "competing_explanation": "Constant-rate oscillation or persistent generated tails may prevent correct CDF/local covariance even with more updates. A ring endpoint shape improvement without the complete terminal-five joint gate, a transient prefix pass, or a different failed conjunct does not establish success. Original 1x receipts retain their frozen source; compare newly emitted initialization/stream and 1x prefix evidence before asserting replay equality. This diagnostic changes only task budget, cadence declaration and retained final state, freezes original schedule horizons and constant rates, and authorizes exactly two attempts, no control rerun, automatic retry or expansion. Both independent tasks finish before readout; final PASS/FAILs confer no ordinary view qualification.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}
