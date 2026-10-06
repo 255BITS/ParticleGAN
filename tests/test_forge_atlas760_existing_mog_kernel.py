@@ -30,7 +30,7 @@ def reaction(step=1000, backend='knn'):
         sigma=prior()['sigma'], sigma_dtype='torch.float32', sigma_units='raw_latent_coordinates',
         standardize=False, row_weights='uniform', same_table_parameter=True,
         sampler='original_public_sample_then_existing_dv12_and_output_noise', stream='private_birth_death')
-    return dict(schema='forge_atlas760_mog_reaction_kernel_v1', candidate_id=owner.CANDIDATE_ID,
+    return dict(schema='forge_atlas791_mog_nearest_positive_v1', candidate_id=owner.CANDIDATE_ID,
         completed_steps=step, core_pins={name: deepcopy(owner.CORE_PINS[name]) for name in
             ('particlegan/birth_death.py', 'particlegan/policy.py')},
         birth_death_type='particlegan.birth_death.ParticleBirthDeath', actual_backend=backend,
@@ -38,10 +38,10 @@ def reaction(step=1000, backend='knn'):
         state_config_fake_pool_prior=deepcopy(fake), sampling_calls_added=0)
 
 
-class Atlas760ExistingMoGKernelMetadataTests(unittest.TestCase):
+class Atlas791NearestPositiveMetadataTests(unittest.TestCase):
     def test_only_corrected_candidate_and_hashed_marker(self):
         self.assertTrue(owner.supports_candidate(candidate()))
-        for identifier in ('atlas-existing-mog-tier1-717-v1', 'atlas-noisy025-tier1-717-v1', 'atlas'):
+        for identifier in ('atlas-existing-mog-tier1-717-v1', 'atlas-noisy025-tier1-717-v1', 'atlas-existing-mog-kernel760-v1', 'atlas'):
             wrong = candidate(); wrong['id'] = identifier
             self.assertFalse(owner.supports_candidate(wrong))
         wrong = candidate(); wrong['claim_contract']['experimental_track'] = 'atlas717_existing_mog'
@@ -131,18 +131,60 @@ class Atlas760ExistingMoGKernelMetadataTests(unittest.TestCase):
                     _validate_particle_records(observations, wrong)
 
     def test_ready_workflow_and_catalog_sources_are_explicit(self):
-        study = json.loads((ROOT / 'configs/forge/studies/atlas-existing-mog-kernel760-study-v1.json').read_text())
-        self.assertEqual(study['status'], 'draft')
+        study = json.loads((ROOT / 'configs/forge/studies/atlas-existing-mog-nearest-positive791-study-v1.json').read_text())
+        self.assertIn(study['status'], ('draft', 'ready'))
         self.assertEqual(study['candidate'], owner.CANDIDATE_ID)
         self.assertEqual(study['scope']['view'], owner.VIEW_ID)
         paths = set(owner.supporting_source_paths(task('two_pole'), candidate(), root=ROOT))
         self.assertIn('configs/forge/legacy-ideas-v1.json', paths)
         self.assertIn('configs/forge/defaults.json', paths)
         self.assertIn('configs/forge/ideas/ka2.json', paths)
-        self.assertIn('configs/forge/ideas/atlas-existing-mog-kernel760-v1.json', paths)
-        self.assertIn('configs/forge/studies/atlas-existing-mog-kernel760-study-v1.json', paths)
+        self.assertIn('configs/forge/ideas/atlas-existing-mog-nearest-positive791-v1.json', paths)
+        self.assertIn('configs/forge/studies/atlas-existing-mog-nearest-positive791-study-v1.json', paths)
         for name in owner.PARENTS:
             self.assertIn('configs/forge/tasks/' + name + '.json', paths)
+
+    def test_previous_kernel_source_and_identity_cannot_supply_new_radius_credit(self):
+        for step in (0, 1000):
+            for field in ('core', 'schema', 'candidate'):
+                wrong = reaction(step=step, backend='pending' if step == 0 else 'knn')
+                if field == 'core':
+                    wrong['core_pins']['particlegan/birth_death.py'] = dict(
+                        sha256='5db0af4bbb12c9c5369c59585b914eb7eff41a40995352bc75bef1046e728a85', bytes=47722)
+                if field == 'schema': wrong['schema'] = 'forge_atlas760_mog_reaction_kernel_v1'
+                if field == 'candidate': wrong['candidate_id'] = 'atlas-existing-mog-kernel760-v1'
+                with self.subTest(step=step, field=field):
+                    with self.assertRaises(ValueError):
+                        owner.validate_reaction_kernel_receipt(wrong, prior(), completed_steps=step)
+
+    def test_pinned_birth_source_and_other_fixed_controls(self):
+        raw = (ROOT / 'particlegan/birth_death.py').read_bytes()
+        self.assertEqual(owner.CORE_PINS['particlegan/birth_death.py'], dict(
+            sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw)))
+        self.assertEqual(owner.CORE_PINS['particlegan/birth_death.py']['sha256'],
+            '7482b29f0065be446a6b5e087a4b55d0961c8a6f2602cf9919ca502edca78c91')
+        self.assertEqual(owner.CORE_PINS['particlegan/policy.py']['sha256'],
+            '7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967')
+        for mutator in ('kernel', 'network', 'data', 'gate', 'horizon'):
+            changed = task('gaussian1d_acquisition')
+            if mutator == 'kernel': changed['execution']['prior']['kind'] = 'noisy_particles'
+            if mutator == 'network': changed['execution']['host_definition']['z_dim'] += 1
+            if mutator == 'data': changed['execution']['host_definition']['means'][0][0] += .1
+            if mutator == 'gate': changed['evaluation']['thresholds'][0][2] = 4095
+            if mutator == 'horizon': changed['execution']['steps'] += 1
+            with self.subTest(field=mutator):
+                with self.assertRaises(ValueError): owner.validate(changed)
+
+    def test_media_and_cards_require_the_new_frozen_scope(self):
+        from experiments.forge.atlas717_existing_mog_media import EXPECTED_VIEW, EXPECTED_CLAIM_CONTRACT, OWNER_PINS
+        view = json.loads((ROOT / 'configs/forge/views/atlas_existing_mog_nearest_positive791_v1.json').read_text())
+        self.assertEqual(EXPECTED_VIEW, view)
+        self.assertEqual(EXPECTED_CLAIM_CONTRACT, candidate()['claim_contract'])
+        for name, expected in OWNER_PINS.items():
+            with self.subTest(module=name):
+                self.assertEqual(expected, hashlib.sha256((ROOT / 'experiments/forge' / (name + '.py')).read_bytes()).hexdigest())
+        self.assertIs(view['reporting']['family_totals'], False)
+
 
 
 if __name__ == '__main__':

@@ -337,11 +337,30 @@ class ParticleBirthDeath:
     # --------------------------------------------------------------- sampling law
     @torch.no_grad()
     def _nearest_other(self, z, points):
-        """Half-NN radius as DV12's perturb_latent (zero distances masked), matmul shortlist."""
-        d, _ = _knn(z, points, min(4, len(points) - 1) + 1)
-        d = d.masked_fill(d == 0, float("inf"))
-        nearest = d.min(1).values
-        return torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+        """Half nearest-positive-support radius for the bound raw MoG.
+
+        Match public DV12's zero mask before the support minimum. Query and
+        support chunks bound coordinate workspace without retaining a full
+        population distance matrix. Legacy unbound rows keep their original
+        shortlist path and floating operations.
+        """
+        if self.rows.mog_prior is None:
+            d, _ = _knn(z, points, min(4, len(points) - 1) + 1)
+            d = d.masked_fill(d == 0, float("inf"))
+            nearest = d.min(1).values
+            return torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+        radii = []
+        support = points.detach()
+        for query in z.detach().split(2048):
+            nearest = torch.full((len(query),), float("inf"), device=z.device, dtype=z.dtype)
+            for centers in support.split(max(1, 2048 // z.shape[1])):
+                distance = query[:, None, :] - centers[None, :, :]
+                distance = distance.mul_(distance).sum(-1)
+                distance.masked_fill_(distance == 0, float("inf"))
+                nearest = torch.minimum(nearest, distance.min(1).values)
+            nearest = nearest.sqrt()
+            radii.append(torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest)))
+        return torch.cat(radii)
 
     @torch.no_grad()
     def _jitter(self, latent, noise):

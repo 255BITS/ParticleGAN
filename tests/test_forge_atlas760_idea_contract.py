@@ -9,7 +9,7 @@ from experiments.forge.contracts import validate_idea
 class CorrectedIdeaContractTests(unittest.TestCase):
     def fixture(self):
         return json.loads((Path(__file__).resolve().parents[1] /
-            'configs/forge/ideas/atlas-existing-mog-kernel760-v1.json').read_text())
+            'configs/forge/ideas/atlas-existing-mog-nearest-positive791-v1.json').read_text())
 
     def test_corrected_schema3_idea_validates_without_mutation(self):
         idea=self.fixture();before=deepcopy(idea)

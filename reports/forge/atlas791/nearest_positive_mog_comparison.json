@@ -1,0 +1,62 @@
+{
+  "additional_draws": 0,
+  "additional_updates": 0,
+  "comparison_scope": "All original published scalar cells at each of24 scheduled observations and original convergence fields; extra raw diagnostics excluded. No latent exposure, initializer/state identity, causal recovery or speed inference.",
+  "current791_results": {
+    "bytes": 56665,
+    "path": "reports/forge/atlas791/nearest_positive_mog/RESULTS.json",
+    "sha256": "207ad7295aefbcdab8ca6f01d875ab35850a5b25406be30aa477d01f0f8067de"
+  },
+  "previous760_results": {
+    "bytes": 51565,
+    "path": "reports/forge/atlas760/corrected_mog/RESULTS.json",
+    "sha256": "6c7817b8c07016d3d41ffc613418e95d42455467f1901f07a4abf6fc2414511a"
+  },
+  "rows": [
+    {
+      "all_24_original_reported_scalar_cells_identical": true,
+      "comparison_scope": "all previously reported metric cells at every original step; extra current raw metrics excluded explicitly; initializer/state/latent exposure not established",
+      "current_attempt_id": "193782839bda49f79fffd4e9bc0747ef",
+      "observation_count": 24,
+      "original_convergence_identical": true,
+      "original_reported_final_metric_cells_identical": true,
+      "previous_attempt_id": "fbb11dff05814678b0c886d5b8253b0a",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "all_24_original_reported_scalar_cells_identical": true,
+      "comparison_scope": "all previously reported metric cells at every original step; extra current raw metrics excluded explicitly; initializer/state/latent exposure not established",
+      "current_attempt_id": "f3140adaffd14f4a8974d25874d345d4",
+      "observation_count": 24,
+      "original_convergence_identical": true,
+      "original_reported_final_metric_cells_identical": true,
+      "previous_attempt_id": "add8fba7566e4482a84424e9a8e372bd",
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "all_24_original_reported_scalar_cells_identical": true,
+      "comparison_scope": "all previously reported metric cells at every original step; extra current raw metrics excluded explicitly; initializer/state/latent exposure not established",
+      "current_attempt_id": "17a40eeeb2df4463a5dede0289716236",
+      "observation_count": 24,
+      "original_convergence_identical": true,
+      "original_reported_final_metric_cells_identical": true,
+      "previous_attempt_id": "e586953c7c7d47f892683aab6255fad1",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_24_original_reported_scalar_cells_identical": true,
+      "comparison_scope": "all previously reported metric cells at every original step; extra current raw metrics excluded explicitly; initializer/state/latent exposure not established",
+      "current_attempt_id": "1398dbfbb37040deae2d507862c6b06d",
+      "observation_count": 24,
+      "original_convergence_identical": true,
+      "original_reported_final_metric_cells_identical": true,
+      "previous_attempt_id": "6e5223c5968f45e5b1d6ad97a1a4330d",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    }
+  ],
+  "schema": "pg_atlas791_previous760_reported_cell_comparison_v1"
+}
