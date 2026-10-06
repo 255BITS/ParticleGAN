@@ -773,9 +773,11 @@ def get_recipe(name="gan", **overrides):
     ``"atlas"`` adds automatic feature-cell selection (128 cells) and the
     settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
     ``"k3p"`` explicitly selects the earlier critic formulation.
-    ``"bcap"`` selects native Adam, fixed real/fake input-gradient caps and
-    constant learning rates, with no guard, anchor, latent damping, extra
-    regularization, EMA serving or additive training noise.
+    ``"bcap"`` selects zero-momentum dualnorm with G/E step .012, D step
+    .018 and sampled-prior row step .03, fixed real/fake input-gradient caps
+    and constant rates. ``"bcap_adam"`` retains the earlier native-Adam
+    preset. Both disable the guard, anchor, latent damping, extra
+    regularization, EMA serving and additive training noise.
     No research configuration file is read at runtime.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
@@ -785,7 +787,7 @@ def get_recipe(name="gan", **overrides):
         "gan": {},
         "ka2": {},
         "k3p": dict(critic_formulation="k3p"),
-        "bcap": dict(critic_formulation="bcap", optimizer_family="adam", reg_arm="b_cap",
+        "bcap_adam": dict(critic_formulation="bcap", optimizer_family="adam", reg_arm="b_cap",
                      reg_coeff=1., reg_kappa=1., reg_every=1,
                      lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .999),
                      lr_floor=1., network_lr_floor=1., network_lr_horizon_cap=None,
@@ -815,11 +817,16 @@ def get_recipe(name="gan", **overrides):
                          batch_size=64, routing_temperature=.125,
                          distance_reduction="mean"),
     }
+    families["bcap"] = {
+        **families["bcap_adam"], "optimizer_family": "dualnorm",
+        "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5,
+        "optimizer_momentum": 0.,
+    }
     families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
     families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
     families["halloween"] = {
-        **families["bcap"], "reg_coeff": 0.0,
+        **families["bcap_adam"], "reg_coeff": 0.0,
         "lr": 0.008020980209802098, "d_lr_mult": 0.4922016232592352,
         "betas": (0.6119661196611966, 0.5612256122561226),
         "d_betas": (0.1051710517105171, 0.7203172031720317),

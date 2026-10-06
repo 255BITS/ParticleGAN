@@ -7,6 +7,7 @@ import pytest
 import torch
 
 from particlegan import get_recipe
+from experiments.forge.api import API_VERSION, FormulationContext, resolve_public_recipe
 from experiments.forge.boundaries import recipe_field_owner
 from experiments.forge.configuration_search import (
     _declarations, _grid, _load_spec, configuration_id, recipe_identity_fields,
@@ -25,6 +26,51 @@ def test_implicit_optimizer_defaults_preserve_all_archived_configuration_ids():
         expanded = {"optimizer_momentum": 0., "optimizer_adam_lr": None, **frozen}
         assert recipe_identity_fields(frozen) == recipe_identity_fields(expanded)
         assert configuration_id(card, resolved_recipe=expanded) == card["configuration_id"]
+
+def test_versioned_bcap_binding_preserves_all_frozen_configuration_recipes_and_ids():
+    cards = [json.loads(path.read_text()) for path in (ROOT / "configs/forge/configurations").glob("*.json")]
+    cards = [card for card in cards if card.get("recipe_preset") == "bcap"]
+    assert len(cards) >= 296  # All cards present when the public default changed.
+    for card in cards:
+        context = FormulationContext(recipe_preset=card["recipe_preset"],
+            recipe_overrides=card.get("recipe_overrides", {}), prior=card.get("prior"),
+            initializer=card.get("initializer", "deterministic_orthogonal"),
+            extensions=card.get("extensions", {}),
+            requires_capabilities=card.get("requires_capabilities", ()),
+            execution_path=card.get("execution_path", "public_trainer"))
+        actual = asdict(context.recipe)
+        frozen = card["resolved_configuration_recipe"]
+        # Normalize only registered implicit default additions, including the
+        # original paired-logistic selector; tuples/lists share JSON identity.
+        assert stable_hash(recipe_identity_fields(actual)) == stable_hash(recipe_identity_fields(frozen)), card["id"]
+        assert configuration_id(card, resolved_recipe=actual) == card["configuration_id"], card["id"]
+
+
+def test_forge_v1_bcap_remains_adam_while_public_bcap_selects_the_new_starter():
+    assert API_VERSION == "forge-api-v1"
+    candidate = {"recipe_preset": "bcap", "recipe_overrides": {}}
+    original = asdict(get_recipe("bcap_adam").replace(name="bcap"))
+    assert asdict(resolve_public_recipe(candidate)) == original
+    assert get_recipe("bcap").optimizer_family == "dualnorm"
+    assert get_recipe("bcap").lr == .012
+    assert get_recipe("bcap").d_lr_mult == 1.5
+    assert get_recipe("bcap").prior_lr_mult == 2.5
+    assert candidate["recipe_overrides"] == {}
+
+
+def test_forge_bcap_binding_respects_explicit_winner_and_name_overrides():
+    candidate = {"recipe_preset": "bcap", "recipe_overrides": {
+        "name": "frozen-label", "optimizer_family": "dualnorm", "optimizer_momentum": 0.,
+        "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5}}
+    resolved = resolve_public_recipe(candidate, name="report-label")
+    assert asdict(resolved) == asdict(get_recipe("bcap").replace(name="report-label"))
+    assert resolve_public_recipe(candidate).name == "frozen-label"
+    assert candidate["recipe_overrides"]["name"] == "frozen-label"
+
+
+def test_halloween_binding_retains_its_explicit_optimizer_and_rate_law():
+    assert asdict(resolve_public_recipe({"recipe_preset": "halloween"})) == asdict(get_recipe("halloween"))
+    assert resolve_public_recipe({"recipe_preset": "halloween"}).optimizer_family == "adam"
 
 
 def test_optimizer_controls_have_explicit_ownership_and_momentum_boundary():
@@ -56,7 +102,7 @@ def test_focused_screen_is_exactly_41_whole_recipes_under_one_campaign():
         for card, _ in declarations:
             recipe = card["resolved_configuration_recipe"]
             arms.add(recipe["optimizer_family"])
-            baseline = asdict(get_recipe("bcap"))
+            baseline = asdict(get_recipe("bcap_adam").replace(name="bcap"))
             changed = {name for name, value in recipe.items()
                        if stable_hash(value) != stable_hash(baseline[name])}
             assert changed <= {"optimizer_family", "optimizer_momentum", "optimizer_adam_lr",

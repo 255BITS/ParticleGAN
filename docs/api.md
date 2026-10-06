@@ -813,7 +813,7 @@ tracks device and dtype.
 
 ```python
 gan = recipe.make_loss()  # GANLoss(recipe.loss, labels=recipe.loss_labels)
-recipe = get_recipe("bcap", loss="hinge", lr=.0010625)
+recipe = get_recipe("bcap", loss="hinge")
 gan = recipe.make_loss()
 ```
 
@@ -897,16 +897,29 @@ recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
 the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
 default is KA2. These choices are recorded in new source/formulation cohorts.
 
-`get_recipe("bcap")` selects a simpler family: native `torch.optim.Adam`, the
-fixed cap above, and constant G/D/prior rates. It disables the critic spike
+`get_recipe("bcap")` selects BCAP-pure with zero-momentum `dualnorm`, the
+fixed cap above, and constant G/D/prior step sizes. It disables the critic spike
 guard, EMA anchor, A2 latent damping, direct-particle gain, prior regularization,
 EMA averaging, and additive input/output training noise. Its defaults are
-coefficient 1, cap 1, penalty every update, Adam `(0, .999)`, G/D LR `.00425`
-and prior LR `.0085`; `loss` defaults to `relativistic` and can be overridden.
+coefficient 1, cap 1, penalty every update, G/E step `.012`, D step `.018`
+(`d_lr_mult=1.5`), and sampled-prior row step `.03` (`prior_lr_mult=2.5`).
+`optimizer_momentum=0`; `loss` defaults to `relativistic` and can be overridden.
 The resolved formulation is `bcap`. Selecting this preset does not change
 historical `Recipe(reg_arm="b_cap")` configurations. A declared MoG prior still
 has its kernel noise; that distribution is independent of additive training
 noise. Models, initialization, prior and execution budget belong to the caller.
+
+This owner-selected default passed 4/6 required Tier 1 tasks in the
+[optimizer-only pacing study](../reports/forge/dualnorm-pacing-v2/DEFAULT_SELECTION.md).
+Gaussian CDF fit and full ring-component covariance still fail; calibration,
+independent confirmation and scale transfer remain unestablished.
+`get_recipe("bcap_adam")` preserves the earlier native `torch.optim.Adam`
+preset with betas `(0, .999)`, G/D LR `.00425` and prior LR `.0085`.
+Restore old checkpoints with `Recipe(**saved_fields)`; recipe labels also
+belong to checkpoint identity. Forge's `forge-api-v1` declarations retain their
+historical `recipe_preset="bcap"` base through this explicit Adam preset, so
+existing cards, configuration IDs and evidence keep their original meaning.
+The measured dualnorm cards explicitly pin their optimizer settings.
 
 ### `ParticleRegularizer`
 
@@ -1034,7 +1047,8 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 
 ```python
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
-get_recipe("bcap", loss="hinge", lr=.0010625) # Fixed BCAP, native Adam, constant rates.
+get_recipe("bcap", **overrides) # Fixed BCAP, winning dualnorm steps, constant rates.
+get_recipe("bcap_adam", **overrides) # Earlier fixed BCAP/native Adam control.
 get_recipe("halloween", **overrides) # Explicit historical optimizer/loss transfer.
 get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
 get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation.
@@ -1046,7 +1060,7 @@ Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 `get_recipe(name="gan", **overrides)` selects components without constructing a
 training loop. Explicit keyword fields override the selected configuration.
 Model families share the default optimizer, loss, penalty and schedule. The
-`bcap` preset supplies fixed caps, native Adam and constant rates without
+`bcap` preset supplies fixed caps, zero-momentum dualnorm and constant rates without
 optimizer interventions or additive training noise. The
 `e22` preset selects DV12 stationarity control with per-row evidence,
 critic-feature birth/death, learned output noise and served averaging; it
@@ -1058,7 +1072,8 @@ and fields are rejected. Restore a complete saved configuration with
 | Name | Components and dimensions |
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
-| `bcap` | Scalar GAN, 20,000 particles, latent dimension 2; pure fixed BCAP and native Adam at constant rates |
+| `bcap` | Scalar GAN, 20,000 particles, latent dimension 2; pure fixed BCAP and dualnorm at constant rates |
+| `bcap_adam` | Earlier pure fixed BCAP preset with native Adam and constant rates |
 | `halloween` | Scalar GAN; distinct G/D rates, moments and epsilon, dense TensorFlow-v1 Adam, least-squares labels `(-1,1,1)`, constant rates and zero critic penalty |
 | `e22` | Scalar GAN, 20,000 particles, latent dimension 2, batch 2,048; E22 controls with learned output noise initially .029 |
 | `e22_routed` | Same E22 controls with `row_policy="routed_paired"`; requires explicit context/routing/feature callbacks and guard observations |
@@ -1250,7 +1265,7 @@ and direct-particle gain; `get_recipe("bcap")` already does this.
 
 ```python
 recipe = get_recipe("bcap", optimizer_family="dualnorm",
-                    lr=.01, d_lr_mult=1.5, prior_lr_mult=3.,
+                    lr=.012, d_lr_mult=1.5, prior_lr_mult=2.5,
                     optimizer_momentum=0.)
 trainer = GANTrainer(recipe, G, D, prior=prior)
 ```
@@ -1288,8 +1303,9 @@ baseline `optimizer_adam_lr` on G/E and baseline
 normalized `lr * prior_lr_mult` on the prior and baseline Adam rates on G/E/D.
 Direct generated-coordinate fixtures have no sampled prior table: their
 generator coordinates follow the matrix/vector rule in `dualnorm` and retain
-Adam in `particle_rownorm_only`. Default recipe values and native Adam
-behavior remain unchanged.
+Adam in `particle_rownorm_only`. Use `get_recipe("bcap_adam")` as the
+explicit control when constructing these isolation arms; native Adam retains
+its existing update law.
 
 `adam_variant="tensorflow_v1"` uses the named `TensorFlowV1Adam` dense update
 law, adding epsilon before second-moment bias correction. Checkpoints include

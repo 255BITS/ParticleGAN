@@ -35,7 +35,7 @@ def equal(left, right):
 
 
 def test_distinct_generator_critic_and_prior_role_settings_are_consumed():
-    recipe = get_recipe("bcap", betas=(.4, .8), d_betas=(.1, .7), prior_betas=(.2, .6),
+    recipe = get_recipe("bcap_adam", betas=(.4, .8), d_betas=(.1, .7), prior_betas=(.2, .6),
                         eps=.03, d_eps=.005, prior_eps=.0001, num_particles=8)
     g, d = module(), module()
     prior = recipe.make_prior()
@@ -53,7 +53,7 @@ def test_distinct_generator_critic_and_prior_role_settings_are_consumed():
 
 
 def test_role_beta2_schedule_starts_from_each_roles_own_initial_moment():
-    recipe = get_recipe("bcap", total_steps=20, num_particles=8, betas=(.4, .8), d_betas=(.1, .7),
+    recipe = get_recipe("bcap_adam", total_steps=20, num_particles=8, betas=(.4, .8), d_betas=(.1, .7),
                         prior_betas=(.2, .6), beta2_end=.95, beta2_anneal_end=.2)
     og, od = recipe.make_optimizers(module(), module(), recipe.make_prior())
     apply_training_schedules(2, recipe, (og, od))
@@ -64,7 +64,7 @@ def test_role_beta2_schedule_starts_from_each_roles_own_initial_moment():
 
 def test_explicit_shared_d_moments_preserve_signature_and_d_only_schedule_is_active():
     from experiments.forge.techniques import recipe_field_active, validate_same_technique
-    base = get_recipe("bcap", beta2_end=.999)
+    base = get_recipe("bcap_adam", beta2_end=.999)
     validate_same_technique(base, base.replace(d_betas=base.betas))
     distinct = base.replace(d_betas=(0, .8))
     assert recipe_field_active("beta2_end", distinct)
@@ -155,7 +155,7 @@ def test_negative_tf_variance_checkpoint_is_rejected_before_mutation():
 
 
 def test_default_additions_preserve_archived_recipe_identity_and_packets():
-    recipe = get_recipe("bcap")
+    recipe = get_recipe("bcap_adam")
     old = asdict(recipe)
     additions = {"d_betas", "d_eps", "prior_eps", "loss_labels", "adam_variant", "lr_schedule",
                  "lr_decay_rate", "lr_decay_steps", "lr_decay_staircase"}
@@ -165,6 +165,22 @@ def test_default_additions_preserve_archived_recipe_identity_and_packets():
     assert Recipe(**recipe.to_dict()) == recipe
     changed = recipe.replace(d_eps=.2)
     assert recipe_identity_fields(asdict(changed)) != recipe_identity_fields(old)
+
+
+def test_halloween_preserves_historical_adam_inheritance_after_bcap_default_changes():
+    recipe = get_recipe("halloween", num_particles=8)
+    assert recipe.optimizer_family == "adam" and recipe.optimizer_momentum == 0.
+    assert recipe.optimizer_adam_lr is None and recipe.prior_lr_mult == 2.
+    assert recipe.adam_variant == "tensorflow_v1"
+    assert (recipe.loss, recipe.loss_labels, recipe.reg_coeff) == ("least_squares", (-1., 1., 1.), 0.)
+    assert (recipe.lr, recipe.d_lr_mult) == (.008020980209802098, .4922016232592352)
+    assert (recipe.betas, recipe.d_betas, recipe.prior_betas) == (
+        (.6119661196611966, .5612256122561226), (.1051710517105171, .7203172031720317), (0., .999))
+    assert (recipe.eps, recipe.d_eps, recipe.prior_eps) == (.3087330873308733, .007500075000750007, 1e-8)
+    opt_g, opt_d = recipe.make_optimizers(module(), module(), recipe.make_prior())
+    assert type(opt_g) is type(opt_d) is TensorFlowV1Adam
+    assert [group["lr"] for group in opt_g.param_groups] == pytest.approx([recipe.lr, 2 * recipe.lr])
+    assert opt_d.param_groups[0]["lr"] == pytest.approx(recipe.lr * recipe.d_lr_mult)
 
 
 def test_explicit_decay_clock_does_not_rescale_when_training_budget_changes():

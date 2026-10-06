@@ -24,9 +24,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LOSSES = ("relativistic", "non_saturating", "hinge", "wasserstein", "least_squares")
 
 
-def trainer_for(loss="relativistic"):
+def trainer_for(loss="relativistic", *, recipe_name="bcap"):
     torch.manual_seed(21)
-    recipe = get_recipe("bcap", loss=loss, z_dim=2, num_particles=8,
+    recipe = get_recipe(recipe_name, loss=loss, z_dim=2, num_particles=8,
                         batch_size=4, total_steps=7000, standardize=False,
                         prior_kind="mog", sigma_rel=.025)
     generator = nn.Sequential(nn.Linear(2, 4), nn.SiLU(), nn.Linear(4, 2))
@@ -55,7 +55,7 @@ def batch():
 
 @pytest.mark.parametrize("loss", LOSSES)
 def test_public_updates_apply_selected_loss_with_native_adam_at_late_constant_rates(loss):
-    trainer = trainer_for(loss)
+    trainer = trainer_for(loss, recipe_name="bcap_adam")
     assert trainer.loss.loss == loss
     assert type(trainer.opt_g) is type(trainer.opt_d) is torch.optim.Adam
     assert trainer.opt_g.latent_damping is trainer.opt_g.direct_response is None

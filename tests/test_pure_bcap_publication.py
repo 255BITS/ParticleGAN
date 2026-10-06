@@ -469,7 +469,7 @@ def _export_fixture(completed, monkeypatch):
         summary = read_json(path)
         for trial in summary["trials"]:
             candidate = next(candidate for candidate in readout["candidates"] if candidate["candidate_id"] == trial["candidate_id"])
-            recipe = asdict(get_recipe("bcap"))
+            recipe = asdict(get_recipe("bcap_adam").replace(name="bcap"))
             trial["declaration"] = {"resolved_configuration_recipe": recipe}
             trial["cost"] = candidate["cost"]
             for task, displayed in zip(trial["tasks"], candidate["tasks"]):

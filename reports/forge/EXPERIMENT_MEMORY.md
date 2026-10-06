@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 524. Inventory coverage: complete. Unresolved import items: 7.
+Records: 552. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4650,6 +4650,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **bcap-optim-ada-nsgda-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-ada-nsgda-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-k3p**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-k3p.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-dualnorm-pacing-v2-a**: Concluded 20 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-a.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-dualnorm-momentum-tier1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-dualnorm-momentum-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-nsgda-layer-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-nsgda-layer-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4678,10 +4679,12 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **bcap-family-defaults-round1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **release07-gan-v3-mog-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-adam-tier1-v1**: Concluded 5 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-adam-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-dualnorm-pacing-v2-c-4054018e4d6380ed**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-release07-gan-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round4-prior-balance-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **ka2-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-dualnorm-pacing-v2-b-006d03f6c1648102**: Concluded 3 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-b-006d03f6c1648102.json) · [Board](../../reports/forge/technique-inventory.md)
 
 ## Unresolved imports and limitations
 
@@ -4695,4 +4698,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `2ae37da43d5a476cd8b605e86c4f132f71a2ec698d5a83abc3adaff996e4fe25`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `2066cebfc9bef22ef32cb3bcdafaf0cdc86b327df776778be55939774f7084b1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
