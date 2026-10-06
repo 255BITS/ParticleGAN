@@ -6,9 +6,9 @@
   "completed_trajectory_updates_each": 1600,
   "files": [
     {
-      "bytes": 8471,
+      "bytes": 9148,
       "path": "README.md",
-      "sha256": "aa4557f90fea2b94a021218f177cf4543b47dec8eb1af95cabb2aa47e7e16a39"
+      "sha256": "1ded926d3549df10d5f814e6c0da75c79df2daca6079aad6e060d4714c2a9758"
     },
     {
       "bytes": 872618,
@@ -181,6 +181,11 @@
       "sha256": "d0ef56537962a031edd82b8cf9ab5e7397158bef4f2f63c434732081fc560663"
     },
     {
+      "bytes": 483037,
+      "path": "retained-mode-metrics.json",
+      "sha256": "eba8cc54b0d5bc33e85448f40e199a04cdbfa7bcb4976f1a8a530e5a4b456952"
+    },
+    {
       "bytes": 30869,
       "path": "retained-partial-comparison-before976.json",
       "sha256": "ef834eeeba618d1e39b654f33286f7578f1a018b369235b33eb8620195434618"
@@ -288,6 +293,21 @@
     "software-controls.json",
     "source-map.json"
   ],
+  "retained_metric_export": {
+    "all_values_copied_exactly": true,
+    "new_model_or_score_calls": 0,
+    "path": "retained-mode-metrics.json",
+    "resolved_core_defaults_excluded": true,
+    "rows_per_arm": 96,
+    "selected_steps_each": [
+      750,
+      1534,
+      1550,
+      1567,
+      1584,
+      1600
+    ]
+  },
   "reusable_default_credit": false,
   "schema": "pg_atlas954_completed_comparison_publication_manifest_v2",
   "scored_horizons": [
