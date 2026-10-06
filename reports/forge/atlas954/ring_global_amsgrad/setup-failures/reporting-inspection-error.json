@@ -1,0 +1,8 @@
+{
+  "schema": "pg_reporting_inspection_error_v1",
+  "stage": "954_resume976_render_inputs_and_existing_publication_inventory",
+  "error": "TypeError: object supporting the buffer API required",
+  "cause": "pin helper takes bytes; inventory supplied a Path",
+  "scientific_work": false,
+  "cost_retained_in_metadata": true
+}

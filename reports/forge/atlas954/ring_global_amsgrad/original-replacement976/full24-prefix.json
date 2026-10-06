@@ -1,0 +1,195 @@
+{
+  "actual_retained_all_raw_metrics_equal": true,
+  "actual_retained_saved_banks_equal": true,
+  "new_bank_pin": {
+    "bytes": 3174233,
+    "sha256": "a5840bca4aa6ba80f0df7665c30eff4b3418d0667198c7432465e8d46b2a3680"
+  },
+  "new_raw_result_pin": {
+    "bytes": 500969,
+    "sha256": "1978d2be2fd23258e706bdc399dd9f9573ad7766c3e9b8b59dd48111093b0346"
+  },
+  "observations_compared": 24,
+  "old_bank_pin": {
+    "bytes": 794217,
+    "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+  },
+  "old_metric_pin": {
+    "bytes": 104220,
+    "sha256": "301a320fe9e0cbba7c02114c0031f4e293f26d22f169dfc4699a2b61a59df134"
+  },
+  "per_bank": [
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 17,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 34,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 50,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 67,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 84,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 100,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 117,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 134,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 150,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 167,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 184,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 200,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 217,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 234,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 250,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 267,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 284,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 300,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 317,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 334,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 350,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 367,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 384,
+      "tensor_equal": true
+    },
+    {
+      "clock_equal": true,
+      "dtype_equal": true,
+      "shape_equal": true,
+      "step": 400,
+      "tensor_equal": true
+    }
+  ],
+  "schema": "976_original_full24_actual_retained_prefix_v1",
+  "status": "PASS",
+  "steps_compared": 400,
+  "whole_training_state_equality": "UNKNOWN_PARTIAL"
+}

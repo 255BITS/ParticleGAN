@@ -1,567 +1,245 @@
 {
-  "canonical_credit": false,
-  "comparative_credit": false,
-  "current_software_accounting": {
-    "cap_seconds": 41288.0,
-    "charged_seconds": 18610.051020307685,
-    "declared_reserve_is_certified_upper_bound": false,
-    "declared_reserve_is_measured_elapsed": false,
-    "exact_all_inclusive_measured_cost": false,
-    "halt_additional_work": false,
-    "measurement_cut": "ACTIVE",
-    "metadata_cap_seconds": 180.0,
-    "metadata_charged_seconds": 45.64905933057889,
-    "metadata_paid_seconds": 45.64905933057889,
-    "metadata_remaining_seconds": 134.3509406694211,
-    "metadata_reserved_seconds": 0.0,
-    "persistence_tail": "UNKNOWN_NOT_ZERO",
-    "phases": [
+  "canonical_original400_pass": false,
+  "comparative_credit": true,
+  "completed_off_repeated": false,
+  "extra_experimental_variant": false,
+  "final5": {
+    "global_amsgrad_off": [
       {
-        "index": 0,
-        "kind": "work",
-        "name": "ROOT_MEASURED_BOOTSTRAP934",
-        "paid_seconds": 0.0,
-        "reserved_seconds": 0.0,
-        "status": "ROOT_HELD_MEASURED"
+        "component_covariance_error": 1.099814409390092,
+        "component_min_eigen_ratio": 0.21125668287277222,
+        "hq": 0.939697265625,
+        "mass_tv": 0.03857421875,
+        "modes": 16,
+        "step": 1534
       },
       {
-        "index": 1,
-        "kind": "work",
-        "name": "954-bind-new-ring-authority-and-discover-owned-producer-paths",
-        "paid_seconds": 0.08820063481107354,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
+        "component_covariance_error": 1.064794396981597,
+        "component_min_eigen_ratio": 0.23200736939907074,
+        "hq": 0.9482421875,
+        "mass_tv": 0.032958984375,
+        "modes": 16,
+        "step": 1550
       },
       {
-        "index": 2,
-        "kind": "work",
-        "name": "954-read-retained-ring-evidence-and-producer-seams",
-        "paid_seconds": 0.05077628791332245,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
+        "component_covariance_error": 1.0368397422134876,
+        "component_min_eigen_ratio": 0.20032811164855957,
+        "hq": 0.951416015625,
+        "mass_tv": 0.042724609375,
+        "modes": 16,
+        "step": 1567
       },
       {
-        "index": 3,
-        "kind": "work",
-        "name": "954-locate-retained-ring-row-and-original-bridge-contract",
-        "paid_seconds": 0.037493657786399126,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
+        "component_covariance_error": 0.8333314154297113,
+        "component_min_eigen_ratio": 0.19965454936027527,
+        "hq": 0.959716796875,
+        "mass_tv": 0.048828125,
+        "modes": 16,
+        "step": 1584
       },
       {
-        "index": 4,
-        "kind": "work",
-        "name": "954-read-ring-construction-run-loop-and-owned-artifact-roots",
-        "paid_seconds": 0.3663212242536247,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 5,
-        "kind": "work",
-        "name": "954-discover-exact-original-ring-artifact-paths",
-        "paid_seconds": 0.037688456941396,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 6,
-        "kind": "work",
-        "name": "954-inspect-owned-original-runtime-root-layout",
-        "paid_seconds": 0.02938008913770318,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 7,
-        "kind": "work",
-        "name": "954-copy-verified-original-producer-and-find-ring-request",
-        "paid_seconds": 0.024994079023599625,
-        "reserved_seconds": 0.0,
-        "status": "ERROR"
-      },
-      {
-        "index": 8,
-        "kind": "work",
-        "name": "954-resolve-original791-snapshot-after-owned-source-mismatch",
-        "paid_seconds": 0.039174022153019905,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 9,
-        "kind": "work",
-        "name": "954-read-exact-retained791-request-and-ring-certification-pointers",
-        "paid_seconds": 0.03672518581151962,
-        "reserved_seconds": 0.0,
-        "status": "ERROR"
-      },
-      {
-        "index": 10,
-        "kind": "work",
-        "name": "954-inspect-held-original-request-versions-and-result-pointer-shape",
-        "paid_seconds": 0.05088645964860916,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 11,
-        "kind": "work",
-        "name": "954_original_device_and_snapshot_pin_selection",
-        "paid_seconds": 0.11384076811373234,
-        "reserved_seconds": 0.0,
-        "status": "ERROR"
-      },
-      {
-        "index": 12,
-        "kind": "work",
-        "name": "954_exact_snapshot_copy_and_retained_ring_locator",
-        "paid_seconds": 0.9216762441210449,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 13,
-        "kind": "work",
-        "name": "954_retained_ring_actual_device_and_banks_manifest",
-        "paid_seconds": 0.0522425239905715,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 14,
-        "kind": "report",
-        "name": "954_babel_exact_device_prefix_blocker",
-        "paid_seconds": 0.37393020233139396,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 15,
-        "kind": "work",
-        "name": "954_retained_bank_schema_and_exact_recipe_export",
-        "paid_seconds": 2.597070634830743,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 16,
-        "kind": "work",
-        "name": "954_read_original_metric_lattice_and_dependency_selection",
-        "paid_seconds": 0.028972518164664507,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 17,
-        "kind": "work",
-        "name": "954_single_owner_snapshot_and_historical_metrics_export",
-        "paid_seconds": 0.2913799621164799,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 18,
-        "kind": "work",
-        "name": "954_review_private_driver_source_once",
-        "paid_seconds": 0.04168605897575617,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 19,
-        "kind": "work",
-        "name": "954_review_driver_metadata_successor_diff",
-        "paid_seconds": 0.09430593391880393,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 20,
-        "kind": "work",
-        "name": "954_driver_handoff_and_worker_meter_schema",
-        "paid_seconds": 0.056503614876419306,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 21,
-        "kind": "work",
-        "name": "954_worker_failure_diagnosis_explicit_source_io_once",
-        "paid_seconds": 0.013101359829306602,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 22,
-        "kind": "work",
-        "name": "954_carry_completed_driver_author_source_io_once",
-        "paid_seconds": 0.5506476280279458,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 23,
-        "kind": "work",
-        "name": "954_resolve_local_vector_horizon_source_review",
-        "paid_seconds": 0.05045130895450711,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 24,
-        "kind": "work",
-        "name": "954_review_private_control_source_once",
-        "paid_seconds": 0.12146289832890034,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 25,
-        "kind": "work",
-        "name": "954_worker_merge_readiness_explicit_source_intervals_once",
-        "paid_seconds": 0.03638224629685283,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 26,
-        "kind": "work",
-        "name": "954_carry_late944_merge_readiness_ci_source_io_once",
-        "paid_seconds": 0.030046701431274414,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 27,
-        "kind": "work",
-        "name": "954_freeze_unadmitted_sources_and_carry_controls_io_once",
-        "paid_seconds": 0.045647738967090845,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 28,
-        "kind": "report",
-        "name": "954_babel_source_preparation_checkpoint",
-        "paid_seconds": 0.3809288418851793,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 29,
-        "kind": "report",
-        "name": "954_claim_exact_ring_gpu1_scope_revision",
-        "paid_seconds": 0.42812330508604646,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 30,
-        "kind": "report",
-        "name": "954_ack_ring_gpu1_revision_same_claim",
-        "paid_seconds": 0.43148459307849407,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 31,
-        "kind": "work",
-        "name": "954_gpu1_mapping_and_live_readonly_inventory",
-        "paid_seconds": 0.6935224458575249,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 32,
-        "kind": "work",
-        "name": "954_worker_failure_diagnosis_gpu959_source_io_once",
-        "paid_seconds": 0.002055794931948185,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 33,
-        "kind": "work",
-        "name": "954_review_freeze_gpu1_driver_and_authority959",
-        "paid_seconds": 0.06907944986596704,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 34,
-        "kind": "work",
-        "name": "954_verify_gpu_metadata_ast_scope_from_pinned_files",
-        "paid_seconds": 0.06711741397157311,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 35,
-        "kind": "report",
-        "name": "954_babel_gpu959_received_preflight_report",
-        "paid_seconds": 1.0828286400064826,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 36,
-        "kind": "work",
-        "name": "954_freeze_gpu1_controls_source_scope",
-        "paid_seconds": 0.046909401658922434,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 37,
-        "kind": "work",
-        "name": "954_worker_merge_readiness_gpu959_source_io_once",
-        "paid_seconds": 0.002926468849182129,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 38,
-        "kind": "work",
-        "name": "954_run_eight_gpu1_focused_controls_once",
-        "paid_seconds": 6.8255681353621185,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 39,
-        "kind": "work",
-        "name": "954_diagnose_source_recipe_binding_and_static_import_closure",
-        "paid_seconds": 1.8039208380505443,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 40,
-        "kind": "work",
-        "name": "F954_recipe_binding_source_diagnosis_io",
-        "paid_seconds": 0.003690820187330246,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 41,
-        "kind": "work",
-        "name": "F954_v4_recipe_binding_source_patch_io",
-        "paid_seconds": 0.0007472722791135311,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 42,
-        "kind": "work",
-        "name": "954_closure_import_binding_and_v4_source_review",
-        "paid_seconds": 0.1478036753833294,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 43,
-        "kind": "work",
-        "name": "954_install_reviewed_v4_driver_and_read_execution_seams",
-        "paid_seconds": 0.028296473901718855,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 44,
-        "kind": "work",
-        "name": "954_read_control_cli_and_budget_admission_seams",
-        "paid_seconds": 0.056521084159612656,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 45,
-        "kind": "work",
-        "name": "M954_v3_controls_pin_amendment_source_io",
-        "paid_seconds": 0.0008344715461134911,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 46,
-        "kind": "work",
-        "name": "954_install_control_v3_and_rerun_fixed_focused_interface_prefix_checks",
-        "paid_seconds": 10.159054847899824,
-        "reserved_seconds": 0.0,
-        "status": "ERROR"
-      },
-      {
-        "index": 47,
-        "kind": "work",
-        "name": "954_report_precise_focused_setup_checkpoint_to_Ember",
-        "paid_seconds": 3.8375294622965157,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 48,
-        "kind": "work",
-        "name": "F954_v5_typed_ownership_source_diagnosis_io",
-        "paid_seconds": 0.0011057332158088684,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 49,
-        "kind": "work",
-        "name": "F954_v5_typed_ownership_source_patch_io",
-        "paid_seconds": 0.0002738097682595253,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 50,
-        "kind": "work",
-        "name": "954_review_install_v5_typed_ownership_and_read_prefix_record_shape",
-        "paid_seconds": 0.08443210879340768,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 51,
-        "kind": "work",
-        "name": "M954_v4_code_content_equality_control_patch_source_io",
-        "paid_seconds": 0.0006024930626153946,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 52,
-        "kind": "work",
-        "name": "954_review_install_v4_controls_and_check_corrected_owner_schema",
-        "paid_seconds": 9.95554324099794,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 53,
-        "kind": "work",
-        "name": "954_freeze_two_declarations_full_science_caps_and_launch_original",
-        "paid_seconds": 0.06837576441466808,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 54,
-        "kind": "work",
-        "name": "954_collect_original_case_terminal_and_full24_prefix",
-        "paid_seconds": 0.003543633036315441,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 55,
-        "kind": "work",
-        "name": "954_report_original_launch_error_no_replay_and_remaining_arm_plan",
-        "paid_seconds": 0.3122231401503086,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 56,
-        "kind": "work",
-        "name": "954_launch_remaining_global_amsgrad_off_by_module",
-        "paid_seconds": 0.031220406759530306,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 57,
-        "kind": "work",
-        "name": "954_collect_remaining_global_amsgrad_off_terminal",
-        "paid_seconds": 0.02072443114593625,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 58,
-        "kind": "work",
-        "name": "954_send_measured_standalone_ring_results_before_publication",
-        "paid_seconds": 0.36715783877298236,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
-      },
-      {
-        "index": 59,
-        "kind": "work",
-        "name": "954_read_owned_branch_existing_publication_and_pr_before_retained_ring_report",
-        "paid_seconds": 1.0083332164213061,
-        "reserved_seconds": 0.0,
-        "status": "COMPLETE"
+        "component_covariance_error": 1.0237480057403445,
+        "component_min_eigen_ratio": 0.21924735605716705,
+        "hq": 0.955322265625,
+        "mass_tv": 0.037841796875,
+        "modes": 16,
+        "step": 1600
       }
     ],
-    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
-    "predecessor_added_once": true,
-    "predecessor_inclusive_seconds": 18564.401960977106,
-    "remaining_seconds": 22677.948979692315,
-    "retained_reporting_must_fit": true,
-    "schema": "pg_atlas954_software_inclusive_v1",
-    "scientific_allocation_seconds": 0
+    "original": [
+      {
+        "component_covariance_error": 0.6475964989513159,
+        "component_min_eigen_ratio": 0.18600913882255554,
+        "hq": 0.96142578125,
+        "mass_tv": 0.0615234375,
+        "modes": 16,
+        "step": 1534
+      },
+      {
+        "component_covariance_error": 0.6206206846982241,
+        "component_min_eigen_ratio": 0.23554623126983643,
+        "hq": 0.962158203125,
+        "mass_tv": 0.045166015625,
+        "modes": 16,
+        "step": 1550
+      },
+      {
+        "component_covariance_error": 0.7279641535133123,
+        "component_min_eigen_ratio": 0.20848609507083893,
+        "hq": 0.958984375,
+        "mass_tv": 0.04248046875,
+        "modes": 16,
+        "step": 1567
+      },
+      {
+        "component_covariance_error": 0.7454515984281898,
+        "component_min_eigen_ratio": 0.2272273153066635,
+        "hq": 0.953125,
+        "mass_tv": 0.052734375,
+        "modes": 16,
+        "step": 1584
+      },
+      {
+        "component_covariance_error": 0.814855189062655,
+        "component_min_eigen_ratio": 0.22236528992652893,
+        "hq": 0.956298828125,
+        "mass_tv": 0.052734375,
+        "modes": 16,
+        "step": 1600
+      }
+    ]
   },
-  "final5": [
-    {
-      "component_covariance_error": 1.099814409390092,
-      "component_min_eigen_ratio": 0.21125668287277222,
-      "hq": 0.939697265625,
-      "mass_tv": 0.03857421875,
-      "modes": 16,
-      "step": 1534
+  "first400_projections": {
+    "global_amsgrad_off": {
+      "arm_id": "atlas791_amsgrad_off",
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "diagnostic": true,
+      "horizon": 400,
+      "metrics": [
+        {
+          "margin": 0,
+          "metric": "sample_count",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 4096,
+          "value": 4096
+        },
+        {
+          "margin": 0,
+          "metric": "modes",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 16,
+          "value": 16
+        },
+        {
+          "margin": 0.101416015625,
+          "metric": "mass_tv",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.048583984375
+        },
+        {
+          "margin": 0.05795898437500002,
+          "metric": "hq",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.907958984375
+        },
+        {
+          "margin": -2.1422579023987054,
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 2.9922579023987055
+        },
+        {
+          "margin": 0.16945931911468506,
+          "metric": "component_min_eigen_ratio",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.31945931911468506
+        }
+      ],
+      "passed": false,
+      "scientific_credit": false,
+      "shortfall": 0.3333333333333333,
+      "status": "FAIL"
     },
-    {
-      "component_covariance_error": 1.064794396981597,
-      "component_min_eigen_ratio": 0.23200736939907074,
-      "hq": 0.9482421875,
-      "mass_tv": 0.032958984375,
-      "modes": 16,
-      "step": 1550
-    },
-    {
-      "component_covariance_error": 1.0368397422134876,
-      "component_min_eigen_ratio": 0.20032811164855957,
-      "hq": 0.951416015625,
-      "mass_tv": 0.042724609375,
-      "modes": 16,
-      "step": 1567
-    },
-    {
-      "component_covariance_error": 0.8333314154297113,
-      "component_min_eigen_ratio": 0.19965454936027527,
-      "hq": 0.959716796875,
-      "mass_tv": 0.048828125,
-      "modes": 16,
-      "step": 1584
-    },
-    {
-      "component_covariance_error": 1.0237480057403445,
-      "component_min_eigen_ratio": 0.21924735605716705,
-      "hq": 0.955322265625,
-      "mass_tv": 0.037841796875,
-      "modes": 16,
-      "step": 1600
+    "original": {
+      "arm_id": "atlas791",
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "diagnostic": true,
+      "horizon": 400,
+      "metrics": [
+        {
+          "margin": 0,
+          "metric": "sample_count",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 4096,
+          "value": 4096
+        },
+        {
+          "margin": 0,
+          "metric": "modes",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 16,
+          "value": 16
+        },
+        {
+          "margin": 0.106787109375,
+          "metric": "mass_tv",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.043212890625
+        },
+        {
+          "margin": -0.003320312499999978,
+          "metric": "hq",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 0.8466796875
+        },
+        {
+          "margin": -2.911147859506309,
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 3.761147859506309
+        },
+        {
+          "margin": 0.1150986909866333,
+          "metric": "component_min_eigen_ratio",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.2650986909866333
+        }
+      ],
+      "passed": false,
+      "scientific_credit": false,
+      "shortfall": 0.333984375,
+      "status": "FAIL"
     }
-  ],
-  "gates_unchanged": true,
-  "global_amsgrad_off_only_recipe_change": [
-    "amsgrad"
-  ],
-  "historical_original400": {
-    "component_covariance_error": 3.761147859506309,
-    "component_min_eigen_ratio": 0.2650986909866333,
-    "hq": 0.8466796875,
-    "mass_tv": 0.043212890625,
-    "modes": 16,
-    "new_run": false,
-    "source": "retained791 historical measurement",
-    "status": "FAIL"
   },
-  "new_global_amsgrad_off": {
+  "full_science_allocation_seconds": 3600,
+  "gates_unchanged": true,
+  "global_amsgrad_off": {
     "arm_id": "atlas791_amsgrad_off",
     "canonical_credit": false,
     "comparative_original_full24_status": "UNAVAILABLE_ORIGINAL_LAUNCH_ERROR",
@@ -1092,30 +770,1353 @@
     "status": "COMPLETE",
     "wall_clock_comparison_credit": false
   },
-  "new_original1600": {
-    "attempt_id": "5ea7912f52594e9f9f5794d8071224e8",
-    "error": {
-      "arm_id": "atlas791",
-      "attempt_id": "5ea7912f52594e9f9f5794d8071224e8",
-      "error_type": "ImportError",
-      "message": "attempted relative import with no known parent package",
-      "status": "ERROR",
-      "wall_seconds": 0.5140660917386413
+  "global_amsgrad_off_summary_created_before_recovery": true,
+  "original": {
+    "arm_id": "atlas791",
+    "canonical_credit": false,
+    "comparative_credit": true,
+    "completed_steps": 1600,
+    "device": "cuda:0",
+    "full24_prefix": {
+      "actual_retained_all_raw_metrics_equal": true,
+      "actual_retained_saved_banks_equal": true,
+      "new_bank_pin": {
+        "bytes": 3174233,
+        "sha256": "a5840bca4aa6ba80f0df7665c30eff4b3418d0667198c7432465e8d46b2a3680"
+      },
+      "new_raw_result_pin": {
+        "bytes": 500969,
+        "sha256": "1978d2be2fd23258e706bdc399dd9f9573ad7766c3e9b8b59dd48111093b0346"
+      },
+      "observations_compared": 24,
+      "old_bank_pin": {
+        "bytes": 794217,
+        "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+      },
+      "old_metric_pin": {
+        "bytes": 104220,
+        "sha256": "301a320fe9e0cbba7c02114c0031f4e293f26d22f169dfc4699a2b61a59df134"
+      },
+      "per_bank": [
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 17,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 34,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 50,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 67,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 84,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 100,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 117,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 134,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 150,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 167,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 184,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 200,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 217,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 234,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 250,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 267,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 284,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 300,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 317,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 334,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 350,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 367,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 384,
+          "tensor_equal": true
+        },
+        {
+          "clock_equal": true,
+          "dtype_equal": true,
+          "shape_equal": true,
+          "step": 400,
+          "tensor_equal": true
+        }
+      ],
+      "schema": "976_original_full24_actual_retained_prefix_v1",
+      "status": "PASS",
+      "steps_compared": 400,
+      "whole_training_state_equality": "UNKNOWN_PARTIAL"
     },
-    "first24_scientific_prefix": "UNAVAILABLE",
-    "full1200_charge_preserved": true,
-    "replacement": "NOT_AUTHORIZED_OR_ADMITTED",
-    "status": "ERROR_BEFORE_TRAINING"
+    "grades": {
+      "1600": {
+        "arm_id": "atlas791",
+        "attempted": true,
+        "confirmation_fraction": 0.9375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1500,
+          "first_pass_step": 650,
+          "minimum_stable_checks": 5,
+          "observations": 96,
+          "passing_observations": 43,
+          "passing_suffix": 11,
+          "stable_from_seconds": null,
+          "stable_from_step": 1434
+        },
+        "diagnostic": true,
+        "horizon": 1600,
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          },
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          {
+            "margin": 0.097265625,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.052734375
+          },
+          {
+            "margin": 0.10629882812500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.956298828125
+          },
+          {
+            "margin": 0.035144810937345006,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.814855189062655
+          },
+          {
+            "margin": 0.07236528992652894,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.22236528992652893
+          }
+        ],
+        "passed": true,
+        "scientific_credit": false,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "400": {
+        "arm_id": "atlas791",
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "diagnostic": true,
+        "horizon": 400,
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          },
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          {
+            "margin": 0.106787109375,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.043212890625
+          },
+          {
+            "margin": -0.003320312499999978,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.8466796875
+          },
+          {
+            "margin": -2.911147859506309,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 3.761147859506309
+          },
+          {
+            "margin": 0.1150986909866333,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.2650986909866333
+          }
+        ],
+        "passed": false,
+        "scientific_credit": false,
+        "shortfall": 0.333984375,
+        "status": "FAIL"
+      }
+    },
+    "initial_import_error_preserved": true,
+    "metrics1600": {
+      "component_core_covariance_error": 0.5158198438584805,
+      "component_core_covariance_errors": [
+        0.6531521081924438,
+        0.5928968787193298,
+        0.40281689167022705,
+        0.4883730411529541,
+        0.6162555813789368,
+        0.8199921250343323,
+        0.5111821889877319,
+        0.18139967322349548,
+        0.5166882872581482,
+        0.5012329816818237,
+        0.5332503318786621,
+        0.6260858178138733,
+        0.538011908531189,
+        0.3359622657299042,
+        0.48768046498298645,
+        0.44813695549964905
+      ],
+      "component_core_eigen_ratios": [
+        0.29857638478279114,
+        0.41626420617103577,
+        0.43367502093315125,
+        0.32814136147499084,
+        0.22236528992652893,
+        0.4076913893222809,
+        0.3762032389640808,
+        0.7628055810928345,
+        0.27128344774246216,
+        0.6087062954902649,
+        0.2779717445373535,
+        0.318911612033844,
+        0.3365202248096466,
+        0.5962739586830139,
+        0.37501129508018494,
+        0.5066826343536377
+      ],
+      "component_core_min_eigen_ratio": 0.22236528992652893,
+      "component_counts": [
+        275,
+        267,
+        288,
+        273,
+        178,
+        239,
+        258,
+        306,
+        229,
+        243,
+        279,
+        250,
+        212,
+        276,
+        225,
+        298
+      ],
+      "component_covariance_error": 0.814855189062655,
+      "component_covariance_errors": [
+        0.6531521081924438,
+        2.119019031524658,
+        0.20717476308345795,
+        0.5023365020751953,
+        0.6162555813789368,
+        0.885399580001831,
+        0.7236753106117249,
+        0.6292194724082947,
+        0.5166882872581482,
+        0.7456870079040527,
+        0.5571723580360413,
+        0.6260858178138733,
+        0.538011908531189,
+        1.335936188697815,
+        0.3638346493244171,
+        2.0180344581604004
+      ],
+      "component_mass": [
+        0.067138671875,
+        0.065185546875,
+        0.0703125,
+        0.066650390625,
+        0.04345703125,
+        0.058349609375,
+        0.06298828125,
+        0.07470703125,
+        0.055908203125,
+        0.059326171875,
+        0.068115234375,
+        0.06103515625,
+        0.0517578125,
+        0.0673828125,
+        0.054931640625,
+        0.07275390625
+      ],
+      "component_min_eigen_ratio": 0.22236528992652893,
+      "component_resolved": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "component_spill": [
+        0.0,
+        0.12734082341194153,
+        0.0173611119389534,
+        0.05494505539536476,
+        0.0,
+        0.050209205597639084,
+        0.05038759857416153,
+        0.03594771400094032,
+        0.0043668122962117195,
+        0.06995885074138641,
+        0.0394265241920948,
+        0.0,
+        0.0,
+        0.13405796885490417,
+        0.004444444552063942,
+        0.07382550090551376
+      ],
+      "covariance_error": 0.05475163459777832,
+      "hq": 0.956298828125,
+      "hq_component_counts": [
+        275,
+        233,
+        283,
+        258,
+        178,
+        227,
+        245,
+        295,
+        228,
+        226,
+        268,
+        250,
+        212,
+        239,
+        224,
+        276
+      ],
+      "mass_tv": 0.052734375,
+      "max_component_spill": 0.13405796885490417,
+      "mean_error": 0.027463838458061218,
+      "min_hq_mass_ratio": 0.6953125,
+      "min_mass_ratio": 0.6953125,
+      "modes": 16,
+      "resolved_core_covariance_error": 0.0,
+      "resolved_core_min_eigen_ratio": 1.0,
+      "resolved_max_component_spill": 0.0,
+      "sample_count": 4096,
+      "step": 1600,
+      "sw1_normalized": 0.025477212428217565,
+      "target_mass": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "target_scale": 3.0029242038726807
+    },
+    "metrics400": {
+      "component_core_covariance_error": 0.5267707640305161,
+      "component_core_covariance_errors": [
+        0.5342926383018494,
+        0.25743913650512695,
+        0.5179094076156616,
+        0.3661923110485077,
+        1.5128202438354492,
+        0.37551334500312805,
+        0.5667718052864075,
+        0.22776396572589874,
+        0.579709529876709,
+        0.3559451401233673,
+        0.2757572829723358,
+        0.4314287602901459,
+        0.5252388715744019,
+        0.3716380298137665,
+        0.37337517738342285,
+        1.15653657913208
+      ],
+      "component_core_eigen_ratios": [
+        0.4695729613304138,
+        1.0301347970962524,
+        0.2675711512565613,
+        0.4848477840423584,
+        0.5521910786628723,
+        0.48770877718925476,
+        0.3135020434856415,
+        0.6872966885566711,
+        0.646075963973999,
+        0.5295047760009766,
+        0.660812497138977,
+        0.4059351086616516,
+        0.3297038972377777,
+        0.5563063621520996,
+        0.5317358374595642,
+        0.4597206115722656
+      ],
+      "component_core_min_eigen_ratio": 0.2675711512565613,
+      "component_counts": [
+        270,
+        255,
+        208,
+        281,
+        243,
+        243,
+        232,
+        232,
+        282,
+        303,
+        210,
+        251,
+        253,
+        274,
+        265,
+        294
+      ],
+      "component_covariance_error": 3.761147859506309,
+      "component_covariance_errors": [
+        3.3317203521728516,
+        0.47311627864837646,
+        0.5466393232345581,
+        0.3661923110485077,
+        1.553067684173584,
+        1.016752004623413,
+        10.634743690490723,
+        11.932948112487793,
+        10.666670799255371,
+        7.731117248535156,
+        0.18635161221027374,
+        0.4056110382080078,
+        1.5010204315185547,
+        2.2001912593841553,
+        2.9924869537353516,
+        4.639736652374268
+      ],
+      "component_mass": [
+        0.06591796875,
+        0.062255859375,
+        0.05078125,
+        0.068603515625,
+        0.059326171875,
+        0.059326171875,
+        0.056640625,
+        0.056640625,
+        0.06884765625,
+        0.073974609375,
+        0.05126953125,
+        0.061279296875,
+        0.061767578125,
+        0.06689453125,
+        0.064697265625,
+        0.07177734375
+      ],
+      "component_min_eigen_ratio": 0.2650986909866333,
+      "component_resolved": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "component_spill": [
+        0.15555556118488312,
+        0.1921568661928177,
+        0.07211538404226303,
+        0.0035587188322097063,
+        0.15226337313652039,
+        0.1316872388124466,
+        0.10775861889123917,
+        0.10775861889123917,
+        0.26595744490623474,
+        0.22772277891635895,
+        0.16190476715564728,
+        0.11952191591262817,
+        0.17391304671764374,
+        0.12408759444952011,
+        0.18113207817077637,
+        0.2312925159931183
+      ],
+      "covariance_error": 0.06091049686074257,
+      "hq": 0.8466796875,
+      "hq_component_counts": [
+        228,
+        206,
+        193,
+        280,
+        206,
+        211,
+        207,
+        207,
+        207,
+        234,
+        176,
+        221,
+        209,
+        240,
+        217,
+        226
+      ],
+      "mass_tv": 0.043212890625,
+      "max_component_spill": 0.26595744490623474,
+      "mean_error": 0.011247992515563965,
+      "min_hq_mass_ratio": 0.6875,
+      "min_mass_ratio": 0.8125,
+      "modes": 16,
+      "resolved_core_covariance_error": 0.0,
+      "resolved_core_min_eigen_ratio": 1.0,
+      "resolved_max_component_spill": 0.0,
+      "sample_count": 4096,
+      "step": 400,
+      "sw1_normalized": 0.03234487097720024,
+      "target_mass": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "target_scale": 3.0029242038726807
+    },
+    "observations": 96,
+    "physical_device": "1",
+    "recipe_changed_fields": [],
+    "replacement_authority_seq": 976,
+    "reusable_default_credit": false,
+    "scientific_observed_wall_seconds": 68.57535970211029,
+    "seed": 0,
+    "status": "COMPLETE",
+    "wall_clock_comparison_credit": false
   },
-  "reusable_default_credit": false,
-  "saved_banks_are_already_scored": true,
-  "schema": "pg_atlas954_retained_ring_standalone_v1",
+  "original_import_error_allocation_seconds_preserved": 1200,
+  "original_import_error_preserved": {
+    "arm_id": "atlas791",
+    "attempt_id": "5ea7912f52594e9f9f5794d8071224e8",
+    "error_type": "ImportError",
+    "message": "attempted relative import with no known parent package",
+    "status": "ERROR",
+    "wall_seconds": 0.5140660917386413
+  },
+  "paired_source": "immutable_original791_plus_declared1600_clock_variant",
+  "prior_partial_commit": "23655232e1568c89e1e79e1518218bad1af14f3b",
+  "ranking_at_common1600": [
+    {
+      "configuration": "Original Atlas791; GLOBAL AMSGrad ON",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 1500,
+        "first_pass_step": 650,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 43,
+        "passing_suffix": 11,
+        "stable_from_seconds": null,
+        "stable_from_step": 1434
+      },
+      "horizon": 1600,
+      "metrics": {
+        "component_core_covariance_error": 0.5158198438584805,
+        "component_core_covariance_errors": [
+          0.6531521081924438,
+          0.5928968787193298,
+          0.40281689167022705,
+          0.4883730411529541,
+          0.6162555813789368,
+          0.8199921250343323,
+          0.5111821889877319,
+          0.18139967322349548,
+          0.5166882872581482,
+          0.5012329816818237,
+          0.5332503318786621,
+          0.6260858178138733,
+          0.538011908531189,
+          0.3359622657299042,
+          0.48768046498298645,
+          0.44813695549964905
+        ],
+        "component_core_eigen_ratios": [
+          0.29857638478279114,
+          0.41626420617103577,
+          0.43367502093315125,
+          0.32814136147499084,
+          0.22236528992652893,
+          0.4076913893222809,
+          0.3762032389640808,
+          0.7628055810928345,
+          0.27128344774246216,
+          0.6087062954902649,
+          0.2779717445373535,
+          0.318911612033844,
+          0.3365202248096466,
+          0.5962739586830139,
+          0.37501129508018494,
+          0.5066826343536377
+        ],
+        "component_core_min_eigen_ratio": 0.22236528992652893,
+        "component_counts": [
+          275,
+          267,
+          288,
+          273,
+          178,
+          239,
+          258,
+          306,
+          229,
+          243,
+          279,
+          250,
+          212,
+          276,
+          225,
+          298
+        ],
+        "component_covariance_error": 0.814855189062655,
+        "component_covariance_errors": [
+          0.6531521081924438,
+          2.119019031524658,
+          0.20717476308345795,
+          0.5023365020751953,
+          0.6162555813789368,
+          0.885399580001831,
+          0.7236753106117249,
+          0.6292194724082947,
+          0.5166882872581482,
+          0.7456870079040527,
+          0.5571723580360413,
+          0.6260858178138733,
+          0.538011908531189,
+          1.335936188697815,
+          0.3638346493244171,
+          2.0180344581604004
+        ],
+        "component_mass": [
+          0.067138671875,
+          0.065185546875,
+          0.0703125,
+          0.066650390625,
+          0.04345703125,
+          0.058349609375,
+          0.06298828125,
+          0.07470703125,
+          0.055908203125,
+          0.059326171875,
+          0.068115234375,
+          0.06103515625,
+          0.0517578125,
+          0.0673828125,
+          0.054931640625,
+          0.07275390625
+        ],
+        "component_min_eigen_ratio": 0.22236528992652893,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.0,
+          0.12734082341194153,
+          0.0173611119389534,
+          0.05494505539536476,
+          0.0,
+          0.050209205597639084,
+          0.05038759857416153,
+          0.03594771400094032,
+          0.0043668122962117195,
+          0.06995885074138641,
+          0.0394265241920948,
+          0.0,
+          0.0,
+          0.13405796885490417,
+          0.004444444552063942,
+          0.07382550090551376
+        ],
+        "covariance_error": 0.05475163459777832,
+        "hq": 0.956298828125,
+        "hq_component_counts": [
+          275,
+          233,
+          283,
+          258,
+          178,
+          227,
+          245,
+          295,
+          228,
+          226,
+          268,
+          250,
+          212,
+          239,
+          224,
+          276
+        ],
+        "mass_tv": 0.052734375,
+        "max_component_spill": 0.13405796885490417,
+        "mean_error": 0.027463838458061218,
+        "min_hq_mass_ratio": 0.6953125,
+        "min_mass_ratio": 0.6953125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.025477212428217565,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "rank": 1,
+      "rank_by": "PASS_then_confirmed_update",
+      "seed": 0,
+      "status": "PASS",
+      "time_to_convergence_seconds": "UNKNOWN"
+    },
+    {
+      "configuration": "GLOBAL AMSGrad OFF",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 750,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 19,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "horizon": 1600,
+      "metrics": {
+        "component_core_covariance_error": 0.48993670009076595,
+        "component_core_covariance_errors": [
+          0.4170224964618683,
+          0.5221322178840637,
+          0.5203654170036316,
+          0.6301774382591248,
+          0.5840529799461365,
+          0.22708411514759064,
+          0.6383172869682312,
+          0.4300716519355774,
+          0.5947827100753784,
+          0.5691066384315491,
+          0.5437659025192261,
+          0.5289578437805176,
+          0.4112911522388458,
+          0.5276547074317932,
+          0.4540556073188782,
+          0.24014903604984283
+        ],
+        "component_core_eigen_ratios": [
+          0.6729418039321899,
+          0.3741748332977295,
+          0.46995458006858826,
+          0.23226997256278992,
+          0.21924735605716705,
+          0.8748190999031067,
+          0.31619763374328613,
+          0.3917869031429291,
+          1.0939807891845703,
+          0.4798211455345154,
+          0.3152726888656616,
+          0.3942052721977234,
+          0.5573476552963257,
+          0.25821006298065186,
+          0.3582240045070648,
+          0.7466245293617249
+        ],
+        "component_core_min_eigen_ratio": 0.21924735605716705,
+        "component_counts": [
+          276,
+          236,
+          263,
+          247,
+          226,
+          291,
+          263,
+          228,
+          294,
+          276,
+          235,
+          264,
+          257,
+          229,
+          275,
+          236
+        ],
+        "component_covariance_error": 1.0237480057403445,
+        "component_covariance_errors": [
+          0.4170224964618683,
+          0.6454304456710815,
+          0.43498554825782776,
+          0.6301774382591248,
+          0.5840529799461365,
+          1.5807973146438599,
+          0.6383172869682312,
+          0.4300716519355774,
+          1.5568701028823853,
+          2.625878095626831,
+          4.545865535736084,
+          0.6573486924171448,
+          0.4112911522388458,
+          0.5276547074317932,
+          0.4540556073188782,
+          0.24014903604984283
+        ],
+        "component_mass": [
+          0.0673828125,
+          0.0576171875,
+          0.064208984375,
+          0.060302734375,
+          0.05517578125,
+          0.071044921875,
+          0.064208984375,
+          0.0556640625,
+          0.07177734375,
+          0.0673828125,
+          0.057373046875,
+          0.064453125,
+          0.062744140625,
+          0.055908203125,
+          0.067138671875,
+          0.0576171875
+        ],
+        "component_min_eigen_ratio": 0.21924735605716705,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.007246376946568489,
+          0.04237288236618042,
+          0.0076045626774430275,
+          0.0,
+          0.0,
+          0.08934707939624786,
+          0.0,
+          0.0,
+          0.22789116203784943,
+          0.10144927352666855,
+          0.12765957415103912,
+          0.011363636702299118,
+          0.0038910505827516317,
+          0.0,
+          0.04363636299967766,
+          0.008474576286971569
+        ],
+        "covariance_error": 0.04469451680779457,
+        "hq": 0.955322265625,
+        "hq_component_counts": [
+          274,
+          226,
+          261,
+          247,
+          226,
+          265,
+          263,
+          228,
+          227,
+          248,
+          205,
+          261,
+          256,
+          229,
+          263,
+          234
+        ],
+        "mass_tv": 0.037841796875,
+        "max_component_spill": 0.22789116203784943,
+        "mean_error": 0.005348275415599346,
+        "min_hq_mass_ratio": 0.80078125,
+        "min_mass_ratio": 0.8828125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.017453585606617517,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "rank": 2,
+      "rank_by": "PASS_then_confirmed_update",
+      "seed": 0,
+      "status": "FAIL",
+      "time_to_convergence_seconds": "UNKNOWN"
+    }
+  ],
+  "reusable_family_default_credit": false,
+  "schema": "pg_atlas954_completed_two_trajectory_comparison_v2",
   "seed": 0,
-  "source": "Original791 immutable inputs with declared1600/96 variants",
-  "source_bundle_pin": {
-    "bytes": 872618,
-    "sha256": "6239e3979031dbdc7f9d1ea76fc34e191e8f2b51044029bbe99604eb9e73b7ce"
+  "unknown_tails": "UNKNOWN_NOT_ZERO",
+  "validated_full24_original_historical_prefix": {
+    "actual_retained_all_raw_metrics_equal": true,
+    "actual_retained_saved_banks_equal": true,
+    "new_bank_pin": {
+      "bytes": 3174233,
+      "sha256": "a5840bca4aa6ba80f0df7665c30eff4b3418d0667198c7432465e8d46b2a3680"
+    },
+    "new_raw_result_pin": {
+      "bytes": 500969,
+      "sha256": "1978d2be2fd23258e706bdc399dd9f9573ad7766c3e9b8b59dd48111093b0346"
+    },
+    "observations_compared": 24,
+    "old_bank_pin": {
+      "bytes": 794217,
+      "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+    },
+    "old_metric_pin": {
+      "bytes": 104220,
+      "sha256": "301a320fe9e0cbba7c02114c0031f4e293f26d22f169dfc4699a2b61a59df134"
+    },
+    "per_bank": [
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 17,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 34,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 50,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 67,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 84,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 100,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 117,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 134,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 150,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 167,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 184,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 200,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 217,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 234,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 250,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 267,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 284,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 300,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 317,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 334,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 350,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 367,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 384,
+        "tensor_equal": true
+      },
+      {
+        "clock_equal": true,
+        "dtype_equal": true,
+        "shape_equal": true,
+        "step": 400,
+        "tensor_equal": true
+      }
+    ],
+    "schema": "976_original_full24_actual_retained_prefix_v1",
+    "status": "PASS",
+    "steps_compared": 400,
+    "whole_training_state_equality": "UNKNOWN_PARTIAL"
   },
-  "two_full_caps_charged_once": 2400,
-  "unknown_tails": "UNKNOWN_NOT_ZERO"
+  "wall_clock_winner_credit": false,
+  "whole_training_state_equality": "UNKNOWN_PARTIAL_BANK_AND_METRIC_ONLY"
 }

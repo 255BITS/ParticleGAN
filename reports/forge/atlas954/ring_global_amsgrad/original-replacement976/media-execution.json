@@ -1,0 +1,26 @@
+{
+  "schema": "pg_original976_saved_media_execution_v1",
+  "renderer_source_pin": {
+    "sha256": "c207704f324a8cdc6a8fe7d30a9a545cca578d0955ad019e002f1d16c3697baf",
+    "bytes": 10806
+  },
+  "bank_pin": {
+    "sha256": "a5840bca4aa6ba80f0df7665c30eff4b3418d0667198c7432465e8d46b2a3680",
+    "bytes": 3174233
+  },
+  "raw_result_pin": {
+    "sha256": "1978d2be2fd23258e706bdc399dd9f9573ad7766c3e9b8b59dd48111093b0346",
+    "bytes": 500969
+  },
+  "grades_pin": {
+    "sha256": "58a6004b55466f26cb1262f87378191b585a6774ce1ae8a1074ca2b2db8ff224",
+    "bytes": 32
+  },
+  "root_parent_span_seconds": 10.30734956311062,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "scientific_work": false,
+  "saved_evidence_only": true,
+  "unknown_tails": "UNKNOWN_NOT_ZERO"
+}
