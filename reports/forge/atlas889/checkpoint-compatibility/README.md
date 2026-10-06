@@ -16,3 +16,5 @@ python /tmp/atlas889-proposal/tests/test_checkpoint_compatibility.py \
 ```
 
 This does not install the proposed modules. A successor scientific attempt still needs independent noninterference review, actual checkpoint and original observer controls, coherent fresh Source/proof pins and a separate allocation. The admitted 889 proof cannot be reused.
+
+[Independent Source review](independent-review.json) is CLEAR_SOURCE_ONLY against the exact frozen handoff. It is static review, not a control execution or admission certificate. The checks cover strict typed state and live numeric/alias/version/RNG state; they do not establish arbitrary ambient callable integrity or the alias topology of returned state copies.

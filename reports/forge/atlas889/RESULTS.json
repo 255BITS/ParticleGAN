@@ -55,6 +55,14 @@
   "checkpoint_compatibility_proposal": {
     "control_count": 7,
     "controls_status": "AUTHORED_NOT_RUN",
+    "independent_source_review": {
+      "bytes": 9043,
+      "cost": "UNMEASURED",
+      "path": "checkpoint-compatibility/independent-review.json",
+      "sha256": "26ff22ca72cfe41a5d94adf8b12323a3fa9e548ae7b940f078b6867fc835061a",
+      "status": "CLEAR_SOURCE_ONLY",
+      "tests_run": false
+    },
     "installed": false,
     "path": "checkpoint-compatibility/README.md",
     "retry_authorized": false,

@@ -35,3 +35,5 @@ PYTHONPATH=. python reports/forge/atlas889/metadata_controls.py --root . --contr
 The observer did alter the state being serialized: it added function-valued controller keys. The failed before-measure digest does not establish that tensor values changed or certify checkpoint purity.
 
 An [uninstalled compatibility proposal](checkpoint-compatibility/README.md) contains the exact patch, Source archive and seven checkpoint controls. It invokes the existing state getter once while suspending only the three verified recorder hooks, then restores their identities. The proposed controls compare OFF/ON full typed hashes and live numeric, alias, version and RNG state through the genuine checkpoint; they also retain rejection of unknown callables and original exceptions. These controls are AUTHORED_NOT_RUN. They do not prove arbitrary ambient callable or returned-copy alias integrity. The proposal has not been installed or admitted, and the consumed attempt remains INVALID.
+
+The [independent Source review](checkpoint-compatibility/independent-review.json) is CLEAR_SOURCE_ONLY against the frozen proposal. It does not certify executed controls or admission.
