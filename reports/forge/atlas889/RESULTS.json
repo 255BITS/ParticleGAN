@@ -1,0 +1,145 @@
+{
+  "accounting_closed_prepublication_cut": {
+    "cap_seconds": 41288,
+    "case_charged_seconds": 300,
+    "case_paid_wall_seconds": 5.252349246758968,
+    "case_reserved_seconds": 294.74765075324103,
+    "case_row_count": 1,
+    "charged_seconds": 15565.312703596182,
+    "declared100_added_once_in_predecessor": true,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_required": true,
+    "maximum_science_seconds": 300,
+    "measurement_cut": "CLOSED_MEMORY",
+    "metadata_cap_seconds": 120,
+    "metadata_charged_seconds": 49.033927782438695,
+    "metadata_remaining_seconds": 70.9660722175613,
+    "next_allowance_seconds": 0,
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_inclusive_seconds": 15216.278775813744,
+    "remaining_seconds": 25722.68729640382,
+    "schema": "pg_atlas889_two_pole_inclusive_cost_v1",
+    "sealed884_cost_added_once": true,
+    "within_cap": true
+  },
+  "accounting_open_cut": {
+    "cap_seconds": 41288.0,
+    "case_charged_seconds": 300.0,
+    "case_paid_wall_seconds": 5.252349246758968,
+    "case_reserved_seconds": 294.74765075324103,
+    "case_row_count": 1,
+    "charged_seconds": 15562.913363567774,
+    "declared100_added_once_in_predecessor": true,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_required": true,
+    "maximum_science_seconds": 300.0,
+    "measurement_cut": "ACTIVE",
+    "metadata_cap_seconds": 120.0,
+    "metadata_charged_seconds": 46.63458775402978,
+    "metadata_remaining_seconds": 73.36541224597022,
+    "next_allowance_seconds": 0.0,
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_inclusive_seconds": 15216.278775813744,
+    "remaining_seconds": 25725.08663643223,
+    "schema": "pg_atlas889_two_pole_inclusive_cost_v1",
+    "sealed884_cost_added_once": true,
+    "within_cap": true
+  },
+  "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+  "attempt_status": "error",
+  "candidate_revision": "4c92b29a63bd2a3e7d4eb5c72148c9280b8156823ef1e716ef85868b9ad36fc4",
+  "checkpoint_compatibility_proposal": {
+    "control_count": 7,
+    "controls_status": "AUTHORED_NOT_RUN",
+    "installed": false,
+    "path": "checkpoint-compatibility/README.md",
+    "retry_authorized": false,
+    "source_handoff_sha256": "e35ed1ba18b5f7f2bd6500eb3ab0477e21f66ffd6a2b52a5f58a2d117fd7726e",
+    "status": "SOURCE_ONLY_UNINSTALLED_UNADMITTED"
+  },
+  "conservative_science_charge_seconds": 300.0,
+  "consumer_patch_installed": false,
+  "convergence_evidence": null,
+  "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "error": {
+    "message": "unknown policy state leaf: function",
+    "type": "TypeError"
+  },
+  "latest_coordinator_reconcile": "903 and905 claimed/acknowledged; preserve actual local amendment history and INVALID full300; Source diagnosis/proposal/report only, science halted.",
+  "measured_supervised_elapsed_seconds": 5.252349246758968,
+  "model_failure_conclusion": "NOT_ESTABLISHED",
+  "observations_retained": 0,
+  "original_gates": [
+    [
+      "mean_abs",
+      ">=",
+      0.3
+    ],
+    [
+      "grad_med",
+      "<=",
+      1.0
+    ]
+  ],
+  "original_schedule": {
+    "final_five": [
+      67,
+      70,
+      74,
+      77,
+      80
+    ],
+    "first_clock": 4,
+    "reads": 24,
+    "updates": 80
+  },
+  "protected_source_witness": "c5468fb3b5ebdaf842a15a5cbed08dd64cdd33b7be218078fba5ba8a86c81132",
+  "publication_cost_cut_note": "Costs after this closed prepublication cut remain charged in the private append-only ledger; this is not a final all-inclusive measured total.",
+  "q_hypothesis": "NOT_MEASURED",
+  "raw_error_pin": {
+    "bytes": 1351,
+    "sha256": "b8194066635f2eb6c69da095c726b38339c4e0e1436342a5f2ed4ce2f71c6816"
+  },
+  "request_id": "84aead29da2ee1938a5b981e",
+  "request_sha256": "570a85811494392260f6ca6c5faf69469c5422d13bf91533ad60a94e38741da0",
+  "resources": {
+    "allowance_seconds": 300,
+    "cpu_threads": 1,
+    "device": "cpu",
+    "gpus": 0
+  },
+  "retry_performed": false,
+  "run_log_pin": {
+    "bytes": 6462,
+    "sha256": "c69dab1dad018ac96793faa20028c15df4fd10aecf995b10c48736d80bd048c5"
+  },
+  "schema": "pg889_published_original_two_pole_invalid_run_v1",
+  "scientific_grade": null,
+  "serialized_state_change": "Three observer function attributes entered original controller dictionaries; tensor-value change and actual checkpoint purity are not established by the failed strict hash.",
+  "software_checks": {
+    "accounting_guards": 16,
+    "all_passed": true,
+    "complete_submission_negatives": 2,
+    "limitation": "Observer fixture snapshot skipped functions and did not exercise genuine owner checkpoint digest.",
+    "metadata_controls": 8,
+    "observer_controls": 11
+  },
+  "source_cause": "Observer-injected SettleTest.observe and OptimizerSurprise.group_q/decide instance callbacks enter their original state_dict() deepcopy; owner strict typed_digest rejects the callable before measure().",
+  "source_commit": "6af67961bf5e9308a5fc22b5a2759a6fb0c308f4",
+  "source_digest": "26a028fa2710660052a445657d9a228c7ce9338d94fb2406bce5a36b60228b5f",
+  "source_history_preserved": true,
+  "status": "INVALID",
+  "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+  "task_id": "two_pole",
+  "task_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+  "terminal_pin": {
+    "bytes": 2268,
+    "sha256": "f336259f20b037be0310866944d278941102f9b6cf283cc3208077f1399e829f"
+  },
+  "unmeasured_reserved_seconds": 294.74765075324103,
+  "winner_or_default_credit": false
+}

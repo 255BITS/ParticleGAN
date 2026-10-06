@@ -1,0 +1,49 @@
+{
+  "actual_artifact_reads": false,
+  "changed_observer_methods": [
+    "__init__",
+    "_hook",
+    "_checkpoint_state (new)",
+    "install",
+    "uninstall"
+  ],
+  "controls": {
+    "test_measure_exception_keeps_original_owner_behavior": "AUTHORED_NOT_RUN",
+    "test_original_failure_precedes_first_measure": "AUTHORED_NOT_RUN",
+    "test_original_getter_exception_identity_and_wrapper_restoration": "AUTHORED_NOT_RUN",
+    "test_populated_complete_state_digest_and_real_checkpoint_off_on": "AUTHORED_NOT_RUN",
+    "test_prevalidation_does_not_hide_changed_hook": "AUTHORED_NOT_RUN",
+    "test_unexpected_original_hook_write_is_not_overwritten": "AUTHORED_NOT_RUN",
+    "test_unrelated_callable_state_still_rejected": "AUTHORED_NOT_RUN"
+  },
+  "method": "stdlib ast/hashlib/compile/difflib only; no module execution or constructor/test invocation",
+  "observer_full_text_reversal_to_7037": true,
+  "observer_original_numerical_wrapped_functions_unchanged": true,
+  "owner_all_function_class_ASTs_exact": true,
+  "owner_delta": "only protected observer SHA/byte pin",
+  "schema": "pg_atlas889_checkpoint_compatibility_source_proof_v1",
+  "scientific_operations": false,
+  "semantic_imports": false,
+  "source_files_compiled_in_memory": [
+    "preimages/experiments/forge/atlas889_two_pole_owner.py",
+    "preimages/experiments/forge/atlas889_two_pole_observer.py",
+    "preimages/tests/test_atlas889_two_pole_observer.py",
+    "preimages/particlegan/policy.py",
+    "preimages/particlegan/continuous.py",
+    "preimages/particlegan/k3p.py",
+    "repo/experiments/forge/atlas889_two_pole_observer.py",
+    "repo/experiments/forge/atlas889_two_pole_owner.py",
+    "tests/test_checkpoint_compatibility.py"
+  ],
+  "status": "AST_STATIC_COMPILE_ONLY",
+  "tests_run": false,
+  "untouched_strict_methods": [
+    "typed_digest",
+    "TwoPoleOwner.complete_state",
+    "TwoPoleOwner.state_sha256",
+    "TwoPoleOwner.checkpoint",
+    "construct_owner",
+    "run_first_case",
+    "run_behavior"
+  ]
+}

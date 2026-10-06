@@ -1,0 +1,41 @@
+{
+  "api_changes": [
+    "Record already-computed direct Adam and controller fields through an isolated readonly observer of the original two-pole API path."
+  ],
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "experimental_track": "atlas889_original_two_pole_passive",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "cost": {
+    "adapter_seconds": 2.163603826891631,
+    "runner_seconds": 4.490260751917958
+  },
+  "error": {
+    "message": "unknown policy state leaf: function",
+    "type": "TypeError"
+  },
+  "execution_path": "public_trainer",
+  "telemetry": {
+    "flops": {
+      "kind": "unavailable",
+      "value": null
+    },
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 638697472
+    },
+    "schema_version": 1,
+    "timing": {
+      "adapter_wall_seconds": 2.163603826891631,
+      "runner_wall_seconds": 4.490260751917958,
+      "scope": "Aggregate runner/adapter time includes setup, sampling, evaluation and artifact I/O; phase timing is separate.",
+      "unattributed_runner_seconds": null
+    }
+  }
+}

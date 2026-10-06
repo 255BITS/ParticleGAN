@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "candidate_revision_echo_rejected": "PASS",
+    "exact889_metadata_identity_forwarded": "PASS",
+    "original_direct_task_law_unchanged": "PASS",
+    "resolved_recipe_echo_rejected": "PASS",
+    "screening_seed_overrides_rejected": "PASS",
+    "unrelated_candidate_rejected": "PASS",
+    "unsupported_override_rejected": "PASS",
+    "wrong_view_rejected": "PASS"
+  },
+  "original_target_run": false,
+  "schema": "forge_atlas889_metadata_submission_control_result_v1",
+  "software_only": true,
+  "status": "PASS"
+}

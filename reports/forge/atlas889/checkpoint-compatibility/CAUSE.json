@@ -1,0 +1,42 @@
+{
+  "actual_facts_basis": "ROOT supplied retained memory only; no actual artifacts read by author",
+  "actual_update_count": "NOT_INFERRED_FROM_MISSING_BANKS",
+  "author_cost": "UNMEASURED",
+  "exact_leaks": [
+    "policy.lr_settle[0][table_group].observe",
+    "policy.surprise.group_q",
+    "policy.surprise.decide"
+  ],
+  "first_source_checkpoint": 4,
+  "historical_control_gap": "M11 _snapshot skipped function objects; no strict complete_state/state_sha256/checkpoint test",
+  "minimal_proposal": "Prevalidate/suspend only three exact installed hook attributes around the single already-called policy.state_dict, restore identical wrappers in finally, keep unknown state strict; owner observer-pin constant follows.",
+  "original_core_unchanged": true,
+  "original_task_recipe_seed_horizon_gates_unchanged": true,
+  "prospective_obligations": [
+    "Independent Source review",
+    "ROOT-paid actual proposed checkpoint and original noninterference controls",
+    "Explicit distinct future candidate/Source/request/proof authority before any science",
+    "No installation/amendment/retry under current889 request"
+  ],
+  "retained_attempt": {
+    "accounted_full_case_seconds": 300,
+    "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+    "independent_grade": "ABSENT",
+    "process_elapsed_seconds_reported_approximately": 5.252,
+    "retry_authorized": false,
+    "scored_banks": 0,
+    "status": "INVALID",
+    "supervisor_returncode": 1
+  },
+  "schema": "pg_atlas889_checkpoint_callable_failure_source_v1",
+  "source_failure_chain": [
+    "TwoPoleOwner.checkpoint calls state_sha256 before measure",
+    "state_sha256 strictly hashes complete_state",
+    "complete_state calls original UpdatePolicy.state_dict",
+    "policy.state_dict includes StationarityLR.state_dict and OptimizerSurprise.state_dict",
+    "SettleTest and OptimizerSurprise deepcopy every instance attribute",
+    "instance-local observer observe/group_q/decide functions therefore enter serialized state",
+    "typed_digest rejects unknown policy state leaf: function"
+  ],
+  "status": "SOURCE_ONLY_UNINSTALLED_PROPOSAL"
+}
