@@ -201,7 +201,9 @@ def verify_state_rates(inputs, row, local, steps):
     state = inputs.tensor(local / "state.pt")
     require(finite_tree(state), "nonfinite final checkpoint")
     trainer = state["trainer"]
-    require(trainer["completed_steps"] == steps and state["recipe"] == row["recipe"],
+    # Torch retains tuple-valued recipe fields; JSON stores the same fields as lists.
+    require(trainer["completed_steps"] == steps and
+            Recipe(**state["recipe"]).to_dict() == Recipe(**row["recipe"]).to_dict(),
             "final state recipe/consumed updates differ")
     require(state["initialization"] == row["initialization"] and state["prior"] == row["prior"],
             "final state initialization/prior binding differs")
@@ -259,6 +261,21 @@ def prefixes(task, row, verdict):
             "last_five": [{"step": p["step"], "joint_pass": joint_pass(p, requirements),
                 "metrics": {key: p[key] for key, _, _ in requirements}} for p in prefix[-5:]]}
     return output
+
+
+def late_window(task, row):
+    points = row["evidence"]["observations"][-60:]
+    requirements = task["evaluation"]["thresholds"]
+    return {"observations": len(points), "start_step": points[0]["step"],
+            "end_step": points[-1]["step"],
+            "joint_passing_observations": sum(joint_pass(p, requirements) for p in points),
+            "metrics": {key: {
+                "failing_observations": sum(any(
+                    threshold_margin(p[key], op, bound) < 0
+                    for name, op, bound in requirements if name == key) for p in points),
+                "minimum": min(p[key] for p in points),
+                "maximum": max(p[key] for p in points)}
+                for key in dict.fromkeys(name for name, _, _ in requirements)}}
 
 
 def draw_curves(rows, output):
@@ -352,7 +369,8 @@ def main():
         parity = compare_prefix(old_row, row, saved_samples(inputs, old_row, old_local), new_samples)
         summary = {"attempt_id": local.name, "result_hash": cert["result_hash"], "gate_status": row["gate_status"],
             "completed_steps": base * 10, "thresholds": task["evaluation"]["thresholds"],
-            "prefixes": prefixes(task, row, verdict), "guards": {k: guards[k] for k in
+            "prefixes": prefixes(task, row, verdict), "last_60_observations": late_window(task, row),
+            "guards": {k: guards[k] for k in
                 ("all_finite", "hooks_exercised", "optimizer_updates", "unintended_rng_deviations")},
             "constant_rate_and_final_state_audit": verify_state_rates(inputs, row, local, base * 10),
             "optimizer_diagnostics": read_trace(inputs, row, local, expected),

@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "2066cebfc9bef22ef32cb3bcdafaf0cdc86b327df776778be55939774f7084b1",
+  "input_digest": "a739f6aebd216f3d9caa190eeae614cdc5dad3acdfc056d983c477048cc9489b",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -547,6 +547,7 @@
     "configs/forge/selections/family-current-v1.json": "ddcfb6202ece446f2bc61557c9f030adea90e91b2d3b30a25206aa6068e52894",
     "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
+    "configs/forge/studies/bcap-pure-budget10x-v1.json": "01a55a6f39e093b317131e1df6bcefb46b65d2c23837d2e35391319a60b0c149",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "41af583480fc0ddce517b227668beb1f3aa2e3de8a41257db4f614cf8d8f3fdf",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json": "7bc42b8af8ce3a3d47f1182bccf6826080a25dafd499cd4e4825804874e18656",
@@ -561,6 +562,7 @@
     "configs/forge/tasks/cover_leftover.json": "f40f960d80090f1b46cc326424cab7d781c36cc9ea3222aea7375c2834028e4e",
     "configs/forge/tasks/five_word_joint_acquisition.json": "26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8",
     "configs/forge/tasks/gaussian1d_acquisition.json": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+    "configs/forge/tasks/gaussian1d_acquisition_budget10x_v1.json": "ea98c0919724f0f744b59bb25620f834d08448fc29ab57288414d845341bf41e",
     "configs/forge/tasks/grid100.json": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
     "configs/forge/tasks/grid100_14k.json": "510bcd101390876bbda1182685bbed5f984b746cfb22a135dded2dbb7209802f",
     "configs/forge/tasks/grid100_affine_paired_laws_v1.json": "0b71c7d7cdd201400dff294b78c483a814daea84d9eaa718662acb2766f243d8",
@@ -579,6 +581,7 @@
     "configs/forge/tasks/mode_hold.json": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5",
     "configs/forge/tasks/residual_student.json": "dfebe28e3bafb0aea298678894524ea7b182481980f4854351bbd4252facd285",
     "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+    "configs/forge/tasks/ring16_acquisition_budget10x_v1.json": "c3c6ce4ca88f4c16f9f512d79bdae4162a56f89a126e23a2a75df7f82a6aa0d0",
     "configs/forge/tasks/ring_extension.json": "19361e1a0817f90a7fe13c1c4b35fff644745258063e87371099936df7461f50",
     "configs/forge/tasks/ring_hold.json": "7d3e33f19db943f6f55016b9cbf2fe93221cc3e202c4c86190d5ff981b1fdfc9",
     "configs/forge/tasks/rotated100.json": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d",
@@ -613,6 +616,7 @@
     "configs/forge/view-history/discriminator_stability-v2.json": "58eab01167cc4baa904f485c5f917a2a36141756024d8dc4b03a14392f6ad639",
     "configs/forge/view-history/discriminator_stability-v3.json": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
+    "configs/forge/views/bcap_pure_budget10x_diagnostic_v1.json": "8683acfa7907cfa6b4875c0cb27f7ef6ec1728bebfc6a5121df54f82a7f8ca12",
     "configs/forge/views/clockfree_continuous.json": "30d62d0f1a11181bc50dd041985cc4be52587ce7abe901114c8e0f2f27fd3d6f",
     "configs/forge/views/discriminator_stability.json": "584c73bed0a5bab6db1112cb3b2d68c9c05475d6382d1477c3cc5ee583114871",
     "configs/forge/views/formulation_comparison.json": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25",
@@ -995,6 +999,7 @@
     "reports/forge/records/readout-15e86dd160a1d64a04ceee04.json": "2cd08537fe901d362ffa4c72e29d4336497accbe49abfc4a145caf02b178fb86",
     "reports/forge/records/readout-170dc0a68d5b68737b370a5f.json": "6c584918593947935ea0a46c3b4bd741fe9fa2864f27f107c4cc4cfb608ae57b",
     "reports/forge/records/readout-21b533460c29dd5049aa64df.json": "c278f7294482eb6ca36a3e26c10824fdd0899f1b4d0bd9afb30006a89d723c33",
+    "reports/forge/records/readout-26e6cf0b4f24d0c63408bb91.json": "7c0750305745c36ea1c499bcd7f8e7382798a3eb2987d2c907c0d09f96107554",
     "reports/forge/records/readout-28f0c9140b4cfeef57f23dd2.json": "19c42309dab2b29860f329ff1ffd030ee414db205c1adb724c44cd3d5baceb56",
     "reports/forge/records/readout-2c2eb24207b627b2ad26ea18.json": "ea33499749feda0f3c739f23dd95ec7ea604a23ffbf3d24bf942163d3b5b08ba",
     "reports/forge/records/readout-2c30cecb0a3f37d001ce3b28.json": "0c4c6f6ac9397029799ce48198146fe95818bd3aa33a6dcff2d1a03907a7bc31",
@@ -2083,16 +2088,16 @@
     "reports/forge/technique-receipts/ff80b61b84c646c2a54350d42c323917.json": "0861086effdfb8888aa3a0e2e4fe133236344060f6a6dbe446c73e4b0709893b"
   },
   "inventory_coverage": {
-    "declared_count": 11763,
+    "declared_count": 11764,
     "missing": [],
     "stale": [],
-    "tracked_count": 11763,
+    "tracked_count": 11764,
     "unclassified": [],
     "valid": true
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "aed8bccf15afbe6bc951598c3ad03cc3c537875b8d75bb6eacb144364dd3293e",
+    "reports/forge/EXPERIMENT_MEMORY.md": "0a6f5b123697ccb98de5f062b0f82505748f4a448941352ed9b07db414e1b2b7",
     "reports/forge/publication-records.json": "a31129dc1cabdac6168664f1aeb4c643546156359c6b39234cea5e8cfad25e9b"
   },
   "pending_readout": [
@@ -2106,7 +2111,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 552,
+  "record_count": 553,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
@@ -2118,5 +2123,5 @@
   "scientific_source_digests": [
     "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
-  "view_count": 8
+  "view_count": 9
 }

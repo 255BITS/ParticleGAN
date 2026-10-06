@@ -1,0 +1,84 @@
+{
+  "automatic_retries": 0,
+  "campaign": {
+    "budget_seconds": 4200,
+    "candidate_budget_seconds": 4200,
+    "id": "bcap-pure-budget10x-v1"
+  },
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "devices": [
+    0,
+    1
+  ],
+  "input_digest": "568195f85507d191ae9f5b6ab91e9ff48a3d93ff50a20e3e41abdc1a75e982cf",
+  "jobs": [
+    {
+      "budget_seconds": 1200,
+      "compatibility_key": "b3de45b55cc6451311d80a759dd2d3a63f14d2a27d3aa62049082f9871cb884e",
+      "task_ids": [
+        "gaussian1d_acquisition_budget10x_v1"
+      ]
+    },
+    {
+      "budget_seconds": 3000,
+      "compatibility_key": "1dec1a7b554c473586c5a8b4b8618debf0dea8d080a1be0bf327569d2bfec7f1",
+      "task_ids": [
+        "ring16_acquisition_budget10x_v1"
+      ]
+    }
+  ],
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "qualification_input": false,
+  "request_id": "c20a937b7e834e08cfa5e0e3",
+  "schema_version": 1,
+  "source": {
+    "digest": "46c1aa862c1da363dc8938c834327ea9702d5db57c8cfcaae488d3e5b5545a4d",
+    "origin_commit": "6939fde43d5df47ed77ce3e9bbc289fe729fbf2f"
+  },
+  "study": "bcap-pure-budget10x-v1",
+  "tasks": {
+    "gaussian1d_acquisition_budget10x_v1": 10000,
+    "ring16_acquisition_budget10x_v1": 4000
+  }
+}

@@ -1,5 +1,10 @@
 # BCAP-pure: remaining Tier 1 criteria and next experiments
 
+**Completed follow-up:** the owner requested 10× training for both failures.
+The [two-run readout](../bcap-pure-budget10x-v1/README.md) records both sustained
+gates as FAIL: Gaussian continues oscillating; ring improves tails but repeatedly
+loses component spread. The original audit and qualification below are retained.
+
 The new BCAP-pure default is a useful **4/6 Tier 1 starting point**, with constant
 dualnorm steps. It still fails Gaussian CDF shape and ring component covariance.
 The strongest next experiment is a bounded training-budget diagnostic with the

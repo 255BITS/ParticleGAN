@@ -1,0 +1,801 @@
+{
+  "attempt_ids": [
+    "b97fa2481fa8452f8f1cfd44ab6568d8",
+    "e60c4e50de8c4733af1024de4c92394f"
+  ],
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "61f6a805704ec33917ef6ffc3b08f755e2a99f4971b394a2b9b51ff2ee8b9892",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "All first24 scored tensors and metrics reproduce the archived winner exactly on both tasks. Original4/6 qualification remains source a0f7e70e/f1755b1b. These two seed0 longer-budget trajectories add diagnostic evidence only; no loss, BCAP, sampling, optimizer setting, serving or effective step-schedule change.",
+  "conclusion": "Both complete 10x constant-step diagnostics FAIL the unchanged terminal-five gates. Gaussian ends KS 0.206962 and mean error 0.523460 sigma, passing suffix0. Ring ends with all metric cells passing but suffix2 after three late component-min-eigen failures; first transient five-pass window934-1000 later breaks. Full report: reports/forge/bcap-pure-budget10x-v1/README.md.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "b97fa2481fa8452f8f1cfd44ab6568d8",
+        "e60c4e50de8c4733af1024de4c92394f"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "11df9538e7abf281c76a36a680458bdc61d4b570bb5f145e5aa38aa24c3d9fa5",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.5704289507120848
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.5704289507120848
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "b97fa2481fa8452f8f1cfd44ab6568d8",
+          "producer_request_id": "c20a937b7e834e08cfa5e0e3",
+          "producer_study_id": "bcap-pure-budget10x-v1",
+          "result_hash": "884a6bd036b7a4a18695ed336f90f55c9d8cd7bdc0932a8da5e9ab0b56610e73",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "e60c4e50de8c4733af1024de4c92394f",
+          "producer_request_id": "c20a937b7e834e08cfa5e0e3",
+          "producer_study_id": "bcap-pure-budget10x-v1",
+          "result_hash": "070a48a63722ae3b2e0a8fe5e04c837ac7272f516bb4a6ad6b97cb0a2b6bb86b",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "bd297e3450f8a4ccf614556e0aa5f3747e0f76caa95d510aafac9ed0e89e9f47",
+        "contract_sha256": "11df9538e7abf281c76a36a680458bdc61d4b570bb5f145e5aa38aa24c3d9fa5",
+        "control_binding_sha256": "f057f540b040703fd6c7a0da5ddcfa4286c3d53e8fc69d9f3831537852da218d",
+        "policy_fingerprint": "3ce1d75e503b76917d4ea62ecf5769030579e00fd9c617434c40e495a8fa9b98",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "1edba1a29578096e95b29454b51cc500fcc12e521588f9c141ad4105c4f0e1f4"
+      },
+      "study_id": "bcap-pure-budget10x-v1",
+      "study_sha256": "1edba1a29578096e95b29454b51cc500fcc12e521588f9c141ad4105c4f0e1f4"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bcap_pure_budget10x_diagnostic_v1",
+  "hypothesis": "The remaining distribution-shape failures may reflect insufficient training allowance. Hold the selected full BCAP-pure dualnorm optimizer and every host/data/prior/sampling law fixed, start exactly two public seed 0 trajectories from scratch, and test the unchanged Gaussian and ring conjunctions through 10x updates. The preregistered numerical prediction is ring full component covariance error <= 0.85 at 10x; Gaussian CDF KS and all original gates remain independently reported. Prefix summaries at 1x/2x/4x/10x are dependent slices of the two trajectories, not independent replications.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Stop this allowance-only revision. Recommend a separately bounded global dualnorm step-size and relative-player-pace refinement across all six original Tier1 tasks, preserving four existing successes. Threshold/estimator calibration is separate methodological work; do not loosen cutoffs solely to accept these runs.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "b97fa2481fa8452f8f1cfd44ab6568d8",
+        "result_hash": "884a6bd036b7a4a18695ed336f90f55c9d8cd7bdc0932a8da5e9ab0b56610e73",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "e60c4e50de8c4733af1024de4c92394f",
+        "result_hash": "070a48a63722ae3b2e0a8fe5e04c837ac7272f516bb4a6ad6b97cb0a2b6bb86b",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-26e6cf0b4f24d0c63408bb91",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "original_attempt_envelope_path": "reports/forge/attempts/b97fa2481fa8452f8f1cfd44ab6568d8/result.json",
+    "path": "reports/forge/bcap-pure-budget10x-v1/results.json",
+    "scientific_source": {
+      "digest": "46c1aa862c1da363dc8938c834327ea9702d5db57c8cfcaae488d3e5b5545a4d",
+      "origin_commit": "6939fde43d5df47ed77ce3e9bbc289fe729fbf2f"
+    },
+    "sha256": "7197d166b6c4f7ff1eafce0dfec3186eb150916ea2da1064292f1b39130f501c"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 4200,
+      "candidate_budget_seconds": 4200,
+      "id": "bcap-pure-budget10x-v1"
+    },
+    "candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "competing_explanation": "Constant-rate oscillation or persistent generated tails may prevent correct CDF/local covariance even with more updates. A ring endpoint shape improvement without the complete terminal-five joint gate, a transient prefix pass, or a different failed conjunct does not establish success. Original 1x receipts retain their frozen source; compare newly emitted initialization/stream and 1x prefix evidence before asserting replay equality. This diagnostic changes only task budget, cadence declaration and retained final state, freezes original schedule horizons and constant rates, and authorizes exactly two attempts, no control rerun, automatic retry or expansion. Both independent tasks finish before readout; final PASS/FAILs confer no ordinary view qualification.",
+    "control": {
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "task_map": {
+        "gaussian1d_acquisition_budget10x_v1": "gaussian1d_acquisition",
+        "ring16_acquisition_budget10x_v1": "ring16_acquisition"
+      }
+    },
+    "falsifier": {
+      "metric": "component_covariance_error",
+      "op": ">",
+      "phase": "final",
+      "task_id": "ring16_acquisition_budget10x_v1",
+      "threshold": 0.85
+    },
+    "hypothesis": "The remaining distribution-shape failures may reflect insufficient training allowance. Hold the selected full BCAP-pure dualnorm optimizer and every host/data/prior/sampling law fixed, start exactly two public seed 0 trajectories from scratch, and test the unchanged Gaussian and ring conjunctions through 10x updates. The preregistered numerical prediction is ring full component covariance error <= 0.85 at 10x; Gaussian CDF KS and all original gates remain independently reported. Prefix summaries at 1x/2x/4x/10x are dependent slices of the two trajectories, not independent replications.",
+    "id": "bcap-pure-budget10x-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "component_covariance_error",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "ring16_acquisition_budget10x_v1",
+      "threshold": 0.85
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be",
+          "digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        },
+        "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+        "selector": [
+          "source"
+        ],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+          "configuration_id": "7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+          "required_passes": 4
+        },
+        "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+        "selector": [
+          "configurations",
+          21
+        ],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "attempt_id": "2f3251483c684806a8f54c30aa360eca",
+          "gate_status": "FAIL",
+          "result_hash": "45b8d0b7c4e5dfecfae26b27800a0d66a39d7cd6b6b7b768de16bc44f68c2a52"
+        },
+        "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+        "selector": [
+          "configurations",
+          21,
+          "tasks",
+          "gaussian1d_acquisition"
+        ],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "attempt_id": "e7a839160d7a4095990c034557ec1d24",
+          "gate_status": "FAIL",
+          "result_hash": "6ddb71b40bd4fbeed2b1413d55f51a4d8eb1213a687e03ee7e56ecb22cb89d53"
+        },
+        "path": "reports/forge/dualnorm-pacing-v2/analysis.json",
+        "selector": [
+          "configurations",
+          21,
+          "tasks",
+          "ring16_acquisition"
+        ],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bcap_pure_budget10x_diagnostic_v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bcap-pure-budget10x-v1",
+  "study_sha256": "1edba1a29578096e95b29454b51cc500fcc12e521588f9c141ad4105c4f0e1f4",
+  "task_results": [
+    {
+      "compatibility_key": "b3de45b55cc6451311d80a759dd2d3a63f14d2a27d3aa62049082f9871cb884e",
+      "cost": {
+        "adapter_loop_seconds": 90.97472369391471,
+        "adapter_seconds": 91.30784376594238,
+        "charged_task": "gaussian1d_acquisition_budget10x_v1",
+        "completed_steps": 10000,
+        "device": "0",
+        "execution_seconds": 96.846007226035,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 10000,
+          "generator": 10000,
+          "prior": 10000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 87.41227890888695,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 240,
+              "seconds": 0.07282765884883702
+            },
+            "sampling": {
+              "calls": 240,
+              "seconds": 0.07168108283076435
+            },
+            "training_updates": {
+              "calls": 10000,
+              "seconds": 87.26777016720735
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 93.51795858994592,
+        "wall_seconds": 96.846007226035
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 3917,
+          "minimum_stable_checks": 5,
+          "observations": 240,
+          "passing_observations": 2,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "cdf_ks": {
+            "margin": -0.1569619728741588,
+            "metric": "cdf_ks",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.05,
+            "value": 0.2069619728741588
+          },
+          "finite_fraction": {
+            "margin": -0.0,
+            "metric": "finite_fraction",
+            "op": "==",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 1.0
+          },
+          "mean_error_sigma": {
+            "margin": -0.32345965057611464,
+            "metric": "mean_error_sigma",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.2,
+            "value": 0.5234596505761147
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          },
+          "std_ratio": {
+            "margin": 0.14872398062725378,
+            "metric": "std_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.2,
+            "value": 1.0512760193727462
+          }
+        },
+        "passed": false,
+        "prefix_snapshots": {
+          "10x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 3917,
+              "minimum_stable_checks": 5,
+              "observations": 240,
+              "passing_observations": 2,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.6028830421467622,
+            "status": "FAIL",
+            "step_budget": 10000
+          },
+          "1x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.2142595548841302,
+            "status": "FAIL",
+            "step_budget": 1000
+          },
+          "2x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 48,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.44600813677728485,
+            "status": "FAIL",
+            "step_budget": 2000
+          },
+          "4x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 3917,
+              "minimum_stable_checks": 5,
+              "observations": 96,
+              "passing_observations": 1,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.036100951295983626,
+            "status": "FAIL",
+            "step_budget": 4000
+          }
+        },
+        "reason": "recomputed complete live budget curve and terminal suffix",
+        "shortfall": 0.6028830421467622,
+        "status": "FAIL",
+        "step_budget": 10000
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.2069619728741588,
+        "finite_fraction": 1.0,
+        "mean": 2.2617298252880573,
+        "mean_error_sigma": 0.5234596505761147,
+        "sample_count": 4096,
+        "std": 0.5256380096863731,
+        "std_ratio": 1.0512760193727462,
+        "step": 10000
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live budget curve and terminal suffix",
+      "task_id": "gaussian1d_acquisition_budget10x_v1"
+    },
+    {
+      "compatibility_key": "1dec1a7b554c473586c5a8b4b8618debf0dea8d080a1be0bf327569d2bfec7f1",
+      "cost": {
+        "adapter_loop_seconds": 54.46258882805705,
+        "adapter_seconds": 54.79059353994671,
+        "charged_task": "ring16_acquisition_budget10x_v1",
+        "completed_steps": 4000,
+        "device": "1",
+        "execution_seconds": 61.23431680595968,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 4000,
+          "generator": 4000,
+          "prior": 4000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 52.66596879402641,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 240,
+              "seconds": 4.68004733172711
+            },
+            "sampling": {
+              "calls": 240,
+              "seconds": 0.06876699975691736
+            },
+            "training_updates": {
+              "calls": 4000,
+              "seconds": 47.917154462542385
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 56.97421728307381,
+        "wall_seconds": 61.23431680595968
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 767,
+          "minimum_stable_checks": 5,
+          "observations": 240,
+          "passing_observations": 110,
+          "passing_suffix": 2,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.2795710492879152,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.5704289507120848
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.022978162765502935,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.17297816276550293
+          },
+          "hq": {
+            "margin": 0.14121093750000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9912109375
+          },
+          "mass_tv": {
+            "margin": 0.103369140625,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.046630859375
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": false,
+        "prefix_snapshots": {
+          "10x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 767,
+              "minimum_stable_checks": 5,
+              "observations": 240,
+              "passing_observations": 110,
+              "passing_suffix": 2,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.0,
+            "status": "FAIL",
+            "step_budget": 4000
+          },
+          "1x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.3333333333333333,
+            "status": "FAIL",
+            "step_budget": 400
+          },
+          "2x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 767,
+              "minimum_stable_checks": 5,
+              "observations": 48,
+              "passing_observations": 3,
+              "passing_suffix": 3,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.0,
+            "status": "FAIL",
+            "step_budget": 800
+          },
+          "4x": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 767,
+              "minimum_stable_checks": 5,
+              "observations": 96,
+              "passing_observations": 40,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "passed": false,
+            "shortfall": 0.03182907236946953,
+            "status": "FAIL",
+            "step_budget": 1600
+          }
+        },
+        "reason": "recomputed complete live budget curve and terminal suffix",
+        "shortfall": 0.0,
+        "status": "FAIL",
+        "step_budget": 4000
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5712466966360807,
+        "component_core_covariance_errors": [
+          0.36967483162879944,
+          0.7139233946800232,
+          0.5338501334190369,
+          0.552808940410614,
+          0.7571772933006287,
+          0.5356665849685669,
+          0.7670160531997681,
+          0.5669385194778442,
+          0.521324634552002,
+          0.414015531539917,
+          0.49463409185409546,
+          0.34418153762817383,
+          0.7327003479003906,
+          0.5380339026451111,
+          0.7630709409713745,
+          0.534930408000946
+        ],
+        "component_core_eigen_ratios": [
+          0.48827752470970154,
+          0.27414217591285706,
+          0.25366881489753723,
+          0.3260292410850525,
+          0.21212077140808105,
+          0.34703153371810913,
+          0.17297816276550293,
+          0.315560907125473,
+          0.2660693824291229,
+          0.4261787533760071,
+          0.45342785120010376,
+          0.5143702030181885,
+          0.17716456949710846,
+          0.31782352924346924,
+          0.22479873895645142,
+          0.24852217733860016
+        ],
+        "component_core_min_eigen_ratio": 0.17297816276550293,
+        "component_counts": [
+          262,
+          290,
+          276,
+          259,
+          268,
+          247,
+          264,
+          306,
+          281,
+          269,
+          201,
+          176,
+          232,
+          241,
+          248,
+          276
+        ],
+        "component_covariance_error": 0.5704289507120848,
+        "component_covariance_errors": [
+          0.36967483162879944,
+          0.7139233946800232,
+          0.5338501334190369,
+          0.552808940410614,
+          0.7571772933006287,
+          0.5225826501846313,
+          0.7670160531997681,
+          0.5669385194778442,
+          0.521324634552002,
+          0.414015531539917,
+          0.49463409185409546,
+          0.34418153762817383,
+          0.7327003479003906,
+          0.5380339026451111,
+          0.7630709409713745,
+          0.534930408000946
+        ],
+        "component_mass": [
+          0.06396484375,
+          0.07080078125,
+          0.0673828125,
+          0.063232421875,
+          0.0654296875,
+          0.060302734375,
+          0.064453125,
+          0.07470703125,
+          0.068603515625,
+          0.065673828125,
+          0.049072265625,
+          0.04296875,
+          0.056640625,
+          0.058837890625,
+          0.060546875,
+          0.0673828125
+        ],
+        "component_min_eigen_ratio": 0.17297816276550293,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.003816793905571103,
+          0.0,
+          0.025362318381667137,
+          0.0,
+          0.0,
+          0.07287449389696121,
+          0.0,
+          0.003267973894253373,
+          0.0,
+          0.022304832935333252,
+          0.014925372786819935,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "covariance_error": 0.07960284501314163,
+        "hq": 0.9912109375,
+        "hq_component_counts": [
+          261,
+          290,
+          269,
+          259,
+          268,
+          229,
+          264,
+          305,
+          281,
+          263,
+          198,
+          176,
+          232,
+          241,
+          248,
+          276
+        ],
+        "mass_tv": 0.046630859375,
+        "max_component_spill": 0.07287449389696121,
+        "mean_error": 0.03125671297311783,
+        "min_hq_mass_ratio": 0.6875,
+        "min_mass_ratio": 0.6875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 4000,
+        "sw1_normalized": 0.04063663118827151,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live budget curve and terminal suffix",
+      "task_id": "ring16_acquisition_budget10x_v1"
+    }
+  ]
+}

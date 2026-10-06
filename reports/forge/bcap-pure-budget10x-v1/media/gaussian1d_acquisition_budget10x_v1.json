@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "d7508d49f7e83ebc59192ce775ca8d288d328be42a76ba55f98f9159045aeca4",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 240,
+  "observations_sha256": "7db6902c13fec5b176b93b4c6107b1696fb9373bc83d0da1e9e9c2740cdd40d9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    30,
+    60,
+    90,
+    120,
+    149,
+    179,
+    209,
+    239
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-pure-budget10x-v1-queue/bcap-pure-budget10x-v1/b97fa2481fa8452f8f1cfd44ab6568d8/observed-samples.pt": "d88fdc9c39ef811857fda3d286fb6f424ee1a56ca7b5e86059b87c9dd8401624"
+  },
+  "task_id": "gaussian1d_acquisition_budget10x_v1"
+}

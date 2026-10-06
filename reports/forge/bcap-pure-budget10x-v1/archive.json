@@ -1,0 +1,59 @@
+{
+  "archive": {
+    "bytes": 16036386,
+    "path": "/home/martyn/dev/ParticleGAN-bcap-pure-tier1-gap-audit/artifacts/forge/bcap-pure-budget10x-v1.tar.gz",
+    "sha256": "bb4be4ae7d9c0b6519eed7e596b4b0d1d2b60bcdc165505ab7107f58b60ad2ca"
+  },
+  "attempts": {
+    "gaussian1d_acquisition_budget10x_v1": {
+      "attempt_id": "b97fa2481fa8452f8f1cfd44ab6568d8",
+      "checkpoint_sha256": "1cd8df020c02516bd0d44fc13f65f883da3f64e5606f6e61b33b5987319dd2b2",
+      "durable_sha256": {
+        "evidence.json": "3145d7491fbbd0d706051e7ee85fa4a5fc7054e5acce14e52ad5592a8f04845a",
+        "request.json": "423db41f378473e897b3e19d816ac4241de87ef14fb689492222d9d58169cdc3",
+        "result.json": "da91330808304ea7d41b48eeb93d80b2dfa039fa275c9fa76a7d86b0d7491d79"
+      },
+      "result_hash": "884a6bd036b7a4a18695ed336f90f55c9d8cd7bdc0932a8da5e9ab0b56610e73",
+      "saved_samples_sha256": "d88fdc9c39ef811857fda3d286fb6f424ee1a56ca7b5e86059b87c9dd8401624"
+    },
+    "ring16_acquisition_budget10x_v1": {
+      "attempt_id": "e60c4e50de8c4733af1024de4c92394f",
+      "checkpoint_sha256": "0a765a356a3c557d7621635f085125bb21b4bb74922a3a26aaa01e1cfc381971",
+      "durable_sha256": {
+        "evidence.json": "a3ad21bfdfee13550a16c95a60b2d80022fb530e7dd859d5708c6865f7fb0606",
+        "request.json": "2d5134756db0a45572959e174a225fbb60db63d2c15fbf9c365854b11066055e",
+        "result.json": "653646f8b66c00e697ad82e2ec215c7b65f57b7a4c27e6c1b0b2700caa0671d6"
+      },
+      "result_hash": "070a48a63722ae3b2e0a8fe5e04c837ac7272f516bb4a6ad6b97cb0a2b6bb86b",
+      "saved_samples_sha256": "4d5787201009bceed032e1e35a18ee9eb3e600c5be400a93db161bd857beec90"
+    }
+  },
+  "availability": "LOCAL_ONLY",
+  "kind": "completed-two-run-research-diagnostic-archive",
+  "manifest": {
+    "all_member_bytes_verified": true,
+    "ordered_member_manifest_sha256": "7b3927c997222b4dce254a29dcfa0d804860bb37d26d3e055d45be322a71ea06",
+    "regular_files": 1232,
+    "uncompressed_bytes": 39738617
+  },
+  "original_archive": {
+    "bytes": 231319616,
+    "path": "/home/martyn/dev/ParticleGAN-dualnorm-pacing-v2/artifacts/forge/bcap-dualnorm-pacing-v2.tar.gz",
+    "sha256": "136c907e4a46cdcfffc7b2a904d2f1b684d06cdd44eabbba537ec64a0a680741",
+    "unchanged": true
+  },
+  "qualification_input": false,
+  "request_id": "c20a937b7e834e08cfa5e0e3",
+  "restore": {
+    "durable_destination": "/home/martyn/dev/ParticleGAN-bcap-pure-tier1-gap-audit",
+    "durable_prefix": "durable/",
+    "note": "Restore to certified paths without editing request/result/evidence bytes. Independent old-prefix comparison also needs the unchanged original archive and its durable receipts. Local-only archive is not distributed by Git.",
+    "queue_destination": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-pure-budget10x-v1-queue",
+    "queue_prefix": "queue/"
+  },
+  "schema_version": 1,
+  "source": {
+    "digest": "46c1aa862c1da363dc8938c834327ea9702d5db57c8cfcaae488d3e5b5545a4d",
+    "origin_commit": "6939fde43d5df47ed77ce3e9bbc289fe729fbf2f"
+  }
+}

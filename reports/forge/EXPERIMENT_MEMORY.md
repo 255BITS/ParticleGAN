@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 552. Inventory coverage: complete. Unresolved import items: 7.
+Records: 553. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3670,6 +3670,22 @@ Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality re
 
 [Evidence](../../reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json) · [Record](records/readout-21b533460c29dd5049aa64df.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · readout-26e6cf0b4f24d0c63408bb91
+
+**Scope:** research_diagnostic; scientific; revision `61f6a805704ec33917ef6ffc3b08f755e2a99f4971b394a2b9b51ff2ee8b9892`.
+
+The remaining distribution-shape failures may reflect insufficient training allowance. Hold the selected full BCAP-pure dualnorm optimizer and every host/data/prior/sampling law fixed, start exactly two public seed 0 trajectories from scratch, and test the unchanged Gaussian and ring conjunctions through 10x updates. The preregistered numerical prediction is ring full component covariance error <= 0.85 at 10x; Gaussian CDF KS and all original gates remain independently reported. Prefix summaries at 1x/2x/4x/10x are dependent slices of the two trajectories, not independent replications.
+
+**Observed:** {'FAIL': 2}; wall seconds 158.08; mechanism `floor_constant`.
+
+ring16_acquisition_budget10x_v1: modes=16, hq=0.99121, mass_tv=0.046631
+
+Both complete 10x constant-step diagnostics FAIL the unchanged terminal-five gates. Gaussian ends KS 0.206962 and mean error 0.523460 sigma, passing suffix0. Ring ends with all metric cells passing but suffix2 after three late component-min-eigen failures; first transient five-pass window934-1000 later breaks. Full report: reports/forge/bcap-pure-budget10x-v1/README.md.
+
+**Next:** Stop this allowance-only revision. Recommend a separately bounded global dualnorm step-size and relative-player-pace refinement across all six original Tier1 tasks, preserving four existing successes. Threshold/estimator calibration is separate methodological work; do not loosen cutoffs solely to accept these runs.
+
+[Evidence](../../reports/forge/bcap-pure-budget10x-v1/results.json) · [Record](records/readout-26e6cf0b4f24d0c63408bb91.json)
+
 ### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
 
 **Scope:** current; scientific; revision `aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9`.
@@ -4698,4 +4714,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `2066cebfc9bef22ef32cb3bcdafaf0cdc86b327df776778be55939774f7084b1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a739f6aebd216f3d9caa190eeae614cdc5dad3acdfc056d983c477048cc9489b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

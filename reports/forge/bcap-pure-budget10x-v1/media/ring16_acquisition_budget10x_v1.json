@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "d9b550b951eb427ba497a0afb0b6633a55ab6c783781bd761ca2fff595170a28",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 240,
+  "observations_sha256": "77b426ac00617543f4bc78fa687f0ae9812b262691e10459cce4587826913dc9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    30,
+    60,
+    90,
+    120,
+    149,
+    179,
+    209,
+    239
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-pure-budget10x-v1-queue/bcap-pure-budget10x-v1/e60c4e50de8c4733af1024de4c92394f/observed-samples.pt": "4d5787201009bceed032e1e35a18ee9eb3e600c5be400a93db161bd857beec90"
+  },
+  "task_id": "ring16_acquisition_budget10x_v1"
+}
