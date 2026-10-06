@@ -11,6 +11,7 @@ from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+from .noisy_particle_prior import NoisyParticlePrior
 from .policy import E22Policy, ServedModel, StepNoise, UpdatePolicy
 from .recipes import (
     NetworkLRTransition,
@@ -34,7 +35,7 @@ __all__ = [
     "ParticleRows", "ScalarHeadFeatures",
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
-    "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
+    "ParticlePrior", "MoGParticlePrior", "NoisyParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
