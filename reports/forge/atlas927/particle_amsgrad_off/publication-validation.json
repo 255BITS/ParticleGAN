@@ -1,0 +1,28 @@
+{
+  "all24_each_run_saved_observations_and_measurements_pure": true,
+  "all72_required_source_pins_join_snapshot": true,
+  "baseline_raw_member_pin": {
+    "bytes": 12967018,
+    "sha256": "17ff337a808fe7f89042ffe3d6c27ef3536f56a634e20e2db5223c4cbe477e18"
+  },
+  "baseline_reruns": 0,
+  "genuine_focused_checks": 8,
+  "grade_join": true,
+  "independent_source_only_reviews_are_not_empirical_passes": true,
+  "proof_join": true,
+  "pure_declaration_checks": 4,
+  "raw_gzip_roundtrip": true,
+  "raw_member_pin": {
+    "bytes": 12661412,
+    "sha256": "ced43d418d9ba1052f3809a6a7eea24dc2cbb93d7ca9f46950871a3048065cc7"
+  },
+  "request_join": true,
+  "retained_root_errors": [
+    "Preinstall KeyError status: read corrected to exact reviewed verdict field before any installation/test/case.",
+    "Retained trace inspection output exceeded tool budget: only bounded saved fields reread; no training replay."
+  ],
+  "retained_trace_unknown_scope_preserved": true,
+  "scientific_attempts": 1,
+  "status": "PASS",
+  "table_group_only_variant_declared": true
+}

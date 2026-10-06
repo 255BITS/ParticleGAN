@@ -1,0 +1,108 @@
+{
+  "candidate_revision": "d211382aff5a48d521651b8e7a86bd627ba05071bcae9c122c362c28eada1ee0",
+  "cause": "UNKNOWN; retained critic input derivatives do not identify training gradients or controller causality",
+  "final_retained_metrics": {
+    "grad_med": 0.010896995663642883,
+    "mean_abs": 0.002445647493004799,
+    "step": 80
+  },
+  "independent_replication": false,
+  "numerical_grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -0.2975543525069952,
+          "metric": "mean_abs",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.3,
+          "value": 0.002445647493004799
+        },
+        {
+          "margin": 0.9891030043363571,
+          "metric": "grad_med",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 1.0,
+          "value": 0.010896995663642883
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.495923920844992,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "grad_med": 0.010896995663642883,
+      "mean_abs": 0.002445647493004799
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "original_byte_pins": {
+    "graded": {
+      "bytes": 2033,
+      "sha256": "4fc6459e872248e8b3190100baa2190a868163531b47b969f19767decb6bc37b"
+    },
+    "raw": {
+      "bytes": 184041,
+      "sha256": "a50a963ad540a70a32451187e7b4b07ca395df16b5640cad111ee7f8dd281b4b"
+    },
+    "request": {
+      "bytes": 532756,
+      "sha256": "1c8c316873f8d8b3cf01ca354f3555247cfcf03f34b82961735e3fc141bf09fa"
+    }
+  },
+  "producer_attempt_id": "f3140adaffd14f4a8974d25874d345d4",
+  "producer_candidate": "atlas-existing-mog-nearest-positive791-v1",
+  "producer_request_id": "6854af9ec7eeb60d1def13fb",
+  "producer_study_id": "atlas-existing-mog-nearest-positive791-study-v1",
+  "record_id": "original791-two-pole-f3140adaffd14f4a8974d25874d345d4",
+  "retained_clocks": [
+    4,
+    7,
+    10,
+    14,
+    17,
+    20,
+    24,
+    27,
+    30,
+    34,
+    37,
+    40,
+    44,
+    47,
+    50,
+    54,
+    57,
+    60,
+    64,
+    67,
+    70,
+    74,
+    77,
+    80
+  ],
+  "schema": "pg_atlas889_original791_motivation_v1",
+  "source_digest": "d45b5459a6def926e41c7d3c544593b1635a670b50ef118fb6660ab679e78f34",
+  "task_id": "two_pole",
+  "training_gradient_retained": false,
+  "use": "motivation_only"
+}

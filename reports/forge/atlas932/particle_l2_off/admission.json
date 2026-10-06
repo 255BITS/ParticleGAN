@@ -1,0 +1,46 @@
+{
+  "actual_controls_pin": {
+    "bytes": 3183,
+    "sha256": "a92f0a06e2406237931dee228ddb67c4297a9a3f8c0de1fc64662b3552de54c5"
+  },
+  "actual_software_execution_pin": {
+    "bytes": 2129,
+    "sha256": "721ab6216f735fefd6831e2cbc642f9b7346c8e363b8506e3ce81bc442ef38b8"
+  },
+  "attempt_id": "8f23a5ca2369457e8c96036ff011766d",
+  "authority_seq": 932,
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "baseline918_rerun": false,
+  "baseline921_rerun": false,
+  "baseline927_rerun": false,
+  "budget_seconds": 300,
+  "candidate_revision": "1957bc63c65671a8a9345373cdc2507f92137dceb50639c054d3ce44963d6dd3",
+  "canonical_original_task_credit": false,
+  "cpu_threads": 1,
+  "device": "cpu",
+  "directory": "/ml2/hypergan/pg-atlas932-particle-l2-runtime-20261006/v1/runs/forge/atlas-two-pole-l2-off932-study-v1/8f23a5ca2369457e8c96036ff011766d",
+  "effective_objective_variant_sha256": "1514574ea06c8cd602293ef0fa99121c4b9f1df1de6d00f5066aa35c69b6036f",
+  "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+  "fresh_successor": true,
+  "gpus": 0,
+  "objective_variant_honestly_changed": true,
+  "old889_replayed": false,
+  "only_particle_l2_intervention": true,
+  "pid": 3918811,
+  "recovery_authority_seq": 934,
+  "request_id": "a7cfc6f48c5ec2f849476208",
+  "request_sha256": "bab2ee01483850e53a7ad915c84d499ec6ba16a294d123c7e3647682d4564d19",
+  "request_source_file_count": 1284,
+  "schema": "pg932_one_particle_l2_objective_case_admission_v1",
+  "software_proof_pin": {
+    "bytes": 9171,
+    "sha256": "24e4845733580cf3caf8fc05f5df0d7d7b494f7aa2d97797df108e5686cf8ff9"
+  },
+  "source_application_pin": {
+    "bytes": 34596,
+    "sha256": "fb92140f9fb1ad1da969b7b6deea1ddf3eb02284d1ba96f86b14234b22bf49d3"
+  },
+  "source_digest": "313379fed51f2ca0633de36bad4c88536d6ebbc6b2a97b4c24c26c7f9b84c56d",
+  "task_digest": "e3eb1e6df5cc334cb5f71684d25f57c1c3321877c2ace336207fb233577d2ffb",
+  "task_id": "two_pole_l2_off932_v1"
+}

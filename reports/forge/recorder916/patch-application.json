@@ -1,0 +1,19 @@
+{
+  "authority_message_id": "ember-recorder-checkpoint-repair-task-20261006-v1",
+  "independent_source_review": "CLEAR_SOURCE_ONLY",
+  "modules": {
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    }
+  },
+  "old_attempt_rebound": false,
+  "original11_unchanged": true,
+  "original_head": "04f68ad968c60b1c2bd36f009e502a7c2c8867c9",
+  "schema": "recorder916_exact_reviewed_patch_application_v1",
+  "scientific_allocation_seconds": 0
+}

@@ -1,0 +1,147 @@
+{
+  "controls": {
+    "count": 8,
+    "coverage": "Populated true original Adam boosted/unboosted parity across numerical leaves/versions/gradients/aliases/RNG and return identity; corrected ratio/restored q/other-group order; no-gradient; original closure/Adam errors; freshness/one-shot/restoration negatives; real-owner checkpoint and detached-recorder load/next update; wrong owner. Original11 suite preserved.",
+    "methods": [
+      "test_current_adam_values_versions_moments_aliases_rng_and_return_match",
+      "test_boosted_and_unboosted_ratio_only_q_and_other_groups_preserved",
+      "test_no_gradient_token_preserves_original_consumer_without_stale_gain",
+      "test_closure_exception_is_same_object_and_clears_capture",
+      "test_adam_exception_restores_group_and_cannot_publish_completed_ratio",
+      "test_current_clock_one_shot_and_missing_restoration_fail_closed",
+      "test_real_owner_checkpoint_recorder_and_load_refresh_live_group",
+      "test_wrong_owner_alias_rejected_before_installation"
+    ],
+    "status": "AUTHORED_NOT_RUN_BY_REVIEWER"
+  },
+  "findings": [
+    {
+      "finding": "Removing exactly the new helper, one constructor call and Idea crosspin reproduces every baseline fa49 byte. Original declarations, full Task and constructor science remain exact.",
+      "name": "whole_owner_reversal"
+    },
+    {
+      "finding": "Captures owned group LR at existing end entry before restoration. Publishes only after original optimizer success and exactly one restoration witness. Original closure/Adam/end exception paths clear capture and propagate; no second optimizer/controller/model call.",
+      "name": "completed_actual_lr"
+    },
+    {
+      "finding": "Missing, wrong-clock, stale, repeated and absent-restoration evidence is rejected. Capture clears on consumption, failure and restore. None direct token preserves original no-gradient consumer.",
+      "name": "current_clock_one_shot"
+    },
+    {
+      "finding": "Exact table tester receives used_lr/original base. Original other-group ratios, iteration and surprise.observe order remain exact. q still consumes restored group; beta and AMSGrad unchanged.",
+      "name": "only_table_ratio_changes"
+    },
+    {
+      "finding": "No tester/surprise serializer callback added. Explicit-key policy/optimizer/response serializers unchanged. Genuine checkpoint control uses installed unchanged recorder and strict typed digest, then detaches recorder before original strict restore.",
+      "name": "checkpoint_serialization"
+    },
+    {
+      "finding": "After successful original policy load, live table group/index is rejoined because Adam replaces group dictionaries. Original load/return occurs once. Active-recorder resume is not claimed.",
+      "name": "restore_group_identity"
+    },
+    {
+      "finding": "Required65 equals exact owner Source map plus owner; proof5 joins current owner and unchanged original11/recorder/contract dependencies. Focused test is explicitly external unless ROOT verifies actual membership. Idea/Study declare LR intervention rather than passive-only equivalence.",
+      "name": "source_and_metadata"
+    }
+  ],
+  "limits": [
+    "No semantic imports/tests, actual artifacts, installation, Queue, Git, network, Babel or science by reviewer.",
+    "Clearance concerns Source only; no recovery, causal, ambient closure purity or active-recorder resume claim.",
+    "ROOT preserves all old errors/INVALID/costs and must join fresh full Queue request/source/revision, genuine software evidence and full300 fit before claim."
+  ],
+  "measurement": "SOURCE_ONLY_UNMEASURED",
+  "pins": [
+    {
+      "bytes": 64151,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/repo/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    {
+      "bytes": 13934,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/repo/tests/test_atlas921_completed_lr_clock.py",
+      "sha256": "3da79006816bcb88488333c200f55077af5d6e3c97f2dafbbedd863fc7279a40"
+    },
+    {
+      "bytes": 1550,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/repo/configs/forge/ideas/atlas-original-two-pole-passive889-v1.json",
+      "sha256": "253800cb61c8cb89da2331654b641191931cc02b15ad96f9d4e9da2299dd96a9"
+    },
+    {
+      "bytes": 2904,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/repo/configs/forge/studies/atlas-original-two-pole-passive889-study-v1.json",
+      "sha256": "fd8c7d42a4d0abcddc2356e24a119dc4d6d7498011fd704998b6cac794994b72"
+    },
+    {
+      "bytes": 26086,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/owner.patch",
+      "sha256": "7c6a96279777307beb5eb6482b13c8794f7129f12864ff37aa3d1765fa2d3096"
+    },
+    {
+      "bytes": 11706,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/source-declaration.json",
+      "sha256": "757f2627062eabc7ff1f733dfc1cbd8fb91f22ffd9dcf3bcf9df5ea6b9a394e2"
+    },
+    {
+      "bytes": 2226,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/SOURCE_PROOF.json",
+      "sha256": "c404e2108531743ce37c5ee9774134bc71a412de540797d9c135176d9b581c7e"
+    },
+    {
+      "bytes": 4577,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/handoff.json",
+      "sha256": "f7cfcc44b3d2fc6ab215d3d53661653e15d59c25ec4df8efcce9b0a33c7d6d43"
+    },
+    {
+      "bytes": 58663,
+      "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v1/baseline/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    },
+    {
+      "bytes": 29610,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/tests/test_atlas889_two_pole_observer.py",
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    },
+    {
+      "bytes": 23311,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/repo/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    {
+      "bytes": 33012,
+      "path": "/ml2/hypergan/pg-atlas889-two-pole-observer-source-20261006/v9/preimages/particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    {
+      "bytes": 81173,
+      "path": "/ml2/hypergan/pg-atlas889-two-pole-observer-source-20261006/v9/preimages/particlegan/policy.py",
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    {
+      "bytes": 60875,
+      "path": "/ml2/hypergan/pg-atlas889-two-pole-observer-source-20261006/v9/preimages/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    }
+  ],
+  "reviewer": "merge_readiness",
+  "schema": "atlas921_lr_clock_primary_independent_source_review_v1",
+  "subject_handoff": {
+    "bytes": 4577,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-source-20261006/v2/handoff.json",
+    "sha256": "f7cfcc44b3d2fc6ab215d3d53661653e15d59c25ec4df8efcce9b0a33c7d6d43"
+  },
+  "unchanged_science": {
+    "backend": "cpu",
+    "cpu_threads": 1,
+    "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "full_case_cap_seconds": 300,
+    "gates": "original mean_abs>=.30 and grad_med<=1",
+    "gpus": 0,
+    "initializer": "original zero12 direct coordinates / IdentityG / stored HostCritic",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "seed": 0,
+    "steps": 80,
+    "task_id": "two_pole"
+  },
+  "verdict": "CLEAR_SOURCE_ONLY"
+}

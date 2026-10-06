@@ -1,0 +1,80 @@
+{
+  "files": [
+    {
+      "bytes": 12076,
+      "path": "reports/forge/atlas889/lrclock921/RESULTS.json",
+      "sha256": "122e5a4fb3eee396d7309c41ffb68d7b220b5b24d274584f3e587e6dabc472c3"
+    },
+    {
+      "bytes": 5347,
+      "path": "reports/forge/atlas889/lrclock921/RESULTS.md",
+      "sha256": "733420a69590b4f6ce6a817c7a2923d66c12b4efff257735b23cacfe9ad9aa1d"
+    },
+    {
+      "bytes": 226769,
+      "path": "reports/forge/atlas889/lrclock921/admitted-request.json",
+      "sha256": "58d36c9fc52ec3ba01154372483d0430a9c59e6fa1c553ccfbe8e0356f6fb57d"
+    },
+    {
+      "bytes": 109687,
+      "path": "reports/forge/atlas889/lrclock921/comparison.json",
+      "sha256": "6bbae818235cce68f2726bdb9328b5f8a916d2e38f84146ceb3382fa080fa9c5"
+    },
+    {
+      "bytes": 2589,
+      "path": "reports/forge/atlas889/lrclock921/focused-controls.json",
+      "sha256": "6a47329bfe1b961f5c39f8317640dd8f526d732a2330e2dcc8c36f827e296ec4"
+    },
+    {
+      "bytes": 1664,
+      "path": "reports/forge/atlas889/lrclock921/focused-controls.stderr",
+      "sha256": "3e36d8612536cc04c7ba1e5e0c87303729caa1345ef13f6effcd169d0bc3b753"
+    },
+    {
+      "bytes": 0,
+      "path": "reports/forge/atlas889/lrclock921/focused-controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2032,
+      "path": "reports/forge/atlas889/lrclock921/graded-result.json",
+      "sha256": "9ee107f4f92e63f2d2eb9521299762c6d9efc633043f8bbb109d2f7168e952cf"
+    },
+    {
+      "bytes": 7735,
+      "path": "reports/forge/atlas889/lrclock921/primary-source-review.json",
+      "sha256": "4e9c124fd98d515f670a6de1fe1c43439e91ccccd926ad5a651ebf059387573d"
+    },
+    {
+      "bytes": 846,
+      "path": "reports/forge/atlas889/lrclock921/publication-validation.json",
+      "sha256": "04fcf2d334f4751578f96310102166a012f3bb93157f252a8fed69e97246387f"
+    },
+    {
+      "bytes": 424044,
+      "path": "reports/forge/atlas889/lrclock921/raw-result.json.gz",
+      "sha256": "06cd106ecd9cee0fe34698d759cdde13bd141465b5ee769d766c943421c34bf1"
+    },
+    {
+      "bytes": 2639,
+      "path": "reports/forge/atlas889/lrclock921/software-proof.json",
+      "sha256": "c8179a69596fd6e00486465258813ff78b750ca13983c912d7165f714a749f15"
+    },
+    {
+      "bytes": 1845,
+      "path": "reports/forge/atlas889/lrclock921/source-application.json",
+      "sha256": "3dde6954126e970b0971cf71e5afdc232b9c7ded2a1c7673934f099739af50e2"
+    },
+    {
+      "bytes": 13657,
+      "path": "reports/forge/atlas889/lrclock921/successor-source-declaration.json",
+      "sha256": "f1666144f27c64c110ba0000dc583e1dfdabdb7d419e1e00c03db63e599dec6b"
+    },
+    {
+      "bytes": 5709,
+      "path": "reports/forge/atlas889/lrclock921/supplemental-source-review.json",
+      "sha256": "b879a18c767a66c855506ab2f9faacfd07b64378115007287b1e316ba4a0e654"
+    }
+  ],
+  "schema": "pg921_public_artifact_pins_v1"
+}

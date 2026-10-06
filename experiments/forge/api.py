@@ -86,6 +86,10 @@ def host_recipe_overrides(candidate, execution, resources):
 
 def task_recipe_resources(task):
     """Resolve only the resources consumed by the task's existing adapter."""
+    from .noisy_prior_tier1 import is_noisy_task
+    if is_noisy_task(task):
+        from .noisy_prior_adapters import task_resources
+        return task_resources(task)
     execution, adapter = task["execution"], task["adapter"]
     if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
         spec = execution["host_definition"]
@@ -106,6 +110,29 @@ def task_recipe_overrides(candidate, task):
     from .taskrecipes import bind_task_candidate
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+        from .atlas932_two_pole_owner import validate_task, TASK_BINDINGS
+        validate_task(task)
+        return {**bound.get('recipe_overrides', {}), **TASK_BINDINGS}
+    from .noisy_prior_tier1 import is_noisy_task, validate
+    if is_noisy_task(task):
+        from .noisy_prior_adapters import blockers, task_resources
+        validate(task)
+        reasons = blockers(task, bound)
+        if reasons:
+            raise CapabilityError(reasons)
+        return host_recipe_overrides(bound, execution, task_resources(task))
+    from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers, task_resources as existing_mog_resources
+    if existing_mog_candidate(bound):
+        reasons = existing_mog_blockers(task, bound)
+        if reasons:
+            raise CapabilityError(reasons)
+        if task["id"] != "two_pole":
+            return host_recipe_overrides(bound, execution, existing_mog_resources(task))
+    from .atlas_two_pole import supports, TASK_BINDINGS
+    if supports(task, bound):
+        # The public Atlas schedule remains intrinsic None; 80 bounds the host.
+        return {**bound.get("recipe_overrides", {}), **TASK_BINDINGS}
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
         from .behavior_adapters import behavior_preflight
@@ -128,7 +155,67 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     from .nativeprofiles import native_host_initialization
     from .priors import task_prior
     from .taskrecipes import adaptation_receipt, bind_task_candidate
+    from .noisy_prior_tier1 import is_noisy_task as recognized_noisy
+    if recognized_noisy(task):
+        from .noisy_prior_adapters import blockers as original_noisy_blockers
+        reasons = original_noisy_blockers(task, candidate, root=root)
+        if reasons:
+            raise CapabilityError(reasons)
+    if (candidate.get('id') == 'atlas-two-pole-l2-off932-v1' or task.get('id') == 'two_pole_l2_off932_v1'):
+        if candidate.get('id') != 'atlas-two-pole-l2-off932-v1' or task.get('id') != 'two_pole_l2_off932_v1':
+            raise CapabilityError(['932 requires its exact objective candidate/task pair'])
+        from .atlas932_two_pole_owner import validate_task
+        validate_task(task, root=root)
     bound = bind_task_candidate(candidate, task)
+    from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers
+    existing_mog = existing_mog_candidate(bound)
+    if existing_mog:
+        reasons = existing_mog_blockers(task, bound, root=root)
+        if reasons:
+            raise CapabilityError(reasons)
+    from .atlas_two_pole import is_task as original_two_pole_task
+    if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+        from .atlas932_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+    elif bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+        from .atlas927_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+    elif (bound.get('id') == 'atlas-original-two-pole-passive889-v1'
+            or (bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1'
+                and original_two_pole_task(task))):
+        from .atlas889_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+        if bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1':
+            from .atlas_existing_mog import supports_candidate as original791_candidate
+            if not original791_candidate(bound):
+                raise CapabilityError(['only the unchanged original791 declaration can be a direct metadata reference'])
+    else:
+        from .atlas_two_pole import supports, resolve_binding, validate_effective_recipe
+    from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
+    noisy_task = is_noisy_task(task)
+    if noisy_task:
+        validate_noisy_task(task, root=root)
+    ordinary_two_pole = supports(task, bound) and not noisy_task
+    noisy_two_pole = noisy_task and task["execution"].get("host") == "two_pole"
+    noisy_binding = resolve_binding(root, bound, task, protocol) if noisy_two_pole else None
+    noisy_ae = noisy_task and task["execution"].get("host") == "ae_gan_hold"
+    noisy_ae_binding = None
+    if noisy_ae:
+        import json
+        from pathlib import Path
+        from . import atlas_noisy_ae
+        ae_root = Path(__file__).resolve().parents[2] if root is None else root
+        ae_protocol = (json.loads(atlas_noisy_ae._source(ae_root, atlas_noisy_ae.PROTOCOL_PATH))
+                       if protocol is None else protocol)
+        noisy_ae_binding = atlas_noisy_ae.resolve_binding(ae_root, bound, task, ae_protocol)
+    existing_mog_ae_binding = None
+    if existing_mog and task["id"] == "ae_gan_hold":
+        import json
+        from pathlib import Path
+        from . import atlas_existing_mog_ae
+        ae_root = Path(__file__).resolve().parents[2] if root is None else root
+        ae_protocol = (json.loads(atlas_existing_mog_ae._source(ae_root, atlas_existing_mog_ae.PROTOCOL_PATH))
+                       if protocol is None else protocol)
+        existing_mog_ae_binding = atlas_existing_mog_ae.resolve_binding(ae_root, bound, task, ae_protocol)
+    ordinary_binding = (resolve_binding(root, bound, task, protocol)
+                        if ordinary_two_pole else None)
     blockers = task_policy_blockers(task, bound)
     if blockers:
         raise CapabilityError(blockers)
@@ -139,11 +226,64 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
-        policy_task=task if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" else None)
+        candidate_id=bound.get("id"),
+        policy_task=task if (ordinary_two_pole or noisy_task or existing_mog or
+            task.get("task_cohort") == "tier1_policy_selected_cloud_v1") else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
-    blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
-    if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
+    if ordinary_two_pole:
+        validate_effective_recipe(asdict(context.recipe))
+        context.ordinary_two_pole_binding = ordinary_binding
+        if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+            context.particle_l2_932_host_entry = {
+                'owner': 'experiments.forge.atlas932_two_pole_owner.run_behavior',
+                'base_recipe_sha256': ordinary_binding['base_recipe_sha256'],
+                'effective_optimizer_variant': deepcopy(ordinary_binding['effective_optimizer_variant']),
+                'effective_optimizer_variant_sha256': ordinary_binding['effective_optimizer_variant_sha256'],
+                'effective_objective_variant': deepcopy(ordinary_binding['effective_objective_variant']),
+                'effective_objective_variant_sha256': ordinary_binding['effective_objective_variant_sha256'],
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'parent_task_id': 'two_pole', 'task_id': 'two_pole_l2_off932_v1',
+                'canonical_original_task_qualification': False}
+        if bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+            context.particle_amsgrad927_host_entry = {
+                'owner': 'experiments.forge.atlas927_two_pole_owner.run_behavior',
+                'base_recipe_sha256': ordinary_binding['base_recipe_sha256'],
+                'effective_optimizer_variant': deepcopy(ordinary_binding['effective_optimizer_variant']),
+                'effective_optimizer_variant_sha256': ordinary_binding['effective_optimizer_variant_sha256'],
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'task_science_changed': False, 'optimizer_law_changed': True,
+                'table_only_amsgrad': False, 'completed_lr_clock_preserved': True,
+                'observer': 'experiments.forge.atlas889_two_pole_observer.PassiveTwoPoleRecorder'}
+        if bound.get('id') == 'atlas-original-two-pole-passive889-v1':
+            context.passive889_host_entry = {
+                'owner': 'experiments.forge.atlas889_two_pole_owner.run_behavior',
+                'observer': 'experiments.forge.atlas889_two_pole_observer.PassiveTwoPoleRecorder',
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'observer_source': deepcopy(ordinary_binding['source_contract']['files'][
+                    'experiments/forge/atlas889_two_pole_observer.py']),
+                'task_science_changed': False, 'consumer_patch_installed': False,
+                'measurement': 'original80/24 plus bounded passive actual Adam/controller fields'}
+        blockers = []
+    elif existing_mog:
+        if existing_mog_ae_binding is not None:
+            if atlas_existing_mog_ae.canonical(asdict(context.recipe)) != atlas_existing_mog_ae.canonical(existing_mog_ae_binding["recipe"]):
+                raise CapabilityError(["actual current79 differs from the original existing MoG AE binding"])
+            context.existing_mog_ae_binding = existing_mog_ae_binding
+        blockers = existing_mog_blockers(task, bound, root=root)
+    elif noisy_task:
+        if noisy_two_pole:
+            validate_effective_recipe(asdict(context.recipe), noisy=True)
+            context.noisy_two_pole_binding = noisy_binding
+        if noisy_ae:
+            if atlas_noisy_ae.canonical(asdict(context.recipe)) != atlas_noisy_ae.canonical(noisy_ae_binding["recipe"]):
+                raise CapabilityError(["actual current79 metadata differs from the original Noisy AE owner binding"])
+            context.noisy_ae_binding = noisy_ae_binding
+        blockers = task_policy_blockers(task, bound)
+    else:
+        blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
+    if (not ordinary_two_pole and not noisy_task and not existing_mog and task["adapter"] == "transfer_behavior"
+            and task["execution"].get("host") != "mode_hold"
             and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
         from .behavior_adapters import behavior_preflight
         blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
@@ -162,10 +302,20 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 
 def task_policy_blockers(task, candidate):
     """Current Forge tasks certify clean/live component laws, not E22 controls."""
+    from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers
+    if existing_mog_candidate(candidate):
+        return existing_mog_blockers(task, candidate)
+    from .noisy_prior_tier1 import is_noisy_task
+    if is_noisy_task(task):
+        from .noisy_prior_adapters import blockers
+        return blockers(task, candidate)
     try:
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    from .atlas_two_pole import supports
+    if supports(task, candidate):
+        return []
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -296,12 +446,70 @@ class FormulationContext:
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
-                 initializer_requirements=None, policy_task=None):
+                 initializer_requirements=None, policy_task=None, candidate_id=None):
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
         self.policy_task = deepcopy(policy_task)
-        if self.policy_task is not None:
+        if ((candidate_id == 'atlas-two-pole-l2-off932-v1' and self.policy_task is not None
+                and self.policy_task.get('id') != 'two_pole_l2_off932_v1')
+                or (self.policy_task is not None and self.policy_task.get('id') == 'two_pole_l2_off932_v1'
+                    and candidate_id != 'atlas-two-pole-l2-off932-v1')):
+            raise CapabilityError(['932 requires its exact objective candidate/task pair'])
+        if candidate_id == 'atlas-two-pole-l2-off932-v1' and self.policy_task is not None:
+            from .atlas932_two_pole_owner import public_parent_task
+            # Only public ownership metadata sees the validated fixed parent.
+            # The caller/request/ownership_contract retain the diagnostic Task.
+            self.policy_task = public_parent_task(self.policy_task)
+        if self.policy_task is not None and (
+                (candidate_id == 'atlas-existing-mog-longer871-v1'
+                 and self.policy_task.get('id') != 'gaussian1d_acquisition_longer871_v1')
+                or (self.policy_task.get('id') == 'gaussian1d_acquisition_longer871_v1'
+                    and candidate_id != 'atlas-existing-mog-longer871-v1')):
+            raise CapabilityError(['longer871 context requires its exact candidate/task pair'])
+        from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1', 'atlas-two-pole-particle-amsgrad-off927-v1', 'atlas-two-pole-l2-off932-v1'}
+        if candidate_id in {'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}:
+            self.candidate_id = candidate_id
+        if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
+            from .atlas844_radius_owner import validate as validate844
+            validate844(self.policy_task)
+        if self._existing_mog:
+            if recipe_preset != "atlas" or extensions or initializer != "deterministic_orthogonal":
+                raise CapabilityError(["Track B permits only the unchanged Atlas preset"])
+            if self.policy_task is not None:
+                validate_existing_mog(self.policy_task)
+                if self.policy_task["id"] not in {"gaussian1d_acquisition", "two_pole", "ae_gan_hold", "ring16_acquisition", 'gaussian1d_acquisition_longer871_v1'}:
+                    raise CapabilityError(["Track B owner unsupported before construction"])
+                expected = existing_mog_resources(self.policy_task)
+                if self.policy_task["id"] == "two_pole":
+                    from .atlas_two_pole import TASK_BINDINGS
+                    expected = TASK_BINDINGS
+                if (recipe_overrides or {}) != expected:
+                    raise CapabilityError(["Track B context permits only fixed task resource bindings"])
+            elif recipe_overrides:
+                raise CapabilityError(["Track B metadata must resolve the unchanged preset before resources"])
+        from .atlas_two_pole import is_task
+        self._ordinary_two_pole = is_task(self.policy_task)
+        from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
+        self._noisy_task = is_noisy_task(self.policy_task)
+        if self._noisy_task:
+            validate_noisy_task(self.policy_task)
+            from .noisy_prior_adapters import blockers
+            reasons = blockers(self.policy_task, dict(recipe_preset=recipe_preset,
+                recipe_overrides={}, extensions=extensions or {}, initializer=initializer))
+            if reasons:
+                raise CapabilityError(reasons)
+            # Task resource bindings are resolved separately below; constructor
+            # validates the unchanged candidate controls, never arbitrary overrides.
+            expected = {**task_recipe_resources(self.policy_task)}
+            if (recipe_overrides or {}) != expected:
+                raise CapabilityError(["Noisy task context permits only its fixed task resources"])
+            if (recipe_preset != "atlas" or extensions or initializer != "deterministic_orthogonal"
+                    or self.policy_task["prior_substitution_parent"]["task"] not in
+                       {"gaussian1d_acquisition", "two_pole", "ae_gan_hold", "ring16_acquisition"}):
+                raise CapabilityError(reasons or ["Noisy prior owner unsupported before construction"])
+        if self.policy_task is not None and not self._ordinary_two_pole and not self._noisy_task and not self._existing_mog:
             from .tier1_policy import validate
             validate(self.policy_task)
         self.registry = registry if registry is not None else default_registry()
@@ -312,12 +520,16 @@ class FormulationContext:
         if incompatible:
             raise CapabilityError([f"extension {name} is unsupported by {execution_path}" for name in incompatible])
         self.prior_config = _resolved_prior(prior)
+        if self._noisy_task or self._existing_mog and self.policy_task is not None:
+            from .priors import task_prior
+            if self.prior_config != task_prior(self.policy_task):
+                raise CapabilityError(["Noisy context prior must equal the fixed parent-width declaration"])
         overrides = dict(recipe_overrides or {})
         duplicates = set(overrides) & set(self.bindings["recipe"])
         if duplicates:
             raise CapabilityError([f"recipe/extension conflict: {sorted(duplicates)}"])
         overrides.update(self.bindings["recipe"])
-        kind = "mog" if self.prior_config["kind"] == "mog" else "particles"
+        kind = {"mog": "mog", "particle_cloud": "particles", "noisy_particle_cloud": "noisy_particles"}[self.prior_config["kind"]]
         prior_fields = {"prior_kind": kind, "sigma_rel": 0., "standardize": self.prior_config["standardize"]}
         for key, value in prior_fields.items():
             if key in overrides and overrides[key] != value:
@@ -325,10 +537,15 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if self._ordinary_two_pole or self._noisy_task and self.policy_task["execution"].get("host") == "two_pole":
+            from .atlas_two_pole import validate_effective_recipe
+            validate_effective_recipe(asdict(self.recipe), noisy=self._noisy_task)
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
-        if self.prior_config["kind"] != "particle_cloud" and (
-                self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
+        if (self.prior_config["kind"] not in {"particle_cloud", "noisy_particle_cloud"}
+                and not (self._existing_mog and self.prior_config["kind"] == "mog"
+                         and self.prior_config["standardize"] is False)
+                and (self.recipe.row_evidence_gate or self.recipe.particle_birth_death)):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
         if execution_path == "public_components" and policy_controls(self.recipe) and self.policy_task is None:
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
@@ -369,13 +586,14 @@ class FormulationContext:
         a2 = (p["learnable"] and not p["standardize"] and self.recipe.latent_damping_max_rate > 0
               and (self.recipe.prior_betas or self.recipe.betas)[0] == 0)
         return {"public_trainer": scalar, "public_components": True, "scalar_gan": scalar,
-                "mog_prior": p["kind"] == "mog", "particle_cloud": p["kind"] == "particle_cloud",
+                "mog_prior": p["kind"] == "mog" or self._noisy_task and p["kind"] == "noisy_particle_cloud",
+                "particle_cloud": p["kind"] in {"particle_cloud", "noisy_particle_cloud"},
                 "learned_locations": p["learnable"], "uniform_masses": True, "fixed_prior_width": True,
                 "a2": a2, "checkpoint": True, "named_rng": True,
-                "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
+                "live_sampling": self._ordinary_two_pole or self._noisy_task or self._existing_mog or not (self.recipe.serve_average or self.recipe.continuous_policy),
                 "policy_controls": policy_controls(self.recipe),
                 "policy_serving": self.recipe.serve_average > 0,
-                "served_sampling": bool(self.policy_task) and policy_controls(self.recipe),
+                "served_sampling": bool(self.policy_task) and not self._ordinary_two_pole and not self._noisy_task and not self._existing_mog and policy_controls(self.recipe),
                 **{name: True for name in self.extension_values}}
 
     def _check_capabilities(self):
@@ -484,7 +702,7 @@ class FormulationContext:
             stream = torch.Generator(device=stream.device).set_state(stream.get_state())
         options = {"device": self.device, "dtype": dtype, "learnable": p["learnable"],
                    "generator": stream, "init_std": p.get("init_std", 1.)}
-        if p["kind"] == "mog":
+        if p["kind"] in {"mog", "noisy_particle_cloud"}:
             options["sigma"] = p["sigma"]
         return self.recipe.make_prior(**options)
 
@@ -506,6 +724,22 @@ class FormulationContext:
             raise CapabilityError(["a declared task and actual public UpdatePolicy are required"])
         if self._trainer is not None or self._policy is not None:
             raise ValueError("context already owns a public lifecycle")
+        if self._ordinary_two_pole or self._noisy_task and self.policy_task["execution"].get("host") == "two_pole":
+            from .atlas_two_pole import canonical, validate_effective_recipe
+            validate_effective_recipe(asdict(policy.recipe), noisy=self._noisy_task)
+            if self._noisy_task:
+                from particlegan.noisy_particle_prior import NoisyParticlePrior
+                if (type(policy.prior) is not NoisyParticlePrior or policy.prior.z is not policy.table
+                        or float(policy.prior.sigma) != 0.):
+                    raise CapabilityError(["direct Noisy two-pole requires the same zero-width unsampled table"])
+            elif policy.prior is not None:
+                raise CapabilityError(["ordinary two-pole has no sampled prior"] )
+            if (canonical(asdict(policy.recipe)) != canonical(asdict(self.recipe))
+                    or external_max_steps != 80 or policy.table.shape != (12, 1)
+                    or policy.row_policy != "independent"):
+                raise CapabilityError(["ordinary two-pole direct-table owner differs from its task"] )
+            self._policy, self._policy_max_steps = policy, external_max_steps
+            return
         if (policy.recipe.to_dict() != self.recipe.to_dict() or
                 external_max_steps != self.policy_task["execution"]["steps"] or
                 policy.table.shape != (self.recipe.num_particles, self.recipe.z_dim) or
@@ -516,6 +750,8 @@ class FormulationContext:
     def build_trainer(self, generator, discriminator, *, initialize=True, max_steps=None):
         """Build the shared public update path; no task-private training loop."""
         self._check_capabilities()
+        if self._existing_mog and self.policy_task is None:
+            raise CapabilityError(["Track B model construction requires its exact original task binding"])
         if self.execution_path != "public_trainer":
             raise CapabilityError(["public_components context does not own a scalar GANTrainer"])
         if self._trainer is not None:
@@ -558,10 +794,15 @@ class FormulationContext:
         options = {
             **{name: self.streams.generator(family, component=component, purpose=purpose)
                for name, (family, component, purpose) in TRAINER_STREAM_BINDINGS.items()
-               if name != "prior_noise_generator" or type(prior).__name__ == "MoGParticlePrior"},
+               if name != "prior_noise_generator" or type(prior).__name__ in {"MoGParticlePrior", "NoisyParticlePrior"}},
             "require_latent_damping": self.recipe.latent_damping_max_rate > 0,
             **self.bindings["trainer"],
         }
+        if self._noisy_task:
+            limit = self.policy_task["execution"]["steps"]
+            if max_steps is not None and max_steps != limit:
+                raise CapabilityError(["Noisy task external horizon differs"])
+            max_steps = limit
         if max_steps is not None:
             if "max_steps" in options:
                 raise CapabilityError(["execution budget conflicts with trainer extension"])
@@ -579,6 +820,18 @@ class FormulationContext:
             from .boundaries import ownership_receipt
             ownership["field_ownership"] = ownership_receipt(**self.ownership_contract,
                 resolved_recipe=asdict(self.recipe), initializer=self.initializer)
+        if getattr(self, 'passive889_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'passive_observation': deepcopy(self.passive889_host_entry)}
+        if getattr(self, 'particle_amsgrad927_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'optimizer_ablation': deepcopy(self.particle_amsgrad927_host_entry)}
+        if getattr(self, 'particle_l2_932_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'objective_ablation': deepcopy(self.particle_l2_932_host_entry)}
         policy = None
         if (self._trainer is not None or self._policy is not None) and policy_controls(self.recipe):
             owner = self._trainer if self._trainer is not None else self._policy
@@ -596,6 +849,12 @@ class FormulationContext:
                           "checkpoint_path": "trainer.birth_death.stream"}]}
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
                 **ownership,
+                 **({"noisy_prior_contract": {"cohort": self.policy_task["task_cohort"],
+                      "parent": deepcopy(self.policy_task["prior_substitution_parent"]),
+                      "measurement_owner": "original_live", "causal_recovery_established": False}}
+                    if self._noisy_task else {}),
+                **({"ordinary_component_contract": deepcopy(self.ordinary_two_pole_binding["source_contract"])}
+                    if getattr(self, "ordinary_two_pole_binding", None) is not None else {}),
                 **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),
                 "recipe_preset": self.recipe_preset,
                 "recipe": self.recipe.to_dict(), "prior": deepcopy(self.prior_config),

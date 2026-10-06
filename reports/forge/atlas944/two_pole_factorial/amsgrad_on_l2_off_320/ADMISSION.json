@@ -1,0 +1,51 @@
+{
+  "allocation_added_once": true,
+  "attempt_id": "8ff5cba6895d03fd913799e866480ed7",
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "canonical_original_task_credit": false,
+  "case_debit_seconds": 300,
+  "case_measurement_seconds": null,
+  "cell_id": "amsgrad_on_l2_off_320",
+  "control_pin": {
+    "bytes": 11740,
+    "sha256": "7a5996f7ad5093e6d82d12f8965faec6298a17fa719125d33fb5c22d8f9783ad"
+  },
+  "cpu_threads": 1,
+  "declaration_path": "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/cases/amsgrad_on_l2_off_320/declaration.json",
+  "declaration_pin": {
+    "bytes": 35287,
+    "sha256": "a87be206fd36c95cbb1fb1ad768bf94f6072589541b329710eaaf5fe4e401910"
+  },
+  "declared_source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+  "derived_owner_source_pin": {
+    "bytes": 75572,
+    "sha256": "b612c77abb0aa8bac552964d65e3635e48fd3559bf7b06bd8274f27ad254a85b"
+  },
+  "device": "cpu",
+  "driver_authority_seq": 944,
+  "driver_pin": {
+    "bytes": 26634,
+    "sha256": "d4e758e3dc9b48f132d031f0ccebf22d8ea766004c6052feadaf3c194fe8dbfe"
+  },
+  "full_case_seconds": 300,
+  "full_frozen_manifest_pin": {
+    "bytes": 212229,
+    "sha256": "2470910ae25790be3f6f47522e8eb756093fd2033ae27d0fde8b0b6353856fd4"
+  },
+  "gpus": 0,
+  "index": 4,
+  "output_path": "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/cases/amsgrad_on_l2_off_320/result",
+  "parent_owner_pin": {
+    "bytes": 76162,
+    "sha256": "ced28b3fe73d1fa74a000b1f10552ada7bc0f703cd8c94c6fff6ce8d04841a07"
+  },
+  "plan_sha256": "46b16d729a6b5ffecac0c912fac684ffabf5c2482c55c08ca5209a2c6bfb9131",
+  "schema": "atlas944_root_case_admission_v1",
+  "scientific_authority_seq": 939,
+  "software_proof_pin": {
+    "bytes": 22740,
+    "sha256": "d309db552b1fe1caf8ec2a27c493161a7e1d33e9e0d5e9070263175ade3472a2"
+  },
+  "status": "ADMITTED_NOT_LAUNCHED",
+  "task_digest": "0efb89d61adbcb7c5b7d8b4f949e41db946ad631a9bf5bb951361f0e1e84f230"
+}

@@ -1,0 +1,43 @@
+{
+  "all_prior_61_assertions_retained": true,
+  "assertion_count_definition": "59 self.assert* plus2 torch.testing.assert_close exact AST multiplicities",
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "-u",
+    "tests/test_atlas932_particle_l2.py",
+    "--output",
+    "/ml2/hypergan/pg-atlas934-l2-recovery-runtime-20261006/v1/software-fixture-v4/FOCUSED932_CONTROLS.json"
+  ],
+  "cpu_threads": 1,
+  "deadline_seconds": 30,
+  "earlier_failures_and_timeout_preserved": true,
+  "elapsed_seconds": 12.144384286832064,
+  "exactly_three_fresh_controls": true,
+  "fixture_only_v4_lifecycle_ordering": true,
+  "focused_controls_pin": {
+    "bytes": 3183,
+    "sha256": "a92f0a06e2406237931dee228ddb67c4297a9a3f8c0de1fc64662b3552de54c5"
+  },
+  "gpus": 0,
+  "owned_pythonpath": "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+  "persistence_tail": "UNKNOWN_NOT_ZERO",
+  "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+  "prior_suites_rerun": false,
+  "production_source_unchanged": true,
+  "returncode": 0,
+  "schema": "pg934_actual_focused_software_execution_v1",
+  "source_author_work": "UNMEASURED_UNKNOWN_NOT_ZERO",
+  "status": "PASS",
+  "stderr_pin": {
+    "bytes": 513,
+    "sha256": "dde666738a142c9629a0cb4cc33c5f01716f06f0d4cc2cac71fbb797670767db"
+  },
+  "stderr_tail": "test_declared_objective_and_actual_owner_coefficient (__main__.ParticleL2Controls.test_declared_objective_and_actual_owner_coefficient) ... ok\ntest_pinned_loss_coefficient_gradient_delta (__main__.ParticleL2Controls.test_pinned_loss_coefficient_gradient_delta) ... ok\ntest_preserved_optimizer_clock_and_recorder_checkpoint (__main__.ParticleL2Controls.test_preserved_optimizer_clock_and_recorder_checkpoint) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 9.829s\n\nOK\n",
+  "stdout_pin": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "timed_out": false,
+  "trace_internal_stage": "Not instrumented; verbose log identifies method completion/current method only."
+}

@@ -1,0 +1,57 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "One original-problem table-only AMSGrad-off diagnostic against the completed921 LR-clock baseline. No default qualification, winner, speed or broader optimizer claim.",
+    "status": "provisional"
+  },
+  "eligibility": {
+    "claim_contract": {
+      "experimental_track": "atlas927_two_pole_particle_amsgrad_off",
+      "optimizer_variant": {
+        "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+        "groups": [
+          {
+            "amsgrad": false,
+            "group_index": 0,
+            "optimizer": "generator",
+            "role": "table"
+          },
+          {
+            "amsgrad": true,
+            "group_index": 1,
+            "optimizer": "generator",
+            "role": "noise"
+          },
+          {
+            "amsgrad": true,
+            "group_index": 0,
+            "optimizer": "critic",
+            "role": "critic"
+          }
+        ],
+        "schema": "forge_atlas927_two_pole_particle_amsgrad_variant_v1",
+        "table_lr_clock": "completed_direct_adam_lr/base_lr"
+      }
+    }
+  },
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "atlas_two_pole_particle_amsgrad_off927_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

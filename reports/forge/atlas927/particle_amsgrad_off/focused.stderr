@@ -1,0 +1,13 @@
+test_registry_base_recipe_and_task_bound (__main__.ParticleAMSGradControls.test_registry_base_recipe_and_task_bound) ... ok
+test_fresh_owned_table_only_group_override (__main__.ParticleAMSGradControls.test_fresh_owned_table_only_group_override) ... ok
+test_populated_adam_denominator_branch (__main__.ParticleAMSGradControls.test_populated_adam_denominator_branch) ... ok
+test_completed_lr_clock_and_q_preserved (__main__.ParticleAMSGradControls.test_completed_lr_clock_and_q_preserved) ... ok
+test_checkpoint_recorder_and_roundtrip_flags (__main__.ParticleAMSGradControls.test_checkpoint_recorder_and_roundtrip_flags) ... ok
+test_closure_and_failure_forwarding (__main__.ParticleAMSGradControls.test_closure_and_failure_forwarding) ... ok
+test_wrong_variant_or_role_rejected (__main__.ParticleAMSGradControls.test_wrong_variant_or_role_rejected) ... ok
+test_original_task_gate_and_core_scope (__main__.ParticleAMSGradControls.test_original_task_gate_and_core_scope) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.879s
+
+OK

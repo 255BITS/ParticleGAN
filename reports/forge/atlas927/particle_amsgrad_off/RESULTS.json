@@ -1,0 +1,236 @@
+{
+  "admission": {
+    "actual_controls_pin": {
+      "bytes": 2786,
+      "sha256": "bea1b6729afb9cfd250df66d21f6dbda4bec40e010e9fba1f26427afafb445bc"
+    },
+    "actual_software_execution_pin": {
+      "bytes": 4647,
+      "sha256": "38cea63f4acb3b2e3403c927f430e4bd3476165fddfac911433dc403afc4546f"
+    },
+    "attempt_id": "05d5b90ed0334a7d835582b8a43b8194",
+    "authority_seq": 927,
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "baseline918_rerun": false,
+    "baseline921_rerun": false,
+    "budget_seconds": 300,
+    "candidate_revision": "9b0d1cb654e208162e8e641feb353bbf97536216df3f7c463869dfff06a17e5b",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "directory": "/ml2/hypergan/pg-atlas927-particle-amsgrad-runtime-20261006/v1/runs/forge/atlas-two-pole-particle-amsgrad-off927-study-v1/05d5b90ed0334a7d835582b8a43b8194",
+    "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+    "fresh_successor": true,
+    "gpus": 0,
+    "old889_replayed": false,
+    "only_table_amsgrad_intervention": true,
+    "optimizer_variant_honestly_changed": true,
+    "pid": 3514855,
+    "request_id": "ea7dabbbd6bd9fa1781dcd7a",
+    "request_sha256": "60ce288b84517dfc8d86454fdb61b767a20118f00e5d721a4e3f14a10be36adb",
+    "request_source_file_count": 1277,
+    "schema": "pg927_one_particle_amsgrad_case_admission_v1",
+    "software_proof_pin": {
+      "bytes": 4779,
+      "sha256": "415c595824055c5ab9f0e3222c7686d90245eb4746da24e83bde27d42e08398c"
+    },
+    "source_application_pin": {
+      "bytes": 5289,
+      "sha256": "5f2dc4403c057c301906e62f576ec14e54e4eda77734ce0a1ba719ad92acadbc"
+    },
+    "source_digest": "a515e30f7de19dc84be907522b653a6fb9b1991b7cde48159ef680a5cb446b91"
+  },
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "case_cost": {
+    "attempt_id": "05d5b90ed0334a7d835582b8a43b8194",
+    "authority_id": "ember-two-pole-particle-amsgrad-ablation-20261006-v1",
+    "authority_seq": 927,
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "candidate_revision": "9b0d1cb654e208162e8e641feb353bbf97536216df3f7c463869dfff06a17e5b",
+    "collected_count": 1,
+    "compatibility_key": "0c9184504ca00c54254a31393fc8e406f14ee695b8d8635a5724861e7366f1b7",
+    "conservative_case_debit_seconds": 300,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "directory": "/ml2/hypergan/pg-atlas927-particle-amsgrad-runtime-20261006/v1/runs/forge/atlas-two-pole-particle-amsgrad-off927-study-v1/05d5b90ed0334a7d835582b8a43b8194",
+    "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+    "exact_all_inclusive_measured_cost": false,
+    "full_case_allowance_seconds": 300,
+    "grade_pin": {
+      "bytes": 2033,
+      "sha256": "640ac013e0ef689cf01d9564ae7ced40bcc512c4d02ef9fa4920ea363e30bd36"
+    },
+    "independently_graded": true,
+    "old889_costs_in_closed_predecessor_once": true,
+    "paid_scientific_elapsed_seconds": 20.86249917326495,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "pid": 3514855,
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "process_receipt_pin": {
+      "bytes": 945,
+      "sha256": "1f4932e1ac64a787a4006e46aa8a5e5d11692530e1bcd20407980a45546c6c09"
+    },
+    "qualification": "Prior918300, prior921300 and new927300 are separate conservative declared debits. Measured new case span overlaps launch setup slightly, is not a certified all-inclusive upper bound, and receives no refund.",
+    "request_id": "ea7dabbbd6bd9fa1781dcd7a",
+    "request_sha256": "60ce288b84517dfc8d86454fdb61b767a20118f00e5d721a4e3f14a10be36adb",
+    "schema": "pg927_separate_single_case_cost_v1",
+    "separate_completed918_and921_debit_seconds": 600,
+    "software_916_charged_separately_without_reset": true,
+    "source_digest": "a515e30f7de19dc84be907522b653a6fb9b1991b7cde48159ef680a5cb446b91",
+    "status": "FAIL",
+    "supervisor_returncode": 0,
+    "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+    "task_id": "two_pole",
+    "terminal_elapsed_seconds": 20.369387817103416,
+    "terminal_pin": {
+      "bytes": 13442653,
+      "sha256": "6952c1d4976462400119db1b9a1759815fc3199bb667a53a44df0295d960a2c6"
+    },
+    "unused_allowance_retained_as_declared_reserve_seconds": 279.13750082673505,
+    "worker_token_sha256": "b80c1d7ddc91f3d3a90ed8a535d8c4d4f9f5d279c77710fcf0d0e03c478ceecb"
+  },
+  "comparison_summary": {
+    "common_motion_prefix_end": 65,
+    "common_motion_travel_ratio": 2.751871819580977,
+    "final80_spread": {
+      "baseline": {
+        "maximum": 0.008075281046330929,
+        "mean": 0.0020370358834043145,
+        "mean_abs": 0.0024456475706150136,
+        "minimum": -0.0016904491931200027,
+        "negative_rows": 5,
+        "population_std": 0.0027198366052662805,
+        "positive_negative_centroid_separation": 0.004332634128097977,
+        "positive_rows": 7,
+        "range": 0.009765730239450932,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 80,
+        "zero_rows": 0
+      },
+      "new": {
+        "maximum": 0.044173307716846466,
+        "mean": 0.010179559137516966,
+        "mean_abs": 0.015023148288795104,
+        "minimum": -0.011610360816121101,
+        "negative_rows": 4,
+        "population_std": 0.016676383304872307,
+        "positive_negative_centroid_separation": 0.02616741429665126,
+        "positive_rows": 8,
+        "range": 0.05578366853296757,
+        "rows": 12,
+        "rows_near_target_poles_within_0_1": 0,
+        "step": 80,
+        "zero_rows": 0
+      }
+    },
+    "grade": {
+      "baseline": {
+        "grad_med": 0.010896995663642883,
+        "mean_abs": 0.002445647493004799
+      },
+      "new": {
+        "grad_med": 0.009985171258449554,
+        "mean_abs": 0.01502314954996109
+      }
+    },
+    "mean_abs_gate_value_ratio": 6.142810684258989,
+    "motion": {
+      "baseline": {
+        "covered_update_count": 65,
+        "interpretation": "Offline retained actual before/after Adam arithmetic over common captured prefix; not extra training, a counterfactual, or all80 trace evidence.",
+        "recorded_adam_cancellation_fraction": 0.8796306346734626,
+        "recorded_adam_cumulative_mean_absolute_travel": 0.05961171927629037,
+        "recorded_adam_net_mean_absolute_displacement": 0.0071754248153107865,
+        "recorded_common_translation_travel_fraction": 0.9670744391989591
+      },
+      "new": {
+        "covered_update_count": 65,
+        "interpretation": "Offline retained actual before/after Adam arithmetic over common captured prefix; not extra training, a counterfactual, or all80 trace evidence.",
+        "recorded_adam_cancellation_fraction": 0.9323374609768595,
+        "recorded_adam_cumulative_mean_absolute_travel": 0.16404381039319557,
+        "recorded_adam_net_mean_absolute_displacement": 0.011099620722234249,
+        "recorded_common_translation_travel_fraction": 0.8806682555567305
+      }
+    }
+  },
+  "cost_before_comparison_publication_cut": {
+    "cap_seconds": 41288,
+    "charged_seconds": 15653.909060027205,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_additional_work": false,
+    "measurement_cut": "CLOSED_MEMORY",
+    "metadata_cap_seconds": 120,
+    "metadata_charged_seconds": 76.72191688790917,
+    "metadata_paid_seconds": 76.72191688790917,
+    "metadata_remaining_seconds": 43.278083112090826,
+    "metadata_reserved_seconds": 0,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_added_once": true,
+    "predecessor_inclusive_seconds": 15577.187143139296,
+    "remaining_seconds": 25634.090939972797,
+    "retained_reporting_must_fit": true,
+    "schema": "pg_recorder916_software_inclusive_v1",
+    "scientific_allocation_seconds": 0
+  },
+  "cost_qualification": "same916120, predecessor once, three separately retained full300 debits. This earlier closed cut excludes current/later reporting/publication/Babel tails, qualified UNKNOWN_NOT_ZERO, never refunded/reset; Source-only agent time UNMEASURED.",
+  "effective_optimizer_variant": {
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "groups": [
+      {
+        "amsgrad": false,
+        "group_index": 0,
+        "optimizer": "generator",
+        "role": "table"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 1,
+        "optimizer": "generator",
+        "role": "noise"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 0,
+        "optimizer": "critic",
+        "role": "critic"
+      }
+    ],
+    "schema": "forge_atlas927_two_pole_particle_amsgrad_variant_v1",
+    "table_lr_clock": "completed_direct_adam_lr/base_lr"
+  },
+  "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+  "qualified_inclusive_before_comparison_publication": 16553.909060027203,
+  "schema": "pg927_particle_amsgrad_single_case_results_v1",
+  "status": "FAIL",
+  "validation": {
+    "all24_each_run_saved_observations_and_measurements_pure": true,
+    "all72_required_source_pins_join_snapshot": true,
+    "baseline_raw_member_pin": {
+      "bytes": 12967018,
+      "sha256": "17ff337a808fe7f89042ffe3d6c27ef3536f56a634e20e2db5223c4cbe477e18"
+    },
+    "baseline_reruns": 0,
+    "genuine_focused_checks": 8,
+    "grade_join": true,
+    "independent_source_only_reviews_are_not_empirical_passes": true,
+    "proof_join": true,
+    "pure_declaration_checks": 4,
+    "raw_gzip_roundtrip": true,
+    "raw_member_pin": {
+      "bytes": 12661412,
+      "sha256": "ced43d418d9ba1052f3809a6a7eea24dc2cbb93d7ca9f46950871a3048065cc7"
+    },
+    "request_join": true,
+    "retained_root_errors": [
+      "Preinstall KeyError status: read corrected to exact reviewed verdict field before any installation/test/case.",
+      "Retained trace inspection output exceeded tool budget: only bounded saved fields reread; no training replay."
+    ],
+    "retained_trace_unknown_scope_preserved": true,
+    "scientific_attempts": 1,
+    "status": "PASS",
+    "table_group_only_variant_declared": true
+  }
+}

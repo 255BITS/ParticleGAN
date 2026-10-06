@@ -1,0 +1,343 @@
+{
+  "authorized_only_intervention": "Existing table tester input = completed Adam LR / original base LR; q/beta/AMSGrad and numerical optimizer implementation unchanged.",
+  "baseline918": {
+    "attempt_id": "e79460aaac2a42508904ff119906891c",
+    "request_id": "785f646f831607b6f7f0ee4f",
+    "source_digest": "6a2ef53ff64a259b74d7095a13ecbe49e1bb169071ead0d4ce5a862ae4bfcd36"
+  },
+  "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "focused921_actual_receipt": {
+    "bytes": 2589,
+    "sha256": "6a47329bfe1b961f5c39f8317640dd8f526d732a2330e2dcc8c36f827e296ec4"
+  },
+  "focused_software_source": {
+    "tests/test_atlas921_completed_lr_clock.py": {
+      "bytes": 13934,
+      "sha256": "3da79006816bcb88488333c200f55077af5d6e3c97f2dafbbedd863fc7279a40"
+    }
+  },
+  "focused_test_membership": "External targeted control Source; verify exact file during paid software phase. This is not assumed present in the maintained frozen Source manifest.",
+  "no_new_allowance": true,
+  "original_task": {
+    "bytes": 3099,
+    "sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5"
+  },
+  "proof": "Fresh full-admitted-request proof is ROOT-owned; no old request/proof/case credit.",
+  "proof_source_pins": {
+    "experiments/forge/atlas889_contract.py": {
+      "bytes": 5520,
+      "sha256": "e4850919918d913600dce641f1c1e421c4e1fe483a4dedac74a520c03458043d"
+    },
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 64151,
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81173,
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    "tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    }
+  },
+  "required_source_pins": {
+    "benchmarks/legacy/locked_shared.py": {
+      "bytes": 4756,
+      "sha256": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0"
+    },
+    "benchmarks/locked_shared/baseline.py": {
+      "bytes": 30125,
+      "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+    },
+    "benchmarks/locked_shared/observation.py": {
+      "bytes": 4351,
+      "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+    },
+    "benchmarks/locked_shared/two_pole.py": {
+      "bytes": 6753,
+      "sha256": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e"
+    },
+    "benchmarks/transfer_suite/protocol.py": {
+      "bytes": 9964,
+      "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "configs/100gaussians/atlas.json": {
+      "bytes": 1798,
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "configs/forge/ideas/atlas-existing-mog-nearest-positive791-v1.json": {
+      "bytes": 1767,
+      "sha256": "f0b58b467852f76dd40ab0cf2d4543b62df577995c7faa72bf32e036251e23f2"
+    },
+    "configs/forge/ideas/atlas-original-two-pole-passive889-v1.json": {
+      "bytes": 1550,
+      "sha256": "253800cb61c8cb89da2331654b641191931cc02b15ad96f9d4e9da2299dd96a9"
+    },
+    "configs/forge/protocols/screening.json": {
+      "bytes": 972,
+      "sha256": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803"
+    },
+    "configs/forge/task-variants/noisy-prior686/two_pole_noisy_prior686_v1.json": {
+      "bytes": 3472,
+      "sha256": "8ff9d2e25fc2a1c5ebb432e9aaeebcdac8483b29ba5ec777342901ede7a7ed2f"
+    },
+    "configs/forge/tasks/two_pole.json": {
+      "bytes": 3099,
+      "sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5"
+    },
+    "configs/forge/views/atlas_original_two_pole_passive889_v1.json": {
+      "bytes": 838,
+      "sha256": "0e581c815faa6a91d372a94a30456e94bb0f51182f13d475ec7aa259e3f57894"
+    },
+    "experiments/forge/adapters.py": {
+      "bytes": 39808,
+      "sha256": "22a504c0d6fa765e32ff0e366af1c0fdfcc0695e057ba3664e9a03e78a459552"
+    },
+    "experiments/forge/api.py": {
+      "bytes": 50840,
+      "sha256": "3494c26774544e28a8e950f79e0c1abdf387d6455f0ed068f5f2516522dfa0a9"
+    },
+    "experiments/forge/atlas889_contract.py": {
+      "bytes": 5520,
+      "sha256": "e4850919918d913600dce641f1c1e421c4e1fe483a4dedac74a520c03458043d"
+    },
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 64151,
+      "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+    },
+    "experiments/forge/atlas_existing_mog.py": {
+      "bytes": 48125,
+      "sha256": "3c9f1d81dcf9e6759d61c91b3650e85fb4eab9b8d0ba648154df1a3b693e3bc4"
+    },
+    "experiments/forge/atlas_existing_mog_ae.py": {
+      "bytes": 54426,
+      "sha256": "c2a2e2b5928859036a4ce11d19ae91a3d4199ed162008440bd891815ef04af07"
+    },
+    "experiments/forge/atlas_noisy_ae.py": {
+      "bytes": 53563,
+      "sha256": "391a8255b26ed44195d3c148ea0983578acfdfa1885ab37372848d82e85528d4"
+    },
+    "experiments/forge/atlas_two_pole.py": {
+      "bytes": 48584,
+      "sha256": "4bc5b7c7acb7f3adc4af6dcbe1d7e1388120815522f3071452d787c5c351ab04"
+    },
+    "experiments/forge/boundaries.py": {
+      "bytes": 18676,
+      "sha256": "9440e0a27b997f7b808a411b1965206ea22e71bc072c656d2bc8f91c17821f85"
+    },
+    "experiments/forge/evaluate.py": {
+      "bytes": 2177,
+      "sha256": "458aa3babbac76ca8bed8c53e21bbe97544d5d71e71c2a6269ef767089ed1d36"
+    },
+    "experiments/forge/initialization.py": {
+      "bytes": 1489,
+      "sha256": "c2674617c306e24337f1dbbf910d2110b7c852557b9c3e43b47f7fe1dce26634"
+    },
+    "experiments/forge/mechanisms.py": {
+      "bytes": 11826,
+      "sha256": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f"
+    },
+    "experiments/forge/noisy_prior_adapters.py": {
+      "bytes": 12074,
+      "sha256": "157c15b13445c92da10f4a5634743216364ab43c29320f3c52e404638ba851b4"
+    },
+    "experiments/forge/noisy_prior_tier1.py": {
+      "bytes": 8177,
+      "sha256": "d8eacc15850c803cb907a39c8b09dbe2777c35bb946e7d8170cff224582c3f4a"
+    },
+    "experiments/forge/planning.py": {
+      "bytes": 20821,
+      "sha256": "a17cb2d13cfbd1f66cff0658effa1124f37d26ad5afaa3ab362ab6a17ef6b81f"
+    },
+    "experiments/forge/policy_adapters.py": {
+      "bytes": 17992,
+      "sha256": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa"
+    },
+    "experiments/forge/priors.py": {
+      "bytes": 2964,
+      "sha256": "4267847c5e116ae9eeacad3a66980bde5a4eb220c89e7182e56b108f9478bda4"
+    },
+    "experiments/forge/rng.py": {
+      "bytes": 6893,
+      "sha256": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293"
+    },
+    "experiments/forge/sampling.py": {
+      "bytes": 9148,
+      "sha256": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1"
+    },
+    "experiments/forge/taskrecipes.py": {
+      "bytes": 3525,
+      "sha256": "c11739bd935256e7083875f4e67d6c29fad1b9ea5915976dd32ed1eb7531d285"
+    },
+    "experiments/forge/views.py": {
+      "bytes": 41404,
+      "sha256": "62ade2d5e9e7c2019bfc0437effd0f8e0343a87f08eb151f51c4912428827136"
+    },
+    "particlegan/__init__.py": {
+      "bytes": 1886,
+      "sha256": "18506efd720327de46f4bd5f4f66dab6e1b0574c5388e5496795400a45aa4070"
+    },
+    "particlegan/_qr.py": {
+      "bytes": 1951,
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    "particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "particlegan/birth_death.py": {
+      "bytes": 48741,
+      "sha256": "7482b29f0065be446a6b5e087a4b55d0961c8a6f2602cf9919ca502edca78c91"
+    },
+    "particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    "particlegan/capabilities.py": {
+      "bytes": 2548,
+      "sha256": "74f57e8485bd72193e535c4f78978b5f908a6c965bb417c2fd57b2cf446720a0"
+    },
+    "particlegan/conditioning.py": {
+      "bytes": 4878,
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "particlegan/diffusion.py": {
+      "bytes": 5100,
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    "particlegan/discriminators.py": {
+      "bytes": 5833,
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    "particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    "particlegan/gan_loss.py": {
+      "bytes": 3203,
+      "sha256": "2ba031aa3c162bc6c4666c7dd43a2aac295ed2a841f7855e6b0a28b29eca6b2f"
+    },
+    "particlegan/grad_regularizers.py": {
+      "bytes": 14853,
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan/init.py": {
+      "bytes": 24559,
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    "particlegan/k3p.py": {
+      "bytes": 33012,
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "particlegan/ka2.py": {
+      "bytes": 16551,
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    "particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    "particlegan/noisy_particle_prior.py": {
+      "bytes": 3328,
+      "sha256": "a59eb7340cae67b0f8f40729bd89cd2071bba63c7ae66d516246554b6c621316"
+    },
+    "particlegan/output_moments.py": {
+      "bytes": 8387,
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    "particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81173,
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    "particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    "particlegan/recipe_schedules.py": {
+      "bytes": 6044,
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 56022,
+      "sha256": "79905bb948cb967f80a087063960ea72e72c04d3b572b4b90ff4fa1dda5f299f"
+    },
+    "particlegan/routing.py": {
+      "bytes": 64904,
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    "particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    "particlegan/training.py": {
+      "bytes": 40093,
+      "sha256": "740c01b14ce4542f5fcef43c59f9eed09b122f349a2308fb17bcc87e97786eb2"
+    },
+    "particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "reuse_scope": "Original11 unchanged controls and checkpoint7 empirical receipt retain916 producer provenance; current owner clock separately checked by8 fresh actual controls and Source review. No claim original18 were rerun.",
+  "reused916_owner_producer_pin": {
+    "bytes": 58663,
+    "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+  },
+  "reused916_software_receipts": {
+    "actual_execution": {
+      "bytes": 5989,
+      "sha256": "e37e441a26347990ac336653bad87a11bf20996b5ac85eb60abf327e211a97d9"
+    },
+    "checkpoint_controls": {
+      "bytes": 236,
+      "sha256": "f12895517de9f80d0602f219c16490128d17001ac7c589b4ab0d1f9c4569ed41"
+    },
+    "observer_controls": {
+      "bytes": 1116,
+      "sha256": "c7e3431be20564e4e69a4b0b660e6501551f3adc9adb88ddaf26958d6d7616f5"
+    }
+  },
+  "schema": "atlas921_lr_clock_source_declaration_v1",
+  "scientific_run": "NOT_RUN",
+  "source_only_primary_review": {
+    "bytes": 7735,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-primary-independent-review-source-20261006/v1/review.json",
+    "sha256": "4e9c124fd98d515f670a6de1fe1c43439e91ccccd926ad5a651ebf059387573d"
+  },
+  "source_only_supplemental_review": {
+    "bytes": 5709,
+    "path": "/ml2/hypergan/pg-atlas921-lr-clock-callback-independent-review-source-20261006/v1/review.json",
+    "sha256": "b879a18c767a66c855506ab2f9faacfd07b64378115007287b1e316ba4a0e654"
+  },
+  "status": "FOCUSED_CONTROLS_PASS_PENDING_FRESH_REQUEST",
+  "successor_authority_id": "ember-two-pole-lr-clock-only-comparison-20261006-v1"
+}

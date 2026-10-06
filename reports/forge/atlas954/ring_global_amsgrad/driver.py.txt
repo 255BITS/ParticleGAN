@@ -1,0 +1,503 @@
+"""954: two isolated ring1600 diagnostics; importing this file is inert.
+
+The pinned canonical MoG owner/update/scorer is reused. Only strict local
+metadata, extended original400/24 clocks and Recipe.amsgrad differ. ROOT owns
+all actual reads/imports/fixtures/runs and the separate180/1200 allocations.
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+from copy import deepcopy
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import sys
+import time
+from types import ModuleType
+
+DRIVER_PATH = 'experiments/forge/atlas954_ring_driver.py'
+TEST_PATH = 'tests/test_atlas954_ring_controls.py'
+PARENT_PATH = 'experiments/forge/canonical_mog_adapter.py'
+PARENT_PIN = {'sha256': '751f072f7cc6249e79e83c7df6e0b0a09170bb9f0ae9ca0a2df12e72f97c08e9', 'bytes': 58817}
+ADAPTER_PIN = {'sha256': 'aaf0a1b7a5af9c69aa593436bfb303ec711ad420c1932284035a7803d5a4a292', 'bytes': 38629}
+BRIDGE_PATH = 'experiments/forge/atlas_existing_mog.py'
+BRIDGE_PIN = {'sha256': '072f1fd749d465dd26e7c6172124177b1fac99bb1316720897ce04f969161d78', 'bytes': 42539}
+NOISY_PRIOR_PATH = 'particlegan/noisy_particle_prior.py'
+NOISY_PRIOR_PIN = {'sha256': 'a59eb7340cae67b0f8f40729bd89cd2071bba63c7ae66d516246554b6c621316', 'bytes': 3328}
+ORIGINAL_SOURCE_DIGEST = 'd45b5459a6def926e41c7d3c544593b1635a670b50ef118fb6660ab679e78f34'
+TASK_PATH = 'configs/forge/tasks/ring16_acquisition.json'
+TASK_PIN = {'sha256': 'e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1', 'bytes': 7835}
+FIXED_SHA256 = {
+    'particlegan/birth_death.py': '7482b29f0065be446a6b5e087a4b55d0961c8a6f2602cf9919ca502edca78c91',
+    'particlegan/policy.py': '7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967',
+    'particlegan/recipes.py': '79905bb948cb967f80a087063960ea72e72c04d3b572b4b90ff4fa1dda5f299f',
+    'experiments/forge/vectorprofiles.py': 'dcbbf669a3457126fce82d073f8d8e4e5254702dca5201f88ea5be7877ee14da',
+    'benchmarks/transfer_suite/vector_tasks.py': '3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0',
+    'benchmarks/toy_audit/ring16_quality.py': 'c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6',
+    'benchmarks/transfer_suite/protocol.py': '99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89',
+    'benchmarks/locked_shared/observation.py': 'bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b',
+}
+ARMS = {'atlas791': True, 'atlas791_amsgrad_off': False}
+CHECKS = ('two_arm_declaration_identity', 'unsupported_declaration_rejected',
+    'original_ring_task_and_recipe_bound', 'global_amsgrad_all_groups',
+    'original_numerical_and_evaluator_source', 'original_400_extended_1600_cadence',
+    'graded_prefix_and_terminal_gates', 'initial17_update_retained_prefix')
+CONTROL_SCHEMA = 'forge_atlas954_ring_control_result_v1'
+PROOF_SCHEMA = 'forge_atlas954_ring_software_proof_v1'
+DECLARATION_SCHEMA = 'forge_atlas954_ring_declaration_v1'
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False)
+
+
+def digest(value):
+    return hashlib.sha256(canonical(value).encode()).hexdigest()
+
+
+def observation_clocks(horizon):
+    if type(horizon) is not int or horizon not in (400, 1600):
+        raise ValueError('only declared400/1600 ring projections')
+    return [(i * 400 + 23) // 24 for i in range(1, horizon * 24 // 400 + 1)]
+
+
+def plan_arm(arm_id):
+    if type(arm_id) is not str or arm_id not in ARMS:
+        raise ValueError('exact two954 arms only')
+    return dict(schema='forge_atlas954_ring_arm_v1', arm_id=arm_id,
+        task_id='ring16_acquisition_longer954_' + arm_id + '_v1',
+        candidate_id='atlas-ring-longer954-' + arm_id.replace('_', '-') + '-v1',
+        seed=0, resources=dict(backend='cuda', cpu_threads=1, gpus=1, budget_seconds=1200),
+        device='cuda:0', physical_device='1',
+        steps=1600, recipe_total_steps=None, amsgrad=ARMS[arm_id],
+        observation_clocks=observation_clocks(1600), scientific_credit=False)
+
+
+def _pin(raw):
+    return dict(sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw))
+
+
+def _read(root, relative, expected=None):
+    root = Path(root).resolve()
+    path = root / relative
+    if not path.is_file() or path.is_symlink() or path.resolve() != path:
+        raise ValueError('missing/aliased Source: ' + relative)
+    raw = path.read_bytes()
+    if expected is not None and _pin(raw) != expected:
+        raise ValueError('Source drift: ' + relative)
+    return raw
+
+
+def _literal(source, name):
+    for node in ast.parse(source).body:
+        if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == name for t in node.targets):
+            return ast.literal_eval(node.value)
+    raise ValueError('missing Source declaration: ' + name)
+
+
+def validate_source_pins(root, source_pins):
+    if not isinstance(source_pins, dict):
+        raise ValueError('explicit typed original791 Source map required')
+    parent = _read(root, PARENT_PATH, PARENT_PIN).decode()
+    required = set(_literal(parent, 'SOURCE_PINS')) | {PARENT_PATH, DRIVER_PATH, TEST_PATH, BRIDGE_PATH, NOISY_PRIOR_PATH}
+    if not required <= set(source_pins):
+        raise ValueError('missing original owner inputs or fresh driver/control Source')
+    for relative, pin in source_pins.items():
+        if (type(relative) is not str or Path(relative).is_absolute() or '..' in Path(relative).parts
+                or not isinstance(pin, dict) or set(pin) != {'sha256', 'bytes'}
+                or type(pin['bytes']) is not int or pin['bytes'] < 0
+                or type(pin['sha256']) is not str or len(pin['sha256']) != 64):
+            raise ValueError('malformed typed Source pin')
+        _read(root, relative, pin)
+    if (source_pins[PARENT_PATH] != PARENT_PIN or source_pins[TASK_PATH] != TASK_PIN
+            or source_pins['experiments/forge/adapters.py'] != ADAPTER_PIN
+            or source_pins[BRIDGE_PATH] != BRIDGE_PIN or source_pins[NOISY_PRIOR_PATH] != NOISY_PRIOR_PIN):
+        raise ValueError('original791 Task/producer/bridge/import dependency or pinned canonical owner differs')
+    if any(source_pins.get(relative, {}).get('sha256') != sha for relative, sha in FIXED_SHA256.items()):
+        raise ValueError('protected nearest-positive791 core/data/metric changed')
+    return deepcopy(source_pins)
+
+
+def validate_base_recipe(base_recipe):
+    if (not isinstance(base_recipe, dict) or len(base_recipe) != 79
+            or base_recipe.get('name') != 'atlas' or base_recipe.get('amsgrad') is not True
+            or base_recipe.get('total_steps') is not None
+            or base_recipe.get('continuous_policy') != 'dv12'
+            or (base_recipe.get('num_particles'), base_recipe.get('z_dim'), base_recipe.get('batch_size')) != (256, 4, 128)):
+        raise ValueError('retained full79 schedule-free Atlas ring Recipe required')
+    return deepcopy(base_recipe)
+
+
+def task_spec(root, arm_id, source_pins):
+    plan = plan_arm(arm_id)
+    parent = json.loads(_read(root, TASK_PATH, TASK_PIN))
+    if (parent['adapter'] != 'transfer_vector' or parent['execution']['steps'] != 400
+            or parent['evaluation']['observations'] != 24 or parent['evaluation']['minimum_stable_checks'] != 5):
+        raise ValueError('original400/24/final5 ring contract differs')
+    task = deepcopy(parent)
+    task['id'] = plan['task_id']
+    task['task_cohort'] = 'atlas954_ring_' + arm_id
+    task['execution'].update(steps=1600, device='cuda:0', physical_device='1',
+        cpu_threads=1, gpus=1, budget_seconds=1200, amsgrad=plan['amsgrad'])
+    task['field_ownership'] = dict(schema_version=1, version='forge-field-boundaries-v2',
+        task_id=task['id'],
+        recipe_fields=dict(source='held full79 original791 Recipe plus declared global AMSGrad field only',
+            amsgrad=plan['amsgrad'], total_steps=None),
+        task_contract=dict(execution=dict(steps=1600, backend='cuda', device='cuda:0',
+            physical_device='1', cpu_threads=1, gpus=1, budget_seconds=1200),
+            host_definition=dict(scope='original geometry/model/data card', declared_steps=400),
+            evaluation=dict(observations=96, original_clock_base400=24, minimum_stable_checks=5)),
+        delegated_reference_values=dict(original791_full79=dict(path=BRIDGE_PATH,
+            entry='EXPECTED_RECIPES.ring16_acquisition', **BRIDGE_PIN)),
+        inactive_legacy_host_fields={},
+        reference_declarations=dict(parent_task=dict(path=TASK_PATH, **TASK_PIN),
+            original791_recipe=dict(path=BRIDGE_PATH, entry='EXPECTED_RECIPES.ring16_acquisition', **BRIDGE_PIN)))
+    # The source-bound geometry/model/data card remains exactly original400.
+    task['evaluation']['observations'] = 96
+    task['evaluation']['evaluator'] = 'experiments.forge.atlas954_ring_driver:grade_at'
+    task['resources'] = dict(parent['resources'], gpus=1, cpu_threads=1, timeout_seconds=1200, allow_cpu=False)
+    task['diagnostic_variant'] = dict(plan=plan, parent_task_sha256=TASK_PIN['sha256'],
+        original_source_digest=ORIGINAL_SOURCE_DIGEST, changed_recipe_fields=['amsgrad'] if not plan['amsgrad'] else [],
+        extension='external1600; original400/24 lattice continued forward; no intrinsic schedule')
+    return task
+
+
+def prepare_adapter_source(raw):
+    """Remove only the pinned original-candidate admission import/call."""
+    if _pin(raw) != ADAPTER_PIN:
+        raise ValueError('exact immutable791 producer preimage required')
+    source = raw.decode()
+    tree = ast.parse(source)
+    node = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == '_vector')
+    changed = deepcopy(node)
+    remove_import = ast.parse('from .atlas_existing_mog import admitted_vector_context').body[0]
+    remove_call = ast.parse('admitted_vector_context(request, task, context, output, device)').body[0]
+    removed = []
+    remaining = []
+    for item in changed.body:
+        if any(ast.dump(item, include_attributes=False) == ast.dump(expected, include_attributes=False)
+               for expected in (remove_import, remove_call)):
+            removed.append(item)
+        else:
+            remaining.append(item)
+    if len(removed) != 2 or not all(any(ast.dump(item, include_attributes=False) == ast.dump(expected, include_attributes=False)
+            for item in removed) for expected in (remove_import, remove_call)):
+        raise ValueError('two original candidate-specific metadata boundaries changed')
+    changed.body = remaining
+    lines = source.splitlines(keepends=True)
+    lines[node.lineno - 1:node.end_lineno] = [ast.unparse(ast.fix_missing_locations(changed)) + '\n']
+    return ''.join(lines).encode()
+
+
+def _producer_compiler(module, *, fixture=False):
+    original = module.compile_producer
+    # This wrapper is local to one isolated module; no shared function changes.
+    def compile_producer(raw, name):
+        if name != '_vector':
+            raise ValueError('954 is only the original ring vector producer')
+        node, overlay = original(prepare_adapter_source(raw), name)
+        checkpoint = next(n for n in node.body if isinstance(n, ast.Assign)
+            and any(isinstance(t, ast.Name) and t.id == 'checkpoints' for t in n.targets))
+        if ast.unparse(checkpoint.value) != 'set(_checkpoints(task))':
+            raise ValueError('original observation boundary changed')
+        checkpoint.value = ast.parse('set(' + repr(observation_clocks(1600)) + ')', mode='eval').body
+        if fixture:
+            loop = next(n for n in node.body if isinstance(n, ast.For))
+            if ast.unparse(loop.iter) != "range(1, task['execution']['steps'] + 1)":
+                raise ValueError('original external loop boundary changed')
+            loop.iter = ast.parse('range(1, 18)', mode='eval').body
+        return ast.fix_missing_locations(node), dict(overlay,
+            metadata_admission_nodes_removed=2, observation_steps=observation_clocks(1600),
+            fixture_updates=17 if fixture else None)
+    return compile_producer
+
+
+def load_owner(root, arm_id, source_pins, base_recipe, *, fixture=False):
+    """ROOT-only: exact original bodies with strict isolated metadata hooks."""
+    plan = plan_arm(arm_id)
+    pins = validate_source_pins(root, source_pins)
+    base_recipe = validate_base_recipe(base_recipe)
+    module = ModuleType('experiments.forge._atlas954_' + arm_id)
+    module.__package__ = 'experiments.forge'
+    module.__file__ = str(Path(root).resolve() / PARENT_PATH)
+    raw = _read(root, PARENT_PATH, PARENT_PIN)
+    exec(compile(raw, module.__file__, 'exec'), module.__dict__)
+    # Replace stale canonical-era metadata pins with the supplied verified791 map.
+    # All bytes are checked, including the old adapter body, before construction.
+    module.SOURCE_PINS = {relative: pin['sha256'] for relative, pin in pins.items()}
+    parent = json.loads(module._source(root, TASK_PATH))
+    protocol = json.loads(module._source(root, module.PROTOCOL_PATH))
+    reference = json.loads(module._source(root, module.CONFIG_PATH))
+    parent_binding = module.resolve_binding(root, dict(recipe_preset='atlas', recipe_overrides=reference), parent, protocol)
+    # Canonical resolve supplies the metadata skeleton; its particles label is older.
+    original791_recipe = _literal(_read(root, BRIDGE_PATH, BRIDGE_PIN).decode(), 'EXPECTED_RECIPES')['ring16_acquisition']
+    if canonical(original791_recipe) != canonical(base_recipe):
+        raise ValueError('pinned original791 bridge full79 differs from held retained Recipe')
+    skeleton_recipe = deepcopy(parent_binding['recipe'])
+    if skeleton_recipe.get('prior_kind') != 'particles' or original791_recipe['prior_kind'] != 'mog':
+        raise ValueError('unexpected canonical/original791 prior metadata')
+    skeleton_recipe['prior_kind'] = original791_recipe['prior_kind']
+    if canonical(skeleton_recipe) != canonical(original791_recipe):
+        raise ValueError('canonical metadata differs from original791 beyond the prior_kind label')
+    task = task_spec(root, arm_id, pins)
+    candidate = dict(id=plan['candidate_id'], diagnostic_variant=deepcopy(plan))
+    recipe = deepcopy(original791_recipe)
+    recipe['amsgrad'] = plan['amsgrad']
+    binding = deepcopy(parent_binding)
+    binding.update(schema='forge_atlas954_ring_owner_binding_v1', task_id=task['id'], task_sha256=digest(task),
+        recipe=recipe, recipe_serialized=module.serialized_recipe(recipe, module._source(root, 'particlegan/recipes.py')),
+        base_recipe_sha256=digest(base_recipe), effective_recipe_sha256=digest(recipe),
+        arm_plan=deepcopy(plan), arm_plan_sha256=digest(plan), driver_sha256=pins[DRIVER_PATH]['sha256'],
+        original_source_digest=ORIGINAL_SOURCE_DIGEST,
+        isolated_producer_source_sha256=hashlib.sha256(prepare_adapter_source(module._source(root, 'experiments/forge/adapters.py'))).hexdigest())
+    observation = dict(kind='ordinary_scheduled_live', observation_steps=observation_clocks(1600),
+        observation_count=96, final_checks=5, holdout_samples=None, goal_steps=observation_clocks(1600),
+        retain_actual_final_observation=False, max_retained_goal_states=96,
+        all_original_numeric_observations_retained=True)
+    contract = binding['source_contract']
+    contract.update(schema='forge_atlas954_ring_public_owner_contract_v1', task_id=task['id'], task=deepcopy(task),
+        full_recipe=recipe, files=deepcopy(pins), source_pins={k: v['sha256'] for k, v in pins.items()},
+        public_prior_factory_default=recipe['prior_kind'],
+        original791_recipe_source=dict(path=BRIDGE_PATH, entry='EXPECTED_RECIPES.ring16_acquisition', **BRIDGE_PIN),
+        canonical_metadata_recipe_sha256=digest(parent_binding['recipe']),
+        external_horizon=1600, intrinsic_horizon=None, observation=observation,
+        base_recipe_sha256=digest(base_recipe), effective_recipe_sha256=digest(recipe),
+        changed_recipe_fields=[] if plan['amsgrad'] else ['amsgrad'], arm_plan_sha256=digest(plan),
+        original_source_digest=ORIGINAL_SOURCE_DIGEST, driver_sha256=pins[DRIVER_PATH]['sha256'],
+        local_metadata_extension=True, scientific_credit=False)
+    contract['harness_overlays'].update(
+        effective_recipe_identity='held original ring full79; only global amsgrad differs in the off arm',
+        base_recipe_sha256=digest(base_recipe), effective_recipe_sha256=digest(recipe),
+        changed_recipe_fields=[] if plan['amsgrad'] else ['amsgrad'])
+    contract['sampling'].update(base_recipe_sha256=digest(base_recipe),
+        training_recipe_sha256=digest(recipe),
+        sampling_law_changed=False, optimizer_variant_affects_training_only=True)
+    binding['source_contract_sha256'] = digest(contract)
+    def guard():
+        validate_source_pins(root, pins)
+    def resolve(root_arg, candidate_arg, task_arg, protocol_arg):
+        if (Path(root_arg).resolve() != Path(root).resolve() or canonical(candidate_arg) != canonical(candidate)
+                or canonical(task_arg) != canonical(task) or canonical(protocol_arg) != canonical(protocol)):
+            raise ValueError('exact954 arm/Task/protocol only')
+        guard()
+        return deepcopy(binding)
+    def check(root_arg, binding_arg):
+        expected = resolve(root_arg, candidate, task, protocol)
+        if canonical(binding_arg) != canonical(expected):
+            raise ValueError('forged or stale954 full owner binding')
+        return expected
+    module.__dict__.update(resolve_binding=resolve, _check_binding=check,
+        binding=binding, task=task, candidate=candidate, protocol=protocol, guard=guard,
+        source_pins=pins, base_recipe=base_recipe, arm_id=arm_id)
+    module.compile_producer = _producer_compiler(module, fixture=fixture)
+    return module
+
+
+def optimizer_receipt(owner):
+    flags = [group.get('amsgrad') for optimizer in (owner.opt_g, owner.opt_d) for group in optimizer.param_groups]
+    expected = owner.recipe.amsgrad
+    if not flags or any(type(flag) is not bool or flag is not expected for flag in flags):
+        raise ValueError('global AMSGrad flag not applied to every generator/prior/noise/critic group')
+    return dict(amsgrad=expected, all_group_flags=flags, generator_groups=len(owner.opt_g.param_groups),
+        critic_groups=len(owner.opt_d.param_groups), full_recipe_sha256=digest(owner.binding['recipe']))
+
+
+def build_software_proof(arm_id, controls, source_pins, base_recipe):
+    plan = plan_arm(arm_id)
+    validate_base_recipe(base_recipe)
+    if (controls.get('schema') != CONTROL_SCHEMA or controls.get('status') != 'PASS'
+            or controls.get('checks') != {name: 'PASS' for name in CHECKS}
+            or controls.get('source_pins') != source_pins
+            or controls.get('base_recipe_sha256') != digest(base_recipe)
+            or canonical(controls.get('base_recipe')) != canonical(base_recipe)
+            or controls.get('software_fixture_updates') != 17 or controls.get('software_fixture_observations') != 1
+            or controls.get('fixture_device') != 'cuda:0'
+            or controls.get('fixture_physical_device') != '1'):
+        raise ValueError('current954 focused controls including actual17/one-read GPU1/cuda:0 fixture required')
+    return dict(schema=PROOF_SCHEMA, status='PASS', arm_id=arm_id, plan_sha256=digest(plan),
+        source_pins=deepcopy(source_pins), base_recipe=deepcopy(base_recipe), base_recipe_sha256=digest(base_recipe),
+        control_sha256=digest(controls), controls=deepcopy(controls))
+
+
+def validate_declaration(declaration):
+    if not isinstance(declaration, dict) or set(declaration) != {
+            'schema', 'arm_id', 'plan', 'source_pins', 'base_recipe', 'software_proof', 'attempt_id'}:
+        raise ValueError('unknown declaration fields')
+    plan = plan_arm(declaration['arm_id'])
+    validate_base_recipe(declaration['base_recipe'])
+    if declaration['schema'] != DECLARATION_SCHEMA or canonical(declaration['plan']) != canonical(plan):
+        raise ValueError('forged arm/seed/resource/horizon/AMSGrad scope')
+    attempt = declaration['attempt_id']
+    if type(attempt) is not str or len(attempt) != 32 or any(c not in '0123456789abcdef' for c in attempt):
+        raise ValueError('fresh attempt identity required')
+    proof = declaration['software_proof']
+    if not isinstance(proof, dict) or proof != build_software_proof(declaration['arm_id'], proof.get('controls', {}), declaration['source_pins'], declaration['base_recipe']):
+        raise ValueError('fresh current954 per-arm proof required')
+    return plan
+
+
+def _grade_source(root, source_pins):
+    tree = ast.parse(_read(root, 'benchmarks/transfer_suite/protocol.py', source_pins['benchmarks/transfer_suite/protocol.py']))
+    node = deepcopy(next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'test_verdict'))
+    steps = next(n for n in node.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'steps' for t in n.targets))
+    if ast.unparse(steps.value) != "sorted({math.ceil(i * spec['steps'] / 24) for i in range(1, 25)})":
+        raise ValueError('original grader clock expression changed')
+    steps.value = ast.parse('list(declared_clocks)', mode='eval').body
+    node.name = '_grade'
+    node.args.args.append(ast.arg(arg='declared_clocks'))
+    return ast.unparse(ast.fix_missing_locations(node)) + '\n'
+
+
+def grade_at(root, arm_id, result, *, horizon, source_pins):
+    plan_arm(arm_id)
+    clocks = observation_clocks(horizon)
+    from benchmarks.transfer_suite import protocol
+    if Path(protocol.__file__).resolve() != Path(root).resolve() / 'benchmarks/transfer_suite/protocol.py':
+        raise ValueError('foreign original grader import')
+    namespace = dict(vars(protocol))
+    exec(compile(_grade_source(root, source_pins), '<954-original-grader-explicit-clocks>', 'exec'), namespace)
+    rows = result['evidence']['observations']
+    projected = [row for row in rows if row['step'] <= horizon]
+    live = projected[-1] if projected and projected[-1]['step'] == horizon else {}
+    packet = dict(observations=projected, live=live)
+    parent = json.loads(_read(root, TASK_PATH, TASK_PIN))
+    grade = namespace['_grade'](dict(steps=horizon, thresholds=parent['evaluation']['thresholds']), packet, clocks)
+    guards = result['evidence'].get('guards', {})
+    if not (guards.get('all_finite') is True and guards.get('hooks_exercised') is True and guards.get('unintended_rng_deviations') == 0):
+        grade.update(status='INVALID', passed=False)
+    grade.update(arm_id=arm_id, horizon=horizon, diagnostic=True, scientific_credit=False)
+    return grade
+
+
+def _atomic(path, value):
+    temporary = path.with_name(path.name + '.tmp')
+    with temporary.open('x') as stream:
+        stream.write(canonical(value) + '\n'); stream.flush(); os.fsync(stream.fileno())
+    os.replace(temporary, path)
+
+
+def _new_output(output):
+    output = Path(output)
+    if output.exists() or output.is_symlink():
+        raise ValueError('fresh owned output directory required')
+    output.mkdir(mode=0o700)
+    return output
+
+
+class _Fresh:
+    def __init__(self, module, output):
+        self.module, self.output, self.owner = module, output, None
+    def construct(self, factory, reader):
+        if self.owner is not None or reader is not self.module.owner_initial_receipt:
+            raise ValueError('one actual fresh canonical owner per attempt')
+        self.module.guard()
+        owner = factory()
+        self.initialization = reader(owner)
+        self.owner = owner
+        self.optimizer = optimizer_receipt(owner)
+        _atomic(self.output / 'INITIALIZATION.json', dict(owner=self.initialization, optimizer=self.optimizer))
+        return owner
+
+
+def _device(device):
+    if type(device) is not str or device != 'cuda:0' or os.environ.get('CUDA_VISIBLE_DEVICES') != '1':
+        raise ValueError('959 authorizes only cuda:0 mapped from physical GPU1; CUDA_VISIBLE_DEVICES must equal 1; no fallback')
+
+
+def _run(root, module, output, device):
+    _device(device)
+    import torch
+    torch.set_num_threads(1)
+    fresh = _Fresh(module, output)
+    request = dict(candidate=module.candidate, task=module.task, protocol=module.protocol, binding=module.binding)
+    result = module.run_case(root, request, output_dir=output, device=device,
+        source_guard=module.guard, fresh_repeat_guard=fresh)
+    result['optimizer_actual'] = fresh.optimizer
+    return result
+
+
+def verify_initial_prefix(root, source_pins, base_recipe, retained_saved, device, output, *, retained_device, retained_metrics):
+    """One exact17-update software fixture, never a400-step baseline rerun."""
+    _device(device)
+    if str(retained_device) != str(device):
+        raise ValueError('historical/current device mismatch; STOP before factory or17-update fixture')
+    if len(retained_saved) != 24 or retained_saved[0]['step'] != 17 or len(retained_metrics) != 24:
+        raise ValueError('protected original24 banks/metric rows required')
+    module = load_owner(root, 'atlas791', source_pins, base_recipe, fixture=True)
+    output = _new_output(output)
+    result = _run(root, module, output, device)
+    if result['complete_state']['trainer']['completed_steps'] != 17 or len(result['evidence']['observations']) != 1:
+        raise ValueError('fixture did not execute exactly17 updates/one original read')
+    import torch
+    actual = torch.load(output / 'observed-samples.pt', weights_only=True, map_location='cpu')
+    expected = retained_saved[0]
+    if (len(actual) != 1 or actual[0]['step'] != 17 or expected['samples'].dtype != torch.float32
+            or tuple(expected['samples'].shape) != (4096, 2) or actual[0]['samples'].dtype != torch.float32
+            or actual[0]['samples'].contiguous().numpy().tobytes() != expected['samples'].contiguous().numpy().tobytes()):
+        raise ValueError('typed ordered first17 bank differs from retained791')
+    def scientific(row):
+        return {k: v for k, v in row.items() if k not in ('step', 'seconds')}
+    if canonical(scientific(result['evidence']['observations'][0])) != canonical(scientific(retained_metrics[0])):
+        raise ValueError('original first17 metric row differs')
+    module.guard()
+    return dict(status='PASS', software_fixture_updates=17, software_fixture_observations=1,
+        fixture_device=str(device), fixture_physical_device='1', compared_device=str(retained_device), equal=True,
+        scope='ordered float32 scored samples and original first metric row; whole-state UNKNOWN')
+
+
+def run_arm(root, declaration, output, device):
+    _device(device)
+    plan = validate_declaration(declaration)
+    pins = validate_source_pins(root, declaration['source_pins'])
+    output = _new_output(output)
+    _atomic(output / 'DECLARATION.json', declaration)
+    started = time.monotonic()
+    try:
+        module = load_owner(root, plan['arm_id'], pins, declaration['base_recipe'])
+        result = _run(root, module, output, device)
+        if (result['complete_state']['trainer']['completed_steps'] != 1600
+                or [row['step'] for row in result['evidence']['observations']] != observation_clocks(1600)):
+            raise ValueError('full1600/96 original lattice required; no early stop')
+        retained = result.pop('retained_goal_states')
+        result.pop('complete_state')
+        if [row['step'] for row in retained] != observation_clocks(1600):
+            raise ValueError('all96 original scored clouds/targets not captured')
+        # Already-scored outputs only. The producer separately saved all banks.
+        import torch
+        torch.save(retained, output / 'retained-goal-states.pt')
+        result['diagnostic'] = dict(plan=plan, binding=module.binding, canonical_credit=False,
+            device=str(device), physical_device='1', historical_device_equality_scope='only proven by the separately retained software prefix fixture')
+        _atomic(output / 'raw-result.json', result)
+        grades = {str(h): grade_at(root, plan['arm_id'], result, horizon=h, source_pins=pins) for h in (400, 1600)}
+        _atomic(output / 'grades.json', grades)
+        if any(grade['status'] not in ('PASS', 'FAIL') for grade in grades.values()):
+            raise ValueError('complete independent400/1600 certification required')
+        _atomic(output / 'terminal.json', dict(schema='forge_atlas954_ring_terminal_v1', status='COMPLETE',
+            arm_id=plan['arm_id'], attempt_id=declaration['attempt_id'], grades={k: v['status'] for k, v in grades.items()},
+            device=str(device), physical_device='1', declaration_sha256=digest(declaration), binding_sha256=digest(module.binding),
+            source_digest=digest(pins), completed_steps=1600, observations=96,
+            wall_seconds=time.monotonic() - started, raw_result_pin=_pin((output / 'raw-result.json').read_bytes()),
+            grades_pin=_pin((output / 'grades.json').read_bytes()), scientific_credit=False))
+        return result, grades
+    except Exception as error:
+        _atomic(output / 'ERROR.json', dict(status='ERROR', error_type=type(error).__name__, message=str(error),
+            arm_id=plan['arm_id'], attempt_id=declaration['attempt_id'], wall_seconds=time.monotonic() - started))
+        raise
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--root', required=True)
+    parser.add_argument('--declaration', required=True)
+    parser.add_argument('--output', required=True)
+    parser.add_argument('--device', required=True)
+    args = parser.parse_args()
+    _device(args.device)
+    run_arm(Path(args.root), json.loads(Path(args.declaration).read_text()), Path(args.output), args.device)
+
+
+if __name__ == '__main__':
+    main()

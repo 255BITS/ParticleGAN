@@ -1,0 +1,31 @@
+{
+  "case_status": "NOT_RUN",
+  "errors": [
+    {
+      "execution": {
+        "chunk_id": "63696c",
+        "exit_code": 1,
+        "original_token_count": 34,
+        "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 26, in <module>\nModuleNotFoundError: No module named 'experiments.forge.util'\n",
+        "wall_time_seconds": 1.027e-05
+      },
+      "stage": "ROOT_IMPORT"
+    },
+    {
+      "execution": {
+        "chunk_id": "466af5",
+        "exit_code": 1,
+        "original_token_count": 236,
+        "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 47, in <module>\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/experiments/forge/queue.py\", line 253, in submit\n    validate_screening_submission(request)\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/experiments/forge/promotion.py\", line 350, in validate_screening_submission\n    context = FormulationContext(recipe_preset=candidate.get(\"recipe_preset\"),\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/experiments/forge/api.py\", line 496, in __init__\n    raise CapabilityError([\"independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported\"])\nexperiments.forge.api.CapabilityError: independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported\n",
+        "wall_time_seconds": 9.58e-06
+      },
+      "stage": "MAINTAINED_SCREENING_VALIDATION_BEFORE_STATE"
+    }
+  ],
+  "proof_bound": false,
+  "request_bound": false,
+  "schema": "pg889_root_pre_claim_admission_errors_v1",
+  "science_admitted": false,
+  "source_amendment_pin": "c5468fb3b5ebdaf842a15a5cbed08dd64cdd33b7be218078fba5ba8a86c81132",
+  "source_commit": "25ef6c9c6f2c6148ab346a7be52d24016065507e"
+}

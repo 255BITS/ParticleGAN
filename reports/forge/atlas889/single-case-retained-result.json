@@ -1,0 +1,60 @@
+{
+  "admission": {
+    "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+    "candidate_revision": "4c92b29a63bd2a3e7d4eb5c72148c9280b8156823ef1e716ef85868b9ad36fc4",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "directory": "/ml2/hypergan/pg-atlas889-two-pole-passive-runtime-20261006/v1/runs/forge/atlas-original-two-pole-passive889-study-v1/5d617c198bb548aa8242e07dc8ca09df",
+    "full_allowance_seconds": 300,
+    "gpus": 0,
+    "request_id": "84aead29da2ee1938a5b981e",
+    "request_sha256": "570a85811494392260f6ca6c5faf69469c5422d13bf91533ad60a94e38741da0",
+    "request_source_file_count": 1270,
+    "schema": "pg889_root_single_case_admission_receipt_v1",
+    "software_proof_pin": {
+      "bytes": 2279,
+      "path": "/ml2/hypergan/pg-atlas889-two-pole-passive-runtime-20261006/v1/observer-software-proof.json",
+      "sha256": "ebe0d5d3653f5eaf38fa7f51c132d771bf5d37d989233c218850f53baa6f8781"
+    },
+    "source_digest": "26a028fa2710660052a445657d9a228c7ce9338d94fb2406bce5a36b60228b5f"
+  },
+  "grade": null,
+  "raw_result_pin": {
+    "bytes": 1351,
+    "sha256": "b8194066635f2eb6c69da095c726b38339c4e0e1436342a5f2ed4ce2f71c6816"
+  },
+  "row": {
+    "allowance_seconds": 300.0,
+    "attempt_id": "5d617c198bb548aa8242e07dc8ca09df",
+    "candidate_revision": "4c92b29a63bd2a3e7d4eb5c72148c9280b8156823ef1e716ef85868b9ad36fc4",
+    "certification_proof": null,
+    "certified": false,
+    "charged_seconds": 300.0,
+    "compatibility_key": "b192f19eea7f4043840e435446ddcdd30236479363d65a8541dac98f054338a5",
+    "completed_terminal": false,
+    "device": "cpu",
+    "id": "B:two_pole",
+    "original_task_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+    "original_terminal_pin": {
+      "bytes": 2268,
+      "sha256": "f336259f20b037be0310866944d278941102f9b6cf283cc3208077f1399e829f"
+    },
+    "overrun_seconds": 0.0,
+    "paid_wall_seconds": 5.252349246758968,
+    "request_id": "84aead29da2ee1938a5b981e",
+    "request_sha256": "570a85811494392260f6ca6c5faf69469c5422d13bf91533ad60a94e38741da0",
+    "reserved_seconds": 294.74765075324103,
+    "source_digest": "26a028fa2710660052a445657d9a228c7ce9338d94fb2406bce5a36b60228b5f",
+    "status": "INVALID",
+    "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+    "task_id": "two_pole",
+    "terminal_status": "error",
+    "unmeasured_interrupt_reserved_seconds": 294.74765075324103,
+    "worker_token_sha256": "5ec106664bf37606d32b2089493927b874b0f4babfa2804ac5284402083d8c53"
+  },
+  "terminal_pin": {
+    "bytes": 2268,
+    "sha256": "f336259f20b037be0310866944d278941102f9b6cf283cc3208077f1399e829f"
+  },
+  "terminal_status": "error"
+}

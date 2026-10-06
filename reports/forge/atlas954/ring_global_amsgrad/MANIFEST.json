@@ -1,0 +1,320 @@
+{
+  "additional_scientific_calls_during_publication": 0,
+  "all_bank_and_metric_inputs_already_scored": true,
+  "canonical_credit": false,
+  "completed_trajectory_observations_each": 96,
+  "completed_trajectory_updates_each": 1600,
+  "files": [
+    {
+      "bytes": 9148,
+      "path": "README.md",
+      "sha256": "1ded926d3549df10d5f814e6c0da75c79df2daca6079aad6e060d4714c2a9758"
+    },
+    {
+      "bytes": 872618,
+      "path": "bound-source-leaves.tar.gz",
+      "sha256": "6239e3979031dbdc7f9d1ea76fc34e191e8f2b51044029bbe99604eb9e73b7ce"
+    },
+    {
+      "bytes": 53292,
+      "path": "comparison.json",
+      "sha256": "5d885ea87829a6388e222c8f8071935e1c758e72f71e954d0263a762841ab0a2"
+    },
+    {
+      "bytes": 31556,
+      "path": "controls.py.txt",
+      "sha256": "ddd4196de994fe94ca6845d8abdebe6d0379d9da40eba22589fb385523f3d959"
+    },
+    {
+      "bytes": 29653,
+      "path": "driver.py.txt",
+      "sha256": "cfbff29104d8ebaebe56e6791435f678d5c366e3c5fada110f4da8d426cd691c"
+    },
+    {
+      "bytes": 9619,
+      "path": "global-amsgrad-off/INITIALIZATION.json",
+      "sha256": "6bc29d3009bd3b909a36aec7761130ccf3fa95c06ed03f6917d7a75405e9b1c2"
+    },
+    {
+      "bytes": 85281,
+      "path": "global-amsgrad-off/declaration.json",
+      "sha256": "ace9baaf1375308fd6bf87da571f6de3a0815d2674b6994976b55a03fbb57d25"
+    },
+    {
+      "bytes": 2271,
+      "path": "global-amsgrad-off/grades.json",
+      "sha256": "e857d77cc64c9f12d44f5aa4664bf1c02ffbf6255cd583b7ab14fb1d3a807f51"
+    },
+    {
+      "bytes": 3174233,
+      "path": "global-amsgrad-off/observed-samples.pt",
+      "sha256": "03eb67e0c3ca73d65234891104fbf226e48997d6e270bd4c33a1ca9539a069b1"
+    },
+    {
+      "bytes": 137872,
+      "path": "global-amsgrad-off/raw-result.json.gz",
+      "sha256": "a4b4c2551e84dc2a4c9be8cf8b2362f1d56fa5070c9a3163cd873ca146c877d6"
+    },
+    {
+      "bytes": 6347533,
+      "path": "global-amsgrad-off/retained-goal-states.pt",
+      "sha256": "c44f55a5e8be3a4d1cd3d28ec986acdd2be93c7d65bd120361731f108b0bf23e"
+    },
+    {
+      "bytes": 793,
+      "path": "global-amsgrad-off/terminal.json",
+      "sha256": "c623056792087050942a72f1af2dc8452d798b6269b368a144f667132a541c8f"
+    },
+    {
+      "bytes": 113338,
+      "path": "media/at-1600.png",
+      "sha256": "ccf91a334a5fd7b950f7a1c47109a64e88121bd6cf98c67204cd13ce81d5c1d1"
+    },
+    {
+      "bytes": 112338,
+      "path": "media/at-400.png",
+      "sha256": "387fa08c0406d838afa50b4615cdb83657309c35052033fa989ab4f769dce1f2"
+    },
+    {
+      "bytes": 26525,
+      "path": "media/media.json",
+      "sha256": "8909efae9d9d30400c4d6314ae6376bf3abb71b4c7974e0b51199d1e2b01da03"
+    },
+    {
+      "bytes": 1823719,
+      "path": "media/ring.gif",
+      "sha256": "2991601f323da254fc462a4d3873f87b059a4dd898aaa8f04847feb93ed3363d"
+    },
+    {
+      "bytes": 215,
+      "path": "original-launch-error/ERROR.json",
+      "sha256": "c408bf326fad89314371214a9a25e163b65633aed25723b3306b16669429e3cd"
+    },
+    {
+      "bytes": 85220,
+      "path": "original-launch-error/declaration.json",
+      "sha256": "e7844095dc10a7e9ac98b4d8ff5e295c75d52e04ea9da06f8fb0229502eb91cc"
+    },
+    {
+      "bytes": 2593,
+      "path": "original-launch-error/stderr.txt",
+      "sha256": "c09ac350221b60d2b49fa78067d9ea49bc3acf7d5ee0145618b58b335512fd98"
+    },
+    {
+      "bytes": 9601,
+      "path": "original-replacement976/INITIALIZATION.json",
+      "sha256": "8d90e9c8ad8bf739773930c34368b61ae62f61c09608d7a313b78651e06bc3aa"
+    },
+    {
+      "bytes": 32642,
+      "path": "original-replacement976/allocation.json",
+      "sha256": "f14c9d4175cff2dbb7abcaa31d6aa870ee4785d62ffa6dca415fc5442f3ea492"
+    },
+    {
+      "bytes": 85220,
+      "path": "original-replacement976/declaration.json",
+      "sha256": "cd449903f33f0e5eb2f3cb3f80e4a0821a050aac8662746bf97f60e3fa84b813"
+    },
+    {
+      "bytes": 4180,
+      "path": "original-replacement976/full24-prefix.json",
+      "sha256": "5d0f1d70b5bb9a32adab491e8d5b3bdc431f92db49db2afccc40396c2de7fe1f"
+    },
+    {
+      "bytes": 2217,
+      "path": "original-replacement976/grades.json",
+      "sha256": "a32854473d8414a6ce3986278151ca066b64881e05e69720dabaa32312fb16c6"
+    },
+    {
+      "bytes": 115106,
+      "path": "original-replacement976/media/at-1600.png",
+      "sha256": "9da5df4a8bd52de7f48fe2c2f43b99bc136bcdb384caf393a030a39685049b17"
+    },
+    {
+      "bytes": 114449,
+      "path": "original-replacement976/media/at-400.png",
+      "sha256": "ce9edd09934ec9b7d5e0c2169370eb774e9501b8eabebf783faa04fb1532b23e"
+    },
+    {
+      "bytes": 26634,
+      "path": "original-replacement976/media/media.json",
+      "sha256": "42fbe93e85cd8c7676990fd9885b3dcb0f33efd49c4387e5a5dec1deaf315347"
+    },
+    {
+      "bytes": 1865458,
+      "path": "original-replacement976/media/ring.gif",
+      "sha256": "6ecc2900a4176351d0e1e1b7cb87efd679f552c8c400ba0bf4f3960a0e1b6c49"
+    },
+    {
+      "bytes": 763,
+      "path": "original-replacement976/media-execution.json",
+      "sha256": "9040142bf1f5c4c3116483f15b2a2405239df8e003899fea3fa7aba853b2c53e"
+    },
+    {
+      "bytes": 3174233,
+      "path": "original-replacement976/observed-samples.pt",
+      "sha256": "a5840bca4aa6ba80f0df7665c30eff4b3418d0667198c7432465e8d46b2a3680"
+    },
+    {
+      "bytes": 137311,
+      "path": "original-replacement976/raw-result.json.gz",
+      "sha256": "9f4ff1452ac6814b47cda7411fd016e1b6cda4a2e5b792fa3ab84817054314cf"
+    },
+    {
+      "bytes": 6347533,
+      "path": "original-replacement976/retained-goal-states.pt",
+      "sha256": "10d9acb1d79f3acae4dacbbc39c1f7efae67be7564e960e69b77e62a6eb28e9d"
+    },
+    {
+      "bytes": 780,
+      "path": "original-replacement976/terminal.json",
+      "sha256": "791987427f81a46f9d428695e7df9059ce31a43cc6e250bb39f21d1d4549e14c"
+    },
+    {
+      "bytes": 10806,
+      "path": "renderer-original976.py.txt",
+      "sha256": "c207704f324a8cdc6a8fe7d30a9a545cca578d0955ad019e002f1d16c3697baf"
+    },
+    {
+      "bytes": 9873,
+      "path": "renderer.py.txt",
+      "sha256": "d0ef56537962a031edd82b8cf9ab5e7397158bef4f2f63c434732081fc560663"
+    },
+    {
+      "bytes": 483037,
+      "path": "retained-mode-metrics.json",
+      "sha256": "eba8cc54b0d5bc33e85448f40e199a04cdbfa7bcb4976f1a8a530e5a4b456952"
+    },
+    {
+      "bytes": 30869,
+      "path": "retained-partial-comparison-before976.json",
+      "sha256": "ef834eeeba618d1e39b654f33286f7578f1a018b369235b33eb8620195434618"
+    },
+    {
+      "bytes": 104220,
+      "path": "retained791-historical-metrics.json",
+      "sha256": "301a320fe9e0cbba7c02114c0031f4e293f26d22f169dfc4699a2b61a59df134"
+    },
+    {
+      "bytes": 2921,
+      "path": "retained791-recipe-inputs.json",
+      "sha256": "937159e78e372377f09d2456fc8e0bc9bf97dbb01a5e7bbda903ee6896f7a634"
+    },
+    {
+      "bytes": 33384,
+      "path": "science-allocation.json",
+      "sha256": "1650d5c3aefbe8b3b97c7ee03c41fe81c667203c4c3d83613f3dea8fc221809d"
+    },
+    {
+      "bytes": 9057,
+      "path": "setup-failures/initial-controls-attempt.json",
+      "sha256": "280efcd28150ec42db3f305078db38eb17d8cca549476f1e8509e81c983a72ad"
+    },
+    {
+      "bytes": 8527,
+      "path": "setup-failures/initial-controls-stderr.txt",
+      "sha256": "29d6ecb052c46bed860de8f717a736bf17e121e2ef547a121a56292313316846"
+    },
+    {
+      "bytes": 292,
+      "path": "setup-failures/publication-wrapper-error.json",
+      "sha256": "82666fa00ac63865f1da52ee9c5b20acf19292f5417cd7804a99437f1100d269"
+    },
+    {
+      "bytes": 324,
+      "path": "setup-failures/reporting-inspection-error.json",
+      "sha256": "42e22c2ba3f9d99ea85dc65804cce564f5e717711fa046553dfaa97bf4831adb"
+    },
+    {
+      "bytes": 591,
+      "path": "setup-failures/v4-controls-attempt.json",
+      "sha256": "905ec444e47e85fb63fa9397c899eb8f2f5adeb210c40b58a0f0539b05a4b4b2"
+    },
+    {
+      "bytes": 3436,
+      "path": "setup-failures/v4-controls-stderr.txt",
+      "sha256": "cfe09bc0f60b24b15958a98e1c13877c5d607b85eaa759fde1ca4ae4142c1a22"
+    },
+    {
+      "bytes": 1853,
+      "path": "software-accounting.json",
+      "sha256": "d567f8dd5ffdda5b9d907f6d4434230837f40330991208fd0f65a1a5f1d7811e"
+    },
+    {
+      "bytes": 591,
+      "path": "software-controls-execution.json",
+      "sha256": "f119371051da9f222c23c9bafe8893aaf71e37461b15ceece70e3df201470a5c"
+    },
+    {
+      "bytes": 28944,
+      "path": "software-controls.json",
+      "sha256": "4e3f9072824da6408b89beacb48a0d3e35dbe447f04aac7c412a8db7eae04865"
+    },
+    {
+      "bytes": 31800,
+      "path": "source-map.json",
+      "sha256": "b9c7eca1c940a6678330d569fa806f8e29887b9bfbf934c36f43398e947c2add"
+    }
+  ],
+  "full24_original_saved_bank_and_raw_metric_equality": "PASS",
+  "original_failed_cap_and_replacement_cap_both_preserved": true,
+  "original_fresh_attempt_error_preserved": true,
+  "paired_completed_trajectories": 2,
+  "partial_original_comparison": false,
+  "prior_partial_commit": "23655232e1568c89e1e79e1518218bad1af14f3b",
+  "prior_report_files_preserved_except_current_readme_comparison_accounting": [
+    "bound-source-leaves.tar.gz",
+    "controls.py.txt",
+    "driver.py.txt",
+    "global-amsgrad-off/INITIALIZATION.json",
+    "global-amsgrad-off/declaration.json",
+    "global-amsgrad-off/grades.json",
+    "global-amsgrad-off/observed-samples.pt",
+    "global-amsgrad-off/raw-result.json.gz",
+    "global-amsgrad-off/retained-goal-states.pt",
+    "global-amsgrad-off/terminal.json",
+    "media/at-1600.png",
+    "media/at-400.png",
+    "media/media.json",
+    "media/ring.gif",
+    "original-launch-error/ERROR.json",
+    "original-launch-error/declaration.json",
+    "original-launch-error/stderr.txt",
+    "renderer.py.txt",
+    "retained791-historical-metrics.json",
+    "retained791-recipe-inputs.json",
+    "science-allocation.json",
+    "setup-failures/initial-controls-attempt.json",
+    "setup-failures/initial-controls-stderr.txt",
+    "setup-failures/publication-wrapper-error.json",
+    "setup-failures/v4-controls-attempt.json",
+    "setup-failures/v4-controls-stderr.txt",
+    "software-controls-execution.json",
+    "software-controls.json",
+    "source-map.json"
+  ],
+  "retained_metric_export": {
+    "all_values_copied_exactly": true,
+    "new_model_or_score_calls": 0,
+    "path": "retained-mode-metrics.json",
+    "resolved_core_defaults_excluded": true,
+    "rows_per_arm": 96,
+    "selected_steps_each": [
+      750,
+      1534,
+      1550,
+      1567,
+      1584,
+      1600
+    ]
+  },
+  "reusable_default_credit": false,
+  "schema": "pg_atlas954_completed_comparison_publication_manifest_v2",
+  "scored_horizons": [
+    400,
+    1600
+  ],
+  "self_omitted": true,
+  "source_file_count": 198,
+  "whole_training_state_equality": "UNKNOWN_PARTIAL"
+}

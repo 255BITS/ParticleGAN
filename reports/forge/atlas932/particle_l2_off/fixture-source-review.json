@@ -1,0 +1,113 @@
+{
+  "corrigendum": {
+    "cause": "This is an incompatibility in fixture hook ordering, without evidence of a production numerical or checkpoint-law defect.",
+    "missed_source_constraint": "The prior review missed that recorder.install requires completed_steps0; v3 completed step1 before a second install. That executable-fixture ordering clearance is superseded. Previous review and ROOT actual failure/cost remain preserved.",
+    "prior_review": {
+      "bytes": 7056,
+      "path": "/ml2/hypergan/pg-atlas932-fixture-v3-independent-review-source-20261006/v1/review.json",
+      "sha256": "fda3744c18891c76cef96d2f915455f2d29e8e10d5c9b9936193f789507f5828"
+    },
+    "retained_failed_test": {
+      "bytes": 18439,
+      "sha256": "54019ff5e2b2f8d9666a9746a3f4a5d9d9791d918255e02f574eb04e13bf7879"
+    }
+  },
+  "handoff": {
+    "bytes": 6060,
+    "path": "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/handoff.json",
+    "sha256": "645cfdb8b56b15dc84a11bd0320bbb553fe9d5486fcf399905829bd3697ac2f2"
+  },
+  "limits": [
+    "Source coherence is not measured control success. ROOT must execute actual controls and preserve every prior failure/cost.",
+    "The frozen Source still limits ambient callable integrity and record completeness; no whole-algorithm or numerical claim follows from this fixture.",
+    "A new exact proof uses the updated test Source pin plus separate retained9278/original11 producers. Any single932 scientific admission remains a separate ROOT authority/full300/global-fit operation."
+  ],
+  "measurement_status": "UNMEASURED",
+  "operations": {
+    "Git_or_network": 0,
+    "actual_artifact_reads": 0,
+    "project_imports": 0,
+    "scientific_operations": 0,
+    "semantic_tests": 0
+  },
+  "remaining_source_blockers": [],
+  "reviewer": "/root/image_quality",
+  "schema": "pg_atlas932_fixture_v4_independent_source_review_v1",
+  "source_findings": [
+    "The sole code delta changes the third control hook ordering. Both first controls and every other function/helper/producer/check roster retain exact ASTs.",
+    "One recorder is installed on the genuine fresh owner before helper spies. No extra owner, numerical update, test method or suite is introduced.",
+    "Pinned helper52f._spy stores exact existing instance attrs. With recorder-first ordering, the inner finally remove() restores the identical recorder wrappers. Its three serializer-hook prior attrs are the real originals, not injected spy functions.",
+    "The existing recorder remains installed throughout the same completed API lifecycle and the single policy checkpoint getter. Its unchanged _checkpoint_state validates all three wrapper identities, temporarily exposes exact original attrs, invokes the existing getter once and restores wrappers in finally.",
+    "The outer finally uninstalls the recorder after spy cleanup, including on update/checkpoint assertion errors. Whole OFF/ON snapshots occur after both forms of instrumentation have been removed; original detached load remains afterward.",
+    "The fresh-install completed_steps0 guard, partial-checkpoint ready guard, hook identity and purity/unknown assertions remain strict. There is no manual phase/counter reset, hook bookkeeping edit, controller bypass or production change.",
+    "All61 prior assertion ASTs and multiplicities remain exactly equal. Original connected-noise, L2 gradient delta, LR/q/counts, completed_steps1/ready/all-five-hooks1, OFF/ON snapshots, integer-zero operations, checkpoint flags and fresh-group/table-alias assertions are retained.",
+    "Ownerced28, Task868a/e3eb, parent55ac, objective1514, optimizer950ed/baseD5, recorder0c207, contract2d32, core/defaults and original gates are unchanged.",
+    "Required82 and proof14 change only the focused-test pin54019/18439 to9d237/18584. Reverting that pin in both maps restores the v3 binding payload exactly. Only the test is an install mutation."
+  ],
+  "source_pins_verified": {
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/CONTROL_V4_DELTA.patch": {
+      "bytes": 9314,
+      "sha256": "76333d8ef4431736b06576a79c3cfa00c66d2a917a42af5addaa50ba6ddd6ded"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/OBJECTIVE_VARIANT.json": {
+      "bytes": 307,
+      "sha256": "75d09cd9e06f7edb49c0ab7f6a27583e4e3a3941fda896fa958034ac2262c9d0"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/OWNER_DELTA.patch": {
+      "bytes": 47770,
+      "sha256": "9033b095c0e06a824f256d38bda71d35f80b76358d854186b6caa22dbc414770"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/baseline/experiments/forge/atlas927_two_pole_owner.py": {
+      "bytes": 68998,
+      "sha256": "0fdd73021ab38f660b8c1ee4b292e32ef9fa39077751ba85d7679a64d283a587"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/handoff.json": {
+      "bytes": 6060,
+      "sha256": "645cfdb8b56b15dc84a11bd0320bbb553fe9d5486fcf399905829bd3697ac2f2"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/experiments/forge/atlas932_two_pole_owner.py": {
+      "bytes": 76162,
+      "sha256": "ced28b3fe73d1fa74a000b1f10552ada7bc0f703cd8c94c6fff6ce8d04841a07"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/tests/test_atlas932_particle_l2.py": {
+      "bytes": 18584,
+      "sha256": "9d23717382fa581e0875e815c99df11e41828667bb3a9ca0ed23abb24ad75207"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/source-binding.json": {
+      "bytes": 17660,
+      "sha256": "2cf5c89bd8980cff6b714bc13f885c2a85ce34de4b9dc7cdf198bf1faf73a72b"
+    },
+    "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/source-proof.json": {
+      "bytes": 2592,
+      "sha256": "42eba3b5dfbb12a5e9e9be62009c6155307bca2be472a942a97aeb4d335c4d37"
+    }
+  },
+  "static_checks": {
+    "assertion_AST_multiset_exact": 61,
+    "changed_method_count": 1,
+    "compile_without_execution": true,
+    "no_manual_phase_or_completed_counter_assignments": true,
+    "only_test_pin_changes82_and14": true,
+    "own_file_pins": 8,
+    "single_recorder_install": true
+  },
+  "status": "CLEAR_SOURCE_ONLY",
+  "subject": {
+    "bytes": 18584,
+    "path": "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/tests/test_atlas932_particle_l2.py",
+    "sha256": "9d23717382fa581e0875e815c99df11e41828667bb3a9ca0ed23abb24ad75207"
+  },
+  "test_status": "AUTHORED_NOT_RUN by author/reviewer. ROOT actual failure declarations were not independently read or executed.",
+  "unchanged_basis": [
+    {
+      "bytes": 23311,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/repo/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    {
+      "bytes": 29610,
+      "path": "/ml2/hypergan/pg-atlas889-two-pole-observer-source-20261006/v9/repo/tests/test_atlas889_two_pole_observer.py",
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    }
+  ]
+}

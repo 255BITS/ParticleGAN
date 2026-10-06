@@ -6,6 +6,7 @@ import torch
 from torch import nn
 
 from .particle_prior import MoGParticlePrior, ParticlePrior
+from .noisy_particle_prior import NoisyParticlePrior
 from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
 
@@ -131,12 +132,13 @@ class GANTrainer:
         self.device, self.dtype = first_trainable.device, first_trainable.dtype
         self.prior = (recipe.make_prior().to(device=self.device, dtype=self.dtype)
                       if prior is None else prior)
-        expected_prior = MoGParticlePrior if recipe.prior_kind == "mog" else ParticlePrior
+        expected_prior = {"mog": MoGParticlePrior, "particles": ParticlePrior,
+                          "noisy_particles": NoisyParticlePrior}[recipe.prior_kind]
         if type(self.prior) is not expected_prior:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
-        if type(self.prior) is MoGParticlePrior and self.prior.standardize != recipe.standardize:
+        if type(self.prior) in (MoGParticlePrior, NoisyParticlePrior) and self.prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if prior_noise_generator is not None and type(self.prior) is not MoGParticlePrior:
+        if prior_noise_generator is not None and type(self.prior) not in (MoGParticlePrior, NoisyParticlePrior):
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
@@ -190,7 +192,7 @@ class GANTrainer:
         else:
             self.input_noise_generator = self.noise_generator
         self.prior_noise_generator = None
-        if type(self.prior) is MoGParticlePrior:
+        if type(self.prior) in (MoGParticlePrior, NoisyParticlePrior):
             self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
             self._STREAMS += ("prior_noise_generator",)
         self.model_generator = None
@@ -313,7 +315,7 @@ class GANTrainer:
         return self.policy._average_rate()
 
     def _sample_training_prior(self, n):
-        if type(self.prior) is MoGParticlePrior:
+        if type(self.prior) in (MoGParticlePrior, NoisyParticlePrior):
             return self.prior.sample(n, generator=self.latent_generator,
                                      noise_generator=self.prior_noise_generator)
         return self.prior.sample(n, generator=self.latent_generator)

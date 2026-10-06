@@ -1,0 +1,50 @@
+{
+  "frame_steps": [
+    42,
+    209,
+    459,
+    625,
+    792,
+    834,
+    1000,
+    1500,
+    2000
+  ],
+  "gif_frame_count": 9,
+  "model_draws_forwards_updates_added": 0,
+  "original_1000_status": "FAIL_RETAINED",
+  "outputs": {
+    "goal-final.png": {
+      "bytes": 97531,
+      "sha256": "b468c6a520104afa05be3d0e69ca5c6741ee296b77126b8ecd093d7c8e88a289"
+    },
+    "goal-first.png": {
+      "bytes": 99280,
+      "sha256": "a03311fbb465ea2c4a252ef083083ab181147550ed72e2b4cf26fae94174f581"
+    },
+    "goal-progress.gif": {
+      "bytes": 515577,
+      "sha256": "3ec0ecdc78a06f216e9aec655cf7eabdd4ee446f1628fc8cef4363f35515968e"
+    },
+    "media.json": {
+      "bytes": 23737,
+      "sha256": "085b7d6268eb7fa58041f6e7e25b942f95a63f2b8d30fe1fc9cebafc40bcfe60"
+    }
+  },
+  "render_source_sha256": "965ec5f53f57df535ca5c769b7e18ba5ac920ff652a0d1b02dab6b68f480a4da",
+  "schema": "pg_atlas871_public_media_provenance_v1",
+  "scored_bank": {
+    "bytes": 801017,
+    "sha256": "8947908ea2dc004f9ee994acb76785bb6f2ab09165d6f888704fe0af3ee11578"
+  },
+  "size": [
+    1100,
+    704
+  ],
+  "status": "RENDERED_VISUAL_QA_PASS",
+  "verdict": "FAIL",
+  "visual_review": {
+    "first_and_final_images": "PASS",
+    "review_notes": "Distribution axis label and scored-statistics line are separated; all-frame KS curve exposes the 0.05 gate and terminal failure; original result and 1000-update comparison remain qualified."
+  }
+}

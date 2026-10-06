@@ -1,0 +1,122 @@
+{
+  "author_handoff": {
+    "bytes": 5239,
+    "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/handoff.json",
+    "sha256": "e35ed1ba18b5f7f2bd6500eb3ab0477e21f66ffd6a2b52a5f58a2d117fd7726e"
+  },
+  "authority": {
+    "current_889_installation_authorized": false,
+    "current_889_retry_authorized": false,
+    "current_889_source_amendment_authorized": false,
+    "future_requirements": "Separate explicit authority, distinct coherent candidate/Source/revision/request/proof, independent noninterference check and ROOT-paid original-plus-genuine-checkpoint controls before any future science.",
+    "latest_parent_direction": "Authenticated Ember905 permits Source diagnosis, uninstalled proposal and public error reporting only. No actual controls executed under that direction.",
+    "original_terminal_invalid_full300_preserved": true
+  },
+  "blockers": [],
+  "checks": [
+    "All thirteen named handoff files and handoff itself match exact raw SHA256 and byte counts; all nine Python files parse and compile in memory without execution.",
+    "Observer changes only initialization/bookkeeping hook arguments/install/uninstall and new _checkpoint_state; all existing nested numerical wrappers are AST-exact.",
+    "Owner whole-text reversal is exact after reverting the sole protected observer SHA/bytes; all strict hashing, complete_state, state_sha256, checkpoint, constructor and scientific loop behavior remain unchanged.",
+    "SettleTest and OptimizerSurprise serialize copied full instance dictionaries; UpdatePolicy serializes lr_settle before surprise; original checkpoint hashes before measure. Installed observe/group_q/decide therefore introduce rejected callable state.",
+    "New boundary prevalidates exactly three installed wrapper identities before any suspension, calls the existing policy getter exactly once, restores those exact objects in finally, and leaves unrelated or unexpected callable state visible to strict hashing.",
+    "Tampered hook prevalidation does not alter the dictionaries; unexpected getter writes remain untouched and mark UNKNOWN. Original getter and measurement exception identities remain subjects of explicit controls.",
+    "Seven external authored controls use the pinned real populated CPU core fixture and unchanged real TwoPoleOwner methods, not the callable-installing _spy. Original hashing-only constructor fragments are extracted and statically compiled; the scientific constructor, target and evaluator are not invoked by these controls.",
+    "Primary proposed OFF/ON checkpoint parity uses complete strict typed_digest and state_sha256 plus real checkpoint4 before/after hashes, exact original getter count, one synthetic measurement, and restored wrapper object identities.",
+    "Supplementary declared live snapshot compares numerical values, alias graph, versions, gradients, modes and RNG. Its callable-skipping behavior is not used to establish the primary strict serialized-state parity.",
+    "Arbitrary callable rejection, getter and measurement exceptions, hook tampering and unexpected getter write controls are meaningful future negatives; all remain AUTHORED_NOT_RUN."
+  ],
+  "control_count": 7,
+  "control_names": [
+    "test_original_failure_precedes_first_measure",
+    "test_populated_complete_state_digest_and_real_checkpoint_off_on",
+    "test_unrelated_callable_state_still_rejected",
+    "test_original_getter_exception_identity_and_wrapper_restoration",
+    "test_measure_exception_keeps_original_owner_behavior",
+    "test_prevalidation_does_not_hide_changed_hook",
+    "test_unexpected_original_hook_write_is_not_overwritten"
+  ],
+  "control_status": "AUTHORED_NOT_RUN",
+  "inference_limits": [
+    "No tests, imports, numerical operations, actual artifact reads, queue operations, Git or network operations performed by reviewer.",
+    "Source clearance does not certify empirical noninterference or checkpoint parity. No arbitrary ambient callback integrity or returned-deepcopy alias topology proof is claimed.",
+    "Suspension/restoration concerns only exact observer hook bookkeeping; general whole-dictionary insertion-order identity is not asserted.",
+    "ROOT retained original run ERROR/INVALID/full300 and absent graded banks are declarations provided to reviewer, not independently read measurements.",
+    "Existing eleven controls and previous independent review missed the strict owner checkpoint compatibility boundary. Their callable-skipping snapshot did not prove this boundary; prior failures/history remain preserved.",
+    "No inference of actual completed-update count, tensor-value mutation, numerical failure, convergence, travel outcome or corrective efficacy from the exception."
+  ],
+  "review_cost": "UNMEASURED",
+  "reviewer_source_error_history": [
+    "A previous review read named CAUSE.md mistakenly; the absent Source filename caused FileNotFoundError. Corrected to handoff-pinned CAUSE.json; no actual artifact path followed."
+  ],
+  "schema": "pg_atlas889_checkpoint_compatibility_proposal_independent_review_v1",
+  "scope": "Named immutable Source/hash/AST/in-memory compile only; uninstalled future proposal/publication review, no operational admission.",
+  "status": "CLEAR_SOURCE_ONLY",
+  "verified_file_count": 13,
+  "verified_files": {
+    "CAUSE.json": {
+      "bytes": 2105,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/CAUSE.json",
+      "sha256": "ce8d2b68c6c27da9017f6205b0d34ce7112462b976cb687a9ceaddb391ec448d"
+    },
+    "README.md": {
+      "bytes": 4409,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/README.md",
+      "sha256": "07f9623c361d235d89f9ef27b872f8b31d8bbf5a121ac397bda8f7f23ab8ff5f"
+    },
+    "SOURCE_PROOF.json": {
+      "bytes": 1992,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/SOURCE_PROOF.json",
+      "sha256": "7eced3ec0f07dc8ec83d16ae106cab21100f44475a4c6ed209a35d1275d80a67"
+    },
+    "preimages/experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 21116,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "7037d2aecd8e6305fb25adeb753ceeff679bd1e27ef45e4171c9d9daca31c0db"
+    },
+    "preimages/experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "428b0aa4a7fc272f8eac39961ebf3b742e513b603d402d95d910b73ff0924856"
+    },
+    "preimages/particlegan/continuous.py": {
+      "bytes": 60875,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "preimages/particlegan/k3p.py": {
+      "bytes": 33012,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "preimages/particlegan/policy.py": {
+      "bytes": 81173,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/particlegan/policy.py",
+      "sha256": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967"
+    },
+    "preimages/tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/preimages/tests/test_atlas889_two_pole_observer.py",
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    },
+    "proposal.patch": {
+      "bytes": 24473,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/proposal.patch",
+      "sha256": "b4e54c316a0baca191ec6db4a2ffd7ba08960f3db68d1f01cf0ae5806e22e352"
+    },
+    "repo/experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/repo/experiments/forge/atlas889_two_pole_observer.py",
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "repo/experiments/forge/atlas889_two_pole_owner.py": {
+      "bytes": 58663,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/repo/experiments/forge/atlas889_two_pole_owner.py",
+      "sha256": "fa49bc9705f7caecf8cd63314fa1328ad64f4c13cc008573073056c15f9d0d50"
+    },
+    "tests/test_checkpoint_compatibility.py": {
+      "bytes": 13490,
+      "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/tests/test_checkpoint_compatibility.py",
+      "sha256": "5889c635b797cd5a3e4b74ea96c34c35661a7aac5fcfa452a034f1c756d504fa"
+    }
+  }
+}

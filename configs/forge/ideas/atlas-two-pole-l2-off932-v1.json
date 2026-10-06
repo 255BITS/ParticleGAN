@@ -1,0 +1,65 @@
+{
+  "api_changes": [
+    "Strict separately owned932 Task/objective route and fresh full-request proof; no shared core/default/recorder or generic grader change."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Set only the explicit particle training L2 coefficient from 0.02 to 0.0 on the distinct two_pole_l2_off932_v1 diagnostic Task. Preserve927 table AMSGradOFF/noise and critic ON, completed LR clock, q/betas/gains, base79 Recipe D5, init/seed0/data/80updates/24reads and original numerical gates. This changes the effective training objective; a result is not a canonical originalTask PASS."
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas932_two_pole_l2_off",
+    "objective_variant": {
+      "parent_task_id": "two_pole",
+      "parent_task_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+      "particle_l2": 0.0,
+      "reference_particle_l2": 0.02,
+      "schema": "forge_atlas932_two_pole_l2_objective_variant_v1",
+      "training_term": "particle_l2 * particles.square().mean()"
+    },
+    "optimizer_variant": {
+      "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+      "groups": [
+        {
+          "amsgrad": false,
+          "group_index": 0,
+          "optimizer": "generator",
+          "role": "table"
+        },
+        {
+          "amsgrad": true,
+          "group_index": 1,
+          "optimizer": "generator",
+          "role": "noise"
+        },
+        {
+          "amsgrad": true,
+          "group_index": 0,
+          "optimizer": "critic",
+          "role": "critic"
+        }
+      ],
+      "schema": "forge_atlas927_two_pole_particle_amsgrad_variant_v1",
+      "table_lr_clock": "completed_direct_adam_lr/base_lr"
+    },
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-two-pole-l2-off932-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Test whether the original particle L2 penalty undoes or limits direct travel after the completed927 optimizer ablation. Identical retained actions/trajectory/scores implies no observed fixed-case effect; changed behavior but FAIL is relevant but insufficient; PASS supports only this explicit objective diagnostic.",
+  "parent": "atlas-two-pole-particle-amsgrad-off927-v1",
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}

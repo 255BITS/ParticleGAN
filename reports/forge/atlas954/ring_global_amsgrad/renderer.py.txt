@@ -1,0 +1,182 @@
+"""Saved-bank ring readout for the ROOT-verified954/959 GLOBAL AMSGrad-off arm.
+
+Rendering only: no model, sampler, evaluator, gate classification or training.
+All scientific imports are deferred until ROOT invokes main().
+"""
+import argparse
+import hashlib
+import json
+import math
+from pathlib import Path
+
+EXPECTED_STEPS = tuple((k * 400 + 23) // 24 for k in range(1, 97))
+METRICS = ('hq', 'component_covariance_error', 'modes', 'mass_tv',
+           'component_min_eigen_ratio')
+RECORDED_VERDICTS = {'400': 'FAIL', '1600': 'FAIL'}
+
+
+def file_pin(path):
+    with Path(path).open('rb') as stream:
+        digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+    return {'sha256': digest, 'bytes': int(Path(path).stat().st_size)}
+
+
+def render(bank_path, raw_result_path, output):
+    # ROOT performs all imports and reads inside its paid rendering phase.
+    import torch
+    import numpy as np
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Circle
+    from PIL import Image
+
+    banks = torch.load(bank_path, map_location='cpu', weights_only=True)
+    raw = json.loads(Path(raw_result_path).read_text(encoding='utf-8'))
+    rows = raw['evidence']['observations']
+    if not isinstance(banks, list) or not isinstance(rows, list) or len(banks) != 96 or len(rows) != 96:
+        raise ValueError('exactly96 original ordered saved banks and scored rows required')
+    held, scored = [], []
+    for expected, bank, row in zip(EXPECTED_STEPS, banks, rows):
+        if (not isinstance(bank, dict) or not isinstance(row, dict)
+                or type(bank.get('step')) is not int or type(row.get('step')) is not int
+                or bank['step'] != expected or row['step'] != expected):
+            raise ValueError('saved bank/scored clocks must join the original extended lattice')
+        samples = bank['samples']
+        if not isinstance(samples, torch.Tensor) or samples.dtype != torch.float32 or tuple(samples.shape) != (4096, 2):
+            raise ValueError('original float32[4096,2] scored bank required')
+        array = samples.detach().cpu().numpy()
+        if not bool(np.isfinite(array).all()):
+            raise ValueError('saved coordinates must be finite')
+        metrics = {}
+        for key in METRICS:
+            value = row[key]
+            if type(value) not in (int, float) or not math.isfinite(value):
+                raise ValueError('finite original scored metric required: ' + key)
+            metrics[key] = int(value) if key == 'modes' and float(value).is_integer() else float(value)
+        if metrics['component_covariance_error'] < 0:
+            raise ValueError('covariance error must be nonnegative')
+        held.append(array)
+        scored.append({'step': expected, **metrics})
+
+    out = Path(output)
+    out.mkdir(parents=True, exist_ok=False)  # preserve every prior/partial render
+    steps = np.asarray(EXPECTED_STEPS)
+    hq = np.asarray([row['hq'] for row in scored])
+    cov = np.asarray([row['component_covariance_error'] for row in scored])
+    # Only the log-axis representation has a floor; the raw values stay intact.
+    cov_plot = np.maximum(cov, 1e-4)
+    indices = sorted(set(int(round(k * 95 / 31)) for k in range(32)) | {23, 95})
+    teal, blue = '#008f86', '#235e9b'
+    fig = plt.figure(figsize=(11.8, 7.0), dpi=85, facecolor='white')
+    fig.suptitle('Acquire all 16 modes with balanced mass and correct local spread',
+                 fontsize=13, y=.975)
+    fig.text(.5, .925, 'GLOBAL AMSGrad-off  |  seed 0  |  saved scored banks',
+             ha='center', fontsize=10, color='#444444')
+    dist = fig.add_axes([.07, .20, .46, .65])
+    dist.set(xlim=(-4.5, 4.5), ylim=(-4.5, 4.5),
+             xlabel='Generated coordinate 1', ylabel='Generated coordinate 2')
+    dist.set_aspect('equal', adjustable='box')
+    dist.grid(alpha=.15)
+    for mode in range(16):
+        theta = 2 * math.pi * mode / 16
+        center = (3 * math.cos(theta), 3 * math.sin(theta))
+        dist.add_patch(Circle(center, .3, fill=False, edgecolor=teal, linewidth=1.2))
+        dist.plot(*center, marker='+', color=teal, markersize=4)
+    cloud = dist.scatter([], [], s=3, c=blue, alpha=.50, linewidths=0,
+                         label='4096 scored generated points')
+    dist.legend(loc='upper right', fontsize=8, framealpha=.9)
+    fig.text(.30, .125, 'Teal: 16 target Gaussians, radius 3, std 0.1; 3-sigma contours',
+             ha='center', fontsize=9, color=teal)
+    view_note = fig.text(.30, .085, '', ha='center', fontsize=8, color='#555555')
+    metric_text = fig.text(.58, .865, '', va='top', fontsize=11, linespacing=1.55)
+    quality = fig.add_axes([.60, .365, .36, .18])
+    spread = fig.add_axes([.60, .115, .36, .18])
+    quality.set(xlim=(0, 1600), ylim=(0, 1.02), ylabel='HQ fraction')
+    quality.plot(steps, hq, color=blue, alpha=.18, linewidth=1)
+    hq_line, = quality.plot([], [], color=blue, linewidth=1.6)
+    quality.axhline(.85, color=teal, linestyle='--', linewidth=1)
+    quality.text(.99, .85, 'gate>=0.85', transform=quality.get_yaxis_transform(),
+                 ha='right', va='bottom', fontsize=8, color=teal)
+    spread.set(xlim=(0, 1600), yscale='log', xlabel='Completed updates',
+               ylabel='Covariance error')
+    spread.set_ylim(min(.85, float(cov_plot.min())) * .65,
+                    max(.85, float(cov_plot.max())) * 1.3)
+    spread.plot(steps, cov_plot, color=blue, alpha=.18, linewidth=1)
+    cov_line, = spread.plot([], [], color=blue, linewidth=1.6)
+    spread.axhline(.85, color=teal, linestyle='--', linewidth=1)
+    spread.text(.99, .85, 'gate<=0.85', transform=spread.get_yaxis_transform(),
+                ha='right', va='bottom', fontsize=8, color=teal)
+    cursors = []
+    for ax in (quality, spread):
+        ax.grid(alpha=.2)
+        ax.axvline(400, color='#666666', linestyle=':', linewidth=1)
+        cursors.append(ax.axvline(0, color='#333333', linewidth=1))
+    fig.text(.78, .04, 'Original 400 cut: FAIL  |  Extended 1600: FAIL',
+             ha='center', fontsize=9, color='#633434')
+    frames, frame_rows = [], []
+    try:
+        for index in indices:
+            step, row, points = EXPECTED_STEPS[index], scored[index], held[index]
+            outside = int(np.count_nonzero(np.any(np.abs(points) > 4.5, axis=1)))
+            cloud.set_offsets(points)
+            dist.set_title('Update ' + str(step), fontsize=12)
+            view_note.set_text(f'Full scored bank retained; beyond viewport: {outside}/4096')
+            metric_text.set_text(
+                f"Scored values at update {step}\n"
+                f"HQ: {row['hq']:.6f}  (gate>=0.85)\n"
+                f"Covariance error: {row['component_covariance_error']:.6f}  (gate<=0.85)\n"
+                f"Modes: {row['modes']:g}/16  |  mass TV: {row['mass_tv']:.6f}  (<=0.15)\n"
+                f"Minimum eigen ratio: {row['component_min_eigen_ratio']:.6f}  (>=0.15)")
+            hq_line.set_data(steps[:index + 1], hq[:index + 1])
+            cov_line.set_data(steps[:index + 1], cov_plot[:index + 1])
+            for cursor in cursors:
+                cursor.set_xdata([step, step])
+            fig.canvas.draw()
+            image = Image.frombytes('RGBA', fig.canvas.get_width_height(),
+                                    bytes(fig.canvas.buffer_rgba())).convert('RGB')
+            if step in (400, 1600):
+                image.save(out / f'at-{step}.png')
+            frames.append(image.convert('P', palette=Image.Palette.ADAPTIVE, colors=128))
+            frame_rows.append({'step': int(step), 'scored_observation_index': int(index),
+                               'outside_viewport_count': outside})
+        frames[0].save(out / 'ring.gif', save_all=True, append_images=frames[1:],
+                       duration=300, loop=0, optimize=False, disposal=2)
+    finally:
+        plt.close(fig)
+    products = {name: file_pin(out / name) for name in ('ring.gif', 'at-400.png', 'at-1600.png')}
+    receipt = {
+        'schema': 'atlas954_saved_ring_media_v1',
+        'method_label': 'GLOBAL AMSGrad-off', 'seed': 0,
+        'recorded_horizon_verdicts': RECORDED_VERDICTS,
+        'verdict_provenance': 'ROOT-supplied retained grades; no classification performed',
+        'source': file_pin(__file__),
+        'inputs': {'bank': file_pin(bank_path), 'raw_result': file_pin(raw_result_path)},
+        'products': products, 'scored_rows': scored, 'frame_rows': frame_rows,
+        'target_context': {'modes': 16, 'radius': 3., 'standard_deviation': .1,
+                           'contour_standard_deviations': 3., 'target_samples_drawn': 0},
+        'viewport': {'x': [-4.5, 4.5], 'y': [-4.5, 4.5]},
+        'gates_shown': {'hq_min': .85, 'component_covariance_error_max': .85,
+                       'modes_min': 16, 'mass_tv_max': .15, 'component_min_eigen_ratio_min': .15},
+        'covariance_semantics': 'Original scored full-cloud/all-assigned error; no trimming or recomputation',
+        'log_axis_only_floor': 1e-4, 'zero_error_values_in_input': int(np.count_nonzero(cov == 0)),
+        'time_axis': 'completed updates; frame duration is playback only',
+        'additional_samples': 0, 'additional_model_calls': 0,
+        'additional_updates': 0, 'additional_scoring_calls': 0,
+    }
+    (out / 'media.json').write_text(json.dumps(receipt, indent=2, sort_keys=True,
+                                             allow_nan=False) + '\n', encoding='utf-8')
+    return receipt
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Render ROOT-verified saved954/959 ring banks only.')
+    parser.add_argument('--bank', type=Path, required=True)
+    parser.add_argument('--raw-result', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    render(args.bank, args.raw_result, args.output)
+
+
+if __name__ == '__main__':
+    main()

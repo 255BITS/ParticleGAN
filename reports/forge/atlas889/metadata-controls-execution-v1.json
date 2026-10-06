@@ -1,0 +1,26 @@
+{
+  "amendment_pin": {
+    "bytes": 6154,
+    "path": "/ml2/hypergan/pg-atlas889-two-pole-passive-runtime-20261006/v1/metadata-source-amendment-v1.json",
+    "sha256": "d8d4da9a767d475ae1e1be7ba6a9cefeae66e7bf9e2de0223937c590d964f533"
+  },
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "/ml2/hypergan/pg-atlas889-metadata-submission-proposal-source-20261006/v2/tests/test_metadata_submission.py",
+    "--root",
+    "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+    "--controls-json",
+    "/ml2/hypergan/pg-atlas889-two-pole-passive-runtime-20261006/v1/metadata-controls-v1.json"
+  ],
+  "elapsed_seconds": 2.2036276790313423,
+  "returncode": 0,
+  "schema": "pg889_root_actual_metadata_controls_execution_v1",
+  "source_pin": {
+    "bytes": 8320,
+    "path": "/ml2/hypergan/pg-atlas889-metadata-submission-proposal-source-20261006/v2/tests/test_metadata_submission.py",
+    "sha256": "8957c125eb6b3b43542535def4cd8f8fe5f09f4384d9b0e1d14167bb61499479"
+  },
+  "stderr": "test_candidate_revision_echo_rejected (__main__.MetadataSubmissionControls.test_candidate_revision_echo_rejected) ... ok\ntest_exact889_metadata_identity_forwarded (__main__.MetadataSubmissionControls.test_exact889_metadata_identity_forwarded) ... ok\ntest_original_direct_task_law_unchanged (__main__.MetadataSubmissionControls.test_original_direct_task_law_unchanged) ... ok\ntest_resolved_recipe_echo_rejected (__main__.MetadataSubmissionControls.test_resolved_recipe_echo_rejected) ... ok\ntest_screening_seed_overrides_rejected (__main__.MetadataSubmissionControls.test_screening_seed_overrides_rejected) ... ok\ntest_unrelated_candidate_rejected (__main__.MetadataSubmissionControls.test_unrelated_candidate_rejected) ... ok\ntest_unsupported_override_rejected (__main__.MetadataSubmissionControls.test_unsupported_override_rejected) ... ok\ntest_wrong_view_rejected (__main__.MetadataSubmissionControls.test_wrong_view_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 1.854s\n\nOK\n",
+  "stdout": ""
+}

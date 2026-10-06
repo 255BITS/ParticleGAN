@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 300,
+    "candidate_budget_seconds": 300,
+    "id": "atlas-two-pole-particle-amsgrad-off927-study-v1"
+  },
+  "candidate": "atlas-two-pole-particle-amsgrad-off927-v1",
+  "competing_explanation": "Weak gradients, restored-beta q normalization, or later hot/settle/birth-death writes may dominate travel even without the table running maximum. Completed921 final mean_abs=0.002445647493004799 and grad_med=0.010896995663642883. Historical reference metadata is not a runnable old factory on this modified Source, and incomplete trace cannot establish equivalence or causal relevance. No baseline rerun, old INVALID rewrite, grade transfer, retuning or default adoption.",
+  "control": {
+    "candidate_id": "atlas-original-two-pole-passive889-v1",
+    "task_map": {
+      "two_pole": "two_pole"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "hypothesis": "Disable only table AMSGrad while retaining the completed direct Adam LR/base tester clock. The explicit effective optimizer variant differs from the base D5 Recipe: table=False, noise=True, critic=True. Test the finite final mean_abs>=0.30 prediction; original grad_med<=1 and final-five stability also determine the task grade. Compare only to completed921: request d9fbd5fa5a55b4af405035a3, attempt 6a64afbc99b742889fedefeaf3d2b7e1, Source2868968d572545047911bd7445a51a6bbcf6b723312606bae5db1af45512a43b, CandidateRevision19344b170308e8db3818acb5fbbd20be103a0e0d36086fec56ae8624c14eedc6, original80/24/seed0 FAIL. Identical complete recorded actions, trajectory and scores mean no observed effect on this case; changed behavior but FAIL means relevant but insufficient; PASS supports only this fixed-case optimizer variant.",
+  "id": "atlas-two-pole-particle-amsgrad-off927-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "original791-two-pole-f3140adaffd14f4a8974d25874d345d4"
+      },
+      "path": "experiments/forge/prior_evidence/atlas889-original791-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cpu",
+    "through_tier": 1,
+    "view": "atlas_two_pole_particle_amsgrad_off927_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

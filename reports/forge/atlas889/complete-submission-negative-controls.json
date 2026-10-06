@@ -1,0 +1,18 @@
+{
+  "attempts_created": 0,
+  "checks": [
+    {
+      "error_type": "ValueError",
+      "name": "unsupported_id",
+      "reason": "study admission blocked: missing/mismatched generated execution binding",
+      "status": "PASS"
+    },
+    {
+      "error_type": "ValueError",
+      "name": "unsupported_cohort",
+      "reason": "study admission blocked: missing/mismatched generated execution binding",
+      "status": "PASS"
+    }
+  ],
+  "schema": "pg889_complete_submission_negative_controls_v1"
+}

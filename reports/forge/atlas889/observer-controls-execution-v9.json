@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/tests/test_atlas889_two_pole_observer.py",
+    "--controls-json",
+    "/ml2/hypergan/pg-atlas889-two-pole-passive-runtime-20261006/v1/software-controls-v9.json"
+  ],
+  "elapsed_seconds": 4.110094538889825,
+  "independent_review_pin": {
+    "bytes": 14241,
+    "sha256": "3d6880304bf1d3f2d689d7187755fc17549d45eecbbf4c8505fad99f3da25287"
+  },
+  "returncode": 0,
+  "schema": "pg889_root_actual_observer_controls_execution_v1",
+  "source_handoff_pin": {
+    "bytes": 10199,
+    "sha256": "ec4e37845ac03ce9496a88206655f1c9b33aae5f515727dfcadd238d5543040c"
+  },
+  "stderr": "test_actual_beta_lr_q_inputs_and_return (__main__.ObserverControls.test_actual_beta_lr_q_inputs_and_return) ... ok\ntest_adam_exception_and_restore_passthrough (__main__.ObserverControls.test_adam_exception_and_restore_passthrough) ... ok\ntest_bounded_records_and_declared_scope_unknown (__main__.ObserverControls.test_bounded_records_and_declared_scope_unknown) ... ok\ntest_capture_fault_marks_unknown (__main__.ObserverControls.test_capture_fault_marks_unknown) ... ok\ntest_closure_exception_passthrough (__main__.ObserverControls.test_closure_exception_passthrough) ... ok\ntest_observer_fault_does_not_replace_q (__main__.ObserverControls.test_observer_fault_does_not_replace_q) ... ok\ntest_original_adam_off_on_populated_moments (__main__.ObserverControls.test_original_adam_off_on_populated_moments) ... ok\ntest_original_finish_event_identity (__main__.ObserverControls.test_original_finish_event_identity) ... ok\ntest_original_policy_hooks_off_on (__main__.ObserverControls.test_original_policy_hooks_off_on) ... ok\ntest_original_recipe_task_registry_binding (__main__.ObserverControls.test_original_recipe_task_registry_binding) ... ok\ntest_private_source_origin_no884_patch (__main__.ObserverControls.test_private_source_origin_no884_patch) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 3.533s\n\nOK\n",
+  "stdout": "",
+  "test_source_pin": {
+    "bytes": 29610,
+    "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+  }
+}

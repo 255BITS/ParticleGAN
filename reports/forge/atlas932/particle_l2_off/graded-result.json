@@ -1,0 +1,66 @@
+{
+  "grades": {
+    "two_pole_l2_off932_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.21216494888067244,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.08783505111932755
+          },
+          {
+            "margin": 0.9778134152293205,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.022186584770679474
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.3536082481344541,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.022186584770679474,
+        "mean_abs": 0.08783505111932755
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "raw_hash": "ae212d13b2c527a0c14202d75487ea8da7216695a52a679a3d8b96c851ac805f",
+  "schema_version": 1,
+  "source_digest": "313379fed51f2ca0633de36bad4c88536d6ebbc6b2a97b4c24c26c7f9b84c56d",
+  "telemetry": {
+    "independent_grading_seconds": 4.696159760933369,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 653582336
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

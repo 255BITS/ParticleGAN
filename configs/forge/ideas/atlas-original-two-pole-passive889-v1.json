@@ -1,0 +1,33 @@
+{
+  "api_changes": [
+    "Record already-computed direct Adam and controller fields through an isolated readonly observer of the original two-pole API path."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "One owner-side correction passes the LR consumed by the completed direct Adam step, divided by the original table base LR, to the existing table settle tester. Passive recording remains. q, beta, AMSGrad, optimizer and core Source, original Task, effective79 Recipe, initializer, seed, 80 updates, 24 reads, resources, measurements and gates are preserved. The tester input intentionally changes; numerical recovery and cause remain unproven."
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas889_original_two_pole_passive",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-original-two-pole-passive889-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Capture actual applied training gradients, LR, beta and moments alongside existing controller inputs and returns to test the temporary-versus-restored-field hypothesis. Numerical recovery and cause remain unproven.",
+  "parent": "atlas-existing-mog-nearest-positive791-v1",
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}
+

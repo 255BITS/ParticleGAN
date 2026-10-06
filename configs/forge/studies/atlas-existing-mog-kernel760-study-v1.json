@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 2220,
+    "candidate_budget_seconds": 2220,
+    "id": "atlas-existing-mog-kernel760-study-v1"
+  },
+  "candidate": "atlas-existing-mog-kernel760-v1",
+  "competing_explanation": "Baseline717 outcomes remain separate. The two direct-coordinate hosts have no sampled MoG, and word/unused retain their genuine ownership blockers. Even correct kernel plumbing may leave the original numerical gates failed. Existing686 prior evidence is motivation only; no grade, checkpoint, selected weights, seed or data are reused. KA2 is a maintained schema3 binding reference, with no additional control pilot.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "hypothesis": "The corrected reference/knn fake pool uses the exact actual raw MoG table and fixed kernel, preserving all other Atlas and original task inputs. A fresh finite run tests the unchanged original six-row Tier1 protocol; implementation correctness alone does not predict scientific recovery.",
+  "id": "atlas-existing-mog-kernel760-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_existing_mog_kernel760_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

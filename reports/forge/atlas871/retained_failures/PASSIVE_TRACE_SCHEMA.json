@@ -1,0 +1,139 @@
+{
+  "admission": "Only for an explicitly authorized fresh original80/24/300 CPU1 case with finite whole-case/global41288 fit, reviewed new Source/proof/ordinary lease/certificate; no declaration or admission by this proposal.",
+  "analysis_limits": [
+    "The generator-side table gradient includes original adversarial plus .02 coordinate L2; do not obtain a GAN-only gradient by another backward/autograd call.",
+    "Derived .9-versus-.999 q arithmetic is a diagnostic over identical recorded g/v/t, not a shadow controller or counterfactual production update.",
+    "Actual AMSGrad displacement uses max_exp_avg_sq; q uses exp_avg_sq. Do not call either inferred q the actual normalized displacement.",
+    "Pre/post table deltas separate observed Adam/hot/birth writes, but do not prove what another algorithm would have done.",
+    "Missing logs, inactive values, overflow and unknown source coverage remain explicit UNKNOWN."
+  ],
+  "bounds": {
+    "added_backwards": 0,
+    "added_decision_evaluations": 0,
+    "added_draws": 0,
+    "added_forwards": 0,
+    "added_optimizer_steps": 0,
+    "coordinate_or_moment_array_shape": [
+      12,
+      1
+    ],
+    "drive_algorithm": false,
+    "overflow": "UNKNOWN; no silent truncation",
+    "scored_banks": 24,
+    "state_getter_calls": 0,
+    "step_records": 80
+  },
+  "capture_boundaries": [
+    "After DirectParticleResponse.begin returns, before the original Adam step: read its actual temporary LR/betas and original token/gain; clone existing table, gradient and moment leaves.",
+    "After original Adam returns, before DirectParticleResponse.end restores fields: capture post-moments and table; preserve every original return/token and call.",
+    "Before and after the existing after_generator_step hook: record actual hot-row correction and queued q/tau/decisions; do not invoke controller decisions again.",
+    "Immediately before and after the existing finish_step: copy current table and already returned birth/death event/moved rows; do not evaluate proposals or generator/critic callbacks again.",
+    "Retain the original24 measured coordinate/target/critic-gradient banks and scalar gate packets unchanged."
+  ],
+  "case": {
+    "dtype": "float32",
+    "generator": "Identity",
+    "prior": "None",
+    "recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "resources": {
+      "allow_cpu": true,
+      "cpu_threads": 1,
+      "gpu_memory_mb": 0,
+      "gpus": 0,
+      "timeout_seconds": 300
+    },
+    "scheduled_observations": [
+      4,
+      7,
+      10,
+      14,
+      17,
+      20,
+      24,
+      27,
+      30,
+      34,
+      37,
+      40,
+      44,
+      47,
+      50,
+      54,
+      57,
+      60,
+      64,
+      67,
+      70,
+      74,
+      77,
+      80
+    ],
+    "seed": 0,
+    "table_shape": [
+      12,
+      1
+    ],
+    "task_id": "two_pole",
+    "updates": 80
+  },
+  "purity": "Read explicit detached live leaves and existing counters only. No trainer/policy/context state_dict or served-state getter inside observation; check tensor identities/versions, unchanged values, optimizer/control cursors and existing global/named/private RNG states. Observer output is ignored by the algorithm.",
+  "schema": "pg_two_pole_passive_step_trace_proposal_v1",
+  "status": "SOURCE_PLAN_ONLY; no implementation, new run or replay",
+  "step_fields": {
+    "actual_motion": [
+      "table_before_Adam_12x1",
+      "table_after_Adam_before_hot_correction_12x1",
+      "table_after_hot_correction_before_finish_12x1",
+      "table_after_actual_birth_death_12x1",
+      "existing_actual_moved_row_ids_or_unavailable_reason"
+    ],
+    "already_computed_gradient": [
+      "generator_side_table_gradient_before_Adam_12x1",
+      "original_GAN_loss_scalar",
+      "original_critic_adversarial_loss_scalar",
+      "original_coordinate_L2_coefficient"
+    ],
+    "existing_controller_values": [
+      "stationarity_ratio_passed_to_observe",
+      "table_scale_s",
+      "block_size_b",
+      "intrinsic_time_tau_before_after",
+      "actual_stationarity_verdict",
+      "existing_surprise_pending_q_table_group",
+      "beta2_visible_to_q_consumer",
+      "actual_reopen_or_guard_decision",
+      "actual_hot_flags",
+      "actual_hold_flag",
+      "actual_excluded_rows",
+      "already_computed_output_sigma"
+    ],
+    "identity": [
+      "completed_step",
+      "task_id",
+      "source_digest",
+      "request_id",
+      "candidate_revision",
+      "attempt_id"
+    ],
+    "moments": [
+      "exp_avg_sq_before_Adam_12x1",
+      "exp_avg_sq_after_Adam_12x1",
+      "max_exp_avg_sq_before_Adam_12x1_if_AMSGrad",
+      "max_exp_avg_sq_after_Adam_12x1_if_AMSGrad"
+    ],
+    "true_direct_step": [
+      "table_group_index",
+      "initial_base_lr",
+      "lr_before_direct_gain",
+      "direct_gain_actual",
+      "lr_during_Adam",
+      "lr_after_restore",
+      "betas_during_Adam",
+      "betas_after_restore",
+      "eps",
+      "amsgrad",
+      "optimizer_step_before",
+      "optimizer_step_after"
+    ]
+  }
+}

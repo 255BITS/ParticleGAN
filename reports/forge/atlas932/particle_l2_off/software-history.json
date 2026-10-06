@@ -1,0 +1,246 @@
+{
+  "corrected_pythonpath_first934": {
+    "command": [
+      "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+      "-B",
+      "-u",
+      "tests/test_atlas932_particle_l2.py",
+      "--output",
+      "/ml2/hypergan/pg-atlas934-l2-recovery-runtime-20261006/v1/software/FOCUSED932_CONTROLS.json"
+    ],
+    "cpu_threads": 1,
+    "deadline_seconds": 30,
+    "earlier_failures_and_timeout_preserved": true,
+    "elapsed_seconds": 7.827596814837307,
+    "exactly_three_fresh_controls": true,
+    "gpus": 0,
+    "owned_pythonpath": "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "prior_suites_rerun": false,
+    "returncode": 1,
+    "schema": "pg934_actual_unchanged_software_execution_v1",
+    "source_and_assertions_unchanged": true,
+    "source_author_work": "UNMEASURED_UNKNOWN_NOT_ZERO",
+    "status": "FAIL",
+    "stderr_pin": {
+      "bytes": 2193,
+      "sha256": "44b57d8bfdc5b8103faec5074ce6e6c05a762ddfd8ad14454d478978c4f3686c"
+    },
+    "stderr_tail": "test_declared_objective_and_actual_owner_coefficient (__main__.ParticleL2Controls.test_declared_objective_and_actual_owner_coefficient) ... ok\ntest_pinned_loss_coefficient_gradient_delta (__main__.ParticleL2Controls.test_pinned_loss_coefficient_gradient_delta) ... ERROR\ntest_preserved_optimizer_clock_and_recorder_checkpoint (__main__.ParticleL2Controls.test_preserved_optimizer_clock_and_recorder_checkpoint) ... ERROR\n\n======================================================================\nERROR: test_pinned_loss_coefficient_gradient_delta (__main__.ParticleL2Controls.test_pinned_loss_coefficient_gradient_delta)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/tests/test_atlas932_particle_l2.py\", line 147, in test_pinned_loss_coefficient_gradient_delta\n    self.assertTrue(torch.equal(zero.policy.log_output_sigma.grad, reference.policy.log_output_sigma.grad))\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: equal(): argument 'input' (position 1) must be Tensor, not NoneType\n\n======================================================================\nERROR: test_preserved_optimizer_clock_and_recorder_checkpoint (__main__.ParticleL2Controls.test_preserved_optimizer_clock_and_recorder_checkpoint)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/tests/test_atlas932_particle_l2.py\", line 205, in test_preserved_optimizer_clock_and_recorder_checkpoint\n    checkpoint = deepcopy(owner.policy.state_dict())\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/particlegan/policy.py\", line 1167, in state_dict\n    raise RuntimeError(\"policy checkpoints require a completed update boundary\")\nRuntimeError: policy checkpoints require a completed update boundary\n\n----------------------------------------------------------------------\nRan 3 tests in 6.134s\n\nFAILED (errors=2)\n",
+    "stdout_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "timed_out": false,
+    "trace_internal_stage": "Not instrumented; verbose log identifies method completion/current method only."
+  },
+  "corrected_v4_review": {
+    "corrigendum": {
+      "cause": "This is an incompatibility in fixture hook ordering, without evidence of a production numerical or checkpoint-law defect.",
+      "missed_source_constraint": "The prior review missed that recorder.install requires completed_steps0; v3 completed step1 before a second install. That executable-fixture ordering clearance is superseded. Previous review and ROOT actual failure/cost remain preserved.",
+      "prior_review": {
+        "bytes": 7056,
+        "path": "/ml2/hypergan/pg-atlas932-fixture-v3-independent-review-source-20261006/v1/review.json",
+        "sha256": "fda3744c18891c76cef96d2f915455f2d29e8e10d5c9b9936193f789507f5828"
+      },
+      "retained_failed_test": {
+        "bytes": 18439,
+        "sha256": "54019ff5e2b2f8d9666a9746a3f4a5d9d9791d918255e02f574eb04e13bf7879"
+      }
+    },
+    "handoff": {
+      "bytes": 6060,
+      "path": "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/handoff.json",
+      "sha256": "645cfdb8b56b15dc84a11bd0320bbb553fe9d5486fcf399905829bd3697ac2f2"
+    },
+    "limits": [
+      "Source coherence is not measured control success. ROOT must execute actual controls and preserve every prior failure/cost.",
+      "The frozen Source still limits ambient callable integrity and record completeness; no whole-algorithm or numerical claim follows from this fixture.",
+      "A new exact proof uses the updated test Source pin plus separate retained9278/original11 producers. Any single932 scientific admission remains a separate ROOT authority/full300/global-fit operation."
+    ],
+    "measurement_status": "UNMEASURED",
+    "operations": {
+      "Git_or_network": 0,
+      "actual_artifact_reads": 0,
+      "project_imports": 0,
+      "scientific_operations": 0,
+      "semantic_tests": 0
+    },
+    "remaining_source_blockers": [],
+    "reviewer": "/root/image_quality",
+    "schema": "pg_atlas932_fixture_v4_independent_source_review_v1",
+    "source_findings": [
+      "The sole code delta changes the third control hook ordering. Both first controls and every other function/helper/producer/check roster retain exact ASTs.",
+      "One recorder is installed on the genuine fresh owner before helper spies. No extra owner, numerical update, test method or suite is introduced.",
+      "Pinned helper52f._spy stores exact existing instance attrs. With recorder-first ordering, the inner finally remove() restores the identical recorder wrappers. Its three serializer-hook prior attrs are the real originals, not injected spy functions.",
+      "The existing recorder remains installed throughout the same completed API lifecycle and the single policy checkpoint getter. Its unchanged _checkpoint_state validates all three wrapper identities, temporarily exposes exact original attrs, invokes the existing getter once and restores wrappers in finally.",
+      "The outer finally uninstalls the recorder after spy cleanup, including on update/checkpoint assertion errors. Whole OFF/ON snapshots occur after both forms of instrumentation have been removed; original detached load remains afterward.",
+      "The fresh-install completed_steps0 guard, partial-checkpoint ready guard, hook identity and purity/unknown assertions remain strict. There is no manual phase/counter reset, hook bookkeeping edit, controller bypass or production change.",
+      "All61 prior assertion ASTs and multiplicities remain exactly equal. Original connected-noise, L2 gradient delta, LR/q/counts, completed_steps1/ready/all-five-hooks1, OFF/ON snapshots, integer-zero operations, checkpoint flags and fresh-group/table-alias assertions are retained.",
+      "Ownerced28, Task868a/e3eb, parent55ac, objective1514, optimizer950ed/baseD5, recorder0c207, contract2d32, core/defaults and original gates are unchanged.",
+      "Required82 and proof14 change only the focused-test pin54019/18439 to9d237/18584. Reverting that pin in both maps restores the v3 binding payload exactly. Only the test is an install mutation."
+    ],
+    "source_pins_verified": {
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/CONTROL_V4_DELTA.patch": {
+        "bytes": 9314,
+        "sha256": "76333d8ef4431736b06576a79c3cfa00c66d2a917a42af5addaa50ba6ddd6ded"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/OBJECTIVE_VARIANT.json": {
+        "bytes": 307,
+        "sha256": "75d09cd9e06f7edb49c0ab7f6a27583e4e3a3941fda896fa958034ac2262c9d0"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/OWNER_DELTA.patch": {
+        "bytes": 47770,
+        "sha256": "9033b095c0e06a824f256d38bda71d35f80b76358d854186b6caa22dbc414770"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/baseline/experiments/forge/atlas927_two_pole_owner.py": {
+        "bytes": 68998,
+        "sha256": "0fdd73021ab38f660b8c1ee4b292e32ef9fa39077751ba85d7679a64d283a587"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/handoff.json": {
+        "bytes": 6060,
+        "sha256": "645cfdb8b56b15dc84a11bd0320bbb553fe9d5486fcf399905829bd3697ac2f2"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/experiments/forge/atlas932_two_pole_owner.py": {
+        "bytes": 76162,
+        "sha256": "ced28b3fe73d1fa74a000b1f10552ada7bc0f703cd8c94c6fff6ce8d04841a07"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/tests/test_atlas932_particle_l2.py": {
+        "bytes": 18584,
+        "sha256": "9d23717382fa581e0875e815c99df11e41828667bb3a9ca0ed23abb24ad75207"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/source-binding.json": {
+        "bytes": 17660,
+        "sha256": "2cf5c89bd8980cff6b714bc13f885c2a85ce34de4b9dc7cdf198bf1faf73a72b"
+      },
+      "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/source-proof.json": {
+        "bytes": 2592,
+        "sha256": "42eba3b5dfbb12a5e9e9be62009c6155307bca2be472a942a97aeb4d335c4d37"
+      }
+    },
+    "static_checks": {
+      "assertion_AST_multiset_exact": 61,
+      "changed_method_count": 1,
+      "compile_without_execution": true,
+      "no_manual_phase_or_completed_counter_assignments": true,
+      "only_test_pin_changes82_and14": true,
+      "own_file_pins": 8,
+      "single_recorder_install": true
+    },
+    "status": "CLEAR_SOURCE_ONLY",
+    "subject": {
+      "bytes": 18584,
+      "path": "/ml2/hypergan/pg-atlas932-particle-l2-source-20261006/v4/repo/tests/test_atlas932_particle_l2.py",
+      "sha256": "9d23717382fa581e0875e815c99df11e41828667bb3a9ca0ed23abb24ad75207"
+    },
+    "test_status": "AUTHORED_NOT_RUN by author/reviewer. ROOT actual failure declarations were not independently read or executed.",
+    "unchanged_basis": [
+      {
+        "bytes": 23311,
+        "path": "/ml2/hypergan/pg-atlas889-checkpoint-compatibility-proposal-source-20261006/v1/repo/experiments/forge/atlas889_two_pole_observer.py",
+        "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+      },
+      {
+        "bytes": 29610,
+        "path": "/ml2/hypergan/pg-atlas889-two-pole-observer-source-20261006/v9/repo/tests/test_atlas889_two_pole_observer.py",
+        "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+      }
+    ]
+  },
+  "failed_fixture_v3": {
+    "all_prior_assertions_retained": true,
+    "command": [
+      "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+      "-B",
+      "-u",
+      "tests/test_atlas932_particle_l2.py",
+      "--output",
+      "/ml2/hypergan/pg-atlas934-l2-recovery-runtime-20261006/v1/software-fixture-v3/FOCUSED932_CONTROLS.json"
+    ],
+    "cpu_threads": 1,
+    "deadline_seconds": 30,
+    "earlier_failures_and_timeout_preserved": true,
+    "elapsed_seconds": 9.251472547184676,
+    "exactly_three_fresh_controls": true,
+    "fixture_only_v3_corrections": true,
+    "gpus": 0,
+    "owned_pythonpath": "/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006",
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "prior_suites_rerun": false,
+    "production_source_unchanged": true,
+    "returncode": 1,
+    "schema": "pg934_actual_unchanged_software_execution_v1",
+    "source_author_work": "UNMEASURED_UNKNOWN_NOT_ZERO",
+    "status": "FAIL",
+    "stderr_pin": {
+      "bytes": 1322,
+      "sha256": "13e1d080ae05cf8fead18c2f44931ac93002f4ab6a9d4455f0e6fe596588287e"
+    },
+    "stderr_tail": "test_declared_objective_and_actual_owner_coefficient (__main__.ParticleL2Controls.test_declared_objective_and_actual_owner_coefficient) ... ok\ntest_pinned_loss_coefficient_gradient_delta (__main__.ParticleL2Controls.test_pinned_loss_coefficient_gradient_delta) ... ok\ntest_preserved_optimizer_clock_and_recorder_checkpoint (__main__.ParticleL2Controls.test_preserved_optimizer_clock_and_recorder_checkpoint) ... FAIL\n\n======================================================================\nFAIL: test_preserved_optimizer_clock_and_recorder_checkpoint (__main__.ParticleL2Controls.test_preserved_optimizer_clock_and_recorder_checkpoint)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/tests/test_atlas932_particle_l2.py\", line 237, in test_preserved_optimizer_clock_and_recorder_checkpoint\n    self.assertEqual(checkpoint_recorder.unknown, [])\nAssertionError: Lists differ: ['observer install failed: ValueError'] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n'observer install failed: ValueError'\n\n- ['observer install failed: ValueError']\n+ []\n\n----------------------------------------------------------------------\nRan 3 tests in 7.325s\n\nFAILED (failures=1)\n",
+    "stdout_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "timed_out": false,
+    "trace_internal_stage": "Not instrumented; verbose log identifies method completion/current method only."
+  },
+  "original7s_timeout": {
+    "last_completed_internal_stage": "UNKNOWN",
+    "paid_reserved_once_in_sealed916": true,
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "status": "TIMEOUT",
+    "stdout_stderr_not_persisted": true
+  },
+  "original_import_failure": {
+    "software_execution": {
+      "command": [
+        "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+        "-B",
+        "tests/test_atlas932_particle_l2.py",
+        "--output",
+        "/ml2/hypergan/pg-atlas932-particle-l2-software-runtime-20261006/v1/FOCUSED932_CONTROLS.json"
+      ],
+      "cpu_threads": 1,
+      "deadline_seconds": 7,
+      "elapsed_seconds": 1.6576466909609735,
+      "exactly_three_fresh_controls": true,
+      "gpus": 0,
+      "persistence_tail": "UNKNOWN_NOT_ZERO",
+      "prior_suites_rerun": false,
+      "returncode": 1,
+      "schema": "pg932_actual_software_execution_v1",
+      "source_author_work": "UNMEASURED_UNKNOWN_NOT_ZERO",
+      "status": "FAIL",
+      "stderr_pin": {
+        "bytes": 1204,
+        "sha256": "f18c0fa688b569e94661c7f2191b4582ed1246b42eec922c67e8c16d24f70edc"
+      },
+      "stdout_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "stderr": "setUpClass (__main__.ParticleL2Controls) ... ERROR\n\n======================================================================\nERROR: setUpClass (__main__.ParticleL2Controls)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/tests/test_atlas932_particle_l2.py\", line 58, in setUpClass\n    cls.binding = cls.adapter.resolve_binding(ROOT, cls.candidate, cls.task, cls.protocol)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/experiments/forge/atlas932_two_pole_owner.py\", line 149, in resolve_binding\n    noisy = is_noisy_task(task)\n            ^^^^^^^^^^^^^^^^^^^\n  File \"/ml2/hypergan/ParticleGAN-atlas-original-two-pole-passive889-20261006/experiments/forge/atlas932_two_pole_owner.py\", line 108, in is_noisy_task\n    from .noisy_prior_tier1 import is_noisy_task as recognized, validate\nModuleNotFoundError: No module named 'experiments'\n\n----------------------------------------------------------------------\nRan 0 tests in 1.314s\n\nFAILED (errors=1)\n"
+  },
+  "previous_failures_removed": false,
+  "refunds": 0,
+  "report_export_import_failure": {
+    "paid_once": true,
+    "reason": "Root omitted owned checkout sys.path before contracts import; corrected in report-only resume, no scientific replay.",
+    "status": "FAILED_BEFORE_WRITES"
+  },
+  "report_status_read_timeout": {
+    "command": "git status --short",
+    "deadline_seconds": 5,
+    "paid_once": true,
+    "retained_report_only_after_halt": true,
+    "status": "TIMEOUT"
+  },
+  "root_count_guard": {
+    "reason": "InitialRoot helper incorrectly expected61 self.assert* calls; actual59 plus2 torch.testing.assert_close preserve61 unchanged. Error debit retained.",
+    "status": "FAILED_BEFORE_INSTALL"
+  },
+  "schema": "pg934_bounded_software_history_v1"
+}

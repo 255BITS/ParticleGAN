@@ -102,6 +102,10 @@ def _validate_measurement_contract(task):
     validate_declaration(task)
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
+    if task.get("task_cohort") == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer import validate
+        validate(task)
+        return
     fixed = {"scoring_weights": "live"}
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import validate
@@ -185,6 +189,14 @@ def load_tasks(root: Path | str) -> dict:
         raise ValueError("no Forge tasks found")
     from .tier1_policy import load_variants
     for name, task in load_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
+    from .noisy_prior_tier1 import load_variants as load_noisy_variants
+    for name, task in load_noisy_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
+    from .atlas871_longer import load_variants as load_duration_variants
+    for name, task in load_duration_variants(root, tasks).items():
         _validate_task(task)
         tasks[name] = task
     return tasks
@@ -336,6 +348,9 @@ def _guards(task, evidence):
 
 
 def _transfer(task, evidence):
+    if task.get("task_cohort") == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer import grade_transfer
+        return grade_transfer(task, evidence)
     from benchmarks.transfer_suite.protocol import test_verdict
 
     evaluation = task["evaluation"]
@@ -560,6 +575,16 @@ def grade_result(task: dict, result: dict | None) -> dict:
         policy_grade = validate_evidence(task, evidence)
         if policy_grade is not None:
             return _verdict(policy_grade["status"], policy_grade["reason"])
+    if task.get("task_cohort") == "noisy_particle_prior_tier1_686_v1":
+        from .noisy_prior_adapters import validate_evidence as validate_noisy_evidence
+        noisy_grade = validate_noisy_evidence(task, evidence)
+        if noisy_grade is not None:
+            return _verdict(noisy_grade["status"], noisy_grade["reason"])
+    if "existing_mog717" in evidence:
+        from .atlas_existing_mog import validate_evidence as validate_existing_mog_evidence
+        existing_grade = validate_existing_mog_evidence(task, evidence)
+        if existing_grade is not None:
+            return _verdict(existing_grade["status"], existing_grade["reason"])
     guard = _guards(task, evidence)
     if guard is not None:
         return guard

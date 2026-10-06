@@ -1,0 +1,44 @@
+{
+  "archive_byte_verification": true,
+  "author_cost": "UNMEASURED",
+  "control_status": "AUTHORED_NOT_RUN",
+  "current_attempt_status": "INVALID",
+  "files": {
+    "CAUSE.json": {
+      "bytes": 2105,
+      "sha256": "ce8d2b68c6c27da9017f6205b0d34ce7112462b976cb687a9ceaddb391ec448d"
+    },
+    "README.md": {
+      "bytes": 2715,
+      "sha256": "c91241623a5f3db5cbb0879b87f116ab209b1408918ca9085556d6e0933451ba"
+    },
+    "SOURCE_PROOF.json": {
+      "bytes": 1992,
+      "sha256": "7eced3ec0f07dc8ec83d16ae106cab21100f44475a4c6ed209a35d1275d80a67"
+    },
+    "independent-review.json": {
+      "bytes": 9043,
+      "sha256": "26ff22ca72cfe41a5d94adf8b12323a3fa9e548ae7b940f078b6867fc835061a"
+    },
+    "proposal-source.zip": {
+      "bytes": 120093,
+      "sha256": "754cfc45c6d096ddae9bcda4a95d4c229f16727bb45ebc9309c188f49d8553f3"
+    },
+    "proposal.patch": {
+      "bytes": 24473,
+      "sha256": "b4e54c316a0baca191ec6db4a2ffd7ba08960f3db68d1f01cf0ae5806e22e352"
+    },
+    "source-handoff.json": {
+      "bytes": 5239,
+      "sha256": "e35ed1ba18b5f7f2bd6500eb3ab0477e21f66ffd6a2b52a5f58a2d117fd7726e"
+    }
+  },
+  "independent_source_review": "CLEAR_SOURCE_ONLY; AUTHORED_NOT_RUN; UNMEASURED",
+  "retry_authorized": false,
+  "schema": "pg889_uninstalled_checkpoint_proposal_publication_v1",
+  "source_handoff_pin": {
+    "bytes": 5239,
+    "sha256": "e35ed1ba18b5f7f2bd6500eb3ab0477e21f66ffd6a2b52a5f58a2d117fd7726e"
+  },
+  "status": "SOURCE_ONLY_UNINSTALLED_UNADMITTED"
+}

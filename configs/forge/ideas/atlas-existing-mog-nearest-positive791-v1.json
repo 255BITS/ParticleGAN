@@ -1,0 +1,37 @@
+{
+  "api_changes": [
+    "Bind the reviewed bound-MoG nearest-positive-support Source and exact unchanged owner crosspins to a distinct Atlas791 identity."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Only the bound raw-MoG reaction support radius changes: zero distances are excluded before the nearest-positive support reduction, with bounded query/support chunks. Existing task priors, fixed widths, networks, seeds, data, full79 Atlas Recipe, public sampling, observers, numerical gates and horizons are unchanged."
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas791_existing_mog_nearest_positive",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-existing-mog-nearest-positive791-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "The old five-neighbor shortlist can return zero radius when at least five support rows share a parent center despite other positive-distance support. The reviewed branch matches the public DV12 half-nearest-positive rule and all-coincident zero fallback. The actual move queries a current parent center; historical duplicate exposure and attribution of previous failures remain unknown. No new noise, kernel, selector, checkpoint reuse or feature_cells correction is claimed.",
+  "parent": "atlas",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  ],
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}

@@ -1,0 +1,154 @@
+{
+  "admission": {
+    "actual_controls_pin": {
+      "bytes": 3183,
+      "sha256": "a92f0a06e2406237931dee228ddb67c4297a9a3f8c0de1fc64662b3552de54c5"
+    },
+    "actual_software_execution_pin": {
+      "bytes": 2129,
+      "sha256": "721ab6216f735fefd6831e2cbc642f9b7346c8e363b8506e3ce81bc442ef38b8"
+    },
+    "attempt_id": "8f23a5ca2369457e8c96036ff011766d",
+    "authority_seq": 932,
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "baseline918_rerun": false,
+    "baseline921_rerun": false,
+    "baseline927_rerun": false,
+    "budget_seconds": 300,
+    "candidate_revision": "1957bc63c65671a8a9345373cdc2507f92137dceb50639c054d3ce44963d6dd3",
+    "canonical_original_task_credit": false,
+    "cpu_threads": 1,
+    "device": "cpu",
+    "directory": "/ml2/hypergan/pg-atlas932-particle-l2-runtime-20261006/v1/runs/forge/atlas-two-pole-l2-off932-study-v1/8f23a5ca2369457e8c96036ff011766d",
+    "effective_objective_variant_sha256": "1514574ea06c8cd602293ef0fa99121c4b9f1df1de6d00f5066aa35c69b6036f",
+    "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+    "fresh_successor": true,
+    "gpus": 0,
+    "objective_variant_honestly_changed": true,
+    "old889_replayed": false,
+    "only_particle_l2_intervention": true,
+    "pid": 3918811,
+    "recovery_authority_seq": 934,
+    "request_id": "a7cfc6f48c5ec2f849476208",
+    "request_sha256": "bab2ee01483850e53a7ad915c84d499ec6ba16a294d123c7e3647682d4564d19",
+    "request_source_file_count": 1284,
+    "schema": "pg932_one_particle_l2_objective_case_admission_v1",
+    "software_proof_pin": {
+      "bytes": 9171,
+      "sha256": "24e4845733580cf3caf8fc05f5df0d7d7b494f7aa2d97797df108e5686cf8ff9"
+    },
+    "source_application_pin": {
+      "bytes": 34596,
+      "sha256": "fb92140f9fb1ad1da969b7b6deea1ddf3eb02284d1ba96f86b14234b22bf49d3"
+    },
+    "source_digest": "313379fed51f2ca0633de36bad4c88536d6ebbc6b2a97b4c24c26c7f9b84c56d",
+    "task_digest": "e3eb1e6df5cc334cb5f71684d25f57c1c3321877c2ace336207fb233577d2ffb",
+    "task_id": "two_pole_l2_off932_v1"
+  },
+  "case_cost": {
+    "attempt_id": "8f23a5ca2369457e8c96036ff011766d",
+    "authority_id": "ember-two-pole-l2-force-ablation-20261006-v1",
+    "authority_seq": 932,
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "candidate_revision": "1957bc63c65671a8a9345373cdc2507f92137dceb50639c054d3ce44963d6dd3",
+    "collected_count": 1,
+    "compatibility_key": "daf1e4fa23730455ce5c969e8fba0b36999d934233e0b65ef8b0c005d0a4126c",
+    "conservative_case_debit_seconds": 300,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "directory": "/ml2/hypergan/pg-atlas932-particle-l2-runtime-20261006/v1/runs/forge/atlas-two-pole-l2-off932-study-v1/8f23a5ca2369457e8c96036ff011766d",
+    "effective_objective_variant_sha256": "1514574ea06c8cd602293ef0fa99121c4b9f1df1de6d00f5066aa35c69b6036f",
+    "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+    "exact_all_inclusive_measured_cost": false,
+    "full_case_allowance_seconds": 300,
+    "grade_pin": {
+      "bytes": 2045,
+      "sha256": "d356fa6377860c241b6e5ffea29734af1da17d36dd170509ddd10b59c7cf97df"
+    },
+    "independently_graded": true,
+    "old889_costs_in_predecessor_once": true,
+    "old916_sealed_not_reset": true,
+    "paid_scientific_elapsed_seconds": 29.4651756612584,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "pid": 3918811,
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "prior918_921_927_carried_once_in_predecessor_seconds": 900,
+    "process_receipt_pin": {
+      "bytes": 925,
+      "sha256": "6964e06c19882e74ee0bc9b9088f63edac9fb7750e76ec37611ef9713c02e951"
+    },
+    "qualification": "Prior918/921/927900 carried once in the sealed predecessor; new932 full300 remains separate conservative declared debit. Measured new case span overlaps launch setup slightly, is not a certified all-inclusive upper bound, and receives no refund.",
+    "recovery_authority_seq": 934,
+    "request_id": "a7cfc6f48c5ec2f849476208",
+    "request_sha256": "bab2ee01483850e53a7ad915c84d499ec6ba16a294d123c7e3647682d4564d19",
+    "schema": "pg932_separate_single_case_cost_v1",
+    "software_934_charged_separately": true,
+    "source_author_work": "UNMEASURED_UNKNOWN_NOT_ZERO",
+    "source_digest": "313379fed51f2ca0633de36bad4c88536d6ebbc6b2a97b4c24c26c7f9b84c56d",
+    "status": "FAIL",
+    "supervisor_returncode": 0,
+    "task_digest": "e3eb1e6df5cc334cb5f71684d25f57c1c3321877c2ace336207fb233577d2ffb",
+    "task_id": "two_pole_l2_off932_v1",
+    "terminal_elapsed_seconds": 28.94434076640755,
+    "terminal_pin": {
+      "bytes": 13468046,
+      "sha256": "941093a972990c4532e3ef15a70534155cb698df31876294b9b88c7711ff365d"
+    },
+    "unused_allowance_retained_as_declared_reserve_seconds": 270.5348243387416,
+    "worker_token_sha256": "08bd6a771ce5961bcb6713b85592cf69995653ef30f05c5c1a4bc276605138f0"
+  },
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -0.21216494888067244,
+          "metric": "mean_abs",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.3,
+          "value": 0.08783505111932755
+        },
+        {
+          "margin": 0.9778134152293205,
+          "metric": "grad_med",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 1,
+          "value": 0.022186584770679474
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.3536082481344541,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "grad_med": 0.022186584770679474,
+      "mean_abs": 0.08783505111932755
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "raw_result_pin": {
+    "bytes": 12685154,
+    "sha256": "a42489439f18afee364e653da518c89745702e1c2ba7b7ff857d928c09335ea6"
+  },
+  "reason": null,
+  "terminal_status": "completed"
+}

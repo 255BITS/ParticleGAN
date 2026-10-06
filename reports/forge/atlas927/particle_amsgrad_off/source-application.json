@@ -1,0 +1,102 @@
+{
+  "original_owner_preserved": {
+    "bytes": 64151,
+    "sha256": "c0eb7e20fb6c2caca5c759b54c00bd742a4f2f3b1e7e4a42545ac8233af3aa76"
+  },
+  "predecessor_head": "53b590e84cf6b0b1aaa33378eed5d2de4c9f98e0",
+  "previous_failures_and_costs_preserved": true,
+  "required_source_pin_count": 72,
+  "retained_root_errors": [
+    {
+      "any_control_or_scientific_call": false,
+      "cost": "paid in same916 clock; no allocation reset",
+      "field": "status",
+      "stage": "review receipt read before installation",
+      "type": "KeyError"
+    }
+  ],
+  "schema": "pg927_source_application_v1",
+  "source_author_cost": "UNMEASURED",
+  "source_only_reviews": [
+    {
+      "bytes": 12929,
+      "path": "/ml2/hypergan/pg-atlas927-particle-amsgrad-primary-independent-review-source-20261006/v1/review.json",
+      "scope": "Independent Source-only review, not empirical controls",
+      "sha256": "f727b66ec4a33e1039a6dd13d4772a918a6549f48cee0814fb1aefa735d3cc81"
+    },
+    {
+      "bytes": 10603,
+      "path": "/ml2/hypergan/pg-atlas927-joined-independent-review-source-20261006/v1/review.json",
+      "scope": "Independent Source-only review, not empirical controls",
+      "sha256": "97a7f117b3dad225311eb1154457bc7e1f4f96dac4b9f905e968ef917318e6e5"
+    }
+  ],
+  "source_roster": {
+    "configs/forge/ideas/atlas-two-pole-particle-amsgrad-off927-v1.json": {
+      "bytes": 2284,
+      "sha256": "a64c72cec3c12f127c15e07fab155564a37b62e1f2432215553ad88618557517",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/configs/forge/ideas/atlas-two-pole-particle-amsgrad-off927-v1.json"
+    },
+    "configs/forge/studies/atlas-two-pole-particle-amsgrad-off927-study-v1.json": {
+      "bytes": 2694,
+      "sha256": "620c804b208da8c2733f6445e9b27f31ae2b9b8b5706670e1720f517ffb320e8",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/configs/forge/studies/atlas-two-pole-particle-amsgrad-off927-study-v1.json"
+    },
+    "configs/forge/views/atlas_two_pole_particle_amsgrad_off927_v1.json": {
+      "bytes": 1627,
+      "sha256": "54d0afcf2443ed06851230de15986d3b59def59c301425d204910d56253fad8a",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/configs/forge/views/atlas_two_pole_particle_amsgrad_off927_v1.json"
+    },
+    "experiments/forge/adapters.py": {
+      "bytes": 40019,
+      "sha256": "7757e74b16f916adf42b1b2b3bcc595085e5d7ea7d2fa78c5fb87db6ff5c94f0",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/adapters.py"
+    },
+    "experiments/forge/api.py": {
+      "bytes": 52201,
+      "sha256": "671e12770c9a6fed73bcbf58de0354f9003e21c380826e90580ccd70bd727e18",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/api.py"
+    },
+    "experiments/forge/atlas927_contract.py": {
+      "bytes": 10860,
+      "sha256": "7a2be1b94d723776a4a938868cefc8cc6962fd37946d5b41e1fe0c49ea15e01d",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/atlas927_contract.py"
+    },
+    "experiments/forge/atlas927_reference.py": {
+      "bytes": 8247,
+      "sha256": "f582b24ef950b065e48618300176161488a0174955af337a1c8495a2a663421e",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/atlas927_reference.py"
+    },
+    "experiments/forge/atlas927_two_pole_owner.py": {
+      "bytes": 68998,
+      "sha256": "0fdd73021ab38f660b8c1ee4b292e32ef9fa39077751ba85d7679a64d283a587",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/repo/experiments/forge/atlas927_two_pole_owner.py"
+    },
+    "experiments/forge/atlas_existing_mog.py": {
+      "bytes": 49246,
+      "sha256": "bc6ef1f03b623560762c0f1555eebdf08818c9796f0e7b3002e5ffe64105a387",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/atlas_existing_mog.py"
+    },
+    "experiments/forge/hostprofiles.py": {
+      "bytes": 15779,
+      "sha256": "b9d334ae9f918de1fc78ab0b1e21255cf94023cfa09e566a49250b7d4a7d2af5",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/hostprofiles.py"
+    },
+    "experiments/forge/promotion.py": {
+      "bytes": 34023,
+      "sha256": "7b5bd5ebdf7d562371797174f7247fed07ed8713d33bc3c97b92205269f14a7c",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/promotion.py"
+    },
+    "experiments/forge/studies.py": {
+      "bytes": 18047,
+      "sha256": "23180555910bee7ac3bf0f8465dc5e0bb4d222a3ad6fc763dcfbefaf2c2c49a0",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-declaration-source-20261006/v1/repo/experiments/forge/studies.py"
+    },
+    "tests/test_atlas927_particle_amsgrad.py": {
+      "bytes": 19154,
+      "sha256": "64e562da2a8fe3a5412f78c8fcf23eaeaa86ddf4b5b7b693ca508bc6d1ded2e5",
+      "source": "/ml2/hypergan/pg-atlas927-particle-amsgrad-source-20261006/v1/repo/tests/test_atlas927_particle_amsgrad.py"
+    }
+  },
+  "status": "INSTALLED_SOURCE_AND_FOCUSED_CONTROLS_PASS"
+}

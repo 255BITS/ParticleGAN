@@ -1,0 +1,20 @@
+{
+  "controls": {
+    "bytes": 31556,
+    "sha256": "ddd4196de994fe94ca6845d8abdebe6d0379d9da40eba22589fb385523f3d959"
+  },
+  "cuda_visible_devices": "1",
+  "device": "cuda:0",
+  "driver": {
+    "bytes": 29653,
+    "sha256": "cfbff29104d8ebaebe56e6791435f678d5c366e3c5fada110f4da8d426cd691c"
+  },
+  "elapsed_seconds": 9.904213984962553,
+  "prior_failed_attempts_preserved": true,
+  "returncode": 0,
+  "schema": "954_fixed_source_focused_controls_actual_attempt_v1",
+  "source_map": {
+    "bytes": 31800,
+    "sha256": "b9c7eca1c940a6678330d569fa806f8e29887b9bfbf934c36f43398e947c2add"
+  }
+}

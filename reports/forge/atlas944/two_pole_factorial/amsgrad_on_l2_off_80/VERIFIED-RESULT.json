@@ -1,0 +1,52 @@
+{
+  "cell_id": "amsgrad_on_l2_off_80",
+  "confirmed_step": null,
+  "declaration_pin": {
+    "bytes": 34998,
+    "sha256": "e715f935da47339ac86c58f8d0a74e36c2bf1d380a923e45ac35b2a7b80c7128"
+  },
+  "elapsed_seconds": 16.446428993251175,
+  "execution_error": null,
+  "first_pass_step": null,
+  "full_case_debit_seconds": 300,
+  "grad_med": 0.012824013829231262,
+  "grade_pin": {
+    "bytes": 682,
+    "sha256": "8eb4641a007feb58560a853c662f1efc9a306a5ab6a2efd8ef3d174c5a662d3a"
+  },
+  "horizon": 80,
+  "mean_abs": 0.0032809569966048002,
+  "observations": 24,
+  "partial_trace_limitation_preserved": true,
+  "particle_l2": 0.0,
+  "passing_observations": 0,
+  "passing_suffix": 0,
+  "population_std": 0.0034162681639620203,
+  "prefix": {
+    "not_a_prefix_equality_claim": true,
+    "status": "NEW80_VARIANT_NO_RETAINED_MATCH"
+  },
+  "range": 0.011737663298845291,
+  "raw_pin": {
+    "bytes": 4300640,
+    "sha256": "7533c5cbd8b1ac4bb58953e1b3748337627ac60e0f74a9cec7d4253efb278f0e"
+  },
+  "request_attempt": "4e8e52da5b0c58b2fe0e7f299720f38e",
+  "rows": 12,
+  "schema": "atlas944_verified_cell_result_v1",
+  "scientific_credit": false,
+  "software_proof_pin": {
+    "bytes": 22739,
+    "sha256": "660d595895e4059b0cc5fc951c000061ed04994d2b81cb62cc9f664b0b17a0f7"
+  },
+  "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+  "supervisor_elapsed_seconds": 14.66504273423925,
+  "table_amsgrad": true,
+  "terminal_pin": {
+    "bytes": 693,
+    "sha256": "788383f5d076604de0cabaab4c0c95671aeed9a0360da35772f36e081413a6ba"
+  },
+  "trace_complete": false,
+  "trace_status": "UNKNOWN",
+  "verdict": "FAIL"
+}

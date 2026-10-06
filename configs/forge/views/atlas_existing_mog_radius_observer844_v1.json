@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_acquisition"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Passive observer diagnostic only; no winning/default/family credit, no causal attribution without a measured effective witness and complete coverage.",
+    "status": "provisional"
+  },
+  "eligibility": {
+    "claim_contract": {
+      "experimental_track": "atlas844_existing_mog_radius_observer"
+    }
+  },
+  "evidence_scope": "original_gaussian_passive_radius_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "atlas_existing_mog_radius_observer844_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

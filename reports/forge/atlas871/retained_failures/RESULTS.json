@@ -1,0 +1,1127 @@
+{
+  "accounting_qualification": "Measured costs, errors and predecessor qualifications are retained; prior off-phase and post-timeout amounts remain UNKNOWN_NOT_ZERO. No exact all-inclusive measured-cost claim.",
+  "isolated_proposal_controls": {
+    "causal_recovery": "UNKNOWN",
+    "core_installed": false,
+    "status": "PASS",
+    "tests_run": 8
+  },
+  "new_model_forwards": 0,
+  "new_optimizer_updates": 0,
+  "new_sampling_draws": 0,
+  "new_scientific_grade_credit": false,
+  "next_case": {
+    "admitted": false,
+    "cpu_threads": 1,
+    "device": "cpu",
+    "full_science_allowance_seconds": 300,
+    "gpus": 0,
+    "reads": 24,
+    "recorder_implemented": false,
+    "repaired_companion_admitted": false,
+    "task": "two_pole",
+    "updates": 80
+  },
+  "original_request_binding": {
+    "candidate_id": "atlas-existing-mog-nearest-positive791-v1",
+    "candidate_revision": "d211382aff5a48d521651b8e7a86bd627ba05071bcae9c122c362c28eada1ee0",
+    "request_id": "6854af9ec7eeb60d1def13fb",
+    "request_raw_pin": {
+      "bytes": 532756,
+      "sha256": "1c8c316873f8d8b3cf01ca354f3555247cfcf03f34b82961735e3fc141bf09fa"
+    },
+    "source": {
+      "complete_roster_owner": "Pinned original request in common run store; source digest retained",
+      "digest": "d45b5459a6def926e41c7d3c544593b1635a670b50ef118fb6660ab679e78f34",
+      "origin_commit": "a0c8ac74a24684adbeab9d73b9c8f43489bb57d1",
+      "relevant_files": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "lib/mog_metrics.py": "70389fe190357d9aa49b8dfe43c822c0eb167be3a2f3e39102c2a32fa8ff5f21",
+        "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+        "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+        "particlegan/policy.py": "7a6ac1410260d720f58b6903310443f3f8dc3a283c1f3b5abd921965835a4967",
+        "particlegan/recipes.py": "79905bb948cb967f80a087063960ea72e72c04d3b572b4b90ff4fa1dda5f299f"
+      },
+      "schema_version": 1
+    }
+  },
+  "original_request_id": "6854af9ec7eeb60d1def13fb",
+  "ring16_acquisition": {
+    "attempt_id": "17a40eeeb2df4463a5dede0289716236",
+    "bank_pin": {
+      "bytes": 794217,
+      "sha256": "71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd"
+    },
+    "cause": "UNKNOWN",
+    "descriptive_analysis_pin": {
+      "bytes": 169298,
+      "sha256": "d7740cb231a0c5c8854349c0c54679c726524fe84e235c0423fbf522977098df"
+    },
+    "descriptive_covariance_trace": [
+      {
+        "by_mode": [
+          {
+            "covariance": [
+              [
+                0.038832215847059384,
+                0.00689024025260654
+              ],
+              [
+                0.00689024025260654,
+                0.005063672459572028
+              ]
+            ],
+            "full_trace": 0.04389588830663141,
+            "inside4_contribution_trace": 0.008602787769270932,
+            "mean": [
+              2.9559658921283223,
+              0.03333239004074821
+            ],
+            "mode": 0,
+            "n": 253,
+            "outside4_contribution_trace": 0.035293100537360476,
+            "outside4_fraction": 0.02371541501976282,
+            "outside4_n": 6,
+            "outside4_trace_fraction": 0.8040183693475614
+          },
+          {
+            "covariance": [
+              [
+                0.01514114106657217,
+                0.013147556687985043
+              ],
+              [
+                0.013147556687985043,
+                0.027328025593894214
+              ]
+            ],
+            "full_trace": 0.042469166660466386,
+            "inside4_contribution_trace": 0.01575183806713472,
+            "mean": [
+              2.7234176606247105,
+              1.2189986820483125
+            ],
+            "mode": 1,
+            "n": 291,
+            "outside4_contribution_trace": 0.026717328593331667,
+            "outside4_fraction": 0.06529209621993126,
+            "outside4_n": 19,
+            "outside4_trace_fraction": 0.6290994312869869
+          },
+          {
+            "covariance": [
+              [
+                0.0042437687292390365,
+                -0.001300407249863586
+              ],
+              [
+                -0.001300407249863586,
+                0.005308158437075935
+              ]
+            ],
+            "full_trace": 0.00955192716631497,
+            "inside4_contribution_trace": 0.00955192716631497,
+            "mean": [
+              2.0472970272673936,
+              2.121210285874664
+            ],
+            "mode": 2,
+            "n": 244,
+            "outside4_contribution_trace": 0.0,
+            "outside4_fraction": 0.0,
+            "outside4_n": 0,
+            "outside4_trace_fraction": 0.0
+          },
+          {
+            "covariance": [
+              [
+                0.005279541761799795,
+                0.002968726582311139
+              ],
+              [
+                0.002968726582311139,
+                0.013063037448048367
+              ]
+            ],
+            "full_trace": 0.01834257920984816,
+            "inside4_contribution_trace": 0.01672594426119242,
+            "mean": [
+              1.1574695852067736,
+              2.737653452378732
+            ],
+            "mode": 3,
+            "n": 270,
+            "outside4_contribution_trace": 0.0016166349486557395,
+            "outside4_fraction": 0.007407407407407418,
+            "outside4_n": 2,
+            "outside4_trace_fraction": 0.08813563949544051
+          },
+          {
+            "covariance": [
+              [
+                0.008962504645327449,
+                0.0051652988011814125
+              ],
+              [
+                0.0051652988011814125,
+                0.014893774558122403
+              ]
+            ],
+            "full_trace": 0.023856279203449852,
+            "inside4_contribution_trace": 0.023856279203449852,
+            "mean": [
+              -0.02990528889456574,
+              2.9959954232585675
+            ],
+            "mode": 4,
+            "n": 245,
+            "outside4_contribution_trace": 0.0,
+            "outside4_fraction": 0.0,
+            "outside4_n": 0,
+            "outside4_trace_fraction": 0.0
+          },
+          {
+            "covariance": [
+              [
+                0.004191419148758988,
+                0.00205494723443523
+              ],
+              [
+                0.00205494723443523,
+                0.006028591754164502
+              ]
+            ],
+            "full_trace": 0.010220010902923491,
+            "inside4_contribution_trace": 0.010220010902923491,
+            "mean": [
+              -1.1718023716017256,
+              2.7495681163876555
+            ],
+            "mode": 5,
+            "n": 215,
+            "outside4_contribution_trace": 0.0,
+            "outside4_fraction": 0.0,
+            "outside4_n": 0,
+            "outside4_trace_fraction": 0.0
+          },
+          {
+            "covariance": [
+              [
+                0.1310788649837445,
+                -0.06451114879329388
+              ],
+              [
+                -0.06451114879329388,
+                0.06451101246832557
+              ]
+            ],
+            "full_trace": 0.19558987745207007,
+            "inside4_contribution_trace": 0.021259326162049005,
+            "mean": [
+              -2.044496064836329,
+              2.0601031496233326
+            ],
+            "mode": 6,
+            "n": 319,
+            "outside4_contribution_trace": 0.17433055129002106,
+            "outside4_fraction": 0.17868338557993735,
+            "outside4_n": 57,
+            "outside4_trace_fraction": 0.8913066134148038
+          },
+          {
+            "covariance": [
+              [
+                0.22045342442515084,
+                -0.026924154799992706
+              ],
+              [
+                -0.026924154799992706,
+                0.016900778389583
+              ]
+            ],
+            "full_trace": 0.23735420281473385,
+            "inside4_contribution_trace": 0.03598875206796394,
+            "mean": [
+              -2.9359024462399184,
+              1.1049448485310014
+            ],
+            "mode": 7,
+            "n": 222,
+            "outside4_contribution_trace": 0.20136545074676993,
+            "outside4_fraction": 0.13063063063063063,
+            "outside4_n": 29,
+            "outside4_trace_fraction": 0.8483753325570779
+          },
+          {
+            "covariance": [
+              [
+                0.14313860356212746,
+                0.02609346128457159
+              ],
+              [
+                0.02609346128457159,
+                0.05230022449325673
+              ]
+            ],
+            "full_trace": 0.1954388280553842,
+            "inside4_contribution_trace": 0.016797201623640245,
+            "mean": [
+              -2.961341051132448,
+              -0.039000630486876735
+            ],
+            "mode": 8,
+            "n": 310,
+            "outside4_contribution_trace": 0.17864162643174397,
+            "outside4_fraction": 0.2612903225806451,
+            "outside4_n": 81,
+            "outside4_trace_fraction": 0.9140539175824357
+          },
+          {
+            "covariance": [
+              [
+                0.13029231113633552,
+                0.01795763674222021
+              ],
+              [
+                0.01795763674222021,
+                0.023243018333496915
+              ]
+            ],
+            "full_trace": 0.15353532946983245,
+            "inside4_contribution_trace": 0.025622370433137066,
+            "mean": [
+              -2.8493095405342044,
+              -1.1626612761223962
+            ],
+            "mode": 9,
+            "n": 258,
+            "outside4_contribution_trace": 0.1279129590366954,
+            "outside4_fraction": 0.06201550387596899,
+            "outside4_n": 16,
+            "outside4_trace_fraction": 0.8331174295739437
+          },
+          {
+            "covariance": [
+              [
+                0.07610572554894578,
+                0.0019119091835469166
+              ],
+              [
+                0.0019119091835469166,
+                0.016661369395446646
+              ]
+            ],
+            "full_trace": 0.09276709494439242,
+            "inside4_contribution_trace": 0.029178616374312537,
+            "mean": [
+              -2.206256144331316,
+              -2.0723071633052434
+            ],
+            "mode": 10,
+            "n": 243,
+            "outside4_contribution_trace": 0.06358847857007988,
+            "outside4_fraction": 0.09053497942386834,
+            "outside4_n": 22,
+            "outside4_trace_fraction": 0.6854637262080574
+          },
+          {
+            "covariance": [
+              [
+                0.023039919429516713,
+                -0.005119137271000641
+              ],
+              [
+                -0.005119137271000641,
+                0.0077488162748604395
+              ]
+            ],
+            "full_trace": 0.03078873570437715,
+            "inside4_contribution_trace": 0.022387748151011716,
+            "mean": [
+              -1.247090729095476,
+              -2.747566851799798
+            ],
+            "mode": 11,
+            "n": 223,
+            "outside4_contribution_trace": 0.008400987553365435,
+            "outside4_fraction": 0.06278026905829592,
+            "outside4_n": 14,
+            "outside4_trace_fraction": 0.2728591272479919
+          },
+          {
+            "covariance": [
+              [
+                0.002728375458294772,
+                0.001238211540508172
+              ],
+              [
+                0.001238211540508172,
+                0.010300049104852736
+              ]
+            ],
+            "full_trace": 0.013028424563147508,
+            "inside4_contribution_trace": 0.013028424563147508,
+            "mean": [
+              -0.011334131655023724,
+              -2.9774808590529394
+            ],
+            "mode": 12,
+            "n": 244,
+            "outside4_contribution_trace": 0.0,
+            "outside4_fraction": 0.0,
+            "outside4_n": 0,
+            "outside4_trace_fraction": 0.0
+          },
+          {
+            "covariance": [
+              [
+                0.005705600743548138,
+                -0.0024537709376479954
+              ],
+              [
+                -0.0024537709376479954,
+                0.04927267016502201
+              ]
+            ],
+            "full_trace": 0.054978270908570145,
+            "inside4_contribution_trace": 0.012169650739823363,
+            "mean": [
+              1.1162003348040026,
+              -2.6702086398767872
+            ],
+            "mode": 13,
+            "n": 258,
+            "outside4_contribution_trace": 0.042808620168746786,
+            "outside4_fraction": 0.046511627906976716,
+            "outside4_n": 12,
+            "outside4_trace_fraction": 0.7786461716836874
+          },
+          {
+            "covariance": [
+              [
+                0.054876713813656115,
+                -0.0008287645683874583
+              ],
+              [
+                -0.0008287645683874583,
+                0.010881992144055412
+              ]
+            ],
+            "full_trace": 0.06575870595771152,
+            "inside4_contribution_trace": 0.02029448469701131,
+            "mean": [
+              2.113543681005244,
+              -2.0926137917597774
+            ],
+            "mode": 14,
+            "n": 253,
+            "outside4_contribution_trace": 0.04546422126070021,
+            "outside4_fraction": 0.06719367588932801,
+            "outside4_n": 17,
+            "outside4_trace_fraction": 0.6913795002282679
+          },
+          {
+            "covariance": [
+              [
+                0.0772051666427693,
+                -0.03319757848734457
+              ],
+              [
+                -0.03319757848734457,
+                0.03986844255558155
+              ]
+            ],
+            "full_trace": 0.11707360919835086,
+            "inside4_contribution_trace": 0.03295959532887366,
+            "mean": [
+              2.621003807552399,
+              -1.082225617141493
+            ],
+            "mode": 15,
+            "n": 248,
+            "outside4_contribution_trace": 0.0841140138694772,
+            "outside4_fraction": 0.16129032258064513,
+            "outside4_n": 40,
+            "outside4_trace_fraction": 0.7184711776243937
+          }
+        ],
+        "n": 4096,
+        "outside4_fraction": 0.076904296875,
+        "outside4_n": 315,
+        "step": 367
+      },
+      {
+        "by_mode": [
+          {
+            "covariance": [
+              [
+                0.04990290589609226,
+                0.01584093843078145
+              ],
+              [
+                0.01584093843078145,
+                0.021223137197619764
+              ]
+            ],
+            "full_trace": 0.07112604309371202,
+            "inside4_contribution_trace": 0.021967317107645837,
+            "mean": [
+              2.9803608223244,
+              0.09622361778661057
+            ],
+            "mode": 0,
+            "n": 270,
+            "outside4_contribution_trace": 0.04915872598606619,
+            "outside4_fraction": 0.059259259259259234,
+            "outside4_n": 16,
+            "outside4_trace_fraction": 0.6911494559214713
+          },
+          {
+            "covariance": [
+              [
+                0.012714431890330074,
+                -0.0005310862292286605
+              ],
+              [
+                -0.0005310862292286605,
+                0.016069226348473586
+              ]
+            ],
+            "full_trace": 0.02878365823880366,
+            "inside4_contribution_trace": 0.02272218981309481,
+            "mean": [
+              2.670884769103106,
+              1.2929357678282494
+            ],
+            "mode": 1,
+            "n": 255,
+            "outside4_contribution_trace": 0.0060614684257088505,
+            "outside4_fraction": 0.06274509803921569,
+            "outside4_n": 16,
+            "outside4_trace_fraction": 0.21058714550526791
+          },
+          {
+            "covariance": [
+              [
+                0.0070541019075237655,
+                -0.00485117963949012
+              ],
+              [
+                -0.00485117963949012,
+                0.007995822294008324
+              ]
+            ],
+            "full_trace": 0.015049924201532089,
+            "inside4_contribution_trace": 0.012529155879557413,
+            "mean": [
+              2.0169882464867372,
+              2.205929270730569
+            ],
+            "mode": 2,
+            "n": 208,
+            "outside4_contribution_trace": 0.0025207683219746757,
+            "outside4_fraction": 0.009615384615384581,
+            "outside4_n": 2,
+            "outside4_trace_fraction": 0.16749375533187472
+          },
+          {
+            "covariance": [
+              [
+                0.004897558445755144,
+                -0.00047370773821368774
+              ],
+              [
+                -0.00047370773821368774,
+                0.009420655867446236
+              ]
+            ],
+            "full_trace": 0.01431821431320138,
+            "inside4_contribution_trace": 0.01431821431320138,
+            "mean": [
+              1.0884060838468559,
+              2.8168711373814483
+            ],
+            "mode": 3,
+            "n": 281,
+            "outside4_contribution_trace": 0.0,
+            "outside4_fraction": 0.0,
+            "outside4_n": 0,
+            "outside4_trace_fraction": 0.0
+          },
+          {
+            "covariance": [
+              [
+                0.018103989485184237,
+                0.01298907337320495
+              ],
+              [
+                0.01298907337320495,
+                0.018904887048751245
+              ]
+            ],
+            "full_trace": 0.03700887653393548,
+            "inside4_contribution_trace": 0.036295493775802976,
+            "mean": [
+              -0.12578221844363605,
+              3.0545648508111145
+            ],
+            "mode": 4,
+            "n": 243,
+            "outside4_contribution_trace": 0.0007133827581325067,
+            "outside4_fraction": 0.004115226337448541,
+            "outside4_n": 1,
+            "outside4_trace_fraction": 0.019275990652630772
+          },
+          {
+            "covariance": [
+              [
+                0.011739791620163314,
+                0.0028265988227151395
+              ],
+              [
+                0.0028265988227151395,
+                0.02370221631178998
+              ]
+            ],
+            "full_trace": 0.0354420079319533,
+            "inside4_contribution_trace": 0.013413693888414058,
+            "mean": [
+              -1.2766410536726807,
+              2.799316885540024
+            ],
+            "mode": 5,
+            "n": 243,
+            "outside4_contribution_trace": 0.02202831404353924,
+            "outside4_fraction": 0.06172839506172845,
+            "outside4_n": 15,
+            "outside4_trace_fraction": 0.6215312091186365
+          },
+          {
+            "covariance": [
+              [
+                0.10219729454218994,
+                -0.07004770295036299
+              ],
+              [
+                -0.07004770295036299,
+                0.07561896715226436
+              ]
+            ],
+            "full_trace": 0.1778162616944543,
+            "inside4_contribution_trace": 0.019685026908932618,
+            "mean": [
+              -2.110327700088764,
+              2.1578807964407165
+            ],
+            "mode": 6,
+            "n": 232,
+            "outside4_contribution_trace": 0.15813123478552168,
+            "outside4_fraction": 0.10344827586206895,
+            "outside4_n": 24,
+            "outside4_trace_fraction": 0.8892956880245416
+          },
+          {
+            "covariance": [
+              [
+                0.17860774052692338,
+                -0.005022933245876721
+              ],
+              [
+                -0.005022933245876721,
+                0.009788069066577938
+              ]
+            ],
+            "full_trace": 0.18839580959350133,
+            "inside4_contribution_trace": 0.02960578903448036,
+            "mean": [
+              -2.876247329958554,
+              1.244574633908683
+            ],
+            "mode": 7,
+            "n": 232,
+            "outside4_contribution_trace": 0.15879002055902097,
+            "outside4_fraction": 0.07758620689655171,
+            "outside4_n": 18,
+            "outside4_trace_fraction": 0.8428532508320631
+          },
+          {
+            "covariance": [
+              [
+                0.15664022266818028,
+                0.01581568338374662
+              ],
+              [
+                0.01581568338374662,
+                0.037421538645902766
+              ]
+            ],
+            "full_trace": 0.19406176131408304,
+            "inside4_contribution_trace": 0.02029639079375762,
+            "mean": [
+              -3.0430645820096873,
+              0.047186246828724306
+            ],
+            "mode": 8,
+            "n": 282,
+            "outside4_contribution_trace": 0.17376537052032542,
+            "outside4_fraction": 0.2056737588652482,
+            "outside4_n": 58,
+            "outside4_trace_fraction": 0.8954127250194925
+          },
+          {
+            "covariance": [
+              [
+                0.09377330276319962,
+                0.040401930992922115
+              ],
+              [
+                0.040401930992922115,
+                0.05088315792537277
+              ]
+            ],
+            "full_trace": 0.14465646068857238,
+            "inside4_contribution_trace": 0.024178009305897148,
+            "mean": [
+              -2.899683438511965,
+              -1.0847302484433643
+            ],
+            "mode": 9,
+            "n": 303,
+            "outside4_contribution_trace": 0.12047845138267524,
+            "outside4_fraction": 0.13531353135313529,
+            "outside4_n": 41,
+            "outside4_trace_fraction": 0.8328591119206944
+          },
+          {
+            "covariance": [
+              [
+                0.007449035192969267,
+                4.8626233235523415e-05
+              ],
+              [
+                4.8626233235523415e-05,
+                0.00934179339179189
+              ]
+            ],
+            "full_trace": 0.016790828584761157,
+            "inside4_contribution_trace": 0.014162475730695002,
+            "mean": [
+              -2.1923779209454852,
+              -1.9373146216074626
+            ],
+            "mode": 10,
+            "n": 210,
+            "outside4_contribution_trace": 0.002628352854066155,
+            "outside4_fraction": 0.042857142857142816,
+            "outside4_n": 9,
+            "outside4_trace_fraction": 0.15653502987050727
+          },
+          {
+            "covariance": [
+              [
+                0.005280719538618085,
+                -0.002100227148337588
+              ],
+              [
+                -0.002100227148337588,
+                0.008654433495459048
+              ]
+            ],
+            "full_trace": 0.013935153034077132,
+            "inside4_contribution_trace": 0.012441470852798162,
+            "mean": [
+              -1.231525780195259,
+              -2.6158077906802357
+            ],
+            "mode": 11,
+            "n": 251,
+            "outside4_contribution_trace": 0.0014936821812789706,
+            "outside4_fraction": 0.019920318725099584,
+            "outside4_n": 5,
+            "outside4_trace_fraction": 0.10718807160756029
+          },
+          {
+            "covariance": [
+              [
+                0.003970195446141355,
+                -0.004220077787680976
+              ],
+              [
+                -0.004220077787680976,
+                0.029458566083366212
+              ]
+            ],
+            "full_trace": 0.033428761529507564,
+            "inside4_contribution_trace": 0.01661094437285303,
+            "mean": [
+              -0.06788992440040875,
+              -2.8448810002549365
+            ],
+            "mode": 12,
+            "n": 253,
+            "outside4_contribution_trace": 0.016817817156654535,
+            "outside4_fraction": 0.09486166007905139,
+            "outside4_n": 24,
+            "outside4_trace_fraction": 0.5030942334435409
+          },
+          {
+            "covariance": [
+              [
+                0.0086385473098615,
+                -0.007637184173313901
+              ],
+              [
+                -0.007637184173313901,
+                0.03914895217426714
+              ]
+            ],
+            "full_trace": 0.047787499484128644,
+            "inside4_contribution_trace": 0.013906524929038485,
+            "mean": [
+              1.1200738751540218,
+              -2.548580478142648
+            ],
+            "mode": 13,
+            "n": 274,
+            "outside4_contribution_trace": 0.03388097455509016,
+            "outside4_fraction": 0.051094890510948954,
+            "outside4_n": 14,
+            "outside4_trace_fraction": 0.7089924126777722
+          },
+          {
+            "covariance": [
+              [
+                0.05184273358764577,
+                -0.0037065243266142167
+              ],
+              [
+                -0.0037065243266142167,
+                0.006435791611553384
+              ]
+            ],
+            "full_trace": 0.058278525199199155,
+            "inside4_contribution_trace": 0.012399432495742619,
+            "mean": [
+              2.0607063140509263,
+              -1.965187940507565
+            ],
+            "mode": 14,
+            "n": 265,
+            "outside4_contribution_trace": 0.04587909270345654,
+            "outside4_fraction": 0.08679245283018866,
+            "outside4_n": 23,
+            "outside4_trace_fraction": 0.7872383960753865
+          },
+          {
+            "covariance": [
+              [
+                0.027784839641462156,
+                -0.020080241954262123
+              ],
+              [
+                -0.020080241954262123,
+                0.06641539779225081
+              ]
+            ],
+            "full_trace": 0.09420023743371296,
+            "inside4_contribution_trace": 0.027055447271958993,
+            "mean": [
+              2.6573922488154196,
+              -1.064766194341945
+            ],
+            "mode": 15,
+            "n": 294,
+            "outside4_contribution_trace": 0.06714479016175397,
+            "outside4_fraction": 0.17006802721088432,
+            "outside4_n": 50,
+            "outside4_trace_fraction": 0.7127879078755249
+          }
+        ],
+        "n": 4096,
+        "outside4_fraction": 0.0771484375,
+        "outside4_n": 316,
+        "step": 400
+      }
+    ],
+    "final_failed_gates": [
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_cov_error",
+        "<=",
+        0.85
+      ]
+    ],
+    "goal": "All16 modes, mass balance, high-quality outputs and full-assignment component covariance",
+    "observations": 24,
+    "original_final_metrics": {
+      "component_cov_error": 3.761147859506309,
+      "component_min_eigen_ratio": 0.2650986909866333,
+      "hq": 0.8466796875,
+      "mass_tv": 0.043212890625,
+      "modes": 16,
+      "n": 4096
+    },
+    "original_full_cloud_grade_unchanged": true,
+    "passing_observations": 0,
+    "precision_and_estimators": "Descriptive Python float64; separately centred core, full-mean tail contributions. Not bitwise Torch scoring or a new grade.",
+    "steps": 400,
+    "task_payload_sha256": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+    "task_raw_sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+    "trace_shares_are_covariance_error_shares": false,
+    "verdict": "FAIL"
+  },
+  "schema": "pg_atlas884_retained_original_failures_v1",
+  "scope": "Retained evidence only; original verdicts and gates preserved",
+  "two_pole": {
+    "attempt_id": "f3140adaffd14f4a8974d25874d345d4",
+    "cause": "UNKNOWN",
+    "device": "cpu",
+    "effective_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "gain_counts": {
+      "applied": 46,
+      "calls": 80,
+      "eligible": 80,
+      "enabled": true,
+      "reason": "actual host mechanism branch applied",
+      "requested": true
+    },
+    "goal": "Coordinate travel and combined critic flatness; balanced pole coverage is ungated",
+    "graded_pin": {
+      "bytes": 2033,
+      "sha256": "4fc6459e872248e8b3190100baa2190a868163531b47b969f19767decb6bc37b"
+    },
+    "missing_causal_trace": [
+      "training_gradient",
+      "Adam_moments",
+      "intervening_hot_and_birth_death_writes",
+      "controller_q_lr_beta_chronology"
+    ],
+    "observations": 24,
+    "original_final_metrics": {
+      "grad_med": 0.010896995663642883,
+      "mean_abs": 0.002445647493004799
+    },
+    "original_gates": [
+      [
+        "mean_abs",
+        ">=",
+        0.3
+      ],
+      [
+        "grad_med",
+        "<=",
+        1.0
+      ]
+    ],
+    "passing_observations": 0,
+    "raw_pin": {
+      "bytes": 184041,
+      "sha256": "a50a963ad540a70a32451187e7b4b07ca395df16b5640cad111ee7f8dd281b4b"
+    },
+    "retained_derivative_semantics": "Combined target12+particle12 input derivatives, not training gradient",
+    "retained_observations": [
+      {
+        "metrics": {
+          "grad_med": 0.04465809464454651,
+          "mean_abs": 0.02093585580587387,
+          "step": 4
+        },
+        "step": 4
+      },
+      {
+        "metrics": {
+          "grad_med": 0.018433749675750732,
+          "mean_abs": 0.027456970885396004,
+          "step": 7
+        },
+        "step": 7
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0055864304304122925,
+          "mean_abs": 0.02892938256263733,
+          "step": 10
+        },
+        "step": 10
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0006943419575691223,
+          "mean_abs": 0.028831355273723602,
+          "step": 14
+        },
+        "step": 14
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0008931756019592285,
+          "mean_abs": 0.0284650269895792,
+          "step": 17
+        },
+        "step": 17
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0017879679799079895,
+          "mean_abs": 0.027551069855690002,
+          "step": 20
+        },
+        "step": 20
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0026259496808052063,
+          "mean_abs": 0.025973567739129066,
+          "step": 24
+        },
+        "step": 24
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0003476962447166443,
+          "mean_abs": 0.024923011660575867,
+          "step": 27
+        },
+        "step": 27
+      },
+      {
+        "metrics": {
+          "grad_med": 0.001745857298374176,
+          "mean_abs": 0.02341039478778839,
+          "step": 30
+        },
+        "step": 30
+      },
+      {
+        "metrics": {
+          "grad_med": 0.00209006667137146,
+          "mean_abs": 0.021536609157919884,
+          "step": 34
+        },
+        "step": 34
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0017118826508522034,
+          "mean_abs": 0.02020333893597126,
+          "step": 37
+        },
+        "step": 37
+      },
+      {
+        "metrics": {
+          "grad_med": 0.003949709236621857,
+          "mean_abs": 0.018975792452692986,
+          "step": 40
+        },
+        "step": 40
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0046768635511398315,
+          "mean_abs": 0.016934894025325775,
+          "step": 44
+        },
+        "step": 44
+      },
+      {
+        "metrics": {
+          "grad_med": 0.00460314005613327,
+          "mean_abs": 0.015498911030590534,
+          "step": 47
+        },
+        "step": 47
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0024081170558929443,
+          "mean_abs": 0.01462677400559187,
+          "step": 50
+        },
+        "step": 50
+      },
+      {
+        "metrics": {
+          "grad_med": 0.005347900092601776,
+          "mean_abs": 0.012000396847724915,
+          "step": 54
+        },
+        "step": 54
+      },
+      {
+        "metrics": {
+          "grad_med": 0.0007317215204238892,
+          "mean_abs": 0.010657607577741146,
+          "step": 57
+        },
+        "step": 57
+      },
+      {
+        "metrics": {
+          "grad_med": 0.013383179903030396,
+          "mean_abs": 0.00807318463921547,
+          "step": 60
+        },
+        "step": 60
+      },
+      {
+        "metrics": {
+          "grad_med": 0.016158729791641235,
+          "mean_abs": 0.006428249645978212,
+          "step": 64
+        },
+        "step": 64
+      },
+      {
+        "metrics": {
+          "grad_med": 0.007640309631824493,
+          "mean_abs": 0.0061850822530686855,
+          "step": 67
+        },
+        "step": 67
+      },
+      {
+        "metrics": {
+          "grad_med": 0.019415415823459625,
+          "mean_abs": 0.003405646188184619,
+          "step": 70
+        },
+        "step": 70
+      },
+      {
+        "metrics": {
+          "grad_med": 0.024445369839668274,
+          "mean_abs": 0.002630456117913127,
+          "step": 74
+        },
+        "step": 74
+      },
+      {
+        "metrics": {
+          "grad_med": 0.005400151014328003,
+          "mean_abs": 0.00218302384018898,
+          "step": 77
+        },
+        "step": 77
+      },
+      {
+        "metrics": {
+          "grad_med": 0.010896995663642883,
+          "mean_abs": 0.002445647493004799,
+          "step": 80
+        },
+        "step": 80
+      }
+    ],
+    "steps": 80,
+    "task_raw_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+    "verdict": "FAIL"
+  }
+}

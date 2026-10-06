@@ -1,0 +1,19 @@
+{
+  "default_git_diff_check": {
+    "returncode": 2,
+    "stdout": "configs/forge/ideas/atlas-original-two-pole-passive889-v1.json:33: new blank line at EOF.\nconfigs/forge/studies/atlas-original-two-pole-passive889-study-v1.json:56: new blank line at EOF.\n"
+  },
+  "git_diff_check_ignoring_only_blank_at_eof": {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=-blank-at-eof",
+      "diff",
+      "--check"
+    ],
+    "returncode": 0
+  },
+  "no_post_admission_scientific_source_change": true,
+  "qualification": "The two declared JSON metadata Sources have an extra blank EOF line. Their exact reviewed/tested/frozen bytes are retained instead of introducing a post-admission Source change. All other whitespace checks pass; eight focused actual controls already passed.",
+  "schema": "pg921_publication_source_validation_v1"
+}

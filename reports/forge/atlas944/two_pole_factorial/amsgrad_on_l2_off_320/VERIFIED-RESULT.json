@@ -1,0 +1,54 @@
+{
+  "cell_id": "amsgrad_on_l2_off_320",
+  "confirmed_step": 264,
+  "declaration_pin": {
+    "bytes": 35287,
+    "sha256": "a87be206fd36c95cbb1fb1ad768bf94f6072589541b329710eaaf5fe4e401910"
+  },
+  "elapsed_seconds": 16.59734594495967,
+  "execution_error": null,
+  "first_pass_step": 250,
+  "full_case_debit_seconds": 300,
+  "grad_med": 0.049550920724868774,
+  "grade_pin": {
+    "bytes": 665,
+    "sha256": "d369271bae0299f96bf81566b094de46553a87e75730ec03d33ddfbec33f4ac9"
+  },
+  "horizon": 320,
+  "mean_abs": 0.8724997043609619,
+  "observations": 96,
+  "partial_trace_limitation_preserved": true,
+  "particle_l2": 0.0,
+  "passing_observations": 22,
+  "passing_suffix": 22,
+  "population_std": 0.8752272884367635,
+  "prefix": {
+    "differing_steps": [],
+    "equal": true,
+    "observations": 24,
+    "scope": "ordered particles/targets/critic_gradient and two original metric values; whole-state UNKNOWN"
+  },
+  "range": 1.8639274835586548,
+  "raw_pin": {
+    "bytes": 4469026,
+    "sha256": "16a1d67b8467d1ee40ec89154090b3f65bf8e059d5c4ed448bd93f5e50daf693"
+  },
+  "request_attempt": "8ff5cba6895d03fd913799e866480ed7",
+  "rows": 12,
+  "schema": "atlas944_verified_cell_result_v1",
+  "scientific_credit": false,
+  "software_proof_pin": {
+    "bytes": 22740,
+    "sha256": "d309db552b1fe1caf8ec2a27c493161a7e1d33e9e0d5e9070263175ade3472a2"
+  },
+  "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+  "supervisor_elapsed_seconds": 14.907155537046492,
+  "table_amsgrad": true,
+  "terminal_pin": {
+    "bytes": 695,
+    "sha256": "1bac2c3e7b1c50420f90bc7e34280ea7b1f712ce49c99cedc93d50a37ec94f46"
+  },
+  "trace_complete": false,
+  "trace_status": "UNKNOWN",
+  "verdict": "PASS"
+}

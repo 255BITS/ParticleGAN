@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 503, in <module>
+    main()
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 499, in main
+    run_arm(Path(args.root), json.loads(Path(args.declaration).read_text()), Path(args.output), args.device)
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 460, in run_arm
+    result = _run(root, module, output, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 412, in _run
+    import torch
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/__init__.py", line 2254, in <module>
+    from torch import _VF as _VF, functional as functional  # usort: skip
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/functional.py", line 8, in <module>
+    import torch.nn.functional as F
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/nn/__init__.py", line 8, in <module>
+    from torch.nn.modules import *  # usort: skip # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/nn/modules/__init__.py", line 1, in <module>
+    from .module import Module  # usort: skip
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/nn/modules/module.py", line 17, in <module>
+    from torch.utils._python_dispatch import is_traceable_wrapper_subclass
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/__init__.py", line 8, in <module>
+    from torch.utils import (
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/data/__init__.py", line 1, in <module>
+    from torch.utils.data.dataloader import (
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 17, in <module>
+    import queue
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/queue.py", line 22, in <module>
+    from .contracts import (atomic_json, canonical, file_lock, identifier, positive_number,
+ImportError: attempted relative import with no known parent package

@@ -32,7 +32,9 @@ class ParticleRows:
     """Explicit owners and operations for an independently sampled particle bank.
 
     Each row of ``table`` is one equal-mass atom, sampled uniformly with
-    replacement, with clean output ``generate(table[i])``. Moving a row must
+    replacement, with clean output ``generate(table[i])``. An optional exact
+    raw ``mog_prior`` owns the same table and its original fixed kernel for
+    the fake pool; clean row-centre queries remain unchanged. Moving a row must
     affect that atom only: conditional banks, nonuniform routers and dense
     soft blends do not satisfy this contract. Declare those models to the
     policy as a different row semantics; evidence and birth/death reject them.
@@ -60,6 +62,7 @@ class ParticleRows:
     controller: object | None = None
     completed_steps: Callable[[], int] = field(default=lambda: 0)
     semantics: str = "independent"
+    mog_prior: object | None = None
 
     def __post_init__(self):
         if self.semantics != "independent":
@@ -89,6 +92,15 @@ class ParticleRows:
             raise TypeError("generation and completed_steps must be callbacks")
         if self.critic_features is not None and not callable(self.critic_features):
             raise TypeError("critic_features must be a callback")
+        if self.mog_prior is not None:
+            from .particle_prior import MoGParticlePrior
+            prior = self.mog_prior
+            if (type(prior) is not MoGParticlePrior or prior.z is not table
+                    or prior.standardize is not False):
+                raise ValueError("reaction sampling needs the exact raw MoG owning this table")
+            if (prior.sigma.ndim != 0 or prior.sigma.requires_grad
+                    or not bool(torch.isfinite(prior.sigma)) or bool(prior.sigma < 0)):
+                raise ValueError("reaction MoG width must be a fixed finite nonnegative scalar")
         self.evaluation_modules = tuple(self.evaluation_modules)
         if any(not isinstance(module, torch.nn.Module) for module in self.evaluation_modules):
             raise TypeError("evaluation_modules must contain torch modules")
@@ -325,11 +337,30 @@ class ParticleBirthDeath:
     # --------------------------------------------------------------- sampling law
     @torch.no_grad()
     def _nearest_other(self, z, points):
-        """Half-NN radius as DV12's perturb_latent (zero distances masked), matmul shortlist."""
-        d, _ = _knn(z, points, min(4, len(points) - 1) + 1)
-        d = d.masked_fill(d == 0, float("inf"))
-        nearest = d.min(1).values
-        return torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+        """Half nearest-positive-support radius for the bound raw MoG.
+
+        Match public DV12's zero mask before the support minimum. Query and
+        support chunks bound coordinate workspace without retaining a full
+        population distance matrix. Legacy unbound rows keep their original
+        shortlist path and floating operations.
+        """
+        if self.rows.mog_prior is None:
+            d, _ = _knn(z, points, min(4, len(points) - 1) + 1)
+            d = d.masked_fill(d == 0, float("inf"))
+            nearest = d.min(1).values
+            return torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+        radii = []
+        support = points.detach()
+        for query in z.detach().split(2048):
+            nearest = torch.full((len(query),), float("inf"), device=z.device, dtype=z.dtype)
+            for centers in support.split(max(1, 2048 // z.shape[1])):
+                distance = query[:, None, :] - centers[None, :, :]
+                distance = distance.mul_(distance).sum(-1)
+                distance.masked_fill_(distance == 0, float("inf"))
+                nearest = torch.minimum(nearest, distance.min(1).values)
+            nearest = nearest.sqrt()
+            radii.append(torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest)))
+        return torch.cat(radii)
 
     @torch.no_grad()
     def _jitter(self, latent, noise):
@@ -457,6 +488,30 @@ class ParticleBirthDeath:
             raise ValueError("generated sample shape must match the observed real sample shape")
 
     @torch.no_grad()
+    def _sample_fake_latents(self):
+        """Use the owned MoG kernel before unchanged DV12/output perturbations.
+
+        The private reaction stream owns indices and kernel noise. Other row
+        contracts retain their original centre-only draw and RNG consumption.
+        """
+        if self.rows.mog_prior is not None:
+            return self.rows.mog_prior.sample(self.N, generator=self.stream)
+        z = self.rows.table.detach()
+        pick = torch.randint(self.N, (self.N,), device=z.device, generator=self.stream)
+        return z[pick], pick
+
+    def _fake_pool_prior(self):
+        prior = self.rows.mog_prior
+        if prior is None:
+            return None
+        return dict(kind="mog", code_path="particlegan.particle_prior.MoGParticlePrior",
+                    sigma=float(prior.sigma), sigma_dtype=str(prior.sigma.dtype),
+                    sigma_units="raw_latent_coordinates", standardize=False,
+                    row_weights="uniform", same_table_parameter=prior.z is self.rows.table,
+                    sampler="original_public_sample_then_existing_dv12_and_output_noise",
+                    stream="private_birth_death")
+
+    @torch.no_grad()
     def maybe_apply(self, sigma_out):
         """Run one evaluation (and its moves) when the reservoir has turned over."""
         self.moved_rows = None
@@ -470,8 +525,7 @@ class ParticleBirthDeath:
             # with replacement, as prior.sample does), not one draw per particle: R is iid from pi,
             # so under rho = pi the two pools are identically distributed and both x and the
             # dimension test are symmetric (a stratified F failed the null test: d_R 1.89 vs d_F 2.10).
-            pick = torch.randint(self.N, (self.N,), device=z.device, generator=self.stream)
-            latent = z[pick]
+            latent, pick = self._sample_fake_latents()
             noise = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=self.stream)
             jitter_delta = self._jitter(latent, noise)
             y = self.rows.generate(latent + jitter_delta)
@@ -667,7 +721,8 @@ class ParticleBirthDeath:
         return dict(k=self.k, s_k=self.s_k, fill=self.fill, rows_since_eval=self.rows_since_eval,
                     counters=dict(self.counters), last=self.last,
                     in_excursion=int((self.n > 0).sum()), eligible_now=int((self.n >= 2).sum()),
-                    **({"iso_recent": list(self.iso_log)} if self.isolation else {}))
+                    **({"iso_recent": list(self.iso_log)} if self.isolation else {}),
+                    **({"fake_pool_prior": self._fake_pool_prior()} if self.rows.mog_prior is not None else {}))
 
     def state_dict(self):
         feature_callback = self.rows.critic_features
@@ -681,7 +736,8 @@ class ParticleBirthDeath:
 
     def _config(self):
         return {"table_shape": tuple(self.rows.table.shape), "space": self.space,
-                "isolation": self.isolation, "feature_scale": self.feature_scale}
+                "isolation": self.isolation, "feature_scale": self.feature_scale,
+                **({"fake_pool_prior": self._fake_pool_prior()} if self.rows.mog_prior is not None else {})}
 
     def _checkpointed_features(self):
         callback = self.rows.critic_features
@@ -707,6 +763,8 @@ class ParticleBirthDeath:
         metadata = {"sample_shape", "feature_state", "iso_log", "config", "moved_rows", "dry_run"}
         if not isinstance(state, dict) or set(state) not in (keys, keys | metadata):
             raise ValueError("invalid birth-death state")
+        if self.rows.mog_prior is not None and state.get("config") != self._config():
+            raise ValueError("corrected MoG reaction state requires its exact kernel configuration")
         for key in ("S", "W", "n", "radius", "pending"):
             if (not isinstance(state[key], torch.Tensor) or state[key].shape != getattr(self, key).shape
                     or state[key].dtype != getattr(self, key).dtype):

@@ -1,0 +1,51 @@
+{
+  "allocation_added_once": true,
+  "attempt_id": "4e8e52da5b0c58b2fe0e7f299720f38e",
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "canonical_original_task_credit": false,
+  "case_debit_seconds": 300,
+  "case_measurement_seconds": null,
+  "cell_id": "amsgrad_on_l2_off_80",
+  "control_pin": {
+    "bytes": 11740,
+    "sha256": "7a5996f7ad5093e6d82d12f8965faec6298a17fa719125d33fb5c22d8f9783ad"
+  },
+  "cpu_threads": 1,
+  "declaration_path": "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/cases/amsgrad_on_l2_off_80/declaration.json",
+  "declaration_pin": {
+    "bytes": 34998,
+    "sha256": "e715f935da47339ac86c58f8d0a74e36c2bf1d380a923e45ac35b2a7b80c7128"
+  },
+  "declared_source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+  "derived_owner_source_pin": {
+    "bytes": 75572,
+    "sha256": "b612c77abb0aa8bac552964d65e3635e48fd3559bf7b06bd8274f27ad254a85b"
+  },
+  "device": "cpu",
+  "driver_authority_seq": 944,
+  "driver_pin": {
+    "bytes": 26634,
+    "sha256": "d4e758e3dc9b48f132d031f0ccebf22d8ea766004c6052feadaf3c194fe8dbfe"
+  },
+  "full_case_seconds": 300,
+  "full_frozen_manifest_pin": {
+    "bytes": 212229,
+    "sha256": "2470910ae25790be3f6f47522e8eb756093fd2033ae27d0fde8b0b6353856fd4"
+  },
+  "gpus": 0,
+  "index": 1,
+  "output_path": "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/cases/amsgrad_on_l2_off_80/result",
+  "parent_owner_pin": {
+    "bytes": 76162,
+    "sha256": "ced28b3fe73d1fa74a000b1f10552ada7bc0f703cd8c94c6fff6ce8d04841a07"
+  },
+  "plan_sha256": "d2f96dd066878a12530f4a060545a4277b26f047ad678811ba389eb84e60e175",
+  "schema": "atlas944_root_case_admission_v1",
+  "scientific_authority_seq": 939,
+  "software_proof_pin": {
+    "bytes": 22739,
+    "sha256": "660d595895e4059b0cc5fc951c000061ed04994d2b81cb62cc9f664b0b17a0f7"
+  },
+  "status": "ADMITTED_NOT_LAUNCHED",
+  "task_digest": "2851539f385a0d293f0ef96a9081b0c74c50909781fb3b2b992372b46ceb12ed"
+}
