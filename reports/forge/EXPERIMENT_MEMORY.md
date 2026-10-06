@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 553. Inventory coverage: complete. Unresolved import items: 7.
+Records: 554. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4326,6 +4326,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-duration-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+The narrow-ring tail covariance may still be converging, and the wider-prior scalar law may become sustained with additional unchanged updates.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 60.077; mechanism `execution_budget_only`.
+
+ring16_acquisition__mog025-n256__duration1600: modes=16, hq=0.98267, mass_tv=0.046875; ring16_acquisition__mog100-n256__duration1600: modes=16, hq=0.93774, mass_tv=0.058594
+
+The user-requested duration diagnostic completes all three CUDA extensions without repeating prefix updates. Ring16 with 256 particles and MoG sigma .1 passes the full 1600-update gate with terminal suffix 6, covariance error .51431, minimum eigen ratio .38370 and HQ .93774. Ring sigma .025 passes the saved 800/1200-update cuts (suffix 8/16), then loses local eigenvalue spread and finishes FAIL with suffix 1 despite a passing endpoint; first five-pass window at update 750, longest streak 19. Gaussian sigma .1 remains FAIL at 4000 (KS .09594, std ratio 1.74796, mean error .27536 sigma); no five-pass window. Only the execution cap changed; models, optimizers and RNG streams restored exactly. Original 400/1000-update failures and the ordinary 4/6 selection remain intact.
+
+**Next:** Stop the bounded duration round. Ring acquisition supports a separately declared 800-update narrow-MoG question or 1600-update sigma-.1 question with unchanged full bounds; the narrow prior needs an endurance check. Gaussian needs a separately bounded trainer-stability hypothesis rather than more unchanged updates. No automatic further training, calibration claim or default adoption.
+
+[Evidence](../../reports/forge/tier1-prior-duration/results.json) · [Record](records/tier1-prior-duration-v1-readout.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-smoke-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -4714,4 +4730,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `5672d9e033db25587a8b714d740de34d2c70222b0de9da10a8b12c4468c0771d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `bf9710d00fb18b8e23558a3864b7cab53c90fe57b57aa73e066b269fbcd67d21`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

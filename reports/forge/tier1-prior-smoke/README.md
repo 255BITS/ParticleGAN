@@ -8,6 +8,9 @@ This user-requested task-only diagnostic tests particle count, cloud versus MoG,
 and MoG width on the two failing acquisition questions. It is based on develop
 `7183d65d`. It grants no ordinary Forge qualification, changes no public default,
 and preserves every archived result and the provisional calibration status.
+The later [user-requested duration follow-up](../tier1-prior-duration/README.md)
+finds a full ring pass at 1,600 updates and scalar regression at 4,000; it retains
+this original-budget study unchanged.
 The existing [current technique leaderboard](../technique-inventory.md) remains
 the only leaderboard for `discriminator_stability`.
 
