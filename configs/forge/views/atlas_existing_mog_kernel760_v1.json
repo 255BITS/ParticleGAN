@@ -1,0 +1,62 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_acquisition"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Isolated Atlas760 corrected MoG reaction-kernel validation; no baseline grade transfer or default qualification.",
+    "status": "provisional"
+  },
+  "eligibility": {
+    "claim_contract": {
+      "experimental_track": "atlas760_existing_mog_kernel"
+    }
+  },
+  "evidence_scope": "original_task_existing_mog_compatibility",
+  "goal": "discriminator_stability",
+  "id": "atlas_existing_mog_kernel760_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

@@ -5,7 +5,8 @@ import math
 
 
 DEFAULT_PRIOR = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
-PRIOR_CODE_PATHS = {"mog": "MoGParticlePrior", "particle_cloud": "ParticlePrior"}
+PRIOR_CODE_PATHS = {"mog": "MoGParticlePrior", "particle_cloud": "ParticlePrior",
+                    "noisy_particle_cloud": "NoisyParticlePrior"}
 
 
 def resolve_prior(value=None, *, explicit=False):
@@ -24,7 +25,7 @@ def resolve_prior(value=None, *, explicit=False):
         raise ValueError(f"unsupported prior fields: {sorted(unknown)}")
     prior = {**DEFAULT_PRIOR, **given}
     if not isinstance(prior["kind"], str) or prior["kind"] not in PRIOR_CODE_PATHS:
-        raise ValueError("prior kind must be mog or particle_cloud")
+        raise ValueError("prior kind must be mog, particle_cloud or noisy_particle_cloud")
     if (type(prior["sigma"]) not in (int, float) or not math.isfinite(prior["sigma"])
             or prior["sigma"] < 0 or type(prior["standardize"]) is not bool
             or type(prior["learnable"]) is not bool):
@@ -34,6 +35,9 @@ def resolve_prior(value=None, *, explicit=False):
                 or prior["sigma"] != 0 or prior["standardize"]
                 or not isinstance(prior["exception_reason"], str) or not prior["exception_reason"].strip()):
             raise ValueError("particle_cloud requires explicit sigma=0, standardize=False and exception_reason")
+    elif prior["kind"] == "noisy_particle_cloud":
+        if prior["standardize"]:
+            raise ValueError("NoisyParticlePrior requires raw row-local standardize=False")
     elif prior["sigma"] <= 0:
         raise ValueError("MoG requires nonzero sigma; declare an explicit particle_cloud exception for zero noise")
     if "init_std" in prior and (type(prior["init_std"]) not in (int, float)

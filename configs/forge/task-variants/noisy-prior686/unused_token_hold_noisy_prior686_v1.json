@@ -1,0 +1,99 @@
+{
+  "adapter": "transfer_behavior",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": null,
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "guards": {
+      "finite_state": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "discriminator"
+      ],
+      "rng_isolation": true
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "thresholds": [
+      [
+        "unused_hold",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_move",
+        ">=",
+        0.85
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cpu",
+    "execution_path": "public_components",
+    "host": "unused_token_hold",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 200
+    },
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "initializer": "deterministic_orthogonal",
+    "prior": {
+      "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+      "kind": "noisy_particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "prior_applicability": "not_sampled",
+    "produces_state": false,
+    "protocol": "screening",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon",
+    "steps": 200
+  },
+  "id": "unused_token_hold_noisy_prior686_v1",
+  "prior_substitution_parent": {
+    "axis": "prior_type_only",
+    "json_sha256": "ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8",
+    "ordinary_parent_credit": false,
+    "qualification_reuse": false,
+    "schema": "pg_noisy_prior686_parent_v1",
+    "task": "unused_token_hold"
+  },
+  "requires_capabilities": [
+    "named_rng",
+    "live_sampling",
+    "particle_cloud"
+  ],
+  "resources": {
+    "allow_cpu": true,
+    "cpu_threads": 1,
+    "gpu_memory_mb": 0,
+    "gpus": 0,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1,
+  "task_cohort": "noisy_particle_prior_tier1_686_v1"
+}

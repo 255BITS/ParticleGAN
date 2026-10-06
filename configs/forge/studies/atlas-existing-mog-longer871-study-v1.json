@@ -1,0 +1,58 @@
+{
+  "campaign": {
+    "budget_seconds": 240,
+    "candidate_budget_seconds": 240,
+    "id": "atlas-existing-mog-longer871-study-v1"
+  },
+  "candidate": "atlas-existing-mog-longer871-v1",
+  "competing_explanation": "The original trajectory already had nine consecutive passes before a later width/KS excursion. Longer training may still fail or fluctuate; a final-only KS pass does not imply sustained success. Prefix equality is measured, never assumed; complete restore scope is unknown, so this run starts from initialization.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {
+      "gaussian1d_acquisition_longer871_v1": "gaussian1d_acquisition"
+    }
+  },
+  "falsifier": {
+    "metric": "cdf_ks",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition_longer871_v1",
+    "threshold": 0.05
+  },
+  "hypothesis": "One fixed from-init run to 2000 updates may satisfy the unchanged terminal five-read Gaussian gate when the original 1000-step suffix failed. All 48 observations, the original-prefix metrics and ordered scored outputs are retained; no first-pass stop.",
+  "id": "atlas-existing-mog-longer871-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "cdf_ks",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition_longer871_v1",
+    "threshold": 0.05
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_existing_mog_longer871_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

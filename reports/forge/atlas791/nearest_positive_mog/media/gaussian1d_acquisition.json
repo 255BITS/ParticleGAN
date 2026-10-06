@@ -1,0 +1,53 @@
+{
+  "existing_prior_contract": {
+    "candidate_id": "atlas-existing-mog-nearest-positive791-v1",
+    "candidate_revision": "d211382aff5a48d521651b8e7a86bd627ba05071bcae9c122c362c28eada1ee0",
+    "cohort": "atlas_existing_task_mog_nearest_positive791_v1",
+    "cross_track_credit": false,
+    "eval_output_noise": "clean",
+    "extra_noise_assumed": false,
+    "latent_prior_sampled": true,
+    "parent_task_id": "gaussian1d_acquisition",
+    "prior_substituted": false,
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "public_prior_type": "particlegan.particle_prior.MoGParticlePrior",
+    "request_sha256": "4888799f865ea0b07ae154b1647408367c5b6d6ac509d7fe162bedfda2170e8e",
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live",
+    "sigma": 0.025,
+    "sigma_units": "raw_latent_coordinates",
+    "source_digest": "d45b5459a6def926e41c7d3c544593b1635a670b50ef118fb6660ab679e78f34"
+  },
+  "gif_bytes": 175351,
+  "gif_sha256": "2af99f5c52d296718749dd20a2305ad9e8a8337ee98493e35f7ed25c1a83b3ff",
+  "observation_count": 24,
+  "observations_sha256": "775e2978df2ec3b90b13d5df56cc23b45576418d38c6bb1cfca3cda180c3775d",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "760264ec9b5cf7c3d91756938988e49df80ca0938d0e43eefcfbd3876c2509db",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "a0813d0dabe31609a29db389d805ee74e5cfde8194e8d5846622185b52d0641b",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas791_nearest_positive_mog_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [
+    {
+      "bytes": 401001,
+      "sha256": "55b1a929bb7e85e4a302f1cc0c7436cbdba725a6588a77bfe7ff518a958812ce"
+    }
+  ],
+  "source_input_sha256": [
+    "55b1a929bb7e85e4a302f1cc0c7436cbdba725a6588a77bfe7ff518a958812ce"
+  ],
+  "task_id": "gaussian1d_acquisition"
+}

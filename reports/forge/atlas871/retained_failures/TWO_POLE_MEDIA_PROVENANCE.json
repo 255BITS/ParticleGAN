@@ -1,0 +1,52 @@
+{
+  "actual_target_bank_preserved": true,
+  "additional_model_forwards": 0,
+  "additional_optimizer_updates": 0,
+  "additional_sampling_draws": 0,
+  "files": {
+    "goal-final.png": {
+      "bytes": 108669,
+      "sha256": "b39343f8ea75dac312730afac4e7c9986992e27d1b11ce78b103eed56fd3372d"
+    },
+    "goal-first.png": {
+      "bytes": 104256,
+      "sha256": "b82e715c8fd73c92b2fa2712f31ad89af17d5a2648fa93eddbb49f905c1ac56d"
+    },
+    "goal-progress.gif": {
+      "bytes": 601014,
+      "sha256": "e0641e3a9ba9a41481a5ac2b789a6483b517edcace8cd35546974c02154cb69b"
+    },
+    "media.json": {
+      "bytes": 15841,
+      "sha256": "7735cadf08135c67b3f779482c1fee12a83ae88f386c40f5c1a2dad1279c004d"
+    }
+  },
+  "observations": 24,
+  "original_attempt_id": "f3140adaffd14f4a8974d25874d345d4",
+  "original_certified_verdict": "FAIL",
+  "original_graded_pin": {
+    "bytes": 2033,
+    "sha256": "4fc6459e872248e8b3190100baa2190a868163531b47b969f19767decb6bc37b"
+  },
+  "original_measurement_purity_all24": true,
+  "original_raw_pin": {
+    "bytes": 184041,
+    "sha256": "a50a963ad540a70a32451187e7b4b07ca395df16b5640cad111ee7f8dd281b4b"
+  },
+  "original_request_id": "6854af9ec7eeb60d1def13fb",
+  "original_task": "two_pole",
+  "qualified_winner_credit": false,
+  "reference_labels": "Display-only comparisons of existing recorded mean_abs/grad_med to unchanged original thresholds; no scorer/grader or new verdict",
+  "renderer_source_pin": {
+    "bytes": 11239,
+    "sha256": "6577cdf02d0f6f58c51d3de55987b0b0eca71e76789c8bca1d413d22314f13d8"
+  },
+  "schema": "pg_atlas884_retained_two_pole_media_root_provenance_v1",
+  "scientific_repetition": false,
+  "task_raw_pin": {
+    "bytes": 3099,
+    "sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5"
+  },
+  "visual_review": "PASS",
+  "visual_review_scope": "ROOT first/final PNG: goal, actual targets and coordinates, explicit zoom, original motion/slope references, ungated coverage and footer readability"
+}

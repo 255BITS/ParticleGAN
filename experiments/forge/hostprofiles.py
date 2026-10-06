@@ -144,13 +144,27 @@ def _validate_candidate_identity(request):
     # Rebuild from declarations, not candidate-provided resolved_recipe echoes.
     # Recipe resolution has no model construction or training draw and does not
     # depend on promotion seed; the registered RNG protocol is checked separately.
+    # Carry the already validated exact Track B metadata identity. The public
+    # context retains all prior, Recipe, ownership and other-family guards.
+    from .atlas_existing_mog import CANDIDATE_ID, VIEW_ID, supports_candidate
+    existing_mog_id = (CANDIDATE_ID if supports_candidate(candidate)
+                       and request.get("view", {}).get("id") == VIEW_ID else None)
+    if candidate.get('id') == 'atlas-existing-mog-radius-observer844-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_radius_observer844_v1':
+        from .atlas844_radius_owner import supports_candidate as supports844
+        if supports844(candidate):
+            existing_mog_id = candidate['id']
+    if candidate.get('id') == 'atlas-existing-mog-longer871-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer_owner import supports_candidate as supports871
+        if supports871(candidate):
+            existing_mog_id = candidate['id']
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), device="cpu",
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
-        execution_path=candidate.get("execution_path", "public_trainer"))
+        execution_path=candidate.get("execution_path", "public_trainer"),
+        candidate_id=existing_mog_id)
     resolved_recipe = asdict(context.recipe)
     if "configuration_id" in candidate:
         from .configuration_search import recipe_identity_fields, validate_configuration_declaration

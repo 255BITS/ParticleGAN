@@ -1,0 +1,27 @@
+{
+  "gif_bytes": 124468,
+  "gif_sha256": "6607939c4fe3f5bf903472f0c75e86131ec2336475442c516755f4540735fb76",
+  "observation_count": 24,
+  "observations_sha256": "f07c19d965f2ae788577aafcd0112a41ed5c073c73cf1720bdd2553c576b05e8",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "2508a74c7d57608900d7a6879e057d4beb62e760e78fbe16904ed478a3bf9e69",
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "84592ae0760dce162d597b5e570a96ecdd0d770912732f1b48fd028958ecd825",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [],
+  "task_id": "ae_gan_hold"
+}

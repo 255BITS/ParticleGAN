@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 2220,
+    "candidate_budget_seconds": 2220,
+    "id": "atlas-existing-mog-tier1-717-study-v1"
+  },
+  "candidate": "atlas-existing-mog-tier1-717-v1",
+  "competing_explanation": "Two-pole is the unchanged direct control and has no sampled MoG. This bounded study tests API/lifecycle compatibility and all original quality gates; it cannot attribute outcomes to added noise, infer causal birth/death benefit, transfer prior grades, or establish a shipped default. KA2 is a maintained schema-3 binding reference only; no extra control pilot is proposed.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "hypothesis": "The existing original task-declared raw MoG prior can retain its exact public class, trainable table and kernel while full Atlas owns its ordinary independent row lifecycle; fresh original Tier 1 gates determine quality.",
+  "id": "atlas-existing-mog-tier1-717-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_existing_mog_tier1_717_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

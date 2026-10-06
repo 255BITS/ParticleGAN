@@ -1,0 +1,34 @@
+{
+  "gif_bytes": 176562,
+  "gif_sha256": "79b97423355d196ad117dbe87e749b30bbd2749043805ab9f37bab9ac8ef0e7d",
+  "observation_count": 24,
+  "observations_sha256": "b4951d68966b8b561cdea2668cd5a1c6309e01f8582b280b139746d1dfaa1d0c",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "d4de226bc488a95e60ee88b86d8e0c50ec1fcff36403f3e0f635d4a0071b96b5",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "84592ae0760dce162d597b5e570a96ecdd0d770912732f1b48fd028958ecd825",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [
+    {
+      "bytes": 401001,
+      "sha256": "f57f0f73618d0b62b99062d9dbbf6913f74538bb3e9c403e74a9383aa204b6ef"
+    }
+  ],
+  "source_input_sha256": [
+    "f57f0f73618d0b62b99062d9dbbf6913f74538bb3e9c403e74a9383aa204b6ef"
+  ],
+  "task_id": "gaussian1d_acquisition"
+}

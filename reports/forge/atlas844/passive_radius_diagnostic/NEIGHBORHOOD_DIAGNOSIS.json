@@ -1,0 +1,720 @@
+{
+  "attempt_id": "d8e09d6b541a4b6aa31f175ecc53a4e5",
+  "authorization_scope": "READ_ONLY_RETAINED_ANALYSIS",
+  "candidate_revision": "e0ed9630fa93d55be62435d884ff073aa430b369c7a7932cc34a869df711da05",
+  "context_source_pins": [
+    {
+      "completed_steps": 792,
+      "label": "observation-792",
+      "phase": "ready",
+      "pin": {
+        "bytes": 423651,
+        "path": "radius-observer844/observation-792.pt",
+        "sha256": "68e8bb41b5b2d17b48778843e4f0d8888d83725becccbae5b31ef5005a3f04d1"
+      },
+      "scheduled_update": null
+    },
+    {
+      "completed_steps": 834,
+      "label": "observation-834",
+      "phase": "ready",
+      "pin": {
+        "bytes": 416459,
+        "path": "radius-observer844/observation-834.pt",
+        "sha256": "cc5090c71866f9cfe53167ad56afe7eec3510c5d7b372803689ada498a89127f"
+      },
+      "scheduled_update": null
+    },
+    {
+      "completed_steps": 875,
+      "label": "observation-875",
+      "phase": "ready",
+      "pin": {
+        "bytes": 415131,
+        "path": "radius-observer844/observation-875.pt",
+        "sha256": "6c0bd89945cc9f8bf3f15d63b57da25c2b68adc38097b05ed24cea1fca8ef67e"
+      },
+      "scheduled_update": null
+    },
+    {
+      "completed_steps": 832,
+      "label": "pre_update-833",
+      "phase": "ready",
+      "pin": {
+        "bytes": 421955,
+        "path": "radius-observer844/pre_update-833.pt",
+        "sha256": "4b311da5eb72a8ddefa695d653d870813d4ac3450a3e108bfefffaaa39e28986"
+      },
+      "scheduled_update": 833
+    },
+    {
+      "completed_steps": 832,
+      "label": "after_generator_backward-833",
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 421255,
+        "path": "radius-observer844/after_generator_backward-833.pt",
+        "sha256": "75a6cd2eb3ca56a3eab749f347c6416cf1379815a71db227a0f9eefab17e304f"
+      },
+      "scheduled_update": 833
+    },
+    {
+      "completed_steps": 833,
+      "label": "post_update-833",
+      "phase": "ready",
+      "pin": {
+        "bytes": 422083,
+        "path": "radius-observer844/post_update-833.pt",
+        "sha256": "0ce8cfc785c9aa7bae68f60be489e94e191d47a556e099ad4cb7a89d494c6c52"
+      },
+      "scheduled_update": 833
+    },
+    {
+      "completed_steps": 833,
+      "label": "pre_update-834",
+      "phase": "ready",
+      "pin": {
+        "bytes": 422083,
+        "path": "radius-observer844/pre_update-834.pt",
+        "sha256": "798597f5b2bc10cf78195eece170e9989aa6b1f5e3b0d988627f56d00f1f6779"
+      },
+      "scheduled_update": 834
+    },
+    {
+      "completed_steps": 833,
+      "label": "after_generator_backward-834",
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 421511,
+        "path": "radius-observer844/after_generator_backward-834.pt",
+        "sha256": "aef898c275149a0ed1ec2eb13b45bbf75a1a4ecf94d4235930497c330a0d1097"
+      },
+      "scheduled_update": 834
+    },
+    {
+      "completed_steps": 834,
+      "label": "post_update-834",
+      "phase": "ready",
+      "pin": {
+        "bytes": 423423,
+        "path": "radius-observer844/post_update-834.pt",
+        "sha256": "05ffd46a8c96dfe058ecfbdbf034f95fcf9d71578bcf6369de1ee73c5573931d"
+      },
+      "scheduled_update": 834
+    },
+    {
+      "completed_steps": 834,
+      "label": "pre_update-835",
+      "phase": "ready",
+      "pin": {
+        "bytes": 416459,
+        "path": "radius-observer844/pre_update-835.pt",
+        "sha256": "2a6aba53d82ad403be1479ceafe192b5fb4113748603668f6a481ab79274402d"
+      },
+      "scheduled_update": 835
+    },
+    {
+      "completed_steps": 834,
+      "label": "after_generator_backward-835",
+      "phase": "generator_step",
+      "pin": {
+        "bytes": 422723,
+        "path": "radius-observer844/after_generator_backward-835.pt",
+        "sha256": "c92d853a1671e963a1b11d5c0eac869016935088194e4364815cb4963688ec58"
+      },
+      "scheduled_update": 835
+    },
+    {
+      "completed_steps": 835,
+      "label": "post_update-835",
+      "phase": "ready",
+      "pin": {
+        "bytes": 424061,
+        "path": "radius-observer844/post_update-835.pt",
+        "sha256": "170ff573eaf11dc9f9cdbe491c0ff5658ba6681e47bc7d4e821c77ac2c8400b7"
+      },
+      "scheduled_update": 835
+    }
+  ],
+  "controller_and_optimizer": [
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        832.0
+      ],
+      "input_sigma_training": null,
+      "label": "pre_update-833",
+      "latent_bandwidth": [
+        0.06814447790384293,
+        0.061603449285030365
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 832.0,
+      "prior_coordinate_population_std": [
+        1.0871447641507779,
+        0.984961551716752
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        832.0
+      ],
+      "input_sigma_training": 0.0,
+      "label": "after_generator_backward-833",
+      "latent_bandwidth": [
+        0.06814249604940414,
+        0.06160301715135574
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 832.0,
+      "prior_coordinate_population_std": [
+        1.0871447641507779,
+        0.984961551716752
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        833.0
+      ],
+      "input_sigma_training": null,
+      "label": "post_update-833",
+      "latent_bandwidth": [
+        0.06814249604940414,
+        0.06160301715135574
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 833.0,
+      "prior_coordinate_population_std": [
+        1.087150350337725,
+        0.9847079345618479
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        833.0
+      ],
+      "input_sigma_training": null,
+      "label": "pre_update-834",
+      "latent_bandwidth": [
+        0.06814249604940414,
+        0.06160301715135574
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 833.0,
+      "prior_coordinate_population_std": [
+        1.087150350337725,
+        0.9847079345618479
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        833.0
+      ],
+      "input_sigma_training": 0.0,
+      "label": "after_generator_backward-834",
+      "latent_bandwidth": [
+        0.06814053654670715,
+        0.061602428555488586
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 833.0,
+      "prior_coordinate_population_std": [
+        1.087150350337725,
+        0.9847079345618479
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        834.0
+      ],
+      "input_sigma_training": null,
+      "label": "post_update-834",
+      "latent_bandwidth": [
+        0.06814053654670715,
+        0.061602428555488586
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 834.0,
+      "prior_coordinate_population_std": [
+        1.0875081379957865,
+        0.9843892648683937
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        834.0
+      ],
+      "input_sigma_training": null,
+      "label": "pre_update-835",
+      "latent_bandwidth": [
+        0.06814053654670715,
+        0.061602428555488586
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 834.0,
+      "prior_coordinate_population_std": [
+        1.0875081379957865,
+        0.9843892648683937
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        834.0
+      ],
+      "input_sigma_training": 0.0,
+      "label": "after_generator_backward-835",
+      "latent_bandwidth": [
+        0.06813882291316986,
+        0.06160164624452591
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 834.0,
+      "prior_coordinate_population_std": [
+        1.0875081379957865,
+        0.9843892648683937
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        835.0
+      ],
+      "input_sigma_training": null,
+      "label": "post_update-835",
+      "latent_bandwidth": [
+        0.06813882291316986,
+        0.06160164624452591
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 835.0,
+      "prior_coordinate_population_std": [
+        1.0873356419700886,
+        0.984394813309528
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        792.0
+      ],
+      "input_sigma_training": null,
+      "label": "observation-792",
+      "latent_bandwidth": [
+        0.06820698827505112,
+        0.06161491572856903
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 792.0,
+      "prior_coordinate_population_std": [
+        1.0906776748986116,
+        0.9854003543520146
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        834.0
+      ],
+      "input_sigma_training": null,
+      "label": "observation-834",
+      "latent_bandwidth": [
+        0.06814053654670715,
+        0.061602428555488586
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 834.0,
+      "prior_coordinate_population_std": [
+        1.0875081379957865,
+        0.9843892648683937
+      ],
+      "prior_sigma": 0.02500000037252903
+    },
+    {
+      "fast_is_none": true,
+      "generator_adam_steps": [
+        875.0
+      ],
+      "input_sigma_training": null,
+      "label": "observation-875",
+      "latent_bandwidth": [
+        0.06806045025587082,
+        0.06163410842418671
+      ],
+      "output_sigma_training": 0.028999999165534973,
+      "prior_adam_step": 875.0,
+      "prior_coordinate_population_std": [
+        1.0876048135975969,
+        0.9884157828258103
+      ],
+      "prior_sigma": 0.02500000037252903
+    }
+  ],
+  "full_live_leaf_scope": "UNKNOWN",
+  "historical_legacy_behavior": "UNKNOWN",
+  "hypothesis": "The active live learner exhibits late-fit/finite-bank sustained-criterion sensitivity. Late generator/prior update oscillation is a mechanism candidate; this analysis does not prove its share versus evaluation variation, or establish any whole-algorithm wiring conclusion.",
+  "missing_quantities": [
+    "Realized834 component indices, MoG and DV12 base noises and intermediate activations are absent, although pre-read evaluation RNG is retained.",
+    "Full live-law population CDF distance is not identified by one4096-output bank.",
+    "Separate optimizer/hot-row write contributions and complete arbitrary callback state are not certified."
+  ],
+  "nearby_original_scores": [
+    {
+      "cdf_ks": 0.02988417335308141,
+      "finite_fraction": 1.0,
+      "mean": 2.01061867493263,
+      "mean_error_sigma": 0.021237349865259603,
+      "sample_count": 4096,
+      "std": 0.4782655554086565,
+      "std_ratio": 0.956531110817313,
+      "step": 709
+    },
+    {
+      "cdf_ks": 0.0332798529524041,
+      "finite_fraction": 1.0,
+      "mean": 1.9852989214996342,
+      "mean_error_sigma": 0.029402157000731677,
+      "sample_count": 4096,
+      "std": 0.46085024785001255,
+      "std_ratio": 0.9217004957000251,
+      "step": 750
+    },
+    {
+      "cdf_ks": 0.04727500335891688,
+      "finite_fraction": 1.0,
+      "mean": 2.0403514531208202,
+      "mean_error_sigma": 0.08070290624164045,
+      "sample_count": 4096,
+      "std": 0.495167517430337,
+      "std_ratio": 0.990335034860674,
+      "step": 792
+    },
+    {
+      "cdf_ks": 0.05170075118549944,
+      "finite_fraction": 1.0,
+      "mean": 1.9806156428530812,
+      "mean_error_sigma": 0.03876871429383755,
+      "sample_count": 4096,
+      "std": 0.43954745270107415,
+      "std_ratio": 0.8790949054021483,
+      "step": 834
+    },
+    {
+      "cdf_ks": 0.04122845242317963,
+      "finite_fraction": 1.0,
+      "mean": 2.0174713051019353,
+      "mean_error_sigma": 0.03494261020387057,
+      "sample_count": 4096,
+      "std": 0.5292281913444297,
+      "std_ratio": 1.0584563826888593,
+      "step": 875
+    },
+    {
+      "cdf_ks": 0.04438779642164109,
+      "finite_fraction": 1.0,
+      "mean": 1.974161569662101,
+      "mean_error_sigma": 0.0516768606757978,
+      "sample_count": 4096,
+      "std": 0.5021854881743558,
+      "std_ratio": 1.0043709763487116,
+      "step": 917
+    }
+  ],
+  "next_test_plan": {
+    "current_new_forward_calls": 0,
+    "current_new_sampling_draws": 0,
+    "current_regrade_calls": 0,
+    "current_training_updates": 0,
+    "does_not_resolve": "True population sup_x|F_full_live834(x)-Phi((x-2)/.5)| versus.05. This requires a separately bounded fixed-state estimator/integration with an explicit error rule. A repeated deterministic bank is not independent replication.",
+    "first": "Use retained post_update-834 pre-read evaluation RNG to replay exactly the already saved4096-output bank in an isolated frozen clone, with no training or seed choice. Require typed output bytes and final evaluation RNG to match the original retained bank and observation-834 state; otherwise STOP UNKNOWN. Retain the realized component indices, MoG base noise and DV12 base noise.",
+    "original_verdict": "FAIL_UNCHANGED",
+    "prerequisite": "Reconstruct and verify every state/Source/buffer/mode/alias/backend/callback component required by the full live MoG+DV12+G sampling law; full arbitrary live-leaf scope remains UNKNOWN. Stop if this narrow sampler replay cannot be bound.",
+    "resolves": "Local state effects on matched inputs; can guide a late optimizer-stability correction if the matched distribution narrows at834.",
+    "second": "Reuse those exact underlying variates at frozen post-update833 and835 states. Three4096 forward banks total including834 replay, zero updates. Keep full live MoG.025 + DV12 perturbation + G, clean output and original Source/backend; do not substitute EMA or omit DV12.",
+    "status": "PLAN_ONLY_NOT_AUTHORIZED_OR_RUN"
+  },
+  "numerical_credit": "DIAGNOSTIC_ONLY",
+  "observed_facts": [
+    "Six generator parameter tensors and97/106/103 prior rows change after backward at833/834/835; gradients are nonzero and Adam steps advance832->835. This is aggregate update evidence, not a separation of Adam/hot-row/other writes.",
+    "At834 birth/death evals416->417 but matched/moves remain23 and last.step becomes834 with last.moves=last.matched=0. No move is recorded in this neighborhood.",
+    "Fixed prior sigma stays.025, recorded training output sigma stays.029, DV12 bandwidth changes smoothly; clean scoring disables additive output noise, retains MoG and DV12.",
+    "At834 post-update versus scored state, six G parameter tensors/table/sigma/DV12 bandwidth bytes are identical and _fast=None; the named evaluation RNG advances.",
+    "The scored bank standard deviation narrows.4951675 at792 ->.4395475 at834 ->.5292282 at875.834 KS.05170075 alone crosses.05 while mean and width gates still pass."
+  ],
+  "original_gate_status": "FAIL",
+  "post_update834_to_scoring834": {
+    "changed_byte_state_paths": [
+      "named_streams._streams/[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+    ],
+    "fast_is_none": true,
+    "nine_typed_parameter_buffer_bandwidth_leaves_identical": true,
+    "pre_read_eval_rng_retained": true
+  },
+  "request_id": "6e12ebfedd3c18d7a123b2d8",
+  "schema": "forge_atlas867_retained_neighborhood_diagnosis_v1",
+  "source_digest": "97090a2e439964e4110df92a22b4d452317dc35f7ebe1b3ddce133c5f8babe98",
+  "updates": [
+    {
+      "backward_to_post_critic": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_generator": {
+        "changed_elements": 1185,
+        "changed_tensors": 6,
+        "l2": 0.014646927898100775,
+        "max_abs": 0.002032041549682617,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_table": {
+        "available": true,
+        "base_l2": 23.549674264798686,
+        "changed_elements": 194,
+        "l2": 0.04781638391106083,
+        "max_abs": 0.014712214469909668,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "birth_death_after": {
+        "counters/evals": 416,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 832
+      },
+      "birth_death_before": {
+        "counters/evals": 416,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 832
+      },
+      "changed_table_rows": 97,
+      "fixed_prior_sigma_post": 0.02500000037252903,
+      "fixed_prior_sigma_pre": 0.02500000037252903,
+      "generator_gradient": {
+        "l2": 0.006392633212330733,
+        "tensors": 6
+      },
+      "pre_to_backward_generator": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "pre_to_backward_table": {
+        "available": true,
+        "base_l2": 23.549674264798686,
+        "changed_elements": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "prior_gradient": {
+        "l2": 0.0004412291129647168,
+        "nonzero_rows": 97,
+        "present": true
+      },
+      "update": 833
+    },
+    {
+      "backward_to_post_critic": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_generator": {
+        "changed_elements": 1185,
+        "changed_tensors": 6,
+        "l2": 0.01077722480837286,
+        "max_abs": 0.0009330809116363525,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_table": {
+        "available": true,
+        "base_l2": 23.547026569882423,
+        "changed_elements": 212,
+        "l2": 0.030712488721987594,
+        "max_abs": 0.009019017219543457,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "birth_death_after": {
+        "counters/evals": 417,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 834
+      },
+      "birth_death_before": {
+        "counters/evals": 416,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 832
+      },
+      "changed_table_rows": 106,
+      "fixed_prior_sigma_post": 0.02500000037252903,
+      "fixed_prior_sigma_pre": 0.02500000037252903,
+      "generator_gradient": {
+        "l2": 0.007595333018507781,
+        "tensors": 6
+      },
+      "pre_to_backward_generator": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "pre_to_backward_table": {
+        "available": true,
+        "base_l2": 23.547026569882423,
+        "changed_elements": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "prior_gradient": {
+        "l2": 0.00019197304774392937,
+        "nonzero_rows": 106,
+        "present": true
+      },
+      "update": 834
+    },
+    {
+      "backward_to_post_critic": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_generator": {
+        "changed_elements": 1185,
+        "changed_tensors": 6,
+        "l2": 0.007112610394242461,
+        "max_abs": 0.0013550668954849243,
+        "parameter_tensors": 6
+      },
+      "backward_to_post_table": {
+        "available": true,
+        "base_l2": 23.548431107195793,
+        "changed_elements": 206,
+        "l2": 0.023230291214650638,
+        "max_abs": 0.00710296630859375,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "birth_death_after": {
+        "counters/evals": 417,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 834
+      },
+      "birth_death_before": {
+        "counters/evals": 417,
+        "counters/matched": 23,
+        "counters/moves": 23,
+        "counters/realised_births": 29,
+        "counters/realised_deaths": 4172,
+        "last/matched": 0,
+        "last/moves": 0,
+        "last/realised_births": 0,
+        "last/realised_deaths": 0,
+        "last/step": 834
+      },
+      "changed_table_rows": 103,
+      "fixed_prior_sigma_post": 0.02500000037252903,
+      "fixed_prior_sigma_pre": 0.02500000037252903,
+      "generator_gradient": {
+        "l2": 0.003064338839880347,
+        "tensors": 6
+      },
+      "pre_to_backward_generator": {
+        "changed_elements": 0,
+        "changed_tensors": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "parameter_tensors": 6
+      },
+      "pre_to_backward_table": {
+        "available": true,
+        "base_l2": 23.548431107195793,
+        "changed_elements": 0,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "shape": [
+          256,
+          2
+        ]
+      },
+      "prior_gradient": {
+        "l2": 0.00021132636374033534,
+        "nonzero_rows": 103,
+        "present": true
+      },
+      "update": 835
+    }
+  ]
+}

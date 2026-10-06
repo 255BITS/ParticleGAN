@@ -1,0 +1,772 @@
+{
+  "bank_hash_encoding": "4096 ordered numeric values encoded little-endian float64; not a tensor-file hash",
+  "caller_statuses_not_regraded": true,
+  "cohort": "atlas_existing_mog_longer871_v1",
+  "diagnostic_final_update": 2000,
+  "fixed_axes": {
+    "cdf_ks": [
+      0,
+      0.2557589277368358
+    ],
+    "density": [
+      0,
+      1.6
+    ],
+    "updates": [
+      0,
+      2000
+    ],
+    "value": [
+      -1,
+      5
+    ]
+  },
+  "frames": [
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "FAIL",
+      "step": 42
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 209
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 459
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 625
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 792
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "FAIL",
+      "step": 834
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 1000
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "PASS",
+      "step": 1500
+    },
+    {
+      "out_of_fixed_x_range": 0,
+      "status": "FAIL",
+      "step": 2000
+    }
+  ],
+  "future_stability": "UNKNOWN",
+  "histogram": {
+    "bin_count": 120,
+    "normalizing_bank_size": 4096
+  },
+  "input_scope": "caller-held original scored banks and metrics; no input files",
+  "model_forwards_added": 0,
+  "observations": [
+    {
+      "metrics": {
+        "cdf_ks": 0.23250811612439615,
+        "finite_fraction": 1.0,
+        "mean": 1.8773764694778947,
+        "mean_error_sigma": 0.24524706104421057,
+        "sample_count": 4096,
+        "std": 0.7404181661520568,
+        "std_ratio": 1.4808363323041136
+      },
+      "ordered_bank_values_sha256": "845c841fbfb13533bd6cd7183f6fee5ac4195fd5ce80096c53fe6bcc99f25c34",
+      "status": "FAIL",
+      "step": 42
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.09954756665766895,
+        "finite_fraction": 1.0,
+        "mean": 1.9926030233764322,
+        "mean_error_sigma": 0.014793953247135505,
+        "sample_count": 4096,
+        "std": 0.7093897771335941,
+        "std_ratio": 1.4187795542671882
+      },
+      "ordered_bank_values_sha256": "9a13087ae20c6d475f1923810b9eb1dcdff113ff202f3da209df383a3a0f873a",
+      "status": "FAIL",
+      "step": 84
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.06090173384924691,
+        "finite_fraction": 1.0,
+        "mean": 2.0459030073398026,
+        "mean_error_sigma": 0.09180601467960514,
+        "sample_count": 4096,
+        "std": 0.5172137454557443,
+        "std_ratio": 1.0344274909114886
+      },
+      "ordered_bank_values_sha256": "96cff10078f0146edad4e89179bfa28e8e6bc47f215b29b443a890448814bf90",
+      "status": "FAIL",
+      "step": 125
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.0898112949994011,
+        "finite_fraction": 1.0,
+        "mean": 2.060248469817452,
+        "mean_error_sigma": 0.12049693963490427,
+        "sample_count": 4096,
+        "std": 0.46144161096761255,
+        "std_ratio": 0.9228832219352251
+      },
+      "ordered_bank_values_sha256": "24caa9528a3143e1a2ad7df33c06e665142733821a5c087a07bdefb58b077de1",
+      "status": "FAIL",
+      "step": 167
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04679464717552595,
+        "finite_fraction": 1.0,
+        "mean": 1.9674537102982868,
+        "mean_error_sigma": 0.0650925794034265,
+        "sample_count": 4096,
+        "std": 0.4781716621421559,
+        "std_ratio": 0.9563433242843118
+      },
+      "ordered_bank_values_sha256": "ded69e95b71f81760b5b88210f2b5dfc6077d806e56e0353c48162153c1d8771",
+      "status": "PASS",
+      "step": 209
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.09900113049920078,
+        "finite_fraction": 1.0,
+        "mean": 1.9119806788075948,
+        "mean_error_sigma": 0.17603864238481037,
+        "sample_count": 4096,
+        "std": 0.45481473763362473,
+        "std_ratio": 0.9096294752672495
+      },
+      "ordered_bank_values_sha256": "86bd06137c7fcf55023796c3b02a701685f83e0ef6c9602dfbe80be42385ffec",
+      "status": "FAIL",
+      "step": 250
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04852199011972458,
+        "finite_fraction": 1.0,
+        "mean": 2.008912477263948,
+        "mean_error_sigma": 0.017824954527895898,
+        "sample_count": 4096,
+        "std": 0.5350226939783539,
+        "std_ratio": 1.0700453879567078
+      },
+      "ordered_bank_values_sha256": "00ef15d3b26363bf0a899d81d0813ba01fdb10662079cd17d93460ae3ae2b447",
+      "status": "PASS",
+      "step": 292
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.06651292920529528,
+        "finite_fraction": 1.0,
+        "mean": 1.9371162808674853,
+        "mean_error_sigma": 0.12576743826502934,
+        "sample_count": 4096,
+        "std": 0.5370481846677855,
+        "std_ratio": 1.074096369335571
+      },
+      "ordered_bank_values_sha256": "6071fe46435238ac83f17ae5ec95930c69b0d3cfb6a68ad5e6fef7ce8c15a516",
+      "status": "FAIL",
+      "step": 334
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.06542163512343291,
+        "finite_fraction": 1.0,
+        "mean": 2.036322524858406,
+        "mean_error_sigma": 0.07264504971681163,
+        "sample_count": 4096,
+        "std": 0.5227784338291432,
+        "std_ratio": 1.0455568676582865
+      },
+      "ordered_bank_values_sha256": "9fa29b5990d3cb833145b93e2a45e6b3fb1522ca4bacd0a210f30235b1e498aa",
+      "status": "FAIL",
+      "step": 375
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.05150851792379174,
+        "finite_fraction": 1.0,
+        "mean": 2.0363529125315836,
+        "mean_error_sigma": 0.07270582506316714,
+        "sample_count": 4096,
+        "std": 0.481532366700525,
+        "std_ratio": 0.96306473340105
+      },
+      "ordered_bank_values_sha256": "47879c16d66d79c65ae09e071b985ac5eb562543a135b3e1b8426d1982cf4be1",
+      "status": "FAIL",
+      "step": 417
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04718261608927654,
+        "finite_fraction": 1.0,
+        "mean": 2.0315366113645723,
+        "mean_error_sigma": 0.06307322272914462,
+        "sample_count": 4096,
+        "std": 0.4856474787157859,
+        "std_ratio": 0.9712949574315718
+      },
+      "ordered_bank_values_sha256": "418363a51fc46418c1b3845c6db377184168b875dbfe24aac56ffe184d6a37f0",
+      "status": "PASS",
+      "step": 459
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.042799093977232805,
+        "finite_fraction": 1.0,
+        "mean": 1.9747849489940563,
+        "mean_error_sigma": 0.05043010201188736,
+        "sample_count": 4096,
+        "std": 0.4934524061891132,
+        "std_ratio": 0.9869048123782264
+      },
+      "ordered_bank_values_sha256": "80e8962c9601d51268bf3722f3831ab4d313da8ddd19b21f7e1c92112c897fb8",
+      "status": "PASS",
+      "step": 500
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.03406270914945886,
+        "finite_fraction": 1.0,
+        "mean": 2.0101744293788215,
+        "mean_error_sigma": 0.02034885875764303,
+        "sample_count": 4096,
+        "std": 0.5007948313419197,
+        "std_ratio": 1.0015896626838394
+      },
+      "ordered_bank_values_sha256": "4656229da0bae782585e7c736a3096759a7b0b2413b32ef0fda671b37201e9b4",
+      "status": "PASS",
+      "step": 542
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.043788357115660426,
+        "finite_fraction": 1.0,
+        "mean": 1.977857063524425,
+        "mean_error_sigma": 0.04428587295114994,
+        "sample_count": 4096,
+        "std": 0.4804642797927833,
+        "std_ratio": 0.9609285595855666
+      },
+      "ordered_bank_values_sha256": "63c33448f36a431fa4c7f947c77cde1571761526fdef7d24fc95db79f1ba23e5",
+      "status": "PASS",
+      "step": 584
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04028571291324878,
+        "finite_fraction": 1.0,
+        "mean": 2.0237546126154484,
+        "mean_error_sigma": 0.047509225230896845,
+        "sample_count": 4096,
+        "std": 0.5330509848568927,
+        "std_ratio": 1.0661019697137855
+      },
+      "ordered_bank_values_sha256": "fb6ae32f67cac72920b84a64e35e44c0bca79189811e2f3bedac70c67d4f2be0",
+      "status": "PASS",
+      "step": 625
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.03887228752496996,
+        "finite_fraction": 1.0,
+        "mean": 2.0223652473359834,
+        "mean_error_sigma": 0.04473049467196688,
+        "sample_count": 4096,
+        "std": 0.503333891213814,
+        "std_ratio": 1.006667782427628
+      },
+      "ordered_bank_values_sha256": "5d587e79334417a5c940c98e6bf2b37088fe54d787a8ba4a0c3efa33a93dcc93",
+      "status": "PASS",
+      "step": 667
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.02988417335308141,
+        "finite_fraction": 1.0,
+        "mean": 2.01061867493263,
+        "mean_error_sigma": 0.021237349865259603,
+        "sample_count": 4096,
+        "std": 0.4782655554086565,
+        "std_ratio": 0.956531110817313
+      },
+      "ordered_bank_values_sha256": "519db8f68ca745e80fe2722286f0be092bdc2fc1b8889b33bbf3babc960a0df5",
+      "status": "PASS",
+      "step": 709
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.0332798529524041,
+        "finite_fraction": 1.0,
+        "mean": 1.9852989214996342,
+        "mean_error_sigma": 0.029402157000731677,
+        "sample_count": 4096,
+        "std": 0.46085024785001255,
+        "std_ratio": 0.9217004957000251
+      },
+      "ordered_bank_values_sha256": "8b2cbde63cda7207e88825882380838a51dac23496a301072575b05eb2259f02",
+      "status": "PASS",
+      "step": 750
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04727500335891688,
+        "finite_fraction": 1.0,
+        "mean": 2.0403514531208202,
+        "mean_error_sigma": 0.08070290624164045,
+        "sample_count": 4096,
+        "std": 0.495167517430337,
+        "std_ratio": 0.990335034860674
+      },
+      "ordered_bank_values_sha256": "42620c1027fdb988b823bd6921b7388df8b15a91314c6454277beb1d2eea304d",
+      "status": "PASS",
+      "step": 792
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.05170075118549944,
+        "finite_fraction": 1.0,
+        "mean": 1.9806156428530812,
+        "mean_error_sigma": 0.03876871429383755,
+        "sample_count": 4096,
+        "std": 0.43954745270107415,
+        "std_ratio": 0.8790949054021483
+      },
+      "ordered_bank_values_sha256": "aae50a87345eaaeeb1a81e1f86bb6ee03540ad485608116d5d1de1e379c80c62",
+      "status": "FAIL",
+      "step": 834
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04122845242317963,
+        "finite_fraction": 1.0,
+        "mean": 2.0174713051019353,
+        "mean_error_sigma": 0.03494261020387057,
+        "sample_count": 4096,
+        "std": 0.5292281913444297,
+        "std_ratio": 1.0584563826888593
+      },
+      "ordered_bank_values_sha256": "6d5727c28697384a48341910be26ee378cf085cb51b5c94dbeca6f8c558358ef",
+      "status": "PASS",
+      "step": 875
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04438779642164109,
+        "finite_fraction": 1.0,
+        "mean": 1.974161569662101,
+        "mean_error_sigma": 0.0516768606757978,
+        "sample_count": 4096,
+        "std": 0.5021854881743558,
+        "std_ratio": 1.0043709763487116
+      },
+      "ordered_bank_values_sha256": "abde3d574b384c493fc0f50b16e201d44239d8d36be7b27ada40a864c4ddc957",
+      "status": "PASS",
+      "step": 917
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.040057943474272384,
+        "finite_fraction": 1.0,
+        "mean": 2.0274288571235957,
+        "mean_error_sigma": 0.054857714247191325,
+        "sample_count": 4096,
+        "std": 0.4782148545448363,
+        "std_ratio": 0.9564297090896726
+      },
+      "ordered_bank_values_sha256": "fab9436771dcde98a128ddc25c3945d7743e6e0fd8bb5cacccbf289337f95009",
+      "status": "PASS",
+      "step": 959
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.03338042068204705,
+        "finite_fraction": 1.0,
+        "mean": 2.003650004560768,
+        "mean_error_sigma": 0.007300009121536277,
+        "sample_count": 4096,
+        "std": 0.493200044404558,
+        "std_ratio": 0.986400088809116
+      },
+      "ordered_bank_values_sha256": "14849a55abb9f715bf31f98aac992f54f9eff5a1fbd3cc5ebf064b1085224513",
+      "status": "PASS",
+      "step": 1000
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.05991022137386015,
+        "finite_fraction": 1.0,
+        "mean": 1.9520807011140278,
+        "mean_error_sigma": 0.09583859777194448,
+        "sample_count": 4096,
+        "std": 0.47114721009728044,
+        "std_ratio": 0.9422944201945609
+      },
+      "ordered_bank_values_sha256": "5a061bc32eaddd264686205f5dff689808c4fa7f76d3ebdcf66580e00371e777",
+      "status": "FAIL",
+      "step": 1042
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.06625001985318762,
+        "finite_fraction": 1.0,
+        "mean": 1.965647117489425,
+        "mean_error_sigma": 0.06870576502115,
+        "sample_count": 4096,
+        "std": 0.4837388645088925,
+        "std_ratio": 0.967477729017785
+      },
+      "ordered_bank_values_sha256": "457610c3f69d5dbbba42064c0282b907663568b8bd4011cc71e065a55498a8cf",
+      "status": "FAIL",
+      "step": 1084
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.05479125362817139,
+        "finite_fraction": 1.0,
+        "mean": 1.9562836218756274,
+        "mean_error_sigma": 0.08743275624874514,
+        "sample_count": 4096,
+        "std": 0.4871717894296963,
+        "std_ratio": 0.9743435788593926
+      },
+      "ordered_bank_values_sha256": "3da384f69a53f6950fce42ed54b253434d4a850cde7485a617b4a181f8fe6252",
+      "status": "FAIL",
+      "step": 1125
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04721705902927942,
+        "finite_fraction": 1.0,
+        "mean": 2.011755886807805,
+        "mean_error_sigma": 0.023511773615609854,
+        "sample_count": 4096,
+        "std": 0.4867636744907838,
+        "std_ratio": 0.9735273489815676
+      },
+      "ordered_bank_values_sha256": "e7562a79a4b3fe54d81abbeaf7d3334a8b21f6cb85a5a1c1020ed7a3c693800a",
+      "status": "PASS",
+      "step": 1167
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.05733741506316936,
+        "finite_fraction": 1.0,
+        "mean": 1.9706320526311174,
+        "mean_error_sigma": 0.05873589473776519,
+        "sample_count": 4096,
+        "std": 0.5110044448389064,
+        "std_ratio": 1.0220088896778128
+      },
+      "ordered_bank_values_sha256": "3bcc06c4d610e7256b59da3f39b4bb075dbb1913c318cff5b562be479f6b75f0",
+      "status": "FAIL",
+      "step": 1209
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.045347355088981134,
+        "finite_fraction": 1.0,
+        "mean": 1.969346313861024,
+        "mean_error_sigma": 0.0613073722779518,
+        "sample_count": 4096,
+        "std": 0.48414325743922704,
+        "std_ratio": 0.9682865148784541
+      },
+      "ordered_bank_values_sha256": "2590686b5d049f4148d4bfe45684114b695fa6112aa98ee5e0ecfa5189780841",
+      "status": "PASS",
+      "step": 1250
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.036296256229561785,
+        "finite_fraction": 1.0,
+        "mean": 1.9841873445475358,
+        "mean_error_sigma": 0.03162531090492848,
+        "sample_count": 4096,
+        "std": 0.48015476035545374,
+        "std_ratio": 0.9603095207109075
+      },
+      "ordered_bank_values_sha256": "82a610b6316e2c959dddab3d3e2bae2cb89c3f0d8ca6eb5c5c32c0dbe407e4eb",
+      "status": "PASS",
+      "step": 1292
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04928601966720858,
+        "finite_fraction": 1.0,
+        "mean": 1.9837604670465225,
+        "mean_error_sigma": 0.03247906590695493,
+        "sample_count": 4096,
+        "std": 0.47784634499125367,
+        "std_ratio": 0.9556926899825073
+      },
+      "ordered_bank_values_sha256": "34f8682e9f74b5fdbf7b1b5f26ee50bd952f3777f4e1b2e9c1682e53cac0bf84",
+      "status": "PASS",
+      "step": 1334
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.040498922743098575,
+        "finite_fraction": 1.0,
+        "mean": 2.020315005160228,
+        "mean_error_sigma": 0.04063001032045577,
+        "sample_count": 4096,
+        "std": 0.4892650931950996,
+        "std_ratio": 0.9785301863901992
+      },
+      "ordered_bank_values_sha256": "721726457025515baa508baeb5492d3cc1992d092c2252af1361000ce9e82226",
+      "status": "PASS",
+      "step": 1375
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.06258458422408897,
+        "finite_fraction": 1.0,
+        "mean": 1.953476115122612,
+        "mean_error_sigma": 0.0930477697547758,
+        "sample_count": 4096,
+        "std": 0.4638797164161013,
+        "std_ratio": 0.9277594328322026
+      },
+      "ordered_bank_values_sha256": "69f7891451e83550ae3671c473772e8f56718c674b1357ae34c659b5fdce8a71",
+      "status": "FAIL",
+      "step": 1417
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.04392567299547445,
+        "finite_fraction": 1.0,
+        "mean": 2.0315650166303385,
+        "mean_error_sigma": 0.06313003326067701,
+        "sample_count": 4096,
+        "std": 0.4943929019940008,
+        "std_ratio": 0.9887858039880016
+      },
+      "ordered_bank_values_sha256": "20d8bec999299bd3bd93d042c72ff8e6ca9de0a4788c98f218347154131bcb02",
+      "status": "PASS",
+      "step": 1459
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.035957838297563105,
+        "finite_fraction": 1.0,
+        "mean": 1.986017749644816,
+        "mean_error_sigma": 0.027964500710368156,
+        "sample_count": 4096,
+        "std": 0.4720118303291779,
+        "std_ratio": 0.9440236606583557
+      },
+      "ordered_bank_values_sha256": "096f3f6e2467d4118de0ce4454bcb97d0325f73c31d42cfb6600fb40a0d99a1e",
+      "status": "PASS",
+      "step": 1500
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.03229494194889626,
+        "finite_fraction": 1.0,
+        "mean": 1.9836082054825965,
+        "mean_error_sigma": 0.03278358903480694,
+        "sample_count": 4096,
+        "std": 0.4821241298445668,
+        "std_ratio": 0.9642482596891336
+      },
+      "ordered_bank_values_sha256": "dbbed04f16f9d878037f95a8643a34151899207105717f87909207b5a201229a",
+      "status": "PASS",
+      "step": 1542
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.07077593530280302,
+        "finite_fraction": 1.0,
+        "mean": 1.9385401767794974,
+        "mean_error_sigma": 0.12291964644100517,
+        "sample_count": 4096,
+        "std": 0.46532419453422136,
+        "std_ratio": 0.9306483890684427
+      },
+      "ordered_bank_values_sha256": "feee91798beb45ca01911b3268f8c940713439a5eed4332a5ef056fca5397faa",
+      "status": "FAIL",
+      "step": 1584
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.0651647873347998,
+        "finite_fraction": 1.0,
+        "mean": 1.9535841550678015,
+        "mean_error_sigma": 0.09283168986439705,
+        "sample_count": 4096,
+        "std": 0.46544310643995546,
+        "std_ratio": 0.9308862128799109
+      },
+      "ordered_bank_values_sha256": "dfc2dc18def3876b2445cd68f04b8dd1b71cff6c7b8e081ca9be019ef170bbc5",
+      "status": "FAIL",
+      "step": 1625
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.031714024396724994,
+        "finite_fraction": 1.0,
+        "mean": 1.9892820306122303,
+        "mean_error_sigma": 0.021435938775539398,
+        "sample_count": 4096,
+        "std": 0.49620882160083424,
+        "std_ratio": 0.9924176432016685
+      },
+      "ordered_bank_values_sha256": "f339224d38952e3d0f9b28091421a8978df8edbe48b4192a9b5d282af9bbfffb",
+      "status": "PASS",
+      "step": 1667
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.08081496364734742,
+        "finite_fraction": 1.0,
+        "mean": 1.9344214928714791,
+        "mean_error_sigma": 0.13115701425704174,
+        "sample_count": 4096,
+        "std": 0.4679553083827891,
+        "std_ratio": 0.9359106167655782
+      },
+      "ordered_bank_values_sha256": "81e86945421d612ff70c0649cb4352927f477dc4257e0f0423e11dab8f3ec197",
+      "status": "FAIL",
+      "step": 1709
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.029920377117043206,
+        "finite_fraction": 1.0,
+        "mean": 2.0092408233322203,
+        "mean_error_sigma": 0.018481646664440632,
+        "sample_count": 4096,
+        "std": 0.5014871741096575,
+        "std_ratio": 1.002974348219315
+      },
+      "ordered_bank_values_sha256": "5a3cf9e5a4777f329966d78d252722ee92736e6c7445c08e70d0c1fe96556c47",
+      "status": "PASS",
+      "step": 1750
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.022735908410207395,
+        "finite_fraction": 1.0,
+        "mean": 2.0052897345885867,
+        "mean_error_sigma": 0.01057946917717345,
+        "sample_count": 4096,
+        "std": 0.5001756122676386,
+        "std_ratio": 1.0003512245352773
+      },
+      "ordered_bank_values_sha256": "b56bdcd51915a061a34cbf0b709ab511c162a884b7625b8beae238bdcb21f7bb",
+      "status": "PASS",
+      "step": 1792
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.032496445854593325,
+        "finite_fraction": 1.0,
+        "mean": 1.9949901966756443,
+        "mean_error_sigma": 0.010019606648711488,
+        "sample_count": 4096,
+        "std": 0.4692647978488226,
+        "std_ratio": 0.9385295956976452
+      },
+      "ordered_bank_values_sha256": "ed42af6389332e95330aa3f2bac01d05d40d622a693e40d1949f6aaf20b4505c",
+      "status": "PASS",
+      "step": 1834
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.040526991363217746,
+        "finite_fraction": 1.0,
+        "mean": 1.9772678034059936,
+        "mean_error_sigma": 0.045464393188012764,
+        "sample_count": 4096,
+        "std": 0.49505607811847646,
+        "std_ratio": 0.9901121562369529
+      },
+      "ordered_bank_values_sha256": "102749927c41ae283e35d5a2d6f04e78dc58cd68a9200239c53728fe7b6e2cdc",
+      "status": "PASS",
+      "step": 1875
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.03655271222532852,
+        "finite_fraction": 1.0,
+        "mean": 1.9928570416377624,
+        "mean_error_sigma": 0.0142859167244751,
+        "sample_count": 4096,
+        "std": 0.46984252707825264,
+        "std_ratio": 0.9396850541565053
+      },
+      "ordered_bank_values_sha256": "88edc445f69422f00280ca9194376c804e4755c92df7647662fb72af5a60dbf5",
+      "status": "PASS",
+      "step": 1917
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.0353418675944277,
+        "finite_fraction": 1.0,
+        "mean": 1.9943129367893562,
+        "mean_error_sigma": 0.011374126421287656,
+        "sample_count": 4096,
+        "std": 0.4646533692173294,
+        "std_ratio": 0.9293067384346588
+      },
+      "ordered_bank_values_sha256": "e34ad4ebcc2301bfd4e8a1ac629f1cfa7a7742b7614165916499b46d522ce6df",
+      "status": "PASS",
+      "step": 1959
+    },
+    {
+      "metrics": {
+        "cdf_ks": 0.0575256077865442,
+        "finite_fraction": 1.0,
+        "mean": 1.954956169007346,
+        "mean_error_sigma": 0.09008766198530793,
+        "sample_count": 4096,
+        "std": 0.47364648185329633,
+        "std_ratio": 0.9472929637065927
+      },
+      "ordered_bank_values_sha256": "c81d0760bf89464e9df8fa59a7112bcaae6b95c87228c47d88354bbc5c42fa78",
+      "status": "FAIL",
+      "step": 2000
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_cut_update": 1000,
+  "original_scorer_sha256": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+  "original_verdict_credit": false,
+  "output_names": [
+    "goal-progress.gif",
+    "goal-first.png",
+    "goal-final.png",
+    "media.json"
+  ],
+  "parent_task_sha256": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+  "prefix_equivalence_claim": "Requires separate protected791/844 exact comparison; renderer does not establish it",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas871_saved_gaussian_media_v1",
+  "scoring_calls_added": 0,
+  "target": {
+    "kind": "analytic_normal_density",
+    "mean": 2.0,
+    "std": 0.5
+  }
+}
