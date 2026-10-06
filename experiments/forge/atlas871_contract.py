@@ -13,7 +13,7 @@ PROOF_SCHEMA = 'forge_atlas871_longer_gaussian_software_proof_v1'
 SOFTWARE_CHECKS = ('task_duration_delta', 'original_task_pin', 'original_prefix_clocks',
     'appended_clocks', 'unchanged_five_suffix_gates', 'incomplete_curve_rejected',
     'strict_task_mutations', 'full79_recipe_binding', 'fixed_rng_and_initializer',
-    'ordinary_admission_resources', 'scoped_registry', 'observer_omitted')
+    'ordinary_admission_resources', 'scoped_registry', 'observer_omitted', 'actual_registry_schema')
 EXTRA_OPERATIONS = ('extra_prior_samples', 'extra_rng_draws', 'extra_model_forwards',
     'extra_backward_calls', 'extra_optimizer_steps', 'extra_decision_evaluations',
     'state_getter_calls', 'state_mutations', 'foreign_device_initializations')

@@ -10,7 +10,6 @@
     "schedule": "schedule_free",
     "scoring_weights": "live"
   },
-  "description": "One same-seed/input from-init Gaussian duration diagnostic; no original-task qualification, first-pass stop, tuning or parameter changes.",
   "execution_path": "public_trainer",
   "guide": "EXPERIMENTATION.md",
   "id": "atlas-existing-mog-longer871-v1",

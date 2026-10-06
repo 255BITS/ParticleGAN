@@ -34,6 +34,36 @@ def curve():
 
 
 class LongerControls(unittest.TestCase):
+    def test_actual_registry_schema(self):
+        # Exercise the actual maintained registry with the complete Source card,
+        # not the deliberately small task/API fixture used by the other controls.
+        from experiments.forge.contracts import validate_idea
+        from experiments.forge.views import validate_view
+        root = Path(__file__).resolve().parents[1]
+        def candidate():
+            return json.loads((root / 'configs/forge/ideas/atlas-existing-mog-longer871-v1.json').read_bytes())
+        complete = candidate()
+        self.assertEqual(complete['schema_version'], 3)
+        self.assertEqual(complete['id'], duration.CANDIDATE_ID)
+        self.assertNotIn('description', complete)
+        self.assertIsNone(validate_idea(candidate()))
+        unsupported = deepcopy(complete)
+        unsupported['description'] = 'unsupported metadata field must be rejected'
+        with self.assertRaisesRegex(ValueError, 'unsupported fields: description'):
+            validate_idea(unsupported)
+        view = json.loads((root / 'configs/forge/views/atlas_existing_mog_longer871_v1.json').read_bytes())
+        tasks = {duration.TASK_ID: deepcopy(duration.EXPECTED_TASK)}
+        self.assertEqual(view['id'], duration.VIEW_ID)
+        self.assertEqual(view['evidence_scope'], 'research_diagnostic')
+        self.assertEqual(view['assignments'][0]['importance'], 'diagnostic')
+        self.assertEqual(view['assignments'][0]['qualification_tier'], 1)
+        self.assertFalse(view['reporting']['family_totals'])
+        self.assertIsNone(validate_view(view, tasks))
+        ordinary_importance = deepcopy(view)
+        ordinary_importance['assignments'][0]['importance'] = 'required'
+        with self.assertRaisesRegex(ValueError, 'diagnostic views require only diagnostic tasks in Tier 1'):
+            validate_view(ordinary_importance, tasks)
+
     def test_task_duration_delta(self):
         task = deepcopy(duration.EXPECTED_TASK)
         self.assertEqual(duration.validate(task)['task_payload_sha256'], duration.TASK_DIGEST)
