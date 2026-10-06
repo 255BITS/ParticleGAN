@@ -44,10 +44,19 @@ class CapabilityError(ValueError):
 
 
 def resolve_public_recipe(candidate, **overrides):
-    """Resolve a preset before task resources; a Recipe.name is only a label."""
+    """Resolve the versioned declaration binding; Recipe.name is only a label.
+
+    Forge API v1 freezes ``bcap`` to the original native-Adam preset, now
+    exposed publicly as ``bcap_adam``. Public ``get_recipe("bcap")`` may select
+    the winning public default without changing archived Forge cards or
+    their identities. Explicit optimizer and rate overrides still take effect.
+    """
     options = {**candidate.get("recipe_overrides", {}), **overrides}
     preset = candidate.get("recipe_preset")
     try:
+        if API_VERSION == "forge-api-v1" and preset == "bcap":
+            label = options.pop("name", "bcap")
+            return get_recipe("bcap_adam", **options).replace(name=label)
         return Recipe(**options) if preset is None else get_recipe(preset, **options)
     except (TypeError, ValueError) as error:
         raise CapabilityError([f"unsupported recipe: {error}"]) from error

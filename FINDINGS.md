@@ -512,7 +512,10 @@ Only optimizer settings changed. BCAP-pure loss, cap/coefficient, task
 auxiliaries, initialization, architecture, data/prior laws, sampling, schedule,
 update budgets and grading retain their existing contracts. This is one
 global recipe at protocol seed 0, with no task-specific winner mixing. The
-public BCAP default remains Adam. The [single current leaderboard](reports/forge/technique-inventory.md)
+public BCAP default was still Adam when this readout was published; the later
+[owner default decision](reports/forge/dualnorm-pacing-v2/DEFAULT_SELECTION.md)
+makes this winning recipe the public `bcap` default while preserving the study's
+unqualified status. The [single current leaderboard](reports/forge/technique-inventory.md)
 uses this new experimental measurement; the [completed readout](reports/forge/dualnorm-pacing-v2/README.md),
 [exact results](reports/forge/dualnorm-pacing-v2/results.json),
 [verified analysis](reports/forge/dualnorm-pacing-v2/analysis.json) and
