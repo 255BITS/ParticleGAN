@@ -1,0 +1,42 @@
+{
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/snapshot/tests/test_atlas944_factorial.py",
+    "--checkout",
+    "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/snapshot",
+    "--retained-prefix",
+    "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/retained-932-numerical-prefix.json",
+    "--retained-prefix-sha256",
+    "dde1702b691a4aa666f412de37ef910095e99d682a679f6b8cb70f2067c05d45",
+    "--output",
+    "/ml2/hypergan/pg-atlas944-factorial-runtime-20261006/v1/FACTORIAL944_CONTROLS.json"
+  ],
+  "deadline_seconds": 30,
+  "elapsed_seconds": 25.570608634967357,
+  "no_scientific_cases_admitted": true,
+  "retained_input_pin": {
+    "bytes": 106222,
+    "sha256": "dde1702b691a4aa666f412de37ef910095e99d682a679f6b8cb70f2067c05d45"
+  },
+  "returncode": 0,
+  "schema": "atlas944_actual_controls_execution_v1",
+  "source_pins": {
+    "experiments/forge/atlas944_factorial.py": {
+      "bytes": 26634,
+      "sha256": "d4e758e3dc9b48f132d031f0ccebf22d8ea766004c6052feadaf3c194fe8dbfe"
+    },
+    "tests/test_atlas944_factorial.py": {
+      "bytes": 21455,
+      "sha256": "b41a32dc24907c1e75cc0a7425ca10e27bf5efbdf5bda39a2412ccefad702669"
+    }
+  },
+  "stderr_pin": {
+    "bytes": 1197,
+    "sha256": "2faad5585f53c492b1def8077a8d2ae6dd2fb134753230ade620aa80b3a013cb"
+  },
+  "stdout_pin": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "files": {
+    "reports/forge/atlas944/two_pole_factorial/CONTROLS-EXECUTION.json": {
+      "bytes": 1524,
+      "sha256": "2d9b5561812a00d8e18c7c1772f53d48b250d0e78596b67b15875306f3f3dd90"
+    },
+    "reports/forge/atlas944/two_pole_factorial/FACTORIAL944_CONTROLS.json": {
+      "bytes": 11740,
+      "sha256": "7a5996f7ad5093e6d82d12f8965faec6298a17fa719125d33fb5c22d8f9783ad"
+    },
+    "reports/forge/atlas944/two_pole_factorial/README.md": {
+      "bytes": 4037,
+      "sha256": "9892b9f00298116ddc01f5d567769002ddaa8fc41b89527cd73381d5fed9f191"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/ADMISSION.json": {
+      "bytes": 1987,
+      "sha256": "6df267cc95b3f6b86121dec6504bbc0a0ca7fb529720bc6c48ddf6fdd0899e1d"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/INITIALIZATION.json": {
+      "bytes": 2091,
+      "sha256": "f8ddb58ed4f1887623cb1e5a18f8e19efad7f508ae545acf03bc36e946db2382"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/PROCESS-RECEIPT.json": {
+      "bytes": 285,
+      "sha256": "028d713a66c134bc5379a8cff327270798d97dfb4f88fbcfb182f4bf12b9e5be"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/VERIFIED-RESULT.json": {
+      "bytes": 1629,
+      "sha256": "5568e5dfd0501b5fbe5b74a56e3ddc07864e6a7f2656c6b30e718c01fb8076e0"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/declaration.json": {
+      "bytes": 34998,
+      "sha256": "e715f935da47339ac86c58f8d0a74e36c2bf1d380a923e45ac35b2a7b80c7128"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/grade.json": {
+      "bytes": 682,
+      "sha256": "8eb4641a007feb58560a853c662f1efc9a306a5ab6a2efd8ef3d174c5a662d3a"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/raw-result.json.gz": {
+      "bytes": 173264,
+      "sha256": "3e1987a89125797942af8b5b72a2b6e7033f86d1c53599032262e1ba45ff6dae"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/saved-curves.json": {
+      "bytes": 73334,
+      "sha256": "57e12573d988596e96424c385e9d7d19c1b3c2626113bbb2094649bf0dae7ea8"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/software-proof.json": {
+      "bytes": 22739,
+      "sha256": "660d595895e4059b0cc5fc951c000061ed04994d2b81cb62cc9f664b0b17a0f7"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/task-variant.json": {
+      "bytes": 4011,
+      "sha256": "f71d39912a632882a7d52c57f9d1c30c8527b6bcc2b06c4567528d764224c505"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_off_80/terminal.json": {
+      "bytes": 693,
+      "sha256": "788383f5d076604de0cabaab4c0c95671aeed9a0360da35772f36e081413a6ba"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/ADMISSION.json": {
+      "bytes": 1987,
+      "sha256": "a6c50e1b2afa462ffc8562912cd6eb070a1b63b373cf7e1bb6fd42a55cb745f2"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/INITIALIZATION.json": {
+      "bytes": 2092,
+      "sha256": "8da549e076db7549676e3a7aabbeb734f28445a4fba0c1d3a9b225ba9d317369"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/PROCESS-RECEIPT.json": {
+      "bytes": 285,
+      "sha256": "8cb3f267fbddb006e0fc8234da8e6445d867556e3d07f56311d7801a69d7684a"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/VERIFIED-RESULT.json": {
+      "bytes": 1710,
+      "sha256": "06b4be4df1e0883a346800355f838fcfbcf2a3ea44662726ab9d580a0379ba1d"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/declaration.json": {
+      "bytes": 35283,
+      "sha256": "aebf6eb66f02a6a6284da622e1d97f550792c21c11fe866ac82f07ea5b1749bf"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/grade.json": {
+      "bytes": 665,
+      "sha256": "e1e872c00cfc86c74e2cd381c55eb4f69c6041900520018738c017d4c574c52d"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/raw-result.json.gz": {
+      "bytes": 212535,
+      "sha256": "e50fbd514660a950537f07017c7c9bea9a3a11e1e4507fc43d990361a2f2eb0e"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/saved-curves.json": {
+      "bytes": 292343,
+      "sha256": "79ccfde5b12acebd36d7adae05e0cb80a1d92af07765977b0b0bb0d2935e1365"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/software-proof.json": {
+      "bytes": 22739,
+      "sha256": "b72f441f5ec00d7b72d1a5e8ff7d1a41bbe34a95e77c1353efd16291f9960e57"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/task-variant.json": {
+      "bytes": 4299,
+      "sha256": "98bc51b4495a36412dd5fca7d9f796c62de86970fbc01ef38bb738de8e61cfb5"
+    },
+    "reports/forge/atlas944/two_pole_factorial/amsgrad_on_l2_on_320/terminal.json": {
+      "bytes": 693,
+      "sha256": "6d136ec2ddd201a7b9b34651c8b8efe7ff95b23065ed9630f14c828775fee288"
+    },
+    "reports/forge/atlas944/two_pole_factorial/bound-source-leaves.tar.gz": {
+      "bytes": 12511,
+      "sha256": "1a13dff4a0d3651920331084a599a0abfbc27d5cd8b2106f5eb8f01deb1c7bf7"
+    },
+    "reports/forge/atlas944/two_pole_factorial/comparison.json": {
+      "bytes": 7839,
+      "sha256": "600d752e9544f42f939cdd42df3366a20714e9c6e5748364795d40474f3df76b"
+    },
+    "reports/forge/atlas944/two_pole_factorial/retained-932-numerical-prefix.json": {
+      "bytes": 106222,
+      "sha256": "dde1702b691a4aa666f412de37ef910095e99d682a679f6b8cb70f2067c05d45"
+    }
+  },
+  "schema": "atlas944_report_manifest_v1"
+}
