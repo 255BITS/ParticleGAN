@@ -21,11 +21,29 @@
     "frozen_protocol_matches": true,
     "frozen_source_bindings_match": true,
     "hard_timeout_controller_within_training_reservation": true,
+    "history_current_source_coverage_pass": true,
     "matched_data_batch_sequence": true,
     "no_retry_admission": true,
+    "original_pinned_sources_preserved": true,
     "probe_gate_pass": true,
     "probe_protocol_matches": true,
     "total_conservative_debit_within630": true
+  },
+  "inventory_coverage": {
+    "catalog_sha256": "bdcb274c07f86e1c460c8da31bf8e8e9e37e38120108a7a9203516f75562b103",
+    "declared_count": 11776,
+    "logs": {
+      "history-check-after-catalog.log": "ddc918865c5fc848b1d92023a2ed02de4e36499b58dd17ed26bcd82425658981",
+      "history-check.log": "5e3f22d323c83c98f92fc95c5bebe8b0a0f0a06f359ee3d61c0fd6e4907ac40d"
+    },
+    "missing": [],
+    "new_current_source_entries": 2,
+    "pinned_sources_preserved": true,
+    "qualification_input": false,
+    "stale": [],
+    "tracked_count": 11776,
+    "unclassified": [],
+    "valid": true
   },
   "model_forwards": 0,
   "preserved_preparation_verification": {

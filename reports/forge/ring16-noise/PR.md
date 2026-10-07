@@ -23,5 +23,8 @@ actual-training GIF provenance verify. Bulk states/logs are archived outside
 Git with exact SHA/bytes/member receipts. Original preparation and PR331 source
 identities remain intact. No production default or qualification change.
 
+Source inventory coverage passes (11,776/11,776 paths); two new current-source
+diagnostic entries preserve all original pinned sources.
+
 See reports/forge/ring16-noise/README.md, results.json,
 execution-verification.json, archive.json and both actual-training GIFs.
