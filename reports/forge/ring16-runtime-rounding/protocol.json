@@ -1,0 +1,89 @@
+{
+  "actual_training_media": "No new training GIF until execution. Fresh arms retain24 actual4096-sample prefix snapshots; render actual goal GIF with fixed axes before publishing a completed neural readout. Restored one-step arms reuse originalprefix media under its original evidence identity.",
+  "ambient_autograd_contract": "Fresh prefixes require enabledTrue. Boundary401 explicitly enablesTrue for ordinary arms andFalse for serial arms. Legacy checkpoints do not record ambientsetting; historicalgradientparity must be checked before attribution.",
+  "arms": {
+    "fresh_graph": {
+      "fresh_prefix": true,
+      "new_updates": 401,
+      "serial_at_401": false,
+      "timeout_seconds": 150
+    },
+    "fresh_serial401": {
+      "fresh_prefix": true,
+      "new_updates": 401,
+      "serial_at_401": true,
+      "timeout_seconds": 150
+    },
+    "restored_graph": {
+      "fresh_prefix": false,
+      "new_updates": 1,
+      "serial_at_401": false,
+      "timeout_seconds": 30
+    },
+    "restored_serial401": {
+      "fresh_prefix": false,
+      "new_updates": 1,
+      "serial_at_401": true,
+      "timeout_seconds": 30
+    }
+  },
+  "baseline_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "bindings": {
+    "benchmarks/toy_audit/ring16_runtime_rounding.py": "26bf9882e0d2ad906cec4e472e5960246f8d05b17db90e1a20df9b24458d44ab",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "experiments/forge/api.py": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/optim/dualnorm.py": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12",
+    "particlegan/training.py": "b3d334e1fb378f3d77226daedc03a7cef4bdf4265082531628863e48a69d5a33"
+  },
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "causal_gates": [
+    "Full400 context must match original digest exactly; stop on mismatch, do not replace fresh prefix with archive.",
+    "Ordinary graph arms must match historical401 gradients before attributing this diagnostic to historical runtime sensitivity.",
+    "Require exact real batch, initial forwards and named streams in compared arms.",
+    "Compare critic gradients bitwise and context401; report graph topology and relative sequence ordering.",
+    "If serial pair agrees but ordinary pair differs, serialized execution removes the measured boundary difference; this alone does not prove which engine detail caused it or full1600 convergence."
+  ],
+  "changed_factor": "Disable autograd multithreading only for update401 in paired serial arms; original checkpoint serial_backward field remainsFalse; intervention declaration travels in diagnostic receipt.",
+  "conversion_arm": "Not declared: loader rejects dtype mismatch, float32 saved values and initial forwards are bit-exact. A future observed dtype-conversion difference requires a separately frozen experiment and cannot use this consumed campaign budget.",
+  "device": "cuda:0",
+  "diagnostic_parent_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+  "error_accounting": "Interrupted arm retains its original exception/artifact hashes and conservatively debits its entire update/time reservation when the exact completed count is unavailable. No retry.",
+  "every_step_followup": "Not declared: all-step serial_backwardTrue is a distinct initialization/runtime cohort and must be trained fresh under a new fixed global trainer declaration; never load aFalse checkpoint asTrue.",
+  "graph_instrumentation": "At401 only, wrap actual Tensor.backward once to read topology/sequence numbers without executing nodes or adding derivative calls; copy actual forwards/gradients/polar factors. Runtime parameter layouts/version/alignment are metadata, not causal proof.",
+  "held_fixed": [
+    "G/D architectures",
+    "16x2d ring target",
+    "z4 learned256 MoG sigma.1",
+    "batch128",
+    "constant G.012 D.018 prior.03",
+    "recipe horizon400",
+    "seed0 and all named stream bindings",
+    "24 ceil-spaced scored4096 clean samples through400 for each freshprefix",
+    "total401 for each causal arm"
+  ],
+  "id": "ring16-runtime-rounding-v1",
+  "initializer": "public named deterministic orthogonal; archived fixture only for explicit restored controls",
+  "max_attempts": 4,
+  "max_new_host_updates": 804,
+  "max_new_scored_draw_events": 48,
+  "max_reserved_seconds": 360,
+  "prefix_file_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+  "prefix_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "quality_verdict": "INCOMPLETE:401-update prefix cannot certify full1600 acquisition or4000 continuoushold. No leaderboard change.",
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "cuda_first_backward_runtime_diagnostic",
+  "seed": 0,
+  "status": "ready",
+  "stopping_rules": [
+    "Stop on CUDA unavailable; never CPU fallback.",
+    "No arm repeat, seed sweep, budget extension, annealing or threshold changes.",
+    "Stop on nonfinite update, source/state mismatch or arm timeout; preserve error and cost."
+  ],
+  "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "user_authorization": "User requested separate runtime-rounding investigation and conditional floating-conversion experiment, leaning boundary400. Boundary intervention is applied to next backward update401."
+}

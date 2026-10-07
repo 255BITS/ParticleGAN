@@ -1,0 +1,17 @@
+Ring16 restart sensitivity first appears in backward gradients despite identical
+float32 model state and initial forwards. This report audits saved tensor bytes
+and checkpoint loading, finds no evidence of a lossy conversion before backward,
+and identifies the existing public serial-backward control as the next bounded
+CUDA diagnostic.
+
+Adds a frozen four-arm 804-update protocol and public-API runner comparing live
+and restored update401 with ordinary versus serialized autograd execution.
+The intervention applies immediately after400; every-step execution and any
+newly identified conversion remain distinct future experiments. Reports ULP
+counts, source/input hashes and causal limitations without changing optimizer
+behavior, qualification results or the technique inventory.
+
+Validation: saved-tensor analysis, Python syntax and frozen-binding checks.
+CUDA neural execution is blocked by unavailable driver; no CPU fallback, new
+training PASS or actual-training GIF is claimed. Publication is pending network
+access.

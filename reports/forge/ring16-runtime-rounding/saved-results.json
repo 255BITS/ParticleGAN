@@ -1,0 +1,110 @@
+{
+  "cpu_neural_execution": false,
+  "critic_gradient_differences": {
+    "net.0.bias": {
+      "bit_exact": true,
+      "changed_elements": 0,
+      "dtype": "torch.float32",
+      "elements": 64,
+      "max_absolute_difference": 0.0,
+      "max_ulp_distance": 0,
+      "relative_frobenius_difference": 0.0
+    },
+    "net.0.weight": {
+      "bit_exact": false,
+      "changed_elements": 346,
+      "dtype": "torch.float32",
+      "elements": 640,
+      "max_absolute_difference": 5.587935447692871e-09,
+      "max_ulp_distance": 96,
+      "relative_frobenius_difference": 9.923488538352332e-08
+    },
+    "net.2.bias": {
+      "bit_exact": true,
+      "changed_elements": 0,
+      "dtype": "torch.float32",
+      "elements": 64,
+      "max_absolute_difference": 0.0,
+      "max_ulp_distance": 0,
+      "relative_frobenius_difference": 0.0
+    },
+    "net.2.weight": {
+      "bit_exact": false,
+      "changed_elements": 2647,
+      "dtype": "torch.float32",
+      "elements": 4096,
+      "max_absolute_difference": 3.725290298461914e-09,
+      "max_ulp_distance": 2560,
+      "relative_frobenius_difference": 1.0285655243802311e-07
+    },
+    "net.4.bias": {
+      "bit_exact": true,
+      "changed_elements": 0,
+      "dtype": "torch.float32",
+      "elements": 1,
+      "max_absolute_difference": 0.0,
+      "max_ulp_distance": 0,
+      "relative_frobenius_difference": 0.0
+    },
+    "net.4.weight": {
+      "bit_exact": false,
+      "changed_elements": 41,
+      "dtype": "torch.float32",
+      "elements": 64,
+      "max_absolute_difference": 1.30385160446167e-08,
+      "max_ulp_distance": 32,
+      "relative_frobenius_difference": 1.243051206352001e-07
+    }
+  },
+  "critic_weights_before_update": {
+    "net.0.bias": true,
+    "net.0.weight": true,
+    "net.2.bias": true,
+    "net.2.weight": true,
+    "net.4.bias": true,
+    "net.4.weight": true
+  },
+  "first_six_forward_outputs_bit_exact": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "full_serialized_prefix_bit_exact": true,
+  "gpu_roundtrip_verified_by_this_analysis": false,
+  "inputs": {
+    "live/prefix-state.pt": {
+      "bytes": 108385,
+      "sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d"
+    },
+    "live/trace.pt": {
+      "bytes": 4319899,
+      "sha256": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145"
+    },
+    "restart/before-state.pt": {
+      "bytes": 109217,
+      "sha256": "cc49b5b34bfd8d90bde5afc8da081a66d02be594f7835a9de91a60ef113ca340"
+    },
+    "restart/trace.pt": {
+      "bytes": 4320795,
+      "sha256": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
+    }
+  },
+  "interpretation": "No observed precision loss before backward. The differing gradients are computed float32 outputs; ULP differences do not identify the arithmetic ordering or prove a conversion caused them.",
+  "model_tensor_count": 25,
+  "model_tensor_dtypes": [
+    "torch.float32"
+  ],
+  "new_model_calls": 0,
+  "new_neural_updates": 0,
+  "observed_update": 401,
+  "prefix_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+  "qualification_input": false,
+  "real_batch_bit_exact": true,
+  "saved_float32_float64_float32_roundtrip_bit_exact": true,
+  "saved_model_state_contains_nonfinite": false,
+  "schema_version": 1,
+  "scope": "saved_tensor_metadata_and_bitwise_math"
+}
