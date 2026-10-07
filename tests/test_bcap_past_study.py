@@ -1,5 +1,6 @@
 """The diagnostic preserves matched conditions and rejects incomplete holds."""
 from copy import deepcopy
+import json
 
 import pytest
 import torch
@@ -8,6 +9,15 @@ from benchmarks.toy_audit import bcap_past_extrapolation as study
 from benchmarks.toy_audit.reproducibility import reproducible_execution
 from experiments.forge.api import CapabilityError, task_formulation_context
 from experiments.forge.state import state_digest
+
+@pytest.fixture(autouse=True)
+def current_software_metadata(monkeypatch):
+    # Archived declaration() intentionally enforces pinned scientific source.
+    # Software fixtures validate today's API using its original task metadata;
+    # they confer no replay or scientific qualification credit.
+    protocol = json.loads(study.PROTOCOL.read_text())
+    monkeypatch.setattr(study, "declaration", lambda: deepcopy(protocol))
+
 
 pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required; no CPU fallback")
 

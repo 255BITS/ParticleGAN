@@ -1,0 +1,47 @@
+{
+  "api_changes": [
+    "Compose public network_update=spectral_capped and prior_update=row_capped with public timing controls and exact checkpointed previews."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.network_update=spectral_capped",
+    "Recipe.network_gradient_scale=0.1",
+    "Recipe.game_update=extrapolation_from_past",
+    "Recipe.prior_update=row_capped",
+    "Recipe.prior_gradient_scale=.001"
+  ],
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-combined-cap-extrapolation-from-past-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Compose fixed network spectral cap .1 and learned-prior row cap .001. Both preview and correction use the same fields, at constant nominal rates and matched initial models/RNGs.",
+  "parent": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "prior_art": [
+    "https://arxiv.org/pdf/1802.10551",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+    "reports/forge/gaussian-response-round/README.md"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_family": "dualnorm",
+    "prior_lr_mult": 2.5,
+    "game_update": "extrapolation_from_past",
+    "network_update": "spectral_capped",
+    "network_gradient_scale": 0.1,
+    "prior_update": "row_capped",
+    "prior_gradient_scale": 0.001
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  }
+}
