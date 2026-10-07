@@ -1,0 +1,63 @@
+{
+  "base_candidate": "release07-gan-v3-task-adapted-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling.",
+    "id": "gaussian-smoke-inventory-v5",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "betas": [
+      [
+        0.0,
+        0.99
+      ]
+    ],
+    "d_lr_mult": [
+      1.0
+    ],
+    "lr": [
+      0.006375
+    ],
+    "lr_anneal_start": [
+      0.6
+    ],
+    "lr_floor": [
+      0.05
+    ],
+    "network_lr_floor": [
+      null
+    ],
+    "prior_betas": [
+      null
+    ],
+    "prior_lr_mult": [
+      1.0
+    ],
+    "prior_reg": [
+      0.05
+    ],
+    "reg_coeff": [
+      6.0
+    ],
+    "reg_every": [
+      1
+    ],
+    "reg_kappa": [
+      1.25
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact preselected global recipe after adopting default numerical-rank truncation for DualNorm and disabling autograd multithreaded backward scheduling project-wide. Complete all runnable Tier1 and unlock Tier2 only for a whole six-task Tier1 PASS. No hyperparameter search, seed variation or retuning.",
+  "id": "gaussian-smoke-inventory-release07-gan-v3-mog-v5",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "schema_version": 1,
+  "trainer_family": "release07-gan-v3-mog",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

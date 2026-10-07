@@ -95,11 +95,11 @@ def _verify_plans(round_definition, campaign, inventory, searches):
     return sorted(rows, key=lambda row: row["candidate_id"])
 
 
-def prepare(root, queue_root, *, stage="plan"):
+def prepare(root, queue_root, *, stage="plan", round_path=ROUND):
     if stage not in {"plan", "enqueue"}:
         raise ValueError("only plan or enqueue is supported; execution is separate")
     root, queue_root = Path(root).resolve(), Path(queue_root).resolve()
-    round_definition = read_json(root / ROUND)
+    round_definition = read_json(root / round_path)
     if discover_techniques(root) != sorted(round_definition["idea_ids"]):
         raise ValueError("current idea roster differs from the frozen round")
     for name in round_definition["idea_ids"]:
@@ -181,9 +181,12 @@ def main(argv=None):
     parser.add_argument("stage", choices=("plan", "enqueue"))
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--queue-root", type=Path)
+    parser.add_argument("--round", type=Path, default=ROUND,
+                        help="a new frozen source round; historical rounds remain unchanged")
     parser.add_argument("--output", type=Path, help="save the compact preparation receipt")
     args = parser.parse_args(argv)
-    result = prepare(args.root, queue_location(args.root, args.queue_root), stage=args.stage)
+    result = prepare(args.root, queue_location(args.root, args.queue_root), stage=args.stage,
+                     round_path=args.round)
     output = args.output or Path(result["queue_root"]) / result["round"] / f"preparation-{args.stage}.json"
     atomic_json(output, result)
     summary = {key: result[key] for key in (

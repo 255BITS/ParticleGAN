@@ -1,4 +1,4 @@
-"""Byte-exact final v4 archive; no models, draws, training or gate reduction.
+"""Byte-exact final inventory archive; no models, draws, training or regrading.
 
 Run only after drain and refresh of the twelve registered search reports.
 Bulk output must live under an ignored Git worktree artifacts/ directory.
@@ -59,7 +59,7 @@ def final_accounting(state):
     if any(row["status"] in {"queued", "running", "paused"} for row in state["submissions"].values()):
         raise ValueError("active campaign requests remain")
     if set(state["campaigns"]) != {ROUND}:
-        raise ValueError("archive requires the single declared v4 campaign")
+        raise ValueError("archive requires the single declared inventory campaign")
     campaign = state["campaigns"][ROUND]
     if campaign["reserved_seconds"] != 0:
         raise ValueError("campaign still reserves worker cost")
@@ -173,9 +173,10 @@ def _create(root, queue, archive_path, receipt_path, stack):
     round_path = root / "configs/forge/rounds" / (ROUND + ".json")
     definition = read(round_path)
     expected_studies = set(definition["studies"]) - set(definition["study_refusals"])
-    searches = sorted((root / "reports/forge/configuration-search").glob("gaussian-smoke-inventory-*-v4.json"))
-    if len(expected_studies) != 12 or {path.stem for path in searches} != expected_studies:
-        raise ValueError("archive requires all twelve registered final search reports")
+    searches = sorted(root / "reports/forge/configuration-search" / (study + ".json")
+                      for study in expected_studies)
+    if not searches or any(not path.is_file() for path in searches):
+        raise ValueError("archive requires every registered final search report")
     for path in searches:
         search = read(path)
         accounting = search.get("campaign_accounting") or {}
@@ -194,7 +195,7 @@ def _create(root, queue, archive_path, receipt_path, stack):
                     *(root / "configs/forge/searches" / (study + ".json") for study in definition["studies"])]
     for name in ("drain.log", "controller.log"):
         if not (queue / name).is_file():
-            raise ValueError("preserve both setup-error drain.log and actual controller.log")
+            raise ValueError("preserve both preparation drain.log and execution controller.log")
     files = collected_files(root, queue, originals, declarations, searches)
     inventory = {"schema_version": 1, "campaign": ROUND, "source_origin_commit": SOURCE,
         "source_digest": SOURCE_DIGEST, "files": {name: {"bytes": path.stat().st_size,
@@ -255,7 +256,11 @@ if __name__ == "__main__":
     parser.add_argument("--archive", required=True, type=Path)
     parser.add_argument("--receipt", type=Path)
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument("--round", default=ROUND)
+    parser.add_argument("--source-commit", default=SOURCE)
+    parser.add_argument("--source-digest", default=SOURCE_DIGEST)
     args = parser.parse_args()
+    ROUND, SOURCE, SOURCE_DIGEST = args.round, args.source_commit, args.source_digest
     if args.verify_only:
         inventory = verify(args.archive)
         print(json.dumps({"verified_files": len(inventory["files"]), "archive_sha256": digest(args.archive)}))
