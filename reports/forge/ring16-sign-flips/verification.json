@@ -1,0 +1,97 @@
+{
+  "algebra_result": "UNMEASURED",
+  "base_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "checks": [
+    {
+      "files": 4,
+      "name": "frozen_source_bindings",
+      "pass": true
+    },
+    {
+      "exit_code": 0,
+      "name": "syntax",
+      "pass": true
+    },
+    {
+      "exit_code": 0,
+      "name": "plan",
+      "pass": true,
+      "result": {
+        "cuda_available": false,
+        "id": "ring16-small-sign-flips-v1",
+        "schedules": [
+          "boundary_only",
+          "every_step"
+        ],
+        "training_launched": false,
+        "training_reservation_seconds": 600,
+        "updates": 3200
+      }
+    },
+    {
+      "exit_code": 1,
+      "name": "unavailable_cuda_training_guard",
+      "output_directory_created": false,
+      "pass": true,
+      "rng_uniform_values": 0,
+      "sampling_draws": 0,
+      "svd_calls": 0,
+      "updates": 0
+    },
+    {
+      "exit_code": 2,
+      "name": "unavailable_cuda_algebra_guard",
+      "output_directory_created": false,
+      "pass": true,
+      "rng_uniform_values": 0,
+      "sampling_draws": 0,
+      "svd_calls": 0,
+      "updates": 0
+    },
+    {
+      "name": "budget_and_diagnostic_scope",
+      "pass": true
+    },
+    {
+      "name": "static_isolated_generator_and_no_matrix_cast",
+      "pass": true,
+      "random_call_sites": 1
+    },
+    {
+      "links": 6,
+      "name": "relative_report_links",
+      "pass": true
+    }
+  ],
+  "cuda_available": false,
+  "limitations": [
+    "No GPU training, saved-gradient CUDA probe, actual candidate-training GIF or tier2 retention was executed.",
+    "Static checks do not establish sensitivity reduction, acquisition or stable convergence.",
+    "Remote PR publication awaits network access; no remote PR is claimed."
+  ],
+  "local_log_root": "runs/api/ring16-sign-flips-static",
+  "local_log_sha256": {
+    "runs/api/ring16-sign-flips-static/plan.log": "19e0b18a1522f47bd92a22a39190667540de32b8ed3ac10c7505d3885d291548",
+    "runs/api/ring16-sign-flips-static/syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/api/ring16-sign-flips-static/unavailable_cuda_algebra_guard.log": "b4e2edf00d44f8f52b8ab49df0fed48fd2969bfc118f40b3817db50fdd5a2af7",
+    "runs/api/ring16-sign-flips-static/unavailable_cuda_training_guard.log": "ef32a1266b09d967e072a7215a1be6e4995d75d55783d7e44f9be0f4dc461ca0"
+  },
+  "protocol_sha256": "a684fb45f2cb2a7dc0f793ca60155f7463eb4120e02990349003f556c5bb72d8",
+  "qualification_input": false,
+  "quality_result": "UNMEASURED",
+  "report_reference_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+  "rng_uniform_values": 0,
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "static_preparation_only",
+  "source_sha256": {
+    "benchmarks/toy_audit/ring16_interventions.py": "b7b55e613958f8bf8e2e6c520d0efb34c10f4b95545dc6e7b143ce525a26dc3b",
+    "benchmarks/toy_audit/ring16_small_sign_flips.py": "2a89c2eabb528b28be4031bb2c4ef780aca2d5f657248ef59a86f9c99a6c7879",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+  },
+  "status": "prepared_cuda_execution_blocked",
+  "svd_calls": 0,
+  "training_launched": false,
+  "training_updates": 0
+}

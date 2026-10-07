@@ -1,0 +1,209 @@
+{
+  "artifacts": "Raw logs, traces, checkpoints, streams and observation tensors stay ignored under runs/api. After execution publish compact metrics/provenance and actual-training GIFs only. Keep technique-inventory.md as the sole generated goal leaderboard.",
+  "baseline_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+  "bindings": {
+    "benchmarks/toy_audit/ring16_interventions.py": "b7b55e613958f8bf8e2e6c520d0efb34c10f4b95545dc6e7b143ce525a26dc3b",
+    "benchmarks/toy_audit/ring16_small_sign_flips.py": "2a89c2eabb528b28be4031bb2c4ef780aca2d5f657248ef59a86f9c99a6c7879",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+  },
+  "boundary_update": 401,
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "dtype": "float32",
+  "execution_backend": "cuda",
+  "gates": {
+    "bounds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ],
+    "retention": "Not authorized by this protocol; separate passing smoke checkpoint dependency and predeclared tier2 budget required.",
+    "smoke": "Any scheduled full passing state plus one independent same-state confirmation satisfying every unchanged bound; both arms still finish1600updates.",
+    "sustained_diagnostic": "Also report unchanged five-terminal-full-pass reducer and longest passing streak; neither replaces smoke or confers ordinary qualification."
+  },
+  "held_fixed": [
+    "one protocol seed0; no seed sweep",
+    "public named deterministic initialization",
+    "uniform16-component 2D Gaussian target, ring radius3, sigma0.1",
+    "G4->64->64->2 and Fourier2 D10->64->64->1, LeakyReLU0.2",
+    "learned uniform256-row MoG prior, sigma0.1, standardizeFalse",
+    "batch128, independent checkpointed named draws",
+    "BCAP penalty and normalized biases/sampled prior rows",
+    "constant G/D/prior rates and optimizer momentum0",
+    "recipe horizon400 and full1600 update cap",
+    "clean live serving through public prior without output noise or EMA",
+    "96 ceil-spaced scheduled4096-sample checks,24 per400updates"
+  ],
+  "historical_controls": {
+    "live": {
+      "execution_source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "execution_source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+      "printed_final_covariance_error": 2.2202680110931396,
+      "printed_full_passes": 0,
+      "qualification_input": false,
+      "receipt_status": "INCOMPLETE_postexecution_metadata_error"
+    },
+    "report_source_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "restored": {
+      "execution_source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "execution_source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+      "final_covariance_error": 0.5143145751208067,
+      "role": "original restart reproduction; distinct runtime path, not a fresh continuous candidate control",
+      "terminal_full_passes": 6
+    },
+    "source_pr": "https://github.com/255BITS/ParticleGAN/pull/331",
+    "unchanged_runs_repeated": false
+  },
+  "id": "ring16-small-sign-flips-v1",
+  "initializer": "public deterministic orthogonal named initializer; public R2 table for prior",
+  "max_attempts": 2,
+  "max_new_host_updates": 3200,
+  "max_new_scoring_draws": 194,
+  "max_reserved_seconds": 600,
+  "max_total_reserved_seconds": 630,
+  "mechanism_module": "benchmarks.toy_audit.ring16_small_sign_flips",
+  "predictions": {
+    "algebra": "Matched-draw pair sensitivity may improve or worsen because weak singular bases themselves differ. Only finite/repeatable/RNG-isolated implementation behavior is gated here.",
+    "continuous": "A confirmed smoke success with every-step flips would support a separately declared continuous-learning retention test; it would not establish stable convergence.",
+    "exploration": "A boundary-only success would show that an isolated weak-direction perturbation can select another trajectory in this fixed experiment; it would not identify the original restart cause."
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipe_horizon": 400,
+  "rng_contract": {
+    "confirmation": "one separate named evaluation confirmation stream, drawn only at first scheduled full passing state;4096 samples before any further update",
+    "constructor": "isolated public reproducible_execution seed0 scope",
+    "data_and_prior": "existing separate named training streams; checkpoint every consumed stream",
+    "evaluation": "existing named standard evaluation stream",
+    "matching": "Initial model hashes and seen target-batch digests agree across candidates; boundary live400 matches original archived fresh public400-state after projecting only newly registered streams. Training-noise draws never advance data/prior/eval streams.",
+    "training_noise": "Isolated checkpointed CUDA generator(noise, component=ring16_intervention, purpose=weak_directions); draw only for weak singular components; zero and no-weak matrices consume no draws."
+  },
+  "saved_matrix_probe": {
+    "backend": "cuda float32; no CPU SVD or matrix dtype conversion",
+    "criterion": "Finite factors, exact same-input/same-perturbation-state repeats, strong signs all+1, +/-1 weak signs, preserved ambient CPU/CUDA RNG, and checkpoint every consumed perturbation-stream state. Zero/no-weak fixtures have no draws. No mismatch-reduction or quality target is imposed.",
+    "fixed_algebra_fixtures": {
+      "cases": [
+        "2x2 zero matrix: exact zero/no draw",
+        "2x2 identity: ordinary factor/no draw"
+      ],
+      "scope": "separate fixed algebra cohort, never a learned initialization"
+    },
+    "historical_baseline": {
+      "full_polar_relative_frobenius": 0.2519904673099518,
+      "identity": "PR331 original saved-gradient probe, CUDA SVD; original pair-norm summary used saved CPU tensors",
+      "raw_relative_frobenius": 1.0285654639119457e-07
+    },
+    "max_attempts": 1,
+    "mismatch_reduction_required": false,
+    "new_pair_norm_backend": "CUDA float32; report measured values, do not demand last-bit equality to historical CPU norm summary",
+    "paired_rng_contract": "Restore only the perturbation stream to its initial checkpoint before each input and repeat; compare matched coin sequences, recording weak counts and signs. Different gradients can have different weak bases/counts.",
+    "parameter": "D net.2.weight, shape64x64, update401",
+    "publication_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "quality_gate": false,
+    "rng_draws": "Up to256 uniform values, drawn only on isolated named CUDA perturbation stream; no ambient/data/prior/eval draws.",
+    "sampling_draws": 0,
+    "scope": "fixed_saved401_weak_sign_flip_cuda_algebra",
+    "status": "planned_unexecuted",
+    "stream_binding": {
+      "component": "ring16_intervention",
+      "device": "cuda:0",
+      "family": "noise",
+      "purpose": "weak_directions"
+    },
+    "timeout_seconds": 30,
+    "trace_execution_sources": {
+      "live": {
+        "commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+        "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d"
+      },
+      "restart": {
+        "commit": "1de465e25252c10622965362cd593a899ce74f74",
+        "source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd"
+      }
+    },
+    "trace_sha256": {
+      "live": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145",
+      "restart": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
+    },
+    "training_updates": 0
+  },
+  "schedule_contract": {
+    "boundary_only": "Fresh public initialization and live updates1..400 unchanged; flip weak G/D spectral signs only during update401; ordinary full polar402..1600. No restore.",
+    "every_step": "Fresh public initialization; draw independent weak spectral signs for each eligible G/D matrix update during1..1600. No restore.",
+    "rationale": "A single perturbation after the shared live400 prefix tests path selection at the restart boundary; every-step tests continuous random weak-direction exploration. Neither changes small individual model weights."
+  },
+  "schedules": [
+    "boundary_only",
+    "every_step"
+  ],
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "cuda_ring16_intervention_diagnostic",
+  "seed": 0,
+  "status": "ready",
+  "steps": 1600,
+  "stopping_rules": [
+    "Freeze source/protocol before paid work; every attempt counts, no retries or repeat of consumed arms.",
+    "Reject CPU backend, wrong matrix dtype/device, missing/wrong-device generator and nonfinite inputs; no CPU substitution for unavailable CUDA.",
+    "Finish both independent arms to1600 even if a smoke state passes.",
+    "Stop an arm on nonfinite training, source/stream mismatch, timeout or budget exhaustion; retain raw error and actual state/cost.",
+    "No seed changes, periodic restart, annealing, prior refresh, subbatch repeat, architecture change, flip-probability/threshold grid or relaxed covariance bounds.",
+    "Do not spend automatically on retention or import these diagnostic results into ordinary qualification."
+  ],
+  "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "timeout_seconds_per_arm": 300,
+  "trainer_delta": {
+    "biases": "unchanged ordinary normalized updates",
+    "dtype_conversion": false,
+    "exact_zero_singular_components": "For a nonzero rank-deficient matrix these are arbitrary unit completions in original polar; flipping them perturbs that normalized completion, not a nonzero gradient component.",
+    "flip_probability": 0.5,
+    "kind": "weak_spectral_random_sign_flips",
+    "learning_rate_schedule": "constant",
+    "learning_rates": {
+      "D": 0.018,
+      "G": 0.012,
+      "prior": 0.03
+    },
+    "no_weak_components": "ordinary U@Vh, no RNG draws",
+    "perturbation_distribution": "one independent CUDA float32 U[0,1) value per weak component; sign=-1 if draw<0.5 else+1",
+    "polar": "U diag(signs) Vh, signs=+1 for s>tau; independent fair +/-1 signs for s<=tau",
+    "prior": "unchanged sampled-row-normalized updates",
+    "production_defaults_changed": false,
+    "rng": "only passed isolated named CUDA noise/ ring16_intervention/ weak_directions generator; every consumed state checkpointed",
+    "roles": [
+      "generator_matrix_weights",
+      "critic_matrix_weights"
+    ],
+    "serial_backward": "unchanged baseline False",
+    "tau": "max(rows,cols)*finfo(float32).eps*smax",
+    "zero_gradient": "exact zero direction, no RNG draws"
+  },
+  "user_authorization": "User requested separate PRs/subagents for weak-value random sign flipping, and favored a single boundary intervention mirroring resume after400; compare that with every-step flips."
+}
