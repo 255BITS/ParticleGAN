@@ -73,16 +73,28 @@ def _signature(request):
     return stable_hash(value)
 
 
-def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda_model, campaign, queue):
+def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda_model, campaign, queue, technique_ids=None):
     root, queue_root = Path(root).resolve(), Path(queue_root).resolve()
     definition = _campaign(root, campaign)
     state = queue.inspect()
     existing = state.get("campaigns", {}).get(definition["id"])
     if existing and existing["definition"] != definition:
         raise ValueError("campaign definition is immutable; use a new campaign id")
+    discovered = discover_techniques(root)
+    names = discovered
+    if technique_ids is not None:
+        if (not isinstance(technique_ids, (list, tuple)) or not technique_ids
+                or any(not isinstance(name, str) or not name for name in technique_ids)):
+            raise ValueError("explicit technique_ids must be a nonempty list of declared idea IDs")
+        if len(set(technique_ids)) != len(technique_ids):
+            raise ValueError("explicit technique_ids must be unique")
+        unknown = sorted(set(technique_ids) - set(discovered))
+        if unknown:
+            raise ValueError("explicit technique_ids contain undeclared ideas: " + ", ".join(unknown))
+        names = list(technique_ids)
     requests = [resolve_idea(root, name, view_id=view_id, through_tier=through_tier,
                             execution_backend=execution_backend, cuda_model=cuda_model)
-                for name in discover_techniques(root)]
+                for name in names]
     sources = {request["source"]["digest"] for request in requests}
     rows = []
     for request in requests:
@@ -118,21 +130,24 @@ def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda
                                          if not row["submission_blockers"]),
                "campaign_budget_covers_declared_ceiling": definition["budget_seconds"] >= declared,
                "guide": "EXPERIMENTATION.md"}
+    if technique_ids is not None:
+        summary["explicit_technique_ids"] = names
+        summary["unrequested_technique_ids"] = sorted(set(discovered) - set(names))
     return requests, summary
 
 
 def plan_inventory(root: Path, queue_root: Path, *, view_id="discriminator_stability", through_tier=3,
-                   execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None) -> dict:
-    """Read-only full-denominator task inventory, preflight and declared budgets."""
+                   execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None, technique_ids=None) -> dict:
+    """Read-only inventory; an explicit roster retains each idea's ordinary admission checks."""
     queue = queue or Queue(queue_root)
     _, summary = _prepare(root, queue_root, view_id=view_id, through_tier=through_tier,
                           execution_backend=execution_backend, cuda_model=cuda_model,
-                          campaign=campaign, queue=queue)
+                          campaign=campaign, queue=queue, technique_ids=technique_ids)
     return summary
 
 
 def enqueue_inventory(root: Path, queue_root: Path, *, view_id="discriminator_stability", through_tier=3,
-                      execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None) -> dict:
+                      execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None, technique_ids=None) -> dict:
     """Freeze every executable row before admitting any request; launch nothing.
 
     Repeated calls attach to the queue's exact request/job identities. Validation
@@ -149,7 +164,7 @@ def enqueue_inventory(root: Path, queue_root: Path, *, view_id="discriminator_st
         raise ValueError("inventory Queue report_root differs from its research repository")
     requests, summary = _prepare(root, queue_root, view_id=view_id, through_tier=through_tier,
                                  execution_backend=execution_backend, cuda_model=cuda_model,
-                                 campaign=campaign, queue=queue)
+                                 campaign=campaign, queue=queue, technique_ids=technique_ids)
     frozen = []
     for request, row in zip(requests, summary["candidates"]):
         if row["submission_blockers"]:
@@ -172,7 +187,7 @@ def enqueue_inventory(root: Path, queue_root: Path, *, view_id="discriminator_st
 
 
 def run_inventory(root: Path, queue_root: Path, *, devices=None, view_id="discriminator_stability", through_tier=3,
-                  execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None) -> dict:
+                  execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None, technique_ids=None) -> dict:
     """Submit, then drain only this bounded campaign with ordinary prerequisites."""
     devices = list(devices or (["cpu"] if execution_backend == "cpu" else ["0", "1"]))
     if (execution_backend == "cpu") != (devices == ["cpu"]):
@@ -181,7 +196,7 @@ def run_inventory(root: Path, queue_root: Path, *, devices=None, view_id="discri
     queue = queue or Queue(queue_root, report_root=root / "reports/forge")
     summary = enqueue_inventory(root, queue_root, view_id=view_id, through_tier=through_tier,
                                 execution_backend=execution_backend, cuda_model=cuda_model,
-                                campaign=campaign, queue=queue)
+                                campaign=campaign, queue=queue, technique_ids=technique_ids)
     if summary["submitted_count"]:
         drain(queue, devices, campaign=summary["campaign"]["id"])
     state = queue.inspect()

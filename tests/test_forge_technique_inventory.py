@@ -248,3 +248,33 @@ def test_grouped_endurance_budget_is_counted_once(checkout):
     result = inventory.plan_inventory(checkout, checkout / "runs", **options())
     assert result["declared_worst_case_seconds"] == 30
     assert result["candidates"][0]["required_tier_totals"] == {"1": 1, "2": 1, "3": 2}
+
+
+@pytest.mark.parametrize('names,message', [([], 'nonempty'),(['base','base'],'unique'),
+                                          (['unknown'],'undeclared'),('base','nonempty'),
+                                          ([1],'nonempty')])
+def test_explicit_idea_roster_rejects_invalid_or_undeclared_ids(checkout,names,message):
+    before={p:p.read_bytes() for p in checkout.rglob('*') if p.is_file()}
+    with pytest.raises(ValueError,match=message):
+        inventory.plan_inventory(checkout,checkout/'runs',technique_ids=names,**options())
+    assert before=={p:p.read_bytes() for p in checkout.rglob('*') if p.is_file()}
+    assert not (checkout/'runs').exists()
+
+
+def test_explicit_idea_roster_preserves_default_discovery_and_admission(checkout):
+    alias(checkout,'added')
+    full=inventory.plan_inventory(checkout,checkout/'runs',**options())
+    selected=inventory.plan_inventory(checkout,checkout/'runs',technique_ids=['base'],**options())
+    assert [row['candidate'] for row in full['candidates']]==['added','base']
+    assert [row['candidate'] for row in selected['candidates']]==['base']
+    assert selected['explicit_technique_ids']==['base']
+    assert selected['unrequested_technique_ids']==['added']
+    assert full['candidates'][1]==selected['candidates'][0]
+    # The selected declaration remains subject to its own preflight/admission.
+    task=read_json(checkout/'configs/forge/tasks/t1.json')
+    task['requires_capabilities'].append('unsupported_inventory_probe')
+    atomic_json(checkout/'configs/forge/tasks/t1.json',task)
+    queued=inventory.enqueue_inventory(checkout,checkout/'runs',technique_ids=['base'],**options())
+    assert queued['blocked_count']==1 and queued['submitted_count']==0
+    assert queued['candidates'][0]['submission_status']=='BLOCKED'
+    assert not (checkout/'runs').exists()
