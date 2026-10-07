@@ -18,10 +18,11 @@
   "id": "gaussian-shallow-v1",
   "lifecycle": "concluded",
   "protocol_sha256": "7b250028cd7d89e9a350afe123f3256d5db929028a1a72a778d707275a215008",
+  "publication_presentation_normalization": "Trailing whitespace removed from the Matplotlib SVG; plotted metric data and path coordinates unchanged.",
   "publications": {
     "controls.json": "88c83a2641fe3590a3016513c44844ce7a0a56d0564ee58c0dc37a2821b73794",
     "data-and-stream-proof.json": "451bb3517e34955da1067851d626e10ece9e43037efa859018007277526eda7c",
-    "metrics.svg": "b4ace15c9eafd5a6fe4fb514d9d6c27a52949a65afb0f271cf0c0ccb4ede7c5a",
+    "metrics.svg": "17eb963d01c40fa1fd5dbfab478059f632ecafb4a9c1e1c02cedfced01c9ada4",
     "restore-proof.json": "39a4b71f348e24684f10a4b43950119bafdf9ebb693c44ee524ed6b7c725aa87",
     "results.json": "4be13276ecd371338f31f1eec6bee4cdceca0516c995434bd62ace9c80dbdd8e",
     "saved-observation-summary.json": "c784a471ca5fd8935096c45931f2b31acbb124446f175ea5c66fcb5b4a1597ab",
