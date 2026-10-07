@@ -18,7 +18,7 @@ import torch
 
 from .api import (CapabilityError, task_formulation_context, task_recipe_resources,
                   task_policy_blockers)
-from .artifacts import manifest_artifacts, verify_artifacts
+from .artifacts import manifest_artifacts, save_provenance_checkpoint, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
@@ -289,22 +289,8 @@ class _Run:
         # save_state and the task's produces_state contract still govern those.
         # Keep the certificate outside its input tree and separate from any
         # evaluator-owned artifact tree so receipt writes cannot invalidate it.
-        provenance_root = self.output / "provenance"
-        provenance_root.mkdir(parents=True, exist_ok=True)
-        provenance_path = provenance_root / "provenance-state.pt"
-        torch.save(state, provenance_path)
-        evidence["provenance_checkpoint"] = {
-            "schema_version": 1, "purpose": "provenance_only",
-            "prerequisite_eligible": False,
-            "artifact_root": str(provenance_root.resolve()),
-            "artifact_manifest": manifest_artifacts(provenance_root),
-            "path": provenance_path.name, "sha256": file_hash(provenance_path),
-            "bytes": provenance_path.stat().st_size, "state_sha256": state_digest(state),
-            "completed_steps": trainer.completed_steps,
-            "named_stream_keys": sorted(state["streams"]["states"]),
-            "named_stream_state_sha256": {key: state_digest(value)
-                for key, value in sorted(state["streams"]["states"].items())},
-            "optimizer_updates_added": 0, "sampling_draws_added": 0}
+        evidence["provenance_checkpoint"] = save_provenance_checkpoint(
+            self.output, state, completed_steps=trainer.completed_steps)
         if save_state:
             torch.save(state, self.output / "state.pt")
         receipt = {"evidence": evidence, "cost": {"optimizer_updates": counts,
