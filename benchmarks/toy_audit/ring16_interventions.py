@@ -255,6 +255,9 @@ def trial(protocol_path, output, arm, baseline_path, *, device):
 
 def summarize(output):
     protocol = read(output / "frozen-protocol.json")
+    controller_path = output / "controller-attempts.json"
+    attempts = read(controller_path) if controller_path.exists() else []
+    admitted = {row["arm"]: row for row in attempts}
     rows = []
     for arm in protocol["schedules"]:
         directory = output / arm
@@ -264,10 +267,12 @@ def summarize(output):
                          "scoring_draws", "prefix_identity", "batch_sequence_sha256", "any_full_pass",
                          "first_full_pass", "confirmed_smoke", "terminal_suffix", "five_terminal_verdict", "final_metrics")})
         else:
-            rows.append({"arm": arm, "status": "INTERRUPTED" if directory.exists() else "UNMEASURED"})
+            rows.append({"arm": arm, "status": "INTERRUPTED" if directory.exists() or arm in admitted else "UNMEASURED",
+                         "controller_attempt": admitted.get(arm),
+                         "conservative_seconds_debit": 300 if directory.exists() or arm in admitted else 0})
     result = {"schema_version": 1, "qualification_input": False, "protocol_id": protocol["id"], "arms": rows,
-              "reserved_updates": 1600 * sum((output / a).exists() for a in protocol["schedules"]),
-              "reserved_seconds": 300 * sum((output / a).exists() for a in protocol["schedules"])}
+              "reserved_updates": 1600 * sum((output / a).exists() or a in admitted for a in protocol["schedules"]),
+              "reserved_seconds": 300 * sum((output / a).exists() or a in admitted for a in protocol["schedules"])}
     atomic_json(output / "summary.json", result)
     print(json.dumps(result), flush=True)
 
@@ -343,8 +348,16 @@ def main():
             raise ValueError("baseline artifact unavailable or changed")
         output.mkdir(parents=True, exist_ok=False)
         atomic_json(output / "frozen-protocol.json", protocol)
-        failures = []
+        failures, attempts = [], []
         for arm in protocol["schedules"]:
+            # Admission precedes child imports, so an early process failure
+            # cannot erase the attempt from campaign reservation accounting.
+            attempt = {"arm": arm, "status": "STARTED", "reserved_seconds": 300,
+                       "reserved_updates": 1600, "reserved_scoring_draws": 97}
+            attempts.append(attempt)
+            atomic_json(output / "controller-attempts.json", attempts)
+            launched = time.monotonic()
+            print(json.dumps({"event": "arm_start", "arm": arm}), flush=True)
             try:
                 result = subprocess.run([sys.executable, "-u", "-m", MODULE, "trial", "--protocol", str(protocol_path),
                                          "--output", str(output), "--arm", arm, "--baseline", str(args.baseline.resolve()),
@@ -358,6 +371,9 @@ def main():
                 atomic_json(directory / "interruption.json", {"status": "INTERRUPTED", "charged_seconds": 300,
                             "reserved_updates": 1600, "reserved_scoring_draws": 97, "retry_permitted": False})
                 failed = True
+            attempt["status"] = "FAILED" if failed else "FINISHED"
+            attempt["child_wall_seconds"] = time.monotonic() - launched
+            atomic_json(output / "controller-attempts.json", attempts)
             if failed:
                 failures.append(arm)
         summarize(output)

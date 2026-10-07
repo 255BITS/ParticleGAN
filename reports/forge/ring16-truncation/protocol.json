@@ -2,7 +2,7 @@
   "artifacts": "Raw logs, traces, checkpoints, streams and observation tensors stay ignored under runs/api. After execution publish compact metrics/provenance and actual-training GIFs only. Keep technique-inventory.md as the sole generated goal leaderboard.",
   "baseline_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
   "bindings": {
-    "benchmarks/toy_audit/ring16_interventions.py": "fa8985f0ba0b98fe640f371cac7fb3a714a3956508e4282b9935cee4e72d5ee5",
+    "benchmarks/toy_audit/ring16_interventions.py": "b7b55e613958f8bf8e2e6c520d0efb34c10f4b95545dc6e7b143ce525a26dc3b",
     "benchmarks/toy_audit/ring16_spectral_truncation.py": "aa59a29e732fd1697195436d559f915fcdfb8dfe401f26dbceb0bc7981073258",
     "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
     "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
