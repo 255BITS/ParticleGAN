@@ -1,7 +1,12 @@
 """Composable PyTorch primitives for GANs with learned particle priors.
 
 Networks and devices belong to the caller; GANTrainer optionally owns updates.
+Importing ParticleGAN disables multithreaded autograd scheduling on this thread.
 """
+from .execution import disable_autograd_multithreading, serial_autograd
+
+disable_autograd_multithreading()
+
 from .autoencoder import ParticleEncoding, particle_ae, particle_vae
 from .capabilities import prior_capabilities, prior_mechanisms
 from .birth_death import ParticleRows, ScalarHeadFeatures
@@ -27,6 +32,7 @@ from .vicreg_loss import ParticleRegularizer
 from . import init
 
 __all__ = [
+    "disable_autograd_multithreading", "serial_autograd",
     "init",
     "TensorFlowV1Adam",
     "prior_capabilities", "prior_mechanisms",

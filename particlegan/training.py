@@ -94,13 +94,11 @@ class GANTrainer:
     Optional named RNG streams isolate input/output noise, MoG kernel noise,
     evaluation and stochastic model layers and travel with checkpoints.
 
-    ``serial_backward=True`` executes the whole update with autograd
-    multithreading disabled. Use it for exact CUDA checkpoint continuation
-    with higher-order critic penalties. This changes gradient summation order
-    from the historical runtime, so it is explicit and checkpointed; loading
-    across execution modes is rejected. The caller's autograd mode is restored.
-    False inherits the caller's autograd setting; that ambient setting is not
-    captured by a legacy checkpoint. True enforces the serialized constraint.
+    The whole update always disables autograd multithreading, including graph
+    construction and higher-order critic penalties. ``serial_backward=True``
+    remains a compatibility assertion; False is rejected. The checkpoint
+    records this constraint, and unmarked or False historical checkpoints
+    require their original source. The caller's autograd mode is restored.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -108,12 +106,13 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=False):
+                 optimizer_options=None, penalty_options=None, serial_backward=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
-        self.serial_backward = serial_backward
+        if not serial_backward:
+            raise ValueError("ParticleGAN requires serial_backward=True; autograd multithreading is disabled")
         if getattr(recipe, "row_policy", "independent") != "independent":
             raise ValueError("GANTrainer requires row_policy='independent'; use E22Policy with RoutedRows "
                              "and a caller-owned loop for paired conditional contexts")
@@ -282,14 +281,17 @@ class GANTrainer:
                 state = torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else torch.get_rng_state()
                 self.model_generator.set_state(state)
 
+    @property
+    def serial_backward(self):
+        """The fixed project execution policy, retained for compatibility."""
+        return True
+
     def _execute_step(self, real, *, generator_real=None, collect_stats=False):
         try:
-            if self.serial_backward:
-                # Serialized backward preserves exact CUDA continuation while
-                # leaving the caller's autograd execution mode unchanged.
-                with torch.autograd.set_multithreading_enabled(False):
-                    return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
-            return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
+            # Scope the entire update: graph construction can affect backward
+            # accumulation order too. Restore the caller's setting on exit.
+            with torch.autograd.set_multithreading_enabled(False):
+                return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
         except Exception:
             self.policy.abort_step()
             raise
@@ -458,7 +460,7 @@ class GANTrainer:
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
-            **({"serial_backward": True} if self.serial_backward else {}),
+            "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
@@ -520,7 +522,8 @@ class GANTrainer:
         if isinstance(state, dict) and (
                 type(state.get("serial_backward", False)) is not bool
                 or state.get("serial_backward", False) != self.serial_backward):
-            raise ValueError("checkpoint serial_backward execution mode does not match trainer")
+            raise ValueError("checkpoint serial_backward execution mode does not match trainer; "
+                             "resume unmarked or False historical checkpoints from their pinned original source")
         if (not isinstance(state, dict) or state.get("schema") != 4
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")

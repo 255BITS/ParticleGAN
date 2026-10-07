@@ -38,7 +38,8 @@ def compute_profile(backend: str, cuda_model: str | None = None, *, threads: int
         raise ValueError("execution backend must be cpu or cuda")
     if type(threads) is not int or threads < 1:
         raise ValueError("compute threads must be a positive integer")
-    result = {"backend": backend, "threads": threads, "deterministic": True, "tf32": False}
+    result = {"backend": backend, "threads": threads, "deterministic": True, "tf32": False,
+              "autograd_multithreading_enabled": False}
     if backend == "cpu":
         cpu = platform.processor()
         path = Path("/proc/cpuinfo")

@@ -295,6 +295,9 @@ def _trainer_class():
     """
     import torch
     from particlegan.training import GANTrainer, InputNoise
+    from .api import require_legacy_autograd_source
+    require_legacy_autograd_source(GANTrainer, SOURCE_PINS["particlegan/training.py"],
+                                 owner="Original common26 supplied-MoG trainer")
     from particlegan import UpdatePolicy
 
     class SuppliedMogTrainer(GANTrainer):
@@ -408,6 +411,10 @@ class MogContext:
 def construct_owner(root, binding, *, device, source_guard):
     """Only the admitted child may invoke this actual public component factory."""
     source_guard()
+    from particlegan.training import GANTrainer
+    from .api import require_legacy_autograd_source
+    require_legacy_autograd_source(GANTrainer, SOURCE_PINS["particlegan/training.py"],
+                                 owner="Original common26 MoG owner")
     _check_binding(root, binding)
     import torch
     from particlegan import Recipe, MoGParticlePrior, prior_capabilities

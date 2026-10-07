@@ -43,6 +43,16 @@ class CapabilityError(ValueError):
         super().__init__("; ".join(self.blockers))
 
 
+def require_legacy_autograd_source(trainer_class, expected_sha256, *, owner):
+    """Refuse an original owner before construction when its trainer changed."""
+    from pathlib import Path
+    source = Path(inspect.getfile(trainer_class)).read_bytes()
+    if hashlib.sha256(source).hexdigest() != expected_sha256:
+        raise CapabilityError([
+            f"{owner} requires its pinned original GANTrainer source; the current "
+            "fixed serial autograd policy cannot substitute for that historical execution cohort"])
+
+
 def resolve_public_recipe(candidate, **overrides):
     """Resolve the versioned declaration binding; Recipe.name is only a label.
 
