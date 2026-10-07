@@ -152,7 +152,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     view = _FastView(critic)
     prior = ParticlePrior(
         PROTOCOL["n_particles"], PROTOCOL["z_dim"], init_std=0.1,
-        generator=torch.Generator().manual_seed(PROTOCOL["seed"]),
+        generator=torch.Generator(device=slow.device).manual_seed(PROTOCOL["seed"]),
     )
     gan = (gan_factory or make_gan_loss)()
     regularizer = (cap_factory or make_b_cap)()

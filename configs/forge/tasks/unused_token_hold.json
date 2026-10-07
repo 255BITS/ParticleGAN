@@ -25,7 +25,7 @@
     },
     "execution_path": "public_components",
     "prior_applicability": "not_sampled",
-    "device": "cpu",
+    "device": "cuda",
     "schedule_policy": "public_recipe_with_frozen_host_horizon"
   },
   "evaluation": {
@@ -75,11 +75,11 @@
     }
   },
   "resources": {
-    "gpus": 0,
-    "gpu_memory_mb": 0,
+    "gpus": 1,
+    "gpu_memory_mb": 512,
     "cpu_threads": 1,
     "timeout_seconds": 300,
-    "allow_cpu": true
+    "allow_cpu": false
   },
   "requires_capabilities": [
     "named_rng",

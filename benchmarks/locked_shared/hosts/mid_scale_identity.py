@@ -369,7 +369,7 @@ def score_hold(
         "pass": not reasons,
         "fail_reasons": ",".join(reasons),
         "per_scale": per_scale,
-        "device": "cpu",
+        "device": str(by_scale[0][1].device),
     }
     if bipolar is not None:
         row["same_dir"] = float(bipolar["same_dir"])
@@ -435,8 +435,6 @@ def _fit(
     train_arm = _train_arm_name(arm)
     torch.manual_seed(int(seed))
     student = MidScaleResidual(int(teacher.concept.numel()))
-    if any(param.is_cuda for param in student.parameters()):
-        raise RuntimeError("mid-scale identity toy is CPU only")
     targets = {scale: teacher.train_target(train_arm, scale) for scale in EVAL_SCALES}
     cloud = torch.stack([targets[scale] for scale in EVAL_SCALES], dim=0)
     critic = ScaleCritic(student.odd.numel(), cloud, hidden=CRITIC_HIDDEN)
@@ -544,7 +542,7 @@ def _fit(
         "reg_is_gradient_penalty": isinstance(reg, GradientPenalty),
         "cover_weight": cover_w,
         "fm_weight": float(FORMULATION["fm_weight"]),
-        "device": "cpu",
+        "device": str(next(student.parameters()).device),
     }
     return student, meta
 
