@@ -35,14 +35,16 @@ before the merged execution source is frozen and any training starts.
 
 ```sh
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py plan \
-  --queue-root runs/forge/gaussian-smoke-inventory-v1
+  --queue-root runs/forge/gaussian-smoke-inventory-v2
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py enqueue \
-  --queue-root runs/forge/gaussian-smoke-inventory-v1
+  --queue-root runs/forge/gaussian-smoke-inventory-v2
 /usr/bin/python -u -m experiments.forge \
-  --queue-root runs/forge/gaussian-smoke-inventory-v1 drain \
-  --gpus 0,1 --campaign gaussian-smoke-inventory-v1
-tail -F runs/forge/gaussian-smoke-inventory-v1/events.jsonl
+  --queue-root runs/forge/gaussian-smoke-inventory-v2 drain \
+  --gpus 0,1 --campaign gaussian-smoke-inventory-v2
+tail -F runs/forge/gaussian-smoke-inventory-v2/events.jsonl
 ```
+
+The original v1 admission stopped before creating any submission, attempt or training update: the host validator conflated the 6,000-update continuation budget with its retained 1,000-update schedule horizon. [The refusal/archive receipt](admission-v1.json) preserves that source and zero cost. The v2 successor changes only this software validation and the registration identity; roster, recipes, task budgets and campaign ceilings remain fixed.
 
 The preparation interface launches no training. The parent runs the reviewed
 campaign with one worker on each physical GPU, preserves raw stdout, traces,

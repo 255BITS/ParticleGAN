@@ -21,7 +21,7 @@ from experiments.forge.technique_inventory import discover_techniques, enqueue_i
 from experiments.forge.views import load_view
 
 
-ROUND = Path("configs/forge/rounds/gaussian-smoke-inventory-v1.json")
+ROUND = Path("configs/forge/rounds/gaussian-smoke-inventory-v2.json")
 
 
 def _progress(stage, scope):
