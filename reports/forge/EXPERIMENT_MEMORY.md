@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 556. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 557. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -629,6 +629,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 **Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
+
+### bcap-past-extrapolation-v1 · bcap-past-extrapolation-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `70af7a3e8a42be5964c019669ae28e284438943821c7cb36cff148853005a5c2`.
+
+A joint cached-gradient lookahead suppresses scalar game oscillation enough to acquire and retain a Gaussian at constant BCAP rates, without losing ring16 acquisition.
+
+**Observed:** {'FAIL': 8, 'PASS': 1}; wall seconds 279.351; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.9707, mass_tv=0.057373
+
+Joint normalized-field extrapolation from the past does not fix Gaussian at the selected constant BCAP rates: acquisition FAIL, hold3/72, longest streak2 and final KS.26799 versus baseline.09594. Simultaneous control passes0/96 Gaussian checks. Ring extrapolation has a strong late fit (covariance.25533, minimum eigen ratio.65523, final115-check streak) but misses1600 acquisition and strict hold115/144; adopted alternating ring retains144/144. All three scalar mean2-to3 shift arms pass0/48 full checks; extrapolation responds near the new mean but ends narrow with KS.13998. Seven new CUDA trials complete22000 updates for279.351 loop seconds;58 software checks pass,9 exact final restores and1308 saved sample metric recomputations. Source-bound baseline reuse and all ordinary qualification remain unchanged.
+
+**Next:** Stop this exact revision as a Gaussian repair; retain the augmentation as opt-in research and keep the adopted ring recipe. Investigate normalized response magnitude near fit in a separately frozen constant-rate comparison, especially nearly unit prior row directions; a magnitude-sensitive prior or frozen-prior role control is not executed or budgeted here. No automatic tuning, seed study, continuation or promotion.
+
+[Evidence](../../reports/forge/bcap-past-extrapolation/results.json) · [Record](records/bcap-past-extrapolation-v1-readout.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -4762,4 +4778,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `fbf0cff03ae84bfdfbcda3dffe73552fb20f11089ecb3ebfcb30c921c64b9f4f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `25e7a5173ae1a8629f9822ea2d6de7fd5e353c6b20d593088165128c3ee6279b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -1,0 +1,286 @@
+{
+  "candidate_id": "bcap-past-extrapolation-v1",
+  "candidate_revision": "70af7a3e8a42be5964c019669ae28e284438943821c7cb36cff148853005a5c2",
+  "changed_factors": [
+    "Recipe.game_update=extrapolation_from_past"
+  ],
+  "conclusion": "Joint normalized-field extrapolation from the past does not fix Gaussian at the selected constant BCAP rates: acquisition FAIL, hold3/72, longest streak2 and final KS.26799 versus baseline.09594. Simultaneous control passes0/96 Gaussian checks. Ring extrapolation has a strong late fit (covariance.25533, minimum eigen ratio.65523, final115-check streak) but misses1600 acquisition and strict hold115/144; adopted alternating ring retains144/144. All three scalar mean2-to3 shift arms pass0/48 full checks; extrapolation responds near the new mean but ends narrow with KS.13998. Seven new CUDA trials complete22000 updates for279.351 loop seconds;58 software checks pass,9 exact final restores and1308 saved sample metric recomputations. Source-bound baseline reuse and all ordinary qualification remain unchanged.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "A joint cached-gradient lookahead suppresses scalar game oscillation enough to acquire and retain a Gaussian at constant BCAP rates, without losing ring16 acquisition.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact revision as a Gaussian repair; retain the augmentation as opt-in research and keep the adopted ring recipe. Investigate normalized response magnitude near fit in a separately frozen constant-rate comparison, especially nearly unit prior row directions; a magnitude-sensitive prior or frozen-prior role control is not executed or budgeted here. No automatic tuning, seed study, continuation or promotion.",
+  "provenance": {
+    "archive_sha256": "10d61ee47ea4339f97060db2514cb086e32e63e50f1da6d2e28da18b37fe5b09",
+    "new_training_updates": 22000,
+    "parent_archives": {
+      "batch": "32580b2591ec6750b2e3c62b9ad8e446f8525072d4a0f46b9918b49453808588",
+      "duration": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480",
+      "prior": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d"
+    },
+    "protocol_sha256": "e7e91c1da201f13bf73b549e41501aecf4b0e555f4c46e7a4c6d1230e2976231",
+    "receipt": "reports/forge/bcap-past-extrapolation/provenance.json",
+    "report": "reports/forge/bcap-past-extrapolation/README.md",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "source_commit": "f987656a49c7477322c058d98e6e1c180518fa36",
+    "trainer_delta": {
+      "alternating": "archived current D-then-G/prior baseline",
+      "extrapolation_from_past": "simultaneous plus previous normalized field lookahead for G/D/prior, correction from base, checkpointed cache",
+      "simultaneous": "evaluate both role gradients before applying either update"
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "bcap-past-extrapolation-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-past-extrapolation/results.json",
+    "sha256": "a46df5dbc074d1229aee567d01a090c743d0519d64a450f37a48f6af56fd62a3"
+  },
+  "task_results": [
+    {
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "cost": {
+        "wall_seconds": 0.0
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 1,
+        "cdf_ks": 0.09594186020319784,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 1,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 1,
+        "mean": 2.1376790918875486,
+        "mean_error_sigma": 0.27535818377509713,
+        "sample_count": 4096,
+        "std": 0.8739799948613184,
+        "std_ratio": 1.7479599897226368
+      },
+      "reason": "Diagnostic stationary; acquisition FAIL, hold 1/72. reuse_complete; 0 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__alternating__stationary"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "cost": {
+        "wall_seconds": 0.0
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "acquisition_suffix": 6,
+        "component_core_covariance_error": 0.45829672552645206,
+        "component_core_min_eigen_ratio": 0.278278112411499,
+        "component_covariance_error": 0.563845245167613,
+        "component_min_eigen_ratio": 0.278278112411499,
+        "covariance_error": 0.04163460433483124,
+        "hold_pass_checks": 144,
+        "hold_total_checks": 144,
+        "hq": 0.970703125,
+        "longest_pass_streak": 150,
+        "mass_tv": 0.057373046875,
+        "max_component_spill": 0.07364340871572495,
+        "mean_error": 0.05096924304962158,
+        "min_hq_mass_ratio": 0.69921875,
+        "min_mass_ratio": 0.73828125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03942264963803208,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Diagnostic stationary; acquisition PASS, hold 144/144. reuse_complete; 0 new updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__alternating__stationary"
+    },
+    {
+      "candidate_id": "bcap-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 36.03845408000052
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.2932944103777998,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 0,
+        "mean": 2.3165249244339066,
+        "mean_error_sigma": 0.6330498488678131,
+        "sample_count": 4096,
+        "std": 1.2255201931775674,
+        "std_ratio": 2.451040386355135
+      },
+      "reason": "Diagnostic stationary; acquisition FAIL, hold 0/72. fresh; 4000 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "bcap-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 53.74621411401313
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 43,
+        "component_core_covariance_error": 0.5518185067921877,
+        "component_core_min_eigen_ratio": 0.18197184801101685,
+        "component_covariance_error": 0.5461555887013674,
+        "component_min_eigen_ratio": 0.18197184801101685,
+        "covariance_error": 0.0760725885629654,
+        "hold_pass_checks": 75,
+        "hold_total_checks": 144,
+        "hq": 0.9775390625,
+        "longest_pass_streak": 59,
+        "mass_tv": 0.060791015625,
+        "max_component_spill": 0.08070175349712372,
+        "mean_error": 0.03315238282084465,
+        "min_hq_mass_ratio": 0.57421875,
+        "min_mass_ratio": 0.57421875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.036936147264941176,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Diagnostic stationary; acquisition PASS, hold 75/144. fresh; 4000 new updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "bcap-past-extrapolation-v1",
+      "cost": {
+        "wall_seconds": 49.5984277309617
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.2679881263690278,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 3,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 2,
+        "mean": 2.3151804251538124,
+        "mean_error_sigma": 0.6303608503076248,
+        "sample_count": 4096,
+        "std": 0.4793269861913933,
+        "std_ratio": 0.9586539723827866
+      },
+      "reason": "Diagnostic stationary; acquisition FAIL, hold 3/72. fresh; 4000 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "bcap-past-extrapolation-v1",
+      "cost": {
+        "wall_seconds": 79.00660482805688
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "component_core_covariance_error": 0.23459569085389376,
+        "component_core_min_eigen_ratio": 0.6382570862770081,
+        "component_covariance_error": 0.25533001171424985,
+        "component_min_eigen_ratio": 0.6552273035049438,
+        "covariance_error": 0.05962158367037773,
+        "hold_pass_checks": 115,
+        "hold_total_checks": 144,
+        "hq": 0.9482421875,
+        "longest_pass_streak": 115,
+        "mass_tv": 0.070556640625,
+        "max_component_spill": 0.1409090906381607,
+        "mean_error": 0.03519948199391365,
+        "min_hq_mass_ratio": 0.59765625,
+        "min_mass_ratio": 0.640625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.035396718720189485,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Diagnostic stationary; acquisition FAIL, hold 115/144. fresh; 4000 new updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "cost": {
+        "wall_seconds": 17.925373972044326
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.20057876790934404,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0,
+        "mean": 3.017259449523408,
+        "mean_error_sigma": 0.03451889904681593,
+        "sample_count": 4096,
+        "std": 0.4062225530892437,
+        "std_ratio": 0.8124451061784874
+      },
+      "reason": "Diagnostic shift; acquisition FAIL, hold 0/24. resume; 2000 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__alternating__shift"
+    },
+    {
+      "candidate_id": "bcap-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 17.835237681982107
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.352838676253131,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0,
+        "mean": 2.6826426757324953,
+        "mean_error_sigma": 0.6347146485350095,
+        "sample_count": 4096,
+        "std": 0.9417996801476526,
+        "std_ratio": 1.8835993602953052
+      },
+      "reason": "Diagnostic shift; acquisition FAIL, hold 0/24. resume; 2000 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__simultaneous__shift"
+    },
+    {
+      "candidate_id": "bcap-past-extrapolation-v1",
+      "cost": {
+        "wall_seconds": 25.20032506796997
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.1399841815203311,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0,
+        "mean": 2.9840514789684676,
+        "mean_error_sigma": 0.03189704206306487,
+        "sample_count": 4096,
+        "std": 0.36112798679979285,
+        "std_ratio": 0.7222559735995857
+      },
+      "reason": "Diagnostic shift; acquisition FAIL, hold 0/24. resume; 2000 new updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__shift"
+    }
+  ],
+  "trainer_family": "bcap-dualnorm"
+}
