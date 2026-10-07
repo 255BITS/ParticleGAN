@@ -1,0 +1,401 @@
+{
+  "field_device": "cuda:1",
+  "model_sampling_draws": 0,
+  "new_gradient_evaluations": 0,
+  "results": [
+    {
+      "cell": "alternating-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "ae8a22dc0b56741960c3da3d26e0d97ce1439dd98f9f2ae48877f9b9f086f659",
+      "final_excess_kurtosis": 1.271171511549693,
+      "final_fitted_normal_ks": 0.03262161279160036,
+      "final_skewness": 0.06461957783409678,
+      "hold_checks": 72,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 59,
+        "mean_error_sigma <= 0.2": 11,
+        "std_ratio <= 1.2": 3,
+        "std_ratio >= 0.8": 2
+      },
+      "hold_mean_error_sigma_range": [
+        0.00021803344134241343,
+        0.5161090939654969
+      ],
+      "hold_std_ratio_range": [
+        0.786179130288528,
+        1.326097873092336
+      ]
+    },
+    {
+      "cell": "alternating-ring16_acquisition-stationary",
+      "checkpoint_sha256": "658677b6d14f606699ea7aff36ba85f29bfb7668652911e0f105d6f030bf734d",
+      "hold_checks": 144,
+      "hold_failed_bounds": {
+        "component_covariance_error <= 0.85": 144
+      }
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "d1101ad6dcaa95cee8dcae14abeb8a3d108d4ae57aa3e94a012a8dd66758e64e",
+      "final_excess_kurtosis": -0.5428212685385527,
+      "final_fitted_normal_ks": 0.09206137663174263,
+      "final_skewness": 0.43344959864517796,
+      "hold_checks": 72,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 72,
+        "mean_error_sigma <= 0.2": 55,
+        "std_ratio <= 1.2": 7,
+        "std_ratio >= 0.8": 33
+      },
+      "hold_mean_error_sigma_range": [
+        0.002940692298579961,
+        2.586344230796385
+      ],
+      "hold_std_ratio_range": [
+        0.28739580736216797,
+        1.5319438647943386
+      ]
+    },
+    {
+      "cell": "simultaneous-ring16_acquisition-stationary",
+      "checkpoint_sha256": "7feb16b8dfb6302d07fded36e152d50ad4c108843d4f9a02031a0a3e11c0f341",
+      "hold_checks": 144,
+      "hold_failed_bounds": {
+        "component_covariance_error <= 0.85": 26
+      }
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "a40b851398fc393c137736ebc8e010280ddab0cf6c977ce9aeacdbe0813708c6",
+      "final_excess_kurtosis": 0.3278860747422221,
+      "final_fitted_normal_ks": 0.030442831420117833,
+      "final_skewness": 0.25991460942763134,
+      "hold_checks": 72,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 42,
+        "mean_error_sigma <= 0.2": 4,
+        "std_ratio <= 1.2": 6
+      },
+      "hold_mean_error_sigma_range": [
+        0.004000450921012089,
+        0.32773175969487056
+      ],
+      "hold_std_ratio_range": [
+        0.8703576733675734,
+        1.874832710537462
+      ],
+      "implied_mean_prior_row_motion": 0.013501112759113311,
+      "parameters": [
+        {
+          "cached_direction_norm": 0.15526442229747772,
+          "cap_norm_utilization": 0.02744713147088957,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.0326957069337368,
+          "cap_norm_utilization": 0.0326957069337368,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.19636739790439606,
+          "cap_norm_utilization": 0.03471317966553887,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.06077377498149872,
+          "cap_norm_utilization": 0.06077377498149872,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.24786368012428284,
+          "cap_norm_utilization": 0.24786368012428284,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.09194917976856232,
+          "cap_norm_utilization": 0.09194917976856232,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 0.4931845963001251,
+          "cap_norm_utilization": 0.08718354310514208,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.053493767976760864,
+          "cap_norm_utilization": 0.053493767976760864,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.4821215569972992,
+          "cap_norm_utilization": 0.08522785557725171,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.08800025284290314,
+          "cap_norm_utilization": 0.08800025284290314,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.2634040415287018,
+          "cap_norm_utilization": 0.2634040415287018,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "prior_direction_max_norm": 1.0,
+      "prior_direction_mean_norm": 0.4500370919704437,
+      "prior_direction_min_norm": 0.018665736541152,
+      "prior_fraction_at_cap": 0.05154639109969139,
+      "prior_nonzero_rows": 97
+    },
+    {
+      "cell": "extrapolation_from_past-ring16_acquisition-stationary",
+      "checkpoint_sha256": "2281a145f3c3a5528ce8f13312351757b3a3a2ec7641dcacb9a7577bde648924",
+      "hold_checks": 144,
+      "hold_failed_bounds": {
+        "component_covariance_error <= 0.85": 144
+      },
+      "implied_mean_prior_row_motion": 0.02972631812095642,
+      "parameters": [
+        {
+          "cached_direction_norm": 5.750062465667725,
+          "cap_norm_utilization": 0.7187578082084656,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.9999999403953552,
+          "cap_norm_utilization": 0.9999999403953552,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 1.8055402040481567,
+          "cap_norm_utilization": 0.2256925255060196,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 1.0,
+          "cap_norm_utilization": 1.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 1.4142135381698608,
+          "cap_norm_utilization": 0.9999999828857289,
+          "dualnorm_motion_cap_norm": 1.4142135623730951,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 1.0,
+          "cap_norm_utilization": 1.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 2.8012969493865967,
+          "cap_norm_utilization": 0.3501621186733246,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.22570183873176575,
+          "cap_norm_utilization": 0.22570183873176575,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 1.6486866474151611,
+          "cap_norm_utilization": 0.20608583092689514,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.2856500446796417,
+          "cap_norm_utilization": 0.2856500446796417,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 1.0,
+          "cap_norm_utilization": 1.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "prior_direction_max_norm": 1.0000001192092896,
+      "prior_direction_mean_norm": 0.9908772706985474,
+      "prior_direction_min_norm": 0.4190848171710968,
+      "prior_fraction_at_cap": 0.9793814420700073,
+      "prior_nonzero_rows": 97
+    },
+    {
+      "cell": "alternating-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "c222a1741de8a42f8e917e7ad21fb242b99e2cd518482e0bef8a6b1b1f40326b",
+      "final_excess_kurtosis": -0.40595091572367004,
+      "final_fitted_normal_ks": 0.024337876336334663,
+      "final_skewness": -0.045273841174941376,
+      "hold_checks": 24,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 14,
+        "mean_error_sigma <= 0.2": 6
+      },
+      "hold_mean_error_sigma_range": [
+        0.0025051102857105434,
+        0.3247390373144299
+      ],
+      "hold_std_ratio_range": [
+        0.8491815390370177,
+        1.174420711313896
+      ]
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "d99bbbfe3c0475c4c9ff94716b7ec7012cc343aedc7d14906bdc6a50544c4896",
+      "final_excess_kurtosis": -0.7377561765136953,
+      "final_fitted_normal_ks": 0.10468824011542177,
+      "final_skewness": 0.03600318111623735,
+      "hold_checks": 24,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 24,
+        "mean_error_sigma <= 0.2": 21,
+        "std_ratio <= 1.2": 3,
+        "std_ratio >= 0.8": 15
+      },
+      "hold_mean_error_sigma_range": [
+        0.03850536956451833,
+        2.7176975182665046
+      ],
+      "hold_std_ratio_range": [
+        0.18152816389489893,
+        1.9183117338214777
+      ]
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "721779eca506ac4cb522a3e59b5c0bae48a6c6976d1a09836dd25cb99442aa89",
+      "final_excess_kurtosis": 0.02584414486914799,
+      "final_fitted_normal_ks": 0.02144988759297528,
+      "final_skewness": 0.0027727507597122836,
+      "hold_checks": 24,
+      "hold_failed_bounds": {
+        "cdf_ks <= 0.05": 16,
+        "mean_error_sigma <= 0.2": 6
+      },
+      "hold_mean_error_sigma_range": [
+        0.003746691800188273,
+        0.27755348733626306
+      ],
+      "hold_std_ratio_range": [
+        0.8058235508419432,
+        1.0825295806756683
+      ],
+      "implied_mean_prior_row_motion": 0.010162949860095978,
+      "parameters": [
+        {
+          "cached_direction_norm": 0.6771832704544067,
+          "cap_norm_utilization": 0.1197102206610987,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.06628265231847763,
+          "cap_norm_utilization": 0.06628265231847763,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.417376846075058,
+          "cap_norm_utilization": 0.07378249954248184,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.0689639002084732,
+          "cap_norm_utilization": 0.0689639002084732,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.22115248441696167,
+          "cap_norm_utilization": 0.22115248441696167,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.05293179303407669,
+          "cap_norm_utilization": 0.05293179303407669,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 0.42102813720703125,
+          "cap_norm_utilization": 0.07442796272235798,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.035339899361133575,
+          "cap_norm_utilization": 0.035339899361133575,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.5081770420074463,
+          "cap_norm_utilization": 0.08983385811169657,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.06226160749793053,
+          "cap_norm_utilization": 0.06226160749793053,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.3845353126525879,
+          "cap_norm_utilization": 0.3845353126525879,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "prior_direction_max_norm": 1.0,
+      "prior_direction_mean_norm": 0.3387649953365326,
+      "prior_direction_min_norm": 0.004535703454166651,
+      "prior_fraction_at_cap": 0.03883495181798935,
+      "prior_nonzero_rows": 103
+    }
+  ],
+  "scope": "posthoc_saved_state_explanation_not_gate",
+  "source_sha256": "67cbaf0855cca3a7b9588c9cfdf18b664937eac713057aa55b3379f748349fcc",
+  "training_updates": 0
+}

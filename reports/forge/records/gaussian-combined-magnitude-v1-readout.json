@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "record_id": "gaussian-combined-magnitude-v1-readout",
+  "record_type": "scientific",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-combined-cap-extrapolation-from-past-v1",
+  "candidate_revision": "35f8baf34b4b178c98b161bc75bbef7fd43a7a5972e18ba2b173e9c7b134a11c",
+  "trainer_family": "bcap-dualnorm",
+  "mechanism_class": "structural",
+  "changed_factors": [
+    "Recipe.network_update=spectral_capped",
+    "Recipe.network_gradient_scale=0.1",
+    "Recipe.game_update=extrapolation_from_past",
+    "Recipe.prior_update=row_capped",
+    "Recipe.prior_gradient_scale=.001",
+    "three explicit timing controls"
+  ],
+  "hypothesis": "Combining the independently tested network and prior caps with past extrapolation produces timely acquisition, uninterrupted retention and target-shift adaptation at constant nominal rates.",
+  "conclusion": "All nine combined-cap trial gates FAIL. Past Gaussian stationary hold30/72 (longest6, first five-pass window2459, endpoint KS.04666) versus network-only41/72; shifted hold8/24 (longest5, first five-pass window6000, endpoint KS.04436). Both acquisition deadlines fail. Alternating holds13/72 then10/24, simultaneous0/72 then0/24. Ring acquisition FAIL for all timings; holds0/144,118/144,0/144. Exactly30,000 new CUDA updates complete for362.353342 loop seconds, zero retries;79 software checks,9 restores,1308 metric recomputations and9 training GIFs verify. No ordinary qualification or default changes.",
+  "next_action": "Stop this exact fixed pair as a smoke repair; retain adopted ring. User authorized fresh two-pass extragradient after compaction, with the same fixed caps/rates and matched data/noise, separately frozen finite budget and full acquisition/hold/shift/regression gates. No next-study code, protocol, trials or spend have begun.",
+  "lifecycle": "concluded",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "source": {
+    "path": "reports/forge/gaussian-combined-magnitude/results.json",
+    "sha256": "2999c4b5ab96455d8473c4a8eb316cc2da98b00107fa3757246b84b546294965"
+  },
+  "provenance": {
+    "source_commit": "d5256284210354bda7a941b6e4121ec82e4d9c23",
+    "protocol_sha256": "0c7508741554189a5df193b7f3f1ab2e82f9c450d980056a8df14149665b6139",
+    "archive_sha256": "29e03c16710cb28435ec2a6d1a8b67deb8bf821ca94bf92ce1803fa79016e14c",
+    "new_training_updates": 30000,
+    "receipt": "reports/forge/gaussian-combined-magnitude/provenance.json",
+    "report": "reports/forge/gaussian-combined-magnitude/README.md",
+    "trainer_delta": {
+      "alternating": "G/D spectral cap .1 plus learned-prior row cap .001; timing alternating",
+      "simultaneous": "G/D spectral cap .1 plus learned-prior row cap .001; timing simultaneous",
+      "extrapolation_from_past": "G/D spectral cap .1 plus learned-prior row cap .001; timing extrapolation_from_past"
+    },
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    }
+  },
+  "task_results": [
+    {
+      "candidate_id": "bcap-combined-cap-alternating-v1",
+      "task_id": "gaussian1d_acquisition__alternating__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.037130128105095084,
+        "finite_fraction": 1.0,
+        "mean": 2.0132335677408264,
+        "mean_error_sigma": 0.026467135481652804,
+        "sample_count": 4096,
+        "std": 0.5057076102549788,
+        "std_ratio": 1.0114152205099576,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 13,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 3
+      },
+      "cost": {
+        "wall_seconds": 35.03481997200288
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 13/72; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-alternating-v1",
+      "task_id": "ring16_acquisition__alternating__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.35429792664945126,
+        "component_core_min_eigen_ratio": 0.27600765228271484,
+        "component_covariance_error": 3.451270619407296,
+        "component_min_eigen_ratio": 0.4216347336769104,
+        "covariance_error": 0.06934714317321777,
+        "hq": 0.965087890625,
+        "mass_tv": 0.078857421875,
+        "max_component_spill": 0.1116504818201065,
+        "mean_error": 0.029300114139914513,
+        "min_hq_mass_ratio": 0.6953125,
+        "min_mass_ratio": 0.703125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03520054988111719,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 52.56321613898035
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 0/144; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-simultaneous-v1",
+      "task_id": "gaussian1d_acquisition__simultaneous__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.15660148184615275,
+        "finite_fraction": 1.0,
+        "mean": 1.9298691497533582,
+        "mean_error_sigma": 0.14026170049328357,
+        "sample_count": 4096,
+        "std": 0.4568010346629683,
+        "std_ratio": 0.9136020693259366,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 34.88316544902045
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 0/72; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-simultaneous-v1",
+      "task_id": "ring16_acquisition__simultaneous__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.414831611327827,
+        "component_core_min_eigen_ratio": 0.31668469309806824,
+        "component_covariance_error": 0.545462186448276,
+        "component_min_eigen_ratio": 0.37083107233047485,
+        "covariance_error": 0.06782113015651703,
+        "hq": 0.973388671875,
+        "mass_tv": 0.09326171875,
+        "max_component_spill": 0.08629441261291504,
+        "mean_error": 0.05512978881597519,
+        "min_hq_mass_ratio": 0.59765625,
+        "min_mass_ratio": 0.59765625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.043104138195120247,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 118,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 118
+      },
+      "cost": {
+        "wall_seconds": 53.345531382015906
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 118/144; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-extrapolation-from-past-v1",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.04666279142036234,
+        "finite_fraction": 1.0,
+        "mean": 2.0315468132466776,
+        "mean_error_sigma": 0.06309362649335526,
+        "sample_count": 4096,
+        "std": 0.5468322233743661,
+        "std_ratio": 1.0936644467487322,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 30,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 6
+      },
+      "cost": {
+        "wall_seconds": 49.073876725975424
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 30/72; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-extrapolation-from-past-v1",
+      "task_id": "ring16_acquisition__extrapolation_from_past__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.3296882025897503,
+        "component_core_min_eigen_ratio": 0.5836865901947021,
+        "component_covariance_error": 3.140609052963555,
+        "component_min_eigen_ratio": 0.5836865901947021,
+        "covariance_error": 0.04417339339852333,
+        "hq": 0.91748046875,
+        "mass_tv": 0.049560546875,
+        "max_component_spill": 0.29906541109085083,
+        "mean_error": 0.018812617287039757,
+        "min_hq_mass_ratio": 0.5859375,
+        "min_mass_ratio": 0.77734375,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.028939368517806457,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 78.20174107293133
+      },
+      "reason": "Source-bound combined-cap diagnostic stationary; acquisition FAIL, hold 0/144; 4000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-alternating-v1",
+      "task_id": "gaussian1d_acquisition__alternating__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.03193157042279138,
+        "finite_fraction": 1.0,
+        "mean": 2.9796065386617556,
+        "mean_error_sigma": 0.04078692267648876,
+        "sample_count": 4096,
+        "std": 0.4835676537001302,
+        "std_ratio": 0.9671353074002604,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 10,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 2
+      },
+      "cost": {
+        "wall_seconds": 17.57012714492157
+      },
+      "reason": "Source-bound combined-cap diagnostic shift; acquisition FAIL, hold 10/24; 2000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-simultaneous-v1",
+      "task_id": "gaussian1d_acquisition__simultaneous__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.2190473170067042,
+        "finite_fraction": 1.0,
+        "mean": 2.886004367726855,
+        "mean_error_sigma": 0.22799126454629004,
+        "sample_count": 4096,
+        "std": 0.3150217412589497,
+        "std_ratio": 0.6300434825178994,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 17.423118119942956
+      },
+      "reason": "Source-bound combined-cap diagnostic shift; acquisition FAIL, hold 0/24; 2000 new updates, no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-combined-cap-extrapolation-from-past-v1",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.04435892853564749,
+        "finite_fraction": 1.0,
+        "mean": 3.043230716168182,
+        "mean_error_sigma": 0.08646143233636394,
+        "sample_count": 4096,
+        "std": 0.5023533305404766,
+        "std_ratio": 1.0047066610809532,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 8,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 5
+      },
+      "cost": {
+        "wall_seconds": 24.25774555292446
+      },
+      "reason": "Source-bound combined-cap diagnostic shift; acquisition FAIL, hold 8/24; 2000 new updates, no ordinary qualification credit."
+    }
+  ]
+}

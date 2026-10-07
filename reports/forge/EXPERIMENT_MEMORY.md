@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 558. Inventory coverage: complete. Unresolved import items: 7.
+Records: 559. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-combined-cap-extrapolation-from-past-v1 · gaussian-combined-magnitude-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `35f8baf34b4b178c98b161bc75bbef7fd43a7a5972e18ba2b173e9c7b134a11c`.
+
+Combining the independently tested network and prior caps with past extrapolation produces timely acquisition, uninterrupted retention and target-shift adaptation at constant nominal rates.
+
+**Observed:** {'FAIL': 9}; wall seconds 362.353; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.96509, mass_tv=0.078857
+
+All nine combined-cap trial gates FAIL. Past Gaussian stationary hold30/72 (longest6, first five-pass window2459, endpoint KS.04666) versus network-only41/72; shifted hold8/24 (longest5, first five-pass window6000, endpoint KS.04436). Both acquisition deadlines fail. Alternating holds13/72 then10/24, simultaneous0/72 then0/24. Ring acquisition FAIL for all timings; holds0/144,118/144,0/144. Exactly30,000 new CUDA updates complete for362.353342 loop seconds, zero retries;79 software checks,9 restores,1308 metric recomputations and9 training GIFs verify. No ordinary qualification or default changes.
+
+**Next:** Stop this exact fixed pair as a smoke repair; retain adopted ring. User authorized fresh two-pass extragradient after compaction, with the same fixed caps/rates and matched data/noise, separately frozen finite budget and full acquisition/hold/shift/regression gates. No next-study code, protocol, trials or spend have begun.
+
+[Evidence](../../reports/forge/gaussian-combined-magnitude/results.json) · [Record](records/gaussian-combined-magnitude-v1-readout.json)
 
 ### bcap-gaussian-response-round-v1 · gaussian-response-round-v1-synthesis
 
@@ -4794,4 +4810,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `1f4f7af27ccc528e0dda7da874e4d51f7dd48f7fd2743f1ef15fbaeb14587ba4`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `30e6ffcac90b9afce521ad4a48e8426b5af1e82235f1f0d2bc9921918b10500f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

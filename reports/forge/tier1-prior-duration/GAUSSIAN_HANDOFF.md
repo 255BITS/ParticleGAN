@@ -196,3 +196,55 @@ control if useful. This interaction remains untested. Freeze a new finite
 protocol before spend; no combined-cap trial or further tuning was run here.
 All27 new final CUDA restores pass. The three-agent round is concluded, and
 PR317 remains an open prerequisite rather than an authorized merge.
+
+## Completed combined caps; next study after compaction
+
+The user authorized the combined network/prior magnitude test, then said:
+"ok lets compact then we'll try that next" after the recommendation to investigate
+fresh, two-pass extragradient. Finish the combined publication/PR first; the next
+study starts after compaction. No fresh-extragradient code, protocol, budget or
+scientific trial has begun. User authorization covers that next investigation,
+not merging the still-open prerequisite PRs.
+
+Current worktree: `/home/martyn/dev/ParticleGAN-gaussian-combined-magnitude`, branch
+`research/gaussian-combined-magnitude`, based on PR317 head84ac1422. It integrates
+the public cap capabilities from PR319/320. Read the
+[combined report](../gaussian-combined-magnitude/README.md), its protocol,
+results/provenance and the compiled memory before proposing or spending more.
+Executed scientific commit: `d5256284210354bda7a941b6e4121ec82e4d9c23`.
+
+Exactly nine CUDA trials completed30,000 updates for362.353342 loop seconds,
+zero retries. All acquisition/combined phase gates FAIL. Gaussian stationary
+holds: alternating13/72, simultaneous0/72, past30/72. Past longest streak6,
+first five-pass window2,459, final KS.04666; network-only had41/72 and first
+window3,875. Shift holds10/24,0/24,8/24. Shift past longest streak5/first window
+6,000, final KS.04436, missing5,000 reacquisition. Good final samples do not
+repair either phase's strict retention. Ring holds0/144,118/144,0/144; simultaneous
+has a late118-check streak, first five-pass window2,117, but misses1,600 acquisition.
+Retain the adopted original alternating ring recipe.
+
+Both scales stayed constant and global: network.1, prior.001; rates G.012,
+D.012×1.5, prior.03. Task/data/prior/initializer/RNG contracts match earlier
+sigma.1 diagnostics, with batch128, seed0, Gaussian z2/width32/depth2 and ring
+z4/width64/depth2. Ordinary sigma.025 Gaussian remains separate. All79 software
+checks,9 CUDA final restores,1,308 saved metric recomputations and9 nine-frame
+actual-training GIFs pass. Raw/archive receipts preserve every consumed stream.
+
+Raw: `runs/api/gaussian-combined-magnitude-v1/` in that worktree; easy tail:
+`tail -f runs/api/gaussian-combined-magnitude.run.log`.
+Archive: `artifacts/gaussian-combined-magnitude-v1.tar.gz`, SHA256
+`29e03c16710cb28435ec2a6d1a8b67deb8bf821ca94bf92ce1803fa79016e14c`.
+Inherited ignored raw symlinks point to the original316 prior/batch studies;
+the new protocol binds their exact checkpoint hashes. Reuse all compatible
+controls under their original source identities; no merger-triggered reruns.
+
+Next: declare a separately bounded fresh predictor/corrector study against the
+combined capped-past baseline, keeping these fixed scales/rates and each task's
+architecture, target/data, prior, sampling, update budget and cadence. Keep
+matched data/noise and checkpoint all consumed streams; explicitly account for
+twice the operator work. Use public GANTrainer; do not copy a private training
+loop. One global trainer per candidate across Gaussian and ring, full original
+acquisition, strict hold, mean-shift response and ring regression. GPU neural
+execution throughout; inherited CPU target/scorer/render exceptions stay explicit.
+Do not tune caps simultaneously, reset history at the shift, introduce annealing,
+select the best snapshot, add seeds or expand this concluded combined study.

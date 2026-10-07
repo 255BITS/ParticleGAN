@@ -1,0 +1,29 @@
+{
+  "model_sampling_draws": 0,
+  "results": [
+    {
+      "arm": "alternating",
+      "fitted_normal_ks": 0.03262161279160036,
+      "skewness": 0.06461957783409678,
+      "step": 4000
+    },
+    {
+      "arm": "simultaneous",
+      "fitted_normal_ks": 0.09206137663174263,
+      "skewness": 0.43344959864517796,
+      "step": 4000
+    },
+    {
+      "arm": "extrapolation_from_past",
+      "cached_nonzero_prior_rows": 97,
+      "cached_prior_direction_max_norm": 1.0,
+      "cached_prior_direction_min_norm": 0.018665736541152,
+      "fitted_normal_ks": 0.030442831420117833,
+      "implied_prior_step_mean": 0.013501111865043639,
+      "skewness": 0.25991460942763134,
+      "step": 4000
+    }
+  ],
+  "scope": "secondary_saved_state_explanation_not_qualification",
+  "training_updates": 0
+}

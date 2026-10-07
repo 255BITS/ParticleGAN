@@ -1,0 +1,108 @@
+{
+  "cells": [
+    {
+      "cell": "alternating-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "ae8a22dc0b56741960c3da3d26e0d97ce1439dd98f9f2ae48877f9b9f086f659",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "alternating-ring16_acquisition-stationary",
+      "checkpoint_sha256": "658677b6d14f606699ea7aff36ba85f29bfb7668652911e0f105d6f030bf734d",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "d1101ad6dcaa95cee8dcae14abeb8a3d108d4ae57aa3e94a012a8dd66758e64e",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "simultaneous-ring16_acquisition-stationary",
+      "checkpoint_sha256": "7feb16b8dfb6302d07fded36e152d50ad4c108843d4f9a02031a0a3e11c0f341",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "a40b851398fc393c137736ebc8e010280ddab0cf6c977ce9aeacdbe0813708c6",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "extrapolation_from_past-ring16_acquisition-stationary",
+      "checkpoint_sha256": "2281a145f3c3a5528ce8f13312351757b3a3a2ec7641dcacb9a7577bde648924",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000
+    },
+    {
+      "cell": "alternating-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "c222a1741de8a42f8e917e7ad21fb242b99e2cd518482e0bef8a6b1b1f40326b",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "d99bbbfe3c0475c4c9ff94716b7ec7012cc343aedc7d14906bdc6a50544c4896",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "721779eca506ac4cb522a3e59b5c0bae48a6c6976d1a09836dd25cb99442aa89",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.03,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000
+    }
+  ],
+  "model_sampling_draws": 0,
+  "training_updates": 0
+}

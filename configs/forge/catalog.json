@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 76,
+      "benchmark/toy_audit": 77,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1536,
+      "support": 1537,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11769
+    "files": 11770
   },
   "coverage": {
-    "declared_count": 11769,
+    "declared_count": 11770,
     "missing": [],
     "stale": [],
-    "tracked_count": 11769,
+    "tracked_count": 11770,
     "unclassified": [],
     "valid": true
   },
@@ -1097,6 +1097,13 @@
       "family": "benchmark/toy_audit",
       "git_blob": "9179185b5345a5860a36b1a676d7a832a34111d7",
       "path": "benchmarks/toy_audit/gaussian1d_quality.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "424c32d6a9f82816a678460ebda6ba2152ef46ff",
+      "path": "benchmarks/toy_audit/gaussian_combined_magnitude.py",
       "role": "support",
       "suggested_tiers": []
     },
@@ -7201,7 +7208,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "b412295d8daa5b5cc67da671fe08e1a08b4bcee9",
+      "git_blob": "3aec37166a6c08341c32966eb3538097c5874b40",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7236,7 +7243,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "6fc5175ae7146120f9b283a9080637ab42fc63fe",
+      "git_blob": "fe66273381a830d41aaf177fdf4b42e052171bc3",
       "path": "experiments/forge/boundaries.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7663,7 +7670,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "dd6f54c05467dbfa5b55ade84515b6b1aa7c3592",
+      "git_blob": "4e438b404abbb6d4df286991d6cbce0d850f4883",
       "path": "experiments/forge/techniques.py",
       "role": "engine_support",
       "suggested_tiers": []
