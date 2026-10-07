@@ -3,6 +3,8 @@ gradient at update 401. This CUDA diagnostic reproduces both historical
 gradients exactly, then disables autograd multithreading only for update 401.
 The serialized live and reloaded runs produce bit-identical critic gradients
 and entire trainer contexts, removing the measured boundary discrepancy.
+The constraint covers the whole update, including higher-order derivative graph
+construction and final backward; those two effects are not independently split.
 
 The recorded graphs have identical topology. Their ordinary relative node
 sequence priorities differ in 1,054 of 7,503 pairs; serialized priorities agree.

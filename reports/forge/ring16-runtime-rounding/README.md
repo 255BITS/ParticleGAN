@@ -13,8 +13,9 @@ The experiment isolates the execution constraint exposed by
 autograd multithreading for the whole update. Its documentation describes exact
 CUDA continuation with higher-order penalties and explicitly warns that this
 changes gradient summation order. That is the API's documented intent and
-existing implementation. Here it is applied externally only to update 401;
-all four checkpoint declarations retain their original false-mode contract.
+existing implementation. Here it is applied externally to the whole update 401,
+including the `create_graph=True` derivative calls and final backward; all four
+checkpoint declarations retain their original false-mode contract.
 
 All four declared arms ran on an NVIDIA RTX A6000, through the public API,
 using seed 0, the public deterministic initializer, the original learned
@@ -153,8 +154,10 @@ proof of a cause.
 
 The frozen [protocol](protocol.json) investigates **update 401**, immediately
 after the user's 400-update boundary. It leaves the first 400 updates unchanged.
-Disabling autograd multithreading only at that backward distinguishes a local
-summation-order effect from retraining an entirely different trajectory.
+Disabling autograd multithreading for that whole update distinguishes a local
+execution effect from retraining an entirely different trajectory. It does not
+separate thread choice during higher-order graph construction from final
+backward scheduling.
 
 | Completed diagnostic arm | New updates | Change |
 | --- | ---: | --- |
