@@ -1,0 +1,13 @@
+{
+  "archive_local_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-spectral-truncation-v1-cuda-evidence.tar.gz",
+  "archive_sha256": "a7f7a8eb26d47604189842b6ba0d9abfcaf4c6b2e96d861f15173134a1747092",
+  "bulk_tracked_in_git": false,
+  "bytes": 7108797,
+  "manifest_sha256": "87b829cca87bdb235623ffd332848a1a4e363ee4691c057c7502910fa67fd608",
+  "member_bytes_verified": true,
+  "original_execution_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+  "raw_file_count": 30,
+  "raw_originals_retained": true,
+  "restore": "tar -xzf ARCHIVE -C CHECKOUT (hydrate local runs/api only; never rerun consumed arms)",
+  "schema_version": 1
+}
