@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "compile-check": {
+      "raw_log": "/tmp/particlegan-ring16-serialized-live/runs/software/ring16-serialized-live-publication/compile-check.log",
+      "raw_log_sha256": "38c5ae88d471266a8e4cfc7938aef731445ebf2a7bf28d4fefd203136292277a",
+      "status": "PASS"
+    },
+    "history-check": {
+      "raw_log": "/tmp/particlegan-ring16-serialized-live/runs/software/ring16-serialized-live-publication/history-check.log",
+      "raw_log_sha256": "ddc918865c5fc848b1d92023a2ed02de4e36499b58dd17ed26bcd82425658981",
+      "status": "PASS"
+    },
+    "validate": {
+      "raw_log": "/tmp/particlegan-ring16-serialized-live/runs/software/ring16-serialized-live-publication/validate.log",
+      "raw_log_sha256": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a",
+      "status": "PASS"
+    }
+  },
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "qualification_changes": 0,
+  "qualification_source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893",
+  "report_local_links_verified": [
+    "protocol.json",
+    "results.json",
+    "verification.json",
+    "archive.json",
+    "../../../benchmarks/toy_audit/ring16_interventions.py",
+    "every_step.gif",
+    "boundary_only.gif"
+  ],
+  "schema_version": 1,
+  "scope": "metadata_publication_checks",
+  "technique_inventory_unchanged_sha256": "ff3dbaec98de9328d676943a94301414e78baeca30071a62df93790185bd7a45"
+}
