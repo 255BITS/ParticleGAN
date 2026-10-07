@@ -110,7 +110,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 5. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -127,7 +127,7 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation) | [3/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) | [0(*)/1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) | [3(*)/23](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation) |
 | [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [3(*)/4](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) | [0(*)/7](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | [3(*)/30](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) |
-| [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [3(*)/6](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [3(*)/27](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) |
+| [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [3(*)/6](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0(*)/20](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [3(*)/28](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) |
 | [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [3/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) | [3(*)/24](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) |
 | [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [3/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [3(*)/24](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) |
 | [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [3/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | [0/0](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3) | [3(*)/22](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage) |
@@ -151,7 +151,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [ae_gan_hold](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | PASS | changed since run |
 | [clockfree_audit_measurement_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_acquisition) | [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | changed since run |
-| [gaussian1d_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition) | [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke) | [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [ring16_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | FAIL | changed since run |
 | [two_pole](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | PASS | changed since run |
 | [unused_token_hold](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | PASS | changed since run |
@@ -165,6 +165,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-cover_leftover) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [gaussian1d_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_stability) | [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [grid100](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_bars4](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [img_blobs4](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [adaptation](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | UNKNOWN | changed since run |
@@ -326,11 +327,11 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 5**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 7**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 19 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 20 / 2**.
 
-Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit.
+Calibration: **provisional**. Revision7 smoke/stability separation is provisional and requires bounded calibration before default adoption. Historical Gaussian acquisition evidence retains its original sigma.025 cohort and five-terminal gate.
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1"></a>
 
@@ -338,7 +339,7 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition) | required | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke) | required | UNKNOWN | recorded definition unavailable |
 | [two_pole](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole) | required | PASS | changed since run |
 | [unused_token_hold](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold) | required | PASS | changed since run |
 | [ae_gan_hold](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold) | required | PASS | changed since run |
@@ -352,6 +353,7 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
+| [gaussian1d_stability](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_stability) | required | UNKNOWN | recorded definition unavailable |
 | [trajectory](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-trajectory) | required | UNKNOWN | changed since run |
 | [residual_student](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-residual_student) | required | UNKNOWN | changed since run |
 | [unipolar](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-unipolar) | required | UNKNOWN | changed since run |
@@ -652,7 +654,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
@@ -783,7 +785,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -879,38 +881,6 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 [Explanation and existing training artifacts](../five-word-joint/README.md)
 
-<a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition"></a>
-
-### gaussian1d_acquisition
-
-**gaussian1d_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition.json).
-
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
-
-Execution: **no recorded execution (*)**.
-
-Used by: [discriminator_stability / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
-
-Current pass criteria:
-
-| Metric | Required bound |
-| --- | --- |
-| sample_count | >= 4096 |
-| finite_fraction | == 1 |
-| mean_error_sigma | <= 0.2 |
-| std_ratio | >= 0.8 |
-| std_ratio | <= 1.2 |
-| cdf_ks | <= 0.05 |
-
-At least 5 consecutive passing terminal observations.
-All 24 declared observations and final live metrics are required.
-
-Declared budget: 1000 updates; timeout 120 seconds.
-
-Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
-
-[Explanation and existing training artifacts](../../toy_audit/api_contract/gaussian1d/README.md)
-
 <a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1"></a>
 
 ### gaussian1d_acquisition_tier1_policy_selected_cloud_v1
@@ -944,6 +914,71 @@ Declared budget: 1000 updates; timeout 120 seconds.
 Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../../toy_audit/api_contract/gaussian1d/README.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke"></a>
+
+### gaussian1d_smoke
+
+**gaussian1d_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; rng isolation = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_stability"></a>
+
+### gaussian1d_stability
+
+**gaussian1d_stability: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
+
+Used by: [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; rng isolation = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: gaussian1d_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
 <a name="cohort-cuda-7f9c23eb0e27-experiment-grid100"></a>
 
@@ -1366,7 +1401,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1428,7 +1463,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1457,7 +1492,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -1492,11 +1527,11 @@ Current pass criteria:
 | component_min_eigen_ratio | >= 0.15 |
 
 At least 5 consecutive passing terminal observations.
-All 24 declared observations and final live metrics are required.
+All 96 declared observations and final live metrics are required.
 
-Declared budget: 400 updates; timeout 300 seconds.
+Declared budget: 1600 updates; timeout 300 seconds.
 
-Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
 <a name="cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -1865,7 +1900,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1892,7 +1927,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
@@ -2019,7 +2054,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -2048,7 +2083,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
