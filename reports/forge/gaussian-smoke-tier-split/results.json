@@ -1,0 +1,63 @@
+{
+  "actual_training_gif": "../tier1-prior-smoke/mog100-n256-gaussian1d_acquisition.gif",
+  "artifacts": {
+    "confirmation-samples.pt": "62e71489da7bf29c36ec4ce70e36a77777d42262c59d8ab05928c37928bfc5e4",
+    "confirmation-state.pt": "3004debd567a8d2311d77ce4a33a3c267385e363997e3ddb48c3a2934c92a371",
+    "source.json": "f92405f88d737a46b91970a4ca2b48986d9b8ef781593ba49498e6f858c67a24"
+  },
+  "confirmation": {
+    "cdf_ks": 0.0475902941792854,
+    "finite_fraction": 1.0,
+    "mean": 2.0049909441295313,
+    "mean_error_sigma": 0.009981888259062544,
+    "sample_count": 4096,
+    "std": 0.46632106991847416,
+    "std_ratio": 0.9326421398369483
+  },
+  "confirmation_sample_count": 4096,
+  "confirmed": true,
+  "execution_source": {
+    "digest": "9c96378192f85d318c6e1cbb5ce9b56ae91346417e420bfcd137d1bbb56af3d4",
+    "origin_commit": "7b55d06bb2a8671220e20945598713ae456e84cd"
+  },
+  "id": "gaussian-smoke-tier-split-v1",
+  "independent_stream": "eval/live/smoke_confirmation",
+  "new_confirmation_draws": 1,
+  "new_training_updates": 0,
+  "original_acquisition_verdict": "FAIL",
+  "original_artifacts": {
+    "curve.json": "3e951dad906e34630b4ae3a5f0c716cdfa606bda11b6f66e0e636bfa24df30bf",
+    "receipt.json": "038cbb67be787ec7237c81f648881b5611bce7dd02e24b5cd7776c6d3f78fd4b",
+    "source.json": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2",
+    "state.pt": "e70cf3edc0feb34c737c605f5cbe17e67c3a5d5be138fabe15c4ecf63a2bdb29"
+  },
+  "original_source": {
+    "digest": "5cf787dc883d392f622ca74237a6d0582d6714b5fa5111bb462c30d91dc0c33d",
+    "origin_commit": "ec9be602b2b8d587b8c8c3f8bc10e98c96580dc1"
+  },
+  "original_verdict_unchanged": true,
+  "primary": {
+    "cdf_ks": 0.042974089754048816,
+    "finite_fraction": 1.0,
+    "mean": 2.0065182581020053,
+    "mean_error_sigma": 0.013036516204010695,
+    "sample_count": 4096,
+    "std": 0.4786939427793527,
+    "std_ratio": 0.9573878855587054
+  },
+  "protocol_sha256": "d32faa4da89855a4d0b6929f919bdc9bcbafecad7ff51599b95441becbb5c07a",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "historical_fixed_checkpoint_confirmation_diagnostic",
+  "serialization_recovery": {
+    "new_sampling_draws": 0,
+    "new_training_updates": 0,
+    "original_error": "KeyError: 'verdict' after the completed saved CUDA draw",
+    "original_stdout_sha256": "6721852b8520c76467caa197d2008be4e93cbbbe11a5243243cb8a7d3798f605",
+    "publisher_sha256": "fcfb5fd4bb4fce0423edb8dc144d910ccfb3049ddceb39f5797a786915df6601",
+    "retries": 0,
+    "scored_saved_tensors": true
+  },
+  "training_state_sha256": "5defe3ab5cbd956859904b77d86339e4bb53e09dec30ffddd5557b5c13261a43",
+  "training_state_unchanged": true
+}
