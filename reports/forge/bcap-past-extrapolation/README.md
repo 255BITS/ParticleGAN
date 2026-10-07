@@ -156,6 +156,14 @@ that remaining hypothesis. It must keep one whole trainer across tasks and
 measure acquisition, live retention and shift response. No such trial, rate grid,
 seed study, continuation or promotion follows automatically from this readout.
 
+The subsequently authorized [three-agent response-magnitude round](../gaussian-response-round/README.md)
+tests frozen prior, capped prior gradients and capped network singular directions
+in separate PRs. None solves continuous Gaussian learning. Network caps with past
+extrapolation improve stationary retention to41/72 and shifted retention to8/24,
+but miss acquisition and full hold; their interaction with capped prior updates
+remains untested. These newer results retain separate source/cohort identities
+and do not change this original readout or the ordinary qualification board.
+
 ## Cost, verification and reproduction
 
 Seven new CUDA trials complete **22,000 updates** and2,816,000 real examples

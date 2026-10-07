@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 557. Inventory coverage: complete. Unresolved import items: 7.
+Records: 558. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-gaussian-response-round-v1 · gaussian-response-round-v1-synthesis
+
+**Scope:** task_only_diagnostic; family_context; revision `145ff31b82454f9f906f09493918b29131ec93b871b1879be2fef19006c8cc6a`.
+
+Do frozen prior, magnitude-sensitive prior or magnitude-sensitive networks independently repair continuous Gaussian learning at constant nominal rates?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `cross_pr_role_isolation_synthesis`.
+
+
+
+All three user-authorized subagent investigations complete 90000 CUDA updates for 1068.147249 loop seconds, zero scientific retries. None passes full continuous Gaussian acquisition/retention. Frozen-prior past retains7/72 checks; prior-cap past10/72; network-cap past41/72, longest5 with first window3875, but misses1000 acquisition. Network-cap past shifted hold8/24 and endpointKS.03837 pass only instantaneously; reacquisition/holdFAIL. All new ring combined gates fail, retaining original alternating learned-prior ring as incumbent. Three separate PRs318/319/320 depend on317.27 exactCUDArestores,3924 saved metric sets and27 actualtrainingGIFs. This synthesis adds0newupdates and no duplicated cost/qualification.
+
+**Next:** Keep the adopted ring recipe; stop these exact independent revisions as full Gaussian repairs. Next propose a separately frozen interaction comparison combining magnitude-sensitive network and learned-prior responses, with matched fixed-prior/network-cap control if useful. Scale units and finite budgets must be declared; one global trainer rule across tasks, no annealing, best-checkpoint selection or seeds. Combined mechanism remains untested; no additional spend follows from this concluded round.
+
+[Evidence](../../reports/forge/gaussian-response-round/results.json) · [Record](records/gaussian-response-round-v1-synthesis.json)
 
 ### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
 
@@ -4778,4 +4794,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `25e7a5173ae1a8629f9822ea2d6de7fd5e353c6b20d593088165128c3ee6279b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `1f4f7af27ccc528e0dda7da874e4d51f7dd48f7fd2743f1ef15fbaeb14587ba4`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

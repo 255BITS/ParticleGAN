@@ -173,3 +173,26 @@ extrapolation capability may be a prerequisite for the new comparisons; check
 its status after compaction and make any stacked-PR dependency explicit. This
 instruction requests new PRs, not merging PR317. Do not infer merge permission
 from the earlier request to merge PR316.
+
+## Completed three-agent response round
+
+The user renewed authorization: "lets do all 3 with subagents! go for it / try to
+solve 1d gaussians". All three independent studies now finish30,000 new CUDA
+updates each, with zero scientific retries. See the
+[joint readout and recommendations](../gaussian-response-round/README.md) for
+the complete comparison and source/PR links. Each independent PR contains its
+own numerical report, compact evidence, provenance, reproduction and training GIFs.
+
+None passes continuous Gaussian acquisition/strict retention. Frozen-prior past
+retains7/72 checks; prior-cap past10/72; network-cap past41/72 and reaches a late
+five-check window at3,875, but misses1,000 acquisition. Network-cap past shifted
+retention is8/24, with a passing endpoint KS.03837; full reacquisition/hold fails.
+All new ring combined gates fail; keep the original learned-prior alternating
+ring recipe. Ordinary tasks and qualification are unchanged.
+
+The recommended next question is the **explicitly combined** network/prior
+magnitude response, with a separately declared fixed-prior plus network-cap
+control if useful. This interaction remains untested. Freeze a new finite
+protocol before spend; no combined-cap trial or further tuning was run here.
+All27 new final CUDA restores pass. The three-agent round is concluded, and
+PR317 remains an open prerequisite rather than an authorized merge.

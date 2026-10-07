@@ -1,0 +1,92 @@
+{
+  "candidate_id": "bcap-gaussian-response-round-v1",
+  "candidate_revision": "145ff31b82454f9f906f09493918b29131ec93b871b1879be2fef19006c8cc6a",
+  "changed_factors": [
+    "No new training; project three independently executed fixed-seed GPU role investigations and preserve their original evidence/cost identities."
+  ],
+  "conclusion": "All three user-authorized subagent investigations complete 90000 CUDA updates for 1068.147249 loop seconds, zero scientific retries. None passes full continuous Gaussian acquisition/retention. Frozen-prior past retains7/72 checks; prior-cap past10/72; network-cap past41/72, longest5 with first window3875, but misses1000 acquisition. Network-cap past shifted hold8/24 and endpointKS.03837 pass only instantaneously; reacquisition/holdFAIL. All new ring combined gates fail, retaining original alternating learned-prior ring as incumbent. Three separate PRs318/319/320 depend on317.27 exactCUDArestores,3924 saved metric sets and27 actualtrainingGIFs. This synthesis adds0newupdates and no duplicated cost/qualification.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Do frozen prior, magnitude-sensitive prior or magnitude-sensitive networks independently repair continuous Gaussian learning at constant nominal rates?",
+  "lifecycle": "concluded",
+  "mechanism_class": "cross_pr_role_isolation_synthesis",
+  "next_action": "Keep the adopted ring recipe; stop these exact independent revisions as full Gaussian repairs. Next propose a separately frozen interaction comparison combining magnitude-sensitive network and learned-prior responses, with matched fixed-prior/network-cap control if useful. Scale units and finite budgets must be declared; one global trainer rule across tasks, no annealing, best-checkpoint selection or seeds. Combined mechanism remains untested; no additional spend follows from this concluded round.",
+  "provenance": {
+    "duplicate_cost_debit": false,
+    "projection_source": "reports/forge/gaussian-response-round/collect.py",
+    "projection_source_sha256": "c5ed152b5a2585ee7e18f9c7ccd76e364968bb3f70c689664a4a82ed818f114a",
+    "prs": {
+      "frozen": "https://github.com/255BITS/ParticleGAN/pull/318",
+      "network": "https://github.com/255BITS/ParticleGAN/pull/320",
+      "prerequisite": "https://github.com/255BITS/ParticleGAN/pull/317",
+      "prior": "https://github.com/255BITS/ParticleGAN/pull/319"
+    },
+    "referenced_cost": {
+      "accounting": "Costs belong to the three original scientific records; do not debit again.",
+      "new_real_training_examples": 11520000,
+      "new_training_loop_seconds": 1068.147248643916,
+      "new_training_updates": 90000,
+      "reserved_seconds": 13500,
+      "scientific_retries": 0
+    },
+    "referenced_scientific_sources": {
+      "frozen": {
+        "archive": {
+          "bytes": 33856484,
+          "contents": "Nine cell receipts, full curves, actual samples, initial/final checkpoints, three no-update control states/curves, RNG checkpoints, executed source/protocol/candidate snapshots, software and scientific/publication logs.",
+          "local_raw": "runs/api/gaussian-frozen-prior-v1",
+          "path": "artifacts/gaussian-frozen-prior-v1.tar.gz",
+          "sha256": "1c60435f0690d24a4f0ec8deb2361ac27749d528bf872b584356cb4847a70d88"
+        },
+        "compact_results_sha256": "f4c1294739885b10e95bbeacfce7204365964dab8068860aadfb56fd1994a8ad",
+        "executed_scientific_commit": "33ca3db28cd3a01336c8f183987184be21379220",
+        "protocol_sha256": "6e5601f349c8e62307ff94d141b5dd7a896d407fdbd2e9a95fdb4b5da4c21073",
+        "provenance_sha256": "a94b4167cf6138f39d4eda849dfc628edfc3dd289a89f54e5e4baffac9b1b3b4",
+        "publication_commit": "dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e",
+        "report_url": "https://github.com/255BITS/ParticleGAN/blob/dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e/reports/forge/gaussian-frozen-prior/README.md"
+      },
+      "network": {
+        "archive": {
+          "bytes": 33779339,
+          "immutable": true,
+          "path": "artifacts/gaussian-network-magnitude-v1.tar.gz",
+          "sha256": "f8c15e2eda12c906c5996c7a9bdb1a7c30d281cc5c2257f93bcf9dd71886cdc9"
+        },
+        "compact_results_sha256": "9f20c38a041a78f466ff165d804b5eacf6f4334f71d8805a62219bf1937131d5",
+        "executed_scientific_commit": "4335e2bd4806e218d0d6e544973c53078d344c1a",
+        "protocol_sha256": "bd3ab3141ae30538667bfe43d3eebfce38124038cdc138e1159fb4ee77b43f59",
+        "provenance_sha256": "b679dda1b3ab5165c0caf654b3cd8239ed8d664b7700072dd42f29a8550aa1da",
+        "publication_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "report_url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/README.md"
+      },
+      "prior": {
+        "archive": {
+          "bytes": 35536601,
+          "contents": "All9 complete curves/checkpoints/observations/receipts/source maps;3frozen shift controls; separate initialization-gradient probe and consumed streams; consistent1186file executed source; publication/reference RNG states; software/preflight/verification logs and publication-source adapters.",
+          "local_raw": "runs/api/gaussian-prior-magnitude-v1",
+          "path": "artifacts/gaussian-prior-magnitude-v1.tar.gz",
+          "sha256": "d477641b12abdc3d64611e1a48322859b8cce79fdd0188df7479449222ec57b6"
+        },
+        "compact_results_sha256": "b7640926d002bdbc549125bb130b0c91fd78b2b8b55bf032a8492c555b6cb40b",
+        "executed_scientific_commit": "7c5d66e6de59e083ef1fc34852d702f52265def0",
+        "protocol_sha256": "0d89553efe7ffe10638e9d4eeb578b30f7b584fe72631eacb39796bfb1478b39",
+        "provenance_sha256": "872c1c702751b3bbecb073fa271eb12f3afd44c0f3f73bce0cbcf85e1c43f7df",
+        "publication_commit": "51b8794dd06db0cd6eb25e90ea9d2f0d48c77dbc",
+        "report_url": "https://github.com/255BITS/ParticleGAN/blob/51b8794dd06db0cd6eb25e90ea9d2f0d48c77dbc/reports/forge/gaussian-prior-magnitude/README.md"
+      }
+    },
+    "report": "reports/forge/gaussian-response-round/README.md",
+    "training_updates": 0
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-response-round-v1-synthesis",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-response-round/results.json",
+    "sha256": "145ff31b82454f9f906f09493918b29131ec93b871b1879be2fef19006c8cc6a"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

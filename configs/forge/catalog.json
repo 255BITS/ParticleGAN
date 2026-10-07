@@ -84025,6 +84025,65 @@
       "suggested_tiers": []
     }
   ],
+  "pinned_sources": [
+    {
+      "counts_by_suffix": {
+        "": 2,
+        ".c": 1,
+        ".csv": 3,
+        ".diff": 4,
+        ".gif": 35,
+        ".gz": 645,
+        ".html": 43,
+        ".json": 2436,
+        ".jsonl": 206,
+        ".log": 40,
+        ".md": 570,
+        ".npz": 1458,
+        ".patch": 2,
+        ".pdf": 3,
+        ".png": 253,
+        ".pt": 104,
+        ".py": 698,
+        ".sh": 6,
+        ".svg": 2,
+        ".toml": 4,
+        ".txt": 29,
+        ".xml": 2,
+        ".yaml": 669,
+        ".zip": 12
+      },
+      "file_count": 7227,
+      "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+      "source_id": "baseline"
+    },
+    {
+      "counts_by_suffix": {
+        ".diff": 2,
+        ".gz": 1,
+        ".json": 168,
+        ".jsonl": 58,
+        ".md": 42,
+        ".patch": 19,
+        ".png": 4,
+        ".py": 64
+      },
+      "file_count": 358,
+      "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "source_id": "pr155"
+    },
+    {
+      "counts_by_suffix": {
+        ".jsonl": 7,
+        ".log": 11,
+        ".md": 2,
+        ".py": 4
+      },
+      "file_count": 24,
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "source_id": "develop-vector-protocols"
+    }
+  ],
   "schema_version": 1,
   "source_roots": [
     "benchmarks",
