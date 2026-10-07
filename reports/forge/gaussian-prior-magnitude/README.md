@@ -78,9 +78,11 @@ their original bytes. Replaying an older source-bound study requires its pinned
 source; software tests separately build current code from the original metadata.
 
 ```sh
+mkdir -p runs/api
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   /usr/bin/python -u -m benchmarks.toy_audit.gaussian_prior_magnitude run \
-  --output runs/api/gaussian-prior-magnitude-v1 --device cuda:1
+  --output runs/api/gaussian-prior-magnitude-v1 --device cuda:1 \
+  > runs/api/gaussian-prior-magnitude-v1.run.log 2>&1
 tail -f runs/api/gaussian-prior-magnitude-v1.run.log
 ```
 
