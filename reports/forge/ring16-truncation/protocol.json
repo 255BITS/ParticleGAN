@@ -1,0 +1,190 @@
+{
+  "artifacts": "Raw logs, traces, checkpoints, streams and observation tensors stay ignored under runs/api. After execution publish compact metrics/provenance and actual-training GIFs only. Keep technique-inventory.md as the sole generated goal leaderboard.",
+  "baseline_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+  "bindings": {
+    "benchmarks/toy_audit/ring16_interventions.py": "fa8985f0ba0b98fe640f371cac7fb3a714a3956508e4282b9935cee4e72d5ee5",
+    "benchmarks/toy_audit/ring16_spectral_truncation.py": "aa59a29e732fd1697195436d559f915fcdfb8dfe401f26dbceb0bc7981073258",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+  },
+  "boundary_update": 401,
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "dtype": "float32",
+  "execution_backend": "cuda",
+  "gates": {
+    "bounds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ],
+    "retention": "Not authorized by this protocol; separate passing smoke checkpoint dependency and predeclared tier2 budget required.",
+    "smoke": "Any scheduled full passing state plus one independent same-state confirmation satisfying every unchanged bound; both arms still finish1600updates.",
+    "sustained_diagnostic": "Also report unchanged five-terminal-full-pass reducer and longest passing streak; neither replaces smoke or confers ordinary qualification."
+  },
+  "held_fixed": [
+    "one protocol seed0; no seed sweep",
+    "public named deterministic initialization",
+    "uniform16-component 2D Gaussian target, ring radius3, sigma0.1",
+    "G4->64->64->2 and Fourier2 D10->64->64->1, LeakyReLU0.2",
+    "learned uniform256-row MoG prior, sigma0.1, standardizeFalse",
+    "batch128, independent checkpointed named draws",
+    "BCAP penalty and normalized biases/sampled prior rows",
+    "constant G/D/prior rates and optimizer momentum0",
+    "recipe horizon400 and full1600 update cap",
+    "clean live serving through public prior without output noise or EMA",
+    "96 ceil-spaced scheduled4096-sample checks,24 per400updates"
+  ],
+  "historical_controls": {
+    "live": {
+      "execution_source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "execution_source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+      "printed_final_covariance_error": 2.2202680110931396,
+      "printed_full_passes": 0,
+      "qualification_input": false,
+      "receipt_status": "INCOMPLETE_postexecution_metadata_error"
+    },
+    "report_source_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "restored": {
+      "execution_source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "execution_source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+      "final_covariance_error": 0.5143145751208067,
+      "role": "original restart reproduction; distinct runtime path, not a fresh continuous candidate control",
+      "terminal_full_passes": 6
+    },
+    "source_pr": "https://github.com/255BITS/ParticleGAN/pull/331",
+    "unchanged_runs_repeated": false
+  },
+  "id": "ring16-spectral-truncation-v1",
+  "initializer": "public deterministic orthogonal named initializer; public R2 table for prior",
+  "max_attempts": 2,
+  "max_new_host_updates": 3200,
+  "max_new_scoring_draws": 194,
+  "max_reserved_seconds": 600,
+  "max_total_reserved_seconds": 630,
+  "mechanism_module": "benchmarks.toy_audit.ring16_spectral_truncation",
+  "predictions": {
+    "boundary_only": "A successful one-update intervention supports trajectory selection at401 in this fixed experiment; it does not establish continuous stability.",
+    "every_step": "A smoke improvement supports investigating a reusable constant-rate spectral rule; full retention and task-ladder qualification remain required.",
+    "weak_direction_mechanism": "Truncation sharply reduces the saved401 full-polar amplification; failure of the10x algebra criterion weakens this mechanism before any quality inference."
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipe_horizon": 400,
+  "rng_contract": {
+    "confirmation": "one separate named evaluation confirmation stream, drawn only at first scheduled full passing state;4096 samples before any further update",
+    "constructor": "isolated public reproducible_execution seed0 scope",
+    "data_and_prior": "existing separate named training streams; checkpoint every consumed stream",
+    "evaluation": "existing named standard evaluation stream",
+    "matching": "initial model hashes and seen-batch digests must agree across candidates; boundary prefix must match archived public400-state under original identity",
+    "training_noise": "mechanism accepts isolated generator but consumes no draws"
+  },
+  "saved_matrix_probe": {
+    "backend": "cuda float32; no CPU SVD or dtype conversion",
+    "criterion": "Finite factors, exact repeats on identical inputs, bit-exact full-polar parity with captured factors, unchanged ambient CPU/CUDA RNG states, and at least10x reduction in pair relative Frobenius difference vs ordinary full polar.",
+    "historical_baseline": {
+      "full_polar_relative_frobenius": 0.2519904673099518,
+      "identity": "PR331 original saved-gradient probe, CUDA SVD; original pair-norm summary used saved CPU tensors",
+      "raw_relative_frobenius": 1.0285654639119457e-07
+    },
+    "max_attempts": 1,
+    "new_pair_norm_backend": "CUDA float32; report measured values, do not demand last-bit equality to historical CPU norm summary",
+    "parameter": "D net.2.weight, shape64x64, update401",
+    "publication_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "quality_gate": false,
+    "rng_draws": 0,
+    "sampling_draws": 0,
+    "scope": "fixed_saved401_truncation_cuda_algebra",
+    "status": "planned_unexecuted",
+    "timeout_seconds": 30,
+    "trace_execution_sources": {
+      "live": {
+        "commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+        "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d"
+      },
+      "restart": {
+        "commit": "1de465e25252c10622965362cd593a899ce74f74",
+        "source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd"
+      }
+    },
+    "trace_sha256": {
+      "live": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145",
+      "restart": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
+    },
+    "training_updates": 0
+  },
+  "schedule_contract": {
+    "boundary_only": "Fresh public initialization and live updates1..400 unchanged; truncate all G/D matrix directions during update401, then ordinary full polar from402..1600. No restore.",
+    "every_step": "Fresh public initialization; truncate every G/D matrix direction during updates1..1600. No restore.",
+    "rationale": "A one-update change immediately after the same400-update live prefix tests path selection at the known restart boundary; continuous truncation tests removal of repeated weak-direction amplification."
+  },
+  "schedules": [
+    "boundary_only",
+    "every_step"
+  ],
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "cuda_ring16_intervention_diagnostic",
+  "seed": 0,
+  "status": "ready",
+  "steps": 1600,
+  "stopping_rules": [
+    "Freeze source/protocol before paid work; every attempt counts, no retries or repeat of consumed arms.",
+    "Reject CPU backend and non-float32 mechanism inputs before SVD; no CPU substitution for unavailable CUDA.",
+    "Finish both independent arms to1600 even if a smoke state passes.",
+    "Stop an arm on nonfinite training, source/stream mismatch, timeout or budget exhaustion; retain raw error and actual cost.",
+    "No seed changes, periodic restart, annealing, prior refresh, subbatch repeat, architecture change, threshold grid or relaxed covariance bound.",
+    "Do not spend automatically on retention or import these diagnostic results into ordinary qualification."
+  ],
+  "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "timeout_seconds_per_arm": 300,
+  "trainer_delta": {
+    "biases": "unchanged ordinary normalized updates",
+    "dtype_conversion": false,
+    "kind": "spectral_truncation",
+    "learning_rate_schedule": "constant",
+    "learning_rates": {
+      "D": 0.018,
+      "G": 0.012,
+      "prior": 0.03
+    },
+    "polar": "U diag(1{s > tau}) Vh",
+    "prior": "unchanged sampled-row-normalized updates",
+    "production_defaults_changed": false,
+    "random_draws": 0,
+    "roles": [
+      "generator_matrix_weights",
+      "critic_matrix_weights"
+    ],
+    "serial_backward": "unchanged baseline False",
+    "tau": "max(rows,cols)*finfo(float32).eps*smax",
+    "zero_gradient": "exact zero direction"
+  },
+  "user_authorization": "User asked for separate subagents/worktrees/PRs investigating truncation, and favored one boundary intervention mirroring resume after400; compare that with the continuous update rule."
+}

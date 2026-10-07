@@ -1,0 +1,92 @@
+{
+  "algebra_result": "UNMEASURED",
+  "base_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "checks": [
+    {
+      "files": 4,
+      "name": "frozen_source_bindings",
+      "pass": true
+    },
+    {
+      "name": "read_only_plan",
+      "pass": true,
+      "result": {
+        "cuda_available": false,
+        "id": "ring16-spectral-truncation-v1",
+        "schedules": [
+          "boundary_only",
+          "every_step"
+        ],
+        "training_launched": false,
+        "training_reservation_seconds": 600,
+        "updates": 3200
+      }
+    },
+    {
+      "exit_code": 1,
+      "name": "unavailable_cuda_training_guard",
+      "output_directory_created": false,
+      "pass": true,
+      "sampling_draws": 0,
+      "svd_calls": 0,
+      "training_updates": 0
+    },
+    {
+      "exit_code": 2,
+      "name": "unavailable_cuda_algebra_guard",
+      "output_directory_created": false,
+      "pass": true,
+      "sampling_draws": 0,
+      "svd_calls": 0,
+      "training_updates": 0
+    },
+    {
+      "files": 2,
+      "name": "python_syntax",
+      "pass": true
+    },
+    {
+      "name": "training_budget_and_source_scope",
+      "pass": true
+    },
+    {
+      "links": 6,
+      "name": "relative_report_links",
+      "pass": true
+    },
+    {
+      "name": "mechanism_static_no_cast_or_rng_use",
+      "pass": true
+    }
+  ],
+  "cuda_available": false,
+  "limitations": [
+    "No GPU training, CUDA spectral probe, actual candidate-training GIF or tier2 retention was executed.",
+    "Static checks establish declaration/source/guard behavior only.",
+    "PR publication awaits network access; this receipt makes no remote-PR claim."
+  ],
+  "local_log_root": "runs/api/ring16-truncation-static",
+  "local_log_sha256": {
+    "runs/api/ring16-truncation-static/plan.log": "00f875449cad4d88a51c46bb045bf6a958d093cb9548d34bbb99f496a62badad",
+    "runs/api/ring16-truncation-static/syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/api/ring16-truncation-static/unavailable_cuda_algebra_guard.log": "084baa4640fa1778e46f94835fc44a97c94baa0d9d9fd60db1683a010296d7e5",
+    "runs/api/ring16-truncation-static/unavailable_cuda_training_guard.log": "887e28c5e9468a597c4ab5f1e609f9a24de5ad92bddae7ab57de4e41e646be38"
+  },
+  "protocol_sha256": "b1fd40aae958a60b470dac60231570a266577ba5aa0c2331b53269b3f9a14097",
+  "qualification_input": false,
+  "quality_result": "UNMEASURED",
+  "report_source_reference_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "static_preparation_only",
+  "source_sha256": {
+    "benchmarks/toy_audit/ring16_interventions.py": "fa8985f0ba0b98fe640f371cac7fb3a714a3956508e4282b9935cee4e72d5ee5",
+    "benchmarks/toy_audit/ring16_spectral_truncation.py": "aa59a29e732fd1697195436d559f915fcdfb8dfe401f26dbceb0bc7981073258",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+  },
+  "status": "prepared_cuda_execution_blocked",
+  "svd_calls": 0,
+  "training_launched": false,
+  "training_updates": 0
+}
