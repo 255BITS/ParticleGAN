@@ -1,0 +1,30 @@
+{
+  "base_candidate": "ka2",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Post-merge CUDA rerun of every registered idea and the previously selected complete family configurations; complete Tier1 then eligible Tier2, no tuning or new seeds. Software-only admission successor to v1; v1 spent zero updates and zero attempts.",
+    "id": "gaussian-smoke-inventory-v2",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.006375
+    ],
+    "prior_lr_mult": [
+      1.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact previously selected global recipe under the new Gaussian acquisition smoke and CUDA behavior cohort, then execute all eligible Tier2 tasks. No hyperparameter selection or retuning.",
+  "id": "gaussian-smoke-inventory-ka2-v2",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "schema_version": 1,
+  "trainer_family": "ka2",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

@@ -55,7 +55,7 @@ def rebind(req):
         job["compatibility_key"] = stable_hash(job["science"])
 
 
-def prospective(tmp_path, tasks=None, *, grouped=False):
+def prospective(tmp_path, tasks=None, *, grouped=False, explicit_initializer=False):
     req = request(tmp_path, cap=1)
     templates = tasks or [task("img_intensity2_residual16"), task("vector_unequal_mass_published")]
     req["candidate"].update(prior=deepcopy(PRIOR), recipe_overrides={}, requires_capabilities=[],
@@ -80,6 +80,9 @@ def prospective(tmp_path, tasks=None, *, grouped=False):
     req["preflight_blockers"] = []
     checkout = tmp_path / "worktree"
     files = {MODULE} | {name for t in templates for name in profile_source_paths(t)}
+    if explicit_initializer:
+        from experiments.forge.initialization import MODULE as INITIALIZATION_MODULE
+        files.add(INITIALIZATION_MODULE)
     for name in files:
         target = checkout / name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -166,6 +169,96 @@ def test_native_initialization_and_own_parent_contracts_are_revalidated(tmp_path
 
 def test_matching_native_parent_and_continuation_validate_without_updates(tmp_path):
     validate_request_host_profiles(prospective(tmp_path, native_tasks(continuation=True)))
+
+
+def gaussian_tasks():
+    return [task("gaussian1d_smoke"), task("gaussian1d_stability")]
+
+
+@pytest.mark.parametrize("explicit_initializer", [False, True])
+def test_gaussian_continuation_keeps_1000_horizon_and_6000_budget_without_models(tmp_path, monkeypatch, explicit_initializer):
+    req = prospective(tmp_path, gaussian_tasks(), explicit_initializer=explicit_initializer)
+    req["through_tier"] = 2
+    req["view"]["assignments"][1]["qualification_tier"] = 2
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Gaussian admission must not construct, sample, or train")
+    monkeypatch.setattr("experiments.forge.api.FormulationContext.construct", forbidden)
+    monkeypatch.setattr("experiments.forge.api.FormulationContext.build_trainer", forbidden)
+    monkeypatch.setattr("experiments.forge.gaussian_tasks.build", forbidden)
+    before = deepcopy(req)
+    validate_request_host_profiles(req)
+    # A worker validating only the continuation still validates its own parent.
+    validate_request_host_profiles(req, task_ids=["gaussian1d_stability"])
+    assert req == before
+    queue = Queue(tmp_path / "queue", grader=grade)
+    assert queue.submit(req, campaign(budget=720))["status"] == "queued"
+    state = queue.inspect()
+    assert len(state["jobs"]) == 2
+    assert all(not row["attempts"] for row in state["jobs"].values())
+
+
+@pytest.mark.parametrize("mutation", [
+    "short_budget", "float_budget", "wrong_horizon", "float_horizon", "wrong_prefix", "float_prefix",
+    "wrong_host_horizon", "missing_parent", "self_parent", "non_smoke_parent", "wrong_dependency",
+    "changed_architecture", "changed_target", "changed_prior", "changed_initializer", "changed_host",
+    "changed_sampling", "wrong_parent_key", "missing_parent_job", "grouped_parent_job",
+])
+def test_gaussian_continuation_refuses_rehashed_budget_or_parent_forgery_before_queue(tmp_path, mutation):
+    req = prospective(tmp_path, gaussian_tasks())
+    req["through_tier"] = 2
+    parent = req["tasks"]["gaussian1d_smoke"]
+    child = req["tasks"]["gaussian1d_stability"]
+    if mutation == "short_budget": child["execution"]["steps"] = 1000
+    elif mutation == "float_budget": child["execution"]["steps"] = 6000.
+    elif mutation == "wrong_horizon": child["execution"]["original_schedule_horizon"] = 6000
+    elif mutation == "float_horizon": child["execution"]["original_schedule_horizon"] = 1000.
+    elif mutation == "wrong_prefix": child["execution"]["preserve_prefix_steps"] = 500
+    elif mutation == "float_prefix": child["execution"]["preserve_prefix_steps"] = 1000.
+    elif mutation == "wrong_host_horizon": child["execution"]["host_definition"]["steps"] = 6000
+    elif mutation == "missing_parent": req["tasks"].pop(parent["id"])
+    elif mutation == "self_parent":
+        child["execution"]["continuation_of"] = child["id"]
+        child["dependencies"] = [{"task": child["id"], "kind": "checkpoint"}]
+    elif mutation == "non_smoke_parent": parent["evaluation"]["kind"] = "gaussian_quality"
+    elif mutation == "wrong_dependency": child["dependencies"] = []
+    elif mutation == "changed_architecture": child["execution"]["host_definition"]["layers"] = 1
+    elif mutation == "changed_target": child["execution"]["host_definition"]["means"] = [[3.]]
+    elif mutation == "changed_prior": child["execution"]["prior"]["sigma"] = .025
+    elif mutation == "changed_initializer": child["execution"]["initializer"] = "supplied"
+    elif mutation == "changed_host": child["execution"]["host"] = "another_scalar_host"
+    elif mutation == "changed_sampling": child["evaluation"]["eval_output_noise"] = "noisy"
+    if mutation != "missing_parent":
+        rebind(req)
+    if mutation == "wrong_parent_key":
+        req["jobs"][1]["science"]["prerequisites"][parent["id"]] = "foreign-parent"
+        req["jobs"][1]["compatibility_key"] = stable_hash(req["jobs"][1]["science"])
+    elif mutation == "missing_parent_job":
+        req["jobs"] = req["jobs"][1:]
+    elif mutation == "grouped_parent_job":
+        child_job = req["jobs"][1]
+        child_job["task_ids"] = [parent["id"], child["id"]]
+        req["jobs"] = [child_job]
+        child_job["science"].update(
+            task_initializers={name: req["tasks"][name]["execution"]["initializer"] for name in child_job["task_ids"]},
+            execution={name: task_execution_fingerprint(req["tasks"][name]) for name in child_job["task_ids"]},
+            evaluation={name: task_evaluation_fingerprint(req["tasks"][name]) for name in child_job["task_ids"]})
+        child_job["compatibility_key"] = stable_hash(child_job["science"])
+    with pytest.raises(ValueError, match="host profile blocked"):
+        validate_request_host_profiles(req)
+    queue = Queue(tmp_path / "queue", grader=grade)
+    with pytest.raises(ValueError):
+        queue.submit(req, campaign(budget=720))
+    assert not queue.inspect()["jobs"]
+    assert not (queue.root / "queue/state.json").exists()
+
+
+@pytest.mark.parametrize("name", ["gaussian1d_smoke", "gaussian1d_acquisition", "vector_unequal_mass_published"])
+def test_other_vector_budget_mismatches_remain_rejected(tmp_path, name):
+    req = prospective(tmp_path, [task(name)])
+    req["tasks"][name]["execution"]["steps"] += 1000
+    rebind(req)
+    with pytest.raises(ValueError, match="execution budget differs from the explicit host card"):
+        validate_request_host_profiles(req)
 
 
 def test_stale_job_identity_cannot_label_a_changed_host(tmp_path):

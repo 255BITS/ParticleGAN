@@ -52,12 +52,50 @@ def _members(request, task_ids):
     return members
 
 
+def _gaussian_continuation(task):
+    """Recognize only the fixed own-smoke continuation, without construction."""
+    if task.get("evaluation", {}).get("kind") != "gaussian_stability":
+        return False
+    from .gaussian_tasks import validate_task
+    validate_task(task)
+    execution = task["execution"]
+    for field, expected in (("steps", 6000), ("preserve_prefix_steps", 1000),
+                            ("original_schedule_horizon", 1000)):
+        if type(execution.get(field)) is not int or execution[field] != expected:
+            raise ValueError(f"Gaussian continuation requires integer {field}={expected}")
+    parent = execution.get("continuation_of")
+    if (execution["host_definition"]["steps"] != 1000
+            or execution.get("produces_state") is not True
+            or not isinstance(parent, str) or not parent or parent == task["id"]):
+        raise ValueError("Gaussian continuation requires its distinct own-smoke parent and 1,000-step host horizon")
+    return True
+
+
+def _validate_gaussian_parent(parent, child):
+    from .gaussian_tasks import SMOKE_KIND, validate_task
+    validate_task(parent)
+    if (parent["evaluation"]["kind"] != SMOKE_KIND
+            or parent["id"] != child["execution"]["continuation_of"]
+            or type(parent["execution"]["steps"]) is not int
+            or parent["execution"]["steps"] != 1000):
+        raise ValueError("Gaussian continuation requires its matching 1,000-update smoke parent")
+    for field in ("host", "host_source", "host_definition", "prior", "initializer", "protocol",
+                  "original_schedule_horizon"):
+        if canonical(parent["execution"].get(field)) != canonical(child["execution"].get(field)):
+            raise ValueError(f"Gaussian continuation changes task-owned {field}")
+    for field in ("sampling_contract_version", "eval_output_noise", "sampling_law", "scoring_weights",
+                  "sample_evaluator", "eval_samples", "thresholds", "observations", "sources"):
+        if canonical(parent["evaluation"].get(field)) != canonical(child["evaluation"].get(field)):
+            raise ValueError(f"Gaussian continuation changes evaluation {field}")
+
+
 def _validate_task(task, candidate, root, *, explicit_initializer=True):
     from .taskrecipes import bind_task_candidate
     initializer = task_initializer(task, candidate, explicit=explicit_initializer)
     reference_candidate = candidate
     candidate = bind_task_candidate(candidate, task)
     execution, adapter = task["execution"], task["adapter"]
+    gaussian_continuation = _gaussian_continuation(task)
     for marker, adapters in PROFILE_ADAPTERS.items():
         if marker in execution and adapter not in adapters:
             raise ValueError(f"{marker} is unsupported by adapter {adapter}")
@@ -94,7 +132,7 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
         else:
             from .vectorprofiles import resolve_vector_spec
             spec = resolve_vector_spec(task, root=root)
-        if execution["steps"] != spec["steps"]:
+        if execution["steps"] != spec["steps"] and not gaussian_continuation:
             raise ValueError("execution budget differs from the explicit host card")
         resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
                      "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
@@ -193,12 +231,14 @@ def _validate_job_identity(request, checked, *, explicit_initializer=True):
             raise ValueError("host job resources differ from its frozen task/compute budget")
         for member in relevant:
             task = request["tasks"][member]
-            if task.get("adapter") == "native100_continuation":
+            gaussian_continuation = _gaussian_continuation(task)
+            if task.get("adapter") == "native100_continuation" or gaussian_continuation:
                 parent_id = task["execution"]["continuation_of"]
                 parents = [row for row in request["jobs"] if parent_id in row.get("task_ids", [row["task_id"]])]
                 if (len(parents) != 1 or science.get("prerequisites", {}).get(parent_id)
-                        != parents[0]["compatibility_key"]):
-                    raise ValueError("native continuation scientific identity lacks its exact own-parent job")
+                        != parents[0]["compatibility_key"] or (gaussian_continuation and parents[0] is job)):
+                    name = "Gaussian" if gaussian_continuation else "native"
+                    raise ValueError(f"{name} continuation scientific identity lacks its exact own-parent job")
         expected_execution = {name: task_execution_fingerprint(request["tasks"][name]) for name in members}
         expected_evaluation = {name: task_evaluation_fingerprint(request["tasks"][name]) for name in members}
         if explicit_initializer:
@@ -255,6 +295,14 @@ def validate_request_host_profiles(request: dict, *, task_ids=None) -> None:
                 if _validate_task(parent, request["candidate"], root, explicit_initializer=explicit_initializer):
                     checked.add(parent_id)
                 validate_native_continuation(parent, task, root=root)
+            elif _gaussian_continuation(task):
+                parent_id = task["execution"]["continuation_of"]
+                if parent_id not in tasks:
+                    raise ValueError("Gaussian continuation lacks its declared smoke parent task")
+                parent = tasks[parent_id]
+                if _validate_task(parent, request["candidate"], root, explicit_initializer=explicit_initializer):
+                    checked.add(parent_id)
+                _validate_gaussian_parent(parent, task)
         except (KeyError, TypeError, ValueError, OSError) as error:
             blockers.append(f"{member}: {error}")
     if not blockers:
