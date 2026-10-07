@@ -16,6 +16,32 @@ remain historical receipts from before device access returned. They are not
 current blockers. Original [PR331](https://github.com/255BITS/ParticleGAN/pull/331)
 and all five follow-up PRs remain unmerged.
 
+## Later uninterrupted serialization follow-up
+
+[PR337](https://github.com/255BITS/ParticleGAN/pull/337) completed a separately
+frozen two-arm CUDA quality protocol; [its compact results](serialized-live-results.json)
+retain execution source `b060fb4623cc831cb47dd592acea49b6704641be` and original
+truncation/noise identities. Always-serialized fresh live training reaches
+terminal quality (11 final full passes), but fails its one first-state independent
+confirmation at1400 (covariance .894789). It fails again at1417, then passes all
+checks1434–1600, ending at covariance .385800. Serializing only401 matches the
+previously isolated third trajectory exactly, confirms acquisition867 and passes
+all45 checks867–1600, ending at covariance .424426. Neither learner reloads.
+
+Initialization, recipe, prior, all1600 target batches, cadence and gates match
+prior continuous truncation/noise; those arms were not rerun. New spend is3200
+GPU updates/194 draws/47.597 whole subprocess seconds, plus3 tiny-model GPU
+software updates; charging its full30s allowance yields77.597s within630s.
+Two CUDA API checks and saved-source/state/batch/archive/media checks passed.
+The report includes two actual-training GIFs and a35-file byte-verified archive.
+
+Truncation remains the first candidate for a separately frozen whole-configuration
+Tier1 comparison. Serialized execution reaches late quality and provides an
+opt-in checkpointed execution mode, while the failed first confirmation remains
+FAIL. The one-time401 success does not justify scheduled switches or restarts.
+No ordinary qualification, default change or Tier2 eligibility is added. The
+original twelve-arm results and closed budgets below remain unchanged.
+
 ## What the reload changes
 
 [Runtime PR334](https://github.com/255BITS/ParticleGAN/pull/334) ran four frozen
@@ -28,7 +54,8 @@ Disabling multithreading for **all autograd work during update 401**, including
 the higher-order `autograd.grad(create_graph=True)` calls and final backward,
 made the live/reloaded gradients, normalized directions and complete resulting
 contexts bit-identical. This selects a **third trajectory**, matching neither
-ordinary path. Its 1,600-update quality was not measured.
+ordinary path. Its 1,600-update quality was not measured by that closed causal protocol;
+the separate quality follow-up above now supplies this measurement.
 
 The saved critic graphs have identical topology but differ in 1,054 of 7,503
 pairwise sequence-number relations. The serialized pair has zero differences.
@@ -121,8 +148,8 @@ ordinary qualification or family default.
 
 For exact reload attribution, the next bounded control should distinguish
 higher-order graph construction from final backward scheduling or capture actual
-node execution order. End-to-end serialized-autograd quality is a separate
-unmeasured question. One-time perturbations demonstrate path sensitivity;
+node execution order. End-to-end serialized-autograd quality was a separate
+unmeasured question at that campaign completion; PR337 above records its follow-up. One-time perturbations demonstrate path sensitivity;
 periodic reloads or repeated sign flips are not supported as continuous fixes.
 Stop the completed negative every-step damping/sign-flip revisions.
 
