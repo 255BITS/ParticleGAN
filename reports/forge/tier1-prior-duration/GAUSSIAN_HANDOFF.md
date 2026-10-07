@@ -208,7 +208,9 @@ not merging the still-open prerequisite PRs.
 
 Current worktree: `/home/martyn/dev/ParticleGAN-gaussian-combined-magnitude`, branch
 `research/gaussian-combined-magnitude`, based on PR317 head84ac1422. It integrates
-the public cap capabilities from PR319/320. Read the
+the public cap capabilities from PR319/320. Publication is
+[PR321](https://github.com/255BITS/ParticleGAN/pull/321), OPEN against develop;
+PR317 remains its open prerequisite. Read the
 [combined report](../gaussian-combined-magnitude/README.md), its protocol,
 results/provenance and the compiled memory before proposing or spending more.
 Executed scientific commit: `d5256284210354bda7a941b6e4121ec82e4d9c23`.

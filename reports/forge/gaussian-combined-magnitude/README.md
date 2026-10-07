@@ -12,6 +12,7 @@ The [compact results](results.json), [frozen protocol](protocol.json),
 bind the outcome to the actual recipe, prior, initializer, sampling and source.
 This is the interaction study authorized after the
 [three independent investigations](../gaussian-response-round/README.md).
+Published in [PR321](https://github.com/255BITS/ParticleGAN/pull/321) against develop.
 
 ## Gaussian results
 
