@@ -284,6 +284,27 @@ class _Run:
                 "storage": "local", "identity": "relative_paths_sizes_sha256",
                 "requires_bulk_artifacts": True,
                 "relocation": "copy the complete artifact tree and verify the unchanged manifest"}
+        # Every run retains its complete public state, including consumed RNG
+        # streams. This audit artifact does not grant checkpoint prerequisites:
+        # save_state and the task's produces_state contract still govern those.
+        # Keep the certificate outside its input tree and separate from any
+        # evaluator-owned artifact tree so receipt writes cannot invalidate it.
+        provenance_root = self.output / "provenance"
+        provenance_root.mkdir(parents=True, exist_ok=True)
+        provenance_path = provenance_root / "provenance-state.pt"
+        torch.save(state, provenance_path)
+        evidence["provenance_checkpoint"] = {
+            "schema_version": 1, "purpose": "provenance_only",
+            "prerequisite_eligible": False,
+            "artifact_root": str(provenance_root.resolve()),
+            "artifact_manifest": manifest_artifacts(provenance_root),
+            "path": provenance_path.name, "sha256": file_hash(provenance_path),
+            "bytes": provenance_path.stat().st_size, "state_sha256": state_digest(state),
+            "completed_steps": trainer.completed_steps,
+            "named_stream_keys": sorted(state["streams"]["states"]),
+            "named_stream_state_sha256": {key: state_digest(value)
+                for key, value in sorted(state["streams"]["states"].items())},
+            "optimizer_updates_added": 0, "sampling_draws_added": 0}
         if save_state:
             torch.save(state, self.output / "state.pt")
         receipt = {"evidence": evidence, "cost": {"optimizer_updates": counts,
