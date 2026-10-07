@@ -33,7 +33,7 @@ def stability_task(smoke):
 
 
 @reproducible_execution
-def execute(task_path, candidate_path, output, *, device, through_stability=False, stability_path=None):
+def execute(task_path, candidate_path, output, *, device, through_stability=False, stability_path=None, resume_existing=False):
     import torch
     if torch.device(device).type != "cuda" or not torch.cuda.is_available():
         raise ValueError("Gaussian architecture study requires CUDA; no CPU fallback")
@@ -48,10 +48,22 @@ def execute(task_path, candidate_path, output, *, device, through_stability=Fals
     request = dict(candidate=candidate, candidate_revision=revision, protocol={"seed": 0},
                    tasks={smoke["id"]: smoke, continuation["id"]: continuation},
                    jobs=[dict(task_id=smoke["id"], compatibility_key=smoke_key)])
-    output.mkdir(parents=True, exist_ok=False)
-    atomic_json(output / "source.json", source)
-    atomic_json(output / "request.json", request)
-    first = run_gaussian(request, smoke, output / "smoke", device, diagnostic=True)
+    if resume_existing:
+        from experiments.forge.artifacts import verify_artifacts
+        archived_request = json.loads((output / "request.json").read_text())
+        if archived_request["candidate"] != candidate or archived_request["tasks"][smoke["id"]] != smoke:
+            raise ValueError("continuation task/candidate differs from the saved prefix")
+        request = archived_request
+        first = json.loads((output / "smoke" / "adapter-receipt.json").read_text())
+        verify_artifacts(first["evidence"]["artifact_root"], first["evidence"]["artifact_manifest"])
+        atomic_json(output / "continuation-source.json", source)
+        source = {**source, "prefix_source": json.loads((output / "source.json").read_text()),
+                  "continued_existing_prefix": True}
+    else:
+        output.mkdir(parents=True, exist_ok=False)
+        atomic_json(output / "source.json", source)
+        atomic_json(output / "request.json", request)
+        first = run_gaussian(request, smoke, output / "smoke", device, diagnostic=True)
     first["gate_status"] = first["gaussian_grade"]["gate_status"]
     result = dict(schema_version=1, qualification_input=False, scope="architecture_diagnostic",
                   runtime=runtime_manifest(), source=source, task_sha256=file_hash(task_path),
@@ -78,9 +90,11 @@ def main():
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--through-stability", action="store_true")
     parser.add_argument("--stability-task", type=Path)
+    parser.add_argument("--resume-existing", action="store_true",
+                        help="Continue an explicitly amended saved prefix; never rerun its updates.")
     args = parser.parse_args()
     execute(args.task, args.candidate, args.output, device=args.device,
-            through_stability=args.through_stability, stability_path=args.stability_task)
+            through_stability=args.through_stability, stability_path=args.stability_task, resume_existing=args.resume_existing)
 
 
 if __name__ == "__main__":
