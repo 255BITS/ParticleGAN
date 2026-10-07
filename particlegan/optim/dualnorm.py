@@ -21,6 +21,14 @@ NORMALIZED_FAMILIES = (
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 
 
+def row_direction(gradient, group):
+    """Shared step/preview field; a fixed scale retains small-gradient magnitude."""
+    norm = gradient.norm(dim=1, keepdim=True)
+    if group["algorithm"] == "row_capped":
+        return gradient / norm.clamp_min(group["row_gradient_scale"])
+    return gradient / (norm + group["eps"])
+
+
 def polar_factor(matrix):
     """Return U Vᵀ; large matrices try bounded Newton--Schulz first.
 
@@ -124,8 +132,14 @@ class NormalizedOptimizer(Optimizer):
             algorithm = self.family
         if algorithm == "dualnorm" and role in ("prior", "table"):
             algorithm = "rownorm"
+        if "row_gradient_scale" in group:
+            scale = group["row_gradient_scale"]
+            if (algorithm != "rownorm" or type(scale) not in (int, float)
+                    or not math.isfinite(scale) or scale <= 0):
+                raise ValueError("row_gradient_scale requires a finite positive row-normalized prior scale")
+            algorithm = "row_capped"
         group["algorithm"] = algorithm
-        if algorithm == "rownorm":
+        if algorithm in ("rownorm", "row_capped"):
             if len(group["params"]) != 1 or group["params"][0].ndim != 2:
                 raise ValueError("the prior table requires its own two-dimensional parameter group")
             group.setdefault("sampled_rows_required", True)
@@ -164,7 +178,7 @@ class NormalizedOptimizer(Optimizer):
         group = next((g for g in self.param_groups if any(p is table for p in g["params"])), None)
         if group is None:
             raise ValueError("sampled table is not owned by this optimizer")
-        if group["algorithm"] != "rownorm":
+        if group["algorithm"] not in ("rownorm", "row_capped"):
             return
         if not isinstance(rows, torch.Tensor) or rows.dtype != torch.long or rows.ndim != 1:
             raise ValueError("sampled rows must be a one-dimensional int64 tensor")
@@ -201,7 +215,7 @@ class NormalizedOptimizer(Optimizer):
                     continue
                 if parameter.grad.is_sparse or parameter.grad.is_complex():
                     raise ValueError("normalized optimizers require dense real gradients")
-                if (group["algorithm"] == "rownorm" and group["sampled_rows_required"]
+                if (group["algorithm"] in ("rownorm", "row_capped") and group["sampled_rows_required"]
                         and parameter not in self._sampled_rows):
                     raise ValueError("row-normalized prior updates require actual sampled rows")
         norms = {}
@@ -240,11 +254,11 @@ class NormalizedOptimizer(Optimizer):
                         second = state["max_exp_avg_sq"]
                     adam_direction = gradient / ((second / (1 - beta2 ** state["step"])).sqrt() + eps)
                     parameter.add_(gradient / (gradient.norm() + eps) * adam_direction.norm(), alpha=-rate)
-                elif algorithm == "rownorm":
+                elif algorithm in ("rownorm", "row_capped"):
                     rows = (self._sampled_rows[parameter] if group["sampled_rows_required"]
                             else torch.arange(len(parameter), device=parameter.device))
                     selected = gradient[rows]
-                    update = selected / (selected.norm(dim=1, keepdim=True) + eps)
+                    update = row_direction(selected, group)
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
                     direction = gradient
@@ -272,7 +286,7 @@ class NormalizedOptimizer(Optimizer):
         result["dualnorm"] = {
             "schema": 1, "family": self.family, "momentum": self.momentum,
             "sampled_rows": [self._sampled_rows.get(group["params"][0])
-                             if group["algorithm"] == "rownorm" else None
+                             if group["algorithm"] in ("rownorm", "row_capped") else None
                              for group in self.param_groups],
         }
         if hasattr(self, "record"):
@@ -309,7 +323,7 @@ class NormalizedOptimizer(Optimizer):
                 raise ValueError("invalid normalized optimizer step size")
             rows = meta["sampled_rows"][index]
             if rows is not None:
-                if (actual["algorithm"] != "rownorm" or not isinstance(rows, torch.Tensor)
+                if (actual["algorithm"] not in ("rownorm", "row_capped") or not isinstance(rows, torch.Tensor)
                         or rows.dtype != torch.long or rows.ndim != 1
                         or (rows.numel() and (bool((rows < 0).any()) or bool((rows >= len(actual["params"][0])).any())))
                         or len(torch.unique(rows)) != len(rows)):
@@ -386,6 +400,11 @@ class NormalizedOptimizer(Optimizer):
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
+    if recipe.prior_update == "row_capped":
+        params = list(params)
+        params = [dict(group, row_gradient_scale=recipe.prior_gradient_scale)
+                  if group.get("role", "generator") in ("prior", "table") else group
+                  for group in params]
     optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum, **options)
     if critic is not None:

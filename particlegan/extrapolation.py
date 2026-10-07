@@ -11,7 +11,7 @@ import math
 
 import torch
 
-from .optim.dualnorm import polar_factor
+from .optim.dualnorm import polar_factor, row_direction
 
 
 @torch.no_grad()
@@ -33,12 +33,12 @@ def stateless_directions(optimizer):
                     raise ValueError("game gradients must be finite and dense")
                 if group["algorithm"] == "sgda":
                     direction.copy_(gradient)
-                elif group["algorithm"] == "rownorm":
+                elif group["algorithm"] in ("rownorm", "row_capped"):
                     rows = optimizer.sampled_rows_for(parameter)
                     if rows is None:
                         raise ValueError("game direction requires actual sampled rows")
                     selected = gradient[rows]
-                    direction[rows] = selected / (selected.norm(dim=1, keepdim=True) + eps)
+                    direction[rows] = row_direction(selected, group)
                 elif parameter.ndim == 2:
                     if not bool(gradient.norm() < eps):
                         direction.copy_(polar_factor(gradient) * math.sqrt(max(1., parameter.shape[0] / parameter.shape[1])))

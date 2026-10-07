@@ -1,0 +1,42 @@
+{
+  "api_changes": [
+    "Public magnitude-sensitive sampled-row prior response with checkpointed fixed scale and exact stateless preview."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.prior_update=row_capped",
+    "Recipe.prior_gradient_scale=.001",
+    "Recipe.game_update=simultaneous"
+  ],
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-prior-capped-simultaneous-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Only sampled learned-prior rows use g/max(norm(g),.001); G/D retain dualnorm. Constant rates and initial tensors match parent.",
+  "parent": "bcap-simultaneous-v1",
+  "prior_art": [
+    "reports/forge/bcap-past-extrapolation/README.md",
+    "https://arxiv.org/pdf/1802.10551"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_family": "dualnorm",
+    "prior_lr_mult": 2.5,
+    "game_update": "simultaneous",
+    "prior_update": "row_capped",
+    "prior_gradient_scale": 0.001
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  }
+}

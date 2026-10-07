@@ -1,5 +1,7 @@
 """The diagnostic preserves matched conditions and rejects incomplete holds."""
 from copy import deepcopy
+import json
+from pathlib import Path
 
 import pytest
 import torch
@@ -9,7 +11,14 @@ from benchmarks.toy_audit.reproducibility import reproducible_execution
 from experiments.forge.api import CapabilityError, task_formulation_context
 from experiments.forge.state import state_digest
 
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required; no CPU fallback")
+_ROOT = Path(__file__).resolve().parents[1]
+_protocol = json.loads((_ROOT / "reports/forge/bcap-past-extrapolation/protocol.json").read_text())
+from experiments.forge.contracts import file_hash
+_pinned_source = all(file_hash(_ROOT / name) == digest for name, digest in _protocol["scientific_implementation"].items())
+pytestmark = [
+    pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required; no CPU fallback"),
+    pytest.mark.skipif(not _pinned_source, reason="Archived scientific study requires its pinned source; current capped-prior host contracts are tested in test_prior_magnitude.py"),
+]
 
 
 @reproducible_execution
