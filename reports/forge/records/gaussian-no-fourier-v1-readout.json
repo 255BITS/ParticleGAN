@@ -1,0 +1,91 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+  "changed_factors": [
+    "Task-owned critic Fourier feature count2 to0; raw scalar input replaces five input features. Public first-layer initialization consequently changes with fan-in5 to1."
+  ],
+  "conclusion": "Removing Fourier features fails timely Gaussian acquisition:0/24 primary full passes and no confirmed state within1000. Stationary hold3/72, shifted deadline reacquisitionFAIL, shifted hold1/24; frozen0/48. Final6000 endpointPASS KS.04585 does not replace missed acquisition or stability gates. Exactly6000CUDAupdates,49.887372adapterloopseconds,6exactcheckpointrestores,219saved-sample recomputations and2actual-training GIFs. Original controls retain source and verdicts; no ordinary qualification/default changes.",
+  "evidence_scope": "task_architecture_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Removing periodic critic features from the scalar Gaussian task permits timely full-distribution acquisition and may reduce drift without changing the learner.",
+  "lifecycle": "concluded",
+  "mechanism_class": "task_owned_architecture",
+  "next_action": "Keep Fourier2 as default, stop this exact Fourier0 revision, assess the independent depth ablation and the separately declared Tier1 smoke/Tier2 stability split. No automatic training, tuning or seed changes.",
+  "provenance": {
+    "archive_sha256": "8c5515862f5afd51fb09fcf8bee963b013014aaaa04a80846a26974f9c44e812",
+    "new_training_updates": 6000,
+    "protocol_sha256": "9f6199b6e56fda838f3b54d3000e57bf71d9d5d667bdf45b37ae3b5ad63007da",
+    "receipt": "reports/forge/gaussian-no-fourier/provenance.json",
+    "report": "reports/forge/gaussian-no-fourier/README.md",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "source_commit": "7c3409a194fc7d7f130306e8f03d571d6711c757",
+    "source_digest": "c5209202f5c7fe0d7a2d20e8817a84e56fd577c815cfc9a1ae2a16fabd027edc",
+    "trainer_delta": "none"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-no-fourier-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-no-fourier/results.json",
+    "sha256": "f546f552af852baa4595a74de05c0b78eeed312498edade7b7babddb502cd259"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "wall_seconds": 8.809734788024798
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.25775910800729407,
+        "finite_fraction": 1.0,
+        "mean": 2.360911785544886,
+        "mean_error_sigma": 0.7218235710897716,
+        "observations": 24,
+        "passing_observations": 0,
+        "sample_count": 4096,
+        "std": 0.6836881902627864,
+        "std_ratio": 1.3673763805255728,
+        "step": 1000
+      },
+      "reason": "Explicit architecture diagnostic, no ordinary qualification; complete frozen budget, all full bounds/guards. No independently confirmed full passing state by1000.",
+      "task_id": "gaussian1d_smoke_no_fourier_v1"
+    },
+    {
+      "cost": {
+        "wall_seconds": 41.07763741805684
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.045848430623458,
+        "finite_fraction": 1.0,
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "mean": 3.042791439947905,
+        "mean_error_sigma": 0.08558287989581004,
+        "sample_count": 4096,
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 1,
+        "stationary_checks": 72,
+        "stationary_passes": 3,
+        "std": 0.5710029405641229,
+        "std_ratio": 1.1420058811282459,
+        "step": 6000
+      },
+      "reason": "Explicit architecture diagnostic, no ordinary qualification; complete frozen budget, all full bounds/guards. Stationary3/72, deadlineFAIL, shifted hold1/24; lateendpointPASS cannot replace gate.",
+      "task_id": "gaussian1d_stability_no_fourier_v1"
+    }
+  ],
+  "trainer_family": "bcap-dualnorm"
+}

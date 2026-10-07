@@ -1,5 +1,11 @@
 # Scalar Gaussian: remove critic Fourier features
 
+**Removing Fourier features fails the new Tier 1 smoke question:** 0/24 primary
+full passes and no independently confirmed passing state within 1,000 updates.
+Continued learning also fails: 3/72 stationary hold checks and 1/24 shifted hold
+checks pass, with failed deadline reacquisition. Keep the original Fourier-2
+critic; this ablation does not repair acquisition or stability.
+
 This is the independently declared Fourier-only architecture ablation. It asks
 whether a raw-input critic makes Gaussian acquisition and continued learning
 easier under the unchanged winning BCAP recipe. The depth ablation retains its
@@ -59,6 +65,75 @@ new cost. Original sigma-.025 Gaussian acquisition remains another task. This
 sigma-.1 architecture diagnostic does not confer ordinary qualification or
 retroactively change previous failures. The architecture change is Gaussian-only;
 the passing ring recipe and its source-bound evidence require no new ring run.
+
+## Completed readout
+
+The single CUDA run completed exactly 6,000 updates and 768,000 real examples
+from scientific commit `7c3409a194fc7d7f130306e8f03d571d6711c757`, with no retries.
+Measured adapter loops total **49.887372 seconds**: 8.809735 for smoke and
+41.077637 for continuation. This excludes publication and is cost accounting,
+not a speed ranking. The final 6,000-update endpoint passes all distribution
+bounds, but it cannot replace timely smoke acquisition or the failed hold gates.
+
+| Phase / endpoint | Full checks passed | Mean error / sigma | Std ratio | KS | Declared result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Smoke / 1,000 | 0/24; no confirmed hits | .72182 | 1.36738 | .25776 | FAIL |
+| Stationary hold / 4,000 | 3/72 | .36097 | 1.14665 | .14352 | FAIL |
+| Shift reacquisition / 5,000 | 2/24; terminal suffix 0 | .22697 | 1.28000 | .09503 | FAIL |
+| Shift hold / 6,000 | 1/24 | .08558 | 1.14201 | .04585 | FAIL; endpoint PASS |
+| Frozen no-update shift control | 0/48 | — | — | — | No adaptation |
+
+These are scoped diagnostic phase counts, not a second technique leaderboard.
+The original five-terminal acquisition question also remains FAIL, with suffix 0.
+[Compact results](results.json), [failure analysis](analysis.json), and
+[provenance](provenance.json) retain the numerical gates and source bindings.
+[Metric curves](metrics.svg) show every primary observation. Actual training is
+illustrated in the nine-frame [smoke GIF](smoke.gif) and [stability GIF](stability.gif);
+the GIFs do not determine the verdicts.
+
+KS fails every smoke check; mean error fails 16/24 and excessive width fails
+5/24. During stationary hold, KS fails 69/72, mean error 49/72 and width fails
+5/72. These counts overlap; KS also responds to location and scale error, so
+they do not establish a separate shape cause. The longest stationary full-pass
+streak is two checks. Shift reacquisition and later hold have longest streak
+one, despite the good final snapshot.
+
+The archived Fourier-2 control has full primary passes at 917 and 1,000, compared
+with zero for this arm. Its old acquisition/hold verdicts retain their original
+scope and do not gain a new confirmed-smoke verdict from this comparison. More
+time yields occasional valid states here, but does not make the smaller critic
+reliably converge. Changing feature count also changes first-layer geometry and
+the public fan-in dependent initialization; this single ablation does not isolate
+which part causes the regression.
+
+**Recommendation:** retain Fourier 2, stop this exact Fourier-0 revision, and
+assess the independent depth ablation. Separating acquisition smoke from
+continuous stability remains useful: it exposes a late passing state without
+treating it as a completed basic test. No ordinary task/default is changed by
+this negative architecture report. There is no extra seed, scale search or
+training continuation in this PR.
+
+Both actual data segments and the shifted sequence exactly match the predeclared
+reference hashes. The actual saved step-0 generator, prior, optimizer state and
+training streams match the archived baseline. Primary evaluation registers lazily
+in the new shared host; its named seed matches the actual final manifest, and
+the audit compares the unconsumed binding explicitly without model draws.
+
+[Saved-output verification](verification.json) recomputes 219 sample sets:
+146 primary (including two initial illustrations), 25 confirmation (including
+the preserved initial illustration) and 48 frozen draws; both full grades match.
+[Six exact CUDA restores](restore-proof.json) cover step 0, both 1,000 states,
+the 4,000 pre-shift state, final 6,000 state and frozen 4,000 state. Finite-state,
+actual three-role optimizer counts, mechanism activation and RNG isolation
+guards pass. Current checkpoint learning rates stay constant. Frozen inputs and
+the complete scientific source digest remain unchanged after execution.
+
+Raw evidence is in the ignored local archive
+`artifacts/gaussian-no-fourier-v1.tar.gz`, SHA-256
+`8c5515862f5afd51fb09fcf8bee963b013014aaaa04a80846a26974f9c44e812`.
+The [archive receipt](archive-receipt.json) records its size and raw location.
+This PR depends on the shared smoke/Tier-2 split; it adds an explicit negative
+architecture variant and evidence, not an adopted default.
 
 ## Reproduction and logs
 

@@ -1,0 +1,74 @@
+{
+  "adapter_loop_seconds": 49.887372206081636,
+  "archive": {
+    "bytes": 3575254,
+    "path": "artifacts/gaussian-no-fourier-v1.tar.gz",
+    "raw_root": "runs/api/gaussian-no-fourier-v1",
+    "sha256": "8c5515862f5afd51fb09fcf8bee963b013014aaaa04a80846a26974f9c44e812",
+    "storage": "ignored local immutable archive"
+  },
+  "budget": {
+    "new_training_updates": 6000,
+    "new_trials": 1,
+    "real_examples": 768000,
+    "reserved_seconds": 720,
+    "retries": 0,
+    "smoke_seconds": 120,
+    "stability_seconds": 600
+  },
+  "candidate_card_sha256": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+  "common_host_commits": [
+    "1853cfda",
+    "7d706fec",
+    "402b49e1"
+  ],
+  "completed_new_updates": 6000,
+  "device": "cuda:0",
+  "frozen_core_source_digest": "7173c3964b331219901102a20fa2c1e78b9947652ea03ce76d0341ff4166a93d",
+  "gpu": "NVIDIA RTX A6000",
+  "id": "gaussian-no-fourier-v1",
+  "new_real_examples": 768000,
+  "protocol_sha256": "9f6199b6e56fda838f3b54d3000e57bf71d9d5d667bdf45b37ae3b5ad63007da",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "report": "reports/forge/gaussian-no-fourier/README.md",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "source_commit": "7c3409a194fc7d7f130306e8f03d571d6711c757",
+  "source_digest": "c5209202f5c7fe0d7a2d20e8817a84e56fd577c815cfc9a1ae2a16fabd027edc",
+  "sources": {
+    "analysis.json": "2025ed44837a45027bb5f2415484e723c604dfacb4ee4a8a876431c066bbb928",
+    "analyze.py": "d5cbe14f4f9cf3295b515f696b413705afe6b6b012ab9d80ea88860898079ca2",
+    "controls.json": "cddf8dbd4a56b2ed50928ee1e862e1941ee61bbc657c7746f35a2e69bc79d86f",
+    "initial-proof.json": "4559d50a3aa59969289ab20e5f813e5d02f19a355c9e8e96b581185413097a76",
+    "restore-proof.json": "92833937812ea7682735a2fa969548e401a4297cd32d02af289e89a776e67744",
+    "results.json": "f546f552af852baa4595a74de05c0b78eeed312498edade7b7babddb502cd259",
+    "verification.json": "2d0289ad8c2a33c1d0001ccf75149d9e19eda3415eb70929eef2cbe40fe753b5"
+  },
+  "task_sha256": {
+    "smoke": "4e1bb85023afbe367eea67f60833aa6189d4bda4aa33e7170fb3d78c35a0561c",
+    "stability": "b483c5f7afaf50f89cd706bc0c9f7d70949c8e62051ef5b1a48920d77ff37e91"
+  },
+  "validation": {
+    "actual_step0_and_data_proof": true,
+    "actual_training_gifs": 2,
+    "all_scientific_inputs_unchanged": true,
+    "exact_cuda_restores": 6,
+    "frames_per_gif": 9,
+    "grades_recomputed": 2,
+    "saved_sample_recomputations": 219,
+    "zero_update_cuda_initialization_proof": true
+  }
+}
