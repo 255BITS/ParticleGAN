@@ -172,6 +172,8 @@ class Recipe:
     # lr is their step size; isolation arms can pin native Adam groups to the
     # original baseline rate independently of the normalized-step sweep.
     optimizer_momentum: float = 0.0
+    # GANTrainer joint-field control and Gidel et al. equations 20–21.
+    game_update: str = "alternating"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -199,6 +201,14 @@ class Recipe:
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
         from .optim.dualnorm import NORMALIZED_FAMILIES
+        if self.game_update not in ("alternating", "simultaneous", "extrapolation_from_past"):
+            raise ValueError("unknown game_update")
+        if self.game_update != "alternating":
+            if (self.optimizer_family not in ("dualnorm", "sgda") or self.optimizer_momentum != 0
+                    or self.model != "gan" or self.conditioning != "scalar" or self.encoder_mode != "none"
+                    or self.continuous_policy is not None or self.row_evidence_gate
+                    or self.particle_birth_death or self.serve_average != 0 or self.ema_decay != 0):
+                raise ValueError("joint game updates require scalar stateless dualnorm/sgda without controllers or averaging")
         if self.optimizer_family not in ("formulation", "adam", *NORMALIZED_FAMILIES):
             raise ValueError("unknown optimizer_family")
         if isinstance(self.optimizer_momentum, bool) or self.optimizer_momentum not in (0., .5, .9):

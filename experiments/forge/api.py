@@ -166,6 +166,8 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.game_update != "alternating" and task.get("adapter") != "transfer_vector":
+        return [f"{task.get('id', '<task>')}: joint game updates require a transfer_vector GANTrainer host"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -325,6 +327,8 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if self.recipe.game_update != "alternating" and execution_path != "public_trainer":
+            raise CapabilityError(["joint game updates require public_trainer execution"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (

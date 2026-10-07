@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "c1f322d8c3d669c86bd4b915cdea006e4fe5cfd44edafa70ff9c7366da57f28d",
+  "input_digest": "fbf0cff03ae84bfdfbcda3dffe73552fb20f11089ecb3ebfcb30c921c64b9f4f",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -460,6 +460,7 @@
     "configs/forge/ideas/bcap-nsgda-global-v1.json": "7d9e93670cf5a9231b93c80c4a26f862f8b4c92246d85a3adf52037597dc557f",
     "configs/forge/ideas/bcap-nsgda-layer-v1.json": "6a6f8fd1114dd2b948bc74e170534ec0639a63fe7e2c3b6d3ae14297e7e048f3",
     "configs/forge/ideas/bcap-particle-rownorm-only-v1.json": "c7e837726646af8fb781dacb4d0353cef2e0c075337615e2e1dfbe3dfe02f6f1",
+    "configs/forge/ideas/bcap-past-extrapolation-v1.json": "70af7a3e8a42be5964c019669ae28e284438943821c7cb36cff148853005a5c2",
     "configs/forge/ideas/bcap-pure-adam-example-v3.json": "ddbad0ba62627831f94cc2e0c77c635a48eaf5a7566b7b2a239fe3e011c10092",
     "configs/forge/ideas/bcap-pure-adam-v1.json": "be942e6d8b0b327b4f2b78c368e0495500f77e9f09bd8365be7c8332f69c5e11",
     "configs/forge/ideas/bcap-pure-adam-v2.json": "135e50efa75164230f72bc93a10e76dbe2b1094b1eb9a3eba44d83f792905dc4",
@@ -472,6 +473,7 @@
     "configs/forge/ideas/bcap-pure-wasserstein-joint-v2.json": "b08a473d1327f32c785eac7238646ce07468c707c19dd72ce5dc012bb0bebd9e",
     "configs/forge/ideas/bcap-pure-wasserstein-v1.json": "dc017cde55fb2c2633bc8b05d51424cc35e38865782334b214ae8902dd00dd2d",
     "configs/forge/ideas/bcap-sgda-v1.json": "1a593b571333e70260f55090da6f7e1b95e73a297270edd1adaeb2ee58c7e21f",
+    "configs/forge/ideas/bcap-simultaneous-v1.json": "13d32851981b778183c42d18d16c3ee976b2c5403a6be1c56a64f707a6f8276f",
     "configs/forge/ideas/e22.json": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0",
     "configs/forge/ideas/five-word-joint-ka2-v1.json": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118",
     "configs/forge/ideas/forge-no-critic-penalty.json": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
@@ -2088,15 +2090,17 @@
   },
   "inventory_coverage": {
     "declared_count": 11768,
-    "missing": [],
+    "missing": [
+      "benchmarks/toy_audit/bcap_past_extrapolation.py"
+    ],
     "stale": [],
-    "tracked_count": 11768,
+    "tracked_count": 11769,
     "unclassified": [],
-    "valid": true
+    "valid": false
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "5762cdfe9c41e9872af72aebfc2e52321fac03996d3588e8ab7ba677428a7fec",
+    "reports/forge/EXPERIMENT_MEMORY.md": "64bb11bac03d6b5a17db6cb7c0464d24c27e8affd56bf5f7046e25a90e72aa76",
     "reports/forge/publication-records.json": "a31129dc1cabdac6168664f1aeb4c643546156359c6b39234cea5e8cfad25e9b"
   },
   "pending_readout": [
