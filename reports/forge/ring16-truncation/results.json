@@ -258,6 +258,89 @@
       "initial_context_digest": "108a78f284e3a7fbbc5e1ccb2c5bb6e03f2ee29d1f0a89edb832ec4614cb7451",
       "intervention_calls": 6,
       "longest_full_passing_streak": 1,
+      "post_first_full_pass": {
+        "failing_observations": [
+          {
+            "component_covariance_error": 1.221810545772314,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1417
+          },
+          {
+            "component_covariance_error": 0.903224429115653,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1434
+          },
+          {
+            "component_covariance_error": 1.2894749259576201,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1450
+          },
+          {
+            "component_covariance_error": 1.042190589942038,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1467
+          },
+          {
+            "component_covariance_error": 1.811359053477645,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1500
+          },
+          {
+            "component_covariance_error": 1.349671614356339,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1517
+          },
+          {
+            "component_covariance_error": 1.4673131620511413,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 1.0243315333500504,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 1.397614108864218,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 1.406118119135499,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 1.3725859075784683,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1600
+          }
+        ],
+        "passing_observations": 1,
+        "scheduled_observations": 12
+      },
       "prefix_identity": {
         "candidate_projected_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
         "exact_except_new_stream_registration": true,
@@ -527,6 +610,40 @@
       "initial_context_digest": "108a78f284e3a7fbbc5e1ccb2c5bb6e03f2ee29d1f0a89edb832ec4614cb7451",
       "intervention_calls": 9600,
       "longest_full_passing_streak": 47,
+      "post_first_full_pass": {
+        "failing_observations": [
+          {
+            "component_covariance_error": 0.9311062693595886,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 717
+          },
+          {
+            "component_covariance_error": 0.9738966058939695,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 734
+          },
+          {
+            "component_covariance_error": 0.8989842161536217,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 750
+          },
+          {
+            "component_covariance_error": 0.8930954243987799,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 817
+          }
+        ],
+        "passing_observations": 51,
+        "scheduled_observations": 55
+      },
       "prefix_identity": {
         "candidate_projected_state_digest": "9d9acfcbbc50d12c123cdbaa0df0d8206c1d0a49c4bf85889df4472dc5d6c249",
         "exact_except_new_stream_registration": false,

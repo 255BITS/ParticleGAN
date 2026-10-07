@@ -64,9 +64,15 @@ exact saved sample arrays and execution commit. Rendering used those saved CUDA
 outputs on CPU with zero model forwards or new draws.
 
 Every-step truncation is a promising constant-rate acquisition candidate in this
-fixed Ring16 diagnostic: all 47 observations from update 834 through 1,600 pass.
-The terminal five-check result supplies evidence within this budget, not a
-continuous-learning retention qualification. A separately declared retention
+fixed Ring16 diagnostic. After its first confirmed pass at 684, it crossed
+back into FAIL at updates **717, 734, 750 and 817**, solely because component
+covariance error exceeded `.85` (.931106, .973897, .898984 and .893095). Of the
+55 scheduled observations after the first pass, 51 passed and four failed;
+all 47 observations from 834 through 1,600 passed. Thus it demonstrates
+confirmed acquisition and later sustained quality within this budget, while
+**failing the stronger requirement to stay within the gate after first reaching
+it**. The terminal five-check result is not a continuous-learning retention
+qualification. A separately declared retention
 study is the next scientific question if this rule is pursued. The isolated
 boundary intervention shows that removing weak directions once can change the
 trajectory, but it did not meet the independent smoke requirement. Neither
