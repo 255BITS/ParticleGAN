@@ -11,7 +11,12 @@ newly identified conversion remain distinct future experiments. Reports ULP
 counts, source/input hashes and causal limitations without changing optimizer
 behavior, qualification results or the technique inventory.
 
-Validation: saved-tensor analysis, Python syntax and frozen-binding checks.
+Hard subprocess timeouts cover setup and persistence. Full state is retained
+before metadata checks; interrupted campaigns retain errors, conservative costs
+and unexecuted peer statuses without retries.
+
+Validation: saved-tensor analysis, Python syntax, frozen bindings and mocked
+controller timeout/failure/success accounting checks with zero model calls.
 CUDA neural execution is blocked by unavailable driver; no CPU fallback, new
 training PASS or actual-training GIF is claimed. Publication is pending network
 access.

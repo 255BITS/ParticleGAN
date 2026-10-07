@@ -122,7 +122,7 @@ def trial(arm, output, prior_root, device):
         raise RuntimeError("CUDA is required; no CPU neural fallback")
     started = time.monotonic()
     try:
-        return cuda_trial(arm, output, prior_root, device=device)
+        return cuda_trial(arm, output, prior_root, device=device, arm_started=started)
     except Exception as error:
         directory = output / str(arm)
         if directory.exists() and not (directory / "receipt.json").exists():
@@ -140,7 +140,7 @@ def trial(arm, output, prior_root, device):
 
 
 @reproducible_execution
-def cuda_trial(arm, output, prior_root, *, device):
+def cuda_trial(arm, output, prior_root, *, device, arm_started):
     protocol = read_protocol()
     if not torch.autograd.is_multithreading_enabled():
         raise ValueError("ordinary prefix requires autograd multithreading enabled")
@@ -167,7 +167,7 @@ def cuda_trial(arm, output, prior_root, *, device):
         raise ValueError("retained original prefix differs")
     if not declared["fresh_prefix"]:
         context.load_state_dict(torch.load(parent, map_location="cpu", weights_only=True))
-    started, digest, observations, snapshots = time.monotonic(), hashlib.sha256(), [], []
+    started, digest, observations, snapshots = arm_started, hashlib.sha256(), [], []
     checks = {math.ceil(i * 400 / 24) for i in range(1, 25)}
     spec = task["execution"]["host_definition"]
     while trainer.completed_steps < 400:
@@ -205,11 +205,11 @@ def cuda_trial(arm, output, prior_root, *, device):
         trace.close()
         torch.save({"real": real, **trace.rows}, directory / "trace401.pt")
     final = cpu(context.state_dict())
-    require_same_formulation(initial, final)
-    require_optimizer_steps(final, 401)
     torch.save(final, directory / "state401.pt")
     torch.save(snapshots, directory / "observations.pt")
     atomic_json(directory / "curve.json", observations)
+    require_same_formulation(initial, final)
+    require_optimizer_steps(final, 401)
     torch.cuda.synchronize(device)
     elapsed = time.monotonic() - started
     if elapsed > declared["timeout_seconds"]:
@@ -219,11 +219,55 @@ def cuda_trial(arm, output, prior_root, *, device):
         "source_commit": source["origin_commit"], "source_digest": source["digest"],
         "protocol_sha256": file_hash(PROTOCOL), "new_updates": declared["new_updates"],
         "completed_updates": 401, "elapsed_seconds": elapsed, "device": device,
+        "timing_scope": "whole child arm including reproducibility setup, context construction and restore; controller separately measures process startup and exit",
         "gpu": torch.cuda.get_device_name(device), "runtime": runtime_manifest(),
         "training_batch_digest": digest.hexdigest(), "named_stream_manifest": context.streams.manifest(),
         "prefix_bit_exact": True, "serial_at_401": declared["serial_at_401"],
         "artifacts": {p.name: file_hash(p) for p in directory.iterdir() if p.is_file()}})
     print(json.dumps({"event": "arm_complete", "arm": arm, "new_updates": declared["new_updates"]}), flush=True)
+
+
+def execute(protocol, output, prior_root, device):
+    output.mkdir(parents=True, exist_ok=False)
+    peers = {arm: {"status": "UNEXECUTED", "updates_debit": 0, "seconds_debit": 0}
+             for arm in protocol["arms"]}
+    complete = False
+    try:
+        for arm, declared in protocol["arms"].items():
+            print(json.dumps({"event": "arm_start", "arm": arm}), flush=True)
+            started = time.monotonic()
+            peers[arm] = {"status": "INCOMPLETE", "updates_debit": declared["new_updates"],
+                          "seconds_debit": declared["timeout_seconds"]}
+            try:
+                subprocess.run([sys.executable, "-u", "-m", MODULE, "trial", "--arm", arm,
+                                "--output", str(output), "--prior-root", str(prior_root),
+                                "--device", device], check=True, timeout=declared["timeout_seconds"])
+                receipt = json.loads((output / arm / "receipt.json").read_text())
+                if receipt["new_updates"] != declared["new_updates"]:
+                    raise ValueError("arm receipt update count differs from declaration")
+            except Exception as error:
+                peers[arm] = {"status": "TIMEOUT" if isinstance(error, subprocess.TimeoutExpired) else "INCOMPLETE",
+                    "updates_debit": declared["new_updates"], "seconds_debit": declared["timeout_seconds"],
+                    "measured_process_wall_seconds": time.monotonic() - started,
+                    "error_type": type(error).__name__, "error": str(error)}
+                directory = output / arm
+                directory.mkdir(parents=True, exist_ok=True)
+                atomic_json(directory / "controller-interruption.json", {"qualification_input": False,
+                    "arm": arm, **peers[arm], "accounting": "Full reservation charged; remaining peers unexecuted; no retries."})
+                raise
+            peers[arm] = {"status": "COMPLETE", "updates_debit": receipt["new_updates"],
+                          "seconds_debit": time.monotonic() - started,
+                          "timing_scope": "whole subprocess including startup, setup, training, persistence and exit"}
+        if (sum(p["updates_debit"] for p in peers.values()) > protocol["max_new_host_updates"] or
+                sum(p["seconds_debit"] for p in peers.values()) > protocol["max_reserved_seconds"]):
+            raise RuntimeError("campaign reservation exceeded")
+        complete = True
+    finally:
+        atomic_json(output / "campaign-summary.json", {"scope": protocol["scope"], "qualification_input": False,
+            "status": "COMPLETE" if complete else "INCOMPLETE", "peers": peers,
+            "attempts": sum(p["status"] != "UNEXECUTED" for p in peers.values()),
+            "new_updates_debit": sum(p["updates_debit"] for p in peers.values()),
+            "seconds_debit": sum(p["seconds_debit"] for p in peers.values())})
 
 
 def main():
@@ -239,19 +283,7 @@ def main():
         return
     if not torch.cuda.is_available() or torch.device(args.device).type != "cuda":
         raise RuntimeError("CUDA is required; no CPU neural fallback")
-    protocol = read_protocol()
-    args.output.mkdir(parents=True, exist_ok=False)
-    for arm in protocol["arms"]:
-        print(json.dumps({"event": "arm_start", "arm": arm}), flush=True)
-        subprocess.run([sys.executable, "-u", "-m", MODULE, "trial", "--arm", arm,
-                        "--output", str(args.output), "--prior-root", str(args.prior_root),
-                        "--device", args.device], check=True)
-    receipts = [json.loads((args.output / arm / "receipt.json").read_text()) for arm in protocol["arms"]]
-    updates, seconds = sum(r["new_updates"] for r in receipts), sum(r["elapsed_seconds"] for r in receipts)
-    if updates > protocol["max_new_host_updates"] or seconds > protocol["max_reserved_seconds"]:
-        raise RuntimeError("campaign reservation exceeded")
-    atomic_json(args.output / "completion.json", {"scope": protocol["scope"], "qualification_input": False,
-        "attempts": len(receipts), "new_updates": updates, "elapsed_seconds": seconds})
+    execute(read_protocol(), args.output, args.prior_root, args.device)
 
 
 if __name__ == "__main__":

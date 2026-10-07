@@ -1,10 +1,18 @@
 {
   "budget_arithmetic": "PASS",
+  "controller_cases": [
+    "timeout",
+    "child_error",
+    "missing_receipt",
+    "complete"
+  ],
+  "controller_timeout_error_and_peer_accounting": "PASS",
   "cpu_and_unavailable_cuda_rejection": "PASS",
   "cpu_neural_execution": false,
   "cuda_available": false,
-  "driver_sha256": "26bf9882e0d2ad906cec4e472e5960246f8d05b17db90e1a20df9b24458d44ab",
+  "driver_sha256": "b8c86dad9e55b4581fea32d391a3e25f8d1867c7a86ea2fae8fa3984d14e2623",
   "executed_cuda_arms": 0,
+  "final_state_saved_before_receipt_validation": "PASS",
   "forge_validate": "PASS",
   "gpu_neural_checks": "BLOCKED",
   "local_torch_primary_sources": {
@@ -13,12 +21,16 @@
   },
   "new_neural_updates": 0,
   "protocol_bindings": "PASS",
-  "protocol_sha256": "b4d2393c43787700aa954032a3cdc7fdc1cbf8fd67b6cb9789797e13addcf6c8",
+  "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
   "relative_report_link_count": 7,
   "relative_report_links": "PASS",
   "saved_result_sha256": "464aa1c51c87e084b75d7408e4a14b353a6616a60f48a10fc3318f1667463b13",
   "scope": "metadata_syntax_and_cuda_guard_checks",
   "syntax": "PASS",
   "technique_inventory_sha256": "ff3dbaec98de9328d676943a94301414e78baeca30071a62df93790185bd7a45",
-  "torch_version": "2.14.0+cu130"
+  "torch_version": "2.14.0+cu130",
+  "whole_process_timeout_seconds": {
+    "fresh": 150,
+    "restored": 30
+  }
 }

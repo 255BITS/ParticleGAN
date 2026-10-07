@@ -101,6 +101,12 @@ the archived gradients. It reads topology/sequence numbers, adds no node
 execution hooks, and invokes original backward/optimizer operations once.
 
 Budget: **4 attempts, 804 new updates, 360 reserved seconds, zero retries**.
+Controller hard timeouts include process startup, context construction, training,
+persistence and exit: 150 seconds per fresh arm and 30 per restored arm.
+Completed arms charge measured process wall time; interrupted arms retain their
+original errors and consume their full reservations. The campaign summary marks
+unexecuted peers explicitly. Full401 state and observations are saved before
+final metadata validation, so a receipt error cannot discard completed results.
 Fresh runs retain their 24 original-cadence observations of 4,096 clean samples;
 restored arms add no scored sampling draws. Every fresh400 context must match
 the archived digest exactly. Any mismatch stops that arm without substituting

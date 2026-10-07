@@ -29,7 +29,7 @@
   },
   "baseline_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
   "bindings": {
-    "benchmarks/toy_audit/ring16_runtime_rounding.py": "26bf9882e0d2ad906cec4e472e5960246f8d05b17db90e1a20df9b24458d44ab",
+    "benchmarks/toy_audit/ring16_runtime_rounding.py": "b8c86dad9e55b4581fea32d391a3e25f8d1867c7a86ea2fae8fa3984d14e2623",
     "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
     "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
     "experiments/forge/api.py": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938",
@@ -69,6 +69,7 @@
   "max_new_host_updates": 804,
   "max_new_scored_draw_events": 48,
   "max_reserved_seconds": 360,
+  "persistence_contract": "Save state401, observations and curve before final formulation/optimizer validation; retain original metadataerrors without repeating training.",
   "prefix_file_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
   "prefix_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
   "qualification_input": false,
@@ -85,5 +86,6 @@
     "Stop on nonfinite update, source/state mismatch or arm timeout; preserve error and cost."
   ],
   "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "timing_contract": "Controller hard subprocess timeout150seconds fresh/30seconds restored covers import, setup, execution, persistence and exit. Completed arms charge measuredwholeprocess wall; interrupted arms charge full reservation, retainchild/controller errors and exact peer statuses; remaining peers unexecuted. Child elapsedstarts before reproducibilitysetup.",
   "user_authorization": "User requested separate runtime-rounding investigation and conditional floating-conversion experiment, leaning boundary400. Boundary intervention is applied to next backward update401."
 }
