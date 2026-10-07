@@ -22,32 +22,22 @@ _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 
 
 def polar_factor(matrix):
-    """Return U Vᵀ; large matrices try bounded Newton--Schulz first.
+    """Return U diag(s > tau) Vᵀ, excluding numerically null directions.
 
-    The zero-gradient guard belongs to the caller. Reduced SVD includes the
-    unit singular-value completion for rank-deficient nonzero matrices.
-    Ill-conditioning or rank deficiency can prevent finite iterations from
-    reaching unit singular values. A Frobenius orthogonality residual above
-    1e-3 falls back to SVD, preserving the declared polar-factor step rule.
+    tau = max(rows, columns) * eps * s_max uses the SVD computation dtype.
+    Float16/bfloat16 inputs retain the existing float32 computation policy;
+    float32/float64 inputs are not cast. Exact SVD at every size makes the
+    cutoff independent of an iterative polar approximation. No RNG is used.
     """
     if matrix.ndim != 2 or not matrix.is_floating_point():
         raise ValueError("polar_factor requires a floating-point matrix")
     original_dtype = matrix.dtype
     value = matrix if original_dtype in (torch.float32, torch.float64) else matrix.float()
-    if max(value.shape) <= 1024:
-        left, _, right = torch.linalg.svd(value, full_matrices=False)
-        return (left @ right).to(dtype=original_dtype)
-    original = value
-    transposed = value.shape[0] > value.shape[1]
-    value = value.T if transposed else value
-    value = value / value.norm().clamp_min(torch.finfo(value.dtype).tiny)
-    for _ in range(30):
-        value = .5 * (3 * value - (value @ value.T) @ value)
-    residual = value @ value.T - torch.eye(value.shape[0], device=value.device, dtype=value.dtype)
-    if not bool(torch.isfinite(residual).all()) or bool(residual.norm() > 1e-3):
-        left, _, right = torch.linalg.svd(original, full_matrices=False)
-        return (left @ right).to(dtype=original_dtype)
-    return (value.T if transposed else value).to(dtype=original_dtype)
+    if 0 in value.shape:
+        return torch.zeros_like(matrix)
+    left, singular, right = torch.linalg.svd(value, full_matrices=False)
+    threshold = max(value.shape) * torch.finfo(value.dtype).eps * singular[0]
+    return ((left * (singular > threshold)) @ right).to(dtype=original_dtype)
 
 
 class NormalizedOptimizer(Optimizer):

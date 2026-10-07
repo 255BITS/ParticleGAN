@@ -4,9 +4,37 @@
 diagnostic. The one-update intervention failed independent confirmation.** Both
 frozen arms completed 1,600 fresh-live CUDA updates on an RTX A6000. The saved
 gradient probe passed and reduced the live/reloaded direction discrepancy about
-1,713-fold. Production defaults, task gates and published qualification remain
-unchanged. The earlier unavailable-CUDA [verification](verification.json) is
+1,713-fold. Those historical runs used an experiment-only hook and left production
+defaults unchanged. Their task gates and published qualification retain their
+original identities. The earlier unavailable-CUDA [verification](verification.json) is
 preserved as its original static preparation receipt.
+
+## Public default adoption
+
+At the user's request, PR332 now applies the every-update numerical-rank cutoff
+in the public `particlegan.optim.polar_factor`, used by `dualnorm` and the critic
+in `dualnorm_D_only`. The global rule is `U diag(s > tau) Vh`, with
+`tau = max(rows, columns) * finfo(computation_dtype).eps * s_max`. Float32 and
+float64 keep their dtype; half/bfloat16 use the existing float32 computation
+policy and cast back. Vectors and sampled prior rows keep their update rules.
+Every size now uses exact reduced SVD: the old >1024 Newton--Schulz fast path
+could normalize directions below this cutoff, and is removed. Large full-rank
+matrices may therefore cost more; the toy matrices already used SVD.
+
+The [GPU integration receipt](default-adoption.json) records 103 passing
+optimizer/software contracts and bit-exact parity with the frozen experiment
+helper on both original saved update-401 critic matrices. Tests cover resolved
+and null directions, zero/rectangular/large matrices, all four floating dtypes,
+actual optimizer moves, sampled-row ownership and public checkpoint continuation.
+The historical helper, protocols, result hashes and archived evidence remain
+unchanged. Existing checkpoints use the new matrix rule when continued in the
+new package; exact historical reproduction requires the original pinned source.
+
+This is the user's selected implementation change, with new ordinary Tier 1 and
+eligible Tier 2 evaluation still pending. The diagnostic results below are not
+relabelled as qualification for the new default. The separate project-wide
+backward-scheduling PR implements the user's later request to disable autograd
+multithreading; that setting is not modified by this optimizer PR.
 
 The [PR331 reproduction](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
 located the first live-versus-restored difference in critic backward gradients

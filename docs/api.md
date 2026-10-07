@@ -1278,12 +1278,16 @@ its SGD direction, applying the scheduled rate once. `dualnorm` uses the
 polar factor of every matrix gradient (including heads), scaled by
 `sqrt(max(1, fan_out/fan_in))`, and L2-normalizes vectors. Its optional
 `optimizer_momentum` is `0`, `.5`, or `.9`; matrices with gradient norm below
-`eps` are skipped. It uses exact SVD through side length 1024. Larger matrices
-try 30 Newton--Schulz iterations, then fall back to SVD if their Frobenius
-orthogonality residual exceeds `1e-3`, including ill-conditioned and
-rank-deficient cases. Accepted iterative factors remain approximate within
-that residual tolerance; no scale-transfer claim follows from this numerical
-check. Higher-dimensional weight tensors are unsupported.
+`eps` are skipped. Every matrix size uses exact reduced SVD, with direction
+`U diag(s > tau) Vh`, where `tau = max(rows, columns) * finfo(dtype).eps * s_max`.
+Numerically null directions receive zero update instead of being amplified to
+unit magnitude. The cutoff uses the computation dtype: float32 and float64 are
+preserved; float16/bfloat16 inputs compute in float32 and cast the result back.
+This replaces the former Newton--Schulz fast path for matrices larger than 1024,
+so large full-rank matrices can cost more per update. Higher-dimensional weight
+tensors are unsupported. Older checkpoints load their stored state, but continue
+under this new rule; reproducing older trajectories requires their original
+package source. No task gate or historical qualification is changed by this rule.
 
 The `dualnorm` prior and `particle_rownorm_only` normalize each sampled prior
 row, without momentum. Unsampled rows stay fixed even if a whole-table
