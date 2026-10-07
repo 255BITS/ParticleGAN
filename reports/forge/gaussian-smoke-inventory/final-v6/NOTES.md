@@ -1,4 +1,23 @@
-# What the selected DualNorm row shows
+# Results and the selected DualNorm row
+
+The complete fixed roster has 52 declarations: 23 admitted CUDA recipes,
+24 preflight blockers and five declaration refusals. All 23 admitted recipes
+finished their runnable Tier1 peers. The six required tasks yield 77 PASS,
+59 FAIL and two capability BLOCKED cells; the separate timing diagnostic
+yields seven PASS, 15 FAIL and one capability BLOCKED cell. No whole recipe
+qualifies for Tier2. There are 161 paid attempts, no scientific retries and
+5,910.478148 measured worker seconds. Earlier source costs remain separate.
+
+The closest whole recipe is the preselected BCAP row
+`bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212`,
+with five of six required passes. Its Gaussian acquisition and original word
+curve gate both pass; Ring16 fails. Gaussian's endpoint CDF KS is 0.03562607,
+and word quality/reconstruction are both 1. Ring16 still finds all 16 modes,
+but component covariance error is 3.33788425 and HQ is 0.85595703.
+Thus Gaussian is solvable under this fixed test: the failure below belongs to
+the selected DualNorm recipe, whose Ring16 success cannot be pooled with
+BCAP's Gaussian/word successes. See the single
+[technique inventory](../../technique-inventory.md) for the full roster.
 
 This is the pre-run selected BCAP/DualNorm configuration
 `bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9`:
@@ -25,36 +44,43 @@ source does not supply qualification credit. This supports adopting the
 implementation for this exact Ring16 question; it does not establish a
 whole-recipe smoke pass or general calibration.
 
-Gaussian reaches a full primary pass at update167: CDF KS 0.04797724,
+Gaussian reaches a full primary pass at update 167: CDF KS 0.04797724,
 mean error 0.06317 target standard deviations, and standard-deviation ratio
 1.00432. At the same unchanged state, the independent confirmation has
 CDF KS 0.05418494, above the frozen 0.05 bound; its moment bounds pass.
-No other scheduled state earns a confirmed pass. At update1000, mean is
+No other scheduled state earns a confirmed pass. At update 1000, mean is
 1.96787909 and standard deviation 0.49788861 for target N(2,0.5²), but
 CDF KS is 0.06460338. Close moments do not establish the required full
 distribution match. This gate is acquisition smoke: it does not require a
 stationary hold or learning-rate annealing.
 
-The word result illustrates a different existing contract. At update20001,
-quality fraction is1, all five words appear, mass TV is0.01894531, exact
-reconstruction is1 and minimum reconstruction token probability is1. The
-complete24-observation curve contains13 passing observations, first at1667,
+The word result illustrates a different existing contract. At update 20001,
+quality fraction is 1, all five words appear, mass TV is 0.01894531, exact
+reconstruction is 1 and minimum reconstruction token probability is 1. The
+complete 24-observation curve contains 13 passing observations, first at 1667,
 and ends with only two passing checks. Its original Tier1 declaration still
 requires a five-check passing terminal suffix. Therefore FAIL is the correct
 verdict despite a passing endpoint. Gaussian's separate acquisition/hold split
 was not silently applied to the word question.
 
-The word worker completes all20001 updates in826.670 seconds against its
-unchanged900-second deadline. The prior-source selected row recorded704.703
+The word worker completes all 20,001 updates in 826.670 seconds against its
+unchanged 900-second deadline. The prior-source selected row recorded 704.703
 seconds. These are measured campaign costs, not an isolated timing experiment
 or a causal speed estimate. These word matrices already used SVD in the prior
 source; the removed >1024-dimension Newton–Schulz path does not apply to them.
 
-Finish and publish the full fixed roster before proposing another trainer
-change. The immediate remaining questions are confirmed Gaussian acquisition
-under fixed scheduling, and the word curve's loss/recovery of an already
+The fixed roster is complete; these failed revisions warrant no automatic
+continuation or promotion. Inspect BCAP's saved per-component Ring16 spread
+and DualNorm's paired Gaussian CDF observations before declaring another
+bounded comparison. DualNorm's word curve also loses and recovers an already
 acquired solution. If Tier1 is to mean acquisition for words as well, declare
 an explicit new word smoke/hold split rather than relabeling this original
 FAIL. Keep continuous-learning hold in its separately declared Tier2 question.
 Do not alter bounds, anneal the learning rate, select a new seed or pool passes
 across global recipes to qualify this row.
+
+The word-specific KA2 declaration cannot construct the scalar trainer required
+by the Gaussian/Ring adapters. Its raw capability errors remain BLOCKED; the
+[V4 readout](../final-v4/readout.json) already records BLOCKED raw errors in those
+same two required cells and the timing diagnostic. These are distinct from
+the general KA2 recipe and from numerical failures. Their costs remain visible.

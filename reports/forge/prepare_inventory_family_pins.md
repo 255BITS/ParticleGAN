@@ -94,6 +94,16 @@ The existing publisher adds the new same-policy source cohort and retains old
 cohorts; source refresh grants no automatic reuse of their task gates. This
 helper does not perform either publication step.
 
+When an unavailable choice leaves a family with only declarations, the
+publisher can bind its canonical display to the source unanimously named by
+the current family pins on that backend. This resolves old/new unrun-source
+ambiguity without choosing a substitute trained recipe. It applies only to
+rows with no attempts, paid cost, executed outcomes or qualified tiers.
+Mixed-source pins and same-source runtime ties remain unresolved; measured
+ties retain their original refusal. Excluded declarations stay in immutable
+evidence and remain available to exact historical display pins. Cached
+regeneration uses the same source consensus and preserves the display.
+
 Run the saved-metadata checks without constructing a neural model:
 
 ```sh
