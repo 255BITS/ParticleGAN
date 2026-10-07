@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "gaussian-smoke-tier-split-v1",
+  "scope": "historical_fixed_checkpoint_confirmation_diagnostic",
+  "status": "ready",
+  "protocol_seed": 0,
+  "execution_backend": "cuda",
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "hypothesis": "The previously fixed update1000 Gaussian state can independently pass the unchanged full distribution bounds, despite the historical five-terminal acquisition failure.",
+  "budget": {
+    "new_training_updates": 0,
+    "max_gpu_seconds": 120,
+    "max_confirmation_draws": 1,
+    "retries": 0
+  },
+  "baseline": {
+    "raw_directory": "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition",
+    "artifacts": {
+      "state.pt": "e70cf3edc0feb34c737c605f5cbe17e67c3a5d5be138fabe15c4ecf63a2bdb29",
+      "curve.json": "3e951dad906e34630b4ae3a5f0c716cdfa606bda11b6f66e0e636bfa24df30bf",
+      "receipt.json": "038cbb67be787ec7237c81f648881b5611bce7dd02e24b5cd7776c6d3f78fd4b",
+      "source.json": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    }
+  },
+  "implementation_sources": {
+    "benchmarks/toy_audit/gaussian_smoke_baseline.py": "29e38b55b8d4c942f86e36b8a33a268a503dca8ac102c5f186745a055d595548",
+    "experiments/forge/gaussian_tasks.py": "839e01a5814adc577d4192173df11a5943a2be8b3252dba42c2e315a63aea698",
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b"
+  },
+  "qualification_input": false,
+  "stopping": "One fixed1000checkpoint, one independent confirmation draw; no checkpoint selection, repeat or training.",
+  "original_evidence_unchanged": true
+}

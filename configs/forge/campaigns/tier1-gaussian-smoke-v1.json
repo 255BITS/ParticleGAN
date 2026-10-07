@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "tier1-gaussian-smoke-v1",
+  "budget_seconds": 2220,
+  "candidate_budget_seconds": 2220,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Revision7 requiredTier1: Gaussian independent-confirmation smoke120s, three behavior tasks300s each, ring16acquisition300s, wordacquisition900s. Optional clockdiagnostic300s is excluded. ThroughTier2 requires a separately bounded42,420s per-candidate reservation; ownGaussianstability600s is required there. This campaign gives no standalone-diagnostic qualification."
+}

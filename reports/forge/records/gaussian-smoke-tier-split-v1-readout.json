@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "record_id": "gaussian-smoke-tier-split-v1-readout",
+  "record_type": "family_context",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Separate can-it-pass smoke from ongoing stationary/shifted stability and independently confirm a fixed historical passing state.",
+  "mechanism_class": "task_policy_and_saved_checkpoint_confirmation",
+  "changed_factors": [
+    "New ordinary sigma.1 Gaussian smoke task replaces sigma.025 five-terminal acquisition in revision7 Tier1; full distribution bounds preserved.",
+    "New required Tier2 own-checkpoint stationary/shifted stability task; original task/evidence unchanged.",
+    "One source-bound independent draw at historical update1000; zero training."
+  ],
+  "conclusion": "Historical fixed1000 Gaussian independently confirms full bounds: KS.047590, meanerror.009982sigma, stdratio.932642; primaryKS.042974. Original five-terminal acquisition remainsFAIL. Newordinary24pairedsmoke awaits inventory; noqualification regrading. 22newGaussian contracts and93focused regression checks pass. Serialization error recovered solely fromsavedtensor/state, no repeat.",
+  "next_action": "Integrate successful smoke/stability split and architecture experiments, rerun exact ordinary current roster onCUDA, run newly eligibleTier2, regenerate the single technique-inventory. Preserve all original evidence and failedstability outcomes.",
+  "source": {
+    "path": "reports/forge/gaussian-smoke-tier-split/results.json",
+    "sha256": "8412763d4b3a626d264eae1498f44084c29a4a1b8ced7d62cfc2eae3f03335de"
+  },
+  "provenance": {
+    "report": "reports/forge/gaussian-smoke-tier-split/README.md",
+    "protocol_sha256": "d32faa4da89855a4d0b6929f919bdc9bcbafecad7ff51599b95441becbb5c07a",
+    "archive_sha256": "29f4886e32aa150bd88a688a3c5cf859b1e127818b39acb8a459f189c197ff96",
+    "training_updates": 0,
+    "new_confirmation_draws": 1
+  },
+  "task_results": []
+}
