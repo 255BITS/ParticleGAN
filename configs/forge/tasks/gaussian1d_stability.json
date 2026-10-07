@@ -107,7 +107,7 @@
     "observations": 24,
     "scoring_weights": "live",
     "sources": {
-      "experiments/forge/gaussian_tasks.py": "52422d9d10de71e591b1a8ae4cf4fee27255c447b1b96c8e6d208a3733b7d8a8",
+      "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f",
       "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b"
     },
     "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
