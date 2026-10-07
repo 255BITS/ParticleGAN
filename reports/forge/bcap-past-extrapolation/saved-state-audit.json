@@ -1,0 +1,48 @@
+{
+  "default_path": {
+    "alternating_step_ast_unchanged_after_dispatch": true,
+    "merged_base": "d91c8d867b06435e79c25f65cf46754e8eabbe69",
+    "model_sampling_draws": 0,
+    "optimizer_bytes_unchanged": true,
+    "recipe_default_omitted": true,
+    "training_updates": 0,
+    "unchanged_methods": [
+      "step",
+      "_execute_step",
+      "_sample_training_prior",
+      "sample",
+      "_generate",
+      "_batch"
+    ]
+  },
+  "scope": "secondary_saved_state_explanation_not_qualification",
+  "shape_and_field": {
+    "model_sampling_draws": 0,
+    "results": [
+      {
+        "arm": "alternating",
+        "fitted_normal_ks": 0.172955361751434,
+        "skewness": 1.613172569498766,
+        "step": 4000
+      },
+      {
+        "arm": "simultaneous",
+        "fitted_normal_ks": 0.17078658899223964,
+        "skewness": 0.32662993491919895,
+        "step": 4000
+      },
+      {
+        "arm": "extrapolation_from_past",
+        "cached_nonzero_prior_rows": 97,
+        "cached_prior_direction_max_norm": 0.9999971985816956,
+        "cached_prior_direction_min_norm": 0.9999237656593323,
+        "fitted_normal_ks": 0.06032984930687513,
+        "implied_prior_step_mean": 0.029999574422836302,
+        "skewness": -0.3929517025696099,
+        "step": 4000
+      }
+    ],
+    "scope": "secondary_saved_state_explanation_not_qualification",
+    "training_updates": 0
+  }
+}

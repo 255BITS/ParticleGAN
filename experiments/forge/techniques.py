@@ -111,6 +111,8 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
     if name == "optimizer_adam_lr":
         return recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}
+    if name == "network_gradient_scale":
+        return recipe.network_update == "spectral_capped"
     if name in {"betas", "amsgrad", "beta2_end"}:
         return recipe.optimizer_family in {
             "formulation", "adam", "ada_nsgda", "dualnorm_D_only", "particle_rownorm_only"}

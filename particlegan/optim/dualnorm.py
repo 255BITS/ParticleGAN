@@ -50,6 +50,22 @@ def polar_factor(matrix):
     return (value.T if transposed else value).to(dtype=original_dtype)
 
 
+def spectral_capped_direction(gradient, scale):
+    """Cap spectral motion while retaining small singular values' magnitude.
+
+    The fixed gradient scale is independent of elapsed updates. Below the cap
+    this is the raw gradient divided by scale, including at rank deficiency.
+    Matrix aspect scaling matches the existing dual-norm geometry.
+    """
+    if gradient.ndim == 2:
+        dtype = gradient.dtype
+        value = gradient if dtype in (torch.float32, torch.float64) else gradient.float()
+        left, singular, right = torch.linalg.svd(value, full_matrices=False)
+        factor = math.sqrt(max(1., gradient.shape[0] / gradient.shape[1]))
+        return ((left * (singular / scale).clamp_max(1)) @ right).to(dtype) * factor
+    return gradient / gradient.norm().clamp_min(scale)
+
+
 class NormalizedOptimizer(Optimizer):
     """Role-aware optimizer, with native Adam only in the isolation arms.
 
@@ -64,7 +80,8 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, **options):
+                 eps=1e-8, momentum=0., amsgrad=False, network_update="dualnorm",
+                 network_gradient_scale=.1, **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -85,6 +102,14 @@ class NormalizedOptimizer(Optimizer):
                 raise ValueError(f"normalized optimizers require disabled {key}")
         self.family, self.momentum = family, float(momentum)
         self.recipe_optimizer_family = family
+        if network_update not in ("dualnorm", "spectral_capped"):
+            raise ValueError("unknown network update rule")
+        if (type(network_gradient_scale) not in (int, float)
+                or not math.isfinite(network_gradient_scale) or network_gradient_scale <= 0):
+            raise ValueError("network gradient scale must be finite and positive")
+        if network_update != "dualnorm" and (family != "dualnorm" or momentum != 0):
+            raise ValueError("spectral capped networks require zero-momentum dualnorm")
+        self.network_update, self.network_gradient_scale = network_update, float(network_gradient_scale)
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
                     "role": "generator", "weight_decay": 0., "maximize": False,
@@ -125,6 +150,9 @@ class NormalizedOptimizer(Optimizer):
         if algorithm == "dualnorm" and role in ("prior", "table"):
             algorithm = "rownorm"
         group["algorithm"] = algorithm
+        if self.network_update == "spectral_capped" and algorithm == "dualnorm":
+            group["network_update"] = self.network_update
+            group["network_gradient_scale"] = self.network_gradient_scale
         if algorithm == "rownorm":
             if len(group["params"]) != 1 or group["params"][0].ndim != 2:
                 raise ValueError("the prior table requires its own two-dimensional parameter group")
@@ -247,6 +275,9 @@ class NormalizedOptimizer(Optimizer):
                     update = selected / (selected.norm(dim=1, keepdim=True) + eps)
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
+                    if group.get("network_update") == "spectral_capped":
+                        parameter.add_(spectral_capped_direction(gradient, group["network_gradient_scale"]), alpha=-rate)
+                        continue
                     direction = gradient
                     if self.momentum:
                         if "momentum_buffer" not in state:
@@ -387,7 +418,9 @@ class NormalizedOptimizer(Optimizer):
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
     optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
-                                    momentum=recipe.optimizer_momentum, **options)
+                                    momentum=recipe.optimizer_momentum,
+                                    network_update=recipe.network_update,
+                                    network_gradient_scale=recipe.network_gradient_scale, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None

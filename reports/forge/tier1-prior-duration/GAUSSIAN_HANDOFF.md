@@ -96,3 +96,80 @@ Local evidence:
 - Torch/CUDA training environment: `/usr/bin/python` (Python 3.14).
   Rendering environment: `/home/martyn/dev/ParticleGAN/.venv/bin/python`
   (Python 3.12 with Matplotlib/Pillow). Two RTX A6000s; studies used cuda:0.
+
+PR316 is now merged into develop `d91c8d867b06435e79c25f65cf46754e8eabbe69`.
+The user authorized a new branch, `research/bcap-extrapolation`, and the bounded
+[extrapolation-from-the-past investigation](../bcap-past-extrapolation/README.md).
+Its executed source is `f987656a49c7477322c058d98e6e1c180518fa36`; all seven new
+GPU trials complete22000 updates for279.351 loop seconds, with no scientific
+retry. The shared public Recipe/GANTrainer capability is implemented and tested;
+the paper's equations20–21 operate on the selected recipe's normalized field.
+
+It does not fix Gaussian: acquisition FAIL, hold3/72, longest passing streak2,
+final KS.26799. Simultaneous control passes0/96 checks. The adopted alternating
+ring remains the only combined acquisition/strict-hold pass; extrapolation's
+strong late ring fit misses1600 acquisition and retains115/144 hold checks.
+All three Gaussian mean2→3 continuations pass0/48 full shift checks. Extrapolation
+responds to the new mean but ends narrow, KS.13998. No history reset, annealing,
+average or best-checkpoint substitution is used.
+
+The final scalar prior cache has97 moving rows with nearly unit direction norms;
+its implied average row step remains.0299996. The saved-state shape improvement
+does not meet target-law fidelity or isolate a cause. Stop this exact revision
+as a scalar repair. The next hypothesis is response magnitude near fit at fixed
+nominal rates, possibly a magnitude-sensitive prior or explicit frozen-prior role
+control. No follow-up experiment or budget has been frozen or executed. Preserve
+the ordinary sigma.025 Gaussian task and the original qualification board.
+
+New local raw: `/home/martyn/dev/ParticleGAN-bcap-extrapolation/runs/api/bcap-past-extrapolation-v1/`.
+Archive SHA256: `10d61ee47ea4339f97060db2514cb086e32e63e50f1da6d2e28da18b37fe5b09`.
+
+## User-authorized next round after compaction
+
+Latest user instruction: "ok i'm going to compact then lets try all 3 in different
+prs with subagents". This explicitly authorizes subagents and three separate PRs
+for the proposals below, to start after compaction. No new trial or delegation
+has started in this turn. The earlier conditional suggestion for proposal3 is
+now superseded: investigate all three, with independent, declared scopes.
+
+1. **Frozen prior from initialization, diagnostic control.** G/D keep learning.
+   Compare alternating and extrapolation with the same initial location tensors,
+   fixed sigma and data/sampling laws. Mark prior learnability as an explicit
+   separate control cohort; it is not a silently substituted learned-prior pass.
+   Test whether G/D can acquire, retain and respond with prior motion removed.
+2. **Magnitude-sensitive learned-prior updates.** Preserve G/D normalization and
+   change only the prior's update rule: cap large movement while allowing small
+   gradients to produce small movement at a constant nominal rate. Freeze its
+   exact scaling/cap and any initialization-based measurement before spend;
+   do not choose a cap from successful checkpoints. Keep the prior learning.
+3. **Magnitude-sensitive G/D updates.** Independently change the network update
+   rule, preserving the learned prior's existing row-normalized rule. This
+   isolates network normalization from proposal2; do not silently combine both
+   changes. Compare extrapolation where supported with explicit timing controls.
+
+Use one subagent and isolated Git worktree per PR. Parent owns the common
+baseline/task contract, source dependencies, finite reservation budgets, GPU
+assignment and final comparison. Three agents can implement independently, but
+there are only two RTX A6000s: at most one scientific worker per GPU, with a
+clear queue for the third. Do not let agents mutate the same checkout, shared
+recipe selections, qualification snapshots or current leaderboard concurrently.
+Each PR should contain its own compact report, metrics, provenance, reproduction
+source and actual-training GIFs, including failures. Root reconciles the compiled
+memory and existing single technique leaderboard without generating another.
+
+Read EXPERIMENTATION.md and compiled memory first. Reuse original source-bound
+stationary controls where compatible; do not rerun unchanged science for branch
+creation or merging. Declare budgets and numerical gates before every new round.
+Use seed0/public deterministic initialization, isolated checkpointed streams,
+CUDA training/sampling/fixtures, identical batch128 and per-task conditions,
+original acquisition gates, continued live retention and explicit target shifts.
+Keep one whole trainer configuration per candidate across Gaussian and ring.
+No LR annealing, best-checkpoint substitution, averaging or seed-only experiments.
+The ordinary Gaussian sigma.025 task remains distinct from sigma.1 diagnostics.
+
+PR317 is currently OPEN against develop, head
+`f7bbbc64f8d6a4e3eba88c8e29795f7470bf020c` before this handoff update. Its shared
+extrapolation capability may be a prerequisite for the new comparisons; check
+its status after compaction and make any stacked-PR dependency explicit. This
+instruction requests new PRs, not merging PR317. Do not infer merge permission
+from the earlier request to merge PR316.

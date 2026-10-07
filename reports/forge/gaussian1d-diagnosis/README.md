@@ -253,3 +253,16 @@ Validation: 97 exact metric recomputations, three exact checkpoint restorations,
 pass. The numerical analysis loop takes 1.143 seconds, excluding setup, rendering
 and archival work. The 89 focused PR checks also pass; Forge validation, memory
 freshness, catalog coverage and whitespace checks pass.
+
+## Extrapolation follow-up after PR316 merged
+
+The [bounded GPU comparison](../bcap-past-extrapolation/README.md) implements the
+paper's equations20–21 on the selected BCAP normalized field, with a joint-state
+simultaneous control. It does not repair Gaussian at the unchanged rates:
+acquisition FAIL, retention3/72, longest passing streak2 and final KS.26799.
+The simultaneous control passes0/96 checks. All three scalar mean2→3 active
+continuations fail reacquisition and all48 full shift checks, although
+extrapolation responds near the new mean. The final prior cache still implies
+almost full.03 row steps. Improved fitted-normal shape does not satisfy the
+required target law. Keep this mechanism opt-in and isolate update magnitude in
+a separately declared comparison before another extrapolation tuning round.

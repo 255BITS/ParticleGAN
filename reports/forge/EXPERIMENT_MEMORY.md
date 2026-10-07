@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 556. Inventory coverage: complete. Unresolved import items: 7.
+Records: 558. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -630,6 +630,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
 
+### bcap-past-extrapolation-v1 · bcap-past-extrapolation-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `70af7a3e8a42be5964c019669ae28e284438943821c7cb36cff148853005a5c2`.
+
+A joint cached-gradient lookahead suppresses scalar game oscillation enough to acquire and retain a Gaussian at constant BCAP rates, without losing ring16 acquisition.
+
+**Observed:** {'FAIL': 8, 'PASS': 1}; wall seconds 279.351; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.9707, mass_tv=0.057373
+
+Joint normalized-field extrapolation from the past does not fix Gaussian at the selected constant BCAP rates: acquisition FAIL, hold3/72, longest streak2 and final KS.26799 versus baseline.09594. Simultaneous control passes0/96 Gaussian checks. Ring extrapolation has a strong late fit (covariance.25533, minimum eigen ratio.65523, final115-check streak) but misses1600 acquisition and strict hold115/144; adopted alternating ring retains144/144. All three scalar mean2-to3 shift arms pass0/48 full checks; extrapolation responds near the new mean but ends narrow with KS.13998. Seven new CUDA trials complete22000 updates for279.351 loop seconds;58 software checks pass,9 exact final restores and1308 saved sample metric recomputations. Source-bound baseline reuse and all ordinary qualification remain unchanged.
+
+**Next:** Stop this exact revision as a Gaussian repair; retain the augmentation as opt-in research and keep the adopted ring recipe. Investigate normalized response magnitude near fit in a separately frozen constant-rate comparison, especially nearly unit prior row directions; a magnitude-sensitive prior or frozen-prior role control is not executed or budgeted here. No automatic tuning, seed study, continuation or promotion.
+
+[Evidence](../../reports/forge/bcap-past-extrapolation/results.json) · [Record](records/bcap-past-extrapolation-v1-readout.json)
+
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
 **Scope:** historical; family_context; revision `7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade`.
@@ -661,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-network-spectral-cap-extrapolation-from-past-v1 · gaussian-network-magnitude-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `c1cf9f5d55929571c00f841e115b056f3f8dd8462be68a30f199db4c23591bd1`.
+
+Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.
+
+**Observed:** {'FAIL': 9}; wall seconds 362.227; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.9751, mass_tv=0.067871
+
+Fixed-scale G/D spectral clipping improves Gaussian but does not solve continuous acquisition/retention: past passes 43/96 (hold 41/72, longest 5, first five-pass window 3875, final KS .06083); shifted past passes 17/48 (hold 8/24, longest 3, endpoint KS .03837). Alternating Gaussian ends passing KS .04838 but holds 11/72; simultaneous passes 0/96. All ring arms pass 0/240 and regress covariance, so retain the adopted ring recipe. All nine CUDA trials complete 30,000 new updates for 362.227 loop seconds, with zero retries; 67 software checks, nine exact final restores and 1308 saved-sample recomputations pass. No ordinary qualification changed.
+
+**Next:** Stop this exact fixed-scale global repair; keep opt-in capability and adopted ring recipe. Compare independent frozen-prior/prior-magnitude results before proposing a separately declared combination. No automatic tuning, expansion, continuation or seeds.
+
+[Evidence](../../reports/forge/gaussian-network-magnitude/results.json) · [Record](records/gaussian-network-magnitude-v1-readout.json)
 
 ### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
 
@@ -4762,4 +4794,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `c1f322d8c3d669c86bd4b915cdea006e4fe5cfd44edafa70ff9c7366da57f28d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ff56b2b70396f2c4cce33d7c8522a34347c9332c5f980d768064d654653c068e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

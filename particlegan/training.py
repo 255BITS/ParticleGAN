@@ -1,5 +1,6 @@
 """A checkpointable training loop using the current recipe formulation."""
 from copy import deepcopy
+from contextlib import nullcontext
 import math
 
 import torch
@@ -207,6 +208,17 @@ class GANTrainer:
                 for name in self._STREAMS if name not in ("eval_generator", "model_generator"))):
             raise ValueError("model stream must be separate from other training streams and global draws")
         self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator)
+        self._extrapolation = None
+        if recipe.game_update != "alternating":
+            if any(isinstance(layer, nn.modules.batchnorm._BatchNorm) for model in (self.G, self.D)
+                   for layer in model.modules()):
+                raise ValueError("joint game updates do not support BatchNorm running state")
+            if recipe.game_update == "extrapolation_from_past":
+                from .extrapolation import PastExtrapolation
+                parameters = {f"{role}.{name}": parameter for role, model in
+                              (("G", self.G), ("D", self.D), ("prior", self.prior))
+                              for name, parameter in model.named_parameters() if parameter.requires_grad}
+                self._extrapolation = PastExtrapolation(parameters, (self.opt_g, self.opt_d))
 
     @property
     def latent_damping(self):
@@ -327,6 +339,8 @@ class GANTrainer:
         return self.max_steps
 
     def _step(self, real, *, generator_real=None, collect_stats=False):
+        if self.recipe.game_update != "alternating":
+            return self._joint_step(real, generator_real=generator_real, collect_stats=collect_stats)
         self._serve_release()
         recipe = self.recipe
         if self.max_steps is not None and self.completed_steps >= self.max_steps:
@@ -400,6 +414,81 @@ class GANTrainer:
             result["penalty_stats"] = penalty_stats
         return result
 
+    def _joint_step(self, real, *, generator_real=None, collect_stats=False):
+        """Evaluate both players at one state, then apply their optimizer steps.
+
+        Past extrapolation temporarily displaces G, D and the table together.
+        The two role gradients use their usual separate latent draws. D never
+        moves between the backward passes; restore the base before correction.
+        """
+        if self.max_steps is not None and self.completed_steps >= self.max_steps:
+            raise RuntimeError("recipe training budget exhausted")
+        real = self._batch(real, "real")
+        real_g = generator_real() if callable(generator_real) else generator_real
+        real_g = real if real_g is None else self._batch(real_g, "generator_real")
+        if real_g.shape != real.shape:
+            raise ValueError("generator_real must match the real batch shape")
+        step_noise = self.policy.begin_step(real, game_record=self.penalty.regularizer.record,
+                                            execution_limit=self.max_steps)
+        critic, noise = self._noisy_D, self.noise_generator
+        critic.std = step_noise.input_sigma
+        fresh = None
+        scope = nullcontext() if self._extrapolation is None else self._extrapolation.lookahead()
+        with scope:
+            self.D.train()
+            self.G.eval()
+            with torch.no_grad():
+                latent, indices_d = self._sample_training_prior(len(real))
+                fake = self._generate(self.G, latent, step_noise.output_sigma, noise, rows=indices_d)
+            self.policy.observe_critic_pair(real, fake)
+            loss_d = self.loss.d_loss(critic(real), critic(fake))
+            self.penalty.collect_stats = collect_stats
+            penalty = self.penalty(critic, real, fake)
+            penalty_stats = self.penalty.last_stats
+            loss_d = loss_d + penalty
+            self.opt_d.zero_grad()
+            loss_d.backward()
+            self.D.eval()
+            self.G.train()
+            flags = [p.requires_grad for p in self.D.parameters()]
+            try:
+                self.D.requires_grad_(False)
+                latent, indices = self._sample_training_prior(len(real))
+                # Both gradients are evaluated before the policy's applied-D
+                # hook. Explicitly bind generator-side rows for the optimizer.
+                if self.prior.z.requires_grad:
+                    self.opt_g.set_sampled_rows(self.prior.z, indices)
+                fake_logits = critic(self._generate(self.G, latent, step_noise.output_sigma, noise, rows=indices))
+                loss_gan = self.loss.g_loss(fake_logits, critic(real_g))
+                prior_reg = loss_gan.new_zeros(())
+                if self.prior.z.requires_grad:
+                    raw = self.prior.z if self.recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                    prior_reg = self.prior_regularizer(raw)
+                loss_g = loss_gan + self.recipe.prior_reg * prior_reg
+                self.opt_g.zero_grad()
+                loss_g.backward()
+                if self._extrapolation is not None:
+                    fresh = self._extrapolation.fresh_directions()
+            finally:
+                for parameter, flag in zip(self.D.parameters(), flags):
+                    parameter.requires_grad_(flag)
+        # Gradients came from the joint lookahead; parameters are now the base.
+        self.opt_d.step()
+        self.policy.after_critic_step()
+        self.policy.after_generator_backward(loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+        self.opt_g.step()
+        self.policy.after_generator_step()
+        self.policy.finish_step()
+        if self._extrapolation is not None:
+            self._extrapolation.previous = fresh
+        result = {key: value.detach() for key, value in dict(
+            loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+            prior_regularization=prior_reg, penalty=penalty).items()}
+        result["step"] = self.completed_steps
+        if collect_stats:
+            result["penalty_stats"] = penalty_stats
+        return result
+
     def _table_tester(self):
         return self.policy._table_tester()
 
@@ -468,6 +557,7 @@ class GANTrainer:
                               for name in names},
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
+            **({"extrapolation": self._extrapolation.state_dict()} if self._extrapolation is not None else {}),
             **({} if self.policy._feature_selection is None else {
                 "backend_selection": self.policy._feature_selection.state_dict()}),
             # Compact metadata completes the reusable policy state without
@@ -537,6 +627,8 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
+        if self._extrapolation is not None:
+            self._extrapolation.check_state(state["extrapolation"], steps)
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -655,6 +747,8 @@ class GANTrainer:
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        if self._extrapolation is not None:
+            self._extrapolation.load_state_dict(state["extrapolation"])
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

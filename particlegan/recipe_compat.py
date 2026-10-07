@@ -1,6 +1,8 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "game_update": "alternating",
+    "network_update": "dualnorm", "network_gradient_scale": .1,
     "d_betas": None, "d_eps": None, "prior_eps": None,
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
