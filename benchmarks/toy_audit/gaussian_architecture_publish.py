@@ -24,7 +24,7 @@ def load(raw):
     tasks = request["tasks"]
     receipts = {phase: result[phase] for phase in ("smoke", "stability") if result.get(phase)}
     for phase, receipt in receipts.items():
-        verify_artifacts(raw / phase, receipt["evidence"]["artifact_manifest"])
+        verify_artifacts(receipt["evidence"]["artifact_root"], receipt["evidence"]["artifact_manifest"])
     return result, request, tasks, receipts
 
 
@@ -34,7 +34,9 @@ def recompute(raw, tasks, receipts):
     for phase, receipt in receipts.items():
         task = next(task for task in tasks.values() if task["evaluation"]["kind"] == "gaussian_" + phase)
         spec = task["execution"]["host_definition"]
-        observed = torch.load(raw / phase / "observed-samples.pt", weights_only=True, map_location="cpu")
+        artifact_root = Path(receipt["evidence"]["artifact_root"])
+        observer = artifact_root / receipt["evidence"]["saved_observer_outputs"]["path"]
+        observed = torch.load(observer, weights_only=True, map_location="cpu")
         frames_by_phase[phase] = observed
         expected = {row["step"]: row for row in receipt["evidence"]["observations"]}
         confirmed = {row["step"]: row for row in receipt["evidence"]["confirmations"]}
@@ -75,7 +77,8 @@ def restore(raw, *, device):
     restored = []
     for phase, receipt in receipts.items():
         task = next(task for task in tasks.values() if task["evaluation"]["kind"] == "gaussian_" + phase)
-        for path in sorted((raw / phase).glob("*state.pt")):
+        artifact_root = Path(receipt["evidence"]["artifact_root"])
+        for path in sorted(artifact_root.glob("*state.pt")):
             state = torch.load(path, weights_only=True, map_location="cpu")
             cap = state["trainer"].get("max_steps", state["recipe"]["total_steps"])
             context, trainer, _ = build(request, task, device, max_steps=cap)
@@ -88,7 +91,7 @@ def restore(raw, *, device):
                 counts = [int(optimizer.state[parameter]["step"]) for group in optimizer.param_groups
                           for parameter in group["params"] if "step" in optimizer.state[parameter]]
                 assert all(count == trainer.completed_steps for count in counts)
-            restored.append(dict(path=str(path.relative_to(raw)), sha256=file_hash(path),
+            restored.append(dict(path=str(path.relative_to(raw.resolve())), sha256=file_hash(path),
                                  state_sha256=state_digest(state), completed_steps=trainer.completed_steps,
                                  exact=True, device=device))
     return dict(passed=True, training_updates=0, model_sampling_draws=0, states=restored)

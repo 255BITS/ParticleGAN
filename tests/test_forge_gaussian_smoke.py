@@ -119,3 +119,32 @@ def test_cuda_confirmation_and_exact_resume_are_isolated():
             from experiments.forge.gaussian_tasks import _restore_parent
             _restore_parent(request,task('gaussian1d_stability'),{},resumed)
     check(device='cuda:1')
+
+@pytest.mark.skipif(not torch.cuda.is_available(),reason='CUDA contract requires GPU')
+def test_tiny_public_execution_keeps_receipt_outside_strict_artifact_tree(tmp_path,monkeypatch):
+    """Two-update software fixture; no full-budget numerical qualification."""
+    import experiments.forge.gaussian_tasks as gaussian
+    from experiments.forge.artifacts import verify_artifacts
+    from experiments.forge.state import state_digest
+    from benchmarks.toy_audit.reproducibility import reproducible_execution
+    value=task();value['id']='gaussian_software_fixture';value['execution']['steps']=2
+    candidate=json.loads(next((ROOT/'configs/forge/configurations').glob('bcap-dualnorm--7beb*.json')).read_text())
+    request=dict(candidate=candidate,protocol={'seed':0})
+    monkeypatch.setattr(gaussian,'validate_task',lambda _:None)
+    monkeypatch.setattr(gaussian,'schedule',lambda start,stop:[1,2])
+    @reproducible_execution
+    def check(*,device):
+        receipt=gaussian.run_gaussian(request,value,tmp_path/'software',device)
+        evidence=receipt['evidence']
+        assert Path(evidence['artifact_root'])==tmp_path/'software/evaluator'
+        assert (tmp_path/'software/adapter-receipt.json').is_file()
+        verify_artifacts(evidence['artifact_root'],evidence['artifact_manifest'])
+        saved=torch.load(Path(evidence['artifact_root'])/'state.pt',weights_only=True,map_location='cpu')
+        context,trainer,_=gaussian.build(request,value,device)
+        context.load_state_dict(saved)
+        assert state_digest(context.state_dict())==state_digest(saved)
+        assert trainer.completed_steps==2 and receipt['gaussian_grade']['gate_status']=='INCOMPLETE'
+        (Path(evidence['artifact_root'])/'unexpected.txt').write_text('must fail')
+        with pytest.raises(ValueError,match='file set changed'):
+            verify_artifacts(evidence['artifact_root'],evidence['artifact_manifest'])
+    check(device='cuda:1')

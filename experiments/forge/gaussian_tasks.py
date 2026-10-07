@@ -234,13 +234,15 @@ def run_gaussian(request, task, output, device, *, prerequisites=None, diagnosti
         continuity = _restore_parent(request, task, prerequisites, context, diagnostic=diagnostic)
         trainer.extend_execution(6000)
     run = _Run(context, trainer, output, task)
+    artifact_output = output / "evaluator"
+    artifact_output.mkdir(exist_ok=False)
     data = context.streams.generator("data", component="target", purpose="training", device="cpu")
     confirmation_stream = context.streams.generator("eval", component="live", purpose="smoke_confirmation")
     rows, confirmations, records, frozen_rows = [], [], [], []
     frozen_context = frozen = None
     checks = set(schedule(0, 1000) if kind == SMOKE_KIND else schedule(1000, 4000) + schedule(4000, 6000))
     digests = {phase: hashlib.sha256() for phase in ("stationary", "shift")}
-    torch.save(context.state_dict(), output / "initial-state.pt")
+    torch.save(context.state_dict(), artifact_output / "initial-state.pt")
 
     def observe(step):
         before = training_digest(context)
@@ -280,7 +282,7 @@ def run_gaussian(request, task, output, device, *, prerequisites=None, diagnosti
     for step in range(start + 1, task["execution"]["steps"] + 1):
         if kind == STABILITY_KIND and step == 4001:
             saved = context.state_dict()
-            torch.save(saved, output / "pre-shift-state.pt")
+            torch.save(saved, artifact_output / "pre-shift-state.pt")
             frozen_context, frozen, _ = build(request, task, device, max_steps=6000)
             frozen_context.load_state_dict(saved)
             if state_digest(frozen_context.state_dict()) != state_digest(saved):
@@ -296,17 +298,17 @@ def run_gaussian(request, task, output, device, *, prerequisites=None, diagnosti
             raise TimeoutError("Gaussian declared task allowance exceeded")
     torch.cuda.synchronize(device)
     state = context.state_dict()
-    torch.save(state, output / "state.pt")
-    torch.save(records, output / "observed-samples.pt")
+    torch.save(state, artifact_output / "state.pt")
+    torch.save(records, artifact_output / "observed-samples.pt")
     if frozen_context is not None:
-        torch.save(frozen_context.state_dict(), output / "frozen-state.pt")
+        torch.save(frozen_context.state_dict(), artifact_output / "frozen-state.pt")
         continuity.update(frozen_completed_steps=frozen.completed_steps, matched_frozen_draws=True)
     evidence = dict(completed_steps=trainer.completed_steps, observations=rows, confirmations=confirmations,
                     live=rows[-1], host=host, frozen_observations=frozen_rows, continuity=continuity,
                     data_sha256={phase: digest.hexdigest() for phase, digest in digests.items()},
-                    artifact_root=str(output.resolve()), checkpoint=dict(path="state.pt", sha256=file_hash(output / "state.pt"),
+                    artifact_root=str(artifact_output.resolve()), checkpoint=dict(path="state.pt", sha256=file_hash(artifact_output / "state.pt"),
                     state_sha256=state_digest(state)), diagnostic=diagnostic,
-                    saved_observer_outputs=dict(path="observed-samples.pt", sha256=file_hash(output / "observed-samples.pt")))
+                    saved_observer_outputs=dict(path="observed-samples.pt", sha256=file_hash(artifact_output / "observed-samples.pt")))
     result = run.receipt(evidence, save_state=False)
     result["gaussian_grade"] = grade(task, result["evidence"])
     atomic_json(output / "adapter-receipt.json", result)
