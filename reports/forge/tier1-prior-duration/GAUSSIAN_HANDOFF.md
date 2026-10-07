@@ -60,10 +60,31 @@ frozen-prior diagnostic, force-response damping, spread restraint and position
 springs; continued quality retention and adaptation must both be measured.
 The current Gaussian task and all historical verdicts remain unchanged.
 
+The completed [batch 128 versus 512 comparison](../tier1-batch-size/README.md)
+adds 10,400 GPU updates, reusing Gaussian 128 and the ring 128 prefix. Neither
+Gaussian acquires five consecutive passes through 4,000; batch 512 final KS
+.12660 is worse than batch 128 .09594. Ring 128 retains all 144/144 post-acquisition
+checks, while ring 512 acquires earlier but fails one of 144 hold checks. Keep
+the adopted batch 128 ring settings. Larger batches also increase the frequency
+of normalized prior-row motion, so this does not isolate gradient noise alone.
+
+The user's preferred next hypothesis is **extrapolation from the past**, after
+compaction. [Gidel et al. §3.3](https://arxiv.org/pdf/1802.10551) reuse the previous
+gradient for a lookahead, evaluate a fresh gradient there, and correct from the
+original state. A prospective BCAP augmentation should explicitly define a
+joint G/D/prior lookahead, checkpoint cached gradients and optimizer histories,
+and retain batch 128, constant rates, seed 0 and the matched public initialization.
+Its interaction with unit-normalized prior updates is unknown. Score live-model
+acquisition, continued stationary hold and a separately declared target-shift
+response; averaged-model or best-checkpoint success cannot stand in for these.
+This is a preference and implementation question, not an executed experiment or
+a frozen budget. Declare the supported mechanism and finite study before spend.
+
 Local evidence:
 
 - Parent raw: `runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/`.
 - Continued raw: `runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/`.
+- Batch comparison raw: `runs/api/tier1-batch-size-v1/`.
 - Curves, saved outputs and named-stream checkpoints are present; use metrics
   before pictures. GIFs render actual saved training samples.
 - Parent archive SHA256:

@@ -204,6 +204,14 @@ Plain-optimizer validation currently requires latent damping disabled and reject
 continuous update policies; exposing a supported BCAP response rule is necessary
 before testing that structural candidate. Do not label it a working Recipe flag.
 
+The subsequent [batch 128 versus 512 study](../tier1-batch-size/README.md) tests a
+simpler proposed noise reduction at constant rates. Gaussian still has no
+five-check passing window at either size through 4,000. Ring 512 acquires faster
+but fails one continued hold check; ring 128 passes all 144 hold checks. Larger
+batches alone do not repair the scalar instability. More frequent normalized
+prior-row updates remain a confound, so the result does not rule out gradient
+noise as a contributor.
+
 Use seed 0, public initialization, matched target batches and isolated/checkpointed
 streams. Hold architecture, sampling, budgets and cadence fixed within each
 declared cohort; compare one complete trainer configuration across Gaussian and

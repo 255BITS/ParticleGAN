@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 555. Inventory coverage: complete. Unresolved import items: 7.
+Records: 556. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4342,6 +4342,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+A larger batch may stabilize scalar acquisition and continued learning while retaining ring quality under the unchanged selected BCAP recipe.
+
+**Observed:** {'FAIL': 3, 'PASS': 1}; wall seconds 122.683; mechanism `task_owned_batch_size_and_stationary_hold`.
+
+ring16_acquisition__batch128__hold4000: modes=16, hq=0.9707, mass_tv=0.057373
+
+Batch512 does not repair Gaussian: both batches have longest full passing streak1 and no five-check window through4000. Gaussian final KS is .09594 at128 and .12660 at512. Ring128 passes acquisition and all144/144 hold checks, ending with150 consecutive passes. Ring512 acquires earlier (first five-check window784 versus1584) but has one covariance failure at2384, so its declared strict hold fails143/144 despite passing acquisition and endpoint. All three new CUDA trials complete10400 updates for122.683 new loop seconds, with exact prefix reuse, four exact final restores and676 metric recomputations. No current task, original qualification or calibration result changes.
+
+**Next:** Stop this bounded batch round and retain adopted ring batch128. Gaussian needs a separately declared mechanism comparison; the user favors extrapolation from the past after compaction. Hold batch fixed and use one whole trainer across tasks; judge live acquisition, continued quality and separately declared target-shift response. No automatic larger batch, retry, seed study or new training.
+
+[Evidence](../../reports/forge/tier1-batch-size/results.json) · [Record](records/tier1-batch-size-v1-readout.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-duration-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -4746,4 +4762,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `16c0ed2f964bdbe8f5cf5b26092c54685a597ea17c64fcbb5d877ead26064d17`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `c1f322d8c3d669c86bd4b915cdea006e4fe5cfd44edafa70ff9c7366da57f28d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
