@@ -1,0 +1,89 @@
+{
+  "artifact_archive": {
+    "bytes": 4531512,
+    "path": "artifacts/gaussian-shallow-v1.tar.gz",
+    "sha256": "319cbec56850ed05711a983d336ee204834c933ec34d6168fd1e5098e8e36837"
+  },
+  "continuation_protocol_sha256": "cde6b89168652c68ea46f1271dcf8bb3f21094e3c8a5ff116524551b6e01f994",
+  "cost": {
+    "adapter_loop_seconds": 45.754934966913424,
+    "budget_seconds": 720,
+    "interpretation": "Adapter accounting includes sampling/scoring and some I/O; not a speed ranking or full job wall time.",
+    "new_real_examples": 768000,
+    "new_training_updates": 6000,
+    "remaining_continuation_seconds": 37.84536868194118,
+    "reused_control_new_cost": 0,
+    "smoke_seconds": 7.909566284972243
+  },
+  "id": "gaussian-shallow-v1",
+  "lifecycle": "concluded",
+  "protocol_sha256": "7b250028cd7d89e9a350afe123f3256d5db929028a1a72a778d707275a215008",
+  "publications": {
+    "controls.json": "88c83a2641fe3590a3016513c44844ce7a0a56d0564ee58c0dc37a2821b73794",
+    "data-and-stream-proof.json": "451bb3517e34955da1067851d626e10ece9e43037efa859018007277526eda7c",
+    "metrics.svg": "b4ace15c9eafd5a6fe4fb514d9d6c27a52949a65afb0f271cf0c0ccb4ede7c5a",
+    "restore-proof.json": "39a4b71f348e24684f10a4b43950119bafdf9ebb693c44ee524ed6b7c725aa87",
+    "results.json": "4be13276ecd371338f31f1eec6bee4cdceca0516c995434bd62ace9c80dbdd8e",
+    "saved-observation-summary.json": "c784a471ca5fd8935096c45931f2b31acbb124446f175ea5c66fcb5b4a1597ab",
+    "smoke.gif": "ae1f17c3446cbaf68e6a2746eb6a1959b3b24aebfab48f84e91149970b6d7d9a",
+    "stability.gif": "ab2035aa9e0382a23491e1170a6d92c675170744de0820bb56b0586c677fc336",
+    "verification.json": "2d0289ad8c2a33c1d0001ccf75149d9e19eda3415eb70929eef2cbe40fe753b5"
+  },
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "secondary_analysis_source": {
+    "path": "reports/forge/gaussian-shallow/verify_data.py",
+    "scope": "Read-only saved-stream audit and original CPU target regeneration; no training/model sampling/qualification change.",
+    "sha256": "ff78a4a7f6a06f243bc9a2bb7c1c48738e9c7321c12b2b735775fe3bcb57df62"
+  },
+  "software_interruption": {
+    "allowed_migration_delta": "evidence.artifact_root only; payload/grades/costs unchanged",
+    "amendment_scope": "Software artifact-location/parent-compatibility repair; guard checks added; all task/recipe/data/sampling/model-state conditions retained.",
+    "new_continuation_updates": 5000,
+    "original_prefix_receipt_sha256": "dd8aee7c637708be28b7f19b9eff506674ae1eaa0e6bb9ac281449b7c31665a8",
+    "original_stdout_sha256": "33943a510ddd5f8ea6372aca78d911906f11dae7ccc72f85ba1d9e038dfa06c9",
+    "paid_scientific_retries": 0,
+    "parent_state_sha256": "a0c52b9e8ea8a9848cc472915db52182a80729ce9c290f8b11955d25bd9b6bb9",
+    "reason": "Original shared host manifest captured before its self receipt was written; strict parent artifact verification rejected that added receipt before stability updates.",
+    "repeated_prefix_updates": 0,
+    "strict_complete_tree_verification": true,
+    "working_relocated_receipt_sha256": "2aba94581c9bdbf22a31ad914a278361e299979ad090ff53ac1d2ad17e0561b4"
+  },
+  "source_commits": {
+    "original_prefix": "326f0e0b82d014dfcd728cd8f5719b2450fc627a",
+    "remaining_continuation": "6f0375011a50e70e505ccd556767e211b82a6246"
+  },
+  "source_digests": {
+    "original_prefix": "b8372c956a48d4d23e6c9db359661a7e41eb367b01703dcd2bde53a6823f3c9c",
+    "remaining_continuation": "74a33f7dc7e4875f23c5d7c4d4df678d82799a39d76e567132c5cd5bf6c24dd2"
+  },
+  "validation": {
+    "actual_training_gifs": 2,
+    "exact_cuda_restores": 6,
+    "forge_validate": "PASS",
+    "gif_frames_each": 9,
+    "grades_recomputed": 2,
+    "matched_shift_real_batch_sha256": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+    "matched_stationary_real_batch_sha256": "a3b2f48e279bc16fe035cc754f57bc1085465e3a75b34c03c092d8ef9198fb8d",
+    "passed_all_finite_mechanism_rng_optimizer_guards": true,
+    "saved_data_and_primary_eval_streams_match_original_at4000and6000": true,
+    "saved_sample_recomputations": {
+      "confirmation": 25,
+      "frozen": 48,
+      "primary": 146
+    },
+    "software_test_reuse": "Shared22check CUDA/metadata host contracts at402b49e1; architecture-specific zero-update initializer preflight and6finalcontext restores add no scientific training.",
+    "zero_update_initial_prior_and_trainer_streams_match": true
+  }
+}
