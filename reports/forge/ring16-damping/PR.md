@@ -15,7 +15,10 @@ sampling law and full bounds. Candidates never reload the archive.
 Validation: both 1600-update arms complete on RTX A6000/CUDA 13.0; 3200 new
 updates, 45.35 training seconds, 193 scored draws, zero retries. Frozen bindings,
 exact boundary prefix, matched target batches, artifact hashes, call counts,
-budgets and actual-training GIF provenance pass verification. Bulk evidence is
+budgets and actual-training GIF provenance pass verification.
+Source inventory coverage also passes (11,776/11,776 paths), with only the new
+diagnostic runner/helper catalog entries added and original pinned sources preserved.
+Bulk evidence is
 archived outside Git with exact SHA/bytes/member receipts. The blocked
 preparation and PR331 evidence retain their original identities. Production
 defaults and qualifications remain unchanged.
