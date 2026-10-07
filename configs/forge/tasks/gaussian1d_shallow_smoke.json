@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "id": "gaussian1d_shallow_smoke",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "gaussian1d_acquisition",
+    "steps": 1000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.1,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_source": "benchmarks/toy_audit/gaussian1d_quality.py",
+    "host_definition": {
+      "hidden": 32,
+      "layers": 1,
+      "fourier": 2,
+      "z_dim": 2,
+      "particles": 256,
+      "batch": 128,
+      "steps": 1000,
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "ema_decay": 0.995,
+      "reg_arm": "k3p",
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "d_every": 1,
+      "g_every": 1,
+      "family": "gaussian1d_acquisition",
+      "split": "development",
+      "kind": "gaussian_mixture",
+      "means": [
+        [
+          2.0
+        ]
+      ],
+      "covariances": [
+        [
+          [
+            0.25
+          ]
+        ]
+      ],
+      "masses": [
+        1.0
+      ],
+      "identifiable": true
+    },
+    "original_schedule_horizon": 1000
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "eval_output_noise": "clean",
+    "kind": "gaussian_smoke",
+    "evaluator": "experiments.forge.gaussian_tasks:grade",
+    "gate_policy": {
+      "id": "gaussian1d-smoke-v1",
+      "finite_atom_exemptions": false,
+      "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+    },
+    "sampling_law": "public_prior_without_output_noise",
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "finite_fraction",
+        "==",
+        1.0
+      ],
+      [
+        "mean_error_sigma",
+        "<=",
+        0.2
+      ],
+      [
+        "std_ratio",
+        ">=",
+        0.8
+      ],
+      [
+        "std_ratio",
+        "<=",
+        1.2
+      ],
+      [
+        "cdf_ks",
+        "<=",
+        0.05
+      ]
+    ],
+    "observations": 24,
+    "scoring_weights": "live",
+    "sources": {
+      "experiments/forge/gaussian_tasks.py": "839e01a5814adc577d4192173df11a5943a2be8b3252dba42c2e315a63aea698",
+      "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b"
+    },
+    "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+    "eval_samples": 4096,
+    "confirmation": "independent_draw_same_state",
+    "guards": {
+      "finite_state": true,
+      "rng_isolation": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "discriminator",
+        "prior"
+      ]
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 120
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": [],
+  "description": "One-hidden-layer scalar Gaussian architecture diagnostic: Can public training reach N(2, .5^2) within1000updates? Any scheduled state must pass full distribution bounds and an independent same-state confirmation draw; finish all1000updates.",
+  "research_artifacts": {
+    "readout": "reports/forge/gaussian-shallow/README.md"
+  },
+  "retained_question_ids": [
+    "gaussian1d-depth-only-diagnostic-v1"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "budget": {
+    "expansion": "none; no follow-on depths, seeds, rates or prior tuning",
+    "maximum_loop_seconds": 720,
+    "new_real_examples": 768000,
+    "new_training_updates": 6000,
+    "scientific_retries": 0,
+    "shift_updates": 2000,
+    "smoke_seconds": 120,
+    "stability_seconds": 600,
+    "stationary_updates": 4000
+  },
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "controls": {
+    "identity": "Original depth2 sigma.1 BCAP acquisition/hold publication retained under original source/recipe/gate; fresh matched confirmation control owned by the smoke split study",
+    "new_training_updates": 0,
+    "path": "reports/forge/gaussian-shallow/controls.json"
+  },
+  "cpu_exceptions": [
+    "Original CPU target generation before realbatch transfer toCUDA to preserve frozen data law",
+    "Saved-output numerical scoring and report/media rendering"
+  ],
+  "execution_backend": "cuda",
+  "falsifiers": [
+    "No confirmed full-law smoke pass by1000 rejects this exact depth variant as a short smoke repair.",
+    "Any stationary hold failure or shifted failure rejects the exact variant as a continuous learner even if smoke passes."
+  ],
+  "gates": {
+    "full_thresholds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "finite_fraction",
+        "==",
+        1.0
+      ],
+      [
+        "mean_error_sigma",
+        "<=",
+        0.2
+      ],
+      [
+        "std_ratio",
+        ">=",
+        0.8
+      ],
+      [
+        "std_ratio",
+        "<=",
+        1.2
+      ],
+      [
+        "cdf_ks",
+        "<=",
+        0.05
+      ]
+    ],
+    "secondary": "Original five terminal acquisition observations retained separately; old evidence never regraded",
+    "tier1": "Any scheduled full-pass state by1000 confirmed by independent same-state draw; no hold requirement",
+    "tier2_shift": "Mean2->3 at4000, sigma.5 retained, five terminal full passes by5000 plus all24holdchecks through6000",
+    "tier2_stationary": "All72 scheduled full-law checks after1000 through4000"
+  },
+  "goal": "discriminator_stability",
+  "hypothesis": "Reducing both networks to one hidden layer can make the learned Gaussian easier to acquire without extra optimizer mechanisms; retained Fourier features isolate depth from the separate no-Fourier arm.",
+  "id": "gaussian-shallow-v1",
+  "initialization": {
+    "baseline_initial_sha256": "714a87af2b4cddd36f2865b02907f681b654a4b528b04762d1945c96cc95c5e0",
+    "changed_network_shapes": "G129 and D225 parameters versus1185 and1281; network tensors necessarily differ under the same initializer policy",
+    "matched_prior_and_training_streams_preflight": "runs/api/gaussian-shallow.preflight.json",
+    "policy": "public deterministic orthogonal named-parameter seed0; prior deterministic R2Normal init_std1",
+    "preflight": {
+      "architecture_delta": {
+        "fourier": 2,
+        "hidden": 32,
+        "layers_after": 1,
+        "layers_before": 2,
+        "z_dim": 2
+      },
+      "baseline_initial_sha256": "714a87af2b4cddd36f2865b02907f681b654a4b528b04762d1945c96cc95c5e0",
+      "critic_parameters": 225,
+      "device": "cuda:1",
+      "generator_parameters": 129,
+      "gpu": "NVIDIA RTX A6000",
+      "network_hashes": {
+        "discriminator": "f1c80da84aae1752422fe7fe207cf62e6a9a7791e6818c91107c97187324ef91",
+        "generator": "4698fd6acbc4b68c2bc8816598329cb3ec276224057814df04a9d06849a79234"
+      },
+      "network_tensors_changed_because_architecture_changed": true,
+      "passed": true,
+      "prior_exactly_matches_original": true,
+      "prior_locations_sha256": "89c0cb98000b0770e7cffb5790528f62a4b881ec8646584be2d1709fc69bd664",
+      "prior_parameters": 512,
+      "recipe_exactly_matches_original_sigma100": true,
+      "schema": "gaussian-shallow-initializer-preflight-v1",
+      "training_streams_exactly_match_original": true,
+      "training_updates": 0
+    }
+  },
+  "inputs": {
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/gaussian1d_shallow_smoke.json": "a80ff6a75a25231c2270ba4648d59fe9153a07068789283dc9e653736a4dfcf3",
+    "configs/forge/tasks/gaussian1d_shallow_stability.json": "ae67d44ba05834fbae83e1ba7ec58351c0b3dc0af7a21c126263b3482ce8b2fd",
+    "reports/forge/gaussian-shallow/controls.json": "88c83a2641fe3590a3016513c44844ce7a0a56d0564ee58c0dc37a2821b73794"
+  },
+  "predictions": [
+    "A scheduled full-law PASS by update1000 that also passes an independent same-state evaluation draw supports depth simplification for smoke.",
+    "Every72 post1000 stationarychecks and shifted reacquisition/hold must pass to claim continuous stability."
+  ],
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "sampling": {
+    "evaluation": "4096 samples at24 absolute scheduledchecks per1000; independent checkpointed confirmation evaluation stream sampled at all24smokechecks to keep law matched",
+    "rng": "constructor, data, training prior/kernel and both eval streams isolated; every consumedstreamcheckpointed; no evaluation changes trainingstreams",
+    "serving": "clean live public GANTrainer.sample(output_noise=False)",
+    "training": "public uniform learned MoG component sampling with fixed isotropic sigma.1 kernel, separate critic/generator component and kernel streams"
+  },
+  "schema_version": 1,
+  "scientific_implementation": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/toy_audit/gaussian_architecture_publish.py": "1711bd7fe6d7fe25438eea8ca04d76e2a32cc9206e52d731cacef25b38014608",
+    "benchmarks/toy_audit/gaussian_shallow_study.py": "edd4340e09123689334f7fec0d05090673acc90ee78a11a2e9c6a50c742cbbe7",
+    "benchmarks/toy_audit/gaussian_smoke_study.py": "7ebda93e8de1866af6641e25b68074bbadbd08d2b78d7e2a0747d1e5556df58a",
+    "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
+    "experiments/forge/adapters.py": "89579b5b07bdc11ee12850bf1ee2480e32978b79a2fa56551c83c0f005709326",
+    "experiments/forge/api.py": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938",
+    "experiments/forge/gaussian_tasks.py": "839e01a5814adc577d4192173df11a5943a2be8b3252dba42c2e315a63aea698",
+    "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5",
+    "experiments/forge/vectorprofiles.py": "dcbbf669a3457126fce82d073f8d8e4e5254702dca5201f88ea5be7877ee14da",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/recipes.py": "1754120822e2c791cd193faefd2a9c21036686024f5f52b210a2b7e29751c680"
+  },
+  "scientific_source_digest": "69efce2df3681cbc637e7df981f7ef6f7af011a7b7a68159f8c67c7560375b4c",
+  "scope": "gaussian_task_architecture_diagnostic",
+  "stability_task_path": "configs/forge/tasks/gaussian1d_shallow_stability.json",
+  "status": "ready",
+  "stopping": "Finish all6000updates, including diagnostic stability after smokeFAIL; smoke120s/stability600s ceilings, zero scientific retries or expansion. Stop this exact revision after the declared budget.",
+  "task_delta": {
+    "hidden_layers": {
+      "after": 1,
+      "before": 2,
+      "roles": [
+        "generator",
+        "discriminator"
+      ]
+    },
+    "unchanged": {
+      "batch": 128,
+      "fourier": 2,
+      "hidden": 32,
+      "particles": 256,
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "target": {
+        "mean": 2.0,
+        "sigma": 0.5
+      },
+      "z_dim": 2
+    }
+  },
+  "task_path": "configs/forge/tasks/gaussian1d_shallow_smoke.json",
+  "trainer_delta": "none; original selected alternating BCAP dualnorm G .012, D .012*1.5, prior .012*2.5, constant-rate floors1, no annealing/EMA/noise/prior regularizer/caps/extrapolation"
+}
