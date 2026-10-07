@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 601. Inventory coverage: complete. Unresolved import items: 7.
+Records: 602. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4422,6 +4422,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-failure-saved-diagnosis-v1
+
+**Scope:** saved_output_and_checkpoint_diagnosis; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Explain why the adopted 1600-update Ring16 conditions retain an archived continuation PASS but fail current uninterrupted training before proposing another solution.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+The archived restored 1600-update PASS and current uninterrupted 1600-update FAIL share recipe, prior, initializer, 91 scientific files and all 14 final named RNG states. All 24 prefix observations through 400 match exactly; the first differing saved observation is 417. All 96 v3/v4 samples and metrics match. Current covariance error 2.22027 fails with zero full passes: 21 of 4096 outputs exceed 20 target sigmas, all assigned to component 11, which contributes 82.3% of the summed covariance errors. The other 15 components average 0.41875. The current roster records 22 numerical FAIL and one API BLOCKED. The exact first differing optimizer update and causal mechanism remain unresolved; original grades are preserved.
+
+**Next:** Declare a bounded CUDA diagnostic comparing continuation of a shared live prefix with restoration of its checkpoint before tuning. Then attribute far outputs to sampled prior rows and local generator mappings. A pass-once rule cannot repair zero full passing observations. This report adds no training, qualification or policy change.
+
+[Evidence](../../reports/forge/ring16-failure/results.json) · [Record](records/ring16-failure-saved-diagnosis-v1.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -4862,4 +4878,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9f0f618c8bda4966464c5262d9397ca4942fc26a49c83939c474561455788044`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `78658d9d9f759bad0538a759edb34ad2b95d367d2d833af043a90b9b8391dc65`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
