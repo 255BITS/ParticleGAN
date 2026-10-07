@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 5,
+  "revision": 6,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -183,5 +183,5 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Revision 5 retains the six required Tier 1 tests and adds a separately scoped clock-audit measurement diagnostic. This full-tier measurement round does not calibrate placement or promote a default; original clock-free eligibility and archived view grades remain unchanged."
+  "policy_change_reason": "Revision 6 adopts the user-selected ring16 task conditions: 256 learned particles, MoG sigma .1 and 1600 updates, with the unchanged full numerical bounds and original evaluation spacing (96 checks). The other tasks and placements stay fixed. Earlier revisions and receipts retain their original task/source identities; the duration diagnostic does not upgrade archived qualification or calibrate the view."
 }

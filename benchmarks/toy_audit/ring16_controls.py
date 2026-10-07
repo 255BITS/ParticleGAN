@@ -9,7 +9,7 @@ from .api_ring16 import list_cases
 from .api_vectors import _target, score_case
 
 
-def run_controls():
+def run_controls(*, device="cpu"):
     case = list_cases()[0]
     n, step = case["eval_samples"], case["default_steps"]
 
@@ -41,7 +41,7 @@ def run_controls():
     rows = []
     for name, points in samples.items():
         try:
-            result = score_case(case, points, step)
+            result = score_case(case, points.to(device), step)
         except ValueError as error:
             result = dict(passed=False, metrics={"nonfinite_output_values": 1},
                           failed_bounds=[str(error)])

@@ -120,6 +120,6 @@ def test_executable_inventory_retains_every_historical_question_and_pr231():
     ledger = api_run.inventory(cases)
     assert ledger["coverage"]["required_questions"] == 110
     assert ledger["coverage"]["missing"] == []
-    assert len(cases) == 178  # Frozen176 plus standalone ring16 and scalar Gaussian.
+    assert len(cases) == 179  # Frozen176, original ring/scalar callers and revised ring smoke.
     assert all(case["evaluation_observations"] >= case.get("terminal_observations", 5)
                for case in cases.values())

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 552. Inventory coverage: complete. Unresolved import items: 7.
+Records: 556. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Close scalar fit after 4.953 CPU seconds: mean 2.02749, std .52790 for target me
 **Next:** Keep the provisional fast Tier 1 test and its FAIL. Before a more complex target, preregister one substantive stability hypothesis with explicit recipe/budget/source binding; no seed-only repeat, ordinary qualification or default adoption.
 
 [Evidence](../../reports/toy_audit/api_contract/gaussian1d/results.json) · [Record](records/gaussian1d-api-8e7f8be3b998d3daf08a0b50.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · gaussian1d-saved-state-diagnosis-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+Does the scalar failure reflect insufficient architecture/prior capacity, or loss of an already acquired fit?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_and_fixed_representation_diagnostic`.
+
+
+
+Actual scalar host is z_dim2, width32/depth2 (G1185/D1281 parameters), correcting the 4/64 handoff typo. All 97 saved sample metrics reproduce and all three CUDA contexts restore exactly. An affine map in the unchanged MLP with unchanged initial 256-location sigma-.1 MoG passes 24/24 numerical checks; conservative exact mixture KS bound .005086. Trained fresh 32768-sample KS is .04160 at1000 and .09307 at4000; fitted-normal shape KS worsens .03613 to .16831, skew1.602. At4000 only .47% of output variance is within components; prior displacement from initialization averages1.403. Constant normalized .012/.018/.03 steps and moving inputs support a stability hypothesis without assigning causality. Zero training updates, no task/gate revision or qualification credit.
+
+**Next:** Require continuous acquisition, quality retention and renewed response to a target shift, without elapsed-step annealing. First propose a separately declared frozen-prior-from-initialization diagnostic with G/D learning throughout. Then compare magnitude/evidence-sensitive prior response or an explicit position spring. Existing prior_reg0 cannot be decreased; VICReg only floors spread and decorrelates, while unit row normalization can preserve motion even with a spring. A2/DV12 cannot simply be enabled for current BCAP dualnorm. Register a finite supported study and preserve matched conditions and all original gates; no new training is launched by this recommendation.
+
+[Evidence](../../reports/forge/gaussian1d-diagnosis/results.json) · [Record](records/gaussian1d-saved-state-diagnosis-v1-readout.json)
 
 ### cf1-bdpair · history-cf1-bdpair-21ac56b45896
 
@@ -4326,6 +4342,54 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+A larger batch may stabilize scalar acquisition and continued learning while retaining ring quality under the unchanged selected BCAP recipe.
+
+**Observed:** {'FAIL': 3, 'PASS': 1}; wall seconds 122.683; mechanism `task_owned_batch_size_and_stationary_hold`.
+
+ring16_acquisition__batch128__hold4000: modes=16, hq=0.9707, mass_tv=0.057373
+
+Batch512 does not repair Gaussian: both batches have longest full passing streak1 and no five-check window through4000. Gaussian final KS is .09594 at128 and .12660 at512. Ring128 passes acquisition and all144/144 hold checks, ending with150 consecutive passes. Ring512 acquires earlier (first five-check window784 versus1584) but has one covariance failure at2384, so its declared strict hold fails143/144 despite passing acquisition and endpoint. All three new CUDA trials complete10400 updates for122.683 new loop seconds, with exact prefix reuse, four exact final restores and676 metric recomputations. No current task, original qualification or calibration result changes.
+
+**Next:** Stop this bounded batch round and retain adopted ring batch128. Gaussian needs a separately declared mechanism comparison; the user favors extrapolation from the past after compaction. Hold batch fixed and use one whole trainer across tasks; judge live acquisition, continued quality and separately declared target-shift response. No automatic larger batch, retry, seed study or new training.
+
+[Evidence](../../reports/forge/tier1-batch-size/results.json) · [Record](records/tier1-batch-size-v1-readout.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-duration-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+The narrow-ring tail covariance may still be converging, and the wider-prior scalar law may become sustained with additional unchanged updates.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 60.077; mechanism `execution_budget_only`.
+
+ring16_acquisition__mog025-n256__duration1600: modes=16, hq=0.98267, mass_tv=0.046875; ring16_acquisition__mog100-n256__duration1600: modes=16, hq=0.93774, mass_tv=0.058594
+
+The user-requested duration diagnostic completes all three CUDA extensions without repeating prefix updates. Ring16 with 256 particles and MoG sigma .1 passes the full 1600-update gate with terminal suffix 6, covariance error .51431, minimum eigen ratio .38370 and HQ .93774. Ring sigma .025 passes the saved 800/1200-update cuts (suffix 8/16), then loses local eigenvalue spread and finishes FAIL with suffix 1 despite a passing endpoint; first five-pass window at update 750, longest streak 19. Gaussian sigma .1 remains FAIL at 4000 (KS .09594, std ratio 1.74796, mean error .27536 sigma); no five-pass window. Only the execution cap changed; models, optimizers and RNG streams restored exactly. Original 400/1000-update failures and the ordinary 4/6 selection remain intact.
+
+**Next:** Stop the bounded duration round. Ring acquisition supports a separately declared 800-update narrow-MoG question or 1600-update sigma-.1 question with unchanged full bounds; the narrow prior needs an endurance check. Gaussian needs a separately bounded trainer-stability hypothesis rather than more unchanged updates. No automatic further training, calibration claim or default adoption.
+
+[Evidence](../../reports/forge/tier1-prior-duration/results.json) · [Record](records/tier1-prior-duration-v1-readout.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-smoke-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+Prior cardinality, public cloud/MoG code path and fixed MoG width may determine acquisition and local shape under the selected BCAP trainer. A balanced nine-configuration prior grid keeps all other task and trainer factors fixed.
+
+**Observed:** {'FAIL': 18}; wall seconds 134.613; mechanism `task_owned_prior_hyperparameters`.
+
+ring16_acquisition__cloud-n256: modes=16, hq=0.93042, mass_tv=0.059814
+
+All 18 CUDA cells complete: 0/18 full-quality PASS, 3/18 explicitly narrower smoke-projection PASS. Larger tables regress fixed-budget acquisition. With 256 rows, MoG sigma .1 passes Gaussian location/width at five terminal checks but not sustained KS; ring passes coverage/precision/balance with cloud or MoG .025 but fails full local covariance. No single tested prior passes both original tasks or both proposed smoke questions. Baseline endpoints exactly reproduce the archived BCAP winner. No trainer delta, seed variation, retries or changed historical gates.
+
+**Next:** Stop this finite grid. Keep 256 particles for these budgets; propose task-owned MoG sigma .1 for a separately scoped scalar smoke and .025 for ring acquisition. Preserve original full CDF/covariance questions as quality evidence and calibrate an explicit future profile revision before ordinary qualification. No automatic continuation or defaults.
+
+[Evidence](../../reports/forge/tier1-prior-smoke/results.json) · [Record](records/tier1-prior-smoke-v1-readout.json)
+
 ### ka2-slow-prior-0p1 · word-diagnostic-1daeb48c4e66b7ab2e4e1551
 
 **Scope:** task_only_diagnostic; scientific; revision `a3ea26c51800ede1c4dd8983a58b0c2a891bf18e8ef814c7aa5f9283186acf81`.
@@ -4698,4 +4762,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `bb5b2bf988b293f25081e786a14f8e3c05d1a4089e937f14e3deb12cbbcf6946`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `c1f322d8c3d669c86bd4b915cdea006e4fe5cfd44edafa70ff9c7366da57f28d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

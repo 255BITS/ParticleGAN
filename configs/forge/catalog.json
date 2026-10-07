@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 71,
+      "benchmark/toy_audit": 75,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 82,
+      "forge_engine": 83,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 82,
+      "engine_support": 83,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1531,
+      "support": 1535,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11763
+    "files": 11768
   },
   "coverage": {
-    "declared_count": 11763,
+    "declared_count": 11768,
     "missing": [],
     "stale": [],
-    "tracked_count": 11763,
+    "tracked_count": 11768,
     "unclassified": [],
     "valid": true
   },
@@ -1074,6 +1074,13 @@
     },
     {
       "family": "benchmark/toy_audit",
+      "git_blob": "bdd244778ea39e6032e083fa86a081f4cf0719d6",
+      "path": "benchmarks/toy_audit/gaussian1d_diagnosis.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
       "git_blob": "22c64bc5d1526d0193badbfab43d5022997478d4",
       "path": "benchmarks/toy_audit/gaussian1d_experiment.py",
       "role": "support",
@@ -1363,6 +1370,27 @@
       "suggested_tiers": [
         2
       ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "67b17c366647d745133e683022c423d51907514c",
+      "path": "benchmarks/toy_audit/tier1_batch_size.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "c8233ef87614abe0d2efd5ec6386fe799e709759",
+      "path": "benchmarks/toy_audit/tier1_prior_duration.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "9b94b6bc89606275266ca6bc83ebb9f2c0b045be",
+      "path": "benchmarks/toy_audit/tier1_prior_smoke.py",
+      "role": "support",
+      "suggested_tiers": []
     },
     {
       "family": "benchmark/toy_audit",
@@ -7672,6 +7700,13 @@
       "family": "forge_engine",
       "git_blob": "205b0ca85aa023fc2d360b2054b7ac0c8ba82f6e",
       "path": "experiments/forge/trainer_families.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "a58bce2d0ef155be57ef1614b0b6223e483efdba",
+      "path": "experiments/forge/transfer_cadence.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
