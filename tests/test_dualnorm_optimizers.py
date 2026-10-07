@@ -21,6 +21,15 @@ FAMILIES = (
 )
 
 
+@pytest.fixture(autouse=True)
+def cuda_optimizer_contract():
+    """Run numerical and tiny public-API software checks on the GPU only."""
+    if not torch.cuda.is_available():
+        pytest.skip("CUDA is required for optimizer contract checks")
+    with torch.device("cuda:0"), torch.autograd.set_multithreading_enabled(False):
+        yield
+
+
 @pytest.mark.parametrize("family", FAMILIES)
 def test_standardized_role_hyperparameters_reach_normalized_and_native_hybrid_groups(family):
     recipe = get_recipe("bcap", optimizer_family=family, lr=.01, d_lr_mult=1.5,
@@ -286,9 +295,6 @@ def test_isolation_arms_preserve_native_adam_updates_for_baseline_players(family
                   for params, rate in groups]
     baseline = torch.optim.Adam([dict(params=params, lr=rate) for params, rate in references],
                                 betas=recipe.betas, eps=recipe.eps)
-    # Only bypass the known upstream graph-capture query on this CPU reference.
-    baseline._accelerator_graph_capture_health_check = lambda: None
-    baseline._cuda_graph_capture_health_check = lambda: None
     for step in range(2):
         for (params, _), (copies, _) in zip(groups, references):
             for index, (actual, copy) in enumerate(zip(params, copies)):
@@ -344,7 +350,7 @@ def make_trainer(family):
         deterministic_orthogonal_(critic, seed=1)
         deterministic_orthogonal_(prior, seed=2)
         return GANTrainer(recipe, generator, critic, prior=prior, seed=0,
-                          model_generator=torch.Generator().manual_seed(17))
+                          model_generator=torch.Generator(device=generator[0].weight.device).manual_seed(17))
 
 
 @pytest.mark.parametrize("family", FAMILIES)
@@ -426,15 +432,52 @@ def test_later_dualnorm_group_keeps_the_full_arm_free_of_adam():
 
 @pytest.mark.parametrize("small_singular_value", [1e-7, 0.])
 @pytest.mark.parametrize("transpose", [False, True])
-def test_large_polar_preserves_unit_singular_values_for_ill_conditioned_or_rank_deficient_input(
+def test_large_polar_preserves_resolved_directions_and_removes_null_completion(
         small_singular_value, transpose):
     gradient = torch.zeros((2, 1025), dtype=torch.float64)
     gradient[0, 0], gradient[1, 1] = 1., small_singular_value
     gradient = gradient.T if transpose else gradient
     factor = polar_factor(gradient)
     assert torch.isfinite(factor).all()
-    torch.testing.assert_close(torch.linalg.svdvals(factor), torch.ones(2, dtype=torch.float64),
+    expected = factor.new_tensor([1., float(small_singular_value > 0)])
+    torch.testing.assert_close(torch.linalg.svdvals(factor), expected,
                                rtol=0, atol=1e-12)
+
+
+@pytest.mark.parametrize("dtype", [torch.float32, torch.float64, torch.float16, torch.bfloat16])
+@pytest.mark.parametrize("shape", [(4, 4), (4, 7), (7, 4), (2, 1025), (1025, 2)])
+def test_polar_suppresses_numerical_null_update_without_changing_resolved_direction(dtype, shape):
+    # Explicit diagonal fixture: the weak direction is below the numerical
+    # rank floor, while a well-resolved small direction remains normalized.
+    gradient = torch.zeros(shape, dtype=dtype)
+    computation_dtype = torch.float64 if dtype == torch.float64 else torch.float32
+    floor = max(shape) * torch.finfo(computation_dtype).eps
+    gradient[0, 0], gradient[1, 1] = 1., floor / 4
+    expected = torch.zeros_like(gradient)
+    expected[0, 0] = 1.
+    before_rng = torch.cuda.get_rng_state().clone()
+    actual = polar_factor(gradient)
+    assert actual.device.type == "cuda" and actual.dtype == dtype
+    torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+    assert torch.equal(before_rng, torch.cuda.get_rng_state())
+    gradient[1, 1] = floor * 4
+    expected[1, 1] = 1.
+    torch.testing.assert_close(polar_factor(gradient), expected, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize("shape", [(3, 5), (5, 3), (0, 3), (3, 0)])
+def test_zero_polar_has_no_null_space_update(shape):
+    gradient = torch.zeros(shape)
+    assert torch.equal(polar_factor(gradient), gradient)
+
+
+def test_default_dualnorm_does_not_move_along_a_rounding_scale_direction():
+    weight = nn.Parameter(torch.zeros((2, 2)))
+    optimizer = NormalizedOptimizer([dict(params=[weight], role="critic")],
+                                    family="dualnorm", lr=.2)
+    weight.grad = torch.diag(weight.new_tensor([3., 1e-8]))
+    optimizer.step()
+    torch.testing.assert_close(weight, weight.new_tensor([[-.2, 0.], [0., 0.]]), rtol=0, atol=0)
 
 
 @pytest.mark.parametrize("family", ["ada_nsgda", "dualnorm", "dualnorm_D_only", "particle_rownorm_only"])
