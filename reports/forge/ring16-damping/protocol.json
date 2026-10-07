@@ -10,8 +10,18 @@
     "archived_fixture_used_as_initializer": false,
     "new_baseline_updates": 0,
     "pr": 331,
+    "report_commit": "49f041708931d06319213069be060f91f8ba9fb2",
     "restored400": "same serialized state/draws, historical PASS exactly reproduced, covariance0.5143145751208067, six terminal passes; distinct runtime path, not a fresh candidate baseline",
-    "source_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "training_execution_sources": {
+      "live": {
+        "digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+        "origin_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+      },
+      "restart": {
+        "digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+        "origin_commit": "1de465e25252c10622965362cd593a899ce74f74"
+      }
+    },
     "uninterrupted_live": "printed full failure, covariance2.2202680110931396, HQ0.93603515625, zero full passes; original postexecution metadata-error receipt remains INCOMPLETE",
     "url": "https://github.com/255BITS/ParticleGAN/pull/331"
   },
@@ -118,11 +128,11 @@
   "saved_gradient_probe": {
     "failure_action": "retain result; no threshold adjustment or retry; no quality claim",
     "input_campaign": "ring16-restart-diagnostic-v1",
+    "input_report_commit": "49f041708931d06319213069be060f91f8ba9fb2",
     "input_sha256": {
       "live": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145",
       "restart": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
     },
-    "input_source_commit": "49f041708931d06319213069be060f91f8ba9fb2",
     "known_original_relative_polar_difference": 0.2519904673099518,
     "known_original_relative_raw_difference": 1.0285654639119457e-07,
     "max_executions": 1,
@@ -130,7 +140,17 @@
     "new_sampling_draws": 0,
     "new_training_updates": 0,
     "scope": "fixed saved live/restart401 hidden critic64x64 gradients; no optimization or sampling",
-    "timeout_seconds": 30
+    "timeout_seconds": 30,
+    "training_execution_sources": {
+      "live": {
+        "digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+        "origin_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+      },
+      "restart": {
+        "digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+        "origin_commit": "1de465e25252c10622965362cd593a899ce74f74"
+      }
+    }
   },
   "schedules": [
     "boundary_only",

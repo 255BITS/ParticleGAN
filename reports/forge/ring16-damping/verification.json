@@ -3,7 +3,17 @@
   "baseline_reused": {
     "new_updates": 0,
     "original_live_receipt": "INCOMPLETE; printed numerical failure remains separate",
-    "source_commit": "49f041708931d06319213069be060f91f8ba9fb2"
+    "report_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "training_execution_sources": {
+      "live": {
+        "digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+        "origin_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+      },
+      "restart": {
+        "digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+        "origin_commit": "1de465e25252c10622965362cd593a899ce74f74"
+      }
+    }
   },
   "bound_sources": {
     "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
@@ -80,7 +90,7 @@
     "updates": 3200
   },
   "production_defaults_changed": false,
-  "protocol_sha256": "55bf5e9de39f88d840a4f9cf64cd9608c3f1179367e532ec05f59b3a225c2b77",
+  "protocol_sha256": "18005b03eb8ccb8cfad1b28fb1bc5e4c327cc555a464a38dd043689eae4a269b",
   "qualification_input": false,
   "sampling_draws": 0,
   "saved_gradient_svd_executions": 0,

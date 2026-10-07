@@ -82,6 +82,9 @@ numeric failure is not relabeled a complete qualification receipt. Restoring
 the same 400 state reproduces the historical PASS exactly: covariance `.514315`
 and six terminal passes. That restored runtime path is separate evidence.
 
+The protocol preserves the original live/restored training commits and source
+digests separately from PR331's report publication commit.
+
 No unchanged baseline is repeated here. The two schedules are prospective
 comparisons against those archived measurements, with exact prefix checking
 for the boundary arm. Matching state 400 and batches cannot prove that every
