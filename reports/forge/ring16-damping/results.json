@@ -1,0 +1,302 @@
+{
+  "archive": "archive.json",
+  "arms": [
+    {
+      "any_full_pass": true,
+      "arm": "boundary_only",
+      "artifacts": {
+        "acquisition-state.pt": "adab2e2c0e2ccaa7aff590900e15a4846ee947ea067880a85d1be3244fd6e153",
+        "confirmation-samples.pt": "d28914046d81f8daee0a0279b680fbb055e718fefa71d3b9e49901ce635c1aef",
+        "curve.json": "5f5a1ab8f9d5ef466e78ee8aa505e2609a25125ee3422b55e2510aa4f9d47b58",
+        "initial-state.pt": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+        "observations.pt": "fbff3e34c0a596d6cd8481b123a1f05c23d026c831e34119ce2423d09d20eefe",
+        "prefix-state.pt": "8223223f38d0d7d88f3869888b5deee8d7ab74da4211991cae80ee2e04fc81d6",
+        "reservation.json": "1064a0764e4baefcb4eef166c57510db50016dcaee5bdc9d45087ea5c9507137",
+        "source.json": "f32f5b897dfcfed91e41e4668089ac6a75e88ad0541f8e81ee70f6bb94c7a384",
+        "state.pt": "3d5c589ccceeba98d474d7d7b365a35a4af2bef676ff5055835b0f81fdefbe81"
+      },
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [
+          "component_covariance_error <= 0.85"
+        ],
+        "full_pass": false,
+        "metrics": {
+          "component_covariance_error": 0.8595406319946051,
+          "component_min_eigen_ratio": 0.3241220712661743,
+          "hq": 0.930908203125,
+          "mass_tv": 0.0654296875,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "57d1b27fe7e2decd0b57322c5e75fee8abb2d5f7f01a0b0bcc91ad517d48e275",
+        "step": 1067
+      },
+      "confirmed_smoke": false,
+      "cuda_runtime": "13.0",
+      "elapsed_seconds": 21.697202358045615,
+      "error": null,
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.45885503105819225,
+        "component_min_eigen_ratio": 0.36701369285583496,
+        "hq": 0.96923828125,
+        "mass_tv": 0.05859375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 1067,
+      "five_terminal_verdict": "PASS",
+      "gpu_capability": [
+        8,
+        6
+      ],
+      "gpu_model": "NVIDIA RTX A6000",
+      "intervention_calls": 6,
+      "prefix_identity": {
+        "candidate_projected_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+        "exact_except_new_stream_registration": true,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "receipt_sha256": "24b1db4992ad293c18047fe0d4d82a7e36b9e6d575f4016c23f37b05239f3082",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scheduled_full_pass_count": 32,
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+        "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+      },
+      "status": "COMPLETE",
+      "terminal_suffix": 31
+    },
+    {
+      "any_full_pass": false,
+      "arm": "every_step",
+      "artifacts": {
+        "curve.json": "d3f84029658f19a6b3b37f0b1ed95b721e9a67bd9a94c5b39a0ed2bd2d028bcf",
+        "initial-state.pt": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+        "observations.pt": "72391ec7d5aed1bc52a2a5ffbf9d1fce47e1425b7b1327f11ecdc52807eb65e2",
+        "prefix-state.pt": "e5101bd0983288ff283eadf2d231a7b3d2c2eaf42378891ed630c636272cd7c1",
+        "reservation.json": "1064a0764e4baefcb4eef166c57510db50016dcaee5bdc9d45087ea5c9507137",
+        "source.json": "f32f5b897dfcfed91e41e4668089ac6a75e88ad0541f8e81ee70f6bb94c7a384",
+        "state.pt": "958ce00966c8bc6343aa894ee4581f428e9bddc06d1727cc65bba32daf49c017"
+      },
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": null,
+      "confirmed_smoke": false,
+      "cuda_runtime": "13.0",
+      "elapsed_seconds": 23.654506949940696,
+      "error": null,
+      "final_failed_bounds": [
+        "component_covariance_error <= 0.85"
+      ],
+      "final_metrics": {
+        "component_covariance_error": 1.057656491175294,
+        "component_min_eigen_ratio": 0.34619760513305664,
+        "hq": 0.969482421875,
+        "mass_tv": 0.072998046875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": null,
+      "five_terminal_verdict": "FAIL",
+      "gpu_capability": [
+        8,
+        6
+      ],
+      "gpu_model": "NVIDIA RTX A6000",
+      "intervention_calls": 9600,
+      "prefix_identity": {
+        "candidate_projected_state_digest": "a8071b238a0ca29c6b33fc74914d38dc67412fab6bb1bb2e9b493aa36cb38905",
+        "exact_except_new_stream_registration": false,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "receipt_sha256": "f0ead32ef44eaad5c3b8153a124d61d360f040c2fb82758cf7fde80e78cc682b",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scheduled_full_pass_count": 0,
+      "scheduled_observations": 96,
+      "scoring_draws": 96,
+      "source": {
+        "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+        "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+      },
+      "status": "COMPLETE",
+      "terminal_suffix": 0
+    }
+  ],
+  "baseline_identity": {
+    "archived_fixture_used_as_initializer": false,
+    "new_baseline_updates": 0,
+    "pr": 331,
+    "report_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "restored400": "same serialized state/draws, historical PASS exactly reproduced, covariance0.5143145751208067, six terminal passes; distinct runtime path, not a fresh candidate baseline",
+    "training_execution_sources": {
+      "live": {
+        "digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+        "origin_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+      },
+      "restart": {
+        "digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+        "origin_commit": "1de465e25252c10622965362cd593a899ce74f74"
+      }
+    },
+    "uninterrupted_live": "printed full failure, covariance2.2202680110931396, HQ0.93603515625, zero full passes; original postexecution metadata-error receipt remains INCOMPLETE",
+    "url": "https://github.com/255BITS/ParticleGAN/pull/331"
+  },
+  "cost": {
+    "conservative_total_seconds_debit": 80.00393600587267,
+    "controller_attempts": [
+      {
+        "arm": "boundary_only",
+        "child_wall_seconds": 24.000013856915757,
+        "reserved_scoring_draws": 97,
+        "reserved_seconds": 300,
+        "reserved_updates": 1600,
+        "status": "FINISHED"
+      },
+      {
+        "arm": "every_step",
+        "child_wall_seconds": 26.003922148956917,
+        "reserved_scoring_draws": 97,
+        "reserved_seconds": 300,
+        "reserved_updates": 1600,
+        "status": "FINISHED"
+      }
+    ],
+    "controller_child_wall_seconds": 50.003936005872674,
+    "new_training_updates": 3200,
+    "probe_elapsed_seconds": 0.36558905499987304,
+    "probe_outer_wall_debit_reason": "one hard-30-second timeout; preserve measured internal seconds separately, conservatively charge full allowance for imports and exit",
+    "probe_outer_wall_debit_seconds": 30,
+    "reserved_probe_seconds": 30,
+    "reserved_training_seconds": 600,
+    "scientific_retries": 0,
+    "scored_draws": 193,
+    "training_elapsed_seconds": 45.35170930798631
+  },
+  "logical_device": "cuda:0",
+  "media": {
+    "entries": [
+      {
+        "arm": "boundary_only",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "607444d44eb4d4273a52af7e6d201ef9eb39b1d4d5b099ad4f3afb5fba6c7fb3",
+        "source_commit": "996fcaa581ef145650acff96824a77b704e71dc3",
+        "source_sha256": "fbff3e34c0a596d6cd8481b123a1f05c23d026c831e34119ce2423d09d20eefe"
+      },
+      {
+        "arm": "every_step",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "d0f8f4fc448796f49793f341759b1c76b7d41f8607d34616c7a0c1bc01b9b8f0",
+        "source_commit": "996fcaa581ef145650acff96824a77b704e71dc3",
+        "source_sha256": "72391ec7d5aed1bc52a2a5ffbf9d1fce47e1425b7b1327f11ecdc52807eb65e2"
+      }
+    ],
+    "model_forwards": 0,
+    "sampling_draws": 0,
+    "training_updates": 0
+  },
+  "physical_gpu": 1,
+  "probe": {
+    "arms": {
+      "live": {
+        "finite": true,
+        "original_matches_captured": true,
+        "same_input_damping_repeat_exact": true,
+        "singular_max_float32": 0.27817246317863464,
+        "tau": 2.122287469319417e-06,
+        "trace_sha256": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145",
+        "weak_directions": 6
+      },
+      "restart": {
+        "finite": true,
+        "original_matches_captured": true,
+        "same_input_damping_repeat_exact": true,
+        "singular_max_float32": 0.27817225456237793,
+        "tau": 2.122285877703689e-06,
+        "trace_sha256": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d",
+        "weak_directions": 6
+      }
+    },
+    "checks": {
+      "ambient_rng_unchanged": true,
+      "at_least_tenfold_discrepancy_reduction": true,
+      "finite": true,
+      "original_factors_match_captured": true,
+      "same_input_repeat_exact": true,
+      "within_30_second_allowance": true
+    },
+    "device": "cuda:0",
+    "elapsed_seconds": 0.36558905499987304,
+    "mechanistic_pass": true,
+    "pair": {
+      "damped_max_difference": 0.0003003254532814026,
+      "damped_over_original_discrepancy": 0.0007764320471324027,
+      "damped_relative_frobenius_difference": 0.0001956534688360989,
+      "original_relative_frobenius_difference": 0.2519904673099518,
+      "raw_max_difference": 3.725290298461914e-09,
+      "raw_relative_frobenius_difference": 1.0285653928576721e-07
+    },
+    "protocol_sha256": "9d3faf972f34c67d7b9ad633f6c34b2b39a6e92371727af37c7146f253db8b59",
+    "qualification_input": false,
+    "sampling_draws": 0,
+    "schema_version": 1,
+    "scope": "fixed_saved_gradient_cuda_damping_analysis",
+    "seed": 0,
+    "source_sha256": "0db7c32dc52a96a6fd2997123ba89abbda042abec350482b981ae3f2e9a053d4",
+    "training_updates": 0
+  },
+  "production_defaults_changed": false,
+  "protocol_id": "ring16-spectral-damping-v1",
+  "protocol_sha256": "9d3faf972f34c67d7b9ad633f6c34b2b39a6e92371727af37c7146f253db8b59",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "completed_cuda_ring16_intervention_diagnostic",
+  "seed": 0
+}

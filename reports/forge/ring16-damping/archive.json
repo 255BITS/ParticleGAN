@@ -1,0 +1,25 @@
+{
+  "bytes": 6994425,
+  "contains_bulk_logs_and_tensor_checkpoints": true,
+  "execution_sources": [
+    {
+      "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+      "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+    },
+    {
+      "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+      "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+    }
+  ],
+  "manifest_member": "archive-manifest.json",
+  "members_verified": 34,
+  "path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-spectral-damping-cuda-v1.tar.gz",
+  "prior_archive_sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+  "prior_raw_root": "/home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1",
+  "schema_version": 1,
+  "scope": "local_raw_cuda_evidence_archive",
+  "sha256": "febb94f0bebbf36125a58c1ac7fe4c32f0faf04da087a64449fa9486aa77b0a9",
+  "source_file_count": 33,
+  "tracked_bulk_files": false,
+  "verification": "all members matched exact SHA256 after writing"
+}

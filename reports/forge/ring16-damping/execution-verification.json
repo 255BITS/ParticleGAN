@@ -1,0 +1,39 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "actual_training_media_only": true,
+    "boundary_fresh400_exact": true,
+    "boundary_only_96_fixed_cadence": true,
+    "boundary_only_all_receipt_artifact_hashes_match": true,
+    "boundary_only_complete1600": true,
+    "boundary_only_firstpass_confirmation_only": true,
+    "boundary_only_matrix_scope_call_count": true,
+    "boundary_only_media_from_actual_observations": true,
+    "boundary_only_within_time": true,
+    "every_step_96_fixed_cadence": true,
+    "every_step_all_receipt_artifact_hashes_match": true,
+    "every_step_complete1600": true,
+    "every_step_firstpass_confirmation_only": true,
+    "every_step_matrix_scope_call_count": true,
+    "every_step_media_from_actual_observations": true,
+    "every_step_within_time": true,
+    "frozen_budget_respected": true,
+    "frozen_protocol_matches": true,
+    "frozen_source_bindings_match": true,
+    "hard_timeout_controller_within_training_reservation": true,
+    "matched_data_batch_sequence": true,
+    "no_retry_admission": true,
+    "probe_gate_pass": true,
+    "probe_protocol_matches": true,
+    "total_conservative_debit_within630": true
+  },
+  "model_forwards": 0,
+  "preserved_preparation_verification": {
+    "path": "verification.json",
+    "sha256": "e2f4ae3d56f418bf2569704f0eed86c34ca64d71d2489d5e3760daa53ed0621a"
+  },
+  "results_sha256": "4beadadeb54eba66d96c19a9accddba2958043b75479697a0aff4ae397038cb5",
+  "sampling_draws": 0,
+  "scope": "saved_receipt_hash_and_budget_verification",
+  "training_updates": 0
+}

@@ -1,23 +1,22 @@
-Ring16's ordinary matrix polar update assigns unit weight to almost-null
-singular directions. PR331 found that a `1.03e-7` relative gradient perturbation
-at update 401 becomes a `.252` relative direction difference, while a restart
-changes the later quality result.
+Ring16's full polar optimizer amplifies an update-401 hidden-critic gradient
+difference of 1.03e-7 into a .252 direction difference. The frozen CUDA probe
+shows smooth spectral damping reduces that discrepancy about 1,288-fold.
 
-This prospective diagnostic adds an experiment-scoped smooth damping rule,
-`s / hypot(s, max(shape)*float32_epsilon*sigma_max)`, with two frozen schedules:
-update 401 only after a fresh live 400 prefix, or every update from initialization.
-Both retain the selected BCAP recipe, constant rates, public initializer, prior,
-batch, sampling law and full numerical bounds. Candidates never load the
-archived 400 checkpoint. A separate zero-update CUDA probe measures sensitivity
-on the original saved gradients.
+Two fresh-live GPU trials compare the same damping rule once at 401 against
+every update through 1600. The boundary arm verifies the unchanged 400 prefix
+and ends with 31 consecutive full passes (covariance .458855); its single
+independent first-pass confirmation narrowly fails (.859541 > .85), so confirmed
+smoke is FAIL. Every-step damping never passes (final covariance 1.057656).
+Both preserve constant rates, seed 0, public initialization, MoG prior, batch,
+sampling law and full bounds. Candidates never reload the archive.
 
-No CUDA experiment ran: the current host has no usable CUDA device. Static
-verification covers syntax, source bindings, plan validation and refusal to
-start CPU training. The finite allowance is 3,200 updates/600 training seconds,
-plus one 30-second saved-gradient probe, with no retries. Production optimizer
-defaults and qualifications remain unchanged. Actual-training GIFs and numeric
-candidate outcomes are pending CUDA execution; GitHub publication is pending
-network access.
+Validation: both 1600-update arms complete on RTX A6000/CUDA 13.0; 3200 new
+updates, 45.35 training seconds, 193 scored draws, zero retries. Frozen bindings,
+exact boundary prefix, matched target batches, artifact hashes, call counts,
+budgets and actual-training GIF provenance pass verification. Bulk evidence is
+archived outside Git with exact SHA/bytes/member receipts. The blocked
+preparation and PR331 evidence retain their original identities. Production
+defaults and qualifications remain unchanged.
 
-Read `reports/forge/ring16-damping/README.md` for the hypothesis, provenance,
-falsifiers, commands and distinction between smoke acquisition and tier2 hold.
+See reports/forge/ring16-damping/README.md, results.json,
+execution-verification.json, archive.json and the two actual-training GIFs.
