@@ -3,7 +3,8 @@
 Selection is independent of grades: the selected BCAP dualnorm configuration
 comes first, then lexicographic candidate/revision/attempt identity. Invalid or
 nonfinite selected evidence is recorded as unavailable; no better-looking
-candidate is substituted. The existing Forge renderer supplies all frames.
+candidate is substituted. Forge supplies standard frames; native task frames
+use certified archived snapshots and measurement events.
 """
 from __future__ import annotations
 
@@ -97,6 +98,134 @@ def finite_tree(value):
     return True
 
 
+def retained_provenance(evidence):
+    """Verify declared audit bytes without restoring or loading model states."""
+    from experiments.forge.artifacts import verify_artifacts
+    checkpoint = evidence.get("provenance_checkpoint")
+    if not checkpoint:
+        return None
+    root = Path(checkpoint["artifact_root"]).resolve()
+    manifest = checkpoint["artifact_manifest"]
+    verify_artifacts(root, manifest)
+    path = (root / checkpoint["path"]).resolve()
+    if (not path.is_relative_to(root) or file_hash(path) != checkpoint["sha256"]
+            or path.stat().st_size != checkpoint["bytes"]):
+        raise ValueError("retained provenance descriptor differs from certified bytes")
+    declared = manifest["files"].get(checkpoint["path"])
+    if not declared or declared["sha256"] != checkpoint["sha256"] or declared["size"] != checkpoint["bytes"]:
+        raise ValueError("retained provenance descriptor differs from its artifact manifest")
+    return dict(path=str(path), sha256=checkpoint["sha256"], bytes=checkpoint["bytes"],
+                state_sha256=checkpoint["state_sha256"], artifact_manifest_sha256=manifest["sha256"],
+                purpose=checkpoint.get("purpose"), completed_steps=checkpoint["completed_steps"])
+
+
+def native_inputs(task, row):
+    """Validate retained native bytes and schedules; add no observations."""
+    import numpy as np
+    from experiments.forge.artifacts import verify_artifacts
+    from experiments.forge.tier1_media import _indices
+    evidence = row["evidence"]
+    root = Path(evidence["artifact_root"]).resolve()
+    verify_artifacts(root, evidence["artifact_manifest"])
+    problem = identifier(evidence["problem"], "native problem")
+    if problem != task["execution"]["problem"]:
+        raise ValueError("native saved problem differs from the requested task")
+    directory = root / problem
+    summary_path, config_path, events_path = [directory / name for name in ("summary.json", "config.json", "events.jsonl")]
+    summary, config = read_json(summary_path), read_json(config_path)
+    if (summary["completed_steps"] != task["execution"]["steps"]
+            or config["steps"] != task["execution"]["steps"]
+            or config["eval_samples"] != task["evaluation"]["eval_samples"]
+            or config["eval_interval"] != task["evaluation"]["eval_interval"]
+            or config["early_eval_steps"] != task["evaluation"]["early_eval_steps"]):
+        raise ValueError("native retained execution law differs from the task")
+    events = [event for line in events_path.read_text().splitlines()
+              if (event := json.loads(line)).get("event") == "eval" and event.get("model") == "live"]
+    if not events or [event["step"] for event in events] != summary["snapshot_steps"]:
+        raise ValueError("native saved live event and snapshot schedules differ")
+    if not finite_tree(events):
+        raise FloatingPointError("nonfinite native saved measurement events")
+    for event in events:
+        for name in ("precision", "modes"):
+            if isinstance(event["metrics"][name], bool) or not isinstance(event["metrics"][name], (int, float)):
+                raise ValueError("native saved coverage metric is unavailable or nonnumeric")
+        for name in task["evaluation"]["accuracy_limits"]:
+            value = event["accuracy"][name]
+            if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float))):
+                raise ValueError("native saved accuracy metric is nonnumeric")
+    indices = _indices(len(events))
+    inputs = {str(path): file_hash(path) for path in (summary_path, config_path, events_path)}
+    snapshots = []
+    for index in indices:
+        path = directory / "snapshots" / f"step_{events[index]['step']:06d}.npz"
+        inputs[str(path)] = file_hash(path)
+        with np.load(path, allow_pickle=False) as saved:
+            values = {name: saved[name].copy() for name in ("live", "target")}
+        if any(value.ndim != 2 or value.shape[1] != 2 or len(value) < 1 for value in values.values()):
+            raise ValueError("native saved snapshots require nonempty two-dimensional live/target arrays")
+        if not finite_tree(values):
+            raise FloatingPointError("nonfinite native retained snapshot arrays")
+        snapshots.append(values)
+    return events, indices, snapshots, inputs
+
+
+def render_native(task, row, output):
+    """Display certified native live snapshots and existing recorded metrics."""
+    from io import BytesIO
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from PIL import Image
+    events, indices, snapshots, inputs = native_inputs(task, row)
+    evidence = row["evidence"]
+    reference = np.concatenate([values["target"] for values in snapshots])
+    low, high = reference.min(axis=0), reference.max(axis=0)
+    padding = np.maximum((high - low) * .05, .01)
+    steps = [event["step"] for event in events]
+    evaluation = task["evaluation"]
+    mode_goal = evaluation["coverage_thresholds"]["min_modes"]
+    accuracy_curves = {name: [np.nan if event["accuracy"][name] is None else event["accuracy"][name] / limit for event in events]
+                       for name, limit in evaluation["accuracy_limits"].items()}
+    finite_accuracy = [value for curve in accuracy_curves.values() for value in curve if math.isfinite(value)]
+    accuracy_high = max([1., *finite_accuracy])
+    observations = [{"step": event["step"], "metrics": event["metrics"], "accuracy": event["accuracy"]} for event in events]
+    frames = []
+    for index, values in zip(indices, snapshots):
+        figure, axes = plt.subplots(3, 1, figsize=(9, 9), constrained_layout=True)
+        axes[0].scatter(values["target"][:, 0], values["target"][:, 1], s=3, alpha=.2, color="black", label="Saved target reference")
+        axes[0].scatter(values["live"][:, 0], values["live"][:, 1], s=3, alpha=.3, label="Saved live scored samples")
+        axes[0].set(xlim=(low[0] - padding[0], high[0] + padding[0]), ylim=(low[1] - padding[1], high[1] + padding[1]),
+                    title="Fixed saved-target axes; live samples outside these axes are clipped")
+        axes[0].set_aspect("equal"); axes[0].legend(fontsize=8)
+        for name, divisor in (("precision", 1), ("modes", mode_goal)):
+            axes[1].plot(steps[:index + 1], [event["metrics"][name] / divisor for event in events[:index + 1]], label=name if divisor == 1 else f"{name} / {divisor}")
+        axes[1].axhline(evaluation["coverage_thresholds"]["min_precision"], color="black", linestyle=":", label="Precision bound")
+        axes[1].axhline(1, color="black", linestyle="--", label="Mode-count bound")
+        axes[1].set(ylim=(-.02, 1.05), title="Saved coverage measurements"); axes[1].legend(fontsize=8)
+        for name, limit in evaluation["accuracy_limits"].items():
+            # Undefined early shape metrics remain gaps; no metric is recomputed.
+            axes[2].plot(steps[:index + 1], accuracy_curves[name][:index + 1], label=f"{name} / {limit}")
+        axes[2].axhline(1, color="black", linestyle="--")
+        axes[2].set(ylim=(-.05, accuracy_high * 1.05), title="Saved accuracy measurements / declared upper limits; gaps mean unavailable")
+        axes[2].legend(fontsize=7, ncol=2)
+        for axis in axes[1:]:
+            axis.set_xlim(0, max(steps))
+        figure.suptitle(f"{task['id']} · update {events[index]['step']} · recorded {row['gate_status']}\nlive / {evidence['sampling_law']}", fontsize=10)
+        buffer = BytesIO(); figure.savefig(buffer, format="png", dpi=100); plt.close(figure)
+        buffer.seek(0); frames.append(Image.open(buffer).convert("RGB"))
+    frames[0].save(output, save_all=True, append_images=frames[1:], duration=400, loop=0)
+    receipt = dict(schema_version=1, task_id=task["id"], recorded_grade=row["gate_status"],
+                   kind="actual_training_native_saved_observations_gif", observation_count=len(events),
+                   selected_observation_indices=indices, source_inputs=inputs,
+                   observations_sha256=stable_hash(observations), gif_sha256=file_hash(output),
+                   optimizer_updates_added=0, sampling_draws_added=0, rescored_observations=0,
+                   qualification_input=False, renderer_sha256=file_hash(Path(__file__)),
+                   nullable_accuracy_display="Undefined saved early accuracy metrics remain gaps.")
+    atomic_json(output.with_suffix(".json"), receipt)
+    return receipt
+
+
 @contextmanager
 def forbid_live_execution():
     """Fail visibly if a future renderer tries to construct or query a model."""
@@ -153,6 +282,7 @@ def publish(queue_root, attempts, output, *, campaign):
                     raise ValueError("executed attempt retained no renderable evidence")
                 if evidence.get("guards", {}).get("all_finite") is False or not finite_tree(evidence.get("observations", [])):
                     raise FloatingPointError("nonfinite recorded observations or finite-state guard")
+                entry["retained_provenance"] = retained_provenance(evidence)
                 task = request["tasks"][choice["task_id"]]
                 samples, _ = tier1_media._scored_outputs(task, evidence, local)
                 if samples is not None and not finite_tree(samples):
@@ -161,10 +291,12 @@ def publish(queue_root, attempts, output, *, campaign):
                     proof = torch.load(Path(evidence["artifact_root"]) / "comparisons.pt", map_location="cpu", weights_only=True)
                     if not finite_tree(proof):
                         raise FloatingPointError("nonfinite saved clock-free comparison states")
-                receipt = tier1_media.render(task, row, local, path)
+                native = task["adapter"] == "native100"
+                receipt = render_native(task, row, path) if native else tier1_media.render(task, row, local, path)
                 with Image.open(path) as gif:
                     frames = gif.n_frames
-                entry.update(media_status="EXPORTED", gif=path.name, gif_sha256=file_hash(path), frames=frames,
+                entry.update(media_status="EXPORTED", renderer_kind="saved_native_snapshots" if native else "forge_saved_observations",
+                             gif=path.name, gif_sha256=file_hash(path), frames=frames,
                              observation_count=receipt["observation_count"],
                              selected_observation_indices=receipt["selected_observation_indices"],
                              observations_sha256=receipt["observations_sha256"],
@@ -199,7 +331,7 @@ def main():
     parser.add_argument("--queue-root", type=Path, required=True)
     parser.add_argument("--attempts", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--campaign", default="gaussian-smoke-inventory-v2")
+    parser.add_argument("--campaign", default="gaussian-smoke-inventory-v4")
     args = parser.parse_args()
     result = publish(args.queue_root.resolve(), args.attempts.resolve(), args.output.resolve(), campaign=args.campaign)
     print(json.dumps({key: result[key] for key in ("campaign", "selected_task_count", "exported_gifs", "unavailable_gifs")}), flush=True)
