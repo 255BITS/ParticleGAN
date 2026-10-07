@@ -1,0 +1,69 @@
+{
+  "historical_evidence_regraded": false,
+  "integration_base": "5af3eea36817a17fe6a7df29d4bfd146844386cc",
+  "local_log_sha256": {
+    "runs/software/serial-autograd-policy/history.log": "289c59e168f3d78199fe1831acdcc796f955633185fe762a8f2a84f5a143a4b2",
+    "runs/software/serial-autograd-policy/pytest-2.log": "76a05acf5f7bb763e4a2cb097e6491bfc057003975e2bf48bede2fff2e9ebb04",
+    "runs/software/serial-autograd-policy/pytest-final.log": "00a31d0da13ab3d45949e6b2f9ab4253e769793bc5b17f81c97ac5f0d4160c25",
+    "runs/software/serial-autograd-policy/pytest.log": "a6d3d4a03bf67b1d85ceba68de1036cf3121a73010d483de425266bc3d3f627a",
+    "runs/software/serial-autograd-policy/validate.log": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a"
+  },
+  "metadata_checks": {
+    "forge_validate": "PASS; no training",
+    "inventory_coverage": "11776/11776"
+  },
+  "ordinary_tier1_and_gated_tier2": "pending fresh merged-source campaign",
+  "policy": {
+    "autograd_multithreading_enabled": false,
+    "caller_scoped_state_restored": true,
+    "cpu_operation_thread_pools_changed": false,
+    "cuda_parallelism_changed": false,
+    "legacy_false_or_unmarked_checkpoint_action": "reject_and_use_pinned_original_source",
+    "torch_api_monkeypatched": false,
+    "whole_update_scope": true
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "user_requested_fixed_project_autograd_scheduling_policy",
+  "software_check_budget": {
+    "completed_public_updates_ceiling_total": 9,
+    "quality_training_updates": 0,
+    "wall_seconds_ceiling_per_invocation": 180
+  },
+  "source_commit": "c57c69133b8373ed3dbfe8e11cfe6df43e7a2b1a",
+  "source_sha256": {
+    "benchmarks/__init__.py": "5b3d047f10122eef719de3126e7424b671376d0c1b4392208a5f487f15eed0f7",
+    "benchmarks/toy_audit/api_run.py": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+    "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
+    "experiments/forge/__init__.py": "5716a43a13f31b3c0987233e7b6e063c311a3b3f9bced2ffcd5c6af6565b7355",
+    "experiments/forge/adapters.py": "9ccacbfda53c524e13d952b52d7c0d87436e1bcfd5369c763933948454543223",
+    "experiments/forge/sources.py": "6a1c6aea0f6ed68d98c8347926809db306eabc479a6fc317330e4033246e9e3f",
+    "particlegan/__init__.py": "dd97439702656a5942e5b9f20d30f47796fff52b35f206c16325cb4f2245e94d",
+    "particlegan/execution.py": "015151489dd0b6c9933b9a9dc3f02edc721907770b82ab72d7e7ee2739d03c9d",
+    "particlegan/training.py": "f56a8e7695f71246683433ae285dda9e8c25e3f7c7da77bc7c795e337fde7d9a",
+    "tests/test_serial_autograd_policy_cuda.py": "715e3dbf3f24f2c4b834040c04281baec80fbed34f43f1fcc3f8dbdcbdff0ff7"
+  },
+  "static_scope_audit": {
+    "all_examples_import_particlegan": true,
+    "audit_kind": "AST import/call inventory; not execution of every optional benchmark",
+    "experiment_backward_files_without_direct_package_import": [
+      "experiments/forge/two_pole_observer.py",
+      "experiments/forge/optimizer_diagnostics.py"
+    ],
+    "files_with_direct_backward_or_grad_calls": {
+      "benchmarks": 25,
+      "examples": 18,
+      "experiments": 28
+    },
+    "those_files_covered_by": "experiments.forge package import and whole-task scope"
+  },
+  "tests": {
+    "final_passed": 5,
+    "final_seconds": 3.05,
+    "final_skipped": 0,
+    "pre_integration_passed": 4,
+    "setup_attempt": "initial fixture incorrectly omitted explicit MoG kind; corrected before any public training update",
+    "successful_public_updates_total": 9
+  },
+  "verification_device": "CUDA physical GPU1, RTX A6000; CUDA_VISIBLE_DEVICES=1, logical cuda:0"
+}
