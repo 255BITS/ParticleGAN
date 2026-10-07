@@ -31,6 +31,12 @@ the isolated named confirmation stream. There is one confirmation opportunity
 per arm; the boundary failure is retained without another draw. Training
 continues through the complete declared budget after either confirmation.
 
+Every-step noise has one later marginal covariance failure at update 850
+(`.851437 > .85`), followed by 45 full passes from 867 through 1600. It passes
+47 of 96 scheduled checks overall. Boundary-only noise passes 10 of 96 and
+has covariance failures at 1417, 1450 and 1500 after its first passing check.
+Neither result establishes that every observation after acquisition passes.
+
 The boundary arm trains an unchanged live prefix through 400 and verifies
 its entire state against PR331's saved prefix. After removing only the two
 newly registered, unused diagnostic streams, the full state digest is exactly
@@ -80,7 +86,7 @@ and distinguishes noise from spectral damping. Better numerical insensitivity
 is not a prerequisite for this observed training success.
 
 The uninterrupted every-step result shows the fixed public-API recipe can
-acquire the full Ring16 law and retain it through the remaining declared checks.
+acquire the full Ring16 law and finish with a long passing terminal sequence.
 It does not identify the exact backward instruction order causing the original
 reload benefit, establish a general noise schedule, or prove longer-term hold.
 The boundary success also shows that a single update can select a better path.

@@ -1,7 +1,9 @@
 Ring16 succeeds under a fixed tiny-noise rule applied to weak gradient singular
 subspaces before ordinary polar normalization. The fresh-live every-step arm
 first passes at 817, passes its one independent confirmation, and ends with 45
-consecutive full passes (covariance .504405, HQ .965576). The 401-only arm ends
+consecutive full passes (covariance .504405, HQ .965576). Covariance marginally
+fails once at 850 (.851437 > .85), then all checks from 867 onward pass;
+strict post-acquisition hold is not claimed. The 401-only arm ends
 with six full passes (covariance .481363), but its first-pass confirmation
 fails covariance .958379, so confirmed smoke is FAIL for that arm.
 

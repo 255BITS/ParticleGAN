@@ -54,6 +54,11 @@
       ],
       "gpu_model": "NVIDIA RTX A6000",
       "intervention_calls": 6,
+      "post_acquisition_failed_steps": [
+        1417,
+        1450,
+        1500
+      ],
       "prefix_identity": {
         "candidate_projected_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
         "exact_except_new_stream_registration": true,
@@ -80,7 +85,8 @@
         "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
       },
       "status": "COMPLETE",
-      "terminal_suffix": 6
+      "terminal_suffix": 6,
+      "terminal_suffix_first_step": 1517
     },
     {
       "any_full_pass": true,
@@ -133,6 +139,9 @@
       ],
       "gpu_model": "NVIDIA RTX A6000",
       "intervention_calls": 9600,
+      "post_acquisition_failed_steps": [
+        850
+      ],
       "prefix_identity": {
         "candidate_projected_state_digest": "7480d2590f44127581a9309df2f659076e7be993a2e74be018eedc757268e994",
         "exact_except_new_stream_registration": false,
@@ -159,7 +168,8 @@
         "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
       },
       "status": "COMPLETE",
-      "terminal_suffix": 45
+      "terminal_suffix": 45,
+      "terminal_suffix_first_step": 867
     }
   ],
   "baseline_identity": {
