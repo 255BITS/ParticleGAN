@@ -213,7 +213,9 @@
         "capped-input-gradients",
         "critic-gradient-penalty",
         "selectable-loss"
-      ]
+      ],
+      "unmeasured_display_backend": "cuda",
+      "unmeasured_display_reason": "No new execution: the preselected configuration refuses its control task map. Display the actual canonical CUDA declaration, which requires a registered study before enqueue; preserve every unresolved alternative and all historical evidence separately, with no source/outcome ranking or qualification."
     },
     {
       "active_search_by_backend": {

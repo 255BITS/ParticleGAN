@@ -21,7 +21,7 @@ PY
 
 /usr/bin/python reports/forge/prepare_inventory_family_pins.py \
   --staged runs/software/inventory-publication/staged.json \
-  --round configs/forge/rounds/gaussian-smoke-inventory-v2.json \
+  --round configs/forge/rounds/gaussian-smoke-inventory-v4.json \
   --old-board runs/software/pre-run-publication/technique-inventory.json \
   --old-selection runs/software/pre-run-publication/family-current-v1.json \
   --manifest runs/software/pre-run-publication/manifest.json \

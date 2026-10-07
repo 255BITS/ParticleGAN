@@ -17,6 +17,29 @@ publication = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(publication)
 
 
+def test_publication_prefers_recorded_then_canonical_declarations(monkeypatch):
+    from experiments.forge import planning, trainer_families
+    paths = [Path('alias.json'), Path('canonical.json'), Path('recorded.json')]
+    original = lambda root: paths
+    monkeypatch.setattr(planning, 'declaration_paths', original)
+    monkeypatch.setattr(trainer_families, 'load_families',
+                        lambda root: {'family': {'canonical_candidate': 'canonical'}})
+    with publication._prefer_recorded_and_canonical_declarations(ROOT, {'recorded'}):
+        assert [p.stem for p in planning.declaration_paths(ROOT)] == ['recorded', 'canonical', 'alias']
+    assert planning.declaration_paths is original
+
+
+def test_publication_restores_declarations_after_error(monkeypatch):
+    from experiments.forge import planning, trainer_families
+    original = lambda root: []
+    monkeypatch.setattr(planning, 'declaration_paths', original)
+    monkeypatch.setattr(trainer_families, 'load_families', lambda root: {})
+    with pytest.raises(RuntimeError):
+        with publication._prefer_recorded_and_canonical_declarations(ROOT):
+            raise RuntimeError('publication failed before writing')
+    assert planning.declaration_paths is original
+
+
 def _current_family_roster():
     pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
     pinned = {pin["trainer_family"] for pin in pins}

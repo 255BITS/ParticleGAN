@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
 import json
@@ -32,6 +33,24 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from experiments.forge.contracts import atomic_text, file_hash, identifier, read_json, stable_hash
 from experiments.forge.technique_board import render_markdown, write_report
+
+
+@contextmanager
+def _prefer_recorded_and_canonical_declarations(root, recorded_candidates=()):
+    """Keep real receipt identities, then canonical unmeasured aliases."""
+    from experiments.forge import planning
+    from experiments.forge.trainer_families import load_families
+    canonical = {family["canonical_candidate"] for family in load_families(root).values()}
+    recorded = set(recorded_candidates)
+    original = planning.declaration_paths
+    def preferred(directory):
+        return sorted(original(directory),
+                      key=lambda path: (path.stem not in recorded, path.stem not in canonical, path.stem))
+    planning.declaration_paths = preferred
+    try:
+        yield
+    finally:
+        planning.declaration_paths = original
 
 
 def _scalars(value):
@@ -328,9 +347,14 @@ if (root / 'experiments/forge/knowledge.py').is_file():
             if (source.get('digest'), source.get('origin_commit')) in sources:
                 recorded_candidates.add(request['candidate']['id'])
         original_declaration_paths = planning.declaration_paths
+        canonical_candidates = set()
+        if (root / 'experiments/forge/trainer_families.py').is_file():
+            from experiments.forge.trainer_families import load_families
+            canonical_candidates = {family['canonical_candidate'] for family in load_families(root).values()}
         def receipt_first_declarations(root):
             return sorted(original_declaration_paths(root),
-                          key=lambda path: (path.stem not in recorded_candidates, path.stem))
+                          key=lambda path: (path.stem not in recorded_candidates,
+                                            path.stem not in canonical_candidates, path.stem))
         planning.declaration_paths = receipt_first_declarations
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
         idea = planning.load_idea(root, idea_id)
@@ -2150,8 +2174,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     live = None
     if (missing or canonical_missing) and recorded_view is None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-current-") as temporary:
-            metadata = write_report(root, view_id, execution_backend=execution_backend,
-                                    output_prefix=Path(temporary) / "current")
+            recorded = {name for _, _, rows in reports for name, row in rows.items() if row.get("attempt_ids")}
+            with _prefer_recorded_and_canonical_declarations(root, recorded):
+                metadata = write_report(root, view_id, execution_backend=execution_backend,
+                                        output_prefix=Path(temporary) / "current")
             live = read_json(metadata["json"])
         for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
             if live.get(key) != manifest[key]:
