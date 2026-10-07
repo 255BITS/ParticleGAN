@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 80,
+      "benchmark/toy_audit": 81,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1538,
+      "support": 1539,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11774
+    "files": 11775
   },
   "coverage": {
-    "declared_count": 11774,
+    "declared_count": 11775,
     "missing": [],
     "stale": [],
-    "tracked_count": 11774,
+    "tracked_count": 11775,
     "unclassified": [],
     "valid": true
   },
@@ -1259,6 +1259,13 @@
       "family": "benchmark/toy_audit",
       "git_blob": "b63e4294deb847c86ba4ec4388c3e33618efc74a",
       "path": "benchmarks/toy_audit/ring16_quality.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "1899a09f85a3507afc32bde6fa4604afbbea4f1a",
+      "path": "benchmarks/toy_audit/ring16_restart.py",
       "role": "support",
       "suggested_tiers": []
     },
