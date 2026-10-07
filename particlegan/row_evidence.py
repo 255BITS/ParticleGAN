@@ -109,9 +109,20 @@ class RowEvidence:
         lo = torch.zeros((), device=t2.device, dtype=t2.dtype)
         hi = torch.full_like(lo, math.log(1e6))
         nan = torch.full_like(t2, float("nan"))
+        if self.d == 2:
+            # These factors stay fixed for all 24 trials. Keep the two
+            # divisions in their original order to preserve rounding.
+            exponent = -(n_eff - 2.0) / 2.0
+            denominator = (n_eff - 1.0).clamp_min(1e-6)
+
+            def pvalue(value):
+                return (exponent * torch.log1p(value / denominator)).exp()
+        else:
+            def pvalue(value):
+                return self._pvalue(value, n_eff)
         for _ in range(24):
             mid = (lo + hi) / 2
-            med = torch.where(ok, self._pvalue(t2 / mid.exp(), n_eff), nan).nanmedian()
+            med = torch.where(ok, pvalue(t2 / mid.exp()), nan).nanmedian()
             below = med < 0.5
             lo, hi = torch.where(below, mid, lo), torch.where(below, hi, mid)
         c = ((lo + hi) / 2).exp()
