@@ -1,0 +1,293 @@
+{
+  "scope": "implementation timing and correctness only; no scientific qualification",
+  "owner_root": "/ml2/hypergan/pg-atlas986-fiveword25-runtime-20261006/v1/owner-source",
+  "adapter": {
+    "bytes": 47593,
+    "sha256": "96f52767867d6e227be780560d03b56a96989bd451e87373b33549fffa33dc55"
+  },
+  "binding": {
+    "bytes": 40174,
+    "sha256": "a2772e2f2ee62d904d20822a3abe194f8e526589d1e97a1c712a5219e5950c2c"
+  },
+  "baseline_module": {
+    "bytes": 9397,
+    "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+  },
+  "optimized_module": {
+    "bytes": 9851,
+    "sha256": "dcc0968f7a784deed9de92523fa20ae4331589b9ff9631967fffffb949650eb4"
+  },
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "torch": "2.13.0+cu126",
+  "device": "cpu",
+  "cpu_threads": 1,
+  "schedule_contract": "original full recipe and 20001 execution limit retained in every fixture",
+  "windows": [
+    {
+      "index": 0,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 256,
+      "seconds": 6.272649246733636,
+      "ms_per_update": 24.502536120053264,
+      "prefix_seconds": {
+        "32": 0.8260524608194828,
+        "64": 1.580757036805153,
+        "128": 3.1343204430304468,
+        "256": 6.272647246718407
+      },
+      "gpu_before": null,
+      "gpu_after": null,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    },
+    {
+      "index": 1,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 256,
+      "seconds": 6.2308229631744325,
+      "ms_per_update": 24.339152199900127,
+      "prefix_seconds": {
+        "32": 0.7560280011966825,
+        "64": 1.5322893923148513,
+        "128": 3.0619154260493815,
+        "256": 6.230820623226464
+      },
+      "gpu_before": null,
+      "gpu_after": null,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    },
+    {
+      "index": 2,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 256,
+      "seconds": 6.266506228595972,
+      "ms_per_update": 24.478539955453016,
+      "prefix_seconds": {
+        "32": 0.8326025898568332,
+        "64": 1.604705168865621,
+        "128": 3.137388181872666,
+        "256": 6.266505248844624
+      },
+      "gpu_before": null,
+      "gpu_after": null,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    },
+    {
+      "index": 3,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 256,
+      "seconds": 6.663168590050191,
+      "ms_per_update": 26.028002304883557,
+      "prefix_seconds": {
+        "32": 0.8374056951142848,
+        "64": 1.65593173308298,
+        "128": 3.297403462231159,
+        "256": 6.663166310172528
+      },
+      "gpu_before": null,
+      "gpu_after": null,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    }
+  ],
+  "equivalence": {
+    "(0, 'baseline')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(1, 'optimized')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(2, 'optimized')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(3, 'baseline')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    }
+  },
+  "stability": {
+    "updates_per_case": 1200,
+    "tensor_bytes_and_values_equal": true,
+    "differences": []
+  },
+  "summary": {
+    "baseline": 25.26526921246841,
+    "optimized": 24.40884607767657,
+    "observed_time_reduction_percent": 3.3897249524228124
+  },
+  "microbenchmark": [
+    {
+      "rows": 5,
+      "counts": {
+        "baseline": {
+          "aten::div": 97,
+          "aten::sub": 48,
+          "aten::neg": 24,
+          "aten::clamp_min": 24
+        },
+        "optimized": {
+          "aten::sub": 2,
+          "aten::neg": 1,
+          "aten::div": 74,
+          "aten::clamp_min": 1
+        }
+      },
+      "windows": [
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 777.0347165205749
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 562.9617699014489
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 498.96958353201626
+        },
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 712.4070016288897
+        }
+      ],
+      "mean_us": {
+        "baseline": 744.7208590747323,
+        "optimized": 530.9656767167326
+      },
+      "observed_time_reduction_percent": 28.70272529006059
+    },
+    {
+      "rows": 25,
+      "counts": {
+        "baseline": {
+          "aten::div": 97,
+          "aten::sub": 48,
+          "aten::neg": 24,
+          "aten::clamp_min": 24
+        },
+        "optimized": {
+          "aten::sub": 2,
+          "aten::neg": 1,
+          "aten::div": 74,
+          "aten::clamp_min": 1
+        }
+      },
+      "windows": [
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 761.5352169523248
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 510.38233232247876
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 504.8419061495224
+        },
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 717.6577601057943
+        }
+      ],
+      "mean_us": {
+        "baseline": 739.5964885290596,
+        "optimized": 507.6121192360006
+      },
+      "observed_time_reduction_percent": 31.36634271404387
+    },
+    {
+      "rows": 128,
+      "counts": {
+        "baseline": {
+          "aten::div": 97,
+          "aten::sub": 48,
+          "aten::neg": 24,
+          "aten::clamp_min": 24
+        },
+        "optimized": {
+          "aten::sub": 2,
+          "aten::neg": 1,
+          "aten::div": 74,
+          "aten::clamp_min": 1
+        }
+      },
+      "windows": [
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 763.8298729943926
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 584.4999004693818
+        },
+        {
+          "case": "optimized",
+          "calls": 512,
+          "us_per_call": 591.7750195294502
+        },
+        {
+          "case": "baseline",
+          "calls": 512,
+          "us_per_call": 814.1768976202002
+        }
+      ],
+      "mean_us": {
+        "baseline": 789.0033853072964,
+        "optimized": 588.137459999416
+      },
+      "observed_time_reduction_percent": 25.458182949322616
+    }
+  ],
+  "raw_artifacts": {
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas_matched_cpu.pstats": {
+      "bytes": 65235,
+      "sha256": "316cb4b36c04a60eadf4facddb2b727c5550b4ea5b3854b39a3083031723f533"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-cpu/result.json": {
+      "bytes": 3715,
+      "sha256": "1a76bb06062d72779da991dd48d6cc3fea714ae53de7b71ccf51ce38797d5a4b"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-cpu/baseline-stability.pt": {
+      "bytes": 5978087,
+      "sha256": "97dafc841302a753bc01752f953bab06f6f5ced6bf6601d00f8b369d6ba6ceba"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-cpu/optimized-stability.pt": {
+      "bytes": 5981896,
+      "sha256": "968b1ec62012730c81a9e5e6ecdf4817a93c98b0de271c75163cdd701eb05f85"
+    }
+  },
+  "validation": {
+    "tests": "143 passed, 4 CUDA-only tests skipped in 12.42s; then 2 targeted CUDA tests passed on physical GPU0 in 11.40s",
+    "state_comparison": "All tensor bytes and scalar values including same NaN diagnostics; full recipe/optimizer/controller/state, final parameter gradients, every measured loss output, and 14 named RNG streams",
+    "finite_training_outputs": true,
+    "naturally_observed_at_1200": {
+      "row_gate_hold_steps": 157,
+      "flagged_rows_sum": 206,
+      "birth_death_evals": 1200,
+      "birth_death_moves": 0,
+      "controller_updates": 1200
+    },
+    "additional_events": "Exact public GANTrainer parity at primed stationarity, 16 row moves/resets, blocked drift and anchored release in tests/test_row_evidence_scale.py"
+  },
+  "host_cpu": "AMD Ryzen 9 5900X, 12 cores / 24 threads"
+}
