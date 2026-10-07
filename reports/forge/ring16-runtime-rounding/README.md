@@ -1,27 +1,63 @@
-# Ring16 runtime rounding: saved-state audit and next CUDA diagnostic
+# Ring16 runtime rounding: CUDA accumulation-order diagnostic
 
-**The saved evidence does not show a floating-point conversion causing the
-restart difference.** All 25 model-state tensors are float32. The complete
-400-update checkpoint, critic weights before update 401 and first six forwards
-are byte-identical between live and restored execution. The first difference
-is still the newly computed critic backward gradient.
+**Serializing autograd only at update 401 eliminates the measured live/reload
+discrepancy.** The two ordinary CUDA arms reproduce the historical live and
+reloaded critic gradients exactly. The two serialized arms instead produce
+identical critic gradients and **identical entire 401-update contexts**, including
+G, D, prior, optimizers and every consumed RNG stream. The serialized result
+matches neither ordinary trajectory: it is a third numerical path, with full
+1,600-update quality still unmeasured.
 
-An existing public execution option provides a concrete next control:
+The experiment isolates the execution constraint exposed by
 [`GANTrainer(serial_backward=True)`](../../../particlegan/training.py) disables
 autograd multithreading for the whole update. Its documentation describes exact
 CUDA continuation with higher-order penalties and explicitly warns that this
 changes gradient summation order. That is the API's documented intent and
-existing implementation, **not a new verification for this Ring16 recipe**.
+existing implementation. Here it is applied externally only to update 401;
+all four checkpoint declarations retain their original false-mode contract.
 
-No neural experiment ran in this investigation: CUDA is unavailable in the
-current execution environment. CPU work only inspects saved tensors and source.
-The original Ring16 PASS/FAIL outcomes and current inventory remain unchanged.
+All four declared arms ran on an NVIDIA RTX A6000, through the public API,
+using seed 0, the public deterministic initializer, the original learned
+256-component MoG, batch 128 and constant learning rates. The original full
+Ring16 PASS/FAIL outcomes and current inventory remain unchanged.
 
-On the user's request to execute, the exact CUDA-only campaign command was
+Before GPU exposure was restored, the exact CUDA-only campaign command was
 actually invoked and refused before any arm or output directory was created.
 The [execution-blocker receipt](execution-blocker.json) preserves its command,
 source/protocol hashes and local stdout/stderr hash: **zero scientific attempts,
-updates or scored draws**. The four-arm campaign remains unconsumed.
+updates or scored draws** in that refused invocation. It remains preserved under
+its original source; the completed CUDA execution uses source
+`fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca` and the unchanged ready protocol.
+
+## Completed comparison
+
+[Compact CUDA results](cuda-results.json) retain original receipt identities,
+gradient/state equality, graph metadata and source hashes. These are causal
+diagnostic comparisons, with no technique ranking or quality qualification.
+
+| Compared update-401 pair | Critic gradients exact | Whole context exact | Hidden critic polar relative difference | Changed graph sequence relations |
+| --- | --- | --- | ---: | ---: |
+| Ordinary live / reloaded | No | No | .25199047 | 1,054 / 7,503 |
+| Serialized live / reloaded | **Yes** | **Yes** | **0** | **0 / 7,503** |
+| Ordinary live / serialized live | No | No | .28366329 | Recorded in receipt |
+| Ordinary reloaded / serialized reloaded | No | No | .31745353 | Recorded in receipt |
+
+The complete 400-update contexts match the archived digest exactly. All 24
+4,096-sample prefix observations match between the two fresh arms and the
+original retained prefix. At 401, real batches and the first six forward inputs
+and outputs match in every comparison. Every named RNG state matches after the
+update. The ordinary gradients reproduce all six historical critic parameter
+gradients bit for bit, so the graph inspection preserves the original observed
+boundary discrepancy.
+
+The [actual-training GIF](media/shared-prefix.gif) shows the common ordinary
+prefix through update 400; its [index](media/index.json) binds both fresh CUDA
+observation files. It does not imply that update-401 differences are visually
+resolved, or that the serialized trajectory later passes quality.
+
+**Causal gate: PASS for removing the measured 401 discrepancy with serialized
+execution. Quality gate: INCOMPLETE by design.** This is one fixed-state,
+same-seed intervention, not a seed study or an independent convergence result.
 
 ## Saved numerical findings
 
@@ -64,7 +100,7 @@ unrecorded intermediate remains a separate hypothesis; neither is established
 by dtype metadata. If a future graph/kernel trace identifies an actual changed
 conversion, declare that conversion as its own bounded intervention.
 
-## Why accumulation order is worth isolating
+## What changed in the runtime
 
 The baseline checkpoint has `serial_backward=False`, which inherits the
 caller's autograd multithreading setting. Legacy checkpoints do not preserve
@@ -72,21 +108,41 @@ that ambient setting. The BCAP update combines the logistic game gradient and
 two penalty branches computed with `torch.autograd.grad(create_graph=True)`.
 The final `loss_d.backward()` merges contributions from this higher-order graph.
 
-The concrete hypothesis is that rebuilding runtime objects changes the order
+The tested hypothesis is that rebuilding runtime objects changes the order
 in which those contributions are added to the same critic weight gradient.
 Floating-point addition rounds after each operation, so changing the order can
 change the final few bits even when every input, weight and forward value is
 identical. The measured SVD normalization can then magnify those few bits in
 almost-zero singular directions. This explains how the observed pattern could
-arise; it does not identify the responsible engine operation.
+arise. The paired CUDA result now supports the ordering mechanism, while the
+exact executed node sequence remains unrecorded.
 
-Locally installed PyTorch 2.14 engine headers order ready nodes using sequence
-numbers; their input buffer explicitly accumulates multiple contributions.
-Those implementation facts and the public serial-backward option motivate an
-ordering control. **No saved graph or execution-order trace exists for the
-original first differing backward, so this is a hypothesis, not an identified
-root cause.** The old runtime-buffer/statistics/double-load controls ruled out
-their specific deltas without recording engine execution order.
+The installed PyTorch `2.14.0+cu130` primary headers provide a specific explanation:
+
+- `torch/include/ATen/SequenceNumber.h:7` describes the node enumeration as thread local.
+- `torch/include/torch/csrc/autograd/node.h:117` explains that sequence numbers from different threads have no guaranteed relative order; line 151 obtains the incrementing value when constructing a node.
+- `torch/include/torch/csrc/autograd/node.h:349` describes how larger numbers take priority, and that parameter accumulators receive `UINT64_MAX`.
+- `torch/include/torch/csrc/autograd/engine.h:102` compares ready-node sequence numbers; `input_buffer.h:52` exposes accumulation of multiple contributions.
+
+The [verification receipt](cuda-verification.json) records each installed header's
+exact path, hash and cited lines. These citations describe implementation of the
+executed version, rather than an assumption about another PyTorch release.
+
+All four actual critic graphs have the same 123-node topology. With ordinary
+execution, live nodes occupy two sequence-number ranges: 46 below 20,000 and
+69 above 50,000, consistent with different histories of main/worker counters.
+After reload, all 115 non-accumulator nodes have small numbers. This changes
+1,054 pairwise priority relations, including newly equal ties. Parameter
+accumulators themselves retain their maximum sequence number.
+
+With serialization, the two graphs' relative sequence relations agree exactly,
+despite the fresh graph's large absolute offset. This supports the inference
+that runtime-local thread counter history changes ready-node priority and
+floating-point accumulation. **Graph metadata records priority, not actual node
+execution order.** Disabling multithreading also changes thread execution, so
+the specific internal addition/kernel is not independently isolated here.
+The earlier buffer/mode/statistics/double-load controls retain their original
+scope and do not explain this measured difference.
 
 Parameter version counters and object/storage identity change when rebuilding.
 Recorded tensor shape, stride, contiguity, dtype and device agree. Counter or
@@ -95,12 +151,12 @@ proof of a cause.
 
 ## Boundary first; every-step behavior is a separate question
 
-The [prospective protocol](protocol.json) investigates **update 401**, immediately
+The frozen [protocol](protocol.json) investigates **update 401**, immediately
 after the user's 400-update boundary. It leaves the first 400 updates unchanged.
 Disabling autograd multithreading only at that backward distinguishes a local
 summation-order effect from retraining an entirely different trajectory.
 
-| Planned diagnostic arm | New updates | Change |
+| Completed diagnostic arm | New updates | Change |
 | --- | ---: | --- |
 | Fresh prefix and live graph | 401 | Read actual backward graph at 401 |
 | Fresh prefix and serialized 401 | 401 | Same graph reads; disable multithreading only at 401 |
@@ -115,6 +171,10 @@ the archived gradients. It reads topology/sequence numbers, adds no node
 execution hooks, and invokes original backward/optimizer operations once.
 
 Budget: **4 attempts, 804 new updates, 360 reserved seconds, zero retries**.
+All four complete; measured whole-subprocess debit is **24.795115167 seconds**.
+This is campaign cost, not a speed comparison. Fresh arms add 48 scored draws;
+restored arms add none. The campaign is now fully consumed, with no automatic
+continuation or repeat authorized within its declaration.
 Controller hard timeouts include process startup, context construction, training,
 persistence and exit: 150 seconds per fresh arm and 30 per restored arm.
 Completed arms charge measured process wall time; interrupted arms retain their
@@ -127,17 +187,11 @@ the archived digest exactly. Any mismatch stops that arm without substituting
 the archived fixture. Compare actual inputs, raw gradients, polar factors,
 graph topology/relative sequence order, named streams and full401 contexts.
 
-If the serialized pair agrees while the ordinary pair differs, that shows this
-execution constraint removes the measured boundary discrepancy. It does not
-prove exactly which engine ordering detail changed or establish 1,600-update
-acquisition/4,000-update continuous stability. If ordinary diagnostic gradients
-do not reproduce the archived ones, report a new instrumentation/runtime cohort
-and withhold historical causal attribution.
-
-The causal test is therefore **UNTESTED**. Exact equality of the serial pair
-would isolate the update-401 discrepancy to the changed execution constraint;
-following the resulting states to 1,600 would still be necessary to establish
-whether that one boundary intervention explains the full-quality PASS.
+The preregistered equality prediction passes, with historical instrumentation
+parity also passing. The serialized result selects a **third trajectory**; it
+does not reproduce the ordinary restored gradient known to lead to PASS.
+Following this state to 1,600 is a separate budgeted question, needed to establish
+whether a one-boundary intervention repairs quality. No such outcome is claimed.
 
 For a continuous learner, setting the public `serial_backward=True` **from the
 start and on every step** is a separate global trainer candidate worth evaluating
@@ -148,7 +202,8 @@ No all-step candidate or conversion arm is declared or paid in this campaign.
 
 ## Execution and limitations
 
-The current process has no NVIDIA device nodes. The parent host inspection found
+In the earlier blocked execution, the process had no NVIDIA device nodes.
+The parent host inspection found
 an installed NVIDIA kernel module and a loadable `libcuda.so.1`, but `cuInit(0)`
 returned `100` (`CUDA_ERROR_NO_DEVICE`). Its mount inspection found `/dev`
 overlaid by a `nodev` tmpfs. PyTorch reports zero CUDA devices and
@@ -158,8 +213,11 @@ namespace, without establishing a driver installation failure. The exact parent
 inspection identity is retained in the blocker receipt. Device/mount/driver
 changes were not attempted.
 
-Use the unchanged, unconsumed protocol from this branch on a CUDA host. Its output
-root must be absent; it is still absent after the failed preflight:
+GPU exposure subsequently became available after the execution environment
+changed; both physical A6000s and CUDA were visible. The completed campaign
+selected physical GPU 0 with `CUDA_VISIBLE_DEVICES=0`, logical `cuda:0`.
+Its original command is retained for reproduction. **The output root is now
+populated and must not be reused; no unchanged campaign repeat is recommended.**
 
 ```sh
 mkdir -p runs/reports/ring16-runtime-rounding
@@ -172,16 +230,22 @@ CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/
 tail -F runs/reports/ring16-runtime-rounding/cuda.log
 ```
 
-After all four CUDA receipts complete, the saved-only
-[boundary comparison](compare_boundary.py) creates the compact causal readout.
-Render the retained actual training snapshots into a fixed-axis GIF before
-publishing any completed neural-test result. No new training or GIF is claimed
-here; the original media remain bound to
+The saved-only [boundary comparison](compare_boundary.py) and
+[renderer](render_prefix.py) use retained tensors, with zero model calls or new
+random draws. Direct helper invocations require `PYTHONPATH=.` from the checkout
+root. An initial comparison invocation lacking that import path failed without
+training; its error is archived, followed by successful corrected analysis.
+[Archive receipt](archive.json) preserves the exact raw training states, traces,
+observations, stdout, source manifests and analysis logs outside Git.
+Original historical evidence remains bound to
 [PR331](https://github.com/255BITS/ParticleGAN/pull/331).
 
 Source and bindings are frozen in the protocol. Diagnostics operate through
 the public ParticleGAN API, use seed 0 and named deterministic initialization,
 retain every consumed RNG stream, preserve constant rates, and grant no
 qualification. [The current inventory](../technique-inventory.md) remains the
-single generated leaderboard. GitHub publication also remains pending because
-network access is unavailable in this environment.
+single generated leaderboard. This report changes no production optimizer,
+default, task, qualification result or inventory row. The next scientific
+question is whether a globally declared every-step serial trainer continuously
+acquires and retains Ring16, or whether a single-boundary intervention suffices;
+both need new frozen budgets and their own actual quality gates.

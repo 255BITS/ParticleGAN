@@ -1,0 +1,37 @@
+{
+  "both_fresh_prefix_observations_bit_exact": true,
+  "gif": {
+    "axes": [
+      -12,
+      12
+    ],
+    "boundary401_samples_claimed": false,
+    "bytes": 315978,
+    "file": "shared-prefix.gif",
+    "frames": 9,
+    "last_frame_update": 400,
+    "maximum_absolute_prefix_sample": 11.941645622253418,
+    "sample_count_per_frame": 4096,
+    "sha256": "ebf97ea31b6702e39fd9367ceef6c85b9bf58404d88f6b6f7a7408500f8a5a6c",
+    "steps": [
+      17,
+      67,
+      117,
+      167,
+      217,
+      250,
+      300,
+      350,
+      400
+    ],
+    "target_panel": "Analytic centers and 2-sigma contours; no target draw."
+  },
+  "new_model_calls": 0,
+  "new_scoring_draws": 0,
+  "qualification_input": false,
+  "scope": "retained_actual_cuda_training_prefix",
+  "source_artifacts": {
+    "runs/api/ring16-runtime-rounding-v1/fresh_graph/observations.pt": "2cdd89d1c2aaf52dd384f30f7f1c827d869ba26452291de13d3f0a857b9a7f88",
+    "runs/api/ring16-runtime-rounding-v1/fresh_serial401/observations.pt": "2cdd89d1c2aaf52dd384f30f7f1c827d869ba26452291de13d3f0a857b9a7f88"
+  }
+}

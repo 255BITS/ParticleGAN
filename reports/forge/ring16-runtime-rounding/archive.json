@@ -1,0 +1,14 @@
+{
+  "archive_members": 50,
+  "archive_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-runtime-rounding-v1.tar.gz",
+  "bytes": 2956852,
+  "contains": "All four completed CUDA arm artifacts and campaign summary; local diagnostic/report logs existing at archive creation. Later publication logs remain separate.",
+  "every_member_hash_verified": true,
+  "new_model_calls": 0,
+  "original_files": 49,
+  "originals_unchanged": true,
+  "qualification_input": false,
+  "restore": "Extract into a new directory; archive paths preserve runs/api and runs/reports. Verify every file with archive-manifest.json before analysis.",
+  "scope": "verified_byte_exact_local_archive",
+  "sha256": "ab129bef834442151f07d85f56def5d9c5c71e8eed5513eec2cb8f0ebf958531"
+}

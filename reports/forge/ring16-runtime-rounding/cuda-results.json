@@ -1,0 +1,1329 @@
+{
+  "analysis_model_calls": 0,
+  "comparisons": {
+    "live_serial_effect": {
+      "all_named_stream_states_exact": true,
+      "critic_gradient": {
+        "D.net.0.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.0.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 1.862645149230957e-09
+        },
+        "D.net.2.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.2.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 3.725290298461914e-09
+        },
+        "D.net.4.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.4.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 1.4901161193847656e-08
+        }
+      },
+      "critic_graph_relative_sequence_order_exact": false,
+      "critic_graph_sequence_relations": {
+        "changed_relative_relations": 2070,
+        "compared_node_pairs": 7503,
+        "examples": [
+          {
+            "left_sequence": [
+              51244,
+              18445
+            ],
+            "node_ids": [
+              18,
+              11
+            ],
+            "right_sequence": [
+              51267,
+              51305
+            ],
+            "types": [
+              "MulBackward0",
+              "AddBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18444
+            ],
+            "node_ids": [
+              18,
+              12
+            ],
+            "right_sequence": [
+              51267,
+              51304
+            ],
+            "types": [
+              "MulBackward0",
+              "SqueezeBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18443
+            ],
+            "node_ids": [
+              18,
+              13
+            ],
+            "right_sequence": [
+              51267,
+              51303
+            ],
+            "types": [
+              "MulBackward0",
+              "SumBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18442
+            ],
+            "node_ids": [
+              18,
+              14
+            ],
+            "right_sequence": [
+              51267,
+              51302
+            ],
+            "types": [
+              "MulBackward0",
+              "MulBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18441
+            ],
+            "node_ids": [
+              18,
+              15
+            ],
+            "right_sequence": [
+              51267,
+              51301
+            ],
+            "types": [
+              "MulBackward0",
+              "AddBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18440
+            ],
+            "node_ids": [
+              18,
+              16
+            ],
+            "right_sequence": [
+              51267,
+              51300
+            ],
+            "types": [
+              "MulBackward0",
+              "MulBackward0"
+            ]
+          }
+        ]
+      },
+      "critic_graph_topology_exact": true,
+      "first_six_forward_inputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_six_forward_outputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hidden_critic_polar": {
+        "bit_exact": false,
+        "max_absolute_difference": 0.4023449122905731,
+        "relative_frobenius_difference": 0.2836632944438053
+      },
+      "real_batch_bit_exact": true,
+      "whole_context401_exact": false
+    },
+    "ordinary_live_vs_restored": {
+      "all_named_stream_states_exact": true,
+      "critic_gradient": {
+        "D.net.0.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.0.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 5.587935447692871e-09
+        },
+        "D.net.2.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.2.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 3.725290298461914e-09
+        },
+        "D.net.4.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.4.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 1.30385160446167e-08
+        }
+      },
+      "critic_graph_relative_sequence_order_exact": false,
+      "critic_graph_sequence_relations": {
+        "changed_relative_relations": 1054,
+        "compared_node_pairs": 7503,
+        "examples": [
+          {
+            "left_sequence": [
+              51244,
+              18445
+            ],
+            "node_ids": [
+              18,
+              11
+            ],
+            "right_sequence": [
+              44,
+              45
+            ],
+            "types": [
+              "MulBackward0",
+              "AddBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              51244,
+              18444
+            ],
+            "node_ids": [
+              18,
+              12
+            ],
+            "right_sequence": [
+              44,
+              44
+            ],
+            "types": [
+              "MulBackward0",
+              "SqueezeBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              51243,
+              18445
+            ],
+            "node_ids": [
+              19,
+              11
+            ],
+            "right_sequence": [
+              43,
+              45
+            ],
+            "types": [
+              "UnsqueezeBackward0",
+              "AddBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              51243,
+              18444
+            ],
+            "node_ids": [
+              19,
+              12
+            ],
+            "right_sequence": [
+              43,
+              44
+            ],
+            "types": [
+              "UnsqueezeBackward0",
+              "SqueezeBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              51243,
+              18443
+            ],
+            "node_ids": [
+              19,
+              13
+            ],
+            "right_sequence": [
+              43,
+              43
+            ],
+            "types": [
+              "UnsqueezeBackward0",
+              "SumBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              51245,
+              18445
+            ],
+            "node_ids": [
+              34,
+              11
+            ],
+            "right_sequence": [
+              45,
+              45
+            ],
+            "types": [
+              "SinBackward0",
+              "AddBackward0"
+            ]
+          }
+        ]
+      },
+      "critic_graph_topology_exact": true,
+      "first_six_forward_inputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_six_forward_outputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hidden_critic_polar": {
+        "bit_exact": false,
+        "max_absolute_difference": 0.5395882427692413,
+        "relative_frobenius_difference": 0.2519904709911514
+      },
+      "real_batch_bit_exact": true,
+      "whole_context401_exact": false
+    },
+    "restored_serial_effect": {
+      "all_named_stream_states_exact": true,
+      "critic_gradient": {
+        "D.net.0.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.0.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 7.450580596923828e-09
+        },
+        "D.net.2.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.2.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 6.51925802230835e-09
+        },
+        "D.net.4.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.4.weight": {
+          "bit_exact": false,
+          "max_absolute_difference": 2.60770320892334e-08
+        }
+      },
+      "critic_graph_relative_sequence_order_exact": false,
+      "critic_graph_sequence_relations": {
+        "changed_relative_relations": 1059,
+        "compared_node_pairs": 7503,
+        "examples": [
+          {
+            "left_sequence": [
+              44,
+              44
+            ],
+            "node_ids": [
+              18,
+              12
+            ],
+            "right_sequence": [
+              67,
+              104
+            ],
+            "types": [
+              "MulBackward0",
+              "SqueezeBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              44,
+              43
+            ],
+            "node_ids": [
+              18,
+              13
+            ],
+            "right_sequence": [
+              67,
+              103
+            ],
+            "types": [
+              "MulBackward0",
+              "SumBackward1"
+            ]
+          },
+          {
+            "left_sequence": [
+              44,
+              42
+            ],
+            "node_ids": [
+              18,
+              14
+            ],
+            "right_sequence": [
+              67,
+              102
+            ],
+            "types": [
+              "MulBackward0",
+              "MulBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              44,
+              41
+            ],
+            "node_ids": [
+              18,
+              15
+            ],
+            "right_sequence": [
+              67,
+              101
+            ],
+            "types": [
+              "MulBackward0",
+              "AddBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              44,
+              40
+            ],
+            "node_ids": [
+              18,
+              16
+            ],
+            "right_sequence": [
+              67,
+              100
+            ],
+            "types": [
+              "MulBackward0",
+              "MulBackward0"
+            ]
+          },
+          {
+            "left_sequence": [
+              44,
+              39
+            ],
+            "node_ids": [
+              18,
+              17
+            ],
+            "right_sequence": [
+              67,
+              99
+            ],
+            "types": [
+              "MulBackward0",
+              "CosBackward0"
+            ]
+          }
+        ]
+      },
+      "critic_graph_topology_exact": true,
+      "first_six_forward_inputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_six_forward_outputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hidden_critic_polar": {
+        "bit_exact": false,
+        "max_absolute_difference": 0.553043857216835,
+        "relative_frobenius_difference": 0.3174535253133032
+      },
+      "real_batch_bit_exact": true,
+      "whole_context401_exact": false
+    },
+    "serialized_live_vs_restored": {
+      "all_named_stream_states_exact": true,
+      "critic_gradient": {
+        "D.net.0.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.0.weight": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.2.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.2.weight": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.4.bias": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        },
+        "D.net.4.weight": {
+          "bit_exact": true,
+          "max_absolute_difference": 0.0
+        }
+      },
+      "critic_graph_relative_sequence_order_exact": true,
+      "critic_graph_sequence_relations": {
+        "changed_relative_relations": 0,
+        "compared_node_pairs": 7503,
+        "examples": []
+      },
+      "critic_graph_topology_exact": true,
+      "first_six_forward_inputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_six_forward_outputs_bit_exact": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "hidden_critic_polar": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0,
+        "relative_frobenius_difference": 0.0
+      },
+      "real_batch_bit_exact": true,
+      "whole_context401_exact": true
+    }
+  },
+  "critic_graph_summary": {
+    "fresh_graph": {
+      "accumulator_nodes": 8,
+      "autograd_multithreading_enabled": true,
+      "maximum_nonaccumulator_sequence": 51274,
+      "minimum_nonaccumulator_sequence": 18400,
+      "nodes": 123,
+      "nonaccumulator_nodes_above_50000": 69,
+      "nonaccumulator_nodes_below_20000": 46
+    },
+    "fresh_serial401": {
+      "accumulator_nodes": 8,
+      "autograd_multithreading_enabled": false,
+      "maximum_nonaccumulator_sequence": 51320,
+      "minimum_nonaccumulator_sequence": 51200,
+      "nodes": 123,
+      "nonaccumulator_nodes_above_50000": 115,
+      "nonaccumulator_nodes_below_20000": 0
+    },
+    "restored_graph": {
+      "accumulator_nodes": 8,
+      "autograd_multithreading_enabled": true,
+      "maximum_nonaccumulator_sequence": 74,
+      "minimum_nonaccumulator_sequence": 0,
+      "nodes": 123,
+      "nonaccumulator_nodes_above_50000": 0,
+      "nonaccumulator_nodes_below_20000": 115
+    },
+    "restored_serial401": {
+      "accumulator_nodes": 8,
+      "autograd_multithreading_enabled": false,
+      "maximum_nonaccumulator_sequence": 120,
+      "minimum_nonaccumulator_sequence": 0,
+      "nodes": 123,
+      "nonaccumulator_nodes_above_50000": 0,
+      "nonaccumulator_nodes_below_20000": 115
+    }
+  },
+  "inputs": {
+    "runs/api/ring16-runtime-rounding-v1/fresh_graph/receipt.json": "728bd7885f97aadc49ad55b099b788e257df65c33a07ba42ebd2e72bf0297101",
+    "runs/api/ring16-runtime-rounding-v1/fresh_graph/state401.pt": "8d5cea490eb26d74fe9152d6099d87aca6c7af6b718eb363c18be902684c18fc",
+    "runs/api/ring16-runtime-rounding-v1/fresh_graph/trace401.pt": "d183345af2de7565f350569268404ca55bd26e30bd198c498fc74de3c6f3a28a",
+    "runs/api/ring16-runtime-rounding-v1/fresh_serial401/receipt.json": "64b3d39024b11a1d656e0eaf3dff85f0f4cfee01f730127bd31fbafc8f4b65fc",
+    "runs/api/ring16-runtime-rounding-v1/fresh_serial401/state401.pt": "76d8f29af2257bf5c93319f7832fe82a3aa4f962522c8bff5eb475a432525393",
+    "runs/api/ring16-runtime-rounding-v1/fresh_serial401/trace401.pt": "5b2c088e3d6270c1fea34a7c550f363297c922c6b3d2d7ac62f66b68be96c218",
+    "runs/api/ring16-runtime-rounding-v1/restored_graph/receipt.json": "ea6fa327e612433885f98367ac5b47906216ced48b427f466bbe0ba4c879dbd0",
+    "runs/api/ring16-runtime-rounding-v1/restored_graph/state401.pt": "2d64a8e631bfde508017f0eae0779d69cbe31ffb0f8484bfaa7210a2a120e308",
+    "runs/api/ring16-runtime-rounding-v1/restored_graph/trace401.pt": "aaff769acb70a542c914da9919578df64154c6541e6fe4f668fd0dadd91277cd",
+    "runs/api/ring16-runtime-rounding-v1/restored_serial401/receipt.json": "a0245633087e055409cbdab66d65951da7636216e9f705c834f6fb0e42bf98ca",
+    "runs/api/ring16-runtime-rounding-v1/restored_serial401/state401.pt": "66c009536a48fa7376bfee1e23e81739b281d46617b4677a70013c0f31e09e65",
+    "runs/api/ring16-runtime-rounding-v1/restored_serial401/trace401.pt": "19afb0a03bcea8564c35f14c0e8ee9790510b0965a80e50043220b9c95bf7d6c"
+  },
+  "instrumentation_cohort_parity": {
+    "fresh_graph": {
+      "D.net.0.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.0.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.2.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.2.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.4.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.4.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      }
+    },
+    "restored_graph": {
+      "D.net.0.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.0.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.2.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.2.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.4.bias": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      },
+      "D.net.4.weight": {
+        "bit_exact": true,
+        "max_absolute_difference": 0.0
+      }
+    }
+  },
+  "new_updates": 804,
+  "qualification_input": false,
+  "receipts": {
+    "fresh_graph": {
+      "arm": "fresh_graph",
+      "artifacts": {
+        "boundary-runtime.json": "a91074d75a327fb8239bbbe25000720aefdcc9050df18b4a0f078555750a2619",
+        "curve.json": "6cc835007cdd82fdfbff6424b32a8ead59b9b8deadff6c0609b7cf54b45be6e3",
+        "frozen-protocol.json": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+        "observations.pt": "2cdd89d1c2aaf52dd384f30f7f1c827d869ba26452291de13d3f0a857b9a7f88",
+        "prefix-state.pt": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "source.json": "4449b8cd0d8eb784c20ef67debededbb9829b03501f37e6f4a1e8e7b1bb87f4a",
+        "state401.pt": "8d5cea490eb26d74fe9152d6099d87aca6c7af6b718eb363c18be902684c18fc",
+        "trace401.pt": "d183345af2de7565f350569268404ca55bd26e30bd198c498fc74de3c6f3a28a"
+      },
+      "completed_updates": 401,
+      "device": "cuda:0",
+      "elapsed_seconds": 8.855060397996567,
+      "gpu": "NVIDIA RTX A6000",
+      "named_stream_manifest": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "new_updates": 401,
+      "prefix_bit_exact": true,
+      "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+      "qualification_input": false,
+      "quality_verdict": "INCOMPLETE",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scope": "cuda_first_backward_runtime_diagnostic",
+      "serial_at_401": false,
+      "source_commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+      "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+      "timing_scope": "whole child arm including reproducibility setup, context construction and restore; controller separately measures process startup and exit",
+      "training_batch_digest": "9065f4f575967210a5f84c431db528fa3b681f8d0b22c0e10432da63ee543f6f"
+    },
+    "fresh_serial401": {
+      "arm": "fresh_serial401",
+      "artifacts": {
+        "boundary-runtime.json": "a91074d75a327fb8239bbbe25000720aefdcc9050df18b4a0f078555750a2619",
+        "curve.json": "6cc835007cdd82fdfbff6424b32a8ead59b9b8deadff6c0609b7cf54b45be6e3",
+        "frozen-protocol.json": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+        "observations.pt": "2cdd89d1c2aaf52dd384f30f7f1c827d869ba26452291de13d3f0a857b9a7f88",
+        "prefix-state.pt": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "source.json": "4449b8cd0d8eb784c20ef67debededbb9829b03501f37e6f4a1e8e7b1bb87f4a",
+        "state401.pt": "76d8f29af2257bf5c93319f7832fe82a3aa4f962522c8bff5eb475a432525393",
+        "trace401.pt": "5b2c088e3d6270c1fea34a7c550f363297c922c6b3d2d7ac62f66b68be96c218"
+      },
+      "completed_updates": 401,
+      "device": "cuda:0",
+      "elapsed_seconds": 6.64644052402582,
+      "gpu": "NVIDIA RTX A6000",
+      "named_stream_manifest": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "new_updates": 401,
+      "prefix_bit_exact": true,
+      "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+      "qualification_input": false,
+      "quality_verdict": "INCOMPLETE",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scope": "cuda_first_backward_runtime_diagnostic",
+      "serial_at_401": true,
+      "source_commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+      "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+      "timing_scope": "whole child arm including reproducibility setup, context construction and restore; controller separately measures process startup and exit",
+      "training_batch_digest": "9065f4f575967210a5f84c431db528fa3b681f8d0b22c0e10432da63ee543f6f"
+    },
+    "restored_graph": {
+      "arm": "restored_graph",
+      "artifacts": {
+        "boundary-runtime.json": "12d2d0e51bf892f5cdd3d12b4b3c97b77d0d569d11b91d712d54e35b400e2488",
+        "curve.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "frozen-protocol.json": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+        "observations.pt": "7c9fe89890ce53581ca9b4187c8a95f6b52321c5253a4b55105596af8d459647",
+        "prefix-state.pt": "63e21761235b59c3a6c5a61ed418e1f86e30843d4038de550220133f5bbf8b7f",
+        "source.json": "4449b8cd0d8eb784c20ef67debededbb9829b03501f37e6f4a1e8e7b1bb87f4a",
+        "state401.pt": "2d64a8e631bfde508017f0eae0779d69cbe31ffb0f8484bfaa7210a2a120e308",
+        "trace401.pt": "aaff769acb70a542c914da9919578df64154c6541e6fe4f668fd0dadd91277cd"
+      },
+      "completed_updates": 401,
+      "device": "cuda:0",
+      "elapsed_seconds": 1.6045828009955585,
+      "gpu": "NVIDIA RTX A6000",
+      "named_stream_manifest": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "new_updates": 1,
+      "prefix_bit_exact": true,
+      "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+      "qualification_input": false,
+      "quality_verdict": "INCOMPLETE",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scope": "cuda_first_backward_runtime_diagnostic",
+      "serial_at_401": false,
+      "source_commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+      "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+      "timing_scope": "whole child arm including reproducibility setup, context construction and restore; controller separately measures process startup and exit",
+      "training_batch_digest": "8903d2c9a3198d2379677f8dfa0f480b6175187af4cd9b5fb3438136817a00ce"
+    },
+    "restored_serial401": {
+      "arm": "restored_serial401",
+      "artifacts": {
+        "boundary-runtime.json": "12d2d0e51bf892f5cdd3d12b4b3c97b77d0d569d11b91d712d54e35b400e2488",
+        "curve.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "frozen-protocol.json": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+        "observations.pt": "7c9fe89890ce53581ca9b4187c8a95f6b52321c5253a4b55105596af8d459647",
+        "prefix-state.pt": "63e21761235b59c3a6c5a61ed418e1f86e30843d4038de550220133f5bbf8b7f",
+        "source.json": "4449b8cd0d8eb784c20ef67debededbb9829b03501f37e6f4a1e8e7b1bb87f4a",
+        "state401.pt": "66c009536a48fa7376bfee1e23e81739b281d46617b4677a70013c0f31e09e65",
+        "trace401.pt": "19afb0a03bcea8564c35f14c0e8ee9790510b0965a80e50043220b9c95bf7d6c"
+      },
+      "completed_updates": 401,
+      "device": "cuda:0",
+      "elapsed_seconds": 1.4708295880118385,
+      "gpu": "NVIDIA RTX A6000",
+      "named_stream_manifest": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "new_updates": 1,
+      "prefix_bit_exact": true,
+      "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+      "qualification_input": false,
+      "quality_verdict": "INCOMPLETE",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "scope": "cuda_first_backward_runtime_diagnostic",
+      "serial_at_401": true,
+      "source_commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+      "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+      "timing_scope": "whole child arm including reproducibility setup, context construction and restore; controller separately measures process startup and exit",
+      "training_batch_digest": "8903d2c9a3198d2379677f8dfa0f480b6175187af4cd9b5fb3438136817a00ce"
+    }
+  },
+  "scope": "cuda_runtime_boundary_diagnostic_readout",
+  "state401_digests": {
+    "fresh_graph": "1359d2f75a6c4cb0fe26c045e7f64ed0df96e87a9ba51ef103812120a3e0ead3",
+    "fresh_serial401": "40a84b3cafddc8d2a402a03f315da56bc97c74b91853c21e29f2f9ad6fd034f8",
+    "restored_graph": "816962fb07aa53dd881a10943f474e722a3b4ba4b507082178f7bfa6245b801d",
+    "restored_serial401": "40a84b3cafddc8d2a402a03f315da56bc97c74b91853c21e29f2f9ad6fd034f8"
+  }
+}

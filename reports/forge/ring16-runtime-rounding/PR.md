@@ -1,31 +1,28 @@
-Ring16 restart sensitivity first appears in backward gradients despite identical
-float32 model state and initial forwards. This report audits saved tensor bytes
-and checkpoint loading, finds no evidence of a lossy conversion before backward,
-and identifies the existing public serial-backward control as the next bounded
-CUDA diagnostic.
+Ring16's uninterrupted and reloaded runs first diverge in the critic backward
+gradient at update 401. This CUDA diagnostic reproduces both historical
+gradients exactly, then disables autograd multithreading only for update 401.
+The serialized live and reloaded runs produce bit-identical critic gradients
+and entire trainer contexts, removing the measured boundary discrepancy.
 
-Adds a frozen four-arm 804-update protocol and public-API runner comparing live
-and restored update401 with ordinary versus serialized autograd execution.
-The intervention applies immediately after400; every-step execution and any
-newly identified conversion remain distinct future experiments. Reports ULP
-counts, source/input hashes and causal limitations without changing optimizer
-behavior, qualification results or the technique inventory.
+The recorded graphs have identical topology. Their ordinary relative node
+sequence priorities differ in 1,054 of 7,503 pairs; serialized priorities agree.
+Installed PyTorch 2.14 headers explain thread-local sequence counters and the
+engine's ready-node priority rule. This supports accumulation order as the
+mechanism, while distinguishing graph priorities from actual execution traces.
+The serialized result is a third trajectory, matching neither ordinary result;
+full 1,600-update quality and continued stability remain unmeasured.
 
-Hard subprocess timeouts cover setup and persistence. Full state is retained
-before metadata checks; interrupted campaigns retain errors, conservative costs
-and unexecuted peer statuses without retries.
+All four frozen arms complete on an RTX A6000: 804 new updates, 24.795 seconds
+whole-process cost, seed 0, public deterministic initialization, unchanged MoG,
+batch, architecture, data, evaluation cadence and constant learning rates.
+Adds compact source-bound results, original receipts, a saved-prefix training
+GIF, byte-verified raw archive receipt and reproducible comparison/rendering
+sources. The earlier GPU preflight refusal remains preserved separately and
+consumed zero scientific attempts.
 
-Validation: saved-tensor analysis, Python syntax, frozen bindings and mocked
-controller timeout/failure/success accounting checks with zero model calls.
-CUDA neural execution is blocked by unavailable GPU exposure; no CPU fallback, new
-training PASS or actual-training GIF is claimed. Publication is pending network
-access.
-
-The requested CUDA campaign was actually invoked and exited at its CUDA
-preflight, before any arm or output directory was created. Its command, source
-bindings and local stderr hash are retained in `execution-blocker.json`.
-Kernel-driver metadata is present, but this process has no NVIDIA device nodes
-and `cuInit(0)` returns CUDA_ERROR_NO_DEVICE. The blocker is GPU exposure in
-the execution namespace; no driver-reinstall conclusion is justified. Zero
-scientific attempts or updates were consumed, and the boundary hypothesis
-remains UNTESTED.
+Validation: complete CUDA receipts, full 400-update checkpoint identity,
+historical gradient parity, all named streams, exact serialized full-state
+equality, 24 prefix sample comparisons, executed-source hashes, archive member
+hashes, GIF provenance and Forge metadata validation. Saved-only reporting
+adds no model calls or random draws. No optimizer defaults, task gates,
+qualification outcomes or technique inventory are changed.

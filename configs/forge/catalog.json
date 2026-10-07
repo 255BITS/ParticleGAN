@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 80,
+      "benchmark/toy_audit": 81,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -101,7 +101,7 @@
       "candidate_implementation": 17,
       "candidate_patch": 26,
       "configuration": 807,
-      "driver": 403,
+      "driver": 404,
       "engine_support": 84,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11774
+    "files": 11775
   },
   "coverage": {
-    "declared_count": 11774,
+    "declared_count": 11775,
     "missing": [],
     "stale": [],
-    "tracked_count": 11774,
+    "tracked_count": 11775,
     "unclassified": [],
     "valid": true
   },
@@ -1261,6 +1261,15 @@
       "path": "benchmarks/toy_audit/ring16_quality.py",
       "role": "support",
       "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7d9268113d42f578857491bf1104437f9c1d78c3",
+      "path": "benchmarks/toy_audit/ring16_runtime_rounding.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
     },
     {
       "family": "benchmark/toy_audit",
