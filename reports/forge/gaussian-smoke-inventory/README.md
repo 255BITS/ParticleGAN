@@ -35,16 +35,27 @@ before the merged execution source is frozen and any training starts.
 
 ```sh
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py plan \
-  --queue-root runs/forge/gaussian-smoke-inventory-v2
+  --queue-root runs/forge/gaussian-smoke-inventory-v3
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py enqueue \
-  --queue-root runs/forge/gaussian-smoke-inventory-v2
+  --queue-root runs/forge/gaussian-smoke-inventory-v3
 /usr/bin/python -u -m experiments.forge \
-  --queue-root runs/forge/gaussian-smoke-inventory-v2 drain \
-  --gpus 0,1 --campaign gaussian-smoke-inventory-v2
-tail -F runs/forge/gaussian-smoke-inventory-v2/events.jsonl
+  --queue-root runs/forge/gaussian-smoke-inventory-v3 drain \
+  --gpus 0,1 --campaign gaussian-smoke-inventory-v3
+tail -F runs/forge/gaussian-smoke-inventory-v3/events.jsonl
 ```
 
 The original v1 admission stopped before creating any submission, attempt or training update: the host validator conflated the 6,000-update continuation budget with its retained 1,000-update schedule horizon. [The refusal/archive receipt](admission-v1.json) preserves that source and zero cost. The v2 successor changes only this software validation and the registration identity; roster, recipes, task budgets and campaign ceilings remain fixed.
+
+The v2 run then exposed an older generic vector-adapter omission: ring execution
+stopped at its 400-update schedule horizon before the declared 1,600-update
+allowance. Dispatch stopped, leaving active tasks to finish and retaining every
+partial result and cost. The v3 software amendment passes the explicit task
+execution allowance to the public trainer, preserving its recipe schedule.
+The complete fixed roster runs under the repaired source because ordinary
+qualification cannot splice task passes from different sources. This is an
+execution repair, with no recipe selection, seed changes or retries of scientific
+failures. The combined conservative executable allowance fits inside the
+original 2,221,440-second goal ceiling.
 
 The preparation interface launches no training. The parent runs the reviewed
 campaign with one worker on each physical GPU, preserves raw stdout, traces,
