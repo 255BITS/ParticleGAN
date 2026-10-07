@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "capped_fraction": 0.0,
+      "cohort": "initialization_gradient_no_updates",
+      "gradient_norm_max": 0.00039187862421385944,
+      "gradient_norm_median": 8.296631131088361e-05,
+      "gradient_norm_min": 7.372839263553033e-06,
+      "implied_prior_step_mean": 0.002975527122616768,
+      "initial_checkpoint_sha256": "60a11b21cd9658ffc001d92d8fc0b415721021c590fe0abe0aa47e235fdc8582",
+      "initial_models_unchanged": true,
+      "probe_checkpoint_sha256": "08f0c27823b57a0378df45a0e627b7ca8de67fc9634c0c9772591800524b9fb8",
+      "scale": 0.001,
+      "selected_rows": 102,
+      "task": "gaussian1d_acquisition",
+      "training_updates": 0
+    },
+    {
+      "capped_fraction": 0.0,
+      "cohort": "initialization_gradient_no_updates",
+      "gradient_norm_max": 0.00021174788707867265,
+      "gradient_norm_median": 4.700350473285653e-05,
+      "gradient_norm_min": 1.8939656456495868e-06,
+      "implied_prior_step_mean": 0.0015735887736082076,
+      "initial_checkpoint_sha256": "ed9e3a8c1e275e8e69357b87af9c98e9f2fadddeec9ebbabfa5fbbbb49ab648c",
+      "initial_models_unchanged": true,
+      "probe_checkpoint_sha256": "2435b7149e9463ede1ef9cf21a6c91801b44694eddc3583a1ee4e162a8ae8716",
+      "scale": 0.001,
+      "selected_rows": 102,
+      "task": "ring16_acquisition",
+      "training_updates": 0
+    }
+  ],
+  "scale_predeclared": true,
+  "training_updates": 0
+}

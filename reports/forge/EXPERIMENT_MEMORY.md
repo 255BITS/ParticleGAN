@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 557. Inventory coverage: complete. Unresolved import items: 7.
+Records: 558. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-prior-capped-extrapolation-from-past-v1 · gaussian-prior-magnitude-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `ad90920771ee3c12c82b469f0f8d1d7bde458bed498a2431200136d954183767`.
+
+A fixed-scale bounded prior response reduces unnecessary small-gradient prior motion while preserving constant-rate network learning and target-shift response.
+
+**Observed:** {'FAIL': 9}; wall seconds 368.727; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.98047, mass_tv=0.056885
+
+Fixed-scale magnitude-sensitive learned-prior updates do not solve Gaussian continuous learning: all three timing arms fail acquisition and retention, with hold2/72 alternating,0/72 simultaneous,10/72 past, longest past streak2. Alternating endpoint KS.03028 passes individually. All three shift arms fail reacquisition/retention; past hold3/24 and longest3. Ring alternating acquires earlier but fails2/144 hold checks; simultaneous46/144 and past0/144. Nine CUDA trials complete30000updates for368.727seconds, with69 software checks,9 exact restores,1308 saved-sample recomputations and a consistent1186file source union. Ordinary task recipes and qualification remain unchanged.
+
+**Next:** Stop this fixedscale.001 revision as Gaussian repair. Compare separately authorized frozen-prior and G/D-magnitude controls before another bounded change; retain adopted normalized-prior alternating ring. No annealing, averaged serving, endpoint substitution or automatic tuning.
+
+[Evidence](../../reports/forge/gaussian-prior-magnitude/results.json) · [Record](records/gaussian-prior-magnitude-v1-readout.json)
 
 ### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
 
@@ -4778,4 +4794,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `25e7a5173ae1a8629f9822ea2d6de7fd5e353c6b20d593088165128c3ee6279b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `3dc6dda9e676d5e535aa54aadd0d53fe625d643749fd66f62d7386dda9665630`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

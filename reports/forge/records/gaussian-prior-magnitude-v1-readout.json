@@ -1,0 +1,283 @@
+{
+  "candidate_id": "bcap-prior-capped-extrapolation-from-past-v1",
+  "candidate_revision": "ad90920771ee3c12c82b469f0f8d1d7bde458bed498a2431200136d954183767",
+  "changed_factors": [
+    "Recipe.prior_update=row_capped",
+    "Recipe.prior_gradient_scale=.001",
+    "Matched alternating/simultaneous/past timing controls"
+  ],
+  "conclusion": "Fixed-scale magnitude-sensitive learned-prior updates do not solve Gaussian continuous learning: all three timing arms fail acquisition and retention, with hold2/72 alternating,0/72 simultaneous,10/72 past, longest past streak2. Alternating endpoint KS.03028 passes individually. All three shift arms fail reacquisition/retention; past hold3/24 and longest3. Ring alternating acquires earlier but fails2/144 hold checks; simultaneous46/144 and past0/144. Nine CUDA trials complete30000updates for368.727seconds, with69 software checks,9 exact restores,1308 saved-sample recomputations and a consistent1186file source union. Ordinary task recipes and qualification remain unchanged.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "A fixed-scale bounded prior response reduces unnecessary small-gradient prior motion while preserving constant-rate network learning and target-shift response.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this fixedscale.001 revision as Gaussian repair. Compare separately authorized frozen-prior and G/D-magnitude controls before another bounded change; retain adopted normalized-prior alternating ring. No annealing, averaged serving, endpoint substitution or automatic tuning.",
+  "provenance": {
+    "archive_sha256": "d477641b12abdc3d64611e1a48322859b8cce79fdd0188df7479449222ec57b6",
+    "new_training_updates": 30000,
+    "protocol_sha256": "0d89553efe7ffe10638e9d4eeb578b30f7b584fe72631eacb39796bfb1478b39",
+    "receipt": "reports/forge/gaussian-prior-magnitude/provenance.json",
+    "report": "reports/forge/gaussian-prior-magnitude/README.md",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "source_commit": "7c5d66e6de59e083ef1fc34852d702f52265def0",
+    "trainer_delta": {
+      "alternating": "Learned-prior direction g/max(norm(g),.001), G/D unchanged dualnorm; timing=alternating",
+      "extrapolation_from_past": "Learned-prior direction g/max(norm(g),.001), G/D unchanged dualnorm; timing=extrapolation_from_past",
+      "simultaneous": "Learned-prior direction g/max(norm(g),.001), G/D unchanged dualnorm; timing=simultaneous"
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-prior-magnitude-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-prior-magnitude/results.json",
+    "sha256": "b7640926d002bdbc549125bb130b0c91fd78b2b8b55bf032a8492c555b6cb40b"
+  },
+  "task_results": [
+    {
+      "candidate_id": "bcap-prior-capped-alternating-v1",
+      "cost": {
+        "wall_seconds": 36.35391537693795
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.030279928965950997,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 2,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 1,
+        "mean": 1.9989327267248882,
+        "mean_error_sigma": 0.002134546550223604,
+        "sample_count": 4096,
+        "std": 0.5255437312232095,
+        "std_ratio": 1.051087462446419
+      },
+      "reason": "Task-only stationary diagnostic; acquisition FAIL, strict hold 2/72. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__alternating__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-alternating-v1",
+      "cost": {
+        "wall_seconds": 53.54448623396456
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 42,
+        "component_core_covariance_error": 0.4922524318099022,
+        "component_core_min_eigen_ratio": 0.1467035859823227,
+        "component_covariance_error": 0.4897060878574848,
+        "component_min_eigen_ratio": 0.1467035859823227,
+        "covariance_error": 0.06691279262304306,
+        "hold_pass_checks": 142,
+        "hold_total_checks": 144,
+        "hq": 0.98046875,
+        "longest_pass_streak": 178,
+        "mass_tv": 0.056884765625,
+        "max_component_spill": 0.0560000017285347,
+        "mean_error": 0.04500812664628029,
+        "min_hq_mass_ratio": 0.65234375,
+        "min_mass_ratio": 0.66015625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.04451798791712097,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Task-only stationary diagnostic; acquisition PASS, strict hold 142/144. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__alternating__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 35.48911904497072
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.20625261514853754,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 0,
+        "mean": 1.820626748347422,
+        "mean_error_sigma": 0.3587465033051558,
+        "sample_count": 4096,
+        "std": 0.41862606730364205,
+        "std_ratio": 0.8372521346072841
+      },
+      "reason": "Task-only stationary diagnostic; acquisition FAIL, strict hold 0/72. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 53.48346761695575
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 36,
+        "component_core_covariance_error": 0.5890386570245028,
+        "component_core_min_eigen_ratio": 0.1535036563873291,
+        "component_covariance_error": 0.5837968848645687,
+        "component_min_eigen_ratio": 0.1535036563873291,
+        "covariance_error": 0.08428754657506943,
+        "hold_pass_checks": 46,
+        "hold_total_checks": 144,
+        "hq": 0.90380859375,
+        "longest_pass_streak": 42,
+        "mass_tv": 0.07177734375,
+        "max_component_spill": 0.5865724086761475,
+        "mean_error": 0.06942380219697952,
+        "min_hq_mass_ratio": 0.45703125,
+        "min_mass_ratio": 0.73046875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.05442500927140603,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Task-only stationary diagnostic; acquisition PASS, strict hold 46/144. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-extrapolation-from-past-v1",
+      "cost": {
+        "wall_seconds": 49.85772224003449
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.19871833783520204,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 10,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 2,
+        "mean": 1.79559000395966,
+        "mean_error_sigma": 0.4088199920806801,
+        "sample_count": 4096,
+        "std": 0.3977238023198263,
+        "std_ratio": 0.7954476046396526
+      },
+      "reason": "Task-only stationary diagnostic; acquisition FAIL, strict hold 10/72. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-extrapolation-from-past-v1",
+      "cost": {
+        "wall_seconds": 78.99018595798407
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "component_core_covariance_error": 0.3933295104652643,
+        "component_core_min_eigen_ratio": 0.5184426307678223,
+        "component_covariance_error": 1.6082339715212584,
+        "component_min_eigen_ratio": 0.517183780670166,
+        "covariance_error": 0.08339253067970276,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "hq": 0.90869140625,
+        "longest_pass_streak": 0,
+        "mass_tv": 0.07470703125,
+        "max_component_spill": 0.3695652186870575,
+        "mean_error": 0.03404613956809044,
+        "min_hq_mass_ratio": 0.56640625,
+        "min_mass_ratio": 0.73046875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03911819033984199,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Task-only stationary diagnostic; acquisition FAIL, strict hold 0/144. 4000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-alternating-v1",
+      "cost": {
+        "wall_seconds": 18.077783997054212
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.0854431417022522,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 1,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 1,
+        "mean": 3.0169806588673964,
+        "mean_error_sigma": 0.03396131773479283,
+        "sample_count": 4096,
+        "std": 0.48993617613579227,
+        "std_ratio": 0.9798723522715845
+      },
+      "reason": "Task-only shift diagnostic; acquisition FAIL, strict hold 1/24. 2000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__alternating__shift"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-simultaneous-v1",
+      "cost": {
+        "wall_seconds": 18.133100358070806
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.35390087680974047,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0,
+        "mean": 3.516800494166091,
+        "mean_error_sigma": 1.0336009883321822,
+        "sample_count": 4096,
+        "std": 0.7327664075240817,
+        "std_ratio": 1.4655328150481635
+      },
+      "reason": "Task-only shift diagnostic; acquisition FAIL, strict hold 0/24. 2000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__simultaneous__shift"
+    },
+    {
+      "candidate_id": "bcap-prior-capped-extrapolation-from-past-v1",
+      "cost": {
+        "wall_seconds": 24.797332828049548
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.1199406775834918,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 3,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 3,
+        "mean": 3.1479315221949946,
+        "mean_error_sigma": 0.2958630443899892,
+        "sample_count": 4096,
+        "std": 0.4888391063128804,
+        "std_ratio": 0.9776782126257608
+      },
+      "reason": "Task-only shift diagnostic; acquisition FAIL, strict hold 3/24. 2000 new CUDA updates. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__shift"
+    }
+  ],
+  "trainer_family": "bcap-dualnorm"
+}

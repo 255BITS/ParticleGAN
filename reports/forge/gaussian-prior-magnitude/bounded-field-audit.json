@@ -1,0 +1,28 @@
+{
+  "model_sampling_draws": 0,
+  "results": [
+    {
+      "checkpoint_sha256": "53e452a66e25df5e6f988de7746b8005977e0583cd7bb4d1d86705f2adc27dbc",
+      "fraction_at_cap": 0.3711340129375458,
+      "implied_prior_mean_step": 0.020140249729156495,
+      "max_norm": 1.0,
+      "mean_norm": 0.6713416576385498,
+      "min_norm": 0.0036526964977383614,
+      "nonzero_rows": 97,
+      "phase": "stationary"
+    },
+    {
+      "checkpoint_sha256": "106ab28b2868f619366f0a3d79e0160a3998119dcb4e789642d997bfaff116e7",
+      "fraction_at_cap": 0.13592232763767242,
+      "implied_prior_mean_step": 0.016162864565849304,
+      "max_norm": 1.0,
+      "mean_norm": 0.5387621521949768,
+      "min_norm": 0.000971083645708859,
+      "nonzero_rows": 103,
+      "phase": "shift"
+    }
+  ],
+  "scale": 0.001,
+  "scope": "secondary_saved_state_diagnostic",
+  "training_updates": 0
+}

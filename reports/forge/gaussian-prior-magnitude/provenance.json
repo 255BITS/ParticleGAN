@@ -1,0 +1,95 @@
+{
+  "archive": {
+    "bytes": 35536601,
+    "contents": "All9 complete curves/checkpoints/observations/receipts/source maps;3frozen shift controls; separate initialization-gradient probe and consumed streams; consistent1186file executed source; publication/reference RNG states; software/preflight/verification logs and publication-source adapters.",
+    "local_raw": "runs/api/gaussian-prior-magnitude-v1",
+    "path": "artifacts/gaussian-prior-magnitude-v1.tar.gz",
+    "sha256": "d477641b12abdc3d64611e1a48322859b8cce79fdd0188df7479449222ec57b6"
+  },
+  "artifacts": {
+    "bounded-field-audit.json": "3742be48078b3dff54b6ac4de201b25a70a8e956301cf17839f444699ee7f6c4",
+    "initialization-probe.json": "cab935410153048728af7f166e8ae760ad1a21ef3d8c25aa48208504a34f0c45",
+    "protocol.json": "0d89553efe7ffe10638e9d4eeb578b30f7b584fe72631eacb39796bfb1478b39",
+    "restore-proof.json": "8d8a44a626a274606833d49decbb266db49a61817ef25c2aa83a0bc1679cd753",
+    "results.json": "b7640926d002bdbc549125bb130b0c91fd78b2b8b55bf032a8492c555b6cb40b",
+    "saved-state-audit.json": "144cccf031162baeb9235c8389b94079cf2f6a52d0d70ffb61d5a4b3785750ed",
+    "shift.svg": "6212f037210f9866548b399a13bd03c25cb54f67e83a8f46b18b1f95b116f22b",
+    "stationary.svg": "29ef16cb0d958ad1a4d917d1690cc270d70f91639d4b2c442e5d0226498e7b52",
+    "verification.json": "1d17167c88f72ba0694b859d157a1509496c51ece43b21d14edf409d8b238afe"
+  },
+  "budget": {
+    "new_training_updates": 30000,
+    "new_trials": 9,
+    "per_shift_trial_seconds": 300,
+    "per_stationary_trial_seconds": 600,
+    "reserved_seconds": 4500,
+    "retries": 0
+  },
+  "controls": {
+    "archive_sha256": "10d61ee47ea4339f97060db2514cb086e32e63e50f1da6d2e28da18b37fe5b09",
+    "path": "reports/forge/bcap-past-extrapolation/results.json",
+    "qualification_reuse": false,
+    "sha256": "a46df5dbc074d1229aee567d01a090c743d0519d64a450f37a48f6af56fd62a3",
+    "training_repeated": false
+  },
+  "cost": {
+    "new_real_training_examples": 3840000,
+    "new_training_loop_seconds": 368.7271136540221,
+    "new_training_updates": 30000,
+    "new_trials": 9,
+    "reused_control_cells": 9,
+    "scientific_retries": 0,
+    "scope": "New loops including scheduled evaluations; excludes construction, restoration, source capture, serialization, publication and independent software fixtures."
+  },
+  "device": "cuda:1",
+  "driver_sha256": "b9c74058407a19ccfdbd913864f59404f586f4a489e46e27a4e59a2ae544d134",
+  "executed_scientific_commit": "7c5d66e6de59e083ef1fc34852d702f52265def0",
+  "gpu": "NVIDIA RTX A6000",
+  "id": "gaussian-prior-magnitude-v1",
+  "media": {
+    "alternating-gaussian1d_acquisition-shift.gif": "626ae39be8a423c5e15373b76c330249fd6ef1cedde1d03d578c667b9b59ca97",
+    "alternating-gaussian1d_acquisition-stationary.gif": "b1f40fab1e394de0794de48b4be1fd09112b842263ae84fd99ff7bdb17d3ccea",
+    "alternating-ring16_acquisition-stationary.gif": "b6b14127cdd62713fcbb40c5e03d7a982d3cec3fd7f83279614d150f0620be96",
+    "extrapolation_from_past-gaussian1d_acquisition-shift.gif": "73ed55076e67bdce19175ee6a5642acea02357e8285bdd30d6b8be54d8677476",
+    "extrapolation_from_past-gaussian1d_acquisition-stationary.gif": "b04d2ba32e819c427e9a1303ebeead1c52f24316c7219d34c4d1ec94c4d6c2c4",
+    "extrapolation_from_past-ring16_acquisition-stationary.gif": "f23ee2c1f3c22e86504aff1146f3fde01eae3094c38ce3b3d2ae8e3e992b9470",
+    "simultaneous-gaussian1d_acquisition-shift.gif": "ad024ddd3abc7b9c936888dd683b2f1e447555245f599ddea46796b8013f2e13",
+    "simultaneous-gaussian1d_acquisition-stationary.gif": "d17d256b34c5d31f855e5c1f0f5798b5e80cb511e8ebaccc87ab9914f68cb20e",
+    "simultaneous-ring16_acquisition-stationary.gif": "6e44374416445b666be6f45fb6675607b70d6418e84a960653f48622a45f7d94"
+  },
+  "post_scientific_metadata_change": "experiments/forge/techniques.py labels prior_gradient_scale active only for learned capped rows; shared archived-host tests use original metadata with current software. No executed numerical update changed or rerun.",
+  "protocol_sha256": "0d89553efe7ffe10638e9d4eeb578b30f7b584fe72631eacb39796bfb1478b39",
+  "publication_source": {
+    "reports/forge/bcap-past-extrapolation/publish.py": "36b10732a74d99835bedc99a68bbb68b6201d4dd3471a7a86102b6caf64b9188",
+    "reports/forge/bcap-past-extrapolation/verify.py": "11e6c554b3a95f4d6230e9578076d17d7a1d170dcc5d8baf1eaf35294aeb819a",
+    "reports/forge/gaussian-prior-magnitude/publish.py": "1b22b57b2d03450d23a78906d73d0e7301350cb07d98a543a8c1e967d68387c9",
+    "reports/forge/gaussian-prior-magnitude/verify.py": "6740a923c27bf986866105e7405e70e2ed2e05d76d92277c6c3bfcafb9298cc6"
+  },
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "source_bundle": {
+    "consistent_union": true,
+    "files": 1186,
+    "manifest_sha256": "f5f707d06ce3453133bdce558dfa57f1f3c0e43f5a5c6f7ccb696c6857091654",
+    "path": "executed-source"
+  },
+  "verification": {
+    "actual_training_gifs": 9,
+    "exact_cuda_restores": 9,
+    "initialization_probe_updates": 0,
+    "saved_sample_recomputations": 1308,
+    "software_passed": 69,
+    "software_skipped": 0
+  }
+}

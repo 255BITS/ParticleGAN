@@ -144,3 +144,26 @@ def test_default_packet_and_unsupported_optimizer_validation():
         get_recipe("bcap", optimizer_family="adam", prior_update="row_capped", prior_gradient_scale=.001)
     with pytest.raises(ValueError, match="finite positive"):
         get_recipe("bcap", optimizer_family="dualnorm", prior_update="row_capped", prior_gradient_scale=0)
+
+
+def test_bound_runner_restores_archived_globals_and_replay_refuses_new_source():
+    original = study.host.PROTOCOL, study.host.initial_proof
+    with pytest.raises(RuntimeError, match="probe"):
+        with study.bound_runner():
+            assert study.host.PROTOCOL == study.PROTOCOL
+            raise RuntimeError("probe")
+    assert (study.host.PROTOCOL, study.host.initial_proof) == original
+    with pytest.raises(ValueError, match="frozen study input changed"):
+        study.host.declaration()
+
+
+def test_prior_response_is_structural_and_scale_only_active_on_learned_capped_rows():
+    from experiments.forge.techniques import recipe_field_active, validate_same_technique
+    base = get_recipe("bcap", optimizer_family="dualnorm")
+    capped = base.replace(prior_update="row_capped", prior_gradient_scale=.001)
+    with pytest.raises(ValueError, match="prior_update"):
+        validate_same_technique(base, capped)
+    validate_same_technique(capped, capped.replace(prior_gradient_scale=.002))
+    assert not recipe_field_active("prior_gradient_scale", base)
+    assert recipe_field_active("prior_gradient_scale", capped)
+    assert not recipe_field_active("prior_gradient_scale", capped, task={"execution":{"prior":{"learnable":False}}})
