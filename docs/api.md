@@ -407,13 +407,23 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 penalty_generator=None, noise_generator=None, input_noise_generator=None,
 prior_noise_generator=None, eval_generator=None, model_generator=None,
 require_latent_damping=None, max_steps=None, optimizer_options=None,
-penalty_options=None, serial_backward=False)` is an
+penalty_options=None, serial_backward=True)` is an
 explicitly imported helper, separate from `Recipe`. Move networks to the same
 device and floating dtype first. When `prior=` is omitted, the helper constructs
 the prior with `recipe.make_prior()`, a plain randomly drawn table. `seed` controls owned sampling streams. The helper
 never changes the weights it receives; for deterministic starting weights,
 call [`init.deterministic_orthogonal_`](#initialization) on G, D and a
 recipe-made prior first and pass `prior=`, as in the minimal loop above.
+
+ParticleGAN disables autograd's multithreaded backward scheduling on import.
+`GANTrainer.step` enforces this for the entire update and restores the caller's
+setting afterward. CPU operation thread pools and CUDA parallelism are unchanged.
+`serial_backward=True` remains accepted for compatibility; False is rejected.
+Checkpoints record True. Unmarked or False historical checkpoints must be
+resumed using their pinned original source because changing scheduling can
+change gradient accumulation rounding. For caller-owned component loops in a
+new thread or an explicitly enabled external context, wrap the whole update in
+`with particlegan.serial_autograd():`, including its forward passes.
 
 The helper supports scalar, unconditional GANs with `ParticlePrior` or
 `MoGParticlePrior`, matching the recipe's `prior_kind` and `standardize` policy.

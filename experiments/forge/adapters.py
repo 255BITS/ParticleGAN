@@ -16,6 +16,8 @@ import time
 import numpy as np
 import torch
 
+from particlegan.execution import serial_autograd
+
 from .api import (CapabilityError, task_formulation_context, task_recipe_resources,
                   task_policy_blockers)
 from .artifacts import manifest_artifacts, save_provenance_checkpoint, verify_artifacts
@@ -607,8 +609,10 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     raise CapabilityError([f"no public adapter for {adapter}; implement and validate the declared capability before training"])
 
 
+@serial_autograd()
 def run_task(request: dict, job: dict, output_dir: Path, device: str) -> dict:
     result = normalize_adapter_costs(_dispatch_task(request, job, output_dir, device))
+    result["autograd_multithreading_enabled"] = torch.autograd.is_multithreading_enabled()
     # Normalize the common diagnostic receipt too. The certified bulk evidence
     # lives in separate artifact roots and is not modified by timing annotation.
     receipt = Path(output_dir) / "adapter-receipt.json"
