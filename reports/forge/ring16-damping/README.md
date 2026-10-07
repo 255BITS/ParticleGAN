@@ -40,6 +40,11 @@ digest `94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750`.
 Confirmation consumes a separate checkpointed evaluation stream. The first
 confirmation failure is retained; there is no additional confirmation draw.
 
+The boundary arm passes 32 of 96 scheduled checks overall. After its first
+passing check, covariance fails at update 1084 (`.881634 > .85`), followed by
+31 full passes from 1100 through 1600. This is terminal acquisition evidence,
+not a claim that every check after first acquisition passes.
+
 ## Mechanism and saved-gradient probe
 
 [PR331's reproduction](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
