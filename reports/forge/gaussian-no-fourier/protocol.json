@@ -1,0 +1,108 @@
+{
+  "architecture": {
+    "critic_depth": 2,
+    "critic_fourier": 0,
+    "critic_hidden": 32,
+    "critic_parameters": 1153,
+    "generator_depth": 2,
+    "generator_hidden": 32,
+    "generator_parameters": 1185,
+    "z_dim": 2
+  },
+  "batch": 128,
+  "budget": {
+    "new_training_updates": 6000,
+    "new_trials": 1,
+    "real_examples": 768000,
+    "reserved_seconds": 720,
+    "retries": 0,
+    "smoke_seconds": 120,
+    "stability_seconds": 600
+  },
+  "candidate": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "changed_factors": [
+    "Task-owned critic Fourier feature count2 to0; raw scalar input replaces five input features. Public first-layer initialization consequently changes with fan-in5 to1."
+  ],
+  "compute": "All neural training, sampling, initialization fixtures and checkpoint restores requireCUDA. CPU inherited target draws, saved-output scoring, archive and media rendering are explicit exceptions.",
+  "controls": {
+    "path": "reports/forge/gaussian-no-fourier/controls.json",
+    "reuse": "Archived original Fourier2 sigma.1 BCAP alternating4000/6000 source-bound controls; no rerun or retrospective ordinary qualification",
+    "ring": "Architecture change applies only to Gaussian; original passing ring evidence retains its source and recipe identity, no new ring updates"
+  },
+  "data_sha256": {
+    "continuation_stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f",
+    "full_stationary": "a3b2f48e279bc16fe035cc754f57bc1085465e3a75b34c03c092d8ef9198fb8d",
+    "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+    "smoke_stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+  },
+  "evaluation": {
+    "checks_per_1000_steps": 24,
+    "frozen_control": "own4000checkpoint, no updates, matched48 shifted component/kernel draws",
+    "historical_secondary": "original five terminal full passes at1000, unchanged numerical bounds",
+    "samples": 4096,
+    "smoke": "any full passing primary+independent confirmation pair at identical training state within1000; all24paired checks and1000updates complete",
+    "stability": "all72stationary postsmoke checks through4000 plus five-terminal shifted reacquisition by5000 and all24later shifted checks through6000"
+  },
+  "hypothesis": "Removing periodic critic features from the scalar Gaussian task permits timely full-distribution acquisition and may reduce drift without changing the learner.",
+  "id": "gaussian-no-fourier-v1",
+  "inputs": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/toy_audit/gaussian_architecture_publish.py": "eaf60d9e3af4f468e20012d358d4e3506a2fc0000bae7a95c31ef866c51cb4b7",
+    "benchmarks/toy_audit/gaussian_no_fourier.py": "ff9f7b162679b714fc217f3d703a353930cbbbbc80e1a7410bed8c48619b4c1d",
+    "benchmarks/toy_audit/gaussian_smoke_study.py": "8f15ecd4823be9c5efeaaf4dbac3163eaef3301b0b453be0cfc8bb21eec8ba98",
+    "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "experiments/forge/adapters.py": "89579b5b07bdc11ee12850bf1ee2480e32978b79a2fa56551c83c0f005709326",
+    "experiments/forge/api.py": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938",
+    "experiments/forge/boundaries.py": "037e4d7b80b708ef3f76b7d8bb8299c5abb1c7cc80a06d5d45522b1351f56171",
+    "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f",
+    "experiments/forge/initialization.py": "c2674617c306e24337f1dbbf910d2110b7c852557b9c3e43b47f7fe1dce26634",
+    "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5",
+    "experiments/forge/vectorprofiles.py": "dcbbf669a3457126fce82d073f8d8e4e5254702dca5201f88ea5be7877ee14da",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/optim/dualnorm.py": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/recipes.py": "1754120822e2c791cd193faefd2a9c21036686024f5f52b210a2b7e29751c680",
+    "particlegan/training.py": "b3d334e1fb378f3d77226daedc03a7cef4bdf4265082531628863e48a69d5a33",
+    "reports/forge/gaussian-no-fourier/controls.json": "cddf8dbd4a56b2ed50928ee1e862e1941ee61bbc657c7746f35a2e69bc79d86f",
+    "reports/forge/gaussian-no-fourier/data-law-proof.json": "ce0b8d9833c89d63286a8f88836637456c000a16121c4a58f6266a9a9e45e4fd",
+    "reports/forge/gaussian-no-fourier/initial-proof.json": "4559d50a3aa59969289ab20e5f813e5d02f19a355c9e8e96b581185413097a76",
+    "reports/forge/gaussian-no-fourier/preflight.py": "cc2ac877ed4da687a1913504604354f83140d00a041fcafe345abbdd685b5152",
+    "reports/forge/gaussian-no-fourier/smoke.json": "4e1bb85023afbe367eea67f60833aa6189d4bda4aa33e7170fb3d78c35a0561c",
+    "reports/forge/gaussian-no-fourier/stability.json": "b483c5f7afaf50f89cd706bc0c9f7d70949c8e62051ef5b1a48920d77ff37e91"
+  },
+  "predictions": {
+    "falsifiers": "No independently confirmed hit rejects this variant as a smoke repair; any scheduled hold failure rejects stability. Good endpoints never replace either gate.",
+    "smoke": "At least one independently confirmed full passing state before1000.",
+    "stability": "Removing periodic features improves uninterrupted stationarity and shifted response."
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "particles": 256,
+    "sigma": 0.1,
+    "standardize": false
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "rng_contract": "Protocolseed0 public deterministic named-parameter initializer; exact originalG/prior/optimizerinitialstates and training streams; onlyDfirstlayer/freqs andDconstructorstream change. DataCPU reference law, cleanliveGPU prior/G samples. Primaryevalsamecadence/stream, isolated independentconfirmationstream at all24states. All consumed streams checkpointed. Every arm consumes the same target and latent/kernel stream law.",
+  "schema_version": 1,
+  "scope": "task_architecture_diagnostic",
+  "seed": 0,
+  "smoke_task": "reports/forge/gaussian-no-fourier/smoke.json",
+  "source_binding": "Complete content-addressed scientific source manifest retained in raw source.json; frozen digest includes every configured source file. Explicit critical inputs listed here.",
+  "source_digest": "7173c3964b331219901102a20fa2c1e78b9947652ea03ce76d0341ff4166a93d",
+  "stability_task": "reports/forge/gaussian-no-fourier/stability.json",
+  "state": "ready",
+  "stopping_rule": "Run exactly one1000-update smoke then its own5000-update diagnostic continuation even after smokeFAIL. Zero retries, no tuning, no extra seed, no followup updates. Parent handles any adoption and ordinary qualification separately.",
+  "target": {
+    "mean": 2.0,
+    "shift_at": 4000,
+    "shift_mean": 3.0,
+    "sigma": 0.5
+  },
+  "trainer_delta": "none: original winning BCAP alternating dualnorm, constant G.012,D.012*1.5,prior.012*2.5, zero momentum/no annealing/no EMA/no training output noise/no prior regularizer"
+}

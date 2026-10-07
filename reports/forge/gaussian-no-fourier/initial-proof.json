@@ -1,0 +1,24 @@
+{
+  "baseline_sha256": "714a87af2b4cddd36f2865b02907f681b654a4b528b04762d1945c96cc95c5e0",
+  "changed_constructor_streams": [
+    "[\"init\",\"discriminator\",\"construction\",\"cpu\"]"
+  ],
+  "changed_critic_tensors": [
+    "freqs",
+    "net.0.bias",
+    "net.0.weight"
+  ],
+  "device": "cuda:0",
+  "exact_optimizer_and_rate_match": true,
+  "generator_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+  "gpu": "NVIDIA RTX A6000",
+  "initial_bias_policy": "public fan-in uniform; first-layer fan-in changes 5 to 1",
+  "parameter_counts": {
+    "D": 1153,
+    "G": 1185
+  },
+  "passed": true,
+  "prior_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+  "train_streams_identical": true,
+  "training_updates": 0
+}

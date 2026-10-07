@@ -1,0 +1,15 @@
+{
+  "batch": 128,
+  "data_sha256": {
+    "continuation_stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f",
+    "full_stationary": "a3b2f48e279bc16fe035cc754f57bc1085465e3a75b34c03c092d8ef9198fb8d",
+    "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+    "smoke_stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+  },
+  "model_sampling_draws": 0,
+  "passed": true,
+  "protocol_seed": 0,
+  "scope": "reference target law replay, no neural execution or qualification",
+  "target_reference_device": "cpu",
+  "training_updates": 0
+}

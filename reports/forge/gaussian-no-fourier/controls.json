@@ -1,0 +1,127 @@
+{
+  "new_cost_seconds": 0,
+  "publication_commit": "84ac1422bd4b07d37e9c172ee216064982c35bcd",
+  "publication_sha256": "a46df5dbc074d1229aee567d01a090c743d0519d64a450f37a48f6af56fd62a3",
+  "results": [
+    {
+      "acquisition_metrics": {
+        "cdf_ks": 0.042974089754048816,
+        "finite_fraction": 1.0,
+        "mean": 2.0065182581020053,
+        "mean_error_sigma": 0.013036516204010695,
+        "sample_count": 4096,
+        "std": 0.4786939427793527,
+        "std_ratio": 0.9573878855587054
+      },
+      "acquisition_suffix": 1,
+      "acquisition_verdict": "FAIL",
+      "arm": "alternating",
+      "baseline_receipt_sha256": "55694179a6275328d02166fda7b4eb33b68ddc338bda9ef876db678c47e66c84",
+      "combined_verdict": "FAIL",
+      "completed_updates": 4000,
+      "data_sha256": "a3b2f48e279bc16fe035cc754f57bc1085465e3a75b34c03c092d8ef9198fb8d",
+      "final_metrics": {
+        "cdf_ks": 0.09594186020319784,
+        "finite_fraction": 1.0,
+        "mean": 2.1376790918875486,
+        "mean_error_sigma": 0.27535818377509713,
+        "sample_count": 4096,
+        "std": 0.8739799948613184,
+        "std_ratio": 1.7479599897226368
+      },
+      "first_five_pass_window": null,
+      "hold_pass_checks": 1,
+      "hold_total_checks": 72,
+      "hold_verdict": "FAIL",
+      "longest_pass_streak": 1,
+      "mode": "reuse_complete",
+      "phase": "stationary",
+      "raw_receipt_sha256": "26e719b2ce5a71670c0b7313251320b4d93c1db40d80ac6e610cf85c726c8823",
+      "source": {
+        "digest": "53865d564be22edf8aa896df2e98019b7f418eadfb3cc307b3ee729677f32042",
+        "origin_commit": "34871d418152d23cf260b29d14e82b6b4874b89d",
+        "schema_version": 1
+      },
+      "task": "gaussian1d_acquisition",
+      "total_checks": 96,
+      "total_pass_checks": 3
+    },
+    {
+      "acquisition_metrics": {
+        "cdf_ks": 0.3373782643453471,
+        "finite_fraction": 1.0,
+        "mean": 3.487294753023889,
+        "mean_error_sigma": 0.9745895060477778,
+        "sample_count": 4096,
+        "std": 0.6680474176105641,
+        "std_ratio": 1.3360948352211282
+      },
+      "acquisition_suffix": 0,
+      "acquisition_verdict": "FAIL",
+      "arm": "alternating",
+      "combined_verdict": "FAIL",
+      "completed_updates": 6000,
+      "data_sha256": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+      "final_metrics": {
+        "cdf_ks": 0.20057876790934404,
+        "finite_fraction": 1.0,
+        "mean": 3.017259449523408,
+        "mean_error_sigma": 0.03451889904681593,
+        "sample_count": 4096,
+        "std": 0.4062225530892437,
+        "std_ratio": 0.8124451061784874
+      },
+      "first_five_pass_window": null,
+      "frozen_summary": {
+        "acquisition_metrics": {
+          "cdf_ks": 0.6761602131194915,
+          "finite_fraction": 1.0,
+          "mean": 2.1288577224331675,
+          "mean_error_sigma": 1.742284555133665,
+          "sample_count": 4096,
+          "std": 0.8605971029816626,
+          "std_ratio": 1.7211942059633252
+        },
+        "acquisition_suffix": 0,
+        "acquisition_verdict": "FAIL",
+        "combined_verdict": "FAIL",
+        "final_metrics": {
+          "cdf_ks": 0.6698703704292451,
+          "finite_fraction": 1.0,
+          "mean": 2.1455794650973985,
+          "mean_error_sigma": 1.708841069805203,
+          "sample_count": 4096,
+          "std": 0.8913637714610438,
+          "std_ratio": 1.7827275429220877
+        },
+        "final_terminal_suffix": 0,
+        "first_five_pass_window": null,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "hold_verdict": "FAIL",
+        "longest_pass_streak": 0,
+        "total_checks": 48,
+        "total_pass_checks": 0
+      },
+      "hold_pass_checks": 0,
+      "hold_total_checks": 24,
+      "hold_verdict": "FAIL",
+      "longest_pass_streak": 0,
+      "mode": "resume",
+      "phase": "shift",
+      "raw_receipt_sha256": "51c2bbaff75d3e0ce415cc16169c2788c6ee393e99dc7383d1663e4b8097ca68",
+      "source": {
+        "digest": "6957179d80f36e00dba763be0a90dffff54a8a42feb5c9e4a74aaf2a66e06c89",
+        "origin_commit": "f987656a49c7477322c058d98e6e1c180518fa36",
+        "schema_version": 1
+      },
+      "task": "gaussian1d_acquisition",
+      "total_checks": 48,
+      "total_pass_checks": 0
+    }
+  ],
+  "schema_version": 1,
+  "scope": "archived architecture control; original verdicts, no requalification",
+  "source_publication": "reports/forge/bcap-past-extrapolation/results.json",
+  "training_updates": 0
+}
