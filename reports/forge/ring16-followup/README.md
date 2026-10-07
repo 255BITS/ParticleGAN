@@ -16,6 +16,31 @@ remain historical receipts from before device access returned. They are not
 current blockers. Original [PR331](https://github.com/255BITS/ParticleGAN/pull/331)
 and all five follow-up PRs remain unmerged.
 
+## Later continuous combination follow-up
+
+[PR338](https://github.com/255BITS/ParticleGAN/pull/338) tests both mechanisms
+continuously under a separately frozen one-arm GPU protocol. It confirms
+acquisition at1050 (independent covariance .817187) and passes all34 scheduled
+checks1050–1600. Final covariance .470678, HQ .956055, massTV .078613 and minimum
+component eigenvalue ratio .387340 satisfy all original bounds. No restart,
+annealing or optimizer reset is used. [Compact results](serialized-truncation-results.json)
+pin execution source `5e1d33f37b312a1b4a760e8417d76542570f0768`, archive and
+original individual-arm comparisons. All9600 matrix updates pass a serialized
+execution-scope guard; unchanged API software evidence is reused without training.
+
+Matched initialization, recipe, prior, all1600 target batches, cadence, gates
+and public numerical code are verified. Truncation alone confirms684 and settles
+834, earlier than the combination's1050; the combination finishes with lower
+covariance (.470678 vs .589678). Both are supported candidates for a separately
+frozen whole-configuration Tier1 comparison. Compatibility is demonstrated;
+universal superiority, combined restart parity and indefinite retention remain
+unestablished. No empirical speed comparison or ordinary qualification is added.
+
+This closed campaign spent1600 new GPU updates/97 scored draws/25.551 whole
+subprocess seconds within300 reserved seconds, one attempt and zero retries.
+The report includes an actual-training GIF and a byte-verified19-file raw archive.
+Original individual results and budgets below remain unchanged.
+
 ## Later uninterrupted serialization follow-up
 
 [PR337](https://github.com/255BITS/ParticleGAN/pull/337) completed a separately
