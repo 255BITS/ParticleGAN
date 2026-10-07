@@ -1,6 +1,7 @@
 """Byte-exact final inventory archive; no models, draws, training or regrading.
 
-Run only after drain and refresh of the twelve registered search reports.
+Run only after drain and refresh of the registered search reports. An explicitly
+stopped partial source cut requires --allow-interrupted and its exact stop receipt.
 Bulk output must live under an ignored Git worktree artifacts/ directory.
 """
 from __future__ import annotations
@@ -53,10 +54,11 @@ def idle_lock(path):
             fcntl.flock(handle, fcntl.LOCK_UN)
 
 
-def final_accounting(state):
+def final_accounting(state, *, allow_interrupted=False):
     if any(row["status"] == "running" for row in state["jobs"].values()):
         raise ValueError("active workers remain")
-    if any(row["status"] in {"queued", "running", "paused"} for row in state["submissions"].values()):
+    active = {"running", "paused"} if allow_interrupted else {"queued", "running", "paused"}
+    if any(row["status"] in active for row in state["submissions"].values()):
         raise ValueError("active campaign requests remain")
     if set(state["campaigns"]) != {ROUND}:
         raise ValueError("archive requires the single declared inventory campaign")
@@ -73,6 +75,35 @@ def final_accounting(state):
     if len(charges) != len(attempts) or {row["attempt_id"] for row in charges} != set(attempts):
         raise ValueError("every original attempt must have exactly one finalized charge")
     return campaign, paid, attempts
+
+
+def interrupted_receipt(queue, state, campaign, paid):
+    """Certify a dispatch-stopped cut without rewriting queued jobs or verdicts."""
+    path = queue / "interruption-receipt.json"
+    receipt = read(path)
+    expected = {"campaign_id": ROUND, "source_origin_commit": SOURCE,
+                "source_digest": SOURCE_DIGEST, "active_workers": 0,
+                "reserved_seconds": 0, "scientific_retries": 0,
+                "old_results_are_new_source_credit": False,
+                "new_source_credit": False, "numerical_verdicts_unchanged": True,
+                "dispatch_stopped": True, "paid_seconds": paid,
+                "queue_state_sha256": digest(queue / "queue/state.json"),
+                "job_status_counts": dict(Counter(row["status"] for row in state["jobs"].values())),
+                "submission_status_counts": dict(Counter(row["status"] for row in state["submissions"].values()))}
+    if any(receipt.get(key) != value for key, value in expected.items()):
+        raise ValueError("interrupted archive requires the exact inactive source-bound stop receipt")
+    if campaign.get("paused") or not receipt.get("successor_campaign_id") or receipt["successor_campaign_id"] == ROUND:
+        raise ValueError("interrupted source must be stopped with an explicit separate successor")
+    return receipt
+
+
+def trial_attempts_match(trial, state, *, allow_interrupted=False):
+    request_id = trial["request_id"]
+    expected = {entry["attempt_id"] for job in state["jobs"].values()
+                if request_id in job["subscribers"] for entry in job["attempts"]}
+    return (request_id in state["submissions"]
+            and (allow_interrupted or trial["status"] != "UNKNOWN")
+            and set(trial.get("attempt_ids", [])) == expected)
 
 
 def ignored_destination(path):
@@ -132,9 +163,10 @@ def verify(path):
     return inventory
 
 
-def _create(root, queue, archive_path, receipt_path, stack):
+def _create(root, queue, archive_path, receipt_path, stack, *, allow_interrupted=False):
     state = read(queue / "queue/state.json")
-    campaign, paid, attempts = final_accounting(state)
+    campaign, paid, attempts = final_accounting(state, allow_interrupted=allow_interrupted)
+    interruption = interrupted_receipt(queue, state, campaign, paid) if allow_interrupted else None
     launch = read(queue / "launch-receipt.json")
     if (launch["source_origin_commit"], launch["source_digest"]) != (SOURCE, SOURCE_DIGEST):
         raise ValueError("launch receipt belongs to another executed source")
@@ -185,11 +217,7 @@ def _create(root, queue, archive_path, receipt_path, stack):
                 or not math.isclose(accounting.get("spent_seconds", -1), paid, rel_tol=0, abs_tol=1e-8)):
             raise ValueError("refresh final source-bound search report before archive: " + str(path))
         for trial in search["trials"]:
-            request_id = trial["request_id"]
-            expected = {entry["attempt_id"] for job in state["jobs"].values()
-                        if request_id in job["subscribers"] for entry in job["attempts"]}
-            if (request_id not in state["submissions"] or trial["status"] == "UNKNOWN"
-                    or set(trial.get("attempt_ids", [])) != expected):
+            if not trial_attempts_match(trial, state, allow_interrupted=allow_interrupted):
                 raise ValueError("search report does not preserve its final original attempt set")
     declarations = [round_path, root / definition["campaign"],
                     *(root / "configs/forge/searches" / (study + ".json") for study in definition["studies"])]
@@ -200,6 +228,8 @@ def _create(root, queue, archive_path, receipt_path, stack):
     inventory = {"schema_version": 1, "campaign": ROUND, "source_origin_commit": SOURCE,
         "source_digest": SOURCE_DIGEST, "files": {name: {"bytes": path.stat().st_size,
         "sha256": digest(path)} for name, path in files.items()}}
+    if interruption is not None:
+        inventory.update(finalized=False, new_source_credit=False, interruption=interruption)
     with archive_path.open("xb") as destination, gzip.GzipFile(fileobj=destination, mode="wb", filename="", mtime=0, compresslevel=6) as compressed:
         with tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as archive:
             for name, path in files.items():
@@ -217,9 +247,9 @@ def _create(root, queue, archive_path, receipt_path, stack):
     if (collected_files(root, queue, originals, declarations, searches) != files
             or any(digest(path) != inventory["files"][name]["sha256"] for name, path in files.items())):
         raise ValueError("original file set or bytes changed while archiving")
-    final_accounting(read(queue / "queue/state.json"))
+    final_accounting(read(queue / "queue/state.json"), allow_interrupted=allow_interrupted)
     receipt = {"schema_version": 1, "campaign": ROUND, "source_origin_commit": SOURCE,
-        "source_digest": SOURCE_DIGEST, "qualification_input": False, "finalized": True,
+        "source_digest": SOURCE_DIGEST, "qualification_input": False, "finalized": not allow_interrupted,
         "attempts": attempts, "attempt_count": len(attempts), "paid_seconds": paid,
         "previous_paid_seconds": launch["previous_paid_seconds"],
         "combined_paid_seconds": paid + launch["previous_paid_seconds"],
@@ -232,13 +262,16 @@ def _create(root, queue, archive_path, receipt_path, stack):
         "members_digest": hashlib.sha256(encoded(inventory)).hexdigest(), "byte_exact_verified": True,
         "search_report_hashes": {path.relative_to(root).as_posix(): digest(path) for path in searches},
         "preserved_log_hashes": {name: digest(queue / name) for name in ("drain.log", "controller.log")}}
+    if interruption is not None:
+        receipt.update(new_source_credit=False, interruption=interruption,
+                       interruption_receipt_sha256=digest(queue / "interruption-receipt.json"))
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     with receipt_path.open("xb") as handle:
         handle.write(encoded(receipt))
     return receipt
 
 
-def create(root, archive_path, receipt_path):
+def create(root, archive_path, receipt_path, *, allow_interrupted=False):
     root, archive_path, receipt_path = map(lambda path: Path(path).resolve(), (root, archive_path, receipt_path))
     ignored_destination(archive_path)
     if archive_path.exists() or receipt_path.exists():
@@ -247,7 +280,7 @@ def create(root, archive_path, receipt_path):
     with ExitStack() as stack:
         stack.enter_context(idle_lock(queue / "coordinator.lock"))
         stack.enter_context(idle_lock(queue / "queue.lock"))
-        return _create(root, queue, archive_path, receipt_path, stack)
+        return _create(root, queue, archive_path, receipt_path, stack, allow_interrupted=allow_interrupted)
 
 
 if __name__ == "__main__":
@@ -256,6 +289,8 @@ if __name__ == "__main__":
     parser.add_argument("--archive", required=True, type=Path)
     parser.add_argument("--receipt", type=Path)
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument("--allow-interrupted", action="store_true",
+                        help="preserve an explicitly stopped partial source cut; never finalize or qualify it")
     parser.add_argument("--round", default=ROUND)
     parser.add_argument("--source-commit", default=SOURCE)
     parser.add_argument("--source-digest", default=SOURCE_DIGEST)
@@ -267,5 +302,5 @@ if __name__ == "__main__":
     else:
         if args.source_root is None or args.receipt is None:
             parser.error("--source-root and --receipt are required for creation")
-        receipt = create(args.source_root, args.archive, args.receipt)
+        receipt = create(args.source_root, args.archive, args.receipt, allow_interrupted=args.allow_interrupted)
         print(json.dumps({key: receipt[key] for key in ("campaign", "bytes", "sha256", "attempt_count", "paid_seconds")}, sort_keys=True))

@@ -57,7 +57,7 @@ def _exact_old_row(pin, rows):
 
 
 def propose(root, staged, old_board, old_selection, round_definition, manifest,
-            archived_rows, declarations, *, configured_standard=False):
+            archived_rows, declarations, *, configured_standard=False, refresh_source=False):
     """Pure saved-metadata transformation; never selects by observed outcomes."""
     root = Path(root)
     _check_digest(staged, "staged publication")
@@ -79,7 +79,17 @@ def propose(root, staged, old_board, old_selection, round_definition, manifest,
             or old_selection.get("default_adoption") is not False
             or any(old_board.get(key) != manifest[key] for key in POLICY_FIELDS)):
         raise ValueError("old selection/inventory differs from its immutable evidence policy")
-    if view["revision"] <= manifest["view_revision"]:
+    if refresh_source:
+        if any(staged.get(key) != manifest[key] for key in POLICY_FIELDS):
+            raise ValueError("source refresh requires the identical registered view policy and tier requirements")
+        registered = [*manifest.get("cohorts", []),
+                      *(entry for policy in manifest.get("archived_policies", []) for entry in policy["cohorts"])]
+        old_digests = {row.get("bindings", {}).get("source_digest") for row in [*archived_rows, *old_board.get("rows", [])]}
+        new_digests = set(staged["frozen_source"].get("source_digests", []))
+        if (not new_digests or new_digests & old_digests
+                or staged["frozen_source"]["commit"] in {entry["source_commit"] for entry in registered}):
+            raise ValueError("source refresh requires a new executed frozen source identity")
+    elif view["revision"] <= manifest["view_revision"]:
         raise ValueError("pin preparation requires a later view revision")
     required = {item["task"] for item in view["assignments"]
                 if item["importance"] == "required" and item["qualification_tier"] == 1}
@@ -212,6 +222,7 @@ def propose(root, staged, old_board, old_selection, round_definition, manifest,
             "view": view["id"], "policy_fingerprint": stable_hash(view),
             "selections": selections, "historical_selections": [history[key] for key in sorted(history)]}
     audit = {"schema_version": 1, "scope": "saved_metadata_only_family_pin_proposal",
+             "preparation_mode": "same_view_source_refresh" if refresh_source else "later_view_policy",
              "frozen_source": deepcopy(staged["frozen_source"]), "view_revision": view["revision"],
              "required_denominator_by_tier": denominator, "selection_rule": round_definition.get("selection_rule"),
              "registered_family_count": len(families), "round_family_count": len(by_family),
@@ -224,8 +235,45 @@ def propose(root, staged, old_board, old_selection, round_definition, manifest,
     return card, audit
 
 
+def _validate_refresh_sources(root, staged):
+    """Check saved source bytes and original request origins without regrading."""
+    from experiments.forge.sources import verify_snapshot
+    expected = staged["frozen_source"]
+    verified = {}
+    for row in staged["rows"]:
+        for attempt in row.get("attempt_ids", []):
+            request = read_json(root / "reports/forge/attempts" / attempt / "request.json")["request"]
+            source = request["source"]
+            proof = read_json(root / "reports/forge/technique-receipts" / (attempt + ".json"))["provenance"]
+            if (source["origin_commit"] != expected["commit"]
+                    or source["digest"] not in expected["source_digests"]
+                    or source["digest"] != row["bindings"]["source_digest"]
+                    or proof.get("source_origin_commit") != source["origin_commit"]
+                    or proof.get("source_digest") != source["digest"]
+                    or request["candidate"]["id"] != row["candidate_id"]
+                    or request["candidate_revision"] != row["candidate_revision"]):
+                raise ValueError("source refresh original request differs from its exact staged receipt/source identity")
+            snapshot = Path(source["snapshot_path"])
+            snapshot = snapshot if snapshot.is_absolute() else root / snapshot
+            manifest_path = snapshot / "forge-source.json"
+            frozen = read_json(manifest_path)
+            if frozen != {key: value for key, value in source.items() if key != "snapshot_path"}:
+                raise ValueError("source refresh snapshot manifest differs from its original request")
+            key = source["digest"], str(snapshot.resolve())
+            if key not in verified:
+                verify_snapshot(snapshot, source)
+                verified[key] = {"source_origin_commit": source["origin_commit"],
+                                 "source_digest": source["digest"], "snapshot": str(snapshot.resolve()),
+                                 "manifest_sha256": file_hash(manifest_path), "source_bytes_verified": True}
+    if not verified:
+        raise ValueError("source refresh has no measured original source to verify")
+    if {key[0] for key in verified} != set(expected["source_digests"]):
+        raise ValueError("source refresh claims a frozen manifest without a measured original source")
+    return [verified[key] for key in sorted(verified)]
+
+
 def prepare(root, *, staged_path, round_path, old_board_path, old_selection_path,
-            manifest_path, configured_standard=False):
+            manifest_path, configured_standard=False, refresh_source=False):
     """Validate saved digests/proofs, then prepare a proposal without publishing."""
     root = Path(root).resolve()
     paths = {"staged": Path(staged_path), "round": Path(round_path), "old_board": Path(old_board_path),
@@ -257,7 +305,9 @@ def prepare(root, *, staged_path, round_path, old_board_path, old_selection_path
     declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
     card, audit = propose(root, staged, read_json(paths["old_board"]), read_json(paths["old_selection"]),
                           read_json(paths["round"]), manifest, archived_rows, declarations,
-                          configured_standard=configured_standard)
+                          configured_standard=configured_standard, refresh_source=refresh_source)
+    if refresh_source:
+        audit["verified_refresh_sources"] = _validate_refresh_sources(root, staged)
     audit["input_files"] = {key: {"path": str(path), "sha256": file_hash(path)} for key, path in paths.items()}
     audit["helper_sha256"] = file_hash(Path(__file__))
     return card, audit
@@ -273,6 +323,8 @@ def main(argv=None):
     parser.add_argument("--manifest", type=Path, default=EVIDENCE_MANIFEST)
     parser.add_argument("--output", type=Path, required=True, help="ignored local directory, or a directory outside the repository")
     parser.add_argument("--configured-standard", action="store_true", help="label a complete 6/6 row configured_standard; default is current_measurement")
+    parser.add_argument("--refresh-source", action="store_true",
+                        help="explicit new-source refresh under the identical registered view; preserve pre-run recipe choices")
     args = parser.parse_args(argv)
     root = args.root.resolve()
     output = args.output if args.output.is_absolute() else root / args.output
@@ -284,7 +336,8 @@ def main(argv=None):
             parser.error("output must be ignored or outside the repository; the helper never writes publication inputs")
     card, audit = prepare(root, staged_path=args.staged, round_path=args.round_path,
                           old_board_path=args.old_board, old_selection_path=args.old_selection,
-                          manifest_path=args.manifest, configured_standard=args.configured_standard)
+                          manifest_path=args.manifest, configured_standard=args.configured_standard,
+                          refresh_source=args.refresh_source)
     atomic_json(targets[0], card)
     atomic_json(targets[1], audit)
     print(json.dumps({"selection": str(targets[0]), "audit": str(targets[1]),
