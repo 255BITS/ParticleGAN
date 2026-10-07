@@ -28,8 +28,17 @@ record True. Existing serialized-mode checkpoints can load when their remaining
 recipe, optimizer and execution bindings match. Unmarked or False historical
 checkpoints must resume from their pinned original source: automatically loading
 them under a different accumulation order would change their continuation
-contract. Frozen research sources, qualification receipts and reports remain
-unchanged.
+contract. Archived research sources, qualification receipts and reports retain
+their original identities.
+
+The original common26 canonical image and MoG owners are strictly pinned
+historical reproduction paths, outside the ordinary Tier 1 roster. Their False
+contract markers and original source pins remain unchanged. Current direct
+factories now explicitly report `BLOCKED` before constructing models if their
+pinned GANTrainer source differs, instead of reaching an incompatible supplied
+trainer assignment or silently changing the old cohort. Recover those owners
+from their archived original source; the current ordinary Forge and toy adapters
+use the fixed policy directly.
 
 Torch's setting is thread-local. The public owned scopes enforce it in new
 threads. Caller-owned component loops run in a new thread, or inside a context
@@ -37,10 +46,12 @@ that deliberately re-enables Torch scheduling, should wrap the complete update
 in `with particlegan.serial_autograd():`. The project does not prevent unrelated
 external code from changing Torch settings globally.
 
-Five CUDA software checks passed on physical GPU1 (RTX A6000), including default
+Six CUDA software checks passed on physical GPU1 (RTX A6000), including default
 BCAP with the merged truncation implementation, forward/backward enforcement,
 exact checkpoint continuation, atomic legacy rejection, failure restoration,
-worker scopes and existing KA2 CUDA continuation. Final checks took 3.05 seconds.
+worker scopes and existing KA2 CUDA continuation. Five integration checks took
+3.05 seconds; the additional legacy-owner preflight check took 0.28 seconds with
+model and optimizer construction fenced.
 The bounded checks consumed nine successful tiny public updates across pre/post
 integration; no quality campaign ran in this PR. Metadata-only Forge validation
 and inventory coverage also passed (11,776/11,776 tracked sources).
