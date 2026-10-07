@@ -270,10 +270,16 @@ compatibility or grant qualification. Reuse still requires the exact recipe,
 task, source, prior, initialization, sampling and runtime bindings.
 
 The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
-scalar Gaussian acquisition, three existing 300-second behavior tasks,
+scalar Gaussian can-it-pass smoke, three existing 300-second behavior tasks,
 the 300-second ring acquisition and the 900-second word acquisition.
-The explicit `tier1-acquisition-v2` campaign caps campaign and candidate
-reservations at that amount. Revision 3's `tier1-acquisition-v1` retains its
+The explicit `tier1-gaussian-smoke-v1` campaign caps required-smoke campaign and
+candidate reservations at that amount. Its Gaussian task requires any passing
+scheduled state plus independent same-state confirmation, and completes all
+1,000 updates. The continuing Gaussian retention/target-shift task is required
+Tier 2 with its own passing smoke checkpoint dependency and 600-second allowance.
+Revision 7 has required counts 6/20/2; its full through-Tier-2 reservation is
+42,420 seconds per candidate (42,720 including the optional 300-second clock
+audit diagnostic). The historical `tier1-acquisition-v2` remains unchanged. Revision 3's `tier1-acquisition-v1` retains its
 2,100-second cap; historical `smoke.json` retains its 900-second cap. Neither
 covers the complete revision-4 Tier 1.
 Task timeouts live in each task's `resources.timeout_seconds`. Larger campaigns
@@ -563,8 +569,8 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/19/2
-for the current `discriminator_stability` view, including unknown and blocked
+techniques reserve no training resources. Required denominators are 6/20/2
+for the current revision-7 `discriminator_stability` view, including unknown and blocked
 cells. The current publication retains its recorded revision 3 (5/19/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.

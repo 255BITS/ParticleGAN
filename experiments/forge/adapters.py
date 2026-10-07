@@ -90,6 +90,12 @@ def adapter_preflight(task, candidate, *, root=None):
         if blockers:
             return blockers
     if adapter == "transfer_vector":
+        if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
+            from .gaussian_tasks import validate_task
+            try:
+                validate_task(task)
+            except (ValueError, KeyError, TypeError) as error:
+                blockers.append(str(error))
         scorer = task["evaluation"].get("sample_evaluator")
         if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples",
                           "benchmarks.toy_audit.gaussian1d_quality:score_samples"):
@@ -571,6 +577,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
         from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
+        if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
+            from .gaussian_tasks import run_gaussian
+            return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
         return _vector(request, task, output_dir, device)
     if adapter == "transfer_image":
         return _image(request, task, output_dir, device)
