@@ -1,0 +1,209 @@
+{
+  "scope": "implementation timing and correctness only; no scientific qualification",
+  "adapter": {
+    "bytes": 47593,
+    "sha256": "96f52767867d6e227be780560d03b56a96989bd451e87373b33549fffa33dc55"
+  },
+  "binding": {
+    "bytes": 40174,
+    "sha256": "a2772e2f2ee62d904d20822a3abe194f8e526589d1e97a1c712a5219e5950c2c"
+  },
+  "baseline_module": {
+    "bytes": 9397,
+    "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+  },
+  "optimized_module": {
+    "bytes": 9851,
+    "sha256": "dcc0968f7a784deed9de92523fa20ae4331589b9ff9631967fffffb949650eb4"
+  },
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "torch": "2.13.0+cu126",
+  "device": "cuda:0",
+  "physical_uuid": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+  "cpu_threads": 1,
+  "schedule_contract": "original full recipe and 20001 execution limit retained in every fixture",
+  "windows": [
+    {
+      "index": 0,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 15.106531598605216,
+      "ms_per_update": 118.01977811410325,
+      "prefix_seconds": {
+        "32": 3.740935194771737,
+        "64": 7.545338341034949,
+        "128": 15.106521498877555
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 91 %, 41399 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17899 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41398 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17899 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 27958784,
+      "peak_reserved_bytes": 33554432
+    },
+    {
+      "index": 1,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 16.70933452900499,
+      "ms_per_update": 130.5416760078515,
+      "prefix_seconds": {
+        "32": 4.236202163156122,
+        "64": 8.315909689292312,
+        "128": 16.70932480925694
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41398 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17905 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41406 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17905 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 32999424,
+      "peak_reserved_bytes": 39845888
+    },
+    {
+      "index": 2,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 15.027780703734607,
+      "ms_per_update": 117.40453674792661,
+      "prefix_seconds": {
+        "32": 3.5651604919694364,
+        "64": 7.171955757774413,
+        "128": 15.027771413791925
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41406 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17909 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 95 %, 41400 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17909 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 38040064,
+      "peak_reserved_bytes": 44040192
+    },
+    {
+      "index": 3,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 15.628891916014254,
+      "ms_per_update": 122.10071809386136,
+      "prefix_seconds": {
+        "32": 4.023807559162378,
+        "64": 7.285926427226514,
+        "128": 15.628882726188749
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41408 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17913 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41399 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 35 %, 17915 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 43080704,
+      "peak_reserved_bytes": 50331648
+    }
+  ],
+  "gpu_before": {
+    "exit_code": 0,
+    "rows": [
+      "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+      "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41399 MiB, 49140 MiB",
+      "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 100 %, 17535 MiB, 49140 MiB"
+    ]
+  },
+  "summary": {
+    "baseline": 120.0602481039823,
+    "optimized": 123.97310637788905,
+    "observed_time_reduction_percent": -3.259078950526484
+  },
+  "status": "ABBA_TIMING_COMPLETED_OPTIONAL_STABILITY_ABORTED_FOR_SERVING_CONTENTION",
+  "early_parity": {
+    "tensor_bytes_and_values_equal": true,
+    "evidence": "All four window-state equality assertions precede the optional continuation; the saved execution log reached baseline continuation step200 and later. No final GPU1200 paired result was obtained."
+  },
+  "continuation_scope": "Incomplete GPU baseline continuation only; no1200GPU paired-stability claim.",
+  "supervision": {
+    "elapsed_seconds": 212.92406970309094,
+    "exit_code": -15,
+    "reason": null,
+    "manual_stop_reason": "Owned child stopped after observing retained autojev server consuming98%SM; paired1200 would exceed remaining240s hardcap",
+    "allocator_cap_bytes": 2147483648,
+    "hardcap_seconds": 240,
+    "no_new_gpu1_pid_overlap": true,
+    "remaining_service_pids": [
+      735245,
+      3918083
+    ]
+  },
+  "contention_sample": {
+    "command": "nvidia-smi pmon -i1 -s u -c1",
+    "serving_pid": 735245,
+    "serving_sm_percent": 98,
+    "serving_memory_percent": 33,
+    "owned_pid": 51747,
+    "owned_sm_percent": "unavailable in sample; no inferred zero"
+  },
+  "interpretation": "No net GPU gain established. Whole-update mean is3.26% slower and window variation plus retained serving load make a clean throughput conclusion inconclusive.",
+  "raw_artifacts": {
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu1-v2/progress.json": {
+      "bytes": 5621,
+      "sha256": "1e989897c4598ab240db96cffcf32eab5f48dbf2d6edf145b517fa3cebd1e14b"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu1-v2.log": {
+      "bytes": 3669,
+      "sha256": "5b6bbaa270843818432a0d4453c6b60f3cbc1500cceeb506b79b3af55b412dff"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu1-v2-supervision.json": {
+      "bytes": 30630,
+      "sha256": "78564251c973eb6839242eefbb6ecc0dcd10a0d4d3d66b99e547acca2d09e818"
+    }
+  },
+  "last_logged_baseline_continuation_steps": 1000,
+  "optimized_continuation_steps": 0,
+  "host_cpu": "AMD Ryzen 9 5900X, 12 cores / 24 threads"
+}

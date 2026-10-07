@@ -1,0 +1,366 @@
+{
+  "scope": "implementation timing and correctness only; no scientific qualification",
+  "adapter": {
+    "bytes": 47593,
+    "sha256": "96f52767867d6e227be780560d03b56a96989bd451e87373b33549fffa33dc55"
+  },
+  "binding": {
+    "bytes": 40174,
+    "sha256": "a2772e2f2ee62d904d20822a3abe194f8e526589d1e97a1c712a5219e5950c2c"
+  },
+  "baseline_module": {
+    "bytes": 9397,
+    "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+  },
+  "optimized_module": {
+    "bytes": 9851,
+    "sha256": "dcc0968f7a784deed9de92523fa20ae4331589b9ff9631967fffffb949650eb4"
+  },
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "torch": "2.13.0+cu126",
+  "device": "cuda:0",
+  "physical_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+  "cpu_threads": 1,
+  "schedule_contract": "original full recipe and 20001 execution limit retained in every fixture",
+  "windows": [
+    {
+      "index": 0,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 22.31597623694688,
+      "ms_per_update": 174.3435643511475,
+      "prefix_seconds": {
+        "32": 5.4168061767704785,
+        "64": 11.15836643986404,
+        "128": 22.31596575677395
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41767 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41768 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 27958784,
+      "peak_reserved_bytes": 33554432
+    },
+    {
+      "index": 1,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 22.687747025862336,
+      "ms_per_update": 177.2480236395495,
+      "prefix_seconds": {
+        "32": 5.628665094263852,
+        "64": 11.417404877021909,
+        "128": 22.687736385967582
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41774 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41774 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 32999424,
+      "peak_reserved_bytes": 39845888
+    },
+    {
+      "index": 2,
+      "case": "optimized",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 22.75188395800069,
+      "ms_per_update": 177.7490934218804,
+      "prefix_seconds": {
+        "32": 5.864244828000665,
+        "64": 11.352925745304674,
+        "128": 22.751872468274087
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41778 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 89 %, 41778 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 38040064,
+      "peak_reserved_bytes": 44040192
+    },
+    {
+      "index": 3,
+      "case": "baseline",
+      "warmup": 8,
+      "updates": 128,
+      "seconds": 22.906708668917418,
+      "ms_per_update": 178.95866147591732,
+      "prefix_seconds": {
+        "32": 5.848762481939048,
+        "64": 11.479044970590621,
+        "128": 22.906700158957392
+      },
+      "gpu_before": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41782 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "gpu_after": {
+        "exit_code": 0,
+        "rows": [
+          "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+          "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41784 MiB, 49140 MiB",
+          "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+        ]
+      },
+      "peak_allocated_bytes": 43080704,
+      "peak_reserved_bytes": 50331648
+    }
+  ],
+  "equivalence": {
+    "(0, 'baseline')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(1, 'optimized')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(2, 'optimized')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    },
+    "(3, 'baseline')": {
+      "tensor_bytes_and_values_equal": true,
+      "differences": []
+    }
+  },
+  "summary": {
+    "baseline": 176.65111291353242,
+    "optimized": 177.49855853071494,
+    "observed_time_reduction_percent": -0.4797284337502816
+  },
+  "gpu_before": {
+    "exit_code": 0,
+    "rows": [
+      "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+      "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41403 MiB, 49140 MiB",
+      "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+    ]
+  },
+  "gpu_after": {
+    "exit_code": 0,
+    "rows": [
+      "index, uuid, utilization.gpu [%], memory.used [MiB], memory.total [MiB]",
+      "0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, 100 %, 41780 MiB, 49140 MiB",
+      "1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 0 %, 17535 MiB, 49140 MiB"
+    ]
+  },
+  "contention_limit": "Shared device; external load snapshots do not establish exclusive or stationary GPU throughput.",
+  "supervision": {
+    "exit_code": 0,
+    "stop_reason": null,
+    "elapsed_seconds": 104.59025592589751,
+    "process_sample_count": 51,
+    "other_processes_unchanged": true,
+    "allocator_cap_bytes": 2147483648,
+    "hardcap_seconds": 180,
+    "physical_device_index": 0
+  },
+  "interpretation": "No measured whole-training GPU improvement; observed optimized mean is 0.48% slower. Shared serving load prevents a clean throughput conclusion.",
+  "raw_artifacts": {
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu0/result.json": {
+      "bytes": 6590,
+      "sha256": "67fe43464f29f8b987febc47ed13bb09a66cbfbd18cd56f7638e5299562cb85d"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu0-supervision.json": {
+      "bytes": 19345,
+      "sha256": "0ee50328913e9d6c017680b6bd2f92bc136f8ee7303927fa81910daad441c38c"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu0.log": {
+      "bytes": 3796,
+      "sha256": "4c397efeb09b2b565720c7bc48f2c4ca986ceb5f1e3787acf486c022a1fd9b98"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-scale-microbench-gpu0.json": {
+      "bytes": 3270,
+      "sha256": "a693a3747052ee9c31946d955d7863da853aa3cec984f7279c6104fd74bfdd7a"
+    },
+    "/home/mikkel/Documents/Codex/2026-10-07/task/atlas-speed-gpu0-tests.log": {
+      "bytes": 99,
+      "sha256": "6489e68fd2724c5221081fe94c976fc1ca28e9462cd84fe3d0bd71b18885a26b"
+    }
+  },
+  "scale_microbenchmark": {
+    "device": "cuda:0",
+    "physical_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "torch": "2.13.0+cu126",
+    "rows": [
+      {
+        "rows": 5,
+        "counts": {
+          "baseline": {
+            "aten::div": 121,
+            "aten::sub": 72,
+            "aten::neg": 24,
+            "aten::clamp_min": 24
+          },
+          "optimized": {
+            "aten::sub": 26,
+            "aten::neg": 1,
+            "aten::div": 98,
+            "aten::clamp_min": 1
+          }
+        },
+        "windows": [
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 6118.203396908939
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4535.272419161629
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4682.020517066121
+          },
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 6417.826640245039
+          }
+        ],
+        "mean_us": {
+          "baseline": 6268.015018576989,
+          "optimized": 4608.646468113875
+        },
+        "observed_time_reduction_percent": 26.47358925505312
+      },
+      {
+        "rows": 25,
+        "counts": {
+          "baseline": {
+            "aten::div": 121,
+            "aten::sub": 72,
+            "aten::neg": 24,
+            "aten::clamp_min": 24
+          },
+          "optimized": {
+            "aten::sub": 26,
+            "aten::neg": 1,
+            "aten::div": 98,
+            "aten::clamp_min": 1
+          }
+        },
+        "windows": [
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 5986.780204693787
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4449.181564268656
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4525.857395492494
+          },
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 5995.197097945493
+          }
+        ],
+        "mean_us": {
+          "baseline": 5990.98865131964,
+          "optimized": 4487.519479880575
+        },
+        "observed_time_reduction_percent": 25.095510256189424
+      },
+      {
+        "rows": 128,
+        "counts": {
+          "baseline": {
+            "aten::div": 121,
+            "aten::sub": 72,
+            "aten::neg": 24,
+            "aten::clamp_min": 24
+          },
+          "optimized": {
+            "aten::sub": 26,
+            "aten::neg": 1,
+            "aten::div": 98,
+            "aten::clamp_min": 1
+          }
+        },
+        "windows": [
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 6230.681719898712
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4935.039731208235
+          },
+          {
+            "case": "optimized",
+            "calls": 64,
+            "us_per_call": 4501.643423282076
+          },
+          {
+            "case": "baseline",
+            "calls": 64,
+            "us_per_call": 6179.448573675472
+          }
+        ],
+        "mean_us": {
+          "baseline": 6205.065146787092,
+          "optimized": 4718.341577245155
+        },
+        "observed_time_reduction_percent": 23.959838202693884
+      }
+    ],
+    "scope": "local operation timing; shared-GPU load does not establish clean whole-training throughput"
+  },
+  "targeted_cuda_validation": "2 passed in 11.40s: float32/float64 dimensions1/2/3/8 scale-search cases and public-trainer particle-event checkpoint recovery",
+  "host_cpu": "AMD Ryzen 9 5900X, 12 cores / 24 threads"
+}

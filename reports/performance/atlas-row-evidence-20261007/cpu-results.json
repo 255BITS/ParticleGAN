@@ -277,7 +277,7 @@
     }
   },
   "validation": {
-    "tests": "143 passed, 4 CUDA tests skipped in 15.11s (CPU-only sandbox; GPU validation pending)",
+    "tests": "143 passed, 4 CUDA-only tests skipped in 12.42s; then 2 targeted CUDA tests passed on physical GPU0 in 11.40s",
     "state_comparison": "All tensor bytes and scalar values including same NaN diagnostics; full recipe/optimizer/controller/state, final parameter gradients, every measured loss output, and 14 named RNG streams",
     "finite_training_outputs": true,
     "naturally_observed_at_1200": {
@@ -288,5 +288,6 @@
       "controller_updates": 1200
     },
     "additional_events": "Exact public GANTrainer parity at primed stationarity, 16 row moves/resets, blocked drift and anchored release in tests/test_row_evidence_scale.py"
-  }
+  },
+  "host_cpu": "AMD Ryzen 9 5900X, 12 cores / 24 threads"
 }

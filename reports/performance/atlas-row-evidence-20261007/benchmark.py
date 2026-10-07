@@ -190,6 +190,12 @@ def main():
         result["equivalence"][str(key)] = {"tensor_bytes_and_values_equal": not delta, "differences": delta[:20]}
         assert not delta, delta[:20]
     del snapshots, control
+    means = {case: statistics.mean(row["ms_per_update"] for row in result["windows"] if row["case"] == case)
+             for case in ("baseline", "optimized")}
+    result["summary"] = {**means, "observed_time_reduction_percent": 100 * (1 - means["optimized"] / means["baseline"])}
+    # Keep completed timing/parity evidence even if the optional longer
+    # continuation is cancelled for contention or reaches its external cap.
+    (args.output / "window-result.json").write_text(json.dumps(result, indent=2) + "\n")
     if args.stability_steps:
         final = {}
         for case in ("baseline", "optimized"):
@@ -211,9 +217,6 @@ def main():
         result["stability"] = {"updates_per_case": args.stability_steps, "tensor_bytes_and_values_equal": not delta,
                                "differences": delta[:20]}
         assert not delta, delta[:20]
-    means = {case: statistics.mean(row["ms_per_update"] for row in result["windows"] if row["case"] == case)
-             for case in ("baseline", "optimized")}
-    result["summary"] = {**means, "observed_time_reduction_percent": 100 * (1 - means["optimized"] / means["baseline"])}
     result["gpu_after"] = gpu_view() if args.device != "cpu" else None
     result["contention_limit"] = "Shared device; external load snapshots do not establish exclusive or stationary GPU throughput."
     (args.output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
