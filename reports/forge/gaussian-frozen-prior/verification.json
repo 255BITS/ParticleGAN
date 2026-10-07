@@ -1,0 +1,90 @@
+{
+  "cells": [
+    {
+      "arm": "alternating",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "arm": "alternating",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 241,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "simultaneous",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "arm": "simultaneous",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 241,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "extrapolation_from_past",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "arm": "extrapolation_from_past",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": false,
+      "live_grade_reproduced": true,
+      "phase": "stationary",
+      "sample_recomputations": 241,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "alternating",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": true,
+      "live_grade_reproduced": true,
+      "phase": "shift",
+      "sample_recomputations": 98,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "arm": "simultaneous",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": true,
+      "live_grade_reproduced": true,
+      "phase": "shift",
+      "sample_recomputations": 98,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "arm": "extrapolation_from_past",
+      "artifact_hashes_verified": true,
+      "frozen_grade_reproduced": true,
+      "live_grade_reproduced": true,
+      "phase": "shift",
+      "sample_recomputations": 98,
+      "task": "gaussian1d_acquisition"
+    }
+  ],
+  "model_sampling_draws": 0,
+  "publication_source_sha256": "36b10732a74d99835bedc99a68bbb68b6201d4dd3471a7a86102b6caf64b9188",
+  "total_sample_recomputations": 1308,
+  "training_updates": 0,
+  "wrapper_source_sha256": "af920735ec9e91caea8ab58ab28c3ffede97bc9bebd305c3891e6e1d0da73cd8"
+}

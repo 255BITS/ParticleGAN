@@ -1,0 +1,108 @@
+{
+  "cells": [
+    {
+      "cell": "alternating-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "3865e57b2b374bf45ef4677b97dbb674758271cbcf4ee56f8f52b29a989fee67",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "alternating-ring16_acquisition-stationary",
+      "checkpoint_sha256": "0bcf19c3a2608b408cf02bd68f68301fee61b36e79a0cd10906ceaf36fcc7881",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "422c8a1b2f17f9e8f741de8c781d5f9122649005981416b6a15b0458798e6c8e",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "simultaneous-ring16_acquisition-stationary",
+      "checkpoint_sha256": "e95dcece0263a94ebef331163c0901302e049ed5732fb0f78dd2a9be58210fb5",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-stationary",
+      "checkpoint_sha256": "1f4120a3e38e43528f7c3a5c46361da11724e7deac22e6c534a76967e6f58665",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "extrapolation_from_past-ring16_acquisition-stationary",
+      "checkpoint_sha256": "b5315bfb52271fd76840c2644c753dbf79c1c28478eef63d709a3fef0c653b60",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "optimizer_steps": 4000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "alternating-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "0927e7b0c1df2d4633f6e633ce7027d83ce40b1584e4e68439d4fe7669426eab",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "simultaneous-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "d9525eadad71c3b57850ef553a758418457b95a639e0c5c4c2a0aae102b96083",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000,
+      "prior_unchanged": true
+    },
+    {
+      "cell": "extrapolation_from_past-gaussian1d_acquisition-shift",
+      "checkpoint_sha256": "cafd753b9c2d628e82f4275d966b05c2e9eb825be2797b9f3ded2a137f36665b",
+      "context_restored_exactly": true,
+      "effective_rates": [
+        0.012,
+        0.018000000000000002
+      ],
+      "frozen_training_state_unchanged": true,
+      "optimizer_steps": 6000,
+      "prior_unchanged": true
+    }
+  ],
+  "model_sampling_draws": 0,
+  "training_updates": 0
+}

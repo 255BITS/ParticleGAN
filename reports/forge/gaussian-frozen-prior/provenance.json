@@ -1,0 +1,99 @@
+{
+  "archive": {
+    "bytes": 33856484,
+    "contents": "Nine cell receipts, full curves, actual samples, initial/final checkpoints, three no-update control states/curves, RNG checkpoints, executed source/protocol/candidate snapshots, software and scientific/publication logs.",
+    "local_raw": "runs/api/gaussian-frozen-prior-v1",
+    "path": "artifacts/gaussian-frozen-prior-v1.tar.gz",
+    "sha256": "1c60435f0690d24a4f0ec8deb2361ac27749d528bf872b584356cb4847a70d88"
+  },
+  "artifacts": {
+    "alternating-gaussian1d_acquisition-shift.gif": "482cb2b84e310ea8280153461023341312dbc7cbcfab2fdde51fd031f0267535",
+    "alternating-gaussian1d_acquisition-stationary.gif": "7d3e480dedea60eda675b077ce89bc3d1eba3b1d5535f5cdff5bcfa0e9037e5e",
+    "alternating-ring16_acquisition-stationary.gif": "e434c5aa38ce27067003f2392ca91a4bb84e191d52315275ce9dedfd27d99087",
+    "extrapolation_from_past-gaussian1d_acquisition-shift.gif": "46f96392c4e4f00537a36f101a567c8fa965ed994ae9dafae839fcf87e69dbda",
+    "extrapolation_from_past-gaussian1d_acquisition-stationary.gif": "f898cdc4eacdd3d0271da7da4d2b4c8bd62e4c1ab4b79d64546d6308ce6e06a2",
+    "extrapolation_from_past-ring16_acquisition-stationary.gif": "9e3cdbe312865d151ebb9b274891b78b75e9d9584ed8f21c44c3d5aa4c4b335b",
+    "restore-proof.json": "80f0172c421de19749c572672c8fb4ace911227db334f68b934038cda70492e8",
+    "results.json": "f4c1294739885b10e95bbeacfce7204365964dab8068860aadfb56fd1994a8ad",
+    "shift.svg": "d684e36fc62bbfb06147fcc7921422f87e07bedbe22dd60ee4c1be571e0c9d26",
+    "simultaneous-gaussian1d_acquisition-shift.gif": "747051c5475dd015195b1aa75ef381e1589eb95269d7aea9c10cf5acc3122166",
+    "simultaneous-gaussian1d_acquisition-stationary.gif": "2f2a5eebc9e0c963fb4c4e5d803ebbab5f7557851fa6bef045182a6a1d605c80",
+    "simultaneous-ring16_acquisition-stationary.gif": "dd109ab81aa7cdfc2511372cf7e1e3c3b0cc2695642b8827e397170b1d993b26",
+    "stationary.svg": "7fd4c6974a7057d7e5b1b295ca698183cd6c84e96bd1fbcc307f7f7ab8094d32",
+    "verification.json": "1d675b501130c93a213d5251b3fda04b2f9bcd434180d75f4669979c38e0e42c"
+  },
+  "budget": {
+    "new_training_updates": 30000,
+    "new_trials": 9,
+    "per_shift_trial_seconds": 300,
+    "per_stationary_trial_seconds": 600,
+    "reserved_seconds": 4500,
+    "retries": 0
+  },
+  "cohort": "frozen_initial_prior",
+  "cost": {
+    "new_real_training_examples": 3840000,
+    "new_training_loop_seconds": 337.1933839499252,
+    "new_training_updates": 30000,
+    "new_trials": 9,
+    "reuse_additional_updates": 0,
+    "reused_learned_control_cells": 9,
+    "scientific_retries": 0,
+    "scope": "New loops including scheduled evaluations, excluding setup/restore/serialization/publication. Software fixture updates are separate nonqualifying checks."
+  },
+  "device": "cuda:0",
+  "driver_sha256": "2752fd552db8c37bc7be5c5576e4cd1e0c066cda422bd6bc313046ac31b0ed71",
+  "executed_scientific_commit": "33ca3db28cd3a01336c8f183987184be21379220",
+  "gpu": "NVIDIA RTX A6000",
+  "id": "gaussian-frozen-prior-v1",
+  "merged_develop_commit": "d91c8d867b06435e79c25f65cf46754e8eabbe69",
+  "parent_archive": {
+    "path": "artifacts/bcap-past-extrapolation-v1.tar.gz",
+    "sha256": "10d61ee47ea4339f97060db2514cb086e32e63e50f1da6d2e28da18b37fe5b09"
+  },
+  "parent_pr": "https://github.com/255BITS/ParticleGAN/pull/317",
+  "protocol_sha256": "6e5601f349c8e62307ff94d141b5dd7a896d407fdbd2e9a95fdb4b5da4c21073",
+  "publication_source": {
+    "publish.py": "af920735ec9e91caea8ab58ab28c3ffede97bc9bebd305c3891e6e1d0da73cd8",
+    "verify.py": "7f8c8517bd255d598ff296f310fdc1aee7844af3ba742575d938d127630fe495"
+  },
+  "qualification_input": false,
+  "raw_results_sha256": "48f810223e5ae991b9d4c9e096fe5c95a1a8106c866e80b40bdd8522b266b37a",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scope": "explicit_frozen_initial_prior_role_diagnostic",
+  "software_repaired_errors": "A local loop variable shadowed declaration during an untrained preflight; corrected before scientific source freeze. No scientific retry.",
+  "source_bound_learned_controls": {
+    "alternating-gaussian1d_acquisition-shift": "runs/api/bcap-past-extrapolation-v1/alternating-gaussian1d_acquisition-shift/receipt.json",
+    "alternating-gaussian1d_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/alternating-gaussian1d_acquisition-stationary/receipt.json",
+    "alternating-ring16_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/alternating-ring16_acquisition-stationary/receipt.json",
+    "extrapolation_from_past-gaussian1d_acquisition-shift": "runs/api/bcap-past-extrapolation-v1/extrapolation_from_past-gaussian1d_acquisition-shift/receipt.json",
+    "extrapolation_from_past-gaussian1d_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/extrapolation_from_past-gaussian1d_acquisition-stationary/receipt.json",
+    "extrapolation_from_past-ring16_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/extrapolation_from_past-ring16_acquisition-stationary/receipt.json",
+    "simultaneous-gaussian1d_acquisition-shift": "runs/api/bcap-past-extrapolation-v1/simultaneous-gaussian1d_acquisition-shift/receipt.json",
+    "simultaneous-gaussian1d_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/simultaneous-gaussian1d_acquisition-stationary/receipt.json",
+    "simultaneous-ring16_acquisition-stationary": "runs/api/bcap-past-extrapolation-v1/simultaneous-ring16_acquisition-stationary/receipt.json"
+  },
+  "verification": {
+    "exact_final_cuda_restores": 9,
+    "fresh_publication_model_draws": 0,
+    "fresh_publication_training_updates": 0,
+    "gif_count": 9,
+    "gif_frames_each": 9,
+    "no_update_training_state_unchanged": true,
+    "prior_unchanged_in_all_cells": true,
+    "saved_sample_metric_recomputations": 1308,
+    "scorer_controls_reused": true,
+    "software_cuda_and_protocol_checks": 8
+  }
+}

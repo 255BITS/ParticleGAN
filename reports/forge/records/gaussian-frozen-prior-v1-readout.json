@@ -1,0 +1,277 @@
+{
+  "candidate_id": "gaussian-frozen-prior-v1",
+  "candidate_revision": "6e5601f349c8e62307ff94d141b5dd7a896d407fdbd2e9a95fdb4b5da4c21073",
+  "changed_factors": [
+    "explicit task-control prior.learnable=false; same initial prior tensor",
+    "alternating/simultaneous/past timing remains declared"
+  ],
+  "conclusion": "Freezing the initial prior does not solve Gaussian at constant BCAP rates: all three timing arms fail acquisition and strict hold. Gaussian hold for alternating/simultaneous/past is 3/72, 0/72, 7/72; final KS is .11345/.14677/.07294, with no five-pass stationary window. All ring arms fail acquisition and hold 0/144, losing learned-prior precision despite 16 modes. Past frozen shift has a passing final endpoint KS .03256, but longest streak 2 and hold 1/24; all strict shift gates fail. Nine CUDA trials complete 30000 updates for 337.193 seconds with 0 retries; 8 software checks, 9 exact final restores and 1308 saved observation recomputations pass. Prior immobility and unchanged no-update controls are verified. Original learned controls are referenced without rerun or qualification relabeling.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Removing prior motion while retaining G/D learning repairs Gaussian acquisition, stationary retention and adaptation at constant rates.",
+  "lifecycle": "concluded",
+  "mechanism_class": "explicit_existing_control_ablation",
+  "next_action": "Stop this exact frozen-prior revision as a continuous Gaussian repair. Retain learned-prior ring and compare the independently scoped magnitude-sensitive prior and network results before any new mechanism or combined round. No automatic tuning, retries, seed study, continuation or promotion.",
+  "provenance": {
+    "archive_sha256": "1c60435f0690d24a4f0ec8deb2361ac27749d528bf872b584356cb4847a70d88",
+    "new_training_updates": 30000,
+    "protocol_sha256": "6e5601f349c8e62307ff94d141b5dd7a896d407fdbd2e9a95fdb4b5da4c21073",
+    "receipt": "reports/forge/gaussian-frozen-prior/provenance.json",
+    "report": "reports/forge/gaussian-frozen-prior/README.md",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "source_commit": "33ca3db28cd3a01336c8f183987184be21379220"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-frozen-prior-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-frozen-prior/results.json",
+    "sha256": "f4c1294739885b10e95bbeacfce7204365964dab8068860aadfb56fd1994a8ad"
+  },
+  "task_results": [
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 32.5317726850044
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.11344811398210186,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 3,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 2,
+        "mean": 1.8732090960256755,
+        "mean_error_sigma": 0.25358180794864893,
+        "sample_count": 4096,
+        "std": 0.5285996323902228,
+        "std_ratio": 1.0571992647804456
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 3/72. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__alternating__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 49.58318193699233
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "component_core_covariance_error": 1.2439034432172775,
+        "component_core_min_eigen_ratio": 0.14908859133720398,
+        "component_covariance_error": 3.6393975764513016,
+        "component_min_eigen_ratio": 0.3058176338672638,
+        "covariance_error": 0.061200350522994995,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "hq": 0.73046875,
+        "longest_pass_streak": 0,
+        "mass_tv": 0.040283203125,
+        "max_component_spill": 0.440191388130188,
+        "mean_error": 0.04553587734699249,
+        "min_hq_mass_ratio": 0.45703125,
+        "min_mass_ratio": 0.8046875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.0373508967956544,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 0/144. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__frozen_initial__alternating__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 31.381354533019476
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.14677234067893513,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 0,
+        "mean": 1.9557104108826024,
+        "mean_error_sigma": 0.08857917823479511,
+        "sample_count": 4096,
+        "std": 0.7356407752565252,
+        "std_ratio": 1.4712815505130503
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 0/72. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 49.475786552997306
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "component_core_covariance_error": 0.9734941776841879,
+        "component_core_min_eigen_ratio": 0.30537667870521545,
+        "component_covariance_error": 3.364488959312439,
+        "component_min_eigen_ratio": 0.5504928827285767,
+        "covariance_error": 0.04609068110585213,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "hq": 0.70703125,
+        "longest_pass_streak": 0,
+        "mass_tv": 0.033447265625,
+        "max_component_spill": 0.47686833143234253,
+        "mean_error": 0.019399244338274002,
+        "min_hq_mass_ratio": 0.53515625,
+        "min_mass_ratio": 0.88671875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.029413669613376613,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 0/144. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__frozen_initial__simultaneous__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 45.479006365989335
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.07293632774562625,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 7,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 1,
+        "mean": 1.91739244791097,
+        "mean_error_sigma": 0.16521510417805985,
+        "sample_count": 4096,
+        "std": 0.4673420342530511,
+        "std_ratio": 0.9346840685061022
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 7/72. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 74.14985143300146
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "component_core_covariance_error": 1.424022264778614,
+        "component_core_min_eigen_ratio": 0.41276201605796814,
+        "component_covariance_error": 5.271316960453987,
+        "component_min_eigen_ratio": 2.768803358078003,
+        "covariance_error": 0.07935702055692673,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "hq": 0.68115234375,
+        "longest_pass_streak": 0,
+        "mass_tv": 0.038330078125,
+        "max_component_spill": 0.47580644488334656,
+        "mean_error": 0.02096780203282833,
+        "min_hq_mass_ratio": 0.46875,
+        "min_mass_ratio": 0.765625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03212611660796827,
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "Explicit frozen-prior stationary control; acquisition FAIL, strict hold 0/144. No ordinary qualification credit.",
+      "task_id": "ring16_acquisition__frozen_initial__extrapolation_from_past__stationary"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 15.80917381204199
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.1768015766888794,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 2,
+        "mean": 3.1776934610388707,
+        "mean_error_sigma": 0.3553869220777415,
+        "sample_count": 4096,
+        "std": 0.562888024081539,
+        "std_ratio": 1.125776048163078
+      },
+      "reason": "Explicit frozen-prior shift control; acquisition FAIL, strict hold 0/24. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__alternating__shift"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 15.922555260942318
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.47287188778285993,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0,
+        "mean": 3.786347154469695,
+        "mean_error_sigma": 1.5726943089393899,
+        "sample_count": 4096,
+        "std": 0.8107181102554748,
+        "std_ratio": 1.6214362205109496
+      },
+      "reason": "Explicit frozen-prior shift control; acquisition FAIL, strict hold 0/24. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__simultaneous__shift"
+    },
+    {
+      "candidate_id": "gaussian-frozen-prior-v1",
+      "cost": {
+        "wall_seconds": 22.860701369936578
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "acquisition_suffix": 0,
+        "cdf_ks": 0.03256366349450057,
+        "finite_fraction": 1.0,
+        "hold_pass_checks": 1,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 2,
+        "mean": 2.982694502774393,
+        "mean_error_sigma": 0.03461099445121363,
+        "sample_count": 4096,
+        "std": 0.4804705897607291,
+        "std_ratio": 0.9609411795214582
+      },
+      "reason": "Explicit frozen-prior shift control; acquisition FAIL, strict hold 1/24. No ordinary qualification credit.",
+      "task_id": "gaussian1d_acquisition__frozen_initial__extrapolation_from_past__shift"
+    }
+  ],
+  "trainer_family": "bcap-dualnorm"
+}
