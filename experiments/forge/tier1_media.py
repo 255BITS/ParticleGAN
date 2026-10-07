@@ -20,6 +20,52 @@ def _indices(count):
     return sorted({round(i * (count - 1) / min(8, count - 1)) for i in range(min(9, count))}) if count > 1 else [0]
 
 
+def _scored_outputs(task, evidence, local):
+    """Validate saved arrays only; retain strict legacy descriptor semantics."""
+    descriptor = evidence.get('saved_observer_outputs')
+    if not descriptor:
+        return None, {}
+    observations = evidence.get('observations', [])
+    gaussian = task['evaluation']['kind'] in {'gaussian_smoke', 'gaussian_stability'}
+    root = Path(evidence['artifact_root']) if gaussian else Path(local)
+    if gaussian:
+        from .artifacts import verify_artifacts
+        verify_artifacts(root, evidence['artifact_manifest'])
+    path = (root / descriptor['path']).resolve()
+    if not path.is_relative_to(root.resolve()) or file_hash(path) != descriptor['sha256']:
+        raise ValueError('retained scored-output descriptor differs from saved bytes')
+    if gaussian:
+        certified = evidence['artifact_manifest']['files'].get(descriptor['path'])
+        if (not certified or certified['sha256'] != descriptor['sha256']
+                or certified['size'] != path.stat().st_size
+                or ('bytes' in descriptor and descriptor['bytes'] != certified['size'])):
+            raise ValueError('Gaussian scored-output descriptor differs from certified bytes')
+    elif path.stat().st_size != descriptor['bytes']:
+        raise ValueError('retained scored-output descriptor differs from saved bytes')
+    samples = torch.load(path, map_location='cpu', weights_only=True)
+    if not isinstance(samples, list) or any(not isinstance(point, dict) for point in samples):
+        raise ValueError('saved scored outputs must be observation objects')
+    steps = [point.get('step') for point in samples]
+    expected = [point['step'] for point in observations]
+    if gaussian:
+        from .gaussian_tasks import schedule
+        smoke = task['evaluation']['kind'] == 'gaussian_smoke'
+        declared = schedule(0, 1000) if smoke else schedule(1000, 4000) + schedule(4000, 6000)
+        if expected != declared:
+            raise ValueError('Gaussian media requires the complete declared scoring schedule')
+        initial = 0 if smoke else 1000
+        if steps == [initial] + expected:
+            samples = samples[1:]
+        elif steps != expected:
+            raise ValueError('Gaussian saved outputs require exactly the initial snapshot and scored schedule')
+        if any(point.get('metrics') != {key: value for key, value in observed.items() if key != 'step'}
+               for point, observed in zip(samples, observations)):
+            raise ValueError('Gaussian saved metrics differ from the certified observation curve')
+    elif steps != expected:
+        raise ValueError('scored output and numerical observation schedules differ')
+    return samples, {str(path): file_hash(path)}
+
+
 def render(task, row, local, output):
     import matplotlib
     matplotlib.use('Agg')
@@ -28,16 +74,7 @@ def render(task, row, local, output):
     evidence = row['evidence']
     observations = evidence.get('observations', [])
     frames, inputs = [], {}
-    samples = None
-    descriptor = evidence.get('saved_observer_outputs')
-    if descriptor:
-        path = (local / descriptor['path']).resolve()
-        if not path.is_relative_to(local.resolve()) or file_hash(path) != descriptor['sha256'] or path.stat().st_size != descriptor['bytes']:
-            raise ValueError('retained scored-output descriptor differs from saved bytes')
-        samples = torch.load(path, map_location='cpu', weights_only=True)
-        if [point['step'] for point in samples] != [point['step'] for point in observations]:
-            raise ValueError('scored output and numerical observation schedules differ')
-        inputs[str(path)] = file_hash(path)
+    samples, inputs = _scored_outputs(task, evidence, local)
     if task['adapter'] == 'clockfree_audit':
         from .artifacts import verify_artifacts
         from .clockfree import learning_state
@@ -68,6 +105,8 @@ def render(task, row, local, output):
             spec = task['execution']['host_definition']
             if values.shape[1] == 1:
                 sigma = float(np.sqrt(spec['covariances'][0][0][0])); mean = spec['means'][0][0]
+                if task['evaluation']['kind'] == 'gaussian_stability' and observations[index]['step'] > task['evaluation']['stationary_end']:
+                    mean = task['evaluation']['shift_mean']
                 limits = (mean - 4 * sigma, mean + 4 * sigma)
                 bins = np.linspace(*limits, 45)
                 counts, _ = np.histogram(values[:, 0], bins=bins)
