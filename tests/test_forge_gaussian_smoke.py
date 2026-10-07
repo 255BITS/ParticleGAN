@@ -11,6 +11,13 @@ from experiments.forge.views import load_tasks, load_view, grade_result
 from benchmarks.toy_audit.gaussian_smoke_study import stability_task
 
 ROOT = Path(__file__).resolve().parents[1]
+from experiments.forge.mechanisms import NAMES
+
+def guards(steps):
+    return dict(all_finite=True,hooks_exercised=True,unintended_rng_deviations=0,
+                optimizer_updates={role:steps for role in ('generator','discriminator','prior')},
+                mechanism_audit=dict(schema_version=1,mechanisms={name:dict(requested=False,enabled=False,calls=steps,eligible=0,applied=0) for name in NAMES}))
+
 GOOD = dict(sample_count=4096, finite_fraction=1., mean_error_sigma=0., std_ratio=1., cdf_ks=.01)
 
 
@@ -23,7 +30,7 @@ def evidence():
     confirms = [dict(step=step, metrics=deepcopy(GOOD), primary_state_sha256='a'*64,
                      confirmed_state_sha256='a'*64, independent_stream='eval/live/smoke_confirmation',
                      training_state_unchanged=True) for step in schedule(0,1000)]
-    return dict(completed_steps=1000, observations=rows, confirmations=confirms)
+    return dict(completed_steps=1000, observations=rows, confirmations=confirms,guards=guards(1000))
 
 
 def test_smoke_accepts_a_single_confirmed_hit_without_terminal_hold():
@@ -59,7 +66,7 @@ def test_smoke_requires_independent_confirmation_to_pass_full_bounds():
 def test_stability_requires_every_hold_and_five_terminal_reacquisition():
     value=task('gaussian1d_stability')
     rows=[dict(step=step,**GOOD) for step in schedule(1000,4000)+schedule(4000,6000)]
-    raw=dict(completed_steps=6000, observations=rows,
+    raw=dict(completed_steps=6000, observations=rows,guards=guards(6000),
              frozen_observations=[dict(step=step,**GOOD) for step in schedule(4000,6000)],
              continuity=dict(prefix_steps=1000,restored_exactly=True,history_reset=False,
                              frozen_completed_steps=4000,matched_frozen_draws=True))
@@ -148,3 +155,17 @@ def test_tiny_public_execution_keeps_receipt_outside_strict_artifact_tree(tmp_pa
         with pytest.raises(ValueError,match='file set changed'):
             verify_artifacts(evidence['artifact_root'],evidence['artifact_manifest'])
     check(device='cuda:1')
+
+
+@pytest.mark.parametrize("name,value,status", [("all_finite",False,"FAIL"),("all_finite",1,"INVALID"),
+                                               ("hooks_exercised",False,"BLOCKED"),("hooks_exercised",1,"INVALID"),
+                                               ("unintended_rng_deviations",True,"INVALID"),("unintended_rng_deviations",1,"INVALID")])
+def test_smoke_rejects_guard_failures(name,value,status):
+    raw=evidence();raw["guards"][name]=value
+    assert grade(task(),raw)["gate_status"]==status
+
+
+@pytest.mark.parametrize("value,status", [(True,"INVALID"),(999,"INCOMPLETE"),(None,"INCOMPLETE")])
+def test_smoke_rejects_unfinished_or_malformed_actual_optimizer_counts(value,status):
+    raw=evidence();raw["guards"]["optimizer_updates"]["prior"]=value
+    assert grade(task(),raw)["gate_status"]==status

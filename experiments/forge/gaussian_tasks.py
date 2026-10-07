@@ -102,6 +102,38 @@ def grade(task, evidence):
     stop = 1000 if kind == SMOKE_KIND else 6000
     if evidence.get("completed_steps") != stop:
         return _verdict("INCOMPLETE", "Gaussian execution did not complete its declared budget")
+    guards = evidence.get("guards")
+    if not isinstance(guards, dict):
+        return _verdict("INCOMPLETE", "missing Gaussian finite/mechanism/RNG/update guards")
+    for name in ("all_finite", "hooks_exercised"):
+        if name not in guards:
+            return _verdict("INCOMPLETE", "missing Gaussian guard " + name)
+        if type(guards[name]) is not bool:
+            return _verdict("INVALID", "Gaussian guard flags must be booleans")
+    if not guards["all_finite"]:
+        return _verdict("FAIL", "Gaussian finite-state guard failed")
+    if not guards["hooks_exercised"]:
+        return _verdict("BLOCKED", "Gaussian requested mechanism activation failed")
+    from .mechanisms import mechanism_blockers
+    blockers = mechanism_blockers(guards.get("mechanism_audit"))
+    if blockers:
+        return _verdict("BLOCKED", "; ".join(blockers))
+    deviations = guards.get("unintended_rng_deviations")
+    if deviations is None:
+        return _verdict("INCOMPLETE", "missing Gaussian RNG audit")
+    if type(deviations) is not int or deviations < 0 or deviations:
+        return _verdict("INVALID", "Gaussian RNG audit must report zero deviations")
+    counts = guards.get("optimizer_updates")
+    if not isinstance(counts, dict):
+        return _verdict("INCOMPLETE", "missing Gaussian actual optimizer counts")
+    for role in ("generator", "discriminator", "prior"):
+        value = counts.get(role)
+        if value is None:
+            return _verdict("INCOMPLETE", "missing Gaussian optimizer count " + role)
+        if type(value) is not int or value < 0:
+            return _verdict("INVALID", "Gaussian optimizer counts must be nonnegative integers")
+        if value != stop:
+            return _verdict("INCOMPLETE", "Gaussian optimizer counts must complete every declared update")
     rows = evidence.get("observations")
     missing = _rows(rows, schedule(0, 1000) if kind == SMOKE_KIND else schedule(1000, 4000) + schedule(4000, 6000))
     if missing:
@@ -137,6 +169,9 @@ def grade(task, evidence):
                 return _verdict("INVALID", "Gaussian confirmation metrics must be an object")
             if confirm["metrics"].get("finite_fraction") != 1.:
                 return _verdict("FAIL", "nonfinite Gaussian confirmation output")
+            if any(type(confirm["metrics"].get(name)) not in (int, float) or not math.isfinite(confirm["metrics"][name])
+                   for name, _, _ in THRESHOLDS):
+                return _verdict("INVALID", "missing finite Gaussian confirmation metric")
             if not bounds(indexed[step]) and not bounds(confirm.get("metrics", {})):
                 hits.append(step)
         return _verdict("PASS" if hits else "FAIL", "any scheduled full pass with independent same-state confirmation",

@@ -51,9 +51,11 @@ def execute(task_path, candidate_path, output, *, device, through_stability=Fals
     if resume_existing:
         from experiments.forge.artifacts import verify_artifacts
         archived_request = json.loads((output / "request.json").read_text())
-        if archived_request["candidate"] != candidate or archived_request["tasks"][smoke["id"]] != smoke:
+        if (archived_request["candidate"] != candidate or archived_request["tasks"][smoke["id"]] != smoke
+                or archived_request["tasks"][continuation["id"]] != continuation):
             raise ValueError("continuation task/candidate differs from the saved prefix")
         request = archived_request
+        smoke_key = next(job["compatibility_key"] for job in request["jobs"] if job["task_id"] == smoke["id"])
         first = json.loads((output / "smoke" / "adapter-receipt.json").read_text())
         verify_artifacts(first["evidence"]["artifact_root"], first["evidence"]["artifact_manifest"])
         atomic_json(output / "continuation-source.json", source)
