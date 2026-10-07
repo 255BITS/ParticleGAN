@@ -325,7 +325,7 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer = context.build_trainer(g, d, max_steps=task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
@@ -358,7 +358,7 @@ def _image(request, task, output, device):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch_size"]})
     g, d = build_image_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer = context.build_trainer(g, d, max_steps=task["execution"]["steps"])
     run = _Run(context, trainer, output, task, sampling_law=ENUMERATED_PRIOR_CLEAN)
     host_receipt = _host_receipt(spec, task["execution"].get("image_profile"), g, d)
     centers = templates(spec).to(device)
