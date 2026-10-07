@@ -18,7 +18,7 @@ import torch
 
 from .api import (CapabilityError, task_formulation_context, task_recipe_resources,
                   task_policy_blockers)
-from .artifacts import manifest_artifacts, verify_artifacts
+from .artifacts import manifest_artifacts, save_provenance_checkpoint, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
@@ -284,6 +284,13 @@ class _Run:
                 "storage": "local", "identity": "relative_paths_sizes_sha256",
                 "requires_bulk_artifacts": True,
                 "relocation": "copy the complete artifact tree and verify the unchanged manifest"}
+        # Every run retains its complete public state, including consumed RNG
+        # streams. This audit artifact does not grant checkpoint prerequisites:
+        # save_state and the task's produces_state contract still govern those.
+        # Keep the certificate outside its input tree and separate from any
+        # evaluator-owned artifact tree so receipt writes cannot invalidate it.
+        evidence["provenance_checkpoint"] = save_provenance_checkpoint(
+            self.output, state, completed_steps=trainer.completed_steps)
         if save_state:
             torch.save(state, self.output / "state.pt")
         receipt = {"evidence": evidence, "cost": {"optimizer_updates": counts,

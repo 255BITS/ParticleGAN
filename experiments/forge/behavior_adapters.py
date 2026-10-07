@@ -27,6 +27,7 @@ from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
 from .api import CapabilityError, task_formulation_context, task_policy_blockers
+from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
@@ -450,6 +451,24 @@ class BehaviorComponents:
                                              "critic_guard": "disabled" if self.recipe.d_guard_ratio == 0 else
                                              "inactive before its declared minimum steps; see targeted component check" if self.task["execution"]["steps"] <= self.recipe.d_guard_min_steps else "installed; see measured activation counters"})
 
+    def provenance_state(self):
+        """Include standalone coordinates omitted by model/optimizer tables."""
+        names = {id(parameter): f"{role}.{name}" for role, model in self.models.items()
+                 for name, parameter in model.named_parameters()}
+        direct = [parameter for parameters in self.role_parameters.values() for parameter in parameters
+                  if id(parameter) in self.direct_particle_ids]
+        names.update({id(parameter): f"direct_particles.{index}" for index, parameter in enumerate(direct)})
+        roles = {role: [{"index": index, "name": names[id(parameter)],
+                    "representation": "direct_sample_coordinates" if id(parameter) in self.direct_particle_ids
+                                      else "latent_prior_locations" if role == "prior" else "network",
+                    "requires_grad": parameter.requires_grad, "value": parameter.detach().clone()}
+                       for index, parameter in enumerate(parameters)]
+                 for role, parameters in self.role_parameters.items()}
+        return dict(models={name: model.state_dict() for name, model in self.models.items()},
+                    role_parameters=roles,
+                    optimizers={name: optimizer.state_dict() for name, optimizer in self.optimizers.items()},
+                    streams=self.context.streams.state_dict(), applied=self.receipt())
+
 
 def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu") -> dict:
     """Execute one original behavioral objective through the shared public binder."""
@@ -532,15 +551,18 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
             else:
                 raw = module.run_arm("locked", steps=steps, seed=seed, **kwargs)
         live = raw.get("live", raw)
-        torch.save(dict(models={name: model.state_dict() for name, model in components.models.items()},
-                        optimizers={name: optimizer.state_dict() for name, optimizer in components.optimizers.items()},
-                        streams=components.context.streams.state_dict()), output_dir / "component-state.pt")
+        checkpoint = components.provenance_state()
+        torch.save(checkpoint, output_dir / "component-state.pt")
         metrics = {key: live[key] for key, _, _ in task["evaluation"]["thresholds"] if key in live}
         policy = executed_receipt(BEHAVIOR_POLICIES[name], eval_output_noise=POLICIES[BEHAVIOR_POLICIES[name]])
         result = dict(task_id=task["id"], evidence=dict(observations=components.observations, live=metrics,
                       scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device=str(device), applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
+        result["evidence"]["provenance_checkpoint"] = save_provenance_checkpoint(
+            output_dir, checkpoint,
+            completed_steps=min(count for role, count in result["evidence"]["guards"]["optimizer_updates"].items()
+                                if any(parameter.requires_grad for parameter in components.role_parameters[role])))
         if components.diagnostic is not None:
             result["evidence"].update(diagnostic_observations=components.diagnostic_observations,
                                      horizon_diagnostic=components.diagnostic.finish())

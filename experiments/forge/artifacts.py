@@ -77,3 +77,29 @@ def verify_artifacts(root: Path | str, manifest: dict) -> None:
     changed = [name for name, row in files.items() if actual["files"][name] != row]
     if changed:
         raise ValueError(f"artifact bytes changed: {changed}")
+
+
+def save_provenance_checkpoint(output: Path | str, state: dict, *, completed_steps: int) -> dict:
+    """Retain complete consumed state without granting continuation eligibility.
+
+    The separate certificate tree contains only saved state. Returning its
+    manifest lets callers write receipts outside those certified input bytes.
+    Serialization and content hashing consume no model or RNG observations.
+    """
+    import torch
+    from .contracts import file_hash
+    from .state import state_digest
+
+    root = Path(output) / "provenance"
+    root.mkdir(parents=True, exist_ok=True)
+    path = root / "provenance-state.pt"
+    torch.save(state, path)
+    return {"schema_version": 1, "purpose": "provenance_only",
+        "prerequisite_eligible": False, "artifact_root": str(root.resolve()),
+        "artifact_manifest": manifest_artifacts(root),
+        "path": path.name, "sha256": file_hash(path), "bytes": path.stat().st_size,
+        "state_sha256": state_digest(state), "completed_steps": completed_steps,
+        "named_stream_keys": sorted(state["streams"]["states"]),
+        "named_stream_state_sha256": {key: state_digest(value)
+            for key, value in sorted(state["streams"]["states"].items())},
+        "optimizer_updates_added": 0, "sampling_draws_added": 0}

@@ -35,13 +35,18 @@ before the merged execution source is frozen and any training starts.
 
 ```sh
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py plan \
-  --queue-root runs/forge/gaussian-smoke-inventory-v3
+  --queue-root runs/forge/gaussian-smoke-inventory-v4
 /usr/bin/python -u reports/forge/prepare_gaussian_smoke_inventory.py enqueue \
-  --queue-root runs/forge/gaussian-smoke-inventory-v3
-/usr/bin/python -u -m experiments.forge \
-  --queue-root runs/forge/gaussian-smoke-inventory-v3 drain \
-  --gpus 0,1 --campaign gaussian-smoke-inventory-v3
-tail -F runs/forge/gaussian-smoke-inventory-v3/events.jsonl
+  --queue-root runs/forge/gaussian-smoke-inventory-v4
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+/usr/bin/python -u - <<'PY' > runs/forge/gaussian-smoke-inventory-v4/drain.log 2>&1
+from pathlib import Path
+from experiments.forge.queue import Queue, drain
+queue = Queue(Path('runs/forge/gaussian-smoke-inventory-v4'),
+              report_root=Path('reports/forge'), on_completion=None)
+drain(queue, ['0', '1'], campaign='gaussian-smoke-inventory-v4')
+PY
+tail -F runs/forge/gaussian-smoke-inventory-v4/events.jsonl
 ```
 
 The original v1 admission stopped before creating any submission, attempt or training update: the host validator conflated the 6,000-update continuation budget with its retained 1,000-update schedule horizon. [The refusal/archive receipt](admission-v1.json) preserves that source and zero cost. The v2 successor changes only this software validation and the registration identity; roster, recipes, task budgets and campaign ceilings remain fixed.
@@ -56,6 +61,19 @@ qualification cannot splice task passes from different sources. This is an
 execution repair, with no recipe selection, seed changes or retries of scientific
 failures. The combined conservative executable allowance fits inside the
 original 2,221,440-second goal ceiling.
+
+The v3 route audit then found missing mandatory checkpoint provenance: generic
+vector/image tasks discarded the full context when they were not continuation
+parents. Word and behavioral hosts already retained states but did not bind them
+to receipt hashes; the direct-particle behavioral state also omitted its standalone
+coordinates. Dispatch stopped, both active workers completed, and all 62 results
+were retained at 2,897.205946 seconds with zero remaining reservation.
+[The exact archive receipt](provenance-interruption-v3.json) preserves this cohort.
+The v4 amendment retains certified full states and every consumed named RNG
+stream, independently of continuation eligibility. It repeats the fixed roster
+under one repaired source; numerical settings and gates remain unchanged.
+The previous v2/v3 paid total is 3,708.623331 seconds, and the combined conservative
+executable allowance is 986,268.623331 seconds, inside the original goal ceiling.
 
 The preparation interface launches no training. The parent runs the reviewed
 campaign with one worker on each physical GPU, preserves raw stdout, traces,

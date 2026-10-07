@@ -14,6 +14,7 @@ import time
 import torch
 
 from .api import CapabilityError, task_formulation_context
+from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json, file_hash
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
 from .state import state_digest
@@ -171,6 +172,9 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
             output, "observed-records.pt", [record for record in records if record["step"]],
             kind="scored_word_records_v1")
     # Durable bulk state remains local; it is not a continuation qualification.
-    torch.save({"fixture": state, "streams": context.streams.state_dict()}, output / "state.pt")
+    checkpoint = {"fixture": state, "streams": context.streams.state_dict()}
+    torch.save(checkpoint, output / "state.pt")
+    receipt["evidence"]["provenance_checkpoint"] = save_provenance_checkpoint(
+        output, checkpoint, completed_steps=fixture.completed_steps)
     atomic_json(output / "adapter-receipt.json", receipt)
     return (receipt, records) if capture_media else receipt
