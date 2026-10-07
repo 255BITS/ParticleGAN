@@ -1,0 +1,74 @@
+{
+  "archive": {
+    "all_member_hashes_verified": true,
+    "archive_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-serialized-truncation-v1-cuda-evidence.tar.gz",
+    "bytes": 3645960,
+    "member_count": 20,
+    "original_files": 19,
+    "sha256": "04bf1bdf7d4c883e0934535e11da6835f1bea48fdea4897ac6d18332d7b61653"
+  },
+  "checkpointed_named_streams_and_serial_mode": "PASS",
+  "completed1600": "PASS",
+  "compute": "Saved CPU tensor-byte comparisons/metrics/media, no models or scientific CPU SVD",
+  "exact_original_truncation_helper": "PASS",
+  "executed_source_files_verified": 1190,
+  "frozen_bindings": "PASS",
+  "matched_initial_models_recipe_prior_batches_cadence_gates": "PASS",
+  "media": {
+    "entries": [
+      {
+        "arm": "every_step",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "93fa93092ec7a1034f114209b2a8b7e36c31a6fa7d0d92909732f684d7fe4aac",
+        "source_commit": "5e1d33f37b312a1b4a760e8417d76542570f0768",
+        "source_sha256": "b79fc40060265692c545892432a29ec5ab99e9556fe06cab03dd2bc4182e56aa"
+      }
+    ],
+    "model_forwards": 0,
+    "sampling_draws": 0,
+    "training_updates": 0
+  },
+  "new_model_calls": 0,
+  "new_sampling_draws": 0,
+  "new_training_updates": 0,
+  "qualification_input": false,
+  "receipt_artifacts_verified": 12,
+  "reused_reducer": {
+    "sha256": "7fddfb91fa63aa31466614a5e547412f5b96b18ffa9e26b3667e4151e361f831",
+    "source_pr": "https://github.com/255BITS/ParticleGAN/pull/337"
+  },
+  "reused_serialization_api_software_checks": {
+    "attempts": 1,
+    "command": [
+      "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_forge_serial_backward_cuda.py"
+    ],
+    "elapsed_seconds": 3.3190438519231975,
+    "exit_code": 0,
+    "max_updates": 3,
+    "physical_gpu": 0,
+    "raw_log_sha256": "fa7580b3cd4f5362a4fc0f52aae3b736dbe6e2abc47947cd0db0ed7ffcd0f46c",
+    "reserved_seconds": 30,
+    "scientific_quality_credit": false,
+    "status": "PASS",
+    "updates_debit": 3
+  },
+  "schema_version": 1,
+  "serialized_polar_scope_guards": 9600,
+  "unchanged_perturbation_stream": "PASS",
+  "unchanged_public_numerical_package": "PASS",
+  "verifier_sha256": "57ad7d768a75f0393eb21863ae0e72f5487d2fbda3bcfb901354949ce9e70af5"
+}

@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "compile-check": {
+      "raw_log_sha256": "ffd6b4b09f613b99fdabee945ac1ae5475d190e4a7abde4a00f7a8b885d0988a",
+      "status": "PASS"
+    },
+    "history-check": {
+      "raw_log_sha256": "743a0365a95391f167b878675b37bf750bcdf6b5271f3036e8158bb6416edd4f",
+      "status": "PASS"
+    },
+    "validate": {
+      "raw_log_sha256": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a",
+      "status": "PASS"
+    }
+  },
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "qualification_changes": 0,
+  "qualification_source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893",
+  "report_local_links_verified": [
+    "protocol.json",
+    "results.json",
+    "verification.json",
+    "actual-training.gif",
+    "archive.json",
+    "../../../benchmarks/toy_audit/ring16_interventions.py",
+    "../../../benchmarks/toy_audit/ring16_serialized_truncation.py"
+  ],
+  "schema_version": 1,
+  "scope": "saved_publication_metadata",
+  "technique_inventory_unchanged_sha256": "ff3dbaec98de9328d676943a94301414e78baeca30071a62df93790185bd7a45"
+}
