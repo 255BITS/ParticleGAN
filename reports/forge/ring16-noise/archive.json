@@ -1,0 +1,25 @@
+{
+  "bytes": 7109835,
+  "contains_bulk_logs_and_tensor_checkpoints": true,
+  "execution_sources": [
+    {
+      "digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+      "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
+    },
+    {
+      "digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+      "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
+    }
+  ],
+  "manifest_member": "archive-manifest.json",
+  "members_verified": 37,
+  "path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-tiny-noise-cuda-v1.tar.gz",
+  "prior_archive_sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+  "prior_raw_root": "/home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1",
+  "schema_version": 1,
+  "scope": "local_raw_cuda_evidence_archive",
+  "sha256": "22323efff9e1ac1ac38e389a3917d6a13ca12f76a0d4566f9616850e7e894471",
+  "source_file_count": 36,
+  "tracked_bulk_files": false,
+  "verification": "all members matched exact SHA256 after writing"
+}

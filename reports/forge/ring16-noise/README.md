@@ -1,154 +1,153 @@
-# Ring16 tiny weak-subspace noise: prospective experiment
+# Ring16 tiny weak-subspace noise: CUDA results
 
-**The finite experiment is prepared; both candidates remain unmeasured.** This
-host has no usable CUDA device, and the driver refuses CPU training before
-creating an attempt. GitHub publication is pending network access. There are no
-new neural updates, candidate quality results or candidate GIFs in this report.
+**The fixed tiny-noise rule applied every update passes confirmed smoke and ends
+with 45 consecutive full passes. Noise applied only at update 401 ends with six
+full passes, but its single first-pass confirmation fails covariance.** Both
+fresh-live 1,600-update arms complete on an RTX A6000 without a checkpoint reload,
+learning-rate annealing, prior changes or seed variation.
 
-The [protocol](protocol.json) tests whether a tiny gradient perturbation at the
-restart boundary changes acquisition, and whether the same intervention is useful
-as an ongoing rule. It keeps the original learning rates constant and introduces
-no production optimizer change.
+The [frozen protocol](protocol.json), [compact results](results.json),
+[execution verification](execution-verification.json) and [archive receipt](archive.json)
+bind the outcomes to actual sources, streams and sampling law. The earlier
+CUDA-blocked [preparation verification](verification.json) remains unchanged
+under its original identity; CUDA became accessible on 2026-10-07.
 
-## Mechanism and relation to the restart evidence
+## Results and declared gates
 
-[PR331's reproduction report](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
-finds a relative hidden-critic gradient difference of `1.03e-7` at update 401,
-amplified to `.252` by full polar normalization. The weak singular directions,
-rather than individual small entries, carry the measured sensitivity. Identical
-inputs reproduce identical SVD factors in that probe. The initial backward
-rounding cause is unresolved; a dtype conversion has not been established.
+Every 4,096-output draw must satisfy all bounds: 16 modes, mass TV ≤ .15,
+HQ ≥ .85, mean component covariance error ≤ .85 and minimum component eigen
+ratio ≥ .15. Confirmed smoke requires a full scheduled pass plus the single
+independent confirmation at those same weights. The five-terminal-pass verdict
+is separate; completing these diagnostics supplies no tier 2 hold.
 
-This experiment defines tiny noise precisely. For gradient matrix `W = U S Vh`:
+| Schedule | First full pass | Confirmation | Terminal suffix | Terminal verdict | Final covariance | Final HQ | Final eigen ratio |
+| --- | ---: | --- | ---: | --- | ---: | ---: | ---: |
+| `boundary_only` (401 only) | 1400 | FAIL: covariance .958379 | 6 | PASS | .481363 | .926270 | .315379 |
+| `every_step` (1–1600) | 817 | PASS: covariance .754245 | 45 | PASS | .504405 | .965576 | .332743 |
+
+The every-step confirmation also has 16 modes, mass TV .087891, HQ .922119 and
+minimum eigen ratio .501905. It is drawn at unchanged update-817 weights from
+the isolated named confirmation stream. There is one confirmation opportunity
+per arm; the boundary failure is retained without another draw. Training
+continues through the complete declared budget after either confirmation.
+
+The boundary arm trains an unchanged live prefix through 400 and verifies
+its entire state against PR331's saved prefix. After removing only the two
+newly registered, unused diagnostic streams, the full state digest is exactly
+`208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd`.
+It continues the same objects, never loading the archive into the learner.
+The perturbation changes six matrix directions at 401. Every-step noise changes
+9,600 matrix directions and intentionally changes the prefix from initialization.
+Both arms consume the same target batch sequence, digest
+`94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750`.
+
+## What the noise does
+
+[PR331's reproduction](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
+found that a `1.03e-7` relative hidden-critic gradient difference at 401 becomes
+a `.252` difference after ordinary full polar normalization. This intervention
+perturbs weak singular subspaces before applying the ordinary polar rule:
 
 ```text
+W = U S Vh
 tau = max(rows, columns) * float32_epsilon * sigma_max
-weak = singular_values <= tau
-k = count(weak)
+weak = singular_values <= tau; k = count(weak)
 N[k, k] ~ iid Normal(0, float32_epsilon * sigma_max / sqrt(k))
 W_prime = W + U[:, weak] @ N @ Vh[weak, :]
 direction = ordinary_polar_factor(W_prime)
 ```
 
-In exact arithmetic, the additive perturbation lies within the weak left/right
-singular subspaces. Float32 reconstruction can round other entries and strong
-projections, so this is not a promise of exact coordinate isolation. The rule
-uses the original float32 dtype throughout. It draws no noise for a matrix with
-no weak directions and returns a zero direction without a draw for an exactly
-zero gradient. The helper captures the original polar function before the runner
-patches it, preserving the ordinary update after perturbation.
+One amplitude and threshold formula applies to every generator and critic
+matrix, with no tuning. Computation remains CUDA float32. The named CUDA noise
+stream is checkpointed independently of data, prior and evaluation RNGs.
+Bias and sampled-prior update rules remain unchanged. Exactly zero gradients
+and matrices without weak directions consume no noise draw. In exact arithmetic
+the additive perturbation stays in weak left/right subspaces; float32
+reconstruction can round other entries and strong projections too.
 
-One threshold and amplitude formula applies to all generator and critic matrix
-weights. Biases, sampled prior-row normalization and the selected recipe remain
-unchanged. There is no amplitude grid, schedule search or seed variation. Noise
-uses the isolated named CUDA stream `noise/ring16_intervention/weak_directions`;
-the full public context checkpoints its actual state. It does not consume the
-data, prior, evaluation or ambient RNG streams.
+The one saved-gradient GPU probe passes its implementation gate. Both inputs
+have six weak directions; actual relative perturbations are about `2.94e-7`
+and the noise standard deviation is `1.35e-8`. Captured ordinary factors match
+exactly, identical-input/identical-noise repeats and consumed RNG after-states
+are exact, and ambient RNG plus the unconsumed canonical stream are unchanged.
+It costs `.412287` seconds, four perturbation tensor draws and zero training
+updates or target/prior/evaluation draws.
 
-This hypothesis differs from damping: full polar normalization still gives the
-weak directions unit strength. Noise can choose another numerical path without
-making the update insensitive to perturbations. A better outcome would need to
-be demonstrated by the unchanged distribution gate; saved-matrix sensitivity
-alone cannot establish a convergence benefit.
+The probe does **not** reduce paired factor discrepancy: it increases from
+`.251990` to `.322775`. Within-input factor change is about `.28`, despite
+the small raw perturbation. This follows the full polar rule's sensitivity
+and distinguishes noise from spectral damping. Better numerical insensitivity
+is not a prerequisite for this observed training success.
 
-## Frozen schedules and gates
+The uninterrupted every-step result shows the fixed public-API recipe can
+acquire the full Ring16 law and retain it through the remaining declared checks.
+It does not identify the exact backward instruction order causing the original
+reload benefit, establish a general noise schedule, or prove longer-term hold.
+The boundary success also shows that a single update can select a better path.
 
-| Arm | Intervention | Current result |
-| --- | --- | --- |
-| `boundary_only` | Train the unchanged fresh live prefix through 400; perturb G/D matrix gradients at 401 only; continue ordinary updates through 1600 | Unmeasured, CUDA blocked |
-| `every_step` | Apply the same perturbation at updates 1–1600 | Unmeasured, CUDA blocked |
+## Conditions, cost and evidence identity
 
-Update 401 is the first update after the proposed step 400 boundary. The boundary
-arm verifies the full fresh 400 state against PR331's archived prefix and continues
-the same live objects. Neither candidate loads that reference checkpoint. The
-continuous arm deliberately changes the trajectory from update 1; its 400 state
-is recorded without requiring equality to the unchanged baseline.
+Both arms use protocol seed 0 and public deterministic named initialization,
+G 4→64→64→2, Fourier D 10→64→64→1, LeakyReLU .2, batch 128, 256 learned uniform
+MoG locations with sigma .1, and radius-3 Ring16 with component sigma .1.
+Constant rates remain G .012, D .018 and prior .03; momentum and prior regularizer
+are zero. Recipe horizon 400, external cap 1600, clean live serving,
+`serial_backward=False` and all 96 checks remain fixed. Every consumed named
+stream is retained in full checkpoints; noise never consumes the ambient stream.
 
-Both arms use protocol seed 0, public deterministic named initialization, the
-uniform radius-3 Ring16 target with component sigma `.1`, G 4→64→64→2,
-Fourier D 10→64→64→1, batch 128 and 256 learned uniform MoG locations with
-prior sigma `.1`. Rates remain G `.012`, D `.018`, prior `.03`; momentum and
-prior regularization are zero. The original recipe horizon is 400, execution
-cap 1,600, clean live public sampling law and 96-check cadence are fixed.
-`serial_backward=False` is unchanged. Hardware/runtime are recorded; execution
-on different hardware remains a separate cohort from the archived A6000 path.
+Both arms complete 3,200 new updates in 53.253886 training seconds with 194
+scored draws, inside the frozen 600-second/194-draw allowance. Including child
+imports and exit, the controller measures 58.014546 seconds. Charging the probe's
+full 30-second allowance conservatively gives an 88.014546-second total debit,
+within the 630-second ceiling. There are zero retries, continuations, seed changes,
+threshold searches or additional confirmation attempts. Physical GPU 1 is an
+RTX A6000, capability 8.6, CUDA 13.0; receipts record Python 3.12.13/Torch 2.14.0.
 
-Every scheduled evaluation draws 4,096 outputs and applies all original full
-bounds: 16 modes, mass TV≤`.15`, HQ≥`.85`, component covariance error≤`.85`,
-minimum component eigen ratio≥`.15`, and the original sample-count bound.
-The smoke diagnostic requires a scheduled full PASS and one independent
-confirmation at the same weights. That one confirmation uses a separate
-checkpointed evaluation stream; a failed confirmation is not retried. The
-five-terminal-pass diagnostic remains separate, and all 1,600 updates are
-completed after acquisition. No Forge qualification or tier2 hold follows.
+Training source is commit `1ca28014bf7102975376efadc691f3e103535f41`, digest
+`4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811`, based on
+develop `2859975707eb3ea4d31958ad1b03e9e69e148a53`. Report publication does not
+change the execution identity. PR331's original uninterrupted baseline retains
+its INCOMPLETE metadata-error receipt and printed covariance `2.220268`; its
+restored baseline retains covariance `.514315` and six terminal passes under
+the original sources listed in the protocol. No unchanged baseline is rerun.
 
-Each arm reserves one 1,600-update attempt and 300 seconds: 3,200 updates,
-600 training seconds, at most 194 scoring draws, zero retries. A separate
-one-execution CUDA algebra probe reserves 30 seconds and zero training updates
-or target/prior/evaluation sampling draws. It makes at most four perturbation
-tensor draws on explicit cloned streams. Exceptions, nonfinite values and
-timeouts remain incomplete/error outcomes without changing the noise scale.
+## Actual training media and reproduction
 
-## Saved-gradient check and comparison limits
+[Boundary-only training GIF](boundary_only-actual-training.gif) and
+[every-step training GIF](every_step-actual-training.gif) show actual retained
+scheduled samples beside target contours with fixed axes, update numbers and
+numeric gates. Saved-output CPU rendering creates no model forward or new
+sample; [frame/source hashes](results.json) identify its exact evidence.
 
-The [probe helper](../../../benchmarks/toy_audit/ring16_tiny_noise.py) uses the
-exact saved live/restored update-401 hidden gradients. Each input and its repeat
-receive a clone of the same initial named noise state. Only those diagnostic
-clones are reset; no model RNG is reset. Their complete consumed stream states
-are retained in an ignored artifact with a hash in the compact receipt.
-
-Its implementation gate requires finite results, an actual relative gradient
-perturbation≤`1e-5`, exact identical-input/identical-noise repeats, identical
-repeat RNG after-states, agreement with captured ordinary factors, unchanged
-ambient RNG and canonical template state, and completion within 30 seconds.
-It reports factor sensitivity without an improvement threshold. Weak SVD bases
-can differ between inputs even with matched noise coordinates; neither lower
-nor higher factor discrepancy alone answers the training question.
-
-PR331's existing uninterrupted live result has covariance error `2.220268`,
-HQ `.936035` and zero full passes. Its original receipt remains INCOMPLETE
-after a post-training metadata error; the printed numerical failure is retained
-separately. Restoring the same 400 state exactly reproduces the historical PASS
-with covariance `.514315` and six terminal passes. These retain their original
-execution commits and source digests, separate from report commit `49f0417`.
-
-No unchanged baseline is repeated. The archived comparison and exact prefix
-check do not prove identical uncheckpointed runtime ordering at 401. An apparent
-repair is therefore a source-bound diagnostic result while that mechanism is
-unresolved, rather than a causal default or general stability claim. Later
-retention requires its own frozen, eligible tier2 budget.
-
-## Execution and publication
-
-On a CUDA host, hydrate the declared baseline and trace artifacts, create
-`runs/reports/ring16-noise/`, and use new exclusive output directories:
+From a fresh checkout with the PR331 artifacts hydrated, use new exclusive
+output roots. The probe uses a separate directory to preserve exclusive
+training-campaign admission.
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 python -u \
+mkdir -p runs/reports/ring16-noise
+timeout 30s env CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 python -u \
+  -m benchmarks.toy_audit.ring16_tiny_noise \
+  --protocol reports/forge/ring16-noise/protocol.json \
+  --raw /home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1 \
+  --output runs/api/ring16-tiny-noise-probe-v1 --device cuda:0 \
+  > runs/reports/ring16-noise/saved-gradient-probe.log 2>&1
+CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 python -u \
   -m benchmarks.toy_audit.ring16_interventions run \
   --protocol reports/forge/ring16-noise/protocol.json \
   --output runs/api/ring16-tiny-noise-v1 --device cuda:0 \
   > runs/reports/ring16-noise/training.log 2>&1
-
-timeout 30s env CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 python -u \
-  -m benchmarks.toy_audit.ring16_tiny_noise \
-  --protocol reports/forge/ring16-noise/protocol.json \
-  --raw /home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1 \
-  --output runs/api/ring16-tiny-noise-v1/saved-gradient-probe \
-  --device cuda:0 > runs/reports/ring16-noise/saved-gradient-probe.log 2>&1
+tail -F runs/reports/ring16-noise/training.log
 ```
 
-Flushed JSON logs support `tail -F`. The runner's `summarize` and `render` actions
-use retained scored samples and produce genuine candidate training GIFs after
-execution. Bulk logs, checkpoints, tensors and stream dumps stay under ignored
-`runs/`; compact results, provenance and actual-training GIFs can then be
-published. No original GIF is presented as a noise candidate result.
+The runner's `summarize` and `render` actions consume saved evidence only. Raw
+states, tensors, noise-stream dumps and logs remain in the verified
+[local archive](archive.json), outside Git. Compact metrics, provenance,
+reproduction sources and actual-training GIFs are committed.
 
-[Static verification](verification.json) covers preparation with zero neural
-execution. [PR body](PR.md) is ready for publication. The
+Recommendation: retain every-step noise as the successful fixed diagnostic
+candidate for a separately declared, eligible tier 2 hold and later matched
+trainer comparison. Keep the one-boundary success as trajectory-sensitivity
+evidence while the separate runtime controls isolate the reload mechanism.
+No additional paid work or default change follows automatically. The
 [technique inventory](../technique-inventory.md) remains the sole generated
-leaderboard; no rank, gate or tier eligibility changes here.
-
-Recommendation: compare these two frozen CUDA schedules against the saved
-baseline, reporting acquisition and endpoint quality separately. Tiny noise is
-an untested way to change the numerical trajectory, not yet a Ring16 repair.
+leaderboard; these diagnostics grant no Forge qualification.

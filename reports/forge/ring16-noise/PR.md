@@ -1,24 +1,25 @@
-PR331 showed that weak-singular-direction normalization amplifies tiny Ring16
-gradient differences at update 401. This experiment asks whether adding
-float32-rounding-scale noise in those directions changes acquisition, either
-once after a fresh live 400 prefix or continuously from initialization.
+Ring16 succeeds under a fixed tiny-noise rule applied to weak gradient singular
+subspaces before ordinary polar normalization. The fresh-live every-step arm
+first passes at 817, passes its one independent confirmation, and ends with 45
+consecutive full passes (covariance .504405, HQ .965576). The 401-only arm ends
+with six full passes (covariance .481363), but its first-pass confirmation
+fails covariance .958379, so confirmed smoke is FAIL for that arm.
 
-The experiment-scoped helper adds `U_weak @ N @ Vh_weak`, with independent
-normal entries of scale `float32_epsilon*sigma_max/sqrt(k)`, before the original
-polar update. It uses one fixed numerical-rank threshold, constant learning
-rates and a separately checkpointed CUDA noise stream. Biases, prior updates,
-public initialization, data draws, batch and full numerical bounds are fixed.
-Candidates never load the archived checkpoint.
+Both GPU arms retain the public deterministic initializer, seed 0, learned MoG,
+batch 128, architecture, constant rates, clean sampling and full distribution
+bounds. Neither reloads the archive; the boundary arm's complete 400 prefix is
+exactly the archived baseline. One formula and isolated checkpointed CUDA
+noise stream apply across all G/D matrix weights, with no amplitude tuning.
 
-No neural experiment ran: CUDA is unavailable on this host. Syntax, bound
-declarations, planning and refusal to start CPU training/probing pass. The
-frozen allowance is 3,200 updates/600 training seconds plus one 30-second
-saved-gradient check, with no retries. Actual-training GIFs and numerical
-candidate outcomes remain pending CUDA execution; GitHub publication remains
-pending network access.
+Validation: saved-gradient implementation gate passes, including captured
+ordinary factors, exact same-noise repeats, checkpointed stream after-states
+and unchanged ambient RNG. The probe increases paired polar discrepancy
+(.252 → .323), so numerical insensitivity is not claimed. Both 1,600-update arms
+complete: 3,200 updates, 53.25 training seconds, 194 draws, zero retries. Bindings,
+prefix identity, target batches, schedule counts, budgets, raw hashes and
+actual-training GIF provenance verify. Bulk states/logs are archived outside
+Git with exact SHA/bytes/member receipts. Original preparation and PR331 source
+identities remain intact. No production default or qualification change.
 
-The saved-gradient probe checkpoints cloned perturbation streams and bounds
-actual gradient perturbation, without assuming noise improves sensitivity or
-convergence. Production defaults and Forge qualifications remain unchanged.
-See `reports/forge/ring16-noise/README.md` for exact formulas, evidence identities,
-budgets, commands and comparison limits.
+See reports/forge/ring16-noise/README.md, results.json,
+execution-verification.json, archive.json and both actual-training GIFs.
