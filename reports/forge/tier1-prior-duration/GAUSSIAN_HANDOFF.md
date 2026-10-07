@@ -46,7 +46,7 @@ that supports a stability hypothesis more than a need for more particles or
 updates. Constant normalized update sizes are a plausible contributor, but
 the existing evidence does not isolate optimizer, prior motion or critic as
 the cause. Inspect saved moments, prior movement and critic behavior before
-declaring a small rate/schedule or role-isolation experiment. Any such change
+declaring a bounded force-response or role-isolation experiment. Any such change
 is a new bounded trainer comparison, not a continuation of the unchanged recipe.
 
 The user has now requested further investigation on PR #316. The
@@ -54,9 +54,11 @@ The user has now requested further investigation on PR #316. The
 above against checkpoint tensors, correcting this handoff's earlier 4/64 typo.
 Its same-network/unchanged-initial-prior affine capacity control passes 24/24
 checks with zero training. Saved states show increasing skew and mostly
-between-component output variance; a late normalized-step decay remains an
-unexecuted hypothesis. The current Gaussian task and all historical verdicts
-remain unchanged.
+between-component output variance. The user requires a continuous learner and
+rejects learning-rate annealing. Recommendations now cover a separately declared
+frozen-prior diagnostic, force-response damping, spread restraint and position
+springs; continued quality retention and adaptation must both be measured.
+The current Gaussian task and all historical verdicts remain unchanged.
 
 Local evidence:
 

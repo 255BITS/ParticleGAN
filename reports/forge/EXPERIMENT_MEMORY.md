@@ -690,7 +690,7 @@ Does the scalar failure reflect insufficient architecture/prior capacity, or los
 
 Actual scalar host is z_dim2, width32/depth2 (G1185/D1281 parameters), correcting the 4/64 handoff typo. All 97 saved sample metrics reproduce and all three CUDA contexts restore exactly. An affine map in the unchanged MLP with unchanged initial 256-location sigma-.1 MoG passes 24/24 numerical checks; conservative exact mixture KS bound .005086. Trained fresh 32768-sample KS is .04160 at1000 and .09307 at4000; fitted-normal shape KS worsens .03613 to .16831, skew1.602. At4000 only .47% of output variance is within components; prior displacement from initialization averages1.403. Constant normalized .012/.018/.03 steps and moving inputs support a stability hypothesis without assigning causality. Zero training updates, no task/gate revision or qualification credit.
 
-**Next:** Propose a separately bounded global BCAP late-step-decay comparison with network/prior floors .1 vs1, matching task conditions and preserved schedule horizons across Gaussian and ring; reject if the full terminal window fails. No new training candidate or admitted study is created by this report.
+**Next:** Require continuous acquisition, quality retention and renewed response to a target shift, without elapsed-step annealing. First propose a separately declared frozen-prior-from-initialization diagnostic with G/D learning throughout. Then compare magnitude/evidence-sensitive prior response or an explicit position spring. Existing prior_reg0 cannot be decreased; VICReg only floors spread and decorrelates, while unit row normalization can preserve motion even with a spring. A2/DV12 cannot simply be enabled for current BCAP dualnorm. Register a finite supported study and preserve matched conditions and all original gates; no new training is launched by this recommendation.
 
 [Evidence](../../reports/forge/gaussian1d-diagnosis/results.json) · [Record](records/gaussian1d-saved-state-diagnosis-v1-readout.json)
 
@@ -4746,4 +4746,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `aa847534bd90cd1a3d7c48bbb72d86226c7a6133b2cab0143bf2263bab5a53b7`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `16c0ed2f964bdbe8f5cf5b26092c54685a597ea17c64fcbb5d877ead26064d17`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

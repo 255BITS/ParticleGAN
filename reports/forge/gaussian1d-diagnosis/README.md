@@ -136,24 +136,81 @@ last checkpoint. BCAP penalizes excess slope rather than clipping it. These
 saved functions show nonzero, spatially varying gradients; they do not prove
 that Fourier features or BCAP caused the failure.
 
-## Recommended next comparison
+## Continuous learning: options and next comparison
 
-Start with **settling the existing normalized updates**, rather than more
-particles, more unchanged training or a larger MLP. A finite next study could
-compare the current whole BCAP recipe with one otherwise identical recipe using
-`network_lr_floor=.1` and `lr_floor=.1`. The existing cosine transition starts at
-60% of each original task horizon, lowering the final G/D/prior steps to
-.0012/.0018/.003. This changes only late update magnitudes and has a concrete
-falsifier: failure to produce five terminal full passes rejects it as a repair.
+The required behavior is to acquire a stationary law, retain its numerical
+quality while training continues, and respond again when the data law changes.
+Use constant base rates and mechanisms driven by the current state or gradient
+evidence. An elapsed-step learning-rate schedule, selected checkpoint or
+permanent shutdown after acquisition does not answer this question. With
+finite-batch stochastic gradients, quality should remain within declared bounds;
+exactly motionless parameters are not required.
 
-Use seed 0, the same initial model hashes, seen target batches, prior, budgets and
-cadence within each task; apply the same complete trainer configuration to both
-Gaussian and the repaired ring. Declare the ring's preserved 400-step schedule
-horizon explicitly: annealing there ends at 400 even though its execution cap is
-1,600, so retaining its pass must be measured. Do not splice Gaussian and ring
-winners. This proposed comparison has **not** run and is not yet an admitted
-Forge study. If it fails, a separate prior-role isolation or Fourier-free
-architecture diagnostic can distinguish competing explanations.
+**The existing prior regularizer is not a position anchor.** Its current weight
+is zero and the public recipe rejects negative weights. The implementation in
+[`vicreg_loss.py`](../../../particlegan/vicreg_loss.py) penalizes coordinate
+standard deviations below 1 and off-diagonal covariance. It permits expansion
+above 1 and arbitrary topology. The saved marginal standard deviations already
+exceed 1 at both 1,000 and 4,000, so its variance-floor term is inactive there.
+Increasing the coefficient can decorrelate the prior, but does not provide the
+missing upper-spread or positional restraint. It could help another failure;
+that has not been tested in this scalar cohort.
+
+| Option | Intended behavior | Limitation / implementation status |
+| --- | --- | --- |
+| Smaller constant prior step | Reduce how far locations move each time, with full ability to keep learning | Existing knob. Prior rates .003/.01/.03/.1 already appeared in the older whole pacing search at sigma .025/G=.01; smaller rates alone are not an established fix. The present sigma-.1 cohort differs. |
+| Two-sided spread restraint | Penalize both contraction and expansion around a declared latent spread, leaving positions free to rearrange | New objective; preserves no particular output variance because G can rescale. Must be distinguished from the existing lower-bound VICReg term. |
+| Fixed position spring | Penalize displacement from the initial prior, e.g. λ meanᵢ ‖zᵢ−zᵢ,initial‖² | Clock-independent. Biases latent representation and may resist useful prior motion on other tasks; a strong initial anchor leaves G responsible for more transport. |
+| Gradient-evidence damping | Reduce response when row forces cancel or are inconsistent; increase it again when persistent change appears | Best match to settle-and-adapt behavior, but requires an explicit response rule and checkpointed history for this BCAP optimizer. Existing A2/DV12 controls are not switch-compatible with full dualnorm. |
+| Extragradient / optimistic game update | Use a predictor/corrector or previous-gradient correction to address coupled G/D/prior oscillation | New optimizer comparison, with additional compute/state. Does not assume the prior alone is responsible. |
+| Zero-centered critic gradient restraint | Encourage the critic to flatten near matching data rather than only penalizing slopes above cap 1 | A loss/penalty change, not prior stabilization. Prior R1/R2 failures remain relevant; theoretical local convergence results do not establish convergence of this stochastic normalized implementation. |
+
+**Do not expect a spring added before row normalization to make steps small.**
+The current prior update is approximately
+`Δzᵢ = −η * gᵢ / (‖gᵢ‖ + eps)` for sampled rows. Replacing `gᵢ` with
+`g_advᵢ + g_springᵢ` normally changes direction while preserving a near-η step.
+Opposing forces and minibatch noise can still produce oscillation. A restoring
+operator whose correction scales with displacement, applied outside that
+normalization, or a response that retains force magnitude can supply a different
+damping mechanism. Its units, sampled-row ownership and state must be explicit.
+Anchoring to a moving average requires its own checkpointed reference; it can
+follow drift and is not equivalent to a fixed initial anchor.
+
+There is relevant prior art for game updates:
+[Gidel et al.](https://arxiv.org/abs/1802.10551) investigate extrapolation and
+extrapolation from the past for stochastic GAN optimization.
+[Mescheder et al.](https://arxiv.org/abs/1801.04406) analyze local convergence
+under suitable assumptions with zero-centered gradient penalties. Neither paper
+proves that any proposed change repairs this particular BCAP/dualnorm run.
+Compiled memory also records that disabling A2 worsened a different native
+learned-MoG host; that is context, not a matched scalar result.
+
+**Recommended order:** first isolate the moving input law with a separately
+declared **frozen-prior-from-initialization control**, alongside the learned-prior
+baseline. Keep both networks learning throughout. This is a causal diagnostic
+with a different declared prior-learnability cohort, not a proposed final
+particle learner and not a freeze triggered at update 1,000. A stable frozen
+control would support investigating prior response; continued drift would show
+that stabilizing the prior alone is insufficient.
+Bind the frozen control to the exact baseline-initialized R2 coordinates before
+freezing: changing `learnable` must not silently replace those coordinates with
+constructor Gaussian draws or change the sampling streams.
+
+For an eventual repair, prefer a bounded comparison of **prior force-response
+damping** against the unchanged row-normalized update. An initial-position spring
+is a useful alternative if its representational bias is acceptable. These are
+unexecuted proposals, not admitted Forge studies or promises of convergence.
+Plain-optimizer validation currently requires latent damping disabled and rejects
+continuous update policies; exposing a supported BCAP response rule is necessary
+before testing that structural candidate. Do not label it a working Recipe flag.
+
+Use seed 0, public initialization, matched target batches and isolated/checkpointed
+streams. Hold architecture, sampling, budgets and cadence fixed within each
+declared cohort; compare one complete trainer configuration across Gaussian and
+ring. Assess live output quality through a prespecified continued stationary hold,
+then a separate prespecified target shift and reacquisition test with the same
+update rule. Preserving the Gaussian gate and ring pass remains necessary; no
+task-specific winner splicing or relaxed CDF bound supplies a repair.
 
 ## Evidence and reproduction
 
