@@ -1,8 +1,11 @@
-# Ring16 weak spectral sign flips: prospective CUDA experiment
+# Ring16 weak spectral sign flips: CUDA results
 
-**Prepared; training and CUDA algebra remain unmeasured.** This host has no
-available CUDA device. The experiment rejects CPU neural execution before
-creating an attempt. Package defaults, task gates and qualification are unchanged.
+**One intervention at update 401 passed confirmed acquisition and the five-terminal
+diagnostic; every-step flipping failed.** Both frozen arms completed 1,600
+fresh-live CUDA updates on an RTX A6000. The saved-gradient perturbation passed
+its implementation gate while increasing pair sensitivity. Package defaults,
+task gates and qualification remain unchanged. The earlier unavailable-CUDA
+[verification](verification.json) is preserved under its original preparation scope.
 
 [PR331's reproduction](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
 found that live and restored objects first produce slightly different critic
@@ -11,6 +14,64 @@ becomes a `.252` relative normalized-direction difference. The original SVD rule
 assigns unit strength to nearly null directions. That motivates this explicitly
 randomized path-selection experiment, without establishing that randomness is
 the missing technique or the cause of the restart discrepancy.
+
+## Measured results
+
+These unranked diagnostic results retain the [frozen protocol](protocol.json),
+[compact metrics/provenance](results.json), [CUDA probe receipt](probe-results.json)
+and [verified raw archive](archive.json). Execution source was
+`79291dad8a15e742bc86a55c56cafc0d26539292`, based on develop `2859975`, with source
+digest `66435ea6507e3c64dea52c89ebfb6ee5a90d0d4cd34220b558c5441c9f56ff05`.
+Later publication changes do not replace this execution identity.
+
+| Schedule | First full pass | Independent confirmation | Full passes / 96 | Longest / terminal streak | Final covariance error / HQ | Five terminal checks |
+| --- | ---: | --- | ---: | ---: | --- | --- |
+| Boundary only at 401 | 1,300 | **PASS**, covariance .581424 | 19 | 19 / 19 | .448597 / .929932 | **PASS** |
+| Every step | None | Not eligible | 0 | 0 / 0 | 1.477256 / .962402 | **FAIL** |
+
+Initial contexts and every seen target batch match across both arms. The boundary
+arm's untouched live 400-state matches PR331's archived context exactly except
+for the two explicitly registered streams. It was never restored into the
+learner. Each arm kept its original optimizer state and constant learning rates.
+All 96 scheduled observations per arm are retained; only the boundary arm
+became eligible for its single independent confirmation. Every-step flipping's
+final failure is solely the unchanged component covariance bound.
+
+The saved CUDA probe found six weak directions in each input and flipped three
+using identical isolated coin sequences. Both captured full factors matched
+exactly; identical-input/same-stream repeats were exact. Strong signs remained
+`+1`, weak signs were `±1`, and all consumed stream states were checkpointed.
+Ambient CPU/CUDA RNG states stayed unchanged, and the separately labeled zero
+and identity algebra fixtures consumed no draws. These checks pass the declared
+implementation gate. Matched flips increased pair direction discrepancy from
+`.2519904673` to `.3586859703`; each flipped direction differed about `.433` from
+its ordinary factor. This is substantial normalized-update exploration, despite
+targeting numerically small singular components. Mismatch reduction was never
+this probe's pass criterion.
+
+Training consumed 3,200 updates, 193 evaluation draws and 46.98 measured training
+seconds (51.70 controller child-wall seconds); the zero-update probe took 1.49
+seconds. Reservations were 600 training seconds plus 30 probe seconds. No retry,
+seed change, continuation, additional training or tier-2 spending occurred.
+
+![Boundary-only actual training](boundary_only.gif)
+
+![Every-step actual training](every_step.gif)
+
+The [media index](media-index.json) binds nine observed frames per arm to saved
+sample arrays and the exact training source. Rendering used the saved CUDA
+observations on CPU, with no model forwards or new sampling draws.
+
+The boundary result shows that a single weak-direction perturbation can select
+a successful quality trajectory from the same live 400-state. Its first full
+pass at 1,300 and all subsequent 19 observations pass. It does not reproduce the
+original restored runtime or identify which operation caused its rounding
+change. The every-step negative result gives no support for adopting continuous
+random flipping. Preserve this outcome and focus follow-up on the separately
+isolated backward-order mechanism or a continuous spectral rule supported by
+its own acquisition evidence. Any retention comparison needs a new frozen
+budget and passing checkpoint dependency; no default or family qualification
+is inferred from this diagnostic.
 
 ## Mechanism and schedule
 
@@ -100,13 +161,12 @@ metadata-error INCOMPLETE receipt. Restored covariance `.514315` with six termin
 passes belongs to that original restart path, rather than a fresh continuous
 control. These historical controls are reused only under their original identity.
 
-## Execute and retain results
+## Reproduce the frozen execution
 
 The shared [public-API runner](../../../benchmarks/toy_audit/ring16_interventions.py)
 owns fresh construction, training, scoring and full context checkpoints. It keeps
-the noise, prior, data and evaluation streams separate. Actual-training GIFs
-come from saved sampled outputs after execution; none exists for this unmeasured
-candidate. Run from this branch on a supported CUDA host, with PR331's exact
+the noise, prior, data and evaluation streams separate. Actual-training GIFs above come from the saved sampled outputs of the completed
+CUDA arms. Run from this branch on a supported CUDA host, with PR331's exact
 fresh `live/prefix-state.pt` hydrated locally. A relocated artifact can be supplied
 with `--baseline`.
 
@@ -136,14 +196,16 @@ python -m benchmarks.toy_audit.ring16_interventions render \
   --output runs/api/ring16-small-sign-flips-v1
 ```
 
-Run/probe directories are exclusive. Keep raw stdout, per-update metrics, tensors,
-checkpoints and RNG states ignored under `runs/api`; archive original bytes and
-publish compact metrics, provenance and actual-training GIFs afterward. The
-[verification receipt](verification.json) records static checks without claiming
-GPU measurements. The [current technique inventory](../technique-inventory.md)
+These commands identify the completed execution. Its local run/probe
+directories are consumed and exclusive; do not replace or retry them. Raw stdout,
+per-update metrics, tensors, checkpoints and RNG states stay ignored under
+`runs/api`, with their exact bytes in the verified archive. Published compact
+metrics, provenance and actual-training GIFs above bind their original execution. The [verification receipt](verification.json) retains the
+earlier static checks; [results](results.json) records the subsequent restored-CUDA
+execution. The [current technique inventory](../technique-inventory.md)
 remains the sole generated goal leaderboard; this diagnostic is unranked.
 
-Compare confirmed acquisition first, then the full terminal diagnostic. Preserve
-a negative result. A boundary-only success would justify studying path selection;
-an every-step success would justify separately declaring retention. Neither is
-evidence for a production default or stable convergence on other tasks.
+Recommendation: retain the boundary success as a path-selection diagnostic and
+stop this every-step flip revision. A different continuous intervention requires
+its own evidence; stable convergence and cross-task default adoption remain
+separate questions.

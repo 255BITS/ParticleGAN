@@ -1,0 +1,13 @@
+{
+  "archive_local_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-small-sign-flips-v1-cuda-evidence.tar.gz",
+  "archive_sha256": "e5b809f1a633cd0c634d01c4930acc505dbc86a1a04da819965c84cade01e784",
+  "bulk_tracked_in_git": false,
+  "bytes": 7002387,
+  "manifest_sha256": "0eae78abc396515a118526d79845b4655784b90bdaebdb689f0e4223719ff4c0",
+  "member_bytes_verified": true,
+  "original_execution_commit": "79291dad8a15e742bc86a55c56cafc0d26539292",
+  "raw_file_count": 29,
+  "raw_originals_retained": true,
+  "restore": "tar -xzf ARCHIVE -C CHECKOUT (hydrate local runs/api only; never rerun consumed arms)",
+  "schema_version": 1
+}

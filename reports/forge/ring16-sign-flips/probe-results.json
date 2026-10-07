@@ -1,0 +1,168 @@
+{
+  "all_consumed_stream_states_checkpointed": true,
+  "ambient_rng_preserved": {
+    "cpu": true,
+    "cuda": true
+  },
+  "arms": {
+    "live": {
+      "change_from_ordinary_direction": {
+        "max_absolute_difference": 0.6633059978485107,
+        "relative_frobenius_difference": 0.4330136179924011
+      },
+      "exact_zero_count": 0,
+      "finite": true,
+      "flipped_count": 3,
+      "full_polar_matches_captured": true,
+      "input_digest": "39acdec91613f7de6fe7f446e2bc3d594d006e64263edeee7a72fb34a84dd3ec",
+      "paired_perturbation_start_exact": true,
+      "repeat_perturbation_start_exact": true,
+      "same_input_rng_progress_exact": true,
+      "same_input_same_rng_repeat_exact": true,
+      "strong_signs_all_plus_one": true,
+      "threshold": 2.122287469319417e-06,
+      "trace_sha256": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145",
+      "weak_count": 6,
+      "weak_signs": [
+        1.0,
+        -1.0,
+        -1.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "weak_signs_are_plus_or_minus_one": true
+    },
+    "restart": {
+      "change_from_ordinary_direction": {
+        "max_absolute_difference": 0.6604772806167603,
+        "relative_frobenius_difference": 0.433011919260025
+      },
+      "exact_zero_count": 0,
+      "finite": true,
+      "flipped_count": 3,
+      "full_polar_matches_captured": true,
+      "input_digest": "b380c47397f35a3e5c080ab869fecf9918b6bd55a63f8aa114bc55296d04cf34",
+      "paired_perturbation_start_exact": true,
+      "repeat_perturbation_start_exact": true,
+      "same_input_rng_progress_exact": true,
+      "same_input_same_rng_repeat_exact": true,
+      "strong_signs_all_plus_one": true,
+      "threshold": 2.122285877703689e-06,
+      "trace_sha256": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d",
+      "weak_count": 6,
+      "weak_signs": [
+        1.0,
+        -1.0,
+        -1.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "weak_signs_are_plus_or_minus_one": true
+    }
+  },
+  "checkpoint_labels": [
+    "initial",
+    "live_after_first",
+    "live_after_repeat",
+    "restart_after_first",
+    "restart_after_repeat",
+    "fixture_zero",
+    "fixture_identity_no_weak"
+  ],
+  "consumed_stream_keys": [
+    "[\"noise\",\"ring16_intervention\",\"weak_directions\",\"cuda:0\"]"
+  ],
+  "cuda_compute_capability": [
+    8,
+    6
+  ],
+  "cuda_model": "NVIDIA RTX A6000",
+  "cuda_runtime": "13.0",
+  "device": "cuda:0",
+  "dtype_conversion": false,
+  "elapsed_seconds": 1.4919318599859253,
+  "fixtures": {
+    "identity_no_weak": {
+      "factor_exact": true,
+      "rng_unchanged": true,
+      "scope": "fixed_algebra_fixture_separate_cohort"
+    },
+    "zero": {
+      "factor_exact": true,
+      "rng_unchanged": true,
+      "scope": "fixed_algebra_fixture_separate_cohort"
+    }
+  },
+  "flip_probability": 0.5,
+  "full_polar": {
+    "max_absolute_difference": 0.539588212966919,
+    "relative_frobenius_difference": 0.2519904673099518
+  },
+  "paired_inputs_restore_same_perturbation_state": true,
+  "perturbation_gate": {
+    "criterion": "finite factors; exact same-input/same-RNG repeats; strong signs+1; only checkpointed perturbation stream consumed; ambient RNG unchanged; no-draw zero/no-weak guards",
+    "mismatch_reduction_required": false,
+    "pass": true,
+    "quality_gate": false
+  },
+  "protocol_sha256": "a684fb45f2cb2a7dc0f793ca60155f7463eb4120e02990349003f556c5bb72d8",
+  "qualification_input": false,
+  "raw_gradient": {
+    "max_absolute_difference": 3.725290298461914e-09,
+    "relative_frobenius_difference": 1.0285653928576721e-07
+  },
+  "rng_checkpoint_sha256": "18cb5561a59f1f23781fc14f5e92f6115e585e751f5f10f8e244fc1359485c5a",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "same_draw_sign_flipped_pair": {
+    "max_absolute_difference": 0.5541255474090576,
+    "relative_frobenius_difference": 0.3586859703063965
+  },
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "fixed_saved401_weak_sign_flip_cuda_algebra",
+  "source_sha256": "2a89c2eabb528b28be4031bb2c4ef780aca2d5f657248ef59a86f9c99a6c7879",
+  "status": "COMPLETE",
+  "stream_manifest": {
+    "bindings": {
+      "[\"noise\",\"ring16_intervention\",\"weak_directions\",\"cuda:0\"]": {
+        "component": "ring16_intervention",
+        "device": "cuda:0",
+        "family": "noise",
+        "initial_state_sha256": "aeb3fc6e375af9184440c0756f7a0103226a5ec797bb0fcf41ba1f43b73dc6ff",
+        "purpose": "weak_directions",
+        "seed": 3602424388014415426
+      }
+    },
+    "runtime": {
+      "rng": "torch.Generator",
+      "torch": "2.14.0+cu130"
+    },
+    "seed": 0,
+    "version": "forge-rng-v1"
+  },
+  "threshold_rule": "s <= max(rows,cols)*finfo(float32).eps*smax",
+  "trace_execution_sources": {
+    "live": {
+      "commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d"
+    },
+    "restart": {
+      "commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd"
+    }
+  },
+  "training_updates": 0,
+  "within_30_second_allowance": true
+}
