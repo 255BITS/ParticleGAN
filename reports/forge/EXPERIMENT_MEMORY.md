@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 557. Inventory coverage: complete. Unresolved import items: 7.
+Records: 558. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### gaussian-frozen-prior-v1 · gaussian-frozen-prior-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `6e5601f349c8e62307ff94d141b5dd7a896d407fdbd2e9a95fdb4b5da4c21073`.
+
+Removing prior motion while retaining G/D learning repairs Gaussian acquisition, stationary retention and adaptation at constant rates.
+
+**Observed:** {'FAIL': 9}; wall seconds 337.193; mechanism `explicit_existing_control_ablation`.
+
+ring16_acquisition__frozen_initial__alternating__stationary: modes=16, hq=0.73047, mass_tv=0.040283
+
+Freezing the initial prior does not solve Gaussian at constant BCAP rates: all three timing arms fail acquisition and strict hold. Gaussian hold for alternating/simultaneous/past is 3/72, 0/72, 7/72; final KS is .11345/.14677/.07294, with no five-pass stationary window. All ring arms fail acquisition and hold 0/144, losing learned-prior precision despite 16 modes. Past frozen shift has a passing final endpoint KS .03256, but longest streak 2 and hold 1/24; all strict shift gates fail. Nine CUDA trials complete 30000 updates for 337.193 seconds with 0 retries; 8 software checks, 9 exact final restores and 1308 saved observation recomputations pass. Prior immobility and unchanged no-update controls are verified. Original learned controls are referenced without rerun or qualification relabeling.
+
+**Next:** Stop this exact frozen-prior revision as a continuous Gaussian repair. Retain learned-prior ring and compare the independently scoped magnitude-sensitive prior and network results before any new mechanism or combined round. No automatic tuning, retries, seed study, continuation or promotion.
+
+[Evidence](../../reports/forge/gaussian-frozen-prior/results.json) · [Record](records/gaussian-frozen-prior-v1-readout.json)
 
 ### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
 
@@ -4778,4 +4794,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `25e7a5173ae1a8629f9822ea2d6de7fd5e353c6b20d593088165128c3ee6279b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `72fbb439db220f23ff0f9043edcf505c83d7b7023fcb559c2f25ca5b2a142604`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
