@@ -164,6 +164,9 @@ def trial(arm, output, prior_root, *, device):
     parent = prior_root / "runs/api/tier1-prior-smoke-v1/mog100-n256/ring16_acquisition"
     if file_hash(parent / "state.pt") != protocol["archived_parent_checkpoint_sha256"]:
         raise ValueError("archived parent differs")
+    # Freeze the complete consumed-stream registry before the initial receipt.
+    context.streams.generator("data", component="target", purpose="training", device="cpu")
+    context.streams.generator("eval", component="live", purpose="samples")
     initial = cpu(context.state_dict())
     torch.save(initial, directory / "initial-state.pt")
     spec = task["execution"]["host_definition"]
