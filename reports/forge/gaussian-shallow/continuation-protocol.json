@@ -1,0 +1,56 @@
+{
+  "allowed_delta": "Certified evaluator tensors move outside the self receipt; archived parent compatibility is preserved; existing finite/mechanism/RNG/update guards are now checked directly. No loss, optimizer, architecture, prior, initializer, batch, evaluation cadence/draw or learning-rate change.",
+  "budget": {
+    "charged_prefix_adapter_seconds": 7.909566284972243,
+    "charged_prefix_updates": 1000,
+    "expansion": "none",
+    "new_real_examples": 640000,
+    "new_training_updates": 5000,
+    "remaining_timeout_seconds": 600,
+    "repeated_prefix_updates": 0,
+    "round_maximum_seconds": 720,
+    "round_training_updates": 6000,
+    "scientific_retries": 0
+  },
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "common_repair_commits": [
+    "7d706fec7b3535c589f33a28c18a5b6d497c3cde",
+    "402b49e10f4d7cd73fbb32c07071828b57719ff9"
+  ],
+  "id": "gaussian-shallow-v1-software-manifest-continuation",
+  "inputs": {
+    "benchmarks/toy_audit/gaussian_architecture_publish.py": "eaf60d9e3af4f468e20012d358d4e3506a2fc0000bae7a95c31ef866c51cb4b7",
+    "benchmarks/toy_audit/gaussian_shallow_resume.py": "a93a6515d7105b2d2b9d14c19c2a4293976e5e6356da37c70cb0a9a4e7db6adc",
+    "benchmarks/toy_audit/gaussian_smoke_study.py": "8f15ecd4823be9c5efeaaf4dbac3163eaef3301b0b453be0cfc8bb21eec8ba98",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/gaussian1d_shallow_smoke.json": "a80ff6a75a25231c2270ba4648d59fe9153a07068789283dc9e653736a4dfcf3",
+    "configs/forge/tasks/gaussian1d_shallow_stability.json": "ae67d44ba05834fbae83e1ba7ec58351c0b3dc0af7a21c126263b3482ce8b2fd",
+    "experiments/forge/artifacts.py": "78da4ed4b4038b8a93918aa4b5de7fa6f7e4d36731b69467e1cd8b7edcd7ee1e",
+    "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f",
+    "reports/forge/gaussian-shallow/migrate_prefix.py": "c5c74941a1a182a95b32d650480807ea72d0ffa921f40e1bb922a912142d80fb",
+    "reports/forge/gaussian-shallow/protocol.json": "7b250028cd7d89e9a350afe123f3256d5db929028a1a72a778d707275a215008"
+  },
+  "original_protocol_sha256": "7b250028cd7d89e9a350afe123f3256d5db929028a1a72a778d707275a215008",
+  "original_source_commit": "326f0e0b82d014dfcd728cd8f5719b2450fc627a",
+  "parent_original_compatibility_key": "62aa7761108227776dbdd9a39425c8f37bb25d98c37883c956b9f9118b80c813",
+  "parent_receipt_sha256": "dd8aee7c637708be28b7f19b9eff506674ae1eaa0e6bb9ac281449b7c31665a8",
+  "parent_smoke_grade_unchanged_by_current_guard_reducer": true,
+  "parent_state_sha256": "a0c52b9e8ea8a9848cc472915db52182a80729ce9c290f8b11955d25bd9b6bb9",
+  "parent_working_receipt_sha256": "2aba94581c9bdbf22a31ad914a278361e299979ad090ff53ac1d2ad17e0561b4",
+  "prefix_migration": {
+    "allowed_receipt_delta": "evidence.artifact_root only",
+    "certified_payload_bytes": "all3 original payloadfiles copybyteexact; original rawdirectory and receipt remain unchanged",
+    "source": "reports/forge/gaussian-shallow/migrate_prefix.py",
+    "strict_complete_tree_verification": true
+  },
+  "qualification_input": false,
+  "rng": "Restore exact own1000state; constructor/data/training/evaluation streams unchanged; preserve all consumedstream states.",
+  "round_id": "gaussian-shallow-v1",
+  "schema_version": 1,
+  "scientific_source_digest": "f89c4b9e21d150c60163b53b93236bb1607a59411d5612b3cbec544e181e90be",
+  "scope": "software_only_artifact_repair_own_state_continuation",
+  "stability_task_path": "configs/forge/tasks/gaussian1d_shallow_stability.json",
+  "status": "ready",
+  "stopping": "Execute only remaining5000updates once and conclude the original bounded architecture round. A software interruption is recorded, not erased or rerun.",
+  "task_path": "configs/forge/tasks/gaussian1d_shallow_smoke.json"
+}
