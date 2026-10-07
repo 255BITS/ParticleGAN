@@ -1,0 +1,22 @@
+{
+  "catalog_delta": "Add only the two current diagnostic source entries and dependent counts/coverage. No scientific source or qualification change.",
+  "history_check": {
+    "command": "python -m experiments.forge history --check",
+    "coverage": {
+      "declared_count": 11776,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11776,
+      "unclassified": [],
+      "valid": true
+    },
+    "exit_code": 0,
+    "raw_local_log": "runs/api/ring16-sign-flips-logs/history-coverage-publication.json",
+    "raw_sha256": "ddc918865c5fc848b1d92023a2ed02de4e36499b58dd17ed26bcd82425658981"
+  },
+  "pinned_sources_unchanged": true,
+  "qualification_input": false,
+  "sampling_draws": 0,
+  "scope": "report_and_current_source_metadata_audit",
+  "training_updates": 0
+}
