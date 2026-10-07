@@ -7,6 +7,8 @@ every update through 1600. The boundary arm verifies the unchanged 400 prefix
 and ends with 31 consecutive full passes (covariance .458855); its single
 independent first-pass confirmation narrowly fails (.859541 > .85), so confirmed
 smoke is FAIL. Every-step damping never passes (final covariance 1.057656).
+The boundary arm also has one covariance failure after first acquisition at
+1084 before its final 31-pass sequence; strict post-acquisition hold is not claimed.
 Both preserve constant rates, seed 0, public initialization, MoG prior, batch,
 sampling law and full bounds. Candidates never reload the archive.
 
