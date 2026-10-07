@@ -1,0 +1,80 @@
+{
+  "device": "CPU saved-tensor rendering only",
+  "entries": [
+    {
+      "arm": "live",
+      "bytes": 146241,
+      "execution_source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "frame_steps": [
+        17,
+        67,
+        117,
+        167,
+        217,
+        250,
+        300,
+        350,
+        400
+      ],
+      "gif": "live.gif",
+      "prefix_origin": "fresh shared public-API live400",
+      "saved_observations": 24,
+      "scope": "actual_training_prefix_only",
+      "sha256": "7dc680a6e8833b39118199a3d00c2f44ee04323f3f142cd91353d8706920531a",
+      "source": "runs/api/ring16-restart-diagnostic-v1/live/prefix-observations.pt",
+      "source_sha256": "5fae9b4fdc1739349b0db4e3ee3ec3a5bd9bcade2bc02e5ba35957558eabce19"
+    },
+    {
+      "arm": "restart",
+      "bytes": 127350,
+      "execution_source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "frame_steps": [
+        17,
+        217,
+        417,
+        617,
+        817,
+        1000,
+        1200,
+        1400,
+        1600
+      ],
+      "gif": "restart.gif",
+      "prefix_origin": "fresh shared public-API live400",
+      "saved_observations": 96,
+      "scope": "actual_training_full_reproduction",
+      "sha256": "4c96f2b6f3bdc84d777a0b51b04b83d6b12ca96b16b5fa123b6135d0d1f2ab09",
+      "source": "runs/api/ring16-restart-diagnostic-v1/restart/observations.pt",
+      "source_sha256": "05157eeb7334750caf1593c828fb052f60a9289dc56af77cff606770222a1007"
+    },
+    {
+      "arm": "archive-replay",
+      "bytes": 127707,
+      "execution_source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "frame_steps": [
+        17,
+        217,
+        417,
+        617,
+        817,
+        1000,
+        1200,
+        1400,
+        1600
+      ],
+      "gif": "archive-replay.gif",
+      "prefix_origin": "original archived public-API prefix400",
+      "saved_observations": 96,
+      "scope": "actual_training_full_reproduction",
+      "sha256": "982d84e449d23a75b79c02ad15dcd717e707f2e409f8a65ffdb59b1beb7138fa",
+      "source": "runs/api/ring16-restart-diagnostic-v1/archive-replay/observations.pt",
+      "source_sha256": "05157eeb7334750caf1593c828fb052f60a9289dc56af77cff606770222a1007"
+    }
+  ],
+  "metrics_result_sha256": "b8d12262e32b6e82cfb7b532a71854d0f127ea047b7be33016a839457033350d",
+  "model_forwards": 0,
+  "renderer_sha256": "5f06d3eaefe40afd844a0c03b388ecd462f4ed3c538882d207f29098f8605d45",
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "training_updates": 0
+}

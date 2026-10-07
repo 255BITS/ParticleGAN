@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 602. Inventory coverage: complete. Unresolved import items: 7.
+Records: 603. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4438,6 +4438,22 @@ The archived restored 1600-update PASS and current uninterrupted 1600-update FAI
 
 [Evidence](../../reports/forge/ring16-failure/results.json) · [Record](records/ring16-failure-saved-diagnosis-v1.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-restart-diagnostic-v1
+
+**Scope:** cuda_checkpoint_boundary_reproduction; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Reproduce what actually changes when restoring Ring16 at400 versus continuing the live objects, with seed0, public initialization, recipe and draws fixed.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `numerical_sensitivity_diagnostic`.
+
+
+
+Restoring the fresh 400-update state and the original archived state each reproduces all 96 historical passing sample tensors exactly (covariance .514315, six terminal passes). Live continuation reproduces all 96 current failing covariance/HQ observations (final covariance 2.220268), but retains its postexecution metadata-error INCOMPLETE receipt and no qualification. At update 401, weights, real/latent inputs and the first six forwards agree; critic weight gradients differ by 1e-9 to 1e-8. A 1.03e-7 relative hidden-gradient change becomes a .252 relative polar-direction change because near-null singular directions receive unit weight. Named and ambient RNG states, batches and sampled indices match all 16 traced updates; four controls match the restored path exactly. Restoring live gradient buffers and module flags does not alter that result. No seed variation, scheduled randomization or subbatch repeats were tested.
+
+**Next:** Investigate damping or truncating almost-null singular directions under a separately declared global trainer delta, constant rates and unchanged full gates. Exact backward accumulation mechanism remains unresolved. Do not promote periodic reloads from this one fixed-state reproduction.
+
+[Evidence](../../reports/forge/ring16-failure/reproduction-results.json) · [Record](records/ring16-restart-diagnostic-v1.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -4878,4 +4894,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `78658d9d9f759bad0538a759edb34ad2b95d367d2d833af043a90b9b8391dc65`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ccf2b5d48524025f3ea550f4812c86b07cf400fb03b072e6681929e8d0199cc0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

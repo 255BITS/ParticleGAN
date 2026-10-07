@@ -1,5 +1,11 @@
 # Ring16: why the longer-training fix does not pass the current smoke
 
+**Follow-up: [the CUDA restart reproduction](REPRODUCTION.md) now reproduces
+both paths and locates the first divergence at update 401.** Matching draws
+produce tiny backward gradient differences that the full SVD update amplifies.
+The new diagnostic uses 4,064 updates; the original saved-only analysis below
+retains its original source, results and qualification scope.
+
 **The earlier fix produced a real PASS, but it has not reproduced in the current
 uninterrupted run.** Both reach 1,600 updates with the selected DualNorm BCAP
 recipe. The earlier run restores a 400-update checkpoint before extending;
@@ -9,7 +15,7 @@ tail makes the current run fail local covariance despite good coverage.
 
 This report starts from `origin/develop` at
 `2859975707eb3ea4d31958ad1b03e9e69e148a53`, after merged PR329. It analyzes
-existing CUDA evidence only: **zero new training updates, model forwards or
+existing CUDA evidence only in this initial analysis: **zero new training updates, model forwards or
 sampling draws**. No recipe, prior, task, gate, tier policy or historical grade
 changes. [Compact results and input hashes](results.json) and the
 [saved-evidence analyzer](analyze_saved.py) make the findings reviewable.
