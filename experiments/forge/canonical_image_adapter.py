@@ -393,6 +393,9 @@ def construct_owner(root, binding, *, source_guard, device="cuda:1"):
     import torch
     import numpy as np
     from particlegan import Recipe, GANTrainer, init
+    from experiments.forge.api import require_legacy_autograd_source
+    require_legacy_autograd_source(GANTrainer, SOURCE_PINS[TRAINER_PATH]["sha256"],
+                                 owner="Original common26 image owner")
     from particlegan.policy import UpdatePolicy
     from experiments.forge.rng import NamedStreams
     from experiments.forge.mechanisms import MechanismAudit

@@ -11,6 +11,7 @@ from torch import nn
 from particlegan import GANTrainer, get_recipe, init
 from benchmarks.toy_audit.reproducibility import construction_rng, reproducible_execution
 from experiments.forge import adapters
+from experiments.forge.api import CapabilityError
 from experiments.forge.state import state_digest
 
 
@@ -145,3 +146,25 @@ def test_benchmark_and_forge_scopes_enforce_policy_in_new_worker(tmp_path, monke
     with ThreadPoolExecutor(max_workers=1) as pool:
         pool.submit(worker).result(timeout=30)
     assert modes == [False, False]
+
+
+def test_pinned_legacy_owner_factories_block_before_models(tmp_path, monkeypatch):
+    from experiments.forge import canonical_image_adapter, canonical_mog_adapter
+    assert torch.ones(1, device=DEVICE).is_cuda
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("legacy compatibility check constructed a model or optimizer")
+
+    monkeypatch.setattr(nn.Module, "__init__", forbidden)
+    monkeypatch.setattr(torch.optim.Optimizer, "__init__", forbidden)
+    factories = (
+        canonical_mog_adapter._trainer_class,
+        lambda: canonical_mog_adapter.construct_owner(
+            tmp_path, {}, device=DEVICE, source_guard=lambda: None),
+        lambda: canonical_image_adapter.construct_owner(
+            tmp_path, {}, device=DEVICE, source_guard=lambda: None),
+    )
+    for factory in factories:
+        with pytest.raises(CapabilityError, match="pinned original GANTrainer source") as error:
+            factory()
+        assert error.value.status == "BLOCKED"
