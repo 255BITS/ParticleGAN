@@ -56,7 +56,7 @@ coordinated GPU1 comparison was therefore run after the priority science screen.
 GPU1's ABBA windows averaged **120.060 ms/update baseline versus 123.973
 optimized**, a **3.26% slower** mean. Individual windows were 118.020/122.101
 baseline and 130.542/117.405 optimized. The retained autojev serving process
-was observed using 98% SM / 33% memory bandwidth during the attempted longer
+was observed using 98% SM / 33% memory utilization during the attempted longer
 continuation. No new science process overlapped. These timings are also
 **inconclusive for clean GPU throughput**, with no net GPU gain established.
 See [the GPU1 receipt](gpu1-results.json).
