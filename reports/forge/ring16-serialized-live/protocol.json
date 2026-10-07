@@ -1,0 +1,179 @@
+{
+  "artifacts": "Raw logs, traces, checkpoints, streams and observation tensors stay ignored under runs/api. After execution publish compact metrics/provenance and actual-training GIFs only. Keep technique-inventory.md as the sole generated goal leaderboard.",
+  "baseline_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+  "bindings": {
+    "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
+    "benchmarks/toy_audit/ring16_interventions.py": "9c3ffaff63885c71995053134fdf09eb30128863b2fe02dd2e937206a7b9f95c",
+    "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+    "benchmarks/toy_audit/ring16_serialization.py": "96cd13b4531372312370b5ce0827b18ee784e469d556a818ceff99c5b66970c7",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "experiments/forge/api.py": "d0d763b9f932f29c083676cfa76f056b8c5702afc5dd680f99959c6b2f46d2d3",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/optim/dualnorm.py": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12",
+    "particlegan/training.py": "b3d334e1fb378f3d77226daedc03a7cef4bdf4265082531628863e48a69d5a33",
+    "tests/test_forge_serial_backward_cuda.py": "e8b0aff54e73883deee9d667f261d8fc18a9cabfb93fe1ed8370639dbf23dbe0"
+  },
+  "boundary_update": 401,
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "dtype": "float32",
+  "execution_backend": "cuda",
+  "gates": {
+    "bounds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ],
+    "retention": "Not authorized by this protocol; separate passing smoke checkpoint dependency and predeclared tier2 budget required.",
+    "smoke": "Any scheduled full passing state plus one independent same-state confirmation satisfying every unchanged bound; both arms still finish1600updates.",
+    "sustained_diagnostic": "Also report unchanged five-terminal-full-pass reducer and longest passing streak; neither replaces smoke or confers ordinary qualification."
+  },
+  "held_fixed": [
+    "one protocol seed0; no seed sweep",
+    "public named deterministic initialization",
+    "uniform16-component 2D Gaussian target, ring radius3, sigma0.1",
+    "G4->64->64->2 and Fourier2 D10->64->64->1, LeakyReLU0.2",
+    "learned uniform256-row MoG prior, sigma0.1, standardizeFalse",
+    "batch128, independent checkpointed named draws",
+    "BCAP penalty and normalized biases/sampled prior rows",
+    "constant G/D/prior rates and optimizer momentum0",
+    "recipe horizon400 and full1600 update cap",
+    "clean live serving through public prior without output noise or EMA",
+    "96 ceil-spaced scheduled4096-sample checks,24 per400updates"
+  ],
+  "historical_controls": {
+    "live": {
+      "execution_source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "execution_source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+      "printed_final_covariance_error": 2.2202680110931396,
+      "printed_full_passes": 0,
+      "qualification_input": false,
+      "receipt_status": "INCOMPLETE_postexecution_metadata_error"
+    },
+    "report_source_commit": "49f041708931d06319213069be060f91f8ba9fb2",
+    "restored": {
+      "execution_source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "execution_source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd",
+      "final_covariance_error": 0.5143145751208067,
+      "role": "original restart reproduction; distinct runtime path, not a fresh continuous candidate control",
+      "terminal_full_passes": 6
+    },
+    "source_pr": "https://github.com/255BITS/ParticleGAN/pull/331",
+    "unchanged_runs_repeated": false
+  },
+  "id": "ring16-serialized-live-v1",
+  "initializer": "public deterministic orthogonal named initializer; public R2 table for prior",
+  "intervention_kind": "autograd_serialization",
+  "max_attempts": 2,
+  "max_new_host_updates": 3200,
+  "max_new_scoring_draws": 194,
+  "max_reserved_seconds": 600,
+  "max_total_reserved_seconds": 630,
+  "max_total_updates_including_software": 3203,
+  "mechanism_module": "benchmarks.toy_audit.ring16_serialization",
+  "metric_backend": "Frozen scorer on saved CUDA-generated sample tensors copied to CPU; no CPU model forward/backward or SVD. Keeps prior metric cohort unchanged.",
+  "predictions": {
+    "boundary_only": "Exact401 parity attributes this continuation to C; quality decides whether C reaches target. A pass does not imply always-serial quality.",
+    "every_step": "Independently confirmed acquisition supports serialized continuous training; report every subsequent failed scheduled gate.",
+    "failure": "A complete no-acquisition arm is negative for this fixed recipe and budget; no extension or retry."
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipe_horizon": 400,
+  "reused_runner": {
+    "changes": "Add execution-context hooks, declared candidate extension, scoped401 parity guard and ambient checkpoints; keep training/scoring loop shared.",
+    "original_sha256": "b7b55e613958f8bf8e2e6c520d0efb34c10f4b95545dc6e7b143ce525a26dc3b",
+    "source_pr": "https://github.com/255BITS/ParticleGAN/pull/332"
+  },
+  "rng_contract": {
+    "confirmation": "one separate named evaluation confirmation stream, drawn only at first scheduled full passing state;4096 samples before any further update",
+    "constructor": "isolated public reproducible_execution seed0 scope",
+    "data_and_prior": "existing separate named training streams; checkpoint every consumed stream",
+    "evaluation": "existing named standard evaluation stream",
+    "matching": "Compare initial model/prior tensors and full target batch digest across actual arms and prior interventions; checkpoint all named streams and initial/401/final ambient CPU/CUDA states.",
+    "training_noise": "no new training-noise consumption; unused helper stream retained only for shared harness identity"
+  },
+  "schedule_contract": {
+    "boundary_guard": "Require full400 exact after removing two unused stream registrations; at401 remove those plus declared external allowance1600 vs401 and require previously measured C digest.",
+    "boundary_only": "Fresh ordinary live1..400, serialized401, ordinary402..1600. Never load reference states into learner.",
+    "every_step": "Fresh live1600, serialized updates1..1600, no checkpoint load."
+  },
+  "schedules": [
+    "every_step",
+    "boundary_only"
+  ],
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "cuda_ring16_intervention_diagnostic",
+  "seed": 0,
+  "serialized401_reference": {
+    "commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+    "pr": "https://github.com/255BITS/ParticleGAN/pull/334",
+    "receipt_status": "COMPLETE_401_updates_only",
+    "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af"
+  },
+  "serialized401_state_digest": "40a84b3cafddc8d2a402a03f315da56bc97c74b91853c21e29f2f9ad6fd034f8",
+  "software_verification": {
+    "command": "pytest tests/test_forge_serial_backward_cuda.py",
+    "max_attempts": 1,
+    "max_host_updates": 3,
+    "qualification_input": false,
+    "scope": "separate tiny CUDA API/checkpoint software cohort, no quality qualification",
+    "timeout_seconds": 30
+  },
+  "status": "ready",
+  "steps": 1600,
+  "stopping_rules": [
+    "Freeze source/protocol before paid work; every attempt counts, no retries or repeat of consumed arms.",
+    "Finish both independent arms to1600 even if a smoke state passes.",
+    "Stop an arm on nonfinite training, source/stream mismatch, timeout or budget exhaustion; retain raw error and actual cost.",
+    "No seed changes, periodic restart, annealing, prior refresh, subbatch repeat, architecture change, threshold grid or relaxed covariance bound.",
+    "Do not spend automatically on retention or import these diagnostic results into ordinary qualification.",
+    "Reject non-CUDA models; assert ordinary caller autograd mode before and after every update. All GPU jobs sequential on physicalGPU0."
+  ],
+  "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "timeout_seconds_per_arm": 300,
+  "trainer_delta": {
+    "annealing": false,
+    "boundary_only": "GANTrainer.serial_backward=False; set_multithreading_enabled(False) scopes whole update401 only",
+    "every_step": "GANTrainer.serial_backward=True via declared Forge extension from initialization; checkpointed execution mode",
+    "kind": "autograd_execution_order",
+    "losses": "unchanged BCAP including higher-order autograd.grad",
+    "new_rng_draws": 0,
+    "optimizer": "unchanged full DualNorm polar, biases and sampled prior rows",
+    "public_defaults_changed": false,
+    "rates": {
+      "D": 0.018,
+      "G": 0.012,
+      "prior": 0.03
+    }
+  },
+  "user_authorization": "User asked to verify serialized live without restart converges, then compare techniques; continue authorized on2026-10-07."
+}

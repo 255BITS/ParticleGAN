@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 80,
+      "benchmark/toy_audit": 82,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1538,
+      "support": 1540,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11774
+    "files": 11776
   },
   "coverage": {
-    "declared_count": 11774,
+    "declared_count": 11776,
     "missing": [],
     "stale": [],
-    "tracked_count": 11774,
+    "tracked_count": 11776,
     "unclassified": [],
     "valid": true
   },
@@ -1250,6 +1250,13 @@
     },
     {
       "family": "benchmark/toy_audit",
+      "git_blob": "7ba72553c578542bc674c65613f8bdb0ebaac185",
+      "path": "benchmarks/toy_audit/ring16_interventions.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
       "git_blob": "6dd3a057c97db254600cdcbc666e0474b604fb10",
       "path": "benchmarks/toy_audit/ring16_publish.py",
       "role": "support",
@@ -1259,6 +1266,13 @@
       "family": "benchmark/toy_audit",
       "git_blob": "b63e4294deb847c86ba4ec4388c3e33618efc74a",
       "path": "benchmarks/toy_audit/ring16_quality.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "538760fa8654a377b3e64196bcc012bbac5696b4",
+      "path": "benchmarks/toy_audit/ring16_serialization.py",
       "role": "support",
       "suggested_tiers": []
     },

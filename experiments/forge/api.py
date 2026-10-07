@@ -275,7 +275,14 @@ def default_registry():
     Add a supported ExtensionSpec here after implementing its public API field;
     ordinary Recipe fields require no extension declaration.
     """
-    return CapabilityRegistry()
+    return CapabilityRegistry().register_extension(ExtensionSpec(
+        name="serial_backward", value_type="bool", target="trainer", argument="serial_backward",
+        description="Serialize all autograd work within each public GANTrainer update.",
+        ownership="GANTrainer execution context; caller mode restored after each update",
+        checkpoint="GANTrainer.serial_backward; restoration rejects a different execution mode",
+        gradient_ownership="Unchanged public losses and derivatives; backward execution order changes",
+        initialization="Unchanged task initializer and named component streams",
+        supported_paths=("public_trainer",)))
 
 
 def _resolved_prior(value):
