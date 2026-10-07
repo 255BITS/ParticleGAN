@@ -7,6 +7,15 @@ reset explains the difference. At update **401**, otherwise identical critic
 calculations produce weight gradients differing by a few billionths. The full
 SVD normalization turns that rounding difference into a substantial update.
 
+**Later CUDA evidence (2026-10-07):** the
+[five-study follow-up](../ring16-followup/README.md) reproduces these ordinary
+gradients and makes the complete live/restored 401 states identical by disabling
+autograd multithreading for that update. Thread-local graph sequence histories
+provide a supported scheduling explanation; actual node execution order remains
+untraced. Continuous truncation and tiny-gradient noise pass confirmed acquisition,
+but both have subsequent failing checks before long late passing streaks. The
+original results and receipt statuses below retain their original identities.
+
 This is a third explanation alongside the user's seed-sensitivity and scheduled
 randomization hypotheses: **numerical sensitivity to restarting the runtime
 objects**. Seed sensitivity was not tested. The exact CUDA/autograd accumulation

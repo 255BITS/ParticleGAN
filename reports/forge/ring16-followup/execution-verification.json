@@ -1,0 +1,19 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "all_arms_complete": true,
+    "all_boundary_prefixes_exact": true,
+    "all_frozen_bindings_match": true,
+    "all_receipt_artifact_hashes_match": true,
+    "all_training_batches_match": true,
+    "five_raw_archive_sha256_match": true,
+    "qualification_unchanged": true
+  },
+  "compiled_memory_refresh": "pending",
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "qualification_input": false,
+  "raw_artifact_hashes_checked": 68,
+  "scope": "saved_receipt_and_frozen_source_validation",
+  "source_result_sha256": "1c7c35f2d9aa61b4be496951af085e106049e72e1d95a78bd415ac6e79b4fd09"
+}

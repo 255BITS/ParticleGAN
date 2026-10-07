@@ -1,0 +1,13 @@
+{
+  "all_member_bytes_verified": true,
+  "all_original_inputs_unchanged": true,
+  "archive": "artifacts/ring16-followup-preparation-v1.tar.gz",
+  "bytes": 189353,
+  "cuda_algebra_executions": 0,
+  "files": 60,
+  "members": 61,
+  "neural_updates": 0,
+  "schema_version": 1,
+  "scope": "five committed branches, prospective protocols/reports and static-check raw logs; no new training",
+  "sha256": "30f7ab06e201c0d0def4bbbe632686a9bdee2595d594656ae82818417edee8fb"
+}
