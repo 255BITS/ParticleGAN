@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "record_id": "gaussian-network-magnitude-v1-readout",
+  "record_type": "scientific",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-network-spectral-cap-extrapolation-from-past-v1",
+  "candidate_revision": "c1cf9f5d55929571c00f841e115b056f3f8dd8462be68a30f199db4c23591bd1",
+  "trainer_family": "bcap-dualnorm",
+  "mechanism_class": "structural",
+  "changed_factors": [
+    "Recipe.network_update=spectral_capped",
+    "Recipe.network_gradient_scale=0.1",
+    "three explicit game timing arms"
+  ],
+  "hypothesis": "Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.",
+  "conclusion": "Fixed-scale G/D spectral clipping improves Gaussian but does not solve continuous acquisition/retention: past passes 43/96 (hold 41/72, longest 5, first five-pass window 3875, final KS .06083); shifted past passes 17/48 (hold 8/24, longest 3, endpoint KS .03837). Alternating Gaussian ends passing KS .04838 but holds 11/72; simultaneous passes 0/96. All ring arms pass 0/240 and regress covariance, so retain the adopted ring recipe. All nine CUDA trials complete 30,000 new updates for 362.227 loop seconds, with zero retries; 67 software checks, nine exact final restores and 1308 saved-sample recomputations pass. No ordinary qualification changed.",
+  "next_action": "Stop this exact fixed-scale global repair; keep opt-in capability and adopted ring recipe. Compare independent frozen-prior/prior-magnitude results before proposing a separately declared combination. No automatic tuning, expansion, continuation or seeds.",
+  "lifecycle": "concluded",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "source": {
+    "path": "reports/forge/gaussian-network-magnitude/results.json",
+    "sha256": "9f20c38a041a78f466ff165d804b5eacf6f4334f71d8805a62219bf1937131d5"
+  },
+  "provenance": {
+    "source_commit": "4335e2bd4806e218d0d6e544973c53078d344c1a",
+    "protocol_sha256": "bd3ab3141ae30538667bfe43d3eebfce38124038cdc138e1159fb4ee77b43f59",
+    "archive_sha256": "f8c15e2eda12c906c5996c7a9bdb1a7c30d281cc5c2257f93bcf9dd71886cdc9",
+    "new_training_updates": 30000,
+    "receipt": "reports/forge/gaussian-network-magnitude/provenance.json",
+    "report": "reports/forge/gaussian-network-magnitude/README.md",
+    "trainer_delta": {
+      "alternating": "G/D spectral cap scale0.1, prior rownorm unchanged; timing alternating",
+      "simultaneous": "G/D spectral cap scale0.1, prior rownorm unchanged; timing simultaneous",
+      "extrapolation_from_past": "G/D spectral cap scale0.1, prior rownorm unchanged; timing extrapolation_from_past"
+    },
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    }
+  },
+  "task_results": [
+    {
+      "candidate_id": "bcap-network-spectral-cap-alternating-v1",
+      "task_id": "gaussian1d_acquisition__alternating__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.048380591390753624,
+        "finite_fraction": 1.0,
+        "mean": 1.9654188037893618,
+        "mean_error_sigma": 0.06916239242127631,
+        "sample_count": 4096,
+        "std": 0.5133480963604892,
+        "std_ratio": 1.0266961927209783,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 11,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 2
+      },
+      "cost": {
+        "wall_seconds": 34.686036534956656
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 11/72; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-alternating-v1",
+      "task_id": "ring16_acquisition__alternating__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.43475655745714903,
+        "component_core_min_eigen_ratio": 0.35894575715065,
+        "component_covariance_error": 2.016709423623979,
+        "component_min_eigen_ratio": 0.3648267388343811,
+        "covariance_error": 0.08843118697404861,
+        "hq": 0.97509765625,
+        "mass_tv": 0.06787109375,
+        "max_component_spill": 0.07886435091495514,
+        "mean_error": 0.014876465313136578,
+        "min_hq_mass_ratio": 0.69921875,
+        "min_mass_ratio": 0.73828125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.032232620669006874,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 53.25706864206586
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 0/144; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-simultaneous-v1",
+      "task_id": "gaussian1d_acquisition__simultaneous__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.13628070169356316,
+        "finite_fraction": 1.0,
+        "mean": 2.0297795535589103,
+        "mean_error_sigma": 0.05955910711782053,
+        "sample_count": 4096,
+        "std": 0.3553454884685239,
+        "std_ratio": 0.7106909769370477,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 34.88964935007971
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 0/72; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-simultaneous-v1",
+      "task_id": "ring16_acquisition__simultaneous__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.4086323380470276,
+        "component_core_min_eigen_ratio": 0.32088369131088257,
+        "component_covariance_error": 1.8541901353746653,
+        "component_min_eigen_ratio": 0.32088369131088257,
+        "covariance_error": 0.05322533845901489,
+        "hq": 0.976318359375,
+        "mass_tv": 0.066650390625,
+        "max_component_spill": 0.10752688348293304,
+        "mean_error": 0.020383520051836967,
+        "min_hq_mass_ratio": 0.6484375,
+        "min_mass_ratio": 0.7265625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.030112453957574396,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 52.83698033296969
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 0/144; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-extrapolation-from-past-v1",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.0608271891586637,
+        "finite_fraction": 1.0,
+        "mean": 1.993564040181809,
+        "mean_error_sigma": 0.01287191963638179,
+        "sample_count": 4096,
+        "std": 0.4963153271319684,
+        "std_ratio": 0.9926306542639368,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 41,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 5
+      },
+      "cost": {
+        "wall_seconds": 48.69601004605647
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 41/72; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-extrapolation-from-past-v1",
+      "task_id": "ring16_acquisition__extrapolation_from_past__stationary",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.4001032914966345,
+        "component_core_min_eigen_ratio": 0.6573346257209778,
+        "component_covariance_error": 2.0555323250591755,
+        "component_min_eigen_ratio": 0.7760011553764343,
+        "covariance_error": 0.09154459089040756,
+        "hq": 0.873779296875,
+        "mass_tv": 0.062744140625,
+        "max_component_spill": 0.3317756950855255,
+        "mean_error": 0.039755214005708694,
+        "min_hq_mass_ratio": 0.55859375,
+        "min_mass_ratio": 0.69140625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.04477976470676037,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 78.90512509294786
+      },
+      "reason": "Diagnostic stationary;  acquisition FAIL,hold 0/144; 4000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-alternating-v1",
+      "task_id": "gaussian1d_acquisition__alternating__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.07496529257064677,
+        "finite_fraction": 1.0,
+        "mean": 2.943350727990037,
+        "mean_error_sigma": 0.11329854401992634,
+        "sample_count": 4096,
+        "std": 0.4360410884268595,
+        "std_ratio": 0.872082176853719,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 17.443794487975538
+      },
+      "reason": "Diagnostic shift;  acquisition FAIL,hold 0/24; 2000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-simultaneous-v1",
+      "task_id": "gaussian1d_acquisition__simultaneous__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.23232181390879403,
+        "finite_fraction": 1.0,
+        "mean": 2.8537276842980646,
+        "mean_error_sigma": 0.2925446314038709,
+        "sample_count": 4096,
+        "std": 0.3721796943535303,
+        "std_ratio": 0.7443593887070606,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 0,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 0
+      },
+      "cost": {
+        "wall_seconds": 17.381809785962105
+      },
+      "reason": "Diagnostic shift;  acquisition FAIL,hold 0/24; 2000 new updates,no ordinary qualification credit."
+    },
+    {
+      "candidate_id": "bcap-network-spectral-cap-extrapolation-from-past-v1",
+      "task_id": "gaussian1d_acquisition__extrapolation_from_past__shift",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.03837185085691841,
+        "finite_fraction": 1.0,
+        "mean": 2.9834066522307694,
+        "mean_error_sigma": 0.03318669553846121,
+        "sample_count": 4096,
+        "std": 0.4611601127858289,
+        "std_ratio": 0.9223202255716578,
+        "acquisition_suffix": 0,
+        "hold_pass_checks": 8,
+        "hold_total_checks": 24,
+        "longest_pass_streak": 3
+      },
+      "cost": {
+        "wall_seconds": 24.13027676695492
+      },
+      "reason": "Diagnostic shift;  acquisition FAIL,hold 8/24; 2000 new updates,no ordinary qualification credit."
+    }
+  ]
+}

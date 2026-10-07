@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 557. Inventory coverage: complete. Unresolved import items: 7.
+Records: 558. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -677,6 +677,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-network-spectral-cap-extrapolation-from-past-v1 · gaussian-network-magnitude-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `c1cf9f5d55929571c00f841e115b056f3f8dd8462be68a30f199db4c23591bd1`.
+
+Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.
+
+**Observed:** {'FAIL': 9}; wall seconds 362.227; mechanism `structural`.
+
+ring16_acquisition__alternating__stationary: modes=16, hq=0.9751, mass_tv=0.067871
+
+Fixed-scale G/D spectral clipping improves Gaussian but does not solve continuous acquisition/retention: past passes 43/96 (hold 41/72, longest 5, first five-pass window 3875, final KS .06083); shifted past passes 17/48 (hold 8/24, longest 3, endpoint KS .03837). Alternating Gaussian ends passing KS .04838 but holds 11/72; simultaneous passes 0/96. All ring arms pass 0/240 and regress covariance, so retain the adopted ring recipe. All nine CUDA trials complete 30,000 new updates for 362.227 loop seconds, with zero retries; 67 software checks, nine exact final restores and 1308 saved-sample recomputations pass. No ordinary qualification changed.
+
+**Next:** Stop this exact fixed-scale global repair; keep opt-in capability and adopted ring recipe. Compare independent frozen-prior/prior-magnitude results before proposing a separately declared combination. No automatic tuning, expansion, continuation or seeds.
+
+[Evidence](../../reports/forge/gaussian-network-magnitude/results.json) · [Record](records/gaussian-network-magnitude-v1-readout.json)
 
 ### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
 
@@ -4778,4 +4794,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `25e7a5173ae1a8629f9822ea2d6de7fd5e353c6b20d593088165128c3ee6279b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ff56b2b70396f2c4cce33d7c8522a34347c9332c5f980d768064d654653c068e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

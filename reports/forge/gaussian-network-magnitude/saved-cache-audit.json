@@ -1,0 +1,258 @@
+{
+  "model_sampling_draws": 0,
+  "new_gradient_evaluations": 0,
+  "results": [
+    {
+      "checkpoint_sha256": "08b45a1a966ded2c32c4948884f65524a5aa7e35783adda8ec68e0a5ca96413f",
+      "implied_mean_prior_row_motion": 0.02996923506259918,
+      "parameters": [
+        {
+          "cached_direction_norm": 0.15279258787631989,
+          "cap_norm_utilization": 0.02701016875059681,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.007697426714003086,
+          "cap_norm_utilization": 0.007697426714003086,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.16091860830783844,
+          "cap_norm_utilization": 0.028446659788393613,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.010414841584861279,
+          "cap_norm_utilization": 0.010414841584861279,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.20642338693141937,
+          "cap_norm_utilization": 0.20642338693141937,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.014938830398023129,
+          "cap_norm_utilization": 0.014938830398023129,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 0.4730794429779053,
+          "cap_norm_utilization": 0.08362942054240785,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.03868114575743675,
+          "cap_norm_utilization": 0.03868114575743675,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.4090433418750763,
+          "cap_norm_utilization": 0.07230933020976843,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.026162756606936455,
+          "cap_norm_utilization": 0.026162756606936455,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.4762727618217468,
+          "cap_norm_utilization": 0.4762727618217468,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "phase": "stationary",
+      "prior_direction_max_norm": 0.9999873042106628,
+      "prior_direction_min_norm": 0.9272325038909912,
+      "prior_nonzero_rows": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "checkpoint_sha256": "bd12a9f996a9b3c2360b07aa6a0ad2cea83b1605b10587c201a704b527bc74a3",
+      "implied_mean_prior_row_motion": 0.029999903440475463,
+      "parameters": [
+        {
+          "cached_direction_norm": 5.7650604248046875,
+          "cap_norm_utilization": 0.7206325531005859,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 1.0,
+          "cap_norm_utilization": 1.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 1.8513514995574951,
+          "cap_norm_utilization": 0.2314189374446869,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 1.0,
+          "cap_norm_utilization": 1.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 1.41421377658844,
+          "cap_norm_utilization": 1.000000151473123,
+          "dualnorm_motion_cap_norm": 1.4142135623730951,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.5981594324111938,
+          "cap_norm_utilization": 0.5981594324111938,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 2.8030717372894287,
+          "cap_norm_utilization": 0.3503839671611786,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.22621355950832367,
+          "cap_norm_utilization": 0.22621355950832367,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 1.7541124820709229,
+          "cap_norm_utilization": 0.21926406025886536,
+          "dualnorm_motion_cap_norm": 8.0,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.26933133602142334,
+          "cap_norm_utilization": 0.26933133602142334,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.9999999403953552,
+          "cap_norm_utilization": 0.9999999403953552,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "phase": "stationary",
+      "prior_direction_max_norm": 0.9999991059303284,
+      "prior_direction_min_norm": 0.9999732375144958,
+      "prior_nonzero_rows": 97,
+      "task": "ring16_acquisition"
+    },
+    {
+      "checkpoint_sha256": "bf7af8d7017bebd0ff5bd1c01458bc257ae7159806daafb19bd8b2ffd08ab741",
+      "implied_mean_prior_row_motion": 0.02999459981918335,
+      "parameters": [
+        {
+          "cached_direction_norm": 0.18431459367275238,
+          "cap_norm_utilization": 0.032582524764411584,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.016835885122418404,
+          "cap_norm_utilization": 0.016835885122418404,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.16920050978660583,
+          "cap_norm_utilization": 0.029910706962582443,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "G.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.028666099533438683,
+          "cap_norm_utilization": 0.028666099533438683,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.21022073924541473,
+          "cap_norm_utilization": 0.21022073924541473,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.04431642219424248,
+          "cap_norm_utilization": 0.04431642219424248,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "G.net.4.bias"
+        },
+        {
+          "cached_direction_norm": 0.4537006914615631,
+          "cap_norm_utilization": 0.0802037088903742,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.0.weight"
+        },
+        {
+          "cached_direction_norm": 0.026707040145993233,
+          "cap_norm_utilization": 0.026707040145993233,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.0.bias"
+        },
+        {
+          "cached_direction_norm": 0.4591706395149231,
+          "cap_norm_utilization": 0.08117066823069145,
+          "dualnorm_motion_cap_norm": 5.656854249492381,
+          "parameter": "D.net.2.weight"
+        },
+        {
+          "cached_direction_norm": 0.007388051599264145,
+          "cap_norm_utilization": 0.007388051599264145,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.2.bias"
+        },
+        {
+          "cached_direction_norm": 0.5905832648277283,
+          "cap_norm_utilization": 0.5905832648277283,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.weight"
+        },
+        {
+          "cached_direction_norm": 0.0,
+          "cap_norm_utilization": 0.0,
+          "dualnorm_motion_cap_norm": 1.0,
+          "parameter": "D.net.4.bias"
+        }
+      ],
+      "phase": "shift",
+      "prior_direction_max_norm": 0.9999815225601196,
+      "prior_direction_min_norm": 0.998526930809021,
+      "prior_nonzero_rows": 103,
+      "task": "gaussian1d_acquisition"
+    }
+  ],
+  "scope": "posthoc_saved_direction_diagnostic_not_gate",
+  "source_sha256": "2c253668476d9b04d4598a8d27e6c860957069442a21a1f8fb04d20947b77053",
+  "training_updates": 0
+}
