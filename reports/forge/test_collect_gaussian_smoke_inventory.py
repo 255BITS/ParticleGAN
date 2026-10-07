@@ -6,7 +6,8 @@ import unittest
 
 from experiments.forge.artifacts import manifest_artifacts
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
-from reports.forge.collect_gaussian_smoke_inventory import collect_saved, validate_attempt, recall_record, saved_state_certificate
+from reports.forge.collect_gaussian_smoke_inventory import (collect_saved, validate_attempt, recall_record,
+                                                          saved_state_certificate, _declared_cuda_job)
 
 
 class SavedCampaignTests(unittest.TestCase):
@@ -263,6 +264,40 @@ class SavedCampaignTests(unittest.TestCase):
         self.assertEqual(certificate["completed_steps"], 1)
         self.assertEqual(certificate["completed_steps_semantics"], "minimum_actual_active_role_optimizer_count")
         self.assertFalse(certificate["completion_budget_witness"])
+
+    def test_actual_v4_administrative_launch_without_redundant_seed(self):
+        self.round["bounded_combined_cost"] = {"original_goal_ceiling_seconds": 1000, "previous_paid_seconds": 7.,
+                                                "previous_round_paid_seconds": {"v2": 2., "v3": 5.}}
+        self.preparation["round_sha256"] = stable_hash(self.round)
+        self.launch = {"schema_version": 1, "campaign_id": self.round["id"], "ordinary_requests": 2,
+                       "source_commit": self.origin, "source_origin_commit": self.origin, "source_digest": self.source["digest"],
+                       "devices": ["0", "1"], "workers_per_gpu": 1, "through_tier": 2, "frozen_declarations": 3,
+                       "execution_backend": "cuda", "all_jobs_require_gpu": True,
+                       "initial_submission_counts": {"queued": 2}, "planned_jobs": 56,
+                       "previous_paid_seconds": 7., "original_goal_ceiling_seconds": 1000}
+        result = self.call()
+        self.assertEqual(result["launch_contract"]["schema_family"], "campaign_id_v1")
+        self.assertEqual(result["launch_contract"]["previous_paid_seconds_claim"], 7.)
+        self.assertEqual(result["seed"], 0)
+        for key, changed in (("previous_paid_seconds", 8.), ("original_goal_ceiling_seconds", 1001),
+                             ("all_jobs_require_gpu", False), ("ordinary_requests", 3), ("source_origin_commit", "x" * 40)):
+            original = self.launch[key]
+            self.launch[key] = changed
+            with self.assertRaises(ValueError):
+                self.call()
+            self.launch[key] = original
+
+    def test_unexecuted_job_seed_and_cuda_contracts_are_still_checked(self):
+        request = next(iter(self.state["submissions"].values()))["request"]
+        pending = next(job for job in request["jobs"] if self.state["jobs"][job["compatibility_key"]]["result"] is None)
+        _declared_cuda_job(pending)
+        pending["science"]["seed"] = 1
+        with self.assertRaisesRegex(ValueError, "declared job permits"):
+            _declared_cuda_job(pending)
+        pending["science"]["seed"] = 0
+        pending["resources"]["allow_cpu"] = True
+        with self.assertRaisesRegex(ValueError, "declared job permits"):
+            _declared_cuda_job(pending)
 
 
 if __name__ == "__main__":

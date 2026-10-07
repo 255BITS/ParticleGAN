@@ -72,6 +72,49 @@ def _sha256(value):
     return isinstance(value, str) and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
 
 
+def _launch_contract(launch, round_definition, preparation, *, origin, digest, roster_size):
+    """Validate either declared administrative launch schema, never infer science."""
+    modern = "campaign_id" in launch
+    campaign = launch.get("campaign_id" if modern else "campaign")
+    count = launch.get("ordinary_requests" if modern else "requests")
+    if (launch.get("source_commit") != origin or launch.get("source_digest") != digest
+            or campaign != round_definition["id"] or type(count) is not int or count < 1
+            or launch.get("through_tier") != 2 or launch.get("workers_per_gpu") != 1
+            or launch.get("devices") != ["0", "1"]
+            or ("seed" in launch and launch["seed"] != 0) or (not modern and launch.get("seed") != 0)):
+        raise ValueError("launch source, campaign, CUDA workers or seed contract drift")
+    if modern:
+        budget = preparation["campaign"]["budget_seconds"]
+        bounds = round_definition.get("bounded_combined_cost", {})
+        previous = launch.get("previous_paid_seconds")
+        previous_rounds = bounds.get("previous_round_paid_seconds", {})
+        if (launch.get("schema_version") != 1 or launch.get("source_origin_commit") != origin
+                or launch.get("frozen_declarations") != roster_size
+                or launch.get("execution_backend") != "cuda" or launch.get("all_jobs_require_gpu") is not True
+                or launch.get("initial_submission_counts") != {"queued": count}
+                or type(launch.get("planned_jobs")) is not int or launch["planned_jobs"] < count
+                or launch.get("original_goal_ceiling_seconds") != budget
+                or bounds.get("original_goal_ceiling_seconds") != budget
+                or type(previous) not in (int, float) or not math.isfinite(previous) or previous < 0
+                or bounds.get("previous_paid_seconds") != previous
+                or not isinstance(previous_rounds, dict) or not previous_rounds
+                or any(type(value) not in (int, float) or not math.isfinite(value) or value < 0 for value in previous_rounds.values())
+                or not math.isclose(sum(previous_rounds.values()), previous, rel_tol=1e-12, abs_tol=1e-8)):
+            raise ValueError("modern launch changed its frozen roster, all-GPU jobs, original ceiling or separate prior-source paid cost")
+    return {"schema_family": "campaign_id_v1" if modern else "legacy_campaign_v1", "campaign_id": campaign,
+            "ordinary_requests": count, "seed_authority": "frozen_round_original_requests_and_jobs",
+            "previous_paid_seconds_claim": launch.get("previous_paid_seconds")}
+
+
+def _declared_cuda_job(definition):
+    if (definition.get("science", {}).get("seed") != 0
+            or definition.get("science", {}).get("compute", {}).get("backend") != "cuda"
+            or definition.get("resources", {}).get("backend") != "cuda"
+            or definition.get("resources", {}).get("allow_cpu") is not False
+            or definition.get("resources", {}).get("gpus") != 1):
+        raise ValueError("declared job permits scientific seed drift or non-CUDA execution")
+
+
 def saved_state_certificate(row, task, *, allow_missing=False):
     """Validate certified state bytes and declared format; never deserialize them.
 
@@ -258,6 +301,7 @@ def collect_saved(root, queue_root, state, round_definition, preparation, launch
     root, queue_root = Path(root), Path(queue_root)
     campaign_id = round_definition["id"]
     _inactive(state, campaign_id, partial_cut=partial_cut)
+    launch_contract = _launch_contract(launch, round_definition, preparation, origin=origin, digest=digest, roster_size=roster_size)
     roster = round_definition["candidate_ids"]
     prepared = {row["candidate_id"]: row for row in preparation["candidates"]}
     if (len(roster) != roster_size or len(set(roster)) != roster_size or set(roster) != set(prepared)
@@ -268,19 +312,18 @@ def collect_saved(root, queue_root, state, round_definition, preparation, launch
             or preparation.get("source_digest") != digest or preparation.get("through_tier") != 2
             or round_definition.get("scientific_retries") != 0 or round_definition.get("seed") != 0
             or round_definition.get("required_denominator_by_tier") != [6, 20, 2]
-            or preparation.get("execution_backend") != "cuda" or round_definition.get("execution_backend") != "cuda"
-            or launch.get("source_commit") != origin or launch.get("source_digest") != digest
-            or launch.get("campaign") != campaign_id
-            or launch.get("seed") != 0 or launch.get("through_tier") != 2
-            or launch.get("workers_per_gpu") != 1 or launch.get("devices") != ["0", "1"]):
+            or preparation.get("execution_backend") != "cuda" or round_definition.get("execution_backend") != "cuda"):
         raise ValueError("frozen roster, preparation, campaign launch or protocol drift")
     campaign_entries = [entry for entry in state["submissions"].values()
                         if entry["request"].get("campaign_id") == campaign_id]
     entries = {entry["request"]["candidate"]["id"]: entry for entry in campaign_entries}
     admitted = {name for name, row in prepared.items() if row.get("request_id") is not None}
-    if (set(entries) != admitted or len(entries) != len(campaign_entries) or len(entries) != launch["requests"]
+    if (set(entries) != admitted or len(entries) != len(campaign_entries) or len(entries) != launch_contract["ordinary_requests"]
             or state["campaigns"][campaign_id]["definition"] != preparation["campaign"]):
         raise ValueError("saved queue admissions differ from the complete prepared roster")
+    if "campaign_id" in launch and launch["planned_jobs"] != len({job["compatibility_key"] for entry in entries.values()
+                                                                  for job in entry["request"]["jobs"]}):
+        raise ValueError("modern launch changed the exact declared execution-group count")
     views = {stable_hash(entry["request"]["view"]) for entry in entries.values()}
     if len(views) != 1:
         raise ValueError("campaign requests changed the frozen view")
@@ -303,12 +346,15 @@ def collect_saved(root, queue_root, state, round_definition, preparation, launch
                     or request["request_id"] != declaration["request_id"]
                     or stable_hash({key: value for key, value in request.items() if key != "request_id"})[:24] != request["request_id"]
                     or request.get("policy_fingerprint") != stable_hash(view)
-                    or request.get("execution_policy") != {"schema_version": 1, "mode": "complete_current_tier"}):
+                    or request.get("execution_policy") != {"schema_version": 1, "mode": "complete_current_tier"}
+                    or request.get("execution_backend") != "cuda"
+                    or request.get("protocol", {}).get("seed") != 0 or request.get("rng", {}).get("seed") != 0):
                 raise ValueError("saved request differs from its exact preparation/scientific protocol")
             saved_request = read_json(queue_root / "queue/requests" / (request["request_id"] + ".json"))
             if saved_request != request:
                 raise ValueError("queue request file changed")
             for definition in request["jobs"]:
+                _declared_cuda_job(definition)
                 job = state["jobs"][definition["compatibility_key"]]
                 if job["definition"] != definition or len(job.get("attempts", [])) > 1 or job.get("retry_of"):
                     raise ValueError("job definition drift or forbidden scientific retry")
@@ -404,6 +450,7 @@ def collect_saved(root, queue_root, state, round_definition, preparation, launch
             "scope": "Whole candidate rows under one exact executed source; saved certificates only, no task pooling or new grading.",
             "qualification_input": False, "qualification_reuse": False, "default_adoption": False,
             "source_commit": origin, "source_digest": digest, "view": view["id"], "view_revision": view["revision"],
+            "launch_contract": launch_contract,
             "policy_fingerprint": stable_hash(view), "seed": 0, "through_tier": 2,
             "roster_count": len(rows), "admitted_count": len(entries), "required_tasks_by_tier": required,
             "required_denominator_by_tier": [6, 20, 2], "admission_status_counts": dict(sorted(Counter(row["admission_status"] for row in rows).items())),

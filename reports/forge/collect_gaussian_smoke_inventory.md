@@ -12,6 +12,12 @@ receipt unless supplied explicitly. The collector binds the round to that Git
 commit and verifies the complete frozen source snapshot. Production collection
 requires all 52 declarations, including blocked/refused candidates, the frozen
 6/20/2 denominators, seed 0, CUDA-only execution and zero scientific retries.
+Both recorded administrative launch formats are supported. V4 uses
+`campaign_id`, `ordinary_requests`, `previous_paid_seconds` and an explicit
+all-GPU declaration. Its previous-source cost must match the frozen round's
+separate ledger and original goal ceiling. Seed 0 remains certified by the
+frozen round and every original request/job, even without a redundant launch
+seed field. No administrative compatibility changes a scientific binding.
 
 Run after both workers and the coordinator have exited:
 
@@ -65,3 +71,15 @@ roster/certificate/source/device/retry refusals, eligibility, strict file and
 named-stream certificates and partial-cut limits without CPU or GPU neural
 execution. Bulk original receipts, stdout, curves and tensor states remain in
 the local artifact archive.
+
+The separate [four-route v4 provenance audit](gaussian-smoke-inventory/v4-route-provenance-audit.json)
+also decoded one already completed Gaussian, two-pole, ring and word checkpoint
+as saved tensor data. It recomputed full state and every named-stream hash and
+checked the original CUDA storage tags, without constructing/restoring models,
+running a forward pass, drawing samples or creating a CUDA context. That compact
+proof preserves original numerical verdicts and does not certify completion of
+the still-running campaign. `audit_inventory_saved_state.py` reproduces that
+saved-data method for the exact attempt IDs recorded in the proof; no additional
+route probes are required for this campaign unless an error or schema change
+appears. The main collector continues to check certificate metadata/file bytes
+without loading checkpoints.
