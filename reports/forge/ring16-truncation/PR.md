@@ -1,20 +1,7 @@
-Ring16's full SVD update amplifies an observed `1.03e-7` relative gradient
-difference at the checkpoint boundary into a `.252` relative direction change.
-This adds an experiment-only float32 numerical-rank truncation rule and compares
-a single intervention during update 401 with applying the same rule on every
-update. Both arms train fresh live objects through the public ParticleGAN API,
-with unchanged architecture, prior, seed, target batches, learning rates and full
-quality bounds.
+Ring16 full SVD normalization amplifies tiny backward differences into large matrix updates. This experiment applies a fixed float32 numerical-rank cutoff to G/D matrix directions, comparing one intervention at update 401 with every-step truncation while holding architecture, prior, initialization, batches, rates and gates fixed.
 
-The frozen protocol reserves two 1,600-update CUDA arms (600 seconds total), plus
-one zero-update saved-gradient CUDA probe (30 seconds). Smoke requires a full
-passing scheduled state and independent same-state confirmation; the historical
-five-terminal reducer remains a separate diagnostic. The runner retains full
-state on errors and produces actual-training GIFs from saved samples. Production
-defaults and qualification are unchanged.
+Every-step truncation passed independent smoke confirmation at update 684 and all 47 terminal observations through update 1,600 (final covariance error .589678, HQ .963623). Boundary-only had two isolated passing observations but failed independent confirmation and the five-terminal diagnostic. The saved-gradient CUDA probe reduced direction mismatch approximately 1,713-fold, with exact captured-factor parity and repeats.
 
-Validation: syntax/source bindings, static protocol checks, and fail-closed
-unavailable-CUDA guards. Training and algebra are unmeasured because this host
-has no CUDA device. GitHub publication is pending network access. See the
-[prospective report](reports/forge/ring16-truncation/README.md) and its verification
-receipt for the exact scope and reproduction commands.
+Validation: both fresh-live CUDA arms completed 1,600 updates; initial contexts, seen batches and the boundary's archived 400-state match; frozen source hashes and all scheduled observations verified. Includes compact metrics/provenance, actual-training GIFs and a verified local raw-artifact archive. Earlier blocked/static receipts remain intact. No retries, production default changes, retention spend or qualification credit.
+
+See [the report](reports/forge/ring16-truncation/README.md) for metrics, reproduction sources and limitations.

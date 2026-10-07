@@ -1,0 +1,732 @@
+{
+  "actual_execution_source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+  "arms": [
+    {
+      "any_full_pass": true,
+      "arm": "boundary_only",
+      "artifact_hashes": {
+        "acquisition-state.pt": "8ab6c6bfad65de9c695bfe36b638ce937acac1e21e18a5f6b33cec5d2fdd4b5b",
+        "actual-training.gif": "9468f14f911fefe8b61bfb97af55be4c9ae6ca7ac4ffa95523bbaa226255595a",
+        "confirmation-samples.pt": "76a22f55fb95297888fb76e6be06ea3beda2abdd3b436fbd14a9b38391abe61e",
+        "curve.json": "be0fe132c3e324c11d4877a618544efbcc02b22485ed60fb44c011451b60b664",
+        "initial-state.pt": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+        "observations.pt": "75c3cb54b3a01b57687200250959e2f65b28298ba01caf58ff23868eb7ea9810",
+        "prefix-state.pt": "8223223f38d0d7d88f3869888b5deee8d7ab74da4211991cae80ee2e04fc81d6",
+        "receipt.json": "2ef6c0bbc01e3b0f28aa5b9dafc9ba6359754f1709b0e1a73b39f0d6c8ab85e5",
+        "reservation.json": "1064a0764e4baefcb4eef166c57510db50016dcaee5bdc9d45087ea5c9507137",
+        "source.json": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22",
+        "state.pt": "bb2c0d8e22c753ac9baffa513b6f88766c8edc9dfcee73e9b08c170eb2c083ae"
+      },
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [
+          "component_covariance_error <= 0.85"
+        ],
+        "full_pass": false,
+        "metrics": {
+          "component_covariance_error": 1.0147978998720646,
+          "component_min_eigen_ratio": 0.39938345551490784,
+          "hq": 0.9443359375,
+          "mass_tv": 0.06396484375,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "999d375d4b0e84302a3552448e0c45f03d1f73246411fba4131bf26d26b90183",
+        "step": 1400
+      },
+      "confirmed_smoke": false,
+      "consumed_streams": [
+        {
+          "binding": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "key": "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "state_digest": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09"
+        },
+        {
+          "binding": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "key": "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "state_digest": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661"
+        },
+        {
+          "binding": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "e6b36aa4432585a65f3f3dd6066598650933eaadd8957cd8972877b382ac7e1e",
+            "purpose": "confirmation",
+            "seed": 8089247490965617658
+          },
+          "key": "[\"eval\",\"live\",\"confirmation\",\"cuda:0\"]",
+          "state_digest": "41b29be17e3308e2b05b92bfbd26fa74525397a8ac31f385e8d9c925507c752f"
+        },
+        {
+          "binding": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "key": "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "state_digest": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0"
+        },
+        {
+          "binding": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "key": "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "state_digest": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6"
+        },
+        {
+          "binding": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "key": "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "state_digest": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82"
+        },
+        {
+          "binding": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "key": "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "state_digest": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3"
+        },
+        {
+          "binding": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "key": "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "state_digest": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46"
+        },
+        {
+          "binding": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "key": "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "state_digest": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e"
+        },
+        {
+          "binding": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "key": "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "state_digest": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3"
+        },
+        {
+          "binding": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "key": "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "state_digest": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602"
+        },
+        {
+          "binding": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "key": "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "state_digest": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6"
+        },
+        {
+          "binding": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "key": "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "state_digest": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376"
+        },
+        {
+          "binding": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "key": "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "state_digest": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66"
+        },
+        {
+          "binding": {
+            "component": "ring16_intervention",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "aeb3fc6e375af9184440c0756f7a0103226a5ec797bb0fcf41ba1f43b73dc6ff",
+            "purpose": "weak_directions",
+            "seed": 3602424388014415426
+          },
+          "key": "[\"noise\",\"ring16_intervention\",\"weak_directions\",\"cuda:0\"]",
+          "state_digest": "8a15766c0209591ffca1bbc8de4e92d6c91b7b273ce0c6c0075f7fc393329558"
+        },
+        {
+          "binding": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          },
+          "key": "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]",
+          "state_digest": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+        }
+      ],
+      "elapsed_seconds": 21.800367005052976,
+      "error": null,
+      "final_context_digest": "f59fe88584732538455f836af15d8850d31076f14846ad7fe371f0b2208a839a",
+      "final_failed_bounds": [
+        "component_covariance_error <= 0.85"
+      ],
+      "final_metrics": {
+        "component_covariance_error": 1.3725859075784683,
+        "component_min_eigen_ratio": 0.36543142795562744,
+        "hq": 0.9306640625,
+        "mass_tv": 0.052734375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 1400,
+      "first_pass_metrics": {
+        "component_covariance_error": 0.8322094669565558,
+        "component_min_eigen_ratio": 0.3375402092933655,
+        "hq": 0.941162109375,
+        "mass_tv": 0.072265625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "five_terminal_verdict": "FAIL",
+      "full_passing_observations": 2,
+      "initial_context_digest": "108a78f284e3a7fbbc5e1ccb2c5bb6e03f2ee29d1f0a89edb832ec4614cb7451",
+      "intervention_calls": 6,
+      "longest_full_passing_streak": 1,
+      "prefix_identity": {
+        "candidate_projected_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+        "exact_except_new_stream_registration": true,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+        "origin_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "receipt_sha256": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22"
+      },
+      "status": "COMPLETE",
+      "terminal_suffix": 0
+    },
+    {
+      "any_full_pass": true,
+      "arm": "every_step",
+      "artifact_hashes": {
+        "acquisition-state.pt": "dbdaa35cbf9c78cf09c1c6f165d0b01041873db784c3e27fbe022697773deff1",
+        "actual-training.gif": "a4a9018a56ab73786a5c7d62aa7426e90779516cf52d97bdd78bd94f8e85d85a",
+        "confirmation-samples.pt": "9efb1a01b00ff691b10c843df6ddffcfd0fe7a42221adca25ea5f39c87ec6132",
+        "curve.json": "ca289830c84e42e775dc6530e485ecdfd69daee1fdeb62d4e188becbd6e7b7cd",
+        "initial-state.pt": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+        "observations.pt": "ae7232971fb54583561f515a7329624050d5e59cd106686c6524a90e50e42793",
+        "prefix-state.pt": "355bfaa4f38e458ac5bfe3813c370687863f20bc3135ab071296eeda36447608",
+        "receipt.json": "f6eaf2ad1a2918eb59c73e3fc12726a32f906cf6a89744a4dd04db8963e713b2",
+        "reservation.json": "1064a0764e4baefcb4eef166c57510db50016dcaee5bdc9d45087ea5c9507137",
+        "source.json": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22",
+        "state.pt": "923a8936a8f07057b9d13a0975d268cdec763811fcbf510d819e841df0cadd09"
+      },
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [],
+        "full_pass": true,
+        "metrics": {
+          "component_covariance_error": 0.8353303028270602,
+          "component_min_eigen_ratio": 0.5696465373039246,
+          "hq": 0.910400390625,
+          "mass_tv": 0.082275390625,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "5bcbc783d62559d08419f5d89a1a0806388e91a72e8bd85da7905a353ee06581",
+        "step": 684
+      },
+      "confirmed_smoke": true,
+      "consumed_streams": [
+        {
+          "binding": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "key": "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "state_digest": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09"
+        },
+        {
+          "binding": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "data",
+            "initial_state_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "key": "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "state_digest": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661"
+        },
+        {
+          "binding": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "e6b36aa4432585a65f3f3dd6066598650933eaadd8957cd8972877b382ac7e1e",
+            "purpose": "confirmation",
+            "seed": 8089247490965617658
+          },
+          "key": "[\"eval\",\"live\",\"confirmation\",\"cuda:0\"]",
+          "state_digest": "41b29be17e3308e2b05b92bfbd26fa74525397a8ac31f385e8d9c925507c752f"
+        },
+        {
+          "binding": {
+            "component": "live",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "5ba709b08c1e2f696fe367a48354b7a721af4b36cca6b0ce2f0c55bfc08017b7",
+            "purpose": "samples",
+            "seed": 9184284035506137832
+          },
+          "key": "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "state_digest": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0"
+        },
+        {
+          "binding": {
+            "component": "sampler",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "1696aa08e2307f28df002755027ee2e7b1999300dac2855f214caa1842a2b301",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "key": "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "state_digest": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6"
+        },
+        {
+          "binding": {
+            "component": "target",
+            "device": "cuda:0",
+            "family": "eval",
+            "initial_state_sha256": "62256bb6bacf4c865ddac69f1b9fa4bdb15a596e8ab2d706e9a56dfb136d52ef",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "key": "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "state_digest": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82"
+        },
+        {
+          "binding": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "key": "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "state_digest": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3"
+        },
+        {
+          "binding": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "key": "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "state_digest": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46"
+        },
+        {
+          "binding": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "init",
+            "initial_state_sha256": "be549c3d68d477f9d11434e663fdbefe2526571de4de86123a84ae9dc23e86a2",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "key": "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "state_digest": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e"
+        },
+        {
+          "binding": {
+            "component": "critic",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "2d5d779ef1c19f73abf72075c1cfeb70b935201245568680a1edc2c37cab0465",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "key": "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "state_digest": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3"
+        },
+        {
+          "binding": {
+            "component": "generator",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "9b325c7520a99d3d27a37b6ef50971e3bfa9f1b12caf5e7a8819ae7e692cfcc1",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "key": "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "state_digest": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602"
+        },
+        {
+          "binding": {
+            "component": "models",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "4c3a40416441f175f5294136bd6bc4582ecd9e17ff5b5ee0292338e228afeaee",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "key": "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "state_digest": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6"
+        },
+        {
+          "binding": {
+            "component": "penalty",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "7e3e442dbb5124abf6e6e1e6e81000ab789c8aa11578d6a6b88a72beadfa3c83",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "key": "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "state_digest": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376"
+        },
+        {
+          "binding": {
+            "component": "prior",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "46a0fb6a2510c83ebfa98bc289a73c096cc0fa24f40136bb998b0edecd8871e5",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "key": "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "state_digest": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66"
+        },
+        {
+          "binding": {
+            "component": "ring16_intervention",
+            "device": "cuda:0",
+            "family": "noise",
+            "initial_state_sha256": "aeb3fc6e375af9184440c0756f7a0103226a5ec797bb0fcf41ba1f43b73dc6ff",
+            "purpose": "weak_directions",
+            "seed": 3602424388014415426
+          },
+          "key": "[\"noise\",\"ring16_intervention\",\"weak_directions\",\"cuda:0\"]",
+          "state_digest": "8a15766c0209591ffca1bbc8de4e92d6c91b7b273ce0c6c0075f7fc393329558"
+        },
+        {
+          "binding": {
+            "component": "latent",
+            "device": "cuda:0",
+            "family": "prior",
+            "initial_state_sha256": "aa2f89742ac1d2c95ef3379ad9ba7a080c557c66258f9dff0dabf5d85a6db3cc",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          },
+          "key": "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]",
+          "state_digest": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+        }
+      ],
+      "elapsed_seconds": 24.13885239197407,
+      "error": null,
+      "final_context_digest": "b959577e0e90e3a0599ec0b2b9e91762243662d9fb6d397c6e764b6bb7503f99",
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.5896781794726849,
+        "component_min_eigen_ratio": 0.35003533959388733,
+        "hq": 0.963623046875,
+        "mass_tv": 0.06591796875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 684,
+      "first_pass_metrics": {
+        "component_covariance_error": 0.8084677802398801,
+        "component_min_eigen_ratio": 0.5825708508491516,
+        "hq": 0.90771484375,
+        "mass_tv": 0.080322265625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 52,
+      "initial_context_digest": "108a78f284e3a7fbbc5e1ccb2c5bb6e03f2ee29d1f0a89edb832ec4614cb7451",
+      "intervention_calls": 9600,
+      "longest_full_passing_streak": 47,
+      "prefix_identity": {
+        "candidate_projected_state_digest": "9d9acfcbbc50d12c123cdbaa0df0d8206c1d0a49c4bf85889df4472dc5d6c249",
+        "exact_except_new_stream_registration": false,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+        "origin_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "receipt_sha256": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22"
+      },
+      "status": "COMPLETE",
+      "terminal_suffix": 47
+    }
+  ],
+  "base_commit": "2859975707eb3ea4d31958ad1b03e9e148a53",
+  "budgets": {
+    "attempts": 2,
+    "controller_child_wall_seconds": 50.8011977589922,
+    "maximum_scoring_draws": 194,
+    "measured_training_seconds": 45.939219397027045,
+    "new_updates": 3200,
+    "probe_reserved_seconds": 30,
+    "probe_seconds": 1.270534249022603,
+    "reserved_updates": 3200,
+    "scientific_retries": 0,
+    "scoring_draws": 194,
+    "training_reserved_seconds": 600
+  },
+  "comparison_checks": {
+    "all_scheduled_observations_retained": true,
+    "both_completed_1600": true,
+    "boundary_prefix_exact": true,
+    "frozen_source_bindings_exact": true,
+    "initial_contexts_exact": true,
+    "old_blocked_verification_retained": "71db3d2378784ddd9509df977dd576944a68d1b621a1534d7bbf2ff80d8bb3c7",
+    "seen_target_batch_sequence_equal": true
+  },
+  "media": {
+    "entries": [
+      {
+        "arm": "boundary_only",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "9468f14f911fefe8b61bfb97af55be4c9ae6ca7ac4ffa95523bbaa226255595a",
+        "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "source_sha256": "75c3cb54b3a01b57687200250959e2f65b28298ba01caf58ff23868eb7ea9810"
+      },
+      {
+        "arm": "every_step",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "a4a9018a56ab73786a5c7d62aa7426e90779516cf52d97bdd78bd94f8e85d85a",
+        "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "source_sha256": "ae7232971fb54583561f515a7329624050d5e59cd106686c6524a90e50e42793"
+      }
+    ],
+    "model_forwards": 0,
+    "sampling_draws": 0,
+    "training_updates": 0
+  },
+  "physical_gpu": 0,
+  "probe": {
+    "ambient_rng_preserved": {
+      "cpu": true,
+      "cuda": true
+    },
+    "arms": {
+      "live": {
+        "discarded_directions": 6,
+        "finite": true,
+        "full_polar_matches_captured": true,
+        "input_digest": "39acdec91613f7de6fe7f446e2bc3d594d006e64263edeee7a72fb34a84dd3ec",
+        "retained_directions": 58,
+        "same_input_full_repeat_exact": true,
+        "same_input_truncation_repeat_exact": true,
+        "threshold": 2.122287469319417e-06,
+        "trace_sha256": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145"
+      },
+      "restart": {
+        "discarded_directions": 6,
+        "finite": true,
+        "full_polar_matches_captured": true,
+        "input_digest": "b380c47397f35a3e5c080ab869fecf9918b6bd55a63f8aa114bc55296d04cf34",
+        "retained_directions": 58,
+        "same_input_full_repeat_exact": true,
+        "same_input_truncation_repeat_exact": true,
+        "threshold": 2.122285877703689e-06,
+        "trace_sha256": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
+      }
+    },
+    "cuda_algebra_elapsed_seconds": 0.5028371789958328,
+    "cuda_compute_capability": [
+      8,
+      6
+    ],
+    "cuda_model": "NVIDIA RTX A6000",
+    "device": "cuda:0",
+    "dtype_conversion": false,
+    "elapsed_seconds": 1.270534249022603,
+    "full_polar": {
+      "max_absolute_difference": 0.539588212966919,
+      "relative_frobenius_difference": 0.2519904673099518
+    },
+    "mechanistic_falsifier": {
+      "criterion": "finite, exact repeats, captured full-factor parity, unchanged RNGs, and >=10x reduction in pair relative Frobenius difference",
+      "pass": true,
+      "quality_gate": false,
+      "required_reduction_factor": 10
+    },
+    "protocol_sha256": "4ee54aaca83e734c531a42e57905dc815b99b1371d4dbd1c113bd85d09895444",
+    "qualification_input": false,
+    "raw_gradient": {
+      "max_absolute_difference": 3.725290298461914e-09,
+      "relative_frobenius_difference": 1.0285653928576721e-07
+    },
+    "rng_draws": 0,
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    },
+    "sampling_draws": 0,
+    "schema_version": 1,
+    "scope": "fixed_saved401_truncation_cuda_algebra",
+    "source_sha256": "aa59a29e732fd1697195436d559f915fcdfb8dfe401f26dbceb0bc7981073258",
+    "status": "COMPLETE",
+    "threshold_rule": "max(rows,cols)*finfo(float32).eps*smax",
+    "trace_execution_sources": {
+      "live": {
+        "commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+        "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d"
+      },
+      "restart": {
+        "commit": "1de465e25252c10622965362cd593a899ce74f74",
+        "source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd"
+      }
+    },
+    "training_updates": 0,
+    "truncated_polar": {
+      "max_absolute_difference": 0.00015792250633239746,
+      "relative_frobenius_difference": 0.0001470709394197911
+    },
+    "within_30_second_allowance": true
+  },
+  "protocol_id": "ring16-spectral-truncation-v1",
+  "protocol_sha256": "4ee54aaca83e734c531a42e57905dc815b99b1371d4dbd1c113bd85d09895444",
+  "qualification_input": false,
+  "raw_local_roots": [
+    "/tmp/particlegan-ring16-truncation/runs/api/ring16-spectral-truncation-v1",
+    "/tmp/particlegan-ring16-truncation/runs/api/ring16-spectral-truncation-v1-algebra",
+    "/tmp/particlegan-ring16-truncation/runs/api/ring16-truncation-logs"
+  ],
+  "runtime": {
+    "cuda_runtime": "13.0",
+    "device": "cuda:0",
+    "gpu_capability": [
+      8,
+      6
+    ],
+    "gpu_model": "NVIDIA RTX A6000",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "saved_output_summary_compute": "CPU tensor-byte hashing, saved metric aggregation and media only; no model forwards, derivatives, optimization or CPU SVD.",
+  "schema_version": 1,
+  "scope": "completed_cuda_ring16_intervention_diagnostic"
+}

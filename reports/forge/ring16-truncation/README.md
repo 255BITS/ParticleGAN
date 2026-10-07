@@ -1,10 +1,12 @@
-# Ring16 weak-direction truncation: prospective CUDA experiment
+# Ring16 weak-direction truncation: CUDA results
 
-**Prepared; no truncation training or CUDA algebra results have been measured.**
-The current host has no available CUDA device. The source and protocol are ready
-for a supported GPU host; neural execution rejects a CPU fallback. This branch
-changes only experiment sources and declarations, leaving production defaults,
-task gates and published qualification unchanged.
+**Every-step truncation passed confirmed acquisition and the five-terminal
+diagnostic. The one-update intervention failed independent confirmation.** Both
+frozen arms completed 1,600 fresh-live CUDA updates on an RTX A6000. The saved
+gradient probe passed and reduced the live/reloaded direction discrepancy about
+1,713-fold. Production defaults, task gates and published qualification remain
+unchanged. The earlier unavailable-CUDA [verification](verification.json) is
+preserved as its original static preparation receipt.
 
 The [PR331 reproduction](https://github.com/255BITS/ParticleGAN/blob/49f041708931d06319213069be060f91f8ba9fb2/reports/forge/ring16-failure/REPRODUCTION.md)
 located the first live-versus-restored difference in critic backward gradients
@@ -15,6 +17,62 @@ printed final covariance error `2.220268` and no full passing state; its origina
 receipt remains INCOMPLETE after a final metadata error. Restoring that same
 400-state passed with covariance error `.514315` and six terminal passes. These
 original results keep their source and runtime identities; no baseline is rerun.
+
+## Measured results
+
+These are unranked diagnostic outcomes under the [frozen protocol](protocol.json),
+with [compact metrics and provenance](results.json), [CUDA algebra receipt](probe-results.json)
+and [verified raw archive](archive.json). Execution source was
+`ca69cabc2801744a7f99b8c601af98ba68a9e639`, based on develop `2859975`;
+source digest `95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940`.
+The later publication commit is not the training source.
+
+| Schedule | First full pass | Independent confirmation | Full passes / 96 | Longest / terminal streak | Final covariance error / HQ | Five terminal checks |
+| --- | ---: | --- | ---: | ---: | --- | --- |
+| Boundary only at 401 | 1,400 | **FAIL**, covariance 1.014798 | 2 | 1 / 0 | 1.372586 / .930664 | **FAIL** |
+| Every step | 684 | **PASS**, covariance .835330 | 52 | 47 / 47 | .589678 / .963623 | **PASS** |
+
+Both arms' initial contexts and all 1,600 seen target batches match exactly.
+The boundary-only live 400-state matches the original archived context exactly
+except for the two explicitly registered new streams. It was never restored
+into the learner. Neither candidate resets its optimizer, changes learning
+rates, or loads a checkpoint during training. All 96 scheduled observations per
+arm are retained, with one independent confirmation at each first full pass.
+The boundary confirmation failure is final under this protocol; later passing
+states were not given another confirmation attempt. Covariance was the only
+failed bound on its confirmation and final observation.
+
+The saved CUDA hidden-gradient probe retained 58 directions and removed six on
+both inputs. Relative Frobenius discrepancy fell from `.2519904673` with full
+polar to `.00014707094` with truncation. Captured full factors matched exactly;
+identical-input repeats were exact, outputs were finite, and ambient CPU/CUDA
+RNG states were unchanged. This passes the declared tenfold mechanistic gate.
+It establishes reduced amplification for this saved pair, independently of the
+quality results.
+
+Training consumed 3,200 updates, 194 evaluation draws and 45.94 measured training
+seconds (50.80 controller child-wall seconds); the zero-update probe took 1.27
+seconds. Reserved ceilings were 600 training seconds plus 30 probe seconds.
+There were no retries, seed changes, additional training or retention runs.
+
+![Boundary-only actual training](boundary_only.gif)
+
+![Every-step actual training](every_step.gif)
+
+The [media index](media-index.json) binds nine observed frames per arm to the
+exact saved sample arrays and execution commit. Rendering used those saved CUDA
+outputs on CPU with zero model forwards or new draws.
+
+Every-step truncation is a promising constant-rate acquisition candidate in this
+fixed Ring16 diagnostic: all 47 observations from update 834 through 1,600 pass.
+The terminal five-check result supplies evidence within this budget, not a
+continuous-learning retention qualification. A separately declared retention
+study is the next scientific question if this rule is pursued. The isolated
+boundary intervention shows that removing weak directions once can change the
+trajectory, but it did not meet the independent smoke requirement. Neither
+outcome identifies the original restart's exact execution-order mechanism or
+establishes a global default across tasks. Keep this report outside the current
+technique inventory's qualification totals.
 
 ## Declared change and schedules
 
@@ -90,7 +148,7 @@ the actual state/error/cost. A passing diagnostic does not qualify a family.
 Retention requires a separately declared tier-2 task and budget; this protocol
 does not launch it automatically.
 
-## Execute and publish
+## Reproduce the frozen execution
 
 The shared [public-API runner](../../../benchmarks/toy_audit/ring16_interventions.py)
 owns construction, training, scoring, checkpoint retention and saved-output GIF
@@ -124,17 +182,17 @@ python -m benchmarks.toy_audit.ring16_interventions render \
   --output runs/api/ring16-spectral-truncation-v1
 ```
 
-The run and probe directories are exclusive; do not rerun consumed arms. Raw
+These commands identify the completed execution. The local run and probe
+directories are consumed and exclusive; do not rerun or replace them. Raw
 stdout, checkpoints, tensors and metric streams remain ignored under `runs/api`.
 The probe validates its frozen source bindings before starting and preserves an
 INCOMPLETE receipt if a Python exception occurs after reserving its directory.
-After execution, publish compact receipts, provenance and actual-training GIFs
-from saved observations. No candidate GIF exists before training. The
-[verification receipt](verification.json) records static checks and unavailable
-GPU measurements. Keep the [current technique inventory](../technique-inventory.md)
+The completed receipts, provenance and actual-training GIFs above derive from
+saved observations. The [verification receipt](verification.json) retains the
+earlier static checks and unavailable GPU state; [results](results.json) records
+the later restored-CUDA execution. Keep the [current technique inventory](../technique-inventory.md)
 as the sole generated goal leaderboard; these diagnostic rows remain unranked.
 
-The next decision comes from the two measured outcomes: preserve a negative
-result, investigate continuous truncation after a confirmed smoke success, or
-retain a boundary-only success as a path-selection diagnostic. Neither schedule
-should become a production default from a single Ring16 result.
+Recommendation: preserve the boundary-only confirmation failure and pursue the
+every-step rule only through a separately bounded retention comparison. Neither
+schedule should become a production default from this single Ring16 diagnostic.
