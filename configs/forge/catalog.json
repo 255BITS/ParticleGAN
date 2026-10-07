@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 80,
+      "benchmark/toy_audit": 83,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -101,7 +101,7 @@
       "candidate_implementation": 17,
       "candidate_patch": 26,
       "configuration": 807,
-      "driver": 403,
+      "driver": 405,
       "engine_support": 84,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1538,
+      "support": 1539,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11774
+    "files": 11777
   },
   "coverage": {
-    "declared_count": 11774,
+    "declared_count": 11777,
     "missing": [],
     "stale": [],
-    "tracked_count": 11774,
+    "tracked_count": 11777,
     "unclassified": [],
     "valid": true
   },
@@ -1250,6 +1250,13 @@
     },
     {
       "family": "benchmark/toy_audit",
+      "git_blob": "f2b13aebc7145bf990fb4d8ad11e0b034df2b6ad",
+      "path": "benchmarks/toy_audit/ring16_interventions.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
       "git_blob": "6dd3a057c97db254600cdcbc666e0474b604fb10",
       "path": "benchmarks/toy_audit/ring16_publish.py",
       "role": "support",
@@ -1261,6 +1268,24 @@
       "path": "benchmarks/toy_audit/ring16_quality.py",
       "role": "support",
       "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "80eab752dd9614fb8eca265eaff512f72d36294e",
+      "path": "benchmarks/toy_audit/ring16_serialized_truncation.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "8156cb861943c8c9919abcbf53c72e946786b1fe",
+      "path": "benchmarks/toy_audit/ring16_spectral_truncation.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
     },
     {
       "family": "benchmark/toy_audit",
