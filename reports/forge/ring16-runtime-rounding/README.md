@@ -17,6 +17,12 @@ No neural experiment ran in this investigation: CUDA is unavailable in the
 current execution environment. CPU work only inspects saved tensors and source.
 The original Ring16 PASS/FAIL outcomes and current inventory remain unchanged.
 
+On the user's request to execute, the exact CUDA-only campaign command was
+actually invoked and refused before any arm or output directory was created.
+The [execution-blocker receipt](execution-blocker.json) preserves its command,
+source/protocol hashes and local stdout/stderr hash: **zero scientific attempts,
+updates or scored draws**. The four-arm campaign remains unconsumed.
+
 ## Saved numerical findings
 
 The [saved-only analyzer](analyze_saved.py) reproduces the following results from
@@ -65,6 +71,14 @@ caller's autograd multithreading setting. Legacy checkpoints do not preserve
 that ambient setting. The BCAP update combines the logistic game gradient and
 two penalty branches computed with `torch.autograd.grad(create_graph=True)`.
 The final `loss_d.backward()` merges contributions from this higher-order graph.
+
+The concrete hypothesis is that rebuilding runtime objects changes the order
+in which those contributions are added to the same critic weight gradient.
+Floating-point addition rounds after each operation, so changing the order can
+change the final few bits even when every input, weight and forward value is
+identical. The measured SVD normalization can then magnify those few bits in
+almost-zero singular directions. This explains how the observed pattern could
+arise; it does not identify the responsible engine operation.
 
 Locally installed PyTorch 2.14 engine headers order ready nodes using sequence
 numbers; their input buffer explicitly accumulates multiple contributions.
@@ -120,6 +134,11 @@ acquisition/4,000-update continuous stability. If ordinary diagnostic gradients
 do not reproduce the archived ones, report a new instrumentation/runtime cohort
 and withhold historical causal attribution.
 
+The causal test is therefore **UNTESTED**. Exact equality of the serial pair
+would isolate the update-401 discrepancy to the changed execution constraint;
+following the resulting states to 1,600 would still be necessary to establish
+whether that one boundary intervention explains the full-quality PASS.
+
 For a continuous learner, setting the public `serial_backward=True` **from the
 start and on every step** is a separate global trainer candidate worth evaluating
 after this control. Its fresh trajectory differs, and its checkpoint mode must
@@ -129,13 +148,26 @@ No all-step candidate or conversion arm is declared or paid in this campaign.
 
 ## Execution and limitations
 
-Use a new empty output root on a CUDA host:
+The current process has no NVIDIA device nodes. The parent host inspection found
+an installed NVIDIA kernel module and a loadable `libcuda.so.1`, but `cuInit(0)`
+returned `100` (`CUDA_ERROR_NO_DEVICE`). Its mount inspection found `/dev`
+overlaid by a `nodev` tmpfs. PyTorch reports zero CUDA devices and
+`torch.cuda.init()` reports “No CUDA GPUs are available”; `nvidia-smi` cannot
+communicate with a GPU. This identifies missing GPU exposure in this execution
+namespace, without establishing a driver installation failure. The exact parent
+inspection identity is retained in the blocker receipt. Device/mount/driver
+changes were not attempted.
+
+Use the unchanged, unconsumed protocol from this branch on a CUDA host. Its output
+root must be absent; it is still absent after the failed preflight:
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 python -u \
+mkdir -p runs/reports/ring16-runtime-rounding
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -u \
   -m benchmarks.toy_audit.ring16_runtime_rounding run \
-  --prior-root /path/to/ring16-restart-diagnostic-v1 \
+  --prior-root /home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1 \
   --output runs/api/ring16-runtime-rounding-v1 \
+  --device cuda:0 \
   > runs/reports/ring16-runtime-rounding/cuda.log 2>&1
 tail -F runs/reports/ring16-runtime-rounding/cuda.log
 ```

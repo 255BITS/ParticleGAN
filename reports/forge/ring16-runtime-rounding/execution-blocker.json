@@ -1,0 +1,99 @@
+{
+  "command": "CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -u -m benchmarks.toy_audit.ring16_runtime_rounding run --output runs/api/ring16-runtime-rounding-v1 --prior-root /home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1 --device cuda:0",
+  "command_exit_code": 1,
+  "command_invocations": 1,
+  "cpu_neural_execution": false,
+  "error": "RuntimeError: CUDA is required; no CPU neural fallback",
+  "failure_stage": "main CUDA preflight before read_protocol/execute and before output/arm creation",
+  "frozen_bindings_verified": {
+    "benchmarks/toy_audit/ring16_runtime_rounding.py": {
+      "actual": "b8c86dad9e55b4581fea32d391a3e25f8d1867c7a86ea2fae8fa3984d14e2623",
+      "expected": "b8c86dad9e55b4581fea32d391a3e25f8d1867c7a86ea2fae8fa3984d14e2623"
+    },
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": {
+      "actual": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+      "expected": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200"
+    },
+    "configs/forge/tasks/ring16_acquisition.json": {
+      "actual": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+      "expected": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+    },
+    "experiments/forge/api.py": {
+      "actual": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938",
+      "expected": "0c4019807cb5a1b042a1f7967215b2c497b176e755bf105e65a7e2bba2cf5938"
+    },
+    "particlegan/grad_regularizers.py": {
+      "actual": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "expected": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan/optim/dualnorm.py": {
+      "actual": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12",
+      "expected": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12"
+    },
+    "particlegan/training.py": {
+      "actual": "b3d334e1fb378f3d77226daedc03a7cef4bdf4265082531628863e48a69d5a33",
+      "expected": "b3d334e1fb378f3d77226daedc03a7cef4bdf4265082531628863e48a69d5a33"
+    }
+  },
+  "host_preflight_observations": {
+    "explicit_cuda_init_error": "RuntimeError: No CUDA GPUs are available",
+    "note": "These observations come from earlier actual tool commands in this turn; the exact neural runner stdout/stderr is retained in log.",
+    "nvidia_smi_error": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "nvidia_smi_exit_code": 9,
+    "parent_inspection": {
+      "cuInit_0_error_name": "CUDA_ERROR_NO_DEVICE",
+      "cuInit_0_return_code": 100,
+      "dev_mount": "tmpfs overlay with nodev; original /dev hidden and NVIDIA nodes absent",
+      "interpretation": "Missing GPU exposure in this execution namespace; kernel-module metadata and CUDA library exist. No evidence requiring driver reinstallation.",
+      "libcuda_so_1_loadable": true,
+      "proc_driver_nvidia_version_module_version": "610.57.04",
+      "source": {
+        "binding_verified": true,
+        "neural_updates": 0,
+        "receipt_path": "/home/martyn/dev/ParticleGAN/runs/software/ring16-followup/gpu-exposure-20261007/receipt.json",
+        "receipt_sha256": "0551246772ba5e29d0421fcdd19bbb3fa0a012feb52f2f80d0922f1d45f35c34"
+      }
+    }
+  },
+  "log": {
+    "bytes": 493,
+    "path": "/tmp/particlegan-ring16-runtime/runs/reports/ring16-runtime-rounding/cuda-execution-20261007.log",
+    "sha256": "319d3eb93699f0b179ab3e5c882c977a376fd65b21945b396465cc1da129741a"
+  },
+  "meaning": "No accumulation-order result: command refused before any scientific arm. The four-arm frozen campaign remains wholly unconsumed.",
+  "new_model_calls": 0,
+  "new_neural_updates": 0,
+  "new_scoring_draws": 0,
+  "next_action": "Execute this same unconsumed protocol when CUDA access is repaired. Do not treat the current refusal as a paid arm, scientific failure or basis for CPU replacement.",
+  "output_root_created": false,
+  "protocol_id": "ring16-runtime-rounding-v1",
+  "protocol_sha256": "9996256e5964d7aab7400c368c9ea10ce68e6d6e76e4189fb932357b0248ee7b",
+  "protocol_status_unchanged": "ready",
+  "qualification_input": false,
+  "recorded_at_utc": "2026-10-07T17:44:11.258098+00:00",
+  "required_dependency": "A real CUDA GPU exposed in this execution namespace with accessible NVIDIA device nodes; this is not a demonstrated driver installation failure.",
+  "reserved_seconds_debit": 0,
+  "runtime": {
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "nvidia_device_paths": [
+      "/dev/nvidia-caps"
+    ],
+    "torch_compiled_cuda_version": "13.0",
+    "torch_version": "2.14.0+cu130"
+  },
+  "schema_version": 1,
+  "scientific_execution_attempts": 0,
+  "scope": "cuda_runtime_boundary_preflight_refusal",
+  "source_commit": "862e4b4a1c532bd702d54ab349133f17f265f849",
+  "source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+  "status": "BLOCKED",
+  "unexecuted_arms": [
+    "fresh_graph",
+    "fresh_serial401",
+    "restored_graph",
+    "restored_serial401"
+  ],
+  "updates_debit": 0,
+  "working_directory": "/tmp/particlegan-ring16-runtime"
+}

@@ -17,6 +17,15 @@ and unexecuted peer statuses without retries.
 
 Validation: saved-tensor analysis, Python syntax, frozen bindings and mocked
 controller timeout/failure/success accounting checks with zero model calls.
-CUDA neural execution is blocked by unavailable driver; no CPU fallback, new
+CUDA neural execution is blocked by unavailable GPU exposure; no CPU fallback, new
 training PASS or actual-training GIF is claimed. Publication is pending network
 access.
+
+The requested CUDA campaign was actually invoked and exited at its CUDA
+preflight, before any arm or output directory was created. Its command, source
+bindings and local stderr hash are retained in `execution-blocker.json`.
+Kernel-driver metadata is present, but this process has no NVIDIA device nodes
+and `cuInit(0)` returns CUDA_ERROR_NO_DEVICE. The blocker is GPU exposure in
+the execution namespace; no driver-reinstall conclusion is justified. Zero
+scientific attempts or updates were consumed, and the boundary hypothesis
+remains UNTESTED.
