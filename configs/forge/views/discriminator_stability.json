@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 6,
+  "revision": 7,
   "goal": "discriminator_stability",
   "assignments": [
     {
       "importance": "required",
       "order": 0,
       "qualification_tier": 1,
-      "task": "gaussian1d_acquisition"
+      "task": "gaussian1d_smoke"
     },
     {
       "importance": "required",
@@ -41,116 +41,122 @@
       "task": "five_word_joint_acquisition"
     },
     {
-      "importance": "required",
-      "order": 0,
+      "task": "gaussian1d_stability",
       "qualification_tier": 2,
-      "task": "trajectory"
+      "importance": "required",
+      "order": 0
     },
     {
       "importance": "required",
       "order": 1,
       "qualification_tier": 2,
-      "task": "residual_student"
+      "task": "trajectory"
     },
     {
       "importance": "required",
       "order": 2,
       "qualification_tier": 2,
-      "task": "unipolar"
+      "task": "residual_student"
     },
     {
       "importance": "required",
       "order": 3,
       "qualification_tier": 2,
-      "task": "cover_leftover"
+      "task": "unipolar"
     },
     {
       "importance": "required",
       "order": 4,
       "qualification_tier": 2,
-      "task": "mid_scale_identity"
+      "task": "cover_leftover"
     },
     {
       "importance": "required",
       "order": 5,
       "qualification_tier": 2,
-      "task": "mode_hold"
+      "task": "mid_scale_identity"
     },
     {
       "importance": "required",
       "order": 6,
       "qualification_tier": 2,
-      "task": "vector_two_broad"
+      "task": "mode_hold"
     },
     {
       "importance": "required",
       "order": 7,
       "qualification_tier": 2,
-      "task": "vector_unequal_mass"
+      "task": "vector_two_broad"
     },
     {
       "importance": "required",
       "order": 8,
       "qualification_tier": 2,
-      "task": "vector_unequal_width"
+      "task": "vector_unequal_mass"
     },
     {
       "importance": "required",
       "order": 9,
       "qualification_tier": 2,
-      "task": "vector_anisotropic"
+      "task": "vector_unequal_width"
     },
     {
       "importance": "required",
       "order": 10,
       "qualification_tier": 2,
-      "task": "vector_overlap"
+      "task": "vector_anisotropic"
     },
     {
       "importance": "required",
       "order": 11,
       "qualification_tier": 2,
-      "task": "vector_spiral"
+      "task": "vector_overlap"
     },
     {
       "importance": "required",
       "order": 12,
       "qualification_tier": 2,
-      "task": "img_stripes2"
+      "task": "vector_spiral"
     },
     {
       "importance": "required",
       "order": 13,
       "qualification_tier": 2,
-      "task": "img_bars4"
+      "task": "img_stripes2"
     },
     {
       "importance": "required",
       "order": 14,
       "qualification_tier": 2,
-      "task": "img_blobs4"
+      "task": "img_bars4"
     },
     {
       "importance": "required",
       "order": 15,
       "qualification_tier": 2,
-      "task": "img_intensity2"
+      "task": "img_blobs4"
     },
     {
       "importance": "required",
       "order": 16,
       "qualification_tier": 2,
-      "task": "grid100"
+      "task": "img_intensity2"
     },
     {
       "importance": "required",
       "order": 17,
       "qualification_tier": 2,
-      "task": "rotated100"
+      "task": "grid100"
     },
     {
       "importance": "required",
       "order": 18,
+      "qualification_tier": 2,
+      "task": "rotated100"
+    },
+    {
+      "importance": "required",
+      "order": 19,
       "qualification_tier": 2,
       "task": "staggered100"
     },
@@ -176,12 +182,12 @@
   "eligibility": {},
   "calibration": {
     "status": "provisional",
-    "adoption_blocker": "Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit."
+    "adoption_blocker": "Revision7 smoke/stability separation is provisional and requires bounded calibration before default adoption. Historical Gaussian acquisition evidence retains its original sigma.025 cohort and five-terminal gate."
   },
   "ranking": {
     "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Revision 6 adopts the user-selected ring16 task conditions: 256 learned particles, MoG sigma .1 and 1600 updates, with the unchanged full numerical bounds and original evaluation spacing (96 checks). The other tasks and placements stay fixed. Earlier revisions and receipts retain their original task/source identities; the duration diagnostic does not upgrade archived qualification or calibrate the view."
+  "policy_change_reason": "User-requested can-it-pass Tier1 smoke with independent same-state confirmation; continuous stationary retention and shifted reacquisition belong to Tier2. New explicit Gaussian tasks adopt learned256MoG sigma .1. Original gaussian1d_acquisition and all historical receipts retain unchanged identities and grades."
 }
