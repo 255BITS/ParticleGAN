@@ -1,0 +1,396 @@
+{
+  "device": "cuda:0",
+  "model_sampling_draws": 0,
+  "protocol_sha256": "bd3ab3141ae30538667bfe43d3eebfce38124038cdc138e1159fb4ee77b43f59",
+  "public_field_backward_calls": 2,
+  "results": [
+    {
+      "initial_state_restored_exactly": true,
+      "parameters": [
+        {
+          "direction_norm": 0.5134935975074768,
+          "gradient_norm": 0.012837337329983711,
+          "implied_parameter_motion": 0.0061619231700897215,
+          "largest_singular": 0.009998183697462082,
+          "mean_singular_motion_fraction": 0.09025057405233383,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.0.weight",
+          "shape": [
+            32,
+            2
+          ],
+          "singular_values": 2,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.00805193092674017
+        },
+        {
+          "direction_norm": 0.2553058862686157,
+          "gradient_norm": 0.02553059160709381,
+          "implied_parameter_motion": 0.0030636706352233888,
+          "largest_singular": 0.02553059160709381,
+          "mean_singular_motion_fraction": 0.2553059160709381,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.0.bias",
+          "shape": [
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.02553059160709381
+        },
+        {
+          "direction_norm": 1.0294742584228516,
+          "gradient_norm": 0.15390925109386444,
+          "implied_parameter_motion": 0.012353691101074218,
+          "largest_singular": 0.1519535928964615,
+          "mean_singular_motion_fraction": 0.04383423179388046,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.2.weight",
+          "shape": [
+            32,
+            32
+          ],
+          "singular_values": 32,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 6.206772292308149e-13
+        },
+        {
+          "direction_norm": 0.7232314944267273,
+          "gradient_norm": 0.07232315093278885,
+          "implied_parameter_motion": 0.008678777933120727,
+          "largest_singular": 0.07232315093278885,
+          "mean_singular_motion_fraction": 0.7232314944267273,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.2.bias",
+          "shape": [
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.07232315093278885
+        },
+        {
+          "direction_norm": 1.0,
+          "gradient_norm": 0.16923737525939941,
+          "implied_parameter_motion": 0.012,
+          "largest_singular": 0.1692373901605606,
+          "mean_singular_motion_fraction": 1.0,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.4.weight",
+          "shape": [
+            1,
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.1692373901605606
+        },
+        {
+          "direction_norm": 1.0,
+          "gradient_norm": 0.19317734241485596,
+          "implied_parameter_motion": 0.012,
+          "largest_singular": 0.19317734241485596,
+          "mean_singular_motion_fraction": 1.0,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.4.bias",
+          "shape": [
+            1
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.19317734241485596
+        },
+        {
+          "direction_norm": 3.054859161376953,
+          "gradient_norm": 0.19399000704288483,
+          "implied_parameter_motion": 0.05498746490478516,
+          "largest_singular": 0.18179838359355927,
+          "mean_singular_motion_fraction": 0.3846534788608551,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.0.weight",
+          "shape": [
+            32,
+            5
+          ],
+          "singular_values": 5,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.00477259187027812
+        },
+        {
+          "direction_norm": 0.718729555606842,
+          "gradient_norm": 0.07187295705080032,
+          "implied_parameter_motion": 0.012937132000923158,
+          "largest_singular": 0.07187295705080032,
+          "mean_singular_motion_fraction": 0.718729555606842,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.0.bias",
+          "shape": [
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.07187295705080032
+        },
+        {
+          "direction_norm": 1.4604793787002563,
+          "gradient_norm": 0.5194828510284424,
+          "implied_parameter_motion": 0.02628862881660462,
+          "largest_singular": 0.4995705187320709,
+          "mean_singular_motion_fraction": 0.08372966945171356,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.2.weight",
+          "shape": [
+            32,
+            32
+          ],
+          "singular_values": 32,
+          "singular_values_above_cap": 2,
+          "smallest_singular": 9.508915876921264e-11
+        },
+        {
+          "direction_norm": 1.0,
+          "gradient_norm": 0.1368086189031601,
+          "implied_parameter_motion": 0.018000000000000002,
+          "largest_singular": 0.1368086189031601,
+          "mean_singular_motion_fraction": 1.0,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.2.bias",
+          "shape": [
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.1368086189031601
+        },
+        {
+          "direction_norm": 1.0,
+          "gradient_norm": 0.41000816226005554,
+          "implied_parameter_motion": 0.018000000000000002,
+          "largest_singular": 0.41000819206237793,
+          "mean_singular_motion_fraction": 1.0,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.4.weight",
+          "shape": [
+            1,
+            32
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.41000819206237793
+        },
+        {
+          "direction_norm": 0.0,
+          "gradient_norm": 0.0,
+          "implied_parameter_motion": 0.0,
+          "largest_singular": 0.0,
+          "mean_singular_motion_fraction": 0.0,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.4.bias",
+          "shape": [
+            1
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.0
+        }
+      ],
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "initial_state_restored_exactly": true,
+      "parameters": [
+        {
+          "direction_norm": 0.21935175359249115,
+          "gradient_norm": 0.005483794491738081,
+          "implied_parameter_motion": 0.002632221043109894,
+          "largest_singular": 0.0051859524101018906,
+          "mean_singular_motion_fraction": 0.02026212215423584,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.0.weight",
+          "shape": [
+            64,
+            4
+          ],
+          "singular_values": 4,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.0006057374412193894
+        },
+        {
+          "direction_norm": 0.024016745388507843,
+          "gradient_norm": 0.0024016746319830418,
+          "implied_parameter_motion": 0.0002882009446620941,
+          "largest_singular": 0.0024016746319830418,
+          "mean_singular_motion_fraction": 0.024016745388507843,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.0.bias",
+          "shape": [
+            64
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.0024016746319830418
+        },
+        {
+          "direction_norm": 0.24183903634548187,
+          "gradient_norm": 0.02418355643749237,
+          "implied_parameter_motion": 0.0029020684361457825,
+          "largest_singular": 0.021983180195093155,
+          "mean_singular_motion_fraction": 0.006824098527431488,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.2.weight",
+          "shape": [
+            64,
+            64
+          ],
+          "singular_values": 64,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 9.872628409235418e-11
+        },
+        {
+          "direction_norm": 0.04940170794725418,
+          "gradient_norm": 0.004940170794725418,
+          "implied_parameter_motion": 0.0005928204953670502,
+          "largest_singular": 0.004940170794725418,
+          "mean_singular_motion_fraction": 0.04940170794725418,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.2.bias",
+          "shape": [
+            64
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.004940170794725418
+        },
+        {
+          "direction_norm": 0.30194711685180664,
+          "gradient_norm": 0.030194714665412903,
+          "implied_parameter_motion": 0.00362336540222168,
+          "largest_singular": 0.028864488005638123,
+          "mean_singular_motion_fraction": 0.1886400580406189,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.4.weight",
+          "shape": [
+            2,
+            64
+          ],
+          "singular_values": 2,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.008863525465130806
+        },
+        {
+          "direction_norm": 0.12345908582210541,
+          "gradient_norm": 0.012345909141004086,
+          "implied_parameter_motion": 0.001481509029865265,
+          "largest_singular": 0.012345909141004086,
+          "mean_singular_motion_fraction": 0.123459093272686,
+          "nominal_rate": 0.012,
+          "parameter": "G.net.4.bias",
+          "shape": [
+            2
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.012345909141004086
+        },
+        {
+          "direction_norm": 3.4501914978027344,
+          "gradient_norm": 0.16577717661857605,
+          "implied_parameter_motion": 0.06210344696044923,
+          "largest_singular": 0.13741321861743927,
+          "mean_singular_motion_fraction": 0.288688600063324,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.0.weight",
+          "shape": [
+            64,
+            10
+          ],
+          "singular_values": 10,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.0022781300358474255
+        },
+        {
+          "direction_norm": 0.4646468460559845,
+          "gradient_norm": 0.04646468535065651,
+          "implied_parameter_motion": 0.008363643229007721,
+          "largest_singular": 0.04646468535065651,
+          "mean_singular_motion_fraction": 0.4646468460559845,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.0.bias",
+          "shape": [
+            64
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.04646468535065651
+        },
+        {
+          "direction_norm": 1.9363168478012085,
+          "gradient_norm": 0.40260079503059387,
+          "implied_parameter_motion": 0.03485370326042176,
+          "largest_singular": 0.3400050699710846,
+          "mean_singular_motion_fraction": 0.07577921450138092,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.2.weight",
+          "shape": [
+            64,
+            64
+          ],
+          "singular_values": 64,
+          "singular_values_above_cap": 2,
+          "smallest_singular": 5.363577984529577e-11
+        },
+        {
+          "direction_norm": 0.871396005153656,
+          "gradient_norm": 0.08713959902524948,
+          "implied_parameter_motion": 0.01568512809276581,
+          "largest_singular": 0.08713959902524948,
+          "mean_singular_motion_fraction": 0.871396005153656,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.2.bias",
+          "shape": [
+            64
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.08713959902524948
+        },
+        {
+          "direction_norm": 0.9999999403953552,
+          "gradient_norm": 0.35995957255363464,
+          "implied_parameter_motion": 0.017999998927116397,
+          "largest_singular": 0.35995957255363464,
+          "mean_singular_motion_fraction": 1.0,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.4.weight",
+          "shape": [
+            1,
+            64
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 1,
+          "smallest_singular": 0.35995957255363464
+        },
+        {
+          "direction_norm": 0.0,
+          "gradient_norm": 0.0,
+          "implied_parameter_motion": 0.0,
+          "largest_singular": 0.0,
+          "mean_singular_motion_fraction": 0.0,
+          "nominal_rate": 0.018000000000000002,
+          "parameter": "D.net.4.bias",
+          "shape": [
+            1
+          ],
+          "singular_values": 1,
+          "singular_values_above_cap": 0,
+          "smallest_singular": 0.0
+        }
+      ],
+      "task": "ring16_acquisition"
+    }
+  ],
+  "scale": 0.1,
+  "scale_changed_after_audit": false,
+  "scope": "separate_initial_field_diagnostic",
+  "training_updates": 0
+}

@@ -174,6 +174,10 @@ class Recipe:
     optimizer_momentum: float = 0.0
     # GANTrainer joint-field control and Gidel et al. equations 20–21.
     game_update: str = "alternating"
+    # Fixed-scale spectral clipping shrinks G/D motion with the gradient.
+    # Learned prior rows retain their existing unit-normalized rule.
+    network_update: str = "dualnorm"
+    network_gradient_scale: float = .1
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -201,6 +205,15 @@ class Recipe:
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
         from .optim.dualnorm import NORMALIZED_FAMILIES
+        if self.network_update not in ("dualnorm", "spectral_capped"):
+            raise ValueError("unknown network_update")
+        if (type(self.network_gradient_scale) not in (int, float)
+                or not math.isfinite(self.network_gradient_scale) or self.network_gradient_scale <= 0):
+            raise ValueError("network_gradient_scale must be finite and positive")
+        if self.network_update != "dualnorm" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0):
+            raise ValueError("spectral capped networks require zero-momentum dualnorm")
+        if self.network_update == "dualnorm" and self.network_gradient_scale != .1:
+            raise ValueError("network_gradient_scale requires spectral_capped network_update")
         if self.game_update not in ("alternating", "simultaneous", "extrapolation_from_past"):
             raise ValueError("unknown game_update")
         if self.game_update != "alternating":

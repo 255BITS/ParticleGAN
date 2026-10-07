@@ -1,0 +1,42 @@
+{
+  "api_changes": [
+    "Public Recipe network spectral cap preserves tiny singular-value magnitude; learned prior rownorm is unchanged; exact past preview shares the direction helper."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.network_update=spectral_capped",
+    "Recipe.network_gradient_scale=0.1",
+    "Recipe.game_update=simultaneous"
+  ],
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-network-spectral-cap-simultaneous-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "G/D matrices use U diag(min(s/0.1,1)) Vt times original aspect factor; biases use g/max(norm(g),0.1). All timing arms retain learned row-normalized prior and constant nominal rates. Fixed scale shared across roles/tasks; no time or success-checkpoint calibration.",
+  "parent": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "prior_art": [
+    "https://arxiv.org/pdf/1802.10551",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_family": "dualnorm",
+    "prior_lr_mult": 2.5,
+    "game_update": "simultaneous",
+    "network_update": "spectral_capped",
+    "network_gradient_scale": 0.1
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  }
+}
