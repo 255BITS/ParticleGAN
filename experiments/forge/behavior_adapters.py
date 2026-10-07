@@ -2,8 +2,8 @@
 
 The existing hosts retain their data, objectives, and measurement loops. Their
 explicit ``components`` argument replaces construction/update primitives once;
-there is no copied training loop and no global optimizer patch. These small CPU
-hosts are separate from the scalar GANTrainer path used by distribution tasks.
+there is no copied training loop and no global optimizer patch. These hosts
+honor their requested device, separately from the scalar GANTrainer path.
 """
 from __future__ import annotations
 
@@ -83,8 +83,9 @@ def _observe_range(receipt, value):
 
 class _OptimizerBundle:
     """One host G step over public optimizers with independently owned priors."""
-    def __init__(self, optimizers):
+    def __init__(self, optimizers, *, enumerated_tables=()):
         self.optimizers = optimizers
+        self.enumerated_tables = tuple(enumerated_tables)
         self.param_groups = [g for optimizer in optimizers for g in optimizer.param_groups]
 
     def zero_grad(self, *args, **kwargs):
@@ -93,6 +94,13 @@ class _OptimizerBundle:
 
     def step(self, *args, **kwargs):
         for optimizer in self.optimizers:
+            setter = getattr(optimizer, "set_sampled_rows", None)
+            if setter is not None:
+                for table in self.enumerated_tables:
+                    if any(table is p for group in optimizer.param_groups for p in group["params"]):
+                        # These hosts feed the entire latent table to G instead
+                        # of sampling. Ownership is exactly every table row.
+                        setter(table, torch.arange(table.shape[0], device=table.device))
             optimizer.step(*args, **kwargs)
 
     def state_dict(self):
@@ -190,7 +198,7 @@ class _NamedNoise(NoisePolicy):
 
 class BehaviorComponents:
     """Explicit shared construction, optimizer, noise, and observation binder."""
-    def __init__(self, request, task):
+    def __init__(self, request, task, *, device="cpu"):
         self.task = task
         reference_candidate = request.get("candidate", {})
         self.reference_candidate = deepcopy(reference_candidate)
@@ -200,7 +208,7 @@ class BehaviorComponents:
         blockers = behavior_preflight(task, candidate)
         if blockers:
             raise CapabilityError(blockers)
-        self.context = task_formulation_context(reference_candidate, task, self.protocol, device="cpu")
+        self.context = task_formulation_context(reference_candidate, task, self.protocol, device=device)
         extension_blockers = behavior_preflight(task, {"recipe_overrides": self.context.bindings["recipe"]})
         if extension_blockers:
             raise CapabilityError(extension_blockers)
@@ -314,7 +322,8 @@ class BehaviorComponents:
                 direct_particles=list(direct_particles)))
         if not parts:
             raise CapabilityError(["host exposes no trainable generator-side component"])
-        public_g = _OptimizerBundle(parts)
+        full_table = self.task["execution"].get("host", self.task["id"]) in {"trajectory", "residual_student"}
+        public_g = _OptimizerBundle(parts, enumerated_tables=[prior.z for prior in priors] if full_table else ())
         public_d = self.recipe.make_critic_optimizer(critic, ema_critic=self.critic_copy(critic))
         self.optimizers = {"generator": public_g, "discriminator": public_d}
         for optimizer in self.optimizers.values():
@@ -324,7 +333,11 @@ class BehaviorComponents:
         self.penalty = _PenaltyBinding(self.recipe, public_d, self.mechanism_audit)
         # Host constructors may seed global RNG for fixed fixtures. Training
         # starts on the independent data stream after construction is complete.
-        torch.set_rng_state(self.context.streams.generator("data", component="host", purpose="batches").get_state())
+        data = self.context.streams.generator("data", component="host", purpose="batches")
+        if data.device.type == "cuda":
+            torch.cuda.set_rng_state(data.get_state(), data.device)
+        else:
+            torch.set_rng_state(data.get_state())
         if self.diagnostic is not None:
             if len(parts) != 1 or len(direct_particles) != 1:
                 raise CapabilityError(["two-pole diagnostics require the existing single direct-coordinate optimizer"])
@@ -457,7 +470,10 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
     if task["execution"].get("prior_applicability") == "not_sampled" and task["execution"]["prior"]["kind"] != "particle_cloud":
         raise CapabilityError(["a nonsampled parameter host cannot claim MoG sampling support"])
     module = modules[name]
-    components = BehaviorComponents(request, task)
+    device = torch.device(device)
+    if device.type == "cuda" and not torch.cuda.is_available():
+        raise CapabilityError(["CUDA behavioral task requires an available GPU"])
+    components = BehaviorComponents(request, task, device=device)
     seed = components.context.streams.seed
     steps = task["execution"]["steps"]
     if type(steps) is not int or steps < 1:
@@ -471,7 +487,15 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
         components.diagnostic = TwoPoleObserver(task, output_dir)
     try:
         torch.set_num_threads(1)
-        with torch.device("cpu"), components.context.streams.fork("data", component="host", purpose="batches"), ExitStack() as stack:
+        # Retained fixture constructors call manual_seed, which also seeds every
+        # visible GPU. Restore every affected caller stream, even on exceptions.
+        devices = list(range(torch.cuda.device_count())) if torch.cuda.is_available() else []
+        with torch.random.fork_rng(devices=devices), torch.device(device), components.context.streams.fork("data", component="host", purpose="batches"), ExitStack() as stack:
+            # Frozen tensor fixtures were created at module import on CPU.
+            # Move their exact values alongside the host, without redrawing.
+            for key, value in vars(module).copy().items():
+                if isinstance(value, torch.Tensor):
+                    stack.enter_context(patch.object(module, key, value.to(device)))
             stack.enter_context(patch.object(module, "checkpoint", components.checkpoint))
             stack.enter_context(patch.object(module, "schedule_optimizer", components.schedule_optimizer))
             if hasattr(module, "PROTOCOL"):
@@ -508,11 +532,14 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
             else:
                 raw = module.run_arm("locked", steps=steps, seed=seed, **kwargs)
         live = raw.get("live", raw)
+        torch.save(dict(models={name: model.state_dict() for name, model in components.models.items()},
+                        optimizers={name: optimizer.state_dict() for name, optimizer in components.optimizers.items()},
+                        streams=components.context.streams.state_dict()), output_dir / "component-state.pt")
         metrics = {key: live[key] for key, _, _ in task["evaluation"]["thresholds"] if key in live}
         policy = executed_receipt(BEHAVIOR_POLICIES[name], eval_output_noise=POLICIES[BEHAVIOR_POLICIES[name]])
         result = dict(task_id=task["id"], evidence=dict(observations=components.observations, live=metrics,
                       scoring_weights="live", guards=components.guards(), **policy),
-                      execution_path="public_components", device="cpu", applied=components.receipt(),
+                      execution_path="public_components", device=str(device), applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
         if components.diagnostic is not None:
             result["evidence"].update(diagnostic_observations=components.diagnostic_observations,
