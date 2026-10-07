@@ -6,6 +6,10 @@ Continued learning also fails: 3/72 stationary hold checks and 1/24 shifted hold
 checks pass, with failed deadline reacquisition. Keep the original Fourier-2
 critic; this ablation does not repair acquisition or stability.
 
+[PR #323](https://github.com/255BITS/ParticleGAN/pull/323) targets develop and
+contains this negative result. The shared smoke/Tier-2 split is
+[PR #322](https://github.com/255BITS/ParticleGAN/pull/322).
+
 This is the independently declared Fourier-only architecture ablation. It asks
 whether a raw-input critic makes Gaussian acquisition and continued learning
 easier under the unchanged winning BCAP recipe. The depth ablation retains its
@@ -125,8 +129,9 @@ the preserved initial illustration) and 48 frozen draws; both full grades match.
 [Six exact CUDA restores](restore-proof.json) cover step 0, both 1,000 states,
 the 4,000 pre-shift state, final 6,000 state and frozen 4,000 state. Finite-state,
 actual three-role optimizer counts, mechanism activation and RNG isolation
-guards pass. Current checkpoint learning rates stay constant. Frozen inputs and
-the complete scientific source digest remain unchanged after execution.
+guards pass. Saved checkpoint learning rates stay constant. Execution and
+verification used the frozen scientific source above. The later develop merge
+keeps the archived protocol/source bindings; reproduction requires that commit.
 
 Raw evidence is in the ignored local archive
 `artifacts/gaussian-no-fourier-v1.tar.gz`, SHA-256
