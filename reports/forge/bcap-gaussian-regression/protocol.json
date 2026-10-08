@@ -1,0 +1,90 @@
+{
+  "aggregate_reserved_seconds": 480,
+  "arms": {
+    "current": {
+      "autograd_multithreading_enabled": false,
+      "truncation": true
+    },
+    "historical": {
+      "autograd_multithreading_enabled": true,
+      "truncation": false
+    },
+    "old_polar_serial": {
+      "autograd_multithreading_enabled": false,
+      "truncation": false
+    },
+    "truncated_parallel": {
+      "autograd_multithreading_enabled": true,
+      "truncation": true
+    }
+  },
+  "base_commit": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+  "candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "changed_factors": [
+    "polar_factor: complete reducedSVD U@Vh versus numericalrank Udiag(s>max(shape)*eps*s0)Vh",
+    "whole-run and whole-public-trainer-update autograd scheduling True versus False"
+  ],
+  "execution_order": [
+    "current",
+    "old_polar_serial",
+    "truncated_parallel",
+    "historical"
+  ],
+  "falsifiers": [
+    "control differs fromV6",
+    "same initialmodels/data/RNG notverified",
+    "actual graph schedulingmode differs fromdeclaredarm",
+    "neitherfactorcombination reproduces priorPASS"
+  ],
+  "fixed_conditions": [
+    "exact saved V6 selected recipe",
+    "task architecture 2->32->32->1/Fourier2",
+    "target N(2,.5^2)",
+    "256 learned MoG particles sigma.1 unstandardized",
+    "batch128",
+    "1000 actualupdates per G,D,prior",
+    "same named checkpointed constructor/data/training/evaluation streams",
+    "24 paired independent same-state observations of4096samples",
+    "original Forge gaussian1d_smoke gates",
+    "constant learning rates",
+    "deterministic CUDA with one CPUthread and TF32disabled"
+  ],
+  "gpu_model": "NVIDIA RTX A6000",
+  "historical_evidence": {
+    "v4_attempt": "b7f7a4e5ebf44f33843568885600118f",
+    "v6_attempt": "2a54a1c10fd94679bccce3fe425726a1",
+    "v6_request_sha256": "69ee8e93599eb2380738e98e39e97f0dec1615e9c7edc7d25731c0b0cb73c481"
+  },
+  "historical_polar": {
+    "path": "particlegan/optim/dualnorm.py",
+    "revision": "5af3eea36817a17fe6a7df29d4bfd146844386cc^",
+    "sha256": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12"
+  },
+  "id": "bcap-gaussian-regression-v1",
+  "initializer": "public deterministic_orthogonal",
+  "inputs_sha256": "131ea68b26c1186f3e6c3437a0e170a195a73e864602fddadb3a0632be6f09f5",
+  "observational_audits": [
+    "model and gradient hashes aftereach publicupdate",
+    "actual update/forward/autograd.grad schedulingflags",
+    "SVDreturned singularvalues measured withoutmodification",
+    "exact targetsequence digest",
+    "initialmodel and observerbytes comparison to archivedV4/V6"
+  ],
+  "per_arm_seconds": 120,
+  "predictions": [
+    "currentcontrol reproduces archivedV6 samples exactly",
+    "historicalfactorarm reproduces archivedV4 observations exactly ifthe twofactors suffice",
+    "one-factor reversals attributecausality orreveal interaction"
+  ],
+  "qualification": false,
+  "question": "Did rank truncation or disabling autograd multithreading change the selected BCAP/DualNorm Gaussian smoke from PASS to FAIL?",
+  "schema_version": 1,
+  "scope": "non_qualifying_causal_diagnostic",
+  "seed": 0,
+  "stopping_rules": [
+    "at mostfourfullarms; no retries, seeds, extensions, learningrate tuning or gatechanges",
+    "stop causal attribution ifcurrentcontrol failsreproduction; preserve failures",
+    "no ordinaryForgequalification or tier2credit"
+  ],
+  "visible_gpu": "0"
+}

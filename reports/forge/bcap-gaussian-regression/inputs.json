@@ -1,0 +1,1317 @@
+{
+  "candidate": {
+    "api_changes": [
+      "Selectable public Recipe optimizer family; checkpointed optimizer state and sampled-row metadata"
+    ],
+    "api_version": "forge-api-v1",
+    "capabilities": [
+      "public_trainer",
+      "public_components",
+      "scalar_gan",
+      "mog_prior",
+      "learned_locations",
+      "uniform_masses",
+      "fixed_prior_width",
+      "checkpoint",
+      "named_rng",
+      "live_sampling"
+    ],
+    "changed_factors": [
+      "Recipe.d_lr_mult=1.5",
+      "Recipe.lr=0.012",
+      "Recipe.prior_lr_mult=2.5"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "configuration_id": "7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "execution_path": "public_trainer",
+    "guide": "EXPERIMENTATION.md",
+    "id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "mechanism_class": "floor_constant",
+    "mechanism_rationale": "Replace only the public optimizer step rule. Fixed current BCAP relativistic loss, b_cap coefficient 1, zero interventions and noise, and constant schedule; task-owned auxiliary objectives remain active. Generator and encoder share the G-player normalization. Hybrid arms pin native-Adam groups to the incumbent base rate 0.00425; sampled-row arms consume actual rows and leave unsampled rows unchanged. This card is a reusable technique, not a task-specific optimizer.",
+    "parent": "bcap-dualnorm-zero-v1",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_art": [
+      "bcap-pure-adam-v2",
+      "reports/smart_descent/sgd/README.md",
+      "https://arxiv.org/abs/2210.04319"
+    ],
+    "recipe_overrides": {
+      "d_lr_mult": 1.5,
+      "lr": 0.012,
+      "optimizer_family": "dualnorm",
+      "prior_lr_mult": 2.5
+    },
+    "recipe_preset": "bcap",
+    "requires_capabilities": [
+      "learned_locations",
+      "named_rng"
+    ],
+    "resolved_configuration_recipe": {
+      "adam_variant": "pytorch",
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 2048,
+      "beta2_anneal_end": 0.2,
+      "beta2_end": null,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "knn",
+      "birth_death_cells": 64,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_betas": null,
+      "d_eps": null,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 0.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "ema_decay": 0.0,
+      "encoder_mode": "none",
+      "eps": 1e-08,
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.0,
+      "loss": "relativistic",
+      "loss_labels": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lr": 0.012,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_decay_rate": 0.96,
+      "lr_decay_staircase": false,
+      "lr_decay_steps": 50000,
+      "lr_floor": 1.0,
+      "lr_schedule": "cosine",
+      "model": "gan",
+      "name": "bcap",
+      "network_lr_floor": 1.0,
+      "network_lr_horizon_cap": null,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "optimizer_adam_lr": null,
+      "optimizer_family": "dualnorm",
+      "optimizer_momentum": 0.0,
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_eps": null,
+      "prior_kind": "mog",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 0.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_coeff_anneal_end": 0.2,
+      "reg_coeff_end": null,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "any",
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "resolved_recipe": {
+      "adam_variant": "pytorch",
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 2048,
+      "beta2_anneal_end": 0.2,
+      "beta2_end": null,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "knn",
+      "birth_death_cells": 64,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_betas": null,
+      "d_eps": null,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 0.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "ema_decay": 0.0,
+      "encoder_mode": "none",
+      "eps": 1e-08,
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.0,
+      "loss": "relativistic",
+      "loss_labels": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lr": 0.012,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_decay_rate": 0.96,
+      "lr_decay_staircase": false,
+      "lr_decay_steps": 50000,
+      "lr_floor": 1.0,
+      "lr_schedule": "cosine",
+      "model": "gan",
+      "name": "bcap",
+      "network_lr_floor": 1.0,
+      "network_lr_horizon_cap": null,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "optimizer_adam_lr": null,
+      "optimizer_family": "dualnorm",
+      "optimizer_momentum": 0.0,
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_eps": null,
+      "prior_kind": "mog",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 0.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_coeff_anneal_end": 0.2,
+      "reg_coeff_end": null,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "any",
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "schema_version": 3,
+    "trainer_family": "bcap-dualnorm"
+  },
+  "candidate_revision": "bd82c80d07f49a0f6d61a30b85b63917842313437df6b10260b59ab53e839da6",
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "tasks": {
+    "gaussian1d_smoke": {
+      "adapter": "transfer_vector",
+      "dependencies": [],
+      "description": "Can public training reach N(2, .5^2) within1000updates? Any scheduled state must pass full distribution bounds and an independent same-state confirmation draw; finish all1000updates.",
+      "evaluation": {
+        "confirmation": "independent_draw_same_state",
+        "eval_output_noise": "clean",
+        "eval_samples": 4096,
+        "evaluator": "experiments.forge.gaussian_tasks:grade",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "gaussian1d-smoke-v1",
+          "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+        },
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "discriminator",
+            "prior"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "gaussian_smoke",
+        "observations": 24,
+        "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+          "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "finite_fraction",
+            "==",
+            1.0
+          ],
+          [
+            "mean_error_sigma",
+            "<=",
+            0.2
+          ],
+          [
+            "std_ratio",
+            ">=",
+            0.8
+          ],
+          [
+            "std_ratio",
+            "<=",
+            1.2
+          ],
+          [
+            "cdf_ks",
+            "<=",
+            0.05
+          ]
+        ]
+      },
+      "execution": {
+        "host": "gaussian1d_acquisition",
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.25
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "gaussian1d_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 32,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            1.0
+          ],
+          "means": [
+            [
+              2.0
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 1000,
+          "z_dim": 2
+        },
+        "host_source": "benchmarks/toy_audit/gaussian1d_quality.py",
+        "initializer": "deterministic_orthogonal",
+        "original_schedule_horizon": 1000,
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "produces_state": true,
+        "protocol": "screening",
+        "steps": 1000
+      },
+      "field_ownership": {
+        "delegated_reference_values": {},
+        "inactive_legacy_host_fields": {
+          "betas": {
+            "owner": "task",
+            "source": "task.execution.host_definition.betas",
+            "status": "inactive_provenance",
+            "value": [
+              0.0,
+              0.999
+            ]
+          },
+          "d_every": {
+            "owner": "task",
+            "source": "task.execution.host_definition.d_every",
+            "status": "inactive_provenance",
+            "value": 1
+          },
+          "d_lr_mult": {
+            "owner": "task",
+            "source": "task.execution.host_definition.d_lr_mult",
+            "status": "inactive_provenance",
+            "value": 1.0
+          },
+          "ema_decay": {
+            "owner": "task",
+            "source": "task.execution.host_definition.ema_decay",
+            "status": "inactive_provenance",
+            "value": 0.995
+          },
+          "g_every": {
+            "owner": "task",
+            "source": "task.execution.host_definition.g_every",
+            "status": "inactive_provenance",
+            "value": 1
+          },
+          "lr": {
+            "owner": "task",
+            "source": "task.execution.host_definition.lr",
+            "status": "inactive_provenance",
+            "value": 0.00425
+          },
+          "prior_lr_mult": {
+            "owner": "task",
+            "source": "task.execution.host_definition.prior_lr_mult",
+            "status": "inactive_provenance",
+            "value": 2.0
+          },
+          "prior_reg": {
+            "owner": "task",
+            "source": "task.execution.host_definition.prior_reg",
+            "status": "inactive_provenance",
+            "value": 0.0
+          },
+          "reg_arm": {
+            "owner": "task",
+            "source": "task.execution.host_definition.reg_arm",
+            "status": "inactive_provenance",
+            "value": "k3p"
+          },
+          "reg_coeff": {
+            "owner": "task",
+            "source": "task.execution.host_definition.reg_coeff",
+            "status": "inactive_provenance",
+            "value": 1.0
+          },
+          "reg_kappa": {
+            "owner": "task",
+            "source": "task.execution.host_definition.reg_kappa",
+            "status": "inactive_provenance",
+            "value": 1.0
+          }
+        },
+        "protocol": {
+          "id": {
+            "owner": "protocol",
+            "source": "protocol.id",
+            "value": "screening"
+          },
+          "revision": {
+            "owner": "protocol",
+            "source": "protocol.revision",
+            "value": 1
+          },
+          "rng": {
+            "owner": "protocol",
+            "source": "protocol.rng",
+            "value": {
+              "candidate_identity_in_seed": false,
+              "component_scoped": true,
+              "derivation": "forge-rng-v1",
+              "streams": [
+                "init",
+                "data",
+                "prior",
+                "noise",
+                "eval"
+              ],
+              "unintended_deviations": 0
+            }
+          },
+          "robustness": {
+            "owner": "protocol",
+            "source": "protocol.robustness",
+            "value": {
+              "cross_seed_reuse": false,
+              "enabled_for_screening": false,
+              "requires_frozen_candidate": true,
+              "requires_preregistered_seed_set": true
+            }
+          },
+          "scoring": {
+            "owner": "protocol",
+            "source": "protocol.scoring",
+            "value": {
+              "best_checkpoint": "diagnostic_only",
+              "ema": "separate_view_required",
+              "weights": "live"
+            }
+          },
+          "seed": {
+            "owner": "protocol",
+            "source": "protocol.seed",
+            "value": 0
+          }
+        },
+        "recipe_fields": {
+          "adam_variant": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "pytorch"
+          },
+          "alpha_bar": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ]
+          },
+          "amsgrad": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "batch_size": {
+            "owner": "task",
+            "source": "task.execution.host_definition.batch",
+            "status": "effective",
+            "value": 128
+          },
+          "beta2_anneal_end": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.2
+          },
+          "beta2_end": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "betas": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": [
+              0.0,
+              0.999
+            ]
+          },
+          "birth_death_backend": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "knn"
+          },
+          "birth_death_cells": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 64
+          },
+          "birth_death_chunk": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 256
+          },
+          "birth_death_feature_scale": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "none"
+          },
+          "birth_death_isolation": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "birth_death_metric_rank": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 8
+          },
+          "birth_death_parent_policy": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "real_anchor"
+          },
+          "birth_death_space": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "data"
+          },
+          "conditioning": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "scalar"
+          },
+          "continuous_policy": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "critic_formulation": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "bcap"
+          },
+          "critic_payoff_damping": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": true
+          },
+          "critic_r1_real": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": true
+          },
+          "d_betas": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "d_eps": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "d_guard_min_steps": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 200
+          },
+          "d_guard_ratio": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "d_lr_mult": {
+            "owner": "hyperparameter",
+            "source": "candidate.recipe_overrides.d_lr_mult",
+            "status": "effective",
+            "value": 1.5
+          },
+          "direct_particle_betas": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": [
+              0.0,
+              0.9
+            ]
+          },
+          "direct_particle_gain": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "distance_reduction": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "sum"
+          },
+          "ema_decay": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "encoder_mode": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "none"
+          },
+          "eps": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1e-08
+          },
+          "input_noise_anneal_end": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.1
+          },
+          "input_noise_std": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "latent_damping_max_rate": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "loss": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "relativistic"
+          },
+          "loss_labels": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": [
+              0.0,
+              1.0,
+              1.0
+            ]
+          },
+          "lr": {
+            "owner": "hyperparameter",
+            "source": "candidate.recipe_overrides.lr",
+            "status": "effective",
+            "value": 0.012
+          },
+          "lr_anneal_start": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.6
+          },
+          "lr_control": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "mobility"
+          },
+          "lr_decay_rate": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.96
+          },
+          "lr_decay_staircase": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "lr_decay_steps": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 50000
+          },
+          "lr_floor": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1.0
+          },
+          "lr_schedule": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "cosine"
+          },
+          "model": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "gan"
+          },
+          "name": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "metadata",
+            "value": "bcap"
+          },
+          "network_lr_floor": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1.0
+          },
+          "network_lr_horizon_cap": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "num_classes": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "num_particles": {
+            "owner": "task",
+            "source": "task.execution.host_definition.particles",
+            "status": "effective",
+            "value": 256
+          },
+          "observation_sigma": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.03
+          },
+          "optimizer_adam_lr": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "optimizer_family": {
+            "owner": "technique",
+            "source": "candidate.recipe_overrides.optimizer_family",
+            "status": "effective",
+            "value": "dualnorm"
+          },
+          "optimizer_momentum": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "output_noise_mode": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "fixed"
+          },
+          "output_noise_std": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "output_noise_warmup": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "particle_birth_death": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "prior_betas": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "prior_eps": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "prior_kind": {
+            "owner": "task",
+            "source": "task.execution.prior.kind",
+            "status": "effective",
+            "value": "mog"
+          },
+          "prior_lr_mult": {
+            "owner": "hyperparameter",
+            "source": "candidate.recipe_overrides.prior_lr_mult",
+            "status": "effective",
+            "value": 2.5
+          },
+          "prior_reg": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "reconstruction_weight": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1.0
+          },
+          "reg_anchor_min_decay": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.9
+          },
+          "reg_anchor_weight": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "reg_arm": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "b_cap"
+          },
+          "reg_coeff": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1.0
+          },
+          "reg_coeff_anneal_end": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.2
+          },
+          "reg_coeff_end": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "reg_every": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1
+          },
+          "reg_kappa": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 1.0
+          },
+          "reopen_anchor": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "hold"
+          },
+          "reopen_guard": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": null
+          },
+          "reopen_signal": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "data"
+          },
+          "routing_temperature": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.25
+          },
+          "row_evidence_exclude": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": true
+          },
+          "row_evidence_gate": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": false
+          },
+          "row_evidence_hold": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": true
+          },
+          "row_evidence_hot": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": true
+          },
+          "row_evidence_null": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "theory"
+          },
+          "row_policy": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "independent"
+          },
+          "serve_average": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.0
+          },
+          "sigma_rel": {
+            "owner": "task",
+            "source": "public prior binding: absolute task sigma replaces relative calibration",
+            "status": "effective",
+            "value": 0.0
+          },
+          "standardize": {
+            "owner": "task",
+            "source": "task.execution.prior.standardize",
+            "status": "effective",
+            "value": false
+          },
+          "table_release_rule": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "any"
+          },
+          "total_steps": {
+            "owner": "task",
+            "source": "task.execution.original_schedule_horizon",
+            "status": "effective",
+            "value": 1000
+          },
+          "ucd_target": {
+            "owner": "technique",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": "class"
+          },
+          "ucd_weight": {
+            "owner": "hyperparameter",
+            "source": "public Recipe preset bcap",
+            "status": "effective",
+            "value": 0.02
+          },
+          "z_dim": {
+            "owner": "task",
+            "source": "task.execution.host_definition.z_dim",
+            "status": "effective",
+            "value": 2
+          }
+        },
+        "reference_declarations": {
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          }
+        },
+        "schema_version": 1,
+        "task_contract": {
+          "budget": {
+            "owner": "task",
+            "source": "task.execution and task.resources",
+            "value": {
+              "execution_resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 120
+              },
+              "original_schedule_horizon": 1000,
+              "steps": 1000
+            }
+          },
+          "evaluation": {
+            "owner": "task",
+            "source": "task.evaluation",
+            "value": {
+              "confirmation": "independent_draw_same_state",
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-smoke-v1",
+                "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_smoke",
+              "observations": 24,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+              },
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            }
+          },
+          "host": {
+            "owner": "task",
+            "source": "frozen task architecture/data declaration and host source",
+            "value": {
+              "definition": {
+                "batch": 128,
+                "covariances": [
+                  [
+                    [
+                      0.25
+                    ]
+                  ]
+                ],
+                "family": "gaussian1d_acquisition",
+                "fourier": 2,
+                "hidden": 32,
+                "identifiable": true,
+                "kind": "gaussian_mixture",
+                "layers": 2,
+                "masses": [
+                  1.0
+                ],
+                "means": [
+                  [
+                    2.0
+                  ]
+                ],
+                "particles": 256,
+                "split": "development",
+                "steps": 1000,
+                "z_dim": 2
+              },
+              "model": null,
+              "native_profile": null,
+              "problem": null,
+              "recipe_resources": null,
+              "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+            }
+          },
+          "initialization": {
+            "owner": "task",
+            "source": "task.execution.initializer",
+            "value": "deterministic_orthogonal"
+          },
+          "prior": {
+            "applicability": "sampled",
+            "code_path": "MoGParticlePrior",
+            "control_binding": {
+              "base_betas": "Recipe.prior_betas or Recipe.betas",
+              "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+              "latent_table_controls": true,
+              "lr_schedule": "prior",
+              "representation": "latent_prior_locations"
+            },
+            "owner": "task",
+            "source": "task.execution.prior",
+            "value": {
+              "kind": "mog",
+              "learnable": true,
+              "sigma": 0.1,
+              "standardize": false
+            }
+          }
+        },
+        "task_id": "gaussian1d_smoke",
+        "version": "forge-field-boundaries-v2"
+      },
+      "id": "gaussian1d_smoke",
+      "preflight_blockers": [],
+      "requires_capabilities": [
+        "checkpoint",
+        "named_rng",
+        "live_sampling",
+        "learned_locations",
+        "mog_prior"
+      ],
+      "research_artifacts": {
+        "readout": "reports/forge/gaussian-smoke-tier-split/README.md"
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 120
+      },
+      "retained_question_ids": [
+        "develop-gaussian1d_acquisition"
+      ],
+      "schema_version": 1
+    }
+  }
+}
