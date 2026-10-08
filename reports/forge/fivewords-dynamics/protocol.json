@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "fivewords-saved-endpoint-dynamics-v1",
+  "scope": "Saved-state endpoint diagnosis; no qualification, configuration search, historical replay, or missing intermediate-state reconstruction",
+  "base_commit": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+  "runtime_execution_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+  "device": "CUDA physical GPU1 only, float32 public optimizer probes; float64 raw-field finite differences",
+  "protocol_seed": 0,
+  "cohorts": ["unsmoothed/truncated-serial", "unsmoothed/full-serial", "unsmoothed/truncated-threaded", "unsmoothed/full-threaded", "smoothed/truncated-serial", "smoothed/full-serial", "smoothed/truncated-threaded", "smoothed/full-threaded"],
+  "endpoint_update": 20001,
+  "enumeration": "All25 Cartesian real-word/prior-row pairs, equal weight; sigma0 finite5cloud; no sampling or noise",
+  "roles": ["G", "E", "prior", "D"],
+  "role_masks": [["G","E","prior","D"], ["G"], ["E"], ["prior"], ["D"], ["G","E","prior"]],
+  "updates_per_probe": 8,
+  "maximum_diagnostic_logical_updates": 384,
+  "maximum_runtime_seconds": 900,
+  "gradient_field": "Each role's minimization gradient, D includes original BCAP; G/E/prior share original joint RpGAN loss; inputs recomputed at each perturbed state, detached exactly as in original role update",
+  "public_step": "Original per-arm public float32 optimizer state, learning rates, truncation, smoothing, epsilon and sampled-row semantics; D first, then G/E/prior. Clone resets for every role mask",
+  "jacobian": "Four-dimensional orthonormal projection along disjoint normalized role directions from first full sequential public step; central finite differences of RAW game field only, CUDA float64, h1e-3 and3e-4",
+  "jacobian_stability": "Relative Frobenius difference <=.05; tiny projected norm<=1e-12 treated as uninformative; skew exceeding symmetric norm is local projected circulation, not chronic causal identification or normalized-step convergence proof",
+  "controls": ["Saved model/optimizer/stream digests restored exactly", "No RNG streams consumed by numerical probes", "Original clean served metrics matched in support/reconstruction", "CUDA bilinear skew and quadratic symmetric finite-difference controls", "Optimizer sampled rows all5 and actual normalized steps finite", "Raw Cartesian expectation independently checked by 25 one-pair loss evaluations"],
+  "predictions": [
+    {"id":"rotation","support":"Stable nonzero antisymmetric projected raw-field component, especially D vs other roles","limit":"Projection and endpoints only; does not prove dominant historical failure cause"},
+    {"id":"normalization","support":"Nonvanishing actual steps despite weak raw gradients, with degraded exact-law quality even under frozen-D role probes","limit":"T(E[g]) not E[T(g)]; one fixed finite probe cannot establish whole-run cause"},
+    {"id":"correspondence","support":"Independent G/E/prior motions change encoded-to-generated correspondence or finite-row assignment from a common passing state","limit":"Movement may be gauge-compatible; measure paired reconstruction and generation separately"}
+  ],
+  "stop_rule": "Execute each endpoint once, no seed variants, retries, annealing, longer training, or qualification regrading; archive errors/null cases",
+  "qualification_input": false,
+  "historical_gif": "Reuse actually scored training GIF from original smoothed truncated-serial source; no new training for media"
+}
