@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 649. Inventory coverage: complete. Unresolved import items: 7.
+Records: 650. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -661,6 +661,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · five-word-tier-split-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990`.
+
+Separate acquisition of the full joint five-word goal from retention under continuing learning, retaining all numerical thresholds and original evidence.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `task_policy_and_own_checkpoint_continuation`.
+
+
+
+Selected BCAP DualNorm full CUDA smoke PASS:13/24 independently confirmed checks, earliest update1,667. Exact own-state hold FAIL:20/25 checks; failures at3,001/5,001/5,167/5,334/5,501; both endpoints PASS. At3,001 generation passes while paired inverse fails. Exactly24,001 research updates;930.430 loop seconds,947.754 total wall seconds,1,200 reserved.100 saved metric sets and complete checkpoints verified;372 software checks pass, including9 CUDA numerical/provenance checks. New ordinary contracts remain UNKNOWN; scientific rows and historical task bytes unchanged. One automatic cuSOLVER fallback warning; no driver change or causal claim.
+
+**Next:** Adopt acquisition/hold placement, retain the holding failure, and use the separate saved-state diagnosis before declaring another bounded mechanism experiment. No automatic research repeat or ordinary qualification credit.
+
+[Evidence](../../reports/forge/five-word-tier-split/readout.json) · [Record](records/five-word-tier-split-v1-readout.json)
 
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · gaussian-no-fourier-v1-external-readout
 
@@ -4886,4 +4902,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `536f19f4c46d55423da5a645f4fc87a792f25961ec44978f52d2a63d876aebe8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7997bc4d308ff25723770f6767fe65e7c229e0aef5d8d7e2fa87b43f2436952c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

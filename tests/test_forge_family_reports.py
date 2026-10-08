@@ -525,16 +525,17 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
             assert cohort["tiers"]["1"]["incomplete"] is True
             assert clock["status"] == "BLOCKED"
             continue
-        # A later scorer binding does not make an executed word test unrun;
-        # its recorded grade still supplies no new qualification.
-        assert cohort["tiers"]["1"]["incomplete"] is False
+        # Replacing the sustained question with independently confirmed smoke
+        # creates an unknown cell; the recorded scientific rows stay unchanged.
+        assert cohort["tiers"]["1"]["incomplete"] is True
+        assert cohort["tasks"]["five_word_joint_smoke"]["status"] == "UNKNOWN"
         assert sum(cohort["tiers"]["1"]["counts"].values()) == 22
         assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
         assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
         assert recorded[cohort["row_index"]]["qualified_tier"] == 0
     bcap = cohorts["bcap"]
-    assert score(bcap["tiers"]["1"]) == "20/22"
+    assert score(bcap["tiers"]["1"]) == "19(*)/22"
     clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
     assert score(clock_view["tiers"]["1"]) == "3/4"
     # Detailed historical clock diagnostics retain their original cohort.
@@ -598,7 +599,9 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
             continue
         required = set(pin.get("measurement_tasks", []))
         for view_name in pin["measurement_views"]:
-            view = read_json(root / f"configs/forge/views/{view_name}.json")
+            # A pinned measurement covered its original view, not a new task
+            # introduced by a later publication-only policy refresh.
+            view = read_json(root / f"configs/forge/view-history/{view_name}-v7.json")
             required.update(assignment["task"] for assignment in view["assignments"]
                             if assignment["importance"] == "required" and assignment["qualification_tier"] == 1)
         assert required
@@ -607,11 +610,15 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
                    and scientific_row_hash(rows[cohort["row_index"]]) == pin["scientific_row_sha256"]]
         assert len(current) == 1
         for cohort in current:
-            assert all(cohort["tasks"][task]["status"] in {"PASS", "FAIL"} for task in required)
+            original = rows[cohort["row_index"]]
+            recorded_tasks = {task["task_id"]: task for task in original["tasks"] + original.get("nonrequired_tasks", [])}
+            assert all(recorded_tasks[task]["status"] in {"PASS", "FAIL"} for task in required)
             views = {view["id"]: view for view in cohort["views"] + cohort.get("scoped_views", [])}
             for view_name in pin["measurement_views"]:
                 tier = views[view_name]["tiers"]["1"]
-                assert tier["incomplete"] is False and set(tier["counts"]) <= {"PASS", "FAIL"}
+                assert tier["incomplete"] is True
+                assert set(tier["counts"]) <= {"PASS", "FAIL", "UNKNOWN"}
+                assert cohort["tasks"]["five_word_joint_smoke"]["status"] == "UNKNOWN"
             # Other goal views retain any unknown cells; a bounded measurement
             # grants neither execution nor qualification outside its scope.
             for view in cohort["views"]:
