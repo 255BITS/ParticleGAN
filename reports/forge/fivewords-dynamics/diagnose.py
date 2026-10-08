@@ -327,12 +327,13 @@ def analyze_endpoint(args, cohort, arm_id, output):
         delta, used, losses, after_d = public_step(fixture, set(ROLES))
         stats = step_statistics(fixture, delta, used)
         first_after = exact_metrics(fixture)
-        reset(fixture, packet, context)
         probes = {}
         for mask in args.protocol["role_masks"]:
-            reset(fixture, packet, context)
-            observations = []
-            for step in range(1, args.protocol["updates_per_probe"] + 1):
+            first_mask = mask == list(ROLES)
+            if not first_mask:
+                reset(fixture, packet, context)
+            observations = [dict(step=1, **first_after)] if first_mask else []
+            for step in range(2 if first_mask else 1, args.protocol["updates_per_probe"] + 1):
                 public_step(fixture, set(mask))
                 observed = exact_metrics(fixture)
                 observations.append(dict(step=step, **observed))
