@@ -24,6 +24,11 @@ The single [current technique inventory](../technique-inventory.md) records the
 whole selected configuration, while [readout.json](readout.json) preserves every
 trial's final metrics, original receipt hashes, source, cost and archive identity.
 
+The [subsequent frozen-recipe Tier 2 stage](../bcap-tier2/README.md) is complete:
+6 PASS, 11 FAIL and four image setup errors across its 21 required tasks.
+It reuses this Tier 1 evidence, retains constant learning rates and updates the
+same inventory. BCAP remains qualified through Tier 1.
+
 The [declared three-recipe study](../../../configs/forge/searches/bcap-six-smoothing-v1.json)
 tests global smoothing strengths `1e-5`, `1e-4` and `1e-3`, with a reservation
 ceiling of **7,560 seconds**, **2,520 per recipe**. It finishes every runnable

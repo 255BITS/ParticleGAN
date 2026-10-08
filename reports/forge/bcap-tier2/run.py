@@ -46,7 +46,14 @@ def main():
     if args.stage == "enqueue":
         entry = queue.submit(request, request["study"]["campaign"])
         summary["request_id"] = entry["request"]["request_id"]
-        atomic_json(ROOT / "reports/forge/bcap-tier2/plan.json", summary)
+        compact = {key: value for key, value in summary.items() if key != "study_binding"}
+        compact.update(source_digest=request["source"]["digest"],
+                       source_origin_commit=request["source"]["origin_commit"],
+                       study_admission=request["study_admission"],
+                       administrative_through_tier_budget_seconds=43020,
+                       new_training_reservation_seconds=40500,
+                       reused_tier1_receipts=7)
+        atomic_json(ROOT / "reports/forge/bcap-tier2/plan.json", compact)
     print(json.dumps(summary, indent=2), flush=True)
 
 

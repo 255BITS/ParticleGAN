@@ -540,7 +540,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -650,7 +650,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | not_applied_to_measurement |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| cover_leftover | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -756,7 +760,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -868,11 +873,12 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| gaussian1d_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / 78833310ac5c | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_stability | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -948,7 +954,11 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| grid100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -981,7 +991,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| img_bars4 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | INCOMPLETE | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1015,7 +1029,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| img_blobs4 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | INCOMPLETE | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1049,7 +1067,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| img_intensity2 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | INCOMPLETE | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1083,7 +1105,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| img_stripes2 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | INCOMPLETE | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1123,7 +1149,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | not_applied_to_measurement |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| mid_scale_identity | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1206,7 +1236,11 @@ Active quality must hold before the shift and throughout the post-deadline windo
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| mode_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1243,7 +1277,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | public_recipe_schedule |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| residual_student | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1305,7 +1343,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ring16_acquisition | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1355,7 +1393,11 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| rotated100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1401,7 +1443,11 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| staggered100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1433,7 +1479,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | public_recipe_schedule |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| trajectory | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1491,7 +1541,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1529,7 +1579,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | not_applied_to_measurement |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| unipolar | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1585,7 +1639,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1625,7 +1679,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_anisotropic | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1659,7 +1717,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_overlap | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1693,7 +1755,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_spiral | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1729,7 +1795,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_two_broad | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1766,7 +1836,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_unequal_mass | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1802,7 +1876,11 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| vector_unequal_width | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / unbound / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1822,4 +1900,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `443e0734707853797ef97e42fc8749fa3ed0e0c8a42b3b104da6169e0609b42b`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `f066473df8afa68b43383bd30ed335941977b0a5bcafb935f8ed0c7ae46ae773`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `3dd2bb151f90dffe507e61cca3522d9665fbcc54ba253e8fe56d9ea089a94afa`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

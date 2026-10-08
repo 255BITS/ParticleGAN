@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "ef50a487e3737895d41357a0cd7000394c0fb4ae01ce2d439950a0583fae44ba",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "6276e8616a88f8edad7fd065315e111124e97bc037140288ad1f3bbbc2d293a0",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/config.json": "afe153419074988ac0d2ce54cfc1918e139851f18c4c9dc0c5c30cd6da54a43b",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/events.jsonl": "a9afb94eec51c77945e7ce91d1de35fd015a9f7380815ace084d0037f352fd3e",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_000050.npz": "dc57bafdd4ae879eeb80f78a2ee8c0fcb0da878fe9107f25f1421f5156a5c5b3",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_000750.npz": "034c6bab0f9883fc5a6b388645038dd59420c4f4c319d080668fd1c658edfeec",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_001750.npz": "d3a11ea9f8c62264833fdfce79e5ff73e6ef2b01e1881a98933a2b8acd5c7259",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_002750.npz": "866a748df9549255b2a0c4a3953123f350e078baec499e727769df7f5bf94fab",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_004000.npz": "752429936c90af915d83f548dc59f9faadf0246fc9ecf6381eb3eca34a50597f",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_005000.npz": "107d735c91452296458037f74e25e95af163450b7ab69c6518799950d36a6e54",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_006000.npz": "33f57ad5bfcd9d6e24f1dd5f95ed78fbde95c537b18f723ef7fcbe4c55e8a897",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/snapshots/step_007000.npz": "da5aaba6130dde471141668ec2a76490bc3f0be0ca653a64b065af0737ebf1c7",
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/404314afcc7b4068b69577c9c7424c12/native100/grid100/summary.json": "f950d017d4be1f76171924ffe9b7cb5ee49ab218e3c35499eb582592309a17bb"
+  },
+  "task_id": "grid100"
+}

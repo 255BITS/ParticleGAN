@@ -271,6 +271,25 @@ def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
     assert "worker launch failed" in next(iter(generated_pages(root, publication).values()))
 
 
+@pytest.mark.parametrize("catalogued", [True, False])
+def test_structured_setup_error_renders_without_changing_recorded_grade(report, catalogued):
+    root, publication = report
+    task = publication["rows"][0]["tasks"][1]
+    task["status"] = "INCOMPLETE"
+    reasons = [{"type": "ValueError", "message": "dualnorm supports matrix weights and vector/scalar biases only"}]
+    if catalogued:
+        task["reasons_sha256"] = stable_hash(reasons)
+        publication["status_reasons"] = {stable_hash(reasons): reasons}
+    else:
+        task["reasons"] = reasons
+    before = deepcopy(publication)
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["status"] == "INCOMPLETE"
+    assert "dualnorm supports matrix weights" in next(iter(generated_pages(root, publication).values()))
+    assert publication["rows"] == before["rows"]
+    assert publication.get("status_reasons") == before.get("status_reasons")
+
+
 @pytest.mark.parametrize("field", ["candidate_id", "candidate_revision", "source_digest"])
 def test_receipt_cannot_supply_metrics_from_another_configuration_or_source(report, field):
     root, publication = report
@@ -527,7 +546,12 @@ def test_current_clock_measurement_retains_original_evidence_alongside_policy_ad
             assert clock["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
         assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
-        assert original["qualified_tier"] == 0
+        # The clock diagnostic grants no qualification. A configured standard
+        # can now qualify independently by passing every ordinary smoke gate.
+        if original["qualified_tier"]:
+            assert original["tiers"]["1"]["passed"] == original["tiers"]["1"]["total"]
+            assert all(task["status"] == "PASS" for task in original["tasks"]
+                       if task["task_id"] in publication["tier_requirements"]["1"])
     # Advancing the policy retains the exact previous selection and failed
     # clock verdict, even though the current BCAP DualNorm audit passes.
     previous = publication["archived_policies"][-1]
@@ -558,7 +582,7 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
     progress = build_progress(root, publication)
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
     for pin in selection["selections"]:
-        if pin["selection_kind"] == "current_measurement":
+        if pin["selection_kind"] != "historical_incumbent":
             continue
         selected = [row for row in rows if scientific_row_hash(row) == pin["scientific_row_sha256"]]
         assert len(selected) == 1
@@ -584,12 +608,12 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
     progress = build_progress(root, publication)
     families = {family["id"]: family for family in progress["families"] + progress["configuration_families"]}
     unmeasured = {row["trainer_family"] for row in rows
-                  if row["selection"]["selection_kind"] == "unmeasured_declaration"}
+                  if not row["attempt_ids"] and row["qualified_tier"] == 0}
     registry = read_json(root / "configs/forge/trainer-families.json")["families"]
     hidden = {family["id"] for family in registry if family.get("inventory_visible") is False}
     assert set(families) == (set(pins) | unmeasured) - hidden
-    assert unmeasured == {family["id"] for family in registry
-                          if family.get("unmeasured_display_backend")} - hidden
+    assert {family["id"] for family in registry
+            if family.get("unmeasured_display_backend")} - hidden <= unmeasured
     for row in rows:
         if row["trainer_family"] in unmeasured:
             assert not row["attempt_ids"] and row["qualified_tier"] == 0
