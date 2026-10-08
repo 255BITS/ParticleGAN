@@ -163,9 +163,21 @@ def exact_metrics(fixture):
                     encoded_latents=encoded.tolist(), prior_latents=fixture.prior.z.tolist())
 
 
+def restore_endpoint_policy(fixture, saved):
+    # Historical host budget is20001, recipe schedule horizon20000. The
+    # public loader rejects that completed count. Restore every original
+    # byte except temporary count metadata, then reinstate the exact count.
+    # No begin_step/scheduling is called by this saved-state diagnostic.
+    restored = dict(saved, completed_steps=min(saved["completed_steps"], fixture.recipe.total_steps))
+    fixture.policy.load_state_dict(restored)
+    fixture.policy.completed_steps = saved["completed_steps"]
+    if state_digest(fixture.policy.state_dict()) != state_digest(saved):
+        raise RuntimeError("Full policy packet differs after explicit count workaround")
+
+
 def load_fixture(root, source):
     from experiments.forge.word_adapter import word_context
-    packet = torch.load(source / "state.pt", map_location="cuda:0", weights_only=False)
+    packet = torch.load(source / "state.pt", map_location="cpu", weights_only=False)
     request = json.loads((source / "request.json").read_text())["request"]
     task = request["tasks"]["five_word_joint_acquisition"]
     context = word_context(request, task, "cuda:0")
@@ -174,7 +186,7 @@ def load_fixture(root, source):
     # RNG state tensors stay on CPU as required by torch.Generator.set_state.
     packet = torch.load(source / "state.pt", map_location="cpu", weights_only=False)
     context.streams.load_state_dict(packet["streams"])
-    fixture.policy.load_state_dict(packet["fixture"]["api_state"])
+    restore_endpoint_policy(fixture, packet["fixture"]["api_state"])
     fixture.data_generator.set_state(packet["fixture"]["data_generator"])
     actual = fixture.state_dict()
     expected = packet["fixture"]
@@ -193,7 +205,7 @@ def load_fixture(root, source):
 
 def reset(fixture, packet, context):
     context.streams.load_state_dict(packet["streams"])
-    fixture.policy.load_state_dict(packet["fixture"]["api_state"])
+    restore_endpoint_policy(fixture, packet["fixture"]["api_state"])
     fixture.data_generator.set_state(packet["fixture"]["data_generator"])
 
 
