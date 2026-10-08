@@ -1,0 +1,77 @@
+{
+  "arms": [
+    {
+      "autograd_multithreading": false,
+      "id": "truncated-serial",
+      "truncation": true
+    },
+    {
+      "autograd_multithreading": false,
+      "id": "full-serial",
+      "truncation": false
+    },
+    {
+      "autograd_multithreading": true,
+      "id": "truncated-threaded",
+      "truncation": true
+    },
+    {
+      "autograd_multithreading": true,
+      "id": "full-threaded",
+      "truncation": false
+    }
+  ],
+  "base_commit": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "candidate_sha256": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "changed_factors": [
+    "Matrix polar factor: exact reduced SVD U@Vh vs U diag(s>max(shape)*eps*smax)Vh",
+    "Whole-run host autograd multithreading True vs False; audited inside actual forward/optimizer/polar calls"
+  ],
+  "cpu_threads": 1,
+  "device": "cuda:0",
+  "gate_placement_limit": "Original Tier1 task requires sustained terminal checks despite acquisition name; do not relax or regrade it in this study.",
+  "held_fixed": [
+    "Public WordFixture and Forge run_word/scorer/guards",
+    "Selected whole global BCAP/DualNorm recipe, constant effective role rates G/E .012 D .018 prior .03, momentum0 prior_reg0",
+    "Five canonical words with six token positions, fixed G/E/joint-D architecture",
+    "Five learned nonstandardized 2D particle-cloud points",
+    "Protocol seed0 public deterministic named initialization and checkpointed constructor/data/prior/noise/eval streams",
+    "20001 updates, all24 scheduled clean/live 1024sample observations, five terminal passing checks",
+    "CUDA A6000 current Python/Torch/NumPy environment deterministicalgorithms on TF32 off",
+    "Identical RNG-neutral instrumentation in allarms"
+  ],
+  "historical_attempts": {
+    "v4": "1e7e6e136ff8496490b15318e7a5f04f",
+    "v6": "1986a8fae42d494b94584b6e60c153e7"
+  },
+  "id": "bcap-word-runtime-regression-factorial-v1",
+  "maximum_runs": 4,
+  "minimum_stable_checks": 5,
+  "observations": 24,
+  "per_run_timeout_seconds": 900,
+  "physical_cuda_slot": "1",
+  "predictions": [
+    {
+      "falsifier": "Full and truncated factors produce identical actual states/observations within either scheduling setting.",
+      "id": "truncation-effect",
+      "prediction": "Changing only matrix truncation changes the observed trajectory and may change sustained word verdict."
+    },
+    {
+      "falsifier": "Both polar rules produce identical actual states/observations across modes.",
+      "id": "autograd-effect",
+      "prediction": "Changing only host autograd mode changes observed trajectory and may change word verdict."
+    }
+  ],
+  "protocol_seed": 0,
+  "purpose": "User-authorized causal diagnosis of a historical PASS to current FAIL after default numerical-rank truncation and disabled autograd multithreading. Task-only diagnostic supplies no ordinary qualification or default adoption.",
+  "qualification_input": false,
+  "reserved_seconds": 3600,
+  "resolved_recipe_sha256": "6084b509203328d54e47b777d1b3da31ed738dd177f5beaa4415058720ce42c6",
+  "schema_version": 1,
+  "stop_rule": "Execute each arm at most once; no retries/extensions/seed variation/annealing/higher-tier work. Report timeout or failed control reproduction without substituting a new arm.",
+  "task": "five_word_joint_acquisition",
+  "task_fingerprint": "b0d2200be5cf3a7a153346cfe188404536e7e2f6525281eb7218ce667fa21163",
+  "task_updates": 20001,
+  "workers": 1
+}
