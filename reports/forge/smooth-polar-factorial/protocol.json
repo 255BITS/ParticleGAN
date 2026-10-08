@@ -1,0 +1,317 @@
+{
+  "arms": [
+    {
+      "autograd_multithreading": false,
+      "id": "truncated-serial",
+      "truncation": true
+    },
+    {
+      "autograd_multithreading": false,
+      "id": "full-serial",
+      "truncation": false
+    },
+    {
+      "autograd_multithreading": true,
+      "id": "truncated-threaded",
+      "truncation": true
+    },
+    {
+      "autograd_multithreading": true,
+      "id": "full-threaded",
+      "truncation": false
+    }
+  ],
+  "base_commit": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "candidate_sha256": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "falsifiers": [
+    "Either current-default Gaussian or word gate fails",
+    "Any input initialization, consumed data/evaluation RNG contract or sampling law is unmatched",
+    "Ring16 fails the current-default arm"
+  ],
+  "gpu_assignment": {
+    "five_word_joint_acquisition": 1,
+    "gaussian1d_smoke": 0,
+    "ring16_acquisition": 0
+  },
+  "held_fixed": [
+    "Task architecture and target/data law",
+    "Seed0 named public deterministic initializer and every consumed checkpointed stream",
+    "Exact task prior, sampling law, data batch sequence, budget and evaluation cadence",
+    "Global BCAP/DualNorm rates G/E .012 D .018 prior .03, momentum0 prior_reg0",
+    "Original Gaussian confirmed acquisition, word five-terminal hold and ring acquisition gates"
+  ],
+  "historical_controls": {
+    "gaussian": {
+      "archive": {
+        "bulk_artifacts_committed": false,
+        "bytes": 3751713,
+        "file_count": 38,
+        "members": [
+          {
+            "bytes": 73756,
+            "path": "bcap-gaussian-regression-v1/current/adapter-receipt.json",
+            "sha256": "41cd09970aa5881f553809a6e3ac987fb57cce75b9df458213ca31be57cdd5ed"
+          },
+          {
+            "bytes": 63255,
+            "path": "bcap-gaussian-regression-v1/current/evaluator/initial-state.pt",
+            "sha256": "bdd9e1a122cf06b180688c493a8bfe45ac69c0cb2f70a1aab2f41bca514baf46"
+          },
+          {
+            "bytes": 842949,
+            "path": "bcap-gaussian-regression-v1/current/evaluator/observed-samples.pt",
+            "sha256": "a96848fa8ab8c11dc0ed9c499ba95e1d561f5fb71d8ec0721779e44cf1fee615"
+          },
+          {
+            "bytes": 62818,
+            "path": "bcap-gaussian-regression-v1/current/evaluator/state.pt",
+            "sha256": "11798b6e8825657c2d59b78dd9809975f976fcd552d935ef630afd443df0d65e"
+          },
+          {
+            "bytes": 64767,
+            "path": "bcap-gaussian-regression-v1/current/provenance/provenance-state.pt",
+            "sha256": "8af5b795481e25d47ca284a419270fc336e8e3298bb47cab7f75cafbc0e57020"
+          },
+          {
+            "bytes": 32863,
+            "path": "bcap-gaussian-regression-v1/current/summary.json",
+            "sha256": "0c4333d0981756c11e113b97616a4e7f12ccd917e61ee54c0504cde38fa265d6"
+          },
+          {
+            "bytes": 205896,
+            "path": "bcap-gaussian-regression-v1/current/trajectory.json",
+            "sha256": "31114c8e30bc291c54817f066592991f5d42da5ea28a5dab3afe2171c8d23342"
+          },
+          {
+            "bytes": 7901,
+            "path": "bcap-gaussian-regression-v1/current.log",
+            "sha256": "6c404e060e52808b0a7fa9958b88e07f454f74e93bf623a7364f8c17f79a6c23"
+          },
+          {
+            "bytes": 73791,
+            "path": "bcap-gaussian-regression-v1/historical/adapter-receipt.json",
+            "sha256": "08fd43109f667dadee77a65cc93f58083a0a9f0652626c5698df84d638b57309"
+          },
+          {
+            "bytes": 63255,
+            "path": "bcap-gaussian-regression-v1/historical/evaluator/initial-state.pt",
+            "sha256": "8f52bee09d04eef9f997204c3bdd8a21adaa98eac2d3df14d229f158b39f04db"
+          },
+          {
+            "bytes": 842949,
+            "path": "bcap-gaussian-regression-v1/historical/evaluator/observed-samples.pt",
+            "sha256": "9fa76110505ec890f6ff37367d5d9b10c3097210ae6aa2be58b2b1cec134407c"
+          },
+          {
+            "bytes": 62818,
+            "path": "bcap-gaussian-regression-v1/historical/evaluator/state.pt",
+            "sha256": "79f9eaead0a25a5d46775b330706c22a0cb1ec1a33c243fcdd02cd2dcac9fa31"
+          },
+          {
+            "bytes": 3654,
+            "path": "bcap-gaussian-regression-v1/historical/execution-audit.json",
+            "sha256": "ba31bf42bfb192c257f2c9c9bc4a5e8fbd10b7c39b0542de8ea41aa601bc703a"
+          },
+          {
+            "bytes": 64767,
+            "path": "bcap-gaussian-regression-v1/historical/provenance/provenance-state.pt",
+            "sha256": "304724c2fa5701b0e6bca4a19b7c9555bf5c606c6642cd8e8c0827df16e9f69d"
+          },
+          {
+            "bytes": 32846,
+            "path": "bcap-gaussian-regression-v1/historical/summary.json",
+            "sha256": "87f484649ed4e406358b5de6c0d2478c72c669c6ac675541a7e101129306dc90"
+          },
+          {
+            "bytes": 205896,
+            "path": "bcap-gaussian-regression-v1/historical/trajectory.json",
+            "sha256": "7f4bccf2868910508de24b69289608302d0feea2dd1421e0bcb0b4ab6d3967c7"
+          },
+          {
+            "bytes": 862,
+            "path": "bcap-gaussian-regression-v1/historical-reproduction.json",
+            "sha256": "35db623240ead6eecedc5975584744d6603dbfdfccda5e57a3154f650efea771"
+          },
+          {
+            "bytes": 7915,
+            "path": "bcap-gaussian-regression-v1/historical.log",
+            "sha256": "996a5e23a259ebac6ad13ea6b539665b7dd581bc3cc10d7cada412df3620db9c"
+          },
+          {
+            "bytes": 73773,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/adapter-receipt.json",
+            "sha256": "791fb84481d52168208c12398fe944022809d85796530e6a9adcf48044f83d31"
+          },
+          {
+            "bytes": 63255,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/evaluator/initial-state.pt",
+            "sha256": "bdd9e1a122cf06b180688c493a8bfe45ac69c0cb2f70a1aab2f41bca514baf46"
+          },
+          {
+            "bytes": 842949,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/evaluator/observed-samples.pt",
+            "sha256": "306edb5ed06996715239efebcb0f6af724027a3150c2b8cefe6251fe9994fee6"
+          },
+          {
+            "bytes": 62818,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/evaluator/state.pt",
+            "sha256": "e7f1ea33b1bf47c6484e026dd37410549562d169626757ead8f238f878676e13"
+          },
+          {
+            "bytes": 64767,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/provenance/provenance-state.pt",
+            "sha256": "a16a73c905a0057b0f9d2eca23b427f914449f0f89290998ce45597c0e902d5c"
+          },
+          {
+            "bytes": 33125,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/summary.json",
+            "sha256": "9993153d6ae0bc78ce99c43631791204f396896651bb0ecb9e0d377dd40850fb"
+          },
+          {
+            "bytes": 205896,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial/trajectory.json",
+            "sha256": "99f208468538e2b054eff9c287431d5ccaad147cab8df59fcc5c54f6de2f843b"
+          },
+          {
+            "bytes": 7916,
+            "path": "bcap-gaussian-regression-v1/old_polar_serial.log",
+            "sha256": "9096f5bd72d0c9105964e1d18305d66247e1a8b7e2dba6c36568eada0264de6e"
+          },
+          {
+            "bytes": 0,
+            "path": "bcap-gaussian-regression-v1/publication.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 73853,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/adapter-receipt.json",
+            "sha256": "33fee22478845e3f5d9113b6374b7005c47ac9d1c522a3d26a56b01eba317af1"
+          },
+          {
+            "bytes": 63255,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/evaluator/initial-state.pt",
+            "sha256": "8f52bee09d04eef9f997204c3bdd8a21adaa98eac2d3df14d229f158b39f04db"
+          },
+          {
+            "bytes": 842949,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/evaluator/observed-samples.pt",
+            "sha256": "149ba71e4669230aab8f2fa188bec66b11c06d5260f2bd85069c65f8d1e6f257"
+          },
+          {
+            "bytes": 62818,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/evaluator/state.pt",
+            "sha256": "b7ead0b67ad5c0c4f128c6707ae8b0ac3879ff1efbbf5d7edb89038ae451a097"
+          },
+          {
+            "bytes": 64767,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/provenance/provenance-state.pt",
+            "sha256": "3df18b5a156e002d3a59d34d16d6fcb198d26c7d6e686e71bc684f1822929024"
+          },
+          {
+            "bytes": 205896,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel/trajectory.json",
+            "sha256": "416f6a0caf7485bad50e286ef81dc4848a589b5eba296d702e507a47f53ac18d"
+          },
+          {
+            "bytes": 8109,
+            "path": "bcap-gaussian-regression-v1/truncated_parallel.log",
+            "sha256": "cd2cf4a3f8b4313989762a055e32f27096b5933fb6edcc37d2ca07a5a86398a1"
+          },
+          {
+            "bytes": 8697,
+            "path": "reproduction/run.py",
+            "sha256": "87601012e476d83a52ebfb37f8c6a71a22cfe5c8421f49e2a38061856b4d9aa0"
+          },
+          {
+            "bytes": 12263,
+            "path": "reproduction/publish.py",
+            "sha256": "d7af5c593061354f352a9824ab81167f8d91b72f21e172ae2e742bbef4641949"
+          },
+          {
+            "bytes": 40304,
+            "path": "reproduction/inputs.json",
+            "sha256": "131ea68b26c1186f3e6c3437a0e170a195a73e864602fddadb3a0632be6f09f5"
+          },
+          {
+            "bytes": 3461,
+            "path": "reproduction/protocol.json",
+            "sha256": "3532640ade6e9bfb9a15c1e2fe62e49c5cd1cb6aa694fbf344cb45d4b9e1b92c"
+          }
+        ],
+        "new_training": 0,
+        "path": "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/artifacts/bcap-gaussian-regression-v1.tar.gz",
+        "schema_version": 1,
+        "sha256": "7f2535941949296cfcdbddf8930a8b791a852f1728c783db937a0d480960185a"
+      },
+      "pull_request": "https://github.com/255BITS/ParticleGAN/pull/342",
+      "readout_path": "reports/forge/bcap-gaussian-regression/readout.json",
+      "readout_sha256": "abf70736d2749814a4bed2c6bef9ec94daaef06fbca7873e4068f045941983b7",
+      "source_commit": "ba593aab5c0e150da1c36005aece17816f074c7b"
+    },
+    "words": {
+      "archive": {
+        "archive": "artifacts/bcap-word-regression-factorial-v1.tar.gz",
+        "bulk_artifacts_tracked": false,
+        "bytes": 13846609,
+        "member_count": 1257,
+        "member_manifest_sha256": "0b2c38170b445db7760385ea8b8318b1c4a93665698a33527275f747aaf90543",
+        "qualification_input": false,
+        "schema_version": 1,
+        "scope": "exact_local_raw_evidence_and_execution_source",
+        "sha256": "b68f4549ce73317415d444b88a5bfcec6c2fd67cc60196867d44cd6eadc665ce",
+        "source_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3",
+        "source_digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+        "verification": "Every member reopened and hashed against original bytes"
+      },
+      "pull_request": "https://github.com/255BITS/ParticleGAN/pull/343",
+      "readout_path": "reports/forge/bcap-word-regression/readout.json",
+      "readout_sha256": "fd1381831e1ad6ba3ebf7406ca500475d27d5c6890c6bc48a5f0a10609fd6574",
+      "source_commit": "62c2fe807061b3a11c32bb4c0a3e7b71af86c8af"
+    }
+  },
+  "id": "smooth-polar-factorial-v1",
+  "initializer": "public deterministic_orthogonal",
+  "maximum_runs": 12,
+  "maximum_updates": 90404,
+  "paper": "https://arxiv.org/html/2608.01911v1",
+  "paper_epsilon": 1e-08,
+  "predictions": [
+    "Smoothing with current serial/truncated defaults acquires confirmed Gaussian and preserves word terminal hold",
+    "Reducing weak-direction amplification reduces sensitivity to numerical rank cutoff and scheduling",
+    "Current Ring16 acquisition remains PASS"
+  ],
+  "qualification_input": false,
+  "reserved_seconds": 5280,
+  "scale_selection": "One a priori absolute gradient scale, 1e-4, shared across all parameters, roles, tasks and runtime arms. No trained-state selection or scale sweep. This is weaker than earlier network cap .1 and retains more ordinary network response while damping tiny gradients.",
+  "schema_version": 1,
+  "scope": "task_only_nonqualifying_diagnostic",
+  "seed": 0,
+  "smoothing_lambda": 0.0001,
+  "stop_rule": "At most one full execution per task/arm, no retries, extensions, scale tuning, seed trials or automatic Tier2 qualification. Complete independent diagnostics even if another arm fails. Unchanged archived controls are analyzed without retraining.",
+  "tasks": {
+    "five_word_joint_acquisition": {
+      "fingerprint": "b0d2200be5cf3a7a153346cfe188404536e7e2f6525281eb7218ce667fa21163",
+      "task_file": "configs/forge/tasks/five_word_joint_acquisition.json",
+      "timeout_seconds": 900,
+      "updates": 20001
+    },
+    "gaussian1d_smoke": {
+      "fingerprint": "c6e9f9e83530465be713b147edb753bd48117f5bda3ff275662a955c0549c796",
+      "task_file": "configs/forge/tasks/gaussian1d_smoke.json",
+      "timeout_seconds": 120,
+      "updates": 1000
+    },
+    "ring16_acquisition": {
+      "fingerprint": "71c43819102df133e23b4fae1c7bde1e16a72fc512b8f35a4ab72beb73dda9a5",
+      "task_file": "configs/forge/tasks/ring16_acquisition.json",
+      "timeout_seconds": 300,
+      "updates": 1600
+    }
+  },
+  "trainer_delta": [
+    "All roles use fixed smoothing every update: matrix singular weights s/hypot(s,lambda); biases g/hypot(norm(g),lambda); sampled prior rows g_i/hypot(norm(g_i),lambda)",
+    "Each historical truncation/autograd factor is held equal to its corresponding archived unsmoothed control",
+    "Retain numerical rank cutoff only in truncated arms; smooth all singular values in full arms"
+  ]
+}
