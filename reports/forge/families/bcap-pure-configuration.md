@@ -105,7 +105,7 @@ Source digest: `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec
 
 [Frozen numerical evidence](../technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: unmeasured_declaration. No new execution: the preselected configuration refuses its control task map. Display the actual canonical CUDA declaration, which requires a registered study before enqueue; preserve every unresolved alternative and all historical evidence separately, with no source/outcome ranking or qualification.
+Selection: historical_incumbent. Preserve the exact existing unmeasured CUDA declaration when measured family selections use different sources. No attempt, measured gate, qualification or default-adoption credit.
 
 </details>
 

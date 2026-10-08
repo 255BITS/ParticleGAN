@@ -82,6 +82,12 @@ matches source, protocol, tasks and runtime across
 categories while preserving their different mechanism signatures. It does not
 relax the ordinary same-technique guard.
 
+The subsequent [BCAP six-task study](../reports/forge/bcap-six/README.md) executes
+these three positive strengths with constant rates. All three pass the six
+required revision-8 Tier 1 tasks; the declared tie-break selects `1e-5`.
+Tier 2 retention and default adoption remain unmeasured. The original example
+declaration above retains its unexecuted identity.
+
 ## Software verification
 
 All numerical checks require CUDA and skip only when CUDA is unavailable.

@@ -494,7 +494,7 @@ Task variants share a guide when their declarations name the same host or proble
 
 ### Experiment: ae-gan-hold
 
-Checks reconstruction/identity and an acquired adversarial edit during the declared hold.
+Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors
 
 Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json), [ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
 
@@ -540,7 +540,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -623,7 +623,7 @@ No related published API training GIF. This task retains its own declared numeri
 
 ### Experiment: cover-leftover
 
-Checks target coverage plus the separate unwanted-remainder/content constraints.
+Cover both signed poles while preserving content and removing the guarded leak
 
 Forge declarations: [cover_leftover](../../configs/forge/tasks/cover_leftover.json).
 
@@ -756,7 +756,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -868,7 +868,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| gaussian1d_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_smoke | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -882,7 +882,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: grid100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [grid100_release07_cloud_named_v1](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
@@ -958,7 +958,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-bars4
 
-Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.
+Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.
 
 Forge declarations: [img_bars4](../../configs/forge/tasks/img_bars4.json), [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json).
 
@@ -992,7 +992,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-blobs4
 
-Healthy location transfer: four small corner patches test localized quality and coverage.
+Recover four localized 2x2 corner patches with correct position, pixel fidelity and balanced output mass.
 
 Forge declarations: [img_blobs4](../../configs/forge/tasks/img_blobs4.json), [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json).
 
@@ -1026,7 +1026,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-intensity2
 
-Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.
+Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.
 
 Forge declarations: [img_intensity2](../../configs/forge/tasks/img_intensity2.json), [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json).
 
@@ -1060,7 +1060,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-stripes2
 
-Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.
+Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass.
 
 Forge declarations: [img_stripes2](../../configs/forge/tasks/img_stripes2.json), [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json).
 
@@ -1094,7 +1094,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mid-scale-identity
 
-Checks identity preservation and target edit magnitude at intermediate control strength.
+Retain identity at half strength in addition to correct neutral and signed poles
 
 Forge declarations: [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json).
 
@@ -1133,7 +1133,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mode-hold
 
-Checks all eight ring modes and HQ through the sampled terminal hold; not within-mode density fidelity.
+Acquire all eight equal-weight radius-three, sigma-.07 Gaussian modes, including their within-mode law.
 
 Forge declarations: [mode_hold](../../configs/forge/tasks/mode_hold.json), [ring_extension](../../configs/forge/tasks/ring_extension.json), [ring_hold](../../configs/forge/tasks/ring_hold.json), [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json).
 
@@ -1219,7 +1219,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: residual-student
 
-Checks whether the intended residual moves toward the correct paired target.
+Recover the fast trajectory with a residual head and reject a correct marginal with wrong identities
 
 Forge declarations: [residual_student](../../configs/forge/tasks/residual_student.json).
 
@@ -1305,7 +1305,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ring16_acquisition | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | MoGParticlePrior (sigma=0.1) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.1) | FAIL | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1319,7 +1319,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: rotated100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json).
 
@@ -1365,7 +1365,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: staggered100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json).
 
@@ -1411,7 +1411,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: trajectory
 
-Checks the extracted trajectory edit while preserving identity in finite paired rows.
+Change angular speed while preserving each trajectory's radius and starting phase
 
 Forge declarations: [trajectory](../../configs/forge/tasks/trajectory.json).
 
@@ -1491,7 +1491,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1505,7 +1505,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unipolar
 
-Checks an intended edit with preservation of unrelated content.
+Make the positive 4D edit while holding the free scale-zero origin
 
 Forge declarations: [unipolar](../../configs/forge/tasks/unipolar.json).
 
@@ -1539,7 +1539,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unused-token-hold
 
-Checks that active controls move and unused controls remain unchanged.
+Move the concept slot on its target axis while keeping the unused slot fixed
 
 Forge declarations: [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json), [unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
@@ -1585,7 +1585,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / a9fd96a4b6f5 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 96b03a5e577d / ecbd6a092f33 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / b5a03f23b4f5 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 488b09cfca27 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 737592c128ef / 34afb01fc624 | [source-bound receipt index](technique-inventory.json) |
@@ -1822,4 +1822,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `443e0734707853797ef97e42fc8749fa3ed0e0c8a42b3b104da6169e0609b42b`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `a4127034741febc570c2e9d2a949e44994ea89b72dd92bc15dde78b3182302be`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `f066473df8afa68b43383bd30ed335941977b0a5bcafb935f8ed0c7ae46ae773`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

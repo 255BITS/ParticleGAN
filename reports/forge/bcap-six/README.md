@@ -127,3 +127,11 @@ needs a fresh checkout and queue; restoring saved evidence permits read-only
 analysis and publication without repeating training. The coordinator briefly
 stopped its per-attempt memory rebuild and recovered the same queue with batch
 publication. Original logs are archived; completed training was not repeated.
+
+The [selection change receipt](selection-change.json) retains the exact previous
+measurement pin. An explicit source pin also preserves the existing unmeasured
+native-Adam declaration when family selections span sources; its rows remain
+unmeasured and receive no gate credit. The
+[publication-only software amendment](publication-amendment.json) binds the
+archived and corrected selection helpers. Use the committed helper for publication;
+the scientific archive, training source and measured outcomes are unchanged.

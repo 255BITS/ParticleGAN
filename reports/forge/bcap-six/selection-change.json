@@ -1,0 +1,61 @@
+{
+  "default_adoption": false,
+  "preserved_unmeasured_declarations": [
+    {
+      "candidate_id": "bcap-pure-adam-v2",
+      "candidate_revision": "806ae1707bf9ca246f21fc3a4a11eb8b536dc3002bf5c1febbbb166ad141dfcc",
+      "cohort": "d5b60bbfb8572dae1be7de3d1c951499ca7cec4e91824b8154dfcd5257d13510",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Preserve the exact existing unmeasured CUDA declaration when measured family selections use different sources. No attempt, measured gate, qualification or default-adoption credit.",
+      "recipe_sha256": "63e977967aa9931ac7ed5d0280e06de993f1a2052e230367b00bcc03cbbd6201",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "5d0477e340736e721ee80f7f1bd04e5a977242a62c9be99c8f77868ade51892b",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "b2aa8e38dceabc14d06ed5f022feb9ff9af0416c92f173afdab9129540e8efd5",
+      "trainer_family": "bcap-pure"
+    }
+  ],
+  "previous_card_sha256": "41b455863f405298cfa71bf54aeb530edb41f71d5673176802c3c9edcd44ac47",
+  "previous_pin": {
+    "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+    "cohort": "a9fd96a4b6f514c1f252d4803a274bd00a1b60b0c6ab07d71d21d6f5b7016557",
+    "execution_backend": "cuda",
+    "measurement_views": [
+      "discriminator_stability"
+    ],
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+    "recipe_sha256": "49c58a0c9e50bd927286736f68d26e63754540b00bdd219bac297f605a875223",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+    "scientific_row_sha256": "d5cd3fa8ea5ef7a837c7ab5ef34fa656a9b6a0a4e7237ced5e50d73afb7bbffd",
+    "selection_kind": "current_measurement",
+    "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+    "task_keys_sha256": "43f245f8c318cc548f8b165b1e4f2cbdf63976373683f556937f8c18720ec52e",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "selected_pin": {
+    "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+    "candidate_revision": "72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8",
+    "cohort": "ecbd6a092f3364ca42359eba073891aef7438d4e48b60a298f59d26ff1ab8847",
+    "execution_backend": "cuda",
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "All six unchanged revision-8 Tier1 requirements pass on this single constant-rate BCAP recipe. Selected by the bounded bcap-six-smoothing-v1 PASS-count/content-hash objective; later tiers remain unmeasured and public defaults unchanged.",
+    "recipe_sha256": "37c978552f8a86f791256d2f5a194a4d2fbc9765e0d1582f8902a45007921bda",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+    "scientific_row_sha256": "d69b7bbdc58e45193f99245e50cd7f9f06b614eed0c485953c5b7e46d2ceb1a0",
+    "selection_kind": "configured_standard",
+    "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+    "task_keys_sha256": "7546462bb6ae09e19c92176ad86d85f97a24bb5c1ea2c4cc4564cb8919c045f2",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "selection_script_sha256": "c51c8aa22ab12d3d70c6473c881ed95a43d5ee86cf51a30a3384097676233fe3",
+  "study_id": "bcap-six-smoothing-v1"
+}
