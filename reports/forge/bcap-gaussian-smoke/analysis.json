@@ -1,0 +1,121 @@
+{
+  "analyzer_sha256": "ae68767c56fb14e49fd5a76f80a647348a0249cc2ed8e6985e7761f01fe3344d",
+  "archive_sha256": "a2519b3f68d2cbf8bf96e929242c21876db301df3df48d51cfd3b4e1957410fc",
+  "attempt_id": "4a5687bf78db4967aebe1ca068163a07",
+  "counts": {
+    "confirmation_full_passes": 0,
+    "confirmation_ks_failures": 24,
+    "confirmation_moment_passes": 11,
+    "confirmed_pairs": 0,
+    "primary_full_passes": 1,
+    "primary_ks_failures": 23,
+    "primary_moment_passes": 10,
+    "scheduled_pairs": 24
+  },
+  "exact_sample_metric_recomputations": 50,
+  "initial_observation_is_qualification": false,
+  "observed_samples_sha256": "64b3f439b603809a23273f585605d09d2cbb509cb815d2cfe19e7d88768e7335",
+  "optimizer_updates_added": 0,
+  "original_receipt_sha256": {
+    "evidence.json": "32e199ad4b8992cdb367e4ba294710d1986975247b310cf019ba35730ac2ceec",
+    "request.json": "eb7362177b9c079e602997e8ba4b21dd3f926878559ecff0b1eef885c483b4d8",
+    "result.json": "a4e6c51a93f4797a5a15c343ac756f039016c56012c86e3d8ea9a266ee6d75a2"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "raw_result_sha256": "167e3b9cdb7afe900f48ed0087a2e409faeef1ce858d80c93c53b24fac5af0a5",
+  "recorded_gate": "FAIL",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_sample_analysis",
+  "scorer_sha256": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+  "selected_states": [
+    {
+      "confirmation": {
+        "fitted_normal_ks": 0.051645639234088936,
+        "largest_cdf_gap": {
+          "direction": "empirical_above_target",
+          "empirical_cdf": 0.105224609375,
+          "target_cdf": 0.05103967055632817,
+          "x": 1.1825722455978394
+        },
+        "median": 2.0207778215408325,
+        "metrics": {
+          "cdf_ks": 0.05418493881867183,
+          "finite_fraction": 1.0,
+          "mean": 1.9650742633530172,
+          "mean_error_sigma": 0.06985147329396568,
+          "sample_count": 4096,
+          "std": 0.5051983874893587,
+          "std_ratio": 1.0103967749787175
+        }
+      },
+      "primary": {
+        "fitted_normal_ks": 0.046095298707236276,
+        "largest_cdf_gap": {
+          "direction": "empirical_above_target",
+          "empirical_cdf": 0.106201171875,
+          "target_cdf": 0.05822392794911821,
+          "x": 1.215070366859436
+        },
+        "median": 2.019834518432617,
+        "metrics": {
+          "cdf_ks": 0.04797724392588179,
+          "finite_fraction": 1.0,
+          "mean": 1.9684160250180867,
+          "mean_error_sigma": 0.06316794996382669,
+          "sample_count": 4096,
+          "std": 0.5021609864016474,
+          "std_ratio": 1.0043219728032948
+        }
+      },
+      "step": 167,
+      "training_state_sha256": "533a723ece036471c7f726ce067e321911f154e5ae459043e50ccb9993ccfe75"
+    },
+    {
+      "confirmation": {
+        "fitted_normal_ks": 0.034198531461934745,
+        "largest_cdf_gap": {
+          "direction": "empirical_above_target",
+          "empirical_cdf": 0.537109375,
+          "target_cdf": 0.4723135721475598,
+          "x": 1.965272307395935
+        },
+        "median": 1.919758379459381,
+        "metrics": {
+          "cdf_ks": 0.06479580285244019,
+          "finite_fraction": 1.0,
+          "mean": 1.96160381793743,
+          "mean_error_sigma": 0.07679236412514001,
+          "sample_count": 4096,
+          "std": 0.5027761009102224,
+          "std_ratio": 1.0055522018204448
+        }
+      },
+      "primary": {
+        "fitted_normal_ks": 0.03908489122513659,
+        "largest_cdf_gap": {
+          "direction": "empirical_above_target",
+          "empirical_cdf": 0.5263671875,
+          "target_cdf": 0.46176380678893314,
+          "x": 1.9520044326782227
+        },
+        "median": 1.9242073893547058,
+        "metrics": {
+          "cdf_ks": 0.06460338071106686,
+          "finite_fraction": 1.0,
+          "mean": 1.967879091593204,
+          "mean_error_sigma": 0.06424181681359187,
+          "sample_count": 4096,
+          "std": 0.4978886054437119,
+          "std_ratio": 0.9957772108874238
+        }
+      },
+      "step": 1000,
+      "training_state_sha256": "9170d4962ab46b6da9c69e3d49d9498cbb4f313656d31f4c6068a0e5fb94383b"
+    }
+  ],
+  "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+  "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+  "unchanged_observation_states": 25
+}

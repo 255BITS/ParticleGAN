@@ -3,6 +3,8 @@
 All five runnable selected families pass five-word acquisition and finish at
 **5/6 required Tier 1 passes**. BCAP's remaining failure is the scalar Gaussian;
 K3P, KA2, R1/R2 and the released GAN v3 MoG recipe still fail ring16.
+The [BCAP Gaussian diagnosis](../bcap-gaussian-smoke/README.md) explains the
+failed independent confirmation and the distribution mismatch in its saved samples.
 No family satisfies all six prerequisites, so **no ordinary Tier 2 run is
 eligible**. E22 and Atlas remain blocked before reservation because these clean
 tasks lack their policy-aware control and served-sampling contract.
