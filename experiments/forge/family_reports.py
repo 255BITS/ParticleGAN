@@ -587,7 +587,9 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             receipt = receipts.get(name, {})
             reasons = reason_catalog.get(previous.get("reasons_sha256"), [])
             status = previous.get("status", "UNKNOWN")
-            reason = ("; ".join(previous.get("reasons", reasons)) or previous.get("reason")
+            reason = ("; ".join(item.get("message", item.get("reason", json.dumps(item, sort_keys=True)))
+                                if isinstance(item, dict) else str(item)
+                                for item in previous.get("reasons", reasons)) or previous.get("reason")
                       or receipt.get("result", {}).get("reason"))
             if not reason:
                 reason = ("; ".join(selected.get("blockers", [])) if status == "BLOCKED" else None)

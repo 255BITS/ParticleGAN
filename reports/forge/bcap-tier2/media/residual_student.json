@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "538cf686c15a84396bb5d9ae9353aed8321bda624201dc8ebc9052a89f00fde2",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "a842ebfec3373355c07628d375888371cf3bfb4ceea67959c1b2c1a671a5ce40",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "residual_student"
+}

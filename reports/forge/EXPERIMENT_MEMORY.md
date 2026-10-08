@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 665. Inventory coverage: complete. Unresolved import items: 7.
+Records: 666. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4422,6 +4422,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
 
+### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
+
+**Scope:** current; scientific; revision `72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8`.
+
+The single selected constant-rate BCAP/DualNorm smoothing=1e-5 recipe that acquired all six Tier 1 tasks can retain live quality and continued learning across the unchanged 21 required Tier 2 tasks. This is a frozen-recipe qualification stage, with no further tuning, seeds or learning-rate annealing.
+
+**Observed:** {'FAIL': 11, 'INCOMPLETE': 4, 'PASS': 13}; wall seconds 2005.605; mechanism `floor_constant`.
+
+
+
+Frozen BCAP smoothing=1e-5 retains 6/6 required Tier 1 passes; Tier 2 records {'FAIL': 11, 'PASS': 6, 'INCOMPLETE': 4}. Gaussian retains only 1/72 stationary checks and misses shifted reacquisition/hold. Words retain generation but lose inverse reconstruction; four image hosts reject convolution tensors before training. No learning-rate annealing, scientific retries, Tier 1 reruns, Tier 3 or default adoption. The frozen hypothesis signature misnames cdf_ks as ks; preserve its incomplete decision and report the actual scalar separately.
+
+**Next:** Keep the Tier 1 selection and these complete Tier 2 failures. Inspect saved retention and inverse-map trajectories; declare any smaller constant global rates or stronger fixed smoothing as a new bounded comparison. Convolution support requires a separately declared optimizer adaptation. Do not spend on Tier 3.
+
+[Evidence](../../reports/forge/bcap-tier2/readout.json) · [Record](records/readout-fa5fada954b7b255ec86d748.json)
+
 ### k3p · readout-faf4999394106140c8a2052e
 
 **Scope:** current; scientific; revision `2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce`.
@@ -4924,4 +4940,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9e10f1e7a38e63dcc5390034352bddcf93f2907e19a95d2c98657c6516ee121f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `0faef97647571e4f38d5fc2e831fbf7a6e296cb3d33035dfaf058bcba8e58255`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
