@@ -256,6 +256,39 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | --- | --- | --- | --- |
 | [target_shift_recovery](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
+<a name="cohort-cuda-7f9c23eb0e27-bcap_convolution_images"></a>
+
+## bcap_convolution_images
+
+**bcap_convolution_images — revision 1**. [View declaration](../../../configs/forge/views/bcap_convolution_images.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Four source-bound image diagnostics do not qualify a new source or adopt public defaults.
+
+<a name="cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [img_stripes2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | diagnostic | UNKNOWN | changed since run |
+| [img_bars4](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | diagnostic | UNKNOWN | changed since run |
+| [img_blobs4](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | diagnostic | UNKNOWN | changed since run |
+| [img_intensity2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | diagnostic | UNKNOWN | changed since run |
+
+<a name="cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-clockfree_continuous"></a>
 
 ## clockfree_continuous
@@ -1220,7 +1253,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap_convolution_images / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1274,7 +1307,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap_convolution_images / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1328,7 +1361,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap_convolution_images / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1382,7 +1415,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap_convolution_images / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 

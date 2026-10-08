@@ -78,7 +78,10 @@ DualNorm implementation rejects parameter tensors with more than two dimensions:
 convolution architectures were accepted by preflight, but optimizer construction
 refused them. These are implementation-support gaps, with no numerical quality
 verdict and no training GIF. Supporting convolutions requires an explicit
-optimizer adaptation and a separate source identity.
+optimizer adaptation and a separate source identity. The subsequent
+[convolution adaptation and four-image rerun](../bcap-convolution/README.md)
+now completes all four tasks on a new source, with four sustained FAIL gates.
+Its results do not replace these original setup-error receipts.
 
 ## Cost and retained evidence
 

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 666. Inventory coverage: complete. Unresolved import items: 7.
+Records: 667. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4054,6 +4054,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
 
+### bcap-dualnorm-convolution-v1 · readout-8b207a728977752808cf002c
+
+**Scope:** research_diagnostic; scientific; revision `dd0702302681db384f1f1a23e10bfd29a40bae4ccbfea5e01e872d8a4d1a9061`.
+
+Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.
+
+**Observed:** {'FAIL': 4}; wall seconds 100.267; mechanism `structural`.
+
+img_intensity2: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1; img_bars4: modes=2, hq=0.65625
+
+Per-offset smoothed DualNorm completed all four unchanged image tasks: {'FAIL': 4}; all 2400 declared updates ran. The prior four optimizer setup errors remain under the original source. Constant rates, fixed smoothing, seed0, no retries or annealing.
+
+**Next:** Use the recorded quality/coverage trajectories to assess the convolution adaptation. Keep the six original Tier1 passes and full original Tier2 readout; other eleven failures and Tier3 remain unaddressed.
+
+[Evidence](../../reports/forge/bcap-convolution/readout.json) · [Record](records/readout-8b207a728977752808cf002c.json)
+
 ### forge-onboarding-anchor-ablation · readout-8bfdfb8d2b1c3daf55f9b0bc
 
 **Scope:** current; scientific; revision `e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7`.
@@ -4940,4 +4956,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d7923740041d813bdc667b2c6ef92a2567b10d20713c476c981d2070b0228a83`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `bd18ce174c96e48cd8ef31e90e18f05622f3bbf939a3c347226012264ddf6264`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

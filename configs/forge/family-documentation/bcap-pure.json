@@ -29,7 +29,8 @@
     "One whole recorded configuration supplies every displayed result. Passing cells from different recipes or sources are never combined.",
     "The cap is a soft loss penalty on critic input gradients, not a hard bound on parameter gradients. The L2 norm is not divided by input dimension.",
     "Corrected joint-host candidates use both generator and encoder adversarial terms. Earlier incompatible receipts preserve their original source and verdicts.",
-    "BCAP with K3P retains its additional K3P training mechanisms and is reported as a separate formulation."
+    "BCAP with K3P retains its additional K3P training mechanisms and is reported as a separate formulation.",
+    "The opt-in per-offset DualNorm convolution extension completes the four previously unsupported image tasks, but all four sustained gates fail. This separate source-bound diagnostic retains constant learning rates and does not replace the selected configuration or original Tier 2 setup errors. See [the convolution readout](../bcap-convolution/README.md)."
   ],
   "references": [
     {
@@ -55,7 +56,7 @@
     {
       "title": "Wasserstein GAN",
       "url": "https://arxiv.org/abs/1701.07875",
-      "component": "Wasserstein score-loss option. This BCAP recipe does not adopt the paper’s weight clipping or full training algorithm."
+      "component": "Wasserstein score-loss option. This BCAP recipe does not adopt the paper\u2019s weight clipping or full training algorithm."
     },
     {
       "title": "Least Squares Generative Adversarial Networks",
@@ -75,7 +76,10 @@
     "particlegan/recipe_schedules.py",
     "configs/forge/ideas/bcap-pure-adam-v2.json",
     "reports/forge/pure-bcap/README.md",
-    "particlegan/optim/dualnorm.py"
+    "particlegan/optim/dualnorm.py",
+    "docs/dualnorm-convolution.md",
+    "reports/forge/bcap-convolution/README.md",
+    "reports/forge/bcap-convolution/readout.json"
   ],
   "equations": [
     {

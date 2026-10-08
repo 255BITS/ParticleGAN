@@ -37,6 +37,36 @@ def close(actual, expected):
     return actual == expected
 
 
+def audit_rates(recipe, checkpoint):
+    """Verify the declared schedule at every clock and its saved endpoint."""
+    import torch
+    from particlegan.recipes import Recipe, learning_rate_scales
+
+    declaration = Recipe(**recipe)
+    scales = [learning_rate_scales(step, declaration) for step in range(601)]
+    assert set(scales) == {(1.0, 1.0)}
+    state = torch.load(Path(checkpoint["artifact_root"]) / checkpoint["path"],
+                       map_location="cpu", weights_only=False)["trainer"]
+    assert state["completed_steps"] == 600
+    schedules = {}
+    for role, initial, optimizer in zip(("generator_and_prior", "discriminator"),
+                                        state["initial_lrs"], state["optimizers"], strict=True):
+        groups = optimizer["param_groups"]
+        assert [group["lr"] for group in groups] == initial
+        metadata = optimizer["dualnorm"]
+        assert metadata["convolution"] == "per_offset"
+        assert metadata["momentum"] == 0 and metadata["smoothing"] == 1e-5
+        schedules[role] = {"initial_group_rates": initial,
+                           "checkpoint_group_rates": [group["lr"] for group in groups],
+                           "kernel_layouts": [group["dualnorm_convolution"]
+                                              for group in groups if "dualnorm_convolution" in group]}
+    assert state["initial_lrs"][0] == [recipe["lr"]] * 7 + [recipe["lr"] * recipe["prior_lr_mult"]]
+    assert state["initial_lrs"][1] == [recipe["lr"] * recipe["d_lr_mult"]] * 4
+    return {"method": "declared_schedule_all_601_clocks_and_checkpoint_endpoint",
+            "clock_count": len(scales), "network_scale_range": [1, 1],
+            "prior_scale_range": [1, 1], "optimizer_groups": schedules}
+
+
 def render_image(task, row, local, output):
     import matplotlib
     matplotlib.use("Agg")
@@ -134,17 +164,15 @@ def main():
         applied = raw.get("applied", raw)
         recipe = applied["recipe"]
         assert recipe["optimizer_convolution"] == "per_offset" and recipe["optimizer_smoothing"] == 1e-5
-        assert recipe["optimizer_family"] == "dualnorm" and recipe["optimizer_momentum"] == 0
+        assert recipe["optimizer_family"] == "dualnorm" and recipe.get("optimizer_momentum", 0) == 0
         assert recipe["lr"] == .012 and recipe["d_lr_mult"] == 1.5 and recipe["prior_lr_mult"] == 2.5
         assert recipe["lr_floor"] == recipe["network_lr_floor"] == 1
-        schedules = applied["training_schedules"]["optimizer_groups"]
-        for role in schedules.values():
-            assert role["lr"]["minimum"] == role["lr"]["maximum"]
         row, = job["result"]["task_results"]
         assert row["gate_status"] in {"PASS", "FAIL"}
         evidence = row["evidence"]
         checkpoint = evidence["provenance_checkpoint"]
         verify_artifacts(Path(checkpoint["artifact_root"]), checkpoint["artifact_manifest"])
+        schedules = audit_rates(recipe, checkpoint)
         assert checkpoint["completed_steps"] == 600
         assert evidence["guards"]["optimizer_updates"] == {"generator": 600, "discriminator": 600, "prior": 600}
         assert evidence["guards"]["unintended_rng_deviations"] == 0

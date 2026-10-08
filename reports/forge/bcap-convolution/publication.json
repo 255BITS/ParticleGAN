@@ -1,0 +1,52 @@
+{
+  "current_inventory_digest": "eca10fa04680f4e0d5a4083832662238da288b0938becc3009eea5f994f16897",
+  "method": "Compare ordered scientific_row_hash projections before and after refresh_publication, plus exact selection-card and original-readout file hashes.",
+  "original_tier2_readout_sha256": "32fc124d9eacb92e03c8a506fb4cf50620f60fa48d1edd2ee99587d4c00cf310",
+  "post_run_checks": {
+    "memory": {
+      "log_path": "runs/bcap-convolution/final-compile-check.log",
+      "log_sha256": "f75d5c26c9c5f57dc904e7b38ad0f354080a2696ad1b0ba83fe75a0b3557a8c1",
+      "records": 667,
+      "status": "CURRENT",
+      "views": 9
+    },
+    "publication_tests": {
+      "files": [
+        "tests/test_forge_family_reports.py",
+        "tests/test_forge_current_technique_inventory.py",
+        "tests/test_forge_tier_report.py"
+      ],
+      "log_path": "runs/bcap-convolution/final-publication-tests.log",
+      "log_sha256": "bcebbec7e961af7461cc7ef5537d2f37440c4f52caf90d93da19a2beb680ce6c",
+      "passed": 248
+    }
+  },
+  "previous_inventory_commit": "515e2de01f0198d2e58899869a698a2af0f03c72",
+  "qualification_regraded": false,
+  "schema_version": 1,
+  "scientific_row_cohorts": {
+    "archived_evidence_rows": {
+      "count": 401,
+      "sha256": "61ede7cf20855175620dfeb590cc50fa3d917848de3c7b16d0b92b36bf001f2d"
+    },
+    "configuration_rows": {
+      "count": 488,
+      "sha256": "1c8da225eeafef45bd63907a70f1b53ba2d2218dad766977daaf3a4aa59bc5cb"
+    },
+    "evidence_rows": {
+      "count": 123,
+      "sha256": "1ecd80c598eb3623cedf7f33a701f66660e7b8dc2a313dfc53a8504364dad37c"
+    },
+    "historical_family_rows": {
+      "count": 40,
+      "sha256": "635108684c0d009702e908a49c7153649d56b5261f16d64303c1b7cad191bf68"
+    },
+    "rows": {
+      "count": 20,
+      "sha256": "46aff07fd913af598cf0c0d793a3de1dd1b5bd8b0368578b43425e2769dbd868"
+    }
+  },
+  "scientific_rows_preserved": true,
+  "selection_sha256": "6b4af46a5677881c36db525c38a006966ed0e2589828aca8277e34c7a550f590",
+  "training_launched": false
+}
