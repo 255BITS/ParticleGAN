@@ -22,6 +22,10 @@ and selection of the quickest stable solution from comparable family finalists.
 Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 
+The [BCAP search options report](../reports/forge/bcap-search-options/README.md)
+flattens every public Recipe field and inventories optimizer/loss categories,
+conditional numerical settings, current evidence and read-only compiler checks.
+
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
 membership and a canonical fallback. Families identify formulations;
 each new search also records its stricter public technique signature. Historical

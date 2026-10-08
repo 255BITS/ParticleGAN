@@ -1,0 +1,1456 @@
+{
+  "categorical_compilation": {
+    "declared_worst_case_seconds": 37800,
+    "definition_sha256": "82a51d0abe2c3761d5c6e62f8e75d90143de09a8d3239e6c84638e1dd3d2639f",
+    "global_python_rng_unchanged": true,
+    "manifest_sha256": "8fe6ed0b726d96fe76bf6c90fa841d688004eca32375feb87b4c0991c3fac593",
+    "population": 15,
+    "queue_submissions": 0,
+    "repeat_manifest_identical": true,
+    "required_tier1_tasks": [
+      "gaussian1d_smoke",
+      "two_pole",
+      "unused_token_hold",
+      "ae_gan_hold",
+      "ring16_acquisition",
+      "five_word_joint_smoke"
+    ],
+    "samples": 15,
+    "status": "PASS",
+    "tiers_required": {
+      "1": 6,
+      "2": 21,
+      "3": 2
+    },
+    "training_updates": 0,
+    "trials": [
+      {
+        "base": "bcap-pure-adam-v2",
+        "blockers": [],
+        "candidate": "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
+        "loss": "relativistic",
+        "optimizer_family": "adam",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-pure-non-saturating-joint-v2",
+        "blockers": [],
+        "candidate": "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+        "loss": "non_saturating",
+        "optimizer_family": "adam",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-pure-hinge-joint-v2",
+        "blockers": [],
+        "candidate": "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+        "loss": "hinge",
+        "optimizer_family": "adam",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-pure-wasserstein-joint-v2",
+        "blockers": [],
+        "candidate": "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7",
+        "loss": "wasserstein",
+        "optimizer_family": "adam",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-pure-least-squares-joint-v2",
+        "blockers": [],
+        "candidate": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "loss": "least_squares",
+        "optimizer_family": "adam",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-sgda-v1",
+        "blockers": [],
+        "candidate": "bcap-sgda--06ecd3e67f43e215de7680565cfb83b0029d9606cb6cc77dd393cac320eb0997",
+        "loss": "relativistic",
+        "optimizer_family": "sgda",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-nsgda-global-v1",
+        "blockers": [],
+        "candidate": "bcap-nsgda-global--49d318d0aa95769c4ff1802689297d2c92facb14f5b10c24898c13060306bccf",
+        "loss": "relativistic",
+        "optimizer_family": "nsgda_global",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-nsgda-layer-v1",
+        "blockers": [],
+        "candidate": "bcap-nsgda-layer--d0ab1ceb6226439e5a855b05a737a1b3821c1497a75fab5e08018ff1d3313155",
+        "loss": "relativistic",
+        "optimizer_family": "nsgda_layer",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-ada-nsgda-v1",
+        "blockers": [],
+        "candidate": "bcap-ada-nsgda--628f53f4f05a987ec17de0f5b2e780b2a43ec37a7e9bc13a92f9fcf529498ece",
+        "loss": "relativistic",
+        "optimizer_family": "ada_nsgda",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-dualnorm-zero-v1",
+        "blockers": [],
+        "candidate": "bcap-dualnorm--71d6dd06207b705635ed67af014870a5dd72a7481b83530ddacbe9feebad51e6",
+        "loss": "relativistic",
+        "optimizer_family": "dualnorm",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-dualnorm-momentum-v1",
+        "blockers": [],
+        "candidate": "bcap-dualnorm--3b07accfac32d3f62d212fba1acd1e8fcd8d097ba4899230e31734da7cee95db",
+        "loss": "relativistic",
+        "optimizer_family": "dualnorm",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-dualnorm-d-only-v1",
+        "blockers": [],
+        "candidate": "bcap-dualnorm-d-only--19db24f9263b0da30ec73c31a7dbf28faef4bfd65f90bae38b80e22272dcd095",
+        "loss": "relativistic",
+        "optimizer_family": "dualnorm_D_only",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-particle-rownorm-only-v1",
+        "blockers": [],
+        "candidate": "bcap-particle-rownorm-only--899f2d55089e1a7e66a9c863686c5eca026dacf27562e399287a0cf0d021d3dc",
+        "loss": "relativistic",
+        "optimizer_family": "particle_rownorm_only",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-dualnorm-smoothed-v1",
+        "blockers": [],
+        "candidate": "bcap-dualnorm--c2f8bdd9a7db66e39b78b49847023c8effe9cb9eb698a30ee3165fa37e055f35",
+        "loss": "relativistic",
+        "optimizer_family": "dualnorm",
+        "status": "READY"
+      },
+      {
+        "base": "bcap-dualnorm-convolution-v1",
+        "blockers": [],
+        "candidate": "bcap-dualnorm--02856f52639d96b198d43912d3e12ccc8f4aa8fc54a0c635fb577b99688f4fc1",
+        "loss": "relativistic",
+        "optimizer_family": "dualnorm",
+        "status": "READY"
+      }
+    ]
+  },
+  "expected_rejections": [
+    {
+      "check": "optimizer_family",
+      "rejection": "forbidden Recipe grid field (fixed host/protocol/sampling law): optimizer_family",
+      "status": "PASS"
+    },
+    {
+      "check": "loss",
+      "rejection": "forbidden Recipe grid field (fixed host/protocol/sampling law): loss",
+      "status": "PASS"
+    },
+    {
+      "check": "optimizer_convolution",
+      "rejection": "forbidden Recipe grid field (fixed host/protocol/sampling law): optimizer_convolution",
+      "status": "PASS"
+    },
+    {
+      "check": "batch_size",
+      "rejection": "forbidden Recipe grid field (fixed host/protocol/sampling law): batch_size",
+      "status": "PASS"
+    },
+    {
+      "check": "optimizer_momentum",
+      "rejection": "search changes technique mechanisms: dualnorm_momentum; declare a structural idea instead of a hyperparameter trial",
+      "status": "PASS"
+    },
+    {
+      "check": "optimizer_smoothing",
+      "rejection": "search changes technique mechanisms: smoothed_dualnorm; declare a structural idea instead of a hyperparameter trial",
+      "status": "PASS"
+    },
+    {
+      "check": "reg_coeff",
+      "rejection": "search changes technique mechanisms: critic_penalty; declare a structural idea instead of a hyperparameter trial",
+      "status": "PASS"
+    },
+    {
+      "check": "reg_kappa",
+      "rejection": "search changes technique mechanisms: gradient_cap; declare a structural idea instead of a hyperparameter trial",
+      "status": "PASS"
+    },
+    {
+      "check": "lr_floor",
+      "rejection": "search changes technique mechanisms: prior_terminal_updates; declare a structural idea instead of a hyperparameter trial",
+      "status": "PASS"
+    },
+    {
+      "check": "257 configurations",
+      "rejection": "search grid exceeds the 256-configuration declaration limit",
+      "status": "PASS"
+    },
+    {
+      "check": "aggregate reservation",
+      "rejection": "shared campaign cannot reserve all sampled categories",
+      "status": "PASS"
+    }
+  ],
+  "inspected_commit": "59941e9e8f7863e4f6443fd783a5041019db4ab2",
+  "known_inactive_epsilon_admissions": [
+    {
+      "admission": "ACCEPTED",
+      "base": "bcap-sgda-v1",
+      "field": "eps",
+      "update_effect": "none: SGDA applies parameter += -lr * gradient"
+    },
+    {
+      "admission": "ACCEPTED",
+      "base": "bcap-sgda-v1",
+      "field": "d_eps",
+      "update_effect": "none: SGDA applies parameter += -lr * gradient"
+    },
+    {
+      "admission": "ACCEPTED",
+      "base": "bcap-sgda-v1",
+      "field": "prior_eps",
+      "update_effect": "none: SGDA applies parameter += -lr * gradient"
+    }
+  ],
+  "numerical_axis_probes": [
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "amsgrad",
+      "probe": true,
+      "reason": "search changes technique mechanisms: amsgrad; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "beta2_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.beta2_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "beta2_end",
+      "probe": 0.99,
+      "reason": "search changes technique mechanisms: beta2_schedule; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "betas",
+      "probe": [
+        0.0,
+        0.99
+      ],
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "d_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "d_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "d_lr_mult",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "direct_particle_betas",
+      "probe": [
+        0.0,
+        0.95
+      ],
+      "reason": "search Recipe.direct_particle_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "lr",
+      "probe": 0.006,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "lr_anneal_start",
+      "probe": 0.4,
+      "reason": "search Recipe.lr_anneal_start is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "lr_decay_rate",
+      "probe": 0.9,
+      "reason": "search Recipe.lr_decay_rate is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "lr_decay_steps",
+      "probe": 10000,
+      "reason": "search Recipe.lr_decay_steps is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "network_lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "optimizer_adam_lr",
+      "probe": 0.003,
+      "reason": "unsupported recipe: optimizer_adam_lr is supported only by isolation arms",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "optimizer_momentum",
+      "probe": 0.5,
+      "reason": "unsupported recipe: optimizer_momentum requires a dualnorm optimizer family",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "optimizer_smoothing",
+      "probe": 1e-05,
+      "reason": "unsupported recipe: optimizer_smoothing requires optimizer_family='dualnorm'",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "prior_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "prior_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "prior_lr_mult",
+      "probe": 3.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "prior_reg",
+      "probe": 0.01,
+      "reason": "search changes technique mechanisms: prior_regularization; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "reg_coeff",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "reg_coeff_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.reg_coeff_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "reg_coeff_end",
+      "probe": 0.1,
+      "reason": "search changes technique mechanisms: penalty_schedule; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "reg_every",
+      "probe": 2,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-pure-adam-v2",
+      "field": "reg_kappa",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "amsgrad",
+      "probe": true,
+      "reason": "search Recipe.amsgrad is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "beta2_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.beta2_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "beta2_end",
+      "probe": 0.99,
+      "reason": "unsupported recipe: scheduled beta2 requires optimizer_family='adam'",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "betas",
+      "probe": [
+        0.0,
+        0.99
+      ],
+      "reason": "search Recipe.betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "d_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "reason": "search Recipe.d_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "d_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "d_lr_mult",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "direct_particle_betas",
+      "probe": [
+        0.0,
+        0.95
+      ],
+      "reason": "search Recipe.direct_particle_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "lr",
+      "probe": 0.006,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "lr_anneal_start",
+      "probe": 0.4,
+      "reason": "search Recipe.lr_anneal_start is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "lr_decay_rate",
+      "probe": 0.9,
+      "reason": "search Recipe.lr_decay_rate is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "lr_decay_steps",
+      "probe": 10000,
+      "reason": "search Recipe.lr_decay_steps is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "network_lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "optimizer_adam_lr",
+      "probe": 0.003,
+      "reason": "unsupported recipe: optimizer_adam_lr is supported only by isolation arms",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "optimizer_momentum",
+      "probe": 0.5,
+      "reason": "search changes technique mechanisms: dualnorm_momentum; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "optimizer_smoothing",
+      "probe": 1e-05,
+      "reason": "search changes technique mechanisms: smoothed_dualnorm; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "prior_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "reason": "search Recipe.prior_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "prior_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "prior_lr_mult",
+      "probe": 3.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "prior_reg",
+      "probe": 0.01,
+      "reason": "search changes technique mechanisms: prior_regularization; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "reg_coeff",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "reg_coeff_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.reg_coeff_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "reg_coeff_end",
+      "probe": 0.1,
+      "reason": "search changes technique mechanisms: penalty_schedule; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "reg_every",
+      "probe": 2,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-zero-v1",
+      "field": "reg_kappa",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "amsgrad",
+      "probe": true,
+      "reason": "search Recipe.amsgrad is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "beta2_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.beta2_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "beta2_end",
+      "probe": 0.99,
+      "reason": "unsupported recipe: scheduled beta2 requires optimizer_family='adam'",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "betas",
+      "probe": [
+        0.0,
+        0.99
+      ],
+      "reason": "search Recipe.betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "d_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "reason": "search Recipe.d_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "d_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "d_lr_mult",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "direct_particle_betas",
+      "probe": [
+        0.0,
+        0.95
+      ],
+      "reason": "search Recipe.direct_particle_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "lr",
+      "probe": 0.006,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "lr_anneal_start",
+      "probe": 0.4,
+      "reason": "search Recipe.lr_anneal_start is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "lr_decay_rate",
+      "probe": 0.9,
+      "reason": "search Recipe.lr_decay_rate is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "lr_decay_steps",
+      "probe": 10000,
+      "reason": "search Recipe.lr_decay_steps is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "network_lr_floor",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "optimizer_adam_lr",
+      "probe": 0.003,
+      "reason": "unsupported recipe: optimizer_adam_lr is supported only by isolation arms",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "optimizer_momentum",
+      "probe": 0.5,
+      "reason": "search changes technique mechanisms: dualnorm_momentum; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "optimizer_smoothing",
+      "probe": 1e-05,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "prior_betas",
+      "probe": [
+        0.0,
+        0.9
+      ],
+      "reason": "search Recipe.prior_betas is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "prior_eps",
+      "probe": 1e-06,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "prior_lr_mult",
+      "probe": 3.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "prior_reg",
+      "probe": 0.01,
+      "reason": "search changes technique mechanisms: prior_regularization; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "reg_coeff",
+      "probe": 2.0,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "reg_coeff_anneal_end",
+      "probe": 0.5,
+      "reason": "search Recipe.reg_coeff_anneal_end is inactive or task-owned on every tuning task; remove this axis or declare a task where it is effective",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "reg_coeff_end",
+      "probe": 0.1,
+      "reason": "search changes technique mechanisms: penalty_schedule; declare a structural idea instead of a hyperparameter trial",
+      "result": "REJECTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "reg_every",
+      "probe": 2,
+      "result": "ACCEPTED"
+    },
+    {
+      "base": "bcap-dualnorm-smoothed-v1",
+      "field": "reg_kappa",
+      "probe": 0.5,
+      "result": "ACCEPTED"
+    }
+  ],
+  "public_optimizer_loss_pairs": [
+    {
+      "loss": "relativistic",
+      "optimizer_family": "adam",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "adam",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "adam",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "adam",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "adam",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "sgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "sgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "sgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "sgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "sgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "nsgda_global",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "nsgda_global",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "nsgda_global",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "nsgda_global",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "nsgda_global",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "nsgda_layer",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "nsgda_layer",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "nsgda_layer",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "nsgda_layer",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "nsgda_layer",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "ada_nsgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "ada_nsgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "ada_nsgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "ada_nsgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "ada_nsgda",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "dualnorm",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "dualnorm",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "dualnorm",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "dualnorm",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "dualnorm",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "dualnorm_D_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "dualnorm_D_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "dualnorm_D_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "dualnorm_D_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "dualnorm_D_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "relativistic",
+      "optimizer_family": "particle_rownorm_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "non_saturating",
+      "optimizer_family": "particle_rownorm_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "hinge",
+      "optimizer_family": "particle_rownorm_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "wasserstein",
+      "optimizer_family": "particle_rownorm_only",
+      "status": "PASS"
+    },
+    {
+      "loss": "least_squares",
+      "optimizer_family": "particle_rownorm_only",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "software inventory and admission; no scientific qualification",
+  "source_sha256": {
+    "experiments/forge/api.py": "de01ee2c64a90baf6965c7339b37d69a14acb5c7296a3690ec6c38cc9ea5aecd",
+    "experiments/forge/boundaries.py": "73e4cb3439ce78f362311dd20a09e2b5481fad19afb86b8181b6f5974f06ca73",
+    "experiments/forge/configuration_search.py": "818f5425945330d24a1eaea0ffeae13354246fc416d27dfe7be9af6af3960cfc",
+    "experiments/forge/search_space.py": "9fbc11c4c3dffb10257da7298f7e8fba5c7e6c293537dcb9b65f014ed3cff77e",
+    "experiments/forge/techniques.py": "58a2d054b95c23a9e90a98c1030b4fcfba52ade5f0a49a4442be35e87f161036",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/optim/dualnorm.py": "efa8a5db5b8d7b78f53f61fc67388d89b7e5b9ae0afb6787a64e45a4a847642b",
+    "particlegan/recipes.py": "897627e8d5d7e3f9a68d46b00a3a65370eed2e991ca2b39b8a1c8fdded8e4133"
+  },
+  "task_bindings": [
+    {
+      "budget_updates": 1000,
+      "evaluation": {
+        "confirmation": "independent_draw_same_state",
+        "eval_output_noise": "clean",
+        "eval_samples": 4096,
+        "evaluator": "experiments.forge.gaussian_tasks:grade",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "gaussian1d-smoke-v1",
+          "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+        },
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "discriminator",
+            "prior"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "gaussian_smoke",
+        "observations": 24,
+        "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+          "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "finite_fraction",
+            "==",
+            1.0
+          ],
+          [
+            "mean_error_sigma",
+            "<=",
+            0.2
+          ],
+          [
+            "std_ratio",
+            ">=",
+            0.8
+          ],
+          [
+            "std_ratio",
+            "<=",
+            1.2
+          ],
+          [
+            "cdf_ks",
+            "<=",
+            0.05
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "budget_updates": 80,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "evaluator_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": null,
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        },
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "task": "two_pole"
+    },
+    {
+      "budget_updates": 200,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "evaluator_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": null,
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        },
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "task": "unused_token_hold"
+    },
+    {
+      "budget_updates": 250,
+      "evaluation": {
+        "eval_output_noise": "public_recipe_schedule",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "evaluator_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": null,
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "encoder",
+            "generator",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        },
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "task": "ae_gan_hold"
+    },
+    {
+      "budget_updates": 1600,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "experiments.forge.transfer_cadence:test_verdict",
+        "evaluator_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": null,
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "ring16-acquisition-smoke-v2",
+          "rationale": "Provisional broad acquisition bounds: every cluster receives at least one quarter of its target mass; balance, 3-sigma precision and all-component spread reject collapsed surrogates. Thresholds are validated by independent target/destructive samples, not tuned to training."
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "sample_evaluator": "benchmarks.toy_audit.ring16_quality:score_samples",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "modes",
+            ">=",
+            16
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "task": "ring16_acquisition"
+    },
+    {
+      "budget_updates": 20001,
+      "evaluation": {
+        "confirmation": "independent_draw_same_state",
+        "eval_output_noise": "clean",
+        "eval_samples": 1024,
+        "evaluator": "experiments.forge.word_tasks:grade",
+        "evaluator_revision": {
+          "change": "Separate acquisition from retention without changing numerical bounds, public host, prior, initialization or original schedule horizon. Historical sustained task and receipts retain their identities.",
+          "historical_task": "five_word_joint_acquisition",
+          "historical_task_sha256": "3a0db059c0465bcb44754ee2c817d42eec07473b84b63717ee514171192b217b",
+          "id": "five-word-acquisition-hold-split-v1",
+          "previous_revision": {
+            "change": "Bind the current shared comparison helper after project-wide disabled multithreaded autograd scheduling. Task architecture, target law, prior, named streams, update budget, sampling, cadence and numerical bounds remain unchanged. Earlier declarations and receipts retain their original source and runtime identity.",
+            "id": "joint-word-serial-autograd-source-binding-v5",
+            "previous_revision": {
+              "change": "Bind the current shared public fixture and deterministic comparison helper for future execution. Forge named component initialization, numerical bounds, geometry, training budget and sampling laws remain unchanged; original receipts retain their original source binding.",
+              "id": "public-api-reproducibility-source-binding-v4",
+              "previous_revision": {
+                "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                "id": "explicit-equality-and-word-prior-betas-v3",
+                "previous_revision": {
+                  "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+                  "id": "joint-word-task-source-binding-v2",
+                  "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+                },
+                "previous_source_sha256": {
+                  "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                  "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+                  "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                }
+              },
+              "previous_source_sha256": {
+                "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                "benchmarks/toy_audit/api_images.py": "65d5ab6be9e80d3633922dca958a3dcd0e1b01b770e470e3c69a66654e800016",
+                "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+                "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+              }
+            },
+            "previous_source_sha256": {
+              "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786"
+            }
+          }
+        },
+        "gate_policy": {
+          "id": "five-word-smoke-v1",
+          "rationale": "Can public joint BiGAN training acquire all five words and confidently reconstruct every paired input at one independently confirmed scheduled state? Complete all 20,001 updates."
+        },
+        "guards": {
+          "exact_optimizer_updates": true,
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "encoder",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "word_smoke",
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/toy_audit/api_images.py": "c1573e6e34c05302db8608982ff03819447a38b4a310a91aaf1832508c3e4336",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+          "experiments/forge/word_adapter.py": "4aa771dd39d58e6ec7a00ab21d82f689d74638a15403e4b2d9024f67a1c57225",
+          "experiments/forge/word_tasks.py": "71169e6164ea85ac7cda623fe08d3a52ffc352646be5c600416461bf5b5aeeac",
+          "particlegan/policy.py": "873919c57ef34021c1f6e4b8b246c4cc81a6679cf13585ca264c2af2f5dd6b6d"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            1024
+          ],
+          [
+            "quality_fraction",
+            ">=",
+            0.95
+          ],
+          [
+            "modes",
+            "==",
+            5
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.1
+          ],
+          [
+            "reconstruction_exact",
+            "==",
+            1
+          ],
+          [
+            "minimum_reconstruction_token_probability",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "task": "five_word_joint_smoke"
+    }
+  ]
+}
