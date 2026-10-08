@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 649. Inventory coverage: complete. Unresolved import items: 7.
+Records: 650. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -661,6 +661,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### fivewords-saved-endpoint-dynamics-v1 · fivewords-saved-endpoint-dynamics-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `2ecb68de48e8b404d472d72a860d6b4f403102f716110b2561f6778bbe652500`.
+
+Which mechanisms explain five-word inverse/coverage instability: adversarial circulation, normalized-step pace, or moving code correspondence?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_endpoint_role_and_raw_game_field_diagnosis`.
+
+
+
+All four passing endpoints lose the exact output goal within eight G/E/prior updates with D fixed. E-only breaks the smoothed truncated/threaded inverse after one step: minimum token probability .999492 → .038852, while the joint surrogate improves .694092 → .693229. All eight first E-only steps lower the surrogate; the latent line shows local surrogate/output-goal tension and sharp decoder geometry. Two passing unsmoothed threaded raw projections are rotation-dominant (skew/symmetric 8.19 and 10.48); failed endpoints in this projection are dominated by symmetric curvature. Two zero-G-direction cases remain null. Continuing normalized E/prior motion despite saturated G changes alignment; task PASS does not certify joint equilibrium. Local sufficient causes and coexistence identified, not one historical/global cause; no qualification/default/Tier 2 credit.
+
+**Next:** Prioritize preserving paired inverse while joint code alignment improves. A direct paired reconstruction constraint/anchor is a justified unexecuted structural option; magnitude-sensitive E/prior pace and extragradient remain hypotheses, no new study launched. Preserve global constant rates and declared controls.
+
+[Evidence](../../reports/forge/fivewords-dynamics/readout.json) · [Record](records/fivewords-saved-endpoint-dynamics-v1-readout.json)
 
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · gaussian-no-fourier-v1-external-readout
 
@@ -4886,4 +4902,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `536f19f4c46d55423da5a645f4fc87a792f25961ec44978f52d2a63d876aebe8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8bb5dac739151d52d7884344f1c975925e32db36c15d906dc90f8072864323a3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

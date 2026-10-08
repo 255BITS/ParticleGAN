@@ -11,5 +11,16 @@
   "all_restore_checks_pass": true,
   "all_supplement_endpoint_errors_zero": true,
   "source_syntax": "Three reproduction/publication sources py_compile passed",
-  "qualification_input": false
+  "qualification_input": false,
+  "memory_refresh": {
+    "mode": "summaries_only",
+    "compile_check": "CURRENT",
+    "record_count": 650,
+    "qualification_refresh": "preserved_published_evidence",
+    "generated_files_changed": [
+      "reports/forge/EXPERIMENT_MEMORY.md",
+      "reports/forge/compilation.json"
+    ],
+    "qualification_inventory_automation_changed": false
+  }
 }
