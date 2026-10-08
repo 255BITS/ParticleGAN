@@ -303,7 +303,8 @@
       },
       "candidates": [
         "bcap-dualnorm-zero-v1",
-        "bcap-dualnorm-momentum-v1"
+        "bcap-dualnorm-momentum-v1",
+        "bcap-dualnorm-smoothed-v1"
       ],
       "canonical_candidate": "bcap-dualnorm-momentum-v1",
       "id": "bcap-dualnorm",

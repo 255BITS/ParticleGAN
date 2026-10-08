@@ -1,0 +1,40 @@
+{
+  "api_changes": [
+    "Opt-in Recipe.optimizer_smoothing and NormalizedOptimizer(smoothing=...), default zero; positive scales bound in optimizer checkpoints"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.optimizer_smoothing=0.0001 for every player and update",
+    "Retain the incumbent BCAP DualNorm global rates G/E=.012,D=.018,prior=.03"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-dualnorm-smoothed-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Opt in to fixed-scale smoothed DualNorm while retaining numerical-rank truncation, BCAP, constant rates, zero momentum, and all task-owned laws. Matrix singular weights are s/hypot(s,lambda); nonmatrix network directions and actually sampled prior rows use g/hypot(norm(g),lambda). The vector rules are an explicit adaptation. One positive global lambda is a reusable structural control, not a qualification or default adoption.",
+  "parent": "bcap-dualnorm-zero-v1",
+  "prior_art": [
+    "bcap-dualnorm-zero-v1",
+    "https://arxiv.org/html/2608.01911v1",
+    "https://github.com/255BITS/ParticleGAN/pull/344"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.0001,
+    "prior_lr_mult": 2.5
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}
