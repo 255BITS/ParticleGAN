@@ -133,7 +133,7 @@
   "files": [
     {
       "family": "benchmark/shared",
-      "git_blob": "d83751efc73753ddecd4e84ca361fb59e390efc3",
+      "git_blob": "dda963fa076fd409bc3de9d338e7a372064cf58e",
       "path": "benchmarks/__init__.py",
       "role": "support",
       "suggested_tiers": []
@@ -933,7 +933,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "8b568cd4c704b1e44cca2d7b6625b6d29ae5fd7a",
+      "git_blob": "b7534a6e39b4dea25a436fa63552ecb8efa16e01",
       "path": "benchmarks/toy_audit/api_run.py",
       "role": "driver",
       "suggested_tiers": [
@@ -1222,7 +1222,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "0685868ebcc9c2f24ee0a6bbfa45a46f75ac924d",
+      "git_blob": "0a3e618cc9e02cc2fe7dcdf6d23acb700812c3ba",
       "path": "benchmarks/toy_audit/reproducibility.py",
       "role": "support",
       "suggested_tiers": []
@@ -7221,7 +7221,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "fc2120b4896ff83e62b3de11fe7cc2a6bbd7394b",
+      "git_blob": "ad81cb53f30908ecd886b91f938f4f3dadfaef45",
       "path": "experiments/forge/__init__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7242,14 +7242,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "8bc8836c6f4c8b45be293fa298ac37a3353037eb",
+      "git_blob": "778becb42de93f38ec073e3407c86cd9bda57595",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "a4bec981fc6036cd3f9b2d003b69264fb5f7ed16",
+      "git_blob": "e5033ef977c0bd0af4c2c9f434f78d9bbb185518",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7347,14 +7347,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ba97d7c01391450e6e45d2fc8e51600369e744f2",
+      "git_blob": "b73aa8f54154caed39725ba21584a4d4fc663496",
       "path": "experiments/forge/canonical_image_adapter.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "604c824b2ce70cdc5cfc38fc74c3c931323af024",
+      "git_blob": "cff8b299f86ab09c427260a7d6aa3086d3c417e0",
       "path": "experiments/forge/canonical_mog_adapter.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7676,7 +7676,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "30c662b9ab4b3628e8b0bd5a14e50883ce348c86",
+      "git_blob": "dbf6fe7f69053836f21bf0c2521265320ade61ef",
       "path": "experiments/forge/sources.py",
       "role": "engine_support",
       "suggested_tiers": []

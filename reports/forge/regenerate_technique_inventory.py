@@ -1830,6 +1830,7 @@ def _family_registry_structure(registry):
             family.pop("tags", None)
             family.pop("reporting_family", None)
             family.pop("inventory_visible", None)
+            family.pop("current_configuration_family", None)
     return value
 
 
@@ -2006,6 +2007,34 @@ def _write_family_pages(root, pages):
             path.unlink()
 
 
+def _declaration_fallback_sources(current_pins):
+    """A unanimous pinned source can bind an otherwise unmeasured display."""
+    sources = {}
+    for pin in current_pins.values():
+        source = pin.get("source_digest")
+        sources.setdefault(pin["execution_backend"], set()).add(source if isinstance(source, str) else None)
+    preferred = {}
+    for backend, digests in sources.items():
+        if len(digests) != 1:
+            continue
+        digest = next(iter(digests))
+        if isinstance(digest, str) and len(digest) == 64 and set(digest) <= set("0123456789abcdef"):
+            preferred[backend] = digest
+    return preferred
+
+
+def _declaration_source_preference(row, previous, preferred_source):
+    """Resolve only source-bound declarations; executed evidence still ties."""
+    from experiments.forge.trainer_families import _declaration_only_row
+    if not preferred_source or not all(_declaration_only_row(item) for item in (row, previous)):
+        return None
+    current_matches = row.get("bindings", {}).get("source_digest") == preferred_source
+    previous_matches = previous.get("bindings", {}).get("source_digest") == preferred_source
+    if current_matches != previous_matches:
+        return current_matches
+    return None
+
+
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False):
     """Maintain one current table; registered source snapshots retain the history."""
@@ -2136,6 +2165,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     candidates = set(declarations)
     current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"])
                     if recorded_view is None else {})
+    declaration_sources = _declaration_fallback_sources(current_pins)
     selected = {}
     for entry, report, rows in reports:
         for name, row in rows.items():
@@ -2148,10 +2178,14 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             if previous is None or rank > previous[0]:
                 selected[key] = rank, entry, report, deepcopy(row)
             elif (rank == previous[0] and any(row.get(field) != previous[3].get(field)
-                                             for field in ("candidate_revision", "cohort", "runtime_cohort"))
-                  and family_for_candidate(root, name, declarations.get(name),
-                                           current_presentation=True)["id"] not in current_pins):
-                raise ValueError("ambiguous latest recorded technique cohort")
+                                             for field in ("candidate_revision", "cohort", "runtime_cohort"))):
+                preference = (_declaration_source_preference(row, previous[3], declaration_sources.get(backend))
+                              if rank == "" else None)
+                if preference is True:
+                    selected[key] = rank, entry, report, deepcopy(row)
+                elif preference is None and family_for_candidate(root, name, declarations.get(name),
+                                                                current_presentation=True)["id"] not in current_pins:
+                    raise ValueError("ambiguous latest recorded technique cohort")
     # A search runtime needs the actual canonical declaration as its fallback;
     # never present an arbitrary unmeasured tuning trial as the family default.
     canonical_missing = set()
@@ -2192,17 +2226,40 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("register new measured technique evidence with --source-commit")
                 row.setdefault("bindings", {})["source_origin_commit"] = None
                 selected[row["candidate_id"], backend, runtime_key] = "", None, live, deepcopy(row)
+    declaration_history = {}
     if current_pins:
         # Exact historical incumbents must survive newer observations of the
         # same card. Keep complete source/runtime alternatives, never cells.
         retained = {}
+        from experiments.forge.trainer_families import _declaration_only_row
+        preferred_declarations = {(item[3]["candidate_id"], item[3].get("runtime_cohort", {}).get("execution_backend"))
+                                  for item in selected.values()
+                                  if _declaration_only_row(item[3])
+                                  and declaration_sources.get(item[3].get("runtime_cohort", {}).get("execution_backend"))
+                                  and item[3].get("bindings", {}).get("source_digest") == declaration_sources.get(
+                                      item[3].get("runtime_cohort", {}).get("execution_backend"))}
+        def excluded_declaration(row):
+            name = row["candidate_id"]
+            backend = row.get("runtime_cohort", {}).get("execution_backend")
+            return ((name, backend) in preferred_declarations and _declaration_only_row(row)
+                    and row.get("bindings", {}).get("source_digest") != declaration_sources.get(backend)
+                    and family_for_candidate(root, name, declarations.get(name),
+                                             current_presentation=True)["id"] not in current_pins)
         for entry, report, rows in reports:
             for name, row in rows.items():
                 backend = row.get("runtime_cohort", {}).get("execution_backend")
                 if name not in candidates or (execution_backend is not None and backend != execution_backend):
                     continue
+                if excluded_declaration(row):
+                    # Keep this row below in immutable evidence/history, rather
+                    # than supplying a second canonical declaration fallback.
+                    declaration_history.setdefault(scientific_row_hash(row),
+                                                   {**deepcopy(row), "publication_key": entry["json_sha256"]})
+                    continue
                 retained.setdefault(scientific_row_hash(row), ("", entry, report, deepcopy(row)))
         for item in selected.values():
+            if excluded_declaration(item[3]):
+                continue
             retained.setdefault(scientific_row_hash(item[3]), item)
         selected = retained
     from experiments.forge.technique_board import DEFAULT_LABELS
@@ -2239,8 +2296,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                        policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
                                        view_policy=recorded_view, execution_backend=execution_backend,
-                                       historical_rows=[{**row, "publication_key": entry["json_sha256"]}
-                                           for _, entry, _, rows in archived_reports for row in rows.values()])
+                                       historical_rows=[*declaration_history.values(), *[{**row, "publication_key": entry["json_sha256"]}
+                                           for _, entry, _, rows in archived_reports for row in rows.values()]])
     result.update(family_result)
     # Immutable scientific history stays numerical, including earlier revisions
     # of the same configuration. It cannot fill cells in the selected row.
@@ -2297,6 +2354,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             "scope": "Exact original C6 baseline selection and retained-data causal diagnosis; no new qualification",
         }
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
+                            "declaration_fallback_source_by_backend": declaration_sources,
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
                                 if (root / "configs/forge/trainer-families.json").is_file() else None,

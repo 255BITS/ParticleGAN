@@ -353,7 +353,7 @@ def certified_retry_successors(summaries: dict) -> dict:
     return successors
 
 
-def _solution_families(root, families, load):
+def _solution_families(root, families, load, selected_rows, current_row_count):
     """Select whole recorded configurations for display, preserving evidence IDs.
 
     Optimizer and tuning registries may predate the solution taxonomy. Their
@@ -363,6 +363,7 @@ def _solution_families(root, families, load):
     registry_path = Path("configs/forge/trainer-families.json")
     registry = load(registry_path) if (root / registry_path).is_file() else {}
     definitions = {item["id"]: item for item in registry.get("families", [])}
+    from .trainer_families import CURRENT_SELECTION, current_family_candidates, scientific_row_hash
     groups, configurations = {}, []
     for family in families.values():
         definition = definitions.get(family["id"], {})
@@ -376,12 +377,28 @@ def _solution_families(root, families, load):
             if definitions[target].get("inventory_visible", True) is False:
                 raise ValueError("reporting family cannot reference a hidden solution")
         groups.setdefault(target, []).append(family)
+    choices = ({choice["family"]: choice for choice in current_family_candidates(root, family_ids=set(groups))}
+               if (root / CURRENT_SELECTION).is_file() else {})
+    if choices:
+        load(CURRENT_SELECTION)  # Bind the display choice in publication provenance.
     solutions = []
     for target, members in groups.items():
         base = next((family for family in members if family["id"] == target), None)
         if base is None:
             raise ValueError("reporting family needs its own recorded solution row")
         solution = deepcopy(base)
+        choice = choices.get(target)
+
+        def is_current(cohort):
+            if choice is None or cohort["row_index"] >= current_row_count:
+                return False
+            row = selected_rows[cohort["row_index"]]
+            if choice["selection_kind"] == "unmeasured_declaration":
+                from .trainer_families import _declaration_only_row
+                return row["candidate_id"] == choice["candidate_id"] and _declaration_only_row(row)
+            return (row["candidate_id"] == choice["candidate_id"]
+                    and scientific_row_hash(row) == choice["scientific_row_sha256"])
+
         if len(members) > 1:
             solution["cohorts"] = []
             runtimes = {}
@@ -398,7 +415,9 @@ def _solution_families(root, families, load):
                             -sum(counts["counts"].get(status, 0) for status in COMPLETE),
                             member["id"] != target, member["id"])
 
-                ordered = sorted(candidates, key=rank)
+                # Explicit current choices take precedence over pass counts.
+                # Old runtimes remain navigation under their original evidence.
+                ordered = sorted(candidates, key=lambda item: (not is_current(item[1]), rank(item)))
                 winner, cohort = ordered[0]
                 selected = deepcopy(cohort)
                 selected["configuration_family"] = winner["id"]
@@ -425,6 +444,15 @@ def _solution_families(root, families, load):
                     configuration["solution_page"] = base["page"]
                     configuration["solution_label"] = base["label"]
                     configurations.append(configuration)
+        if choice is not None:
+            current = [cohort for cohort in solution["cohorts"] if is_current(cohort)]
+            if len(current) != 1:
+                raise ValueError(f"family {target}: current benchmark must match exactly one verified scientific row")
+            solution["current_cohort_anchor"] = current[0]["anchor"]
+            solution["benchmark_configuration"] = deepcopy(choice)
+            solution["cohorts"].sort(key=lambda cohort: cohort["anchor"] != current[0]["anchor"])
+            if len(members) > 1:
+                solution["configuration_selection"] = "explicit_current_configuration"
         solutions.append(solution)
     return solutions, configurations
 
@@ -616,7 +644,8 @@ def build_progress(root: Path, publication: dict) -> dict:
         if illustration is not None:
             inputs[illustration["path"]] = file_hash(root / illustration["path"])
     active, configurations = _solution_families(
-        root, {name: family for name, family in families.items() if not family["historical_only"]}, load)
+        root, {name: family for name, family in families.items() if not family["historical_only"]}, load,
+        selected_rows, len(publication["rows"]))
     atlas_navigation = _atlas_evidence_navigation(root, load)
     next_steps = Path("reports/forge/atlas-inventory-next-steps-20261005.md")
     if atlas_navigation is not None and (root / next_steps).is_file():
@@ -664,19 +693,21 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     lines = ["# Forge family leaderboard", "",
              "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
              "pseudocode and training details; click any count for the experiment results. "
-             "Each family/runtime uses one complete selected configuration and source.", "",
+             "Each family uses one current selected configuration and source. Earlier runtime cohorts remain on its detail page.", "",
              "A family is the high-level implementation and formulation. Optimizers, learning rates, momentum "
-             "and other configuration choices stay within that family. BCAP and BCAP with K3P have different "
-             "formulations and remain separate. The displayed configuration has the most recorded required passes; "
-             "ties prefer more completed measurements, then the existing family selection. "
+             "and other configuration choices stay within that family. Current benchmarks use the explicit family selection; "
+             "BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain "
+             "their separate evidence on the detail pages. "
              "Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.", "",
              "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
              "these totals measure requirements across views, not unique training runs or scientific rank.", "",
              *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
+            if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
+                continue
             name = family["label"]
-            if cohort["backend"] != "cuda" or len(family["cohorts"]) > 1:
+            if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
                 name += " (" + cohort["backend"] + ")"
             cells = ["**" + link(root, page, name, family["page"]) + "**"]
             cells += _score_cells(root, page, family, cohort, cohort, bold=True)
@@ -712,7 +743,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
 
 
 def _tag_directory(root, page, progress):
-    families = progress["families"] + progress.get("historical_families", [])
+    families = progress["families"] + progress.get("configuration_families", []) + progress.get("historical_families", [])
     used = {tag for family in families for tag in family.get("tags", [])}
     if not used:
         return []
@@ -815,10 +846,13 @@ def _metric_values(metrics, prefix=""):
 def _selected_configuration_details(root, page, publication, family, cohort, row):
     if not family.get("configuration_selection"):
         return []
-    lines = ["## Best recorded configuration", "",
-             "Selected by recorded required passes, then completed measurements. Each count comes from this "
-             "one complete configuration. Source differences preserve separate evidence contracts; the selection "
-             "does not establish a controlled win or default adoption.", ""]
+    explicit = (family.get("configuration_selection") == "explicit_current_configuration"
+                and cohort["anchor"] == family.get("current_cohort_anchor"))
+    lines = ["## " + ("Current benchmark configuration" if explicit else "Best recorded configuration"), "",
+             ("Uses the explicitly selected family configuration, regardless of alternative pass counts. " if explicit else
+              "Selected by recorded required passes, then completed measurements. ") +
+             "Each count comes from this one complete configuration. Source differences preserve separate evidence "
+             "contracts; the selection does not establish a controlled win or default adoption.", ""]
     recipe = publication.get("recipe_contracts", {}).get(row.get("bindings", {}).get("recipe_sha256"))
     if recipe is not None:
         fields = (
@@ -904,7 +938,10 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         frozen_evidence = (link(root, page, "Frozen numerical evidence", pointer["snapshot"])
                            if pointer.get("snapshot") and pointer.get("json_sha256") else
                            _existing_link(root, page, "Frozen numerical evidence", pointer.get("snapshot")))
-        lines += [*_heading(2, cohort["backend"].upper() + " results", base), f"Runtime: **{cohort['backend']}**. Selected configuration: " +
+        current_anchor = family.get("current_cohort_anchor")
+        cohort_label = ("Current benchmark" if cohort["anchor"] == current_anchor else
+                        "Archived runtime cohort") if current_anchor else cohort["backend"].upper() + " results"
+        lines += [*_heading(2, cohort_label, base), f"Runtime: **{cohort['backend']}**. Selected configuration: " +
                   _existing_link(root, page, configuration_label, config) + ".", "",
                   f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
                   f"{publication['view']} revision {publication['view_revision']}. "

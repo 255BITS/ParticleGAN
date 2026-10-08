@@ -109,7 +109,7 @@ def parser():
     techniques.add_argument("--device", choices=("cpu", "cuda"), help="show one execution cohort (default both)")
     techniques.add_argument("--json", action="store_true")
     techniques.add_argument("--output", type=Path, help="write Markdown and compact JSON using this path prefix")
-    inventory = commands.add_parser("inventory", help="discover and run all declared techniques through ordinary Forge gates")
+    inventory = commands.add_parser("inventory", help="run one selected current configuration per family through ordinary Forge gates")
     inventory_stages = inventory.add_subparsers(dest="stage", required=True)
     for stage in ("plan", "enqueue", "run"):
         inv = inventory_stages.add_parser(stage)
