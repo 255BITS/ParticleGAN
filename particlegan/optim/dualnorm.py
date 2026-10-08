@@ -22,9 +22,12 @@ _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 
 
 def polar_factor(matrix, *, smoothing=0., truncate=True):
-    """Return U diag(s > tau) Vᵀ, excluding numerically null directions.
+    """Return the polar direction with optional fixed-scale spectral smoothing.
 
     tau = max(rows, columns) * eps * s_max uses the SVD computation dtype.
+    With smoothing > 0, singular weights are s / hypot(s, smoothing).
+    Otherwise weights are one. ``truncate=True`` additionally zeros weights
+    at or below tau; ``truncate=False`` retains the full spectral rule.
     Float16/bfloat16 inputs retain the existing float32 computation policy;
     float32/float64 inputs are not cast. Exact SVD at every size makes the
     cutoff independent of an iterative polar approximation. No RNG is used.

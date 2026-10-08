@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 649. Inventory coverage: complete. Unresolved import items: 7.
+Records: 650. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4422,6 +4422,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### smooth-polar-factorial-v1 · smooth-polar-factorial-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `134a422b3626c068a6d7539b1948706e20679945387c555faff575115b8f776f`.
+
+Can one fixed paper-inspired smoothing scale repair both Gaussian acquisition and word stability across the four existing truncation/autograd combinations without damaging Ring16?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `fixed_smoothed_polar_with_vector_extension`.
+
+
+
+Twelve CUDA runs: Gaussian confirmed acquisition3/4, words terminal hold0/4, Ring16 protection4/4. Current truncated/serial acquires Gaussian459/625/750 but ends KS.137062; all four Gaussian endpoints fail. Word pass checks in arm order12/5/11/14, suffix0/0/3/0. All four acquire the full joint word goal once; the current word acquisition-named task still demands five terminal passing checks. Historical full/threaded word PASS becomes FAIL. Exact input/data/stream matching and saved Gaussian/word regrading verified. At current-word16668, leading G weights .0215/.0812/.1053 while E/D near1 suggest unequal player pace; causal roles not isolated. Reject this exact all-role scale as a shared repair. Controls retain original sources/instrumentation; this is not a byte-identical runtime replay. No qualification/default adoption/Tier2 credit.
+
+**Next:** Keep optimizer_smoothing default0 and project autograd policy disabled. Inspect archived G/E/prior movement around word collapses before a bounded matrix-only versus vector-extension role comparison; no new paid training authorized by this record.
+
+[Evidence](../../reports/forge/smooth-polar-factorial/readout.json) · [Record](records/smooth-polar-factorial-v1-readout.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -4886,4 +4902,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `536f19f4c46d55423da5a645f4fc87a792f25961ec44978f52d2a63d876aebe8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f44cdcde052820e0f5936aae1e8a82b8316bab952cf4a75058fe5bd2ab20816e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

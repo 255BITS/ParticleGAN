@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "5987e92c7556d602e25a8aa0446ab5591cb22503bb3163a9610be1200863f5be",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "51bf3bf651dcdf618750523937d7083922246158636c44029b2ab9e5ff023255",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/five_word_joint_acquisition--truncated-serial/observed-records.pt": "7b9f5f17828fde732347a2ae9414983400c9cf01f98422ad749d10bd1c0a22d9"
+  },
+  "task_id": "five_word_joint_acquisition"
+}

@@ -1,0 +1,22 @@
+{
+  "all_checks_passed": true,
+  "cuda_slot": 0,
+  "existing_optimizer_checks": 103,
+  "junit_files": {
+    "post-publication-cuda.xml": "bd3a96672913b9067e99f537bdc492742849f0cae722acf32ade27b798d66f13",
+    "recipe-forge-compatibility.xml": "ef105b95b09c6d30ff1cf2aedc29518f80898be9300eca8a4885c9458cf0d50c",
+    "smooth-polar-final-preflight.xml": "117bdd0cff7d93964dece5915b47421e584a3292a9c06972ba990b822e0e494a",
+    "smooth-polar-preflight.xml": "5410efe136c6aef7df595787f4f46380d8f148504e6d7c86c5559ad711ecb8f2",
+    "zero-default-parity-fixed.xml": "916ec2779c359dccc42c891bf3bb7b7d13126bb6b3678d34a25cda6797733303"
+  },
+  "metadata_only_and_constructor_checks": "74 existing field ownership, technique identity, archived recipe IDs and public recipe compatibility checks; CUDA default device, no paid training. Two behavioral training fixtures outside this compatibility scope deselected.",
+  "new_smoothing_checks": 13,
+  "post_publication_cuda_status": "14 PASS; no new distinct cases. Numerical code unchanged after execution; documented optional operator and added CUDA-unavailable skip for CPU CI.",
+  "recipe_forge_compatibility_checks": 74,
+  "scientific_qualification": false,
+  "software_fixture_correction": "Reference optimizer loaded from exact develop was initially rejected by the current-class type guard during construction, before any updates. Corrected reference class binding passes; no scientific arm retried.",
+  "suite_unique_checks": 191,
+  "zero_default_parity": "Three public CUDA updates match frozen develop bitexact in learned components, optimizers and consumed streams; ambient envelopes excluded.",
+  "zero_default_parity_checks": 1,
+  "zero_default_parity_status": "PASS"
+}

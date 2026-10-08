@@ -1,0 +1,40 @@
+{
+  "candidate_id": "smooth-polar-factorial-v1",
+  "candidate_revision": "134a422b3626c068a6d7539b1948706e20679945387c555faff575115b8f776f",
+  "changed_factors": [
+    "One shared lambda1e-4 every update: smoothed matrix singular directions, biases and actually sampled prior rows; numerical rank cutoff retained only in truncated arms.",
+    "Hold each runtime factor equal to its exact archived unsmoothed control; no architecture/prior/data/budget/sampling/gate/seed change."
+  ],
+  "conclusion": "Twelve CUDA runs: Gaussian confirmed acquisition3/4, words terminal hold0/4, Ring16 protection4/4. Current truncated/serial acquires Gaussian459/625/750 but ends KS.137062; all four Gaussian endpoints fail. Word pass checks in arm order12/5/11/14, suffix0/0/3/0. All four acquire the full joint word goal once; the current word acquisition-named task still demands five terminal passing checks. Historical full/threaded word PASS becomes FAIL. Exact input/data/stream matching and saved Gaussian/word regrading verified. At current-word16668, leading G weights .0215/.0812/.1053 while E/D near1 suggest unequal player pace; causal roles not isolated. Reject this exact all-role scale as a shared repair. Controls retain original sources/instrumentation; this is not a byte-identical runtime replay. No qualification/default adoption/Tier2 credit.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Can one fixed paper-inspired smoothing scale repair both Gaussian acquisition and word stability across the four existing truncation/autograd combinations without damaging Ring16?",
+  "lifecycle": "concluded",
+  "mechanism_class": "fixed_smoothed_polar_with_vector_extension",
+  "next_action": "Keep optimizer_smoothing default0 and project autograd policy disabled. Inspect archived G/E/prior movement around word collapses before a bounded matrix-only versus vector-extension role comparison; no new paid training authorized by this record.",
+  "provenance": {
+    "archive_sha256": "db3969e1e9e7931568780a6de9fa94dae0b85b00598746f4ceeed8f2b6f4adc3",
+    "measured_arm_seconds": 3064.254001415102,
+    "new_analysis_updates": 0,
+    "new_model_sampling": 0,
+    "protocol_sha256": "fd6f6f915cebae8375cae8f8c77d543dbe4662a83a66ecfb1ff50cd964f5e6dc",
+    "report": "reports/forge/smooth-polar-factorial/README.md",
+    "research_updates": 90404,
+    "reserved_seconds": 5280,
+    "scientific_retries": 0,
+    "software_unique_checks": 191,
+    "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+    "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "smooth-polar-factorial-v1-readout",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/smooth-polar-factorial/readout.json",
+    "sha256": "52f6e645d327dcb854abd0fb856909acecbfd49c71c6458b2d3aa9be156806aa"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

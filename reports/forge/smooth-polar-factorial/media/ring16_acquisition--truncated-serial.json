@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "011b79ae0a936f890b4eb250108ec305fe79dcf245de56f02fcff88b1b1a70ec",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "a3aa2b39e48bb2ffbfd27db17ba527cb65f0d312cf76e24cb2c84f18c535775d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/ring16_acquisition--truncated-serial/observed-samples.pt": "c8973f8e4f09daf970e10d8545519efc662637d9dc7cb9790d184126445add40"
+  },
+  "task_id": "ring16_acquisition"
+}

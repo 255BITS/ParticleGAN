@@ -1299,6 +1299,18 @@ tensors are unsupported. Older checkpoints load their stored state, but continue
 under this new rule; reproducing older trajectories requires their original
 package source. No task gate or historical qualification is changed by this rule.
 
+`optimizer_smoothing` is an opt-in, fixed gradient scale for `dualnorm` only.
+Its default `0` preserves the existing update rule and checkpoint packet.
+For a positive scale `lambda`, matrix singular weights become
+`s / hypot(s, lambda)` within the retained numerical rank; vectors and sampled
+prior rows use `g / hypot(norm(g), lambda)`. Matrix aspect scaling and learning
+rates still apply once. Checkpoints record a nonzero scale and reject a
+different scale on restore. Turning smoothing on changes Forge's technique
+signature; varying a positive scale retains that mechanism.
+The [matched CUDA comparison](../reports/forge/smooth-polar-factorial/README.md)
+tests one scale across four runtime combinations. It improves serial Gaussian
+acquisition but fails the word stability gate, so it does not select a new default.
+
 The `dualnorm` prior and `particle_rownorm_only` normalize each sampled prior
 row, without momentum. Unsampled rows stay fixed even if a whole-table
 regularizer creates gradients there. `GANTrainer` and

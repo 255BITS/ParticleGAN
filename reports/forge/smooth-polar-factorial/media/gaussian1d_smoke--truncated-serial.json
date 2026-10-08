@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "1b04fc07f42c432a40ef444ec9dfbaea2871bfb272ef05a1a9eba5d76a6d8bed",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b9218b528049a03dd16fe3979e7881959e43a699c27d2a59a3403270aa1bc8b2",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/gaussian1d_smoke--truncated-serial/evaluator/observed-samples.pt": "8d7a2dfde4721eccf0647d2cbdc48417704eec48c8a1c357f083d36e6fef2edf"
+  },
+  "task_id": "gaussian1d_smoke"
+}

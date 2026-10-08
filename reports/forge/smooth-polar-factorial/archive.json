@@ -1,0 +1,33 @@
+{
+  "additional_pinned_sources": [
+    "configs/forge/tasks/five_word_joint_acquisition.json",
+    "configs/forge/tasks/gaussian1d_smoke.json",
+    "configs/forge/tasks/ring16_acquisition.json",
+    "pyproject.toml",
+    "tests/test_dualnorm_smoothing.py",
+    "tests/test_dualnorm_optimizers.py",
+    "tests/test_forge_boundaries.py",
+    "tests/test_forge_techniques.py",
+    "tests/test_recipe_defaults.py",
+    "tests/test_forge_dualnorm_contracts.py"
+  ],
+  "all_member_bytes_verified": true,
+  "bulk_artifacts_committed": false,
+  "bytes": 28141909,
+  "file_count": 1359,
+  "members_sha256": "b0c8574064dbacd296d6223dec5ad9a618efa36fceb6fee6cc806c29db89923f",
+  "new_sampling": 0,
+  "new_updates": 0,
+  "path": "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/artifacts/smooth-polar-factorial-v1-complete.tar.gz",
+  "previous_export": {
+    "bytes": 28116407,
+    "file_count": 1346,
+    "path": "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/artifacts/smooth-polar-factorial-v1.tar.gz",
+    "reason": "Supplement exact task declarations and software fixtures; original training evidence unchanged.",
+    "sha256": "ef0cf9a597cbafe804d2b2cc52e00d6d64d7ac6f679572146abe58ffa9087f46"
+  },
+  "schema_version": 1,
+  "sha256": "db3969e1e9e7931568780a6de9fa94dae0b85b00598746f4ceeed8f2b6f4adc3",
+  "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+  "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f"
+}

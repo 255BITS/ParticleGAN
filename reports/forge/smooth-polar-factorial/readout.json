@@ -1,0 +1,3407 @@
+{
+  "actual_updates": 90404,
+  "cells": {
+    "five_word_joint_acquisition": {
+      "full-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "full-serial",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "6084b509203328d54e47b777d1b3da31ed738dd177f5beaa4415058720ce42c6",
+        "cost": {
+          "adapter_loop_seconds": 710.4555331169395,
+          "completed_steps": 20001,
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 706.7178138341988,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 24,
+                "seconds": 0.27869119914248586
+              },
+              "sampling": {
+                "calls": 0,
+                "seconds": 0
+              },
+              "training_updates": {
+                "calls": 20001,
+                "seconds": 706.4391226350563
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 900,
+          "wall_seconds": 710.724642080022
+        },
+        "data_sha256": "380e6ad5a81f0ce509879fca575de0b0c1a364b50b0037641582e13329044c64",
+        "gate": "FAIL",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 20001,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 20001,
+                "calls": 20001,
+                "eligible": 20001,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+          "E": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+          "G": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+          "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+        },
+        "original_unsmoothed_gate": "FAIL",
+        "original_unsmoothed_quality": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 3334,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 14,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "sample_count",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1024,
+              "value": 1024
+            },
+            {
+              "margin": 0.050000000000000044,
+              "metric": "quality_fraction",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.95,
+              "value": 1.0
+            },
+            {
+              "margin": -1,
+              "metric": "modes",
+              "op": "==",
+              "status": "FAIL",
+              "threshold": 5,
+              "value": 4
+            },
+            {
+              "margin": -0.1171875,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.1,
+              "value": 0.2171875
+            },
+            {
+              "margin": -1,
+              "metric": "reconstruction_exact",
+              "op": "==",
+              "status": "FAIL",
+              "threshold": 1,
+              "value": 0
+            },
+            {
+              "margin": -0.9,
+              "metric": "minimum_reconstruction_token_probability",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.9,
+              "value": 0.0
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.5619791666666667,
+          "status": "FAIL"
+        },
+        "quality": {
+          "failed_bound_counts": {
+            "mass_tv <= 0.1": 19,
+            "minimum_reconstruction_token_probability >= 0.9": 19,
+            "modes == 5": 19,
+            "quality_fraction >= 0.95": 5,
+            "reconstruction_exact == 1": 19,
+            "sample_count >= 1024": 0
+          },
+          "final_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1953125,
+            "mass_berry": 0.2109375,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.0,
+            "mass_melon": 0.59375,
+            "mass_tv": 0.4046875,
+            "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+            "modes": 3,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 3.684136152764116,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "first_full_pass": 3334,
+          "observations": 24,
+          "passing_observations": 5,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "53097e687fbda6b774446aa20ddf9fb1a20258106975a0c2900552ba8a8caf63",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 17055,
+          "matrix_updates": 234
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "full-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "full-threaded",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "6084b509203328d54e47b777d1b3da31ed738dd177f5beaa4415058720ce42c6",
+        "cost": {
+          "adapter_loop_seconds": 674.8105207069311,
+          "completed_steps": 20001,
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 671.0109018133953,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 24,
+                "seconds": 0.279612849582918
+              },
+              "sampling": {
+                "calls": 0,
+                "seconds": 0
+              },
+              "training_updates": {
+                "calls": 20001,
+                "seconds": 670.7312889638124
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 900,
+          "wall_seconds": 675.0898907399969
+        },
+        "data_sha256": "380e6ad5a81f0ce509879fca575de0b0c1a364b50b0037641582e13329044c64",
+        "gate": "FAIL",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 20001,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 20001,
+                "calls": 20001,
+                "eligible": 20001,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+          "E": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+          "G": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+          "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+        },
+        "original_unsmoothed_gate": "PASS",
+        "original_unsmoothed_quality": {
+          "attempted": true,
+          "confirmation_fraction": 0.9583520823958802,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 19168,
+            "first_pass_step": 5001,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 17,
+            "passing_suffix": 6,
+            "stable_from_seconds": null,
+            "stable_from_step": 15835
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "sample_count",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1024,
+              "value": 1024
+            },
+            {
+              "margin": 0.050000000000000044,
+              "metric": "quality_fraction",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.95,
+              "value": 1.0
+            },
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 5,
+              "value": 5
+            },
+            {
+              "margin": 0.0810546875,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.1,
+              "value": 0.018945312500000006
+            },
+            {
+              "margin": 0,
+              "metric": "reconstruction_exact",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 1,
+              "value": 1
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "minimum_reconstruction_token_probability",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "quality": {
+          "failed_bound_counts": {
+            "mass_tv <= 0.1": 10,
+            "minimum_reconstruction_token_probability >= 0.9": 5,
+            "modes == 5": 10,
+            "quality_fraction >= 0.95": 4,
+            "reconstruction_exact == 1": 5,
+            "sample_count >= 1024": 0
+          },
+          "final_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1875,
+            "mass_berry": 0.0,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.2109375,
+            "mass_melon": 0.40625,
+            "mass_tv": 0.2171875,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 1.033147474534859e-07,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "first_full_pass": 4167,
+          "observations": 24,
+          "passing_observations": 14,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "f946a6db5812941bd0c55813388564a9d74158f500f8aa25bc426d1e0a4de291",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 16891,
+          "matrix_updates": 226
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "truncated-serial",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "6084b509203328d54e47b777d1b3da31ed738dd177f5beaa4415058720ce42c6",
+        "cost": {
+          "adapter_loop_seconds": 721.2628354609478,
+          "completed_steps": 20001,
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 717.5024235893507,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 24,
+                "seconds": 0.27787596662528813
+              },
+              "sampling": {
+                "calls": 0,
+                "seconds": 0
+              },
+              "training_updates": {
+                "calls": 20001,
+                "seconds": 717.2245476227254
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 900,
+          "wall_seconds": 721.6074616920669
+        },
+        "data_sha256": "380e6ad5a81f0ce509879fca575de0b0c1a364b50b0037641582e13329044c64",
+        "gate": "FAIL",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 20001,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 20001,
+                "calls": 20001,
+                "eligible": 20001,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+          "E": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+          "G": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+          "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+        },
+        "original_unsmoothed_gate": "FAIL",
+        "original_unsmoothed_quality": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 1667,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 13,
+            "passing_suffix": 2,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "sample_count",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1024,
+              "value": 1024
+            },
+            {
+              "margin": 0.050000000000000044,
+              "metric": "quality_fraction",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.95,
+              "value": 1.0
+            },
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 5,
+              "value": 5
+            },
+            {
+              "margin": 0.0810546875,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.1,
+              "value": 0.018945312500000006
+            },
+            {
+              "margin": 0,
+              "metric": "reconstruction_exact",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 1,
+              "value": 1
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "minimum_reconstruction_token_probability",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "quality": {
+          "failed_bound_counts": {
+            "mass_tv <= 0.1": 7,
+            "minimum_reconstruction_token_probability >= 0.9": 10,
+            "modes == 5": 7,
+            "quality_fraction >= 0.95": 2,
+            "reconstruction_exact == 1": 8,
+            "sample_count >= 1024": 0
+          },
+          "final_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2109375,
+            "mass_berry": 0.1875,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.2080078125,
+            "mass_melon": 0.1982421875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.0006752923945896327,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 0.9667052128027319,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "first_full_pass": 834,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "bdcec4317cfedc7f5eb9fe16059145ad97fd94f76015698425e598b7fcdd35c1",
+        "sampled_rank_summary": {
+          "actual_removed": 16875,
+          "below_threshold": 16875,
+          "matrix_updates": 226
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "truncated-threaded",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "6084b509203328d54e47b777d1b3da31ed738dd177f5beaa4415058720ce42c6",
+        "cost": {
+          "adapter_loop_seconds": 819.1605536889983,
+          "completed_steps": 20001,
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 815.3738875510171,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 24,
+                "seconds": 0.27890405419748276
+              },
+              "sampling": {
+                "calls": 0,
+                "seconds": 0
+              },
+              "training_updates": {
+                "calls": 20001,
+                "seconds": 815.0949834968196
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 900,
+          "wall_seconds": 819.4389228839427
+        },
+        "data_sha256": "380e6ad5a81f0ce509879fca575de0b0c1a364b50b0037641582e13329044c64",
+        "gate": "FAIL",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 20001,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 20001,
+                "calls": 20001,
+                "eligible": 20001,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+          "E": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+          "G": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+          "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+        },
+        "original_unsmoothed_gate": "FAIL",
+        "original_unsmoothed_quality": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 5001,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 14,
+            "passing_suffix": 3,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "sample_count",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1024,
+              "value": 1024
+            },
+            {
+              "margin": 0.050000000000000044,
+              "metric": "quality_fraction",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.95,
+              "value": 1.0
+            },
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 5,
+              "value": 5
+            },
+            {
+              "margin": 0.0810546875,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.1,
+              "value": 0.018945312500000006
+            },
+            {
+              "margin": 0,
+              "metric": "reconstruction_exact",
+              "op": "==",
+              "status": "PASS",
+              "threshold": 1,
+              "value": 1
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "minimum_reconstruction_token_probability",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "quality": {
+          "failed_bound_counts": {
+            "mass_tv <= 0.1": 8,
+            "minimum_reconstruction_token_probability >= 0.9": 13,
+            "modes == 5": 8,
+            "quality_fraction >= 0.95": 1,
+            "reconstruction_exact == 1": 12,
+            "sample_count >= 1024": 0
+          },
+          "final_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2080078125,
+            "mass_berry": 0.1875,
+            "mass_grape": 0.1982421875,
+            "mass_lemon": 0.1953125,
+            "mass_melon": 0.2109375,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 1.7555881466801267e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "first_full_pass": 2501,
+          "observations": 24,
+          "passing_observations": 11,
+          "passing_suffix": 3
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "058b88c554f9cb92e70699d359e50977acbd32608fd4e02fd79d94652ffd5c7c",
+        "sampled_rank_summary": {
+          "actual_removed": 16600,
+          "below_threshold": 16600,
+          "matrix_updates": 225
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      }
+    },
+    "gaussian1d_smoke": {
+      "full-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "full-serial",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "4233c1f2f7e9f64edd8401a42bb4afe15ccc1f357bd4bab2dc8239225fa7c60b",
+        "cost": {
+          "adapter_loop_seconds": 10.322239069035277,
+          "completed_steps": 1000,
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 9.94352374272421,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 25,
+                "seconds": 0.4415113126160577
+              },
+              "sampling": {
+                "calls": 50,
+                "seconds": 0.09847904497291893
+              },
+              "training_updates": {
+                "calls": 1000,
+                "seconds": 9.403533385135233
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 120,
+          "wall_seconds": 10.635093683027662
+        },
+        "data_sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        },
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1000,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1000,
+                "calls": 1000,
+                "eligible": 1000,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "G": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "prior": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674"
+        },
+        "original_unsmoothed_gate": "FAIL",
+        "original_unsmoothed_quality": {
+          "confirmed_steps": [],
+          "first_confirmed_step": null,
+          "observations": 24,
+          "passing_observations": 0
+        },
+        "quality": {
+          "best_primary_cdf_ks": 0.03814541722871734,
+          "confirmed_states": [
+            {
+              "confirmation_cdf_ks": 0.03301567016985868,
+              "primary_cdf_ks": 0.03814541722871734,
+              "step": 459
+            }
+          ],
+          "confirmed_steps": [
+            459
+          ],
+          "failed_bound_counts": {
+            "cdf_ks <= 0.05": 23,
+            "finite_fraction == 1.0": 0,
+            "mean_error_sigma <= 0.2": 14,
+            "sample_count >= 4096": 0,
+            "std_ratio <= 1.2": 1,
+            "std_ratio >= 0.8": 4
+          },
+          "final_confirmation_cdf_ks": 0.23441752861402487,
+          "final_metrics": {
+            "cdf_ks": 0.2254772864907263,
+            "finite_fraction": 1.0,
+            "mean": 1.820665807405021,
+            "mean_error_sigma": 0.3586683851899579,
+            "sample_count": 4096,
+            "std": 0.5458742941653691,
+            "std_ratio": 1.0917485883307383,
+            "step": 1000
+          },
+          "first_full_pass": 459,
+          "observations": 24,
+          "passing_observations": 1,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "d24d8410779de5526c7df3c174f02f37bb57b766f0499bf5247f65de3a9e148f",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 798,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "full-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "full-threaded",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "4233c1f2f7e9f64edd8401a42bb4afe15ccc1f357bd4bab2dc8239225fa7c60b",
+        "cost": {
+          "adapter_loop_seconds": 10.621236075996421,
+          "completed_steps": 1000,
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 10.233420928823762,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 25,
+                "seconds": 0.43688178376760334
+              },
+              "sampling": {
+                "calls": 50,
+                "seconds": 0.09816172625869513
+              },
+              "training_updates": {
+                "calls": 1000,
+                "seconds": 9.698377418797463
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 120,
+          "wall_seconds": 10.907291103038006
+        },
+        "data_sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        },
+        "gate": "FAIL",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1000,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1000,
+                "calls": 1000,
+                "eligible": 1000,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "G": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "prior": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674"
+        },
+        "original_unsmoothed_gate": "PASS",
+        "original_unsmoothed_quality": {
+          "confirmed_steps": [
+            917
+          ],
+          "first_confirmed_step": 917,
+          "observations": 24,
+          "passing_observations": 2
+        },
+        "quality": {
+          "best_primary_cdf_ks": 0.059824285119170956,
+          "confirmed_states": [],
+          "confirmed_steps": [],
+          "failed_bound_counts": {
+            "cdf_ks <= 0.05": 24,
+            "finite_fraction == 1.0": 0,
+            "mean_error_sigma <= 0.2": 13,
+            "sample_count >= 4096": 0,
+            "std_ratio <= 1.2": 2,
+            "std_ratio >= 0.8": 4
+          },
+          "final_confirmation_cdf_ks": 0.1398086765076454,
+          "final_metrics": {
+            "cdf_ks": 0.14532563600277093,
+            "finite_fraction": 1.0,
+            "mean": 2.174973658286035,
+            "mean_error_sigma": 0.3499473165720701,
+            "sample_count": 4096,
+            "std": 0.6843384256102032,
+            "std_ratio": 1.3686768512204064,
+            "step": 1000
+          },
+          "first_full_pass": null,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "900d66d9ac74d50d3ca7d90d490b87436f012438ace3458ea539b7d2b4d120b6",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 959,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "truncated-serial",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "4233c1f2f7e9f64edd8401a42bb4afe15ccc1f357bd4bab2dc8239225fa7c60b",
+        "cost": {
+          "adapter_loop_seconds": 10.312694009044208,
+          "completed_steps": 1000,
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 9.927448731847107,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 25,
+                "seconds": 0.43913988524582237
+              },
+              "sampling": {
+                "calls": 50,
+                "seconds": 0.10853448580019176
+              },
+              "training_updates": {
+                "calls": 1000,
+                "seconds": 9.379774360801093
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 120,
+          "wall_seconds": 10.642680930090137
+        },
+        "data_sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        },
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1000,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1000,
+                "calls": 1000,
+                "eligible": 1000,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "G": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "prior": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674"
+        },
+        "original_unsmoothed_gate": "FAIL",
+        "original_unsmoothed_quality": {
+          "confirmed_steps": [],
+          "first_confirmed_step": null,
+          "observations": 24,
+          "passing_observations": 1
+        },
+        "quality": {
+          "best_primary_cdf_ks": 0.02958269007115144,
+          "confirmed_states": [
+            {
+              "confirmation_cdf_ks": 0.035876930674063834,
+              "primary_cdf_ks": 0.02958269007115144,
+              "step": 459
+            },
+            {
+              "confirmation_cdf_ks": 0.04152008514093679,
+              "primary_cdf_ks": 0.04547442828314541,
+              "step": 625
+            },
+            {
+              "confirmation_cdf_ks": 0.03612024069685882,
+              "primary_cdf_ks": 0.040773543973072146,
+              "step": 750
+            }
+          ],
+          "confirmed_steps": [
+            459,
+            625,
+            750
+          ],
+          "failed_bound_counts": {
+            "cdf_ks <= 0.05": 20,
+            "finite_fraction == 1.0": 0,
+            "mean_error_sigma <= 0.2": 14,
+            "sample_count >= 4096": 0,
+            "std_ratio <= 1.2": 3,
+            "std_ratio >= 0.8": 3
+          },
+          "final_confirmation_cdf_ks": 0.13329153528837429,
+          "final_metrics": {
+            "cdf_ks": 0.13706196910468005,
+            "finite_fraction": 1.0,
+            "mean": 1.8768611113246152,
+            "mean_error_sigma": 0.2462777773507696,
+            "sample_count": 4096,
+            "std": 0.5705471551846502,
+            "std_ratio": 1.1410943103693003,
+            "step": 1000
+          },
+          "first_full_pass": 375,
+          "observations": 24,
+          "passing_observations": 4,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "bbfd0061848de0944059efaa0cbe2b548f7462cf341a9c250c7a4ecc8960a8ce",
+        "sampled_rank_summary": {
+          "actual_removed": 835,
+          "below_threshold": 835,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "truncated-threaded",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "4233c1f2f7e9f64edd8401a42bb4afe15ccc1f357bd4bab2dc8239225fa7c60b",
+        "cost": {
+          "adapter_loop_seconds": 10.648200874915347,
+          "completed_steps": 1000,
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 10.269783823401667,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 25,
+                "seconds": 0.4387281753588468
+              },
+              "sampling": {
+                "calls": 50,
+                "seconds": 0.09879360371269286
+              },
+              "training_updates": {
+                "calls": 1000,
+                "seconds": 9.732262044330128
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 120,
+          "wall_seconds": 13.056868450948969
+        },
+        "data_sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        },
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1000,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1000,
+                "calls": 1000,
+                "eligible": 1000,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1000,
+            "generator": 1000,
+            "prior": 1000
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "G": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "prior": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674"
+        },
+        "original_unsmoothed_gate": "PASS",
+        "original_unsmoothed_quality": {
+          "confirmed_steps": [
+            459,
+            667,
+            792,
+            1000
+          ],
+          "first_confirmed_step": 459,
+          "observations": 24,
+          "passing_observations": 5
+        },
+        "quality": {
+          "best_primary_cdf_ks": 0.03873536214959272,
+          "confirmed_states": [
+            {
+              "confirmation_cdf_ks": 0.03988678410640728,
+              "primary_cdf_ks": 0.03873536214959272,
+              "step": 250
+            }
+          ],
+          "confirmed_steps": [
+            250
+          ],
+          "failed_bound_counts": {
+            "cdf_ks <= 0.05": 23,
+            "finite_fraction == 1.0": 0,
+            "mean_error_sigma <= 0.2": 10,
+            "sample_count >= 4096": 0,
+            "std_ratio <= 1.2": 1,
+            "std_ratio >= 0.8": 4
+          },
+          "final_confirmation_cdf_ks": 0.14591891589707628,
+          "final_metrics": {
+            "cdf_ks": 0.14865064484920865,
+            "finite_fraction": 1.0,
+            "mean": 2.23367270892777,
+            "mean_error_sigma": 0.4673454178555403,
+            "sample_count": 4096,
+            "std": 0.6963645535137128,
+            "std_ratio": 1.3927291070274257,
+            "step": 1000
+          },
+          "first_full_pass": 250,
+          "observations": 24,
+          "passing_observations": 1,
+          "passing_suffix": 0
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "7c3efaf57a1194c051149951e8add81a09f0eed8baa0e626c8c9fd9beb567920",
+        "sampled_rank_summary": {
+          "actual_removed": 877,
+          "below_threshold": 877,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      }
+    },
+    "ring16_acquisition": {
+      "full-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "full-serial",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "ae77755e766bd7777f16ead64ccee02973e6283db4d84ef04a95498dec14ef87",
+        "cost": {
+          "adapter_loop_seconds": 22.428037359029986,
+          "completed_steps": 1600,
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 21.713900838745758,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 96,
+                "seconds": 1.8460968504659832
+              },
+              "sampling": {
+                "calls": 96,
+                "seconds": 0.03025086596608162
+              },
+              "training_updates": {
+                "calls": 1600,
+                "seconds": 19.837553122313693
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 300,
+          "wall_seconds": 22.65053770900704
+        },
+        "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1600,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1600,
+                "calls": 1600,
+                "eligible": 1600,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "G": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "prior": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36"
+        },
+        "original_unsmoothed_gate": null,
+        "original_unsmoothed_quality": null,
+        "quality": {
+          "failed_bound_counts": {
+            "component_covariance_error <= 0.85": 48,
+            "component_min_eigen_ratio >= 0.15": 1,
+            "hq >= 0.85": 34,
+            "mass_tv <= 0.15": 3,
+            "modes >= 16": 25,
+            "sample_count >= 4096": 0
+          },
+          "final_metrics": {
+            "component_core_covariance_error": 0.4163132905960083,
+            "component_core_covariance_errors": [
+              0.41249462962150574,
+              0.8851835131645203,
+              0.5042839050292969,
+              0.2956376373767853,
+              0.2754068672657013,
+              0.5264783501625061,
+              0.6145637035369873,
+              0.5939191579818726,
+              0.2731386423110962,
+              0.38138651847839355,
+              0.3394986689090729,
+              0.30432644486427307,
+              0.27869942784309387,
+              0.2992991805076599,
+              0.3610675632953644,
+              0.31562843918800354
+            ],
+            "component_core_eigen_ratios": [
+              0.581553041934967,
+              0.3863842487335205,
+              0.36809042096138,
+              0.589713990688324,
+              0.6160250306129456,
+              0.42558279633522034,
+              0.2407229244709015,
+              0.5687827467918396,
+              0.6141805648803711,
+              0.5088791251182556,
+              0.7188087701797485,
+              0.6632277965545654,
+              0.6058622598648071,
+              0.5901345014572144,
+              0.5536598563194275,
+              0.5722215175628662
+            ],
+            "component_core_min_eigen_ratio": 0.2407229244709015,
+            "component_counts": [
+              234,
+              218,
+              224,
+              300,
+              319,
+              234,
+              215,
+              212,
+              311,
+              248,
+              245,
+              211,
+              264,
+              291,
+              300,
+              270
+            ],
+            "component_covariance_error": 0.6399354673922062,
+            "component_covariance_errors": [
+              0.516772449016571,
+              1.2652709484100342,
+              0.5875371098518372,
+              0.2930764853954315,
+              0.2685563564300537,
+              0.5264783501625061,
+              0.8031265139579773,
+              0.712496280670166,
+              1.4959180355072021,
+              1.8010003566741943,
+              0.4016859233379364,
+              0.3189956843852997,
+              0.2854209244251251,
+              0.2992991805076599,
+              0.3477044403553009,
+              0.31562843918800354
+            ],
+            "component_mass": [
+              0.05712890625,
+              0.05322265625,
+              0.0546875,
+              0.0732421875,
+              0.077880859375,
+              0.05712890625,
+              0.052490234375,
+              0.0517578125,
+              0.075927734375,
+              0.060546875,
+              0.059814453125,
+              0.051513671875,
+              0.064453125,
+              0.071044921875,
+              0.0732421875,
+              0.06591796875
+            ],
+            "component_min_eigen_ratio": 0.2514459490776062,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.05128205195069313,
+              0.2293577939271927,
+              0.1294642835855484,
+              0.04333333298563957,
+              0.05329153686761856,
+              0.0,
+              0.1302325576543808,
+              0.11320754885673523,
+              0.04823151230812073,
+              0.04032257944345474,
+              0.04897959157824516,
+              0.061611372977495193,
+              0.03787878900766373,
+              0.020618556067347527,
+              0.019999999552965164,
+              0.018518518656492233
+            ],
+            "covariance_error": 0.07157818228006363,
+            "hq": 0.93896484375,
+            "hq_component_counts": [
+              222,
+              168,
+              195,
+              287,
+              302,
+              234,
+              187,
+              188,
+              296,
+              238,
+              233,
+              198,
+              254,
+              285,
+              294,
+              265
+            ],
+            "mass_tv": 0.064208984375,
+            "max_component_spill": 0.2293577939271927,
+            "mean_error": 0.04689876362681389,
+            "min_hq_mass_ratio": 0.65625,
+            "min_mass_ratio": 0.82421875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.040836434851213285,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "first_full_pass": 750,
+          "observations": 96,
+          "passing_observations": 48,
+          "passing_suffix": 47
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "558d20d4f5526a793098d8646a2391567bb22ebdc419a20201548390229488b1",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 226,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "full-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "full-threaded",
+          "truncation": false
+        },
+        "baseline_recipe_sha256": "ae77755e766bd7777f16ead64ccee02973e6283db4d84ef04a95498dec14ef87",
+        "cost": {
+          "adapter_loop_seconds": 23.2458145970013,
+          "completed_steps": 1600,
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 22.523758367751725,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 96,
+                "seconds": 1.8501914303051308
+              },
+              "sampling": {
+                "calls": 96,
+                "seconds": 0.030136759392917156
+              },
+              "training_updates": {
+                "calls": 1600,
+                "seconds": 20.643430178053677
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 300,
+          "wall_seconds": 23.483229281031527
+        },
+        "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1600,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1600,
+                "calls": 1600,
+                "eligible": 1600,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "G": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "prior": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36"
+        },
+        "original_unsmoothed_gate": null,
+        "original_unsmoothed_quality": null,
+        "quality": {
+          "failed_bound_counts": {
+            "component_covariance_error <= 0.85": 45,
+            "component_min_eigen_ratio >= 0.15": 1,
+            "hq >= 0.85": 30,
+            "mass_tv <= 0.15": 4,
+            "modes >= 16": 16,
+            "sample_count >= 4096": 0
+          },
+          "final_metrics": {
+            "component_core_covariance_error": 0.40197967644780874,
+            "component_core_covariance_errors": [
+              0.6692615151405334,
+              0.8166055679321289,
+              0.484325110912323,
+              0.35201042890548706,
+              0.19679707288742065,
+              0.4714111387729645,
+              0.4669351577758789,
+              0.4224628210067749,
+              0.2555285096168518,
+              0.17148426175117493,
+              0.5161806344985962,
+              0.4881497621536255,
+              0.24400778114795685,
+              0.30651822686195374,
+              0.29950278997421265,
+              0.2704940438270569
+            ],
+            "component_core_eigen_ratios": [
+              0.5658695697784424,
+              0.428574800491333,
+              0.43783414363861084,
+              0.5052234530448914,
+              0.7396643757820129,
+              0.42774006724357605,
+              0.3399913012981415,
+              0.7903113961219788,
+              0.6651580333709717,
+              0.7577844262123108,
+              0.5977675914764404,
+              0.5639541149139404,
+              0.7013958096504211,
+              0.5719146728515625,
+              0.6696237921714783,
+              0.6177894473075867
+            ],
+            "component_core_min_eigen_ratio": 0.3399913012981415,
+            "component_counts": [
+              260,
+              200,
+              212,
+              286,
+              362,
+              208,
+              260,
+              231,
+              316,
+              285,
+              217,
+              221,
+              259,
+              275,
+              263,
+              241
+            ],
+            "component_covariance_error": 0.5573345785960555,
+            "component_covariance_errors": [
+              0.709101140499115,
+              0.9885368347167969,
+              0.484325110912323,
+              0.33868226408958435,
+              0.21954339742660522,
+              0.4714111387729645,
+              0.4828486442565918,
+              0.9228633046150208,
+              2.0714049339294434,
+              0.17148426175117493,
+              0.5161806344985962,
+              0.4881497621536255,
+              0.22384048998355865,
+              0.29109716415405273,
+              0.2673901319503784,
+              0.2704940438270569
+            ],
+            "component_mass": [
+              0.0634765625,
+              0.048828125,
+              0.0517578125,
+              0.06982421875,
+              0.08837890625,
+              0.05078125,
+              0.0634765625,
+              0.056396484375,
+              0.0771484375,
+              0.069580078125,
+              0.052978515625,
+              0.053955078125,
+              0.063232421875,
+              0.067138671875,
+              0.064208984375,
+              0.058837890625
+            ],
+            "component_min_eigen_ratio": 0.33886560797691345,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.09615384787321091,
+              0.125,
+              0.04716981202363968,
+              0.0699300691485405,
+              0.03591160103678703,
+              0.009615384973585606,
+              0.0923076942563057,
+              0.16017316281795502,
+              0.06962025165557861,
+              0.021052632480859756,
+              0.032258063554763794,
+              0.04977375641465187,
+              0.019305018708109856,
+              0.03999999910593033,
+              0.03802281245589256,
+              0.02489626593887806
+            ],
+            "covariance_error": 0.063225656747818,
+            "hq": 0.94287109375,
+            "hq_component_counts": [
+              235,
+              175,
+              202,
+              266,
+              349,
+              206,
+              236,
+              194,
+              294,
+              279,
+              210,
+              210,
+              254,
+              264,
+              253,
+              235
+            ],
+            "mass_tv": 0.06396484375,
+            "max_component_spill": 0.16017316281795502,
+            "mean_error": 0.014473767951130867,
+            "min_hq_mass_ratio": 0.68359375,
+            "min_mass_ratio": 0.78125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.030749607568039735,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "first_full_pass": 684,
+          "observations": 96,
+          "passing_observations": 51,
+          "passing_suffix": 45
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "6b5d936ed5f0bb66182e7140f546645636272c9cb429dc190dd178538992b532",
+        "sampled_rank_summary": {
+          "actual_removed": 0,
+          "below_threshold": 198,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-serial": {
+        "arm": {
+          "autograd_multithreading": false,
+          "id": "truncated-serial",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "ae77755e766bd7777f16ead64ccee02973e6283db4d84ef04a95498dec14ef87",
+        "cost": {
+          "adapter_loop_seconds": 22.498131777043454,
+          "completed_steps": 1600,
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 21.75273347517941,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 96,
+                "seconds": 1.8987067750422284
+              },
+              "sampling": {
+                "calls": 96,
+                "seconds": 0.029947210801765323
+              },
+              "training_updates": {
+                "calls": 1600,
+                "seconds": 19.824079489335418
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 300,
+          "wall_seconds": 22.718527643941343
+        },
+        "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1600,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1600,
+                "calls": 1600,
+                "eligible": 1600,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "G": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "prior": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36"
+        },
+        "original_unsmoothed_gate": null,
+        "original_unsmoothed_quality": null,
+        "quality": {
+          "failed_bound_counts": {
+            "component_covariance_error <= 0.85": 61,
+            "component_min_eigen_ratio >= 0.15": 1,
+            "hq >= 0.85": 34,
+            "mass_tv <= 0.15": 4,
+            "modes >= 16": 20,
+            "sample_count >= 4096": 0
+          },
+          "final_metrics": {
+            "component_core_covariance_error": 0.36285749822854996,
+            "component_core_covariance_errors": [
+              0.3530040681362152,
+              0.5287283062934875,
+              0.5881245732307434,
+              0.40081462264060974,
+              0.16346204280853271,
+              0.278401255607605,
+              0.6573161482810974,
+              0.42064180970191956,
+              0.31918519735336304,
+              0.4086814820766449,
+              0.3321419656276703,
+              0.2677959203720093,
+              0.2621191143989563,
+              0.17395669221878052,
+              0.3523991107940674,
+              0.29894766211509705
+            ],
+            "component_core_eigen_ratios": [
+              0.5104088187217712,
+              0.3594696521759033,
+              0.5355672836303711,
+              0.7440730333328247,
+              0.8210068941116333,
+              0.6065327525138855,
+              0.4080928564071655,
+              0.6563128232955933,
+              0.5495072603225708,
+              0.4528666138648987,
+              0.8864911794662476,
+              0.8453778028488159,
+              0.6860116720199585,
+              0.7559719085693359,
+              0.5596607327461243,
+              0.7628175616264343
+            ],
+            "component_core_min_eigen_ratio": 0.3594696521759033,
+            "component_counts": [
+              291,
+              192,
+              209,
+              223,
+              366,
+              230,
+              223,
+              233,
+              319,
+              239,
+              266,
+              164,
+              326,
+              315,
+              237,
+              263
+            ],
+            "component_covariance_error": 0.6182709094136953,
+            "component_covariance_errors": [
+              0.3530040681362152,
+              0.5508059859275818,
+              0.5881245732307434,
+              0.5568698644638062,
+              2.5816292762756348,
+              0.14904125034809113,
+              0.8585549592971802,
+              0.7071505188941956,
+              0.9842114448547363,
+              0.4086814820766449,
+              0.3835424482822418,
+              0.2677959203720093,
+              0.19908346235752106,
+              0.6524925231933594,
+              0.3523991107940674,
+              0.29894766211509705
+            ],
+            "component_mass": [
+              0.071044921875,
+              0.046875,
+              0.051025390625,
+              0.054443359375,
+              0.08935546875,
+              0.05615234375,
+              0.054443359375,
+              0.056884765625,
+              0.077880859375,
+              0.058349609375,
+              0.06494140625,
+              0.0400390625,
+              0.07958984375,
+              0.076904296875,
+              0.057861328125,
+              0.064208984375
+            ],
+            "component_min_eigen_ratio": 0.35778170824050903,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.0,
+              0.0520833320915699,
+              0.0717703327536583,
+              0.07174888253211975,
+              0.12021858245134354,
+              0.0782608687877655,
+              0.08071748912334442,
+              0.15021459758281708,
+              0.08777429163455963,
+              0.012552301399409771,
+              0.09022556245326996,
+              0.024390242993831635,
+              0.02760736271739006,
+              0.08571428805589676,
+              0.008438818156719208,
+              0.01901140622794628
+            ],
+            "covariance_error": 0.07267755270004272,
+            "hq": 0.93701171875,
+            "hq_component_counts": [
+              291,
+              182,
+              194,
+              207,
+              322,
+              212,
+              205,
+              198,
+              291,
+              236,
+              242,
+              160,
+              317,
+              288,
+              235,
+              258
+            ],
+            "mass_tv": 0.08642578125,
+            "max_component_spill": 0.15021459758281708,
+            "mean_error": 0.018788490444421768,
+            "min_hq_mass_ratio": 0.625,
+            "min_mass_ratio": 0.640625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.03317259108387282,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "first_full_pass": 1034,
+          "observations": 96,
+          "passing_observations": 35,
+          "passing_suffix": 35
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "2725768ba53a4b2d3ad0332e13944e82d9395a72e75641715c0682fbaf3aa149",
+        "sampled_rank_summary": {
+          "actual_removed": 197,
+          "below_threshold": 197,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      },
+      "truncated-threaded": {
+        "arm": {
+          "autograd_multithreading": true,
+          "id": "truncated-threaded",
+          "truncation": true
+        },
+        "baseline_recipe_sha256": "ae77755e766bd7777f16ead64ccee02973e6283db4d84ef04a95498dec14ef87",
+        "cost": {
+          "adapter_loop_seconds": 23.081057747942396,
+          "completed_steps": 1600,
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "phase_timing": {
+            "coverage": "partial_adapter",
+            "measured_seconds": 22.369493901729584,
+            "method": "exclusive_synchronized_wall_time",
+            "phases": {
+              "evaluation": {
+                "calls": 96,
+                "seconds": 1.8338606837205589
+              },
+              "sampling": {
+                "calls": 96,
+                "seconds": 0.02984102559275925
+              },
+              "training_updates": {
+                "calls": 1600,
+                "seconds": 20.505792192416266
+              }
+            },
+            "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+          },
+          "reservation_seconds": 300,
+          "wall_seconds": 23.298855217988603
+        },
+        "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate": "PASS",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_anchor": {
+                "applied": 0,
+                "calls": 1600,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              },
+              "critic_penalty": {
+                "applied": 1600,
+                "calls": 1600,
+                "eligible": 1600,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "reason": "disabled by the declared formulation; no activation claimed",
+                "requested": false
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 1600,
+            "generator": 1600,
+            "prior": 1600
+          },
+          "unintended_rng_deviations": 0
+        },
+        "initial_models": {
+          "D": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "G": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "prior": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36"
+        },
+        "original_unsmoothed_gate": null,
+        "original_unsmoothed_quality": null,
+        "quality": {
+          "failed_bound_counts": {
+            "component_covariance_error <= 0.85": 51,
+            "component_min_eigen_ratio >= 0.15": 1,
+            "hq >= 0.85": 31,
+            "mass_tv <= 0.15": 4,
+            "modes >= 16": 12,
+            "sample_count >= 4096": 0
+          },
+          "final_metrics": {
+            "component_core_covariance_error": 0.33803195552900434,
+            "component_core_covariance_errors": [
+              0.26068976521492004,
+              0.7522665858268738,
+              0.48119157552719116,
+              0.35736143589019775,
+              0.1030890941619873,
+              0.36480024456977844,
+              0.5031192898750305,
+              0.7296570539474487,
+              0.22425977885723114,
+              0.12455416470766068,
+              0.4880133271217346,
+              0.3037404417991638,
+              0.263188898563385,
+              0.1459955871105194,
+              0.17453213036060333,
+              0.13205191493034363
+            ],
+            "component_core_eigen_ratios": [
+              0.6545138359069824,
+              0.4535953998565674,
+              0.45137572288513184,
+              0.5736092329025269,
+              0.9381376504898071,
+              0.515366792678833,
+              0.28852829337120056,
+              0.3634737730026245,
+              0.7019851207733154,
+              0.896868109703064,
+              0.5411502122879028,
+              0.6475799679756165,
+              0.7163264155387878,
+              0.793531060218811,
+              0.8078709840774536,
+              0.8233418464660645
+            ],
+            "component_core_min_eigen_ratio": 0.28852829337120056,
+            "component_counts": [
+              287,
+              195,
+              218,
+              225,
+              313,
+              238,
+              244,
+              196,
+              302,
+              277,
+              231,
+              216,
+              247,
+              322,
+              259,
+              326
+            ],
+            "component_covariance_error": 0.38510568672791123,
+            "component_covariance_errors": [
+              0.26068976521492004,
+              0.9598271250724792,
+              0.5798245668411255,
+              0.42254313826560974,
+              0.1030890941619873,
+              0.36480024456977844,
+              0.4998888373374939,
+              0.8446934819221497,
+              0.22425977885723114,
+              0.12455416470766068,
+              0.5235909819602966,
+              0.3802902102470398,
+              0.31150946021080017,
+              0.17635691165924072,
+              0.24431270360946655,
+              0.14146052300930023
+            ],
+            "component_mass": [
+              0.070068359375,
+              0.047607421875,
+              0.05322265625,
+              0.054931640625,
+              0.076416015625,
+              0.05810546875,
+              0.0595703125,
+              0.0478515625,
+              0.07373046875,
+              0.067626953125,
+              0.056396484375,
+              0.052734375,
+              0.060302734375,
+              0.07861328125,
+              0.063232421875,
+              0.07958984375
+            ],
+            "component_min_eigen_ratio": 0.2940426468849182,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.02090592309832573,
+              0.18974359333515167,
+              0.10091742873191833,
+              0.07999999821186066,
+              0.03194888308644295,
+              0.012605042196810246,
+              0.032786883413791656,
+              0.0714285746216774,
+              0.03311258181929588,
+              0.018050542101264,
+              0.05627705529332161,
+              0.0555555559694767,
+              0.08097165822982788,
+              0.05590062215924263,
+              0.0617760606110096,
+              0.02760736271739006
+            ],
+            "covariance_error": 0.059103142470121384,
+            "hq": 0.946044921875,
+            "hq_component_counts": [
+              281,
+              158,
+              196,
+              207,
+              303,
+              235,
+              236,
+              182,
+              292,
+              272,
+              218,
+              204,
+              227,
+              304,
+              243,
+              317
+            ],
+            "mass_tv": 0.07177734375,
+            "max_component_spill": 0.18974359333515167,
+            "mean_error": 0.06096716225147247,
+            "min_hq_mass_ratio": 0.6171875,
+            "min_mass_ratio": 0.76171875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.04654803084545775,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "first_full_pass": 867,
+          "observations": 96,
+          "passing_observations": 45,
+          "passing_suffix": 45
+        },
+        "rank_scope": "only steps 1,2 and 24 evenly spaced checkpoints",
+        "receipt_sha256": "5aa3da7b2f494576a6767e0f4e9d0739638395c666af509c15ded08f2c12665d",
+        "sampled_rank_summary": {
+          "actual_removed": 223,
+          "below_threshold": 223,
+          "matrix_updates": 156
+        },
+        "source_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+        "source_digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "source_manifest_sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+      }
+    }
+  },
+  "completed_runs": 12,
+  "cross_arm_invariants": {
+    "five_word_joint_acquisition": {
+      "same_base_recipe": true,
+      "same_data": true,
+      "same_final_named_streams": true,
+      "same_initial_models": true
+    },
+    "gaussian1d_smoke": {
+      "same_base_recipe": true,
+      "same_data": true,
+      "same_final_named_streams": true,
+      "same_initial_models": true
+    },
+    "ring16_acquisition": {
+      "same_base_recipe": true,
+      "same_data": true,
+      "same_final_named_streams": true,
+      "same_initial_models": true
+    }
+  },
+  "default_adoption": false,
+  "id": "smooth-polar-factorial-v1",
+  "media": {
+    "five_word_joint_acquisition--full-serial": {
+      "gif_sha256": "203ee072f99307c35fb2843e66414f220f93ed0bd26f340b9a2f4d458cc8d53e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "666c5b205171d22e11ee00b1651f66747a9d094790648a50a2111e4ae90019af",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/five_word_joint_acquisition--full-serial/observed-records.pt": "d0c0b465cbbccbedf8db3729d8324205491b80c05959351158e1cc49ac661887"
+      },
+      "task_id": "five_word_joint_acquisition"
+    },
+    "five_word_joint_acquisition--full-threaded": {
+      "gif_sha256": "fc448aaf68d6a5cabd21b74a69b9c3a17a8dda8a95c2204a8cac4af534a4a617",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "10eb20712045d08f720a68fbe87c7e82a1a41ea6d1e304a854023224765fd9ac",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/five_word_joint_acquisition--full-threaded/observed-records.pt": "5e0747cade00c0b49829c3209b22dcdd6045fb9355460a63e30706d57f576a04"
+      },
+      "task_id": "five_word_joint_acquisition"
+    },
+    "five_word_joint_acquisition--truncated-serial": {
+      "gif_sha256": "5987e92c7556d602e25a8aa0446ab5591cb22503bb3163a9610be1200863f5be",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "51bf3bf651dcdf618750523937d7083922246158636c44029b2ab9e5ff023255",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/five_word_joint_acquisition--truncated-serial/observed-records.pt": "7b9f5f17828fde732347a2ae9414983400c9cf01f98422ad749d10bd1c0a22d9"
+      },
+      "task_id": "five_word_joint_acquisition"
+    },
+    "five_word_joint_acquisition--truncated-threaded": {
+      "gif_sha256": "0ad798cf226cb0136bcc81ddd3908dd00641d287c6b58d67aeb71ab0daa28eb6",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6d69a85b9ba2ccd2058f9c415fda342f3e94983dfeae0e5770f608205996f6e2",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/five_word_joint_acquisition--truncated-threaded/observed-records.pt": "f40163f4fe00afb526009f267d0d10a7b019fafdbd0446246cf8b769444b35dc"
+      },
+      "task_id": "five_word_joint_acquisition"
+    },
+    "gaussian1d_smoke--full-serial": {
+      "gif_sha256": "85bd1ef1da1dd0c73511117a3020dc672501be722a362694c68a3dd3fe882482",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d679614ce28b144d2c41aba549630862116f89af1a6781833ea7a246c48c5e69",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/gaussian1d_smoke--full-serial/evaluator/observed-samples.pt": "f7c43bad674bacf0e974a645ccad487a6f1d53af1154641b55310925cd4866b4"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "gaussian1d_smoke--full-threaded": {
+      "gif_sha256": "dea8c0194bf558ff55f52d84a892292d7e0ced1d29aae0ca54fd87485ae441f9",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "81afb5ff23a1c8afbd52c12cd38405677a9821f2ddeda55db594479dbdaf207b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/gaussian1d_smoke--full-threaded/evaluator/observed-samples.pt": "0051945ad342d7680839bc15a1151d0179ad3f8a1ad307e645ade589c5930b8b"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "gaussian1d_smoke--truncated-serial": {
+      "gif_sha256": "1b04fc07f42c432a40ef444ec9dfbaea2871bfb272ef05a1a9eba5d76a6d8bed",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b9218b528049a03dd16fe3979e7881959e43a699c27d2a59a3403270aa1bc8b2",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/gaussian1d_smoke--truncated-serial/evaluator/observed-samples.pt": "8d7a2dfde4721eccf0647d2cbdc48417704eec48c8a1c357f083d36e6fef2edf"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "gaussian1d_smoke--truncated-threaded": {
+      "gif_sha256": "7da60033aa644f22dd0eb8796a17ed495248447ba4bf65de477fcb382dcab833",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "1476c52309b0fa205daad64b710ab2956ef0e4507cc34573e8891feb8eed63f5",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/gaussian1d_smoke--truncated-threaded/evaluator/observed-samples.pt": "8e43a9c2a6ad5efba1e8cd38be4cf5c4378686d7ebcd128da9d6a1028309108f"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "ring16_acquisition--full-serial": {
+      "gif_sha256": "f253d4876ce2bd1db108b41aca2aaa8ca82a1bc5d6ddc3c12bce5b9a13d3ba26",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 96,
+      "observations_sha256": "7040d25a70d4a7f1cf5835acdb9765e342410be256fbc7b5e27cc8362fe5ea04",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/ring16_acquisition--full-serial/observed-samples.pt": "cf647768e5eeedd250cbb4c94261cd15db682972a793a281a59334a21b75a946"
+      },
+      "task_id": "ring16_acquisition"
+    },
+    "ring16_acquisition--full-threaded": {
+      "gif_sha256": "d5997dfaacdbcc69ad87f1eb2a43ec41a124ac02a1109c866c7f785f04792670",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 96,
+      "observations_sha256": "436af4f16291b90990924b9c93dc2e6a3858c2ce24237faa6e8d0add1fcb0684",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/ring16_acquisition--full-threaded/observed-samples.pt": "71e39545c7426eaf806fcd87fceb757e0971364b74e15eed538d5880625a7107"
+      },
+      "task_id": "ring16_acquisition"
+    },
+    "ring16_acquisition--truncated-serial": {
+      "gif_sha256": "011b79ae0a936f890b4eb250108ec305fe79dcf245de56f02fcff88b1b1a70ec",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 96,
+      "observations_sha256": "a3aa2b39e48bb2ffbfd27db17ba527cb65f0d312cf76e24cb2c84f18c535775d",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/ring16_acquisition--truncated-serial/observed-samples.pt": "c8973f8e4f09daf970e10d8545519efc662637d9dc7cb9790d184126445add40"
+      },
+      "task_id": "ring16_acquisition"
+    },
+    "ring16_acquisition--truncated-threaded": {
+      "gif_sha256": "ace052b632ddbc46ed57e99424621043528d11b4dd6cd04532281f7f7764308b",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 96,
+      "observations_sha256": "1891d8317c386233ce5175422c0374737dfa48fcecd39f5d05e2b39a4016619d",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-smooth-polar-factorial/runs/forge/smooth-polar-factorial-v1/ring16_acquisition--truncated-threaded/observed-samples.pt": "710f8cf087b2701d96d889a4edf9dfe44a03ff82a6faea390e252de3a3c10287"
+      },
+      "task_id": "ring16_acquisition"
+    }
+  },
+  "new_analysis_updates": 0,
+  "new_sampling": 0,
+  "ordinary_qualification_changes": 0,
+  "original_control_bindings": {
+    "gaussian": {
+      "pull_request": "https://github.com/255BITS/ParticleGAN/pull/342",
+      "readout_path": "reports/forge/bcap-gaussian-regression/readout.json",
+      "readout_sha256": "abf70736d2749814a4bed2c6bef9ec94daaef06fbca7873e4068f045941983b7",
+      "source_commit": "ba593aab5c0e150da1c36005aece17816f074c7b"
+    },
+    "words": {
+      "pull_request": "https://github.com/255BITS/ParticleGAN/pull/343",
+      "readout_path": "reports/forge/bcap-word-regression/readout.json",
+      "readout_sha256": "fd1381831e1ad6ba3ebf7406ca500475d27d5c6890c6bc48a5f0a10609fd6574",
+      "source_commit": "62c2fe807061b3a11c32bb4c0a3e7b71af86c8af"
+    }
+  },
+  "paid_seconds": 3064.254001415102,
+  "paper_epsilon": 1e-08,
+  "partial": false,
+  "protocol_sha256": "fd6f6f915cebae8375cae8f8c77d543dbe4662a83a66ecfb1ff50cd964f5e6dc",
+  "qualification_input": false,
+  "reserved_seconds": 5280,
+  "retrospective_word_scale_example": {
+    "arm": "truncated-serial",
+    "rows": [
+      {
+        "leading_direction_weight": 0.9999995660594883,
+        "role": "D",
+        "shape": [
+          256,
+          170
+        ],
+        "singular_max": 0.10734201967716217
+      },
+      {
+        "leading_direction_weight": 0.9999998890163957,
+        "role": "D",
+        "shape": [
+          128,
+          256
+        ],
+        "singular_max": 0.21225383877754211
+      },
+      {
+        "leading_direction_weight": 0.9999995023959714,
+        "role": "D",
+        "shape": [
+          1,
+          128
+        ],
+        "singular_max": 0.10024042427539825
+      },
+      {
+        "leading_direction_weight": 0.021473160698854646,
+        "role": "G",
+        "shape": [
+          64,
+          2
+        ],
+        "singular_max": 2.147811301256297e-06
+      },
+      {
+        "leading_direction_weight": 0.08123350799585527,
+        "role": "G",
+        "shape": [
+          128,
+          64
+        ],
+        "singular_max": 8.150286703312304e-06
+      },
+      {
+        "leading_direction_weight": 0.10534786507980126,
+        "role": "G",
+        "shape": [
+          168,
+          128
+        ],
+        "singular_max": 1.0593736078590155e-05
+      },
+      {
+        "leading_direction_weight": 0.9999896640131323,
+        "role": "E",
+        "shape": [
+          128,
+          168
+        ],
+        "singular_max": 0.021994072943925858
+      },
+      {
+        "leading_direction_weight": 0.999992847689595,
+        "role": "E",
+        "shape": [
+          64,
+          128
+        ],
+        "singular_max": 0.026439880952239037
+      },
+      {
+        "leading_direction_weight": 0.9999994284468398,
+        "role": "E",
+        "shape": [
+          2,
+          64
+        ],
+        "singular_max": 0.09353119879961014
+      }
+    ],
+    "scope": "saved network matrix directions only; no causal role isolation",
+    "step": 16668
+  },
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "task_only_nonqualifying_diagnostic",
+  "seeds": [
+    0
+  ],
+  "smoothing_lambda": 0.0001,
+  "verification": {
+    "five_word_joint_acquisition--full-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initialization": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "baseline_word_data_generator": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "five_word_joint_acquisition--full-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initialization": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "baseline_word_data_generator": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "five_word_joint_acquisition--truncated-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initialization": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "baseline_word_data_generator": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "five_word_joint_acquisition--truncated-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initialization": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "baseline_word_data_generator": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "gaussian1d_smoke--full-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initial_streams": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "initial_scored_samples_equal": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "gaussian1d_smoke--full-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initial_streams": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "initial_scored_samples_equal": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "gaussian1d_smoke--truncated-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initial_streams": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "initial_scored_samples_equal": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "gaussian1d_smoke--truncated-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "all_saved_metrics_recomputed": true,
+      "baseline_data": true,
+      "baseline_final_streams": true,
+      "baseline_initial_models": true,
+      "baseline_initial_streams": true,
+      "baseline_prior": true,
+      "baseline_recipe": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "initial_scored_samples_equal": true,
+      "original_control_artifacts_verified": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "ring16_acquisition--full-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "ring16_acquisition--full-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "ring16_acquisition--truncated-serial": {
+      "actual_mode": true,
+      "all_finite": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    },
+    "ring16_acquisition--truncated-threaded": {
+      "actual_mode": true,
+      "all_finite": true,
+      "completed_roles": true,
+      "exercised": true,
+      "gate_recomputed": true,
+      "source_files_verified": true,
+      "zero_rng_deviations": true
+    }
+  }
+}

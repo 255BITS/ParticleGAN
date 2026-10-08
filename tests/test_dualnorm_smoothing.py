@@ -14,7 +14,7 @@ from particlegan.optim.dualnorm import NormalizedOptimizer, polar_factor
 @pytest.fixture(autouse=True)
 def cuda_contract():
     if not torch.cuda.is_available():
-        pytest.fail("CUDA is required for smoothing verification")
+        pytest.skip("CUDA is required for smoothing verification")
     with torch.device("cuda:0"), torch.autograd.set_multithreading_enabled(False):
         yield
 
