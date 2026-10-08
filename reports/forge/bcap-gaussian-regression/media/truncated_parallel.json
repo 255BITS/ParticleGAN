@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "8f7cf3b4a4689808b098853d576e4675eb9c493d3660cf3066fff26005d7d0f3",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "5497177a56bc45cfeee14b4cbcea42dd485cf0066f04ef9e1a4c593d70fd712c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/runs/bcap-gaussian-regression/truncated_parallel/evaluator/observed-samples.pt": "149ba71e4669230aab8f2fa188bec66b11c06d5260f2bd85069c65f8d1e6f257"
+  },
+  "task_id": "gaussian1d_smoke"
+}

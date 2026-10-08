@@ -1,0 +1,168 @@
+{
+  "archive_reproduction": {
+    "current_vs_archived_v6": {
+      "confirmation_samples_bitexact": true,
+      "final": {
+        "all_named_streams_bitexact": true,
+        "models_bitexact": true,
+        "optimizers_bitexact": true,
+        "streams_bitexact": true
+      },
+      "initial": {
+        "all_named_streams_bitexact": true,
+        "models_bitexact": true,
+        "optimizers_bitexact": true,
+        "streams_bitexact": true
+      },
+      "primary_and_confirmation_metrics_exact": true,
+      "primary_samples_bitexact": true,
+      "saved_observations": 25
+    },
+    "historical_vs_archived_v4": {
+      "confirmation_samples_bitexact": true,
+      "final": {
+        "all_named_streams_bitexact": true,
+        "models_bitexact": true,
+        "optimizers_bitexact": true,
+        "streams_bitexact": true
+      },
+      "initial": {
+        "all_named_streams_bitexact": true,
+        "models_bitexact": true,
+        "optimizers_bitexact": true,
+        "streams_bitexact": true
+      },
+      "primary_and_confirmation_metrics_exact": true,
+      "primary_samples_bitexact": true,
+      "saved_observations": 25
+    }
+  },
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "matched_arm_invariants": {
+    "all_1000_role_updates": true,
+    "all_final_named_streams_bitexact": true,
+    "all_initial_models_bitexact": true,
+    "all_initial_named_streams_bitexact": true,
+    "finite_and_mechanisms_exercised": true,
+    "same_data_digest": true,
+    "same_prior": true,
+    "same_resolved_recipe": true,
+    "zero_rng_deviations": true
+  },
+  "media": {
+    "current": {
+      "gif_sha256": "43e4d4d9926cd4ef10383a5681d509e96f7eb8bbc0635f56c5e4d7d5ff555a47",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d472e190e5340ab1073c827770097dee214f3ef581db4ab5dac65c79c359a2d3",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/runs/bcap-gaussian-regression/current/evaluator/observed-samples.pt": "a96848fa8ab8c11dc0ed9c499ba95e1d561f5fb71d8ec0721779e44cf1fee615"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "historical": {
+      "gif_sha256": "91c41c575090faebeb53ece83da7dc73d32892df9bfe5c0c71e3ac82da843993",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b1ba60cc4ea797b81900efe604d1b637a665e9cf30457c10b8078b1c8ff440de",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/runs/bcap-gaussian-regression/historical/evaluator/observed-samples.pt": "9fa76110505ec890f6ff37367d5d9b10c3097210ae6aa2be58b2b1cec134407c"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "old_polar_serial": {
+      "gif_sha256": "a19463dce1ec3872a91a7acdba74f02de8daf0689b2b730f583126a6f20568b7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "cfb2bd682b87741c6a3885f3195228adbca85a39c916d8607110521849f115b2",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/runs/bcap-gaussian-regression/old_polar_serial/evaluator/observed-samples.pt": "306edb5ed06996715239efebcb0f6af724027a3150c2b8cefe6251fe9994fee6"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    "truncated_parallel": {
+      "gif_sha256": "8f7cf3b4a4689808b098853d576e4675eb9c493d3660cf3066fff26005d7d0f3",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5497177a56bc45cfeee14b4cbcea42dd485cf0066f04ef9e1a4c593d70fd712c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-bcap-gaussian-regression/runs/bcap-gaussian-regression/truncated_parallel/evaluator/observed-samples.pt": "149ba71e4669230aab8f2fa188bec66b11c06d5260f2bd85069c65f8d1e6f257"
+      },
+      "task_id": "gaussian1d_smoke"
+    }
+  },
+  "new_sampling": 0,
+  "new_updates": 0,
+  "note": "Global caller RNG envelopes differ because fresh processes are intentionally separate; model/optimizer and all consumed named streams reproduce exactly.",
+  "publisher_sha256": "d7af5c593061354f352a9824ab81167f8d91b72f21e172ae2e742bbef4641949",
+  "schema_version": 1
+}
