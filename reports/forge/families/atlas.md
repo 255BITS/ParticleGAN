@@ -126,16 +126,16 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [atlas](../../../configs/forge/ideas/atlas.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895`. Candidate revision: `674f43fbb22ae3df45c666d3290ec8ad40e990d0883c036729d8e56ad097752b`. Runtime cohort: `e84c5e7910559b15078d38f8f3320f1e02605b16a365f6883beaa060224129ac`.
+Source digest: `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`. Candidate revision: `d9668613222ca8684a468158f86a46ccdd09badae1b70c7a33832f324dc461a5`. Runtime cohort: `315f80a8133b25f19e0f14bc7f9d9ff281b6a5998ad9a7593866d97417c4b8ab`.
 
-[Frozen numerical evidence](../technique-evidence/7c4e188f1ee495526c2decf6f02a45f392123aaf4f33f1f6fb9a398fe3ac05e7.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: historical_incumbent. Current-source pre-run whole candidate choice is partially BLOCKED or unmeasured; retain exact display evidence with no complete current-measurement, qualification or default-adoption credit.
+Selection: historical_incumbent. Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.
 
 </details>
 
@@ -166,7 +166,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | --- | --- | --- | --- |
 | [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | matches recorded run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | BLOCKED | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
 | [ring16_acquisition](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
 | [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | matches recorded run |
@@ -181,7 +181,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | matches recorded run |
 | [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
@@ -361,7 +361,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
 | [ring16_acquisition](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | BLOCKED | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | BLOCKED | matches recorded run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -371,7 +371,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | required | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | BLOCKED | matches recorded run |
 | [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
 | [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
 | [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
@@ -859,13 +859,15 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 ### five_word_joint_hold
 
-**five_word_joint_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
+**five_word_joint_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
 Current pass criteria:
 
@@ -892,13 +894,15 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 ### five_word_joint_smoke
 
-**five_word_joint_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
+**five_word_joint_smoke: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
 Current pass criteria:
 
@@ -2511,7 +2515,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [atlas](../../../configs/forge/ideas/atlas.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -4896,7 +4900,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [atlas](../../../configs/forge/ideas/atlas.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>

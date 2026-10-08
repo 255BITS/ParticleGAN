@@ -6,7 +6,8 @@ Current selection pins one whole ordinary evidence row per formulation family.
 new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
 --advance-policy explicitly archives an earlier policy before registering new
-source evidence under the current view. Archived outcomes are never regraded.
+source evidence and rebinding the same selected configurations under the current
+view. Archived outcomes and selection cards are preserved without regrade.
 --refresh-publication updates display evidence and declared-view coverage while
 preserving verified selected rows and their recorded qualification policy.
 """
@@ -730,8 +731,71 @@ def _archived_reports(root, manifest):
                 policy.get("policy_fingerprint") in fingerprints):
             raise ValueError("invalid archived technique evidence policy")
         fingerprints.add(policy["policy_fingerprint"])
+        selection = policy.get("family_selection")
+        if selection is not None and file_hash(root / selection["path"]) != selection["sha256"]:
+            raise ValueError("archived family selection hash mismatch")
         reports.extend((policy, entry, *_snapshot(root, entry, policy)) for entry in policy["cohorts"])
     return reports
+
+
+def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports):
+    """Stage exact new pins for the existing choices; never rank new recipes."""
+    from experiments.forge.trainer_families import (CURRENT_SELECTION, family_for_candidate,
+                                                   family_row_pin, load_current_selection)
+    from experiments.forge.planning import declaration_paths
+    from experiments.forge.views import load_view
+    path = root / CURRENT_SELECTION
+    if not path.is_file():
+        return None, None
+    card = read_json(path)
+    # Preserve compatibility with an explicitly prepared selection card.
+    if card.get("policy_fingerprint") == report["policy_fingerprint"]:
+        return None, None
+    pins = load_current_selection(root, view_id=manifest["view"],
+                                  policy_fingerprint=manifest["policy_fingerprint"])
+    declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
+    selections = []
+    for family, pin in pins.items():
+        original_matches = []
+        for _, _, rows in prior_reports:
+            for original in rows.values():
+                row = {**original, "trainer_family": family}
+                if family_row_pin(row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+                                  measurement_views=pin.get("measurement_views"),
+                                  measurement_tasks=pin.get("measurement_tasks")) == pin:
+                    original_matches.append(row)
+        if not original_matches:
+            raise ValueError(f"policy advance requires verified previous family selection: {family}")
+        matches = [row for row in registered_rows.values() if row["candidate_id"] == pin["candidate_id"]
+                   and row.get("runtime_cohort", {}).get("execution_backend") == pin["execution_backend"]]
+        if len(matches) != 1:
+            raise ValueError(f"policy advance requires one new verified row for selected family: {family}")
+        row = {**matches[0], "trainer_family": family}
+        if family_for_candidate(root, row["candidate_id"], declarations.get(row["candidate_id"]),
+                                current_presentation=True)["id"] != family:
+            raise ValueError(f"policy advance cannot change selected configuration family: {family}")
+        views = pin.get("measurement_views", [manifest["view"]])
+        tasks = pin.get("measurement_tasks")
+        required = {assignment["task"] for view in views for assignment in load_view(root, view)["assignments"]
+                    if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        required.update(tasks or [])
+        observations = row.get("tasks", []) + row.get("nonrequired_tasks", [])
+        observed = {task["task_id"]: task["status"] for task in observations}
+        complete = (bool(row.get("attempt_ids")) and bool(required) and len(observed) == len(observations)
+                    and all(observed.get(task) in {"PASS", "FAIL"} for task in required))
+        reason = ("Retain the previously selected configuration in its verified new-policy source cohort; "
+                  "no outcome-based recipe reselection, qualification transfer or default adoption.")
+        selections.append(family_row_pin(row, selection_kind="current_measurement" if complete else "historical_incumbent",
+                                         reason=reason, measurement_views=views if complete else None,
+                                         measurement_tasks=tasks if complete else None))
+    advanced = {**deepcopy(card), "policy_fingerprint": report["policy_fingerprint"], "selections": selections}
+    original = path.read_bytes().decode("utf-8")
+    digest = file_hash(path)
+    relative = CURRENT_SELECTION.parent / "history" / f"family-current-{digest}.json"
+    archive = root / relative
+    if archive.exists() and archive.read_bytes() != original.encode("utf-8"):
+        raise ValueError("archived family selection conflicts with original bytes")
+    return advanced, (relative, original, digest)
 
 
 def _current_tier_cell(row, tier, required, json_link):
@@ -2073,7 +2137,17 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                 advancing = True
         reports = [(entry, *_snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
         archived_reports = _archived_reports(root, manifest)
-    pending_snapshot = None
+    pending_snapshot = pending_selection = pending_selection_text = selection_archive = None
+    prior_manifest, prior_reports = deepcopy(manifest), list(reports)
+    if advancing and execution_backend is None:
+        from experiments.forge.trainer_families import CURRENT_SELECTION
+        selection_path = root / CURRENT_SELECTION
+        backends = ({pin["execution_backend"] for pin in read_json(selection_path)["selections"]}
+                    if selection_path.is_file() else set())
+        if len(backends) > 1:
+            raise ValueError("policy advance with mixed selected backends requires an explicit --device")
+        if backends:
+            execution_backend = backends.pop()
     if source_commit is not None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
@@ -2107,9 +2181,14 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         # credit; it prevents cached regeneration from inventing CPU shadows or
         # resolving those same blockers against later source changes.
         if execution_backend is not None:
+            from experiments.forge.trainer_families import CURRENT_SELECTION
+            selection_path = root / CURRENT_SELECTION
+            incumbents = ({pin["candidate_id"] for pin in read_json(selection_path)["selections"]}
+                          if selection_path.is_file() else set())
             unmeasured = {}
             for row in report["rows"]:
-                if row["candidate_id"] in candidates or row.get("attempt_ids") or row.get("status") != "BLOCKED":
+                if (row["candidate_id"] in candidates or row.get("attempt_ids")
+                        or (row.get("status") != "BLOCKED" and row["candidate_id"] not in incumbents)):
                     continue
                 unmeasured.setdefault(row["candidate_id"], []).append(row)
             for name, rows in unmeasured.items():
@@ -2151,8 +2230,18 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         selected = {row["candidate_id"]: row for row in report["rows"]
                     if row["candidate_id"] in candidates and
                     (bool(row.get("attempt_ids")) if isinstance(candidates[row["candidate_id"]], str) else True)}
+        selected = dict(sorted(selected.items()))
         for row in selected.values():
             _validate_published_row(root, report, row)
+        if advancing:
+            pending_selection, selection_archive = _advanced_family_selection(
+                root, prior_manifest, report, selected, prior_reports)
+            if selection_archive:
+                relative_selection, _, digest = selection_archive
+                manifest["archived_policies"][-1]["family_selection"] = {
+                    "path": relative_selection.as_posix(), "sha256": digest}
+            if pending_selection is not None:
+                pending_selection_text = json.dumps(pending_selection, sort_keys=True, indent=2) + "\n"
         if not any(old == entry for old, _, _ in reports):
             reports.append((entry, report, selected))
         pending_snapshot = root / relative, data
@@ -2163,7 +2252,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                                     scientific_row_hash, select_family_rows)
     declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
     candidates = set(declarations)
-    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"])
+    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"],
+                                         selection_card=pending_selection)
                     if recorded_view is None else {})
     declaration_sources = _declaration_fallback_sources(current_pins)
     selected = {}
@@ -2296,6 +2386,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                        policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
                                        view_policy=recorded_view, execution_backend=execution_backend,
+                                       selection_card=pending_selection,
                                        historical_rows=[*declaration_history.values(), *[{**row, "publication_key": entry["json_sha256"]}
                                            for _, entry, _, rows in archived_reports for row in rows.values()]])
     result.update(family_result)
@@ -2359,7 +2450,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
                                 if (root / "configs/forge/trainer-families.json").is_file() else None,
                             "selected_rows_sha256": stable_hash(result["rows"]),
-                            "family_current_selection_sha256": file_hash(root / CURRENT_SELECTION)
+                            "family_current_selection_sha256": (hashlib.sha256(pending_selection_text.encode()).hexdigest()
+                                if pending_selection_text is not None else file_hash(root / CURRENT_SELECTION))
                                 if current_pins else None}
     registry_path = root / "configs/forge/trainer-families.json"
     if registry_path.is_file():
@@ -2378,7 +2470,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["provenance"]["passive_publications_reducer_sha256"] = file_hash(Path(publication_memory.__file__))
     if not recorded_policy and view_id == "discriminator_stability":
         from experiments.forge.family_reports import build_progress
-        result["family_progress"] = build_progress(root, result)
+        result["family_progress"] = build_progress(root, result, selection_card=pending_selection)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -2387,7 +2479,12 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
-    # Validate all inputs before changing evidence registry or public outputs.
+    # Validate all inputs before changing selection cards, registry or outputs.
+    if selection_archive:
+        relative_selection, original, _ = selection_archive
+        _write_changed(root / relative_selection, original)
+    if pending_selection is not None:
+        _write_changed(root / CURRENT_SELECTION, pending_selection_text)
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")

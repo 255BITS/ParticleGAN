@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 650. Inventory coverage: complete. Unresolved import items: 7.
+Records: 661. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4790,6 +4790,22 @@ All three existing families pass the unchanged 20,001-update, 24-check/five-term
 
 [Evidence](../../reports/forge/word-root-cause/summary.json) · [Record](records/word-diagnostic-readout-46dd1b58096a2b9d65e90c5a.json)
 
+### technique-inventory-word-split-v1 · word-split-inventory-v1-readout
+
+**Scope:** source_bound_campaign_readout; scientific; revision `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`.
+
+A confirmed can-it-pass joint five-word smoke separates acquisition from continuing hold while preserving all generation and inverse bounds.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `task_gate_reform`.
+
+
+
+Five runnable selected families each pass 5/6 required Tier 1 tasks and all acquire five words. BCAP fails only Gaussian; K3P, KA2, R1/R2 and released GAN v3 MoG fail only ring16. E22/Atlas remain preflight-blocked. No ordinary Tier 2 work is eligible. All 35 CUDA attempts complete for 1796.544469 paid seconds; all 31 available scalar endpoint comparisons match the previous post-truncation cohort. No scientific retries or source pooling.
+
+**Next:** Keep the acquisition/hold split. The prepared constant positive-smoothing BCAP comparison is the next bounded option; preserve full smoke gates and require all six passes before Tier 2. No search or default adoption follows automatically.
+
+[Evidence](../../reports/forge/word-split-inventory/readout.json) · [Record](records/word-split-inventory-v1-readout.json)
+
 ## Compact publications and closed partial cuts
 
 These study and trial projections preserve recorded outcomes, unknowns and source cohorts. They do not regrade archived science or replace original receipts. Overlapping study/trial costs must not be summed.
@@ -4798,6 +4814,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 - **gaussian-smoke-inventory-bcap-nsgda-global-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-ka2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-ka2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-original-full19-retest**: Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-prefix5-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier1-refresh-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v6.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4812,6 +4829,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-ka2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-sgda-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-sgda-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-bcap-dualnorm-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-bcap-dualnorm-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-tier1-refresh-v1**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-input-noise-tier1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-input-noise-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4845,6 +4863,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **k3p-global-tier1-v3**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-ka2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-ka2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-r1r2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-r1r2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pure-bcap-relativistic-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-modern-toy-v1**: Concluded 4 whole configurations. Recorded selection: qualified_winner; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-modern-toy-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4871,6 +4890,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-bcap-dualnorm-d-only-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-d-only-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-repaired-continuation**: Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once. [Source](../../reports/forge/pr223-native3-repaired-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-bcap**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-bcap.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-release07-gan-v3-mog-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-release07-gan-v3-mog-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pure-bcap-wasserstein-joint-rates-v2**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-wasserstein-joint-rates-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-dualnorm-zero-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-r1r2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-r1r2.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4881,6 +4901,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v4.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-k3p-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-k3p-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-release07-gan-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v5.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4902,4 +4923,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9b165ae2839030d8dce26878e1fa652913cfdaaf7bbcfe360d56cb4cccb40d7d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a8ecb6070a13e6f6e80b41e05eabfb4d8490df124dbff4e233d315ac28a1213c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
