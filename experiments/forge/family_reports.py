@@ -857,7 +857,7 @@ def _selected_configuration_details(root, page, publication, family, cohort, row
     if recipe is not None:
         fields = (
             ("Adversarial loss", ("loss", "loss_labels")),
-            ("Optimizer", ("optimizer_family", "optimizer_momentum", "optimizer_adam_lr", "adam_variant")),
+            ("Optimizer", ("optimizer_family", "optimizer_momentum", "optimizer_smoothing", "optimizer_adam_lr", "adam_variant")),
             ("Adam parameters (when used)", ("betas", "d_betas", "prior_betas", "eps", "d_eps", "prior_eps")),
             ("Learning rates", ("lr", "d_lr_mult", "prior_lr_mult")),
             ("Rate schedule", ("lr_schedule", "lr_floor", "network_lr_floor", "network_lr_horizon_cap")),
@@ -875,7 +875,7 @@ def _selected_configuration_details(root, page, publication, family, cohort, row
             if label.startswith("Adam parameters") and optimizer not in {"adam", "ada_nsgda", "dualnorm_d_only", "particle_rownorm_only"}:
                 continue
             if label == "Optimizer" and optimizer not in {"adam", "ada_nsgda", "dualnorm_d_only", "particle_rownorm_only"}:
-                keys = ("optimizer_family", "optimizer_momentum")
+                keys = ("optimizer_family", "optimizer_momentum", "optimizer_smoothing")
             values = "; ".join(f"{key}={recipe[key]}" for key in keys if key in recipe)
             if values:
                 lines.append("| " + label + " | " + cell(values) + " |")

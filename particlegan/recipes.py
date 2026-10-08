@@ -172,6 +172,9 @@ class Recipe:
     # lr is their step size; isolation arms can pin native Adam groups to the
     # original baseline rate independently of the normalized-step sweep.
     optimizer_momentum: float = 0.0
+    # Fixed gradient scale for smoothed polar, bias and sampled-prior updates.
+    # epsilon in the smoothed-polar paper is optimizer_smoothing ** 2.
+    optimizer_smoothing: float = 0.0
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -205,6 +208,11 @@ class Recipe:
             raise ValueError("optimizer_momentum must be 0, 0.5 or 0.9")
         if self.optimizer_momentum != 0 and self.optimizer_family not in ("dualnorm", "dualnorm_D_only"):
             raise ValueError("optimizer_momentum requires a dualnorm optimizer family")
+        if (type(self.optimizer_smoothing) not in (int, float)
+                or not math.isfinite(self.optimizer_smoothing) or self.optimizer_smoothing < 0):
+            raise ValueError("optimizer_smoothing must be finite and nonnegative")
+        if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):

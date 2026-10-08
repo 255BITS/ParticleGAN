@@ -122,6 +122,14 @@ Technique signatures are additional provenance in newly planned studies.
 Existing configuration hashes, saved studies, qualification results and
 historical family/cohort distinctions retain their original identity.
 
+`optimizer_smoothing` exposes fixed-scale DualNorm smoothing with a zero public
+default. Enabling or disabling it crosses a structural technique boundary;
+positive scales can vary within the explicitly enabled base. The
+[smoothing guide](dualnorm-smoothing.md) supplies a reusable structural card,
+an unexecuted CUDA Tier 1 search example, and the separate categorical comparison
+path for unsmoothed versus smoothed controls. Default recipes, current family
+selections and archived qualification remain unchanged.
+
 The initial [R1/R2 search](../configs/forge/searches/r1r2-modern-toy-v1.json)
 tests four substantive toy-host adaptations of the existing Modern GAN recipe:
 learning rates 0.00425 and 0.0085, paired with penalty schedules 1 to 0.1 and

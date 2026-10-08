@@ -21,14 +21,18 @@ NORMALIZED_FAMILIES = (
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 
 
-def polar_factor(matrix):
-    """Return U diag(s > tau) Vᵀ, excluding numerically null directions.
+def polar_factor(matrix, *, smoothing=0.):
+    """Return the polar direction with optional fixed-scale spectral smoothing.
 
     tau = max(rows, columns) * eps * s_max uses the SVD computation dtype.
+    With smoothing > 0, singular weights are s / hypot(s, smoothing).
+    Otherwise retained weights are one. Weights at or below tau stay zero.
     Float16/bfloat16 inputs retain the existing float32 computation policy;
     float32/float64 inputs are not cast. Exact SVD at every size makes the
     cutoff independent of an iterative polar approximation. No RNG is used.
     """
+    if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
+        raise ValueError("polar smoothing must be finite and nonnegative")
     if matrix.ndim != 2 or not matrix.is_floating_point():
         raise ValueError("polar_factor requires a floating-point matrix")
     original_dtype = matrix.dtype
@@ -37,6 +41,10 @@ def polar_factor(matrix):
         return torch.zeros_like(matrix)
     left, singular, right = torch.linalg.svd(value, full_matrices=False)
     threshold = max(value.shape) * torch.finfo(value.dtype).eps * singular[0]
+    if smoothing:
+        weights = singular / torch.hypot(singular, torch.full_like(singular, smoothing))
+        weights = weights * (singular > threshold)
+        return ((left * weights) @ right).to(dtype=original_dtype)
     return ((left * (singular > threshold)) @ right).to(dtype=original_dtype)
 
 
@@ -54,13 +62,17 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, **options):
+                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
             raise ValueError("optimizer momentum must be 0, 0.5 or 0.9")
         if momentum != 0 and family not in ("dualnorm", "dualnorm_D_only"):
             raise ValueError("momentum is supported only by dualnorm arms")
+        if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
+            raise ValueError("optimizer smoothing must be finite and nonnegative")
+        if smoothing and family != "dualnorm":
+            raise ValueError("optimizer smoothing requires the dualnorm family")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -74,6 +86,7 @@ class NormalizedOptimizer(Optimizer):
             if value not in (None, False, 0):
                 raise ValueError(f"normalized optimizers require disabled {key}")
         self.family, self.momentum = family, float(momentum)
+        self.smoothing = float(smoothing)
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -234,7 +247,10 @@ class NormalizedOptimizer(Optimizer):
                     rows = (self._sampled_rows[parameter] if group["sampled_rows_required"]
                             else torch.arange(len(parameter), device=parameter.device))
                     selected = gradient[rows]
-                    update = selected / (selected.norm(dim=1, keepdim=True) + eps)
+                    norm = selected.norm(dim=1, keepdim=True)
+                    denominator = (torch.hypot(norm, torch.full_like(norm, self.smoothing))
+                                   if self.smoothing else norm + eps)
+                    update = selected / denominator
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
                     direction = gradient
@@ -247,9 +263,14 @@ class NormalizedOptimizer(Optimizer):
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        parameter.add_(polar_factor(direction), alpha=-rate * factor)
+                        update = (polar_factor(direction, smoothing=self.smoothing)
+                                  if self.smoothing else polar_factor(direction))
+                        parameter.add_(update, alpha=-rate * factor)
                     else:
-                        parameter.add_(direction / (direction.norm() + eps), alpha=-rate)
+                        norm = direction.norm()
+                        denominator = (torch.hypot(norm, norm.new_tensor(self.smoothing))
+                                       if self.smoothing else norm + eps)
+                        parameter.add_(direction / denominator, alpha=-rate)
         if self._adam is not None:
             self._adam.step()
         self.clear_sampled_rows()
@@ -265,6 +286,8 @@ class NormalizedOptimizer(Optimizer):
                              if group["algorithm"] == "rownorm" else None
                              for group in self.param_groups],
         }
+        if self.smoothing:
+            result["dualnorm"]["smoothing"] = self.smoothing
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -278,9 +301,14 @@ class NormalizedOptimizer(Optimizer):
         if not isinstance(saved, dict) or saved.keys() != expected_keys:
             raise ValueError("invalid normalized optimizer checkpoint schema")
         meta = saved["dualnorm"]
-        if (not isinstance(meta, dict) or set(meta) != {"schema", "family", "momentum", "sampled_rows"}
+        expected_meta = {"schema", "family", "momentum", "sampled_rows"}
+        if self.smoothing:
+            expected_meta.add("smoothing")
+        if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
+        if meta.get("smoothing", 0.) != self.smoothing:
+            raise ValueError("checkpoint optimizer smoothing differs")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -377,7 +405,8 @@ class NormalizedOptimizer(Optimizer):
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
     optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
-                                    momentum=recipe.optimizer_momentum, **options)
+                                    momentum=recipe.optimizer_momentum,
+                                    smoothing=recipe.optimizer_smoothing, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None

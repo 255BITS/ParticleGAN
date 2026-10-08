@@ -23,7 +23,7 @@ OWNERS = frozenset({"task", "technique", "hyperparameter", "protocol"})
 TUNABLE_FIELDS = frozenset({
     "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "d_betas", "d_eps", "prior_eps",
     "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
-    "optimizer_momentum", "optimizer_adam_lr",
+    "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })

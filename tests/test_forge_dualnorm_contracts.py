@@ -19,6 +19,14 @@ from experiments.forge.techniques import recipe_field_active, validate_same_tech
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.fixture
+def cuda_behavior_contract():
+    if not torch.cuda.is_available():
+        pytest.skip("CUDA is required for numerical optimizer checks")
+    with torch.device("cuda:0"), torch.autograd.set_multithreading_enabled(False):
+        yield
+
+
 def test_implicit_optimizer_defaults_preserve_all_archived_configuration_ids():
     for path in (ROOT / "configs/forge/configurations").glob("*.json"):
         card = json.loads(path.read_text())
@@ -132,7 +140,7 @@ def test_hybrid_isolation_rates_preserve_native_adam_incumbent():
 
 
 @pytest.mark.parametrize("family", ["dualnorm", "particle_rownorm_only"])
-def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family):
+def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family, cuda_behavior_contract):
     from experiments.forge.behavior_adapters import BehaviorComponents
 
     task = json.loads((ROOT / "configs/forge/tasks/ae_gan_hold.json").read_text())
@@ -140,8 +148,9 @@ def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family
     if family == "particle_rownorm_only":
         overrides["optimizer_adam_lr"] = .00425
     components = BehaviorComponents({"candidate": {"recipe_preset": "bcap", "recipe_overrides": overrides},
-                                     "protocol": {"seed": 0}}, task)
+                                     "protocol": {"seed": 0}}, task, device="cuda:0")
     prior = components.make_prior(components.recipe)
+    assert prior.z.device.type == "cuda"
     opt_g, _, _, _ = components.bind(generator=torch.nn.Linear(2, 2), critic=torch.nn.Linear(2, 1),
                                      priors=[prior], opt_g=None, opt_d=None)
     table_opt = next(optimizer for optimizer in opt_g.optimizers
