@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 649. Inventory coverage: complete. Unresolved import items: 7.
+Records: 650. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -629,6 +629,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 **Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · bcap-word-runtime-regression-factorial-v1-readout
+
+**Scope:** task_only_diagnostic; task_diagnostic_readout; revision `fd1381831e1ad6ba3ebf7406ca500475d27d5c6890c6bc48a5f0a10609fd6574`.
+
+Under the winning global BCAP/DualNorm recipe, isolate default numerical-rank truncation and disabled autograd multithreading on the unchanged five-word joint Tier1 terminal-hold gate.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `explicit_existing_control_ablation`.
+
+
+
+CUDA 2x2: full polar/enabled autograd PASS (17/24 checks, terminal suffix 6); truncated/enabled FAIL (14/24, suffix 3); full/disabled FAIL (14/24, suffix 0); truncated/disabled FAIL (13/24, suffix 2). Either single change loses the historical word-hold PASS. All four acquire a full quality pass. Full/enabled and truncated/disabled controls reproduce V4/V6 observation and consumed-state tensor bytes exactly. All arms use one recipe, task, initialization and actual batch sequence: seed 0, 20,001 updates, 24 checks, zero unintended RNG changes. Truncation changes the first polar updates with matching first critic gradients. Scheduling modes match updates 1 and 2 but differ by 834, bounding the unsaved onset to updates 3–834. The sampled numerical-null directions are substantial; unchanged nominal rates do not imply unchanged player motion. Original hold gates, defaults and global qualification remain unchanged. The four arms cost 2,963.142459086026 seconds; this narrative duplicates no task results or cost.
+
+**Next:** Retain diagnostic scope and original failures. Explicitly separate word acquisition Tier1 from retention Tier2 if changing the intended question; otherwise declare a bounded global recipe comparison under serial/truncated defaults while holding all task laws fixed. No annealing, seed trials or automatic continuation.
+
+[Evidence](../../reports/forge/bcap-word-regression/readout.json) · [Record](records/bcap-word-runtime-regression-factorial-v1-readout.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -4886,4 +4902,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `536f19f4c46d55423da5a645f4fc87a792f25961ec44978f52d2a63d876aebe8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `72debd5cdae4218c9335b2f180405811d7c538f8d485a3948e08787f7b3c49d0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

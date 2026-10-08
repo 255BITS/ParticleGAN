@@ -1,0 +1,14 @@
+{
+  "archive": "artifacts/bcap-word-regression-factorial-v1.tar.gz",
+  "bulk_artifacts_tracked": false,
+  "bytes": 13846609,
+  "member_count": 1257,
+  "member_manifest_sha256": "0b2c38170b445db7760385ea8b8318b1c4a93665698a33527275f747aaf90543",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "exact_local_raw_evidence_and_execution_source",
+  "sha256": "b68f4549ce73317415d444b88a5bfcec6c2fd67cc60196867d44cd6eadc665ce",
+  "source_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3",
+  "source_digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+  "verification": "Every member reopened and hashed against original bytes"
+}

@@ -1,0 +1,95 @@
+{
+  "arms": [
+    {
+      "arm": "truncated-serial",
+      "bytes": 533981,
+      "gif": "media/truncated-serial.gif",
+      "gif_sha256": "e2710cd85b2c539fe43e4a88c81ab3d5557025e2f5bdb6a371f448b112af59eb",
+      "observations_added": 0,
+      "renderer_source_sha256": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+      "sampling_draws_added": 0,
+      "selected_scored_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_observed_records_sha256": "1b742968206d1bcdb139c4d0b052d55c8c4e28a1f28c93032328115675a38442",
+      "training_updates_added": 0
+    },
+    {
+      "arm": "full-serial",
+      "bytes": 533033,
+      "gif": "media/full-serial.gif",
+      "gif_sha256": "a81796bef5899469ba87e6ca0c1513644840c97040ba8726e23666a1b029d96e",
+      "observations_added": 0,
+      "renderer_source_sha256": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+      "sampling_draws_added": 0,
+      "selected_scored_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_observed_records_sha256": "73ab5f74c8236ba61f83793e59c39aa08a20283ea504dccc6a949e8bc456e2a2",
+      "training_updates_added": 0
+    },
+    {
+      "arm": "truncated-threaded",
+      "bytes": 536064,
+      "gif": "media/truncated-threaded.gif",
+      "gif_sha256": "b38c0eb5bed40117e8d5b23b76d6a58390e0eb53d0189029b0a0e0b962896147",
+      "observations_added": 0,
+      "renderer_source_sha256": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+      "sampling_draws_added": 0,
+      "selected_scored_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_observed_records_sha256": "220b656aa08cc5de432ad83cc7bbe78340c06e8808f4fdbc37016ce1ef8e0273",
+      "training_updates_added": 0
+    },
+    {
+      "arm": "full-threaded",
+      "bytes": 532579,
+      "gif": "media/full-threaded.gif",
+      "gif_sha256": "70d3fe869823527ae82afd383641e93f0f46b8aae721a3a96cd2df966abf2a31",
+      "observations_added": 0,
+      "renderer_source_sha256": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+      "sampling_draws_added": 0,
+      "selected_scored_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_observed_records_sha256": "0d400628c3408ef5b6c91233684be4df9464bd27c74e6659e8e1f0253a33435d",
+      "training_updates_added": 0
+    }
+  ],
+  "frame_selection": "nine equally spaced existing scored states; identical grade-independent selection for every arm",
+  "schema_version": 1,
+  "scope": "actual_existing_scored_training_states"
+}

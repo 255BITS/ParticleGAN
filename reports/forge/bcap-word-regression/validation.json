@@ -1,0 +1,50 @@
+{
+  "additional_training_updates": 0,
+  "board_hashes": {
+    "reports/forge/technique-inventory.json": "b84e992b7456852ce93f2db7c94ae8d1f314d469264285d71168f655d37d6f86",
+    "reports/forge/technique-inventory.md": "a165b3ab1f98b61d2a4ad77abcbd26f84ef2bc43d993b6f825430c23f7f51a89"
+  },
+  "checks": {
+    "actual_training_media_hashes_and_nine_frames": true,
+    "all_four_full_budget_cuda_arms": true,
+    "current_inventory_and_qualification_unchanged": true,
+    "exact_historical_and_current_controls": true,
+    "frozen_protocol_hashes_match": true,
+    "mode_matches_actual_execution": true,
+    "narrative_record_source_hash_matches": true,
+    "one_recipe_task_initializer_data_sequence": true,
+    "paid_cost_within_reservation": true,
+    "source_and_archive_hashes_match": true
+  },
+  "forge_validate": {
+    "candidates": 405,
+    "tasks": 64,
+    "training_launched": false
+  },
+  "freshness_command": "python -m experiments.forge compile --check",
+  "media": {
+    "full-serial": {
+      "frames": 9,
+      "height": 1048,
+      "width": 1380
+    },
+    "full-threaded": {
+      "frames": 9,
+      "height": 1048,
+      "width": 1380
+    },
+    "truncated-serial": {
+      "frames": 9,
+      "height": 1048,
+      "width": 1380
+    },
+    "truncated-threaded": {
+      "frames": 9,
+      "height": 1048,
+      "width": 1380
+    }
+  },
+  "numerical_tensor_comparisons_device": "CUDA physicalGPU1",
+  "schema_version": 1,
+  "scope": "publication_and_completed_saved_evidence_controls"
+}
