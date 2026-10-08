@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **8/8 views**.
+Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **9/9 views**.
 
 Declared priors across the catalog: **38 MoGParticlePrior**, **28 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -33,6 +33,7 @@ This report follows changing declarations and published evidence; it selects no 
 | View | Revision | Tier 1 | Tier 2 | Tier 3 | Declared calibration |
 | --- | ---: | --- | --- | --- | --- |
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
+| [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 3 | 4 required | 19 required | 7 required | provisional |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 8 | 6 required, 1 diagnostic | 21 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
@@ -94,6 +95,41 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/adapt
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | paired_adaptation / paired_adaptation | 3600 | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate) |
+
+## bcap_convolution_images
+
+Declaration: [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Four source-bound image diagnostics do not qualify a new source or adopt public defaults.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+4 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [img_stripes2](../../configs/forge/tasks/img_stripes2.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-stripes2) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_bars4](../../configs/forge/tasks/img_bars4.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-bars4) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_blobs4](../../configs/forge/tasks/img_blobs4.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-blobs4) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_intensity2](../../configs/forge/tasks/img_intensity2.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-intensity2) | transfer_image / transfer_sustained | 600 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## clockfree_continuous
 
@@ -494,7 +530,7 @@ Task variants share a guide when their declarations name the same host or proble
 
 ### Experiment: ae-gan-hold
 
-Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors
+Checks reconstruction/identity and an acquired adversarial edit during the declared hold.
 
 Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json), [ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
 
@@ -623,7 +659,7 @@ No related published API training GIF. This task retains its own declared numeri
 
 ### Experiment: cover-leftover
 
-Cover both signed poles while preserving content and removing the guarded leak
+Checks target coverage plus the separate unwanted-remainder/content constraints.
 
 Forge declarations: [cover_leftover](../../configs/forge/tasks/cover_leftover.json).
 
@@ -888,7 +924,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: grid100
 
-Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
+Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
 
 Forge declarations: [grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [grid100_release07_cloud_named_v1](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
@@ -968,7 +1004,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-bars4
 
-Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.
+Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.
 
 Forge declarations: [img_bars4](../../configs/forge/tasks/img_bars4.json), [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json).
 
@@ -1006,7 +1042,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-blobs4
 
-Recover four localized 2x2 corner patches with correct position, pixel fidelity and balanced output mass.
+Healthy location transfer: four small corner patches test localized quality and coverage.
 
 Forge declarations: [img_blobs4](../../configs/forge/tasks/img_blobs4.json), [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json).
 
@@ -1044,7 +1080,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-intensity2
 
-Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.
+Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.
 
 Forge declarations: [img_intensity2](../../configs/forge/tasks/img_intensity2.json), [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json).
 
@@ -1082,7 +1118,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-stripes2
 
-Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass.
+Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.
 
 Forge declarations: [img_stripes2](../../configs/forge/tasks/img_stripes2.json), [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json).
 
@@ -1120,7 +1156,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mid-scale-identity
 
-Retain identity at half strength in addition to correct neutral and signed poles
+Checks identity preservation and target edit magnitude at intermediate control strength.
 
 Forge declarations: [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json).
 
@@ -1163,7 +1199,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mode-hold
 
-Acquire all eight equal-weight radius-three, sigma-.07 Gaussian modes, including their within-mode law.
+Checks all eight ring modes and HQ through the sampled terminal hold; not within-mode density fidelity.
 
 Forge declarations: [mode_hold](../../configs/forge/tasks/mode_hold.json), [ring_extension](../../configs/forge/tasks/ring_extension.json), [ring_hold](../../configs/forge/tasks/ring_hold.json), [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json).
 
@@ -1253,7 +1289,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: residual-student
 
-Recover the fast trajectory with a residual head and reject a correct marginal with wrong identities
+Checks whether the intended residual moves toward the correct paired target.
 
 Forge declarations: [residual_student](../../configs/forge/tasks/residual_student.json).
 
@@ -1357,7 +1393,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: rotated100
 
-Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
+Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
 
 Forge declarations: [rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json).
 
@@ -1407,7 +1443,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: staggered100
 
-Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
+Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
 
 Forge declarations: [staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json).
 
@@ -1457,7 +1493,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: trajectory
 
-Change angular speed while preserving each trajectory's radius and starting phase
+Checks the extracted trajectory edit while preserving identity in finite paired rows.
 
 Forge declarations: [trajectory](../../configs/forge/tasks/trajectory.json).
 
@@ -1555,7 +1591,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unipolar
 
-Make the positive 4D edit while holding the free scale-zero origin
+Checks an intended edit with preservation of unrelated content.
 
 Forge declarations: [unipolar](../../configs/forge/tasks/unipolar.json).
 
@@ -1593,7 +1629,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unused-token-hold
 
-Move the concept slot on its target axis while keeping the unused slot fixed
+Checks that active controls move and unused controls remain unchanged.
 
 Forge declarations: [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json), [unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
@@ -1898,6 +1934,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `443e0734707853797ef97e42fc8749fa3ed0e0c8a42b3b104da6169e0609b42b`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `44d5f6408895fe3c026f34891de985b93d2fcafba4acbd2b7c21de99a248c86b`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `3dd2bb151f90dffe507e61cca3522d9665fbcc54ba253e8fe56d9ea089a94afa`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `fbbcd40ee03103715dc56994486ede8e45169401904f757ca2a0f0da043d3893`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

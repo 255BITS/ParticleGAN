@@ -1295,7 +1295,11 @@ unit magnitude. The cutoff uses the computation dtype: float32 and float64 are
 preserved; float16/bfloat16 inputs compute in float32 and cast the result back.
 This replaces the former Newton--Schulz fast path for matrices larger than 1024,
 so large full-rank matrices can cost more per update. Higher-dimensional weight
-tensors are unsupported. Older checkpoints load their stored state, but continue
+tensors require the explicit `optimizer_convolution="per_offset"` adaptation
+for module-bound Conv2d/ConvTranspose2d kernels; unlabelled high-rank tensors
+remain unsupported. The [convolution contract](dualnorm-convolution.md) specifies
+channel-group layout, kernel scaling, smoothing and checkpoint compatibility.
+Older checkpoints load their stored state, but continue
 under this new rule; reproducing older trajectories requires their original
 package source. No task gate or historical qualification is changed by this rule.
 

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "implementation_commit": "342d4b1c5",
+  "unique_passing_checks": 527,
+  "groups": {
+    "optimizer_recipe_cuda": 227,
+    "forge_adapters": 110,
+    "tier_report_current_inventory": 190
+  },
+  "physical_cuda_model": "NVIDIA RTX A6000",
+  "forge_validate": "PASS",
+  "forge_compile_check": "CURRENT",
+  "independent_convolution_norm_cases": 12,
+  "research_training_launched": false,
+  "raw_logs": [
+    "runs/dualnorm-convolution/focused.log",
+    "runs/dualnorm-convolution/final.log",
+    "runs/bcap-convolution/forge-tests.log",
+    "runs/bcap-convolution/publication-tests.log"
+  ],
+  "qualification_input": false
+}

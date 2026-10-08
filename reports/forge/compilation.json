@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "0faef97647571e4f38d5fc2e831fbf7a6e296cb3d33035dfaf058bcba8e58255",
+  "input_digest": "d7923740041d813bdc667b2c6ef92a2567b10d20713c476c981d2070b0228a83",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -467,6 +467,7 @@
     "configs/forge/family-tags.json": "3a4aa728a133c35b56da6a027d70b93425fad58e47ce6c2cd0a19bf0965ba9c9",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
     "configs/forge/ideas/bcap-ada-nsgda-v1.json": "54a9d5bb1a67886015544142339fab9bf23988ba60cf759c38cafbce9d89e1c6",
+    "configs/forge/ideas/bcap-dualnorm-convolution-v1.json": "c8d8993391cb8b0fb20736b2d75cd0a7a27d6ebd41c86fd9cb563ea5cc18671f",
     "configs/forge/ideas/bcap-dualnorm-d-only-v1.json": "991f883abe23f7ce11d5a0faf6eec705d8b14e864796b1bd469c142b3765ac84",
     "configs/forge/ideas/bcap-dualnorm-momentum-v1.json": "bf7537439345e32c5326cc002d3764a095da6027d41f3c9879095076816ceefb",
     "configs/forge/ideas/bcap-dualnorm-smoothed-v1.json": "8aab8eaa3a06ca8e43014688d4b74916125d0aa2d63121131d2f2ed3651a62ae",
@@ -653,6 +654,7 @@
     "configs/forge/selections/history/family-current-13cf92489a3dd80d16e512c7235c52ce58c9d7f81634aa3517c85ecd16268589.json": "13cf92489a3dd80d16e512c7235c52ce58c9d7f81634aa3517c85ecd16268589",
     "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
+    "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "41af583480fc0ddce517b227668beb1f3aa2e3de8a41257db4f614cf8d8f3fdf",
@@ -727,6 +729,7 @@
     "configs/forge/view-history/discriminator_stability-v3.json": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b",
     "configs/forge/view-history/discriminator_stability-v7.json": "5dee961803741452be1a2af5476a4e29159d43eef05a1cf991af2988e6dcff0e",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
+    "configs/forge/views/bcap_convolution_images.json": "ae8329bd6e82c1e3adb6641a1bf3d404f4ec52509e776a805263eab9880c7b0a",
     "configs/forge/views/clockfree_continuous.json": "30d62d0f1a11181bc50dd041985cc4be52587ce7abe901114c8e0f2f27fd3d6f",
     "configs/forge/views/discriminator_stability.json": "91d767ba798e067f02c00efacec3c63487550b46a47cc07fd1576b90739bf9c0",
     "configs/forge/views/formulation_comparison.json": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25",
@@ -2707,7 +2710,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "8ba9b751926aa415792eedcd892161c0f432a4f0deabb9fd62760f1d9bb5792c",
+    "reports/forge/EXPERIMENT_MEMORY.md": "7b0f6ee2516967c3190d5390e2a600cdc8df059a1136366a5d2f46c5130ee204",
     "reports/forge/publication-records.json": "da0a4c05af33fdd3f49703263e65d65b487d3efbdce6242e45c6f4cece1e4c03"
   },
   "pending_readout": [
@@ -2733,5 +2736,5 @@
   "scientific_source_digests": [
     "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
-  "view_count": 8
+  "view_count": 9
 }

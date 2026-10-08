@@ -28,13 +28,18 @@ receive weight `s / hypot(s, lambda)`. The numerical-rank mask remains
 epsilon skips, aspect-ratio multiplier and momentum accumulation are preserved.
 Momentum, when explicitly enabled, is accumulated before smoothing.
 
-Nonmatrix network directions and actually sampled prior rows use
+Scalar/vector network directions and actually sampled prior rows use
 `g / hypot(norm(g), lambda)`. Unsampled rows remain unchanged. These vector
 rules extend the [paper's matrix feedback](https://arxiv.org/html/2608.01911v1),
 whose regularization parameter is `epsilon=lambda**2`. Its continuous-time
 single-objective analysis supplies no convergence guarantee for this adversarial
 trainer. Absolute smoothing can change the relative pace of players whose
 gradient scales differ.
+
+With the opt-in `optimizer_convolution="per_offset"` adaptation, Conv2d and
+ConvTranspose2d kernels use this same matrix smoothing independently for each
+channel group and spatial offset. The [convolution contract](dualnorm-convolution.md)
+specifies their layout, scaling and per-slice epsilon skips.
 
 Zero takes the previous exact code paths, including `norm + eps` vector
 denominators. Zero is omitted from default Recipe and optimizer checkpoint

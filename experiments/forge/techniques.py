@@ -113,6 +113,8 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
     if name == "optimizer_smoothing":
         return recipe.optimizer_family == "dualnorm"
+    if name == "optimizer_convolution":
+        return recipe.optimizer_family == "dualnorm"
     if name == "optimizer_adam_lr":
         return recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}
     if name in {"betas", "amsgrad", "beta2_end"}:
