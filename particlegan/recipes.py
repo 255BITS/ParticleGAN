@@ -175,6 +175,8 @@ class Recipe:
     # Fixed gradient scale for smoothed polar, bias and sampled-prior updates.
     # epsilon in the smoothed-polar paper is optimizer_smoothing ** 2.
     optimizer_smoothing: float = 0.0
+    # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
+    optimizer_convolution: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -213,6 +215,10 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        if self.optimizer_convolution not in ("none", "per_offset"):
+            raise ValueError("optimizer_convolution must be none or per_offset")
+        if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -469,6 +475,8 @@ class Recipe:
             result.pop("optimizer_family")
         if self.optimizer_momentum == 0:
             result.pop("optimizer_momentum")
+        if self.optimizer_convolution == "none":
+            result.pop("optimizer_convolution", None)
         if self.optimizer_adam_lr is None:
             result.pop("optimizer_adam_lr")
         if self.eps == 1e-8:
@@ -615,10 +623,12 @@ class Recipe:
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, [p for p in critic.parameters() if p.requires_grad], critic=critic, **options)
         if self.optimizer_family != "formulation":
-            from .optim.dualnorm import make_normalized_optimizer
+            from .optim.dualnorm import convolution_parameter_groups, make_normalized_optimizer
             if self.optimizer_family == "particle_rownorm_only" and self.optimizer_adam_lr is not None:
                 options["lr"] = self.optimizer_adam_lr * self.d_lr_mult
             params = [{"params": [p for p in critic.parameters() if p.requires_grad], "role": "critic"}]
+            if self.optimizer_convolution == "per_offset":
+                params = convolution_parameter_groups(params, [critic], family=self.optimizer_family)
             return make_normalized_optimizer(self, params, critic=critic, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
@@ -631,7 +641,7 @@ class Recipe:
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
-        """Optimizer over ``params`` (tensors or param groups) whose ``step()`` does the
+        """Optimizer over ``params`` (module, tensors or param groups) whose ``step()`` does the
         recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
         and the direct-particle response for the param group ``direct_particles``).
@@ -643,13 +653,20 @@ class Recipe:
         Normalized families accept role-named groups. Their row-normalized
         prior requires ``set_sampled_rows(prior.z, indices)`` before stepping;
         the public trainer/policy records generator-side sample IDs automatically.
+        A supplied module binds Conv2d/ConvTranspose2d weights automatically when
+        ``optimizer_convolution='per_offset'``. Bare high-rank tensor iterables
+        lack this layout contract and are rejected by DualNorm.
         """
+        from torch import nn
+        module = params if isinstance(params, nn.Module) else None
+        if module is not None:
+            params = [p for p in module.parameters() if p.requires_grad]
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, params, **options)
         if self.optimizer_family != "formulation":
-            from .optim.dualnorm import make_normalized_optimizer
+            from .optim.dualnorm import convolution_parameter_groups, make_normalized_optimizer
             params = list(params)
             if params and not isinstance(params[0], dict):
                 params = [{"params": params}]
@@ -671,6 +688,8 @@ class Recipe:
                 if uses_adam and self.optimizer_adam_lr is not None:
                     group["lr"] = self.optimizer_adam_lr * (self.prior_lr_mult if is_prior else 1.)
                 groups.append(group)
+            if module is not None and self.optimizer_convolution == "per_offset":
+                groups = convolution_parameter_groups(groups, [module], family=self.optimizer_family)
             return make_normalized_optimizer(self, groups, **options)
         from .k3p import K3PGeneratorAdam
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
@@ -742,7 +761,12 @@ class Recipe:
                         role_params.append(p)
                         seen.add(id(p))
             if normalized and role_params:
-                groups.append({"params": role_params, "lr": self.lr, "role": role})
+                role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
+                if self.optimizer_convolution == "per_offset":
+                    from .optim.dualnorm import convolution_parameter_groups
+                    role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
+                                                               family=self.optimizer_family)
+                groups.extend(role_groups)
         if g_params and not normalized:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
