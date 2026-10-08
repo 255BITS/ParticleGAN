@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "five-word-tier-split-v1",
+  "scope": "task_only_cuda_gate_verification",
+  "qualification_input": false,
+  "seed": 0,
+  "device": "cuda:0",
+  "initializer": "deterministic_orthogonal",
+  "candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "tasks": [
+    "five_word_joint_smoke",
+    "five_word_joint_hold"
+  ],
+  "smoke_updates": 20001,
+  "hold_updates": 4000,
+  "smoke_checks": 24,
+  "hold_checks": 25,
+  "smoke_reservation_seconds": 900,
+  "hold_reservation_seconds": 300,
+  "maximum_reserved_seconds": 1200,
+  "checkpoint": "earliest_independently_confirmed_full_joint_pass",
+  "hold": "all_checks_including_restored_state",
+  "original_schedule_horizon": 20000,
+  "annealing_change": false,
+  "runtime_default_change": false,
+  "seed_trials": false,
+  "rerun_failed_science": false
+}

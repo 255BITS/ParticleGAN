@@ -220,8 +220,8 @@ def test_joint_acquisition_is_required_smoke_after_existing_prerequisites():
     view = load_view(ROOT, "discriminator_stability")
     tier1 = [row["task"] for row in view["assignments"] if row["qualification_tier"] == 1]
     assert tier1[:4] == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold"]
-    assert next(row for row in view["assignments"] if row["task"] == "five_word_joint_acquisition") == {
-        "task": "five_word_joint_acquisition", "qualification_tier": 1, "importance": "required", "order": 5}
+    assert next(row for row in view["assignments"] if row["task"] == "five_word_joint_smoke") == {
+        "task": "five_word_joint_smoke", "qualification_tier": 1, "importance": "required", "order": 5}
     task = load_tasks(ROOT)["five_word_joint_acquisition"]
     assert task["execution"]["steps"] == 20001
     assert task["execution"]["original_schedule_horizon"] == 20000

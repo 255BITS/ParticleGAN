@@ -7,7 +7,7 @@ def test_inventory_cli_defaults_discover_all_techniques_through_all_tiers():
     assert args.view == "discriminator_stability"
     assert args.through_tier == 3
     assert args.gpus == "0,1"
-    assert str(args.campaign) == "configs/forge/campaigns/technique-inventory.json"
+    assert str(args.campaign) == "configs/forge/campaigns/technique-inventory-word-split-v1.json"
 
 
 def test_techniques_cli_regeneration_selects_compute_without_execution_options():

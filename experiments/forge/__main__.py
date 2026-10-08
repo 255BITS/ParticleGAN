@@ -117,7 +117,7 @@ def parser():
         inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
         inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
         inv.add_argument("--cuda-model")
-        inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory.json"))
+        inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
         if stage == "run":
             inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
     tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")
