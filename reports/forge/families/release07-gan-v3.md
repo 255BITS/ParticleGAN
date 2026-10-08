@@ -106,7 +106,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
-## CUDA results
+## Current benchmark
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json).
 
@@ -2542,7 +2542,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-0d83d78027c5"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json).
 
@@ -4984,7 +4984,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-c195899a64af"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json).
 

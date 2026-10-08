@@ -21,8 +21,8 @@ DEFAULT_CAMPAIGN = Path("configs/forge/campaigns/technique-inventory.json")
 
 def discover_techniques(root: Path) -> list[str]:
     """New idea cards enter the next inventory without a maintained name list."""
-    # Saved tuning trials are evidence variants; only an explicit search runs
-    # them. Expanding an ordinary inventory must not rerun every historical grid.
+    # Discovery lists ideas; the current family roster selects exact saved
+    # configurations separately. Never expand a benchmark into historical grids.
     names = sorted(path.stem for path in (Path(root) / "configs/forge/ideas").glob("*.json"))
     if not names:
         raise ValueError("technique inventory requires at least one declared idea")
@@ -82,6 +82,12 @@ def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda
         raise ValueError("campaign definition is immutable; use a new campaign id")
     discovered = discover_techniques(root)
     names = discovered
+    family_choices = None
+    if technique_ids is None:
+        from .trainer_families import CURRENT_SELECTION, current_family_candidates
+        if (root / CURRENT_SELECTION).is_file():
+            family_choices = current_family_candidates(root)
+            names = [choice["candidate_id"] for choice in family_choices]
     if technique_ids is not None:
         if (not isinstance(technique_ids, (list, tuple)) or not technique_ids
                 or any(not isinstance(name, str) or not name for name in technique_ids)):
@@ -133,12 +139,16 @@ def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda
     if technique_ids is not None:
         summary["explicit_technique_ids"] = names
         summary["unrequested_technique_ids"] = sorted(set(discovered) - set(names))
+    if family_choices is not None:
+        summary["selection_scope"] = "one_current_configuration_per_family"
+        summary["family_selections"] = family_choices
+        summary["unrequested_technique_ids"] = sorted(set(discovered) - set(names))
     return requests, summary
 
 
 def plan_inventory(root: Path, queue_root: Path, *, view_id="discriminator_stability", through_tier=3,
                    execution_backend="cuda", cuda_model=None, campaign=DEFAULT_CAMPAIGN, queue=None, technique_ids=None) -> dict:
-    """Read-only inventory; an explicit roster retains each idea's ordinary admission checks."""
+    """Plan current family configurations, or an explicit historical idea roster."""
     queue = queue or Queue(queue_root)
     _, summary = _prepare(root, queue_root, view_id=view_id, through_tier=through_tier,
                           execution_backend=execution_backend, cuda_model=cuda_model,

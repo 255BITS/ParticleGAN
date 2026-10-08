@@ -30,6 +30,7 @@
       "id": "bcap",
       "label": "BCAP with K3P",
       "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law.",
+      "reporting_family": "bcap-pure",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -135,6 +136,7 @@
       "id": "k3p-no-anchor",
       "label": "K3P without critic anchor",
       "rationale": "Removing the critic anchor is a structural ablation, not a tuned K3P configuration.",
+      "reporting_family": "k3p",
       "tags": [
         "adversarial-training",
         "critic-gradient-penalty",
@@ -150,6 +152,7 @@
       "id": "k3p-no-penalty",
       "label": "K3P without critic penalty",
       "rationale": "Removing the critic penalty is a structural ablation.",
+      "reporting_family": "k3p",
       "tags": [
         "adversarial-training",
         "optimizer-interventions",
@@ -202,6 +205,7 @@
         "bcap-pure-least-squares-joint-v2"
       ],
       "canonical_candidate": "bcap-pure-adam-v2",
+      "current_configuration_family": "bcap-dualnorm",
       "current_presentation_candidates": [
         "bcap-pure-adam-example-v3"
       ],

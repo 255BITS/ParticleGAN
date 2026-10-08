@@ -118,7 +118,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
-## CUDA results
+## Current benchmark
 
 Runtime: **cuda**. Selected configuration: [ka2 · 093c6f2bd417](../../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json).
 
@@ -2554,7 +2554,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-c195899a64af"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [ka2 · 093c6f2bd417](../../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json).
 
@@ -4988,7 +4988,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-0d83d78027c5"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [ka2 · 093c6f2bd417](../../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json).
 

@@ -1830,6 +1830,7 @@ def _family_registry_structure(registry):
             family.pop("tags", None)
             family.pop("reporting_family", None)
             family.pop("inventory_visible", None)
+            family.pop("current_configuration_family", None)
     return value
 
 

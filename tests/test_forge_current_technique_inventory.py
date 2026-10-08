@@ -2,6 +2,7 @@
 from copy import deepcopy
 from collections import Counter
 import importlib.util
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -1406,7 +1407,7 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
-    cohort_count = sum(len(family["cohorts"]) for family in result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
     assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == cohort_count
     assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
 
@@ -1647,19 +1648,24 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    cohort_count = sum(len(family["cohorts"]) for family in result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
     assert len([line for line in table if line.startswith("| **[")]) == cohort_count
     labels = [family["label"] for family in result["family_progress"]["families"]]
-    assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 1
+    assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 0
     assert "tensorflow" not in text.lower() and "halloween" not in text.lower()
     bcap = next(family for family in result["family_progress"]["families"] if family["label"] == "BCAP")
     for cohort in bcap["cohorts"]:
-        assert cohort["total"]["passed"] == max(item["total"]["passed"] for item in cohort["configuration_alternatives"])
+        if cohort["anchor"] == bcap["current_cohort_anchor"]:
+            selected = result["rows"][cohort["row_index"]]
+            assert selected["candidate_id"] == bcap["benchmark_configuration"]["candidate_id"]
+            assert selected["trainer_family"] == "bcap-dualnorm"
+        else:
+            assert cohort["total"]["passed"] == max(item["total"]["passed"] for item in cohort["configuration_alternatives"])
     page = _family_text(ROOT, result, bcap["id"])
-    assert "Best recorded configuration" in page and "optimizer_family=" in page
+    assert "Current benchmark configuration" in page and "optimizer_family=dualnorm" in page
     assert "Recorded observations" in page or "Metric" in page
     view_rows = sum(len(cohort["views"]) for family in result["family_progress"]["families"]
-                    for cohort in family["cohorts"])
+                    for cohort in family["cohorts"] if cohort["anchor"] == family["current_cohort_anchor"])
     assert len([line for line in table if line.startswith("| ↳ [")]) == view_rows
     assert all("families/" in line for line in table)
     assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
@@ -1688,7 +1694,7 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
     assert "Original Atlas recipe and serving-law evidence" in _family_text(ROOT, result, "atlas")
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
-    cohort_count = sum(len(family["cohorts"]) for family in result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
     assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
     assert result == before
 
@@ -1796,7 +1802,8 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
         ["git", "show", blob], cwd=ROOT))
     assert file_hash(tmp_path / CURRENT_SELECTION) == original["selection_sha256"]
     registry_path = tmp_path / "configs/forge/trainer-families.json"
-    registry = read_json(registry_path)
+    registry = json.loads(subprocess.check_output(
+        ["git", "show", original["source_commit"] + ":configs/forge/trainer-families.json"], cwd=ROOT))
     registry["families"] = [family for family in registry["families"] if family["id"] in original_families]
     atomic_json(registry_path, registry)
     (tmp_path / publication.EVIDENCE_MANIFEST).write_bytes(subprocess.check_output(

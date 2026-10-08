@@ -1,5 +1,18 @@
 # Gaussian smoke inventory: exact gaussian-smoke-inventory-v6 readout
 
+The current benchmark roster is **seven solution families, one selected global
+configuration each**. **BCAP uses the winning DualNorm configuration: 4/6 Tier 1,
+Ring16 PASS after 1,600 updates; Gaussian and words FAIL.** The
+[current technique inventory](../../technique-inventory.md) shows that selection.
+Its detail pages retain older runtimes and alternative recipes.
+
+The executed V6 campaign was broader than the intended family benchmark: its
+wrapper included every registered idea plus saved configurations. The default
+inventory runner now uses the seven selected family configurations. This
+correction launches no training and changes no recorded verdicts. The remaining
+aggregate counts below describe the archived broad campaign, not the current
+benchmark roster.
+
 The frozen roster retains all **52 candidates**, including **23 admitted** recipes and every blocked/refused declaration. Each recipe keeps its own six Tier 1, twenty Tier 2 and two Tier 3 required cells. This report does not select or rank recipes.
 
 **0 whole recipes pass all six Tier 1 gates.** All runnable Tier 1 peers ran: **True**. All newly eligible Tier 2 jobs ran: **True**. Tier 3 is outside this campaign's cap.
@@ -34,6 +47,8 @@ The [root archive receipt](../archive-v6.json) retains 3987 original files in `a
 
 [Selected whole-recipe findings](NOTES.md) · [Interrupted V5 evidence](../interrupted-v5/README.md) · [Actual-training GIFs and source receipts](../media-v6/README.md).
 
-[Publication validation](validation.json): 148 metadata-only publication tests pass; Forge validation and compiled-memory checks pass, and historical coverage is 11,776/11,776. The merged implementation PRs separately record 103 CUDA optimizer checks and six CUDA scheduling checks. All 1,199 scientific files still match the executed source; original registered snapshot hashes and pre-run configuration identities are preserved.
+[Publication validation](validation.json): 148 metadata-only publication tests pass; Forge validation and compiled-memory checks pass, and historical coverage is 11,776/11,776. The merged implementation PRs separately record 103 CUDA optimizer checks and six CUDA scheduling checks. At the original publication, all 1,199 scientific files matched the executed source. The subsequent family-selection/reporting correction retains that pinned reproduction source, every registered snapshot and all pre-run configuration identities.
 
 The GIFs use certified retained training observations. Export added no inference, sampling draws, training updates or rescoring; numerical verdicts remain unchanged.
+
+[Family benchmark correction](../family-benchmark-selection.json): 348 metadata checks pass; the read-only CUDA plan selects seven configurations, one per family. All scientific row hashes, metrics, verdicts and archived snapshots are preserved. No additional training or qualification was performed.

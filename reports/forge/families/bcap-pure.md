@@ -8,7 +8,7 @@
 
 ## Technique overview
 
-BCAP adds a fixed critic penalty whenever the input-gradient norm exceeds a threshold, evaluated separately on real and generated data. This high-level formulation defines the family. Adam, normalized-gradient and dualnorm optimizers, learning rates, momentum and loss settings are configuration choices. The best recorded whole configuration and its exact settings appear below; BCAP with K3P remains a separate formulation with its additional training mechanisms.
+BCAP adds a fixed critic penalty whenever the input-gradient norm exceeds a threshold, evaluated separately on real and generated data. This high-level formulation defines the family. Adam, normalized-gradient and DualNorm optimizers, learning rates, momentum and loss settings are configuration choices. The current benchmark uses the explicitly selected winning DualNorm recipe. Historical BCAP-with-K3P formulations and optimizer alternatives retain their complete, separate evidence below.
 
 ![Real and generated samples share a critic; a soft penalty discourages excessive input-gradient slopes and adds to the critic loss.](assets/bcap-explainer.png)
 
@@ -78,16 +78,16 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
-## CUDA results
+## Current benchmark
 
-Runtime: **cuda**. Selected configuration: [bcap-ada-nsgda · 2e9b7b3ea44f](../../../configs/forge/configurations/bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675.json).
+Runtime: **cuda**. Selected configuration: [bcap-dualnorm · 7beb7378d81d](../../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json).
 
 Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895`. Candidate revision: `3205c7f0bd717837c6220827046bc0d548adb8680bef50ef1291b2459aa6b5ac`. Runtime cohort: `f539a56fa9daca4c8e1fef4a3374f48ad60d128764c85a8d8ac07b732da9bb21`.
+Source digest: `6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895`. Candidate revision: `bd82c80d07f49a0f6d61a30b85b63917842313437df6b10260b59ab53e839da6`. Runtime cohort: `395e36134d32e8254326c824d24c5d9fb5e3a10cc0799e4eff03595e1ca41b99`.
 
 [Frozen numerical evidence](../technique-evidence/7c4e188f1ee495526c2decf6f02a45f392123aaf4f33f1f6fb9a398fe3ac05e7.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
@@ -97,27 +97,26 @@ Selection: current_measurement. Preserve the round's pre-run whole candidate cho
 
 Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
-## Best recorded configuration
+## Current benchmark configuration
 
-Selected by recorded required passes, then completed measurements. Each count comes from this one complete configuration. Source differences preserve separate evidence contracts; the selection does not establish a controlled win or default adoption.
+Uses the explicitly selected family configuration, regardless of alternative pass counts. Each count comes from this one complete configuration. Source differences preserve separate evidence contracts; the selection does not establish a controlled win or default adoption.
 
 Recorded trainer recipe; task-owned architecture, prior, initialization, budget and sampling remain in the experiment receipts below. Null role overrides inherit the shared value. Optimizer parameters only apply to optimizers that consume them.
 
 | Setting | Selected value |
 | --- | --- |
 | Adversarial loss | loss=relativistic; loss_labels=[0.0, 1.0, 1.0] |
-| Optimizer | optimizer_family=ada_nsgda; optimizer_momentum=0.0; optimizer_adam_lr=None; adam_variant=pytorch |
-| Adam parameters (when used) | betas=[0.0, 0.999]; d_betas=None; prior_betas=None; eps=1e-08; d_eps=None; prior_eps=None |
-| Learning rates | lr=0.016; d_lr_mult=1.0; prior_lr_mult=2.0 |
+| Optimizer | optimizer_family=dualnorm; optimizer_momentum=0.0 |
+| Learning rates | lr=0.012; d_lr_mult=1.5; prior_lr_mult=2.5 |
 | Rate schedule | lr_schedule=cosine; lr_floor=1.0; network_lr_floor=1.0; network_lr_horizon_cap=None |
 | Critic penalty | reg_arm=b_cap; reg_coeff=1.0; reg_kappa=1.0; reg_every=1; reg_anchor_weight=0.0 |
 | Damping and guards | d_guard_ratio=0.0; latent_damping_max_rate=0.0; direct_particle_gain=False |
 | Training noise | input_noise_std=0.0; output_noise_std=0.0; output_noise_mode=fixed |
 | Averaging | ema_decay=0.0; serve_average=0.0 |
 
-Base network rate: **0.016**; critic rate: **0.016**; prior rate: **0.032** before any declared schedule or host adaptation.
+Base network rate: **0.012**; critic rate: **0.018**; prior rate: **0.03** before any declared schedule or host adaptation.
 
-Selected optimizer rule: Magnitude graft: compute the unit-LR beta1-zero Adam update A for each tensor, then step W -= eta_P * norm(A) * g / (norm(g) + epsilon). The direction remains the raw gradient, and eta is applied exactly once. Adam second-moment history is retained.
+Selected optimizer rule: For matrix weights, use momentum m=mu*m+g and the polar update sqrt(max(1, fan_out/fan_in))*polar(m). Normalize bias/vector momentum per tensor. Skip matrix gradients below epsilon. Sampled prior rows receive independent normalized-gradient steps with no momentum; unsampled rows do not move. No Adam components.
 
 <details>
 <summary>Other recorded configurations in this family</summary>
@@ -126,8 +125,9 @@ These are whole configurations under their original sources. Their individual pa
 
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
-| [bcap-ada-nsgda · 2e9b7b3ea44f](bcap-ada-nsgda.md) | 20(*)/151 | `6269a18ac4f8` | Selected |
-| [bcap-dualnorm · 7beb7378d81d](bcap-dualnorm.md) | 20(*)/151 | `6269a18ac4f8` | Alternative |
+| [bcap-dualnorm · 7beb7378d81d](bcap-dualnorm.md) | 20(*)/151 | `6269a18ac4f8` | Selected |
+| [bcap · 08689a73c551](bcap.md) | 20(*)/151 | `6269a18ac4f8` | Alternative |
+| [bcap-ada-nsgda · 2e9b7b3ea44f](bcap-ada-nsgda.md) | 20(*)/151 | `6269a18ac4f8` | Alternative |
 | [bcap-nsgda-global · 4d46c3064ad2](bcap-nsgda-global.md) | 20(*)/151 | `6269a18ac4f8` | Alternative |
 | [bcap-particle-rownorm-only · 4c8ddce0b214](bcap-particle-rownorm-only.md) | 20(*)/151 | `6269a18ac4f8` | Alternative |
 | [bcap-dualnorm-d-only · 3305345f128e](bcap-dualnorm-d-only.md) | 13(*)/151 | `6269a18ac4f8` | Alternative |
@@ -165,8 +165,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [ae_gan_hold](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
-| [gaussian1d_smoke](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [ring16_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [gaussian1d_smoke](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [ring16_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [two_pole](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [unused_token_hold](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 
@@ -353,11 +353,11 @@ Calibration: **provisional**. Revision7 smoke/stability separation is provisiona
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_smoke](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | PASS | matches recorded run |
+| [gaussian1d_smoke](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | FAIL | matches recorded run |
 | [two_pole](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
 | [unused_token_hold](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
-| [ring16_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
+| [ring16_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | PASS | matches recorded run |
 | [five_word_joint_acquisition](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition) | required | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1](bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
@@ -678,12 +678,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hold | 0.0787658 | <= 0.35 | PASS |
-| recon_mse | 0.0197622 | <= 0.05 | PASS |
+| hold | 0.0405433 | <= 0.35 | PASS |
+| recon_mse | 0.0062603 | <= 0.05 | PASS |
 
-Recorded terminal passing observations: **8**; required: 5.
+Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/933a8e23db8d45789a657e6b0bacc86b.json)
+[Compact metrics and receipt provenance](../technique-receipts/ea898707013843a78d10cb60ca191ef1.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -769,7 +769,7 @@ Recorded final metrics:
 | --- | ---: |
 | parity_comparisons | 4 |
 
-[Compact metrics and receipt provenance](../technique-receipts/2fb01ab6c06949b99966fc96942278fc.json)
+[Compact metrics and receipt provenance](../technique-receipts/218ba7d302ee49688c9e2216a12647e3.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -851,16 +851,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| mass_tv | 1 | <= 0.1 | FAIL |
-| minimum_reconstruction_token_probability | 0 | >= 0.9 | FAIL |
-| modes | 0 | == 5 | FAIL |
-| quality_fraction | 0 | >= 0.95 | FAIL |
-| reconstruction_exact | 0 | == 1 | FAIL |
+| mass_tv | 0.0189453 | <= 0.1 | PASS |
+| minimum_reconstruction_token_probability | 1 | >= 0.9 | PASS |
+| modes | 5 | == 5 | PASS |
+| quality_fraction | 1 | >= 0.95 | PASS |
+| reconstruction_exact | 1 | == 1 | PASS |
 | sample_count | 1024 | >= 1024 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **2**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/ab3d3a0775d34e609a990867b819fc21.json)
+[Compact metrics and receipt provenance](../technique-receipts/1986a8fae42d494b94584b6e60c153e7.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -958,7 +958,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 ### gaussian1d_smoke
 
-**gaussian1d_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
+**gaussian1d_smoke: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
@@ -970,16 +970,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.0827422 |
+| cdf_ks | 0.0646034 |
 | finite_fraction | 1 |
-| mean | 2.00693 |
-| mean_error_sigma | 0.013868 |
+| mean | 1.96788 |
+| mean_error_sigma | 0.0642418 |
 | sample_count | 4096 |
-| std | 0.454166 |
-| std_ratio | 0.908333 |
+| std | 0.497889 |
+| std_ratio | 0.995777 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/12cfdc8f254b4913a21191304125b77f.json)
+[Compact metrics and receipt provenance](../technique-receipts/2a54a1c10fd94679bccce3fe425726a1.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1548,11 +1548,11 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 ### ring16_acquisition
 
-**ring16_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
+**ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
@@ -1560,16 +1560,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 10.8446 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 1.75785 | >= 0.15 | PASS |
-| hq | 0.248535 | >= 0.85 | FAIL |
-| mass_tv | 0.138916 | <= 0.15 | PASS |
-| modes | 5 | >= 16 | FAIL |
+| component_covariance_error | 0.470678 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.38734 | >= 0.15 | PASS |
+| hq | 0.956055 | >= 0.85 | PASS |
+| mass_tv | 0.0786133 | <= 0.15 | PASS |
+| modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **34**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d41e6155e15148429414bcaa1577d377.json)
+[Compact metrics and receipt provenance](../technique-receipts/15f2c30f75484c0489d283a07e655edf.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1995,12 +1995,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| grad_med | 0.6741 | <= 1 | PASS |
-| mean_abs | 0.963491 | >= 0.3 | PASS |
+| grad_med | 0.288466 | <= 1 | PASS |
+| mean_abs | 0.943551 | >= 0.3 | PASS |
 
-Recorded terminal passing observations: **16**; required: 5.
+Recorded terminal passing observations: **17**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/3c3693cb30b846ffba2060ffffde72c9.json)
+[Compact metrics and receipt provenance](../technique-receipts/ba92d7aaa1994806b7cd548ccbac249b.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2151,12 +2151,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_move | 0.966355 | >= 0.85 | PASS |
-| unused_hold | 0.990129 | >= 0.85 | PASS |
+| concept_move | 0.990217 | >= 0.85 | PASS |
+| unused_hold | 0.992745 | >= 0.85 | PASS |
 
-Recorded terminal passing observations: **21**; required: 5.
+Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/04348f26785a4f76bf5fc25d1016cf8e.json)
+[Compact metrics and receipt provenance](../technique-receipts/c4fb9d0db8484e7ebbea03d71ed7fd1f.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2560,7 +2560,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-0d83d78027c5"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [bcap-dualnorm · 7beb7378d81d](../../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json).
 
@@ -2607,6 +2607,7 @@ These are whole configurations under their original sources. Their individual pa
 | --- | ---: | --- | --- |
 | [bcap-dualnorm · 7beb7378d81d](bcap-dualnorm.md) | 20(*)/151 | `f1755b1b5538` | Selected |
 | [bcap-pure · 5ea5bdbb2d71](bcap-pure-configuration.md) | 19(*)/151 | `eede2a3a5780` | Alternative |
+| [bcap · 08689a73c551](bcap.md) | 19(*)/151 | `21ec7e3f8940` | Alternative |
 | [bcap-nsgda-global · 4d46c3064ad2](bcap-nsgda-global.md) | 19(*)/151 | `c5c60a8018e1` | Alternative |
 | [bcap-nsgda-layer · 3cca4c69f248](bcap-nsgda-layer.md) | 19(*)/151 | `c5c60a8018e1` | Alternative |
 | [bcap-particle-rownorm-only · 4c8ddce0b214](bcap-particle-rownorm-only.md) | 19(*)/151 | `c5c60a8018e1` | Alternative |
@@ -5020,7 +5021,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-c195899a64af"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [bcap-dualnorm · 7beb7378d81d](../../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json).
 
@@ -5066,6 +5067,7 @@ These are whole configurations under their original sources. Their individual pa
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
 | [bcap-dualnorm · 7beb7378d81d](bcap-dualnorm.md) | 21(*)/151 | `d276c5a7344f` | Selected |
+| [bcap · 08689a73c551](bcap.md) | 20(*)/151 | `d276c5a7344f` | Alternative |
 | [bcap-ada-nsgda · 2e9b7b3ea44f](bcap-ada-nsgda.md) | 20(*)/151 | `d276c5a7344f` | Alternative |
 | [bcap-nsgda-global · 4d46c3064ad2](bcap-nsgda-global.md) | 20(*)/151 | `d276c5a7344f` | Alternative |
 | [bcap-particle-rownorm-only · 4c8ddce0b214](bcap-particle-rownorm-only.md) | 19(*)/151 | `d276c5a7344f` | Alternative |

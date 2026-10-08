@@ -104,6 +104,46 @@ def test_optimizer_alias_keeps_exact_runtime_groups_and_stable_ties(report):
     assert {item["backend"]: item["row_index"] for item in cohorts} == {"cuda": 0, "cpu": 1}
 
 
+def test_explicit_current_optimizer_wins_display_without_borrowing_or_hiding_history(report):
+    from experiments.forge.trainer_families import CURRENT_SELECTION, family_row_pin
+    root, publication = report
+    variant = deepcopy(publication["rows"][0])
+    variant.update(candidate_id="selected-optimizer", trainer_family="optimizer", attempt_ids=[])
+    variant["bindings"]["source_digest"] = "selected-source"
+    variant["tasks"] = [{"task_id": name, "status": "FAIL"} for name in ("shared", "failed", "missing", "held")]
+    publication["rows"].append(variant)
+    old = deepcopy(variant)
+    old["runtime_cohort"]["model"] = "older-runtime"
+    old["bindings"]["source_digest"] = "archived-source"
+    publication["historical_family_rows"] = [old]
+    atomic_json(root / "configs/forge/trainer-families.json", {"schema_version": 1, "families": [
+        {"id": "k3p", "label": "K3P", "candidates": ["k3p-config"],
+         "canonical_candidate": "k3p-config", "current_configuration_family": "optimizer"},
+        {"id": "optimizer", "label": "Optimizer", "candidates": ["selected-optimizer"],
+         "canonical_candidate": "selected-optimizer", "reporting_family": "k3p"}]})
+    pin = family_row_pin(variant, selection_kind="historical_incumbent", reason="Explicit current optimizer.")
+    atomic_json(root / CURRENT_SELECTION, {"schema_version": 1, "scope": "whole_candidate_family_current",
+        "default_adoption": False, "view": "alpha", "policy_fingerprint": "fixture", "selections": [pin]})
+    original = deepcopy(publication["rows"] + publication["historical_family_rows"])
+    current = generate(report)
+    family = publication["family_progress"]["families"][0]
+    assert current["row_index"] == 1 and score(current["total"]) == "0/5"
+    assert len(family["cohorts"]) == 2
+    assert publication["rows"] + publication["historical_family_rows"] == original
+    page = root / "reports/forge/technique-inventory.md"
+    text = render_leaderboard(root, publication, page)
+    assert sum(line.startswith("| **[") for line in text.splitlines()) == 1
+    assert "older-runtime" not in text
+    detail = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "Current benchmark configuration" in detail and "Archived runtime cohort" in detail
+    assert "selected-source" in detail and "archived-source" in detail
+    pin["scientific_row_sha256"] = "different-row"
+    atomic_json(root / CURRENT_SELECTION, {"schema_version": 1, "scope": "whole_candidate_family_current",
+        "default_adoption": False, "view": "alpha", "policy_fingerprint": "fixture", "selections": [pin]})
+    with pytest.raises(ValueError, match="exactly one verified scientific row"):
+        build_progress(root, publication)
+
+
 def test_hidden_inventory_entry_preserves_numerical_rows_without_navigation(report):
     root, publication = report
     hidden = deepcopy(publication["rows"][0])
@@ -494,10 +534,13 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
         assert recorded[cohort["row_index"]]["qualified_tier"] == 0
     bcap = cohorts["bcap"]
-    assert score(bcap["tiers"]["1"]) == "19/22"
+    assert score(bcap["tiers"]["1"]) == "20/22"
     clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
     assert score(clock_view["tiers"]["1"]) == "3/4"
-    clock = bcap["tasks"]["clockfree_audit_measurement_v1"]
+    # Detailed historical clock diagnostics retain their original cohort.
+    clock = next(cohort["tasks"]["clockfree_audit_measurement_v1"]
+                 for family in progress["families"] + progress["configuration_families"] if family["id"] == "bcap"
+                 for cohort in family["cohorts"] if "clock_audit" in cohort["tasks"]["clockfree_audit_measurement_v1"])
     assert clock["clock_audit"]["comparisons"]["step_label"]["digest_equal"] is False
     assert clock["clock_audit"]["comparisons"]["horizon"]["digest_equal"] is False
     assert clock["training_media"][0]["recorded_grade"] == "FAIL"
@@ -511,6 +554,8 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
     original_families = {pin["trainer_family"] for pin in selection["selections"]
                          if pin["selection_kind"] != "current_measurement"} - {"atlas", "e22"}
+    registry = read_json(root / "configs/forge/trainer-families.json")["families"]
+    original_families -= {family["id"] for family in registry if family.get("inventory_visible") is False}
     ordinary = [family for family in progress["families"] + progress["configuration_families"]
                 if family["id"] in original_families]
     assert {family["id"] for family in ordinary} == original_families
@@ -519,7 +564,7 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
             assert cohort["tiers"]["1"]["incomplete"] is False
             assert "(*)" not in score(cohort["tiers"]["1"])
             assert set(cohort["tiers"]["1"]["counts"]) <= {"PASS", "FAIL"}
-            assert rows[cohort["row_index"]]["qualified_tier"] == 0
+            assert (rows + publication.get("historical_family_rows", []))[cohort["row_index"]]["qualified_tier"] == 0
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
     assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
@@ -527,6 +572,7 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
 
 
 def test_current_measurement_families_complete_only_their_declared_view_scope():
+    from experiments.forge.trainer_families import scientific_row_hash
     root = Path(__file__).resolve().parents[1]
     publication = read_json(root / "reports/forge/technique-inventory.json")
     rows = deepcopy(publication["rows"])
@@ -540,7 +586,7 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
     hidden = {family["id"] for family in registry if family.get("inventory_visible") is False}
     assert set(families) == (set(pins) | unmeasured) - hidden
     assert unmeasured == {family["id"] for family in registry
-                          if family.get("unmeasured_display_backend")}
+                          if family.get("unmeasured_display_backend")} - hidden
     for row in rows:
         if row["trainer_family"] in unmeasured:
             assert not row["attempt_ids"] and row["qualified_tier"] == 0
@@ -556,7 +602,11 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
             required.update(assignment["task"] for assignment in view["assignments"]
                             if assignment["importance"] == "required" and assignment["qualification_tier"] == 1)
         assert required
-        for cohort in families[name]["cohorts"]:
+        current = [cohort for cohort in families[name]["cohorts"]
+                   if cohort["row_index"] < len(rows)
+                   and scientific_row_hash(rows[cohort["row_index"]]) == pin["scientific_row_sha256"]]
+        assert len(current) == 1
+        for cohort in current:
             assert all(cohort["tasks"][task]["status"] in {"PASS", "FAIL"} for task in required)
             views = {view["id"]: view for view in cohort["views"] + cohort.get("scoped_views", [])}
             for view_name in pin["measurement_views"]:
@@ -570,7 +620,7 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
                             if assignment["importance"] == "required" and assignment["qualification_tier"] == 1]
                 if any(status in {"UNKNOWN", "NOT_RUN", "BLOCKED"} for status in statuses):
                     assert view["tiers"]["1"]["incomplete"] is True
-            assert rows[cohort["row_index"]]["qualified_tier"] == 0
+            assert (rows + publication.get("historical_family_rows", []))[cohort["row_index"]]["qualified_tier"] == 0
     assert publication["rows"] == rows
 
 
@@ -581,12 +631,15 @@ def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
     current = [row for row in publication["rows"] if row["trainer_family"] == "release07-gan-v3"]
     assert len(current) == 1
-    old_pins = {pin["trainer_family"]: pin for pin in selection["historical_selections"]}
+    old_pins = {}
+    for pin in selection["historical_selections"]:
+        old_pins.setdefault(pin["trainer_family"], set()).add(pin["scientific_row_sha256"])
     for row in publication["historical_family_rows"]:
-        assert scientific_row_hash(row) == old_pins[row["trainer_family"]]["scientific_row_sha256"]
+        assert scientific_row_hash(row) in old_pins[row["trainer_family"]]
     aliases = publication["family_progress"]["historical_families"]
-    assert {family["id"] for family in aliases} == set(old_pins)
-    assert not set(old_pins) & {family["id"] for family in publication["family_progress"]["families"]}
+    historical_ids = {family["id"] for family in read_json(root / "configs/forge/trainer-families.json")["historical_families"]}
+    assert {family["id"] for family in aliases} == set(old_pins) & historical_ids
+    assert not historical_ids & {family["id"] for family in publication["family_progress"]["families"]}
     pages = generated_pages(root, publication)
     for family in aliases:
         text = pages[root / family["page"]]

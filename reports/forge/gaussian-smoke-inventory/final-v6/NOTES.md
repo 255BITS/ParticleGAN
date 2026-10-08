@@ -1,5 +1,13 @@
 # Results and the selected DualNorm row
 
+Current benchmarks use one selected configuration per solution family. BCAP is
+the winning DualNorm row below, with four of six required passes and Ring16 PASS
+at 1,600 updates. The current inventory has seven family entries. Historical
+optimizer/formulation alternatives and runtime cohorts remain on detail pages.
+The V6 wrapper mistakenly ran a broader catalog; its complete archived counts
+follow. The runner now selects the current family configurations without
+repeating those completed experiments.
+
 The complete fixed roster has 52 declarations: 23 admitted CUDA recipes,
 24 preflight blockers and five declaration refusals. All 23 admitted recipes
 finished their runnable Tier1 peers. The six required tasks yield 77 PASS,
@@ -8,7 +16,7 @@ yields seven PASS, 15 FAIL and one capability BLOCKED cell. No whole recipe
 qualifies for Tier2. There are 161 paid attempts, no scientific retries and
 5,910.478148 measured worker seconds. Earlier source costs remain separate.
 
-The closest whole recipe is the preselected BCAP row
+An archived BCAP-with-K3P comparison row is
 `bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212`,
 with five of six required passes. Its Gaussian acquisition and original word
 curve gate both pass; Ring16 fails. Gaussian's endpoint CDF KS is 0.03562607,
@@ -16,7 +24,8 @@ and word quality/reconstruction are both 1. Ring16 still finds all 16 modes,
 but component covariance error is 3.33788425 and HQ is 0.85595703.
 Thus Gaussian is solvable under this fixed test: the failure below belongs to
 the selected DualNorm recipe, whose Ring16 success cannot be pooled with
-BCAP's Gaussian/word successes. See the single
+this alternative's Gaussian/word successes. This row is not the current BCAP
+benchmark configuration. See the single
 [technique inventory](../../technique-inventory.md) for the full roster.
 
 This is the pre-run selected BCAP/DualNorm configuration
@@ -70,8 +79,8 @@ or a causal speed estimate. These word matrices already used SVD in the prior
 source; the removed >1024-dimension Newton–Schulz path does not apply to them.
 
 The fixed roster is complete; these failed revisions warrant no automatic
-continuation or promotion. Inspect BCAP's saved per-component Ring16 spread
-and DualNorm's paired Gaussian CDF observations before declaring another
+continuation or promotion. Inspect the selected DualNorm's paired Gaussian CDF
+observations before declaring another
 bounded comparison. DualNorm's word curve also loses and recovers an already
 acquired solution. If Tier1 is to mean acquisition for words as well, declare
 an explicit new word smoke/hold split rather than relabeling this original

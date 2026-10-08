@@ -104,7 +104,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
-## CUDA results
+## Current benchmark
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
@@ -123,9 +123,9 @@ Selection: current_measurement. Preserve the round's pre-run whole candidate cho
 
 Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
-## Best recorded configuration
+## Current benchmark configuration
 
-Selected by recorded required passes, then completed measurements. Each count comes from this one complete configuration. Source differences preserve separate evidence contracts; the selection does not establish a controlled win or default adoption.
+Uses the explicitly selected family configuration, regardless of alternative pass counts. Each count comes from this one complete configuration. Source differences preserve separate evidence contracts; the selection does not establish a controlled win or default adoption.
 
 Recorded trainer recipe; task-owned architecture, prior, initialization, budget and sampling remain in the experiment receipts below. Null role overrides inherit the shared value. Optimizer parameters only apply to optimizers that consume them.
 
@@ -152,8 +152,10 @@ These are whole configurations under their original sources. Their individual pa
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
 | [k3p · 0b37e98a01e3](k3p.md) | 19(*)/151 | `6269a18ac4f8` | Selected |
+| [forge-no-critic-penalty](k3p-no-penalty.md) | 18(*)/151 | `6269a18ac4f8` | Alternative |
 | [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 14(*)/151 | `6269a18ac4f8` | Alternative |
 | [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 13(*)/151 | `6269a18ac4f8` | Alternative |
+| [forge-onboarding-anchor-ablation](k3p-no-anchor.md) | 13(*)/151 | `6269a18ac4f8` | Alternative |
 
 </details>
 
@@ -2574,7 +2576,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-c195899a64af"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
@@ -2620,8 +2622,10 @@ These are whole configurations under their original sources. Their individual pa
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
 | [k3p · 0b37e98a01e3](k3p.md) | 19(*)/151 | `d276c5a7344f` | Selected |
+| [forge-no-critic-penalty](k3p-no-penalty.md) | 18(*)/151 | `d276c5a7344f` | Alternative |
 | [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 14(*)/151 | `d276c5a7344f` | Alternative |
 | [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 13(*)/151 | `d276c5a7344f` | Alternative |
+| [forge-onboarding-anchor-ablation](k3p-no-anchor.md) | 13(*)/151 | `d276c5a7344f` | Alternative |
 
 </details>
 
@@ -5042,7 +5046,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 <a name="cohort-cuda-0d83d78027c5"></a>
 
-## CUDA results
+## Archived runtime cohort
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
@@ -5089,6 +5093,8 @@ These are whole configurations under their original sources. Their individual pa
 | [k3p · 0b37e98a01e3](k3p.md) | 19(*)/151 | `21ec7e3f8940` | Selected |
 | [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 13(*)/151 | `21ec7e3f8940` | Alternative |
 | [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 12(*)/151 | `21ec7e3f8940` | Alternative |
+| [forge-onboarding-anchor-ablation](k3p-no-anchor.md) | 12(*)/151 | `21ec7e3f8940` | Alternative |
+| [forge-no-critic-penalty](k3p-no-penalty.md) | 6(*)/151 | `21ec7e3f8940` | Alternative |
 
 </details>
 

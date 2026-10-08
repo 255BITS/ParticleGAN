@@ -504,8 +504,15 @@ Configured standards do not change public defaults or relax calibration and
 independent-confirmation requirements. Recorded-policy reconstruction preserves
 its original family/cohort rows.
 
-The ordinary `inventory` execution command still submits declared ideas;
-configuration grids run only through an explicitly requested `search` study.
+The ordinary `inventory` execution command uses one explicitly selected current
+configuration per visible solution family from
+`configs/forge/selections/family-current-v1.json`. BCAP uses the winning DualNorm
+configuration selected by `current_configuration_family` in the family registry.
+Optimizer variants, ablations and previous runtime cohorts remain archived
+comparisons; they do not expand the default benchmark roster. The current
+leaderboard displays this same whole configuration per family. Historical
+reproduction wrappers retain their explicit frozen idea/configuration rosters.
+Configuration grids run only through an explicitly requested `search` study.
 
 Use the [configuration-search workflow](docs/forge-configuration-search.md) to
 declare a bounded recipe grid without copying a trainer. A study freezes its

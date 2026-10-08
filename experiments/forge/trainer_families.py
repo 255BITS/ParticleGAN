@@ -190,6 +190,12 @@ def load_families(root: Path | str) -> dict:
             raise ValueError("reporting family must reference a visible registered solution without another alias")
         if not isinstance(family.get("inventory_visible", True), bool):
             raise ValueError("inventory visibility must be boolean")
+        preferred = family.get("current_configuration_family")
+        if preferred is not None:
+            identifier(preferred, "current configuration family")
+            if (reporting != family["id"] or preferred not in result
+                    or result[preferred].get("reporting_family", preferred) != family["id"]):
+                raise ValueError("current configuration must belong to its reporting family")
         aliases = family.get("historical_family_ids", [])
         if not isinstance(aliases, list) or len(set(aliases)) != len(aliases) or set(aliases) - set(historical_ids):
             raise ValueError("trainer family aliases require exact registered historical identities")
@@ -200,6 +206,37 @@ def load_families(root: Path | str) -> dict:
     if len(set(referenced)) != len(referenced):
         raise ValueError("historical trainer family cannot belong to multiple solution families")
     return result
+
+
+def current_family_candidates(root: Path | str, *, family_ids=None) -> list[dict]:
+    """One explicitly selected whole configuration per visible solution family.
+
+    Reporting aliases leave historical formulation and receipt identities intact.
+    A selected optimizer is not replaced by a better-scoring archived alternative.
+    """
+    root = Path(root)
+    families = load_families(root)
+    card = read_json(root / CURRENT_SELECTION)
+    pins = load_current_selection(root, view_id=card["view"], policy_fingerprint=card["policy_fingerprint"])
+    choices = []
+    for name, family in sorted(families.items()):
+        if family.get("reporting_family", name) != name or not family.get("inventory_visible", True):
+            continue
+        if family_ids is not None and name not in family_ids:
+            continue
+        configuration_family = family.get("current_configuration_family", name)
+        pin = pins.get(configuration_family)
+        if pin is None:
+            declaration = families[configuration_family]
+            if declaration.get("unmeasured_display_backend") is None:
+                raise ValueError(f"family {name}: current benchmark requires an explicit whole-row selection")
+            pin = {"trainer_family": configuration_family, "candidate_id": declaration["canonical_candidate"],
+                   "selection_kind": "unmeasured_declaration", "execution_backend": declaration["unmeasured_display_backend"]}
+        choices.append({"family": name, "label": family["label"],
+                        "configuration_family": configuration_family, **deepcopy(pin)})
+    if len({choice["candidate_id"] for choice in choices}) != len(choices):
+        raise ValueError("current family benchmarks cannot repeat a selected candidate")
+    return choices
 
 
 def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict | None = None,
