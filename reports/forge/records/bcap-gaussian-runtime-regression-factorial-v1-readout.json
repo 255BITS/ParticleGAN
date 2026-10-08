@@ -1,0 +1,21 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "abf70736d2749814a4bed2c6bef9ec94daaef06fbca7873e4068f045941983b7",
+  "conclusion": "Four matched CUDA arms: full polar/enabled autograd PASS at917 (endpointCDFKS .0429741); truncated/enabled PASS at459,667,792,1000 (.0371191); full/disabled FAIL (.0692344); truncated/disabled FAIL (.0646034). Disabling autograd multithreading isolates the PASS-to-FAIL factor for both polar rules; truncation alone does not cause this Gaussian failure. Current and historical-factor controls reproduce archived V6/V4 samples, metrics, model/optimizer states and all consumed named streams bitexact despite Python/NumPy metadata differences. Same task/recipe/public deterministic initialization/data sequence/prior, seed0,1000updates/24paired independent confirmations per arm. Aggregate post-update gradient/model hashes diverge atupdate1; individual derivative onset not measured. Truncated/enabled arm completed before a post-run audit incorrectly included no-grad inference forwards; metadata-only recovery preserves missing live counters explicitly and repeats no training. Four arms completed; original gates/defaults/global qualification unchanged. This narrative duplicates no task results or cost.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Under the selected global BCAP/DualNorm recipe, isolate numerical-rank truncation and disabled autograd multithreading on the unchanged 1D Gaussian confirmed acquisition smoke.",
+  "lifecycle": "concluded",
+  "mechanism_class": "explicit_existing_control_ablation",
+  "next_action": "Retain the fixed serial policy, original Gaussian failure and diagnostic scope. Inspect saved distribution/critic/prior gradients for poor CDF margin before a bounded new global recipe comparison with matched full-suite validation. No automatic rollback, task-specific scheduling, annealing, seed trials, gate relaxation or continuation.",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "bcap-gaussian-runtime-regression-factorial-v1-readout",
+  "record_type": "task_diagnostic_readout",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-gaussian-regression/readout.json",
+    "sha256": "abf70736d2749814a4bed2c6bef9ec94daaef06fbca7873e4068f045941983b7"
+  },
+  "task_results": []
+}

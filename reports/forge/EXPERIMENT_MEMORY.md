@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 649. Inventory coverage: complete. Unresolved import items: 7.
+Records: 650. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -629,6 +629,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 **Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · bcap-gaussian-runtime-regression-factorial-v1-readout
+
+**Scope:** task_only_diagnostic; task_diagnostic_readout; revision `abf70736d2749814a4bed2c6bef9ec94daaef06fbca7873e4068f045941983b7`.
+
+Under the selected global BCAP/DualNorm recipe, isolate numerical-rank truncation and disabled autograd multithreading on the unchanged 1D Gaussian confirmed acquisition smoke.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `explicit_existing_control_ablation`.
+
+
+
+Four matched CUDA arms: full polar/enabled autograd PASS at917 (endpointCDFKS .0429741); truncated/enabled PASS at459,667,792,1000 (.0371191); full/disabled FAIL (.0692344); truncated/disabled FAIL (.0646034). Disabling autograd multithreading isolates the PASS-to-FAIL factor for both polar rules; truncation alone does not cause this Gaussian failure. Current and historical-factor controls reproduce archived V6/V4 samples, metrics, model/optimizer states and all consumed named streams bitexact despite Python/NumPy metadata differences. Same task/recipe/public deterministic initialization/data sequence/prior, seed0,1000updates/24paired independent confirmations per arm. Aggregate post-update gradient/model hashes diverge atupdate1; individual derivative onset not measured. Truncated/enabled arm completed before a post-run audit incorrectly included no-grad inference forwards; metadata-only recovery preserves missing live counters explicitly and repeats no training. Four arms completed; original gates/defaults/global qualification unchanged. This narrative duplicates no task results or cost.
+
+**Next:** Retain the fixed serial policy, original Gaussian failure and diagnostic scope. Inspect saved distribution/critic/prior gradients for poor CDF margin before a bounded new global recipe comparison with matched full-suite validation. No automatic rollback, task-specific scheduling, annealing, seed trials, gate relaxation or continuation.
+
+[Evidence](../../reports/forge/bcap-gaussian-regression/readout.json) · [Record](records/bcap-gaussian-runtime-regression-factorial-v1-readout.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -4886,4 +4902,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `536f19f4c46d55423da5a645f4fc87a792f25961ec44978f52d2a63d876aebe8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f4dc61f13c3a03f78dfc266bf3dbacb93becca373ff3cefd4e742b8a9430c38d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
