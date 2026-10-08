@@ -53,15 +53,17 @@ def factors(truncate, parallel, output):
     old_execute, old_state = GANTrainer._execute_step, GANTrainer.state_dict
     old_property, old_polar = GANTrainer.serial_backward, dualnorm.polar_factor
     old_svd, old_grad = torch.linalg.svd, torch.autograd.grad
-    modes = {name: Counter() for name in ("update", "forward", "autograd_grad")}
+    modes = {name: Counter() for name in ("update", "forward_training", "forward_no_grad", "autograd_grad")}
     ranks, trajectories = Counter(), []
     installed = set()
 
     def execute(self, real, *, generator_real=None, collect_stats=False):
         if id(self) not in installed:
+            def forward_mode(*_):
+                key = "forward_training" if torch.is_grad_enabled() else "forward_no_grad"
+                modes[key].update([torch.autograd.is_multithreading_enabled()])
             for model in (self.G, self.D):
-                model.register_forward_pre_hook(
-                    lambda *_: modes["forward"].update([torch.autograd.is_multithreading_enabled()]))
+                model.register_forward_pre_hook(forward_mode)
             installed.add(id(self))
         try:
             with torch.autograd.set_multithreading_enabled(parallel):
@@ -108,6 +110,10 @@ def factors(truncate, parallel, output):
         GANTrainer.serial_backward, dualnorm.polar_factor = old_property, old_polar
         torch.linalg.svd, torch.autograd.grad = old_svd, old_grad
         atomic_json(output / "trajectory.json", trajectories)
+        atomic_json(output / "execution-audit.json", {
+            "modes": {key: {str(flag): count for flag, count in value.items()} for key, value in modes.items()},
+            "ranks": [{"shape": list(shape), "rank": rank, "directions": directions,
+                       "calls": count} for (shape, rank, directions), count in sorted(ranks.items())]})
 
 
 def run_arm(name, output):
@@ -134,7 +140,7 @@ def run_arm(name, output):
     if elapsed > protocol["per_arm_seconds"]:
         raise TimeoutError("diagnostic arm exceeded its complete allowance")
     grade, evidence = raw["gaussian_grade"], raw["evidence"]
-    if any(set(counter) != {parallel} for counter in modes.values()):
+    if any(set(modes[key]) != {parallel} for key in ("update", "forward_training", "autograd_grad")):
         raise ValueError("actual forward/higher-order/update scheduling did not match arm")
     summary = {
         "arm": name, "scope": "non_qualifying_causal_diagnostic", "qualification": False,
