@@ -1,0 +1,1631 @@
+{
+  "flattened_paths": 102,
+  "numerical_grid_fields": 27,
+  "recipe_fields": 92,
+  "rows": [
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "bcap",
+        "bcap_adam": "bcap_adam"
+      },
+      "effective_defaults": {
+        "bcap": "bcap",
+        "bcap_adam": "bcap_adam"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "name",
+      "recipe_field": "name"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "bcap",
+        "bcap_adam": "bcap"
+      },
+      "effective_defaults": {
+        "bcap": "bcap",
+        "bcap_adam": "bcap"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "critic_formulation",
+      "recipe_field": "critic_formulation"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "gan",
+        "bcap_adam": "gan"
+      },
+      "effective_defaults": {
+        "bcap": "gan",
+        "bcap_adam": "gan"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "model",
+      "recipe_field": "model"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 2,
+        "bcap_adam": 2
+      },
+      "effective_defaults": {
+        "bcap": 2,
+        "bcap_adam": 2
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "z_dim",
+      "recipe_field": "z_dim"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 20000,
+        "bcap_adam": 20000
+      },
+      "effective_defaults": {
+        "bcap": 20000,
+        "bcap_adam": 20000
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "num_particles",
+      "recipe_field": "num_particles"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "particles",
+        "bcap_adam": "particles"
+      },
+      "effective_defaults": {
+        "bcap": "particles",
+        "bcap_adam": "particles"
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "prior_kind",
+      "recipe_field": "prior_kind"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "sigma_rel",
+      "recipe_field": "sigma_rel"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "standardize",
+      "recipe_field": "standardize"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "num_classes",
+      "recipe_field": "num_classes"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "scalar",
+        "bcap_adam": "scalar"
+      },
+      "effective_defaults": {
+        "bcap": "scalar",
+        "bcap_adam": "scalar"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "conditioning",
+      "recipe_field": "conditioning"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "class",
+        "bcap_adam": "class"
+      },
+      "effective_defaults": {
+        "bcap": "class",
+        "bcap_adam": "class"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "ucd_target",
+      "recipe_field": "ucd_target"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.02,
+        "bcap_adam": 0.02
+      },
+      "effective_defaults": {
+        "bcap": 0.02,
+        "bcap_adam": 0.02
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "ucd_weight",
+      "recipe_field": "ucd_weight"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "alpha_bar[0]",
+      "recipe_field": "alpha_bar"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "effective_defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "alpha_bar[1]",
+      "recipe_field": "alpha_bar"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.5,
+        "bcap_adam": 0.5
+      },
+      "effective_defaults": {
+        "bcap": 0.5,
+        "bcap_adam": 0.5
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "alpha_bar[2]",
+      "recipe_field": "alpha_bar"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.05,
+        "bcap_adam": 0.05
+      },
+      "effective_defaults": {
+        "bcap": 0.05,
+        "bcap_adam": 0.05
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "alpha_bar[3]",
+      "recipe_field": "alpha_bar"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0001,
+        "bcap_adam": 0.0001
+      },
+      "effective_defaults": {
+        "bcap": 0.0001,
+        "bcap_adam": 0.0001
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "alpha_bar[4]",
+      "recipe_field": "alpha_bar"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 2048,
+        "bcap_adam": 2048
+      },
+      "effective_defaults": {
+        "bcap": 2048,
+        "bcap_adam": 2048
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "batch_size",
+      "recipe_field": "batch_size"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 7000,
+        "bcap_adam": 7000
+      },
+      "effective_defaults": {
+        "bcap": 7000,
+        "bcap_adam": 7000
+      },
+      "numerical_grid_field": false,
+      "owner": "task",
+      "path": "total_steps",
+      "recipe_field": "total_steps"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "continuous_policy",
+      "recipe_field": "continuous_policy"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 0.012,
+        "bcap_adam": 0.00425
+      },
+      "effective_defaults": {
+        "bcap": 0.012,
+        "bcap_adam": 0.00425
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "lr",
+      "recipe_field": "lr"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1.5,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.5,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "d_lr_mult",
+      "recipe_field": "d_lr_mult"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 2.5,
+        "bcap_adam": 2.0
+      },
+      "effective_defaults": {
+        "bcap": 2.5,
+        "bcap_adam": 2.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "prior_lr_mult",
+      "recipe_field": "prior_lr_mult"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "betas[0]",
+      "recipe_field": "betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 0.999,
+        "bcap_adam": 0.999
+      },
+      "effective_defaults": {
+        "bcap": 0.999,
+        "bcap_adam": 0.999
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "betas[1]",
+      "recipe_field": "betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "prior_betas[0]",
+      "recipe_field": "prior_betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": 0.999,
+        "bcap_adam": 0.999
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "prior_betas[1]",
+      "recipe_field": "prior_betas"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "b_cap",
+        "bcap_adam": "b_cap"
+      },
+      "effective_defaults": {
+        "bcap": "b_cap",
+        "bcap_adam": "b_cap"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "reg_arm",
+      "recipe_field": "reg_arm"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "reg_coeff",
+      "recipe_field": "reg_coeff"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "reg_kappa",
+      "recipe_field": "reg_kappa"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1,
+        "bcap_adam": 1
+      },
+      "effective_defaults": {
+        "bcap": 1,
+        "bcap_adam": 1
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "reg_every",
+      "recipe_field": "reg_every"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "prior_reg",
+      "recipe_field": "prior_reg"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "ema_decay",
+      "recipe_field": "ema_decay"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.6,
+        "bcap_adam": 0.6
+      },
+      "effective_defaults": {
+        "bcap": 0.6,
+        "bcap_adam": 0.6
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "lr_anneal_start",
+      "recipe_field": "lr_anneal_start"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "lr_floor",
+      "recipe_field": "lr_floor"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "network_lr_floor",
+      "recipe_field": "network_lr_floor"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "network_lr_horizon_cap",
+      "recipe_field": "network_lr_horizon_cap"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "effective_defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "reg_anchor_min_decay",
+      "recipe_field": "reg_anchor_min_decay"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "reg_anchor_weight",
+      "recipe_field": "reg_anchor_weight"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "direct_particle_gain",
+      "recipe_field": "direct_particle_gain"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "d_guard_ratio",
+      "recipe_field": "d_guard_ratio"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 200,
+        "bcap_adam": 200
+      },
+      "effective_defaults": {
+        "bcap": 200,
+        "bcap_adam": 200
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "d_guard_min_steps",
+      "recipe_field": "d_guard_min_steps"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "latent_damping_max_rate",
+      "recipe_field": "latent_damping_max_rate"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "direct_particle_betas[0]",
+      "recipe_field": "direct_particle_betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "effective_defaults": {
+        "bcap": 0.9,
+        "bcap_adam": 0.9
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "direct_particle_betas[1]",
+      "recipe_field": "direct_particle_betas"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "input_noise_std",
+      "recipe_field": "input_noise_std"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.1,
+        "bcap_adam": 0.1
+      },
+      "effective_defaults": {
+        "bcap": 0.1,
+        "bcap_adam": 0.1
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "input_noise_anneal_end",
+      "recipe_field": "input_noise_anneal_end"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "output_noise_std",
+      "recipe_field": "output_noise_std"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "output_noise_warmup",
+      "recipe_field": "output_noise_warmup"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "effective_defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "encoder_mode",
+      "recipe_field": "encoder_mode"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.25,
+        "bcap_adam": 0.25
+      },
+      "effective_defaults": {
+        "bcap": 0.25,
+        "bcap_adam": 0.25
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "routing_temperature",
+      "recipe_field": "routing_temperature"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "sum",
+        "bcap_adam": "sum"
+      },
+      "effective_defaults": {
+        "bcap": "sum",
+        "bcap_adam": "sum"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "distance_reduction",
+      "recipe_field": "distance_reduction"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.03,
+        "bcap_adam": 0.03
+      },
+      "effective_defaults": {
+        "bcap": 0.03,
+        "bcap_adam": 0.03
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "observation_sigma",
+      "recipe_field": "observation_sigma"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "reconstruction_weight",
+      "recipe_field": "reconstruction_weight"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "amsgrad",
+      "recipe_field": "amsgrad"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "critic_r1_real",
+      "recipe_field": "critic_r1_real"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "critic_payoff_damping",
+      "recipe_field": "critic_payoff_damping"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "fixed",
+        "bcap_adam": "fixed"
+      },
+      "effective_defaults": {
+        "bcap": "fixed",
+        "bcap_adam": "fixed"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "output_noise_mode",
+      "recipe_field": "output_noise_mode"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "mobility",
+        "bcap_adam": "mobility"
+      },
+      "effective_defaults": {
+        "bcap": "mobility",
+        "bcap_adam": "mobility"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "lr_control",
+      "recipe_field": "lr_control"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "particle_birth_death",
+      "recipe_field": "particle_birth_death"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_evidence_gate",
+      "recipe_field": "row_evidence_gate"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "any",
+        "bcap_adam": "any"
+      },
+      "effective_defaults": {
+        "bcap": "any",
+        "bcap_adam": "any"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "table_release_rule",
+      "recipe_field": "table_release_rule"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_evidence_hot",
+      "recipe_field": "row_evidence_hot"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_evidence_exclude",
+      "recipe_field": "row_evidence_exclude"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "effective_defaults": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_evidence_hold",
+      "recipe_field": "row_evidence_hold"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "data",
+        "bcap_adam": "data"
+      },
+      "effective_defaults": {
+        "bcap": "data",
+        "bcap_adam": "data"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "birth_death_space",
+      "recipe_field": "birth_death_space"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "serve_average",
+      "recipe_field": "serve_average"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "data",
+        "bcap_adam": "data"
+      },
+      "effective_defaults": {
+        "bcap": "data",
+        "bcap_adam": "data"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "reopen_signal",
+      "recipe_field": "reopen_signal"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "hold",
+        "bcap_adam": "hold"
+      },
+      "effective_defaults": {
+        "bcap": "hold",
+        "bcap_adam": "hold"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "reopen_anchor",
+      "recipe_field": "reopen_anchor"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "reopen_guard",
+      "recipe_field": "reopen_guard"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "theory",
+        "bcap_adam": "theory"
+      },
+      "effective_defaults": {
+        "bcap": "theory",
+        "bcap_adam": "theory"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_evidence_null",
+      "recipe_field": "row_evidence_null"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "birth_death_isolation",
+      "recipe_field": "birth_death_isolation"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "effective_defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "birth_death_feature_scale",
+      "recipe_field": "birth_death_feature_scale"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "knn",
+        "bcap_adam": "knn"
+      },
+      "effective_defaults": {
+        "bcap": "knn",
+        "bcap_adam": "knn"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "birth_death_backend",
+      "recipe_field": "birth_death_backend"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 64,
+        "bcap_adam": 64
+      },
+      "effective_defaults": {
+        "bcap": 64,
+        "bcap_adam": 64
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "birth_death_cells",
+      "recipe_field": "birth_death_cells"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 8,
+        "bcap_adam": 8
+      },
+      "effective_defaults": {
+        "bcap": 8,
+        "bcap_adam": 8
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "birth_death_metric_rank",
+      "recipe_field": "birth_death_metric_rank"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 256,
+        "bcap_adam": 256
+      },
+      "effective_defaults": {
+        "bcap": 256,
+        "bcap_adam": 256
+      },
+      "numerical_grid_field": false,
+      "owner": "hyperparameter",
+      "path": "birth_death_chunk",
+      "recipe_field": "birth_death_chunk"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "real_anchor",
+        "bcap_adam": "real_anchor"
+      },
+      "effective_defaults": {
+        "bcap": "real_anchor",
+        "bcap_adam": "real_anchor"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "birth_death_parent_policy",
+      "recipe_field": "birth_death_parent_policy"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "independent",
+        "bcap_adam": "independent"
+      },
+      "effective_defaults": {
+        "bcap": "independent",
+        "bcap_adam": "independent"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "row_policy",
+      "recipe_field": "row_policy"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "dualnorm",
+        "bcap_adam": "adam"
+      },
+      "effective_defaults": {
+        "bcap": "dualnorm",
+        "bcap_adam": "adam"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "optimizer_family",
+      "recipe_field": "optimizer_family"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "optimizer_momentum",
+      "recipe_field": "optimizer_momentum"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "optimizer_smoothing",
+      "recipe_field": "optimizer_smoothing"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "effective_defaults": {
+        "bcap": "none",
+        "bcap_adam": "none"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "optimizer_convolution",
+      "recipe_field": "optimizer_convolution"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "optimizer_adam_lr",
+      "recipe_field": "optimizer_adam_lr"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": 1e-08,
+        "bcap_adam": 1e-08
+      },
+      "effective_defaults": {
+        "bcap": 1e-08,
+        "bcap_adam": 1e-08
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "eps",
+      "recipe_field": "eps"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "beta2_end",
+      "recipe_field": "beta2_end"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.2,
+        "bcap_adam": 0.2
+      },
+      "effective_defaults": {
+        "bcap": 0.2,
+        "bcap_adam": 0.2
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "beta2_anneal_end",
+      "recipe_field": "beta2_anneal_end"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "reg_coeff_end",
+      "recipe_field": "reg_coeff_end"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.2,
+        "bcap_adam": 0.2
+      },
+      "effective_defaults": {
+        "bcap": 0.2,
+        "bcap_adam": 0.2
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "reg_coeff_anneal_end",
+      "recipe_field": "reg_coeff_anneal_end"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "relativistic",
+        "bcap_adam": "relativistic"
+      },
+      "effective_defaults": {
+        "bcap": "relativistic",
+        "bcap_adam": "relativistic"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "loss",
+      "recipe_field": "loss"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "d_betas[0]",
+      "recipe_field": "d_betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": 0.999,
+        "bcap_adam": 0.999
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "d_betas[1]",
+      "recipe_field": "d_betas"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "d_eps",
+      "recipe_field": "d_eps"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": true,
+        "bcap_adam": true
+      },
+      "defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "effective_defaults": {
+        "bcap": null,
+        "bcap_adam": null
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "prior_eps",
+      "recipe_field": "prior_eps"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "effective_defaults": {
+        "bcap": 0.0,
+        "bcap_adam": 0.0
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "loss_labels[0]",
+      "recipe_field": "loss_labels"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "loss_labels[1]",
+      "recipe_field": "loss_labels"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "effective_defaults": {
+        "bcap": 1.0,
+        "bcap_adam": 1.0
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "loss_labels[2]",
+      "recipe_field": "loss_labels"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "pytorch",
+        "bcap_adam": "pytorch"
+      },
+      "effective_defaults": {
+        "bcap": "pytorch",
+        "bcap_adam": "pytorch"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "adam_variant",
+      "recipe_field": "adam_variant"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": "cosine",
+        "bcap_adam": "cosine"
+      },
+      "effective_defaults": {
+        "bcap": "cosine",
+        "bcap_adam": "cosine"
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "lr_schedule",
+      "recipe_field": "lr_schedule"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 0.96,
+        "bcap_adam": 0.96
+      },
+      "effective_defaults": {
+        "bcap": 0.96,
+        "bcap_adam": 0.96
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "lr_decay_rate",
+      "recipe_field": "lr_decay_rate"
+    },
+    {
+      "declared_activity_without_task": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "defaults": {
+        "bcap": 50000,
+        "bcap_adam": 50000
+      },
+      "effective_defaults": {
+        "bcap": 50000,
+        "bcap_adam": 50000
+      },
+      "numerical_grid_field": true,
+      "owner": "hyperparameter",
+      "path": "lr_decay_steps",
+      "recipe_field": "lr_decay_steps"
+    },
+    {
+      "declared_activity_without_task": null,
+      "defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "effective_defaults": {
+        "bcap": false,
+        "bcap_adam": false
+      },
+      "numerical_grid_field": false,
+      "owner": "technique",
+      "path": "lr_decay_staircase",
+      "recipe_field": "lr_decay_staircase"
+    }
+  ],
+  "schema_version": 1
+}
