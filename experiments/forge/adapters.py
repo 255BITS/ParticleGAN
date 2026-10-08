@@ -576,7 +576,7 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     adapter = task["adapter"]
     if adapter == "word_joint":
         from .word_adapter import run_word
-        return run_word(request, task, output_dir, device)
+        return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
     if adapter == "transfer_behavior":
         if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
             from .policy_behavior_adapters import run_behavior

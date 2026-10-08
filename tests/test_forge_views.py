@@ -73,13 +73,13 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     smoke = [a["task"] for a in stability["assignments"]
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
     assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
-                     "five_word_joint_acquisition"]
+                     "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 7
+    assert stability["revision"] == 8
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "clockfree_audit_measurement_v1"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 20, 2]
+                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -111,7 +111,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition", 1600, 300),
-                                   ("five_word_joint_acquisition", 20001, 900)):
+                                   ("five_word_joint_smoke", 20001, 900)):
         assert planned[name]["qualification_tier"] == 1
         assert planned[name]["importance"] == "required" and planned[name]["permitted_by_tier_cap"]
         assert planned[name]["budget_seconds"] == timeout
