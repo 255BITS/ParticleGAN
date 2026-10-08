@@ -72,28 +72,26 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 ## CUDA results
 
-Runtime: **cuda**. Selected configuration: [bcap-dualnorm · 7beb7378d81d](../../../configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json).
+Runtime: **cuda**. Selected configuration: [bcap-dualnorm · 8db70e3cb9fd](../../../configs/forge/configurations/bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 1**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`. Candidate revision: `0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92`. Runtime cohort: `a9fd96a4b6f514c1f252d4803a274bd00a1b60b0c6ab07d71d21d6f5b7016557`.
+Source digest: `801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a`. Candidate revision: `72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8`. Runtime cohort: `ecbd6a092f3364ca42359eba073891aef7438d4e48b60a298f59d26ff1ab8847`.
 
-[Frozen numerical evidence](../technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/9bd0e91d06ace71d60e47d14a4db2954ea069a74a93cd240e2a1c84784fc2e0d.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.
+Selection: configured_standard. All six unchanged revision-8 Tier1 requirements pass on this single constant-rate BCAP recipe. Selected by the bounded bcap-six-smoothing-v1 PASS-count/content-hash objective; later tiers remain unmeasured and public defaults unchanged.
 
 </details>
-
-Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3(*)/23](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [4(*)/30](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/21](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5(*)/29](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/21](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [6(*)/29](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
 | [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3(*)/22](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
@@ -117,7 +115,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [ae_gan_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [gaussian1d_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [gaussian1d_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [ring16_acquisition](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [two_pole](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [unused_token_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
@@ -306,7 +304,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | FAIL | matches recorded run |
+| [gaussian1d_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | PASS | matches recorded run |
 | [two_pole](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
 | [unused_token_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
@@ -632,12 +630,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hold | 0.0405433 | <= 0.35 | PASS |
-| recon_mse | 0.0062603 | <= 0.05 | PASS |
+| hold | 0.0411383 | <= 0.35 | PASS |
+| recon_mse | 0.00589515 | <= 0.05 | PASS |
 
-Recorded terminal passing observations: **22**; required: 5.
+Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b6d5eb6149d244669b6ac2069e4e8b56.json)
+[Compact metrics and receipt provenance](../technique-receipts/ac34e490e95544d9973d45f647e0e432.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -723,7 +721,7 @@ Recorded final metrics:
 | --- | ---: |
 | parity_comparisons | 4 |
 
-[Compact metrics and receipt provenance](../technique-receipts/932de39b0da24e8d95b13f1d37cdde5f.json)
+[Compact metrics and receipt provenance](../technique-receipts/71c1218bcea94954838a766c2fda4972.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -878,8 +876,8 @@ Recorded final metrics:
 | completed_steps | 20001 |
 | mass_apple | 0.1875 |
 | mass_berry | 0.195312 |
-| mass_grape | 0.210938 |
-| mass_lemon | 0.208008 |
+| mass_grape | 0.208008 |
+| mass_lemon | 0.210938 |
 | mass_melon | 0.198242 |
 | mass_tv | 0.0189453 |
 | minimum_reconstruction_token_probability | 1 |
@@ -893,7 +891,7 @@ Recorded final metrics:
 | served_averaged | 0 |
 | step | 20001 |
 
-[Compact metrics and receipt provenance](../technique-receipts/8a2c607601884c039c551c5bc2652d68.json)
+[Compact metrics and receipt provenance](../technique-receipts/2e700f5b3f394de59e02546341aec00b.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -954,7 +952,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 ### gaussian1d_smoke
 
-**gaussian1d_smoke: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
+**gaussian1d_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
@@ -966,16 +964,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.0646034 |
+| cdf_ks | 0.0840962 |
 | finite_fraction | 1 |
-| mean | 1.96788 |
-| mean_error_sigma | 0.0642418 |
+| mean | 1.93604 |
+| mean_error_sigma | 0.127917 |
 | sample_count | 4096 |
-| std | 0.497889 |
-| std_ratio | 0.995777 |
+| std | 0.594517 |
+| std_ratio | 1.18903 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/4a5687bf78db4967aebe1ca068163a07.json)
+[Compact metrics and receipt provenance](../technique-receipts/552b402395d740029c82a38fc206b187.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1556,16 +1554,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.470678 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.38734 | >= 0.15 | PASS |
-| hq | 0.956055 | >= 0.85 | PASS |
-| mass_tv | 0.0786133 | <= 0.15 | PASS |
+| component_covariance_error | 0.451691 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.300655 | >= 0.15 | PASS |
+| hq | 0.96875 | >= 0.85 | PASS |
+| mass_tv | 0.052002 | <= 0.15 | PASS |
 | modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
-Recorded terminal passing observations: **34**; required: 5.
+Recorded terminal passing observations: **45**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/795acf9d536c4969a5542c43b8f75f0c.json)
+[Compact metrics and receipt provenance](../technique-receipts/1db2d1f4da6b4c6f9458ae1be2e7dce8.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1991,12 +1989,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| grad_med | 0.288466 | <= 1 | PASS |
+| grad_med | 0.288468 | <= 1 | PASS |
 | mean_abs | 0.943551 | >= 0.3 | PASS |
 
 Recorded terminal passing observations: **17**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/5a88de9e4729431ca039607a02e0f7b9.json)
+[Compact metrics and receipt provenance](../technique-receipts/a8ab41de17b24a459220ad598042e788.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2147,12 +2145,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_move | 0.990217 | >= 0.85 | PASS |
-| unused_hold | 0.992745 | >= 0.85 | PASS |
+| concept_move | 0.998699 | >= 0.85 | PASS |
+| unused_hold | 0.986031 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/8ed478b6a2bb469ab9efc8c9542fed06.json)
+[Compact metrics and receipt provenance](../technique-receipts/ca04af081a2f44c28d088142491863fa.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 

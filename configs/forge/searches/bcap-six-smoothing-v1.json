@@ -1,0 +1,29 @@
+{
+  "base_candidate": "bcap-dualnorm-smoothed-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 7560,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-six-smoothing-v1",
+    "purpose": "Bounded first round requested to find a single BCAP recipe passing all six revision-8 Tier1 tasks. Three fixed global positive smoothing strengths; unchanged incumbent rates, no LR annealing, no higher-tier spend or scientific retries.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "optimizer_smoothing": [
+      1e-05,
+      0.0001,
+      0.001
+    ]
+  },
+  "guide": "docs/dualnorm-smoothing.md",
+  "hypothesis": "Fixed-scale DualNorm smoothing can produce independently confirmed Gaussian acquisition while retaining the incumbent BCAP passes on the other five required Tier1 tasks. A whole six-of-six recipe is the success criterion.",
+  "id": "bcap-six-smoothing-v1",
+  "protocol": "screening",
+  "rationale": "Protocol seed0 and the public deterministic initializer; one global smoothing scale per candidate across every role and task. Preserve original architectures, learned MoG priors, seen batches, named streams, sampling, full update budgets and 24 paired evaluation cadence. Rates G/E=.012,D=.018,prior=.03 remain constant with all LR floors1 and zero momentum. Complete all runnable current-tier tasks for every trial; stop this round after three configurations. No taskwise pooling, gate relaxation, continuation, seed study or automatic default adoption. Prior evidence: word-split-inventory-v1-readout and PR349 Gaussian diagnosis; archived unsmoothed results are provenance, not a matched new-source control.",
+  "schema_version": 2,
+  "trainer_family": "bcap-dualnorm",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}
