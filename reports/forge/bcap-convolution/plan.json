@@ -1,0 +1,136 @@
+{
+  "candidate": "bcap-dualnorm-convolution-v1",
+  "candidate_revision": "dd0702302681db384f1f1a23e10bfd29a40bae4ccbfea5e01e872d8a4d1a9061",
+  "execution_policy": {
+    "mode": "complete_current_tier",
+    "schema_version": 1
+  },
+  "guide": "EXPERIMENTATION.md",
+  "original_task_tier": 2,
+  "policy_fingerprint": "fdd48ac4c3069a08a53aa1b66f550282e3656b8c7f8ba94aeb1826ad6a768538",
+  "preflight_blockers": [],
+  "qualification_input": false,
+  "request_id": "56dea41d0667b569d6ee22e0",
+  "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+  "source_origin_commit": "515e2de01f0198d2e58899869a698a2af0f03c72",
+  "study": {
+    "campaign": {
+      "budget_seconds": 7200,
+      "candidate_budget_seconds": 7200,
+      "id": "bcap-convolution-images-v1"
+    },
+    "candidate": "bcap-dualnorm-convolution-v1",
+    "competing_explanation": "Kernel support may permit all declared updates but fail sustained image coverage or quality. A numerical failure is distinct from an optimizer setup error; the old unsupported receipts are motivation rather than a matched trained control. The selected incumbent has other genuine Tier2 failures and none is addressed by this four-image diagnostic.",
+    "control": {
+      "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2",
+      "threshold": 0.9
+    },
+    "hypothesis": "Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.",
+    "id": "bcap-convolution-images-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "source_origin_commit": "f96819ddb2b8510c3496b1883d73439e8691db83",
+          "study_id": "bcap-tier2-smoothing-v1"
+        },
+        "path": "reports/forge/bcap-tier2/readout.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bcap_convolution_images"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_admission": {
+    "binding_sha256": "db273908fbd45aad22c11cb9ab1d15c948729d2c9eebe4d4098519eb38cb0eac",
+    "contract_sha256": "b883a66ac2bf05f10b36912c8fe237c03742509ce5b247bcbe41ed154baf8455",
+    "control_binding_sha256": "f37e064f41cd6007b2e807bbf192fb7d7f9bd42d531087bbbd5744cebd7d6185",
+    "policy_fingerprint": "fdd48ac4c3069a08a53aa1b66f550282e3656b8c7f8ba94aeb1826ad6a768538",
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "study_sha256": "8dd3b0a0600902412bc9bcf3c25bd190105e9ea7344964d2494fce85cd6bc127"
+  },
+  "tasks": [
+    {
+      "blockers": [],
+      "budget_seconds": 1800,
+      "execution_group": "img_stripes2",
+      "execution_group_blockers": [],
+      "importance": "diagnostic",
+      "order": 0,
+      "permitted_by_tier_cap": true,
+      "qualification_tier": 1,
+      "reusable": false,
+      "shared_pending": false,
+      "task": "img_stripes2"
+    },
+    {
+      "blockers": [],
+      "budget_seconds": 1800,
+      "execution_group": "img_bars4",
+      "execution_group_blockers": [],
+      "importance": "diagnostic",
+      "order": 1,
+      "permitted_by_tier_cap": true,
+      "qualification_tier": 1,
+      "reusable": false,
+      "shared_pending": false,
+      "task": "img_bars4"
+    },
+    {
+      "blockers": [],
+      "budget_seconds": 1800,
+      "execution_group": "img_blobs4",
+      "execution_group_blockers": [],
+      "importance": "diagnostic",
+      "order": 2,
+      "permitted_by_tier_cap": true,
+      "qualification_tier": 1,
+      "reusable": false,
+      "shared_pending": false,
+      "task": "img_blobs4"
+    },
+    {
+      "blockers": [],
+      "budget_seconds": 1800,
+      "execution_group": "img_intensity2",
+      "execution_group_blockers": [],
+      "importance": "diagnostic",
+      "order": 3,
+      "permitted_by_tier_cap": true,
+      "qualification_tier": 1,
+      "reusable": false,
+      "shared_pending": false,
+      "task": "img_intensity2"
+    }
+  ],
+  "through_tier": 1,
+  "view": "bcap_convolution_images",
+  "worst_case_seconds": 7200
+}

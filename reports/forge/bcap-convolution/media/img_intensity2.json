@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "ae376e62f64e4275f697a954c721138458ab1d550465f0178b95a2f0a3112166",
+  "kind": "actual_training_saved_image_outputs_gif",
+  "observation_count": 24,
+  "observations_sha256": "068e8ccb6632bee1cffb49a5dc4507ae7d452b73bc836f2bf0310d20e53ed4f1",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+  "sampling_draws_added": 0,
+  "saved_sample_sets_recomputed": 24,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-dualnorm-convolution/runs/forge/bcap-convolution-images-v1/00c234acacda4ace9c31694a5eded91e/observed-images.pt": "820332a43660fd475852ad39c7f5c22d4da6eb9a2ef92c2cd7f69f473f6f7baa"
+  },
+  "task_id": "img_intensity2"
+}
