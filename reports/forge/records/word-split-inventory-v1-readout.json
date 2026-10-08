@@ -1,0 +1,36 @@
+{
+  "candidate_id": "technique-inventory-word-split-v1",
+  "candidate_revision": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+  "changed_factors": [
+    "Five-word acquisition is required Tier 1; strict own-checkpoint hold is required Tier 2.",
+    "Exactly one unchanged selected whole recipe per family; smoothing stays off, with existing rank truncation and disabled autograd multithreading retained."
+  ],
+  "conclusion": "Five runnable selected families each pass 5/6 required Tier 1 tasks and all acquire five words. BCAP fails only Gaussian; K3P, KA2, R1/R2 and released GAN v3 MoG fail only ring16. E22/Atlas remain preflight-blocked. No ordinary Tier 2 work is eligible. All 35 CUDA attempts complete for 1796.544469 paid seconds; all 31 available scalar endpoint comparisons match the previous post-truncation cohort. No scientific retries or source pooling.",
+  "evidence_scope": "source_bound_campaign_readout",
+  "goal": "discriminator_stability",
+  "hypothesis": "A confirmed can-it-pass joint five-word smoke separates acquisition from continuing hold while preserving all generation and inverse bounds.",
+  "lifecycle": "concluded",
+  "mechanism_class": "task_gate_reform",
+  "next_action": "Keep the acquisition/hold split. The prepared constant positive-smoothing BCAP comparison is the next bounded option; preserve full smoke gates and require all six passes before Tier 2. No search or default adoption follows automatically.",
+  "provenance": {
+    "all_actual_attempts_cuda": true,
+    "archive_sha256": "a2519b3f68d2cbf8bf96e929242c21876db301df3df48d51cfd3b4e1957410fc",
+    "attempt_count": 35,
+    "collector_sha256": "c9cac3c7463f30eef9b5e03130d5aad12f501c79d8e7a7349a2205530bfca822",
+    "scientific_retries": 0,
+    "seed": 0,
+    "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+    "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "word-split-inventory-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/word-split-inventory/readout.json",
+    "sha256": "3dcb3a8457dcf486c9295f7c22a4fb4d5a9da67cfbe02af6ec916400c2e587ed"
+  },
+  "task_results": [],
+  "task_results_note": "Campaign-level recall only. Candidate-specific final metrics and original receipt proofs are in the linked readout; no synthetic family qualification."
+}

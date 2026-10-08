@@ -42,11 +42,12 @@ def family_row_pin(row: dict, *, selection_kind: str, reason: str, measurement_v
     return pin
 
 
-def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint: str) -> dict:
+def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint: str,
+                           selection_card: dict | None = None) -> dict:
     path = Path(root) / CURRENT_SELECTION
-    if not path.is_file():
+    if selection_card is None and not path.is_file():
         return {}
-    card = read_json(path)
+    card = read_json(path) if selection_card is None else selection_card
     if (card.get("schema_version") != 1 or card.get("scope") != "whole_candidate_family_current"
             or card.get("default_adoption") is not False or not isinstance(card.get("selections"), list)):
         raise ValueError("unsupported whole-row family selection")
@@ -208,7 +209,7 @@ def load_families(root: Path | str) -> dict:
     return result
 
 
-def current_family_candidates(root: Path | str, *, family_ids=None) -> list[dict]:
+def current_family_candidates(root: Path | str, *, family_ids=None, selection_card: dict | None = None) -> list[dict]:
     """One explicitly selected whole configuration per visible solution family.
 
     Reporting aliases leave historical formulation and receipt identities intact.
@@ -216,8 +217,9 @@ def current_family_candidates(root: Path | str, *, family_ids=None) -> list[dict
     """
     root = Path(root)
     families = load_families(root)
-    card = read_json(root / CURRENT_SELECTION)
-    pins = load_current_selection(root, view_id=card["view"], policy_fingerprint=card["policy_fingerprint"])
+    card = read_json(root / CURRENT_SELECTION) if selection_card is None else selection_card
+    pins = load_current_selection(root, view_id=card["view"], policy_fingerprint=card["policy_fingerprint"],
+                                  selection_card=card)
     choices = []
     for name, family in sorted(families.items()):
         if family.get("reporting_family", name) != name or not family.get("inventory_visible", True):
@@ -480,13 +482,15 @@ def _declaration_only_row(row):
 def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, view_id: str,
                        policy_fingerprint: str, declarations: dict | None = None,
                        view_policy: dict | None = None, execution_backend: str | None = None,
-                       historical_rows: list[dict] | None = None) -> dict:
+                       historical_rows: list[dict] | None = None,
+                       selection_card: dict | None = None) -> dict:
     """Choose one current whole row per family; archived policies retain cohorts."""
     if view_policy is not None and (view_policy.get("id") != view_id
                                     or stable_hash(view_policy) != policy_fingerprint):
         raise ValueError("explicit family-selection view differs from its recorded policy")
     declarations = _declarations(root) if declarations is None else declarations
-    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=policy_fingerprint)
+    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=policy_fingerprint,
+                                         selection_card=selection_card)
                     if view_policy is None else {})
     grouped, families, variants = {}, {}, []
     for original in rows:
@@ -571,9 +575,10 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
                                         row.get("runtime_cohort", {}).get("execution_backend", "")))
     result = {"rows": selected_rows, "configuration_rows": variants, "trainer_families": families}
     selection_path = Path(root) / CURRENT_SELECTION
-    if view_policy is None and selection_path.is_file():
+    if view_policy is None and (selection_card is not None or selection_path.is_file()):
         history = []
-        for pin in read_json(selection_path).get("historical_selections", []):
+        card = read_json(selection_path) if selection_card is None else selection_card
+        for pin in card.get("historical_selections", []):
             matches = []
             for original in rows + (historical_rows or []):
                 previous = deepcopy(original)

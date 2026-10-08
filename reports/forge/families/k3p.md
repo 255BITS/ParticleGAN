@@ -108,16 +108,16 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895`. Candidate revision: `ee4b65dd6dbe019a8099ccd05013eee2876acea1cc7c04904c14fc53eefd835e`. Runtime cohort: `0474d5313a8fd0ae863081733be2556dfd70a9639cf940149c736d37358e396f`.
+Source digest: `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`. Candidate revision: `f8a586adde90a6b016692bc8f026ee2f857ff5efd3615b68b7328bd04a70016d`. Runtime cohort: `b5a03f23b4f56ecf2c6894d4b7c1042a93581726b8d329eefcbfa497a48ff6e2`.
 
-[Frozen numerical evidence](../technique-evidence/7c4e188f1ee495526c2decf6f02a45f392123aaf4f33f1f6fb9a398fe3ac05e7.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Preserve the round's pre-run whole candidate choice in its freshly measured CUDA source cohort; no task pooling, outcome-based recipe reselection, calibration or default adoption.
+Selection: current_measurement. Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.
 
 </details>
 
@@ -132,7 +132,7 @@ Recorded trainer recipe; task-owned architecture, prior, initialization, budget 
 | Setting | Selected value |
 | --- | --- |
 | Adversarial loss | loss=relativistic; loss_labels=[0.0, 1.0, 1.0] |
-| Optimizer | optimizer_family=formulation; optimizer_momentum=0.0 |
+| Optimizer | optimizer_family=formulation; optimizer_momentum=0.0; optimizer_smoothing=0.0 |
 | Learning rates | lr=0.006375; d_lr_mult=1.0; prior_lr_mult=1.0 |
 | Rate schedule | lr_schedule=cosine; lr_floor=0.05; network_lr_floor=0.01; network_lr_horizon_cap=1600 |
 | Critic penalty | reg_arm=None; reg_coeff=1.0; reg_kappa=1.0; reg_every=1; reg_anchor_weight=1.0 |
@@ -151,11 +151,11 @@ These are whole configurations under their original sources. Their individual pa
 
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
-| [k3p · 0b37e98a01e3](k3p.md) | 19(*)/152 | `6269a18ac4f8` | Selected |
-| [forge-no-critic-penalty](k3p-no-penalty.md) | 18(*)/152 | `6269a18ac4f8` | Alternative |
-| [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 13(*)/152 | `6269a18ac4f8` | Alternative |
-| [forge-onboarding-anchor-ablation](k3p-no-anchor.md) | 13(*)/152 | `6269a18ac4f8` | Alternative |
-| [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 13(*)/152 | `6269a18ac4f8` | Alternative |
+| [k3p · 0b37e98a01e3](k3p.md) | 20(*)/152 | `cbb19c5e55e9` | Selected |
+| [k3p-a2-off-native-diagnostic](k3p-no-a2.md) | 0(*)/152 | `cbb19c5e55e9` | Alternative |
+| [forge-onboarding-anchor-ablation](k3p-no-anchor.md) | 0(*)/152 | `cbb19c5e55e9` | Alternative |
+| [forge-no-critic-penalty](k3p-no-penalty.md) | 0(*)/152 | `cbb19c5e55e9` | Alternative |
+| [k3p-no-output-noise-diagnostic](k3p-no-training-noise.md) | 0(*)/152 | `cbb19c5e55e9` | Alternative |
 
 </details>
 
@@ -163,7 +163,7 @@ These are whole configurations under their original sources. Their individual pa
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3(*)/23](k3p.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3(*)/30](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [4(*)/6](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/21](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [4(*)/29](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/21](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5(*)/29](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
 | [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0(*)/19](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [3(*)/24](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0(*)/19](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [3(*)/24](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0(*)/19](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3(*)/22](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
@@ -186,7 +186,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | --- | --- | --- | --- |
 | [ae_gan_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](k3p.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | FAIL | matches recorded run |
-| [five_word_joint_smoke](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [gaussian1d_smoke](k3p.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [ring16_acquisition](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [two_pole](k3p.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
@@ -201,7 +201,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](k3p.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
 | [gaussian1d_stability](k3p.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
 | [grid100](k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_bars4](k3p.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
@@ -381,7 +381,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [unused_token_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 | [ring16_acquisition](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
-| [five_word_joint_smoke](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](k3p.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -391,7 +391,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](k3p.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | required | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | matches recorded run |
 | [trajectory](k3p.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
 | [residual_student](k3p.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
 | [unipolar](k3p.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
@@ -707,7 +707,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **11**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d0dea0262ec74da39fff2118533f7ed0.json)
+[Compact metrics and receipt provenance](../technique-receipts/9f24a53553f24dd99ea6adae4c1da99c.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -787,7 +787,7 @@ Actual task device: `0` (recorded execution receipt).
 
 Used by: [clockfree_continuous / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
-[Compact metrics and receipt provenance](../technique-receipts/58848edcb0a145f593e6c27662beac8b.json)
+[Compact metrics and receipt provenance](../technique-receipts/f5d65d7ec35d463a9e3fbb22554f768f.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -894,11 +894,13 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
 Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 2](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
 Current pass criteria:
 
@@ -925,13 +927,39 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 ### five_word_joint_smoke
 
-**five_word_joint_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
+**five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
 
-Execution: **no recorded execution (*)**.
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Recorded final metrics:
+
+| Metric | Measured |
+| --- | ---: |
+| completed_steps | 20001 |
+| mass_apple | 0.198242 |
+| mass_berry | 0.208008 |
+| mass_grape | 0.1875 |
+| mass_lemon | 0.210938 |
+| mass_melon | 0.195312 |
+| mass_tv | 0.0189453 |
+| minimum_reconstruction_token_probability | 0.000107317 |
+| modes | 5 |
+| output_noise_added | 0 |
+| policy_latent_perturbation | 0 |
+| quality_fraction | 1 |
+| reconstruction_exact | 0 |
+| reconstruction_nll | 1.0627 |
+| sample_count | 1024 |
+| served_averaged | 0 |
+| step | 20001 |
+
+[Compact metrics and receipt provenance](../technique-receipts/c4a735e8780f471a80dca366283ff739.json)
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
 Current pass criteria:
 
@@ -994,7 +1022,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
@@ -1011,7 +1039,7 @@ Recorded final metrics:
 | std_ratio | 0.951925 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/c8e242a0e03a4c7d9488f0fc3762a442.json)
+[Compact metrics and receipt provenance](../technique-receipts/d9ece58cd6eb4cb4a4e02c515459eb83.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1584,7 +1612,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
@@ -1601,7 +1629,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/38b7de44cdc3478bad29445209a8c4d8.json)
+[Compact metrics and receipt provenance](../technique-receipts/a74474ecc45949d68efc4b17425cbd8f.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2032,7 +2060,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **8**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d8f917001d51447abfdaf7c2372b94cd.json)
+[Compact metrics and receipt provenance](../technique-receipts/7aff92cfaa9b43578bbb1f955704d29b.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2188,7 +2216,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **16**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/e320e05e3878484ca26059040e370f2f.json)
+[Compact metrics and receipt provenance](../technique-receipts/a07649fe53fb422d99f764f91a06b31a.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2596,7 +2624,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -5082,7 +5110,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>

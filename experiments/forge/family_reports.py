@@ -8,6 +8,8 @@ from __future__ import annotations
 
 from collections import Counter
 from copy import deepcopy
+import hashlib
+import json
 import os
 from pathlib import Path
 
@@ -353,7 +355,7 @@ def certified_retry_successors(summaries: dict) -> dict:
     return successors
 
 
-def _solution_families(root, families, load, selected_rows, current_row_count):
+def _solution_families(root, families, load, selected_rows, current_row_count, *, selection_card=None):
     """Select whole recorded configurations for display, preserving evidence IDs.
 
     Optimizer and tuning registries may predate the solution taxonomy. Their
@@ -377,8 +379,9 @@ def _solution_families(root, families, load, selected_rows, current_row_count):
             if definitions[target].get("inventory_visible", True) is False:
                 raise ValueError("reporting family cannot reference a hidden solution")
         groups.setdefault(target, []).append(family)
-    choices = ({choice["family"]: choice for choice in current_family_candidates(root, family_ids=set(groups))}
-               if (root / CURRENT_SELECTION).is_file() else {})
+    choices = ({choice["family"]: choice for choice in current_family_candidates(
+        root, family_ids=set(groups), selection_card=selection_card)}
+               if selection_card is not None or (root / CURRENT_SELECTION).is_file() else {})
     if choices:
         load(CURRENT_SELECTION)  # Bind the display choice in publication provenance.
     solutions = []
@@ -457,12 +460,17 @@ def _solution_families(root, families, load, selected_rows, current_row_count):
     return solutions, configurations
 
 
-def build_progress(root: Path, publication: dict) -> dict:
+def build_progress(root: Path, publication: dict, *, selection_card: dict | None = None) -> dict:
     """Project current view placement over immutable selected task outcomes."""
     root = Path(root)
     inputs = {}
 
     def load(path):
+        from .trainer_families import CURRENT_SELECTION
+        if selection_card is not None and path == CURRENT_SELECTION:
+            text = json.dumps(selection_card, sort_keys=True, indent=2) + "\n"
+            inputs[path.as_posix()] = hashlib.sha256(text.encode()).hexdigest()
+            return deepcopy(selection_card)
         inputs[path.as_posix()] = file_hash(root / path)
         return read_json(root / path)
 
@@ -645,7 +653,7 @@ def build_progress(root: Path, publication: dict) -> dict:
             inputs[illustration["path"]] = file_hash(root / illustration["path"])
     active, configurations = _solution_families(
         root, {name: family for name, family in families.items() if not family["historical_only"]}, load,
-        selected_rows, len(publication["rows"]))
+        selected_rows, len(publication["rows"]), selection_card=selection_card)
     atlas_navigation = _atlas_evidence_navigation(root, load)
     next_steps = Path("reports/forge/atlas-inventory-next-steps-20261005.md")
     if atlas_navigation is not None and (root / next_steps).is_file():

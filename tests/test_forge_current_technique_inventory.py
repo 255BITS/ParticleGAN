@@ -1036,6 +1036,130 @@ def test_policy_advance_refuses_old_source_and_retains_current_files(evidence, m
     assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_bytes
 
 
+def _pin_existing_policy_rows(root, manifest):
+    rows = [read_json(root / entry["snapshot"])["rows"][0] for entry in manifest["cohorts"]]
+    atomic_json(root / "configs/forge/trainer-families.json", {
+        "schema_version": 1, "families": [{"id": row["candidate_id"], "label": row["candidate_id"],
+                                           "candidates": [row["candidate_id"]], "canonical_candidate": row["candidate_id"]}
+                                          for row in rows]})
+    card = _family_pin(root, manifest, {**rows[0], "trainer_family": rows[0]["candidate_id"]})
+    card["selections"] += [family_row_pin({**row, "trainer_family": row["candidate_id"]},
+                                         selection_kind="historical_incumbent", reason="Recorded incumbent.")
+                           for row in rows[1:]]
+    card["historical_selections"] = []
+    atomic_json(root / CURRENT_SELECTION, card)
+    return card
+
+
+@pytest.mark.parametrize("blocked", [True, False])
+def test_policy_advance_rebinds_same_selected_recipes_and_archives_exact_card(evidence, monkeypatch, blocked):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    if not blocked:
+        path = root / CURRENT_SELECTION
+        path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    publication.publish_current(root)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    protected = {entry["snapshot"]: (root / entry["snapshot"]).read_bytes() for entry in manifest["cohorts"]}
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    if not blocked:
+        report["rows"][1]["status"] = "UNKNOWN"
+        report["rows"][1]["tasks"][0]["status"] = "UNKNOWN"
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+    result = publication.publish_current(root, source_commit="commit-c",
+                                         execution_backend="cuda" if blocked else None, advance_policy=True)
+    advanced = read_json(root / CURRENT_SELECTION)
+    assert advanced["policy_fingerprint"] == report["policy_fingerprint"]
+    assert advanced["historical_selections"] == card["historical_selections"]
+    assert [(pin["trainer_family"], pin["candidate_id"], pin["execution_backend"]) for pin in advanced["selections"]] == [
+        (pin["trainer_family"], pin["candidate_id"], pin["execution_backend"]) for pin in card["selections"]]
+    assert [pin["candidate_revision"] for pin in advanced["selections"]] == ["revision-c", "revision-d"]
+    assert all(pin["selection_kind"] == "historical_incumbent" for pin in advanced["selections"])
+    updated = read_json(root / publication.EVIDENCE_MANIFEST)
+    archive = updated["archived_policies"][0]["family_selection"]
+    assert (root / archive["path"]).read_bytes() == original
+    assert file_hash(root / archive["path"]) == archive["sha256"]
+    current = read_json(result["json"])
+    assert current["provenance"]["family_current_selection_sha256"] == file_hash(root / CURRENT_SELECTION)
+    assert all(row["qualified_tier"] == 0 for row in current["rows"])
+    assert all((root / path).read_bytes() == data for path, data in protected.items())
+    outputs = _outputs(root)
+    assert publication.publish_current(root, execution_backend="cuda") == result
+    assert _outputs(root) == outputs
+    assert publication.publish_current(root, source_commit="commit-c", execution_backend="cuda", advance_policy=True) == result
+    assert read_json(root / publication.EVIDENCE_MANIFEST) == updated
+    (root / archive["path"]).write_text("{}\n")
+    with pytest.raises(ValueError, match="archived family selection hash mismatch"):
+        publication.publish_current(root)
+    assert _outputs(root) == outputs
+
+
+@pytest.mark.parametrize("failure", ["missing_new_row", "invalid_old_pin", "late_validation"])
+def test_failed_policy_pin_advance_leaves_selection_and_publication_unchanged(evidence, monkeypatch, failure):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    publication.publish_current(root)
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    if failure == "missing_new_row":
+        report["rows"].pop()
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+    elif failure == "invalid_old_pin":
+        card["selections"][0]["scientific_row_sha256"] = "invalid"
+        atomic_json(root / CURRENT_SELECTION, card)
+    else:
+        def fail_after_selection_validation(*args, **kwargs):
+            raise ValueError("late publication validation failed")
+        monkeypatch.setattr(publication, "_family_pages", fail_after_selection_validation)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    manifest_bytes = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    outputs = _outputs(root)
+    with pytest.raises(ValueError):
+        publication.publish_current(root, source_commit="commit-c", execution_backend="cuda", advance_policy=True)
+    assert (root / CURRENT_SELECTION).read_bytes() == original
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_bytes
+    assert _outputs(root) == outputs
+    assert not (root / CURRENT_SELECTION.parent / "history").exists()
+
+
+def test_policy_pin_advance_marks_fully_observed_new_failures_as_measurements(evidence, monkeypatch):
+    root, manifest = evidence
+    original = _pin_existing_policy_rows(root, manifest)
+    original["historical_selections"] = deepcopy(original["selections"])
+    atomic_json(root / CURRENT_SELECTION, original)
+    prior = [(entry, *publication._snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    row = report["rows"][0]
+    row["tasks"] = [{"task_id": name, "status": "FAIL" if name == "ring" else "PASS"}
+                    for name in report["tier_requirements"]["1"]]
+    staged, _ = publication._advanced_family_selection(
+        root, manifest, report, {item["candidate_id"]: item for item in report["rows"]}, prior)
+    assert staged["selections"][0]["selection_kind"] == "current_measurement"
+    assert staged["selections"][0]["measurement_views"] == [manifest["view"]]
+    assert staged["selections"][1]["selection_kind"] == "historical_incumbent"
+    assert staged["historical_selections"] == original["historical_selections"]
+    assert read_json(root / CURRENT_SELECTION)["policy_fingerprint"] == manifest["policy_fingerprint"]
+
+
+def test_policy_pin_advance_requires_explicit_backend_for_mixed_selections(evidence, monkeypatch):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    publication.publish_current(root)
+    _later_policy_evidence(root, manifest, monkeypatch)
+    card["selections"][1]["execution_backend"] = "cpu"
+    atomic_json(root / CURRENT_SELECTION, card)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    outputs = _outputs(root)
+    def unexpected(*args, **kwargs):
+        pytest.fail("ambiguous backend must be refused before source regrade")
+    monkeypatch.setattr(publication, "regenerate", unexpected)
+    with pytest.raises(ValueError, match="mixed selected backends requires an explicit --device"):
+        publication.publish_current(root, source_commit="commit-c", advance_policy=True)
+    assert (root / CURRENT_SELECTION).read_bytes() == original
+    assert _outputs(root) == outputs
+
+
 def test_policy_advance_requires_later_revision_and_source(evidence, monkeypatch):
     root, manifest = evidence
     publication.publish_current(root)
