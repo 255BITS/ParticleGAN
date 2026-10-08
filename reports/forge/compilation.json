@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "7997bc4d308ff25723770f6767fe65e7c229e0aef5d8d7e2fa87b43f2436952c",
+  "input_digest": "9b165ae2839030d8dce26878e1fa652913cfdaaf7bbcfe360d56cb4cccb40d7d",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -466,6 +466,7 @@
     "configs/forge/ideas/bcap-ada-nsgda-v1.json": "54a9d5bb1a67886015544142339fab9bf23988ba60cf759c38cafbce9d89e1c6",
     "configs/forge/ideas/bcap-dualnorm-d-only-v1.json": "991f883abe23f7ce11d5a0faf6eec705d8b14e864796b1bd469c142b3765ac84",
     "configs/forge/ideas/bcap-dualnorm-momentum-v1.json": "bf7537439345e32c5326cc002d3764a095da6027d41f3c9879095076816ceefb",
+    "configs/forge/ideas/bcap-dualnorm-smoothed-v1.json": "8aab8eaa3a06ca8e43014688d4b74916125d0aa2d63121131d2f2ed3651a62ae",
     "configs/forge/ideas/bcap-dualnorm-zero-v1.json": "2d12c398edbbeeb5e2a131fa00f4ed2eb1c32f1b35301d329278f0bb44253426",
     "configs/forge/ideas/bcap-nsgda-global-v1.json": "7d9e93670cf5a9231b93c80c4a26f862f8b4c92246d85a3adf52037597dc557f",
     "configs/forge/ideas/bcap-nsgda-layer-v1.json": "6a6f8fd1114dd2b948bc74e170534ec0639a63fe7e2c3b6d3ae14297e7e048f3",
@@ -518,6 +519,7 @@
     "configs/forge/rounds/tier1-existing-configs-v1.json": "aea7193e563f282df7f96b54b75605fe4a10a9744fa4c565127e8aa6f98f9fd1",
     "configs/forge/search-spaces/halloween-transfer-v1.json": "99721d95a336e734f4fb72d2c094255765cdccd1fbaa6c825cb78517c5712885",
     "configs/forge/searches/bcap-dualnorm-pacing-v2-a.json": "64d8a61e0f86303f6d2fdc5948320e724d9cac07b9b9b842c7b1271f3cf6b973",
+    "configs/forge/searches/bcap-dualnorm-smoothing-tier1-v1.json": "f943229b968079b0263a8aa5722a3a48908ad4d2a260587904fcb63ed81ba8c8",
     "configs/forge/searches/bcap-family-defaults-round1-v1.json": "80b71aedba00536c976e2116adf2dafa9df8ca577d5b2b89d45e4cf6c08db7d4",
     "configs/forge/searches/bcap-optim-ada-nsgda-tier1-v1.json": "9d5f447d5e4e737f2a26b5cffeb187b9c8c277c5ef865a1ea485b4f6a7c7ac4a",
     "configs/forge/searches/bcap-optim-adam-tier1-v1.json": "f53310bc5564015e7f083e84b73bdad99aba71feed8d1030be4605a797e75571",
@@ -708,7 +710,7 @@
     "configs/forge/tasks/vector_unequal_mass_published.json": "9a06f9996756429beb5a161150d9aeb38aae9d62b54b2a81def12fb5c9b631de",
     "configs/forge/tasks/vector_unequal_width.json": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
     "configs/forge/tasks/vector_unequal_width_published.json": "dbaca203f391ac52d40f08a8c7c1e58d54469aa3e260b26fc9e0c0bef0ba0172",
-    "configs/forge/trainer-families.json": "172d94b5148008e8bc3b90eedaeacca98d4a97dbfaa5af639353158ec21571b0",
+    "configs/forge/trainer-families.json": "fd9ce0afbeb16b2ff8fc1cb6e7f3fc739ff5400dd3ad91e6547739d3784a077e",
     "configs/forge/view-history/clockfree_continuous-v2.json": "68935adac00a08890c798e193af48ab8bfdddf719e7c66f52aec2f36806b989d",
     "configs/forge/view-history/discriminator_stability-v2.json": "58eab01167cc4baa904f485c5f917a2a36141756024d8dc4b03a14392f6ad639",
     "configs/forge/view-history/discriminator_stability-v3.json": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b",
@@ -2606,7 +2608,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "190a64a7c75d92e98dbefa5a7e9d67f858572ddefa1e12c186c2de37e612d456",
+    "reports/forge/EXPERIMENT_MEMORY.md": "dfc7a0b5aa37d71d1125cfe837647f6a56f77366ee798aff8b2a77b971588493",
     "reports/forge/publication-records.json": "8a2d1604554722de44d4bb89d3c7d8ed09e8d3ea5e6e420d2fb5b640fdc63ef2"
   },
   "pending_readout": [
