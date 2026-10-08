@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "f72449c02c76952657983df5c926cf2f3fe85efc9a4680e1d05ae8e4560ce6a2",
+  "archive_members_verified": 115,
+  "all_original_inputs_byte_verified": true,
+  "expected_endpoints": 8,
+  "diagnostic_updates": 384,
+  "supplement_forward_points": 48,
+  "zero_sampling": true,
+  "zero_historical_training": true,
+  "all_controls_pass": true,
+  "all_restore_checks_pass": true,
+  "all_supplement_endpoint_errors_zero": true,
+  "source_syntax": "Three reproduction/publication sources py_compile passed",
+  "qualification_input": false
+}

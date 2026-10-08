@@ -1,0 +1,40 @@
+{
+  "candidate_id": "fivewords-saved-endpoint-dynamics-v1",
+  "candidate_revision": "2ecb68de48e8b404d472d72a860d6b4f403102f716110b2561f6778bbe652500",
+  "changed_factors": [
+    "Bounded separately-scoped exact25-pair role interventions from eight archived endpoint packets; original runtime factors preserved.",
+    "Raw-field four-role directional Jacobian, plus zero-update latent-code line from retained first E-only coordinates; no full-training replay or configuration search."
+  ],
+  "conclusion": "All4 passing endpoints lose the exact output goal within8 G/E/prior updates with D fixed. E-only breaks smoothed truncated/threaded inverse after1 step, minprob .999492\u2192.038852, while joint surrogate improves .694092\u2192.693229. All8 first E-only steps lower surrogate; latent line shows local surrogate/output-goal tension and sharp decoder geometry. Two passing unsmoothed threaded raw projections are rotation-dominant (skew/sym8.19,10.48); failed endpoints in this projection are symmetric-dominated. Two zero-G-direction cases remain null. Continuing normalized E/prior motion despite saturated G changes alignment; task PASS does not certify joint equilibrium. Local sufficient causes and coexistence identified, not one historical/global cause; no qualification/default/Tier2 credit.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Which mechanisms explain five-word inverse/coverage instability: adversarial circulation, normalized-step pace, or moving code correspondence?",
+  "lifecycle": "concluded",
+  "mechanism_class": "saved_endpoint_role_and_raw_game_field_diagnosis",
+  "next_action": "Prioritize preserving paired inverse while joint code alignment improves. A direct paired reconstruction constraint/anchor is a justified unexecuted structural option; magnitude-sensitive E/prior pace and extragradient remain hypotheses, no new study launched. Preserve global constant rates and declared controls.",
+  "provenance": {
+    "archive_sha256": "f72449c02c76952657983df5c926cf2f3fe85efc9a4680e1d05ae8e4560ce6a2",
+    "diagnostic_execution_commit": "31e23909786be1f578290d0ed98e003b1b62d8d0",
+    "diagnostic_seconds": 13.56045984197408,
+    "frozen_math_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+    "historical_training_updates": 0,
+    "new_model_sampling": 0,
+    "new_model_updates": 384,
+    "protocol_sha256": "2ecb68de48e8b404d472d72a860d6b4f403102f716110b2561f6778bbe652500",
+    "report": "reports/forge/fivewords-dynamics/README.md",
+    "scientific_retries": 0,
+    "supplement_protocol_sha256": "50c33af0d26c347b4565c787229007a08a60a0d409a6849d7b20fa1d35629b1b",
+    "supplement_seconds": 0.8057546380441636
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "fivewords-saved-endpoint-dynamics-v1-readout",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/fivewords-dynamics/readout.json",
+    "sha256": "d58368816ecfd86e0574670e443a9adff04eea06a500f14c54e8e08cbb76efb3"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}
