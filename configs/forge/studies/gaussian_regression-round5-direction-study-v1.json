@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 21180,
+    "candidate_budget_seconds": 7020,
+    "id": "gaussian_regression-round5-v1"
+  },
+  "candidate": "gaussian_regression-round5-direction-v1",
+  "competing_explanation": "The blend direction itself or the changing adversarial/transport game may cause regression. Endpoint KS, fewer conflicts or lower covariance cannot substitute for complete retention gates; whole-history paths differ after the first changed step.",
+  "control": {
+    "candidate_id": "gaussian_regression-round5-local-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "cdf_ks",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "hypothesis": "Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.",
+  "id": "gaussian_regression-round5-direction-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "cdf_ks",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "saved-state Gaussian diagnostic"
+      },
+      "path": "reports/forge/bcap-physics/gaussian_regression/round5/prior-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "gaussian_regression-round5-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

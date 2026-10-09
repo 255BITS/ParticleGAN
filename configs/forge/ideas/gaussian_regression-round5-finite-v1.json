@@ -1,0 +1,47 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Exact local-v2 plus strict_progress; same existing adversarial protection; only geometry mode differs among these arms."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/gaussian_regression/round5/README.md",
+  "id": "gaussian_regression-round5-finite-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Isolate finite acceptance from the exact PR367 common-descent blend while retaining exact local-v2 transport and the winning BCAP global recipe.",
+  "parent": "projection_transport-round4-transport-v1",
+  "prior_art": [
+    "bcap-dualnorm-convolution-v1",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "constraint_geometry_mode": "strict_progress",
+    "d_lr_mult": 1.5,
+    "kinetic_transport_local_weight": 1.0,
+    "kinetic_transport_projections": 32,
+    "kinetic_transport_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

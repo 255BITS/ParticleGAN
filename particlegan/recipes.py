@@ -220,8 +220,8 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
-        if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress"):
-            raise ValueError("constraint_geometry_mode must be none, nonascent or strict_progress")
+        if self.constraint_geometry_mode not in ("none", "nonascent", "direction_blend", "strict_progress"):
+            raise ValueError("constraint_geometry_mode must be none, nonascent, direction_blend or strict_progress")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
             raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
         if self.optimizer_convolution not in ("none", "per_offset"):
