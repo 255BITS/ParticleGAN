@@ -2,6 +2,9 @@
 
 SEARCH_RECIPE_DEFAULTS = {
     "constraint_geometry_mode": "none",
+    "kinetic_transport_weight": 0.0,
+    "kinetic_transport_local_weight": 0.0,
+    "kinetic_transport_projections": 32,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
     "d_betas": None, "d_eps": None, "prior_eps": None,

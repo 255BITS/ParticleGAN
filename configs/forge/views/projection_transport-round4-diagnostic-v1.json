@@ -1,0 +1,68 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "trajectory"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "residual_student"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "mid_scale_identity"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 7,
+      "qualification_tier": 1,
+      "task": "vector_two_broad"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "projection_transport-round4-diagnostic-v1",
+  "policy_change_reason": "Authorized four-arm exact winner, strict projection, local-v2 transport, and both; full unchanged gates, applicability and own-smoke dependencies.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

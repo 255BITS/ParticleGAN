@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 43200,
+    "candidate_budget_seconds": 10020,
+    "id": "projection_transport-round4-v1"
+  },
+  "candidate": "projection_transport-round4-winner-v1",
+  "competing_explanation": "Projection may suppress useful transport by protecting adversarial loss; same-batch progress need not preserve density. Frozen conditionals cannot consume transport, so BOTH cannot establish conditional repair there.",
+  "control": {
+    "candidate_id": "projection_transport-round4-projection-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "hypothesis": "Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.",
+  "id": "projection_transport-round4-winner-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "source-pinned-singleton-motivation"
+      },
+      "path": "reports/forge/bcap-physics/projection_transport/round4/prior-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "projection_transport-round4-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

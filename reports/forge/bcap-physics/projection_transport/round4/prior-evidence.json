@@ -1,0 +1,218 @@
+{
+  "evidence": [
+    {
+      "candidate_id": "constraint_geometry-round3-strict-progress-v1",
+      "candidate_revision": "251cd9f05b6fc2b7502a060893726c85b31bd3f814d0a1c2403ec393670f9f45",
+      "checkpoint_descriptors": [
+        {
+          "completed_steps": 400,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/d3550f211f2a44238fc2000b58da93bf/provenance/provenance-state.pt",
+          "sha256": "78f0ea7b9dbfec537ddbe9ac7ed0d5ca0cccdca84e1b6dd1ddce2740861d24cf",
+          "task_id": "trajectory",
+          "top_level_keys": [
+            "models",
+            "role_parameters",
+            "optimizers",
+            "streams",
+            "applied"
+          ]
+        },
+        {
+          "completed_steps": 80,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/318b54ae36cf4aa28b4dddb0a3c911d8/provenance/provenance-state.pt",
+          "sha256": "a91e8eca6f0eeccbebec1634d52d56264ce8d9acf2b53db68671975a43300513",
+          "task_id": "two_pole",
+          "top_level_keys": [
+            "models",
+            "role_parameters",
+            "optimizers",
+            "streams",
+            "applied"
+          ]
+        },
+        {
+          "completed_steps": 400,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/88479a53c6094731b36406059a7e01aa/provenance/provenance-state.pt",
+          "sha256": "d675309694b460c03e2905d1cff27687921077915a433083cf87f8936b2bc398",
+          "task_id": "residual_student",
+          "top_level_keys": [
+            "models",
+            "role_parameters",
+            "optimizers",
+            "streams",
+            "applied"
+          ]
+        },
+        {
+          "completed_steps": 6000,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/3f91f8d7d063411b8280d7dddb54a699/provenance/provenance-state.pt",
+          "sha256": "8e6d6713b3a1dca5a3faf0c46389965752f9869d70d6cf9f85ac7edf335dc97b",
+          "task_id": "gaussian1d_stability",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 1000,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/144f3d8f04a646938052ab5516fecf34/provenance/provenance-state.pt",
+          "sha256": "8694fe36f43054ac2c7328b28fb910109e20811c19f472b89dad62767cd39ff5",
+          "task_id": "gaussian1d_smoke",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 800,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/071a3ce3c55f4ddfa50078894ac3e3ad/provenance/provenance-state.pt",
+          "sha256": "648c5f6e25a38271513f3d0b5561054d48d66012e15503d8403a005426d39aca",
+          "task_id": "mid_scale_identity",
+          "top_level_keys": [
+            "models",
+            "role_parameters",
+            "optimizers",
+            "streams",
+            "applied"
+          ]
+        }
+      ],
+      "family": "projection",
+      "report": "/home/martyn/dev/ParticleGAN-bcap-r4-projection_transport/reports/forge/bcap-physics/constraint_geometry/round3/README.md",
+      "report_sha256": "73588ef10e560d8e8433a972228816cbba6e8adc2dc9c23a1bc1d38fe4d03a38",
+      "results_sha256": "518ee6650e36992af1702724971773050b6f44c51f3bc1a360b2620dfcfa37e7",
+      "retained_summary": {
+        "candidate": {
+          "BLOCKED": 0,
+          "FAIL": 1,
+          "INCOMPLETE": 0,
+          "INVALID": 0,
+          "PASS": 5
+        },
+        "control": {
+          "BLOCKED": 0,
+          "FAIL": 3,
+          "INCOMPLETE": 0,
+          "INVALID": 0,
+          "PASS": 3
+        }
+      },
+      "source_commit": "13450f4cae33748240ca5425814f3ff6fcc1bc41",
+      "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e"
+    },
+    {
+      "candidate_id": null,
+      "candidate_revision": null,
+      "checkpoint_descriptors": [
+        {
+          "completed_steps": 1200,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/6e4e2fb1df754f23b583ae4aadc4edad/provenance/provenance-state.pt",
+          "sha256": "e5761c79e388066195ff49d6d80d5d152711457cc4648a31579b51f6c820eeb1",
+          "task_id": "vector_two_broad",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 1000,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/d66895153c4440fb93069f80d0cf7a99/provenance/provenance-state.pt",
+          "sha256": "c636d074d75aa26113a597f33f636651d34716453e2bf3e04c12eaf08166b563",
+          "task_id": "gaussian1d_smoke",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 1200,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/458f28edb51246faa84350eb942225c3/provenance/provenance-state.pt",
+          "sha256": "d876a54b7a7b92f259af1f28951cf286bffa0339b167599591199d11a632d639",
+          "task_id": "vector_unequal_width",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 6000,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/e87d9c4997ce4d67a543c4ba1fd2f07c/provenance/provenance-state.pt",
+          "sha256": "7986b11ad3e73e1fdc3d1e3a7386550edb3558b02717c81088738a755c2849d6",
+          "task_id": "gaussian1d_stability",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        },
+        {
+          "completed_steps": 1200,
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/2b9ff220ef5c46b48127e03e801faf79/provenance/provenance-state.pt",
+          "sha256": "ec0f7fc42c966cafa0275aa0b22557b4cd4c16c77885286e4562b9129e9db6cb",
+          "task_id": "vector_unequal_mass",
+          "top_level_keys": [
+            "schema",
+            "api_version",
+            "recipe",
+            "prior",
+            "extensions",
+            "initializer",
+            "initialization",
+            "streams",
+            "trainer"
+          ]
+        }
+      ],
+      "family": "transport",
+      "report": "/home/martyn/dev/ParticleGAN-bcap-physics-kinetic_transport/reports/forge/bcap-physics/kinetic_transport/round2/README.md",
+      "report_sha256": "9823a4919346b73c317051546fde0b0506906a224fcda9bb380167fcc1c9230b",
+      "results_sha256": "11e8c36fc9833d9c8d09e15ca10977305152ab41eb19c61c2117bf2cd918de45",
+      "retained_summary": null,
+      "source_commit": {},
+      "source_digest": null
+    }
+  ],
+  "qualification_input": false,
+  "scope": "source-pinned-singleton-motivation"
+}

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 787. Inventory coverage: complete. Unresolved import items: 7.
+Records: 791. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3702,6 +3702,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
 
+### projection_transport-round4-winner-v1 · readout-042b50fd23528eb783e6de63
+
+**Scope:** research_diagnostic; scientific; revision `bcb7b94fbf9a2b64e1f5e9bbb25fd20a184942847bb3bc8f03e28a7b6fe5bf7b`.
+
+Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.
+
+**Observed:** {'FAIL': 4, 'PASS': 4}; wall seconds 261.735; mechanism `structural`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+Exact winning BCAP matched control:4PASS4FAIL; Gaussian retention and both conditional identities fail; no qualification reuse.
+
+**Next:** Stop this finite campaign. Preserve singleton repairs and the supported BOTH vector lead; retain Gaussian regression and conditional BLOCKED denominator. No global replacement, seed study, continuation, merge or promotion; conditional union requires a separately authorized consumer study.
+
+[Evidence](../../reports/forge/attempts/1aca0207b7704fa891b1bcc65abce752/result.json) · [Record](records/readout-042b50fd23528eb783e6de63.json)
+
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
 **Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
@@ -3733,6 +3749,22 @@ The public EMA-anchor ablation failed two_pole after 80 fixed-seed CPU updates: 
 **Next:** Stop this ablation at tier 1. Keep its frozen FAIL receipt as onboarding and fail-fast evidence; do not promote it or spend on downstream tasks. A scientific anchor comparison would require one explicitly bounded compatible parent/ablation design after the initial gate calibration gaps are addressed.
 
 [Evidence](../../reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json) · [Record](records/readout-10242573330bec1494c7602b.json)
+
+### projection_transport-round4-projection-v1 · readout-12cc7c318f942e23c3593391
+
+**Scope:** research_diagnostic; scientific; revision `c1866f2e4033373df31d49b9b88551b689cb34464fd3c9b08b65b33045078cc5`.
+
+Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.
+
+**Observed:** {'FAIL': 2, 'PASS': 6}; wall seconds 850.514; mechanism `structural`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654; vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+Strict projection reproduces two conditional repairs:6PASS2FAIL. Five inactive cohorts exactly match the winner; Gaussian retention and unequal mass still fail.
+
+**Next:** Stop this finite campaign. Preserve singleton repairs and the supported BOTH vector lead; retain Gaussian regression and conditional BLOCKED denominator. No global replacement, seed study, continuation, merge or promotion; conditional union requires a separately authorized consumer study.
+
+[Evidence](../../reports/forge/attempts/0cc42773ef0443519958317ae20e0124/result.json) · [Record](records/readout-12cc7c318f942e23c3593391.json)
 
 ### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
 
@@ -4053,6 +4085,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 **Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+
+### projection_transport-round4-both-v1 · readout-8077267dc340811feadff19f
+
+**Scope:** research_diagnostic; scientific; revision `bc39a35164e5ce21fddeb21854ed9da0fcc0b4d7d232261e1b29e85f5ae7001e`.
+
+Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.
+
+**Observed:** {'FAIL': 1, 'PASS': 3}; wall seconds 280.876; mechanism `structural`.
+
+vector_two_broad: hq=0.99072, mass_tv=0.005127; vector_unequal_mass: hq=0.97876, mass_tv=0.018867
+
+Composition retains unequal-mass sustainedPASS (suffix9,covariance.350241) and broadPASS;3PASS1FAIL4BLOCKED. Gaussian retention regresses (28/72 to8/72 stationary,KS.060653 to.241544). Conditional union unmeasured.
+
+**Next:** Stop this finite campaign. Preserve singleton repairs and the supported BOTH vector lead; retain Gaussian regression and conditional BLOCKED denominator. No global replacement, seed study, continuation, merge or promotion; conditional union requires a separately authorized consumer study.
+
+[Evidence](../../reports/forge/attempts/390665d59b6e43eca17652dbdcbf01d6/result.json) · [Record](records/readout-8077267dc340811feadff19f.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4453,6 +4501,22 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
 [Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
+
+### projection_transport-round4-transport-v1 · readout-e0e49c15c6a17fc1f4c039b0
+
+**Scope:** research_diagnostic; scientific; revision `386360e6387a9eae24376a24ac921145fc6f8c45ae24da59ffdd530f777825c8`.
+
+Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.
+
+**Observed:** {'FAIL': 1, 'PASS': 3}; wall seconds 200.727; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96973, mass_tv=0.016426; vector_two_broad: hq=0.9856, mass_tv=0.00073242
+
+Exact local-v2 reproduces rare-density repair and broad guardrail:3PASS1FAIL4BLOCKED. Gaussian retention still fails; conditionals/fixed component hosts unsupported.
+
+**Next:** Stop this finite campaign. Preserve singleton repairs and the supported BOTH vector lead; retain Gaussian regression and conditional BLOCKED denominator. No global replacement, seed study, continuation, merge or promotion; conditional union requires a separately authorized consumer study.
+
+[Evidence](../../reports/forge/attempts/2865e3889a2e4d23a78be6a89b349435/result.json) · [Record](records/readout-e0e49c15c6a17fc1f4c039b0.json)
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -5070,4 +5134,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `ee4a8010648c6da2e6bb428bdbb61d9636e742f8222f5067b0ea0f980e6237da`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `d89d8d7d319bcd47c4cf1c4a02611ce5ca3121821f3dd0c6a7f71c576e3e0596`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

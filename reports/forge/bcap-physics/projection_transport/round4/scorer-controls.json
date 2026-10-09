@@ -1,0 +1,121 @@
+{
+  "controls": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "status": "PASS",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.546370878809079
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.44999998807907104
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25,
+          0.0
+        ]
+      ],
+      "status": "FAIL",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "status": "PASS",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.6945207538578243
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.5
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ]
+      ],
+      "status": "FAIL",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "std_ratio",
+          ">=",
+          0.8,
+          0.0
+        ],
+        [
+          "cdf_ks",
+          "<=",
+          0.05,
+          0.5
+        ]
+      ],
+      "status": "FAIL",
+      "task_id": "gaussian1d_smoke"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_receipt": "/home/martyn/dev/ParticleGAN-bcap-physics-kinetic_transport/reports/forge/bcap-physics/kinetic_transport/scorer-controls.json",
+  "original_receipt_sha256": "b6e575a4f84d26307df2b6146224ae746720476ec595da54c6d514b6953c0b0b",
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "reused_source_pinned_controls_no_training",
+  "scorer_sources": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "unchanged_target_task_cards": true
+}

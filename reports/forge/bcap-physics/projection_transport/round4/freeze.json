@@ -1,0 +1,199 @@
+{
+  "arms": {
+    "both": {
+      "blocked_tasks": {
+        "mid_scale_identity": [
+          "mid_scale_identity: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "residual_student": [
+          "residual_student: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "trajectory": [
+          "trajectory: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "two_pole": [
+          "two_pole: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ]
+      },
+      "candidate_id": "projection_transport-round4-both-v1",
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "strict_progress",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "original_request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/queue/requests/e435328afce2e594bf7e9622.json",
+      "original_request_sha256": "433a4779799279463ac5e647e37849fce3bf7049badc88fea96e87c126a1c987",
+      "request_id": "e435328afce2e594bf7e9622",
+      "revision": "bc39a35164e5ce21fddeb21854ed9da0fcc0b4d7d232261e1b29e85f5ae7001e",
+      "study_id": "projection_transport-round4-both-study-v1"
+    },
+    "projection": {
+      "blocked_tasks": {},
+      "candidate_id": "projection_transport-round4-projection-v1",
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "strict_progress",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "original_request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/queue/requests/98866e4d65b225c4aedccdee.json",
+      "original_request_sha256": "00487b2a697e14a86e9f4f1e9258bdde4125554482a9a634d304684167764bf1",
+      "request_id": "98866e4d65b225c4aedccdee",
+      "revision": "c1866f2e4033373df31d49b9b88551b689cb34464fd3c9b08b65b33045078cc5",
+      "study_id": "projection_transport-round4-projection-study-v1"
+    },
+    "transport": {
+      "blocked_tasks": {
+        "mid_scale_identity": [
+          "mid_scale_identity: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "residual_student": [
+          "residual_student: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "trajectory": [
+          "trajectory: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ],
+        "two_pole": [
+          "two_pole: frozen public_components host does not consume Recipe kinetic transport sample-space losses; mechanism is unsupported"
+        ]
+      },
+      "candidate_id": "projection_transport-round4-transport-v1",
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "none",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "original_request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/queue/requests/574010f5dd3494e037142738.json",
+      "original_request_sha256": "f3b6d415fac3bc564f5ba1e13d2c5c1857d4dcf235a8b7a96b822c68e5059a2f",
+      "request_id": "574010f5dd3494e037142738",
+      "revision": "386360e6387a9eae24376a24ac921145fc6f8c45ae24da59ffdd530f777825c8",
+      "study_id": "projection_transport-round4-transport-study-v1"
+    },
+    "winner": {
+      "blocked_tasks": {},
+      "candidate_id": "projection_transport-round4-winner-v1",
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "none",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "original_request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/queue/requests/f8b29ffae3e504c2d509d732.json",
+      "original_request_sha256": "d6cff4dae373b2300b0a35267dfc90e90d4c0c61d758ced537b0e4dfdd12e237",
+      "request_id": "f8b29ffae3e504c2d509d732",
+      "revision": "bcb7b94fbf9a2b64e1f5e9bbb25fd20a184942847bb3bc8f03e28a7b6fe5bf7b",
+      "study_id": "projection_transport-round4-winner-study-v1"
+    }
+  },
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "source_commit": "63bad2205c36b792648168c869a55bac2e1f605d",
+  "source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f"
+}

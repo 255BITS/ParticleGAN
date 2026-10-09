@@ -1,0 +1,990 @@
+{
+  "attempt_ids": [
+    "1aca0207b7704fa891b1bcc65abce752",
+    "6978e5121cbf42db8f00c78385b03587",
+    "850a3d819f764e6eb85560950d5f1583",
+    "86126c8a19af411a835aff615deddc11",
+    "8fe5a76997d94f79b034c95ee425c9a5",
+    "9a2bf49d2bc648238eb261f0da0dbb46",
+    "a5501b08266f4a588b9007631e1b446c",
+    "b76ebf4ae35b4e3abc1f7400d3a6398b"
+  ],
+  "candidate_id": "projection_transport-round4-winner-v1",
+  "candidate_revision": "bcb7b94fbf9a2b64e1f5e9bbb25fd20a184942847bb3bc8f03e28a7b6fe5bf7b",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Four-arm seed0 public-initializer comparison on one source; exact winner is primary control for the substantive arms. Singletons reproduce archived numeric states/curves. Original gates, priors, seen batches, streams, cadence and budgets unchanged; unsupported transport hosts spend nothing.",
+  "conclusion": "Exact winning BCAP matched control:4PASS4FAIL; Gaussian retention and both conditional identities fail; no qualification reuse.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "1aca0207b7704fa891b1bcc65abce752",
+        "6978e5121cbf42db8f00c78385b03587",
+        "850a3d819f764e6eb85560950d5f1583",
+        "86126c8a19af411a835aff615deddc11",
+        "8fe5a76997d94f79b034c95ee425c9a5",
+        "9a2bf49d2bc648238eb261f0da0dbb46",
+        "a5501b08266f4a588b9007631e1b446c",
+        "b76ebf4ae35b4e3abc1f7400d3a6398b"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "63af438acfadbacd1cdbd595fcc0b5d79c6a311f4cac806fe9ea5aa1c107e4e1",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 3.691653147339821
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 3.691653147339821
+        }
+      },
+      "outcome": "falsified",
+      "provenance": [
+        {
+          "attempt_id": "1aca0207b7704fa891b1bcc65abce752",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "be1c55bfe5600eb12e69ebfd24f0ef8785eec4290852d945bc801eccdd93b0a1",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "6978e5121cbf42db8f00c78385b03587",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "8a55605afcb57e04e283fd6e78032b319e0206cbaa83899a8455e9b8599d4b70",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "850a3d819f764e6eb85560950d5f1583",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "dcb33a9099e649dcb61c7aeef4d1d0cff5b51e9d1f2acb66a61f0e1ceb7bff60",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "86126c8a19af411a835aff615deddc11",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "a29ee2227f17681248cd62f4f13333b9e04c2bfddaff4e67346c209c5f699f74",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "8fe5a76997d94f79b034c95ee425c9a5",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "d5df7be09e89f0252c61b847508034cadcb462cf7dbaa4e8d223c71edfede81a",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9a2bf49d2bc648238eb261f0da0dbb46",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "8cd8c1b97f0778ee249ab3fb718867ace4903a37ae48f4c0ca0e61c74f29669b",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a5501b08266f4a588b9007631e1b446c",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "7555e5cb134eb63a227fb6487e3a23c846c58782ecfd132f610f1a3a237a2059",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b76ebf4ae35b4e3abc1f7400d3a6398b",
+          "producer_request_id": "f8b29ffae3e504c2d509d732",
+          "producer_study_id": "projection_transport-round4-winner-study-v1",
+          "result_hash": "2c8590b4deb0f5b52c2de9a88e9078b6f790d913439ae09a8975e1ca87072765",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "88f7ae1f625b4fcc4159e01bc7dcacb26173772bac82383f336cb84b20ddb84e",
+        "contract_sha256": "63af438acfadbacd1cdbd595fcc0b5d79c6a311f4cac806fe9ea5aa1c107e4e1",
+        "control_binding_sha256": "62b10192ec6a64a1960d99f420b56e1daa5795a79895c526abf192e2085135d3",
+        "policy_fingerprint": "856fa69cdfa8b13fe65f1c8b1a8f3b563b6be3146a317f519c201e2ea3b9c97b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "7875099f8755cec3631f0c44743eb56a96b0f4a1cae577226242b552060224d8"
+      },
+      "study_id": "projection_transport-round4-winner-study-v1",
+      "study_sha256": "7875099f8755cec3631f0c44743eb56a96b0f4a1cae577226242b552060224d8"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "projection_transport-round4-diagnostic-v1",
+  "hypothesis": "Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this finite campaign. Preserve singleton repairs and the supported BOTH vector lead; retain Gaussian regression and conditional BLOCKED denominator. No global replacement, seed study, continuation, merge or promotion; conditional union requires a separately authorized consumer study.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "1aca0207b7704fa891b1bcc65abce752",
+        "result_hash": "be1c55bfe5600eb12e69ebfd24f0ef8785eec4290852d945bc801eccdd93b0a1",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "6978e5121cbf42db8f00c78385b03587",
+        "result_hash": "8a55605afcb57e04e283fd6e78032b319e0206cbaa83899a8455e9b8599d4b70",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "850a3d819f764e6eb85560950d5f1583",
+        "result_hash": "dcb33a9099e649dcb61c7aeef4d1d0cff5b51e9d1f2acb66a61f0e1ceb7bff60",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "86126c8a19af411a835aff615deddc11",
+        "result_hash": "a29ee2227f17681248cd62f4f13333b9e04c2bfddaff4e67346c209c5f699f74",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "8fe5a76997d94f79b034c95ee425c9a5",
+        "result_hash": "d5df7be09e89f0252c61b847508034cadcb462cf7dbaa4e8d223c71edfede81a",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "9a2bf49d2bc648238eb261f0da0dbb46",
+        "result_hash": "8cd8c1b97f0778ee249ab3fb718867ace4903a37ae48f4c0ca0e61c74f29669b",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a5501b08266f4a588b9007631e1b446c",
+        "result_hash": "7555e5cb134eb63a227fb6487e3a23c846c58782ecfd132f610f1a3a237a2059",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "b76ebf4ae35b4e3abc1f7400d3a6398b",
+        "result_hash": "2c8590b4deb0f5b52c2de9a88e9078b6f790d913439ae09a8975e1ca87072765",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-042b50fd23528eb783e6de63",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/1aca0207b7704fa891b1bcc65abce752/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 43200,
+      "candidate_budget_seconds": 10020,
+      "id": "projection_transport-round4-v1"
+    },
+    "candidate": "projection_transport-round4-winner-v1",
+    "competing_explanation": "Projection may suppress useful transport by protecting adversarial loss; same-batch progress need not preserve density. Frozen conditionals cannot consume transport, so BOTH cannot establish conditional repair there.",
+    "control": {
+      "candidate_id": "projection_transport-round4-projection-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "component_covariance_error",
+      "op": ">",
+      "phase": "final",
+      "task_id": "vector_unequal_mass",
+      "threshold": 0.85
+    },
+    "hypothesis": "Exact strict-progress projection can preserve the supported local-v2 unequal-mass repair; singletons reproduce their scoped results on one source. Unsupported conditionals supply no union credit.",
+    "id": "projection_transport-round4-winner-study-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "component_covariance_error",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "vector_unequal_mass",
+      "threshold": 0.85
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "scope": "source-pinned-singleton-motivation"
+        },
+        "path": "reports/forge/bcap-physics/projection_transport/round4/prior-evidence.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "projection_transport-round4-diagnostic-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "projection_transport-round4-winner-study-v1",
+  "study_sha256": "7875099f8755cec3631f0c44743eb56a96b0f4a1cae577226242b552060224d8",
+  "task_results": [
+    {
+      "compatibility_key": "8acd5c9d5f7962e7673c9a197f8411ad73e46ca35a85105ab6b5895282afb40b",
+      "cost": {
+        "adapter_loop_seconds": 37.01049228699412,
+        "adapter_seconds": 37.28038532601204,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 48.98277792602312,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 35.3832325139083,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3816915840143338
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.01123137108515948
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 34.990309558808804
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 38.667214389075525,
+        "wall_seconds": 48.98277792602312
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2916666666666667,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 350,
+          "first_pass_step": 150,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 150
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.4644192516803741,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.38558074831962585
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.250066465139389,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.40006646513938904
+          },
+          "hq": {
+            "margin": 0.13876953125000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.98876953125
+          },
+          "mass_tv": {
+            "margin": 0.08701171875,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.06298828125
+          },
+          "sw1_normalized": {
+            "margin": 0.04541049482719112,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.13458950517280888
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.38558074831962585,
+        "component_core_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_core_eigen_ratios": [
+          0.40006646513938904,
+          0.5530211329460144
+        ],
+        "component_core_min_eigen_ratio": 0.40006646513938904,
+        "component_counts": [
+          2306,
+          1790
+        ],
+        "component_covariance_error": 0.38558074831962585,
+        "component_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_mass": [
+          0.56298828125,
+          0.43701171875
+        ],
+        "component_min_eigen_ratio": 0.40006646513938904,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.005637467373162508,
+          0.018435753881931305
+        ],
+        "covariance_error": 0.11147095263004303,
+        "hq": 0.98876953125,
+        "mass_tv": 0.06298828125,
+        "max_component_spill": 0.018435753881931305,
+        "mean_error": 0.1914638876914978,
+        "min_mass_ratio": 0.8740234375,
+        "resolved_core_covariance_error": 0.38558074831962585,
+        "resolved_core_min_eigen_ratio": 0.40006646513938904,
+        "resolved_max_component_spill": 0.018435753881931305,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.13458950517280888,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "1f33d333cf4dcf2a073459ae3356534c026b31c7a9aea7ed1464e5c5f18050e6",
+      "cost": {
+        "adapter_seconds": 0.9600379869807512,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.959448174922727,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.295880693010986,
+        "wall_seconds": 6.959448174922727
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "c5d9c37e0dba221c0aef82319fc5986da5c7ecaf4a074a4221141981427ed37e",
+      "cost": {
+        "adapter_seconds": 11.299333061906509,
+        "charged_task": "residual_student",
+        "device": "0",
+        "execution_seconds": 17.97054513299372,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 12.713617268949747,
+        "wall_seconds": 17.97054513299372
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.04103601306676864,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.061036013066768646
+          },
+          "success_rate": {
+            "margin": -0.5,
+            "metric": "success_rate",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 0.5
+          },
+          "wrong_pad_rate": {
+            "margin": -0.5,
+            "metric": "wrong_pad_rate",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.0,
+            "value": 0.5
+          }
+        },
+        "passed": false,
+        "shortfall": 1.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.061036013066768646,
+        "success_rate": 0.5,
+        "wrong_pad_rate": 0.5
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "residual_student"
+    },
+    {
+      "compatibility_key": "844a44c78608a3f0ffdf70604b214df4c399573199aaf6c69c28c68aaa701f0b",
+      "cost": {
+        "adapter_seconds": 22.301919013028964,
+        "charged_task": "mid_scale_identity",
+        "device": "0",
+        "execution_seconds": 28.6913092789473,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 23.68382020504214,
+        "wall_seconds": 28.6913092789473
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2925,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 234,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metric_checks": {
+          "concept_cos_minus": {
+            "margin": 0.14997472763061526,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999747276306152
+          },
+          "concept_cos_plus": {
+            "margin": 0.14998778104782107,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.999987781047821
+          },
+          "concept_mag_minus": {
+            "margin": 0.24082517623901367,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0091748237609863
+          },
+          "concept_mag_plus": {
+            "margin": 0.23508214950561523,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0149178504943848
+          },
+          "identity_at_0": {
+            "margin": 0.14915090477599602,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.999150904775996
+          },
+          "identity_at_mid": {
+            "margin": 0.1314403064495584,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9814403064495584
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999747276306152,
+        "concept_cos_plus": 0.999987781047821,
+        "concept_mag_minus": 1.0091748237609863,
+        "concept_mag_plus": 1.0149178504943848,
+        "identity_at_0": 0.999150904775996,
+        "identity_at_mid": 0.9814403064495584
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "compatibility_key": "263dc808da4cd3e1a16e76593fa9ab5ec4f7720822fcacc27b6a55d544453d7b",
+      "cost": {
+        "adapter_loop_seconds": 77.2488102739444,
+        "adapter_seconds": 77.63081692508422,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 84.09543201001361,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 72.14744483644608,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.5950715293874964
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1470011865021661
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 70.40537212055642
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 78.964227215969,
+        "wall_seconds": 84.09543201001361
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "98d388eec4d371fd10a25bf1161501fefd1e6d9bd579d9b70d2810d3917cb5c8",
+      "cost": {
+        "adapter_loop_seconds": 16.418535700067878,
+        "adapter_seconds": 16.732497079996392,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 22.760004978976212,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 15.279501502867788,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.46117084368597716
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.11450046033132821
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 14.703830198850483
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 18.02561042108573,
+        "wall_seconds": 22.760004978976212
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "52c4e426f5498051b6433f04e856bff81a85c5a7f0fde8090ff5fb5a363b57d9",
+      "cost": {
+        "adapter_seconds": 11.708539093961008,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 18.166805936023593,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 13.106569568044506,
+        "wall_seconds": 18.166805936023593
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.2198618906736374,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.2398618906736374
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.2398618906736374
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    },
+    {
+      "compatibility_key": "ba11ef2d60e28b72bc01345db95f4ff7d95100c9ddabf3da7e129ab3a8147ad5",
+      "cost": {
+        "adapter_loop_seconds": 27.223639334901236,
+        "adapter_seconds": 27.511803411063738,
+        "charged_task": "vector_unequal_mass",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 34.10888917197008,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 26.16040544968564,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3990846568485722
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.009851462091319263
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 25.75146933074575
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 28.859299754025415,
+        "wall_seconds": 34.10888917197008
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -2.8416531473398208,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 3.691653147339821
+          },
+          "component_min_eigen_ratio": {
+            "margin": -0.14092709366232156,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.009072906337678432
+          },
+          "hq": {
+            "margin": 0.10458984375000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.95458984375
+          },
+          "mass_tv": {
+            "margin": 0.07934571951627731,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.07065428048372269
+          },
+          "min_mass_ratio": {
+            "margin": -0.04248046875,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.20751953125
+          },
+          "sw1_normalized": {
+            "margin": 0.02536158405510111,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.15463841594489888
+          }
+        },
+        "passed": false,
+        "shortfall": 0.518239305458135,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5303929001092911,
+        "component_core_covariance_errors": [
+          0.2456076443195343,
+          0.4634510278701782,
+          0.4541144073009491,
+          0.9583985209465027
+        ],
+        "component_core_eigen_ratios": [
+          0.7341277003288269,
+          0.3805922865867615,
+          0.41528597474098206,
+          0.009072906337678432
+        ],
+        "component_core_min_eigen_ratio": 0.009072906337678432,
+        "component_counts": [
+          2273,
+          1498,
+          308,
+          17
+        ],
+        "component_covariance_error": 3.691653147339821,
+        "component_covariance_errors": [
+          1.027569055557251,
+          0.4634510278701782,
+          12.317193984985352,
+          0.9583985209465027
+        ],
+        "component_mass": [
+          0.554931640625,
+          0.36572265625,
+          0.0751953125,
+          0.004150390625
+        ],
+        "component_min_eigen_ratio": 0.009072906337678432,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.018477782607078552,
+          0.04939919710159302,
+          0.22727273404598236,
+          0.0
+        ],
+        "covariance_error": 0.08032716810703278,
+        "hq": 0.95458984375,
+        "mass_tv": 0.07065428048372269,
+        "max_component_spill": 0.22727273404598236,
+        "mean_error": 0.21188154816627502,
+        "min_mass_ratio": 0.20751953125,
+        "resolved_core_covariance_error": 0.3877243598302205,
+        "resolved_core_min_eigen_ratio": 0.3805922865867615,
+        "resolved_max_component_spill": 0.22727273404598236,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.15463841594489888,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_mass"
+    }
+  ]
+}
