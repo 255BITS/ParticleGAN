@@ -142,6 +142,8 @@ class GANTrainer:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
+        if recipe.kinetic_transport_prior_only and not self.prior.z.requires_grad:
+            raise ValueError("prior-only transport requires trainable prior locations")
         if not any(p.requires_grad for p in discriminator.parameters()):
             raise ValueError("discriminator must have trainable parameters")
         seen = set()
@@ -404,7 +406,17 @@ class GANTrainer:
             if recipe.kinetic_transport_tail_weight:
                 loss_g = loss_g + transport_tail
             self.opt_g.zero_grad()
-            loss_g.backward()
+            if recipe.kinetic_transport_prior_only:
+                prior_parameters = tuple(p for p in self.prior.parameters() if p.requires_grad)
+                if not prior_parameters:
+                    raise ValueError("prior-only transport requires trainable prior locations")
+                # Keep the identical fake/real tensors and objective values.
+                # Restrict only the transport pullback: shared G parameters do
+                # not absorb a density force intended to rearrange locations.
+                (loss_gan + recipe.prior_reg * prior_reg).backward(retain_graph=True)
+                torch.autograd.backward(transport + transport_local, inputs=prior_parameters)
+            else:
+                loss_g.backward()
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             if recipe.kinetic_transport_backtrack:
@@ -450,6 +462,8 @@ class GANTrainer:
             result["kinetic_transport_tail"] = transport_tail.detach()
         if recipe.kinetic_transport_backtrack:
             result["kinetic_backtrack"] = backtrack
+        if recipe.kinetic_transport_prior_only:
+            result["kinetic_transport_prior_only"] = True
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

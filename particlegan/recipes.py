@@ -83,6 +83,9 @@ class Recipe:
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_tail_weight: float = 0.0
     kinetic_transport_backtrack: bool = False
+    # Route existing transport pullbacks only to learned locations; G retains
+    # the ordinary adversarial/prior-regularization objective. No extra draws.
+    kinetic_transport_prior_only: bool = False
     kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
@@ -371,6 +374,13 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_backtrack) is not bool:
             raise ValueError("kinetic_transport_backtrack must be a boolean")
+        if type(self.kinetic_transport_prior_only) is not bool:
+            raise ValueError("kinetic_transport_prior_only must be a boolean")
+        if self.kinetic_transport_prior_only:
+            if self.model != "gan" or not (self.kinetic_transport_weight or self.kinetic_transport_local_weight):
+                raise ValueError("prior-only transport requires GAN and an active sliced/local signal")
+            if self.kinetic_transport_backtrack or self.kinetic_transport_tail_weight:
+                raise ValueError("prior-only transport cannot combine with backtracking or tail moments")
         if (type(self.kinetic_transport_tail_weight) not in (int, float)
                 or not math.isfinite(self.kinetic_transport_tail_weight) or self.kinetic_transport_tail_weight < 0):
             raise ValueError("kinetic_transport_tail_weight must be finite and nonnegative")

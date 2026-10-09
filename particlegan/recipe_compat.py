@@ -5,6 +5,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "kinetic_transport_local_weight": 0.0,
     "kinetic_transport_tail_weight": 0.0,
     "kinetic_transport_backtrack": False,
+    "kinetic_transport_prior_only": False,
     "kinetic_transport_projections": 32,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",

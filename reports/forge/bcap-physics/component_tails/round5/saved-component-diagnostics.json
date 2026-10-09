@@ -1,0 +1,4947 @@
+{
+  "analysis_seconds": 1.5167144330916926,
+  "diagnostics": [
+    {
+      "all_centers": 256,
+      "average_between_fraction": 0.9980266429850762,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        130,
+        126
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/2b886f4f1eee4a1bbf8fc39cb6927adc/provenance/provenance-state.pt",
+      "checkpoint_sha256": "2ddaff0e4fe30a3aef91c6a8691540f9fc87d994bbd79df66498953d9e3c14aa",
+      "checkpoint_state_sha256": "3395915858e4fcbede48b76b131d871e9e1c90060eb60db5acca47246780d54e",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9979248627628484,
+          "center_only_covariance_error": 0.22523948655118808,
+          "center_output_covariance": [
+            [
+              0.04782545224369095,
+              -0.004655230029379552
+            ],
+            [
+              -0.004655230029379552,
+              0.05076690491054991
+            ]
+          ],
+          "center_output_trace_over_target": 0.7887388572339269,
+          "center_to_conditional_mean_rms": 0.0003687475219755259,
+          "centers": 130,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.00017528731192780543,
+              -1.1695425458553364e-07
+            ],
+            [
+              -1.1695425458553364e-07,
+              2.9827931894725257e-05
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.0016409219505802456,
+          "conditional_mean_covariance": [
+            [
+              0.04787530945526485,
+              -0.004669873900346363
+            ],
+            [
+              -0.004669873900346363,
+              0.050763757820653906
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.7891125382073501,
+          "finite_quadrature_total_covariance_error": 0.2232682383090069,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9981284232073038,
+          "center_only_covariance_error": 0.2862766636515463,
+          "center_output_covariance": [
+            [
+              0.07906525607386694,
+              -0.011841087165529092
+            ],
+            [
+              -0.011841087165529092,
+              0.05325674357343773
+            ]
+          ],
+          "center_output_trace_over_target": 1.0585759971784374,
+          "center_to_conditional_mean_rms": 0.00025555524776572317,
+          "centers": 126,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.0002165988586183618,
+              -2.552313389947749e-05
+            ],
+            [
+              -2.552313389947749e-05,
+              3.152519489308172e-05
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.001984992428091548,
+          "conditional_mean_covariance": [
+            [
+              0.0790771729690381,
+              -0.01184120233808292
+            ],
+            [
+              -0.01184120233808292,
+              0.05324957486073896
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.0586139826382164,
+          "finite_quadrature_total_covariance_error": 0.28814601526052935,
+          "quadrature_decomposition_max_abs_error": 5.551115123125783e-17,
+          "weighted_assignment_migration_fraction": 0.0016988970923056555
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/2b886f4f1eee4a1bbf8fc39cb6927adc/request.json",
+      "request_sha256": "47a86e63725929383a2415b5a9f020f2a57b7d1a9d0a0e06fd9250afe691ebc1",
+      "source": "round4-local-v2",
+      "source_commit": "0704638faaeea031ea705ec3177a2d56b838c105",
+      "source_digest": "a4f22e27e034a2c0c81c189c03bf7637f90ab25ff98ab13697787aed4341923e",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_centers": 256,
+      "average_between_fraction": 0.9931696072939263,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        61,
+        64,
+        65,
+        66
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/213aabf2053642d993fe4683f471c696/provenance/provenance-state.pt",
+      "checkpoint_sha256": "dbf8a58c4c38c249dc8103a45aeb7dc483c6d49e2c6b958d6c7c8943ff46d192",
+      "checkpoint_state_sha256": "6a061aa6a75f5d2ebb4a01aaf9b6eb6e1becf0e2eeeaeb6378393906c893f2b5",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9889264647625183,
+          "center_only_covariance_error": 5.8085785642486165,
+          "center_output_covariance": [
+            [
+              0.04483205455511327,
+              0.003562506784638455
+            ],
+            [
+              0.003562506784638455,
+              0.005372251660018067
+            ]
+          ],
+          "center_output_trace_over_target": 5.122888328541108,
+          "center_to_conditional_mean_rms": 0.00042719653143037705,
+          "centers": 61,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.00023519308210222681,
+              0.00022671100614382093
+            ],
+            [
+              0.00022671100614382093,
+              0.0003270218381147305
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.05736886872949263,
+          "conditional_mean_covariance": [
+            [
+              0.044838531178871426,
+              0.0035659850575479775
+            ],
+            [
+              0.0035659850575479775,
+              0.0053702956829411435
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.123349619013314,
+          "finite_quadrature_total_covariance_error": 5.849943807593254,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9952839692634353,
+          "center_only_covariance_error": 4.451028161475598,
+          "center_output_covariance": [
+            [
+              0.10091803589328624,
+              -0.017935570806806234
+            ],
+            [
+              -0.017935570806806234,
+              0.023756704856393845
+            ]
+          ],
+          "center_output_trace_over_target": 4.328984128170446,
+          "center_to_conditional_mean_rms": 0.00045889096682280535,
+          "centers": 64,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.00027437693235519945,
+              -0.00013808019368379584
+            ],
+            [
+              -0.00013808019368379584,
+              0.0003166621269481418
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.02052218991166838,
+          "conditional_mean_covariance": [
+            [
+              0.10094943209842171,
+              -0.017933560714107632
+            ],
+            [
+              -0.017933560714107632,
+              0.02378506048499048
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.331058844655116,
+          "finite_quadrature_total_covariance_error": 4.469780750411475,
+          "quadrature_decomposition_max_abs_error": 4.163336342344337e-17,
+          "weighted_assignment_migration_fraction": 0.00021899765932073328
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9934522865785026,
+          "center_only_covariance_error": 0.25325663436135776,
+          "center_output_covariance": [
+            [
+              0.05063007344440496,
+              -0.0055350463426316965
+            ],
+            [
+              -0.0055350463426316965,
+              0.04556530120616994
+            ]
+          ],
+          "center_output_trace_over_target": 1.202442210008864,
+          "center_to_conditional_mean_rms": 0.0003880508338222192,
+          "centers": 65,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.0003323353629646358,
+              -0.00011155792985042284
+            ],
+            [
+              -0.00011155792985042284,
+              0.00030192026906316135
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.007928195577556444,
+          "conditional_mean_covariance": [
+            [
+              0.050652670067137945,
+              -0.0055392336340736315
+            ],
+            [
+              -0.0055392336340736315,
+              0.04557981100702718
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.2029060403141092,
+          "finite_quadrature_total_covariance_error": 0.26168208148033406,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9950157085712491,
+          "center_only_covariance_error": 0.17880875591271214,
+          "center_output_covariance": [
+            [
+              0.100627854080923,
+              0.006930810998455756
+            ],
+            [
+              0.006930810998455756,
+              0.07242353618613571
+            ]
+          ],
+          "center_output_trace_over_target": 0.9613965743923031,
+          "center_to_conditional_mean_rms": 0.00047629244079205646,
+          "centers": 66,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.0003945766762087801,
+              3.903079684041926e-05
+            ],
+            [
+              3.903079684041926e-05,
+              0.00047274951948370584
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.004818478673489115,
+          "conditional_mean_covariance": [
+            [
+              0.1006994782393894,
+              0.006934953596779444
+            ],
+            [
+              0.006934953596779444,
+              0.07244513047896817
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.9619144546567181,
+          "finite_quadrature_total_covariance_error": 0.1778037822978286,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/213aabf2053642d993fe4683f471c696/request.json",
+      "request_sha256": "914a3892bfc307987a3843633a265e3b519eb571627ac2f8f04c88f8a6507078",
+      "source": "round4-local-v2",
+      "source_commit": "0704638faaeea031ea705ec3177a2d56b838c105",
+      "source_digest": "a4f22e27e034a2c0c81c189c03bf7637f90ab25ff98ab13697787aed4341923e",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "all_centers": 256,
+      "average_between_fraction": 0.9867525956431776,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        141,
+        77,
+        32,
+        6
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/44c605460e35465d89b83bc8c8fc312f/provenance/provenance-state.pt",
+      "checkpoint_sha256": "2b9198c543ea2a78c4426b33aff7c65f221579b27082f19080b21b0cadbdb82f",
+      "checkpoint_state_sha256": "2ce6d77bf07f1e725c174d8912f4dbf16d7c76efabcae73424fa8d25d0d804a4",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9960644490238142,
+          "center_only_covariance_error": 0.1936960877797875,
+          "center_output_covariance": [
+            [
+              0.02709776659521777,
+              -0.00429312910216236
+            ],
+            [
+              -0.00429312910216236,
+              0.02868589816541571
+            ]
+          ],
+          "center_output_trace_over_target": 0.8608590017539781,
+          "center_to_conditional_mean_rms": 0.0004830453080320663,
+          "centers": 141,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              8.467216959506777e-05,
+              4.6045429735005234e-05
+            ],
+            [
+              4.6045429735005234e-05,
+              0.00013595753857424767
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.0034047793587405665,
+          "conditional_mean_covariance": [
+            [
+              0.0271273945476781,
+              -0.004305858228480197
+            ],
+            [
+              -0.004305858228480197,
+              0.028712666992812007
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.8617293224082027,
+          "finite_quadrature_total_covariance_error": 0.19003292244529693,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9915869512312395,
+          "center_only_covariance_error": 0.3949929635118393,
+          "center_output_covariance": [
+            [
+              0.03605523098043655,
+              -0.005035700708688598
+            ],
+            [
+              -0.005035700708688598,
+              0.048632335349066406
+            ]
+          ],
+          "center_output_trace_over_target": 1.3069068539010384,
+          "center_to_conditional_mean_rms": 0.0005255361851742921,
+          "centers": 77,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.0001462327516981973,
+              -0.00014640511236202992
+            ],
+            [
+              -0.00014640511236202992,
+              0.0005729119072478435
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.011097911115618921,
+          "conditional_mean_covariance": [
+            [
+              0.03610256788328237,
+              -0.005020902940738048
+            ],
+            [
+              -0.005020902940738048,
+              0.048657960607460415
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.3080328131502243,
+          "finite_quadrature_total_covariance_error": 0.4091652290187946,
+          "quadrature_decomposition_max_abs_error": 2.0816681711721685e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9911712209395752,
+          "center_only_covariance_error": 0.9947376923059453,
+          "center_output_covariance": [
+            [
+              0.07704687634399655,
+              -0.003982439241663971
+            ],
+            [
+              -0.003982439241663971,
+              0.02515994075238903
+            ]
+          ],
+          "center_output_trace_over_target": 1.5772656550190904,
+          "center_to_conditional_mean_rms": 0.0006983017692030673,
+          "centers": 32,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.0007421594081908952,
+              -9.559665793780951e-05
+            ],
+            [
+              -9.559665793780951e-05,
+              0.0001687459369179017
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.014057180887048928,
+          "conditional_mean_covariance": [
+            [
+              0.07703532381125591,
+              -0.003979026783041434
+            ],
+            [
+              -0.003979026783041434,
+              0.02522832520437852
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.5781426907872182,
+          "finite_quadrature_total_covariance_error": 1.0099154841508189,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9681877613780817,
+          "center_only_covariance_error": 0.49088349191717273,
+          "center_output_covariance": [
+            [
+              0.011601812237859437,
+              -0.004131502291451107
+            ],
+            [
+              -0.004131502291451107,
+              0.03866186608150536
+            ]
+          ],
+          "center_output_trace_over_target": 0.7756740280180917,
+          "center_to_conditional_mean_rms": 0.0005460636884188906,
+          "centers": 6,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.0009526501761362305,
+              -0.0002988410149491898
+            ],
+            [
+              -0.0002988410149491898,
+              0.0006993077673964371
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.02549317747966721,
+          "conditional_mean_covariance": [
+            [
+              0.01157027269662354,
+              -0.004145610417587563
+            ],
+            [
+              -0.004145610417587563,
+              0.03870614708785701
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.775870655561074,
+          "finite_quadrature_total_covariance_error": 0.4799759256726973,
+          "quadrature_decomposition_max_abs_error": 1.214306433183765e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/44c605460e35465d89b83bc8c8fc312f/request.json",
+      "request_sha256": "443415e6609618c3b1badf07c4de4b3c049e7837175ff21a92c3410a15bc6c82",
+      "source": "round4-local-v2",
+      "source_commit": "0704638faaeea031ea705ec3177a2d56b838c105",
+      "source_digest": "a4f22e27e034a2c0c81c189c03bf7637f90ab25ff98ab13697787aed4341923e",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_centers": 20000,
+      "average_between_fraction": 0.44624583491826086,
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "center_counts": [
+        138,
+        104,
+        122,
+        107,
+        119,
+        111,
+        82,
+        96,
+        92,
+        127,
+        143,
+        135,
+        184,
+        142,
+        159,
+        137,
+        124,
+        184,
+        190,
+        161,
+        150,
+        201,
+        322,
+        320,
+        305,
+        257,
+        245,
+        415,
+        303,
+        216,
+        188,
+        147,
+        230,
+        232,
+        247,
+        230,
+        330,
+        451,
+        207,
+        128,
+        172,
+        116,
+        184,
+        164,
+        159,
+        122,
+        165,
+        231,
+        120,
+        130,
+        151,
+        146,
+        249,
+        184,
+        146,
+        126,
+        166,
+        287,
+        154,
+        134,
+        172,
+        161,
+        235,
+        206,
+        148,
+        140,
+        215,
+        331,
+        165,
+        125,
+        171,
+        144,
+        254,
+        256,
+        221,
+        281,
+        329,
+        445,
+        228,
+        161,
+        159,
+        143,
+        226,
+        217,
+        187,
+        229,
+        227,
+        329,
+        257,
+        197,
+        205,
+        214,
+        282,
+        233,
+        235,
+        223,
+        220,
+        230,
+        225,
+        287
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/3edfe9ab274847f3bde1c8b3f56717c9/provenance/provenance-state.pt",
+      "checkpoint_sha256": "2954f8d2e266b1781666bb3691f58535c1d3818ef4fc9ee39a6be5d93ce38e6e",
+      "checkpoint_state_sha256": "483074f6b1bb689a6ea814791a7d2b7f0e104f5325d328546e3e0600b36f19ad",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5564563156325243,
+          "center_only_covariance_error": 2.268523821829592,
+          "center_output_covariance": [
+            [
+              0.0016179946161491456,
+              0.0015221835897261185
+            ],
+            [
+              0.0015221835897261185,
+              0.0026852848906093684
+            ]
+          ],
+          "center_output_trace_over_target": 2.3907108781550432,
+          "center_to_conditional_mean_rms": 0.0015005627218777219,
+          "centers": 138,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.0017027007833070682,
+              0.0007709322044186248
+            ],
+            [
+              0.0007709322044186248,
+              0.0017680641504381441
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.9282027740917043,
+          "conditional_mean_covariance": [
+            [
+              0.0016394798880833587,
+              0.001491893468569363
+            ],
+            [
+              0.001491893468569363,
+              0.002714835448888768
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.41906411764965,
+          "finite_quadrature_total_covariance_error": 4.234060684619754,
+          "quadrature_decomposition_max_abs_error": 3.903127820947816e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.399821984960663,
+          "center_only_covariance_error": 1.0717887302461808,
+          "center_output_covariance": [
+            [
+              0.0012024819983910168,
+              0.0003418313774124963
+            ],
+            [
+              0.0003418313774124963,
+              0.0021392544134180014
+            ]
+          ],
+          "center_output_trace_over_target": 1.8565202606735869,
+          "center_to_conditional_mean_rms": 0.00038363693696301127,
+          "centers": 104,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.001963250559382244,
+              0.00019879616022477924
+            ],
+            [
+              0.00019879616022477924,
+              0.0030805189685412992
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.8020942303133576,
+          "conditional_mean_covariance": [
+            [
+              0.0012034152294447319,
+              0.0003346186468363191
+            ],
+            [
+              0.0003346186468363191,
+              0.002156604454392446
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.866677634197045,
+          "finite_quadrature_total_covariance_error": 3.890275716472209,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.494312068637823,
+          "center_only_covariance_error": 2.66288103551828,
+          "center_output_covariance": [
+            [
+              0.001237233665185345,
+              0.0007859141767431549
+            ],
+            [
+              0.0007859141767431549,
+              0.0040840644039068785
+            ]
+          ],
+          "center_output_trace_over_target": 2.956276755833352,
+          "center_to_conditional_mean_rms": 0.0005394350503974433,
+          "centers": 122,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.001775570622389076,
+              7.182983027720581e-05
+            ],
+            [
+              7.182983027720581e-05,
+              0.0037291731672103885
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.058191046754697,
+          "conditional_mean_covariance": [
+            [
+              0.0012416279028900925,
+              0.0007775788276940248
+            ],
+            [
+              0.0007775788276940248,
+              0.004139282182561957
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.98939454326881,
+          "finite_quadrature_total_covariance_error": 5.799366283305771,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3873336888817804,
+          "center_only_covariance_error": 1.8594033138569381,
+          "center_output_covariance": [
+            [
+              0.0008561032331262925,
+              0.00032177283266657903
+            ],
+            [
+              0.00032177283266657903,
+              0.0032220581402524423
+            ]
+          ],
+          "center_output_trace_over_target": 2.265645246351267,
+          "center_to_conditional_mean_rms": 0.0006935981061115264,
+          "centers": 107,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.0017904241132388565,
+              -0.00024238670373200098
+            ],
+            [
+              -0.00024238670373200098,
+              0.004752205345844754
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.634794206372843,
+          "conditional_mean_covariance": [
+            [
+              0.0008516998402767722,
+              0.000318539403381609
+            ],
+            [
+              0.000318539403381609,
+              0.0032846150792561033
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.297952772547426,
+          "finite_quadrature_total_covariance_error": 5.772476320251958,
+          "quadrature_decomposition_max_abs_error": 3.943785402416022e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.40732847440305736,
+          "center_only_covariance_error": 1.1995560277243098,
+          "center_output_covariance": [
+            [
+              0.000869909017764554,
+              -0.0003998036311996944
+            ],
+            [
+              -0.0003998036311996944,
+              0.0023179149050148373
+            ]
+          ],
+          "center_output_trace_over_target": 1.7710133208549794,
+          "center_to_conditional_mean_rms": 0.004738834615161651,
+          "centers": 119,
+          "component": 4,
+          "conditional_jitter_covariance": [
+            [
+              0.0017862751342108325,
+              -0.00027063829430617645
+            ],
+            [
+              -0.00027063829430617645,
+              0.0033725865980198896
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.8660343449156915,
+          "conditional_mean_covariance": [
+            [
+              0.0008649346012393588,
+              -0.00041962244254622116
+            ],
+            [
+              -0.00041962244254622116,
+              0.002680623415790999
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.9697544877416602,
+          "finite_quadrature_total_covariance_error": 4.3443755335232614,
+          "quadrature_decomposition_max_abs_error": 3.0357660829594124e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3970811907475149,
+          "center_only_covariance_error": 2.6251603150750484,
+          "center_output_covariance": [
+            [
+              0.0012072617434795584,
+              0.00020691245263540118
+            ],
+            [
+              0.00020691245263540118,
+              0.004214232976226152
+            ]
+          ],
+          "center_output_trace_over_target": 3.0119415626859283,
+          "center_to_conditional_mean_rms": 0.0003409667226063733,
+          "centers": 111,
+          "component": 5,
+          "conditional_jitter_covariance": [
+            [
+              0.001814289649046541,
+              -0.00018576958949133987
+            ],
+            [
+              -0.00018576958949133987,
+              0.006467117758872902
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.600781972319558,
+          "conditional_mean_covariance": [
+            [
+              0.0012083810984216486,
+              0.00020807835129162488
+            ],
+            [
+              0.00020807835129162488,
+              0.004245738202780744
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.0300663304954276,
+          "finite_quadrature_total_covariance_error": 7.888062257945422,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.8774919018168506,
+          "center_only_covariance_error": 34.44949470930004,
+          "center_output_covariance": [
+            [
+              0.0445863632337978,
+              0.0018397979530787052
+            ],
+            [
+              0.0018397979530787052,
+              0.003601025320096062
+            ]
+          ],
+          "center_output_trace_over_target": 26.770771878690944,
+          "center_to_conditional_mean_rms": 0.0008920522352258165,
+          "centers": 82,
+          "component": 6,
+          "conditional_jitter_covariance": [
+            [
+              0.0017952346828244217,
+              -0.00020016010001582438
+            ],
+            [
+              -0.00020016010001582438,
+              0.004940646118126172
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.7421560648098446,
+          "conditional_mean_covariance": [
+            [
+              0.044593727337948696,
+              0.0018723152024871436
+            ],
+            [
+              0.0018723152024871436,
+              0.0036535391048074716
+            ]
+          ],
+          "conditional_mean_trace_over_target": 26.804037373074767,
+          "finite_quadrature_total_covariance_error": 36.29473342322386,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9566594504191613,
+          "center_only_covariance_error": 84.25412952109978,
+          "center_output_covariance": [
+            [
+              0.10811240917321838,
+              0.001280489847464724
+            ],
+            [
+              0.001280489847464724,
+              0.00238597622039445
+            ]
+          ],
+          "center_output_trace_over_target": 61.387992939846676,
+          "center_to_conditional_mean_rms": 0.0010923275182033929,
+          "centers": 96,
+          "component": 7,
+          "conditional_jitter_covariance": [
+            [
+              0.0018551670780244515,
+              -0.00023342053895085419
+            ],
+            [
+              -0.00023342053895085419,
+              0.0031577318138966953
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.784943876684088,
+          "conditional_mean_covariance": [
+            [
+              0.10817103543577533,
+              0.0012941949682719347
+            ],
+            [
+              0.0012941949682719347,
+              0.0024790865708065046
+            ]
+          ],
+          "conditional_mean_trace_over_target": 61.47229105961084,
+          "finite_quadrature_total_covariance_error": 85.82647013828276,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.003088908219848941
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9899977845102607,
+          "center_only_covariance_error": 417.2642659185506,
+          "center_output_covariance": [
+            [
+              0.5318225178046536,
+              -0.009273403604638747
+            ],
+            [
+              -0.009273403604638747,
+              0.00347213622509971
+            ]
+          ],
+          "center_output_trace_over_target": 297.38592401383283,
+          "center_to_conditional_mean_rms": 0.00018962516229183095,
+          "centers": 92,
+          "component": 8,
+          "conditional_jitter_covariance": [
+            [
+              0.0019104973231950269,
+              -0.00025294872990789407
+            ],
+            [
+              -0.00025294872990789407,
+              0.0034971582660620615
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.0042531567490687,
+          "conditional_mean_covariance": [
+            [
+              0.5317768526957256,
+              -0.009273169875309803
+            ],
+            [
+              -0.009273169875309803,
+              0.0034612711230320578
+            ]
+          ],
+          "conditional_mean_trace_over_target": 297.35451834051804,
+          "finite_quadrature_total_covariance_error": 418.75813502662726,
+          "quadrature_decomposition_max_abs_error": 4.440892098500626e-16,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9741055012041873,
+          "center_only_covariance_error": 103.21996745546275,
+          "center_output_covariance": [
+            [
+              0.10665457912432921,
+              -0.05200826632218432
+            ],
+            [
+              -0.05200826632218432,
+              0.026713074004329887
+            ]
+          ],
+          "center_output_trace_over_target": 74.09314189978464,
+          "center_to_conditional_mean_rms": 0.0012680813987286656,
+          "centers": 127,
+          "component": 9,
+          "conditional_jitter_covariance": [
+            [
+              0.0015542607782938478,
+              -0.0010776647387741869
+            ],
+            [
+              -0.0010776647387741869,
+              0.0019930337337756877
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.9707192072244417,
+          "conditional_mean_covariance": [
+            [
+              0.10684624815229415,
+              -0.051928578272773696
+            ],
+            [
+              -0.051928578272773696,
+              0.026596732375952947
+            ]
+          ],
+          "conditional_mean_trace_over_target": 74.13499045583016,
+          "finite_quadrature_total_covariance_error": 105.24048528748969,
+          "quadrature_decomposition_max_abs_error": 5.551115123125783e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.474197281270336,
+          "center_only_covariance_error": 1.7947482834452269,
+          "center_output_covariance": [
+            [
+              0.0023026944728939186,
+              0.00041318380315749707
+            ],
+            [
+              0.00041318380315749707,
+              0.0026056444235102562
+            ]
+          ],
+          "center_output_trace_over_target": 2.7268549892879355,
+          "center_to_conditional_mean_rms": 0.00104933084410148,
+          "centers": 143,
+          "component": 10,
+          "conditional_jitter_covariance": [
+            [
+              0.0029964470572484926,
+              -0.00017652225922462107
+            ],
+            [
+              -0.00017652225922462107,
+              0.0024236543969879606
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.0111675263008224,
+          "conditional_mean_covariance": [
+            [
+              0.002320919440032164,
+              0.00040539923134809923
+            ],
+            [
+              0.00040539923134809923,
+              0.0025672206974283285
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.715633456348685,
+          "finite_quadrature_total_covariance_error": 4.737110950711816,
+          "quadrature_decomposition_max_abs_error": 3.198396408832238e-18,
+          "weighted_assignment_migration_fraction": 1.7724378993215965e-06
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4307141427268307,
+          "center_only_covariance_error": 1.137081942179762,
+          "center_output_covariance": [
+            [
+              0.0014339315899196696,
+              0.000797311445524504
+            ],
+            [
+              0.000797311445524504,
+              0.0016335485804232237
+            ]
+          ],
+          "center_output_trace_over_target": 1.7041556794640182,
+          "center_to_conditional_mean_rms": 0.0014488172430809202,
+          "centers": 135,
+          "component": 11,
+          "conditional_jitter_covariance": [
+            [
+              0.001988427662385204,
+              0.0006379109401140053
+            ],
+            [
+              0.0006379109401140053,
+              0.002164495151017729
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.307179380411506,
+          "conditional_mean_covariance": [
+            [
+              0.0014660952468311616,
+              0.0007616329099962621
+            ],
+            [
+              0.0007616329099962621,
+              0.001675951172437658
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7455813740233543,
+          "finite_quadrature_total_covariance_error": 3.432709281411948,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.43989278402452764,
+          "center_only_covariance_error": 1.7091791344404212,
+          "center_output_covariance": [
+            [
+              0.0011186222833890586,
+              0.0002585435603986204
+            ],
+            [
+              0.0002585435603986204,
+              0.003033309561384039
+            ]
+          ],
+          "center_output_trace_over_target": 2.3066288422743626,
+          "center_to_conditional_mean_rms": 0.0011940978999320719,
+          "centers": 184,
+          "component": 12,
+          "conditional_jitter_covariance": [
+            [
+              0.0020968803399405243,
+              -4.28831092963095e-06
+            ],
+            [
+              -4.28831092963095e-06,
+              0.003254462890286163
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.9729685123058913,
+          "conditional_mean_covariance": [
+            [
+              0.0011300963493680288,
+              0.0002415446666915802
+            ],
+            [
+              0.0002415446666915802,
+              0.0030727012662911685
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.3348876043631726,
+          "finite_quadrature_total_covariance_error": 4.646883589527553,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.29122702930010674,
+          "center_only_covariance_error": 0.8212094642703615,
+          "center_output_covariance": [
+            [
+              0.0007052486783592461,
+              6.29008152442393e-05
+            ],
+            [
+              6.29008152442393e-05,
+              0.001923065251522714
+            ]
+          ],
+          "center_output_trace_over_target": 1.4601744305724562,
+          "center_to_conditional_mean_rms": 0.0008920613216764719,
+          "centers": 142,
+          "component": 13,
+          "conditional_jitter_covariance": [
+            [
+              0.002004002198238024,
+              -0.00034385595619626426
+            ],
+            [
+              -0.00034385595619626426,
+              0.004526671240710998
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.6281519728506404,
+          "conditional_mean_covariance": [
+            [
+              0.000707891070901353,
+              4.9797555479915196e-05
+            ],
+            [
+              4.9797555479915196e-05,
+              0.0019754909196338607
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.4907677981275662,
+          "finite_quadrature_total_covariance_error": 4.637482834270328,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.371813338976316,
+          "center_only_covariance_error": 0.7237413765788338,
+          "center_output_covariance": [
+            [
+              0.0007195111237564735,
+              -2.5113223554359803e-05
+            ],
+            [
+              -2.5113223554359803e-05,
+              0.0018026189262119203
+            ]
+          ],
+          "center_output_trace_over_target": 1.4011833851626987,
+          "center_to_conditional_mean_rms": 0.0035130089610713854,
+          "centers": 159,
+          "component": 14,
+          "conditional_jitter_covariance": [
+            [
+              0.0019076720871743901,
+              -0.00020308821530863635
+            ],
+            [
+              -0.00020308821530863635,
+              0.002835549739715146
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.6351232824262834,
+          "conditional_mean_covariance": [
+            [
+              0.0007202448466155276,
+              -8.962307610006352e-06
+            ],
+            [
+              -8.962307610006352e-06,
+              0.002087190036015081
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.559686072697756,
+          "finite_quadrature_total_covariance_error": 3.4478535030615447,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3945369620039498,
+          "center_only_covariance_error": 2.6845400184203205,
+          "center_output_covariance": [
+            [
+              0.0007990912594390044,
+              0.0006651206668414378
+            ],
+            [
+              0.0006651206668414378,
+              0.004183289387591744
+            ]
+          ],
+          "center_output_trace_over_target": 2.7679892958981815,
+          "center_to_conditional_mean_rms": 0.0012122103767117198,
+          "centers": 137,
+          "component": 15,
+          "conditional_jitter_covariance": [
+            [
+              0.0020058281258841784,
+              9.723951571387754e-05
+            ],
+            [
+              9.723951571387754e-05,
+              0.005856140520958434
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.367760434385205,
+          "conditional_mean_covariance": [
+            [
+              0.0007994825161149525,
+              0.0006751493362724761
+            ],
+            [
+              0.0006751493362724761,
+              0.004323600200151242
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.8461571134828416,
+          "finite_quadrature_total_covariance_error": 7.492258104652468,
+          "quadrature_decomposition_max_abs_error": 3.0357660829594124e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3383276943659664,
+          "center_only_covariance_error": 1.3136490227767987,
+          "center_output_covariance": [
+            [
+              0.0005673700883091006,
+              -7.571312137210477e-05
+            ],
+            [
+              -7.571312137210477e-05,
+              0.0025350791220017494
+            ]
+          ],
+          "center_output_trace_over_target": 1.7235829242243768,
+          "center_to_conditional_mean_rms": 0.0009350165517256513,
+          "centers": 124,
+          "component": 16,
+          "conditional_jitter_covariance": [
+            [
+              0.001790143495278605,
+              -0.0003264010538547636
+            ],
+            [
+              -0.0003264010538547636,
+              0.004394558517269456
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.435945621548438,
+          "conditional_mean_covariance": [
+            [
+              0.0005706824676961426,
+              -6.573349472805975e-05
+            ],
+            [
+              -6.573349472805975e-05,
+              0.0025916925545452457
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7568750425354476,
+          "finite_quadrature_total_covariance_error": 4.936885933153968,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5290616335306578,
+          "center_only_covariance_error": 2.327470492964386,
+          "center_output_covariance": [
+            [
+              0.0017417599971699495,
+              0.0006239398781690437
+            ],
+            [
+              0.0006239398781690437,
+              0.00359973523959896
+            ]
+          ],
+          "center_output_trace_over_target": 2.9674974047353673,
+          "center_to_conditional_mean_rms": 0.0009098492089663316,
+          "centers": 184,
+          "component": 17,
+          "conditional_jitter_covariance": [
+            [
+              0.0019687002301532314,
+              -0.00013226813926958653
+            ],
+            [
+              -0.00013226813926958653,
+              0.002857830836908801
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.6814061944282606,
+          "conditional_mean_covariance": [
+            [
+              0.001741370181542244,
+              0.0006219163722041863
+            ],
+            [
+              0.0006219163722041863,
+              0.003680851901934028
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.012345653676515,
+          "finite_quadrature_total_covariance_error": 4.979634523090675,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.001991350324976613
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5223671342133767,
+          "center_only_covariance_error": 2.03199007608637,
+          "center_output_covariance": [
+            [
+              0.0013154276282209753,
+              -0.0015202084872523102
+            ],
+            [
+              -0.0015202084872523102,
+              0.0022763376967036004
+            ]
+          ],
+          "center_output_trace_over_target": 1.9954252147905238,
+          "center_to_conditional_mean_rms": 0.0008921346405286706,
+          "centers": 190,
+          "component": 18,
+          "conditional_jitter_covariance": [
+            [
+              0.0015283811026432909,
+              -0.001112234872462148
+            ],
+            [
+              -0.001112234872462148,
+              0.0017654782507249736
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.8299218944162687,
+          "conditional_mean_covariance": [
+            [
+              0.0013117440668783064,
+              -0.0015122761201624196
+            ],
+            [
+              -0.0015122761201624196,
+              0.0022906124587498216
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.00130921528246,
+          "finite_quadrature_total_covariance_error": 4.120193514202106,
+          "quadrature_decomposition_max_abs_error": 3.903127820947816e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.6114500699055665,
+          "center_only_covariance_error": 3.4924900678324566,
+          "center_output_covariance": [
+            [
+              0.001494931124929189,
+              -0.0022867485403689474
+            ],
+            [
+              -0.0022867485403689474,
+              0.003891245080032297
+            ]
+          ],
+          "center_output_trace_over_target": 2.9923201652687528,
+          "center_to_conditional_mean_rms": 0.001805183715433802,
+          "centers": 161,
+          "component": 19,
+          "conditional_jitter_covariance": [
+            [
+              0.0014780879910005402,
+              -0.0011066452647107213
+            ],
+            [
+              -0.0011066452647107213,
+              0.0019411390118950352
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.8995705897945145,
+          "conditional_mean_covariance": [
+            [
+              0.0014652472260764408,
+              -0.0022612651758440604
+            ],
+            [
+              -0.0022612651758440604,
+              0.003915493903989851
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.989300679163999,
+          "finite_quadrature_total_covariance_error": 5.634389125623174,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5540167990403522,
+          "center_only_covariance_error": 2.940051767677047,
+          "center_output_covariance": [
+            [
+              0.0030135622431776256,
+              2.360580703328498e-05
+            ],
+            [
+              2.360580703328498e-05,
+              0.003987857615981883
+            ]
+          ],
+          "center_output_trace_over_target": 3.889677766348885,
+          "center_to_conditional_mean_rms": 0.0019328121141104122,
+          "centers": 150,
+          "component": 20,
+          "conditional_jitter_covariance": [
+            [
+              0.0034954538991263375,
+              -5.8252558277996746e-05
+            ],
+            [
+              -5.8252558277996746e-05,
+              0.002138765809516057
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.13012211412527,
+          "conditional_mean_covariance": [
+            [
+              0.0030896661559783275,
+              1.6780391155376923e-05
+            ],
+            [
+              1.6780391155376923e-05,
+              0.003909369595492839
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.8883532620548324,
+          "finite_quadrature_total_covariance_error": 6.026040734177926,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 8.180830537421764e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4550094329773565,
+          "center_only_covariance_error": 2.259678585751336,
+          "center_output_covariance": [
+            [
+              0.0036281710495411567,
+              7.629388179618076e-05
+            ],
+            [
+              7.629388179618076e-05,
+              0.0018041014648882722
+            ]
+          ],
+          "center_output_trace_over_target": 3.0179292265241817,
+          "center_to_conditional_mean_rms": 0.0012145386964719231,
+          "centers": 201,
+          "component": 21,
+          "conditional_jitter_covariance": [
+            [
+              0.0036210262868410776,
+              -0.0005341606334274395
+            ],
+            [
+              -0.0005341606334274395,
+              0.0030012888370223177
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.6790640208998453,
+          "conditional_mean_covariance": [
+            [
+              0.003719371581720365,
+              5.529691709899054e-05
+            ],
+            [
+              5.529691709899054e-05,
+              0.0018095605353400414
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.071629006686054,
+          "finite_quadrature_total_covariance_error": 5.943774143028623,
+          "quadrature_decomposition_max_abs_error": 1.6805133673525319e-18,
+          "weighted_assignment_migration_fraction": 1.6851269495574425e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.43065602592021845,
+          "center_only_covariance_error": 1.2234991574898084,
+          "center_output_covariance": [
+            [
+              0.0012251141327004407,
+              0.0008377388885407479
+            ],
+            [
+              0.0008377388885407479,
+              0.0018569467551483947
+            ]
+          ],
+          "center_output_trace_over_target": 1.7122560782175769,
+          "center_to_conditional_mean_rms": 0.003395852681153855,
+          "centers": 322,
+          "component": 22,
+          "conditional_jitter_covariance": [
+            [
+              0.002115477773817244,
+              0.0004751012157472689
+            ],
+            [
+              0.0004751012157472689,
+              0.0021486687222320657
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.368970316276476,
+          "conditional_mean_covariance": [
+            [
+              0.0012914256713591457,
+              0.000778706696786398
+            ],
+            [
+              0.000778706696786398,
+              0.0019340065234723222
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.791906805687258,
+          "finite_quadrature_total_covariance_error": 3.4746041620156216,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3415878517964739,
+          "center_only_covariance_error": 0.6038871730750304,
+          "center_output_covariance": [
+            [
+              0.001211537871716595,
+              0.00030865458810045126
+            ],
+            [
+              0.00030865458810045126,
+              0.0014506268617350037
+            ]
+          ],
+          "center_output_trace_over_target": 1.4789804328786333,
+          "center_to_conditional_mean_rms": 0.0017243635033615688,
+          "centers": 320,
+          "component": 23,
+          "conditional_jitter_covariance": [
+            [
+              0.002225434334736458,
+              -2.1493523166725066e-05
+            ],
+            [
+              -2.1493523166725066e-05,
+              0.003115223894523147
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.967032400555543,
+          "conditional_mean_covariance": [
+            [
+              0.0012546797613863774,
+              0.0002779066221700411
+            ],
+            [
+              0.0002779066221700411,
+              0.0015160831668031335
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.539312764324957,
+          "finite_quadrature_total_covariance_error": 3.575563272235061,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.356507739050362,
+          "center_only_covariance_error": 0.1341297068088131,
+          "center_output_covariance": [
+            [
+              0.0010112983601979362,
+              7.962882372491336e-05
+            ],
+            [
+              7.962882372491336e-05,
+              0.0009638453618336124
+            ]
+          ],
+          "center_output_trace_over_target": 1.097302086644461,
+          "center_to_conditional_mean_rms": 0.0038525195457932405,
+          "centers": 305,
+          "component": 24,
+          "conditional_jitter_covariance": [
+            [
+              0.002060127967560427,
+              -8.499527676757623e-05
+            ],
+            [
+              -8.499527676757623e-05,
+              0.0019640017010494303
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.235627632075145,
+          "conditional_mean_covariance": [
+            [
+              0.0010452167858197236,
+              6.375991051943521e-05
+            ],
+            [
+              6.375991051943521e-05,
+              0.0011842325127381377
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.238582964919297,
+          "finite_quadrature_total_covariance_error": 2.474437823837614,
+          "quadrature_decomposition_max_abs_error": 1.3010426069826053e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.32624301226218944,
+          "center_only_covariance_error": 1.0921396964917744,
+          "center_output_covariance": [
+            [
+              0.0005849570405828872,
+              0.00011169041174540822
+            ],
+            [
+              0.00011169041174540822,
+              0.0022446502550210433
+            ]
+          ],
+          "center_output_trace_over_target": 1.5720040801167525,
+          "center_to_conditional_mean_rms": 0.0019557842590884793,
+          "centers": 257,
+          "component": 25,
+          "conditional_jitter_covariance": [
+            [
+              0.0018979725998906685,
+              -0.00035494113121531796
+            ],
+            [
+              -0.00035494113121531796,
+              0.004319505255691978
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.4541544235471053,
+          "conditional_mean_covariance": [
+            [
+              0.0005969051397615944,
+              0.00014446855137021758
+            ],
+            [
+              0.00014446855137021758,
+              0.002413688800182947
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.6725522175887246,
+          "finite_quadrature_total_covariance_error": 4.756956361753574,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3431041265629118,
+          "center_only_covariance_error": 1.1086789034526805,
+          "center_output_covariance": [
+            [
+              0.0007758113435095355,
+              0.00040763820269182463
+            ],
+            [
+              0.00040763820269182463,
+              0.0021819878706754057
+            ]
+          ],
+          "center_output_trace_over_target": 1.6432218138851171,
+          "center_to_conditional_mean_rms": 0.0013810080326978362,
+          "centers": 245,
+          "component": 26,
+          "conditional_jitter_covariance": [
+            [
+              0.002060805676038323,
+              -6.953571502081765e-05
+            ],
+            [
+              -6.953571502081765e-05,
+              0.003809789069316293
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.2614415812211637,
+          "conditional_mean_covariance": [
+            [
+              0.0007913231671826805,
+              0.00043745893178739746
+            ],
+            [
+              0.00043745893178739746,
+              0.002274954707224793
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7034877372662,
+          "finite_quadrature_total_covariance_error": 4.371845340258862,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3901067909670765,
+          "center_only_covariance_error": 0.850255438311171,
+          "center_output_covariance": [
+            [
+              0.0006193495862174418,
+              -0.0007036589637223906
+            ],
+            [
+              -0.0007036589637223906,
+              0.0012195575255933295
+            ]
+          ],
+          "center_output_trace_over_target": 1.0216150796661208,
+          "center_to_conditional_mean_rms": 0.002136180237798999,
+          "centers": 415,
+          "component": 27,
+          "conditional_jitter_covariance": [
+            [
+              0.0014378706230098069,
+              -0.0008716207569043231
+            ],
+            [
+              -0.0008716207569043231,
+              0.0015508138602449615
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.6603802969964316,
+          "conditional_mean_covariance": [
+            [
+              0.0006200220042902855,
+              -0.0006840806982217309
+            ],
+            [
+              -0.0006840806982217309,
+              0.0012916341606050916
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.0620312209629368,
+          "finite_quadrature_total_covariance_error": 2.4788281434445842,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5651164683879913,
+          "center_only_covariance_error": 1.752125917174345,
+          "center_output_covariance": [
+            [
+              0.0017235517535324867,
+              -2.589139910261387e-05
+            ],
+            [
+              -2.589139910261387e-05,
+              0.002972132426214856
+            ]
+          ],
+          "center_output_trace_over_target": 2.608713478004737,
+          "center_to_conditional_mean_rms": 0.0010125786656012218,
+          "centers": 303,
+          "component": 28,
+          "conditional_jitter_covariance": [
+            [
+              0.0018858378420492212,
+              -0.000920098673238739
+            ],
+            [
+              -0.000920098673238739,
+              0.0017507615147137681
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.0203330106841686,
+          "conditional_mean_covariance": [
+            [
+              0.0017240940693877384,
+              1.1896188174265207e-06
+            ],
+            [
+              1.1896188174265207e-06,
+              0.00300154402920425
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.6253545443153965,
+          "finite_quadrature_total_covariance_error": 3.8387865955164147,
+          "quadrature_decomposition_max_abs_error": 6.071532165918825e-18,
+          "weighted_assignment_migration_fraction": 0.000655611395791179
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5665425195198709,
+          "center_only_covariance_error": 3.0385306536970846,
+          "center_output_covariance": [
+            [
+              0.000717960805374888,
+              -0.001270833213712858
+            ],
+            [
+              -0.001270833213712858,
+              0.004319612555204381
+            ]
+          ],
+          "center_output_trace_over_target": 2.798651915062963,
+          "center_to_conditional_mean_rms": 0.0015023978148342811,
+          "centers": 216,
+          "component": 29,
+          "conditional_jitter_covariance": [
+            [
+              0.0019233581446861595,
+              -0.0007396950556196421
+            ],
+            [
+              -0.0007396950556196421,
+              0.0019557108914642933
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.1550383904355805,
+          "conditional_mean_covariance": [
+            [
+              0.0007200413754039715,
+              -0.0012294506718277581
+            ],
+            [
+              -0.0012294506718277581,
+              0.004350023496236746
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.8167027548516175,
+          "finite_quadrature_total_covariance_error": 4.970063314343685,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5441786769136392,
+          "center_only_covariance_error": 3.1128940195928676,
+          "center_output_covariance": [
+            [
+              0.003935956735729332,
+              0.0005183994904878603
+            ],
+            [
+              0.0005183994904878603,
+              0.003337922639017114
+            ]
+          ],
+          "center_output_trace_over_target": 4.041044166497314,
+          "center_to_conditional_mean_rms": 0.002513798958503802,
+          "centers": 188,
+          "component": 30,
+          "conditional_jitter_covariance": [
+            [
+              0.004164602233679148,
+              -0.0001953844515121473
+            ],
+            [
+              -0.0001953844515121473,
+              0.002075535225908194
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.466743092654847,
+          "conditional_mean_covariance": [
+            [
+              0.004137281381609461,
+              0.000504699503930498
+            ],
+            [
+              0.000504699503930498,
+              0.0033124573088161957
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.138743787997355,
+          "finite_quadrature_total_covariance_error": 6.809638802162497,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 0.0005550705558488028
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3756293127667175,
+          "center_only_covariance_error": 1.369811487182364,
+          "center_output_covariance": [
+            [
+              0.002513407785691611,
+              0.0003479961456612164
+            ],
+            [
+              0.0003479961456612164,
+              0.0013409691612821404
+            ]
+          ],
+          "center_output_trace_over_target": 2.1413205628795495,
+          "center_to_conditional_mean_rms": 0.0006408936480986788,
+          "centers": 147,
+          "component": 31,
+          "conditional_jitter_covariance": [
+            [
+              0.0037259011059905325,
+              -0.00024202158488766261
+            ],
+            [
+              -0.00024202158488766261,
+              0.002740542944551087
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.5924689786780197,
+          "conditional_mean_covariance": [
+            [
+              0.0025487505041038735,
+              0.0003448915771933817
+            ],
+            [
+              0.0003448915771933817,
+              0.0013415441308232152
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.161274834307506,
+          "finite_quadrature_total_covariance_error": 4.908654750300139,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 4.31052074154742e-06
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.37671791541273636,
+          "center_only_covariance_error": 1.0658094484817637,
+          "center_output_covariance": [
+            [
+              0.0021894824612930805,
+              -7.319651903843293e-05
+            ],
+            [
+              -7.319651903843293e-05,
+              0.0013083601962308974
+            ]
+          ],
+          "center_output_trace_over_target": 1.943245954227204,
+          "center_to_conditional_mean_rms": 0.0015192162888867213,
+          "centers": 230,
+          "component": 32,
+          "conditional_jitter_covariance": [
+            [
+              0.0032370041319819444,
+              -0.0003351813678008954
+            ],
+            [
+              -0.0003351813678008954,
+              0.0027817914974772643
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.3437754071380232,
+          "conditional_mean_covariance": [
+            [
+              0.0022992155194581708,
+              -9.823320670163422e-05
+            ],
+            [
+              -9.823320670163422e-05,
+              0.001338604656821438
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.0210112437606074,
+          "finite_quadrature_total_covariance_error": 4.461161739327363,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 1.2522556214802098e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2790619912150406,
+          "center_only_covariance_error": 0.3370600407767042,
+          "center_output_covariance": [
+            [
+              0.0007641940921578433,
+              0.00025167128341127754
+            ],
+            [
+              0.00025167128341127754,
+              0.0007027001450908407
+            ]
+          ],
+          "center_output_trace_over_target": 0.8149412569147745,
+          "center_to_conditional_mean_rms": 0.0037987940348824657,
+          "centers": 232,
+          "component": 33,
+          "conditional_jitter_covariance": [
+            [
+              0.0021657161956698825,
+              2.7356867216718992e-05
+            ],
+            [
+              2.7356867216718992e-05,
+              0.002149997650081194
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.3976188443806854,
+          "conditional_mean_covariance": [
+            [
+              0.0009216831500930589,
+              0.00021657642431695249
+            ],
+            [
+              0.00021657642431695249,
+              0.0007488511879970955
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.9280746482145213,
+          "finite_quadrature_total_covariance_error": 2.3437755643958478,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-19,
+          "weighted_assignment_migration_fraction": 5.462470250064403e-07
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.23975408431947298,
+          "center_only_covariance_error": 0.7031072212942024,
+          "center_output_covariance": [
+            [
+              0.00024671319489467616,
+              2.716867018312842e-05
+            ],
+            [
+              2.716867018312842e-05,
+              0.0002895879201178142
+            ]
+          ],
+          "center_output_trace_over_target": 0.29794506901384715,
+          "center_to_conditional_mean_rms": 0.006924559898196217,
+          "centers": 247,
+          "component": 34,
+          "conditional_jitter_covariance": [
+            [
+              0.001300910167910232,
+              -0.00014792224632518517
+            ],
+            [
+              -0.00014792224632518517,
+              0.0014043878753945093
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.5029433832086747,
+          "conditional_mean_covariance": [
+            [
+              0.0003707258464282567,
+              2.1958426249285212e-05
+            ],
+            [
+              2.1958426249285212e-05,
+              0.0004824273791345485
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.47397402234335506,
+          "finite_quadrature_total_covariance_error": 0.9941062002364143,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3307900136710359,
+          "center_only_covariance_error": 1.71658355062878,
+          "center_output_covariance": [
+            [
+              9.538035134407844e-05,
+              0.00021041396327470933
+            ],
+            [
+              0.00021041396327470933,
+              0.002909384649004157
+            ]
+          ],
+          "center_output_trace_over_target": 1.6693139177573726,
+          "center_to_conditional_mean_rms": 0.0020472548887639466,
+          "centers": 230,
+          "component": 35,
+          "conditional_jitter_covariance": [
+            [
+              0.0006803705069255837,
+              4.890512111502112e-05
+            ],
+            [
+              4.890512111502112e-05,
+              0.005629143463024795
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.5052855990741625,
+          "conditional_mean_covariance": [
+            [
+              0.0001257809951188567,
+              0.00022743916295521165
+            ],
+            [
+              0.00022743916295521165,
+              0.002993007210398908
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7326601439397,
+          "finite_quadrature_total_covariance_error": 6.075306890606923,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2536535930178785,
+          "center_only_covariance_error": 0.8126283506510737,
+          "center_output_covariance": [
+            [
+              0.0001359174741861845,
+              -0.0001562402077524885
+            ],
+            [
+              -0.0001562402077524885,
+              0.00023882912133012138
+            ]
+          ],
+          "center_output_trace_over_target": 0.20819255664088937,
+          "center_to_conditional_mean_rms": 0.006716593211458132,
+          "centers": 330,
+          "component": 36,
+          "conditional_jitter_covariance": [
+            [
+              0.0006742614992946302,
+              -0.00039856812426335516
+            ],
+            [
+              -0.00039856812426335516,
+              0.0010733654024228142
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.9709038509653909,
+          "conditional_mean_covariance": [
+            [
+              0.00016790759102115337,
+              -0.00018233673235445687
+            ],
+            [
+              -0.00018233673235445687,
+              0.0004260415976241019
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.32997177713775155,
+          "finite_quadrature_total_covariance_error": 0.8002831763846253,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.44766507678536405,
+          "center_only_covariance_error": 1.0308486842126552,
+          "center_output_covariance": [
+            [
+              0.00017843890168123787,
+              -0.00044944648512845595
+            ],
+            [
+              -0.00044944648512845595,
+              0.0017926570599928518
+            ]
+          ],
+          "center_output_trace_over_target": 1.0950533308516888,
+          "center_to_conditional_mean_rms": 0.002594735799568663,
+          "centers": 451,
+          "component": 37,
+          "conditional_jitter_covariance": [
+            [
+              0.0008438450124136367,
+              -0.00048950314572588
+            ],
+            [
+              -0.00048950314572588,
+              0.0016903762038380304
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.4079006998799053,
+          "conditional_mean_covariance": [
+            [
+              0.00022208951879756664,
+              -0.0004484065283820474
+            ],
+            [
+              -0.0004484065283820474,
+              0.001831885864040111
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.1410974545112822,
+          "finite_quadrature_total_covariance_error": 2.312491857668452,
+          "quadrature_decomposition_max_abs_error": 5.421010862427522e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4148314136474558,
+          "center_only_covariance_error": 1.3863509225139796,
+          "center_output_covariance": [
+            [
+              0.00040285156175612124,
+              -0.0003297775035905047
+            ],
+            [
+              -0.0003297775035905047,
+              0.0025275522943542603
+            ]
+          ],
+          "center_output_trace_over_target": 1.628002170248923,
+          "center_to_conditional_mean_rms": 0.0014466059453368098,
+          "centers": 207,
+          "component": 38,
+          "conditional_jitter_covariance": [
+            [
+              0.002114690927273168,
+              -0.00040510206142747174
+            ],
+            [
+              -0.00040510206142747174,
+              0.002066320116787389
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.322783953267126,
+          "conditional_mean_covariance": [
+            [
+              0.00044073734041951036,
+              -0.00029731038064630317
+            ],
+            [
+              -0.00029731038064630317,
+              0.002523219991422532
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.6466429904200526,
+          "finite_quadrature_total_covariance_error": 3.2716436196724508,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4919894116108431,
+          "center_only_covariance_error": 2.670929516736718,
+          "center_output_covariance": [
+            [
+              0.0004665630065780661,
+              -6.375901481236318e-05
+            ],
+            [
+              -6.375901481236318e-05,
+              0.004270587771295126
+            ]
+          ],
+          "center_output_trace_over_target": 2.6317504773592657,
+          "center_to_conditional_mean_rms": 0.0008042809792931955,
+          "centers": 128,
+          "component": 39,
+          "conditional_jitter_covariance": [
+            [
+              0.0029080195821213346,
+              -0.0002665865611810456
+            ],
+            [
+              -0.0002665865611810456,
+              0.0020065023005249316
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.7302899817036588,
+          "conditional_mean_covariance": [
+            [
+              0.0004890291038397345,
+              -6.298131813996051e-05
+            ],
+            [
+              -6.298131813996051e-05,
+              0.004270503048941979
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.6441845747442563,
+          "finite_quadrature_total_covariance_error": 4.672263185237946,
+          "quadrature_decomposition_max_abs_error": 3.0357660829594124e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.551753616551029,
+          "center_only_covariance_error": 6.335439907702891,
+          "center_output_covariance": [
+            [
+              0.008466701569620948,
+              -0.0006614162723260583
+            ],
+            [
+              -0.0006614162723260583,
+              0.003525512508391597
+            ]
+          ],
+          "center_output_trace_over_target": 6.662341268895297,
+          "center_to_conditional_mean_rms": 0.0009303823837209765,
+          "centers": 172,
+          "component": 40,
+          "conditional_jitter_covariance": [
+            [
+              0.00763155430442234,
+              -0.0002590888503706553
+            ],
+            [
+              -0.0002590888503706553,
+              0.002114835391089072
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.414661034962356,
+          "conditional_mean_covariance": [
+            [
+              0.008495707325988755,
+              -0.0006680566128094358
+            ],
+            [
+              -0.0006680566128094358,
+              0.0035012790667108278
+            ]
+          ],
+          "conditional_mean_trace_over_target": 6.664992554878083,
+          "finite_quadrature_total_covariance_error": 12.56662341985064,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0020884491488638106
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.47068589940064837,
+          "center_only_covariance_error": 5.136623827505611,
+          "center_output_covariance": [
+            [
+              0.007267612203266618,
+              0.00047056044279611945
+            ],
+            [
+              0.00047056044279611945,
+              0.00222446362774984
+            ]
+          ],
+          "center_output_trace_over_target": 5.273375552260418,
+          "center_to_conditional_mean_rms": 0.00045114945641952953,
+          "centers": 116,
+          "component": 41,
+          "conditional_jitter_covariance": [
+            [
+              0.008034549574535243,
+              -0.0004970772360971772
+            ],
+            [
+              -0.0004970772360971772,
+              0.0026903933408720993
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.9583017220208285,
+          "conditional_mean_covariance": [
+            [
+              0.00730943120611286,
+              0.00046273043172104515
+            ],
+            [
+              0.00046273043172104515,
+              0.0022275892443967445
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.298344785741081,
+          "finite_quadrature_total_covariance_error": 11.77922246239956,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.002667254461623824
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.39032201798435257,
+          "center_only_covariance_error": 3.1154941127766045,
+          "center_output_covariance": [
+            [
+              0.004785095302584773,
+              -0.0005368917308124201
+            ],
+            [
+              -0.0005368917308124201,
+              0.0011318191951179932
+            ]
+          ],
+          "center_output_trace_over_target": 3.2871747774121736,
+          "center_to_conditional_mean_rms": 0.0017220616066599955,
+          "centers": 184,
+          "component": 42,
+          "conditional_jitter_covariance": [
+            [
+              0.006953454287975274,
+              -0.0006605297841042067
+            ],
+            [
+              -0.0006605297841042067,
+              0.0025198689648363334
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.262957453078764,
+          "conditional_mean_covariance": [
+            [
+              0.004915926249889801,
+              -0.000567750347365019
+            ],
+            [
+              -0.000567750347365019,
+              0.0011489912280725522
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.369398656746586,
+          "finite_quadrature_total_covariance_error": 8.992838208126985,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.00011020740785510121
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.35065791469659824,
+          "center_only_covariance_error": 2.990936664637047,
+          "center_output_covariance": [
+            [
+              0.0046645434558817865,
+              -0.0003550992700117727
+            ],
+            [
+              -0.0003550992700117727,
+              0.0011608800815226337
+            ]
+          ],
+          "center_output_trace_over_target": 3.2363464652622,
+          "center_to_conditional_mean_rms": 0.0019708048084207557,
+          "centers": 164,
+          "component": 43,
+          "conditional_jitter_covariance": [
+            [
+              0.007332159223588415,
+              -0.000932406193333394
+            ],
+            [
+              -0.000932406193333394,
+              0.003830387877508386
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 6.201415162691109,
+          "conditional_mean_covariance": [
+            [
+              0.0047702128958767385,
+              -0.0004358853125666469
+            ],
+            [
+              -0.0004358853125666469,
+              0.0012577892585566288
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.3488901433226372,
+          "finite_quadrature_total_covariance_error": 9.51861132219135,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.00012210185625448556
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2817530618127113,
+          "center_only_covariance_error": 1.7527388752695943,
+          "center_output_covariance": [
+            [
+              0.003065283302358012,
+              0.00024341623316968502
+            ],
+            [
+              0.00024341623316968502,
+              0.00048788758171044696
+            ]
+          ],
+          "center_output_trace_over_target": 1.973983858391034,
+          "center_to_conditional_mean_rms": 0.004157483367790561,
+          "centers": 159,
+          "component": 44,
+          "conditional_jitter_covariance": [
+            [
+              0.00720855396781094,
+              0.00021695917016112138
+            ],
+            [
+              0.00021695917016112138,
+              0.0026141208388020267
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.457041652969001,
+          "conditional_mean_covariance": [
+            [
+              0.0032646350847654157,
+              0.0001209176114421467
+            ],
+            [
+              0.0001209176114421467,
+              0.000588592203524283
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.14068186359966,
+          "finite_quadrature_total_covariance_error": 7.745040672749219,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 5.673428753218825e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2836284542510395,
+          "center_only_covariance_error": 2.30859525657187,
+          "center_output_covariance": [
+            [
+              0.0031070202194159674,
+              0.0005901739636171342
+            ],
+            [
+              0.0005901739636171342,
+              0.0026511202849763796
+            ]
+          ],
+          "center_output_trace_over_target": 3.1989670018356207,
+          "center_to_conditional_mean_rms": 0.0017294934940051017,
+          "centers": 122,
+          "component": 45,
+          "conditional_jitter_covariance": [
+            [
+              0.007760637043595941,
+              0.0003010279358934492
+            ],
+            [
+              0.0003010279358934492,
+              0.007259458405266867
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 8.344497614929955,
+          "conditional_mean_covariance": [
+            [
+              0.003254982063982482,
+              0.0005792255177768391
+            ],
+            [
+              0.0005792255177768391,
+              0.00269182930805506
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.303784152327916,
+          "finite_quadrature_total_covariance_error": 10.709441388420446,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 2.568562745088091e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.31268361184960736,
+          "center_only_covariance_error": 2.026231233000733,
+          "center_output_covariance": [
+            [
+              0.003375141330506326,
+              0.00011293654811831985
+            ],
+            [
+              0.00011293654811831985,
+              0.0001934174792958495
+            ]
+          ],
+          "center_output_trace_over_target": 1.9825327061677265,
+          "center_to_conditional_mean_rms": 0.004238241014527048,
+          "centers": 165,
+          "component": 46,
+          "conditional_jitter_covariance": [
+            [
+              0.007174565216645509,
+              6.041091362734935e-07
+            ],
+            [
+              6.041091362734935e-07,
+              0.0011997197838676053
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.652380635757946,
+          "conditional_mean_covariance": [
+            [
+              0.003514133838024687,
+              0.00012848756598876935
+            ],
+            [
+              0.00012848756598876935,
+              0.00029561335520748313
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.116526254819428,
+          "finite_quadrature_total_covariance_error": 7.7062738460713724,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 3.41433124182271e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3392977269163736,
+          "center_only_covariance_error": 1.57866260550971,
+          "center_output_covariance": [
+            [
+              0.002747987866104649,
+              0.00046693231148530113
+            ],
+            [
+              0.00046693231148530113,
+              0.001331524713338361
+            ]
+          ],
+          "center_output_trace_over_target": 2.26639591639987,
+          "center_to_conditional_mean_rms": 0.0012161230499944792,
+          "centers": 231,
+          "component": 47,
+          "conditional_jitter_covariance": [
+            [
+              0.006291195566889253,
+              0.00011039606674713297
+            ],
+            [
+              0.00011039606674713297,
+              0.0018844516756085158
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.542026323853785,
+          "conditional_mean_covariance": [
+            [
+              0.002825347457434882,
+              0.00048489527648722515
+            ],
+            [
+              0.00048489527648722515,
+              0.0013731828616798257
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.3325168840199546,
+          "finite_quadrature_total_covariance_error": 6.748514528375198,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 1.6458351922271968e-06
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2899461543138354,
+          "center_only_covariance_error": 0.9312352040686,
+          "center_output_covariance": [
+            [
+              0.0017761200042671595,
+              0.00024290964248812152
+            ],
+            [
+              0.00024290964248812152,
+              0.0016206010270884818
+            ]
+          ],
+          "center_output_trace_over_target": 1.8870672720575503,
+          "center_to_conditional_mean_rms": 0.0002943339004671531,
+          "centers": 120,
+          "component": 48,
+          "conditional_jitter_covariance": [
+            [
+              0.006312095248581611,
+              6.972320973728654e-05
+            ],
+            [
+              6.972320973728654e-05,
+              0.002059512364608335
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.650893198330635,
+          "conditional_mean_covariance": [
+            [
+              0.0017925106979383714,
+              0.0002443138214215689
+            ],
+            [
+              0.0002443138214215689,
+              0.0016259841776484244
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.8991638523937613,
+          "finite_quadrature_total_covariance_error": 6.07883287159819,
+          "quadrature_decomposition_max_abs_error": 3.0357660829594124e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.380051472562766,
+          "center_only_covariance_error": 2.125292480002234,
+          "center_output_covariance": [
+            [
+              0.0017341577219637536,
+              0.0006238612281976616
+            ],
+            [
+              0.0006238612281976616,
+              0.0033172507611470255
+            ]
+          ],
+          "center_output_trace_over_target": 2.806338094379166,
+          "center_to_conditional_mean_rms": 0.0002504027613832726,
+          "centers": 130,
+          "component": 49,
+          "conditional_jitter_covariance": [
+            [
+              0.006267624267400859,
+              6.865498291268794e-05
+            ],
+            [
+              6.865498291268794e-05,
+              0.0019909247030198106
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.588082840157653,
+          "conditional_mean_covariance": [
+            [
+              0.0017461746475888155,
+              0.000632902899922685
+            ],
+            [
+              0.000632902899922685,
+              0.003316622598522655
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.812665185043791,
+          "finite_quadrature_total_covariance_error": 6.620999977635646,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5996467860222926,
+          "center_only_covariance_error": 7.857309262355532,
+          "center_output_covariance": [
+            [
+              0.01055702819430741,
+              0.0006551985204529545
+            ],
+            [
+              0.0006551985204529545,
+              0.0033285124603307384
+            ]
+          ],
+          "center_output_trace_over_target": 7.714189385088992,
+          "center_to_conditional_mean_rms": 0.002355790366542791,
+          "centers": 151,
+          "component": 50,
+          "conditional_jitter_covariance": [
+            [
+              0.0074100827202220896,
+              -4.822774520095522e-05
+            ],
+            [
+              -4.822774520095522e-05,
+              0.0019041495597303588
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.174573577749887,
+          "conditional_mean_covariance": [
+            [
+              0.010664139435668473,
+              0.0006764068350833106
+            ],
+            [
+              0.0006764068350833106,
+              0.0032866651437336906
+            ]
+          ],
+          "conditional_mean_trace_over_target": 7.750447121691827,
+          "finite_quadrature_total_covariance_error": 13.925600966128181,
+          "quadrature_decomposition_max_abs_error": 1.0408340855860843e-17,
+          "weighted_assignment_migration_fraction": 0.002049153935482479
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4930691200312789,
+          "center_only_covariance_error": 6.370760647815797,
+          "center_output_covariance": [
+            [
+              0.009003798312791118,
+              0.00018743441567637268
+            ],
+            [
+              0.00018743441567637268,
+              0.0008079952496452513
+            ]
+          ],
+          "center_output_trace_over_target": 5.450996517211493,
+          "center_to_conditional_mean_rms": 0.00040029126254756436,
+          "centers": 146,
+          "component": 51,
+          "conditional_jitter_covariance": [
+            [
+              0.007336614026198927,
+              2.6417288125867547e-05
+            ],
+            [
+              2.6417288125867547e-05,
+              0.0027470559571669633
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.602038975878016,
+          "conditional_mean_covariance": [
+            [
+              0.00900069783509063,
+              0.00018769857040654242
+            ],
+            [
+              0.00018769857040654242,
+              0.0008072394633647747
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.4488541482963795,
+          "finite_quadrature_total_covariance_error": 12.30897449057944,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0008191902892741837
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4416121587317367,
+          "center_only_covariance_error": 4.148043564575652,
+          "center_output_covariance": [
+            [
+              0.006170749595546613,
+              -0.0002129821671790339
+            ],
+            [
+              -0.0002129821671790339,
+              0.0009512322344690475
+            ]
+          ],
+          "center_output_trace_over_target": 3.956656640197292,
+          "center_to_conditional_mean_rms": 0.0010044954034262614,
+          "centers": 249,
+          "component": 52,
+          "conditional_jitter_covariance": [
+            [
+              0.0066661249361136595,
+              -0.00022227161440468998
+            ],
+            [
+              -0.00022227161440468998,
+              0.0024397622263260146
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.058826288254514,
+          "conditional_mean_covariance": [
+            [
+              0.0062263229811670385,
+              -0.00020962291394729035
+            ],
+            [
+              -0.00020962291394729035,
+              0.0009752494560821355
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.000873644975458,
+          "finite_quadrature_total_covariance_error": 9.63907819853274,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.00012122899570910444
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3530568908402933,
+          "center_only_covariance_error": 3.4020197025349885,
+          "center_output_covariance": [
+            [
+              0.005223757843014692,
+              -0.00011134898434284602
+            ],
+            [
+              -0.00011134898434284602,
+              0.0010725566301119254
+            ]
+          ],
+          "center_output_trace_over_target": 3.497952545157218,
+          "center_to_conditional_mean_rms": 0.0017724708954101988,
+          "centers": 184,
+          "component": 53,
+          "conditional_jitter_covariance": [
+            [
+              0.007778545671147731,
+              -7.308631334929308e-05
+            ],
+            [
+              -7.308631334929308e-05,
+              0.003929395635871955
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 6.504411948964175,
+          "conditional_mean_covariance": [
+            [
+              0.005294478047192417,
+              -0.0001095795294952969
+            ],
+            [
+              -0.0001095795294952969,
+              0.0010949081252114733
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.5496590456439034,
+          "finite_quadrature_total_covariance_error": 10.100089467966631,
+          "quadrature_decomposition_max_abs_error": 1.599198204416119e-18,
+          "weighted_assignment_migration_fraction": 0.00013820433033084645
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3487368595145699,
+          "center_only_covariance_error": 4.1698389987030815,
+          "center_output_covariance": [
+            [
+              0.006151750330548161,
+              0.0005360264413006786
+            ],
+            [
+              0.0005360264413006786,
+              0.0007890431027889297
+            ]
+          ],
+          "center_output_trace_over_target": 3.855996418091195,
+          "center_to_conditional_mean_rms": 0.0019926936131953346,
+          "centers": 146,
+          "component": 54,
+          "conditional_jitter_covariance": [
+            [
+              0.009014307407831358,
+              0.00037019593026604196
+            ],
+            [
+              0.00037019593026604196,
+              0.00429840459599375
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 7.395951240281806,
+          "conditional_mean_covariance": [
+            [
+              0.0062544054196049135,
+              0.0005114782462346837
+            ],
+            [
+              0.0005114782462346837,
+              0.0008742543911981637
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.960366629587364,
+          "finite_quadrature_total_covariance_error": 11.818332437445088,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.000122636249007809
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2847595527062271,
+          "center_only_covariance_error": 2.429885990368752,
+          "center_output_covariance": [
+            [
+              0.003257202601932946,
+              0.0011449607170203116
+            ],
+            [
+              0.0011449607170203116,
+              0.0020776101939615444
+            ]
+          ],
+          "center_output_trace_over_target": 2.96378493751914,
+          "center_to_conditional_mean_rms": 0.002163029313883332,
+          "centers": 126,
+          "component": 55,
+          "conditional_jitter_covariance": [
+            [
+              0.007748034618733446,
+              0.0009123512086466546
+            ],
+            [
+              0.0009123512086466546,
+              0.006150390808546425
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 7.721347592235133,
+          "conditional_mean_covariance": [
+            [
+              0.0033542921466586215,
+              0.0011021760633733227
+            ],
+            [
+              0.0011021760633733227,
+              0.002179104940946949
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.074109545920422,
+          "finite_quadrature_total_covariance_error": 10.165346759351495,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 2.3864422533380765e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2540337782833875,
+          "center_only_covariance_error": 1.2869906361040813,
+          "center_output_covariance": [
+            [
+              0.0023897022611089076,
+              0.0002460912494327717
+            ],
+            [
+              0.0002460912494327717,
+              0.0003143858088874628
+            ]
+          ],
+          "center_output_trace_over_target": 1.5022711758035883,
+          "center_to_conditional_mean_rms": 0.004062024934971299,
+          "centers": 166,
+          "component": 56,
+          "conditional_jitter_covariance": [
+            [
+              0.007431233795654968,
+              8.8155565336541e-05
+            ],
+            [
+              8.8155565336541e-05,
+              0.0012756300470770517
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.837146662386754,
+          "conditional_mean_covariance": [
+            [
+              0.002507379396472356,
+              0.00029790268774900337
+            ],
+            [
+              0.00029790268774900337,
+              0.00045768450934145354
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.647257753748261,
+          "finite_quadrature_total_covariance_error": 7.144411036834206,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 3.4701059390415456e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.31409362560739534,
+          "center_only_covariance_error": 0.9598621874495362,
+          "center_output_covariance": [
+            [
+              0.0017871531481178924,
+              0.0004921477395613259
+            ],
+            [
+              0.0004921477395613259,
+              0.0013702167394265981
+            ]
+          ],
+          "center_output_trace_over_target": 1.754094412100517,
+          "center_to_conditional_mean_rms": 0.001089695492114365,
+          "centers": 287,
+          "component": 57,
+          "conditional_jitter_covariance": [
+            [
+              0.004811732470347179,
+              1.6387853179634242e-05
+            ],
+            [
+              1.6387853179634242e-05,
+              0.002223238683242064
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.9083173746855904,
+          "conditional_mean_covariance": [
+            [
+              0.0018578445148254906,
+              0.0005066993728289814
+            ],
+            [
+              0.0005066993728289814,
+              0.0013636441287681817
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7897159438508483,
+          "finite_quadrature_total_covariance_error": 5.034118162828584,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3024410942498046,
+          "center_only_covariance_error": 1.1003819165464481,
+          "center_output_covariance": [
+            [
+              0.0015933782887438007,
+              0.0006354447081722373
+            ],
+            [
+              0.0006354447081722373,
+              0.001720492454003437
+            ]
+          ],
+          "center_output_trace_over_target": 1.8410393331511152,
+          "center_to_conditional_mean_rms": 0.000796147542743344,
+          "centers": 154,
+          "component": 58,
+          "conditional_jitter_covariance": [
+            [
+              0.0056592306305529765,
+              0.0002082462467250965
+            ],
+            [
+              0.0002082462467250965,
+              0.0020660570716710043
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.291826574959372,
+          "conditional_mean_covariance": [
+            [
+              0.0016291780306104662,
+              0.0006243706093388397
+            ],
+            [
+              0.0006243706093388397,
+              0.0017202802686028902
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.860810198194133,
+          "finite_quadrature_total_covariance_error": 5.584878843288324,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3939514668717865,
+          "center_only_covariance_error": 2.2672522611963353,
+          "center_output_covariance": [
+            [
+              0.0017709417931497337,
+              0.0011079417790000328
+            ],
+            [
+              0.0011079417790000328,
+              0.0031613914301705692
+            ]
+          ],
+          "center_output_trace_over_target": 2.740185171136989,
+          "center_to_conditional_mean_rms": 0.00026119923382546056,
+          "centers": 134,
+          "component": 59,
+          "conditional_jitter_covariance": [
+            [
+              0.005688079564585269,
+              6.65653500848962e-05
+            ],
+            [
+              6.65653500848962e-05,
+              0.0019419104329199556
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.238883404761731,
+          "conditional_mean_covariance": [
+            [
+              0.0017899836167820109,
+              0.0011173041885093186
+            ],
+            [
+              0.0011173041885093186,
+              0.0031697606733643614
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.7554135418575054,
+          "finite_quadrature_total_covariance_error": 6.2761642675896905,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5842113405258698,
+          "center_only_covariance_error": 3.6009230504725043,
+          "center_output_covariance": [
+            [
+              0.004488036291850765,
+              9.024907152070938e-05
+            ],
+            [
+              9.024907152070938e-05,
+              0.0037488019760650764
+            ]
+          ],
+          "center_output_trace_over_target": 4.576021338558893,
+          "center_to_conditional_mean_rms": 0.0032435058687134387,
+          "centers": 172,
+          "component": 60,
+          "conditional_jitter_covariance": [
+            [
+              0.004055031796835974,
+              -6.863008467614569e-05
+            ],
+            [
+              -6.863008467614569e-05,
+              0.0020489663407927037
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.391110134711942,
+          "conditional_mean_covariance": [
+            [
+              0.004830348978033311,
+              0.00013919700233517833
+            ],
+            [
+              0.00013919700233517833,
+              0.003746183482139125
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.764740337498765,
+          "finite_quadrature_total_covariance_error": 7.359329373504115,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-18,
+          "weighted_assignment_migration_fraction": 0.00011568590183682638
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4642692768307422,
+          "center_only_covariance_error": 1.914149561212412,
+          "center_output_covariance": [
+            [
+              0.002948120734436443,
+              0.0003197121826209654
+            ],
+            [
+              0.0003197121826209654,
+              0.0021395154018089566
+            ]
+          ],
+          "center_output_trace_over_target": 2.8264645686885714,
+          "center_to_conditional_mean_rms": 0.0023073906049242278,
+          "centers": 161,
+          "component": 61,
+          "conditional_jitter_covariance": [
+            [
+              0.0035167811320821153,
+              -2.3481073192209635e-05
+            ],
+            [
+              -2.3481073192209635e-05,
+              0.002626149563362433
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.412739333870078,
+          "conditional_mean_covariance": [
+            [
+              0.0031738216567699165,
+              0.0003559870742971945
+            ],
+            [
+              0.0003559870742971945,
+              0.002149699784606074
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.957511962678885,
+          "finite_quadrature_total_covariance_error": 5.487044859074502,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-18,
+          "weighted_assignment_migration_fraction": 7.070894805914401e-05
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3635727661906164,
+          "center_only_covariance_error": 1.5100457370572602,
+          "center_output_covariance": [
+            [
+              0.002785678948854156,
+              0.00025259250191226495
+            ],
+            [
+              0.00025259250191226495,
+              0.0007970702028542318
+            ]
+          ],
+          "center_output_trace_over_target": 1.9904162295843764,
+          "center_to_conditional_mean_rms": 0.003490370167428849,
+          "centers": 235,
+          "component": 62,
+          "conditional_jitter_covariance": [
+            [
+              0.00381791093047259,
+              0.00025569306494569626
+            ],
+            [
+              0.00025569306494569626,
+              0.003029417617912634
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.8040714811148724,
+          "conditional_mean_covariance": [
+            [
+              0.0030881833779765376,
+              0.00031192464028414877
+            ],
+            [
+              0.00031192464028414877,
+              0.0008235005492672566
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.173157774687575,
+          "finite_quadrature_total_covariance_error": 5.296008052930229,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 2.6963682936488118e-06
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.32381037525120543,
+          "center_only_covariance_error": 1.048704628476713,
+          "center_output_covariance": [
+            [
+              0.0021446257373243837,
+              0.0003027448305711234
+            ],
+            [
+              0.0003027448305711234,
+              0.0006780908278136335
+            ]
+          ],
+          "center_output_trace_over_target": 1.568175896458819,
+          "center_to_conditional_mean_rms": 0.0033999776971368805,
+          "centers": 206,
+          "component": 63,
+          "conditional_jitter_covariance": [
+            [
+              0.0037285994386206385,
+              0.00038054594697304223
+            ],
+            [
+              0.00038054594697304223,
+              0.0028837091505848306
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.673504834883281,
+          "conditional_mean_covariance": [
+            [
+              0.002405895209581248,
+              0.00039323613574295874
+            ],
+            [
+              0.00039323613574295874,
+              0.0007605747378729537
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7591500010260892,
+          "finite_quadrature_total_covariance_error": 4.722451444991008,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 6.151908242790978e-07
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.21928240333068205,
+          "center_only_covariance_error": 0.8612563734400608,
+          "center_output_covariance": [
+            [
+              0.0010569130064788219,
+              0.0006162701014652387
+            ],
+            [
+              0.0006162701014652387,
+              0.0015461082590763633
+            ]
+          ],
+          "center_output_trace_over_target": 1.446122950149542,
+          "center_to_conditional_mean_rms": 0.0017452651379621556,
+          "centers": 148,
+          "component": 64,
+          "conditional_jitter_covariance": [
+            [
+              0.00355028208931627,
+              0.0011629671833383586
+            ],
+            [
+              0.0011629671833383586,
+              0.00607942100513983
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 5.349835144373622,
+          "conditional_mean_covariance": [
+            [
+              0.0011169165900637207,
+              0.0006243551173328622
+            ],
+            [
+              0.0006243551173328622,
+              0.0015878058946372912
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.5026236284233323,
+          "finite_quadrature_total_covariance_error": 6.401012189540684,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2008119169957916,
+          "center_only_covariance_error": 0.5367596507706982,
+          "center_output_covariance": [
+            [
+              0.0008696387214401284,
+              0.0004638419481837175
+            ],
+            [
+              0.0004638419481837175,
+              0.0010884652774851146
+            ]
+          ],
+          "center_output_trace_over_target": 1.0878355736450114,
+          "center_to_conditional_mean_rms": 0.0019275796086703322,
+          "centers": 140,
+          "component": 65,
+          "conditional_jitter_covariance": [
+            [
+              0.003236522412660955,
+              0.00041294032724809807
+            ],
+            [
+              0.00041294032724809807,
+              0.00503354165817313
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.594480118274996,
+          "conditional_mean_covariance": [
+            [
+              0.0009676653408262145,
+              0.0004841170579484337
+            ],
+            [
+              0.0004841170579484337,
+              0.0011103529067675339
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.1544546018274335,
+          "finite_quadrature_total_covariance_error": 4.9706243529744984,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.2446511085410721,
+          "center_only_covariance_error": 0.5049160218361969,
+          "center_output_covariance": [
+            [
+              0.0006130699338468379,
+              0.0002624662220021125
+            ],
+            [
+              0.0002624662220021125,
+              0.0004607993438422855
+            ]
+          ],
+          "center_output_trace_over_target": 0.5965940534087542,
+          "center_to_conditional_mean_rms": 0.004215742967119686,
+          "centers": 215,
+          "component": 66,
+          "conditional_jitter_covariance": [
+            [
+              0.002269211711149186,
+              3.020136185437802e-05
+            ],
+            [
+              3.020136185437802e-05,
+              0.0017781861466977654
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.2485544040955836,
+          "conditional_mean_covariance": [
+            [
+              0.0007271377374738509,
+              0.00030575822060006675
+            ],
+            [
+              0.00030575822060006675,
+              0.0005837801493803716
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.7282877274293406,
+          "finite_quadrature_total_covariance_error": 2.042415129004993,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.388159461783011,
+          "center_only_covariance_error": 1.106586334198642,
+          "center_output_covariance": [
+            [
+              0.0007453422819158275,
+              0.0008429568431634676
+            ],
+            [
+              0.0008429568431634676,
+              0.0016339430466036774
+            ]
+          ],
+          "center_output_trace_over_target": 1.3218252052167894,
+          "center_to_conditional_mean_rms": 0.0043510541366090635,
+          "centers": 331,
+          "component": 67,
+          "conditional_jitter_covariance": [
+            [
+              0.002195343660865079,
+              0.00044557114679779573
+            ],
+            [
+              0.00044557114679779573,
+              0.001809987122522998
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.2251838067725327,
+          "conditional_mean_covariance": [
+            [
+              0.0009162890633593397,
+              0.0009013781052661845
+            ],
+            [
+              0.0009013781052661845,
+              0.0016247440065865178
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.411685063108351,
+          "finite_quadrature_total_covariance_error": 3.0372915199702297,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.32961892437015455,
+          "center_only_covariance_error": 0.9961418140289923,
+          "center_output_covariance": [
+            [
+              0.0008049089223360318,
+              0.0007180875488965205
+            ],
+            [
+              0.0007180875488965205,
+              0.001653114697598804
+            ]
+          ],
+          "center_output_trace_over_target": 1.3655687011989426,
+          "center_to_conditional_mean_rms": 0.002252626412590187,
+          "centers": 165,
+          "component": 68,
+          "conditional_jitter_covariance": [
+            [
+              0.0030845397149117677,
+              0.0003676846759239504
+            ],
+            [
+              0.0003676846759239504,
+              0.0021136540846385084
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.887885493801908,
+          "conditional_mean_covariance": [
+            [
+              0.0009178310786408219,
+              0.0007439181442406785
+            ],
+            [
+              0.0007439181442406785,
+              0.0016380630406338768
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.4199412017661956,
+          "finite_quadrature_total_covariance_error": 3.533640591279585,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.40641786774248223,
+          "center_only_covariance_error": 1.8254182972914303,
+          "center_output_covariance": [
+            [
+              0.0007574621351975234,
+              0.000877795118168473
+            ],
+            [
+              0.000877795118168473,
+              0.002858754796258494
+            ]
+          ],
+          "center_output_trace_over_target": 2.009009440874671,
+          "center_to_conditional_mean_rms": 0.001046776661171811,
+          "centers": 125,
+          "component": 69,
+          "conditional_jitter_covariance": [
+            [
+              0.0034179939362342414,
+              0.0003977795889459229
+            ],
+            [
+              0.0003977795889459229,
+              0.0019425819848680429
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.9780977851026655,
+          "conditional_mean_covariance": [
+            [
+              0.0008033131834596644,
+              0.0008946424914211741
+            ],
+            [
+              0.0008946424914211741,
+              0.0028670025442733777
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.0390643282115146,
+          "finite_quadrature_total_covariance_error": 4.2786177446563,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.608713999962767,
+          "center_only_covariance_error": 6.035311236477057,
+          "center_output_covariance": [
+            [
+              0.007943448028273703,
+              0.0015930639965144508
+            ],
+            [
+              0.0015930639965144508,
+              0.0029790868567599964
+            ]
+          ],
+          "center_output_trace_over_target": 6.0680750403655725,
+          "center_to_conditional_mean_rms": 0.0024038481541360577,
+          "centers": 171,
+          "component": 70,
+          "conditional_jitter_covariance": [
+            [
+              0.004806805672101157,
+              0.00027941691123205205
+            ],
+            [
+              0.00027941691123205205,
+              0.0022451930579290395
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.917777139537506,
+          "conditional_mean_covariance": [
+            [
+              0.008084345968630854,
+              0.0015980661113352479
+            ],
+            [
+              0.0015980661113352479,
+              0.00288627489253097
+            ]
+          ],
+          "conditional_mean_trace_over_target": 6.094789472006758,
+          "finite_quadrature_total_covariance_error": 10.205993457782938,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.000181454135285692
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4728665947112238,
+          "center_only_covariance_error": 2.4446453709158735,
+          "center_output_covariance": [
+            [
+              0.003394463827937337,
+              0.0010998656444672285
+            ],
+            [
+              0.0010998656444672285,
+              0.001919721678270728
+            ]
+          ],
+          "center_output_trace_over_target": 2.952325331940943,
+          "center_to_conditional_mean_rms": 0.001882104234494995,
+          "centers": 144,
+          "component": 71,
+          "conditional_jitter_covariance": [
+            [
+              0.0033822115374321235,
+              0.00014285078147948453
+            ],
+            [
+              0.00014285078147948453,
+              0.002720837887356581
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.3905830720140147,
+          "conditional_mean_covariance": [
+            [
+              0.003522188088439333,
+              0.0011539734627108102
+            ],
+            [
+              0.0011539734627108102,
+              0.0019525706157128872
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.0415326656645196,
+          "finite_quadrature_total_covariance_error": 5.755026519257063,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.41817943406866065,
+          "center_only_covariance_error": 2.0820202787572146,
+          "center_output_covariance": [
+            [
+              0.0035348124184340036,
+              0.0001798173922918975
+            ],
+            [
+              0.0001798173922918975,
+              0.001024435841399092
+            ]
+          ],
+          "center_output_trace_over_target": 2.532915743417012,
+          "center_to_conditional_mean_rms": 0.0020349187132082105,
+          "centers": 254,
+          "component": 72,
+          "conditional_jitter_covariance": [
+            [
+              0.0033799452080503782,
+              0.0003834851899169457
+            ],
+            [
+              0.0003834851899169457,
+              0.0032356889837926403
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.6753523919358786,
+          "conditional_mean_covariance": [
+            [
+              0.003707202495921588,
+              0.0002467002652277951
+            ],
+            [
+              0.0002467002652277951,
+              0.0010477379863243973
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.6416336466250327,
+          "finite_quadrature_total_covariance_error": 5.584515862626549,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.32185566722273584,
+          "center_only_covariance_error": 0.747461871281189,
+          "center_output_covariance": [
+            [
+              0.0017601836990389901,
+              0.0001741660790874799
+            ],
+            [
+              0.0001741660790874799,
+              0.000576721337831703
+            ]
+          ],
+          "center_output_trace_over_target": 1.2982805983407844,
+          "center_to_conditional_mean_rms": 0.002070530288836654,
+          "centers": 256,
+          "component": 73,
+          "conditional_jitter_covariance": [
+            [
+              0.0024199383482766974,
+              8.300572455760587e-05
+            ],
+            [
+              8.300572455760587e-05,
+              0.002862896149284178
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.934908104615538,
+          "conditional_mean_covariance": [
+            [
+              0.0018752067180253986,
+              0.0002192960038906684
+            ],
+            [
+              0.0002192960038906684,
+              0.0006320917136761712
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.3929435970951443,
+          "finite_quadrature_total_covariance_error": 3.374170727479444,
+          "quadrature_decomposition_max_abs_error": 7.589415207398531e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.26995242824927423,
+          "center_only_covariance_error": 0.5626736027304471,
+          "center_output_covariance": [
+            [
+              0.0014337246986956948,
+              0.00014862113903980274
+            ],
+            [
+              0.00014862113903980274,
+              0.0013287843018132148
+            ]
+          ],
+          "center_output_trace_over_target": 1.534727248868076,
+          "center_to_conditional_mean_rms": 0.0025513205094300595,
+          "centers": 221,
+          "component": 74,
+          "conditional_jitter_covariance": [
+            [
+              0.002237596377549286,
+              0.00028194367571606166
+            ],
+            [
+              0.00028194367571606166,
+              0.005715718484552047
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.418508332622895,
+          "conditional_mean_covariance": [
+            [
+              0.0015316255987493747,
+              0.00021739373216363736
+            ],
+            [
+              0.00021739373216363736,
+              0.0014093014623550674
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.633848395346048,
+          "finite_quadrature_total_covariance_error": 5.413858856021882,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3023732426497923,
+          "center_only_covariance_error": 0.558633934767884,
+          "center_output_covariance": [
+            [
+              0.0012467427312156702,
+              0.00043303497726027997
+            ],
+            [
+              0.00043303497726027997,
+              0.000798573648818585
+            ]
+          ],
+          "center_output_trace_over_target": 1.136286897315635,
+          "center_to_conditional_mean_rms": 0.0015125244816849494,
+          "centers": 281,
+          "component": 75,
+          "conditional_jitter_covariance": [
+            [
+              0.0019128157316085116,
+              -0.00010053262887471858
+            ],
+            [
+              -0.00010053262887471858,
+              0.0030435554347576126
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.7535395841696215,
+          "conditional_mean_covariance": [
+            [
+              0.0012925792731093757,
+              0.0004633354876609576
+            ],
+            [
+              0.0004633354876609576,
+              0.0008556669137806805
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.1934701243289136,
+          "finite_quadrature_total_covariance_error": 2.999324339256548,
+          "quadrature_decomposition_max_abs_error": 1.3010426069826053e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.405621540515715,
+          "center_only_covariance_error": 1.0287762118628887,
+          "center_output_covariance": [
+            [
+              0.0013345461119802812,
+              0.0008654589915624674
+            ],
+            [
+              0.0008654589915624674,
+              0.0007335443673238536
+            ]
+          ],
+          "center_output_trace_over_target": 1.1489391749051279,
+          "center_to_conditional_mean_rms": 0.00260461664729542,
+          "centers": 329,
+          "component": 76,
+          "conditional_jitter_covariance": [
+            [
+              0.0017062160376245454,
+              0.0004298365972208533
+            ],
+            [
+              0.0004298365972208533,
+              0.0015092603093743249
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.7863757790185821,
+          "conditional_mean_covariance": [
+            [
+              0.0013781188687576966,
+              0.0009049028546795219
+            ],
+            [
+              0.0009049028546795219,
+              0.0008162178346503942
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.219075967278783,
+          "finite_quadrature_total_covariance_error": 2.5296227941866216,
+          "quadrature_decomposition_max_abs_error": 1.0842021724855044e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5117497285256355,
+          "center_only_covariance_error": 1.7913958999978545,
+          "center_output_covariance": [
+            [
+              0.001451903681703561,
+              0.0014734858798859946
+            ],
+            [
+              0.0014734858798859946,
+              0.0016428469891530476
+            ]
+          ],
+          "center_output_trace_over_target": 1.7193059577874406,
+          "center_to_conditional_mean_rms": 0.0015989752219664035,
+          "centers": 445,
+          "component": 77,
+          "conditional_jitter_covariance": [
+            [
+              0.0014640236661853053,
+              0.000723745006870015
+            ],
+            [
+              0.000723745006870015,
+              0.0015667321362007082
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.6837532524708398,
+          "conditional_mean_covariance": [
+            [
+              0.0014838294583418422,
+              0.0014903895722693584
+            ],
+            [
+              0.0014903895722693584,
+              0.001692796443810823
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7647921981777113,
+          "finite_quadrature_total_covariance_error": 3.4752975018826016,
+          "quadrature_decomposition_max_abs_error": 1.3010426069826053e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.43957309754918045,
+          "center_only_covariance_error": 2.024624832874612,
+          "center_output_covariance": [
+            [
+              0.001658611187388437,
+              0.0015459702391616857
+            ],
+            [
+              0.0015459702391616857,
+              0.0020335837311297763
+            ]
+          ],
+          "center_output_trace_over_target": 2.0512194344120736,
+          "center_to_conditional_mean_rms": 0.00022707849975861117,
+          "centers": 228,
+          "component": 78,
+          "conditional_jitter_covariance": [
+            [
+              0.0026247177306073398,
+              0.000438000087049977
+            ],
+            [
+              0.000438000087049977,
+              0.0020863586118662547
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.617264679666212,
+          "conditional_mean_covariance": [
+            [
+              0.001669601426924557,
+              0.0015461530972012093
+            ],
+            [
+              0.0015461530972012093,
+              0.002025550271888672
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.052862090159744,
+          "finite_quadrature_total_covariance_error": 4.282572360915681,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5175797252752352,
+          "center_only_covariance_error": 3.0563016406253234,
+          "center_output_covariance": [
+            [
+              0.001697683419683291,
+              0.0020605567935694266
+            ],
+            [
+              0.0020605567935694266,
+              0.0033503671330139323
+            ]
+          ],
+          "center_output_trace_over_target": 2.8044725774507007,
+          "center_to_conditional_mean_rms": 0.0012715084695898618,
+          "centers": 161,
+          "component": 79,
+          "conditional_jitter_covariance": [
+            [
+              0.002838951106775248,
+              0.00037865525492320124
+            ],
+            [
+              0.00037865525492320124,
+              0.001924949633288372
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.6466115677203392,
+          "conditional_mean_covariance": [
+            [
+              0.0017667123391456015,
+              0.002091973667866898
+            ],
+            [
+              0.002091973667866898,
+              0.003344388013523806
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.8395002447036104,
+          "finite_quadrature_total_covariance_error": 5.272281898226794,
+          "quadrature_decomposition_max_abs_error": 7.806255641895632e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.6371972831845066,
+          "center_only_covariance_error": 4.584494490439888,
+          "center_output_covariance": [
+            [
+              0.0055402949300704255,
+              4.494594700316647e-05
+            ],
+            [
+              4.494594700316647e-05,
+              0.004437247041176747
+            ]
+          ],
+          "center_output_trace_over_target": 5.543078968132596,
+          "center_to_conditional_mean_rms": 0.002072665343808711,
+          "centers": 159,
+          "component": 80,
+          "conditional_jitter_covariance": [
+            [
+              0.0034502643050254634,
+              -1.4731793563314255e-05
+            ],
+            [
+              -1.4731793563314255e-05,
+              0.002172925638386035
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.123994466669514,
+          "conditional_mean_covariance": [
+            [
+              0.005557422216239698,
+              4.87710422587164e-05
+            ],
+            [
+              4.87710422587164e-05,
+              0.004318692787040321
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.486730651627353,
+          "finite_quadrature_total_covariance_error": 7.738117072453842,
+          "quadrature_decomposition_max_abs_error": 7.806255641895632e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5963175452654695,
+          "center_only_covariance_error": 4.466433399434108,
+          "center_output_covariance": [
+            [
+              0.0033342119315708262,
+              0.0009101883622085933
+            ],
+            [
+              0.0009101883622085933,
+              0.005873444426977633
+            ]
+          ],
+          "center_output_trace_over_target": 5.115364731508374,
+          "center_to_conditional_mean_rms": 0.0008953555767147988,
+          "centers": 143,
+          "component": 81,
+          "conditional_jitter_covariance": [
+            [
+              0.003105034113903346,
+              0.00024055796282548524
+            ],
+            [
+              0.00024055796282548524,
+              0.003182236708175486
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.4929282944888103,
+          "conditional_mean_covariance": [
+            [
+              0.0033896615446184436,
+              0.0009423720583684972
+            ],
+            [
+              0.0009423720583684972,
+              0.005897861009481198
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.159734840910097,
+          "finite_quadrature_total_covariance_error": 7.896446651573254,
+          "quadrature_decomposition_max_abs_error": 4.336808689942018e-18,
+          "weighted_assignment_migration_fraction": 8.862189496607983e-07
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.39724063424190187,
+          "center_only_covariance_error": 1.4359437195900016,
+          "center_output_covariance": [
+            [
+              0.0027060841508418157,
+              -0.00011579585734191147
+            ],
+            [
+              -0.00011579585734191147,
+              0.0011271038835924596
+            ]
+          ],
+          "center_output_trace_over_target": 2.129548944599853,
+          "center_to_conditional_mean_rms": 0.0004698287405812069,
+          "centers": 226,
+          "component": 82,
+          "conditional_jitter_covariance": [
+            [
+              0.0024757483171888935,
+              0.0002142190517647573
+            ],
+            [
+              0.0002142190517647573,
+              0.003382002416709388
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.2543060191784052,
+          "conditional_mean_covariance": [
+            [
+              0.002726205874868555,
+              -0.00010883165333674673
+            ],
+            [
+              -0.00010883165333674673,
+              0.0011342677219839824
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.1447075906481676,
+          "finite_quadrature_total_covariance_error": 4.417028910703526,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3466600525344336,
+          "center_only_covariance_error": 0.9150323141697503,
+          "center_output_covariance": [
+            [
+              0.002037103563399387,
+              0.00014963490308244387
+            ],
+            [
+              0.00014963490308244387,
+              0.0010364349367473073
+            ]
+          ],
+          "center_output_trace_over_target": 1.707521418301723,
+          "center_to_conditional_mean_rms": 0.0009137647817933928,
+          "centers": 217,
+          "component": 83,
+          "conditional_jitter_covariance": [
+            [
+              0.0023061486729806582,
+              3.788778645931142e-05
+            ],
+            [
+              3.788778645931142e-05,
+              0.003580234986262411
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.2702132001987585,
+          "conditional_mean_covariance": [
+            [
+              0.0020673371652130284,
+              0.00016670141879354937
+            ],
+            [
+              0.00016670141879354937,
+              0.001055958871508467
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.7351644946514582,
+          "finite_quadrature_total_covariance_error": 4.014477120808559,
+          "quadrature_decomposition_max_abs_error": 8.673617379884035e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3034366178289269,
+          "center_only_covariance_error": 0.9998087709401198,
+          "center_output_covariance": [
+            [
+              0.0015830404991438955,
+              0.0001358686952995426
+            ],
+            [
+              0.0001358686952995426,
+              0.0019563689883154304
+            ]
+          ],
+          "center_output_trace_over_target": 1.9663386379212993,
+          "center_to_conditional_mean_rms": 0.000943076658869659,
+          "centers": 187,
+          "component": 84,
+          "conditional_jitter_covariance": [
+            [
+              0.002147926508955156,
+              0.0003068922726521817
+            ],
+            [
+              0.0003068922726521817,
+              0.006139919428971555
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.604358933496151,
+          "conditional_mean_covariance": [
+            [
+              0.001607118874856792,
+              0.00015433069716352656
+            ],
+            [
+              0.00015433069716352656,
+              0.0020032287329278193
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.0057487054456558,
+          "finite_quadrature_total_covariance_error": 6.138319988919306,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.33906135093143147,
+          "center_only_covariance_error": 1.037817069135148,
+          "center_output_covariance": [
+            [
+              0.0018042564419428861,
+              0.0006762781006875755
+            ],
+            [
+              0.0006762781006875755,
+              0.0007883748255383354
+            ]
+          ],
+          "center_output_trace_over_target": 1.4403507288981865,
+          "center_to_conditional_mean_rms": 0.0013871376989311064,
+          "centers": 229,
+          "component": 85,
+          "conditional_jitter_covariance": [
+            [
+              0.002082726142325584,
+              5.972503154835404e-05
+            ],
+            [
+              5.972503154835404e-05,
+              0.0030578132154146526
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.8558552478016788,
+          "conditional_mean_covariance": [
+            [
+              0.0018124484771050988,
+              0.0006854805789841732
+            ],
+            [
+              0.0006854805789841732,
+              0.0008246468442350454
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.465052981466361,
+          "finite_quadrature_total_covariance_error": 3.4225831924535663,
+          "quadrature_decomposition_max_abs_error": 7.589415207398531e-19,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.3509143575993336,
+          "center_only_covariance_error": 1.2199356688670384,
+          "center_output_covariance": [
+            [
+              0.0016908776479523883,
+              0.0009189823484022244
+            ],
+            [
+              0.0009189823484022244,
+              0.0012104980424055924
+            ]
+          ],
+          "center_output_trace_over_target": 1.611875411220568,
+          "center_to_conditional_mean_rms": 0.0006924167971541786,
+          "centers": 227,
+          "component": 86,
+          "conditional_jitter_covariance": [
+            [
+              0.0020175148725044946,
+              0.00023206733245201747
+            ],
+            [
+              0.00023206733245201747,
+              0.003398434758407716
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.008860957747733,
+          "conditional_mean_covariance": [
+            [
+              0.0016848730354244942,
+              0.0009336317662432423
+            ],
+            [
+              0.0009336317662432423,
+              0.0012431450277893398
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.6266767297280729,
+          "finite_quadrature_total_covariance_error": 3.894480670845358,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5015533655880495,
+          "center_only_covariance_error": 2.3909439325466195,
+          "center_output_covariance": [
+            [
+              0.0020321839463568296,
+              0.0018554888824841944
+            ],
+            [
+              0.0018554888824841944,
+              0.001945654828118512
+            ]
+          ],
+          "center_output_trace_over_target": 2.2099104682253183,
+          "center_to_conditional_mean_rms": 0.0008602047946622125,
+          "centers": 329,
+          "component": 87,
+          "conditional_jitter_covariance": [
+            [
+              0.001811260197325972,
+              0.0007051529482755638
+            ],
+            [
+              0.0007051529482755638,
+              0.002184335005501882
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.2197751508128336,
+          "conditional_mean_covariance": [
+            [
+              0.0020388443471635676,
+              0.0018655738458255482
+            ],
+            [
+              0.0018655738458255482,
+              0.001981654705598676
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.2336106232362676,
+          "finite_quadrature_total_covariance_error": 4.485028553799048,
+          "quadrature_decomposition_max_abs_error": 3.0357660829594124e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5622161231967958,
+          "center_only_covariance_error": 2.527757353891985,
+          "center_output_covariance": [
+            [
+              0.0018969244773384699,
+              0.001960229112739841
+            ],
+            [
+              0.001960229112739841,
+              0.0021931463723198342
+            ]
+          ],
+          "center_output_trace_over_target": 2.2722616221757934,
+          "center_to_conditional_mean_rms": 0.0006361001979524073,
+          "centers": 257,
+          "component": 88,
+          "conditional_jitter_covariance": [
+            [
+              0.001569037275337476,
+              0.0012886171365002965
+            ],
+            [
+              0.0012886171365002965,
+              0.0016262289998169816
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.7751479611343735,
+          "conditional_mean_covariance": [
+            [
+              0.0018953342166919305,
+              0.0019562266871383347
+            ],
+            [
+              0.0019562266871383347,
+              0.0022081294168176933
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.2797020577765585,
+          "finite_quadrature_total_covariance_error": 4.73002523687806,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.6099235624048486,
+          "center_only_covariance_error": 3.9254945517499062,
+          "center_output_covariance": [
+            [
+              0.0020092356359095198,
+              0.002595719749688746
+            ],
+            [
+              0.002595719749688746,
+              0.004102729365096413
+            ]
+          ],
+          "center_output_trace_over_target": 3.3955361699975573,
+          "center_to_conditional_mean_rms": 0.0005237026904655935,
+          "centers": 197,
+          "component": 89,
+          "conditional_jitter_covariance": [
+            [
+              0.002017927694515897,
+              0.0007548802158201729
+            ],
+            [
+              0.0007548802158201729,
+              0.0019057240214890364
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.1798065463357528,
+          "conditional_mean_covariance": [
+            [
+              0.0020216259099522884,
+              0.00259775505396795
+            ],
+            [
+              0.00259775505396795,
+              0.004113396361619471
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.4083457649763904,
+          "finite_quadrature_total_covariance_error": 6.011435558257455,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5911056432591634,
+          "center_only_covariance_error": 2.930518871493225,
+          "center_output_covariance": [
+            [
+              0.004196985719168982,
+              -0.0011331352711802813
+            ],
+            [
+              -0.0011331352711802813,
+              0.0015887362832109355
+            ]
+          ],
+          "center_output_trace_over_target": 3.2142900565363752,
+          "center_to_conditional_mean_rms": 0.0008828855213379515,
+          "centers": 205,
+          "component": 90,
+          "conditional_jitter_covariance": [
+            [
+              0.0017632295162260457,
+              -0.0006405125299586315
+            ],
+            [
+              -0.0006405125299586315,
+              0.0022345535960245494
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.2209906560685697,
+          "conditional_mean_covariance": [
+            [
+              0.004222213885979323,
+              -0.0011214500603989911
+            ],
+            [
+              -0.0011214500603989911,
+              0.0015570592177463023
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.210707335000225,
+          "finite_quadrature_total_covariance_error": 4.995812149718987,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5850208341713352,
+          "center_only_covariance_error": 3.9937420050122845,
+          "center_output_covariance": [
+            [
+              0.005892658868873025,
+              -0.0005690161027659029
+            ],
+            [
+              -0.0005690161027659029,
+              0.0014145459540891362
+            ]
+          ],
+          "center_output_trace_over_target": 4.059558304712965,
+          "center_to_conditional_mean_rms": 0.0004991756038194186,
+          "centers": 214,
+          "component": 91,
+          "conditional_jitter_covariance": [
+            [
+              0.0017769076773495535,
+              -0.00010204739248210264
+            ],
+            [
+              -0.00010204739248210264,
+              0.003419258851022927
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.8867592320171194,
+          "conditional_mean_covariance": [
+            [
+              0.005910852411324934,
+              -0.0005524453442752884
+            ],
+            [
+              -0.0005524453442752884,
+              0.0014144928764352005
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.069636340884956,
+          "finite_quadrature_total_covariance_error": 6.206568286758216,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 5.921930364555801e-07
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.51137055191434,
+          "center_only_covariance_error": 2.3741278646156796,
+          "center_output_covariance": [
+            [
+              0.0038773408654473136,
+              -0.0003626151689797312
+            ],
+            [
+              -0.0003626151689797312,
+              0.0009597000184513485
+            ]
+          ],
+          "center_output_trace_over_target": 2.6872449816600184,
+          "center_to_conditional_mean_rms": 0.0010398049657458887,
+          "centers": 282,
+          "component": 92,
+          "conditional_jitter_covariance": [
+            [
+              0.001784391242113752,
+              -0.000275348738864969
+            ],
+            [
+              -0.000275348738864969,
+              0.002861264675437189
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.5809199985293074,
+          "conditional_mean_covariance": [
+            [
+              0.0038837585929461485,
+              -0.00032806984325047965
+            ],
+            [
+              -0.00032806984325047965,
+              0.0009781089016745938
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.7010375434092104,
+          "finite_quadrature_total_covariance_error": 4.451619152451891,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5653279231451233,
+          "center_only_covariance_error": 4.402547175359958,
+          "center_output_covariance": [
+            [
+              0.0063409315348168785,
+              -0.0009036373911959817
+            ],
+            [
+              -0.0009036373911959817,
+              0.0013033171792882845
+            ]
+          ],
+          "center_output_trace_over_target": 4.246804914119993,
+          "center_to_conditional_mean_rms": 0.001165346990990542,
+          "centers": 233,
+          "component": 93,
+          "conditional_jitter_covariance": [
+            [
+              0.0016574835945187966,
+              -5.564890447239862e-05
+            ],
+            [
+              -5.564890447239862e-05,
+              0.004210730350855417
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.260118914542664,
+          "conditional_mean_covariance": [
+            [
+              0.006287158608438361,
+              -0.0008762891826545296
+            ],
+            [
+              -0.0008762891826545296,
+              0.0013449516166158463
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.240061308975844,
+          "finite_quadrature_total_covariance_error": 6.714613619573933,
+          "quadrature_decomposition_max_abs_error": 1.734723475976807e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4912593898437964,
+          "center_only_covariance_error": 3.8078199446172896,
+          "center_output_covariance": [
+            [
+              0.005667182634229855,
+              -0.00034045516661155027
+            ],
+            [
+              -0.00034045516661155027,
+              0.0016289221753004151
+            ]
+          ],
+          "center_output_trace_over_target": 4.053391630478207,
+          "center_to_conditional_mean_rms": 0.0010636425395392334,
+          "centers": 235,
+          "component": 94,
+          "conditional_jitter_covariance": [
+            [
+              0.001682108912101313,
+              5.973131700097567e-05
+            ],
+            [
+              5.973131700097567e-05,
+              0.00582686060842983
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 4.171649805287876,
+          "conditional_mean_covariance": [
+            [
+              0.00560612808214682,
+              -0.00031666451545389883
+            ],
+            [
+              -0.00031666451545389883,
+              0.0016448200658281751
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.028304595849893,
+          "finite_quadrature_total_covariance_error": 7.20633258069572,
+          "quadrature_decomposition_max_abs_error": 5.204170427930421e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.5454576943479272,
+          "center_only_covariance_error": 4.327906158287864,
+          "center_output_covariance": [
+            [
+              0.0063892361572425085,
+              6.610927855389864e-05
+            ],
+            [
+              6.610927855389864e-05,
+              0.0013509927811662817
+            ]
+          ],
+          "center_output_trace_over_target": 4.300127261871298,
+          "center_to_conditional_mean_rms": 0.0006004094269995632,
+          "centers": 223,
+          "component": 95,
+          "conditional_jitter_covariance": [
+            [
+              0.0015611709564833111,
+              -2.8907769515274867e-06
+            ],
+            [
+              -2.8907769515274867e-06,
+              0.004913872097725841
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.597246203019822,
+          "conditional_mean_covariance": [
+            [
+              0.006387502128756452,
+              6.21593485332024e-05
+            ],
+            [
+              6.21593485332024e-05,
+              0.0013826482208040393
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.316750268352233,
+          "finite_quadrature_total_covariance_error": 6.974966367037516,
+          "quadrature_decomposition_max_abs_error": 1.214306433183765e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4929630281949937,
+          "center_only_covariance_error": 2.953008817855621,
+          "center_output_covariance": [
+            [
+              0.004576108005861094,
+              0.0005258656966624183
+            ],
+            [
+              0.0005258656966624183,
+              0.0011449138781693324
+            ]
+          ],
+          "center_output_trace_over_target": 3.1783455457247687,
+          "center_to_conditional_mean_rms": 0.0016315283023243556,
+          "centers": 220,
+          "component": 96,
+          "conditional_jitter_covariance": [
+            [
+              0.0016596603284056899,
+              0.00013315137152742528
+            ],
+            [
+              0.00013315137152742528,
+              0.004304896721575302
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.3136428624658496,
+          "conditional_mean_covariance": [
+            [
+              0.004562283572282485,
+              0.0005495341729492738
+            ],
+            [
+              0.0005495341729492738,
+              0.001236713875050008
+            ]
+          ],
+          "conditional_mean_trace_over_target": 3.22166530385894,
+          "finite_quadrature_total_covariance_error": 5.599810235506788,
+          "quadrature_decomposition_max_abs_error": 2.6020852139652106e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.591248724124536,
+          "center_only_covariance_error": 4.504391906904106,
+          "center_output_covariance": [
+            [
+              0.00609861451535995,
+              0.0015028696854834677
+            ],
+            [
+              0.0015028696854834677,
+              0.0020516234031187496
+            ]
+          ],
+          "center_output_trace_over_target": 4.527910032489593,
+          "center_to_conditional_mean_rms": 0.000867123537486778,
+          "centers": 230,
+          "component": 97,
+          "conditional_jitter_covariance": [
+            [
+              0.001486509379596327,
+              0.0002670535905757461
+            ],
+            [
+              0.0002670535905757461,
+              0.004189813577660412
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 3.1535128082017057,
+          "conditional_mean_covariance": [
+            [
+              0.006113030656093718,
+              0.0014909912031230855
+            ],
+            [
+              0.0014909912031230855,
+              0.002097631681311153
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.5614791546918845,
+          "finite_quadrature_total_covariance_error": 7.031228806905073,
+          "quadrature_decomposition_max_abs_error": 1.951563910473908e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.6497086861977502,
+          "center_only_covariance_error": 4.451533569161219,
+          "center_output_covariance": [
+            [
+              0.004850693438092259,
+              0.002628816347355305
+            ],
+            [
+              0.002628816347355305,
+              0.0025348804593969603
+            ]
+          ],
+          "center_output_trace_over_target": 4.10309668019811,
+          "center_to_conditional_mean_rms": 0.0008448617879420019,
+          "centers": 225,
+          "component": 98,
+          "conditional_jitter_covariance": [
+            [
+              0.001402738568518242,
+              0.0008904748350514328
+            ],
+            [
+              0.0008904748350514328,
+              0.002580048829062432
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 2.212659703331062,
+          "conditional_mean_covariance": [
+            [
+              0.0048639416000712,
+              0.0026115281903487677
+            ],
+            [
+              0.0026115281903487677,
+              0.002523200088939981
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.10396767550305,
+          "finite_quadrature_total_covariance_error": 6.620050474121583,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.7998092729853955,
+          "center_only_covariance_error": 7.824814364063169,
+          "center_output_covariance": [
+            [
+              0.006717682822082983,
+              0.004871938787361967
+            ],
+            [
+              0.004871938787361967,
+              0.005127516279765198
+            ]
+          ],
+          "center_output_trace_over_target": 6.580666280734326,
+          "center_to_conditional_mean_rms": 0.0009124376684700729,
+          "centers": 287,
+          "component": 99,
+          "conditional_jitter_covariance": [
+            [
+              0.0012947459387813434,
+              0.0013317859043232793
+            ],
+            [
+              0.0013317859043232793,
+              0.0016753257451983803
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 1.650039852777115,
+          "conditional_mean_covariance": [
+            [
+              0.006720116181703002,
+              0.004867497270781969
+            ],
+            [
+              0.004867497270781969,
+              0.00514602222392371
+            ]
+          ],
+          "conditional_mean_trace_over_target": 6.592299227477782,
+          "finite_quadrature_total_covariance_error": 10.01683319398859,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 500000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 25,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/3edfe9ab274847f3bde1c8b3f56717c9/request.json",
+      "request_sha256": "bec8634134d958648327eaeffe2bf8af59773c6db9dfc8fd19a2d1d746943f3d",
+      "source": "round4-native-winner",
+      "source_commit": "313b437cd364a38c618e5d959c7791488c2a1bf7",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "grid100"
+    }
+  ],
+  "full_allowance_seconds": 600,
+  "global_rng_unchanged": true,
+  "optimizer_updates_added": 0,
+  "quadrature_rule": "5 nodes per latent axis, Gauss-Hermite for independent Gaussian jitter; approximate nonlinear conditional moments",
+  "qualification_input": false,
+  "retained_finite_G_prior_probe": {
+    "path": "reports/forge/bcap-physics/transport_tails/round4/saved-tail-diagnostics.json",
+    "scope": "original six next-batch disposable proposals; not actual past-update attribution",
+    "sha256": "34ff3070354d685704141e008c23cad78a37ac979509a129a17ace79f34c077e"
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "exhaustive_center_outputs_and_fixed_assignment_nonlinear_kernel_quadrature",
+  "source_receipts": {
+    "/home/martyn/dev/ParticleGAN-bcap-r4-role_motion/reports/forge/bcap-physics/role_motion/round4/provenance.json": "8a6cfe1cd18601dab1d3ff551a76b4bbab0b39cc5d01470b5bfad980ffd23d80",
+    "/home/martyn/dev/ParticleGAN-bcap-r5-component_tails/reports/forge/bcap-physics/transport_tails/round4/provenance.json": "1bc56534a3f1c62d54d4b8d0fcea709d9f3289e4c81a0ae65bc8f48013aa3a72"
+  },
+  "training_oracles": "none; target labels/moments are diagnostic only"
+}

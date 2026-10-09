@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 19440,
+    "candidate_budget_seconds": 9720,
+    "id": "component_tails_round5"
+  },
+  "candidate": "component_prior_transport_r5",
+  "competing_explanation": "The prior pullback is restricted by the shared generator Jacobian and may be poorly conditioned; removing shared-map shape forces can prevent early allocation or destabilize adversarial G. Native saved jitter variation is substantial. Lower covariance alone may hide missing modes or poor temporal retention.",
+  "control": {
+    "candidate_id": "kinetic_transport_local_v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "hypothesis": "Prior-only pullbacks of retained sliced/local transport reduce unequal-width uncensored covariance while preserving rare and broad sustained gates, without changing the empirical training objective.",
+  "id": "component_tails_candidate_round5",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "kinetic_transport_local_v2",
+        "revision": "d732da1b43da7f8c7913b5d79641f5e8dba43bac422e5055802d6d2e3d544a76",
+        "source_digest": "a4f22e27e034a2c0c81c189c03bf7637f90ab25ff98ab13697787aed4341923e"
+      },
+      "path": "reports/forge/bcap-physics/transport_tails/round4/results.json",
+      "selector": [
+        "arms",
+        "control"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "component_tails_round5_diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

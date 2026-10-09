@@ -1,0 +1,59 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "vector_two_broad"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "grid100"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Subset mechanism evidence cannot qualify ordinary tiers or public defaults.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "component_tails_round5_diagnostic",
+  "policy_change_reason": "Bounded center-versus-jitter diagnosis and one prior-only transport successor against retained exact local-v2; original full gates, own-smoke prerequisite and native7k budget unchanged.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "raw_metrics_only"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}
