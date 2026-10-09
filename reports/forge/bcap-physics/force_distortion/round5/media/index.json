@@ -1,0 +1,382 @@
+{
+  "media": [
+    {
+      "gif": "media/candidate-mid_scale_identity.gif",
+      "gif_sha256": "35f7dd1ab10609ea798a9971b4ee868a2200d3c821eacd26a42f933ee50b4648",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "29c72759fd004093d2de48d5ed25514e899e663184fbb67ae6835edd4ce6d07b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/1c08b79d498b473486466e49e237e998/constraint_geometry-scored-outputs.pt": "37adc7f595ae29e1977edeab4454bec0fc72056bfd2e2207a5ba02f80c9c7a18"
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "gif": "media/candidate-gaussian1d_stability.gif",
+      "gif_sha256": "303ba5190c7b57683017e65f0557dece06dc919e91ea4bf4fc9d0dfd225202bd",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "753694883ad67ae170ca6f476fd0a17d29732f802583e6492563ba6f5997135d",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d91994f324f64ecea55c9b655dfe0fad/evaluator/observed-samples.pt": "66416511bd982e673e5d8564cc57cecca0c4827ffee21d16b8529b4595f6c57a"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "gif": "media/candidate-residual_student.gif",
+      "gif_sha256": "3a343d734039963051d5aeb2f768be264334a7fcc0218615d5d847d5587af712",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "76a6c61c0c281e1854ac0dc70ce95adad6e87a2d6909cc03a7f5ca631833d0fc",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/b3137e65cf724dd989ab4d184f2a8688/constraint_geometry-scored-outputs.pt": "7b3f5077fd9f6ba5a8e177a2675411c9279b29db984951bd04e55479c33f5c4f"
+      },
+      "task_id": "residual_student"
+    },
+    {
+      "gif": "media/candidate-trajectory.gif",
+      "gif_sha256": "76ceab76f92c2421ae9b3bb043ce05c93b9817ae75f5dda5c41d12aec18d4380",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a80949ed62f5c84430bedfe7dc3d77153e2f17627b87e5986bf29012eb7bb3fa",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/929209115f1e4096a684b7f4b5237016/constraint_geometry-scored-outputs.pt": "2d82e13ede63b7d4494fa005fe59e8125b499ecfa2ef377e0750990888ef9a89"
+      },
+      "task_id": "trajectory"
+    },
+    {
+      "gif": "media/candidate-grid100.gif",
+      "gif_sha256": "77964e9706a5454f4785bc34f3535c9da0da802727eed397e372e665979585ca",
+      "kind": "actual_training_native_saved_observations_gif",
+      "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+      "observation_count": 34,
+      "observations_sha256": "98b073f0cc79a7e127296bba6fc62fea36a804ad425b6299eb417746ff556ed0",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+      "rescored_observations": 0,
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        21,
+        25,
+        29,
+        33
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/config.json": "5a4941acff071490017476f41f3ce4c6753741c0e7136d8c96ef6b4330a222bf",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/events.jsonl": "4a54e2ab43e4c5bb015d6e92611ac67e2e8eb0398237ef10dce1a736abd9cde1",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_000050.npz": "750bb68d86d05b522c854b5da158cd4a664ddb8e373cf8181938720a407d15a4",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_000750.npz": "9c944b6107ed8be27b7341237d907c921167d7eeacb9137b84091a0e673ffb07",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_001750.npz": "b9f7dce11443e31d581a511b3f2aa9e2bd34d1f6220900b96dffd19ec0294872",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_002750.npz": "0eae07f4797990ad5342294ecec8b1635a7a24acc7a82c53aa92bae2a9a64f81",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_004000.npz": "99741fc685d89e61dd20bcd9de7dc0a09f33b672cccecf6c5ed61db30e6518f9",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_005000.npz": "5991aedb4def708a8b3f2f726004687c1cce55c34c2c521d9f971bb473188714",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_006000.npz": "d050c4c2e558f4a8542cd2b80bf238ea2914a0d5ca9433310c2ffd1faf3026b3",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/snapshots/step_007000.npz": "453759a605493a92775f05c1167b44bf5165e266338c6a48773bd251d73d7933",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d729d942b2cd445d8c2f930ca9b635ff/native100/grid100/summary.json": "8e845c2fab3e2be3238168112de29b23668336f6b96a27f320fd46ddf1ff138b"
+      },
+      "task_id": "grid100"
+    },
+    {
+      "gif": "media/candidate-gaussian1d_smoke.gif",
+      "gif_sha256": "c6b555b97519512764805ea99d726791debf8f5f21a5c98be712c9fa5425c318",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "4722049237c2e3eca22405893152d992ae63597541178ba6db9c7e694d100ee5",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/a5f33b56e8bb4503a0a0830b3d699107/evaluator/observed-samples.pt": "7fafb94fb89841d066c05dc850a902321cc0e9f6ea956db06e572c2e3375f00c"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "gif": "media/control-trajectory.gif",
+      "gif_sha256": "635c08d8aca507353e00e499496bcd09d1c9552d53c3ea14c6fc16b9b9a0d62f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "f5445e142a9717f03af7563a8e92929951a2890b109785e9909b2cb3caf1f6ef",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/e57d58af46214556a15357d405eeba23/constraint_geometry-scored-outputs.pt": "bd361938587f6ec18f2b6ffa9ec4e9347a15895b1666674097cf102341cd41ae"
+      },
+      "task_id": "trajectory"
+    },
+    {
+      "gif": "media/control-gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/b219c003024a490faacfe7a39f12427e/evaluator/observed-samples.pt": "e993308e6abb72e1256a147c43509d82f0efe22766444afb410620e396c3d132"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "gif": "media/control-residual_student.gif",
+      "gif_sha256": "e9347ac1b184505f186456cbe08a28b6350f0db54e111a23f2e7c271e1d3d7a9",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "557aab554e874f797ca6530c2b7dd8cb0704019fd539258f1999f5e68341156a",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/6342428515dd4af980ac3122da06ed81/constraint_geometry-scored-outputs.pt": "a0ca680e06c0fb75f6b4eb7ee4a1e19fd964dc6283fc67b2ab1ed825ea9fe51a"
+      },
+      "task_id": "residual_student"
+    },
+    {
+      "gif": "media/control-grid100.gif",
+      "gif_sha256": "0f85d136f34d2dbdec2ed51c5d53fff05c87638aec57762ba7a91d77aa7a1ba8",
+      "kind": "actual_training_native_saved_observations_gif",
+      "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+      "observation_count": 34,
+      "observations_sha256": "447311999188f9406c1b22b038c2d3a4597a8aefb87acb0deb36d3c05ac840dc",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+      "rescored_observations": 0,
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        21,
+        25,
+        29,
+        33
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/config.json": "952d88b4d051982d955649e8c2553ea89eb63c228c76f0c6c9394e7c2b4baad6",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/events.jsonl": "c9d6b6cc00b235f63db99b9319fdac1dfc173a4e892ee94269753bc81b26084a",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_000050.npz": "85655e94cd22a8f73c9f06bdff963dae6708cb86dd07bc8293c2a2a3628d37b0",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_000750.npz": "987a65eb0fd8e67ff48fa548a5b32ea174113faa2a69c3a8f244fcd8104ab933",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_001750.npz": "e516d46e2e84dfe8df86f23ef72855514b1e436f8e5330c5e310c7c4d28c46a7",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_002750.npz": "049d2d3467f7dd808565ec912e278521aaab48418da0f2d5fdbd17de315792ba",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_004000.npz": "0fe9452d59ebe33b3a06c18b7fe9d671652f292bf78b90e34eac6e7ee9c616f1",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_005000.npz": "2727ade3e24a47f987446778be9ff3bd3bbe04263c506e188b8aedba6e538828",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_006000.npz": "15359aeeb1a10dc4ff6283e32f5a4650a079ce8d38136795d6b1507391ca0725",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/snapshots/step_007000.npz": "1b53a3a85c1ee1622f4350cd566f334c47d069a415c70502df858b0a450bc4ba",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d7faa821ce634be384a3b9d99c38d0c6/native100/grid100/summary.json": "ce948d4cb761fbdd0ca692ab42d16976f1602f25745951e12a68a5e7d491ece0"
+      },
+      "task_id": "grid100"
+    },
+    {
+      "gif": "media/control-mid_scale_identity.gif",
+      "gif_sha256": "f900c2fde1fb92a0c0150017c672613fc17b8b241ad3a80d086226efe2d32571",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "bd9691328548d7aa5c4ce0e88bae3bd178dfc03a266d0a8049b06056276485da",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/8160aad6657047c8b1e37cbcf23b94de/constraint_geometry-scored-outputs.pt": "5c04f2c500c1f42f02e49dbb7d513f7da59c3ee2bc0046087316169c7d17d9a3"
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "gif": "media/control-gaussian1d_stability.gif",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/2a9b99fc4c6d4e5cbdbbad95ca3098c9/evaluator/observed-samples.pt": "e3211dedcb97f0ddbe711f53229bf08d146cf4d1492e7c315dba5d0f13c652bb"
+      },
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

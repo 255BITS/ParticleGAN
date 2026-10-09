@@ -1,0 +1,136 @@
+{
+  "active_workers": 0,
+  "actual_training_gif_frames": {
+    "media/candidate-gaussian1d_smoke.gif": 9,
+    "media/candidate-gaussian1d_stability.gif": 9,
+    "media/candidate-grid100.gif": 9,
+    "media/candidate-mid_scale_identity.gif": 9,
+    "media/candidate-residual_student.gif": 9,
+    "media/candidate-trajectory.gif": 9,
+    "media/control-gaussian1d_smoke.gif": 9,
+    "media/control-gaussian1d_stability.gif": 9,
+    "media/control-grid100.gif": 9,
+    "media/control-mid_scale_identity.gif": 9,
+    "media/control-residual_student.gif": 9,
+    "media/control-trajectory.gif": 9
+  },
+  "ancillary_full_allowance": 1920,
+  "archived_qualification_telemetry_hashes": {
+    "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+    "reports/forge/leaderboards/adaptation.md": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+    "reports/forge/leaderboards/clockfree_continuous.md": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+    "reports/forge/leaderboards/formulation_comparison.md": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+    "reports/forge/leaderboards/host_profile_transfer.md": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+    "reports/forge/leaderboards/quality_coverage.md": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+    "reports/forge/technique-inventory.json": "87466b6ef0f5d5a60d5202471f9043b79e7b8678ec0a1f32417d0770df402e1c",
+    "reports/forge/technique-inventory.md": "697d350cb7c5fe0a3e74d5f40e2561c376489632fa32c690ade712f70f337de2"
+  },
+  "changed_scientific_files": [],
+  "final_jobs": 12,
+  "main_full_reservations_including_retries": 19680,
+  "matched_protocol_proofs": [
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "gaussian1d_smoke",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    },
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "gaussian1d_stability",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    },
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "grid100",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    },
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "mid_scale_identity",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    },
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "residual_student",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    },
+    {
+      "all_consumed_non_eval_streams_equal": true,
+      "initial_models_and_prior_equal": true,
+      "task_id": "trajectory",
+      "training_stream_families": [
+        "data",
+        "init",
+        "noise",
+        "prior"
+      ]
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_snapshot_paths_absent_at_stacked_base": [
+    "reports/forge/leaderboards/quality_coverage.json",
+    "reports/forge/leaderboards/clockfree_continuous.json",
+    "reports/forge/leaderboards/discriminator_stability.json",
+    "reports/forge/leaderboards/formulation_comparison.json",
+    "reports/forge/leaderboards/host_profile_transfer.json",
+    "reports/forge/leaderboards/adaptation.json"
+  ],
+  "original_task_condition_hashes": {
+    "gaussian1d_smoke": "4460635c069d10da44c5f7199d940fdd1531b604eddf64675120510e0f3fb7d1",
+    "gaussian1d_stability": "65d760ce7a45ee3ec062e76f57026ff09b29463711ea749bcd7079acbc0038d7",
+    "grid100": "e1b414bd92140a95338f0bc62d6c5328efa919e2913457a258ac2de33daeac3f",
+    "mid_scale_identity": "d2c147762fb91bb76f5fb0ded9b76bc973e689ed7493ff34f1a01552040d029a",
+    "residual_student": "bdbc7f22d91b6dffa2bf46bcb743d227093783f728b2a73bf7fb8e78463ee204",
+    "trajectory": "54ad90050bcb897c99c1fabf8b69935452fb6420b5ff2eaef717d60ad295a57e"
+  },
+  "paid_attempts": 14,
+  "paid_worker_seconds": 3832.3240880155936,
+  "qualification_input": false,
+  "remaining_reserved_seconds": 0,
+  "retained_incomplete_attempts": 2,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scientific_files_verified": 523,
+  "scorer_controls_sha256": "d15e01af16112a8387e393ff2a2ce570ffc03a0153b63bf5d0ebd63505c130a3",
+  "software_tests": {
+    "broader_suite_passed": 224,
+    "final_sample_force_suite_passed": 4,
+    "overlap": 3,
+    "unique_passed": 225
+  },
+  "source_commit": "1a977eec9838918f3722921c49fe2f4b632fe3e4",
+  "source_digest": "d289a2c2d679513f53b49768068aa61e3f8956292244028d074d1d997844e54c",
+  "total_full_allowance": 21600,
+  "valid": true,
+  "zero_unintended_rng_audits": 258
+}

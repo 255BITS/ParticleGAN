@@ -1,0 +1,343 @@
+{
+  "ambient_rng_unchanged": true,
+  "controls": {
+    "gaussian_mean_2.0": {
+      "oracle": {
+        "failed_bounds": [],
+        "metrics": {
+          "cdf_ks": 0.00012207031250022204,
+          "finite_fraction": 1.0,
+          "mean": 2.0,
+          "mean_error_sigma": 0.0,
+          "sample_count": 4096,
+          "std": 0.49991985549631973,
+          "std_ratio": 0.9998397109926395
+        },
+        "passed": true
+      },
+      "point_collapse": {
+        "failed_bounds": [
+          "std_ratio >= 0.8",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "cdf_ks": 0.5,
+          "finite_fraction": 1.0,
+          "mean": 2.0,
+          "mean_error_sigma": 0.0,
+          "sample_count": 4096,
+          "std": 0.0,
+          "std_ratio": 0.0
+        },
+        "passed": false
+      },
+      "wrong_mean": {
+        "failed_bounds": [
+          "mean_error_sigma <= 0.2",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "cdf_ks": 0.6828115319313326,
+          "finite_fraction": 1.0,
+          "mean": 3.0,
+          "mean_error_sigma": 2.0,
+          "sample_count": 4096,
+          "std": 0.49991985549631973,
+          "std_ratio": 0.9998397109926395
+        },
+        "passed": false
+      }
+    },
+    "gaussian_mean_3.0": {
+      "oracle": {
+        "failed_bounds": [],
+        "metrics": {
+          "cdf_ks": 0.00012207031250022204,
+          "finite_fraction": 1.0,
+          "mean": 3.0,
+          "mean_error_sigma": 0.0,
+          "sample_count": 4096,
+          "std": 0.49991985549631973,
+          "std_ratio": 0.9998397109926395
+        },
+        "passed": true
+      },
+      "point_collapse": {
+        "failed_bounds": [
+          "std_ratio >= 0.8",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "cdf_ks": 0.5,
+          "finite_fraction": 1.0,
+          "mean": 3.0,
+          "mean_error_sigma": 0.0,
+          "sample_count": 4096,
+          "std": 0.0,
+          "std_ratio": 0.0
+        },
+        "passed": false
+      },
+      "wrong_mean": {
+        "failed_bounds": [
+          "mean_error_sigma <= 0.2",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "cdf_ks": 0.6828115319313326,
+          "finite_fraction": 1.0,
+          "mean": 4.0,
+          "mean_error_sigma": 2.0,
+          "sample_count": 4096,
+          "std": 0.49991985549631973,
+          "std_ratio": 0.9998397109926395
+        },
+        "passed": false
+      }
+    },
+    "grid100": {
+      "balanced_point_collapse": {
+        "accuracy": {
+          "abs_cov_trace_bias": 1.0,
+          "accuracy_pass": false,
+          "accuracy_score": 8.75,
+          "all_finite": true,
+          "center_max_sigma": 0.0,
+          "center_rms_sigma": 0.0,
+          "cov_frob_rms": 1.0,
+          "cov_trace_bias": -1.0,
+          "frozen_pass": false,
+          "mass_tv": 0.0,
+          "n": 100000,
+          "passed": false,
+          "precision": 1.0,
+          "precision_gap": 0.011108996538242266,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 1.0,
+          "valid_n": 100000,
+          "within_radius_n": 100000
+        },
+        "coverage": {
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_cov_eig_ratio": 0.0,
+          "max_mode_mass": 0.01,
+          "max_radial_median_ratio": 0.0,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 1000,
+          "min_hq_mode_mass": 0.01,
+          "min_radial_median_ratio": 0.0,
+          "modes": 100,
+          "n": 100000,
+          "passed": false,
+          "precision": 1.0,
+          "valid_n": 100000
+        }
+      },
+      "one_mode": {
+        "accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.99,
+          "n": 100000,
+          "passed": false,
+          "precision": 1.0,
+          "precision_gap": 0.011108996538242266,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 100000
+        },
+        "coverage": {
+          "hq": 1.0,
+          "mass_tv": 0.9900000000000001,
+          "max_cov_eig_ratio": 0.0,
+          "max_mode_mass": 1.0,
+          "max_radial_median_ratio": 0.0,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 1,
+          "n": 100000,
+          "passed": false,
+          "precision": 1.0,
+          "valid_n": 100000
+        }
+      },
+      "oracle": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.002483059358359463,
+          "accuracy_pass": true,
+          "accuracy_score": 0.1362815729945808,
+          "all_finite": true,
+          "center_max_sigma": 0.10380235419318293,
+          "center_rms_sigma": 0.04387304454623034,
+          "cov_frob_rms": 0.054571307739215084,
+          "cov_trace_bias": -0.002483059358359463,
+          "frozen_pass": true,
+          "mass_tv": 0.013119999999999998,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98872,
+          "precision_gap": 0.00017100346175769054,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.0032905523598764086,
+          "valid_n": 100000,
+          "within_radius_n": 98872
+        },
+        "coverage": {
+          "hq": 0.98871,
+          "mass_tv": 0.01312,
+          "max_cov_eig_ratio": 1.0909502979960397,
+          "max_mode_mass": 0.01089,
+          "max_radial_median_ratio": 1.0464655812525272,
+          "min_cov_eig_ratio": 0.8158159294414384,
+          "min_hq_count": 904,
+          "min_hq_mode_mass": 0.00904,
+          "min_radial_median_ratio": 0.9493244314471765,
+          "modes": 100,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98871,
+          "valid_n": 100000
+        }
+      }
+    },
+    "mid_scale_identity": {
+      "mid_identity_swap": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "identity_mid",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.8181817496021324e-08,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": false,
+        "per_scale": [
+          {
+            "identity_kept": 1.0,
+            "on_concept": -1.0,
+            "scale": -1.0
+          },
+          {
+            "identity_kept": 1.0,
+            "on_concept": 0.0,
+            "scale": 0.0
+          },
+          {
+            "identity_kept": 1.8181817496021324e-08,
+            "on_concept": 0.5,
+            "scale": 0.5
+          },
+          {
+            "identity_kept": 1.0,
+            "on_concept": 1.0,
+            "scale": 1.0
+          }
+        ],
+        "same_dir": 0.0,
+        "scales": [
+          -1.0,
+          0.0,
+          0.5,
+          1.0
+        ]
+      },
+      "oracle": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.0,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": true,
+        "per_scale": [
+          {
+            "identity_kept": 1.0,
+            "on_concept": -1.0,
+            "scale": -1.0
+          },
+          {
+            "identity_kept": 1.0,
+            "on_concept": 0.0,
+            "scale": 0.0
+          },
+          {
+            "identity_kept": 1.0,
+            "on_concept": 0.5,
+            "scale": 0.5
+          },
+          {
+            "identity_kept": 1.0,
+            "on_concept": 1.0,
+            "scale": 1.0
+          }
+        ],
+        "same_dir": 0.0,
+        "scales": [
+          -1.0,
+          0.0,
+          0.5,
+          1.0
+        ]
+      }
+    },
+    "residual_student": {
+      "oracle": {
+        "metrics": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "passed": true
+      },
+      "wrong_identity": {
+        "metrics": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535642087459564,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "passed": false
+      }
+    },
+    "trajectory": {
+      "oracle": {
+        "metrics": {
+          "identity_mse": 0.0
+        },
+        "passed": true
+      },
+      "wrong_identity": {
+        "metrics": {
+          "identity_mse": 0.12535642087459564
+        },
+        "passed": false
+      }
+    }
+  },
+  "information_access": "Target-informed scorer witnesses only; never candidate training or alternate initializers.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "training_rng_draws_added": 0
+}

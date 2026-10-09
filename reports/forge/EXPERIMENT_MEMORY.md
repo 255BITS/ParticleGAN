@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 790. Inventory coverage: complete. Unresolved import items: 7.
+Records: 792. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4358,6 +4358,22 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 
 [Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
 
+### force-distortion-round5-control-v1 · readout-b58a2b1466f992da0e0096fc
+
+**Scope:** research_diagnostic; scientific; revision `df92eab95d695d1ed5ff4b8626c3e255a603c7f7f4901a7de7b91ef099a04b12`.
+
+Retained direction blend reproduces conditional identity repair but fails full native fidelity on the same new-source tasks.
+
+**Observed:** {'FAIL': 2, 'INCOMPLETE': 2, 'PASS': 4}; wall seconds 2674.215; mechanism `structural`.
+
+
+
+Matched retained direction-blend control completes 4 PASS / 2 FAIL: native coverage/accuracy and the added Gaussian stability diagnostic fail; conditional trajectory, residual, mid-scale and Gaussian smoke pass. Two original same-source smoke grading timeouts remain INCOMPLETE and charged, followed by the certified execution retry. This does not rewrite its archived round4 qualification.
+
+**Next:** Stop the exact filter as a global repair. Preserve source-bound evidence and the conditional direction-blend repair; inspect the parent aggregate before any separately admitted intervention. No seed repeat, sweep, continuation, extra task, automatic promotion or qualification pooling.
+
+[Evidence](../../reports/forge/attempts/1f7fdad580f24028bb9a0f5fdc16d9b2/result.json) · [Record](records/readout-b58a2b1466f992da0e0096fc.json)
+
 ### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
 
 **Scope:** current; scientific; revision `724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44`.
@@ -4517,6 +4533,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+
+### force-distortion-round5-candidate-v1 · readout-e4aa4ff1deff6bbebdbd4df6
+
+**Scope:** research_diagnostic; scientific; revision `ee1605211bd3344a667facaa0336a411ae28cf97efdc50fad9f3f2976fe9d0b6`.
+
+Damped empirical output-kernel force filtering improves native precision while retaining full conditional identity passes; a global replacement requires all complete gates, including Gaussian retention.
+
+**Observed:** {'FAIL': 2, 'PASS': 4}; wall seconds 1158.109; mechanism `structural`.
+
+
+
+Damped empirical output-kernel filtering completes 4 PASS / 2 FAIL with no new full PASS. Native precision .28345 misses the .48 prediction, while the trajectory MSE > .02 falsifier is not observed. Full native coverage/accuracy and Gaussian retention fail. Stop this exact CG4/ridge/filter revision; no global repair or default adoption.
+
+**Next:** Stop the exact filter as a global repair. Preserve source-bound evidence and the conditional direction-blend repair; inspect the parent aggregate before any separately admitted intervention. No seed repeat, sweep, continuation, extra task, automatic promotion or qualification pooling.
+
+[Evidence](../../reports/forge/attempts/1c08b79d498b473486466e49e237e998/result.json) · [Record](records/readout-e4aa4ff1deff6bbebdbd4df6.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5118,4 +5150,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `a04b21ad4b4b711a92ddfeaf0b92af106e1f025d8f95fa5ae437da4cb5af966d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f8773287cca73148ccd05a3840c37c6b4c09936f689af748f7849ff313cfa0fd`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "35f7dd1ab10609ea798a9971b4ee868a2200d3c821eacd26a42f933ee50b4648",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "29c72759fd004093d2de48d5ed25514e899e663184fbb67ae6835edd4ce6d07b",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/1c08b79d498b473486466e49e237e998/constraint_geometry-scored-outputs.pt": "37adc7f595ae29e1977edeab4454bec0fc72056bfd2e2207a5ba02f80c9c7a18"
+  },
+  "task_id": "mid_scale_identity"
+}

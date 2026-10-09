@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "3a343d734039963051d5aeb2f768be264334a7fcc0218615d5d847d5587af712",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "76a6c61c0c281e1854ac0dc70ce95adad6e87a2d6909cc03a7f5ca631833d0fc",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/b3137e65cf724dd989ab4d184f2a8688/constraint_geometry-scored-outputs.pt": "7b3f5077fd9f6ba5a8e177a2675411c9279b29db984951bd04e55479c33f5c4f"
+  },
+  "task_id": "residual_student"
+}

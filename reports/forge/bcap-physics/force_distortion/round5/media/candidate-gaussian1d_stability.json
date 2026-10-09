@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "303ba5190c7b57683017e65f0557dece06dc919e91ea4bf4fc9d0dfd225202bd",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "753694883ad67ae170ca6f476fd0a17d29732f802583e6492563ba6f5997135d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/force_distortion/queue/force-distortion-round5-v1/d91994f324f64ecea55c9b655dfe0fad/evaluator/observed-samples.pt": "66416511bd982e673e5d8564cc57cecca0c4827ffee21d16b8529b4595f6c57a"
+  },
+  "task_id": "gaussian1d_stability"
+}
