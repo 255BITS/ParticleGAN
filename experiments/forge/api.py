@@ -31,6 +31,14 @@ BUILTIN_CAPABILITIES = (
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
     "policy_controls", "policy_serving", "served_sampling",
 )
+COMPONENT_OBJECTIVE_HOSTS = frozenset({
+    "two_pole", "unused_token_hold", "ae_gan_hold", "trajectory",
+    "residual_student", "unipolar", "cover_leftover", "mid_scale_identity",
+    "five_word_joint",
+})
+COMPONENT_TRANSPORT_COHORTS = frozenset({
+    "conditional_transport_round5_v1", "component_output_transport_v1",
+})
 _MISSING = object()
 
 
@@ -165,8 +173,8 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
-        if context.execution_path == "public_components" and task["execution"].get("host") not in {
-                "two_pole", "trajectory", "residual_student", "mid_scale_identity"}:
+        if (context.execution_path == "public_components"
+                and task["execution"].get("host") not in COMPONENT_OBJECTIVE_HOSTS):
             raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])
         if context.recipe.constraint_geometry_mode == "strict_progress" and (
                 context.recipe.input_noise_std or context.recipe.output_noise_std or context.recipe.standardize):
@@ -186,9 +194,9 @@ def task_policy_blockers(task, candidate):
         return error.blockers
     consumer = task.get('execution', {}).get('transport_consumer')
     if consumer is not None and (consumer != 'output_marginal_v1'
-            or task.get('adapter') != 'transfer_behavior'
-            or task.get('execution', {}).get('host') not in ('trajectory', 'residual_student', 'mid_scale_identity')
-            or task.get('task_cohort') != 'conditional_transport_round5_v1'):
+            or task.get('adapter') not in ('transfer_behavior', 'word_joint')
+            or task.get('execution', {}).get('host') not in COMPONENT_OBJECTIVE_HOSTS
+            or task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS):
         return ['unsupported explicit component transport consumer']
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "

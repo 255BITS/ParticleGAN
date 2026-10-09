@@ -174,6 +174,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
                  "adapter_loop_seconds": time.monotonic() - started, "phase_timing": timing.snapshot()},
         "scope": "ordinary_full_task" if steps == task["execution"]["steps"] else "integration_demo_only",
         "declared_task_updates": task["execution"]["steps"], "execution_limit": steps}
+    if fixture.transport is not None:
+        receipt["evidence"]["component_transport"] = fixture.transport.state_dict()
     if optimizer_diagnostics is not None:
         receipt["evidence"]["optimizer_diagnostics"] = optimizer_diagnostics.receipt()
     if retain_scored_outputs:

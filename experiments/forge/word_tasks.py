@@ -207,6 +207,7 @@ def restore_parent(request, task, prerequisites, fixture, context):
         raise ValueError("word saved state differs from its recipe/task/candidate/prefix binding")
     context.streams.load_state_dict(saved["streams"])
     fixture.policy.load_state_dict(saved["fixture"]["api_state"])
+    fixture.restore_component_transport(saved["fixture"].get("component_transport"))
     fixture.data_generator.set_state(saved["fixture"]["data_generator"].cpu())
     fixture.max_steps = saved["fixture"]["max_steps"]
     if state_digest(fixture.state_dict()) != state_digest(saved["fixture"]):
@@ -333,6 +334,8 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         scoring_weights="live", completed_steps=fixture.completed_steps, executed_updates=updates,
         guards=guards, rng_audits=rng_audits, continuity=continuity,
         **executed_receipt(JOINT_WORDS_CLEAN, eval_output_noise="clean"))
+    if fixture.transport is not None:
+        evidence["component_transport"] = fixture.transport.state_dict()
     if checkpoint is not None:
         evidence.update(checkpoint=checkpoint, artifact_root=str((output / "acquisition").resolve()),
                         artifact_manifest=manifest_artifacts(output / "acquisition"))
