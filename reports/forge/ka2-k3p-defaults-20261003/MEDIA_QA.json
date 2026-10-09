@@ -1,0 +1,583 @@
+{
+  "capacity_scope": "Separate all16 supported cold zero-update snapshot witnesses; no terminal-noise or convergence credit.",
+  "costs": {
+    "cumulative_campaign_seconds": 141.1879250756465,
+    "fair_speed_ranking": false,
+    "new_scientific_paid_seconds": 27.193673191126436,
+    "original_campaign_ceiling_seconds": 15360,
+    "prior_counted_once_seconds": 113.99425188452005,
+    "reserve_seconds": 0
+  },
+  "git_calls": 0,
+  "inputs": {
+    "k3p/final-state.pt": {
+      "bytes": 170831,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "24567ffd5c7e32768af2e3f3b32c60b31a2eb776a3f1c2ff0ceb1330d10745dc"
+    },
+    "k3p/goal.gif": {
+      "bytes": 219873,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "85f8d05174a7bd2d4f0960649f76dcd38f3afa4af583a9430a67bbed9d13b181"
+    },
+    "k3p/observations.npz": {
+      "bytes": 347836,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "572bf258fc4f835b4116aaf03aee6f65088afc0b780abec7c972ca3ddda8b2e1"
+    },
+    "k3p/receipt": {
+      "bytes": 45853,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "2cb069fdd6cf3560385984f3a9d35d651e0d0df3e1aca28d864ea0582679c480"
+    },
+    "k3p/study": {
+      "bytes": 1375271,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/study.json",
+      "sha256": "385a48da6efb236c9b2a388e5eb8fbebf43c0add3d1a34270c36ad71be749461"
+    },
+    "ka2/final-state.pt": {
+      "bytes": 171087,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "eccae36db0ec194be83d2c285cd660baf2717a12869424947f743b7f22a2c3bd"
+    },
+    "ka2/goal.gif": {
+      "bytes": 220159,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "2fd6bdeb6133d30dc97cfe3d604ac9b3fabc6fd7f182b1b5776fc9240d586b61"
+    },
+    "ka2/observations.npz": {
+      "bytes": 347851,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "fe36496ada1717941357337a66326b00b4129490ad1ba77248ecd1edc6db3032"
+    },
+    "ka2/receipt": {
+      "bytes": 45768,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "b60afb0fd92a55d3cd97dc5bdeaeb53af5004061653cc1722cf7a96b77f7aeb7"
+    },
+    "ka2/study": {
+      "bytes": 1375231,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/study.json",
+      "sha256": "58721647a201b569c1ac0a992880d410ca5375836986807afbc547397e89aabf"
+    }
+  },
+  "inspection_only_pixel_copies": true,
+  "interpretation": [
+    "Both full600 runs are real scientific failures rather than timeout/prerequisite errors.",
+    "Both recorded both recognized modes at the endpoint; modes alone do not certify distribution quality.",
+    "KA2 terminal HQ .9697265625 clears.9, but finite-template TV .12890625 exceeds.1. K3P terminal HQ .896484375 fails.9 and finite-template TV .2021484375 fails.1.",
+    "Both nearest-template raw frequency TV values are .0986328125, inside.1; these count assignments even for poor images. Finite-template TV additionally accounts for rejected/off-template output mass, which is .0302734375 forKA2 and .103515625 forK3P.",
+    "There are no passing observations in either25-check retained trajectory. Therefore no first-five acquisition window or five-later hold can be claimed.",
+    "The source-selected law is fast, output-noise-off and noDV12 for this image case. Fixed training output-noise warmup and scheduled recipe remain unchanged.",
+    "Mean RMSE is a diagnostic; a visually good subset or low average error cannot replace finite-template mass/quality gates.",
+    "Seven unattempted cases per family remainUNKNOWN and cannot inherit the coldQ1 witness, originalAtlas19 or ordinaryMoG successes.",
+    "Matching frame0/300 decoded pixels do not establish complete formulation/state or later-training equivalence.",
+    "The raw GIF caption caveat is addressed in frozen runner readout and proposed publisher metadata; originalGIFs remain unchanged."
+  ],
+  "new_gif_rendering": 0,
+  "new_models": 0,
+  "new_sampler_calls": 0,
+  "new_scoring_calls": 0,
+  "new_training_updates": 0,
+  "original_gate_counts": {
+    "FAIL": 2,
+    "UNAVAILABLE": 14
+  },
+  "records": [
+    {
+      "added_study_gate": "FAIL",
+      "api_components": [
+        "get_recipe",
+        "Recipe.make_prior",
+        "init.deterministic_orthogonal_",
+        "GANTrainer.step",
+        "GANTrainer.served_model",
+        "ServedModel.sample"
+      ],
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 171087,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "eccae36db0ec194be83d2c285cd660baf2717a12869424947f743b7f22a2c3bd"
+        },
+        "goal.gif": {
+          "bytes": 220159,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "2fd6bdeb6133d30dc97cfe3d604ac9b3fabc6fd7f182b1b5776fc9240d586b61"
+        },
+        "observations.npz": {
+          "bytes": 347851,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "fe36496ada1717941357337a66326b00b4129490ad1ba77248ecd1edc6db3032"
+        }
+      },
+      "completed_updates": 600,
+      "configuration_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "family": "ka2",
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0986328125,
+        "finite_template_tv": 0.12890625,
+        "hq": 0.9697265625,
+        "mean_rmse": 0.03644286096096039,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "rejected_mass": 0.0302734375,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "full_protocol_complete": true,
+      "gif": {
+        "caption_caveat": "Inherited text says policy latent perturbation retained. Actual family controller isNone and every recorded perturbation flag is0; source-owned readout/publication explicitly states fast-only/noDV12.",
+        "frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "original_bytes_unchanged": true,
+        "preview_pixel_checks": [
+          {
+            "actual_update": 0,
+            "index": 0,
+            "pixel_sha256": "8933dbc205c8c536efda030b07715b9fd5d8724bf4f91fc8bed45b14766fabf5",
+            "preview": {
+              "bytes": 35294,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/ka2-frame-pixels/first.png",
+              "sha256": "bae9a1cfd2ab0bbbb1164c7d1f1905a31d2f1e4b72f3a37c0b93348c487cc191"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          },
+          {
+            "actual_update": 300,
+            "index": 4,
+            "pixel_sha256": "655884bb5338e238136a495e6fee4b727b2de9c9f5db0e6b65484be36c4dccb9",
+            "preview": {
+              "bytes": 37745,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/ka2-frame-pixels/middle.png",
+              "sha256": "14cddcebfc1e76723fe13699fdb57a89e718962d24c516fe2886652020df44ce"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          },
+          {
+            "actual_update": 600,
+            "index": 8,
+            "pixel_sha256": "94a312100cfe475985d9ffd77debca314a47a23a965a7214d2e02c6bce796560",
+            "preview": {
+              "bytes": 37353,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/ka2-frame-pixels/last.png",
+              "sha256": "2a3d28ea96ed441040a0c8c7fa12714de8526ea5b49d71ed888be7bbb5a48e37"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          }
+        ],
+        "size": [
+          460,
+          627
+        ],
+        "visual_assessment": "Desired .35/.85 central patches and actual sampled patches are visible; update, metricFAIL, defaultFAIL and finite-template TV/rejected-mass footer are readable. Some patterns visibly improve but failed distribution gate remains explicit."
+      },
+      "metric_checks": {
+        "acquisition_hold": {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        },
+        "final_failed_bounds": [
+          "finite_template_tv"
+        ],
+        "passing_observations": 0,
+        "post_update_observations": 24,
+        "steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "terminal_observations": 5,
+        "total_observations": 25
+      },
+      "ordinary_gate": "FAIL",
+      "paid_seconds": 13.617582915117964,
+      "receipt": {
+        "bytes": 45768,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "b60afb0fd92a55d3cd97dc5bdeaeb53af5004061653cc1722cf7a96b77f7aeb7"
+      },
+      "recipe": {
+        "amsgrad": false,
+        "batch_size": 32,
+        "continuous_policy": null,
+        "critic_formulation": null,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "name": "ka2",
+        "num_particles": 32,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "required_cases": 8,
+      "reserve_seconds": 0,
+      "retained_arrays": {
+        "all_finite": true,
+        "array_keys": 50,
+        "constant_ordered_target_bank": true,
+        "dtype": "float32",
+        "recorded_steps": 25,
+        "sample_metric_regating": false,
+        "sample_shape_per_step": [
+          1024,
+          1,
+          8,
+          8
+        ],
+        "target_patches": {
+          "background": 0,
+          "intensities": [
+            0.35,
+            0.85
+          ],
+          "region_columns": [
+            2,
+            6
+          ],
+          "region_rows": [
+            2,
+            6
+          ]
+        },
+        "target_shape": [
+          2,
+          1,
+          8,
+          8
+        ]
+      },
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "source_binding": {
+        "all_receipt_source_files_match_frozen_snapshot": true,
+        "declared_scientific_files": 75,
+        "discovery_inputs_sha256": {
+          "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+        },
+        "git_blob_recheck_by_reviewer": false,
+        "receipt_files": 154,
+        "snapshot_digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e"
+      },
+      "source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+      "study": {
+        "bytes": 1375231,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/study.json",
+        "sha256": "58721647a201b569c1ac0a992880d410ca5375836986807afbc547397e89aabf"
+      },
+      "thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "unknown_cases": 7
+    },
+    {
+      "added_study_gate": "FAIL",
+      "api_components": [
+        "get_recipe",
+        "Recipe.make_prior",
+        "init.deterministic_orthogonal_",
+        "GANTrainer.step",
+        "GANTrainer.served_model",
+        "ServedModel.sample"
+      ],
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 170831,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "24567ffd5c7e32768af2e3f3b32c60b31a2eb776a3f1c2ff0ceb1330d10745dc"
+        },
+        "goal.gif": {
+          "bytes": 219873,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "85f8d05174a7bd2d4f0960649f76dcd38f3afa4af583a9430a67bbed9d13b181"
+        },
+        "observations.npz": {
+          "bytes": 347836,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "572bf258fc4f835b4116aaf03aee6f65088afc0b780abec7c972ca3ddda8b2e1"
+        }
+      },
+      "completed_updates": 600,
+      "configuration_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "family": "k3p",
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0986328125,
+        "finite_template_tv": 0.2021484375,
+        "hq": 0.896484375,
+        "mean_rmse": 0.033563561737537384,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "rejected_mass": 0.103515625,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "full_protocol_complete": true,
+      "gif": {
+        "caption_caveat": "Inherited text says policy latent perturbation retained. Actual family controller isNone and every recorded perturbation flag is0; source-owned readout/publication explicitly states fast-only/noDV12.",
+        "frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "original_bytes_unchanged": true,
+        "preview_pixel_checks": [
+          {
+            "actual_update": 0,
+            "index": 0,
+            "pixel_sha256": "8933dbc205c8c536efda030b07715b9fd5d8724bf4f91fc8bed45b14766fabf5",
+            "preview": {
+              "bytes": 35294,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/k3p-frame-pixels/first.png",
+              "sha256": "bae9a1cfd2ab0bbbb1164c7d1f1905a31d2f1e4b72f3a37c0b93348c487cc191"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          },
+          {
+            "actual_update": 300,
+            "index": 4,
+            "pixel_sha256": "655884bb5338e238136a495e6fee4b727b2de9c9f5db0e6b65484be36c4dccb9",
+            "preview": {
+              "bytes": 37745,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/k3p-frame-pixels/middle.png",
+              "sha256": "14cddcebfc1e76723fe13699fdb57a89e718962d24c516fe2886652020df44ce"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          },
+          {
+            "actual_update": 600,
+            "index": 8,
+            "pixel_sha256": "cb60fddacfefdb30996458fef2363342050e079995f318a89b82b4ed57e76a2a",
+            "preview": {
+              "bytes": 37434,
+              "path": "/ml2/hypergan/ka2-k3p-defaults-goal-review-20261003/k3p-frame-pixels/last.png",
+              "sha256": "a3af80b11ddcbdce68f2b64a7fedb246cde6fa0e45405bd90ffb7b4ba9082c11"
+            },
+            "visual_status": "READABLE_AND_FAITHFUL"
+          }
+        ],
+        "size": [
+          460,
+          627
+        ],
+        "visual_assessment": "Desired .35/.85 central patches and actual sampled patches are visible; update, metricFAIL, defaultFAIL and finite-template TV/rejected-mass footer are readable. Some patterns visibly improve but failed distribution gate remains explicit."
+      },
+      "metric_checks": {
+        "acquisition_hold": {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        },
+        "final_failed_bounds": [
+          "finite_template_tv",
+          "hq"
+        ],
+        "passing_observations": 0,
+        "post_update_observations": 24,
+        "steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "terminal_observations": 5,
+        "total_observations": 25
+      },
+      "ordinary_gate": "FAIL",
+      "paid_seconds": 13.576090276008472,
+      "receipt": {
+        "bytes": 45853,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "2cb069fdd6cf3560385984f3a9d35d651e0d0df3e1aca28d864ea0582679c480"
+      },
+      "recipe": {
+        "amsgrad": false,
+        "batch_size": 32,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "name": "k3p",
+        "num_particles": 32,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "required_cases": 8,
+      "reserve_seconds": 0,
+      "retained_arrays": {
+        "all_finite": true,
+        "array_keys": 50,
+        "constant_ordered_target_bank": true,
+        "dtype": "float32",
+        "recorded_steps": 25,
+        "sample_metric_regating": false,
+        "sample_shape_per_step": [
+          1024,
+          1,
+          8,
+          8
+        ],
+        "target_patches": {
+          "background": 0,
+          "intensities": [
+            0.35,
+            0.85
+          ],
+          "region_columns": [
+            2,
+            6
+          ],
+          "region_rows": [
+            2,
+            6
+          ]
+        },
+        "target_shape": [
+          2,
+          1,
+          8,
+          8
+        ]
+      },
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "source_binding": {
+        "all_receipt_source_files_match_frozen_snapshot": true,
+        "declared_scientific_files": 75,
+        "discovery_inputs_sha256": {
+          "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+        },
+        "git_blob_recheck_by_reviewer": false,
+        "receipt_files": 154,
+        "snapshot_digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e"
+      },
+      "source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+      "study": {
+        "bytes": 1375271,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/study.json",
+        "sha256": "385a48da6efb236c9b2a388e5eb8fbebf43c0add3d1a34270c36ad71be749461"
+      },
+      "thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "unknown_cases": 7
+    }
+  ],
+  "review_boundary": "Both family studies were announced immutable by root; no evolving paths were read.",
+  "schema": "particlegan_ka2_k3p_actual_goal_media_review_v1",
+  "science_counts": {
+    "FAIL": 2,
+    "UNKNOWN": 14,
+    "required": 16
+  },
+  "source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+  "state_restores": 0,
+  "status": "CLEAR_WITH_DOCUMENTED_GENERIC_CAPTION_CAVEAT",
+  "study_gate_counts": {
+    "FAIL": 2,
+    "UNAVAILABLE": 14
+  }
+}

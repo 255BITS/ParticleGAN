@@ -1,0 +1,39 @@
+{
+  "capacity_sampler_replay": true,
+  "combined": {
+    "bytes": 1382102,
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/combined.json",
+    "sha256": "f55d2e759196db5ae02a4733ccc3fdf26605e5c1054b451c327d455bfb7a0fd1"
+  },
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py",
+    "combine",
+    "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/study.json",
+    "--archive",
+    "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/study.json",
+    "--output",
+    "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/combined.json"
+  ],
+  "elapsed_seconds": 12.123893327079713,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "log": {
+    "bytes": 1382102,
+    "path": "/ml2/hypergan/ka2-k3p-defaults-combine-actual-20261003.log",
+    "sha256": "f55d2e759196db5ae02a4733ccc3fdf26605e5c1054b451c327d455bfb7a0fd1"
+  },
+  "numeric_trace_rescore": true,
+  "ordinary_training_updates": 0,
+  "returncode": 0,
+  "root_executed": true,
+  "schema": "particlegan_ka2_k3p_defaults_certification_execution_v1",
+  "scientific_source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+  "scope": "Actual root CPU replay and retained-array recertification; publication separately performs no models, draws or rescoring.",
+  "workdir": "/ml2/hypergan/ParticleGAN-ka2-k3p-defaults-20261003"
+}

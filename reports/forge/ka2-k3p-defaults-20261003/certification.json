@@ -1,0 +1,144 @@
+{
+  "certifier": {
+    "commit": "26ff278c3796d775969391adc0bde52e3af11149",
+    "discovery_inputs_sha256": {
+      "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+    },
+    "files_sha256": {
+      "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+      "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+      "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+      "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+      "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+      "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+      "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+      "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+      "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "benchmarks/toy_audit/api_conditionals.py": "ca6b063c0ac315f90661deaffae8f60fbd4a0f9575b891db1895501d12edad38",
+      "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "benchmarks/toy_audit/api_diagnostics.py": "d83ca91e423823e16126f5eb0557af3682efa22e459db7e1cbd7490558360a50",
+      "benchmarks/toy_audit/api_family_search.py": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f",
+      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/api_publish.py": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+      "benchmarks/toy_audit/api_readout.py": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+      "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "benchmarks/toy_audit/api_ring16.py": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff",
+      "benchmarks/toy_audit/api_run.py": "44a770e6fbeca4d9e2d7d1e74d3107ab2d9ef2f284d76d6e7a0d60cce6f1a5e7",
+      "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+      "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+      "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "experiments/forge/configuration_search.py": "0e7f4ee2b2aa34b80105a80465c12b238e9a2c7f223ca15d2ad93828d6eb5b56",
+      "experiments/forge/contracts.py": "0b197620cfe44144d1b9a4a7eaf0320f31c207488fd5e4ba0002727e26af3dfc",
+      "experiments/forge/policy_execution.py": "fa99cb761903211d17fa1eaded93ff3f5d7a92c9d3f15c327a42d92e9c9e197a",
+      "experiments/forge/queue.py": "41fe55475b195f8c46e7b7ce780b66497ac71eebc7a25ee1eba569d907b82d55",
+      "experiments/forge/sources.py": "d96cff109fb509c32e9830f4c5ea3acefa2c2df65509908f6ba920ad1fd27ebb",
+      "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "reports/forge/critic-balance-20261003/run_critic_balance.py": "f1cd29b512c2333672955e356218060e781e88c68eb3b1c3970b59ee3d13f615",
+      "reports/forge/generator-step-20261003/run_generator_step.py": "b3eadfed95a1c0c2b8bbdaab8459aff54799c9824dcc9909eb9fc4312bc642b5",
+      "reports/forge/ka2-k3p-defaults-20261003/bind_capacity.py": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+      "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5",
+      "reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py": "ceef878d0bcedfc5fc62c961655121e48296645cb6a1f5ae2c92fa27bdb0d781"
+    },
+    "function": "combine_studies",
+    "root": "/ml2/hypergan/ParticleGAN-ka2-k3p-defaults-20261003"
+  },
+  "combined": {
+    "bytes": 1382102,
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/combined.json",
+    "sha256": "f55d2e759196db5ae02a4733ccc3fdf26605e5c1054b451c327d455bfb7a0fd1"
+  },
+  "prior_carryover": {
+    "artifacts": {
+      "atlas/study.json": {
+        "bytes": 1339184,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/study.json",
+        "sha256": "02ed35c689ae1a6f5df11bab6e42b2a07bb389d6ea3db146f3357e226411e2f7"
+      },
+      "certification.json": {
+        "bytes": 11733,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/certification.json",
+        "sha256": "6ba725612752bfaabf1fecd2b3b2bed6f59d150364092b322337f6e6a029cb6f"
+      },
+      "combined.json": {
+        "bytes": 1345994,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/combined.json",
+        "sha256": "2de9d080f8fdacdbb504f7fda6f7ee8ab2ba2dce00a454b117210dcc02a17b23"
+      },
+      "e22/study.json": {
+        "bytes": 1338911,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/e22/study.json",
+        "sha256": "6b0fcfd09df7d5b197cefc608a8ae59ef6583a8179e12685a6e117e9acaae5fa"
+      },
+      "publication-v1/results.json": {
+        "bytes": 92866,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/publication-v1/results.json",
+        "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+      }
+    },
+    "claim": "Prior Atlas/E22 scientific failures and separate bootstrap ERROR retained; slot mapping transfers only paid costs, never grades",
+    "engineering_paid_seconds": 4.757908704923466,
+    "schema": "named_family_previous_debit_v1",
+    "scientific_paid_seconds": {
+      "atlas": 55.03923988668248,
+      "e22": 54.19710329291411
+    },
+    "slot_predecessor": {
+      "k3p": "e22",
+      "ka2": "atlas"
+    },
+    "slot_prior_paid_seconds": {
+      "k3p": 54.19710329291411,
+      "ka2": 59.797148591605946
+    },
+    "total_paid_seconds": 113.99425188452005
+  },
+  "schema": "particlegan_ka2_k3p_defaults_publication_certification_v1",
+  "verification": {
+    "capacity_sampler_replay": true,
+    "cpu_only": true,
+    "numeric_trace_rescore": true,
+    "ordinary_training_updates": 0
+  }
+}

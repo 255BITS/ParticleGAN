@@ -1,0 +1,57 @@
+{
+  "all_members_individually_inspected": 20897,
+  "archive_bytes": 131261240,
+  "archive_path": "/ml2/hypergan/forge-ka2-k3p-defaults-archive-20261003/ka2-k3p-defaults-capacity16-learning2-v1.tar.gz",
+  "archive_sha256": "5271659901bd29e11fddb59486bbdf3ed7a4631da3fa519c62d6222fb2ed7c15",
+  "availability": "LOCAL_ONLY",
+  "bootstrap_members_inspected_and_hydrated": 42,
+  "capacity": {
+    "SUPPORTED": 16,
+    "required": 16
+  },
+  "costs": {
+    "ceiling_seconds": 15360.0,
+    "cumulative_paid_seconds": 141.1879250756465,
+    "new_paid_seconds": 27.193673191126436,
+    "prior_paid_seconds": 113.99425188452005,
+    "reserved_seconds": 0.0
+  },
+  "current_durable_attempts": 2,
+  "full_index_sha256": "aa9684cde781ff356c6a9c65775240db7b9d591c8b10da569aa7c7d1f3ea14bc",
+  "full_inspection_receipt": {
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-archive-20261003/full-member-inspection.json",
+    "sha256": "03ac5e5a189ee07d1c76a88b09130eecd8808fd8b141834d3ea823843bec82b8"
+  },
+  "future_prior2_and_unfinished_common_index_included": false,
+  "hydration_receipt": {
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-archive-20261003/bootstrap-hydration.json",
+    "sha256": "329d0069a46cd5cbdfcbc2e8455b3c917ad2d12155336ef11163263e6724ee5c"
+  },
+  "learning": {
+    "FAIL": 2,
+    "UNKNOWN": 14,
+    "required": 16
+  },
+  "new_model_constructions": 0,
+  "new_sampler_calls": 0,
+  "new_scorer_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "prior_engineering_attempts": 1,
+  "prior_scientific_attempts": 4,
+  "publication_required_inputs": 13945,
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "resolver": "experiments.forge.artifact_resolver",
+  "retain_until": "UNDECLARED",
+  "retention_owner": "UNASSIGNED",
+  "schema": "particlegan_ka2_k3p_defaults_archive_verification_v1",
+  "source_snapshot_count": 4,
+  "source_snapshot_file_counts": [
+    3396,
+    3397,
+    3400,
+    3404
+  ],
+  "status": "PASS"
+}

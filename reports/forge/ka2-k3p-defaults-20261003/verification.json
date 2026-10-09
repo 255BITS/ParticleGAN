@@ -1,0 +1,56 @@
+{
+  "actual_capacity_packet": {
+    "SUPPORTED": 16,
+    "ordinary_updates": 0,
+    "required": 16,
+    "sha256": "f291f8dc1d5c8557f7047580de52e4df3f0d7f5a86ea0b4e9f344486b557f923"
+  },
+  "archive_root_verification": {
+    "archive_bytes": 131261240,
+    "archive_sha256": "5271659901bd29e11fddb59486bbdf3ed7a4631da3fa519c62d6222fb2ed7c15",
+    "availability": "LOCAL_ONLY",
+    "full_index_sha256": "aa9684cde781ff356c6a9c65775240db7b9d591c8b10da569aa7c7d1f3ea14bc",
+    "protected_scientific_source_unchanged": true,
+    "publication_inputs_covered": 13945,
+    "remote_replication": "NOT_PERFORMED",
+    "resolver_inspection_and_hydration_receipts_verified": true,
+    "results_and_original_gif_copies_byte_identical": true,
+    "safe_members": 20897
+  },
+  "certification_sha256": "e10765e3ae2c064d001207c9dd9aa6e864719645058b0c625c10d823e355f3a0",
+  "combined_sha256": "f55d2e759196db5ae02a4733ccc3fdf26605e5c1054b451c327d455bfb7a0fd1",
+  "counts": {
+    "capacity_SUPPORTED": 16,
+    "original_goal_gifs": 2,
+    "science_FAIL": 2,
+    "science_UNKNOWN": 14
+  },
+  "default_adoption": false,
+  "editorial_adjustments": [
+    "Published MEDIA_QA.md links target byte-identical committed GIF copies; external review remains unchanged.",
+    "Shared index V2 removes provisional PR269 labels; its nine source-input pins and numerical projections are unchanged."
+  ],
+  "publication_input_files": 13945,
+  "publication_model_restore_sample_rescore_update_calls": 0,
+  "publisher_commit": "5a74fc240f496164ef6ce6da7245145a60e489a8",
+  "publisher_controls": {
+    "log": "/ml2/hypergan/ka2-k3p-defaults-publisher-root-controls-20261003.log",
+    "passed": 78
+  },
+  "results_sha256": "a35cccc85c1774dca3e301ba73e493943ba31f3562ea52a97ec25fc7a7b97047",
+  "schema": "particlegan_ka2_k3p_defaults_software_verification_v1",
+  "snapshot_preflight": {
+    "definitions": 177,
+    "digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e",
+    "files": 3404,
+    "new_models_samples_updates_cuda": 0,
+    "required_case_hashes": 8,
+    "resolved_recipes": 16
+  },
+  "source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+  "source_controls": {
+    "log": "/ml2/hypergan/ka2-k3p-defaults-root-software-controls-20261003.log",
+    "passed": 192
+  },
+  "speed_winner": null
+}
