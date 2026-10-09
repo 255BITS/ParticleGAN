@@ -51,7 +51,6 @@
   "control": {
     "candidate_id": "hydraulic-output-travel-v1",
     "task_map": {
-      "two_pole": "two_pole",
       "gaussian1d_smoke": "gaussian1d_smoke",
       "gaussian1d_stability": "gaussian1d_stability",
       "grid100": "grid100",
