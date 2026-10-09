@@ -181,6 +181,8 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # Opt-in protection of existing G/encoder/prior objectives. Component
+    # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
@@ -575,13 +577,22 @@ class Recipe:
         return GANLoss(self.loss, labels=self.loss_labels)
 
     def kinetic_transport_loss(self, fake, real):
-        """Public sample-space auxiliary objective; the caller owns the batches."""
+        """Weighted empirical transport on caller-owned G-phase output batches.
+
+        Enabling this objective requires a host consumer. It draws no samples,
+        detaches real targets and retains gradients through fake outputs. Hosts
+        with zero weight retain their original objective without calling it.
+        """
         from .kinetic_transport import kinetic_transport_loss
         return self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)
 
     def kinetic_transport_local_loss(self, fake, real):
-        """Public relative local moment residual; caller owns the same batches."""
+        """Weighted local-v2 residual on the same caller-owned output batches.
+
+        Anchors, bandwidths and normalizers come from detached real targets.
+        This auxiliary term does not become a protected projection objective.
+        """
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
 
@@ -684,6 +695,13 @@ class Recipe:
         A supplied module binds Conv2d/ConvTranspose2d weights automatically when
         ``optimizer_convolution='per_offset'``. Bare high-rank tensor iterables
         lack this layout contract and are rejected by DualNorm.
+
+        With ``constraint_geometry_mode != 'none'``, call
+        ``particlegan.optim.constraint_geometry.constraint_geometry_backward``
+        before ``step()`` with the host's existing protected scalar losses.
+        Protection must cover the joint generator/encoder/prior optimizer.
+        The default mode requires no protected-loss hook and retains the
+        original optimizer type and checkpoint format.
         """
         from torch import nn
         module = params if isinstance(params, nn.Module) else None
