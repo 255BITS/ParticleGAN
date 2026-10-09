@@ -183,9 +183,12 @@ def test_campaign_cleanup_waits_for_real_supervisor_and_descendants(study, tmp_p
     queue.submit(req, campaign(study.CAMPAIGN))
     claimed = queue.claim(SLOTS)
     process = queue.launch(claimed)
-    child = await_file(Path(claimed["worker"]["directory"]) / "grandchild.json")
-    study.cancel_campaign(queue, "software test of campaign shutdown")
-    study.finish_supervision(queue)
+    try:
+        # Includes importing the real serial-autograd dependency in the child.
+        child = await_file(Path(claimed["worker"]["directory"]) / "grandchild.json", timeout=10)
+    finally:
+        study.cancel_campaign(queue, "software test of campaign shutdown")
+        study.finish_supervision(queue)
     assert process.wait(timeout=3) == 1
     supervision = study.supervision_state(queue)
     assert not supervision["running_jobs"] and not supervision["active_leases"]
