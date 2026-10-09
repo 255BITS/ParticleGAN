@@ -2,6 +2,8 @@
 
 All **96 BCAP-on configurations** have concluded, at **2026-10-09 04:51 MDT**. Four passed all **6/6 Tier 1** requirements. Three tied at **7/21 Tier 2**, below the frozen **10/21** target. The extra 24 produced no Tier 1 survivors. The whole-configuration PASS-count/content-hash objective selected **DualNorm with non-saturating loss**; the hash resolves the three-way tie. No candidate qualifies through Tier 2.
 
+After this readout was published, the owner requested using the winner as the named public `bcap` preset. The separate [default-selection decision](DEFAULT_SELECTION.md) records that update; this search's original scientific outcomes and immutable archive are preserved.
+
 The [current technique inventory](../technique-inventory.md) is the single goal leaderboard. [Summary](summary.json), [combined selection](combined-readout.json), [all original 72 results](readout.json), and [all added 24 results](overnight/readout.json) retain every configuration, setting, final metric, gate and attempt identity. Missing higher-tier results remain unmeasured, rather than numerical failures.
 
 The selected recipe uses G/E rate **0.012**, D rate **0.018**, and prior rate **0.030**, all constant; DualNorm smoothing **0.001**, zero momentum, convolution **per_offset**, BCAP coefficient **1**, cap **1**, and regularization **every update**. Its [complete resolved recipe](../../../configs/forge/configurations/bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36.json) is the authoritative global configuration across tasks. Forge v1's historical `bcap` preset resolves through Adam, so reproducing this configuration requires its explicit optimizer and loss overrides. Public package defaults are unchanged.

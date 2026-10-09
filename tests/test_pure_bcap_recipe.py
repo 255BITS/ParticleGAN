@@ -19,6 +19,8 @@ def test_bcap_public_preset_contains_only_requested_training_mechanisms():
     assert recipe.critic_formulation == recipe.effective_critic_formulation == "bcap"
     assert recipe.optimizer_family == "dualnorm"
     assert recipe.optimizer_momentum == 0. and recipe.optimizer_adam_lr is None
+    assert recipe.loss == "non_saturating"
+    assert recipe.optimizer_smoothing == .001 and recipe.optimizer_convolution == "per_offset"
     assert (recipe.reg_arm, recipe.reg_coeff, recipe.reg_kappa, recipe.reg_every) == ("b_cap", 1., 1., 1)
     assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult, recipe.betas) == (.012, 1.5, 2.5, (0., .999))
     assert recipe.lr_floor == recipe.network_lr_floor == 1.
@@ -32,10 +34,11 @@ def test_bcap_public_preset_contains_only_requested_training_mechanisms():
 def test_bcap_adam_retains_the_exact_historical_preset_under_an_explicit_name():
     recipe = get_recipe("bcap_adam")
     assert (recipe.optimizer_family, recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == ("adam", .00425, 1., 2.)
-    # Apart from the public name and four optimizer choices, every resolved
-    # field retains the old law. Checkpoints can reconstruct their saved name.
+    # Historical Adam retains its complete law. The public winner adds the
+    # explicitly selected loss, smoothing and convolution configuration.
     assert recipe.replace(name="bcap", optimizer_family="dualnorm", lr=.012,
-                          d_lr_mult=1.5, prior_lr_mult=2.5) == get_recipe("bcap")
+                          d_lr_mult=1.5, prior_lr_mult=2.5, loss="non_saturating",
+                          optimizer_smoothing=.001, optimizer_convolution="per_offset") == get_recipe("bcap")
     assert Recipe(**recipe.to_dict()) == recipe
 
 
@@ -161,8 +164,12 @@ def test_public_dualnorm_default_rejects_incompatible_optimizer_state_atomically
     _assert_state_equal(before, trainer.state_dict())
 
 
-def test_historical_adam_checkpoint_reconstructs_saved_recipe_and_cannot_load_as_new_default():
-    historical = _trainer(get_recipe("bcap_adam").replace(name="bcap"))
+@pytest.mark.parametrize("historical_recipe", [
+    get_recipe("bcap_adam").replace(name="bcap"),
+    get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none"),
+])
+def test_historical_bcap_checkpoint_reconstructs_saved_recipe_and_cannot_load_as_new_default(historical_recipe):
+    historical = _trainer(historical_recipe)
     historical.step(_batch())
     saved = historical.state_dict()
     current = _trainer()

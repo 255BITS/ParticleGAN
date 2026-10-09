@@ -113,7 +113,7 @@ def test_momentum_direction_is_smoothed_after_accumulation():
 
 
 def test_public_recipe_consumes_scale_for_every_role_and_preserves_zero_packet():
-    base = get_recipe("bcap", optimizer_family="dualnorm", num_particles=5, z_dim=2)
+    base = get_recipe("bcap", optimizer_family="dualnorm", optimizer_smoothing=0., num_particles=5, z_dim=2)
     assert "optimizer_smoothing" not in base.to_dict()
     smooth = base.replace(optimizer_smoothing=1e-4)
     prior = smooth.make_prior()

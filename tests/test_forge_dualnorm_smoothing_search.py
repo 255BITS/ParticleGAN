@@ -30,7 +30,8 @@ def test_positive_scale_grid_is_active_owned_and_reusable(checkout, spec):
     assert len(plan["trials"]) == 3
     assert plan["declared_worst_case_seconds"] == 30
     assert recipe_field_owner("optimizer_smoothing") == "hyperparameter"
-    expected = technique_signature(get_recipe("bcap", optimizer_smoothing=1e-4))
+    expected = technique_signature(get_recipe("bcap", loss="relativistic",
+                                              optimizer_smoothing=1e-4, optimizer_convolution="none"))
     task = read_json(checkout / "configs/forge/tasks/t1.json")
     for card, settings in search._declarations(checkout, spec):
         assert technique_signature(card["resolved_configuration_recipe"]) == expected
@@ -61,18 +62,19 @@ def test_invalid_scale_rejected_before_writing(checkout, spec, scale):
 
 def test_other_families_do_not_claim_an_active_smoothing_axis():
     for family in ("adam", "formulation", "sgda", "dualnorm_D_only", "particle_rownorm_only"):
-        recipe = get_recipe("gan" if family == "formulation" else "bcap", optimizer_family=family)
+        recipe = get_recipe("gan" if family == "formulation" else "bcap_adam", optimizer_family=family)
         assert not recipe_field_active("optimizer_smoothing", recipe)
 
 
 def test_zero_default_preserves_recipe_signature_and_configuration_identity(checkout):
     base = enable_base(checkout, smoothing=0.)
-    recipe = asdict(get_recipe("bcap"))
+    legacy = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none")
+    recipe = asdict(legacy)
     historical = {name: value for name, value in recipe.items() if name != "optimizer_smoothing"}
     assert technique_signature(recipe) == technique_signature(historical)
     assert search.recipe_identity_fields(recipe) == search.recipe_identity_fields(historical)
     assert search.configuration_id(base, resolved_recipe=recipe) == search.configuration_id(base, resolved_recipe=historical)
-    assert "optimizer_smoothing" not in get_recipe("bcap").to_dict()
+    assert "optimizer_smoothing" not in legacy.to_dict()
 
 
 def test_categorical_space_explicitly_compares_unsmoothed_and_smoothed_bases(checkout):

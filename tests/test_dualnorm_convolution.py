@@ -26,7 +26,7 @@ def cuda_contract():
 
 
 def recipe(**overrides):
-    return get_recipe("bcap", **{"optimizer_convolution": "per_offset", **overrides})
+    return get_recipe("bcap", **{"optimizer_convolution": "per_offset", "optimizer_smoothing": 0., **overrides})
 
 
 def gradient_like(weight, offset=0.):
@@ -192,7 +192,7 @@ def test_public_factories_bind_encoder_critic_and_sampled_prior_without_changing
 def test_unlabelled_high_rank_and_unsupported_modes_fail_closed():
     module = nn.Conv2d(2, 2, 3)
     with pytest.raises(ValueError, match="metadata"):
-        get_recipe("bcap").make_optimizers(module, nn.Linear(2, 1))
+        get_recipe("bcap", optimizer_convolution="none").make_optimizers(module, nn.Linear(2, 1))
     with pytest.raises(ValueError, match="metadata"):
         recipe().make_generator_optimizer(module.parameters())
     with pytest.raises(ValueError, match="metadata"):
@@ -242,8 +242,8 @@ def test_checkpoint_kernel_contract_rejected_before_mutating_state(field, value)
         assert state_digest(other.state_dict()) == before_other
 
 
-def test_default_dense_packets_omit_convolution_and_opt_in_dense_updates_are_identical():
-    base = get_recipe("bcap")
+def test_disabled_convolution_packets_and_opt_in_dense_updates_are_identical():
+    base = get_recipe("bcap", optimizer_convolution="none")
     enabled = base.replace(optimizer_convolution="per_offset")
     assert "optimizer_convolution" not in base.to_dict()
     assert enabled.to_dict()["optimizer_convolution"] == "per_offset"
