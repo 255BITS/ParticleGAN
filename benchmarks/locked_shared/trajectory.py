@@ -191,7 +191,9 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = generator(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_scores = critic(slow, fake)
+            protected_real_scores = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_scores, protected_real_scores)
             protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity; only the relativistic pair does that.
@@ -199,7 +201,11 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
             g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
             g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
             g_loss = g_loss + spread(prior.z)
-            constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,))
+            # Reuse the original real logits; do not add a second real forward.
+            def protected_evaluator():
+                return (gan.g_loss(critic(slow, generator(slow, prior.z)), protected_real_scores),)
+            constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
+                                         protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:

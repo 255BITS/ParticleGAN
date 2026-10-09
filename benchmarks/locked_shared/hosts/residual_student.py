@@ -259,7 +259,9 @@ def train(*, pairing: str = "shared", echo: bool = False,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = head(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_scores = critic(slow, fake)
+            protected_real_scores = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_scores, protected_real_scores)
             protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity. The residual term does, and only on both-land
@@ -273,7 +275,11 @@ def train(*, pairing: str = "shared", echo: bool = False,
                 residual = fake.new_zeros(())
             g_loss = g_loss + RESIDUAL_WEIGHT * residual
             protected = (protected_adversarial, residual) if both else (protected_adversarial,)
-            constraint_geometry_backward(g_loss, opt_g, protected)
+            def protected_evaluator():
+                current = head(slow, prior.z)
+                adversarial = gan.g_loss(critic(slow, current), protected_real_scores)
+                return (adversarial, (current[mask] - fast[mask]).pow(2).mean()) if both else (adversarial,)
+            constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:

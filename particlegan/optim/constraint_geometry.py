@@ -11,7 +11,7 @@ import torch
 from .dualnorm import NormalizedOptimizer
 
 
-def constraint_geometry_backward(loss, optimizer, protected_losses):
+def constraint_geometry_backward(loss, optimizer, protected_losses, *, protected_evaluator=None):
     """Backpropagate the unchanged scalar loss; bind existing protected losses.
 
     Ordinary optimizers use exactly the original backward. Enabled optimizers
@@ -19,7 +19,7 @@ def constraint_geometry_backward(loss, optimizer, protected_losses):
     """
     binder = getattr(optimizer, "bind_protected_losses", None)
     if binder is not None:
-        binder(protected_losses)
+        binder(protected_losses, protected_evaluator=protected_evaluator)
     loss.backward()
 
 
@@ -66,7 +66,7 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
     def _parameters(self):
         return [p for group in self.param_groups for p in group["params"]]
 
-    def bind_protected_losses(self, losses):
+    def bind_protected_losses(self, losses, *, protected_evaluator=None):
         if self._protected is not None:
             raise ValueError("constraint_geometry losses already pending")
         losses = tuple(losses)

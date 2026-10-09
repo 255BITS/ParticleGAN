@@ -105,7 +105,7 @@ class _OptimizerBundle:
                         setter(table, torch.arange(table.shape[0], device=table.device))
             optimizer.step(*args, **kwargs)
 
-    def bind_protected_losses(self, losses):
+    def bind_protected_losses(self, losses, *, protected_evaluator=None):
         enabled = [optimizer for optimizer in self.optimizers
                    if hasattr(optimizer, "bind_protected_losses")]
         if not enabled:
@@ -115,7 +115,7 @@ class _OptimizerBundle:
         optimizer = enabled[0]
         for table in self.enumerated_tables:
             optimizer.set_sampled_rows(table, torch.arange(len(table), device=table.device))
-        optimizer.bind_protected_losses(losses)
+        optimizer.bind_protected_losses(losses, protected_evaluator=protected_evaluator)
 
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
@@ -336,7 +336,7 @@ class BehaviorComponents:
                 direct_particles=list(direct_particles)))
         if not parts:
             raise CapabilityError(["host exposes no trainable generator-side component"])
-        if self.recipe.constraint_geometry_mode == "nonascent" and len(parts) > 1:
+        if self.recipe.constraint_geometry_mode != "none" and len(parts) > 1:
             # Zero-momentum full DualNorm has independent per-group histories.
             # Joining their groups changes no base direction, rate or ownership;
             # it permits one projection of the actual combined displacement.

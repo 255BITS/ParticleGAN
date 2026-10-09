@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "constraint_geometry-round3-v1"
+  },
+  "candidate": "constraint_geometry-round3-strict-progress-v1",
+  "competing_explanation": "Same-batch strict descent may stall at opposed protected gradients, suppress useful coverage, or overfit the changing critic; informative paired residual gradients need not repair row identity within the fixed budget. No trajectory paired oracle is introduced.",
+  "control": {
+    "candidate_id": "constraint_geometry-round3-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "identity_mse",
+    "op": ">",
+    "phase": "final",
+    "task_id": "residual_student",
+    "threshold": 0.02
+  },
+  "hypothesis": "Strict common descent realized by bounded same-batch Armijo acceptance repairs residual identity beyond schema2 boundary nonascent while retaining passing guardrails.",
+  "id": "constraint_geometry-round3-candidate-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "identity_mse",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "residual_student",
+    "threshold": 0.02
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate": "constraint_geometry-round2-nonascent-v1",
+        "source_digest": "b87904dcae3e2df70006c04b51d3fd65d89979a72c7f5f1e841ae684517f7685"
+      },
+      "path": "reports/forge/bcap-physics/constraint_geometry/round2/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "constraint_geometry-round3-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

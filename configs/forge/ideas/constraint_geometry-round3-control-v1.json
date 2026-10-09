@@ -1,0 +1,44 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Corrected schema2 nonascent predecessor imported into matched round3 source"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/constraint_geometry/round3/README.md",
+  "id": "constraint_geometry-round3-control-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Primary matched schema2 predecessor control isolates the strict progress package; exact winner is archived context only.",
+  "parent": "constraint_geometry-round2-nonascent-v1",
+  "prior_art": [
+    "bcap-dualnorm-convolution-v1",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "constraint_geometry_mode": "nonascent",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

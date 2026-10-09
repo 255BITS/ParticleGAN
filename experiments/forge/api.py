@@ -167,6 +167,9 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         if context.execution_path == "public_components" and task["execution"].get("host") not in {
                 "two_pole", "trajectory", "residual_student", "mid_scale_identity"}:
             raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])
+        if context.recipe.constraint_geometry_mode == "strict_progress" and (
+                context.recipe.input_noise_std or context.recipe.output_noise_std or context.recipe.standardize):
+            raise CapabilityError(["strict_progress finite replay requires zero additive noise and an unstandardized prior"])
     context.host_adaptation = adaptation_receipt(candidate, task)
     context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),

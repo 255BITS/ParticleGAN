@@ -116,12 +116,14 @@ def _assert_bitwise_state(a, b):
 
 @pytest.mark.parametrize('dtype', [torch.float32, torch.float64])
 @pytest.mark.parametrize('device', ['cpu', 'cuda'])
-def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
+@pytest.mark.parametrize('mode', ['nonascent', 'strict_progress'])
+def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device, mode):
     """Software fixture: public initialization, sampled ownership, no training gate."""
     if device == 'cuda' and not torch.cuda.is_available():
         pytest.skip('CUDA unavailable')
     from particlegan.init import deterministic_orthogonal_
     from particlegan.optim.dualnorm import NormalizedOptimizer
+    from particlegan.optim.strict_progress import StrictProgressOptimizer
     import random
     import numpy as np
 
@@ -137,7 +139,8 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
     groups = [dict(params=list(networks[0].parameters()), role='generator'),
               dict(params=[tables[0]], role='prior', lr=.030)]
     plain = NormalizedOptimizer(groups, **options)
-    guarded = ConstraintGeometryOptimizer([
+    optimizer_type = ConstraintGeometryOptimizer if mode == 'nonascent' else StrictProgressOptimizer
+    guarded = optimizer_type([
         dict(params=list(networks[1].parameters()), role='generator'),
         dict(params=[tables[1]], role='prior', lr=.030)], **options)
     rows = torch.tensor([0, 2, 2, 4], device=device)
@@ -162,7 +165,8 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
         losses = [net(table[rows]).square().mean() for net, table in zip(networks, tables)]
         before_grad = [None if p.grad is None else p.grad.clone() for p in parameters[1]]
         before_rng = rng_state()
-        guarded.bind_protected_losses((losses[1],))
+        guarded.bind_protected_losses((losses[1],), protected_evaluator=lambda:
+                                     (networks[1](tables[1][rows]).square().mean(),))
         assert_rng(before_rng, rng_state())
         for p, old_grad in zip(parameters[1], before_grad):
             if old_grad is None:
@@ -183,8 +187,92 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
         saved = deepcopy(guarded.state_dict())
         base_saved = deepcopy(saved)
         base_saved.pop('constraint_geometry')
+        base_saved.pop('strict_progress', None)
         _assert_bitwise_state(plain.state_dict(), base_saved)
         if index == 0:
             guarded.load_state_dict(saved)
             plain.load_state_dict(deepcopy(plain.state_dict()))
             _assert_bitwise_state(guarded.state_dict(), saved)
+
+
+def test_strict_progress_realizes_descent_and_backtracks_nonlinear_overshoot():
+    from particlegan.optim.strict_progress import StrictProgressOptimizer
+    p = torch.nn.Parameter(torch.tensor([.1], dtype=torch.float64))
+    opt = StrictProgressOptimizer([p], lr=1., smoothing=.001)
+    protected = p.square().sum()
+    old = float(protected.detach())
+    constraint_geometry_backward(-p.sum(), opt, (protected,),
+                                 protected_evaluator=lambda: (p.square().sum(),))
+    opt.step()
+    assert float(p.square().sum().detach()) < old
+    assert opt.strict_progress_stats['accepted_steps'] == 1
+    assert opt.strict_progress_stats['backtracks'] == 2
+    assert opt.strict_progress_stats['min_accepted_scale'] == .25
+    assert opt.strict_progress_stats['max_accepted_armijo_violation'] == 0
+    assert opt.constraint_geometry_stats['steps'] == 1
+    assert opt.strict_progress_stats['max_retained_norm_ratio'] <= 1
+
+
+def test_strict_progress_opposition_and_pending_checkpoint_contract():
+    from particlegan.optim.strict_progress import StrictProgressOptimizer
+    p = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    opt = StrictProgressOptimizer([p], lr=.1, smoothing=.001)
+    evaluator = lambda: (p.sum(), -p.sum())
+    constraint_geometry_backward(-p.sum(), opt, evaluator(), protected_evaluator=evaluator)
+    state = deepcopy(opt.state_dict())
+    restored = StrictProgressOptimizer([p], lr=.1, smoothing=.001)
+    restored.load_state_dict(state)
+    with pytest.raises(ValueError, match='evaluator'):
+        restored.step()
+    assert torch.equal(p, torch.tensor([1.], dtype=torch.float64))
+    restored.bind_protected_evaluator(evaluator)
+    restored.step()
+    assert torch.equal(p, torch.tensor([1.], dtype=torch.float64))
+    assert restored.strict_progress_stats['pareto_stalls'] == 1
+    assert restored.strict_progress_stats['rejected_steps'] == 1
+    assert restored.strict_progress_stats['probes'] == 0
+    assert restored.constraint_geometry_stats['steps'] == 1
+    bad = deepcopy(restored.state_dict())
+    bad['strict_progress']['stats']['accepted_steps'] = -1
+    with pytest.raises(ValueError, match='counter'):
+        restored.load_state_dict(bad)
+
+
+def test_strict_progress_inactive_cancellation_and_callback_rng_fail_closed():
+    from particlegan.optim.strict_progress import StrictProgressOptimizer
+    from particlegan.optim.dualnorm import NormalizedOptimizer
+    p = torch.nn.Parameter(torch.tensor([.1234567]))
+    plain = torch.nn.Parameter(p.detach().clone())
+    options = dict(lr=.12345676, smoothing=.001)
+    opt = StrictProgressOptimizer([p], **options)
+    baseline = NormalizedOptimizer([plain], **options)
+    calls = []
+    def evaluator():
+        calls.append(True)
+        return (p.sum(),)
+    loss = p.sum()
+    constraint_geometry_backward(loss, opt, (loss,), protected_evaluator=evaluator)
+    plain.sum().backward()
+    baseline.step()
+    opt.step()
+    assert torch.equal(p, plain) and not calls
+    opt.zero_grad()
+    loss = p.sum()
+    def stochastic_evaluator():
+        return (p.sum() + torch.rand(()),)
+    constraint_geometry_backward(-loss, opt, (loss,), protected_evaluator=stochastic_evaluator)
+    before, rng = p.detach().clone(), torch.get_rng_state().clone()
+    with pytest.raises(ValueError, match='ambient RNG'):
+        opt.step()
+    assert torch.equal(p, before) and torch.equal(rng, torch.get_rng_state())
+
+
+def test_strict_progress_public_recipe_and_deterministic_replay_restriction():
+    from particlegan.optim.strict_progress import StrictProgressOptimizer
+    from particlegan import GANTrainer
+    recipe = get_recipe('bcap', optimizer_family='dualnorm', constraint_geometry_mode='strict_progress')
+    module = torch.nn.Linear(2, 1)
+    assert isinstance(recipe.make_generator_optimizer(module), StrictProgressOptimizer)
+    with pytest.raises(ValueError, match='deterministic replay'):
+        GANTrainer(get_recipe('bcap', optimizer_family='dualnorm', constraint_geometry_mode='strict_progress',
+                              standardize=False, output_noise_std=.1), module, torch.nn.Linear(1, 1))

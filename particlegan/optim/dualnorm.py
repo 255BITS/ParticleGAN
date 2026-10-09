@@ -530,6 +530,9 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     if recipe.constraint_geometry_mode == "nonascent" and critic is None:
         from .constraint_geometry import ConstraintGeometryOptimizer
         optimizer_class = ConstraintGeometryOptimizer
+    elif recipe.constraint_geometry_mode == "strict_progress" and critic is None:
+        from .strict_progress import StrictProgressOptimizer
+        optimizer_class = StrictProgressOptimizer
     optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,

@@ -511,7 +511,16 @@ def _fit(
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
         protected_adversarial = g_loss
         g_loss = g_loss + cover_w * cover / n_scales
-        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover))
+        def protected_evaluator():
+            adversarial = student.odd.new_zeros(())
+            paired_cover = student.odd.new_zeros(())
+            for scale in EVAL_SCALES:
+                current = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
+                adversarial = adversarial + gan.g_loss(critic(current, scale), real_scores[scale]) / n_scales
+                paired_cover = paired_cover + F.mse_loss(student.state(scale), targets[scale])
+            return adversarial, paired_cover
+        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover),
+                                     protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)
