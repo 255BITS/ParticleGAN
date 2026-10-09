@@ -18,6 +18,8 @@ p.add_argument('--backend', choices=['cpu', 'cuda'], required=True)
 p.add_argument('--cpu-random', action='store_true')
 p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
 p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
+p.add_argument('--init', default=None, help='deterministic structured init name; default keeps PyTorch init')
+p.add_argument('--seed-offset', type=int, default=0, help='added to every torch seed; 0 leaves seeds unchanged')
 p.add_argument('--output', type=Path, required=True)
 p.add_argument('--network-floor', type=float, required=True)
 p.add_argument('--prior-floor', type=float, required=True)
@@ -28,6 +30,14 @@ a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.seed_offset or a.init:
+    from particlegan.structured_init import NAMES, configure, install_seed_offset
+    if a.seed_offset:
+        install_seed_offset(a.seed_offset)
+    if a.init:
+        if a.init not in NAMES:
+            raise SystemExit(f'unknown --init {a.init!r}; expected one of: {", ".join(NAMES)}')
+        configure(a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 
@@ -112,6 +122,9 @@ original_step = torch.optim.Adam.step
 
 
 def init(opt, *args, **kwargs):
+    if a.init:
+        from particlegan.structured_init import freeze
+        freeze()
     kwargs.setdefault('foreach', False)
     kwargs.setdefault('fused', False)
     original_init(opt, *args, **kwargs)
@@ -209,7 +222,7 @@ import inspect
 from convergence_gate import ConvergenceGate
 audit = RandomAudit(a.cpu_random)
 started = time.perf_counter()
-record = dict(task='mode_hold_convergence', backend=a.backend, schedule=dict(
+record = dict(task='mode_hold_convergence', backend=a.backend, init=a.init, seed_offset=a.seed_offset, schedule=dict(
                   network_lr_horizon_cap=config['network_lr_horizon_cap'], network_lr_floor=a.network_floor,
                   prior_lr_floor=a.prior_floor, lr_anneal_start=a.anneal_start, frozen_budget=1200),
               initialization_fixture_sha256=(hashlib.sha256(a.initial_state.read_bytes()).hexdigest()
@@ -231,7 +244,8 @@ def ema_measure(step):
     while frame is not None and frame.f_code.co_name != 'train_mode_hold':
         frame = frame.f_back
     snapshot = frame.f_locals['snapshot']
-    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
+    fork_devices = [torch.cuda.current_device()] if a.backend == 'cuda' else []
+    with torch.random.fork_rng(devices=fork_devices):
         row = snapshot(step)
     return dict(step=step, modes=row['modes'], hq=row['hq'])
 

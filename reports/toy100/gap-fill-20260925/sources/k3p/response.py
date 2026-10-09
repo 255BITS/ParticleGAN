@@ -29,7 +29,7 @@ def begin(opt):
         key=(id(opt),index)
         gain,cosine=gain_from(current,previous.get(key))
         previous[key]=current.clone()
-        assert previous[key].device.type=='cuda'
+        assert previous[key].device == current.device
         saved.append((group,group['lr'],group['betas']))
         group['betas']=(0.,.9)
         group['lr']*=gain
