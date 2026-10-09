@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 14400,
+    "candidate_budget_seconds": 7200,
+    "id": "information_geometry_campaign_v1"
+  },
+  "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "competing_explanation": "Weak singular directions can encode rare-component shape and low-intensity features rather than noise; suppressing them can worsen rare modes. Moving prior rows, mass quantization and coupled-game instability remain unchanged.",
+  "control": {
+    "candidate_id": "information_geometry_spectral_half_v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "hypothesis": "Matched winning BCAP control in the same executed source/runtime supplies the frozen reference for the one spectral-half comparison.",
+  "id": "information_geometry_control_v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36"
+      },
+      "path": "reports/forge/bcap-tier2-search/failure-analysis.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "information_geometry_diagnostic_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

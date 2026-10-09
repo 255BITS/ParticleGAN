@@ -1,0 +1,60 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "img_blobs4"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "img_intensity2"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Four source-bound image diagnostics do not qualify a new source or adopt public defaults.",
+    "status": "provisional"
+  },
+  "description": "Bounded fractional matrix-preconditioning diagnostic. Shared common anchors and three fidelity specialists; unchanged complete gates. No ordinary-tier qualification.",
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "information_geometry_diagnostic_v1",
+  "policy_change_reason": "Explicit information-geometry mechanism diagnostic; scheduler tier1 includes unchanged smoke-dependent Gaussian stability and standalone original Tier2 specialists. All original dependencies/budgets/gates remain.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "raw_metrics_only"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

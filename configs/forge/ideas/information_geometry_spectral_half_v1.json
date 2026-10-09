@@ -1,0 +1,48 @@
+{
+  "api_changes": [
+    "Public Recipe.optimizer_family=information_geometry_spectral_half; shared optimizer and convolution/checkpoint contracts"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Only matrix singular weighting changes from smoothed polar to damped spectral half, on every network role and explicit per-offset convolution group"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-tier2-search/STUDY.md",
+  "id": "information_geometry_spectral_half_v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Instantaneous normalized fourth-root Gram preconditioning retains singular contrast with identical top spectral movement, rates, bias/prior update laws, loss and penalty.",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "prior_art": [
+    "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "reports/forge/dualnorm-pacing-v2/README.md",
+    "reports/forge/gaussian1d-diagnosis/README.md",
+    "https://proceedings.mlr.press/v80/gupta18a.html"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "information_geometry_spectral_half",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "information_geometry_spectral_half"
+}

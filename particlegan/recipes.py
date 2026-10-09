@@ -213,11 +213,11 @@ class Recipe:
         if (type(self.optimizer_smoothing) not in (int, float)
                 or not math.isfinite(self.optimizer_smoothing) or self.optimizer_smoothing < 0):
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
-        if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
+        if self.optimizer_smoothing and self.optimizer_family not in ("dualnorm", "information_geometry_spectral_half"):
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
         if self.optimizer_convolution not in ("none", "per_offset"):
             raise ValueError("optimizer_convolution must be none or per_offset")
-        if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
+        if self.optimizer_convolution != "none" and self.optimizer_family not in ("dualnorm", "information_geometry_spectral_half"):
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)

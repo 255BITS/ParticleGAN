@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 14400,
+    "candidate_budget_seconds": 7200,
+    "id": "information_geometry_campaign_v1"
+  },
+  "candidate": "information_geometry_spectral_half_v1",
+  "competing_explanation": "Weak singular directions can encode rare-component shape and low-intensity features rather than noise; suppressing them can worsen rare modes. Moving prior rows, mass quantization and coupled-game instability remain unchanged.",
+  "control": {
+    "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "img_blobs4",
+    "threshold": 0.9
+  },
+  "hypothesis": "Partially preserving singular contrast suppresses weak minibatch directions that smoothed polar promotes, improving image background fidelity and avoiding rare-component collapse without a scalar rate or prior change.",
+  "id": "information_geometry_candidate_v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "img_blobs4",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36"
+      },
+      "path": "reports/forge/bcap-tier2-search/failure-analysis.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "information_geometry_diagnostic_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -16,7 +16,7 @@ from ..grad_regularizers import CriticStepRecord
 
 NORMALIZED_FAMILIES = (
     "sgda", "nsgda_global", "nsgda_layer", "ada_nsgda", "dualnorm",
-    "dualnorm_D_only", "particle_rownorm_only",
+    "dualnorm_D_only", "particle_rownorm_only", "information_geometry_spectral_half",
 )
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 _CONVOLUTION_VERSION = "per_offset_polar_v1"
@@ -29,7 +29,7 @@ def convolution_parameter_groups(groups, modules, *, family):
     retain their original parameters and fields, including checkpoint layout.
     A bare parameter iterable has no module contract and cannot use this hook.
     """
-    if family not in ("dualnorm", "dualnorm_D_only"):
+    if family not in ("dualnorm", "dualnorm_D_only", "information_geometry_spectral_half"):
         return groups
     kernels = {}
     for root in modules:
@@ -52,7 +52,7 @@ def convolution_parameter_groups(groups, modules, *, family):
     result = []
     for original in groups:
         role = original.get("role", original.get("forge_role", "generator"))
-        eligible = role not in ("prior", "table") and (family == "dualnorm" or role == "critic")
+        eligible = role not in ("prior", "table") and (family in ("dualnorm", "information_geometry_spectral_half") or role == "critic")
         parameters = list(original["params"])
         if not eligible or not any(id(p) in kernels for p in parameters):
             result.append({**original, "params": parameters})
@@ -160,11 +160,11 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("momentum is supported only by dualnorm arms")
         if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
             raise ValueError("optimizer smoothing must be finite and nonnegative")
-        if smoothing and family != "dualnorm":
+        if smoothing and family not in ("dualnorm", "information_geometry_spectral_half"):
             raise ValueError("optimizer smoothing requires the dualnorm family")
         if convolution not in ("none", "per_offset"):
             raise ValueError("optimizer convolution must be none or per_offset")
-        if convolution != "none" and family != "dualnorm":
+        if convolution != "none" and family not in ("dualnorm", "information_geometry_spectral_half"):
             raise ValueError("optimizer convolution requires the dualnorm family")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
@@ -182,6 +182,11 @@ class NormalizedOptimizer(Optimizer):
         self.smoothing = float(smoothing)
         self.convolution = convolution
         self.recipe_optimizer_family = family
+        if family == "information_geometry_spectral_half":
+            from .information_geometry import information_geometry_spectral_half
+            self.matrix_direction = information_geometry_spectral_half
+        else:
+            self.matrix_direction = polar_factor
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
                     "role": "generator", "weight_decay": 0., "maximize": False,
@@ -218,7 +223,7 @@ class NormalizedOptimizer(Optimizer):
         elif self.family == "particle_rownorm_only":
             algorithm = "rownorm" if role in ("prior", "table") else "adam"
         else:
-            algorithm = self.family
+            algorithm = "dualnorm" if self.family == "information_geometry_spectral_half" else self.family
         if algorithm == "dualnorm" and role in ("prior", "table"):
             algorithm = "rownorm"
         group["algorithm"] = algorithm
@@ -371,14 +376,13 @@ class NormalizedOptimizer(Optimizer):
                             # current slice does not move on stale momentum.
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
-                            update = polar_factor(direction_matrix, smoothing=self.smoothing)
+                            update = self.matrix_direction(direction_matrix, smoothing=self.smoothing)
                             weight_matrix.add_(update, alpha=-rate * factor)
                     elif parameter.ndim == 2:
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        update = (polar_factor(direction, smoothing=self.smoothing)
-                                  if self.smoothing else polar_factor(direction))
+                        update = self.matrix_direction(direction, smoothing=self.smoothing)
                         parameter.add_(update, alpha=-rate * factor)
                     else:
                         norm = direction.norm()
