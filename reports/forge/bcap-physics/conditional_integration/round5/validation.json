@@ -1,0 +1,162 @@
+{
+  "active_workers": 0,
+  "actual_training_gifs": {
+    "media/both-gaussian1d_smoke.gif": 9,
+    "media/both-gaussian1d_stability.gif": 9,
+    "media/both-mid_scale_identity_transport_round5_v1.gif": 9,
+    "media/both-residual_student_transport_round5_v1.gif": 9,
+    "media/both-trajectory_transport_round5_v1.gif": 9,
+    "media/both-vector_two_broad.gif": 9,
+    "media/both-vector_unequal_mass.gif": 9,
+    "media/direction-gaussian1d_smoke.gif": 9,
+    "media/direction-gaussian1d_stability.gif": 9,
+    "media/direction-mid_scale_identity_transport_round5_v1.gif": 9,
+    "media/direction-residual_student_transport_round5_v1.gif": 9,
+    "media/direction-trajectory_transport_round5_v1.gif": 9,
+    "media/direction-vector_two_broad.gif": 9,
+    "media/direction-vector_unequal_mass.gif": 9,
+    "media/transport-gaussian1d_smoke.gif": 9,
+    "media/transport-gaussian1d_stability.gif": 9,
+    "media/transport-mid_scale_identity_transport_round5_v1.gif": 9,
+    "media/transport-residual_student_transport_round5_v1.gif": 9,
+    "media/transport-trajectory_transport_round5_v1.gif": 9,
+    "media/transport-vector_two_broad.gif": 9,
+    "media/transport-vector_unequal_mass.gif": 9,
+    "media/winner-gaussian1d_smoke.gif": 9,
+    "media/winner-gaussian1d_stability.gif": 9,
+    "media/winner-mid_scale_identity_transport_round5_v1.gif": 9,
+    "media/winner-residual_student_transport_round5_v1.gif": 9,
+    "media/winner-trajectory_transport_round5_v1.gif": 9,
+    "media/winner-vector_two_broad.gif": 9,
+    "media/winner-vector_unequal_mass.gif": 9
+  },
+  "ancillary_allowance_seconds": 1200,
+  "attempts": 28,
+  "capacity_probes": 0,
+  "compile_summaries_check": {
+    "added_inputs": [],
+    "changed_inputs": [],
+    "coverage_scope": "Registered compact publication schemas and normalized records; original artifact availability is separate.",
+    "fresh": true,
+    "inventory_coverage": {
+      "declared_count": 11780,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11780,
+      "unclassified": [],
+      "valid": true
+    },
+    "memory_current": true,
+    "next_action": null,
+    "publication_materialization_current": true,
+    "publication_record_count": 480,
+    "qualification_refresh": {
+      "mode": "preserved_published_evidence",
+      "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+      "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+    },
+    "record_count": 795,
+    "reducer_current": true,
+    "removed_inputs": [],
+    "status": "CURRENT",
+    "view_count": 14
+  },
+  "completed_cells": 28,
+  "executed_full_reservations": 38880,
+  "final_grades": {
+    "both": {
+      "BLOCKED": 0,
+      "FAIL": 1,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 6
+    },
+    "direction": {
+      "BLOCKED": 0,
+      "FAIL": 2,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 5
+    },
+    "transport": {
+      "BLOCKED": 0,
+      "FAIL": 3,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 4
+    },
+    "winner": {
+      "BLOCKED": 0,
+      "FAIL": 4,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 3
+    }
+  },
+  "forge_validation": {
+    "candidates": 525,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "bcap-convolution-images-v1",
+      "bcap-tier2-smoothing-v1",
+      "conditional-integration-round5-both-study-v1",
+      "conditional-integration-round5-direction-study-v1",
+      "conditional-integration-round5-transport-study-v1",
+      "conditional-integration-round5-winner-study-v1",
+      "constraint_geometry-candidate-study-v1",
+      "constraint_geometry-control-study-v1",
+      "constraint_geometry-round2-candidate-study-v1",
+      "constraint_geometry-round2-control-study-v1",
+      "constraint_geometry-round3-candidate-study-v1",
+      "constraint_geometry-round3-control-study-v1",
+      "projection_transport-round4-both-study-v1",
+      "projection_transport-round4-projection-study-v1",
+      "projection_transport-round4-transport-study-v1",
+      "projection_transport-round4-winner-study-v1",
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 69,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "bcap_convolution_images",
+      "clockfree_continuous",
+      "conditional-integration-round5-diagnostic-v1",
+      "constraint_geometry-diagnostic-v1",
+      "constraint_geometry-round2-diagnostic-v1",
+      "constraint_geometry-round3-diagnostic-v1",
+      "discriminator_stability",
+      "formulation_comparison",
+      "host_profile_transfer",
+      "k3p_two_pole_horizon",
+      "projection_transport-round4-diagnostic-v1",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "frozen_scientific_files_unchanged": 524,
+  "main_execution_and_log_follower_stopped": true,
+  "matched_named_stream_cohorts": 7,
+  "mechanism_protocol_tests": 28,
+  "optimizer_updates_added": 0,
+  "original_task_qualification_telemetry_files_unchanged": 88,
+  "paid_worker_seconds": 3246.556998399785,
+  "planned_full_reservations": 38880,
+  "qualification_input": false,
+  "reservation_remaining": 0,
+  "retries": 0,
+  "saved_bitwise_parity_checks": 20,
+  "schema_version": 1,
+  "software_stdout": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/logs/software.log",
+    "sha256": "a40593eea89d6c1286077ed1c027b10f47d7b1ccdc386ef5790a7fb47cd2246e"
+  },
+  "source_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+  "source_digest": "4ac4f8f1eea473cdbea3924461f1162744717b8e74ecda5ea628743a3c253380",
+  "track_ceiling": 43200,
+  "training_draws_added": 0
+}

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "ed3283bf0b18a018df3e8f20770a5de3f5956ab19df5543bca98198ebf72708f",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6b2f3334b550c41b9b9ffb4443df498af249411ac592a0dbdc0acf2afe66b66d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/97efef2349fa4908a919e43ce5281d39/constraint_geometry-scored-outputs.pt": "076b879eb3c2cf8d1ab474664ccbe2cecbd460f158ea852a59b63c9668234004"
+  },
+  "task_id": "trajectory_transport_round5_v1"
+}

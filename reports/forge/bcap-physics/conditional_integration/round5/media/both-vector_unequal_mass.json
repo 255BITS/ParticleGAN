@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "69d5bd832da2c8dcaa069f261b55996787af460c78c99164651549969f524b10",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "9acca976052f119d29fc290a0d01d66622b1f9970196e4c85e67918ec980c7e2",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/1b9617739f7843b0a50ad2165d613b0d/observed-samples.pt": "17e878769d3ee3aa5e3dce09af451805e56f14ec5d4fdb2701e71e89a1173325"
+  },
+  "task_id": "vector_unequal_mass"
+}

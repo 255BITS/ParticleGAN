@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "ac2ffd1a9f4b17dc7f8770b6eb0ffdd49cb228bea9cb077f58bcb4217715c563",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6540adf8b94a44d186e8d1e0258a1e75757c045bc42e3f8b145647e7937e1828",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/72be4e183f80443e891e1a9a3659c03d/constraint_geometry-scored-outputs.pt": "566f527b17bb47ea8df479d2e28cc52825b2dfa14eacf1ea4d75cb5630aab625"
+  },
+  "task_id": "mid_scale_identity_transport_round5_v1"
+}

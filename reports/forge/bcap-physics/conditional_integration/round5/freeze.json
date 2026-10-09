@@ -1,0 +1,211 @@
+{
+  "arms": {
+    "conditional-integration-round5-both-v1": {
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "direction_blend",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "preflight_blockers": [],
+      "revision": "690923872eca6b008781706d45e8516e569e5517e9898c6dd8c36cf800b98e53",
+      "study_id": "conditional-integration-round5-both-study-v1",
+      "tasks": [
+        "gaussian1d_smoke",
+        "gaussian1d_stability",
+        "mid_scale_identity_transport_round5_v1",
+        "residual_student_transport_round5_v1",
+        "trajectory_transport_round5_v1",
+        "vector_two_broad",
+        "vector_unequal_mass"
+      ]
+    },
+    "conditional-integration-round5-direction-v1": {
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "direction_blend",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "preflight_blockers": [],
+      "revision": "2d5e67c986110c020221fc8092137d1ced40a211aac545cccc300230ca004baa",
+      "study_id": "conditional-integration-round5-direction-study-v1",
+      "tasks": [
+        "gaussian1d_smoke",
+        "gaussian1d_stability",
+        "mid_scale_identity_transport_round5_v1",
+        "residual_student_transport_round5_v1",
+        "trajectory_transport_round5_v1",
+        "vector_two_broad",
+        "vector_unequal_mass"
+      ]
+    },
+    "conditional-integration-round5-transport-v1": {
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "none",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "preflight_blockers": [],
+      "revision": "f1a2c6039a28494e10b29697cbcb5295ddb22d0f5f51c6707c8387ac561691de",
+      "study_id": "conditional-integration-round5-transport-study-v1",
+      "tasks": [
+        "gaussian1d_smoke",
+        "gaussian1d_stability",
+        "mid_scale_identity_transport_round5_v1",
+        "residual_student_transport_round5_v1",
+        "trajectory_transport_round5_v1",
+        "vector_two_broad",
+        "vector_unequal_mass"
+      ]
+    },
+    "conditional-integration-round5-winner-v1": {
+      "global_recipe_overrides": {
+        "constraint_geometry_mode": "none",
+        "d_lr_mult": 1.5,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "preflight_blockers": [],
+      "revision": "21d77a56360d482c32d06aedefd7a57d17fb46545197ad37c2ef8b3bbd75b5d1",
+      "study_id": "conditional-integration-round5-winner-study-v1",
+      "tasks": [
+        "gaussian1d_smoke",
+        "gaussian1d_stability",
+        "mid_scale_identity_transport_round5_v1",
+        "residual_student_transport_round5_v1",
+        "trajectory_transport_round5_v1",
+        "vector_two_broad",
+        "vector_unequal_mass"
+      ]
+    }
+  },
+  "exact_mechanisms": {
+    "particlegan/kinetic_transport.py": {
+      "byte_exact": true,
+      "original_commit": "63bad2205c36b792648168c869a55bac2e1f605d",
+      "sha256": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+    },
+    "particlegan/optim/direction_blend.py": {
+      "byte_exact": true,
+      "original_commit": "32a55b1a972695e70ae867231bc37d93fb0b58bc",
+      "sha256": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72"
+    },
+    "particlegan/optim/strict_progress.py": {
+      "byte_exact": true,
+      "original_commit": "63bad2205c36b792648168c869a55bac2e1f605d",
+      "sha256": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577"
+    }
+  },
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "source_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+  "source_digest": "4ac4f8f1eea473cdbea3924461f1162744717b8e74ecda5ea628743a3c253380",
+  "source_snapshot": null
+}

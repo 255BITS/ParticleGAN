@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "9d910dcada7dd6e32ac6ab28a1ab95bf92c8593049b5f370d1349ac8e5f6f729",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "a4da11d47da599fa4a975aae6675807d6c1f3a494903c88ce54c832e540c1ba1",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/6cb612b6c389425e80fc368369de5d19/evaluator/observed-samples.pt": "2a1061d47f543ef88bc5b113381f6218a309ee3c591e579e49fdeaacb62f8db4"
+  },
+  "task_id": "gaussian1d_stability"
+}
