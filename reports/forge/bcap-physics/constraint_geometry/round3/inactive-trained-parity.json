@@ -1,0 +1,93 @@
+{
+  "checks": [
+    {
+      "ambient_global_rng": null,
+      "bitwise_equal": true,
+      "candidate_attempt_id": "318b54ae36cf4aa28b4dddb0a3c911d8",
+      "candidate_constraint_stats": [
+        {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        }
+      ],
+      "control_attempt_id": "5ef53637f2dd44d3bcd9c00bb6f319b4",
+      "observation_mismatches": [],
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "two_pole"
+    },
+    {
+      "ambient_global_rng": {
+        "candidate_unchanged_within_run": true,
+        "control_unchanged_within_run": true,
+        "cross_arm_mismatches": [
+          "$.cpu_rng",
+          "$.cuda_rng"
+        ],
+        "reason": "Per-worker ambient global states; public trainer uses isolated named model RNG inside fork_rng, then restores ambient state."
+      },
+      "bitwise_equal": true,
+      "candidate_attempt_id": "144f3d8f04a646938052ab5516fecf34",
+      "candidate_constraint_stats": [
+        {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1000
+        }
+      ],
+      "control_attempt_id": "5cbfd08736394c048888a0a479cc4c79",
+      "observation_mismatches": [],
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "ambient_global_rng": {
+        "candidate_unchanged_within_run": true,
+        "control_unchanged_within_run": true,
+        "cross_arm_mismatches": [
+          "$.cpu_rng",
+          "$.cuda_rng"
+        ],
+        "reason": "Per-worker ambient global states; public trainer uses isolated named model RNG inside fork_rng, then restores ambient state."
+      },
+      "bitwise_equal": true,
+      "candidate_attempt_id": "3f91f8d7d063411b8280d7dddb54a699",
+      "candidate_constraint_stats": [
+        {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 6000
+        }
+      ],
+      "control_attempt_id": "4e9f69967ff54edca6f2b3bbec839fea",
+      "observation_mismatches": [],
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "excluded_cross_arm_full_checkpoint_hashes": [
+    "training_state_sha256",
+    "primary_state_sha256",
+    "confirmed_state_sha256"
+  ],
+  "excluded_declared_delta": [
+    "constraint_geometry",
+    "constraint_geometry_mode",
+    "strict_progress"
+  ],
+  "note": "Original checkpoint bytes and same-state confirmation hashes remain intact; every consumed named stream and numeric output is compared.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "separated_unused_ambient_state": [
+    "trainer.cpu_rng",
+    "trainer.cuda_rng"
+  ]
+}

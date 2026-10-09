@@ -302,3 +302,9 @@ finishes 3 PASS / 3 FAIL for both arms, with no new sustained identity pass.
 The schema1 results and UNMEASURED status of the correction at this report's
 original publication remain historical evidence; round-two receipts carry the
 new measured identity and do not retroactively qualify schema1.
+
+[Round three](round3/README.md) adds strict common descent with finite same-batch
+acceptance as a substantive successor. Its matched schema2 comparison adds
+sustained trajectory and residual passes, retains both guardrails and inactive
+parity, and still fails Gaussian stability. Its new source/recipe receipts carry
+that scoped result; earlier nonascent conclusions remain unchanged.

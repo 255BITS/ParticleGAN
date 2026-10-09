@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 785. Inventory coverage: complete. Unresolved import items: 7.
+Records: 787. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3942,6 +3942,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.049
 
 [Evidence](../../reports/forge/technique-receipts/0142b29ed9154d9fbf065c2934545c0c.json) · [Record](records/readout-56577544c52c17aa60639d19.json)
 
+### constraint_geometry-round3-strict-progress-v1 · readout-568ca0dd3d3cdf1221ae4605
+
+**Scope:** research_diagnostic; scientific; revision `251cd9f05b6fc2b7502a060893726c85b31bd3f814d0a1c2403ec393670f9f45`.
+
+Strict common descent realized by bounded same-batch Armijo acceptance repairs residual identity beyond schema2 boundary nonascent while retaining passing guardrails.
+
+**Observed:** {'FAIL': 1, 'PASS': 5}; wall seconds 157.421; mechanism `structural`.
+
+
+
+Strict common descent with same-batch Armijo realization adds sustained trajectory and residual PASS against corrected schema2, preserving passing guardrails and inactive numerical parity; Gaussian continuous stability remains FAIL.
+
+**Next:** Retain as scoped opt-in conditional repair, with no default adoption or ordinary Tier2 qualification. Stop this finite study after publication; future transfer/noisy support or component ablation requires new explicit authorization. Do not combine untested repairs.
+
+[Evidence](../../reports/forge/attempts/071a3ce3c55f4ddfa50078894ac3e3ad/result.json) · [Record](records/readout-568ca0dd3d3cdf1221ae4605.json)
+
 ### k3p-a2-off-native-diagnostic · readout-5830d399b6741ce7b3a2b992
 
 **Scope:** calibration_diagnostic; scientific; revision `8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581`.
@@ -4325,6 +4341,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 **Next:** Stop this exact failed revision. Preserve full denominators and the separate recorded cohorts; no seed repeats,unchanged reruns or downstream gate filling. Before a substantive further test, establish an independently justified and bounded convergence/reference protocol; calibrate the provisional screen before adoption.
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
+
+### constraint_geometry-round3-control-v1 · readout-c31ec37dd154ae5d9b9bbf74
+
+**Scope:** research_diagnostic; scientific; revision `d7b7781095e80fa5a2c703353b1c7a389b5f68d7966bc7c08e753db181fffbe4`.
+
+Corrected schema2 nonascent remains the primary control for finite useful progress; residual identity remains above the full original gate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 148.059; mechanism `structural`.
+
+
+
+Completed matched corrected schema2 nonascent predecessor control:3PASS3FAIL, retaining identity failures under new source. No archived result or qualification rewritten.
+
+**Next:** Retain as primary source-bound control for this successor package; winner evidence remains contextual under original source. No unchanged rerun or qualification credit.
+
+[Evidence](../../reports/forge/attempts/4e9f69967ff54edca6f2b3bbec839fea/result.json) · [Record](records/readout-c31ec37dd154ae5d9b9bbf74.json)
 
 ### k3p · readout-c3df7159c90725fdef1cb700
 
@@ -5038,4 +5070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `39eecc17c337985d8e73459a3ff63ac92b9c2ee5ec5535d85f3019650cae9fc8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ee4a8010648c6da2e6bb428bdbb61d9636e742f8222f5067b0ea0f980e6237da`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

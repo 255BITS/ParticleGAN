@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "c727754a2e37d377bb47a68552e4f58285c6089482dfff5c10aa79402f2a89d7",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "2426796f4146876896783d732756a1a3abed124ad3133751eb92c8126268d1c2",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/9c1a8a6f18c7448fb2a3d49e377cb57d/constraint_geometry-scored-outputs.pt": "cd1e92bc8813ecbd33daf2af4836a4b4759a0ab9ed7fe1738500bc372d8bc0e7"
+  },
+  "task_id": "residual_student"
+}

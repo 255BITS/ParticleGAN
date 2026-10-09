@@ -1,0 +1,623 @@
+{
+  "attempt_ids": [
+    "071a3ce3c55f4ddfa50078894ac3e3ad",
+    "144f3d8f04a646938052ab5516fecf34",
+    "318b54ae36cf4aa28b4dddb0a3c911d8",
+    "3f91f8d7d063411b8280d7dddb54a699",
+    "88479a53c6094731b36406059a7e01aa",
+    "d3550f211f2a44238fc2000b58da93bf"
+  ],
+  "candidate_id": "constraint_geometry-round3-strict-progress-v1",
+  "candidate_revision": "251cd9f05b6fc2b7502a060893726c85b31bd3f814d0a1c2403ec393670f9f45",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Matched same source/runtime/seed0/laws: candidate5PASS1FAIL vs schema2 control3PASS3FAIL. Trajectory MSE .00025847997 vs .2437363565, suffix19 vs0; residual .00036959240 vs .0626398921, all12 correct vs5, suffix21 vs0. Mid-scale suffix20 vs20 PASS. Gaussian/two-pole inactive numeric states match bitwise. Residual needs625 backtracks; no trained rejection/stall.",
+  "conclusion": "Strict common descent with same-batch Armijo realization adds sustained trajectory and residual PASS against corrected schema2, preserving passing guardrails and inactive numerical parity; Gaussian continuous stability remains FAIL.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "071a3ce3c55f4ddfa50078894ac3e3ad",
+        "144f3d8f04a646938052ab5516fecf34",
+        "318b54ae36cf4aa28b4dddb0a3c911d8",
+        "3f91f8d7d063411b8280d7dddb54a699",
+        "88479a53c6094731b36406059a7e01aa",
+        "d3550f211f2a44238fc2000b58da93bf"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "788111eb06d2260fc48b836da7d8b83d800e71e4f904ee5e9b6129c07ce19f80",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.00036959239514544606
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.00036959239514544606
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "071a3ce3c55f4ddfa50078894ac3e3ad",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "f267fb4fe9a05aac3f508f52fb4983b72ddebff40816cbda83efac4cd7a51b45",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "144f3d8f04a646938052ab5516fecf34",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "3d3c931b2cb3100aa066142f354a86b4dc91109adcb1e37dd3a1be089920c1ce",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "318b54ae36cf4aa28b4dddb0a3c911d8",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "40ecae677fd191775754ac260cbb6980be4641512e376c38d06024fe0a62c497",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3f91f8d7d063411b8280d7dddb54a699",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "66ab51dcaaff002c7be45d3223407569adc2aa436c30366b81700c60aa33a402",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "88479a53c6094731b36406059a7e01aa",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "84df1a423bd010bc0bc3179197eac6524bd122d3aca9d1c14db6431e10aa06ab",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d3550f211f2a44238fc2000b58da93bf",
+          "producer_request_id": "32e39cb8205edc5e330a6826",
+          "producer_study_id": "constraint_geometry-round3-candidate-study-v1",
+          "result_hash": "d73b92ca21e647164a19f373707b35fee3333652de49872916a5cf31122f98fc",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "015586a4c32263d48b6c565ea116cf3debc0179f4672d44cb8399dbdf81147d3",
+        "contract_sha256": "788111eb06d2260fc48b836da7d8b83d800e71e4f904ee5e9b6129c07ce19f80",
+        "control_binding_sha256": "fe30603ebe2deb0ed2845a2bd0c6ab3bbf56ac5b71ad7999ec3672e1767e06e4",
+        "policy_fingerprint": "3e5202f067c5defb915f6ff0bcd138efb167cfa66e1cd3af90a1a623f410ee64",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "57638b7da832f4bcf52ccbce8266c71738a63f6f5127e20e5ae51cf20030d4b8"
+      },
+      "study_id": "constraint_geometry-round3-candidate-study-v1",
+      "study_sha256": "57638b7da832f4bcf52ccbce8266c71738a63f6f5127e20e5ae51cf20030d4b8"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "constraint_geometry-round3-diagnostic-v1",
+  "hypothesis": "Strict common descent realized by bounded same-batch Armijo acceptance repairs residual identity beyond schema2 boundary nonascent while retaining passing guardrails.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Retain as scoped opt-in conditional repair, with no default adoption or ordinary Tier2 qualification. Stop this finite study after publication; future transfer/noisy support or component ablation requires new explicit authorization. Do not combine untested repairs.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "071a3ce3c55f4ddfa50078894ac3e3ad",
+        "result_hash": "f267fb4fe9a05aac3f508f52fb4983b72ddebff40816cbda83efac4cd7a51b45",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "144f3d8f04a646938052ab5516fecf34",
+        "result_hash": "3d3c931b2cb3100aa066142f354a86b4dc91109adcb1e37dd3a1be089920c1ce",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "318b54ae36cf4aa28b4dddb0a3c911d8",
+        "result_hash": "40ecae677fd191775754ac260cbb6980be4641512e376c38d06024fe0a62c497",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3f91f8d7d063411b8280d7dddb54a699",
+        "result_hash": "66ab51dcaaff002c7be45d3223407569adc2aa436c30366b81700c60aa33a402",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "88479a53c6094731b36406059a7e01aa",
+        "result_hash": "84df1a423bd010bc0bc3179197eac6524bd122d3aca9d1c14db6431e10aa06ab",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "d3550f211f2a44238fc2000b58da93bf",
+        "result_hash": "d73b92ca21e647164a19f373707b35fee3333652de49872916a5cf31122f98fc",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-568ca0dd3d3cdf1221ae4605",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/071a3ce3c55f4ddfa50078894ac3e3ad/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 12840,
+      "candidate_budget_seconds": 6420,
+      "id": "constraint_geometry-round3-v1"
+    },
+    "candidate": "constraint_geometry-round3-strict-progress-v1",
+    "competing_explanation": "Same-batch strict descent may stall at opposed protected gradients, suppress useful coverage, or overfit the changing critic; informative paired residual gradients need not repair row identity within the fixed budget. No trajectory paired oracle is introduced.",
+    "control": {
+      "candidate_id": "constraint_geometry-round3-control-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "identity_mse",
+      "op": ">",
+      "phase": "final",
+      "task_id": "residual_student",
+      "threshold": 0.02
+    },
+    "hypothesis": "Strict common descent realized by bounded same-batch Armijo acceptance repairs residual identity beyond schema2 boundary nonascent while retaining passing guardrails.",
+    "id": "constraint_geometry-round3-candidate-study-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "identity_mse",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "residual_student",
+      "threshold": 0.02
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate": "constraint_geometry-round2-nonascent-v1",
+          "source_digest": "b87904dcae3e2df70006c04b51d3fd65d89979a72c7f5f1e841ae684517f7685"
+        },
+        "path": "reports/forge/bcap-physics/constraint_geometry/round2/results.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "constraint_geometry-round3-diagnostic-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "constraint_geometry-round3-candidate-study-v1",
+  "study_sha256": "57638b7da832f4bcf52ccbce8266c71738a63f6f5127e20e5ae51cf20030d4b8",
+  "task_results": [
+    {
+      "compatibility_key": "d062b7ee8da521fe66552c180896961aad664cd690a88df0b5d3d6dfe121d861",
+      "cost": {
+        "adapter_seconds": 21.445552380988374,
+        "charged_task": "mid_scale_identity",
+        "device": "0",
+        "execution_seconds": 27.71547543304041,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 22.85172454197891,
+        "wall_seconds": 27.71547543304041
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 300,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 21,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 167
+        },
+        "metric_checks": {
+          "concept_cos_minus": {
+            "margin": 0.14998712539672854,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999871253967285
+          },
+          "concept_cos_plus": {
+            "margin": 0.1499666213989258,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999666213989258
+          },
+          "concept_mag_minus": {
+            "margin": 0.24998557567596436,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0000144243240356
+          },
+          "concept_mag_plus": {
+            "margin": 0.23856306076049805,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.011436939239502
+          },
+          "identity_at_0": {
+            "margin": 0.1467924032622755,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9967924032622755
+          },
+          "identity_at_mid": {
+            "margin": 0.13635833968000233,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9863583396800023
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999871253967285,
+        "concept_cos_plus": 0.9999666213989258,
+        "concept_mag_minus": 1.0000144243240356,
+        "concept_mag_plus": 1.011436939239502,
+        "identity_at_0": 0.9967924032622755,
+        "identity_at_mid": 0.9863583396800023
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "compatibility_key": "671af1f380197bc0e683bff315dd8efa4956b85b4a34affc508f4ac3e9f615e0",
+      "cost": {
+        "adapter_loop_seconds": 16.67801537597552,
+        "adapter_seconds": 17.02219240204431,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 23.42048385401722,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 15.831417712382972,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.47943897219374776
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12047902378253639
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 15.231499716406688
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 18.393336998997256,
+        "wall_seconds": 23.42048385401722
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "46d499f42efc3bd4d9dafe8f565761b36b479d6cd63bebd9a06173e043fe31af",
+      "cost": {
+        "adapter_seconds": 1.293538675061427,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.782689651008695,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.6615033539710566,
+        "wall_seconds": 7.782689651008695
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "5a9176f66c0ecccccdc73295316f389ef4131c4efea8ac015544c159ae0764af",
+      "cost": {
+        "adapter_loop_seconds": 60.30464683601167,
+        "adapter_seconds": 60.700339975068346,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 67.0804236169206,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 58.10520810377784,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.5605913790641353
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.14256327680777758
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 56.40205344790593
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 62.04595508798957,
+        "wall_seconds": 67.0804236169206
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "4ca25a1cdbc85d2c22ee3f7f7717772bece95db84104e8fc85377a20d56c1d35",
+      "cost": {
+        "adapter_seconds": 10.479481528978795,
+        "charged_task": "residual_student",
+        "device": "0",
+        "execution_seconds": 16.832009473000653,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 11.841138029005378,
+        "wall_seconds": 16.832009473000653
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.335,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 134,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 21,
+          "passing_suffix": 21,
+          "stable_from_seconds": null,
+          "stable_from_step": 67
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": 0.019630407604854554,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.02,
+            "value": 0.00036959239514544606
+          },
+          "success_rate": {
+            "margin": 0.0,
+            "metric": "success_rate",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 1.0
+          },
+          "wrong_pad_rate": {
+            "margin": 0.0,
+            "metric": "wrong_pad_rate",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.0,
+            "value": 0.0
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.00036959239514544606,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "residual_student"
+    },
+    {
+      "compatibility_key": "2e0ba0c0e28bfefae127872aed6de8f414083c0fa7cec6a3a11f3c152009e83d",
+      "cost": {
+        "adapter_seconds": 8.057814656058326,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 14.589786843047477,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 9.476988176000305,
+        "wall_seconds": 14.589786843047477
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.4175,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 167,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 19,
+          "passing_suffix": 19,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": 0.01974152003414929,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.02,
+            "value": 0.00025847996585071087
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.00025847996585071087
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    }
+  ]
+}
