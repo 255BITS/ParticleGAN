@@ -151,7 +151,8 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none", **options):
+                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
+                 thermodynamic_optimism=0., **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -166,6 +167,13 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
+        if (type(thermodynamic_optimism) not in (int, float)
+                or not math.isfinite(thermodynamic_optimism)
+                or not 0 <= thermodynamic_optimism <= 1):
+            raise ValueError("thermodynamic_optimism must be finite in [0, 1]")
+        if thermodynamic_optimism and (family != "dualnorm" or momentum):
+            raise ValueError("thermodynamic_optimism requires zero-momentum dualnorm")
+        self.thermodynamic_optimism = float(thermodynamic_optimism)
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -288,6 +296,28 @@ class NormalizedOptimizer(Optimizer):
     def _player(role):
         return "prior" if role in ("prior", "table") else ("critic" if role == "critic" else "generator")
 
+    def _thermodynamic_direction(self, parameter, gradient, group):
+        """DualNorm unit-rate direction, including matrix/kernel dimension factors."""
+        update = torch.zeros_like(parameter)
+        if "dualnorm_convolution" in group:
+            metadata = group["dualnorm_convolution"]
+            factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
+            factor /= math.prod(metadata["kernel_size"])
+            for dst, src in zip(_convolution_matrices(update, metadata),
+                                _convolution_matrices(gradient, metadata)):
+                if not bool(src.norm() < group["eps"]):
+                    dst.copy_(polar_factor(src, smoothing=self.smoothing) * factor)
+        elif parameter.ndim == 2:
+            if not bool(gradient.norm() < group["eps"]):
+                factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
+                update.copy_(polar_factor(gradient, smoothing=self.smoothing) * factor)
+        else:
+            norm = gradient.norm()
+            denominator = (torch.hypot(norm, norm.new_tensor(self.smoothing))
+                           if self.smoothing else norm + group["eps"])
+            update.copy_(gradient / denominator)
+        return update
+
     @torch.no_grad()
     def step(self, closure=None):
         loss = None
@@ -353,6 +383,16 @@ class NormalizedOptimizer(Optimizer):
                     update = selected / denominator
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
+                    if self.thermodynamic_optimism:
+                        current = self._thermodynamic_direction(parameter, gradient, group)
+                        # The first active gradient uses an ordinary update. A zero
+                        # current gradient subsequently permits the previous-direction
+                        # correction; grad=None consumes no history or update.
+                        previous = state.get("thermodynamic_previous_direction", current)
+                        update = current + self.thermodynamic_optimism * (current - previous)
+                        parameter.add_(update, alpha=-rate)
+                        state["thermodynamic_previous_direction"] = current.clone()
+                        continue
                     direction = gradient
                     if self.momentum:
                         if "momentum_buffer" not in state:
@@ -400,6 +440,8 @@ class NormalizedOptimizer(Optimizer):
                              if group["algorithm"] == "rownorm" else None
                              for group in self.param_groups],
         }
+        if self.thermodynamic_optimism:
+            result["dualnorm"]["thermodynamic_optimism"] = self.thermodynamic_optimism
         if self.smoothing:
             result["dualnorm"]["smoothing"] = self.smoothing
         if self.convolution != "none":
@@ -418,6 +460,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("invalid normalized optimizer checkpoint schema")
         meta = saved["dualnorm"]
         expected_meta = {"schema", "family", "momentum", "sampled_rows"}
+        if self.thermodynamic_optimism:
+            expected_meta.add("thermodynamic_optimism")
         if self.smoothing:
             expected_meta.add("smoothing")
         if self.convolution != "none":
@@ -425,6 +469,8 @@ class NormalizedOptimizer(Optimizer):
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
+        if meta.get("thermodynamic_optimism", 0.) != self.thermodynamic_optimism:
+            raise ValueError("checkpoint thermodynamic optimism differs")
         if meta.get("smoothing", 0.) != self.smoothing:
             raise ValueError("checkpoint optimizer smoothing differs")
         if meta.get("convolution", "none") != self.convolution:
@@ -471,6 +517,8 @@ class NormalizedOptimizer(Optimizer):
                     required = {"step", "exp_avg_sq"}
                 elif algorithm == "dualnorm" and self.momentum:
                     required.add("momentum_buffer")
+                if algorithm == "dualnorm" and self.thermodynamic_optimism:
+                    required.add("thermodynamic_previous_direction")
                 if algorithm in ("adam", "ada_nsgda") and actual["amsgrad"]:
                     required.add("max_exp_avg_sq")
                 if state.keys() != required:
@@ -529,7 +577,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
-                                    convolution=recipe.optimizer_convolution, **options)
+                                    convolution=recipe.optimizer_convolution,
+                                    thermodynamic_optimism=recipe.thermodynamic_optimism, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None

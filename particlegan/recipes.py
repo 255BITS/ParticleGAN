@@ -177,6 +177,9 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # Experimental network-only optimism after DualNorm normalization.
+    # Prior/table row updates retain their original sampled-row law.
+    thermodynamic_optimism: float = 0.0
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -219,6 +222,13 @@ class Recipe:
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if (type(self.thermodynamic_optimism) not in (int, float)
+                or not math.isfinite(self.thermodynamic_optimism)
+                or not 0 <= self.thermodynamic_optimism <= 1):
+            raise ValueError("thermodynamic_optimism must be finite in [0, 1]")
+        if self.thermodynamic_optimism and (self.optimizer_family != "dualnorm"
+                                         or self.optimizer_momentum):
+            raise ValueError("thermodynamic_optimism requires zero-momentum dualnorm")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):

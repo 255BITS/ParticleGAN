@@ -1,0 +1,49 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.thermodynamic_optimism=1.0 for G/E/D after normalization; first active gradient ordinary, later u+(u-u_previous). Prior/table updates unchanged."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/thermodynamic/README.md",
+  "id": "thermodynamic-bcap-optimism-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Correct the normalized network field using its previous direction to test a selective optimistic response to rotational game motion. The learned prior retains its unchanged sampled-row rule. No literal thermodynamic law is claimed.",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "prior_art": [
+    "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "reports/forge/gaussian1d-diagnosis/README.md",
+    "reports/forge/dualnorm-pacing-v2/README.md",
+    "reports/toy100/optimistic-adam-scratch.md",
+    "https://arxiv.org/abs/1711.00141",
+    "https://arxiv.org/abs/1802.10551"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "thermodynamic_optimism": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}

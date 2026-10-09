@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "thermodynamic-circulation-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 1
+    },
+    {
+      "task": "gaussian1d_stability",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 2
+    },
+    {
+      "task": "mode_hold",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 3
+    },
+    {
+      "task": "vector_two_broad",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 4
+    },
+    {
+      "task": "trajectory",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 5
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Six unchanged tasks are a scoped mechanism diagnostic; no ordinary tier qualification or adoption."
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Explicitly scoped nonequilibrium/game-circulation diagnostic; unchanged full task gates and smoke checkpoint dependency. Shared anchors plus passing broad-vector guardrail, failing mode hold and conditional trajectory."
+}

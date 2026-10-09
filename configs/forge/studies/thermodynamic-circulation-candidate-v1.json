@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "thermodynamic-circulation-candidate-v1",
+  "status": "ready",
+  "candidate": "thermodynamic-bcap-optimism-v1",
+  "control": {
+    "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "task_map": {}
+  },
+  "hypothesis": "Selective network optimism improves coupled-game retention while preserving the unchanged broad-vector and two-pole guards; fixed task objectives, priors and sampling remain.",
+  "scope": {
+    "view": "thermodynamic-circulation-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "thermodynamic-circulation-v1",
+    "candidate_budget_seconds": 6420,
+    "budget_seconds": 14400
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+      "selector": [],
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "seed": 0,
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "gaussian1d_stability",
+    "metric": "ks",
+    "op": "<=",
+    "threshold": 0.05,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "gaussian1d_stability",
+    "metric": "ks",
+    "op": ">",
+    "threshold": 0.05,
+    "phase": "final"
+  },
+  "competing_explanation": "Normalized network/prior movement and task objective competition can cause drift without a correctable rotational cycle; optimism amplifies stochastic direction changes, and prior-row motion remains unchanged. Older Adam optimism and capped cached-past comparisons failed under distinct original contracts.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}
