@@ -235,8 +235,11 @@ def collect(options):
                 blockers = (task or {}).get('preflight_blockers', [])
                 if role == 'combined' and tid in context['diagnostic_blockers']:
                     blockers = [context['diagnostic_blockers'][tid]]
-                status = 'BLOCKED' if blockers or any(j['status'] == 'blocked' for j in jobs) else 'UNMEASURED'
+                submission_blocked = bool(jobs) and sub.get('status') == 'blocked'
+                status = 'BLOCKED' if blockers or submission_blocked or any(j['status'] == 'blocked' for j in jobs) else 'UNMEASURED'
                 reason = blockers or [j.get('reason') for j in jobs if j.get('reason')]
+                if submission_blocked and sub.get('reason') is not None:
+                    reason = [*reason, sub['reason']]
                 if not reason:
                     reason = ['Not declared in this diagnostic scope' if scope != 'ordinary' and not jobs
                               else 'No certified final result; ordinary eligibility or own checkpoint remains unmet']
