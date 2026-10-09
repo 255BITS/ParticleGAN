@@ -13,6 +13,8 @@ The subsequent [round-two readout](reports/forge/bcap-physics/round2/README.md)
 records a scoped sustained unequal-mass repair and remaining failures.
 The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
 sustained conditional identity repairs while preserving the remaining failures.
+The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
+smaller conditional repair and measures composition, finite overshoot and tails.
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 The [Forge preparation review map](docs/forge-integration-review-map.md) records

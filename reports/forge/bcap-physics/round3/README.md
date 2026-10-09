@@ -1,5 +1,7 @@
 # BCAP repair research: round three
 
+The subsequent [round-four comparison](../round4/README.md) isolates direction alone as a sufficient conditional repair and tests composition, actual finite native movement and tail-sensitive mechanisms. The completed readout below retains its original source-bound conclusions.
+
 **Projection's strict-progress successor repairs both conditional identity tasks under their complete sustained gates.** Its matched corrected-schema2 control still fails both. Transport's backtracking successor loses the preceding rare-density repair; the hydraulic, game and kernel successors supply no new sustained task PASS. These are five completed, independently implemented mechanism comparisons, with unchanged task gates and one global configuration per candidate. No ordinary qualification or public default changes. The original winner retains its archived **7/21 Tier 2** result in the [single current technique inventory](../../technique-inventory.md).
 
 The [round-two readout](../round2/README.md) supported three continuations: transport's actual rare-density pass, hydraulic's motion/retention lead, and projection's cleanly measured implementation as a useful-progress question. Projection was a diagnostic lead. The two new tracks test reversible same-batch game correction and a full pairwise multiscale characteristic kernel witness. They revisit the limitations of stale optimism and finite-cell moments with substantive new mechanisms. No sweep or seed experiment is added.
