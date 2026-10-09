@@ -1,5 +1,7 @@
 # BCAP repair research: round two
 
+The subsequent [round-three comparison](../round3/README.md) adds two sustained conditional identity PASSes. The completed readout below retains its original source-bound conclusions.
+
 **Transport's local-density successor supplies the first new sustained task PASS: unequal mass.** Hydraulic still improves motion and retention without passing the complete native/Gaussian gates; corrected projection adds no identity pass; blacksmith and alchemy regress passing guardrails. This completes five independently implemented, source-bound comparisons. No ordinary qualification or public default changes. The original winner retains its archived **7/21 Tier 2** result in the [single current technique inventory](../../technique-inventory.md).
 
 The [first-round comparison](../README.md) motivated three successors and two new theories. Every track pushed a reviewable implementation and frozen declarations before executing its bounded experiment. Its report preserves the original numerical gates, full scheduled observations, actual-training GIFs, source/protocol receipts, forecasts and negative results. The [comparison receipt](comparison.json) binds the five publications to both scientific arms and every completed worker result.
