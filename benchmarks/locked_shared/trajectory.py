@@ -205,7 +205,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
             def protected_evaluator():
                 return (gan.g_loss(critic(slow, generator(slow, prior.z)), protected_real_scores),)
             constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
-                                         protected_evaluator=protected_evaluator)
+                                         protected_evaluator=protected_evaluator, sample_outputs=(fake,))
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:

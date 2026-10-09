@@ -164,6 +164,9 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
+        if (context.recipe.constraint_geometry_mode == 'sample_force' and context.execution_path=='public_components'
+                and task['execution'].get('host') not in {'trajectory','residual_student','mid_scale_identity'}):
+            raise CapabilityError(['sample-force output consumer is unavailable for this host'])
         if context.execution_path == "public_components" and task["execution"].get("host") not in {
                 "two_pole", "trajectory", "residual_student", "mid_scale_identity"}:
             raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])

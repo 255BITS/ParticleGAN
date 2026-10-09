@@ -120,6 +120,13 @@ class _OptimizerBundle:
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
 
+    def bind_sample_force(self, loss, outputs):
+        enabled=[o for o in self.optimizers if hasattr(o,'bind_sample_force')]
+        if not enabled:return
+        if len(enabled)!=1 or len(self.optimizers)!=1:
+            raise CapabilityError(['sample-force filtering requires one joint generator/prior optimizer'])
+        enabled[0].bind_sample_force(loss,outputs)
+
 
 class _ConditionedScore(nn.Module):
     def __init__(self, critic, scale):

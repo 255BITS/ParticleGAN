@@ -1,0 +1,250 @@
+{
+  "allowance_seconds": 900,
+  "committed_training_updates": 0,
+  "elapsed_seconds": 1.6627527070231736,
+  "global_rng_restored": true,
+  "qualification_input": false,
+  "rows": [
+    {
+      "attempt_id": "0f881a47a0c2400e8238409b177450ab",
+      "checkpoint_and_optimizer_unchanged": true,
+      "cohort": "fixed_saved_critic_endpoint",
+      "committed_updates": 0,
+      "diagnostics": {
+        "actual_dualnorm_finite": {
+          "cosine_with_direct_descent": 0.8670137231125488,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.06422062991654204,
+          "output_proxy_scale": 1.0,
+          "rms": 0.034390207343707596
+        },
+        "actual_dualnorm_linear": {
+          "cosine_with_direct_descent": 0.8668090917226654,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.06436872370561042,
+          "output_proxy_scale": 1.0,
+          "rms": 0.034477649073619415
+        },
+        "direct": {
+          "cosine_with_direct_descent": 0.9999999999999999,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.024161637365518365,
+          "output_proxy_scale": 1.0,
+          "rms": 0.011217925890232181
+        },
+        "direct_force_norm": 0.15544013679027557,
+        "individually_normalized_nonadditivity": 0.996914267539978,
+        "joint_linearity_residual": 1.278090309142499e-07,
+        "loss": 1.3018295764923096,
+        "network_linear": {
+          "cosine_with_direct_descent": 0.8606215897418946,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.05430123959541653,
+          "output_proxy_scale": 1.0,
+          "rms": 0.029294339598172854
+        },
+        "nonlinear_relative_error": 0.013471653356810803,
+        "parameter_gradient_norm": 1.3480430841445923,
+        "prior_linear": {
+          "cosine_with_direct_descent": 0.8113421330286176,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.010067483985960303,
+          "output_proxy_scale": 1.0,
+          "rms": 0.005761069609056687
+        },
+        "shared_raw_gradient": {
+          "cosine_with_direct_descent": 0.8654970422629424,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -1.817194186619935,
+          "output_proxy_scale": 1.0,
+          "rms": 0.9748144437228625
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/0f881a47a0c2400e8238409b177450ab/provenance/provenance-state.pt",
+      "sha256": "b094894e7a76186a528a4d1e3107eb8a0b5b72552fdc34cfe1f6efaf0f0b5045",
+      "task": "trajectory"
+    },
+    {
+      "attempt_id": "2e289b6eff3943e1b4caeaa7f394aefd",
+      "checkpoint_and_optimizer_unchanged": true,
+      "cohort": "fixed_saved_critic_endpoint",
+      "committed_updates": 0,
+      "diagnostics": {
+        "actual_dualnorm_finite": {
+          "cosine_with_direct_descent": 0.9377749658583417,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.031356326390670784,
+          "output_proxy_scale": 1.0,
+          "rms": 0.03219509568384635
+        },
+        "actual_dualnorm_linear": {
+          "cosine_with_direct_descent": 0.9378641328987063,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.03142907902140817,
+          "output_proxy_scale": 1.0,
+          "rms": 0.03226672638138389
+        },
+        "direct": {
+          "cosine_with_direct_descent": 1.0000000000000002,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.005617879425888303,
+          "output_proxy_scale": 1.0,
+          "rms": 0.005409231800958578
+        },
+        "direct_force_norm": 0.07495251297950745,
+        "individually_normalized_nonadditivity": 1.2158247232437134,
+        "joint_linearity_residual": 1.256802306670579e-07,
+        "loss": 1.1899334192276,
+        "network_linear": {
+          "cosine_with_direct_descent": 0.938657780575792,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.027447721176362197,
+          "output_proxy_scale": 1.0,
+          "rms": 0.028155431506438226
+        },
+        "nonlinear_relative_error": 0.012119062338932621,
+        "parameter_gradient_norm": 0.7222028374671936,
+        "prior_linear": {
+          "cosine_with_direct_descent": 0.786563972294743,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.003981358458166568,
+          "output_proxy_scale": 1.0,
+          "rms": 0.004873718140604364
+        },
+        "shared_raw_gradient": {
+          "cosine_with_direct_descent": 0.9160196913509705,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.5215449112430662,
+          "output_proxy_scale": 1.0,
+          "rms": 0.5482139485526751
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/2e289b6eff3943e1b4caeaa7f394aefd/provenance/provenance-state.pt",
+      "sha256": "b38ddf2afb01abece78752de81fb52dbf2292f6ccd95c4f72ad498f5ff85614b",
+      "task": "residual_student"
+    },
+    {
+      "all_params_optimizer_buffers_named_rng_restored": true,
+      "cohort": "original_source_actual_next_post_D_proposal",
+      "committed_updates": 0,
+      "diagnostics": {
+        "actual_dualnorm_finite": {
+          "cosine_with_direct_descent": 0.8269066549786063,
+          "fraction_active_rows_uphill": 0.03759765625,
+          "loss_first_order_change": -0.12718692693374728,
+          "output_proxy_scale": 1.0,
+          "rms": 0.18999795260071253
+        },
+        "actual_dualnorm_linear": {
+          "cosine_with_direct_descent": 0.8287602315593324,
+          "fraction_active_rows_uphill": 0.0361328125,
+          "loss_first_order_change": -0.12903390920048094,
+          "output_proxy_scale": 1.0,
+          "rms": 0.19232594979337914
+        },
+        "direct": {
+          "cosine_with_direct_descent": 0.9999999999999998,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -0.0001599978636352865,
+          "output_proxy_scale": 1.0,
+          "rms": 0.00019764103426814892
+        },
+        "direct_force_norm": 0.012649026699364185,
+        "joint_linearity_residual": 8.012685270841757e-08,
+        "loss": 0.7350766658782959,
+        "network_linear": {
+          "cosine_with_direct_descent": 0.7823927131202116,
+          "fraction_active_rows_uphill": 0.0458984375,
+          "loss_first_order_change": -0.11102613511697006,
+          "output_proxy_scale": 1.0,
+          "rms": 0.17529250979550187
+        },
+        "nonlinear_relative_error": 0.02485776102514889,
+        "parameter_gradient_norm": 2.5749433040618896,
+        "prior_linear": {
+          "cosine_with_direct_descent": 0.8424326913327795,
+          "fraction_active_rows_uphill": 0.00146484375,
+          "loss_first_order_change": -0.018007774059161062,
+          "output_proxy_scale": 1.0,
+          "rms": 0.02640509628348421
+        },
+        "shared_raw_gradient": {
+          "cosine_with_direct_descent": 0.7753709994686148,
+          "fraction_active_rows_uphill": 0.05078125,
+          "loss_first_order_change": -6.6303324611499885,
+          "output_proxy_scale": 0.05942345966944334,
+          "rms": 10.563034207705966
+        }
+      },
+      "hypothetical_discarded_updates": 1,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/db79021404c14c91aa5f38f9f1be40fb/native100/grid100/training-state.pt",
+      "sha256": "fc58a8e364defbd76e4e4d9942aa23f76bc6aafd7a7289951ecde29347008176",
+      "source_commit": "753f28a5ee778fdf7a0d979e6206b1024d9daab3",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task": "grid100"
+    },
+    {
+      "all_params_optimizer_buffers_named_rng_restored": true,
+      "attempt_id": "c2701b900fb64a748e5d908245eb8feb",
+      "cohort": "fixed_saved_critic_deterministic_kernel_cubature",
+      "committed_updates": 0,
+      "cubature_points": 1024,
+      "diagnostic_rows": 128,
+      "diagnostics": {
+        "actual_dualnorm_finite": {
+          "cosine_with_direct_descent": 0.46742555804745833,
+          "fraction_active_rows_uphill": 0.212890625,
+          "loss_first_order_change": -0.00674236912121973,
+          "output_proxy_scale": 1.0,
+          "rms": 0.07384160868996988
+        },
+        "actual_dualnorm_linear": {
+          "cosine_with_direct_descent": 0.4692505017669792,
+          "fraction_active_rows_uphill": 0.2119140625,
+          "loss_first_order_change": -0.006753442349637477,
+          "output_proxy_scale": 1.0,
+          "rms": 0.0736752352037379
+        },
+        "direct": {
+          "cosine_with_direct_descent": 1.0000000000000027,
+          "fraction_active_rows_uphill": 0.0,
+          "loss_first_order_change": -1.8632360919402323e-05,
+          "output_proxy_scale": 1.0,
+          "rms": 9.538255857428503e-05
+        },
+        "direct_force_norm": 0.004316521808505058,
+        "joint_linearity_residual": 6.265833008001209e-08,
+        "loss": 0.8430793285369873,
+        "network_linear": {
+          "cosine_with_direct_descent": 0.39781382564602363,
+          "fraction_active_rows_uphill": 0.248046875,
+          "loss_first_order_change": -0.0053798049994371894,
+          "output_proxy_scale": 1.0,
+          "rms": 0.06922894947735052
+        },
+        "nonlinear_relative_error": 0.022080566658459706,
+        "parameter_gradient_norm": 0.12570451200008392,
+        "prior_linear": {
+          "cosine_with_direct_descent": 0.6727289430438054,
+          "fraction_active_rows_uphill": 0.1142578125,
+          "loss_first_order_change": -0.00137363733561645,
+          "output_proxy_scale": 1.0,
+          "rms": 0.01045280992912303
+        },
+        "shared_raw_gradient": {
+          "cosine_with_direct_descent": 0.32093710446925006,
+          "fraction_active_rows_uphill": 0.3017578125,
+          "loss_first_order_change": -0.015801625446925604,
+          "output_proxy_scale": 0.24873444857706686,
+          "rms": 0.25204780115500647
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/c2701b900fb64a748e5d908245eb8feb/provenance/provenance-state.pt",
+      "sha256": "1c8a835822b2263562ca7bda5e4a963332557956bcf3ce14b6f6e89fcb8b487d",
+      "task": "vector_unequal_width"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "source-bound endpoint/fixed-critic and discarded public next-update cohorts",
+  "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+}

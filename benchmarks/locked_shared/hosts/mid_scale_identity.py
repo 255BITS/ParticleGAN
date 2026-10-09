@@ -499,16 +499,20 @@ def _fit(
         critic.requires_grad_(False)
         opt_g.zero_grad(set_to_none=True)
         g_loss = student.odd.new_zeros(())
+        sample_outputs = []
         with torch.no_grad():
             real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
+            sample_outputs.append(fake)
             g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
-            cover = cover + F.mse_loss(student.state(scale), targets[scale])
+            cover_state = student.state(scale)
+            sample_outputs.append(cover_state)
+            cover = cover + F.mse_loss(cover_state, targets[scale])
         protected_adversarial = g_loss
         g_loss = g_loss + cover_w * cover / n_scales
         def protected_evaluator():
@@ -520,7 +524,7 @@ def _fit(
                 paired_cover = paired_cover + F.mse_loss(student.state(scale), targets[scale])
             return adversarial, paired_cover
         constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover),
-                                     protected_evaluator=protected_evaluator)
+                                     protected_evaluator=protected_evaluator, sample_outputs=tuple(sample_outputs))
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)

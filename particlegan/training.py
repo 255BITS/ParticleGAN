@@ -377,7 +377,8 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            generated = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_logits = critic(generated)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -403,7 +404,7 @@ class GANTrainer:
                     logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
                     return (self.loss.g_loss(logits, real_logits),)
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
+                                         protected_evaluator=protected_evaluator, sample_outputs=(generated,))
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()

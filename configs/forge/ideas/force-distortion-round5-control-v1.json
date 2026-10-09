@@ -1,0 +1,45 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Retain exact round4 direction-blend winner configuration as same-source matched control."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/force_distortion/round5/README.md",
+  "id": "force-distortion-round5-control-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Retain exact round4 direction-blend winner configuration as same-source matched control.",
+  "parent": "projection-ablation-round4-direction_blend-v1",
+  "prior_art": [
+    "bcap-dualnorm-convolution-v1",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "constraint_geometry_mode": "direction_blend",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "inventory_visible": false
+}

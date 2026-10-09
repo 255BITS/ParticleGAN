@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "id": "force-distortion-round5-v1",
+    "budget_seconds": 19440,
+    "candidate_budget_seconds": 9720
+  },
+  "candidate": "force-distortion-round5-control-v1",
+  "competing_explanation": "Four CG iterations approximate a batch-local preconditioner. FullDualNorm nonlinearity can reintroduce distortion; filtering may remove useful sample coupling, alter the critic path, or fail finite/tail/mass/retention gates.",
+  "control": {
+    "candidate_id": "projection-ablation-round4-direction_blend-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "identity_mse",
+    "op": ">",
+    "phase": "final",
+    "task_id": "trajectory",
+    "threshold": 0.02
+  },
+  "hypothesis": "Damped empirical output-kernel force filtering improves native precision while retaining full conditional identity passes; a global replacement requires all complete gates, including Gaussian retention.",
+  "id": "force-distortion-round5-control-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.48
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-physics/force_distortion/round5/saved-force-traces.json",
+      "selector": [],
+      "identity": {
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "force-distortion-round5-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

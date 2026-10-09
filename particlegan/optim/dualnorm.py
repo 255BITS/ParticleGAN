@@ -527,7 +527,10 @@ class NormalizedOptimizer(Optimizer):
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
     optimizer_class = NormalizedOptimizer
-    if recipe.constraint_geometry_mode == "nonascent" and critic is None:
+    if recipe.constraint_geometry_mode == 'sample_force' and critic is None:
+        from .sample_force import SampleForceOptimizer
+        optimizer_class = SampleForceOptimizer
+    elif recipe.constraint_geometry_mode == "nonascent" and critic is None:
         from .constraint_geometry import ConstraintGeometryOptimizer
         optimizer_class = ConstraintGeometryOptimizer
     elif recipe.constraint_geometry_mode == "strict_progress" and critic is None:

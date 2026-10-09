@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **9/9 views**.
+Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **14/14 views**.
 
 Declared priors across the catalog: **38 MoGParticlePrior**, **28 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -35,10 +35,15 @@ This report follows changing declarations and published evidence; it selects no 
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
 | [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 3 | 4 required | 19 required | 7 required | provisional |
+| [constraint_geometry-diagnostic-v1](../../configs/forge/views/constraint_geometry-diagnostic-v1.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | provisional |
+| [constraint_geometry-round2-diagnostic-v1](../../configs/forge/views/constraint_geometry-round2-diagnostic-v1.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | provisional |
+| [constraint_geometry-round3-diagnostic-v1](../../configs/forge/views/constraint_geometry-round3-diagnostic-v1.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | provisional |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 8 | 6 required, 1 diagnostic | 21 required | 2 required | provisional |
+| [force-distortion-round5-diagnostic-v1](../../configs/forge/views/force-distortion-round5-diagnostic-v1.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
+| [projection-ablation-round4-diagnostic-v1](../../configs/forge/views/projection-ablation-round4-diagnostic-v1.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
 | [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json) | 1 | 7 required | 0 tasks | 0 tasks | undeclared |
 
@@ -192,6 +197,117 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 | [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-staggered100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [staggered100](../../configs/forge/tasks/staggered100.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | paired_adaptation / paired_adaptation | 3600 | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate) |
 
+## constraint_geometry-diagnostic-v1
+
+Declaration: [constraint_geometry-diagnostic-v1](../../configs/forge/views/constraint_geometry-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [trajectory](../../configs/forge/tasks/trajectory.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [residual_student](../../configs/forge/tasks/residual_student.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json) | diagnostic | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mid-scale-identity) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## constraint_geometry-round2-diagnostic-v1
+
+Declaration: [constraint_geometry-round2-diagnostic-v1](../../configs/forge/views/constraint_geometry-round2-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [trajectory](../../configs/forge/tasks/trajectory.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [residual_student](../../configs/forge/tasks/residual_student.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json) | diagnostic | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mid-scale-identity) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## constraint_geometry-round3-diagnostic-v1
+
+Declaration: [constraint_geometry-round3-diagnostic-v1](../../configs/forge/views/constraint_geometry-round3-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [trajectory](../../configs/forge/tasks/trajectory.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [residual_student](../../configs/forge/tasks/residual_student.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json) | diagnostic | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mid-scale-identity) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
 ## discriminator_stability
 
 Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 8; goal: `discriminator_stability`.
@@ -252,6 +368,43 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+
+## force-distortion-round5-diagnostic-v1
+
+Declaration: [force-distortion-round5-diagnostic-v1](../../configs/forge/views/force-distortion-round5-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [grid100](../../configs/forge/tasks/grid100.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
+| [trajectory](../../configs/forge/tasks/trajectory.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [residual_student](../../configs/forge/tasks/residual_student.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json) | diagnostic | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mid-scale-identity) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## formulation_comparison
 
@@ -411,6 +564,43 @@ No published solution leaderboard for this view yet; task registration and relat
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 800 | 300 | — |
 | [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 800 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## projection-ablation-round4-diagnostic-v1
+
+Declaration: [projection-ablation-round4-diagnostic-v1](../../configs/forge/views/projection-ablation-round4-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [trajectory](../../configs/forge/tasks/trajectory.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [residual_student](../../configs/forge/tasks/residual_student.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
+| [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json) | diagnostic | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mid-scale-identity) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
 
 ### Tier 2: quality
 
@@ -1934,6 +2124,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `44d5f6408895fe3c026f34891de985b93d2fcafba4acbd2b7c21de99a248c86b`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `6fcb29914acf657d6fe3ea35819a0dcb351235456ef904860941d01f88f291c3`. The JSON form includes the individual task and view file hashes.
 
 Published artifact input digest: `b23b0f41d21d3ee681008d65d3c6169296a76a881a81b1629d5d8456aafa360c`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
