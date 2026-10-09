@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "scope": "posthoc_output_space_diagnostic_not_actual_training_gradient",
+  "target_frame": "4096 deterministic mixture quantiles; same fixed target law, a separate diagnostic batch",
+  "limitations": "Does not reconstruct the actual last training minibatch or network/prior parameter gradients; cannot establish training causality.",
+  "optimizer_updates_added": 0,
+  "random_draws_added": 0,
+  "global_rng_unchanged": true,
+  "cpu_wall_seconds": 0.19431811408139765,
+  "diagnostics": [
+    {
+      "arm": "control",
+      "task_id": "vector_two_broad",
+      "attempt_id": "aee8671ba5094f98aad49bc31eda4a86",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/aee8671ba5094f98aad49bc31eda4a86/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "loss": 0.3076211835437594,
+      "residuals": {
+        "mass": 0.2570522081334435,
+        "location": 0.023101708177285032,
+        "shape": 0.027467267233030876
+      },
+      "output_gradient_rms": {
+        "mass": 0.0019710541934658933,
+        "location": 0.0002483300893821409,
+        "shape": 0.0003253307273912989
+      },
+      "output_gradient_cosines": {
+        "mass_location": -0.6007648891548418,
+        "mass_shape": -0.02072191509353668,
+        "location_shape": -0.2828566744582591
+      },
+      "total_output_gradient_rms": 0.0018417839215339447,
+      "mass_over_location_shape_rms": 3.4359226494709967,
+      "finite": true
+    },
+    {
+      "arm": "control",
+      "task_id": "vector_unequal_width",
+      "attempt_id": "838d7c70eea5463d98852787ae8e55b0",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/838d7c70eea5463d98852787ae8e55b0/observed-samples.pt": "5012bd6a392e978905e669dfb184d0637ffd1c238b6c61b817f41384ce49c25e"
+      },
+      "loss": 1.6838846957284155,
+      "residuals": {
+        "mass": 0.6502798548981223,
+        "location": 0.2063092083025232,
+        "shape": 0.8272956325277699
+      },
+      "output_gradient_rms": {
+        "mass": 0.0009046745434921047,
+        "location": 0.0007756173454029799,
+        "shape": 0.0032517511651240848
+      },
+      "output_gradient_cosines": {
+        "mass_location": 0.08215065956662078,
+        "mass_shape": -0.005552644045078965,
+        "location_shape": 0.09953237066163863
+      },
+      "total_output_gradient_rms": 0.00354663021897607,
+      "mass_over_location_shape_rms": 0.22463167726702743,
+      "finite": true
+    },
+    {
+      "arm": "control",
+      "task_id": "vector_unequal_mass",
+      "attempt_id": "805b20af930a473e91478890c7403e01",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/805b20af930a473e91478890c7403e01/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "loss": 3.9522101715671076,
+      "residuals": {
+        "mass": 0.40416210382489887,
+        "location": 0.39512154556677714,
+        "shape": 3.1529265221754317
+      },
+      "output_gradient_rms": {
+        "mass": 0.0009395572332838221,
+        "location": 0.0009212159091429815,
+        "shape": 0.009782001012782595
+      },
+      "output_gradient_cosines": {
+        "mass_location": 0.29551298857275676,
+        "mass_shape": 0.0005558190375299084,
+        "location_shape": 0.16191761813994357
+      },
+      "total_output_gradient_rms": 0.010042853610559566,
+      "mass_over_location_shape_rms": 0.08778269562668921,
+      "finite": true
+    },
+    {
+      "arm": "candidate",
+      "task_id": "vector_unequal_mass",
+      "attempt_id": "6b2ec25273594710a553d6cf5a030f63",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/6b2ec25273594710a553d6cf5a030f63/observed-samples.pt": "8e3a473b3bf117c32f8b054a2ffe93ab6d782e46a935c25310979da4a2968027"
+      },
+      "loss": 0.6045472916060074,
+      "residuals": {
+        "mass": 0.4505962615924538,
+        "location": 0.14669414955777704,
+        "shape": 0.007256880455776572
+      },
+      "output_gradient_rms": {
+        "mass": 0.00011681438783630326,
+        "location": 0.00045986355373344253,
+        "shape": 0.00011269177042604235
+      },
+      "output_gradient_cosines": {
+        "mass_location": 0.012438226619267526,
+        "mass_shape": 0.024413299247002727,
+        "location_shape": 0.5159750406050487
+      },
+      "total_output_gradient_rms": 0.0005415507278496775,
+      "mass_over_location_shape_rms": 0.20402288286776057,
+      "finite": true
+    },
+    {
+      "arm": "candidate",
+      "task_id": "vector_two_broad",
+      "attempt_id": "b22229a4c61d40659ccacd6f627afffa",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/b22229a4c61d40659ccacd6f627afffa/observed-samples.pt": "06d0b70db152c727b1895636b00dbe2cb536e494063da76648305b30d8dfdf32"
+      },
+      "loss": 1.1406234397732105,
+      "residuals": {
+        "mass": 1.09184874707656,
+        "location": 0.0373764056066561,
+        "shape": 0.011398287089994172
+      },
+      "output_gradient_rms": {
+        "mass": 0.0011053089721256401,
+        "location": 0.00033067915831097865,
+        "shape": 0.00015073005597925093
+      },
+      "output_gradient_cosines": {
+        "mass_location": -0.6107185222622417,
+        "mass_shape": -0.0960863519057543,
+        "location_shape": 0.03067199209575546
+      },
+      "total_output_gradient_rms": 0.0009372185960469378,
+      "mass_over_location_shape_rms": 2.295986323725156,
+      "finite": true
+    },
+    {
+      "arm": "candidate",
+      "task_id": "vector_unequal_width",
+      "attempt_id": "37784a3e210f43f3b3553d56565c84d1",
+      "saved_sample_proof": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/37784a3e210f43f3b3553d56565c84d1/observed-samples.pt": "74c9fa5e517fffe336feeb4a0ad83d5af84cae63ba0c313bc10589dcad29dd7d"
+      },
+      "loss": 1.8267987544035644,
+      "residuals": {
+        "mass": 1.7423659790793384,
+        "location": 0.06420424011474819,
+        "shape": 0.02022853520947781
+      },
+      "output_gradient_rms": {
+        "mass": 0.0009159697658561103,
+        "location": 0.00032027884563358655,
+        "shape": 0.00017892245577747282
+      },
+      "output_gradient_cosines": {
+        "mass_location": -0.21379941522824308,
+        "mass_shape": -0.026441401530853507,
+        "location_shape": -0.0617341120988253
+      },
+      "total_output_gradient_rms": 0.0009123636113874099,
+      "mass_over_location_shape_rms": 1.8348705487485688,
+      "finite": true
+    }
+  ]
+}

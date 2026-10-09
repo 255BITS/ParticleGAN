@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "b60671fe44a64b01524dbdf94fb4542dc600116cef5d324719d83a36507518cd",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "c5e9ff73f09ef13381d2733b3fc5eecb7ffd831bd5c7c540ab917f90c7ca403f",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/6b2ec25273594710a553d6cf5a030f63/observed-samples.pt": "8e3a473b3bf117c32f8b054a2ffe93ab6d782e46a935c25310979da4a2968027"
+  },
+  "task_id": "vector_unequal_mass"
+}
