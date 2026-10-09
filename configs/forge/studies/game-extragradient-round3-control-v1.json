@@ -4,10 +4,10 @@
   "status": "ready",
   "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
   "control": {
-    "candidate_id": "game-extragradient-bcap-round3-v1",
+    "candidate_id": "bcap-dualnorm-conv-non-saturating-v1",
     "task_map": {}
   },
-  "hypothesis": "Same-batch fresh predicted-state game correction improves continuous retention without the cached-direction noise amplification of optimism; task laws and full gates remain fixed.",
+  "hypothesis": "Execute the exact saved winner in this current source/runtime as the sole primary matched control for game-extragradient. The supported parent declaration is an admission-only reference, never a third trained or causal arm; the reverse candidate binding is unsupported for two-pole.",
   "scope": {
     "view": "game-extragradient-round3-v1",
     "through_tier": 1,

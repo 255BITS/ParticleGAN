@@ -78,6 +78,9 @@ in this same scientific source/runtime. The sole delta is
 every update, full DualNorm smoothing .001/momentum0/per-offset convolution,
 constant G/E .012, D .018, prior .030, floors1, and zero additive noise/EMA remain.
 No archived winner or previous candidate result supplies third-arm causal credit.
+The control study uses the winner's supported parent declaration solely as an
+admission reference because the reverse candidate binding cannot execute
+two-pole. It launches no parent run and supplies no third-arm comparison.
 
 Before execution, forecast final Gaussian stability **`cdf_ks <= .05`**,
 at least **60/72** stationary and **20/24** shifted-hold full passes, a mode-hold
