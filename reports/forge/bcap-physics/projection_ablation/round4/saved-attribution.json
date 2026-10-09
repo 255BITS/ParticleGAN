@@ -1,0 +1,837 @@
+{
+  "analysis_seconds": 0.2780153990024701,
+  "helper_sha256": "e2cdb48d9f4e8375dc012fb8641b8f084e470e0e2a702af0b3de09137f6e774b",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "rows": [
+    {
+      "cohort": "original_winner",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 1.4236847834390878,
+            "prior": 0.17786052869931576
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.00523625668601738
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.0075561764905686815
+          },
+          "set_coverage": {
+            "network": 1.48646378191498,
+            "prior": 0.18571720677638134
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.05107806376983998,
+          "adversarial__latent_spread": -0.049809020534589715,
+          "adversarial__set_coverage": -0.5781927159892846,
+          "latent_l2__latent_spread": -0.9902198592668323,
+          "set_coverage__latent_l2": -0.05062369751581774,
+          "set_coverage__latent_spread": 0.050623624087746344
+        },
+        "identity_mse": 0.2398619002829999,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.020440003735816004,
+            "norm": 0.12976503793043742,
+            "protected_derivatives": {
+              "adversarial": -0.08145209727036393
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0021482357208223225,
+            "norm": 0.08507691158056667,
+            "protected_derivatives": {
+              "adversarial": -0.005952208819226387
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 0.00226292271233834,
+            "norm": 0.09286143686802362,
+            "protected_derivatives": {
+              "adversarial": 0.006204719480630224
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": 0.019849748305588735,
+            "norm": 0.12956124766818444,
+            "protected_derivatives": {
+              "adversarial": 0.031531534861645526
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": 0.01984996330468286,
+            "norm": 0.12952845205484376,
+            "protected_derivatives": {
+              "adversarial": 0.031525563624192794
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": 0.005849117917121807,
+            "norm": 0.13056464307895266,
+            "protected_derivatives": {
+              "adversarial": -0.015594804168274823
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 0.005656562111737416,
+            "norm": 0.1305687451662314,
+            "protected_derivatives": {
+              "adversarial": -0.016106906472091388
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.020439600891005515,
+            "norm": 0.12976118221387023,
+            "protected_derivatives": {
+              "adversarial": -0.08144975318525785
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 1.1912236335370576,
+          "latent_l2": 0.016451030449117023,
+          "latent_spread": 0.002857598873200492,
+          "set_coverage": 0.09129740329153435
+        },
+        "normalized_combined": {
+          "identity_derivative": 0.005788815228368844,
+          "norm": 0.1305669222648971,
+          "protected_derivatives": {
+            "adversarial": -0.015758283537235365
+          }
+        },
+        "normalized_nonadditivity_ratio": 0.9969142017010837,
+        "normalized_sum": {
+          "identity_derivative": -0.00047556843871125103,
+          "norm": 0.2021228786420143,
+          "protected_derivatives": {
+            "adversarial": -0.04966805174731454
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/0f881a47a0c2400e8238409b177450ab/provenance/provenance-state.pt",
+      "sha256": "b094894e7a76186a528a4d1e3107eb8a0b5b72552fdc34cfe1f6efaf0f0b5045",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task": "trajectory"
+    },
+    {
+      "cohort": "original_winner",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 0.9098237693944742,
+            "prior": 0.10933667201509753
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.005129814609760987
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.0075772463570019126
+          },
+          "paired_residual": {
+            "network": 0.16186589231575113,
+            "prior": 0.022515783808863397
+          },
+          "set_coverage": {
+            "network": 1.1043239217051297,
+            "prior": 0.13431948399480365
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.04138356956239116,
+          "adversarial__latent_spread": -0.04797602379052848,
+          "adversarial__paired_residual": 0.952727306279025,
+          "adversarial__set_coverage": -0.7675204487639967,
+          "latent_l2__latent_spread": -0.9758538034471145,
+          "latent_l2__paired_residual": 0.05189348722823703,
+          "latent_spread__paired_residual": -0.061965755345130484,
+          "set_coverage__latent_l2": -0.036989406452775445,
+          "set_coverage__latent_spread": 0.04829086094196232,
+          "set_coverage__paired_residual": -0.8332813117995542
+        },
+        "identity_mse": 0.061036005225907186,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.00796954050163707,
+            "norm": 0.12718138748594995,
+            "protected_derivatives": {
+              "adversarial": -0.047628242271271326,
+              "paired_residual": -0.00796954050163707
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0007046986386037946,
+            "norm": 0.08451621577856161,
+            "protected_derivatives": {
+              "adversarial": -0.003196943545430498,
+              "paired_residual": -0.0007046986386037946
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 0.0008385806235343106,
+            "norm": 0.09270705165847692,
+            "protected_derivatives": {
+              "adversarial": 0.0037290800683113263,
+              "paired_residual": 0.0008385806235343106
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": -0.00826155874908997,
+            "norm": 0.1026433953149872,
+            "protected_derivatives": {
+              "adversarial": -0.04417018523640344,
+              "paired_residual": -0.00826155874908997
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": 0.006857839477010257,
+            "norm": 0.12931170301219339,
+            "protected_derivatives": {
+              "adversarial": 0.034827064524914006,
+              "paired_residual": 0.006857839477010257
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": 0.006618985393320341,
+            "norm": 0.12941965102633274,
+            "protected_derivatives": {
+              "adversarial": 0.03340509034300673,
+              "paired_residual": 0.006618985393320341
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.00038449083671121716,
+            "norm": 0.12933474856253455,
+            "protected_derivatives": {
+              "adversarial": -0.007039486781909404,
+              "paired_residual": -0.00038449083671121716
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -0.000495803430301164,
+            "norm": 0.12921935568749587,
+            "protected_derivatives": {
+              "adversarial": -0.007430502271571943,
+              "paired_residual": -0.000495803430301164
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": 0.0030831880626424396,
+            "norm": 0.1292800331141646,
+            "protected_derivatives": {
+              "adversarial": 0.011184476360527955,
+              "paired_residual": 0.0030831880626424396
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.008051405872760008,
+            "norm": 0.12805144647879985,
+            "protected_derivatives": {
+              "adversarial": -0.04759303451563794,
+              "paired_residual": -0.008051405872760008
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 1.0066735225704717,
+          "latent_l2": 0.01578899875831036,
+          "latent_spread": 0.004096837759289401,
+          "paired_residual": 0.061036005225907186,
+          "set_coverage": 0.10233790791612138
+        },
+        "normalized_combined": {
+          "identity_derivative": -0.00042569172505526145,
+          "norm": 0.12930310291713434,
+          "protected_derivatives": {
+            "adversarial": -0.00718681298865044,
+            "paired_residual": -0.00042569172505526145
+          }
+        },
+        "normalized_nonadditivity_ratio": 1.2158242568652058,
+        "normalized_sum": {
+          "identity_derivative": -0.009239377788786265,
+          "norm": 0.20967404855924945,
+          "protected_derivatives": {
+            "adversarial": -0.056439226459879935,
+            "paired_residual": -0.009239377788786265
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/2e289b6eff3943e1b4caeaa7f394aefd/provenance/provenance-state.pt",
+      "sha256": "b38ddf2afb01abece78752de81fb52dbf2292f6ccd95c4f72ad498f5ff85614b",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task": "residual_student"
+    },
+    {
+      "cohort": "round3_candidate",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 1.621899030021538,
+            "prior": 0.034478699653601765
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.005003873860550652
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.006561441675209009
+          },
+          "set_coverage": {
+            "network": 0.5950592408148349,
+            "prior": 0.013409366822961415
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.0021898946547317245,
+          "adversarial__latent_spread": 0.0005575215983020234,
+          "adversarial__set_coverage": 0.9844230934532188,
+          "latent_l2__latent_spread": -0.8206525837194065,
+          "set_coverage__latent_l2": 0.0030369221220388504,
+          "set_coverage__latent_spread": -0.000512515776606024
+        },
+        "identity_mse": 0.0002584796540150356,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.0009450615415900963,
+            "norm": 0.12800837664182976,
+            "protected_derivatives": {
+              "adversarial": -0.058953902367595054
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -8.310985724068642e-06,
+            "norm": 0.08332914901768321,
+            "protected_derivatives": {
+              "adversarial": -0.00040086628919896235
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 3.3006993421975323e-06,
+            "norm": 0.0900779791834576,
+            "protected_derivatives": {
+              "adversarial": 1.9822071645160115e-05
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.0009763014339638379,
+            "norm": 0.12224852754052272,
+            "protected_derivatives": {
+              "adversarial": -0.05770068266717868
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": -0.0009749912515331855,
+            "norm": 0.12405126940009177,
+            "protected_derivatives": {
+              "adversarial": -0.05763661562797388
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0009692799308730586,
+            "norm": 0.129131161282978,
+            "protected_derivatives": {
+              "adversarial": -0.0587913567603818
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -0.0009694736728320221,
+            "norm": 0.12910867273087465,
+            "protected_derivatives": {
+              "adversarial": -0.058796193066358984
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.0009447131523673567,
+            "norm": 0.12818205570404367,
+            "protected_derivatives": {
+              "adversarial": -0.0589323720164857
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 0.7294061642937931,
+          "latent_l2": 0.015023252167381252,
+          "latent_spread": 0.004952116844000331,
+          "set_coverage": 0.0062035116963608545
+        },
+        "normalized_combined": {
+          "identity_derivative": -0.0009695930901607072,
+          "norm": 0.12912126651191613,
+          "protected_derivatives": {
+            "adversarial": -0.05881362476452425
+          }
+        },
+        "normalized_nonadditivity_ratio": 1.0299264998730182,
+        "normalized_sum": {
+          "identity_derivative": -0.0019263732619358047,
+          "norm": 0.25809385483622493,
+          "protected_derivatives": {
+            "adversarial": -0.11703562925232751
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/d3550f211f2a44238fc2000b58da93bf/provenance/provenance-state.pt",
+      "sha256": "78f0ea7b9dbfec537ddbe9ac7ed0d5ca0cccdca84e1b6dd1ddce2740861d24cf",
+      "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e",
+      "task": "trajectory"
+    },
+    {
+      "cohort": "round3_candidate",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 0.014632692916231977,
+            "prior": 0.000688644689028717
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.005516662019391573
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.005332135229587267
+          },
+          "paired_residual": {
+            "network": 0.02528022020865195,
+            "prior": 0.0007446270044920211
+          },
+          "set_coverage": {
+            "network": 0.6067252850076469,
+            "prior": 0.017871048107808502
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.001217201557625743,
+          "adversarial__latent_spread": -0.006335548385715613,
+          "adversarial__paired_residual": 0.2037809322377587,
+          "adversarial__set_coverage": 0.20378093223775867,
+          "latent_l2__latent_spread": -0.7031850300145757,
+          "latent_l2__paired_residual": -0.0006029502463769134,
+          "latent_spread__paired_residual": 0.006653455863543486,
+          "set_coverage__latent_l2": -0.0006029502463769132,
+          "set_coverage__latent_spread": 0.006653455863543484,
+          "set_coverage__paired_residual": 1.0000000000000007
+        },
+        "identity_mse": 0.00036959210197915794,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.00022578227428951013,
+            "norm": 0.062233323488501864,
+            "protected_derivatives": {
+              "adversarial": -0.0007109645737066274,
+              "paired_residual": -0.00022578227428951013
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": 1.251038221816181e-06,
+            "norm": 0.08247625706582838,
+            "protected_derivatives": {
+              "adversarial": -2.5414417482448905e-06,
+              "paired_residual": 1.251038221816181e-06
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -1.541255974188209e-05,
+            "norm": 0.079961677341816,
+            "protected_derivatives": {
+              "adversarial": 7.96853062716965e-06,
+              "paired_residual": -1.541255974188209e-05
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": -0.0010228085319570674,
+            "norm": 0.05665345793198659,
+            "protected_derivatives": {
+              "adversarial": -8.066898498623138e-05,
+              "paired_residual": -0.0010228085319570674
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.001132299054820716,
+            "norm": 0.12499742780302245,
+            "protected_derivatives": {
+              "adversarial": -8.374607723793563e-05,
+              "paired_residual": -0.001132299054820716
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": -0.0011316967330135118,
+            "norm": 0.12642559907360088,
+            "protected_derivatives": {
+              "adversarial": -8.327755284782287e-05,
+              "paired_residual": -0.0011316967330135118
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0011297810434867123,
+            "norm": 0.12624080190650516,
+            "protected_derivatives": {
+              "adversarial": -0.0001238064910117335,
+              "paired_residual": -0.0011297810434867123
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -0.0011285402492193365,
+            "norm": 0.12611414794202996,
+            "protected_derivatives": {
+              "adversarial": -0.0001263982214127231,
+              "paired_residual": -0.0011285402492193365
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": -0.00113057228008274,
+            "norm": 0.12616299588203875,
+            "protected_derivatives": {
+              "adversarial": -0.00012654563626982057,
+              "paired_residual": -0.00113057228008274
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.0008975170287357814,
+            "norm": 0.09741727278904234,
+            "protected_derivatives": {
+              "adversarial": -0.00048692836003282145,
+              "paired_residual": -0.0008975170287357814
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 0.6696252034554525,
+          "latent_l2": 0.0182601359017185,
+          "latent_spread": 0.0001704011114405228,
+          "paired_residual": 0.00036959210197915794,
+          "set_coverage": 0.00887021044749979
+        },
+        "normalized_combined": {
+          "identity_derivative": -0.0011308813716590467,
+          "norm": 0.1263671439513847,
+          "protected_derivatives": {
+            "adversarial": -0.000124952903918099,
+            "paired_residual": -0.0011308813716590467
+          }
+        },
+        "normalized_nonadditivity_ratio": 0.797193978485646,
+        "normalized_sum": {
+          "identity_derivative": -0.0023950513825873603,
+          "norm": 0.21061554352413092,
+          "protected_derivatives": {
+            "adversarial": -0.0008699525470518695,
+            "paired_residual": -0.0023950513825873603
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/88479a53c6094731b36406059a7e01aa/provenance/provenance-state.pt",
+      "sha256": "d675309694b460c03e2905d1cff27687921077915a433083cf87f8936b2bc398",
+      "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e",
+      "task": "residual_student"
+    },
+    {
+      "cohort": "round3_control",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 1.054957339649707,
+            "prior": 0.12587305823217768
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.00509502143831947
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.007568021099320242
+          },
+          "paired_residual": {
+            "network": 0.1793167682392338,
+            "prior": 0.02360148717831298
+          },
+          "set_coverage": {
+            "network": 1.2449431470833774,
+            "prior": 0.15359571116712487
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.04305445718475913,
+          "adversarial__latent_spread": -0.05141168398399419,
+          "adversarial__paired_residual": 0.9631358668872588,
+          "adversarial__set_coverage": -0.8212015888926114,
+          "latent_l2__latent_spread": -0.9744591362218159,
+          "latent_l2__paired_residual": 0.05248174879232842,
+          "latent_spread__paired_residual": -0.06335688480801958,
+          "set_coverage__latent_l2": -0.04088035364287395,
+          "set_coverage__latent_spread": 0.05451034444421801,
+          "set_coverage__paired_residual": -0.8750497396351928
+        },
+        "identity_mse": 0.06263989258919593,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.008728975942122756,
+            "norm": 0.12851546861784138,
+            "protected_derivatives": {
+              "adversarial": -0.05599751521701417,
+              "paired_residual": -0.008728975942122756
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0007926849122553817,
+            "norm": 0.08461257193068593,
+            "protected_derivatives": {
+              "adversarial": -0.0038786335991913257,
+              "paired_residual": -0.0007926849122553817
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 0.0009761070010864833,
+            "norm": 0.09266483468814032,
+            "protected_derivatives": {
+              "adversarial": 0.004747638685034574,
+              "paired_residual": 0.0009761070010864833
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": -0.009013447431524674,
+            "norm": 0.10614890953087065,
+            "protected_derivatives": {
+              "adversarial": -0.05149371826272627,
+              "paired_residual": -0.009013447431524674
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": 0.007879142080606024,
+            "norm": 0.1293090761492771,
+            "protected_derivatives": {
+              "adversarial": 0.04350509193686278,
+              "paired_residual": 0.007879142080606024
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": 0.007690430952358856,
+            "norm": 0.12946145941561554,
+            "protected_derivatives": {
+              "adversarial": 0.042227658508612535,
+              "paired_residual": 0.007690430952358856
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.00046842446049937295,
+            "norm": 0.12904131217923334,
+            "protected_derivatives": {
+              "adversarial": -0.006872755568779855,
+              "paired_residual": -0.00046842446049937295
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -0.0005336171416228347,
+            "norm": 0.12909669878232582,
+            "protected_derivatives": {
+              "adversarial": -0.00714146363445811,
+              "paired_residual": -0.0005336171416228347
+            }
+          },
+          "paired_residual": {
+            "identity_derivative": 0.0037582064355477073,
+            "norm": 0.12845258517108196,
+            "protected_derivatives": {
+              "adversarial": 0.01615754608186057,
+              "paired_residual": 0.0037582064355477073
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.008777325347939548,
+            "norm": 0.12846779475715767,
+            "protected_derivatives": {
+              "adversarial": -0.055972327924248194,
+              "paired_residual": -0.008777325347939548
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 1.0085852547658571,
+          "latent_l2": 0.015575546074161003,
+          "latent_spread": 0.004592426692055381,
+          "paired_residual": 0.06263989258919593,
+          "set_coverage": 0.11707564434597934
+        },
+        "normalized_combined": {
+          "identity_derivative": -0.0004865303900375671,
+          "norm": 0.12906679598087992,
+          "protected_derivatives": {
+            "adversarial": -0.006940401085621615,
+            "paired_residual": -0.0004865303900375671
+          }
+        },
+        "normalized_nonadditivity_ratio": 1.2461856411322554,
+        "normalized_sum": {
+          "identity_derivative": -0.009679859204210304,
+          "norm": 0.19783499591616358,
+          "protected_derivatives": {
+            "adversarial": -0.06311713645703443,
+            "paired_residual": -0.009679859204210304
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/9c1a8a6f18c7448fb2a3d49e377cb57d/provenance/provenance-state.pt",
+      "sha256": "03ce3a014b0f6796a4f5f1cf4eaaa846eb8d6f0f6f2eebd4908e107927193996",
+      "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e",
+      "task": "residual_student"
+    },
+    {
+      "cohort": "round3_control",
+      "diagnostics": {
+        "both_land_rows": 12,
+        "caveat": "Endpoint derivatives in a distinct CPU FP64 diagnostic; not actual rounded training steps, finite loss guarantees or causal training ablations.",
+        "checkpoint_unchanged": true,
+        "component_gradient_norms": {
+          "adversarial": {
+            "network": 1.511920481822298,
+            "prior": 0.149471739303851
+          },
+          "latent_l2": {
+            "network": 0.0,
+            "prior": 0.005358843257343545
+          },
+          "latent_spread": {
+            "network": 0.0,
+            "prior": 0.007549473435536887
+          },
+          "set_coverage": {
+            "network": 1.2338901774910056,
+            "prior": 0.12918863479753742
+          }
+        },
+        "gradient_cosines": {
+          "adversarial__latent_l2": 0.043496977933463,
+          "adversarial__latent_spread": -0.041311312487856966,
+          "adversarial__set_coverage": -0.5807480519512976,
+          "latent_l2__latent_spread": -0.9943057158822362,
+          "set_coverage__latent_l2": -0.048100117338665635,
+          "set_coverage__latent_spread": 0.04663150392748225
+        },
+        "identity_mse": 0.24373637229501147,
+        "individually_normalized": {
+          "adversarial": {
+            "identity_derivative": -0.019566707326157555,
+            "norm": 0.1300696910692233,
+            "protected_derivatives": {
+              "adversarial": -0.08094076734173053
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0019516415920099329,
+            "norm": 0.08587332256942283,
+            "protected_derivatives": {
+              "adversarial": -0.00545943472558766
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": 0.0020640285614905874,
+            "norm": 0.09317884242506659,
+            "protected_derivatives": {
+              "adversarial": 0.0057166301521724295
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": 0.01889780619649789,
+            "norm": 0.1290530459767691,
+            "protected_derivatives": {
+              "adversarial": 0.03271806226138887
+            }
+          }
+        },
+        "leave_one_out": {
+          "adversarial": {
+            "identity_derivative": 0.018897497692069658,
+            "norm": 0.12910272792480654,
+            "protected_derivatives": {
+              "adversarial": 0.032673018241118484
+            }
+          },
+          "latent_l2": {
+            "identity_derivative": -0.0037797264227942893,
+            "norm": 0.13035396009175426,
+            "protected_derivatives": {
+              "adversarial": -0.04038496883329327
+            }
+          },
+          "latent_spread": {
+            "identity_derivative": -0.004331530388579406,
+            "norm": 0.13037041355075585,
+            "protected_derivatives": {
+              "adversarial": -0.041869585513572526
+            }
+          },
+          "set_coverage": {
+            "identity_derivative": -0.019566748095144238,
+            "norm": 0.1300713334045455,
+            "protected_derivatives": {
+              "adversarial": -0.08093921401050205
+            }
+          }
+        },
+        "loss_values": {
+          "adversarial": 1.2238136574652716,
+          "latent_l2": 0.017230320634065825,
+          "latent_spread": 0.001657641466918944,
+          "set_coverage": 0.07873603512399635
+        },
+        "normalized_combined": {
+          "identity_derivative": -0.004060685075134214,
+          "norm": 0.1303582540916381,
+          "protected_derivatives": {
+            "adversarial": -0.04113969876671526
+          }
+        },
+        "normalized_nonadditivity_ratio": 0.9618510598939494,
+        "normalized_sum": {
+          "identity_derivative": -0.0005565141601790144,
+          "norm": 0.19432067625546595,
+          "protected_derivatives": {
+            "adversarial": -0.047965509653756885
+          }
+        }
+      },
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/constraint_geometry/queue/constraint_geometry-round3-v1/8d5c77a1a21748d8a84a64138a5b7785/provenance/provenance-state.pt",
+      "sha256": "bb0ddfd88ebb23aed0d696d93bf3a87424b9c5566024779dc796311969313a52",
+      "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e",
+      "task": "trajectory"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_endpoint_decomposition",
+  "torch_rng_unchanged": true
+}

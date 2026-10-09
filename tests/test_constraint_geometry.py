@@ -116,7 +116,7 @@ def _assert_bitwise_state(a, b):
 
 @pytest.mark.parametrize('dtype', [torch.float32, torch.float64])
 @pytest.mark.parametrize('device', ['cpu', 'cuda'])
-@pytest.mark.parametrize('mode', ['nonascent', 'strict_progress'])
+@pytest.mark.parametrize('mode', ['nonascent', 'direction_blend', 'strict_progress'])
 def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device, mode):
     """Software fixture: public initialization, sampled ownership, no training gate."""
     if device == 'cuda' and not torch.cuda.is_available():
@@ -124,6 +124,7 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device, mod
     from particlegan.init import deterministic_orthogonal_
     from particlegan.optim.dualnorm import NormalizedOptimizer
     from particlegan.optim.strict_progress import StrictProgressOptimizer
+    from particlegan.optim.direction_blend import DirectionBlendOptimizer
     import random
     import numpy as np
 
@@ -139,7 +140,8 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device, mod
     groups = [dict(params=list(networks[0].parameters()), role='generator'),
               dict(params=[tables[0]], role='prior', lr=.030)]
     plain = NormalizedOptimizer(groups, **options)
-    optimizer_type = ConstraintGeometryOptimizer if mode == 'nonascent' else StrictProgressOptimizer
+    optimizer_type = {'nonascent': ConstraintGeometryOptimizer, 'direction_blend': DirectionBlendOptimizer,
+                      'strict_progress': StrictProgressOptimizer}[mode]
     guarded = optimizer_type([
         dict(params=list(networks[1].parameters()), role='generator'),
         dict(params=[tables[1]], role='prior', lr=.030)], **options)
@@ -188,6 +190,7 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device, mod
         base_saved = deepcopy(saved)
         base_saved.pop('constraint_geometry')
         base_saved.pop('strict_progress', None)
+        base_saved.pop('direction_blend', None)
         _assert_bitwise_state(plain.state_dict(), base_saved)
         if index == 0:
             guarded.load_state_dict(saved)
@@ -276,3 +279,44 @@ def test_strict_progress_public_recipe_and_deterministic_replay_restriction():
     with pytest.raises(ValueError, match='deterministic replay'):
         GANTrainer(get_recipe('bcap', optimizer_family='dualnorm', constraint_geometry_mode='strict_progress',
                               standardize=False, output_noise_std=.1), module, torch.nn.Linear(1, 1))
+
+
+@pytest.mark.parametrize('device', ['cpu', 'cuda'])
+@pytest.mark.parametrize('dtype', [torch.float32, torch.float64])
+def test_direction_blend_full_scale_can_overshoot_without_evaluator(device, dtype):
+    from particlegan.optim.direction_blend import DirectionBlendOptimizer
+    from particlegan.optim.strict_progress import common_descent
+    if device == 'cuda' and not torch.cuda.is_available():
+        pytest.skip('CUDA unavailable')
+    p = torch.nn.Parameter(torch.tensor([.1], device=device, dtype=dtype))
+    opt = DirectionBlendOptimizer([p], lr=1., smoothing=.001)
+    protected = p.square().sum()
+    old = p.detach().clone()
+    constraint_geometry_backward(-p.sum(), opt, (protected,),
+        protected_evaluator=lambda: pytest.fail('direction-only arm called evaluator'))
+    normals = opt._protected.clone()
+    pending = deepcopy(opt.state_dict())
+    opt.load_state_dict(pending)
+    opt.step()
+    from particlegan.optim.dualnorm import NormalizedOptimizer
+    base_p = torch.nn.Parameter(old.clone())
+    base = NormalizedOptimizer([base_p], lr=1., smoothing=.001)
+    (-base_p.sum()).backward()
+    base.step()
+    expected, possible = common_descent(base_p.detach()-old, normals)
+    assert possible and torch.equal(p.detach(), old+expected)
+    assert float(p.square().sum().detach()) > float(protected.detach())
+    assert float(normals.double() @ (p.detach()-old).double()) < 0
+    assert opt.direction_blend_stats['blended_steps'] == 1
+    opt.load_state_dict(deepcopy(opt.state_dict()))
+    bad = deepcopy(opt.state_dict())
+    bad['direction_blend']['stats']['conflict_steps'] = -1
+    with pytest.raises(ValueError, match='counter'):
+        opt.load_state_dict(bad)
+
+
+def test_direction_blend_public_recipe():
+    from particlegan.optim.direction_blend import DirectionBlendOptimizer
+    recipe = get_recipe('bcap', optimizer_family='dualnorm', constraint_geometry_mode='direction_blend')
+    opt = recipe.make_generator_optimizer(torch.nn.Linear(2, 2))
+    assert isinstance(opt, DirectionBlendOptimizer)
