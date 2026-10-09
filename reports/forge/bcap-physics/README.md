@@ -1,5 +1,7 @@
 # Five physical theories for BCAP repair: completed comparison
 
+The subsequent [round-two comparison](round2/README.md) continues hydraulic, transport and corrected projection, adds blacksmith and alchemy, and records a new sustained unequal-mass PASS. The first-round readout below retains its original source-bound conclusions.
+
 **Output-motion control is the strongest follow-up lead; transport repairs allocation. None of the five candidates converts a failing task into a complete sustained PASS.** All five PRs are ready for review. This round concludes the authorized comparisons and changes no public default or ordinary qualification. The original winner retains its source-bound **7/21 Tier 2** result in the [current technique inventory](../technique-inventory.md).
 
 Each track formalized one theory, preregistered one global trainer candidate, and compared it with the winning BCAP recipe in its own frozen source/runtime. The theories concern mechanical leverage, game circulation, density transport, feasible descent geometry, and gradient-spectrum geometry. Their mathematical properties are scoped; these experiments establish no universal hierarchy from evolution to SGD to a stronger optimizer.
