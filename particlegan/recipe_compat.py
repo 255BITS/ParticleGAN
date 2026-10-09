@@ -3,6 +3,7 @@
 SEARCH_RECIPE_DEFAULTS = {
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
+    "optimizer_tempering": 0.0,
     "d_betas": None, "d_eps": None, "prior_eps": None,
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,

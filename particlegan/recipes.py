@@ -177,6 +177,8 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # Evidence-responsive strike amplitude; zero preserves the existing optimizer.
+    optimizer_tempering: float = 0.0
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -219,6 +221,11 @@ class Recipe:
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if (type(self.optimizer_tempering) not in (int, float)
+                or not math.isfinite(self.optimizer_tempering) or not 0 <= self.optimizer_tempering < 1):
+            raise ValueError("optimizer_tempering must be in [0, 1)")
+        if self.optimizer_tempering and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
+            raise ValueError("optimizer_tempering requires zero-momentum dualnorm")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -477,6 +484,8 @@ class Recipe:
             result.pop("optimizer_momentum")
         if self.optimizer_convolution == "none":
             result.pop("optimizer_convolution", None)
+        if not self.optimizer_tempering:
+            result.pop("optimizer_tempering", None)
         if self.optimizer_adam_lr is None:
             result.pop("optimizer_adam_lr")
         if self.eps == 1e-8:

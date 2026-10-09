@@ -1,0 +1,26 @@
+{
+  "original_candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "original_seed": 0,
+  "original_source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+  "archive": {
+    "task": "gaussian1d_stability",
+    "attempt_id": "ffc5586829b04e6baf8d0e443551a6b0",
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/ffc5586829b04e6baf8d0e443551a6b0/evaluator/state.pt",
+    "sha256": "9854ff0e94bd81c477371fab33df58c7caec6f1156fdc4658179c29dfe974d0e"
+  },
+  "verified_sha256": "9854ff0e94bd81c477371fab33df58c7caec6f1156fdc4658179c29dfe974d0e",
+  "saved_state_keys": [
+    "schema",
+    "api_version",
+    "recipe",
+    "prior",
+    "extensions",
+    "initializer",
+    "initialization",
+    "streams",
+    "trainer"
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "evidence_scope": "inspection_of_existing_saved_state_and_published_derivatives_not_new_training"
+}

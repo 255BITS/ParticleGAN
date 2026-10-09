@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "blacksmith-tempering-r2-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 1
+    },
+    {
+      "task": "gaussian1d_stability",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 2
+    },
+    {
+      "task": "mode_hold",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 3
+    },
+    {
+      "task": "vector_two_broad",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 4
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Five unchanged tasks are a mechanism diagnostic; no ordinary qualification or adoption."
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Scoped evidence-responsive normalized-strike diagnostic, retaining two-pole, confirmed Gaussian and dependent stability, failing mode hold and passing broad vectors."
+}

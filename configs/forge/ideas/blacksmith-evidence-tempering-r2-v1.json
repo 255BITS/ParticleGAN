@@ -1,0 +1,46 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "trainer_family": "bcap-dualnorm",
+  "schema_version": 3,
+  "id": "blacksmith-evidence-tempering-r2-v1",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "guide": "reports/forge/bcap-physics/blacksmith/README.md",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Scale current normalized strikes by bias-corrected raw-gradient evidence coherence. All players use decay .95; prior histories condition on actual row observations. This is a bounded variance-responsive gain, not a curvature or physical-law guarantee.",
+  "changed_factors": [
+    "Recipe.optimizer_tempering=.95: per-tensor G/E/D and per-observed-row prior coherence gain; direction, objectives, data and budgets unchanged."
+  ],
+  "prior_art": [
+    "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+    "https://proceedings.mlr.press/v28/schaul13.html"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "optimizer_tempering": 0.95
+  }
+}

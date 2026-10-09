@@ -151,7 +151,7 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none", **options):
+                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none", tempering=0., **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -166,6 +166,11 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
+        if (type(tempering) not in (int, float) or not math.isfinite(tempering)
+                or not 0 <= tempering < 1):
+            raise ValueError("optimizer tempering must be in [0, 1)")
+        if tempering and (family != "dualnorm" or momentum):
+            raise ValueError("optimizer tempering requires zero-momentum dualnorm")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -181,6 +186,7 @@ class NormalizedOptimizer(Optimizer):
         self.family, self.momentum = family, float(momentum)
         self.smoothing = float(smoothing)
         self.convolution = convolution
+        self.tempering = float(tempering)
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -288,6 +294,40 @@ class NormalizedOptimizer(Optimizer):
     def _player(role):
         return "prior" if role in ("prior", "table") else ("critic" if role == "critic" else "generator")
 
+    def _tempering_gain(self, parameter, gradient, state, rows=None):
+        """Bias-corrected gradient coherence, per tensor or per observed row.
+
+        Histories use raw gradients, while the strike direction remains current
+        DualNorm. Missing gradients consume nothing; zero observed gradients do
+        consume evidence. An unobserved prior row never ages or changes history.
+        """
+        if not self.tempering:
+            return 1.
+        if "temper_mean" not in state:
+            state["temper_mean"] = torch.zeros_like(parameter)
+            state["temper_square"] = torch.zeros_like(parameter)
+            state["temper_count"] = torch.zeros((len(parameter), 1) if rows is not None else (),
+                                                dtype=torch.long, device=parameter.device)
+        mean, square, count = (state[k] for k in ("temper_mean", "temper_square", "temper_count"))
+        beta = self.tempering
+        if rows is None:
+            mean.mul_(beta).add_(gradient, alpha=1 - beta)
+            square.mul_(beta).addcmul_(gradient, gradient, value=1 - beta)
+            count.add_(1)
+            correction = 1 - torch.full_like(count, beta, dtype=parameter.dtype).pow(count)
+            numerator, denominator = mean.square().sum(), square.sum() * correction
+        else:
+            selected = gradient[rows]
+            mean[rows] = beta * mean[rows] + (1 - beta) * selected
+            square[rows] = beta * square[rows] + (1 - beta) * selected.square()
+            count[rows] += 1
+            correction = 1 - torch.full_like(count[rows], beta, dtype=parameter.dtype).pow(count[rows])
+            numerator = mean[rows].square().sum(dim=1, keepdim=True)
+            denominator = square[rows].sum(dim=1, keepdim=True) * correction
+        # An exact zero denominator gives no strike, rather than NaN. Clamp
+        # only roundoff beyond Jensen's [0,1] bound; no gradient-scale floor.
+        return (numerator / denominator.clamp_min(torch.finfo(parameter.dtype).tiny)).clamp_(0, 1)
+
     @torch.no_grad()
     def step(self, closure=None):
         loss = None
@@ -351,8 +391,11 @@ class NormalizedOptimizer(Optimizer):
                     denominator = (torch.hypot(norm, torch.full_like(norm, self.smoothing))
                                    if self.smoothing else norm + eps)
                     update = selected / denominator
+                    if self.tempering:
+                        update = update * self._tempering_gain(parameter, gradient, state, rows)
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
+                    gain = self._tempering_gain(parameter, gradient, state)
                     direction = gradient
                     if self.momentum:
                         if "momentum_buffer" not in state:
@@ -372,6 +415,8 @@ class NormalizedOptimizer(Optimizer):
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
                             update = polar_factor(direction_matrix, smoothing=self.smoothing)
+                            if self.tempering:
+                                update = update * gain
                             weight_matrix.add_(update, alpha=-rate * factor)
                     elif parameter.ndim == 2:
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
@@ -379,12 +424,17 @@ class NormalizedOptimizer(Optimizer):
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
                         update = (polar_factor(direction, smoothing=self.smoothing)
                                   if self.smoothing else polar_factor(direction))
+                        if self.tempering:
+                            update = update * gain
                         parameter.add_(update, alpha=-rate * factor)
                     else:
                         norm = direction.norm()
                         denominator = (torch.hypot(norm, norm.new_tensor(self.smoothing))
                                        if self.smoothing else norm + eps)
-                        parameter.add_(direction / denominator, alpha=-rate)
+                        update = direction / denominator
+                        if self.tempering:
+                            update = update * gain
+                        parameter.add_(update, alpha=-rate)
         if self._adam is not None:
             self._adam.step()
         self.clear_sampled_rows()
@@ -404,6 +454,8 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["smoothing"] = self.smoothing
         if self.convolution != "none":
             result["dualnorm"]["convolution"] = self.convolution
+        if self.tempering:
+            result["dualnorm"]["tempering"] = {"schema": 1, "decay": self.tempering}
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -422,6 +474,8 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("smoothing")
         if self.convolution != "none":
             expected_meta.add("convolution")
+        if self.tempering:
+            expected_meta.add("tempering")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -429,6 +483,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint optimizer smoothing differs")
         if meta.get("convolution", "none") != self.convolution:
             raise ValueError("checkpoint optimizer convolution differs")
+        if self.tempering and meta.get("tempering") != {"schema": 1, "decay": self.tempering}:
+            raise ValueError("checkpoint optimizer tempering differs")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -471,17 +527,24 @@ class NormalizedOptimizer(Optimizer):
                     required = {"step", "exp_avg_sq"}
                 elif algorithm == "dualnorm" and self.momentum:
                     required.add("momentum_buffer")
+                if self.tempering:
+                    required |= {"temper_mean", "temper_square", "temper_count"}
                 if algorithm in ("adam", "ada_nsgda") and actual["amsgrad"]:
                     required.add("max_exp_avg_sq")
                 if state.keys() != required:
                     raise ValueError("invalid normalized optimizer history fields")
                 for key in required - {"step"}:
                     tensor = state[key]
-                    if (not isinstance(tensor, torch.Tensor) or tensor.shape != parameter.shape
-                            or tensor.dtype != parameter.dtype or not bool(torch.isfinite(tensor).all())):
+                    shape = ((len(parameter), 1) if algorithm == "rownorm" else ()) if key == "temper_count" else parameter.shape
+                    dtype = torch.long if key == "temper_count" else parameter.dtype
+                    if (not isinstance(tensor, torch.Tensor) or tensor.shape != shape
+                            or tensor.dtype != dtype or not bool(torch.isfinite(tensor).all())):
                         raise ValueError(f"invalid normalized optimizer {key} tensor")
-                    if key in ("exp_avg_sq", "max_exp_avg_sq") and bool((tensor < 0).any()):
+                    if key in ("exp_avg_sq", "max_exp_avg_sq", "temper_square", "temper_count") and bool((tensor < 0).any()):
                         raise ValueError("invalid negative second-moment history")
+                    if key == "temper_count" and (bool((tensor != tensor.floor()).any())
+                                                   or bool((tensor > state["step"]).any())):
+                        raise ValueError("invalid tempering observation count")
                 if "step" in state:
                     step = state["step"]
                     if isinstance(step, torch.Tensor):
@@ -515,6 +578,14 @@ class NormalizedOptimizer(Optimizer):
         metadata = state.pop("dualnorm")
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
+        if self.tempering:
+            # Torch's generic loader casts history tensors to parameter dtype.
+            # Row observation clocks must remain exact integer counters.
+            for actual, packet in zip(self.param_groups, state["param_groups"]):
+                for parameter, identifier in zip(actual["params"], packet["params"]):
+                    if "temper_count" in state["state"].get(identifier, {}):
+                        self.state[parameter]["temper_count"] = state["state"][identifier]["temper_count"].to(
+                            device=parameter.device, dtype=torch.long).clone()
         self._refresh_adam()
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):
@@ -529,7 +600,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
-                                    convolution=recipe.optimizer_convolution, **options)
+                                    convolution=recipe.optimizer_convolution,
+                                    tempering=recipe.optimizer_tempering, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
