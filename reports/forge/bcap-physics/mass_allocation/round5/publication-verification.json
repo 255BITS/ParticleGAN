@@ -1,0 +1,218 @@
+{
+  "active_scientific_workers": 0,
+  "actual_training_gifs": [
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-gaussian1d_smoke.gif",
+      "sha256": "d686dadfe7bd8d7f157bcf1d2ad83e65387b2f506ec707f71f09737092f443b7"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-gaussian1d_stability.gif",
+      "sha256": "d80ab00446985e83c2481f503332e6d25780269643e713d34b0f440a4a0c3221"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-grid100.gif",
+      "sha256": "b152e195a2b8d8322eaf23d016981b9053353cb3eb4ea1bfd3ef3cffe299b46a"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-vector_two_broad.gif",
+      "sha256": "6b1c9aed6308005120c9e6a237aee04e4049dcf42ba2abef6ae142712bc4fd28"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-vector_unequal_mass.gif",
+      "sha256": "d22e4c4329c498bc667327307e8c49e6847f19103f03657456b63a3812b112ca"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/candidate-vector_unequal_width.gif",
+      "sha256": "c957421d2c2455602d6951b60fb126c8188229c5cdbc10122056490809cd5f90"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-gaussian1d_smoke.gif",
+      "sha256": "d686dadfe7bd8d7f157bcf1d2ad83e65387b2f506ec707f71f09737092f443b7"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-gaussian1d_stability.gif",
+      "sha256": "0ae91b2b7fca36ba3fa69e86d273a3c4ba46857098e1141bbcb5b6026a4a6c07"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-grid100.gif",
+      "sha256": "3c697ad0f7b67f499fc55217920b4063421d22dd7b0e484632717669a81b45cd"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-vector_two_broad.gif",
+      "sha256": "329c6be1f169d4363c73a4832e7312bc6168e30c28ee17fa07dc465241da9a5e"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-vector_unequal_mass.gif",
+      "sha256": "83185b013de83720d91faea09ca80d237c0dea60b4f99cdfb191682286d02b3a"
+    },
+    {
+      "frames": 9,
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/media/control-vector_unequal_width.gif",
+      "sha256": "b06557f16cc3a68a9d605e63e21e5cce3057bc121c69e933b17e2056a13a341c"
+    }
+  ],
+  "administrative_disposition": {
+    "full_compile_hook": "Interrupted before any of 88 protected files changed. Final publication used summaries-only refresh and read-only freshness check.",
+    "interrupted_log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/abandon.log",
+    "record": "reports/forge/records/lifecycle-3adc8030026cb516f274d123.json",
+    "record_sha256": "e81474b191eeabb5e53d234b07cfed087d7f6a6d2376acf86a600052e6d9cb00"
+  },
+  "all_preserved_and_scientific_hashes_match": true,
+  "all_report_relative_links_exist": true,
+  "final_compile_check": {
+    "exit_code": 0,
+    "fresh": true,
+    "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/compile-check-final-publication.log",
+    "log_sha256": "86b8b5476eb4ed04a196703036af84ecdefca144097ad0720b8639affb23a2f3",
+    "status": "CURRENT"
+  },
+  "job_workers": [
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_two_broad",
+      "worker_pid": 2432383
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_unequal_mass",
+      "worker_pid": 2430970
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "gaussian1d_smoke",
+      "worker_pid": 2427420
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "grid100",
+      "worker_pid": 2435500
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "grid100",
+      "worker_pid": 2450350
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "gaussian1d_smoke",
+      "worker_pid": 2446097
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_unequal_width",
+      "worker_pid": 2449627
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_two_broad",
+      "worker_pid": 2448956
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_unequal_width",
+      "worker_pid": 2434086
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "gaussian1d_stability",
+      "worker_pid": 2446662
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "vector_unequal_mass",
+      "worker_pid": 2448109
+    },
+    {
+      "process_exists": false,
+      "status": "terminal",
+      "task_id": "gaussian1d_stability",
+      "worker_pid": 2428118
+    }
+  ],
+  "optimizer_updates_added_by_publication": 0,
+  "original_files_preserved": 88,
+  "public_sampling_draws_added_by_publication": 0,
+  "publication_checks": [
+    {
+      "check": "compile-summaries",
+      "exit_code": 0,
+      "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/compile-summaries-final.log",
+      "log_sha256": "4ea4242651a1f44ae6cbfcaad6ad0ab1fd9cd4d23839bd612755b39d5466ceaf",
+      "seconds": 3.9418113050051033
+    },
+    {
+      "check": "compile-check",
+      "exit_code": 0,
+      "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/compile-check-final.log",
+      "log_sha256": "86b8b5476eb4ed04a196703036af84ecdefca144097ad0720b8639affb23a2f3",
+      "seconds": 1.8691386909922585
+    },
+    {
+      "check": "tier-inventory",
+      "exit_code": 0,
+      "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/tier-inventory-final.log",
+      "log_sha256": "cd53c291fa13789537fd56faa0e703bac278d0b28c96489b3627ad2ac217f369",
+      "seconds": 3.731767754070461
+    },
+    {
+      "check": "forge-validate",
+      "exit_code": 0,
+      "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/forge-validate-final.log",
+      "log_sha256": "408f77fc70dbbeb5f6fdf4d4d797b9f1b6ec88338e7b4dcab6aec67f68902e71",
+      "seconds": 4.635201495024376
+    }
+  ],
+  "qualification_input": false,
+  "read_only_reports": {
+    "control-parity.json": "7c26b6b1cc71a2beefa26069594b6b0b15cc3730c84774696793bc795837baac",
+    "media/index.json": "a777a4d42f7568dbee7f40351afe3b97d47522c8a21ccd30d3b8b9015b2ef223",
+    "provenance.json": "69f5e9d41db040a25849d5dd5cc5db0339ed99a96616116735bc5e7aef8f2526",
+    "receipts.json": "ec8c4bc4c5683a73cb6b37c68aa9aa9c23585e08b9cb8c0af43db3d6d9d69034",
+    "scorer-controls.json": "466aebb805974ba45adfcb99dc8ce2f32d8dbdfbd97dd791400d431de582a5ca",
+    "validation.json": "10af772e2462a7ad3d762710245d87851b4aa2d65c5c9ca7c8e7fd0049081c19"
+  },
+  "remaining_reserved_seconds": 0,
+  "scalar_vector_metric_sets_reproduced": 432,
+  "schema_version": 1,
+  "scientific_working_file_checks": 414,
+  "software": {
+    "cohort": "Separate synthetic linear software fixtures; no scientific task credit.",
+    "final_checks_passed": 36,
+    "initial_checks_passed": 35,
+    "logs": [
+      {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/software.log",
+        "sha256": "a09219a4bdc96eeaf2252c82d6216fc9ea51571dc02759f90d37a55b1675e73e"
+      },
+      {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/logs/software-final.log",
+        "sha256": "8ec0b7f04236e51811b211c5d0280f931c220b3a265e4e0bcabebc885f1c2fd9"
+      }
+    ],
+    "synthetic_public_trainer_updates_across_both_runs": 10
+  },
+  "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+  "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3"
+}

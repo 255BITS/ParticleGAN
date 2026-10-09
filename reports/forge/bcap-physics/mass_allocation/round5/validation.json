@@ -1,0 +1,140 @@
+{
+  "analysis_seconds": 2.616472152993083,
+  "data_replays": [
+    {
+      "batch_size": 128,
+      "both_consumed_target_streams_match": true,
+      "matched_public_initializer": true,
+      "prior": [
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      ],
+      "reconstructed_actual_batch_sequence_sha256": "2d2b1683475340fe9096c7ea6b61fef36b089dcd065ec7251fa6323b055a94ae",
+      "steps": 1200,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "batch_size": 128,
+      "both_consumed_target_streams_match": true,
+      "matched_public_initializer": true,
+      "prior": [
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      ],
+      "reconstructed_actual_batch_sequence_sha256": "ded45ce2c9510da5a3dee9b5c16c458857bf22ecb647b1e297b071446232ac19",
+      "steps": 1200,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "batch_size": 128,
+      "both_consumed_target_streams_match": true,
+      "matched_public_initializer": true,
+      "prior": [
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      ],
+      "reconstructed_actual_batch_sequence_sha256": "b379e7964d7fbf566e34b7db82d91cd11eeaee9f10bbefbe8abdd9b8d7142274",
+      "steps": 1200,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "batch_size": 2048,
+      "both_consumed_target_streams_match": true,
+      "matched_public_initializer": true,
+      "prior": [
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      ],
+      "reconstructed_actual_batch_sequence_sha256": "d14f2e6a442334f289de1084ec5e334748040f530e35bbb304f8fa468cc0acc8",
+      "steps": 7000,
+      "task_id": "grid100"
+    }
+  ],
+  "frozen_file_checks": 2406,
+  "optimizer_updates_added": 0,
+  "original_task_and_publication_hashes_unchanged": true,
+  "own_gaussian_continuations": [
+    {
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "d38cf12e8f70cf944c840586f5a1868e953cf86f25ca8a29f067382cc86f615f",
+        "parent_checkpoint_sha256": "b5338d5c3336fe94740513313dc8d3595731cfbeabc685a6937e67c0a17af0e9",
+        "parent_compatibility_key": "2a2ca97c5afa5b8b2cdead649cd55393f4041af8cc9a4364a36cf8b5111f6db2",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "aaecf9324c4a2bfb90a6076c56794c88796afd1d5eb0544e5ff76e1cb6e4393d",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "role": "control",
+      "status": "executed"
+    },
+    {
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "aedb5e70712838fad3aa519268e8fec3bb669109c7bf266ea581a2451f9d3606",
+        "parent_checkpoint_sha256": "7a09e39203731b16df0491cb9f5abb40247455b9f0d727e09bf0033a99985c59",
+        "parent_compatibility_key": "67e7ebcf1b05a9a54d2ee3bed6c89164d9902eb319d6142b3c236bc92de44ea2",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "6baa7de524ea97b22f58cc756af2dfc4a132526b887b6dfefe8c857d868d33ec",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "role": "candidate",
+      "status": "executed"
+    }
+  ],
+  "public_sampling_draws_added": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_files_unchanged": true,
+  "scope": "Read-only frozen-source/receipt/state and deterministic target replay; original per-update target tensors were not retained. Named streams isolate evaluation from all training draws.",
+  "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+  "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+  "trained_state_mutations": 0
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "scope": "Read-only research context before conclusion; originals retain their source and cohort, motivation only.",
+  "files": {
+    "reports/forge/EXPERIMENT_MEMORY.md": "87380f56d86b05dc0d7a3fbb534c9e99b9f660fb796cbd020f77a2ce16deedbb",
+    "/home/martyn/dev/ParticleGAN/reports/forge/bcap-physics/round4/README.md": "d5c42c4c39deaab180e687510ba3905a815c3c9b532f094db73da26158dacb02",
+    "/home/martyn/dev/ParticleGAN-bcap-physics-kinetic_transport/reports/forge/bcap-physics/kinetic_transport/round2/README.md": "9823a4919346b73c317051546fde0b0506906a224fcda9bb380167fcc1c9230b",
+    "/home/martyn/dev/ParticleGAN-bcap-r4-role_motion/reports/forge/bcap-physics/role_motion/round4/saved-role-probes.json": "5ec9ac091135f38ac2884277383325e289eea661e7f72c09104357ab48b7db1a"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "archived_attempt_id": "7fe959bc7cea47249df469a730093f74",
+      "archived_checkpoint_sha256": "c79765d26741c883871ca778aa485b2c5e80155044c6f30910a37f3dbe9c25eb",
+      "archived_source": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "bitwise_equal": true,
+      "mismatches": {
+        "metrics": [],
+        "numerical_state": [],
+        "observations": []
+      },
+      "new_attempt_id": "56ed77aff2c84cf0bd7618e040e0fb3c",
+      "new_checkpoint_sha256": "3162bbace5daa6f8c16c2afa7297abd1b7974d4da301d8ad5fbce7e1f847f0f0",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_attempt_id": "4171d610187045ada0f7000a0764eef8",
+      "archived_checkpoint_sha256": "ff288c5b76c0cabe75dd07e73502d19995dcf2e0ea4d6725b8e8a0074687cf6e",
+      "archived_source": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "bitwise_equal": true,
+      "mismatches": {
+        "metrics": [],
+        "numerical_state": [],
+        "observations": []
+      },
+      "new_attempt_id": "442320429f0143d3aad23a8ea72f3cc3",
+      "new_checkpoint_sha256": "62944867f8b35a50abe9e5aa69bd7985d52264fab5cd8b7c31810f3d5c9f2a99",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_attempt_id": "f318e20ffa2e4aba859a23964a3d0fbf",
+      "archived_checkpoint_sha256": "1c6f7065022a8c38f3031c744afd73f2795ea6e8f25dc7f98acd8bc9208141c9",
+      "archived_source": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "bitwise_equal": true,
+      "mismatches": {
+        "metrics": [],
+        "numerical_state": [],
+        "observations": []
+      },
+      "new_attempt_id": "f8286475c34f4755827e55ac9ea6f172",
+      "new_checkpoint_sha256": "e014721ffdbfa87267949c2f2398d0e16979ddc4733ad89bda32991f42c7a6f5",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "2865e3889a2e4d23a78be6a89b349435",
+      "archived_checkpoint_sha256": "84cd3ba3945d730067784ea4d9826017d659c67763032fa6414a855dcbe45716",
+      "archived_source": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "bitwise_equal": true,
+      "mismatches": {
+        "metrics": [],
+        "numerical_state": [],
+        "observations": []
+      },
+      "new_attempt_id": "3daabc202005466a9c4716a176901532",
+      "new_checkpoint_sha256": "97712c34988466669ccea5fa90e38f56d3b6d634b83678287a4ebbd15db0728b",
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "Exact local-v2 matched-source reproduction of archived singleton; no qualification reuse or independent-seed credit."
+}

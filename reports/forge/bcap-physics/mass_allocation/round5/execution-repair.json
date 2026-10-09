@@ -1,0 +1,20 @@
+{
+  "ancillary_allowances": 360,
+  "compatibility_key": "67e7ebcf1b05a9a54d2ee3bed6c89164d9902eb319d6142b3c236bc92de44ea2",
+  "original_attempt_id": "f618a99d1fea438c867f9794d0af88f6",
+  "original_attempt_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/f618a99d1fea438c867f9794d0af88f6",
+  "original_certificates": {
+    "evidence": "7e2eb3e4fb628a7733b25d0690f327ac3491883fa9e3c3491a3a77d3e7a2b980",
+    "request": "0d6250528e9553fe4531dd74f06816b1c71ba4bce3358917c53163f54aab22a4",
+    "result": "c119d823eaa1c2bc1f044b5695764e7744323863d59d96fd6044b8124fb65579"
+  },
+  "original_paid_seconds": 121.38786142203026,
+  "original_planned_full_allowances": 19440,
+  "planned_with_retry_full_allowances": 19560,
+  "qualification_input": false,
+  "reason": "Execution-only repair: single physical GPU/one active campaign worker after two-device smoke timed out under measured host-memory pressure. Original1000-update raw state retained; frozen source/recipe/task120-second allowance/seed/data law unchanged. No scientific failure rerun.",
+  "retry_full_allowance_seconds": 120,
+  "schema_version": 1,
+  "scope": "Execution timeout repair, same frozen scientific request; original INCOMPLETE not rewritten.",
+  "track_ceiling_seconds": 21600
+}
