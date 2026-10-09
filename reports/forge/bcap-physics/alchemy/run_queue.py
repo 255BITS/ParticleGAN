@@ -9,4 +9,4 @@ if __name__ == '__main__':
     assert Path(particlegan.__file__).resolve().is_relative_to(ROOT)
     print({'phase':'bounded_drain','python_package':particlegan.__file__,'queue':str(QUEUE)},flush=True)
     queue = Queue(QUEUE, report_root=ROOT/'reports/forge', on_completion=None)
-    print(drain(queue,['cuda:0'],workers_per_gpu=1,allow_sharing=True,watch=False),flush=True)
+    print(drain(queue,['0'],workers_per_gpu=1,allow_sharing=True,watch=False),flush=True)
