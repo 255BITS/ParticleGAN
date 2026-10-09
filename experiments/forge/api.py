@@ -149,6 +149,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
+        component_transport=task["execution"].get("transport_consumer"),
         policy_task=task if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
@@ -163,6 +164,13 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     ownership_receipt(candidate, task, asdict(context.recipe), protocol,
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
+    if context.recipe.constraint_geometry_mode != "none":
+        if context.execution_path == "public_components" and task["execution"].get("host") not in {
+                "two_pole", "trajectory", "residual_student", "mid_scale_identity"}:
+            raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])
+        if context.recipe.constraint_geometry_mode == "strict_progress" and (
+                context.recipe.input_noise_std or context.recipe.output_noise_std or context.recipe.standardize):
+            raise CapabilityError(["strict_progress finite replay requires zero additive noise and an unstandardized prior"])
     context.host_adaptation = adaptation_receipt(candidate, task)
     context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),
@@ -176,6 +184,15 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    consumer = task.get('execution', {}).get('transport_consumer')
+    if consumer is not None and (consumer != 'output_marginal_v1'
+            or task.get('adapter') != 'transfer_behavior'
+            or task.get('execution', {}).get('host') not in ('trajectory', 'residual_student', 'mid_scale_identity')
+            or task.get('task_cohort') != 'conditional_transport_round5_v1'):
+        return ['unsupported explicit component transport consumer']
+    if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
+        return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
+                "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -306,10 +323,13 @@ class FormulationContext:
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
-                 initializer_requirements=None, policy_task=None):
+                 initializer_requirements=None, policy_task=None, component_transport=None):
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
+        if component_transport not in (None, 'output_marginal_v1'):
+            raise CapabilityError(['unsupported component transport consumer'])
+        self.component_transport = component_transport
         self.policy_task = deepcopy(policy_task)
         if self.policy_task is not None:
             from .tier1_policy import validate
@@ -335,6 +355,9 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight) and component_transport is None:
+            raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "
+                                   "the current Forge host bindings do not support it"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (

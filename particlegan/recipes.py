@@ -78,6 +78,10 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Opt-in label-free transport signal on the same G-phase target batch.
+    kinetic_transport_weight: float = 0.0
+    kinetic_transport_local_weight: float = 0.0
+    kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -177,6 +181,7 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    constraint_geometry_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -215,6 +220,10 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress", "direction_blend"):
+            raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
+        if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
+            raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
         if self.optimizer_convolution not in ("none", "per_offset"):
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
@@ -357,6 +366,14 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if (type(self.kinetic_transport_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
+            raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+        if (type(self.kinetic_transport_local_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
+            raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
+        if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
+            raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -556,6 +573,17 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
+
+    def kinetic_transport_loss(self, fake, real):
+        """Public sample-space auxiliary objective; the caller owns the batches."""
+        from .kinetic_transport import kinetic_transport_loss
+        return self.kinetic_transport_weight * kinetic_transport_loss(
+            fake, real, projections=self.kinetic_transport_projections)
+
+    def kinetic_transport_local_loss(self, fake, real):
+        """Public relative local moment residual; caller owns the same batches."""
+        from .kinetic_transport import kinetic_transport_local_loss
+        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
