@@ -15,7 +15,7 @@ import tarfile
 
 
 DEVELOP = "5737ade47dca89b04d338ada20667781d1f2b5df"
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get("BCAP_COMPATIBILITY_ROOT", Path(__file__).resolve().parents[1]))
 CASES = ("bcap_adam", "bcap_winner", "k3p", "ka2", "r1r2", "released_gan")
 PRIORS = ("particle_cloud", "mog")
 NEW_INACTIVE_FIELDS = {
@@ -171,17 +171,27 @@ def _probe(root, output, baseline=None):
     # remain explicit and must not acquire a projection/transport requirement.
     view = json.loads((root / "configs/forge/views/discriminator_stability.json").read_text())
     matrix = {}
+    without_hooks = {}
+    declared_tasks = {}
     for case, name in HOST_CARDS.items():
         card = _card(root, name)
         matrix[case] = {}
+        without_hooks[case] = {}
         for assignment in view["assignments"]:
             if assignment["importance"] != "required" or assignment["qualification_tier"] > 2:
                 continue
             task_id = assignment["task"]
             task = json.loads((root / f"configs/forge/tasks/{task_id}.json").read_text())
+            declared_tasks[task_id] = task
             blockers = adapter_preflight(task, card, root=root)
             matrix[case][task_id] = blockers
+            optional_absent = deepcopy(task)
+            optional_absent["execution"].pop("transport_consumer", None)
+            optional_absent["execution"].pop("transport_contract", None)
+            without_hooks[case][task_id] = adapter_preflight(optional_absent, card, root=root)
     packets["host_matrix"] = matrix
+    packets["without_hooks"] = without_hooks
+    packets["declared_tasks"] = declared_tasks
     from experiments.forge.behavior_adapters import run_behavior
     components = {}
     for case, host in COMPONENT_CASES:
@@ -197,6 +207,7 @@ def _probe(root, output, baseline=None):
         # Public provenance added explicit inactive optional metadata. Its
         # value must be inactive; substantive training state remains exact.
         assert state.pop("component_transport", None) is None
+        assert state["applied"].pop("component_transport", None) is None
         recipe = state["applied"]["recipe"]
         for name, default in NEW_INACTIVE_FIELDS.items():
             assert recipe.pop(name, default) == default
@@ -293,6 +304,7 @@ else:
         reference, candidate = comparison
         assert len(reference["host_matrix"][case]) == 27
         _assert_equal(reference["host_matrix"][case], candidate["host_matrix"][case], case)
+        _assert_equal(reference["host_matrix"][case], candidate["without_hooks"][case], case + ".without-hooks")
         for blockers in candidate["host_matrix"][case].values():
             assert not any("transport" in reason or "constraint_geometry" in reason for reason in blockers)
         if case in ("e22", "atlas"):
@@ -302,7 +314,15 @@ else:
     def test_inactive_original_component_hosts_are_bitwise_develop(comparison, case, host):
         reference, candidate = comparison
         key = f"{case}/{host}"
-        _assert_equal(reference["components"][key], candidate["components"][key], key)
+        old, new = deepcopy(reference["components"][key]), deepcopy(candidate["components"][key])
+        # Rebinding sources creates explicit new provenance. The independent
+        # task-contract test below verifies unchanged conditions/gates and the
+        # exact old revision ancestry; all actual trained state stays strict.
+        for packet in (old, new):
+            evaluation = packet["applied"]["field_ownership"]["task_contract"]["evaluation"]["value"]
+            evaluation.pop("sources", None)
+            evaluation.pop("evaluator_revision", None)
+        _assert_equal(old, new, key)
 
     @pytest.mark.parametrize("case", CASES)
     def test_inactive_word_joint_and_resume_are_bitwise_develop(comparison, case):
@@ -311,3 +331,30 @@ else:
         _assert_equal(old, {name: value for name, value in new.items() if name != "restored"}, case)
         for name in ("suffix", "final"):
             _assert_equal(old[name], new["restored"][name], case + ".resume." + name)
+
+    def test_integrated_canonical_contracts_preserve_original_task_conditions_and_gates(comparison):
+        reference, candidate = comparison
+        assert reference["declared_tasks"].keys() == candidate["declared_tasks"].keys()
+        for name, original in reference["declared_tasks"].items():
+            updated = candidate["declared_tasks"][name]
+            _assert_equal(original["id"], updated["id"], name + ".id")
+            _assert_equal(original["adapter"], updated["adapter"], name + ".adapter")
+            execution = dict(updated["execution"])
+            execution.pop("transport_consumer", None)
+            execution.pop("transport_contract", None)
+            _assert_equal(original["execution"], execution, name + ".execution")
+            old_eval = {key: value for key, value in original["evaluation"].items()
+                        if key not in ("sources", "evaluator_revision")}
+            new_eval = {key: value for key, value in updated["evaluation"].items()
+                        if key not in ("sources", "evaluator_revision")}
+            _assert_equal(old_eval, new_eval, name + ".evaluation")
+            old_revision = original["evaluation"].get("evaluator_revision")
+            revision = updated["evaluation"].get("evaluator_revision")
+            if revision != old_revision:
+                assert revision["original_task_commit"] == DEVELOP
+                assert revision["original_task_path"] == f"configs/forge/tasks/{name}.json"
+                _assert_equal(old_revision, revision["previous_revision"], name + ".original-revision")
+            for path, old_hash in original["evaluation"].get("sources", {}).items():
+                new_hash = updated["evaluation"]["sources"][path]
+                if new_hash != old_hash:
+                    assert revision["previous_source_sha256"][path] == old_hash

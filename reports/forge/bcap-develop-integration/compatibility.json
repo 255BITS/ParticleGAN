@@ -3,148 +3,148 @@
   "baseline_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
   "component_cases": [
     {
-      "candidate_state_sha256": "2d1b55d9a359201f020d6b969bdcda1064d2e0b05ca0c07fced8f4dd92156b85",
       "case": "bcap_adam/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "2d1b55d9a359201f020d6b969bdcda1064d2e0b05ca0c07fced8f4dd92156b85"
+      "normalized_candidate_state_sha256": "46bd2cca020a109b03c6f9c893f01a91ab0ed6322eee7678114994175e5bf415",
+      "normalized_reference_state_sha256": "46bd2cca020a109b03c6f9c893f01a91ab0ed6322eee7678114994175e5bf415",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "a003f9ea7c12a1f12b1454238f742907389aabbe573377b1aac7a1a8ed7f01a2",
       "case": "bcap_adam/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "a003f9ea7c12a1f12b1454238f742907389aabbe573377b1aac7a1a8ed7f01a2"
+      "normalized_candidate_state_sha256": "2afd2bff0eca59d82846a1589fc4b7574cb34a076023f205f024897a6ead043c",
+      "normalized_reference_state_sha256": "2afd2bff0eca59d82846a1589fc4b7574cb34a076023f205f024897a6ead043c",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "e5ac700c6aee507fcec272ff68accfdad75c262acb9e877cd3fcde811257d8fa",
       "case": "bcap_winner/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "e5ac700c6aee507fcec272ff68accfdad75c262acb9e877cd3fcde811257d8fa"
+      "normalized_candidate_state_sha256": "9ea34cffede112e0026e7e8c4f74da388238687278680efdb1ef4b970eab3188",
+      "normalized_reference_state_sha256": "9ea34cffede112e0026e7e8c4f74da388238687278680efdb1ef4b970eab3188",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "3a17f54c797aaeb2a036d7c6b1f59d5d541145401dcb15d9b2074b190fc9b66e",
       "case": "bcap_winner/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "3a17f54c797aaeb2a036d7c6b1f59d5d541145401dcb15d9b2074b190fc9b66e"
+      "normalized_candidate_state_sha256": "ec97c5768eec914b144eb11e3f1341ae5838afd85ca283e29e4141ea72cc41bf",
+      "normalized_reference_state_sha256": "ec97c5768eec914b144eb11e3f1341ae5838afd85ca283e29e4141ea72cc41bf",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "c002d572911d47ba9afecccbeb56c5a19fb7b8511047c9f643dd5a19e4435715",
       "case": "k3p/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "c002d572911d47ba9afecccbeb56c5a19fb7b8511047c9f643dd5a19e4435715"
+      "normalized_candidate_state_sha256": "09f20370180b770645006c70b080a5018c97bdb9e68e5dcd9ddd0672a06f7ef4",
+      "normalized_reference_state_sha256": "09f20370180b770645006c70b080a5018c97bdb9e68e5dcd9ddd0672a06f7ef4",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "8316cbf638758709154c9215f1cb2a628dc93960c6e1e335212b762e1c594e9e",
       "case": "k3p/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "8316cbf638758709154c9215f1cb2a628dc93960c6e1e335212b762e1c594e9e"
+      "normalized_candidate_state_sha256": "164106b445f5778b040b7aea32afb196df8a5f42306a4115b9bb91beb64a94af",
+      "normalized_reference_state_sha256": "164106b445f5778b040b7aea32afb196df8a5f42306a4115b9bb91beb64a94af",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "3de843741f0b14cd17d76fe7af75ac5db98d7055ce99ae50eab67d8b90732994",
       "case": "ka2/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "3de843741f0b14cd17d76fe7af75ac5db98d7055ce99ae50eab67d8b90732994"
+      "normalized_candidate_state_sha256": "8adef55fa70df5d68be716186da275209d5bdc5d04b5d980685b470a61e3db21",
+      "normalized_reference_state_sha256": "8adef55fa70df5d68be716186da275209d5bdc5d04b5d980685b470a61e3db21",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "6bf718450d849f6181f71d984f58417b2a3abed2d6effd09c092b1e047815f0d",
       "case": "ka2/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "6bf718450d849f6181f71d984f58417b2a3abed2d6effd09c092b1e047815f0d"
+      "normalized_candidate_state_sha256": "f00921d963848c636fc7fe01b4f1725bfd398a45a701966f40553524fc38d7aa",
+      "normalized_reference_state_sha256": "f00921d963848c636fc7fe01b4f1725bfd398a45a701966f40553524fc38d7aa",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "63d8a3186788eaa4b66732be385eaed99d5bd58d44d64564f3466eb6c77af277",
       "case": "r1r2/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "63d8a3186788eaa4b66732be385eaed99d5bd58d44d64564f3466eb6c77af277"
+      "normalized_candidate_state_sha256": "3d58d1c0b98ef70708ae8a057c208cee60d242474eae07ad55efd89d6cc8913c",
+      "normalized_reference_state_sha256": "3d58d1c0b98ef70708ae8a057c208cee60d242474eae07ad55efd89d6cc8913c",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "8ba63b50580c04293186540d0360ef5ad8e58073434d610456e92656342a94a2",
       "case": "r1r2/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "8ba63b50580c04293186540d0360ef5ad8e58073434d610456e92656342a94a2"
+      "normalized_candidate_state_sha256": "0cdc30bd5ed6eecd78b34d913743fa013c24179ecb256b2fc3aa56a6939d8c27",
+      "normalized_reference_state_sha256": "0cdc30bd5ed6eecd78b34d913743fa013c24179ecb256b2fc3aa56a6939d8c27",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "dd29a79d2887f22250a79c0f75b714e56b4aa10a3cd7ff7115fdf50e99a25dd4",
       "case": "released_gan/trajectory",
-      "numerical_differences": 0,
-      "reference_state_sha256": "dd29a79d2887f22250a79c0f75b714e56b4aa10a3cd7ff7115fdf50e99a25dd4"
+      "normalized_candidate_state_sha256": "187f20897f0aa2275a5969a9818bf4998dceedb5ca4575be0481be1cd17e8423",
+      "normalized_reference_state_sha256": "187f20897f0aa2275a5969a9818bf4998dceedb5ca4575be0481be1cd17e8423",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "450d43159b569c61f1732db09255a8746146aa3bad4a07c2ab8b431daf9b6bb1",
       "case": "released_gan/ae_gan_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "450d43159b569c61f1732db09255a8746146aa3bad4a07c2ab8b431daf9b6bb1"
+      "normalized_candidate_state_sha256": "a18ac4eb0dcdd0e31eb322dde0e6cd8ab5ecd29ade26050fcc3e7d4583ea4d0f",
+      "normalized_reference_state_sha256": "a18ac4eb0dcdd0e31eb322dde0e6cd8ab5ecd29ade26050fcc3e7d4583ea4d0f",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "b72943e08843f5f8d20ae0c4a807f86eac981ad36a8a111adfdea5d9107acbb4",
       "case": "bcap_winner/two_pole",
-      "numerical_differences": 0,
-      "reference_state_sha256": "b72943e08843f5f8d20ae0c4a807f86eac981ad36a8a111adfdea5d9107acbb4"
+      "normalized_candidate_state_sha256": "74357786fd4164bc0dd3de5f15a53b36ef93b4408c77af3ee23a5dad23f800b1",
+      "normalized_reference_state_sha256": "74357786fd4164bc0dd3de5f15a53b36ef93b4408c77af3ee23a5dad23f800b1",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "d84c105c6c188e2fd504d8ffe19fcb3b8e508809f056b8377059fca4b7df2d47",
       "case": "bcap_winner/unused_token_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "d84c105c6c188e2fd504d8ffe19fcb3b8e508809f056b8377059fca4b7df2d47"
+      "normalized_candidate_state_sha256": "9a425511a60afc56339062e90b373fa054eb38be4404b2f25c61b7fd39fce80b",
+      "normalized_reference_state_sha256": "9a425511a60afc56339062e90b373fa054eb38be4404b2f25c61b7fd39fce80b",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "d5f6b0789c82839e18c43128b1a24876ac54dd1cab346a8b7f4006338fde1f7b",
       "case": "bcap_winner/mid_scale_identity",
-      "numerical_differences": 0,
-      "reference_state_sha256": "d5f6b0789c82839e18c43128b1a24876ac54dd1cab346a8b7f4006338fde1f7b"
+      "normalized_candidate_state_sha256": "80a32359a159230271a30244d00f563cc3f6a3fe03fc9734be2794c32dbdf192",
+      "normalized_reference_state_sha256": "80a32359a159230271a30244d00f563cc3f6a3fe03fc9734be2794c32dbdf192",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "2b7fc0e1419a4337db268fa1dd4595f2464338ac87e6de3bbf4e9ee289ce2e28",
       "case": "bcap_winner/residual_student",
-      "numerical_differences": 0,
-      "reference_state_sha256": "2b7fc0e1419a4337db268fa1dd4595f2464338ac87e6de3bbf4e9ee289ce2e28"
+      "normalized_candidate_state_sha256": "101b779d43b1548e7d2f9f50569221329a84dbee79794331349ffb68f3fbffd8",
+      "normalized_reference_state_sha256": "101b779d43b1548e7d2f9f50569221329a84dbee79794331349ffb68f3fbffd8",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "4f7b521d1e17cc2d8d7f8e2bae1a24a654d4141e370b95bf2cf671b9e1ce68ac",
       "case": "bcap_winner/unipolar",
-      "numerical_differences": 0,
-      "reference_state_sha256": "4f7b521d1e17cc2d8d7f8e2bae1a24a654d4141e370b95bf2cf671b9e1ce68ac"
+      "normalized_candidate_state_sha256": "10eb5a476aa6a493a17ee9625afc99aabbea97885bf83bd5aa1303657386aa09",
+      "normalized_reference_state_sha256": "10eb5a476aa6a493a17ee9625afc99aabbea97885bf83bd5aa1303657386aa09",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "71176ceb3f6941142b13191944417b582415d886088f72c21b5ebb25acaf8ef9",
       "case": "bcap_winner/cover_leftover",
-      "numerical_differences": 0,
-      "reference_state_sha256": "71176ceb3f6941142b13191944417b582415d886088f72c21b5ebb25acaf8ef9"
+      "normalized_candidate_state_sha256": "d3148095808401c01a3efb7eedc59f1198677ab2d758f53c64162f368256f330",
+      "normalized_reference_state_sha256": "d3148095808401c01a3efb7eedc59f1198677ab2d758f53c64162f368256f330",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "e5548c9bd68d57e2e052379ecf524c4139e7fe73f13956c40ac85faaa522ee80",
       "case": "ka2/two_pole",
-      "numerical_differences": 0,
-      "reference_state_sha256": "e5548c9bd68d57e2e052379ecf524c4139e7fe73f13956c40ac85faaa522ee80"
+      "normalized_candidate_state_sha256": "54017d320d1e3538522fd49874a8af56b88d04303fc680c0e714070e4cb78220",
+      "normalized_reference_state_sha256": "54017d320d1e3538522fd49874a8af56b88d04303fc680c0e714070e4cb78220",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "463bc88751a91a5d83f66427907860111d5926ad06bf198e1e86631b922c4214",
       "case": "ka2/unused_token_hold",
-      "numerical_differences": 0,
-      "reference_state_sha256": "463bc88751a91a5d83f66427907860111d5926ad06bf198e1e86631b922c4214"
+      "normalized_candidate_state_sha256": "e3104763f654224dc79bc616369acc9f51b364026254795f6228ad9b431df19c",
+      "normalized_reference_state_sha256": "e3104763f654224dc79bc616369acc9f51b364026254795f6228ad9b431df19c",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "8a8e0730482df423147ba310a492b26af3b073331aeb742c4f4a8d869c05508b",
       "case": "ka2/mid_scale_identity",
-      "numerical_differences": 0,
-      "reference_state_sha256": "8a8e0730482df423147ba310a492b26af3b073331aeb742c4f4a8d869c05508b"
+      "normalized_candidate_state_sha256": "e5cad781ff061029dc0c87b17ef0d0e00813b7d422d54e82bc194c06bc9b30a3",
+      "normalized_reference_state_sha256": "e5cad781ff061029dc0c87b17ef0d0e00813b7d422d54e82bc194c06bc9b30a3",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "56d5fc562e61ee5434c02fb93f99bb451dad4574757ef288f3821239559da71e",
       "case": "ka2/residual_student",
-      "numerical_differences": 0,
-      "reference_state_sha256": "56d5fc562e61ee5434c02fb93f99bb451dad4574757ef288f3821239559da71e"
+      "normalized_candidate_state_sha256": "8c14474b41e230da15babbf13885cff8c59e659f4bf9fd4366e89f308845971d",
+      "normalized_reference_state_sha256": "8c14474b41e230da15babbf13885cff8c59e659f4bf9fd4366e89f308845971d",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "7314624606dc330ce22996be7540206bf961e1f44e3e56d3d7b71ebdbdd211fe",
       "case": "ka2/unipolar",
-      "numerical_differences": 0,
-      "reference_state_sha256": "7314624606dc330ce22996be7540206bf961e1f44e3e56d3d7b71ebdbdd211fe"
+      "normalized_candidate_state_sha256": "7cd5a1f3ae012f4f18b3bf1f72e0921acaf45870a45e71f92dc2deab8cad9acb",
+      "normalized_reference_state_sha256": "7cd5a1f3ae012f4f18b3bf1f72e0921acaf45870a45e71f92dc2deab8cad9acb",
+      "numerical_differences": 0
     },
     {
-      "candidate_state_sha256": "84b7245727b505fb21abd471a7318ac2a5503d1499d9bcbe693cf638bd348afc",
       "case": "ka2/cover_leftover",
-      "numerical_differences": 0,
-      "reference_state_sha256": "84b7245727b505fb21abd471a7318ac2a5503d1499d9bcbe693cf638bd348afc"
+      "normalized_candidate_state_sha256": "d2365d2ee7745fa5926e3177518d9ad49a41b25d362b10d3b345f3946e93b349",
+      "normalized_reference_state_sha256": "d2365d2ee7745fa5926e3177518d9ad49a41b25d362b10d3b345f3946e93b349",
+      "numerical_differences": 0
     }
   ],
   "host_acceptance": {
@@ -204,41 +204,72 @@
     "E22 and Atlas original clean/live cohorts remain BLOCKED before spend; their separate policy cohorts were not executed",
     "Final integrated host production tree must rerun these checks before publication"
   ],
+  "port_only_audit": {
+    "artifacts": {
+      "pytest-reviewed/bcap-compatibility0/candidate.log": {
+        "bytes": 18475,
+        "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+      },
+      "pytest-reviewed/bcap-compatibility0/candidate.pt": {
+        "bytes": 51053554,
+        "sha256": "6a4e1afddd0039312f5e26b4e4a7195367bf12dc3e477f13f72f777ac0949e78"
+      },
+      "pytest-reviewed/bcap-compatibility0/develop.log": {
+        "bytes": 18475,
+        "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+      },
+      "pytest-reviewed/bcap-compatibility0/develop.pt": {
+        "bytes": 34084253,
+        "sha256": "274a8036aa3d7b436d5e47366a9599c28bb11741f133cf344ab6345ec5d53e7e"
+      },
+      "reviewed.log": {
+        "bytes": 100,
+        "sha256": "c83b1aeb1df467830a401c907258d4d88cdff00df80c95d9719fd61389133e03"
+      },
+      "reviewed.xml": {
+        "bytes": 9965,
+        "sha256": "639e3b5a8a2a3c03403bc7731c2021072a55335a6d0ef7b40191629734d921ab"
+      }
+    },
+    "duration_seconds": 13.07,
+    "tested_commit": "d9025840e12b4ec2bc2dbbc783fcc6059cb99555",
+    "tests_passed": 62
+  },
   "production_defects_identified": [],
   "protocol": {
     "initializer": "public deterministic_orthogonal through FormulationContext",
-    "optional_provenance_projection": "Only explicit new inactive defaults and their ownership metadata; each omitted value checked before projection",
+    "optional_provenance_projection": "Checked inactive defaults, plus evaluator source bindings/revision metadata. Canonical contract tests independently prove unchanged execution conditions/gates and exact original revision/hash ancestry.",
     "reference": "git archive of pinned develop production/config/profile sources, separate Python interpreter",
     "seed": 0,
     "threshold": "exact tensor/dictionary equality; zero numerical differences"
   },
   "raw_artifact_identities": {
-    "pytest-reviewed/bcap-compatibility0/candidate.log": {
-      "bytes": 18475,
-      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
-    },
-    "pytest-reviewed/bcap-compatibility0/candidate.pt": {
-      "bytes": 51053554,
-      "sha256": "6a4e1afddd0039312f5e26b4e4a7195367bf12dc3e477f13f72f777ac0949e78"
-    },
-    "pytest-reviewed/bcap-compatibility0/develop.log": {
-      "bytes": 18475,
-      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
-    },
-    "pytest-reviewed/bcap-compatibility0/develop.pt": {
-      "bytes": 34084253,
-      "sha256": "274a8036aa3d7b436d5e47366a9599c28bb11741f133cf344ab6345ec5d53e7e"
-    },
-    "reviewed.log": {
+    "canonical.log": {
       "bytes": 100,
-      "sha256": "c83b1aeb1df467830a401c907258d4d88cdff00df80c95d9719fd61389133e03"
+      "sha256": "803525940d11d23c35bf2e24a92daa6ab96157ffaeead10fbaa788d31f42334f"
     },
-    "reviewed.xml": {
-      "bytes": 9965,
-      "sha256": "639e3b5a8a2a3c03403bc7731c2021072a55335a6d0ef7b40191629734d921ab"
+    "canonical.xml": {
+      "bytes": 10131,
+      "sha256": "71d7497c40f3ce10fc7b15a68a62b6c1559904770430a4a4582b1381d6b6861a"
+    },
+    "pytest-canonical/bcap-compatibility0/candidate.log": {
+      "bytes": 18475,
+      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+    },
+    "pytest-canonical/bcap-compatibility0/candidate.pt": {
+      "bytes": 51199538,
+      "sha256": "24786bd3e446c7c6e973ecd13746c0507e4c2ff41f926eccf99c7ba514c33ce4"
+    },
+    "pytest-canonical/bcap-compatibility0/develop.log": {
+      "bytes": 18475,
+      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+    },
+    "pytest-canonical/bcap-compatibility0/develop.pt": {
+      "bytes": 34193245,
+      "sha256": "3277f29dd971cf7d2f6feba4cae12ef89ba57164bf0034312fb2c29c5ef51a46"
     }
   },
-  "reproduction": "PYTHONPATH=. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_bcap_integration_compatibility.py",
+  "reproduction": "BCAP_COMPATIBILITY_ROOT=/home/martyn/dev/ParticleGAN-bcap-develop-integration PYTHONPATH=/home/martyn/dev/ParticleGAN-bcap-develop-integration OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_bcap_integration_compatibility.py",
   "runtime": {
     "deterministic_algorithms": true,
     "device": "cpu",
@@ -359,37 +390,76 @@
   "schema_version": 1,
   "scope": "bounded_software_compatibility",
   "source_files_sha256": {
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "f8391719e77b389d033e469be5fa53dcf1f46c0d74ba3990877add2a36118fea",
+    "benchmarks/locked_shared/hosts/cover_leftover.py": "e2a780856d58bd59853f6cf0cac1eb4d205b658fa8329d5060f9638c20d329ce",
     "benchmarks/locked_shared/hosts/mid_scale_identity.py": "48f4d4842ef73ebf92bedbfad83a915d4010cd1b8eed408a913ddcbfb366a06e",
     "benchmarks/locked_shared/hosts/residual_student.py": "7b4de4b1840c10d62cf608e6e395083fa275f7fd238c1f4c57fbb739cb1a22c6",
+    "benchmarks/locked_shared/hosts/unipolar.py": "88f2970af9a19777a80e974b6301a049acc4a1f38ddb31387058eeca005e948e",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "090abe6d153ab10cf0e0102e6d2fdcf7f40b9dd63f3b9191e640d7f6a7e2446c",
     "benchmarks/locked_shared/trajectory.py": "99d8ea4f3bc16d8dd70452a7a368e8128e5e967abd2197949d7c2ea433e3c7aa",
-    "benchmarks/locked_shared/two_pole.py": "487477821e7cd4f97492eccb9a28407832f46b002563b314c0d21e573a7f51b2",
-    "experiments/forge/api.py": "52adad84942595e6f854043014c1a4c2bc98891e865286fb43c82a49bcf85f54",
-    "experiments/forge/behavior_adapters.py": "1dffd1568c1ed714dd54aa8af6f19b3a7d2b970a7507adf56243b5a7b2a828d2",
+    "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+    "benchmarks/toy_audit/api_images.py": "b4e76f9f143464611f2a1abfd2018e9df7170cdc2653cc3d1123da446533fa8c",
+    "configs/forge/tasks/ae_gan_hold.json": "5476db845f394120199e69334481064da394c401068f50e15db9325d58291c32",
+    "configs/forge/tasks/cover_leftover.json": "82a811e375b8c68f82fd6295b922719986c7207ca26076c3331124ba99ee67f5",
+    "configs/forge/tasks/five_word_joint_acquisition.json": "48500da5a15e8700d2a6142a1481c70ce4994c7edb78c40b5826aea3ef0cc6aa",
+    "configs/forge/tasks/five_word_joint_hold.json": "b312dcfab664e44a56e7d847c02aeb61644daabf37992ece549bb2ddc17a7db3",
+    "configs/forge/tasks/five_word_joint_smoke.json": "f72b442ecab7bbee4395cbf967557f9d6901c2030fdb9629c32d777d2940df59",
+    "configs/forge/tasks/gaussian1d_smoke.json": "4cf5029189743f168f01cdbc64e2a7c653cbb642c1fd5ef86f0d9e52a7cdbb11",
+    "configs/forge/tasks/gaussian1d_stability.json": "bfa5e2e562da18894abef64c890a48734d4faa96ffa6f453eb4ed6128c9d05b8",
+    "configs/forge/tasks/grid100.json": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
+    "configs/forge/tasks/img_bars4.json": "562c05c07de33e5a5e088cff097af9cf9f6f8b37bb436aed37bf502fb7aff86f",
+    "configs/forge/tasks/img_blobs4.json": "15c7ec3cfe80539b14d24824afc1a6fffae99e27b5a38e75c991823b5aceb336",
+    "configs/forge/tasks/img_intensity2.json": "6a69162bee7dd1c50c9f596f29ed339a5e475c296156c4324e5092099cddf90d",
+    "configs/forge/tasks/img_stripes2.json": "010a96d3829b639d13f1150f30a5ff44119bcc10a23822f4191773bab177eb70",
+    "configs/forge/tasks/mid_scale_identity.json": "f43fdca142fc1e1e8e932d5a14f1c60772eefc8b80a54d84904a9a59deff1a69",
+    "configs/forge/tasks/mode_hold.json": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5",
+    "configs/forge/tasks/residual_student.json": "b1d4f9c0ace89a1d7d45bd5cc3a9e0c2caba551781d70a3e15f4a3ab37e8bbbf",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "configs/forge/tasks/rotated100.json": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d",
+    "configs/forge/tasks/staggered100.json": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1",
+    "configs/forge/tasks/trajectory.json": "9604bfe5e0ede5ee841b79c3b022327bfe6c692bab2cee3d22cca1128652f273",
+    "configs/forge/tasks/two_pole.json": "229dd3b29482f609c098336e1d5fa6d1e92b11a76a4398ce63a001d82645b3d2",
+    "configs/forge/tasks/unipolar.json": "3f61abbc3eca47c32c1280311bd4c7df36da67ef84701d058e0dfc699ffce501",
+    "configs/forge/tasks/unused_token_hold.json": "85646ff945e5a395c6254a635ddac627bccb550951ba66be5be913565d726f77",
+    "configs/forge/tasks/vector_anisotropic.json": "e98512a93ba2d3a10a5fe6640cf74c5d22f88f917e9a5cf313302cc4aed1a24b",
+    "configs/forge/tasks/vector_overlap.json": "72bde8ab5f9a5222b095ee17849c27823156bd28675f443138d56542c9e69c35",
+    "configs/forge/tasks/vector_spiral.json": "d47cf689d77375873c25b5d6aa3610e9d6250ee5a9d2f2592538d49da943ff9f",
+    "configs/forge/tasks/vector_two_broad.json": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab",
+    "configs/forge/tasks/vector_unequal_mass.json": "ea1b35df2bd0ab55b50d47ade00a758775d29130641fc1e76db28c03009164ff",
+    "configs/forge/tasks/vector_unequal_width.json": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
+    "experiments/forge/api.py": "0725057ffd1656c1fbb60d72c305900f6ed4b0d35088e1d0bb7388edf2457883",
+    "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0",
     "experiments/forge/boundaries.py": "5ff3580bf8e0f5213197795668b27195d492e129ff4f40b1c2ebe6918a92bd91",
     "experiments/forge/studies.py": "7673638f157fbe95fc61f3e526d3b3f60ef2f8e3c336f1eddf9141939293ebe1",
-    "particlegan/conditional_transport.py": "596e6a50039ba0cae2490cc6bbd810968a868728fecccdd010963507f16e7598",
+    "experiments/forge/word_adapter.py": "16bed6dbc88b98bc6f310d484a71d147e7b75a3dac473c80c835af917b153566",
+    "experiments/forge/word_tasks.py": "aad16baeabbfcacdbc53675ca0ffece5f1e1010c510a4e7ac1dd9565047760a5",
+    "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
     "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
     "particlegan/optim/constraint_geometry.py": "b78f2d6dec2d345c1357b3812a7f9adac8c4da0f86c8536ebfe0092c18269c5e",
     "particlegan/optim/direction_blend.py": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72",
     "particlegan/optim/dualnorm.py": "9ff1d4cd40effe478cb2afa74fbb418bef80c5b144609a84d4f5e568f787c969",
     "particlegan/optim/strict_progress.py": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577",
     "particlegan/recipe_compat.py": "2ab0c555e0420f54a9d26b24f9463f4c2b85114fd9dd53a387e364ff959c8d8e",
-    "particlegan/recipes.py": "be8437f18208f7df5bda942ba1cbb69200c50b746c2c9f2017936d3862fafcf7",
+    "particlegan/recipes.py": "e5b522d7e88af83e4f70fada37b9ad81650832417d7f19cc64fb3fea5f8371bf",
     "particlegan/training.py": "87c263849ad4ee19aec654f95b63a8bbc90cc39132162a74d77dd2fb4d066b43"
   },
-  "tail_command": "tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/compatibility/pytest-reviewed/bcap-compatibility0/candidate.log",
+  "tail_command": "tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/compatibility/pytest-canonical/bcap-compatibility0/candidate.log",
   "test_source": "tests/test_bcap_integration_compatibility.py",
-  "test_source_sha256": "328f519edede0c03ef6d81c1611278461c21fe9ed30914f3eebc862ecca0fdbf",
-  "tested_candidate_production_commit": "d9025840e12b4ec2bc2dbbc783fcc6059cb99555",
+  "test_source_sha256": "0ef9c1a1cc30abe3ac02e999d989ef6fbb7374d3ca4b6e85bc87aa9ff7ad2211",
+  "tested_candidate_production_commit": "03d26ee437e60e20f424dfb382d00f12286295dd",
+  "tested_candidate_working_tree_contains_uncommitted_contract_bindings": true,
+  "tested_source_snapshot_sha256": "7bd0f508db12136140aa335a49433ff2cf6d6a0eca4ad1a7c0e70614c68b0068",
   "tests": {
     "actual_develop_trainer_checkpoint_continuations": 36,
+    "canonical_condition_gate_ancestry_comparisons": 27,
     "component_host_cases": 24,
-    "duration_seconds": 13.07,
+    "duration_seconds": 16.8,
     "failed": 0,
     "original_host_preflight_comparisons": 216,
-    "passed": 62,
+    "passed": 63,
     "public_software_outer_updates": 408,
     "scalar_formulation_prior_cases": 12,
+    "without_transport_hook_preflight_comparisons": 216,
     "word_joint_and_resume_cases": 6
   },
   "verdict": "PASS",
@@ -400,7 +470,10 @@
     "Named construction, data, prior, training-noise and evaluation stream checkpoints match develop",
     "Evaluation preserves consumed training streams and caller global RNG",
     "Actual develop trainer checkpoint loading supports absent new fields, explicit inactive fields and absent policy metadata",
-    "Actual develop word joint policy/data/named-stream checkpoints resume exactly"
+    "Actual develop word joint policy/data/named-stream checkpoints resume exactly",
+    "All 216 inactive host preflights preserve develop acceptance even when optional consumer/transport contract are absent",
+    "All 27 canonical task execution laws and complete numeric gates remain equal to original develop contracts after only explicitly declared transport additions",
+    "Every changed original evaluator source hash and exact original evaluator revision remain in version ancestry"
   ],
   "word_cases": [
     {
