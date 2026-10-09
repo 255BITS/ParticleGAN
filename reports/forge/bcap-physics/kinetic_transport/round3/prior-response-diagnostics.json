@@ -1,0 +1,551 @@
+{
+  "device": "physical_gpu1",
+  "diagnostics": [
+    {
+      "archived_streams_mutated": false,
+      "attempt_id": "6e4e2fb1df754f23b583ae4aadc4edad",
+      "batch": "exact final consumed real batch replayed and final data stream verified; generated probe reuses one cloned final-stream 128-row/jitter draw at the frozen endpoint",
+      "checkpoint_sha256": "e5761c79e388066195ff49d6d80d5d152711457cc4648a31579b51f6c820eeb1",
+      "composite_before": 0.8691244721412659,
+      "full_proposal_composite_change": -0.051655057817697525,
+      "generated_probe_draws": 128,
+      "gradient_cosines": [
+        {
+          "joint_parameter_gradient_cosine": 0.22771680355072021,
+          "output_gradient_cosine": -0.3677448034286499,
+          "terms": [
+            "adversarial",
+            "local"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.19151605665683746,
+          "output_gradient_cosine": -0.5033906698226929,
+          "terms": [
+            "adversarial",
+            "sliced"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.9778078198432922,
+          "output_gradient_cosine": 0.4693089425563812,
+          "terms": [
+            "sliced",
+            "local"
+          ]
+        }
+      ],
+      "losses_before": {
+        "adversarial": 0.6826745271682739,
+        "local": 0.07055485248565674,
+        "sliced": 0.1158950924873352
+      },
+      "original_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "output_gradient_dot_actual_full_output_motion": -0.08511888235807419,
+      "parameter_directional_derivative": -0.08604361116886139,
+      "parameter_tensor_count": 7,
+      "task_id": "vector_two_broad",
+      "trials": [
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691158677801489,
+          "composite": 0.8174694143235683,
+          "losses": {
+            "adversarial": 0.6846821308135986,
+            "local": 0.043493758887052536,
+            "sliced": 0.08929352462291718
+          },
+          "scale": 1.0
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691201699607074,
+          "composite": 0.8347970023751259,
+          "losses": {
+            "adversarial": 0.6832518577575684,
+            "local": 0.05065256357192993,
+            "sliced": 0.1008925810456276
+          },
+          "scale": 0.5
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691223210509866,
+          "composite": 0.8497917465865612,
+          "losses": {
+            "adversarial": 0.682909369468689,
+            "local": 0.05892382189631462,
+            "sliced": 0.10795855522155762
+          },
+          "scale": 0.25
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691233965961263,
+          "composite": 0.8589108884334564,
+          "losses": {
+            "adversarial": 0.6827728748321533,
+            "local": 0.0643230602145195,
+            "sliced": 0.1118149533867836
+          },
+          "scale": 0.125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691239343686961,
+          "composite": 0.8638828620314598,
+          "losses": {
+            "adversarial": 0.6827188730239868,
+            "local": 0.0673375353217125,
+            "sliced": 0.1138264536857605
+          },
+          "scale": 0.0625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.869124203254981,
+          "composite": 0.8664704412221909,
+          "losses": {
+            "adversarial": 0.6826958656311035,
+            "local": 0.06892113387584686,
+            "sliced": 0.11485344171524048
+          },
+          "scale": 0.03125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691243376981235,
+          "composite": 0.8677889183163643,
+          "losses": {
+            "adversarial": 0.6826847195625305,
+            "local": 0.06973174214363098,
+            "sliced": 0.11537245661020279
+          },
+          "scale": 0.015625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8691244049196947,
+          "composite": 0.8684546202421188,
+          "losses": {
+            "adversarial": 0.6826795339584351,
+            "local": 0.0701417550444603,
+            "sliced": 0.11563333123922348
+          },
+          "scale": 0.0078125
+        }
+      ]
+    },
+    {
+      "archived_streams_mutated": false,
+      "attempt_id": "458f28edb51246faa84350eb942225c3",
+      "batch": "exact final consumed real batch replayed and final data stream verified; generated probe reuses one cloned final-stream 128-row/jitter draw at the frozen endpoint",
+      "checkpoint_sha256": "d876a54b7a7b92f259af1f28951cf286bffa0339b167599591199d11a632d639",
+      "composite_before": 0.9910981059074402,
+      "full_proposal_composite_change": -0.008842818439006805,
+      "generated_probe_draws": 128,
+      "gradient_cosines": [
+        {
+          "joint_parameter_gradient_cosine": 0.5784953832626343,
+          "output_gradient_cosine": 0.3071838617324829,
+          "terms": [
+            "adversarial",
+            "local"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.15100723505020142,
+          "output_gradient_cosine": -0.336389422416687,
+          "terms": [
+            "adversarial",
+            "sliced"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.6867217421531677,
+          "output_gradient_cosine": 0.10511904954910278,
+          "terms": [
+            "sliced",
+            "local"
+          ]
+        }
+      ],
+      "losses_before": {
+        "adversarial": 0.731605052947998,
+        "local": 0.15372918546199799,
+        "sliced": 0.10576383769512177
+      },
+      "original_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "output_gradient_dot_actual_full_output_motion": -0.17992417514324188,
+      "parameter_directional_derivative": -0.1808994710445404,
+      "parameter_tensor_count": 7,
+      "task_id": "vector_unequal_width",
+      "trials": [
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910800159603357,
+          "composite": 0.9822552874684334,
+          "losses": {
+            "adversarial": 0.7345667481422424,
+            "local": 0.1554972380399704,
+            "sliced": 0.09219130128622055
+          },
+          "scale": 1.0
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910890609338879,
+          "composite": 0.952931135892868,
+          "losses": {
+            "adversarial": 0.73044753074646,
+            "local": 0.12423160672187805,
+            "sliced": 0.09825199842453003
+          },
+          "scale": 0.5
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910935834206641,
+          "composite": 0.9592310413718224,
+          "losses": {
+            "adversarial": 0.7302426099777222,
+            "local": 0.12715677917003632,
+            "sliced": 0.10183165222406387
+          },
+          "scale": 0.25
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910958446640521,
+          "composite": 0.9715987518429756,
+          "losses": {
+            "adversarial": 0.730731725692749,
+            "local": 0.13711264729499817,
+            "sliced": 0.10375437885522842
+          },
+          "scale": 0.125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910969752857461,
+          "composite": 0.9804997146129608,
+          "losses": {
+            "adversarial": 0.7311075329780579,
+            "local": 0.14464454352855682,
+            "sliced": 0.10474763810634613
+          },
+          "scale": 0.0625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910975405965932,
+          "composite": 0.9856095016002655,
+          "losses": {
+            "adversarial": 0.7313371896743774,
+            "local": 0.14901907742023468,
+            "sliced": 0.10525323450565338
+          },
+          "scale": 0.03125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910978232520167,
+          "composite": 0.988310381770134,
+          "losses": {
+            "adversarial": 0.7314666509628296,
+            "local": 0.15133601427078247,
+            "sliced": 0.10550771653652191
+          },
+          "scale": 0.015625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.9910979645797284,
+          "composite": 0.9896942600607872,
+          "losses": {
+            "adversarial": 0.7315351963043213,
+            "local": 0.1525234878063202,
+            "sliced": 0.10563557595014572
+          },
+          "scale": 0.0078125
+        }
+      ]
+    },
+    {
+      "archived_streams_mutated": false,
+      "attempt_id": "e87d9c4997ce4d67a543c4ba1fd2f07c",
+      "batch": "exact final consumed real batch replayed and final data stream verified; generated probe reuses one cloned final-stream 128-row/jitter draw at the frozen endpoint",
+      "checkpoint_sha256": "7986b11ad3e73e1fdc3d1e3a7386550edb3558b02717c81088738a755c2849d6",
+      "composite_before": 0.8335134387016296,
+      "full_proposal_composite_change": 0.003043750301003456,
+      "generated_probe_draws": 128,
+      "gradient_cosines": [
+        {
+          "joint_parameter_gradient_cosine": -0.10693639516830444,
+          "output_gradient_cosine": -0.08643347769975662,
+          "terms": [
+            "adversarial",
+            "local"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": -0.17115899920463562,
+          "output_gradient_cosine": -0.1549052745103836,
+          "terms": [
+            "adversarial",
+            "sliced"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.9784776568412781,
+          "output_gradient_cosine": 0.3168680667877197,
+          "terms": [
+            "sliced",
+            "local"
+          ]
+        }
+      ],
+      "losses_before": {
+        "adversarial": 0.6938045620918274,
+        "local": 0.10628735274076462,
+        "sliced": 0.03342149406671524
+      },
+      "original_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "output_gradient_dot_actual_full_output_motion": -0.2903845012187958,
+      "parameter_directional_derivative": -0.28499889373779297,
+      "parameter_tensor_count": 7,
+      "task_id": "gaussian1d_stability",
+      "trials": [
+        {
+          "accepted": false,
+          "armijo_bound": 0.8334849388122558,
+          "composite": 0.8365571890026331,
+          "losses": {
+            "adversarial": 0.6950344443321228,
+            "local": 0.12745189666748047,
+            "sliced": 0.014070848003029823
+          },
+          "scale": 1.0
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8334991887569427,
+          "composite": 0.8166404459625483,
+          "losses": {
+            "adversarial": 0.6943119764328003,
+            "local": 0.10785187780857086,
+            "sliced": 0.014476591721177101
+          },
+          "scale": 0.5
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8335063137292862,
+          "composite": 0.8045023828744888,
+          "losses": {
+            "adversarial": 0.6940294504165649,
+            "local": 0.08877800405025482,
+            "sliced": 0.021694928407669067
+          },
+          "scale": 0.25
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8335098762154579,
+          "composite": 0.8079569861292839,
+          "losses": {
+            "adversarial": 0.693915843963623,
+            "local": 0.08703900873661041,
+            "sliced": 0.027002133429050446
+          },
+          "scale": 0.125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8335116574585438,
+          "composite": 0.8178186323493719,
+          "losses": {
+            "adversarial": 0.6938613653182983,
+            "local": 0.0938900038599968,
+            "sliced": 0.030067263171076775
+          },
+          "scale": 0.0625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8335125480800867,
+          "composite": 0.8250384479761124,
+          "losses": {
+            "adversarial": 0.6938332915306091,
+            "local": 0.09949575364589691,
+            "sliced": 0.03170940279960632
+          },
+          "scale": 0.03125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8335129933908582,
+          "composite": 0.8291539177298546,
+          "losses": {
+            "adversarial": 0.6938178539276123,
+            "local": 0.10277949273586273,
+            "sliced": 0.03255657106637955
+          },
+          "scale": 0.015625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.833513216046244,
+          "composite": 0.8313079960644245,
+          "losses": {
+            "adversarial": 0.6938104033470154,
+            "local": 0.10451072454452515,
+            "sliced": 0.03298686817288399
+          },
+          "scale": 0.0078125
+        }
+      ]
+    },
+    {
+      "archived_streams_mutated": false,
+      "attempt_id": "2b9ff220ef5c46b48127e03e801faf79",
+      "batch": "exact final consumed real batch replayed and final data stream verified; generated probe reuses one cloned final-stream 128-row/jitter draw at the frozen endpoint",
+      "checkpoint_sha256": "ec0f7fc42c966cafa0275aa0b22557b4cd4c16c77885286e4562b9129e9db6cb",
+      "composite_before": 0.8280667066574097,
+      "full_proposal_composite_change": 0.009017400443553925,
+      "generated_probe_draws": 128,
+      "gradient_cosines": [
+        {
+          "joint_parameter_gradient_cosine": 0.2790754437446594,
+          "output_gradient_cosine": 0.01455731876194477,
+          "terms": [
+            "adversarial",
+            "local"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": -0.5399515628814697,
+          "output_gradient_cosine": -0.5587368607521057,
+          "terms": [
+            "adversarial",
+            "sliced"
+          ]
+        },
+        {
+          "joint_parameter_gradient_cosine": 0.4853338599205017,
+          "output_gradient_cosine": 0.07830455899238586,
+          "terms": [
+            "sliced",
+            "local"
+          ]
+        }
+      ],
+      "losses_before": {
+        "adversarial": 0.6831692457199097,
+        "local": 0.03291012719273567,
+        "sliced": 0.11198737472295761
+      },
+      "original_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "output_gradient_dot_actual_full_output_motion": -0.06761551648378372,
+      "parameter_directional_derivative": -0.06722623109817505,
+      "parameter_tensor_count": 7,
+      "task_id": "vector_unequal_mass",
+      "trials": [
+        {
+          "accepted": false,
+          "armijo_bound": 0.8280599840342998,
+          "composite": 0.8370841071009636,
+          "losses": {
+            "adversarial": 0.683885395526886,
+            "local": 0.054835498332977295,
+            "sliced": 0.09836321324110031
+          },
+          "scale": 1.0
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280633453458548,
+          "composite": 0.8151803202927113,
+          "losses": {
+            "adversarial": 0.6825008392333984,
+            "local": 0.028879981487989426,
+            "sliced": 0.1037994995713234
+          },
+          "scale": 0.5
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280650260016322,
+          "composite": 0.816492635756731,
+          "losses": {
+            "adversarial": 0.6825791001319885,
+            "local": 0.026361215859651566,
+            "sliced": 0.10755231976509094
+          },
+          "scale": 0.25
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.828065866329521,
+          "composite": 0.8209621086716652,
+          "losses": {
+            "adversarial": 0.6828182339668274,
+            "local": 0.028462864458560944,
+            "sliced": 0.10968101024627686
+          },
+          "scale": 0.125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280662864934653,
+          "composite": 0.8241841197013855,
+          "losses": {
+            "adversarial": 0.6829747557640076,
+            "local": 0.030397608876228333,
+            "sliced": 0.1108117550611496
+          },
+          "scale": 0.0625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280664965754375,
+          "composite": 0.8260426633059978,
+          "losses": {
+            "adversarial": 0.6830666065216064,
+            "local": 0.031582098454236984,
+            "sliced": 0.11139395833015442
+          },
+          "scale": 0.03125
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280666016164235,
+          "composite": 0.8270353451371193,
+          "losses": {
+            "adversarial": 0.6831170320510864,
+            "local": 0.032228998839855194,
+            "sliced": 0.11168931424617767
+          },
+          "scale": 0.015625
+        },
+        {
+          "accepted": true,
+          "armijo_bound": 0.8280666541369166,
+          "composite": 0.8275462463498116,
+          "losses": {
+            "adversarial": 0.683142900466919,
+            "local": 0.032565318048000336,
+            "sliced": 0.11183802783489227
+          },
+          "scale": 0.0078125
+        }
+      ]
+    }
+  ],
+  "generated_probe_draws": 512,
+  "optimizer_proposals_constructed": 4,
+  "saved_training_updates_added": 0,
+  "schema_version": 1,
+  "scope": "frozen_endpoint_proposal_diagnostic_not_actual_last_training_step",
+  "wall_seconds": 2.0294977329904214
+}

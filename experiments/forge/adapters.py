@@ -203,6 +203,10 @@ class _Run:
         with self.timing.measure("training_updates"):
             self.last_update = self.trainer.step(real, collect_stats=True)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
+        if "kinetic_backtrack" in self.last_update:
+            _event("kinetic_backtrack", task=self.task["id"],
+                   step=self.trainer.completed_steps,
+                   **self.last_update["kinetic_backtrack"])
         if self.trainer.completed_steps != before + 1:
             raise RuntimeError("public trainer did not complete one update")
         self.finite = self.finite and _finite_tree(self.last_update)

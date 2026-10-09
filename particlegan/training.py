@@ -120,6 +120,9 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        if recipe.kinetic_transport_backtrack and any(
+                isinstance(m, (nn.modules.dropout._DropoutNd, nn.RReLU)) for m in generator.modules()):
+            raise ValueError("kinetic backtracking requires a deterministic generator")
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -368,7 +371,13 @@ class GANTrainer:
         flags = [p.requires_grad for p in self.D.parameters()]
         try:
             self.D.requires_grad_(False)
-            latent, indices = self._sample_training_prior(len(real))
+            if recipe.kinetic_transport_backtrack and type(self.prior) is MoGParticlePrior:
+                latent, indices, replay_jitter = self.prior.sample(
+                    len(real), generator=self.latent_generator,
+                    noise_generator=self.prior_noise_generator, return_noise=True)
+            else:
+                latent, indices = self._sample_training_prior(len(real))
+                replay_jitter = torch.zeros_like(latent) if recipe.kinetic_transport_backtrack else None
             fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
@@ -394,7 +403,29 @@ class GANTrainer:
             loss_g.backward()
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+            if recipe.kinetic_transport_backtrack:
+                parameters = [p for group in self.opt_g.param_groups for p in group["params"]]
+                before = [p.detach().clone() for p in parameters]
+                gradient = [torch.zeros_like(p) if p.grad is None else p.grad.detach().clone() for p in parameters]
             self.opt_g.step()
+            if recipe.kinetic_transport_backtrack:
+                from .kinetic_backtrack import kinetic_backtrack
+                def replay_objective():
+                    means = self.prior.means() if type(self.prior) is MoGParticlePrior else self.prior.z
+                    replay_latent = means[indices] + replay_jitter
+                    buffers = {name: value.detach().clone() for name,value in self.G.named_buffers()}
+                    replay_fake = torch.func.functional_call(
+                        self.G, (dict(self.G.named_parameters()), buffers), (replay_latent,))
+                    value = self.loss.g_loss(critic(replay_fake), real_logits)
+                    if recipe.kinetic_transport_weight:
+                        value = value + recipe.kinetic_transport_loss(replay_fake, real_g)
+                    if recipe.kinetic_transport_local_weight:
+                        value = value + recipe.kinetic_transport_local_loss(replay_fake, real_g)
+                    if recipe.prior_reg:
+                        raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                        value = value + recipe.prior_reg * self.prior_regularizer(raw)
+                    return value
+                backtrack = kinetic_backtrack(parameters,before,gradient,replay_objective,loss_g.detach())
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
@@ -409,6 +440,8 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if recipe.kinetic_transport_backtrack:
+            result["kinetic_backtrack"] = backtrack
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

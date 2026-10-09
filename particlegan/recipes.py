@@ -81,6 +81,7 @@ class Recipe:
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
+    kinetic_transport_backtrack: bool = False
     kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
@@ -367,6 +368,10 @@ class Recipe:
         if (type(self.kinetic_transport_local_weight) not in (int, float)
                 or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
+        if type(self.kinetic_transport_backtrack) is not bool:
+            raise ValueError("kinetic_transport_backtrack must be a boolean")
+        if self.kinetic_transport_backtrack and (self.input_noise_std or self.output_noise_std):
+            raise ValueError("kinetic backtracking requires zero additive input/output noise")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:

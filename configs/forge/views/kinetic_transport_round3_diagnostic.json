@@ -1,0 +1,56 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "vector_two_broad"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Subset mechanism evidence cannot qualify ordinary tiers or public defaults.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "kinetic_transport_round3_diagnostic",
+  "policy_change_reason": "Round3 finite same-batch descent diagnostic of unchanged full-budget tasks, with local-v2 as one primary matched control. Both two-pole cells explicitly unsupported; own Gaussian smoke dependency retained. No ordinary qualification.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "raw_metrics_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}
