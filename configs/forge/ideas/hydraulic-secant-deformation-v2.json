@@ -1,0 +1,52 @@
+{
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "id": "hydraulic-secant-deformation-v2",
+  "parent": "hydraulic-output-travel-v1",
+  "mechanism_class": "structural",
+  "extensions": {
+    "hydraulic_travel": 1.0,
+    "hydraulic_deformation": 1.0
+  },
+  "api_changes": [
+    "GANTrainer.hydraulic_deformation_weight; checkpointed coefficient, fixed zero-spacing policy and energy/loss counters"
+  ],
+  "changed_factors": [
+    "hydraulic_deformation_weight=1: add loss_gan.detach().abs() times antithetic secant energy divided by generator-side real-batch total variance; jitter and centers detached from prior gradients",
+    "Candidate nearest-distinct spacing preflight precedes D: duplicates use positive neighbor distance; singleton/constant finite batches take a complete zero G/prior parameter ray, with clocks advancing once"
+  ],
+  "mechanism_rationale": "Penalize network-only local finite response to already consumed antithetic MoG jitter, normalized by current real-batch variance and adversarial loss. Joint output travel stays bounded; contraction is a preference without a target-covariance guarantee.",
+  "prior_art": [
+    "reports/forge/bcap-physics/hydraulic/round2/saved-deformation.json",
+    "https://arxiv.org/abs/1802.08768",
+    "reports/forge/bcap-physics/hydraulic/native-width.json"
+  ],
+  "guide": "reports/forge/bcap-physics/hydraulic/round2/README.md"
+}

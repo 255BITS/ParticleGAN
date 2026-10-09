@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "12bb7d560855a2888bc90421bb2809f0ccc0f5f70ae528be3d051939686b2c68",
+  "input_digest": "445e5d5f0c807df62ed7d944229085f425fd3ce0fc443b3f0b96b6a6ea0c2c11",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -594,6 +594,7 @@
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "b4b8b0ef96aaca94bdd29ef9b5edfe0f2bb17166571f7bd35c8b7b9aaf7249ac",
     "configs/forge/ideas/halloween-optimizer-loss-v1.json": "201760742c6bed39b2262eae42f28031deaccf5ea490047e126b356e220337ca",
     "configs/forge/ideas/hydraulic-output-travel-v1.json": "011fff431b70760d31d133b0edbdf5b9b0ed4614d485bc27c25aba50bead2edf",
+    "configs/forge/ideas/hydraulic-secant-deformation-v2.json": "58a770d5228d92ba9808505d2e41e71ab24d8dbf5d79c6afcd9a7ef590932a4f",
     "configs/forge/ideas/k3p-a2-off-native-diagnostic.json": "66e366ea1fced5d6575a5b4acd322e39564ce582ac591449cd5a79b5831907be",
     "configs/forge/ideas/k3p-bcap-matched-v1.json": "7eed5eb795a0cedf1200e3333ea225736e06a3db67d6b48720115a144fda71a8",
     "configs/forge/ideas/k3p-global-input-noise-v1.json": "e8cd2312d5ce4ca16afff0100d0995a80928f64a235d97a206f20ce496d31837",
@@ -760,6 +761,8 @@
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
+    "configs/forge/studies/hydraulic-deformation-candidate-round2-v1.json": "8a7cb99b5f0a86659d11702bcbdeb66d41fd998f4642445588d82b8e3a57cdd2",
+    "configs/forge/studies/hydraulic-deformation-control-round2-v1.json": "f2a4a5c8e561283216c653ef9b9ee11e37e03065f568aa94d69c16c9c7e60c5d",
     "configs/forge/studies/hydraulic-motion-candidate-v1.json": "d79a1fc382355ae8c073bfd4f8137bdf5b19b159e2dec3825a0e278ef91b84a5",
     "configs/forge/studies/hydraulic-motion-control-v1.json": "ae368168d5241073130b875490f0fd7ab771961bd65f65be91a98fd25fee6bea",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
@@ -3595,7 +3598,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "16679ae6c83e56a6b270c825b34cd283ecaf25c05953c7e006be6e396677e84b",
+    "reports/forge/EXPERIMENT_MEMORY.md": "a3f561ab59bfc9c1f5b9a6543667543020d1ca6fdb49b8f10a0dc20ece85af29",
     "reports/forge/publication-records.json": "1f6664212046adc861ccd05a62ca815cd7b0cf21b5274c015cbb36ac5129205d"
   },
   "pending_readout": [

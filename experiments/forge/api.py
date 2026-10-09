@@ -292,6 +292,12 @@ def default_registry():
         ownership="technique", checkpoint="public trainer hydraulic summary and setting",
         gradient_ownership="Scales joint G/prior update along its existing direction",
         initialization="unchanged public initializer", supported_paths=("public_trainer",)))
+    registry.register_extension(ExtensionSpec(
+        name="hydraulic_deformation", value_type="float", target="trainer",
+        argument="hydraulic_deformation_weight", description="Network-only normalized antithetic MoG response penalty",
+        ownership="technique", checkpoint="public trainer hydraulic deformation setting and counters",
+        gradient_ownership="Adds generator-only finite-response gradient; prior adversarial gradient unchanged",
+        initialization="unchanged public initializer", supported_paths=("public_trainer",)))
     return registry
 
 
