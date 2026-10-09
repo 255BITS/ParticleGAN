@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **9/9 views**.
+Catalog: **66 tasks**; **59 assigned** to at least one view; **7 unassigned**. Showing **10/10 views**.
 
 Declared priors across the catalog: **38 MoGParticlePrior**, **28 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -38,6 +38,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 8 | 6 required, 1 diagnostic | 21 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
+| [hydraulic_motion_diagnostic](../../configs/forge/views/hydraulic_motion_diagnostic.json) | 1 | 5 diagnostic | 0 tasks | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
 | [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json) | 1 | 7 required | 0 tasks | 0 tasks | undeclared |
@@ -390,6 +391,42 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/host_
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+
+## hydraulic_motion_diagnostic
+
+Declaration: [hydraulic_motion_diagnostic](../../configs/forge/views/hydraulic_motion_diagnostic.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Scoped motion diagnostic preserves full gates but supplies no ordinary-tier qualification.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+5 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [grid100](../../configs/forge/tasks/grid100.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
+| [vector_two_broad](../../configs/forge/tasks/vector_two_broad.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-vector-two-broad) | transfer_vector / transfer_sustained | 1200 | 1800 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## k3p_two_pole_horizon
 
@@ -1934,6 +1971,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `44d5f6408895fe3c026f34891de985b93d2fcafba4acbd2b7c21de99a248c86b`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `48b6670b1a327c91358b9226a628caf768923d757ad626954140b9bd4ec0690d`. The JSON form includes the individual task and view file hashes.
 
 Published artifact input digest: `b23b0f41d21d3ee681008d65d3c6169296a76a881a81b1629d5d8456aafa360c`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

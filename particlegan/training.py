@@ -106,7 +106,8 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=True):
+                 optimizer_options=None, penalty_options=None, serial_backward=True,
+                 hydraulic_travel_fraction=0.):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
@@ -120,6 +121,20 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        from .hydraulic import HydraulicTravel
+        self.hydraulic = None
+        if type(hydraulic_travel_fraction) not in (int, float) or not math.isfinite(hydraulic_travel_fraction):
+            raise ValueError("hydraulic_travel_fraction must be a finite nonnegative number")
+        if hydraulic_travel_fraction != 0:
+            self.hydraulic = HydraulicTravel(hydraulic_travel_fraction)
+            if (recipe.optimizer_family != "dualnorm" or recipe.optimizer_momentum != 0
+                    or recipe.output_noise_std != 0 or recipe.input_noise_std != 0
+                    or recipe.continuous_policy is not None or recipe.serve_average != 0):
+                raise ValueError("hydraulic travel requires zero-momentum DualNorm and deterministic clean training")
+            deterministic = (nn.Linear, nn.LeakyReLU, nn.ReLU, nn.Tanh, nn.Sigmoid, nn.Identity, nn.Flatten)
+            if any(not tuple(module.children()) and not isinstance(module, deterministic)
+                   for module in generator.modules()) or any(True for _ in generator.buffers()):
+                raise ValueError("hydraulic travel requires a deterministic stateless generator")
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -139,6 +154,8 @@ class GANTrainer:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
+        if self.hydraulic is not None and getattr(self.prior, "standardize", False):
+            raise ValueError("hydraulic travel does not support standardized prior reads")
         if not any(p.requires_grad for p in discriminator.parameters()):
             raise ValueError("discriminator must have trainable parameters")
         seen = set()
@@ -387,7 +404,15 @@ class GANTrainer:
             loss_g.backward()
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
+            if self.hydraulic is None:
+                self.opt_g.step()
+            else:
+                fixed_latent = latent.detach().clone()
+                old_rows = self.prior.z[indices].detach().clone()
+                def hydraulic_probe():
+                    moved_latent = fixed_latent + self.prior.z[indices] - old_rows
+                    return self.G(fixed_latent).detach(), self.G(moved_latent).detach()
+                self.hydraulic.step(self.opt_g, real_g, hydraulic_probe)
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
@@ -461,6 +486,7 @@ class GANTrainer:
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
             "serial_backward": True,
+            **({"hydraulic": self.hydraulic.state_dict()} if self.hydraulic is not None else {}),
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
@@ -540,6 +566,8 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
+        if self.hydraulic is not None:
+            self.hydraulic.validate_state_dict(state["hydraulic"], steps)
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -658,6 +686,8 @@ class GANTrainer:
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        if self.hydraulic is not None:
+            self.hydraulic.load_state_dict(state["hydraulic"])
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

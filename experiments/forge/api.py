@@ -285,7 +285,14 @@ def default_registry():
     Add a supported ExtensionSpec here after implementing its public API field;
     ordinary Recipe fields require no extension declaration.
     """
-    return CapabilityRegistry()
+    registry = CapabilityRegistry()
+    registry.register_extension(ExtensionSpec(
+        name="hydraulic_travel", value_type="float", target="trainer",
+        argument="hydraulic_travel_fraction", description="Training-batch-spacing joint output travel limit",
+        ownership="technique", checkpoint="public trainer hydraulic summary and setting",
+        gradient_ownership="Scales joint G/prior update along its existing direction",
+        initialization="unchanged public initializer", supported_paths=("public_trainer",)))
+    return registry
 
 
 def _resolved_prior(value):

@@ -271,6 +271,8 @@ class _Run:
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        if trainer.hydraulic is not None:
+            evidence["hydraulic"] = trainer.hydraulic.state_dict()
         if self.optimizer_diagnostics is not None:
             evidence["optimizer_diagnostics"] = self.optimizer_diagnostics.receipt()
         if self.policy_audit is not None:
