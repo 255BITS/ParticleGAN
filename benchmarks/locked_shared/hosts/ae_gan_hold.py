@@ -126,6 +126,8 @@ def evaluate(encoder, decoder, prior, recipe, *, output_callback=None) -> dict[s
         codes, _ = prior.sample(1024)
         fake = decoder(codes)
         metrics = {"recon_mse": recon_mse, "hold": _hold_distance(fake)}
+        if output_callback is None:
+            output_callback = getattr(decoder, "_evaluation_output_callback", None)
         if output_callback is not None:
             output_callback(data, recon, fake, metrics)
         return metrics
@@ -195,9 +197,19 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
         context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
         with context:
             if components is not None and components.context.component_transport is not None:
-                return evaluate(encoder, decoder, prior, recipe,
-                    output_callback=lambda data, recon, fake, metrics:
-                    components.constraint_geometry_capture(step, data, recon, metrics))
+                def capture(data, recon, fake, metrics):
+                    components.constraint_geometry_capture(step, data, recon, metrics)
+                previous = getattr(decoder, "_evaluation_output_callback", None)
+                decoder._evaluation_output_callback = capture
+                try:
+                    # Retain the original four-argument evaluator call so
+                    # wrappers for inactive techniques require no new hook.
+                    return evaluate(encoder, decoder, prior, recipe)
+                finally:
+                    if previous is None:
+                        del decoder._evaluation_output_callback
+                    else:
+                        decoder._evaluation_output_callback = previous
             return evaluate(encoder, decoder, prior, recipe)
 
     opened = measure(0)

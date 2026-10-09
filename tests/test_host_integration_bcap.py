@@ -106,6 +106,19 @@ def test_unused_slot_is_excluded_from_transport_training(tmp_path, monkeypatch):
         assert torch.equal(fake, fake[:1].expand_as(fake))
 
 
+def test_declared_ae_consumer_preserves_four_argument_evaluation_wrappers(tmp_path, monkeypatch):
+    from benchmarks.locked_shared.hosts import ae_gan_hold
+    original, calls = ae_gan_hold.evaluate, []
+    def wrapped(encoder, decoder, prior, recipe):
+        calls.append(True)
+        return original(encoder, decoder, prior, recipe)
+    monkeypatch.setattr(ae_gan_hold, "evaluate", wrapped)
+    result = run_behavior(dict(protocol=dict(seed=0), candidate=winner()), integrated_task("ae_gan_hold"), tmp_path)
+    assert calls and result["evidence"]["guards"]["unintended_rng_deviations"] == 0
+    records = torch.load(tmp_path / "constraint_geometry-scored-outputs.pt", weights_only=False)
+    assert all(len(record["views"]) == 1 for record in records)
+
+
 def test_disabled_consumer_returns_the_exact_loss_without_validating_optional_panels():
     consumer = OutputMarginalTransport(get_recipe("ka2", kinetic_transport_weight=0., kinetic_transport_local_weight=0.))
     parameter = torch.tensor(2., requires_grad=True)
