@@ -176,6 +176,9 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.kinetic_transport_weight and task.get("execution", {}).get("execution_path") == "public_components":
+        return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
+                "Recipe.kinetic_transport_loss sample-space signal; mechanism is unsupported"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -335,6 +338,9 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if execution_path == "public_components" and self.recipe.kinetic_transport_weight:
+            raise CapabilityError(["public_components must explicitly consume Recipe.kinetic_transport_loss; "
+                                   "the current Forge host bindings do not support it"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (

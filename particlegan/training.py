@@ -369,7 +369,8 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -378,11 +379,13 @@ class GANTrainer:
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
+            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+                         if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
-            loss_g = loss_gan + recipe.prior_reg * prior_reg
+            loss_g = loss_gan + recipe.prior_reg * prior_reg + transport
             self.opt_g.zero_grad()
             loss_g.backward()
             self.policy.after_generator_backward(
@@ -398,6 +401,8 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if recipe.kinetic_transport_weight:
+            result["kinetic_transport"] = transport.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

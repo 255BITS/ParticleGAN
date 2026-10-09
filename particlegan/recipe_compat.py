@@ -1,6 +1,8 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "kinetic_transport_weight": 0.0,
+    "kinetic_transport_projections": 32,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
     "d_betas": None, "d_eps": None, "prior_eps": None,
