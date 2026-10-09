@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "scope": "analytic float32 arithmetic witness; no learned model or training",
+  "original": [
+    0.12345670163631439
+  ],
+  "intended_updated": [
+    -1.2345670263869124e-08
+  ],
+  "recomposed": [
+    -1.4901161193847656e-08
+  ],
+  "maximum_absolute_difference": 2.5554909299785322e-09,
+  "bitwise_equal": false,
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0
+}

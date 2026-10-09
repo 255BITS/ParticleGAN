@@ -107,13 +107,17 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
         before = normals.double() @ displacement.double()
         stats = self.constraint_geometry_stats
         stats["steps"] += 1
-        stats["projected_steps"] += int(not torch.equal(projected, displacement))
+        changed = not torch.equal(projected, displacement)
+        stats["projected_steps"] += int(changed)
         stats["max_derivative_before"] = max(stats["max_derivative_before"], float(before.max()))
-        offset = 0
-        for parameter, original in zip(parameters, originals):
-            size = parameter.numel()
-            parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
-            offset += size
+        if changed:
+            offset = 0
+            for parameter, original in zip(parameters, originals):
+                size = parameter.numel()
+                parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
+                offset += size
+        # Preserve the already-applied tensors bitwise when projection is inactive.
+        # old + (new - old) can lose near-zero values in float32.
         applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
         after = normals.double() @ applied.double()
         stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
@@ -122,7 +126,7 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
 
     def state_dict(self):
         result = super().state_dict()
-        result["constraint_geometry"] = dict(schema=1, mode="nonascent", stats=deepcopy(self.constraint_geometry_stats),
+        result["constraint_geometry"] = dict(schema=2, mode="nonascent", stats=deepcopy(self.constraint_geometry_stats),
                                                pending=None if self._protected is None else self._protected.clone())
         return result
 
@@ -130,7 +134,7 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
         saved = dict(saved)
         meta = saved.pop("constraint_geometry", None)
         if (not isinstance(meta, dict) or set(meta) != {"schema", "mode", "stats", "pending"}
-                or meta["schema"] != 1 or meta["mode"] != "nonascent"
+                or meta["schema"] != 2 or meta["mode"] != "nonascent"
                 or set(meta["stats"]) != set(self.constraint_geometry_stats)):
             raise ValueError("invalid constraint_geometry checkpoint")
         for key, value in meta["stats"].items():

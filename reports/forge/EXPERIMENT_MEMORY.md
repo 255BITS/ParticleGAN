@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3830,6 +3830,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### constraint_geometry-nonascent-v1 · readout-35c64b46eedef0831b3a6aac
+
+**Scope:** research_diagnostic; scientific; revision `a1c79573bfc2c13b0517409f609db17062f64384ce427e10ee9a337afbb40f56`.
+
+Post-normalization protection of existing adversarial and active paired losses resolves coverage interference while retaining conditional guardrails; unchanged BCAP winner is matched in the same source/runtime.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 140.788; mechanism `structural`.
+
+
+
+Measured frozen implementation:2PASS,3FAIL,1own-smoke-prerequisite BLOCKED. Trajectory/residual repair falsified;0projection Gaussian smoke regression exposes inactive-path float32 recomposition confound across attribution. Corrected software will be separately labelled UNMEASURED with no scientific rerun.
+
+**Next:** Stop exact trained revision. Preserve receipts; correct inactive-path arithmetic with bitwise software parity tests only, label corrected source UNMEASURED, and require a new independently authorized source-bound study before scientific attribution.
+
+[Evidence](../../reports/forge/attempts/51c559b016d248388056dcab751a8012/result.json) · [Record](records/readout-35c64b46eedef0831b3a6aac.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -4197,6 +4213,22 @@ One preregistered full 7000-update clean learned-MoG grid diagnostic FAIL for 93
 **Next:** Stop this exact diagnostic and its infeasible no-output-noise-reference-v1 roster: every lineage is already smoke-negative or reference-negative, so no possible completion satisfies a reference positive and zero false rejects. Do not spend on its smoke, other reference cells or 14k continuation. Preserve all 16 reference purposes and frozen criteria. Next stage should first use saved terminal artifacts to locate per-mode shape/centre/critic-response failure and require a new supported structural hypothesis with a separately bounded preregistration. Production promotion remains blocked on accepted calibration and finished exact qualification.
 
 [Evidence](../../reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/result.json) · [Record](records/readout-abd06840fa1f42a4f64c13ab.json)
+
+### constraint_geometry-control-v1 · readout-ac82943db25e6134866495ce
+
+**Scope:** research_diagnostic; scientific; revision `53ab9888fa7d32645260b911a85c46003b4b272b4551d2b3682ec8e09eb4c825`.
+
+Post-normalization protection of existing adversarial and active paired losses resolves coverage interference while retaining conditional guardrails; unchanged BCAP winner is matched in the same source/runtime.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 290.783; mechanism `structural`.
+
+
+
+Matched winner control completes6declared tasks:3PASS and3FAIL,0incomplete. Trajectory/residual remain failing, mid-scale/two-pole/smoke pass, continuous Gaussian fails full retention and shifted reacquisition.
+
+**Next:** Retain original winner evidence and exact source-bound matched control. Stop the measured projection revision; software parity correction remains scientifically UNMEASURED. No extra training, seed or gate changes.
+
+[Evidence](../../reports/forge/attempts/0849b0fe1246477e89e5f45219310c72/result.json) · [Record](records/readout-ac82943db25e6134866495ce.json)
 
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `84e39d58d82a5db9bd4578ec9e05b3f55f31c6353ea09f6d606c27dde7c7e1b6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

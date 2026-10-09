@@ -73,3 +73,27 @@ def test_disabled_backward_and_exact_winner_resolution():
 def test_recipe_rejects_incompatible_update():
     with pytest.raises(ValueError, match="zero-momentum"):
         get_recipe("bcap", optimizer_momentum=.5, constraint_geometry_mode="nonascent")
+
+
+def test_inactive_projection_preserves_already_applied_step_bitwise():
+    from particlegan.optim.dualnorm import NormalizedOptimizer
+    old = torch.tensor([.1234567], dtype=torch.float32)
+    plain = torch.nn.Parameter(old.clone())
+    guarded = torch.nn.Parameter(old.clone())
+    options = dict(lr=.12345676, smoothing=.001)
+    baseline = NormalizedOptimizer([plain], **options)
+    candidate = ConstraintGeometryOptimizer([guarded], **options)
+    plain.sum().backward()
+    baseline.step()
+    loss = guarded.sum()
+    constraint_geometry_backward(loss, candidate, (loss,))
+    candidate.step()
+    # The fixture deliberately crosses zero. Recomposition destroys a real
+    # low-order result, so ordinary allclose would miss this regression.
+    assert not torch.equal(old + (plain.detach() - old), plain.detach())
+    assert torch.equal(guarded.detach(), plain.detach())
+    assert candidate.constraint_geometry_stats['projected_steps'] == 0
+    legacy = deepcopy(candidate.state_dict())
+    legacy['constraint_geometry']['schema'] = 1
+    with pytest.raises(ValueError, match='checkpoint'):
+        candidate.load_state_dict(legacy)

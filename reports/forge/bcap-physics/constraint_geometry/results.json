@@ -1,0 +1,1004 @@
+{
+  "campaign_accounting": {
+    "definition": {
+      "budget_seconds": 12840,
+      "candidate_budget_seconds": 6420,
+      "id": "constraint_geometry-round-v1"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 431.57080043805763
+  },
+  "candidate": "constraint_geometry-nonascent-v1",
+  "candidate_revision": "a1c79573bfc2c13b0517409f609db17062f64384ce427e10ee9a337afbb40f56",
+  "control": "constraint_geometry-control-v1",
+  "control_revision": "53ab9888fa7d32645260b911a85c46003b4b272b4551d2b3682ec8e09eb4c825",
+  "measured_optimizer_schema": 1,
+  "measured_source_commit": "f909ec56e",
+  "optimizer_updates_added_by_publication": 0,
+  "outcomes": {
+    "candidate": {
+      "BLOCKED": 1,
+      "FAIL": 3,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 2
+    },
+    "control": {
+      "BLOCKED": 0,
+      "FAIL": 3,
+      "INCOMPLETE": 0,
+      "INVALID": 0,
+      "PASS": 3
+    }
+  },
+  "published_optimizer_schema": 2,
+  "published_software_status": "corrected inactive path; UNMEASURED; no new scientific training",
+  "qualification_input": false,
+  "requests": {
+    "candidate": "7d22bb9602d65151123f8494",
+    "control": "f30bde03964b05286609b536"
+  },
+  "reservation_ceiling": 12840,
+  "sampling_draws_added_by_publication": 0,
+  "schema_version": 1,
+  "scope": "research_diagnostic",
+  "source_digest": "43391f7415970f12e3818d76b95a4562bdc81570f5bd6c4e36fc54ad6d63ce8f",
+  "task_results": [
+    {
+      "attempt_id": "51c559b016d248388056dcab751a8012",
+      "constraint_geometry": [
+        {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        }
+      ],
+      "cost": {
+        "adapter_seconds": 1.219860379002057,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.31292499799747,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.548176329000853,
+        "wall_seconds": 7.31292499799747
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "paid_seconds": 2.548176329000853,
+      "role": "candidate",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.04799902066588402,
+        "mean_rms": 0.03959076479077339,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "task_id": "two_pole"
+    },
+    {
+      "gate_status": "BLOCKED",
+      "metrics": {},
+      "reason": "own prerequisite did not pass",
+      "role": "candidate",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "b8f61980e99c47838f03387cf8b20af0",
+      "constraint_geometry": [
+        {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1000
+        }
+      ],
+      "cost": {
+        "adapter_loop_seconds": 38.67324582696892,
+        "adapter_seconds": 39.167466796934605,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 45.444512570044026,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 35.39859450829681,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4876708169467747
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.1740947050275281
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 34.73682898632251
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 40.44886465091258,
+        "wall_seconds": 45.444512570044026
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": null,
+        "observations": 24,
+        "passing_observations": 0
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.08163495367114892,
+        "finite_fraction": 1.0,
+        "mean": 2.0674435789405834,
+        "mean_error_sigma": 0.13488715788116679,
+        "sample_count": 4096,
+        "std": 0.5791668139388241,
+        "std_ratio": 1.1583336278776482,
+        "step": 1000
+      },
+      "paid_seconds": 40.44886465091258,
+      "role": "candidate",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": null
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "fe6af71b0bb14cae8f1770d260d0622c",
+      "constraint_geometry": [
+        {
+          "max_derivative_after": 1.1539733724074091e-08,
+          "max_derivative_before": 0.0182138616319046,
+          "projected_steps": 39,
+          "steps": 400
+        }
+      ],
+      "cost": {
+        "adapter_seconds": 18.953095680917613,
+        "charged_task": "trajectory",
+        "device": "1",
+        "execution_seconds": 25.251570836058818,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 20.263060846016742,
+        "wall_seconds": 25.251570836058818
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.2244100081920624,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.24441000819206238
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "identity_mse_increasing_intervals": 12,
+      "metrics": {
+        "identity_mse": 0.24441000819206238
+      },
+      "paid_seconds": 20.263060846016742,
+      "role": "candidate",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.20696251094341278,
+        "mean_rms": 0.06004676595330238,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "scorer_controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "task_id": "trajectory"
+    },
+    {
+      "attempt_id": "9a216d19d03d48ea956be7be22216702",
+      "constraint_geometry": [
+        {
+          "max_derivative_after": 8.047141276251724e-09,
+          "max_derivative_before": 0.0024227419048763565,
+          "projected_steps": 50,
+          "steps": 800
+        }
+      ],
+      "cost": {
+        "adapter_seconds": 28.503853905014694,
+        "charged_task": "mid_scale_identity",
+        "device": "1",
+        "execution_seconds": 34.80105659097899,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 29.829948620987125,
+        "wall_seconds": 34.80105659097899
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 300,
+          "first_pass_step": 167,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 167
+        },
+        "metric_checks": {
+          "concept_cos_minus": {
+            "margin": 0.1499675750732422,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999675750732422
+          },
+          "concept_cos_plus": {
+            "margin": 0.14989622831344607,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.999896228313446
+          },
+          "concept_mag_minus": {
+            "margin": 0.2594086527824402,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 0.9905913472175598
+          },
+          "concept_mag_plus": {
+            "margin": 0.2548791766166687,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 0.9951208233833313
+          },
+          "identity_at_0": {
+            "margin": 0.14904600060537232,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9990460006053723
+          },
+          "identity_at_mid": {
+            "margin": 0.14297467173053136,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9929746717305313
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999675750732422,
+        "concept_cos_plus": 0.999896228313446,
+        "concept_mag_minus": 0.9905913472175598,
+        "concept_mag_plus": 0.9951208233833313,
+        "identity_at_0": 0.9990460006053723,
+        "identity_at_mid": 0.9929746717305313
+      },
+      "paid_seconds": 29.829948620987125,
+      "role": "candidate",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.21278350055217743,
+        "mean_rms": 0.0337006077170372,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "attempt_id": "fa2d2a10184c432687c22291ff4de4cb",
+      "constraint_geometry": [
+        {
+          "max_derivative_after": 5.271037992801014e-09,
+          "max_derivative_before": 0.017362748727862497,
+          "projected_steps": 50,
+          "steps": 400
+        }
+      ],
+      "cost": {
+        "adapter_seconds": 21.719393908046186,
+        "charged_task": "residual_student",
+        "device": "1",
+        "execution_seconds": 27.977864203043282,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 23.043538574012928,
+        "wall_seconds": 27.977864203043282
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.04259450316429138,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.06259450316429138
+          },
+          "success_rate": {
+            "margin": -0.5833333134651184,
+            "metric": "success_rate",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 0.4166666865348816
+          },
+          "wrong_pad_rate": {
+            "margin": -0.5833333730697632,
+            "metric": "wrong_pad_rate",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.0,
+            "value": 0.5833333730697632
+          }
+        },
+        "passed": false,
+        "shortfall": 1.055555562178294,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "identity_mse_increasing_intervals": 9,
+      "metrics": {
+        "identity_mse": 0.06259450316429138,
+        "success_rate": 0.4166666865348816,
+        "wrong_pad_rate": 0.5833333730697632
+      },
+      "paid_seconds": 23.043538574012928,
+      "role": "candidate",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.18467777967453003,
+        "mean_rms": 0.05388892814517021,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "scorer_controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "task_id": "residual_student"
+    },
+    {
+      "attempt_id": "5f0b34c373994bf595e540b0f0b73935",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_loop_seconds": 33.96316934505012,
+        "adapter_seconds": 34.361397703993134,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 40.93540270801168,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 30.408470085356385,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4669021803420037
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12691741774324328
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 29.814650487271138
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 35.73731035797391,
+        "wall_seconds": 40.93540270801168
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "paid_seconds": 35.73731035797391,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": null
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "c8565d3bdaa84abb8e473744ee3e0a2a",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_seconds": 22.436943514971063,
+        "charged_task": "mid_scale_identity",
+        "device": "1",
+        "execution_seconds": 28.64474604895804,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 23.7671429150505,
+        "wall_seconds": 28.64474604895804
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2925,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 234,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metric_checks": {
+          "concept_cos_minus": {
+            "margin": 0.14997472763061526,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999747276306152
+          },
+          "concept_cos_plus": {
+            "margin": 0.14998778104782107,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.999987781047821
+          },
+          "concept_mag_minus": {
+            "margin": 0.24082517623901367,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0091748237609863
+          },
+          "concept_mag_plus": {
+            "margin": 0.23508214950561523,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0149178504943848
+          },
+          "identity_at_0": {
+            "margin": 0.14915090477599602,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.999150904775996
+          },
+          "identity_at_mid": {
+            "margin": 0.1314403064495584,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9814403064495584
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999747276306152,
+        "concept_cos_plus": 0.999987781047821,
+        "concept_mag_minus": 1.0091748237609863,
+        "concept_mag_plus": 1.0149178504943848,
+        "identity_at_0": 0.999150904775996,
+        "identity_at_mid": 0.9814403064495584
+      },
+      "paid_seconds": 23.7671429150505,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.21202699840068817,
+        "mean_rms": 0.03307240828871727,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "attempt_id": "0849b0fe1246477e89e5f45219310c72",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_seconds": 1.1211746860062703,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.412912852014415,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.4726890379097313,
+        "wall_seconds": 7.412912852014415
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "paid_seconds": 2.4726890379097313,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.04799902066588402,
+        "mean_rms": 0.03959076479077339,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "2039e936fc59444aa7edd63f09551a2c",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_loop_seconds": 168.09089981403667,
+        "adapter_seconds": 168.53996378590818,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 174.5467774469871,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 150.32678715896327,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.6105960900895298
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1811031949473545
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 148.5350878739264
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 169.8114592169877,
+        "wall_seconds": 174.5467774469871
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "paid_seconds": 169.8114592169877,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": null
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "7ea5dabf0bc7441f993a4dfd791cd17e",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_seconds": 13.878990013035946,
+        "charged_task": "residual_student",
+        "device": "1",
+        "execution_seconds": 20.11255861504469,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 15.168200038024224,
+        "wall_seconds": 20.11255861504469
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.04103601306676864,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.061036013066768646
+          },
+          "success_rate": {
+            "margin": -0.5,
+            "metric": "success_rate",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 0.5
+          },
+          "wrong_pad_rate": {
+            "margin": -0.5,
+            "metric": "wrong_pad_rate",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.0,
+            "value": 0.5
+          }
+        },
+        "passed": false,
+        "shortfall": 1.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "identity_mse_increasing_intervals": 8,
+      "metrics": {
+        "identity_mse": 0.061036013066768646,
+        "success_rate": 0.5,
+        "wrong_pad_rate": 0.5
+      },
+      "paid_seconds": 15.168200038024224,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.18467797338962555,
+        "mean_rms": 0.056567221879959106,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "scorer_controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "task_id": "residual_student"
+    },
+    {
+      "attempt_id": "7098708936a543d78ea7aa241200dc78",
+      "constraint_geometry": [],
+      "cost": {
+        "adapter_seconds": 13.014309186022729,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 19.130473568919115,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 14.350704173091799,
+        "wall_seconds": 19.130473568919115
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.2198618906736374,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.2398618906736374
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "identity_mse_increasing_intervals": 11,
+      "metrics": {
+        "identity_mse": 0.2398618906736374
+      },
+      "paid_seconds": 14.350704173091799,
+      "role": "control",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scored_prediction_motion": {
+        "intervals": 23,
+        "maximum_rms": 0.20696254074573517,
+        "mean_rms": 0.06089881807565689,
+        "note": "Movement between scored states; not per-step accepted norm or projection fraction."
+      },
+      "scorer_controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "task_id": "trajectory"
+    }
+  ]
+}
