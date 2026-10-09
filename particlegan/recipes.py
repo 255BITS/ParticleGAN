@@ -198,6 +198,12 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+    # Local constant-rate overlay. Off leaves the cosine anneal untouched.
+    # On, learning-rate multipliers are 1 while floors, caps, and seeds stay.
+    constant_lr: bool = False
+    # Standard errors of the critic's paired real−fake gap. None disables the
+    # generator idle rule. 1 is the critic batch estimate's own noise floor.
+    generator_idle_se: float | None = None
 
     def __post_init__(self):
         from .gan_loss import GANLoss
@@ -249,6 +255,22 @@ class Recipe:
             raise ValueError("invalid exponential LR rate, steps or staircase")
         if self.lr_schedule != "cosine" and (self.continuous_policy is not None or self.network_lr_horizon_cap is not None):
             raise ValueError("explicit constant/exponential LR requires a scheduled recipe without a horizon cap")
+        if type(self.constant_lr) is not bool:
+            raise ValueError("constant_lr must be a bool")
+        if self.generator_idle_se is not None and (
+                isinstance(self.generator_idle_se, bool)
+                or type(self.generator_idle_se) not in (int, float)
+                or not math.isfinite(self.generator_idle_se)
+                or self.generator_idle_se < 0):
+            raise ValueError("generator_idle_se must be None or a finite nonnegative number")
+        if self.generator_idle_se is not None:
+            object.__setattr__(self, "generator_idle_se", float(self.generator_idle_se))
+        if self.constant_lr and self.lr_schedule != "cosine":
+            raise ValueError("constant_lr overlays a cosine recipe; it is not a second schedule")
+        if self.constant_lr and self.continuous_policy is not None:
+            raise ValueError("constant_lr does not combine with a continuous policy")
+        if self.constant_lr and self.lr_control == "stationarity":
+            raise ValueError("constant_lr does not combine with lr_control='stationarity'")
         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
             raise ValueError("eps must be finite and positive")
         for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
@@ -948,6 +970,16 @@ def learning_rate_scales(step, recipe, *, network_transition=None, controller=No
     if getattr(recipe, "lr_control", "mobility") == "stationarity":
         raise ValueError("lr_control='stationarity' requires per-group policy state; use "
                          "E22Policy/UpdatePolicy.begin_step() or GANTrainer instead of learning_rate_scales")
+    if getattr(recipe, "constant_lr", False):
+        if recipe.continuous_policy is not None:
+            raise ValueError("constant_lr does not combine with a continuous policy")
+        if type(step) is not int or step < 0:
+            raise ValueError("LR schedule clock must be completed nonnegative training updates")
+        if network_transition is not None:
+            raise ValueError("constant_lr does not accept network transitions")
+        if controller is not None:
+            raise ValueError("controller requires a continuous recipe")
+        return 1.0, 1.0
     if recipe.continuous_policy is not None:
         from .continuous import DataDriftController
         if not isinstance(controller, DataDriftController) or controller.variant != recipe.continuous_policy:

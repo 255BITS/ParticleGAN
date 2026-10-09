@@ -14,6 +14,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -311,14 +312,20 @@ def _fit_rpgan(
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
             real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
+        paired_real = []
+        paired_fake = []
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
-            g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
+            fake_logits = critic(fake, scale)
+            paired_real.append(real_scores[scale])
+            paired_fake.append(fake_logits)
+            g_term = gan.g_loss(fake_logits, real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
         g_loss.backward()
         schedule_optimizer(opt_g, step)
+        release_generator_step(opt_g, paired_real, paired_fake)
         opt_g.step()
         critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_residual(student))

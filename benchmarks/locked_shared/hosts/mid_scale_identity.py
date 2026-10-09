@@ -14,6 +14,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -499,17 +500,23 @@ def _fit(
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
             real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
+        paired_real = []
+        paired_fake = []
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
-            g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
+            fake_logits = critic(fake, scale)
+            paired_real.append(real_scores[scale])
+            paired_fake.append(fake_logits)
+            g_loss = g_loss + gan.g_loss(fake_logits, real_scores[scale]) / n_scales
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
         g_loss = g_loss + cover_w * cover / n_scales
         g_loss.backward()
         schedule_optimizer(opt_g, step)
+        release_generator_step(opt_g, paired_real, paired_fake)
         opt_g.step()
         critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),

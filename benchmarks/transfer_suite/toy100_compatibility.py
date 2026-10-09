@@ -115,9 +115,14 @@ def declared_recipe(config: dict):
     output_rng = candidate.pop("output_noise_rng", None)
     if output_rng_declared and output_rng != "isolated":
         raise ValueError("output_noise_rng must be 'isolated' when declared")
-    resolved, _ = resolve_config(candidate)
+    resolved, built = resolve_config(candidate)
     globals_only = {name: resolved[name] for name in GLOBAL_RECIPE_FIELDS}
     recipe = gan_v3_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
+    # These overlays are not historical global fields. Re-apply only when the
+    # resolved recipe turned one on, so archived protocols keep their identity.
+    if built.constant_lr or built.generator_idle_se is not None:
+        recipe = recipe.replace(constant_lr=built.constant_lr,
+                                generator_idle_se=built.generator_idle_se)
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)

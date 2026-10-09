@@ -15,6 +15,7 @@ from torch import nn
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
 
 from particlegan import ParticlePrior, ParticleRegularizer
+from particlegan.generator_idle import release_generator_step
 
 PROTOCOL = {
     "cover_weight": LOCKED_SHARED.cover_weight,
@@ -189,7 +190,9 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = generator(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_logits = critic(slow, fake)
+            real_logits = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_logits, real_logits)
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity; only the relativistic pair does that.
             # fm_weight is 0: no feature-matching term is added.
@@ -198,6 +201,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
             g_loss = g_loss + spread(prior.z)
             g_loss.backward()
             schedule_optimizer(opt_g, step - 1)
+            release_generator_step(opt_g, real_logits, fake_logits)
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

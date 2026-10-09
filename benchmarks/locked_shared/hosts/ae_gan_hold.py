@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -240,6 +241,8 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
         for param in critic.parameters():
             param.requires_grad_(True)
         schedule_optimizer(opt_g, step - 1)
+        if cfg.adversarial_weight > 0:
+            release_generator_step(opt_g, real_logits, fake_logits)
         opt_g.step()
         checkpoint(step, lambda: measure(step))
         if step == 1 or (step % 50 == 0 and step != cfg.steps):

@@ -14,6 +14,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -493,7 +494,9 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         fake = torch.cat([fake_p, fake_m], dim=0)
         if noise_policy is not None:
             fake = noise_policy.output(fake, generator_step=True)
-        g_loss = gan.g_loss(critic(fake), critic(real.detach()))
+        fake_logits = critic(fake)
+        real_logits = critic(real.detach())
+        g_loss = gan.g_loss(fake_logits, real_logits)
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
         g_loss = g_loss + spread(parts)
         if particle_l2 > 0.0:
@@ -505,6 +508,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         opt_g.zero_grad()
         g_loss.backward()
         schedule_optimizer(opt_g, step)
+        release_generator_step(opt_g, real_logits, fake_logits)
         opt_g.step()
         ema.update(generator_params)
         checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))

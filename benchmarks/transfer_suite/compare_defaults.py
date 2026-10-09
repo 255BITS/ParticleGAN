@@ -150,7 +150,9 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
             rates = self.base_rates.setdefault(
                 optimizer, [group['lr'] for group in optimizer.param_groups],
             )
-            if network_lr_horizon_cap is None:
+            if getattr(recipe, "constant_lr", False):
+                network_scale = prior_scale = 1.0
+            elif network_lr_horizon_cap is None:
                 network_scale = prior_scale = learning_rate_scale(
                     completed_updates, self.total_steps,
                     recipe.lr_anneal_start, recipe.lr_floor,

@@ -34,7 +34,8 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
+          "constant_lr": False, "generator_idle_se": None}
 
 
 @dataclass(frozen=True)
@@ -67,7 +68,8 @@ class LegacyRecipe(Recipe):
         """The recorded dict: recorded field order; added fields only when changed."""
         values = super().to_dict()
         out = {key: values[key] for key in _RECORDED_ORDER}
-        out.update({key: values[key] for key, neutral in _ADDED.items() if values[key] != neutral})
+        out.update({key: values.get(key, neutral) for key, neutral in _ADDED.items()
+                    if values.get(key, neutral) != neutral})
         return out
 
     def make_loss(self, **overrides):

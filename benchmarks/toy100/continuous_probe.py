@@ -222,15 +222,23 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
             moments = [int(state["step"].item() if isinstance(state["step"], torch.Tensor)
                            else state["step"])
                        for state in row["optimizer"].state.values() if "step" in state]
+            groups = len(row["optimizer"].param_groups)
+            idle_generator = (getattr(recipe, "generator_idle_se", None) is not None
+                              and groups > 1)
             if not moments:
-                raise RuntimeError("Adam moment counters are missing")
-            if min(moments) != max(moments):
-                raise RuntimeError("Adam moment counters disagree within an optimizer")
+                if not idle_generator:
+                    raise RuntimeError("Adam moment counters are missing")
+                updates = moment_min = moment_max = 0
+            else:
+                if min(moments) != max(moments):
+                    raise RuntimeError("Adam moment counters disagree within an optimizer")
+                updates = moments[0]
+                moment_min, moment_max = min(moments), max(moments)
             rows.append(dict(calls=row["calls"],
                              delegate_calls=row["delegate_calls"],
-                             updates=moments[0],
-                             moment_steps_min=min(moments),
-                             moment_steps_max=max(moments),
+                             updates=updates,
+                             moment_steps_min=moment_min,
+                             moment_steps_max=moment_max,
                              rates=[group["lr"] for group in
                                     row["optimizer"].param_groups]))
         return sorted(rows, key=lambda row: len(row["rates"]))
@@ -307,9 +315,11 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
             network_lr_horizon_cap=config.get("network_lr_horizon_cap"),
             network_lr_floor=config.get("network_lr_floor"),
         ))
+        from particlegan.generator_idle import generator_idle_scope
         control = evaluate.FixedControl(vector_tasks.fixed_policy("cosine"),
                                         noise_horizon)
         stack.enter_context(bridge.control_host_schedules(control))
+        stack.enter_context(generator_idle_scope(getattr(recipe, "generator_idle_se", None)))
         result = baseline.run_toy("mode_hold", candidate(recipe), noise_policy=policy)
     result["seconds"] = time.perf_counter() - started
     receipt = policy.receipt()
@@ -428,12 +438,19 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
             if not (math.isclose(measured["min"], expected, rel_tol=1e-12)
                     and math.isclose(measured["max"], expected, rel_tol=1e-12)):
                 raise RuntimeError(f"{role} actual LR changed during constant run")
+    generator_idle = getattr(recipe, "generator_idle_se", None) is not None
     for row in optimizer_final:
-        if (row["calls"] != expected_accounting["calls"]
-                or row["updates"] != expected_accounting["moment_updates"]):
+        if row["calls"] != expected_accounting["calls"]:
             raise RuntimeError("Adam update count differs from declared continuation")
-    if shift_pair is not None and any(row["updates"] != shift_step
-                                      for row in shift_pair["optimizer_at_shift"]):
+        if generator_idle and len(row["rates"]) > 1:
+            if row["updates"] > expected_accounting["moment_updates"]:
+                raise RuntimeError("Adam update count differs from declared continuation")
+        elif row["updates"] != expected_accounting["moment_updates"]:
+            raise RuntimeError("Adam update count differs from declared continuation")
+    if shift_pair is not None and any(
+            (row["updates"] > shift_step if generator_idle and len(row["rates"]) > 1
+             else row["updates"] != shift_step)
+            for row in shift_pair["optimizer_at_shift"]):
         raise RuntimeError("optimizer state reset at distribution shift")
     hold_pass = bool(continued is None or continued["pass_all"])
     shift_quality = bool(recovery is not None and recovery["deadline_pass"])

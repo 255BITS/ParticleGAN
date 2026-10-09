@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from .generator_idle import gate_generator_update
 from .particle_prior import MoGParticlePrior, ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
@@ -65,7 +66,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_family": "formulation", "eps": 1e-8,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
-                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
+                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
+                        "constant_lr": False, "generator_idle_se": None}
 
 
 class GANTrainer:
@@ -387,6 +389,9 @@ class GANTrainer:
             loss_g.backward()
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+            # None returns before the logits are read. An idle step clears
+            # gradients, then step() still runs so hooks and the phase advance.
+            gate_generator_update(self.opt_g, real_logits, fake_logits, recipe.generator_idle_se)
             self.opt_g.step()
             self.policy.after_generator_step()
         finally:
