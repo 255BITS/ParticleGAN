@@ -178,6 +178,9 @@ class Recipe:
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
     optimizer_adam_lr: float | None = None
+    # Optional raw-output full pairwise multiscale Cauchy MMD. Stateless;
+    # GANTrainer consumes the existing G-phase real/generated vector batches.
+    kernel_witness_weight: float = 0.0
     eps: float = 1e-8
     beta2_end: float | None = None
     beta2_anneal_end: float = 0.2
@@ -200,6 +203,9 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if (type(self.kernel_witness_weight) not in (int, float)
+                or not math.isfinite(self.kernel_witness_weight) or self.kernel_witness_weight < 0):
+            raise ValueError("kernel_witness_weight must be finite and nonnegative")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -556,6 +562,15 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
+
+    def kernel_witness_loss(self, fake, real, *, return_parts=False):
+        """Weighted stateless raw-output pairwise witness; no added RNG."""
+        from .kernel_witness import kernel_witness_loss
+        value = kernel_witness_loss(fake, real, return_parts=return_parts)
+        if return_parts:
+            loss, parts = value
+            return self.kernel_witness_weight * loss, parts
+        return self.kernel_witness_weight * value
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

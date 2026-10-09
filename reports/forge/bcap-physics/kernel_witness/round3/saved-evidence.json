@@ -1,0 +1,450 @@
+{
+  "alchemy_done_sha256": "d166312d47308b5ff8bf6e367a1d932f8d968b42590fdc4e5b8df1482159ce66",
+  "controls": [
+    {
+      "control": "empirical_null",
+      "gradient_rms": 1.1902103395254804e-19,
+      "loss": 0.0,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "collapse",
+      "gradient_rms": 1.986334669711068e-05,
+      "loss": 0.07263443612547105,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "double_width",
+      "gradient_rms": 0.0006058884059788963,
+      "loss": 0.02241012344850929,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "missing_last_component",
+      "gradient_rms": 3.4645696180465596e-05,
+      "loss": 0.00040865329092482083,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "empirical_null",
+      "gradient_rms": 7.650224245847839e-20,
+      "loss": 0.0,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "collapse",
+      "gradient_rms": 3.515882985933216e-05,
+      "loss": 0.03467217250045346,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "double_width",
+      "gradient_rms": 0.00037304219139628394,
+      "loss": 0.012026965644459764,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "missing_last_component",
+      "gradient_rms": 0.00030380727991378097,
+      "loss": 0.04341069620831639,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "empirical_null",
+      "gradient_rms": 1.08954378168895e-19,
+      "loss": 0.0,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "collapse",
+      "gradient_rms": 2.6176390141571117e-05,
+      "loss": 0.13040386521043668,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "double_width",
+      "gradient_rms": 0.000656186784482824,
+      "loss": 0.03585213089102279,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "missing_last_component",
+      "gradient_rms": 0.0012973010325031658,
+      "loss": 0.22316376863025034,
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "cpu_wall_seconds": 15.84031000698451,
+  "diagnostics": [
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "9fadb126cd3346e0afebf0ae94058452",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/9fadb126cd3346e0afebf0ae94058452/provenance/provenance-state.pt",
+        "sha256": "236a450a371f63e7fab93b33868e08368f7c52765bafd29ff4145220e3f97b00",
+        "task": "vector_unequal_mass"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.05748225244220334,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 1.3303411626770452,
+          "attraction_repulsion_cosine": -0.43457356734254704,
+          "critic_norm": 0.23587945895923304,
+          "finite": true,
+          "repulsion_norm": 0.5469159623537426,
+          "residual_over_term_norms": 0.6384634946697287,
+          "witness_critic_cosine": -0.41016758029118794,
+          "witness_norm": 1.1985601444408045,
+          "witness_over_critic_norm": 5.081240010169564
+        },
+        "prior": {
+          "attraction_norm": 0.02500982320718077,
+          "attraction_repulsion_cosine": -0.8333408630634288,
+          "critic_norm": 0.006344302378770693,
+          "finite": true,
+          "repulsion_norm": 0.023283766870265874,
+          "residual_over_term_norms": 0.2906897558673247,
+          "witness_critic_cosine": -0.06747948443264605,
+          "witness_norm": 0.01403845190956962,
+          "witness_over_critic_norm": 2.2127652610860875
+        }
+      },
+      "parts": {
+        "attraction": -0.6843990928431222,
+        "global_scale": 2.515407917800956,
+        "local_scale": 0.03427377298989143,
+        "repulsion": 0.36248095823300047,
+        "target": 0.37940038705232504
+      },
+      "source": "original_winner",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "candidate",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/6b2ec25273594710a553d6cf5a030f63/provenance/provenance-state.pt",
+        "sha256": "6d8712a17463ff5b3f34af8c0c75b4600a7ab5c3072a60c22a9b504f3b5f0dda"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.05401044230220664,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.5558673520193604,
+          "attraction_repulsion_cosine": -0.247800339851008,
+          "critic_norm": 0.07375272977932365,
+          "finite": true,
+          "repulsion_norm": 0.472581453113979,
+          "residual_over_term_norms": 0.616596647472706,
+          "witness_critic_cosine": 0.16999748766540618,
+          "witness_norm": 0.6341380853425274,
+          "witness_over_critic_norm": 8.598164261037372
+        },
+        "prior": {
+          "attraction_norm": 0.019924831458854195,
+          "attraction_repulsion_cosine": -0.9040924450588183,
+          "critic_norm": 0.006220283569718153,
+          "finite": true,
+          "repulsion_norm": 0.025911234260418997,
+          "residual_over_term_norms": 0.25336411371645573,
+          "witness_critic_cosine": 0.09545120127044339,
+          "witness_norm": 0.011613214167212872,
+          "witness_over_critic_norm": 1.8669911165704425
+        }
+      },
+      "parts": {
+        "attraction": -0.8889318932282263,
+        "global_scale": 2.515407917800956,
+        "local_scale": 0.03427377298989143,
+        "repulsion": 0.5635419484781079,
+        "target": 0.37940038705232504
+      },
+      "source": "alchemy_round2_candidate",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "control",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/805b20af930a473e91478890c7403e01/provenance/provenance-state.pt",
+        "sha256": "ab0486b955e1a5efea9c2b4c08ca4355bb81050cfaba388eda7fac1682ca15d0"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.05748225244220334,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 1.3303411626770452,
+          "attraction_repulsion_cosine": -0.43457356734254704,
+          "critic_norm": 0.23587945895923304,
+          "finite": true,
+          "repulsion_norm": 0.5469159623537426,
+          "residual_over_term_norms": 0.6384634946697287,
+          "witness_critic_cosine": -0.41016758029118794,
+          "witness_norm": 1.1985601444408045,
+          "witness_over_critic_norm": 5.081240010169564
+        },
+        "prior": {
+          "attraction_norm": 0.02500982320718077,
+          "attraction_repulsion_cosine": -0.8333408630634288,
+          "critic_norm": 0.006344302378770693,
+          "finite": true,
+          "repulsion_norm": 0.023283766870265874,
+          "residual_over_term_norms": 0.2906897558673247,
+          "witness_critic_cosine": -0.06747948443264605,
+          "witness_norm": 0.01403845190956962,
+          "witness_over_critic_norm": 2.2127652610860875
+        }
+      },
+      "parts": {
+        "attraction": -0.6843990928431222,
+        "global_scale": 2.515407917800956,
+        "local_scale": 0.03427377298989143,
+        "repulsion": 0.36248095823300047,
+        "target": 0.37940038705232504
+      },
+      "source": "alchemy_round2_control",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "c2701b900fb64a748e5d908245eb8feb",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/c2701b900fb64a748e5d908245eb8feb/provenance/provenance-state.pt",
+        "sha256": "1c8a835822b2263562ca7bda5e4a963332557956bcf3ce14b6f6e89fcb8b487d",
+        "task": "vector_unequal_width"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.08714666684564276,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.7420815128202874,
+          "attraction_repulsion_cosine": -0.6367691876986403,
+          "critic_norm": 0.10959964877561118,
+          "finite": true,
+          "repulsion_norm": 0.2719819656065455,
+          "residual_over_term_norms": 0.5979059343788801,
+          "witness_critic_cosine": -0.16958504621055073,
+          "witness_norm": 0.6063145715882928,
+          "witness_over_critic_norm": 5.5320849871483695
+        },
+        "prior": {
+          "attraction_norm": 0.018595988213816413,
+          "attraction_repulsion_cosine": -0.5176911143546009,
+          "critic_norm": 0.005985127185119261,
+          "finite": true,
+          "repulsion_norm": 0.017317623767865713,
+          "residual_over_term_norms": 0.49205277402076236,
+          "witness_critic_cosine": -0.34494811712376866,
+          "witness_norm": 0.017671392400691977,
+          "witness_over_critic_norm": 2.9525508571694377
+        }
+      },
+      "parts": {
+        "attraction": -0.530947058400656,
+        "global_scale": 4.476263951375602,
+        "local_scale": 0.031915607449221284,
+        "repulsion": 0.3388985524828639,
+        "target": 0.2791951727634349
+      },
+      "source": "original_winner",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "candidate",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/37784a3e210f43f3b3553d56565c84d1/provenance/provenance-state.pt",
+        "sha256": "6639556a901318adc89fd83d418e55530e5e22c4d7e99126249d1f601aa62fcc"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.31611775884502696,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.2406655815662302,
+          "attraction_repulsion_cosine": -0.7373187380159477,
+          "critic_norm": 0.5602515810862487,
+          "finite": true,
+          "repulsion_norm": 0.31844096740534245,
+          "residual_over_term_norms": 0.3849022475570364,
+          "witness_critic_cosine": -0.35666658878468227,
+          "witness_norm": 0.21520136732301653,
+          "witness_over_critic_norm": 0.3841155912595043
+        },
+        "prior": {
+          "attraction_norm": 0.008539995457060776,
+          "attraction_repulsion_cosine": -0.6841943923255145,
+          "critic_norm": 0.016514158088317608,
+          "finite": true,
+          "repulsion_norm": 0.020217552788491383,
+          "residual_over_term_norms": 0.5447551044219985,
+          "witness_critic_cosine": 0.21914843589781888,
+          "witness_norm": 0.015665821197426426,
+          "witness_over_critic_norm": 0.9486297220630757
+        }
+      },
+      "parts": {
+        "attraction": -0.4057153362287082,
+        "global_scale": 4.476263951375602,
+        "local_scale": 0.031915607449221284,
+        "repulsion": 0.44263792231030025,
+        "target": 0.2791951727634349
+      },
+      "source": "alchemy_round2_candidate",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "control",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/838d7c70eea5463d98852787ae8e55b0/provenance/provenance-state.pt",
+        "sha256": "98a88c54359d1000deedb74c7617b0037703539bb8f03b5762f74053b9e8162a"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.08714666684564276,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.7420815128202874,
+          "attraction_repulsion_cosine": -0.6367691876986403,
+          "critic_norm": 0.10959964877561118,
+          "finite": true,
+          "repulsion_norm": 0.2719819656065455,
+          "residual_over_term_norms": 0.5979059343788801,
+          "witness_critic_cosine": -0.16958504621055073,
+          "witness_norm": 0.6063145715882928,
+          "witness_over_critic_norm": 5.5320849871483695
+        },
+        "prior": {
+          "attraction_norm": 0.018595988213816413,
+          "attraction_repulsion_cosine": -0.5176911143546009,
+          "critic_norm": 0.005985127185119261,
+          "finite": true,
+          "repulsion_norm": 0.017317623767865713,
+          "residual_over_term_norms": 0.49205277402076236,
+          "witness_critic_cosine": -0.34494811712376866,
+          "witness_norm": 0.017671392400691977,
+          "witness_over_critic_norm": 2.9525508571694377
+        }
+      },
+      "parts": {
+        "attraction": -0.530947058400656,
+        "global_scale": 4.476263951375602,
+        "local_scale": 0.031915607449221284,
+        "repulsion": 0.3388985524828639,
+        "target": 0.2791951727634349
+      },
+      "source": "alchemy_round2_control",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "candidate",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/b22229a4c61d40659ccacd6f627afffa/provenance/provenance-state.pt",
+        "sha256": "88bff45e50f728ffe811e81fc40675983bb05ed0cc542113466ec299fe156d20"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.16185992931803456,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.43949288996634855,
+          "attraction_repulsion_cosine": -0.9862283188628919,
+          "critic_norm": 0.5176450393266663,
+          "finite": true,
+          "repulsion_norm": 0.7198244451220277,
+          "residual_over_term_norms": 0.2548608581124863,
+          "witness_critic_cosine": 0.0534428232906101,
+          "witness_norm": 0.29546461084530445,
+          "witness_over_critic_norm": 0.5707861341231706
+        },
+        "prior": {
+          "attraction_norm": 0.008564596584516516,
+          "attraction_repulsion_cosine": -0.9934766954976003,
+          "critic_norm": 0.005392241316318534,
+          "finite": true,
+          "repulsion_norm": 0.013946938908535806,
+          "residual_over_term_norms": 0.24543937490975132,
+          "witness_critic_cosine": 0.37058020774814954,
+          "witness_norm": 0.005525217199673442,
+          "witness_over_critic_norm": 1.024660595762375
+        }
+      },
+      "parts": {
+        "attraction": -0.7487532497183901,
+        "global_scale": 1.0432945348456193,
+        "local_scale": 0.040719047143693565,
+        "repulsion": 0.5758069173031245,
+        "target": 0.33480626173330014
+      },
+      "source": "alchemy_round2_candidate",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "original_arm": "control",
+        "original_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue/alchemy_distillation_r2_v1/aee8671ba5094f98aad49bc31eda4a86/provenance/provenance-state.pt",
+        "sha256": "1dae498fd490010c1a7a71a88d5850ff9327627cf9cd7be4b94341185a94eaa7"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.0268031732561288,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.799648820413489,
+          "attraction_repulsion_cosine": -0.8408174670819384,
+          "critic_norm": 0.08942949508956007,
+          "finite": true,
+          "repulsion_norm": 0.47379779962294855,
+          "residual_over_term_norms": 0.3739721797975845,
+          "witness_critic_cosine": 0.3558122463874765,
+          "witness_norm": 0.47623360835089296,
+          "witness_over_critic_norm": 5.325240938394699
+        },
+        "prior": {
+          "attraction_norm": 0.020441859469643744,
+          "attraction_repulsion_cosine": -0.7707072381687322,
+          "critic_norm": 0.002878015206834114,
+          "finite": true,
+          "repulsion_norm": 0.01758286505568267,
+          "residual_over_term_norms": 0.3459067262545125,
+          "witness_critic_cosine": 0.3898201888945194,
+          "witness_norm": 0.013153007977285334,
+          "witness_over_critic_norm": 4.57016625417833
+        }
+      },
+      "parts": {
+        "attraction": -0.6527503036876693,
+        "global_scale": 1.0432945348456193,
+        "local_scale": 0.040719047143693565,
+        "repulsion": 0.34474721521049795,
+        "target": 0.33480626173330014
+      },
+      "source": "alchemy_round2_control",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "global_rng_unchanged": true,
+  "limitations": "Cubature derivatives and raw gradients, not exact applied DualNorm steps, independent heldout prediction, or qualification. Real minibatch replay matches saved data stream. Adaptive kernels and biased V-statistic are not an unbiased fixed-kernel population gradient.",
+  "new_random_sampling_draws": 0,
+  "optimizer_updates_added": 0,
+  "original_report_sha256": "c462265fc74affcd4d1e39e6363d4b96052883688f468e801e064e801b9edd78",
+  "original_source": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+  "qualification_input": false,
+  "replayed_archived_data_batches": true,
+  "schema_version": 1,
+  "scope": "CPU_float64_frozen_state_parameter_force_audit"
+}

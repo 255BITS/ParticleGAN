@@ -334,6 +334,8 @@ class GANTrainer:
         if self.max_steps is not None and self.completed_steps >= self.max_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
+        if recipe.kernel_witness_weight and (real.ndim != 2 or len(real) < 2):
+            raise ValueError("kernel witness requires vector batches with at least two rows")
         if generator_real is not None and not callable(generator_real):
             generator_real = self._batch(generator_real, "generator_real")
             if generator_real.shape[1:] != real.shape[1:]:
@@ -369,7 +371,8 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            generated = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_logits = critic(generated)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -383,6 +386,9 @@ class GANTrainer:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if recipe.kernel_witness_weight:
+                witness, witness_parts = recipe.kernel_witness_loss(generated, real_g, return_parts=True)
+                loss_g = loss_g + witness
             self.opt_g.zero_grad()
             loss_g.backward()
             self.policy.after_generator_backward(
@@ -398,6 +404,9 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if recipe.kernel_witness_weight:
+            result["kernel_witness"] = witness.detach()
+            result.update({f"kernel_witness_{key}": value.detach() for key, value in witness_parts.items()})
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

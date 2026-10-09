@@ -60,6 +60,9 @@ def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     if host != "ae_gan_hold":
         fields |= set(candidate.get("recipe_overrides", {})) & {"routing_temperature", "distance_reduction"}
     prior_blockers = []
+    if candidate.get("recipe_overrides", {}).get("kernel_witness_weight", 0):
+        prior_blockers.append(f"{task['id']}: frozen public_components host does not consume "
+                              "Recipe.kernel_witness_weight; mechanism is unsupported")
     if host in HOSTS:
         expected = "mog" if host == "ae_gan_hold" else "particle_cloud"
         if prior["kind"] != expected:

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "scope": "reuse_original_unchanged_scorer_controls",
+  "new_training_updates": 0,
+  "new_random_draws": 0,
+  "original_source_commit": "bbf6ce30af8d56aea2ce0914341c818f988888d6",
+  "original_receipt_sha256": "b6e575a4f84d26307df2b6146224ae746720476ec595da54c6d514b6953c0b0b",
+  "original_receipt_url": "https://github.com/255BITS/ParticleGAN/blob/bbf6ce30af8d56aea2ce0914341c818f988888d6/reports/forge/bcap-physics/kinetic_transport/scorer-controls.json",
+  "verified_current_scorer_sources": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "controls": [
+    {
+      "task_id": "vector_unequal_mass",
+      "control": "oracle",
+      "status": "PASS",
+      "failed_bounds": []
+    },
+    {
+      "task_id": "vector_unequal_mass",
+      "control": "point_collapse",
+      "status": "FAIL",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.546370878809079
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.44999998807907104
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25,
+          0.0
+        ]
+      ]
+    },
+    {
+      "task_id": "vector_unequal_width",
+      "control": "oracle",
+      "status": "PASS",
+      "failed_bounds": []
+    },
+    {
+      "task_id": "vector_unequal_width",
+      "control": "point_collapse",
+      "status": "FAIL",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.7550261362884907
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.75
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ]
+      ]
+    },
+    {
+      "task_id": "vector_two_broad",
+      "control": "oracle",
+      "status": "PASS",
+      "failed_bounds": []
+    },
+    {
+      "task_id": "vector_two_broad",
+      "control": "point_collapse",
+      "status": "FAIL",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.6945207538578243
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.5
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ]
+      ]
+    },
+    {
+      "task_id": "gaussian1d_smoke",
+      "control": "oracle",
+      "status": "PASS",
+      "failed_bounds": []
+    },
+    {
+      "task_id": "gaussian1d_smoke",
+      "control": "point_collapse",
+      "status": "FAIL",
+      "failed_bounds": [
+        [
+          "std_ratio",
+          ">=",
+          0.8,
+          0.0
+        ],
+        [
+          "cdf_ks",
+          "<=",
+          0.05,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "rationale": "Same task laws, evaluation source bytes and full bounds; existing oracle/destructive controls are reusable scorer validation, not newly matched scientific evidence.",
+  "round3_reuse": "Sources and complete task thresholds unchanged; preserve original control identity, no new training/draws or source qualification."
+}

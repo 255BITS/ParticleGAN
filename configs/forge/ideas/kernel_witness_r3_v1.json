@@ -1,0 +1,56 @@
+{
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "kernel_witness_weight": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "id": "kernel_witness_r3_v1",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "trainer_family": "kernel-witness",
+  "mechanism_class": "structural",
+  "guide": "reports/forge/bcap-physics/kernel_witness/round3/README.md",
+  "changed_factors": [
+    "Add full pairwise raw-output Cauchy MMD at real-derived local/geometric/global scales, global weight1; retain every winning trainer, prior and sampling setting"
+  ],
+  "mechanism_rationale": "A characteristic pairwise distribution discrepancy adds long-range attraction and full generated-pair repulsion beyond finite moment or real-anchor feature witnesses. Adaptive real-batch scales are detached and stateless.",
+  "prior_art": [
+    "https://jmlr.org/papers/v13/gretton12a.html",
+    "https://arxiv.org/abs/1711.01558",
+    "https://arxiv.org/abs/1906.04370",
+    "reports/forge/bcap-tier2-search/failure-state-analysis.json"
+  ],
+  "api_changes": [
+    {
+      "provider": "particlegan.Recipe.kernel_witness_loss",
+      "variables": [
+        "kernel_witness_weight"
+      ],
+      "affected_hosts": "Unconditional vector GANTrainer; frozen public_components hosts explicitly BLOCKED",
+      "migration": "Default zero preserves existing serialized recipes and streams; no new state or RNG"
+    }
+  ]
+}
