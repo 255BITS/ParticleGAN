@@ -201,6 +201,8 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
             g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
             g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
             g_loss = g_loss + spread(prior.z)
+            if components is not None:
+                g_loss = components.add_transport_loss(g_loss, fake, fast, conditioning=slow)
             # Reuse the original real logits; do not add a second real forward.
             def protected_evaluator():
                 return (gan.g_loss(critic(slow, generator(slow, prior.z)), protected_real_scores),)

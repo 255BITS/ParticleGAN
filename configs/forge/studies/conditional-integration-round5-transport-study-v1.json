@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 42000,
+    "candidate_budget_seconds": 10500,
+    "id": "conditional-integration-round5-v1"
+  },
+  "candidate": "conditional-integration-round5-transport-v1",
+  "competing_explanation": "Marginal transport is permutation invariant and may compete with existing identity signals; first-order common descent cannot guarantee finite loss descent, density or retention.",
+  "control": {
+    "candidate_id": "conditional-integration-round5-winner-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "hypothesis": "Direction-only blend plus exact local-v2 may retain both conditional identity repairs and rare/broad density repairs in one global recipe with explicit output-marginal consumers.",
+  "id": "conditional-integration-round5-transport-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "source-pinned-saved-motivation"
+      },
+      "path": "reports/forge/bcap-physics/conditional_integration/round5/prior-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "conditional-integration-round5-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

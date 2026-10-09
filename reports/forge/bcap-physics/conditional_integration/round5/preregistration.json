@@ -1,0 +1,272 @@
+{
+  "ancillary_allowance_seconds": 1200,
+  "arms": [
+    "winner",
+    "direction",
+    "transport",
+    "both"
+  ],
+  "campaign_ceiling": 42000,
+  "falsifier": "Any conditional/rare/broad full-gate FAIL falsifies retained union; Gaussian retention FAIL blocks global repair regardless of endpoint improvement.",
+  "original_unsupported_contracts_preserved": true,
+  "planned_full_reservations": 38880,
+  "plans": {
+    "both": {
+      "blockers": [],
+      "candidate": "conditional-integration-round5-both-v1",
+      "jobs": [
+        {
+          "budget_seconds": 120,
+          "task_id": "gaussian1d_smoke",
+          "task_ids": [
+            "gaussian1d_smoke"
+          ]
+        },
+        {
+          "budget_seconds": 600,
+          "task_id": "gaussian1d_stability",
+          "task_ids": [
+            "gaussian1d_stability"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "trajectory_transport_round5_v1",
+          "task_ids": [
+            "trajectory_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "residual_student_transport_round5_v1",
+          "task_ids": [
+            "residual_student_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "mid_scale_identity_transport_round5_v1",
+          "task_ids": [
+            "mid_scale_identity_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_unequal_mass",
+          "task_ids": [
+            "vector_unequal_mass"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_two_broad",
+          "task_ids": [
+            "vector_two_broad"
+          ]
+        }
+      ],
+      "study_review": "READY"
+    },
+    "direction": {
+      "blockers": [],
+      "candidate": "conditional-integration-round5-direction-v1",
+      "jobs": [
+        {
+          "budget_seconds": 120,
+          "task_id": "gaussian1d_smoke",
+          "task_ids": [
+            "gaussian1d_smoke"
+          ]
+        },
+        {
+          "budget_seconds": 600,
+          "task_id": "gaussian1d_stability",
+          "task_ids": [
+            "gaussian1d_stability"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "trajectory_transport_round5_v1",
+          "task_ids": [
+            "trajectory_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "residual_student_transport_round5_v1",
+          "task_ids": [
+            "residual_student_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "mid_scale_identity_transport_round5_v1",
+          "task_ids": [
+            "mid_scale_identity_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_unequal_mass",
+          "task_ids": [
+            "vector_unequal_mass"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_two_broad",
+          "task_ids": [
+            "vector_two_broad"
+          ]
+        }
+      ],
+      "study_review": "READY"
+    },
+    "transport": {
+      "blockers": [],
+      "candidate": "conditional-integration-round5-transport-v1",
+      "jobs": [
+        {
+          "budget_seconds": 120,
+          "task_id": "gaussian1d_smoke",
+          "task_ids": [
+            "gaussian1d_smoke"
+          ]
+        },
+        {
+          "budget_seconds": 600,
+          "task_id": "gaussian1d_stability",
+          "task_ids": [
+            "gaussian1d_stability"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "trajectory_transport_round5_v1",
+          "task_ids": [
+            "trajectory_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "residual_student_transport_round5_v1",
+          "task_ids": [
+            "residual_student_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "mid_scale_identity_transport_round5_v1",
+          "task_ids": [
+            "mid_scale_identity_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_unequal_mass",
+          "task_ids": [
+            "vector_unequal_mass"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_two_broad",
+          "task_ids": [
+            "vector_two_broad"
+          ]
+        }
+      ],
+      "study_review": "READY"
+    },
+    "winner": {
+      "blockers": [],
+      "candidate": "conditional-integration-round5-winner-v1",
+      "jobs": [
+        {
+          "budget_seconds": 120,
+          "task_id": "gaussian1d_smoke",
+          "task_ids": [
+            "gaussian1d_smoke"
+          ]
+        },
+        {
+          "budget_seconds": 600,
+          "task_id": "gaussian1d_stability",
+          "task_ids": [
+            "gaussian1d_stability"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "trajectory_transport_round5_v1",
+          "task_ids": [
+            "trajectory_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "residual_student_transport_round5_v1",
+          "task_ids": [
+            "residual_student_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "mid_scale_identity_transport_round5_v1",
+          "task_ids": [
+            "mid_scale_identity_transport_round5_v1"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_unequal_mass",
+          "task_ids": [
+            "vector_unequal_mass"
+          ]
+        },
+        {
+          "budget_seconds": 1800,
+          "task_id": "vector_two_broad",
+          "task_ids": [
+            "vector_two_broad"
+          ]
+        }
+      ],
+      "study_review": "READY"
+    }
+  },
+  "prediction": "BOTH must PASS all three conditional gates, unequal mass and broad to retain the measured union; Gaussian full retention is required for any global repair.",
+  "qualification_input": false,
+  "saved_probe_allowance_seconds": 120,
+  "schema_version": 1,
+  "scope": "research_diagnostic",
+  "tasks": [
+    "gaussian1d_smoke",
+    "gaussian1d_stability",
+    "trajectory_transport_round5_v1",
+    "residual_student_transport_round5_v1",
+    "mid_scale_identity_transport_round5_v1",
+    "vector_unequal_mass",
+    "vector_two_broad"
+  ],
+  "track_ceiling": 43200,
+  "two_pole": "Excluded; original transport-bearing two-pole contract remains BLOCKED; no implicit consumer.",
+  "variants": [
+    {
+      "id": "trajectory_transport_round5_v1",
+      "original": "trajectory",
+      "original_sha256": "fad1602190a5f7d833552db5f9a8447ac4b6de9027dead9abc84d3b6f9605fbe"
+    },
+    {
+      "id": "residual_student_transport_round5_v1",
+      "original": "residual_student",
+      "original_sha256": "bb2e269559aaa56e1062a045a6a1c51d4f5868da8bc77660061deb7a4616100d"
+    },
+    {
+      "id": "mid_scale_identity_transport_round5_v1",
+      "original": "mid_scale_identity",
+      "original_sha256": "1ece9bd8444a312b24bbdb45077e90e32c80a94a4966e7db91fd37ebb3895cfb"
+    }
+  ]
+}

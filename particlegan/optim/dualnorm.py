@@ -533,6 +533,9 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     elif recipe.constraint_geometry_mode == "strict_progress" and critic is None:
         from .strict_progress import StrictProgressOptimizer
         optimizer_class = StrictProgressOptimizer
+    elif recipe.constraint_geometry_mode == "direction_blend" and critic is None:
+        from .direction_blend import DirectionBlendOptimizer
+        optimizer_class = DirectionBlendOptimizer
     optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
