@@ -11,21 +11,21 @@
     "task_map": {}
   },
   "falsifier": {
-    "metric": "identity_mse",
-    "op": ">",
-    "phase": "final",
-    "task_id": "trajectory",
-    "threshold": 0.02
-  },
-  "hypothesis": "Damped empirical output-kernel force filtering improves native precision while retaining full conditional identity passes; a global replacement requires all complete gates, including Gaussian retention.",
-  "id": "force-distortion-round5-control-study-v1",
-  "max_rounds": 1,
-  "prediction": {
     "metric": "precision",
     "op": ">=",
     "phase": "final",
     "task_id": "grid100",
-    "threshold": 0.48
+    "threshold": 0.97
+  },
+  "hypothesis": "Retained direction blend reproduces conditional identity repair but fails full native fidelity on the same new-source tasks.",
+  "id": "force-distortion-round5-control-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": "<",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.97
   },
   "prior_evidence": [
     {
