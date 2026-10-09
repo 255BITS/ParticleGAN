@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 19440,
+    "candidate_budget_seconds": 9720,
+    "id": "mass-allocation-round5-v1"
+  },
+  "candidate": "mass-allocation-round5-control-v1",
+  "competing_explanation": "Balanced finite batch coupling still contains sampled mass fluctuations and shared-map distortion. Cross-label pairing decreases are diagnostic only; minibatch OT is not a population divergence and can bias shape. Native local-v2 is unmeasured before this study. Local covariance or occupancy improvements can coexist with spill, missing quality mass and retention failure.",
+  "control": {
+    "candidate_id": "mass-allocation-round5-candidate-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "precision",
+    "op": "<",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.97
+  },
+  "hypothesis": "Balanced joint-coordinate block transport improves native genuine quality mass while preserving local-v2 rare/broad sustained passes; original full density and temporal gates decide repair.",
+  "id": "mass-allocation-round5-control-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.97
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "qualification_input": false
+      },
+      "path": "reports/forge/bcap-physics/mass_allocation/round5/prior-diagnostics.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "mass-allocation-round5-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "plans": {
+    "candidate": {
+      "candidate_revision": "aedb5e70712838fad3aa519268e8fec3bb669109c7bf266ea581a2451f9d3606",
+      "planned_seconds": 9720,
+      "status": "READY"
+    },
+    "control": {
+      "candidate_revision": "d38cf12e8f70cf944c840586f5a1868e953cf86f25ca8a29f067382cc86f615f",
+      "planned_seconds": 9720,
+      "status": "READY"
+    }
+  },
+  "schema_version": 1,
+  "scientific_updates_added": 0,
+  "software": {
+    "cohort": "Fixed synthetic linear public trainer tests, not scientific tasks",
+    "distinct_tests": 36,
+    "earlier_tests": 35,
+    "final_log": "software-final.log",
+    "first_log": "software.log",
+    "synthetic_public_trainer_fixture_updates_total": 10
+  }
+}

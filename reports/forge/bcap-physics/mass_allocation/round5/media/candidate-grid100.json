@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "b152e195a2b8d8322eaf23d016981b9053353cb3eb4ea1bfd3ef3cffe299b46a",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "7c3c3a5a27363db0d035eb8e695c23a2614728dbd0bef5d4b7fdde52ba731f8a",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/config.json": "c4f2b267de35279a1e343e9240427fdc1cc0929ee9098b36e47440106d61e937",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/events.jsonl": "107f6177283751246a6be6867dcbed89017e2039aa7a0f1304f2367805d5730c",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000050.npz": "f18028531888998ebdabe244129d21b6455aa60a225bf4cb541298d550bccfa9",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000750.npz": "2d3fe97f04d6e69e3d2654a6ad6c8fe7c98709fb21d146b868d5d51481ebeab6",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_001750.npz": "e15f3e23288ac4c849fe3c997bf84b2b03cfe4b1ac4f90515222ae86dad0bdcb",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_002750.npz": "0b62beaa12741a63fedbf03dcb8305a0b96a468e24938b155f56da286beae5ff",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_004000.npz": "fc9d5f9281f6737dde84d9e4fdcc56ec65993d6cfad38d8c906fc99bf13f681e",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_005000.npz": "8e4bd14068e6500f477e8e67a4ab724028756ad98a32e9e3e2608371b06af225",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_006000.npz": "2e9f4805ac7095157b6d366566cc7512ea08be7e64ac1e713f0c800d9db747f1",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_007000.npz": "625fdc96be8ebb875d5c6aa05755bca2621c46de5b456eda66e77ecbbe89ea6e",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/summary.json": "b101946132376a041f13290fe0f8a20b72079df8872d363d7e6d007dabe04c44"
+  },
+  "task_id": "grid100"
+}

@@ -1,0 +1,3450 @@
+{
+  "matched_checks": [
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": true,
+      "initialization_equal": true,
+      "own_smoke_restoration": false,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": true,
+      "initialization_equal": true,
+      "own_smoke_restoration": true,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": null,
+      "initialization_equal": true,
+      "own_smoke_restoration": false,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "grid100"
+    },
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": null,
+      "initialization_equal": true,
+      "own_smoke_restoration": false,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": null,
+      "initialization_equal": true,
+      "own_smoke_restoration": false,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "consumed_named_training_streams_equal": true,
+      "data_digest_equal": null,
+      "initialization_equal": true,
+      "own_smoke_restoration": false,
+      "recipe_delta_only": "kinetic_transport_mode",
+      "source_runtime_protocol_equal": true,
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "proofs": [
+    {
+      "attempt_id": "292142a6d67144cba3b460b565a73e80",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "de6b6583b0bb8fc3ddd7b0211be2d2744074dceef120ecba24618cd7a291fa01",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378,
+            "net.6.bias": 3451349313449224512,
+            "net.6.weight": 4418587902875615470
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "07229cdb3ae86f0746c5de25bd61b4637020c104fbf6180c141220491a85f247",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866,
+            "net.6.bias": 3267559673347489931,
+            "net.6.weight": 6547758434591862365
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "41246d315685e3e3405fe86d0ef74655a7aceed12d6a4a4d291501321e12ba6f",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "51ea35450c95f93becd7d7b8a9f54ef1541be867f127b96b87168178a494407a",
+        "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "38a1da2621522d4c1a7a59fe1a08cc65d65a8c4d41242d998ef2b22f991c5c29",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "fc6832375be85ff7955fab06540eda46405f32cc5952b49b0daf5e6afd8e647a",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "f15ed9272e7203c626f712ebf52b350f8e586d43da53654051c42301747ac3ca",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "f2492035c7e6a9db5955b28e6c7785d9bcb3a705d15435a532fb12c636541f8c",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "bf9fc0e630e6656e1f62b5f5ab3f3d1ade2febbb05b6c47461352e3204812ac9",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "ebea83140d3eb8657335408cb14e20eaa8c7d0a3d0a9a7125933e2e8cc7f38dd",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "3c753ad7b04689f09e72e573f6bfe006cc25c7590b54e33eb6544e7be8118be7"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+        "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+      },
+      "original_certificates": {
+        "evidence": "118a8a69c5ad2eea301105a934df9deea35a2a9294a97b1e0ef68bef9178be34",
+        "request": "c49e2ba54e50cbdfc0961ae4def53872bb2323bcc273b909491a0891c010efc9",
+        "result": "95e263f82afbf5412f5e0b1ee6221859c58c6854720aca226b799f77abf6d726"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "00e58e49feefa32c0c92e6470c4552adc04da5fb93f2c38efa577948a2180ea0",
+              "size": 770141
+            }
+          },
+          "schema_version": 1,
+          "sha256": "ff9f85878ff185292e822b4819cfe14367d3fada93f3483721a4c131eb7bc6e5",
+          "total_bytes": 770141
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/provenance",
+        "bytes": 770141,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "00e58e49feefa32c0c92e6470c4552adc04da5fb93f2c38efa577948a2180ea0",
+        "state_sha256": "8790afe3d3f590c011522bfac18ae3d40c07e0cd216b32b078e5fc87b2394a80"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/config.json": "c4f2b267de35279a1e343e9240427fdc1cc0929ee9098b36e47440106d61e937",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/events.jsonl": "107f6177283751246a6be6867dcbed89017e2039aa7a0f1304f2367805d5730c",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000050.npz": "f18028531888998ebdabe244129d21b6455aa60a225bf4cb541298d550bccfa9",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_000750.npz": "2d3fe97f04d6e69e3d2654a6ad6c8fe7c98709fb21d146b868d5d51481ebeab6",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_001750.npz": "e15f3e23288ac4c849fe3c997bf84b2b03cfe4b1ac4f90515222ae86dad0bdcb",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_002750.npz": "0b62beaa12741a63fedbf03dcb8305a0b96a468e24938b155f56da286beae5ff",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_004000.npz": "fc9d5f9281f6737dde84d9e4fdcc56ec65993d6cfad38d8c906fc99bf13f681e",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_005000.npz": "8e4bd14068e6500f477e8e67a4ab724028756ad98a32e9e3e2608371b06af225",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_006000.npz": "2e9f4805ac7095157b6d366566cc7512ea08be7e64ac1e713f0c800d9db747f1",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/snapshots/step_007000.npz": "625fdc96be8ebb875d5c6aa05755bca2621c46de5b456eda66e77ecbbe89ea6e",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/292142a6d67144cba3b460b565a73e80/native100/grid100/summary.json": "b101946132376a041f13290fe0f8a20b72079df8872d363d7e6d007dabe04c44"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "grid100"
+    },
+    {
+      "attempt_id": "fb1c44208b8342478d8f8e2fcef1f3ec",
+      "data_sha256": {
+        "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e462a3207efe118392970224445f20c137371b1552ef108de888bc4c73206513",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "1e38231883fdad1ec103263ce87ef0bafe7b17817a8bbcd8be542f54cae40842",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "095f02785bbabad82b79bfffe85e719fc585310996573d1126f94ba361fad21e",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "679f4d56ca52c64cb7ee3fbd975fedceb681cb1060103e69d554ac8ea342b0f2",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "cdee60eb6b8aa5224c8b9f3f23bfaf0c602d7529077b2fbacce5104cf97085ab",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "def97f907a66980e18a2fc72687347dd73505e0da482a5145ec8f57fd75df4fa"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+      },
+      "original_certificates": {
+        "evidence": "5dec9562a906b9296ba48c8ece80318724707fa49ee715eb2945010e6fa4c850",
+        "request": "a62e461e44579b44d780a03eac5ba5314d84e785c29a98325be91ac063726d0d",
+        "result": "d8208d0fb12b961d79a789a7a5570748ce12aa82d2002c919f57302df944a3fb"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "c2bb69871401e6d4ae4674395eb8b5259e236a0341139ce414a20e007997e041",
+              "size": 65151
+            }
+          },
+          "schema_version": 1,
+          "sha256": "0f50fcc005e20eb4adab52a82c5adb74e9cfb97c58081c71263dc8ee541c36c1",
+          "total_bytes": 65151
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/fb1c44208b8342478d8f8e2fcef1f3ec/provenance",
+        "bytes": 65151,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "c2bb69871401e6d4ae4674395eb8b5259e236a0341139ce414a20e007997e041",
+        "state_sha256": "6baa7de524ea97b22f58cc756af2dfc4a132526b887b6dfefe8c857d868d33ec"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/fb1c44208b8342478d8f8e2fcef1f3ec/evaluator/observed-samples.pt": "9826aff08d92d7c04d2cbd2126314e9a73f9952ad2634676189ef1ba9bd1392a"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "1c953eda96044ccfadb11210e422d4b0",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "973b839b3a567b595c3b58da53384b299140a6c13335f7e43ad22b2298b8346d",
+        "request": "1315c05e6d2d922b4eccac8b907624477376184dd517505330a8bf62dfd80877",
+        "result": "52f144c68043cdc47ff711ae35250c35322e69a468e182c254ca6b5d1842004a"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "22d0c0bba2c0005ef107f3c9e572af117118e4d247ff734a1cf329741f9f57a5",
+              "size": 110073
+            }
+          },
+          "schema_version": 1,
+          "sha256": "14c6a675391c1d4ce0cbab09526acfd7ab79668a796834703b7f7cbe7bf186b0",
+          "total_bytes": 110073
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/1c953eda96044ccfadb11210e422d4b0/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "22d0c0bba2c0005ef107f3c9e572af117118e4d247ff734a1cf329741f9f57a5",
+        "state_sha256": "d1763143f5d4b8ec35d635b3a9a9536162420a024f1390d8ec660fc49145cd2a"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/1c953eda96044ccfadb11210e422d4b0/observed-samples.pt": "09218f1a2f125ccd818cae174965141ebe652c4268b64ca5e604863bacbee7fb"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "35a0573027034b82b60c079470a931e9",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "31689220bad956d50f5d740c3e3f1321d9f3a7604d5a14307d5d17af1d2351c0",
+        "request": "631b5ead56c27bab48a900afd8ef283101015f27416ca62a9cb0bb534cabcbf0",
+        "result": "a53c7665fa839263d2f9d0e5be44621ddfe6c4ea36c4bf8e0e7d9c6275494e51"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "9b3f2057cce663302b7c16b26344f3ffe45320d5299f259350a3d7785913f20a",
+              "size": 110073
+            }
+          },
+          "schema_version": 1,
+          "sha256": "1e229c296bc75e055f4bea261c3c3104e965673e47d500eecc2f4a2af12258d2",
+          "total_bytes": 110073
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/35a0573027034b82b60c079470a931e9/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "9b3f2057cce663302b7c16b26344f3ffe45320d5299f259350a3d7785913f20a",
+        "state_sha256": "bd403e5d05f8de57260a8192be1198b44fcc83eb523e4acef8f59e79359644eb"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/35a0573027034b82b60c079470a931e9/observed-samples.pt": "cab57d850940acfe4734f17ec7fab9c76e05a307d26c556ac83d49894dc90016"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "dd46c87332e4444ab5b2d7517aa9c9af",
+      "data_sha256": {
+        "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+        "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "29ca92a99c9277cbcbc7e63f884f079d35c2103bf673ead3477c40ef8ba1e1ec",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "fb6f07de8fecc2e99f5bc78b5b2a8f9d86f096b4539c16ffe3765994ae5c4a2b",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "1e38231883fdad1ec103263ce87ef0bafe7b17817a8bbcd8be542f54cae40842",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "095f02785bbabad82b79bfffe85e719fc585310996573d1126f94ba361fad21e",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "679f4d56ca52c64cb7ee3fbd975fedceb681cb1060103e69d554ac8ea342b0f2",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "0741303aa81598ffed93bd390b0bd6e01ed4b19495e51f2d39aad6deb3e7d490",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "921d3e9d42ed8f089b543870d7bce51e873462d825d68451b6adb2665d649f5a"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+      },
+      "original_certificates": {
+        "evidence": "d576a473d2f9746a797bfad5467a03bd5fa0d6ab99b3617944f2af0996f36b1b",
+        "request": "2f28834b7fcbc9ee5b32414bf0f6e277c0a9acac4329e0cc4071f74206be059f",
+        "result": "3b698cb725cc1943462505a3b74ee65d7934bb97aaa2289e934c22d423928c21"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "5bc2b6e2522ddf929258022738f8564ef86e90f1a7c41981774b82c43e500da9",
+              "size": 65343
+            }
+          },
+          "schema_version": 1,
+          "sha256": "74abb05a7c09a4f6081b34dd85fc182aaff09346cf7d6a78c0a97a3cb18fc9e1",
+          "total_bytes": 65343
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/dd46c87332e4444ab5b2d7517aa9c9af/provenance",
+        "bytes": 65343,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "5bc2b6e2522ddf929258022738f8564ef86e90f1a7c41981774b82c43e500da9",
+        "state_sha256": "076123bac7e20f0e2e9ba33bc4ca3e76df8637e3bcb1dec3a32122778bdfc7dd"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/dd46c87332e4444ab5b2d7517aa9c9af/evaluator/observed-samples.pt": "cd207e64bad679178a4d18f540a8982a0d4beb4b01393980479bafe6a07f87bd"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "a58305c34c3c423e94c20b0dd9630fee",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "283f80f18db208b58b192e56f71f89cd615d31c352adbd12bf3db08c549f7d19",
+        "request": "584f3736d9b9389cb23996fea5efee659b87e5e2139b3e1ab24cd9be81ea330d",
+        "result": "cedd83f23d05ebe0e4158ae9270e4e6260f31afe143b13a7a8b4b48ed3ab54c0"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "29038b1101407db3eca0a90a3c1316428b9c659b88f877edf180960e8dda795b",
+              "size": 110073
+            }
+          },
+          "schema_version": 1,
+          "sha256": "21074c58132d621f5519ac067a102d23e8ebc87cb7ed60609d82f70a8b70ab8b",
+          "total_bytes": 110073
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/a58305c34c3c423e94c20b0dd9630fee/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "29038b1101407db3eca0a90a3c1316428b9c659b88f877edf180960e8dda795b",
+        "state_sha256": "dd77c46a6d700de1a86fdcad3f580755f14efed56eb66a89bd4dfa9860459bd0"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_mode": "balanced_assignment",
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/a58305c34c3c423e94c20b0dd9630fee/observed-samples.pt": "db472883d7cd20c629ea014df664a5c5db8daa10c753d812d6df6a1181af5ff4"
+      },
+      "role": "candidate",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "56ed77aff2c84cf0bd7618e040e0fb3c",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "61b6baaf5d6fb6f42e844aa8336379e0a0119c30bb8c7bbc7d0f5ee1c577c289",
+        "request": "10a2bc5a8e632f97a0268a54df02d687571f677f087e66f901ddbf6cfe3f0828",
+        "result": "de776a166f8e64a2c3c918fe3aa1e06c3ad191b23ee5a065fa1ea58e9a15d15d"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "3162bbace5daa6f8c16c2afa7297abd1b7974d4da301d8ad5fbce7e1f847f0f0",
+              "size": 110009
+            }
+          },
+          "schema_version": 1,
+          "sha256": "60c467b28c5248d0bf12847a63c27a7865fec9170f8c3367bc9f236691eb29dd",
+          "total_bytes": 110009
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/56ed77aff2c84cf0bd7618e040e0fb3c/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "3162bbace5daa6f8c16c2afa7297abd1b7974d4da301d8ad5fbce7e1f847f0f0",
+        "state_sha256": "411dd4b623b1cdd2ece2f7eb89ff0426c632ac457e2afb03a11c282fa48152c1"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/56ed77aff2c84cf0bd7618e040e0fb3c/observed-samples.pt": "b8a10e5bc96971a72ccd8e1ce4cf969e0af99ac70dab7161b72311d9113b0606"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "442320429f0143d3aad23a8ea72f3cc3",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "31d3907e3b1e913266b75ed70871daab9e7d5c4bc7ef3c78a1c41f3a8ea9bc5e",
+        "request": "cf066ef875093ff7a257a6399a9f22f56d49819212eac9a6477f74ad98acf048",
+        "result": "89d79e7a999c3de4f977e57fd528e25c4d730656fc8377aa8c2877a18e79378e"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "62944867f8b35a50abe9e5aa69bd7985d52264fab5cd8b7c31810f3d5c9f2a99",
+              "size": 110009
+            }
+          },
+          "schema_version": 1,
+          "sha256": "bfa3b7ac209b0b3ea483020d0140fc9858001b175fc4075f48cde7450f92b6a0",
+          "total_bytes": 110009
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/442320429f0143d3aad23a8ea72f3cc3/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "62944867f8b35a50abe9e5aa69bd7985d52264fab5cd8b7c31810f3d5c9f2a99",
+        "state_sha256": "c5821aea1cd880434913bca04b57c7aa5386530f6219682c5979c5a56f5bb118"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/442320429f0143d3aad23a8ea72f3cc3/observed-samples.pt": "5bfcd30b8524ce99f93aa9ccd6d934f9150a5484065c4af5913e0e90c4e2e560"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "f8286475c34f4755827e55ac9ea6f172",
+      "data_sha256": {
+        "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e462a3207efe118392970224445f20c137371b1552ef108de888bc4c73206513",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "1e38231883fdad1ec103263ce87ef0bafe7b17817a8bbcd8be542f54cae40842",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "095f02785bbabad82b79bfffe85e719fc585310996573d1126f94ba361fad21e",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "679f4d56ca52c64cb7ee3fbd975fedceb681cb1060103e69d554ac8ea342b0f2",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "cdee60eb6b8aa5224c8b9f3f23bfaf0c602d7529077b2fbacce5104cf97085ab",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "def97f907a66980e18a2fc72687347dd73505e0da482a5145ec8f57fd75df4fa"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+      },
+      "original_certificates": {
+        "evidence": "6585ba0ce0c9c87dc7a5879a733b0abd589124aa1860e1011862eba728d7efb3",
+        "request": "672b24801af0269287aeb788ddd90cb0670d0bc4924d88c0adb986a5deaa6415",
+        "result": "52ad8c361bdd48b67fccb0115b252861cbe08513b0fa224e029033a84ee0154e"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "e014721ffdbfa87267949c2f2398d0e16979ddc4733ad89bda32991f42c7a6f5",
+              "size": 65087
+            }
+          },
+          "schema_version": 1,
+          "sha256": "f63d361b0e226a361c4b327b742dd17e20b8903bc58ad257be0deca0c0ad58ce",
+          "total_bytes": 65087
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/f8286475c34f4755827e55ac9ea6f172/provenance",
+        "bytes": 65087,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "e014721ffdbfa87267949c2f2398d0e16979ddc4733ad89bda32991f42c7a6f5",
+        "state_sha256": "aaecf9324c4a2bfb90a6076c56794c88796afd1d5eb0544e5ff76e1cb6e4393d"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/f8286475c34f4755827e55ac9ea6f172/evaluator/observed-samples.pt": "391a95cf228d49bb1db9e3b52a488e7b695449d43235a66bf263dd68d6cecc93"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "52636f5757f64b4b982c8dfdc861a92d",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "de6b6583b0bb8fc3ddd7b0211be2d2744074dceef120ecba24618cd7a291fa01",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378,
+            "net.6.bias": 3451349313449224512,
+            "net.6.weight": 4418587902875615470
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "07229cdb3ae86f0746c5de25bd61b4637020c104fbf6180c141220491a85f247",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866,
+            "net.6.bias": 3267559673347489931,
+            "net.6.weight": 6547758434591862365
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "41246d315685e3e3405fe86d0ef74655a7aceed12d6a4a4d291501321e12ba6f",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "51ea35450c95f93becd7d7b8a9f54ef1541be867f127b96b87168178a494407a",
+        "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "38a1da2621522d4c1a7a59fe1a08cc65d65a8c4d41242d998ef2b22f991c5c29",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "fc6832375be85ff7955fab06540eda46405f32cc5952b49b0daf5e6afd8e647a",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "f15ed9272e7203c626f712ebf52b350f8e586d43da53654051c42301747ac3ca",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "f2492035c7e6a9db5955b28e6c7785d9bcb3a705d15435a532fb12c636541f8c",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "bf9fc0e630e6656e1f62b5f5ab3f3d1ade2febbb05b6c47461352e3204812ac9",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "ebea83140d3eb8657335408cb14e20eaa8c7d0a3d0a9a7125933e2e8cc7f38dd",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "3c753ad7b04689f09e72e573f6bfe006cc25c7590b54e33eb6544e7be8118be7"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+        "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+      },
+      "original_certificates": {
+        "evidence": "42c4b3912e76ec92d97c717735cde2591a4fa160e79ac4f39eaefed914f0a7a1",
+        "request": "f5de40949d51403907a96cb1d454143878945b1809694c50d3474e1453c3a575",
+        "result": "b3241c16cb89e11319ecdcd8909ea97ebfff92d63014e786b09a916105132fc6"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "d617fa0f027892fb6871362f405520f8232dce55f647775fd87fa5579949fcb8",
+              "size": 770077
+            }
+          },
+          "schema_version": 1,
+          "sha256": "b3b057f98dd078f4dd0da6ef0f1a6e8ddc6572beb16ed52579280bd11b6fc131",
+          "total_bytes": 770077
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/provenance",
+        "bytes": 770077,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "d617fa0f027892fb6871362f405520f8232dce55f647775fd87fa5579949fcb8",
+        "state_sha256": "f34fd5dcdc28496699fb46e60f7872889ced24d8ca1bc73f2bcbcbea5eccf86b"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/config.json": "cb23ff4195eed1e0b64063cc888aa19aff224e954d3f39a0ae0395e558766b8c",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/events.jsonl": "c06822992903c89a18d0481bdf955302056e3f0a16e904c7e33a17e62bde3282",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_000050.npz": "6d77f65b062459027c0603d8f1187727e7bc23e852666eec2f3bfa50dc88857a",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_000750.npz": "1f37bf2ad9354e61bbb930a401a6b8aad1e8f2f3e8be523e315711ea5c128b05",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_001750.npz": "dc26897dcb4ebe3043d024488e3702228c99e1c354c8d965697ab2d9eb0d672a",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_002750.npz": "31bc8309312002d2fd413e5b47476a9355430ec0b17e5a8631105ff39deb7623",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_004000.npz": "d4da0c64913189f6fb7fd2305760cc2f3f234b71b55a849d4946b09571044291",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_005000.npz": "d9cc901ffd0a3e0bf3ab0082ca7e92ee277588cb4fcfa21e0104d7acba5fabcf",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_006000.npz": "d6082857748172c50729527fa5953dfb06a16c2d6094a753fa35a8d2c45d09f0",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/snapshots/step_007000.npz": "4c748f16474a0b61e5f0643b1a6fb83bd8e74092f4b92798169211a200bd37bd",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/52636f5757f64b4b982c8dfdc861a92d/native100/grid100/summary.json": "4fd72248bff5e51271d7fde697e934e58af1c61ee1cae4753e47108e21e7b1b3"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "grid100"
+    },
+    {
+      "attempt_id": "df2f22a3c98f48539de2624b247ff535",
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "fe410afedabbeaf86a88f5535ce4e382913d6ad4f5778e838edbc95d85c23e51",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "a315c1a4bbb53fa76b123b1970298e1a3e4edac47fcb4324884cc037ee86afa0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c3ddd1ab494cd82703d76a443602bfd36280dc0e243a054ca51d217f2c5087f5",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "e373e4a7fadf540678445324e8f30ee49219f8deb6d887dd5abce9365e5f8713",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "6356f04adfa74ad83852a36c1bac8bedde63f483ee8635b7d9c33f62dda814c5",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "e3a95dbef575953f5de5cd559092f0af02e073f511dac5fa4255ec78cb152e96"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "original_certificates": {
+        "evidence": "0db5bf183e3477c12a98fd8afab6c285eaf8be6451551edc7ae8435e79ae9438",
+        "request": "6af0ef5edd42748e3bdc096f8e0457c26e61403ddaaedb652591b9d4c5c0ca71",
+        "result": "f1a1637c86daddc3a3fe93865b180b82055a93795a57968fa451c5d7b8acea7b"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "9a14cafa4fd38bbeaa540736158f16bad9e5c85edd8559f742f02ed9c664bf1d",
+              "size": 110009
+            }
+          },
+          "schema_version": 1,
+          "sha256": "f6c88e5a9fddb99af2d1a2f303a6826f253d98d05b65d09cb917a2a2cf7a0e49",
+          "total_bytes": 110009
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/df2f22a3c98f48539de2624b247ff535/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "9a14cafa4fd38bbeaa540736158f16bad9e5c85edd8559f742f02ed9c664bf1d",
+        "state_sha256": "286d2b07f17ab40b088b46172bd5f79296969ab1493b95636e76b7c99a397f30"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/df2f22a3c98f48539de2624b247ff535/observed-samples.pt": "860f280def6b92591c5d603853f1740c99062d6de6ef1d707f21dc5fc8b9a51a"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "3daabc202005466a9c4716a176901532",
+      "data_sha256": {
+        "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+        "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "29ca92a99c9277cbcbc7e63f884f079d35c2103bf673ead3477c40ef8ba1e1ec",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "e7da79ae8e76881cbaf43e005c62646bfd07b25fc52df296da766dcd937dd0d7",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "fb6f07de8fecc2e99f5bc78b5b2a8f9d86f096b4539c16ffe3765994ae5c4a2b",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "1e38231883fdad1ec103263ce87ef0bafe7b17817a8bbcd8be542f54cae40842",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "308b5624bc504a40a0522d65d03c49f6340e95c59a03d6d6656075de8e8eeeb6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "201f1c674084749d91b9e4ce4d0bb09d9871a676fa27a96229969039cc958f81",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "095f02785bbabad82b79bfffe85e719fc585310996573d1126f94ba361fad21e",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "679f4d56ca52c64cb7ee3fbd975fedceb681cb1060103e69d554ac8ea342b0f2",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0d87523ff3e5e2f02a5b0b94f5266014c4b173aa30a4f6ca3ec7d8258ab3ee45",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "789a47af6028384b1a96732e3d2c304205350b2a4b097bb0b6360214e3c28618",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "6d912282bee1f2daf0a9172d5742825860302efcb72fed5edc6be7ec0b6969db",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "6ec4d5edd86032d0b44eb0a15e60e34b17541e35926a41795c0f8c507b86aefc",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "f2176e7d2c76088f34d672ebc72f0fa859c2566f0da2353892b69d1731c4df6f",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "0741303aa81598ffed93bd390b0bd6e01ed4b19495e51f2d39aad6deb3e7d490",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "921d3e9d42ed8f089b543870d7bce51e873462d825d68451b6adb2665d649f5a"
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+        "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+      },
+      "original_certificates": {
+        "evidence": "ea9807ea4278d05187cf249c62e0d25fe20a961e536ab57b1a429b3f6e3e29b2",
+        "request": "3c7a9df651ed1231cc97f8f65ba3247c5b2842920eb2930843346ebef59473e4",
+        "result": "74d106f5be8b61297249f7d8ce33212920ea57e7b0f0649bbf1d041cc57785f3"
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "97712c34988466669ccea5fa90e38f56d3b6d634b83678287a4ebbd15db0728b",
+              "size": 65279
+            }
+          },
+          "schema_version": 1,
+          "sha256": "3a095eca05ce027d551c7b623978e8449e34f33365a8c96d33e13033b504cf93",
+          "total_bytes": 65279
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/3daabc202005466a9c4716a176901532/provenance",
+        "bytes": 65279,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "97712c34988466669ccea5fa90e38f56d3b6d634b83678287a4ebbd15db0728b",
+        "state_sha256": "520bf972dadf765bcd86f73378a285952b7f3df7aea4fd1f943ce009a7d64d17"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "retained_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/mass_allocation/queue/mass-allocation-round5-v1/3daabc202005466a9c4716a176901532/evaluator/observed-samples.pt": "bc6e0ebdfb5b38e888ed5c7b8f5bf1fa86fcbe2555f33c91a837783072a17a0f"
+      },
+      "role": "control",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_commit": "6e0c08dfe22e4bb57624d3211e67ef7cc07de8a5",
+      "source_digest": "3b09403805f51c1dc8dc7a520eef7de0879292f7d5e595640842fc968c10dbd3",
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "qualification_input": false,
+  "schema_version": 1
+}

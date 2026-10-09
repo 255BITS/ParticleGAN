@@ -183,6 +183,10 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.kinetic_transport_weight and recipe.kinetic_transport_mode == "balanced_assignment":
+        from importlib.util import find_spec
+        if find_spec("scipy") is None:
+            return ["balanced_assignment requires SciPy; install ParticleGAN's mog extra before reservation"]
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components":
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]

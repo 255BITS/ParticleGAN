@@ -1,0 +1,48 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Import exact local-v2 as matched new-source control; no trainer delta."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/mass_allocation/round5/README.md",
+  "id": "mass-allocation-round5-control-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Exact retained local-v2 rare/broad positive baseline; source-bound archived scores remain contextual.",
+  "parent": "projection_transport-round4-transport-v1",
+  "prior_art": [
+    "https://proceedings.mlr.press/v108/fatras20a.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html",
+    "reports/forge/bcap-physics/mass_allocation/round5/prior-diagnostics.json"
+  ],
+  "recipe_overrides": {
+    "constraint_geometry_mode": "none",
+    "d_lr_mult": 1.5,
+    "kinetic_transport_local_weight": 1.0,
+    "kinetic_transport_projections": 32,
+    "kinetic_transport_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

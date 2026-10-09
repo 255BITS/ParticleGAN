@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 791. Inventory coverage: complete. Unresolved import items: 7.
+Records: 794. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3622,6 +3622,22 @@ Administrative abandoned: Concluded preregistered full-native FAIL. Training out
 
 [Evidence](../../) · [Record](records/lifecycle-1fdc4834581ce2e17a87e8e7.json)
 
+### mass-allocation-round5-candidate-v1 · lifecycle-3adc8030026cb516f274d123
+
+**Scope:** administrative; administrative; revision `aedb5e70712838fad3aa519268e8fec3bb669109c7bf266ea581a2451f9d3606`.
+
+None
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Completed matched study: sustained width PASS gained but rare PASS lost, native genuine quality worsens, and Gaussian retention remains FAIL. Preserve scoped width evidence; stop this exact global replacement without further submissions or retries.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-3adc8030026cb516f274d123.json)
+
 ### k3p-bcap-matched-v1 · lifecycle-78a4ebc4a9d5f08ddeab2fa9
 
 **Scope:** administrative; administrative; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -3941,6 +3957,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
+
+### mass-allocation-round5-candidate-v1 · readout-529377ca68e5235edeeb1959
+
+**Scope:** research_diagnostic; scientific; revision `aedb5e70712838fad3aa519268e8fec3bb669109c7bf266ea581a2451f9d3606`.
+
+Balanced joint-coordinate block transport improves native genuine quality mass while preserving local-v2 rare/broad sustained passes; original full density and temporal gates decide repair.
+
+**Observed:** {'FAIL': 3, 'INCOMPLETE': 1, 'PASS': 3}; wall seconds 909.609; mechanism `structural`.
+
+vector_unequal_width: hq=0.97803, mass_tv=0.015625; grid100: precision=0.15276, mass_tv=0.08002; vector_two_broad: hq=0.9895, mass_tv=0.0014648
+
+Balanced assignment repairs full sustained unequal width but loses rare density: 3 PASS / 3 FAIL. Native holdout precision .21973 to .15276, genuine modes 17 to 9; Gaussian retention still FAIL.
+
+**Next:** Stop this exact candidate as a global replacement. Preserve its scoped width PASS and retain local-v2 rare/broad positives; no sweep, seed study, continuation, matrix filling or promotion.
+
+[Evidence](../../reports/forge/attempts/1c953eda96044ccfadb11210e422d4b0/result.json) · [Record](records/readout-529377ca68e5235edeeb1959.json)
 
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
@@ -4533,6 +4565,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+
+### mass-allocation-round5-control-v1 · readout-e9d2cd1d58359266792b3f2a
+
+**Scope:** research_diagnostic; scientific; revision `d38cf12e8f70cf944c840586f5a1868e953cf86f25ca8a29f067382cc86f615f`.
+
+Balanced joint-coordinate block transport improves native genuine quality mass while preserving local-v2 rare/broad sustained passes; original full density and temporal gates decide repair.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 2053.478; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96973, mass_tv=0.016426; grid100: precision=0.21973, mass_tv=0.08646
+
+Exact retained local-v2 control finishes 3 PASS / 3 FAIL: smoke, rare and broad PASS; own Gaussian retention, width and native FAIL. Archived singleton metrics and numerical states reproduce bitwise.
+
+**Next:** Retain local-v2 rare/broad reference under its exact recipe and source. Campaign complete; stop unchanged runs and preserve all measured failures and timeout history.
+
+[Evidence](../../reports/forge/attempts/3daabc202005466a9c4716a176901532/result.json) · [Record](records/readout-e9d2cd1d58359266792b3f2a.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5134,4 +5182,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d89d8d7d319bcd47c4cf1c4a02611ce5ca3121821f3dd0c6a7f71c576e3e0596`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8b64f6e650afa982b810aa17024256f94123c5628a1500fb3263093156143b9e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

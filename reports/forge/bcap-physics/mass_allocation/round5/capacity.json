@@ -1,0 +1,24 @@
+{
+  "elapsed_seconds": 1.5912037539528683,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "reservation_seconds": 120,
+  "rows": [
+    {
+      "gradient_finite": true,
+      "loss": 0.6726505756378174,
+      "mode": "sliced",
+      "projected_7000_loss_only_seconds": 2411.6366958478466,
+      "seconds": 0.31394491298124194
+    },
+    {
+      "gradient_finite": true,
+      "loss": 0.6726505756378174,
+      "mode": "balanced_assignment",
+      "projected_7000_loss_only_seconds": 1693.1015914306045,
+      "seconds": 0.24162159499246627
+    }
+  ],
+  "schema_version": 1,
+  "scope": "synthetic2048-row sample-space forward/backward only; no trainer, optimizer updates, learned draws or quality claims"
+}
