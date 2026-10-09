@@ -40,6 +40,11 @@ def conditions(request):
             for tid, card in request['tasks'].items()}
 
 
+def scientific_source(source):
+    """Commit and archive location are provenance, not scientific file identity."""
+    return {key: source[key] for key in ('digest', 'files')}
+
+
 def metadata(entry):
     saved, row = entry['saved'], entry['row']
     actual = saved.get('applied', saved)
@@ -75,9 +80,12 @@ def own_checkpoints(data):
             require(continuity.get('restored_exactly') is True and continuity.get('history_reset') is False,
                     f'{entry["item"]["role"]}/{entry["row"]["task_id"]}: missing exact own-checkpoint restore')
             parents = [p for p in data['final'] if p['item']['role'] == entry['item']['role']
+                and p['item']['scope'] == entry['item']['scope']
                 and p['row']['task_id'] == dependency['task']
                 and p['row']['compatibility_key'] == continuity.get('parent_compatibility_key')
-                and p['request']['candidate_revision'] == continuity.get('parent_candidate_revision')]
+                and p['request']['candidate_revision'] == continuity.get('parent_candidate_revision')
+                and p['row']['evidence'].get('checkpoint', {}).get('sha256') == continuity.get('parent_checkpoint_sha256')
+                and p['row']['evidence'].get('checkpoint', {}).get('state_sha256') == continuity.get('parent_state_sha256')]
             unique = {parent['item']['attempt_id']: parent for parent in parents}
             require(len(unique) == 1, f'{entry["row"]["task_id"]}: unique own certified producer required')
             parent = next(iter(unique.values()))
@@ -97,32 +105,54 @@ def own_checkpoints(data):
                     f'{entry["row"]["task_id"]}: consumed checkpoint state differs')
             checks.append(dict(scope=entry['item']['scope'], role=entry['item']['role'], task_id=entry['row']['task_id'],
                 parent_task_id=dependency['task'], parent_attempt_id=parent['item']['attempt_id'],
+                parent_scope=parent['item']['scope'], parent_source_commit=parent['request']['source'].get('origin_commit'),
                 parent_checkpoint_sha256=descriptor['sha256'], parent_state_sha256=descriptor['state_sha256'],
                 prefix_steps=continuity.get('prefix_steps'), restored_exactly=True, history_reset=False))
     return checks
 
 
 def source_bindings(data, root):
-    checked, requests = {}, []
+    checked, snapshots, requests = {}, set(), []
     for context in data['scopes']:
         reference = next(iter(context['submissions'].values()))['request']
         for role, sub in context['submissions'].items():
             request = sub['request']
-            for key in ('source', 'runtime', 'protocol', 'compute_profiles'):
+            require(scientific_source(request['source']) == scientific_source(reference['source']),
+                    f'{context["scope"]}/{role}: scientific source differs')
+            for key in ('runtime', 'protocol', 'compute_profiles'):
                 require(request.get(key) == reference.get(key), f'{context["scope"]}/{role}: {key} differs')
             require(conditions(request) == conditions(reference), f'{context["scope"]}/{role}: task conditions differ')
             require(request['protocol']['seed'] == 0, 'Expected protocol seed 0')
             files, source = request['source']['files'], request['source']
             require(stable_hash(files) == source['digest'], f'{role}: source manifest digest differs')
             if source['digest'] not in checked:
-                snapshot = Path(source['snapshot_path'])
-                verify_snapshot(snapshot, source)
                 for relative, digest in files.items():
                     require(file_hash(root / relative) == digest, f'Published scientific bytes changed: {relative}')
-                checked[source['digest']] = dict(source_commit=source.get('origin_commit'), source_digest=source['digest'],
-                    frozen_snapshot=str(snapshot), scientific_files_verified=len(files), published_files_equal=True)
+                checked[source['digest']] = dict(source_digest=source['digest'], source_commits=[],
+                    frozen_snapshots=[], snapshot_manifests=[], scientific_files_verified=len(files), published_files_equal=True)
+            item = checked[source['digest']]
+            origin = source.get('origin_commit')
+            if origin is not None and origin not in item['source_commits']:
+                item['source_commits'].append(origin)
+            snapshot = Path(source['snapshot_path']).resolve()
+            identity = (source['digest'], str(snapshot))
+            if identity not in snapshots:
+                verify_snapshot(snapshot, source)
+                stored = read_json(snapshot / 'forge-source.json')
+                require(scientific_source(stored) == scientific_source(source),
+                        f'{context["scope"]}/{role}: snapshot manifest scientific identity differs')
+                snapshots.add(identity)
+                item['frozen_snapshots'].append(str(snapshot))
+                item['snapshot_manifests'].append(dict(path=str(snapshot / 'forge-source.json'),
+                    sha256=file_hash(snapshot / 'forge-source.json'), origin_commit=stored.get('origin_commit')))
             requests.append(dict(scope=context['scope'], role=role, request_id=request['request_id'],
-                                 candidate_revision=request['candidate_revision'], source_digest=source['digest']))
+                candidate_revision=request['candidate_revision'], source_digest=source['digest'],
+                source_commit=origin, frozen_snapshot=str(snapshot)))
+    for item in checked.values():
+        item['source_commits'].sort()
+        item['frozen_snapshots'].sort()
+        item['source_commit'] = item['source_commits'][0] if len(item['source_commits']) == 1 else None
+        item['frozen_snapshot'] = item['frozen_snapshots'][0] if len(item['frozen_snapshots']) == 1 else None
     return list(checked.values()), requests
 
 
@@ -226,7 +256,9 @@ def matched_state(data):
                      if entry['item']['role'] != group[0]['item']['role']]
             if other:
                 reference = other[0]
-                for key in ('source', 'runtime', 'protocol'):
+                require(scientific_source(reference['request']['source']) == scientific_source(group[0]['request']['source']),
+                        f'{scope}/{tid}: ordinary reference scientific files differ')
+                for key in ('runtime', 'protocol'):
                     require(reference['request'][key] == group[0]['request'][key],
                             f'{scope}/{tid}: ordinary reference {key} differs')
                 require(conditions(reference['request'])[tid] == conditions(group[0]['request'])[tid],
@@ -240,6 +272,8 @@ def matched_state(data):
             proof_kind=first['item']['provenance_checkpoint'].get('proof_kind', 'training_checkpoint'),
             saved_state_references={p['item']['role']: p['item']['provenance_checkpoint'] for p in group},
             original_arm_scopes={p['item']['role']: p['item']['scope'] for p in group},
+            original_arm_source_commits={p['item']['role']: p['request']['source'].get('origin_commit') for p in group},
+            original_arm_source_digests={p['item']['role']: p['request']['source']['digest'] for p in group},
             completed_roles=[p['item']['role'] for p in group],
             initial_state_proof_sha256=state_digest(initial), non_eval_streams=len(first_states),
             completed_steps={p['item']['role']: p['item']['provenance_checkpoint']['completed_steps'] for p in group},
