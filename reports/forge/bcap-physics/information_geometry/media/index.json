@@ -1,0 +1,366 @@
+{
+  "items": [
+    {
+      "attempt_id": "10a2fbd74ed24f379693c7fe4ec610bd",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/gaussian1d_smoke.gif",
+      "gif_sha256": "094c38be74c104f7a5a8c2c3ccadc09e31b24f6eee1aee9b678273d57b481eba",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "ea7f5ab05c0c669d6f6e4ee541d8e76462dda877e1d31a9040c9b64677f737d5",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/10a2fbd74ed24f379693c7fe4ec610bd/evaluator/observed-samples.pt": "46b2816975e0ab4e63172a08be70731ca3e8527a00ab31fac69bffab9d05d528"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "3a44de4f33c84583acaec03bfa1d979b",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/two_pole.gif",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "3abe929ac4f74414b9849493b696958e",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/vector_unequal_mass.gif",
+      "gif_sha256": "948bf94b4db8a40419021cd021549e7f6cb2ffad21df188adffed2b1a1884fb2",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "3cd17a7130ae190ca0948c4252c886f34b7554dd46f0cc5afa2a487cb8c3a563",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/3abe929ac4f74414b9849493b696958e/observed-samples.pt": "0663530e05631a407dab13c5e828c0bcd31722281cb5d7df054bcbbee1cbcb20"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "3b09e4e8cabc4fbe81bac86d80ddfb3c",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/img_intensity2.gif",
+      "gif_sha256": "963c4ebad5a4de228978e5c86c1f7140f89edc3e43a6063ece83b787490f9db7",
+      "kind": "actual_training_saved_image_outputs_gif",
+      "observation_count": 24,
+      "observations_sha256": "d92ae35e1e0452aeb47a6a4146bac9b04b1bb067824e9a37c374133b34b9e5e6",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+      "sampling_draws_added": 0,
+      "saved_sample_sets_recomputed": 24,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/3b09e4e8cabc4fbe81bac86d80ddfb3c/observed-images.pt": "237a4d1246f520cef2e543bd8077c4d33189716e21e656daa543ae2a0774541f"
+      },
+      "task_id": "img_intensity2"
+    },
+    {
+      "attempt_id": "48bb2368c65a4b5d9bda4e3f99376df7",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/gaussian1d_stability.gif",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/48bb2368c65a4b5d9bda4e3f99376df7/evaluator/observed-samples.pt": "c6126a8ffaef62da8a6bc9d9b0e83ce4250cb443fe1fd98cb8c39849b0fb995c"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "573ef8bb3c524f60b9def8c3cf792e5c",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/vector_unequal_mass.gif",
+      "gif_sha256": "6b2a7e8fe10e721cad43fb108074cd401f926d0562ff7039c9a61c6efd54512f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a29b7e6a77be9a52394a1dfef5b799cd17f526c925dec7ae7b74f87e3f8486e4",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/573ef8bb3c524f60b9def8c3cf792e5c/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "92ed7a8e91cb4039a2939e2475e891e3",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/img_intensity2.gif",
+      "gif_sha256": "2309eb2645d9c50bdde8ccb6334febff34a4260f2ec7fa9a83b84b6e6f72b0b8",
+      "kind": "actual_training_saved_image_outputs_gif",
+      "observation_count": 24,
+      "observations_sha256": "26c86be8f1644709d021879c26c93963957afd07c6947a13bc1601a05f78f357",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+      "sampling_draws_added": 0,
+      "saved_sample_sets_recomputed": 24,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/92ed7a8e91cb4039a2939e2475e891e3/observed-images.pt": "aba9af20f61c28447414ddc2346d4659617ce24cd3a3e4e4a01736e24d1ada7a"
+      },
+      "task_id": "img_intensity2"
+    },
+    {
+      "attempt_id": "a391fde358dd48f9b2cebbc937ed8469",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/two_pole.gif",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "c6e74fd8ceea4f52a2b17ac6fe6b335f",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/img_blobs4.gif",
+      "gif_sha256": "40af88ef4a793cb0eacd09cf0f41dcdaba36d10a7b72d217b4fb25f361e98d5b",
+      "kind": "actual_training_saved_image_outputs_gif",
+      "observation_count": 24,
+      "observations_sha256": "eedb71cbe832edaf2e8c2023ea431cccdb962228c5fc5d0e3eadb13d2ac29c38",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+      "sampling_draws_added": 0,
+      "saved_sample_sets_recomputed": 24,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/c6e74fd8ceea4f52a2b17ac6fe6b335f/observed-images.pt": "a58be93837a04ea0a0d1e776629d679a4e76c3e8323eabeb3a5dc81023eb2c06"
+      },
+      "task_id": "img_blobs4"
+    },
+    {
+      "attempt_id": "cce86df88b944f2a8537249e74987185",
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "gif": "media/candidate/gaussian1d_stability.gif",
+      "gif_sha256": "0a5c85d43eb9de033f64660321df851daf1c572ac7414149fe6d158fc1c0519d",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "3a7cd835fcad7491e1265a89f93f361cdbbe18018a2bfea6899b92e046089c5f",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/cce86df88b944f2a8537249e74987185/evaluator/observed-samples.pt": "0aaac33201efbb3bcfb45cc148b35f936682bab8700c085b67827dcdd3ef8188"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "e1396a0dc1744e93b5ce33ad19dde6c4",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/img_blobs4.gif",
+      "gif_sha256": "3495e9992149d0a394e5acfac84a4937f53b97a902fc43d0b966e18d3602b955",
+      "kind": "actual_training_saved_image_outputs_gif",
+      "observation_count": 24,
+      "observations_sha256": "0e97f894ec1445c16ff34255a140c7c4f9fdfe74bad22e79da2c6a96dbdc2c08",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+      "sampling_draws_added": 0,
+      "saved_sample_sets_recomputed": 24,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/e1396a0dc1744e93b5ce33ad19dde6c4/observed-images.pt": "7fdb2663b0e127c5dc6f7f177334048c2051a92e72f982d5c93147e4914a5003"
+      },
+      "task_id": "img_blobs4"
+    },
+    {
+      "attempt_id": "f73d9410b8b94adaa08e5d9b3b63c649",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "gif": "media/control/gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/f73d9410b8b94adaa08e5d9b3b63c649/evaluator/observed-samples.pt": "da2bb73631814a02d6d02d923e3f51495b27f5e618eeb1573af6c728b8e98df1"
+      },
+      "task_id": "gaussian1d_smoke"
+    }
+  ],
+  "qualification_input": false,
+  "schema_version": 1
+}

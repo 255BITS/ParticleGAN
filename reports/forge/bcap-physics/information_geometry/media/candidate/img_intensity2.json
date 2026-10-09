@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "963c4ebad5a4de228978e5c86c1f7140f89edc3e43a6063ece83b787490f9db7",
+  "kind": "actual_training_saved_image_outputs_gif",
+  "observation_count": 24,
+  "observations_sha256": "d92ae35e1e0452aeb47a6a4146bac9b04b1bb067824e9a37c374133b34b9e5e6",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+  "sampling_draws_added": 0,
+  "saved_sample_sets_recomputed": 24,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/information_geometry_campaign_v1/3b09e4e8cabc4fbe81bac86d80ddfb3c/observed-images.pt": "237a4d1246f520cef2e543bd8077c4d33189716e21e656daa543ae2a0774541f"
+  },
+  "task_id": "img_intensity2"
+}

@@ -1,0 +1,788 @@
+{
+  "attempt_ids": [
+    "48bb2368c65a4b5d9bda4e3f99376df7",
+    "573ef8bb3c524f60b9def8c3cf792e5c",
+    "92ed7a8e91cb4039a2939e2475e891e3",
+    "a391fde358dd48f9b2cebbc937ed8469",
+    "e1396a0dc1744e93b5ce33ad19dde6c4",
+    "f73d9410b8b94adaa08e5d9b3b63c649"
+  ],
+  "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "candidate_revision": "dc0c4e80c5a5b0bbc44f4fcc9dc9c90ee3cbd59c7b7abc78332dcb462d866179",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Relative spectral-half candidate keeps only the same2PASS/6, improves unequal-mass endpoint covariance and allocation but misses eigen floor, regresses both image gates and does not improve Gaussian2/72 stationary or0/24 shifted-hold checks. Two-pole matrices are all rank-one, so unchanged trajectory is expected from the equal top singular step.",
+  "conclusion": "Matched winning BCAP control completes all six unchanged full diagnostic tasks:2PASS/4FAIL, no blockers, scientific retries or incomplete runs. Retains both common anchor passes but fails Gaussian hold/shift, unequal-mass fidelity and both image gates. Historical qualification is preserved under its original evidence identity.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "48bb2368c65a4b5d9bda4e3f99376df7",
+        "573ef8bb3c524f60b9def8c3cf792e5c",
+        "92ed7a8e91cb4039a2939e2475e891e3",
+        "a391fde358dd48f9b2cebbc937ed8469",
+        "e1396a0dc1744e93b5ce33ad19dde6c4",
+        "f73d9410b8b94adaa08e5d9b3b63c649"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "47522709be372a6859ca0cbb32773100c3f5ebe83609c178d6d4429bf51c2254",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.958502471446991
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.958502471446991
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "48bb2368c65a4b5d9bda4e3f99376df7",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "b149b0197caefa7b73ca9bfce5ac537f29a9f62cf5b67e4db81b818b747c614b",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "573ef8bb3c524f60b9def8c3cf792e5c",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "1bf91bf63e1acdc995241ade6ba3afc68f2eeef309b682a8669c9a5f500f460a",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "92ed7a8e91cb4039a2939e2475e891e3",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "1851195da0aeee07e3c00e402b33b988d850a9df8b539ab445179b26a8d7f44f",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a391fde358dd48f9b2cebbc937ed8469",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "f58492a61d5635069d3c57db69cae030a7cde96cf78930e508c8f790e59b0163",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "e1396a0dc1744e93b5ce33ad19dde6c4",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "5b7243c5ec235d2575fc60aa889cdbf8e928a79b42082dc27c16c8a2d935ca05",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f73d9410b8b94adaa08e5d9b3b63c649",
+          "producer_request_id": "ddd40e01a4a0edcd711af989",
+          "producer_study_id": "information_geometry_control_v1",
+          "result_hash": "904433900ef269aa06fbe2ed5afee89a810cf83571f56cf5f5eab37b0a9645b5",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "f3f3e17e2ce77fde31b3502c7982caaca4b719f16ddca890c75b7ddb5185e67a",
+        "contract_sha256": "47522709be372a6859ca0cbb32773100c3f5ebe83609c178d6d4429bf51c2254",
+        "control_binding_sha256": "ec3ec267ffdb6d38c0e226295e8638638e6ad820fbdca3f456c426e99296bba2",
+        "policy_fingerprint": "85e25f3f7003ab0b2f789660c621daeac78e9812d3b96b348929770bf9b63670",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "5cdf77d3fb0730d9e28456d17ab7c115d39ed0eb0037f6c104e87b609fcb648a"
+      },
+      "study_id": "information_geometry_control_v1",
+      "study_sha256": "5cdf77d3fb0730d9e28456d17ab7c115d39ed0eb0037f6c104e87b609fcb648a"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "information_geometry_diagnostic_v1",
+  "hypothesis": "Matched winning BCAP control in the same executed source/runtime supplies the frozen reference for the one spectral-half comparison.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Retain the incumbent; conclude this bounded diagnostic and stop the failed spectral-half revision. Review saved-state signal/metric alignment before another substantive candidate; no unchanged rerun or ordinary qualification claim.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "48bb2368c65a4b5d9bda4e3f99376df7",
+        "result_hash": "b149b0197caefa7b73ca9bfce5ac537f29a9f62cf5b67e4db81b818b747c614b",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "573ef8bb3c524f60b9def8c3cf792e5c",
+        "result_hash": "1bf91bf63e1acdc995241ade6ba3afc68f2eeef309b682a8669c9a5f500f460a",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "92ed7a8e91cb4039a2939e2475e891e3",
+        "result_hash": "1851195da0aeee07e3c00e402b33b988d850a9df8b539ab445179b26a8d7f44f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a391fde358dd48f9b2cebbc937ed8469",
+        "result_hash": "f58492a61d5635069d3c57db69cae030a7cde96cf78930e508c8f790e59b0163",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "e1396a0dc1744e93b5ce33ad19dde6c4",
+        "result_hash": "5b7243c5ec235d2575fc60aa889cdbf8e928a79b42082dc27c16c8a2d935ca05",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f73d9410b8b94adaa08e5d9b3b63c649",
+        "result_hash": "904433900ef269aa06fbe2ed5afee89a810cf83571f56cf5f5eab37b0a9645b5",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-f74ba207f04d77da8e45dd82",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/48bb2368c65a4b5d9bda4e3f99376df7/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 14400,
+      "candidate_budget_seconds": 7200,
+      "id": "information_geometry_campaign_v1"
+    },
+    "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "competing_explanation": "Weak singular directions can encode rare-component shape and low-intensity features rather than noise; suppressing them can worsen rare modes. Moving prior rows, mass quantization and coupled-game instability remain unchanged.",
+    "control": {
+      "candidate_id": "information_geometry_spectral_half_v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "hypothesis": "Matched winning BCAP control in the same executed source/runtime supplies the frozen reference for the one spectral-half comparison.",
+    "id": "information_geometry_control_v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36"
+        },
+        "path": "reports/forge/bcap-tier2-search/failure-analysis.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "information_geometry_diagnostic_v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "information_geometry_control_v1",
+  "study_sha256": "5cdf77d3fb0730d9e28456d17ab7c115d39ed0eb0037f6c104e87b609fcb648a",
+  "task_results": [
+    {
+      "compatibility_key": "60b2efe91f40d4ee49a01b5081866294674034ca7f12f2408baa37f143cdf170",
+      "cost": {
+        "adapter_loop_seconds": 77.48468212701846,
+        "adapter_seconds": 77.8186727979919,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 83.95868169493042,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 72.6240951558575,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.5772531173424795
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1534788031131029
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 70.89336323540192
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 79.13112948602065,
+        "wall_seconds": 83.95868169493042
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "5d0fc04acfc1478f72d72b6b83daa983b6e9f8a446d764123911eed9ae944ea4",
+      "cost": {
+        "adapter_loop_seconds": 17.67177213099785,
+        "adapter_seconds": 18.027513546985574,
+        "charged_task": "vector_unequal_mass",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 24.26556523400359,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 17.095377258141525,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3797262643929571
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007569140754640102
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 16.708081852993928
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 19.377748942002654,
+        "wall_seconds": 24.26556523400359
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -2.8416531473398208,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 3.691653147339821
+          },
+          "component_min_eigen_ratio": {
+            "margin": -0.14092709366232156,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.009072906337678432
+          },
+          "hq": {
+            "margin": 0.10458984375000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.95458984375
+          },
+          "mass_tv": {
+            "margin": 0.07934571951627731,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.07065428048372269
+          },
+          "min_mass_ratio": {
+            "margin": -0.04248046875,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.20751953125
+          },
+          "sw1_normalized": {
+            "margin": 0.02536158405510111,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.15463841594489888
+          }
+        },
+        "passed": false,
+        "shortfall": 0.518239305458135,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5303929001092911,
+        "component_core_covariance_errors": [
+          0.2456076443195343,
+          0.4634510278701782,
+          0.4541144073009491,
+          0.9583985209465027
+        ],
+        "component_core_eigen_ratios": [
+          0.7341277003288269,
+          0.3805922865867615,
+          0.41528597474098206,
+          0.009072906337678432
+        ],
+        "component_core_min_eigen_ratio": 0.009072906337678432,
+        "component_counts": [
+          2273,
+          1498,
+          308,
+          17
+        ],
+        "component_covariance_error": 3.691653147339821,
+        "component_covariance_errors": [
+          1.027569055557251,
+          0.4634510278701782,
+          12.317193984985352,
+          0.9583985209465027
+        ],
+        "component_mass": [
+          0.554931640625,
+          0.36572265625,
+          0.0751953125,
+          0.004150390625
+        ],
+        "component_min_eigen_ratio": 0.009072906337678432,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.018477782607078552,
+          0.04939919710159302,
+          0.22727273404598236,
+          0.0
+        ],
+        "covariance_error": 0.08032716810703278,
+        "hq": 0.95458984375,
+        "mass_tv": 0.07065428048372269,
+        "max_component_spill": 0.22727273404598236,
+        "mean_error": 0.21188154816627502,
+        "min_mass_ratio": 0.20751953125,
+        "resolved_core_covariance_error": 0.3877243598302205,
+        "resolved_core_min_eigen_ratio": 0.3805922865867615,
+        "resolved_max_component_spill": 0.22727273404598236,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.15463841594489888,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "compatibility_key": "c95ff0201b65459fe7e8d5d89e1f70ec67d53c7fc480c0334dd2be3d67fce16e",
+      "cost": {
+        "adapter_loop_seconds": 45.88704735401552,
+        "adapter_seconds": 46.13787042803597,
+        "charged_task": "img_intensity2",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 52.331346261897124,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 45.060261495411396,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.07759873196482658
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.01392078131902963
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 44.96874198212754
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 47.45178046496585,
+        "wall_seconds": 52.331346261897124
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.21250000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.6875
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.11805555555555557,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.03125,
+        "hq": 0.6875,
+        "mean_rmse": 0.06014157459139824,
+        "mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.40625,
+          0.28125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_intensity2"
+    },
+    {
+      "compatibility_key": "97200ba48ec7e010f24feb97388cf60ffd28f015725ddd8da4fe9f5cb4303bf6",
+      "cost": {
+        "adapter_seconds": 1.1163080869009718,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.477602359955199,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.4954565069638193,
+        "wall_seconds": 7.477602359955199
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "1fc10f131bd8eb8e86e8606ff7740fcbdbd17a63e55ebd256d19aa768e36cd94",
+      "cost": {
+        "adapter_loop_seconds": 46.13002110400703,
+        "adapter_seconds": 46.37024122802541,
+        "charged_task": "img_blobs4",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 52.970987980952486,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 45.27640486822929,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.0939731567632407
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.012292332015931606
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 45.17013937945012
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 47.64567729400005,
+        "wall_seconds": 52.970987980952486
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.15000000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.75
+          },
+          "modes": {
+            "margin": -2,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.33333333333333337,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.1875,
+        "hq": 0.75,
+        "mean_rmse": 0.056202083826065063,
+        "mode_fractions": [
+          0.28125,
+          0.28125,
+          0.0625,
+          0.375
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.28125,
+          0.0625,
+          0.03125,
+          0.375
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_blobs4"
+    },
+    {
+      "compatibility_key": "8a9857da257d83d1c227c67a007fcd700f1753c01a3af30a3b03ed361496ff1e",
+      "cost": {
+        "adapter_loop_seconds": 16.459072483936325,
+        "adapter_seconds": 16.817491373978555,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 23.099909547017887,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 15.38914488919545,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.47110335517209023
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.10923484351951629
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 14.808806690503843
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 18.216840849025175,
+        "wall_seconds": 23.099909547017887
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    }
+  ]
+}

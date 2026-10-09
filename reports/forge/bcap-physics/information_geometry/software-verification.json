@@ -1,0 +1,92 @@
+{
+  "forge_validation": {
+    "candidates": 512,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "bcap-convolution-images-v1",
+      "bcap-tier2-smoothing-v1",
+      "information_geometry_candidate_v1",
+      "information_geometry_control_v1",
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 66,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "bcap_convolution_images",
+      "clockfree_continuous",
+      "discriminator_stability",
+      "formulation_comparison",
+      "host_profile_transfer",
+      "information_geometry_diagnostic_v1",
+      "k3p_two_pole_horizon",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "gif_verification": {
+    "files": 12,
+    "frames_per_gif": 9,
+    "input_hashes_verified": true,
+    "optimizer_updates_added": 0,
+    "sampling_draws_added": 0
+  },
+  "groups": [
+    {
+      "log_sha256": "aab060aea4ff32f311c8bf98836763be42d9e97a75e43fbd53718fc8bac935e5",
+      "passed": 144,
+      "tests": [
+        "tests/test_information_geometry_spectral_half.py",
+        "tests/test_dualnorm_optimizers.py",
+        "tests/test_dualnorm_smoothing.py",
+        "tests/test_pure_bcap_recipe.py"
+      ]
+    },
+    {
+      "log_sha256": "38e1c727016d9aa5ebfb22341cf52daae933194adca4763484f13532d482166a",
+      "passed": 35,
+      "tests": [
+        "tests/test_forge_boundaries.py",
+        "tests/test_dualnorm_default_parity.py",
+        "tests/test_forge_dualnorm_contracts.py"
+      ]
+    }
+  ],
+  "local_logs_root": "/tmp/bcap-physics-20261009/information_geometry",
+  "memory_freshness": {
+    "added_inputs": [],
+    "changed_inputs": [],
+    "coverage_scope": "Registered compact publication schemas and normalized records; original artifact availability is separate.",
+    "fresh": true,
+    "inventory_coverage": {
+      "declared_count": 11780,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11780,
+      "unclassified": [],
+      "valid": true
+    },
+    "memory_current": true,
+    "next_action": null,
+    "publication_materialization_current": true,
+    "publication_record_count": 480,
+    "qualification_refresh": {
+      "mode": "preserved_published_evidence",
+      "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+      "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+    },
+    "record_count": 784,
+    "reducer_current": true,
+    "removed_inputs": [],
+    "status": "CURRENT",
+    "view_count": 10
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "tests_passed": 179,
+  "training_launched_by_verification": false
+}

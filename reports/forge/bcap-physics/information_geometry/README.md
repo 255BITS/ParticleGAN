@@ -1,8 +1,66 @@
 # Information geometry: relative spectral-half BCAP diagnostic
 
-Status: preregistered, training pending. One candidate and the exact winning
-BCAP control will run in the shared campaign. This is a mechanism diagnostic,
-with no ordinary-tier qualification or default-adoption claim.
+**The relative spectral-half candidate fails as a global BCAP repair.** Both
+candidate and matched winner finish **2 PASS / 4 FAIL**, with no incomplete runs
+or blockers. Unequal-mass covariance and allocation improve, but local contraction
+still fails; both image tasks regress and Gaussian retention does not improve.
+The candidate is [administratively abandoned](../../records/lifecycle-f3bc2d33f89c35bf3364cd55.json).
+Retain the incumbent. The comparison costs
+**502.118434 paid worker seconds**, against 12,840 full reserved seconds and a
+14,400-second ceiling. This diagnostic supplies no ordinary qualification or
+default-adoption claim.
+
+[Final metrics and complete gates](results.json), [certified provenance and
+matched-condition proofs](provenance.json), and [actual-training GIF receipts](media/index.json)
+retain the complete evidence. The parent owns the one current cross-track
+comparison; the task table below is this fixed diagnostic's readout.
+
+| Full unchanged task | Winning control | Spectral-half candidate | Exact measured difference |
+| --- | --- | --- | --- |
+| two_pole | PASS, suffix17 | PASS, suffix17 | Identical mean absolute coordinate .9585024714 and median gradient .9523457289 |
+| gaussian1d_smoke | PASS, first confirmation375 | PASS, first confirmation459 | Endpoint KS .0718421618 → .1029597128; smoke accepts a confirmed scheduled state, not endpoint retention |
+| gaussian1d_stability | FAIL | FAIL | Both stationary2/72, shifted hold0/24; final KS .3206228940 → .3526373411 |
+| vector_unequal_mass | FAIL, full checks0/24 | FAIL, full checks0/24 | Covariance3.6916531473 → .7413333580; min mass .2075195313 → .7560220957; min eigen .0090729063 → .0969907194 (required≥.15) |
+| img_blobs4 | FAIL, HQ .7500, modes2 | FAIL, HQ .5625, modes2 | Both full checks0/24; requiredHQ≥.9 and four genuine modes |
+| img_intensity2 | FAIL, HQ .6875, modes2 | FAIL, HQ .4375, modes1 | Both full checks0/24; requiredHQ≥.9 and two genuine modes |
+
+The [candidate study readout](../../records/readout-34d60f269493acf6d8d140cc.json)
+and [control readout](../../records/readout-f74ba207f04d77da8e45dd82.json) are concluded.
+The preregistered blobs-HQ prediction≥.9 is falsified. Better final unequal-mass
+covariance does not replace the missing full gate or terminal suffix. Its rarest
+component receives109/4,096 draws instead of17/4,096 in the control, while the
+remaining minimum eigenvalue floor still fails. No task-specific winner is selected.
+
+Two-pole is an explicitly fixed zero-particle/stored-critic fixture. Its direct
+particle matrix is N×1 and critic matrices are32×1 and1×32: all have rank≤1.
+Our rule exactly equals smoothed polar in that case, so its identical trajectory
+checks public API compatibility but gives **no evidence of preserving learned
+multidimensional passing behavior**. No additional experiment was added after
+seeing this limitation. Gaussian smoke is learned but tests acquisition only.
+
+Endpoint image decomposition uses the exact32 saved outputs and their nearest
+templates. Background means target absolute pixel≤.001; other pixels are signal.
+It adds no draws, training, or replacement gate:
+
+| Pixel-region diagnostic | Control | Candidate |
+| --- | ---: | ---: |
+| Blobs background RMSE | .1027143512 | .0883120391 |
+| Blobs signal RMSE | .0785586926 | .4542922028 |
+| Blobs signal signed bias | −.0139758703 | −.2497308980 |
+| Intensity background RMSE | .0008729852 | .0009848633 |
+| Intensity signal RMSE | .1372261864 | .1643675214 |
+| Intensity signal signed bias | −.0362130781 | −.0398471188 |
+
+Lower blob background error accompanies a much larger signal error and negative
+intensity bias. The results contradict a useful global repair from suppressing
+weak singular directions; they are compatible with suppressing useful template
+features. They do not prove that interpretation, since matrix direction and total
+Frobenius motion change together and no true curvature is measured.
+
+Next action: keep the winner, stop spectral-half, and inspect saved multidimensional
+signal/gradient alignment before considering a metric that estimates actual
+curvature. No exponent/rate search, extra steps, fresh seed, continuation,
+qualification, or promotion follows from this round.
 
 ## Theory and measurable optimizer strength
 
@@ -38,7 +96,7 @@ The existing smoothed polar rule has weights sᵢ/hᵢ. The candidate has weight
 
     wᵢ = sᵢ / sqrt(hᵢ h_max).
 
-Equivalently, normalize (GGᵀ + ε²I)^−1/4 G by h_max^−1/2. Away from the
+Equivalently, apply (GGᵀ + ε²I)^−1/4 G / sqrt(h_max). Away from the
 damping scale, weights become sqrt(sᵢ/s_max), rather than all one. The largest
 singular step is exactly matched to smoothed polar; weaker singular steps
 shrink by sqrt(hᵢ/h_max). This changes direction geometry and total matrix
@@ -147,11 +205,52 @@ GPU. Do not start another drain. Both commands below only enqueue:
 tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/events.jsonl
 ```
 
-Pretraining software validation: 144 tests pass, including spectral contrast,
+Software validation: **179 tests pass**, including spectral contrast,
 orthogonal equivariance, unchanged bias/sampled-prior laws, public grouped
 Conv2d/ConvTranspose2d construction, exact optimizer resume and family mismatch
 rejection. The candidate plan reports READY, zero preflight blockers and exactly
-one consumed optimizer-family delta on every task. Final measured results,
-source/runtime receipts and actual-training GIFs will replace this pending status.
+one consumed optimizer-family delta on every task. Certified endpoint optimizer
+packets contain the actual candidate/control families, smoothing .001 and
+momentum0. All six matched task contracts agree. Public initializer hashes, initial
+named RNG bindings and consumed data-stream endpoints match on the five learned
+task cohorts; two-pole retains its explicit fixed source-defined fixture. Both Gaussian
+continuations use their own actual smoke endpoints; their stationary/shift batch
+digests also match. Vector/image receipts omit a batch-sequence digest, so their
+proof uses identical frozen source/data draws, named-stream bindings and final
+consumption hashes rather than claiming a nonexistent digest. Every consumed
+stream is retained in its provenance checkpoint.
+
+Training source commit is `2c182d552100a562cd9f7c9d8f3d226d855b26c8`, executed digest
+`a31696abf0d63393a34795022aa730be575944d390bf79a0992017306a9a10f0`.
+The shared runtime is CPython3.12.13, Torch2.14.0, NumPy2.5.2, SciPy1.17.1,
+RTX A6000 with deterministic algorithms and TF32 disabled. Candidate paid cost
+is258.014341164 s and control244.104093079 s, with zero retries, zero residual
+reservation and16,960 new updates including both5,000-update Gaussian
+continuations. These shared-GPU supervised costs include startup and independent
+grading and are accounting, not throughput evidence.
+
+Twelve GIFs show saved training outputs/measurements, with nine frames each.
+All96 image metric observations are independently recomputed from saved arrays.
+Publication adds zero training or sampling. Bulk stdout, JSONL, checkpoints and
+state tensors stay outside Git in the durable shared queue campaign, while
+[the publisher](information_geometry_publish.py) verifies original receipt hashes,
+source/runtime equality, checkpoint metadata, matched conditions and media inputs.
+Render and inspect those same completed records with:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -u \
+  reports/forge/bcap-physics/information_geometry/information_geometry_publish.py \
+  --queue-root /mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue \
+  --certificate-root /home/martyn/dev/ParticleGAN
+```
+
+| Task | Candidate actual-training GIF | Control actual-training GIF |
+| --- | --- | --- |
+| two_pole | [GIF](media/candidate/two_pole.gif) | [GIF](media/control/two_pole.gif) |
+| Gaussian smoke | [GIF](media/candidate/gaussian1d_smoke.gif) | [GIF](media/control/gaussian1d_smoke.gif) |
+| Gaussian stability | [GIF](media/candidate/gaussian1d_stability.gif) | [GIF](media/control/gaussian1d_stability.gif) |
+| Unequal mass | [GIF](media/candidate/vector_unequal_mass.gif) | [GIF](media/control/vector_unequal_mass.gif) |
+| Blobs | [GIF](media/candidate/img_blobs4.gif) | [GIF](media/control/img_blobs4.gif) |
+| Intensity | [GIF](media/candidate/img_intensity2.gif) | [GIF](media/control/img_intensity2.gif) |
 The parent retains the one current cross-track comparison; this report adds no
 second generated leaderboard.

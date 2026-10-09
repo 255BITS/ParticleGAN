@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 784. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3686,6 +3686,22 @@ Administrative abandoned: Registered native comparison failed the unchanged full
 
 [Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
 
+### information_geometry_spectral_half_v1 · lifecycle-f3bc2d33f89c35bf3364cd55
+
+**Scope:** administrative; administrative; revision `a07a5ff342eb7d147ae9ffc0ffc4eef7abd785585a5a982814ca8087e17c7aea`.
+
+None
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Completed fixed spectral-half comparison fails all three fidelity specialists and Gaussian stability; image regression falsifies prediction, remaining component contraction fails full gate. Stop this revision and retain incumbent.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-f3bc2d33f89c35bf3364cd55.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -3829,6 +3845,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 **Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
+
+### information_geometry_spectral_half_v1 · readout-34d60f269493acf6d8d140cc
+
+**Scope:** research_diagnostic; scientific; revision `a07a5ff342eb7d147ae9ffc0ffc4eef7abd785585a5a982814ca8087e17c7aea`.
+
+Partially preserving singular contrast suppresses weak minibatch directions that smoothed polar promotes, improving image background fidelity and avoiding rare-component collapse without a scalar rate or prior change.
+
+**Observed:** {'FAIL': 4, 'PASS': 2}; wall seconds 258.014; mechanism `structural`.
+
+vector_unequal_mass: hq=0.97852, mass_tv=0.073877
+
+All six full diagnostic tasks complete: 2 PASS / 4 FAIL, zero incomplete or blockers. Blob HQ .5625 fails the preregistered .9 prediction; intensity HQ .4375 with one genuine mode also regresses. Unequal-mass covariance .741333 and minimum mass ratio .756022 improve, but eigen floor .096991 < .15 and zero full passing checks retain FAIL. Gaussian stability is unchanged at2/72 stationary and0/24 shifted hold. Stop this exact revision.
+
+**Next:** Keep incumbent. Inspect saved multidimensional generator and critic directions to distinguish weak rare-feature signal from noise before proposing a metric that estimates actual curvature; no rate/exponent search, extra steps, retry, new seed, qualification or promotion.
+
+[Evidence](../../reports/forge/attempts/10a2fbd74ed24f379693c7fe4ec610bd/result.json) · [Record](records/readout-34d60f269493acf6d8d140cc.json)
 
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
@@ -4438,6 +4470,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-f74ba207f04d77da8e45dd82
+
+**Scope:** research_diagnostic; scientific; revision `dc0c4e80c5a5b0bbc44f4fcc9dc9c90ee3cbd59c7b7abc78332dcb462d866179`.
+
+Matched winning BCAP control in the same executed source/runtime supplies the frozen reference for the one spectral-half comparison.
+
+**Observed:** {'FAIL': 4, 'PASS': 2}; wall seconds 244.104; mechanism `floor_constant`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654; img_intensity2: modes=2, hq=0.6875
+
+Matched winning BCAP control completes all six unchanged full diagnostic tasks:2PASS/4FAIL, no blockers, scientific retries or incomplete runs. Retains both common anchor passes but fails Gaussian hold/shift, unequal-mass fidelity and both image gates. Historical qualification is preserved under its original evidence identity.
+
+**Next:** Retain the incumbent; conclude this bounded diagnostic and stop the failed spectral-half revision. Review saved-state signal/metric alignment before another substantive candidate; no unchanged rerun or ordinary qualification claim.
+
+[Evidence](../../reports/forge/attempts/48bb2368c65a4b5d9bda4e3f99376df7/result.json) · [Record](records/readout-f74ba207f04d77da8e45dd82.json)
+
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
 **Scope:** current; scientific; revision `72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8`.
@@ -4974,4 +5022,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d546edb16ffcf217b680252c9516a53e27a88b67817ec96ff4c97f952824a09e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `2abc39ab9af1132f3c372a4be0d9c3798dd816574bddbf0ba53e9ad033afba86`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
