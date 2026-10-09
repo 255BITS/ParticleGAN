@@ -364,6 +364,9 @@ if (root / 'experiments/forge/knowledge.py').is_file():
                                     freeze_source=False, execution_backend=execution_backend,
                                     cuda_model=cuda_model)
     knowledge._current_request = question_request
+if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
+    from reports.forge.word_checkpoint_publication import install
+    install()
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 print(json.dumps(result, sort_keys=True))
 """
@@ -426,6 +429,12 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
     if commit:
         result["frozen_source"] = {"commit": commit, "source_digests": frozen_digests,
                                    "qualifies_latest_checkout": False}
+        adapter = root / "reports/forge/word_checkpoint_publication.py"
+        if adapter.is_file():
+            result["reporting_adapters"] = {"word_checkpoint_publication": {
+                "path": "reports/forge/word_checkpoint_publication.py",
+                "sha256": file_hash(adapter),
+                "scope": "Bind the existing word grader's own-checkpoint proof to its selected smoke parent; numerical grading and original task declarations remain frozen."}}
     _publication_provenance(result, summaries)
     repo_prefix = os.path.relpath(root, markdown_path.parent.resolve())
     markdown = render_markdown(result, json_link=json_path.name, repo_link_prefix=repo_prefix)
@@ -2103,6 +2112,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     execution_backend=None, recorded_policy=None, advance_policy=False):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
+    if (root / "reports/forge/word_checkpoint_publication.py").is_file():
+        from reports.forge.word_checkpoint_publication import install
+        install()
     manifest_path = root / EVIDENCE_MANIFEST
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
     if recorded_policy is not None and source_commit is not None:
