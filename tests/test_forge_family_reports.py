@@ -505,8 +505,9 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
     assert pages == generated_pages(root, publication)
 
 
-def test_committed_pages_and_every_drilldown_link_match_the_generator():
-    root = Path(__file__).resolve().parents[1]
+def test_committed_pages_and_every_drilldown_link_match_the_generator(tmp_path):
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     assert publication["family_progress"] == build_progress(root, publication)
     pages = generated_pages(root, publication)
@@ -598,9 +599,10 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
     assert publication["rows"] == rows
 
 
-def test_current_measurement_families_complete_only_their_declared_view_scope():
+def test_current_measurement_families_complete_only_their_declared_view_scope(tmp_path):
     from experiments.forge.trainer_families import scientific_row_hash
-    root = Path(__file__).resolve().parents[1]
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     rows = deepcopy(publication["rows"])
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")

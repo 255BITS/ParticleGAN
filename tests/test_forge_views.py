@@ -134,6 +134,8 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
     from benchmarks.transfer_suite.vector_tasks import TASKS as vectors
     from benchmarks.transfer_suite.image_tasks import TASKS as images
     tasks = load_tasks(ROOT)
+    from tests.archived_forge_contracts import archived_contract_bytes
+    archived_shallow = {"gaussian1d_shallow_smoke", "gaussian1d_shallow_stability"}
     # Behavioral and image tasks still follow their existing task declarations.
     # Vector policy is independently frozen below; scorer upgrades cannot replace it.
     for spec in required_tasks() + [s for s in images if s["tier"] == "ranking"]:
@@ -178,6 +180,16 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 # Frozen policy execution bytes may deliberately be blocked
                 # by a newer package. Their source pins remain immutable.
                 assert digest == historical_policy_sources[path]
+                continue
+            if task["id"] in archived_shallow and path == "experiments/forge/gaussian_tasks.py":
+                original = json.loads(archived_contract_bytes(
+                    "shallow_gaussian_cards", "configs/forge/tasks/" + task["id"] + ".json"))
+                assert task == original
+                assert hashlib.sha256(archived_contract_bytes("shallow_gaussian", path)).hexdigest() == digest
+                from experiments.forge.preflight import task_preflight
+                candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
 
