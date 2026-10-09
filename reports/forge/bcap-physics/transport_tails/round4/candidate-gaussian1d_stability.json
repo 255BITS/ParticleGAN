@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "f87c4255e1861acd988054195a8764a1273ae8e52297dd939863d0f5e840fec0",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "bbe41038b91a40ec08370f312a1f577a0aa911246fba5ceec8488af2ee474292",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/306cf2fc796140da88b3e1d61c0c94a6/evaluator/observed-samples.pt": "c63f1da2550471b2197bc031bd1d8152f1002cffafa4371b222b09bb187d6208"
+  },
+  "task_id": "gaussian1d_stability"
+}

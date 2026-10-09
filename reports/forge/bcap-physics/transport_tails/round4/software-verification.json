@@ -1,0 +1,37 @@
+{
+  "actual_training_gifs": 10,
+  "archived_v2_exact_parity_tasks": 5,
+  "bulk_logs_committed": false,
+  "focused_tests_distinct_passed": 18,
+  "forge_boundary_study_tests_passed": 69,
+  "forge_compile_check": "CURRENT",
+  "forge_validate": "PASS",
+  "frames_per_gif": 9,
+  "initial_declaration_failure": "One study used a nonstandard terminal_rules value; restored schema-mandated request_missing_evidence before admission. No trainer change or scientific retry.",
+  "initial_protocol_invocation": "Requested nonexistent test_forge_field_boundaries.py; corrected to test_forge_boundaries.py; no tests or training launched by that invocation.",
+  "local_software_log_sha256": {
+    "admission-test.log": "06254aecdf245cc6f8784e134e36703bcc595ac0578b8c5f7f3591bcb399781b",
+    "focused-tests.log": "d542a5501c1433adf61630c21cda9d615fb0bb8af161ea6da53d7997bf7cbdf7",
+    "protocol-tests.log": "a1ba1df67667a9df54a068f8da2ac89452473069bb01395b776ac9068857ef69",
+    "validate.log": "1f953ac3429780123806a3d8cc0c38e5cc53411444ff885608dca64bb2ddc085"
+  },
+  "original_compact_records_and_inventory_bytewise_unchanged": 315,
+  "preservation_reference_commit": "f9f6419ac251033e9076f7ba4bab87e715d321bd",
+  "pytest_reported_seconds": {
+    "boundaries_studies": 3.47,
+    "corrected_admission_only": 0.54,
+    "focused_initial": 2.07
+  },
+  "reproduction_source_sha256": {
+    "diagnose.py": "2c7f535963e687ed04ac5ac0e956d25fdf757e6063ffe74bc220ae718d189922",
+    "publish.py": "0f6e9c239e894c4ff61f355996dd89f23380a1f43204faabdd3dd46812fbecb9",
+    "run.py": "c0f3b139da0b27a7f68f35e22f58611afef040e461efbfe2f16288afcf03dd4f",
+    "verify.py": "1a6c9ea82c0d99c31945456e60c3f1deef80ceb2b95c4df0c2ac80cf3e3dbc09"
+  },
+  "saved_metric_sets_reproduced": 432,
+  "schema_version": 1,
+  "scorer_controls": "4 oracle PASS / 4 collapse FAIL reused after exact scorer-source, law and gate checks",
+  "software_training_outer_updates": 10,
+  "software_training_scope": "four new public-trainer checkpoint/consumption updates plus six existing local/backtrack regression updates; no task qualification",
+  "summaries_only_memory": "CURRENT"
+}

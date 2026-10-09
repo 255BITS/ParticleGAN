@@ -1,6 +1,6 @@
 """Frozen v2/v3 tail fields and finite G/prior role probes; no training."""
 from pathlib import Path
-import sys, time
+import sys, time, argparse
 ROOT = Path(__file__).resolve().parents[5]
 sys.path.insert(0, str(ROOT))
 import torch
@@ -42,7 +42,8 @@ def main():
     torch.use_deterministic_algorithms(True)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
-    old = ROOT/'reports/forge/bcap-physics/kinetic_transport/round3'
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--current',action='store_true');args=parser.parse_args()
+    old = Path(__file__).resolve().parent if args.current else ROOT/'reports/forge/bcap-physics/kinetic_transport/round3'
     provenance = read_json(old/'provenance.json')
     rows = []
     for source in provenance['attempts']:
@@ -75,10 +76,12 @@ def main():
         trainer.G.train(); trainer.D.eval(); trainer.D.requires_grad_(False)
         real = real.to(trainer.device); outputs = outputs.to(trainer.device)
         def losses(x):
-            return {'adversarial':trainer.loss.g_loss(trainer.D(x),trainer.D(real)),
+            values = {'adversarial':trainer.loss.g_loss(trainer.D(x),trainer.D(real)),
                     'sliced':trainer.recipe.kinetic_transport_loss(x,real),
                     'local':trainer.recipe.kinetic_transport_local_loss(x,real)}
-        fields = {k:[] for k in ('adversarial','sliced','local')}
+            if args.current:values['tail']=trainer.recipe.kinetic_transport_tail_loss(x,real)
+            return values
+        fields = {k:[] for k in (('adversarial','sliced','local','tail') if args.current else ('adversarial','sliced','local'))}
         for block in outputs.split(len(real)):
             fake = block.detach().clone().requires_grad_(True)
             for name, loss in losses(fake).items():
@@ -116,7 +119,7 @@ def main():
             for p,b in zip(params,before):p.copy_(b)
             centers = trainer.G(trainer.prior.z)
             assigned = torch.cdist(centers,centers.new_tensor(spec['means'])).argmin(1)
-        rows.append({'archived_arm':source['arm'],'mechanism':'local-v2' if source['arm']=='control' else 'backtrack-v3',
+        rows.append({'archived_arm':source['arm'],'mechanism':'local-v2' if source['arm']=='control' else ('tail-moments-r4' if args.current else 'backtrack-v3'),
                      'task_id':task['id'],'attempt_id':source['attempt_id'],'source_digest':source['source_digest'],
                      'checkpoint_sha256':file_hash(checkpoint),'metric_endpoint':evidence['live'],
                      'center_counts':torch.bincount(assigned,minlength=len(spec['means'])).tolist(),
@@ -131,7 +134,7 @@ def main():
              'generated_probe_draws':sum(r['probe_generated_draws'] for r in rows),
              'archived_checkpoints_streams_mutated':False,'wall_seconds':time.monotonic()-started,
              'device':'physical GPU1','diagnostics':rows}
-    atomic_json(Path(__file__).with_name('saved-tail-diagnostics.json'),receipt)
+    atomic_json(Path(__file__).with_name('current-state-diagnostics.json' if args.current else 'saved-tail-diagnostics.json'),receipt)
     print({'event':'saved_tail_probe_complete','seconds':receipt['wall_seconds']},flush=True)
 
 if __name__=='__main__':main()

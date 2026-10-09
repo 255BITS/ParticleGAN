@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 787. Inventory coverage: complete. Unresolved import items: 7.
+Records: 789. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4358,6 +4358,22 @@ Corrected intensity FAIL and learned-MoG vector_two_broad PASS under the same fr
 
 [Evidence](../../reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/result.json) · [Record](records/readout-c3df7159c90725fdef1cb700.json)
 
+### kinetic_transport_local_v2 · readout-c4050e5c2ce218efce23f50f
+
+**Scope:** research_diagnostic; scientific; revision `d732da1b43da7f8c7913b5d79641f5e8dba43bac422e5055802d6d2e3d544a76`.
+
+Matched local-v2 primary control for tail-moment diagnostic; sliced-v1 remains an admission reference, never a launched third arm.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 741.734; mechanism `structural`.
+
+vector_unequal_width: hq=0.95508, mass_tv=0.020752; vector_two_broad: hq=0.9856, mass_tv=0.00073242; vector_unequal_mass: hq=0.96973, mass_tv=0.016426
+
+All five full-budget matched primary-control jobs complete: 3 PASS, 2 FAIL, 1 genuine two-pole BLOCKED. Sustained unequal mass and broad quality plus confirmed Gaussian smoke pass; unequal width and Gaussian stability fail.
+
+**Next:** Retain source-bound local-v2 rare-density evidence and unchanged limitations. Reject the tail-moment replacement, publish every matched receipt, and stop this bounded round; no extra training or default promotion.
+
+[Evidence](../../reports/forge/bcap-physics/transport_tails/round4/results.json) · [Record](records/readout-c4050e5c2ce218efce23f50f.json)
+
 ### k3p · readout-c723a88e5122f97011aabad9
 
 **Scope:** calibration_diagnostic; scientific; revision `5d60f405c372f33d8c96675c772fe97e10bb922cfe313d8e66722de9d32bc289`.
@@ -4469,6 +4485,22 @@ All five runnable jobs complete: 2 PASS, 3 FAIL, 1 BLOCKED versus local-v2 3 PAS
 **Next:** Reject and stop this exact finite-descent successor as a global or rare-density repair. Preserve local-v2 scoped unequal-mass evidence. Same-batch descent is insufficient for served tails and changing-game retention; no further sweep, seed run, candidate, continuation or promotion in this round.
 
 [Evidence](../../reports/forge/bcap-physics/kinetic_transport/round3/results.json) · [Record](records/readout-e719b1e0153af333e0a4e6f1.json)
+
+### transport_tail_moments_r4 · readout-ea62aa6b7c05d53eddb79b50
+
+**Scope:** research_diagnostic; scientific; revision `ca1acf91580491c820cc03f894435f4bf5883d43f434676514562fe78ae1286c`.
+
+Unbounded local radial moment matching reduces full unequal-width covariance while preserving local-v2 rare-mass and broad-vector sustained passes.
+
+**Observed:** {'FAIL': 4, 'PASS': 1}; wall seconds 188.395; mechanism `structural`.
+
+vector_unequal_mass: hq=1, mass_tv=0.45
+
+All five full-budget runnable jobs complete: 1 PASS, 4 FAIL, 1 genuine two-pole BLOCKED. Unequal mass, width and broad collapse to one served mode; width covariance scalar .822211 meets the forecast despite mass TV .75 and zero minimum eigen/mass ratios. Gaussian stability worsens to 11/72 stationary and 2/24 shifted passing checks; smoke PASS.
+
+**Next:** Reject and stop this exact tail-moment package. Preserve local-v2 scoped rare-density repair. Unbounded finite features do not ensure component allocation, complete covariance quality or temporal retention; no sweep, seed repeat, continuation, second arm proposal or promotion follows.
+
+[Evidence](../../reports/forge/bcap-physics/transport_tails/round4/results.json) · [Record](records/readout-ea62aa6b7c05d53eddb79b50.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5070,4 +5102,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `004252fdeb40fbd843de1cb58aecf84b66457464bab6b33dabba0e806720500c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `79449bb2f0065baae5a84d05fcc0442251dfdc80373c3bb4d0be76ddea088b8b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "ee23f0b3c2104861e9742bf6587b8ade2364466120968a017bdc120b3ab9d7c8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b7aaccea8cae92229c1619eb68db388431656577eb5ac3f22e6864629bc9e3cd",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/6c73f4e5e30e464fbd6c655df5c73126/observed-samples.pt": "c0d81fe487ca4f27d8d7fc2946c32ad797e5c1a9bc6c3d33daa5b1c58982b70d"
+  },
+  "task_id": "vector_unequal_mass"
+}

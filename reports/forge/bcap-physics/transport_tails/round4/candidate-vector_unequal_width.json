@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "266f58164e42bd0c037987bc2d65e6c2d9494d90ff294c7fbf8d3540a75ee412",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "58ac6c9a1fca53d355b3fbe70f1ee5f7b78e69efd08fc3db54265c1da35fe539",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/transport_tails/queue/transport_tails_round4/e975dd839f6f476a8034df7037ebfabd/observed-samples.pt": "8d16206f16c550eacba9134540c50050943328108eaa07e108b383288263638c"
+  },
+  "task_id": "vector_unequal_width"
+}
