@@ -1,6 +1,7 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "finite_step_mode": "none",
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
     "d_betas": None, "d_eps": None, "prior_eps": None,

@@ -148,14 +148,16 @@ def inspect_study(root, request):
         # Unsupported candidate cells stay in the denominator and cannot run.
         # A task-local binding refusal must not erase independently runnable
         # peers. Legacy contracts continue using their original strict resolver.
-        if candidate["id"] != study["candidate"]:
-            return decisions._bindings(candidate, tasks, protocol, checkout)
         combined = decisions._bindings(candidate, {}, protocol, checkout)
         for name, task in tasks.items():
             try:
                 resolved = decisions._bindings(candidate, {name: task}, protocol, checkout)
             except ValueError as exc:
-                if not task.get("preflight_blockers"):
+                # A control may have a different applicability refusal from
+                # the submitted arm. Validate that arm's actual preflight,
+                # rather than trusting the other arm's frozen task annotation.
+                from .adapters import adapter_preflight
+                if not adapter_preflight(task,candidate,root=checkout):
                     raise  # A missing preflight refusal must never authorize a host.
                 from .views import task_execution_fingerprint, task_evaluation_fingerprint
                 resolved = {key: {name: {"status": "BLOCKED", "reason": str(exc)}} for key in combined}

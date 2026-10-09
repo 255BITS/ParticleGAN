@@ -162,6 +162,8 @@ class GANTrainer:
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=deepcopy(self.D),
             require_latent_damping=require_latent_damping, **self.optimizer_options)
+        from .finite_step import FiniteStep
+        self.finite_step = FiniteStep() if recipe.finite_step_mode != "none" else None
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
@@ -369,6 +371,11 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
+            if self.finite_step is not None:
+                replay = self.finite_step.capture((self.G,self.D,self.prior))
+                # Freeze the drawn kernel offset, while retaining dependence on
+                # the updated locations. Never resample during acceptance.
+                offset = latent.detach()-self.prior.z[indices].detach()
             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -387,7 +394,13 @@ class GANTrainer:
             loss_g.backward()
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
+            if self.finite_step is None:
+                self.opt_g.step()
+            else:
+                def objective():
+                    z = self.prior.z[indices]+offset
+                    return self.loss.g_loss(critic(self.G(z)),critic(real_g))
+                self.finite_step.apply(self.opt_g,loss_g,objective,replay,(self.G,self.D,self.prior))
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
@@ -400,6 +413,8 @@ class GANTrainer:
         result["step"] = self.completed_steps
         if collect_stats:
             result["penalty_stats"] = penalty_stats
+            if self.finite_step is not None:
+                result["finite_step"] = deepcopy(self.finite_step.last)
         return result
 
     def _table_tester(self):
@@ -469,6 +484,7 @@ class GANTrainer:
             "requires_grad": {name: {key: p.requires_grad for key, p in getattr(self, name).named_parameters()}
                               for name in names},
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
+            **({"finite_step":self.finite_step.state_dict()} if self.finite_step is not None else {}),
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
             **({} if self.policy._feature_selection is None else {
                 "backend_selection": self.policy._feature_selection.state_dict()}),
@@ -528,6 +544,8 @@ class GANTrainer:
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if self.finite_step is not None:
+            self.finite_step.validate(state["finite_step"])
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
@@ -642,6 +660,8 @@ class GANTrainer:
                 self.log_output_sigma.copy_(state["output_noise"]["log_sigma"])
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
+        if self.finite_step is not None:
+            self.finite_step.load_state_dict(state["finite_step"])
         if self.controller is not None:
             self.controller.load_state_dict(_state_to_device(state["controller"], self.device))
         if self.lr_settle is not None:

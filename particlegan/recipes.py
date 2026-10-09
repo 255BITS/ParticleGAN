@@ -177,6 +177,9 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # Bounded same-batch acceptance of every actual G/prior proposal. Public
+    # GANTrainer only; no geometry oracle and no change to optimizer direction.
+    finite_step_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -200,6 +203,18 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if self.finite_step_mode not in ("none", "armijo"):
+            raise ValueError("finite_step_mode must be none or armijo")
+        if self.finite_step_mode != "none" and (
+                self.model != "gan" or self.conditioning != "scalar" or self.encoder_mode != "none"
+                or self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
+                or self.loss != "non_saturating" or self.prior_reg != 0
+                or self.input_noise_std != 0 or self.output_noise_std != 0
+                or self.continuous_policy is not None or self.serve_average != 0
+                or self.particle_birth_death or self.row_evidence_gate
+                or self.latent_damping_max_rate != 0):
+            raise ValueError("finite_step_mode requires scalar nonsaturating DualNorm without momentum, "
+                             "prior regularization, additive noise or policy interventions")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)

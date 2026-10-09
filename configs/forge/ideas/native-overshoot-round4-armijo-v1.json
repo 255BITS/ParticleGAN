@@ -1,0 +1,47 @@
+{
+  "api_changes": [
+    "Public Recipe.finite_step_mode and checkpointed GANTrainer finite replay; conditional/fixed two-pole components explicitly unsupported."
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.finite_step_mode=armijo; every actual joint G/prior proposal is checked, including locally downhill ones; c0.1, ten halvings, zero on finite rejection"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/native_overshoot/round4/README.md",
+  "id": "native-overshoot-round4-armijo-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Preserve the actual winner optimizer directions and D updates; realize sufficient same-batch G/prior decrease using the actual displacement and unchanged kernel draws. No target geometry or scoring label enters acceptance.",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "prior_art": [
+    "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+    "https://msp.org/pjm/1966/16-1/pjm-v16-n1-p01-p.pdf",
+    "https://arxiv.org/abs/1905.09997"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "finite_step_mode": "armijo",
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

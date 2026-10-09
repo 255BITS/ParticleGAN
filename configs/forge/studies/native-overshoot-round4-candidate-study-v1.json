@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "native-overshoot-round4-v1"
+  },
+  "candidate": "native-overshoot-round4-armijo-v1",
+  "competing_explanation": "Finite descent on a changing batch/critic is not population fidelity. Armijo may suppress rare useful movement, select critic exploitation, or satisfy scalar loss while worsening full local covariance. The archived endpoint probe is a one-state hypothesis, not a trained result.",
+  "control": {
+    "candidate_id": "native-overshoot-round4-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "precision",
+    "op": "<",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.97
+  },
+  "hypothesis": "Bounded Armijo realization of actual G/prior motion repairs sustained native precision without losing distribution shape or broad/Gaussian guardrails.",
+  "id": "native-overshoot-round4-candidate-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.97
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "db79021404c14c91aa5f38f9f1be40fb",
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "path": "reports/forge/bcap-physics/native_overshoot/round4/saved-probe.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "native-overshoot-round4-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

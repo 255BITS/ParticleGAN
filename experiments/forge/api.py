@@ -179,6 +179,9 @@ def task_policy_blockers(task, candidate):
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
+    if recipe.finite_step_mode != "none" and task["adapter"] == "transfer_behavior":
+        return ["finite_step_mode requires the public GANTrainer scalar objective; "
+                "conditional/fixed two-pole public-component hosts do not bind its finite replay"]
     if not policy_controls(recipe):
         return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
@@ -335,6 +338,8 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if self.recipe.finite_step_mode != "none" and execution_path != "public_trainer":
+            raise CapabilityError(["finite_step_mode is supported only by public GANTrainer"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (
