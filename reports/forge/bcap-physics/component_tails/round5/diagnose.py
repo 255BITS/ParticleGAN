@@ -133,7 +133,7 @@ def main():
     rows.append(diagnose('round4-native-winner',native))
     assert torch.equal(rng,torch.get_rng_state())
     finite = ROOT/'reports/forge/bcap-physics/transport_tails/round4/saved-tail-diagnostics.json'
-    atomic_json(OUT/'saved-component-diagnostics.json',{
+    result = {
         'schema_version':1,'qualification_input':False,
         'scope':'exhaustive_center_outputs_and_fixed_assignment_nonlinear_kernel_quadrature',
         'optimizer_updates_added':0,'sampling_draws_added':0,'global_rng_unchanged':True,
@@ -143,7 +143,22 @@ def main():
         'source_receipts':{str(local_path):file_hash(local_path),str(role_path):file_hash(role_path)},
         'retained_finite_G_prior_probe':{'path':str(finite.relative_to(ROOT)),'sha256':file_hash(finite),
             'scope':'original six next-batch disposable proposals; not actual past-update attribution'},
-        'diagnostics':rows})
+        'diagnostics':rows}
+    archive = Path('/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/saved-component-full.json')
+    atomic_json(archive,result)
+    for row in rows:
+        if row['task_id'] != 'grid100':
+            continue
+        components = row.pop('component_summary')
+        metrics = [key for key,value in components[0].items() if isinstance(value,float)]
+        row['component_summary_aggregate'] = {key:{
+            'mean':float(np.mean([v[key] for v in components if key in v])),
+            'median':float(np.median([v[key] for v in components if key in v])),
+            'min':float(np.min([v[key] for v in components if key in v])),
+            'max':float(np.max([v[key] for v in components if key in v]))} for key in metrics}
+        row['missing_or_single_center_components'] = [v['component'] for v in components if v.get('missing_shape')]
+    result['full_component_archive'] = {'path':str(archive),'sha256':file_hash(archive)}
+    atomic_json(OUT/'saved-component-diagnostics.json',result)
     print({'event':'component_diagnostic_complete','seconds':time.monotonic()-start,
            'between_fraction':{r['task_id']:r['average_between_fraction'] for r in rows}},flush=True)
 
