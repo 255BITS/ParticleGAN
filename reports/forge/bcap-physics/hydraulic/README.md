@@ -228,7 +228,10 @@ seed robustness, scientific default adoption or extra candidate is claimed.
 Both measured arms use source digest
 `937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f`,
 Python 3.12.13/Torch 2.14.0 on RTX A6000, seed 0, one Torch thread and deterministic
-public initialization. Candidate source-origin commit is `534b35f10be84500746a71e9707a6e0ead9844a7`;
+public initialization on the four matched learned tasks. The additional
+two-pole control preserves its separately declared stored critic weights and
+zero direct coordinates; it is a fixed-fixture task, never a substituted
+initializer for a learned task. Candidate source-origin commit is `534b35f10be84500746a71e9707a6e0ead9844a7`;
 control is `2957c118d2ba50ad8c0bf8138a020c4281a356d1`. Those commits differ
 only in admission declarations outside the frozen scientific source. Four
 matched-parity receipts verify initial G/D/prior hashes, recipes, priors, task
