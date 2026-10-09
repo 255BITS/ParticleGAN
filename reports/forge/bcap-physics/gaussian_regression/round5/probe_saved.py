@@ -39,7 +39,7 @@ def main():
                 assert state_digest(context.state_dict())==state_digest(saved)
             evidence=row['evidence'];assert grade(task,evidence)['gate_status']==row['gate_status']
             curve=evidence['observations']; chunks=[curve[i:i+24] for i in range(0,len(curve),24)]
-            item=dict(role=role,task_id=task_id,attempt_id=result['attempt_id'],source=request['source'],
+            item=dict(role=role,task_id=task_id,attempt_id=result['attempt_id'],source={k:request['source'][k] for k in ('origin_commit','digest')},
                 certificates={n:file_hash(local/(n+'.json')) for n in ('request','result')},
                 checkpoint_path=str(path),checkpoint_sha256=descriptor['sha256'],exact_restore=True,
                 optimizer_steps=trainer.completed_steps,optimizer_stats=find_stats(saved),
