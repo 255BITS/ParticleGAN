@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 783. Inventory coverage: complete. Unresolved import items: 7.
+Records: 785. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4038,6 +4038,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-783482660df5696a6ed50f75
+
+**Scope:** research_diagnostic; scientific; revision `607425144b6578b5887c26af2ced7a8637087d929584613f268dcf64b7b5edb8`.
+
+Measure the exact BCAP winner primary control in the revised scientific source/runtime; its original parent is an untrained admission reference only.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 318.256; mechanism `floor_constant`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+The exact winner diagnostic control completes all five frozen tasks: three PASS and two FAIL. It reproduces original Gaussian/native endpoints; this is no new repair, qualification or parent comparison.
+
+**Next:** Close this exact matched-control study and retain its receipts. Preserve archived winner selection and qualifications; no parent training or further control rerun follows.
+
+[Evidence](../../reports/forge/attempts/03edce6bd630456ea92f35eb7e8671ff/result.json) · [Record](records/readout-783482660df5696a6ed50f75.json)
+
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
 **Scope:** current; scientific; revision `f415e58283e06eaf2679a31dbf0317b69bda8fd3e1a880e62209ac9318f1eaf8`.
@@ -4165,6 +4181,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+
+### hydraulic-secant-deformation-v2 · readout-9f6ac354828f6069c1e83b87
+
+**Scope:** research_diagnostic; scientific; revision `fa836befe1a9b010280a21f7a487a096cf5206686ca49f91078890499410269e`.
+
+Combined hydraulic travel plus network-only local contraction reduces native served width error and improves precision relative to the exact BCAP winner, while preserving Gaussian retention and broad-vector PASS.
+
+**Observed:** {'FAIL': 2, 'PASS': 2}; wall seconds 641.515; mechanism `structural`.
+
+grid100: precision=0.50133, center_rms_sigma=0.36362, mass_tv=0.069, radial_ks=0.33394
+
+Combined travel and secant deformation candidate retains broad-vector PASS but strict Gaussian and native FAIL; native precision.50133 misses.55 prediction, covariance bias.90183 misses.70 explanatory forecast, and local variance ratio4.45623 exceeds the matched winner. Two-pole remains unsupported/unmeasured.
+
+**Next:** Stop this exact combined revision as a global repair; retain winner/default and all original qualifications. Before a separately frozen substantive idea, distinguish local training density from global variance normalization and measure deformation gradient work. No coefficient sweep, seed repeats, transfer or extra training follows.
+
+[Evidence](../../reports/forge/attempts/927604292f2e421a8f67e037f7a3aa2a/result.json) · [Record](records/readout-9f6ac354828f6069c1e83b87.json)
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -5006,4 +5038,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `445e5d5f0c807df62ed7d944229085f425fd3ce0fc443b3f0b96b6a6ea0c2c11`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7e77dbb91e232d7763c76ab9b615ab41152dd96e24133de39a45a6dd9d2dfe20`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

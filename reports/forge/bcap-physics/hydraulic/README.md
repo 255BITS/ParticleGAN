@@ -1,5 +1,8 @@
 # Hydraulic output travel: bounded mechanism study
 
+[Round two: separately bounded travel and local-deformation successor](round2/README.md)
+preserves every round-one result and source identity below.
+
 The travel bound nearly retains the Gaussian and improves native precision, but
 **the candidate still fails the complete Gaussian and native gates**. Both
 recipes retain the broad-vector pass, and both pass 2/4 matched executed tasks.
