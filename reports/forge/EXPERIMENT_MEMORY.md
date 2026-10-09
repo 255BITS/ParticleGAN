@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 787. Inventory coverage: complete. Unresolved import items: 7.
+Records: 790. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3862,6 +3862,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/0d93422aa0ff4852bba4f0de4a1e6926/result.json) · [Record](records/readout-457f93f65c1e6782fba74306.json)
 
+### projection-ablation-round4-strict_progress-v1 · readout-45b4ad3bd3dbeaa2bc7ebe7b
+
+**Scope:** research_diagnostic; scientific; revision `da9f9c1520e03868589031f8ded3be30c77892c1d1c34b7c4a048937bb2fdf46`.
+
+The combined measured mechanism retains both identity sustained passes on this common-source ablation.
+
+**Observed:** {'FAIL': 1, 'INCOMPLETE': 1, 'PASS': 5}; wall seconds 671.251; mechanism `structural`.
+
+
+
+Finite strict progress reproduces final5PASS1FAIL and both complete identity repairs. One two-pole execution timeout is preserved and superseded only for execution by a certified unchanged-source retry.
+
+**Next:** Retain finite acceptance for applications needing its local certificate; prefer the smaller direction-only repair for this measured scope. No ordinary qualification/default adoption; all work concluded.
+
+[Evidence](../../reports/forge/attempts/0a0cd7346f844db2b076996e3068c384/result.json) · [Record](records/readout-45b4ad3bd3dbeaa2bc7ebe7b.json)
+
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
 **Scope:** current; scientific; revision `87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9`.
@@ -4053,6 +4069,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 **Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+
+### projection-ablation-round4-nonascent-v1 · readout-7cac8ddc90e2d8e580ac36b4
+
+**Scope:** research_diagnostic; scientific; revision `17ba8daccba1806625a714eccd4e3d3eea0b1783796e0386699d2ec0387282f9`.
+
+Corrected schema2 alone retains wrong-identity failures while matching passing guardrails.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 189.621; mechanism `structural`.
+
+
+
+Corrected schema2 final3PASS3FAIL reproduces both identity failures and the Gaussian stability failure; passing guardrails retained.
+
+**Next:** Retain this source-bound causal control; choose direction-only as the smallest measured conditional repair, with no ordinary qualification or default promotion.
+
+[Evidence](../../reports/forge/attempts/1b7a4a7e3c9c4bdba45e692884729745/result.json) · [Record](records/readout-7cac8ddc90e2d8e580ac36b4.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4453,6 +4485,22 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
 [Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
+
+### projection-ablation-round4-direction_blend-v1 · readout-e1716333811cd46df3150ed3
+
+**Scope:** research_diagnostic; scientific; revision `7b3671a30c43369e87249ddf8e6ca0309e05d21ea98a1c3c5b20bc48b7a38699`.
+
+The full common-descent direction alone retains both trajectory and residual sustained passes, isolating finite acceptance necessity.
+
+**Observed:** {'FAIL': 1, 'PASS': 5}; wall seconds 293.204; mechanism `structural`.
+
+
+
+Full-scale common descent WITHOUT finite acceptance retains BOTH complete sustained identity passes and mid-scale guardrail: final5PASS1FAIL. Gaussian stability remains FAIL.
+
+**Next:** Prefer direction_blend as the smallest scoped conditional repair; retain strict_progress when a finite same-batch certificate is required. No broad transfer/default promotion or further run here.
+
+[Evidence](../../reports/forge/attempts/028a8a5a8d5f4cbb8fec4497df5829c7/result.json) · [Record](records/readout-e1716333811cd46df3150ed3.json)
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -5070,4 +5118,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `ee4a8010648c6da2e6bb428bdbb61d9636e742f8222f5067b0ea0f980e6237da`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a04b21ad4b4b711a92ddfeaf0b92af106e1f025d8f95fa5ae437da4cb5af966d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

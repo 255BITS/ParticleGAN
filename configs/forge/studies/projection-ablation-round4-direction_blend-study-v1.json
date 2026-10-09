@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "id": "projection-ablation-round4-v1",
+    "budget_seconds": 19260,
+    "candidate_budget_seconds": 6420
+  },
+  "candidate": "projection-ablation-round4-direction_blend-v1",
+  "competing_explanation": "Full-scale strict derivatives may still overshoot; blending can alter critic dynamics and useful cover motion. Both trajectory and residual full gates and mid-scale guardrail decide the repair, not the single residual forecast.",
+  "control": {
+    "candidate_id": "projection-ablation-round4-nonascent-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "identity_mse",
+    "op": ">",
+    "phase": "final",
+    "task_id": "residual_student",
+    "threshold": 0.02
+  },
+  "hypothesis": "The full common-descent direction alone retains both trajectory and residual sustained passes, isolating finite acceptance necessity.",
+  "id": "projection-ablation-round4-direction_blend-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "identity_mse",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "residual_student",
+    "threshold": 0.02
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-physics/constraint_geometry/round3/results.json",
+      "selector": [],
+      "identity": {
+        "candidate": "constraint_geometry-round3-strict-progress-v1",
+        "source_digest": "49084004acda1634f89ab66f027e521e42d54305e0722e39182c436488f85f7e"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "projection-ablation-round4-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
