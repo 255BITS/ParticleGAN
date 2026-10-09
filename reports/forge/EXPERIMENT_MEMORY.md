@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 784. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3606,6 +3606,22 @@ Historical recorded task outcomes: FAIL=1
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/paired-bd-graft/baseline-result.json) · [Record](records/history-v3-repro-50fe3393d8b8.json)
 
+### blacksmith-evidence-tempering-r2-v1 · lifecycle-17b50f7074ef4aba89072c9e
+
+**Scope:** administrative; administrative; revision `00065f7a14a602a983465cf857363208b70c558779fd02c138d97ef2ab0d6c1a`.
+
+None
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: The .95 all-player coherence gain loses confirmed Gaussian acquisition and broad-vector PASS, regresses mode hold, and leaves own Gaussian stability blocked. No further unchanged experiment.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-17b50f7074ef4aba89072c9e.json)
+
 ### k3p-no-output-noise-diagnostic · lifecycle-1fdc4834581ce2e17a87e8e7
 
 **Scope:** administrative; administrative; revision `0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603`.
@@ -4086,6 +4102,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.076
 
 [Evidence](../../reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json) · [Record](records/readout-8bfdfb8d2b1c3daf55f9b0bc.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-8f79e41c278ebdb50f9e2b1e
+
+**Scope:** research_diagnostic; scientific; revision `c284991a0e1f2ad94a66bb693f3553c8916c59c483ba059b946ba3198583f1a7`.
+
+Execute the exact saved winning BCAP recipe on the same current source/runtime and unchanged task streams as the primary matched control.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 149.067; mechanism `floor_constant`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988; mode_hold: modes=8, hq=0.98926
+
+Matched exact-winning-recipe control completes all five tasks: 3 PASS and 2 FAIL. Gaussian stability remains stationary2/72, shiftedhold0/24 and deadline FAIL; modehold suffix3 fails despite passing endpoint.
+
+**Next:** Retain this exact recipe as a research control and its original failures. Stop the rejected .95 tempering revision; no new qualification or adoption.
+
+[Evidence](../../reports/forge/attempts/46bd60329b694bdb8384d2e02850a754/result.json) · [Record](records/readout-8f79e41c278ebdb50f9e2b1e.json)
+
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
 **Scope:** calibration_diagnostic; scientific; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -4421,6 +4453,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1,
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### blacksmith-evidence-tempering-r2-v1 · readout-f5e2ea80cc94d27e6d17f91d
+
+**Scope:** research_diagnostic; scientific; revision `00065f7a14a602a983465cf857363208b70c558779fd02c138d97ef2ab0d6c1a`.
+
+Gradient-coherence tempering suppresses destructive normalized motion near fit while preserving acquisition, renewed shifted response and broad-vector fidelity.
+
+**Observed:** {'FAIL': 3, 'PASS': 1}; wall seconds 93.748; mechanism `structural`.
+
+vector_two_broad: hq=0.96265, mass_tv=0.15796; mode_hold: modes=6, hq=0.5979
+
+Evidence tempering .95 fails the unchanged diagnostic: 1 PASS, 3 FAIL, 1 BLOCKED. Lost independently confirmed Gaussian smoke and broad-vector guard; mode hold regresses to 6/8 modes and quality .597900. Own Gaussian stability is genuinely unmeasured.
+
+**Next:** Stop this exact all-player evidence-tempering revision. Preserve the control and numerical failures; no tuning, continuation, seed repeats or default adoption.
+
+[Evidence](../../reports/forge/attempts/5930af3cccf54fac91ec761798d5098c/result.json) · [Record](records/readout-f5e2ea80cc94d27e6d17f91d.json)
 
 ### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
 
@@ -4974,4 +5022,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ba74890978724fc122d1977025f2904aa19d797b73f29477ccae6441e52886f5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

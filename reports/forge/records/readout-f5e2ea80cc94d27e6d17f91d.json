@@ -1,0 +1,564 @@
+{
+  "attempt_ids": [
+    "5930af3cccf54fac91ec761798d5098c",
+    "60a53518b0a04843aedc915040366135",
+    "7f4d4b26584b4b9a90402095f54206d7",
+    "cd3d629ebdbf44139ac48c3ae56ae4e0"
+  ],
+  "candidate_id": "blacksmith-evidence-tempering-r2-v1",
+  "candidate_revision": "00065f7a14a602a983465cf857363208b70c558779fd02c138d97ef2ab0d6c1a",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Same-source/runtime winning BCAP control has 3 PASS and 2 FAIL. Its Gaussian stability reproduces stationary2/72, shiftedhold0/24; modehold suffix3. Candidate broad covariance2.472045 versus control.385581, minimum eigenratio.016968 versus.400066. No previously failing sustained task is repaired.",
+  "conclusion": "Evidence tempering .95 fails the unchanged diagnostic: 1 PASS, 3 FAIL, 1 BLOCKED. Lost independently confirmed Gaussian smoke and broad-vector guard; mode hold regresses to 6/8 modes and quality .597900. Own Gaussian stability is genuinely unmeasured.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "5930af3cccf54fac91ec761798d5098c",
+        "60a53518b0a04843aedc915040366135",
+        "7f4d4b26584b4b9a90402095f54206d7",
+        "cd3d629ebdbf44139ac48c3ae56ae4e0"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "b8cf599c00e3c088ba45cd3312ba73c7bbc61d63d2d156cf6549ca623c904716",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+          "producer_request_id": "510bc14c4f15267e2d9dd7d0",
+          "producer_study_id": "blacksmith-tempering-r2-candidate-v1",
+          "result_hash": "c9c8414cc4d6308aa087ba1113d17036703f3e03d5764477df79732c9d874958",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "60a53518b0a04843aedc915040366135",
+          "producer_request_id": "510bc14c4f15267e2d9dd7d0",
+          "producer_study_id": "blacksmith-tempering-r2-candidate-v1",
+          "result_hash": "b44451110e5dc1a6df05f5c221977032401878b7a44070bb158d6b4fffdd31b1",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+          "producer_request_id": "510bc14c4f15267e2d9dd7d0",
+          "producer_study_id": "blacksmith-tempering-r2-candidate-v1",
+          "result_hash": "767fe68d08ca7de5826bff74fc8c1c42b7b23a51675461c4c4a6957625332fa4",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+          "producer_request_id": "510bc14c4f15267e2d9dd7d0",
+          "producer_study_id": "blacksmith-tempering-r2-candidate-v1",
+          "result_hash": "7ab33a88ced3e2ffdd94317625df0c8ebd843bb158c67806a80ca4350c2f4e71",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "3be094e58f8e471d4d94f8ff259be00b1d259265d4dd65ee4160e126f58d8e6b",
+        "contract_sha256": "b8cf599c00e3c088ba45cd3312ba73c7bbc61d63d2d156cf6549ca623c904716",
+        "control_binding_sha256": "8b047f4230e8f358d0f8fae4f5e643efea9c9a8fad40d8612403bef1f5d615d8",
+        "policy_fingerprint": "967e5992f1eedd024d13b8dfeb240ca7b5c62de832cb7ba274f0c342f1456fdd",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "219e3d3e8051a7c4774bbee62f33bf89b605f7ac2ed139c76f073a6e6318fdc6"
+      },
+      "study_id": "blacksmith-tempering-r2-candidate-v1",
+      "study_sha256": "219e3d3e8051a7c4774bbee62f33bf89b605f7ac2ed139c76f073a6e6318fdc6"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "blacksmith-tempering-r2-v1",
+  "hypothesis": "Gradient-coherence tempering suppresses destructive normalized motion near fit while preserving acquisition, renewed shifted response and broad-vector fidelity.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact all-player evidence-tempering revision. Preserve the control and numerical failures; no tuning, continuation, seed repeats or default adoption.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+        "result_hash": "c9c8414cc4d6308aa087ba1113d17036703f3e03d5764477df79732c9d874958",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "60a53518b0a04843aedc915040366135",
+        "result_hash": "b44451110e5dc1a6df05f5c221977032401878b7a44070bb158d6b4fffdd31b1",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+        "result_hash": "767fe68d08ca7de5826bff74fc8c1c42b7b23a51675461c4c4a6957625332fa4",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+        "result_hash": "7ab33a88ced3e2ffdd94317625df0c8ebd843bb158c67806a80ca4350c2f4e71",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-f5e2ea80cc94d27e6d17f91d",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/5930af3cccf54fac91ec761798d5098c/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 14400,
+      "candidate_budget_seconds": 4620,
+      "id": "blacksmith-tempering-r2-v1"
+    },
+    "candidate": "blacksmith-evidence-tempering-r2-v1",
+    "competing_explanation": "Coherent game cycles or biased gradients can keep gain high near a bad fit; rapidly changing useful gradients can be suppressed and prevent acquisition. Per-row sparse histories may retain stale evidence. This gain does not constrain output motion, covariance or objective competition.",
+    "control": {
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "cdf_ks",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "hypothesis": "Gradient-coherence tempering suppresses destructive normalized motion near fit while preserving acquisition, renewed shifted response and broad-vector fidelity.",
+    "id": "blacksmith-tempering-r2-candidate-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "cdf_ks",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "seed": 0,
+          "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+        },
+        "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "blacksmith-tempering-r2-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "blacksmith-tempering-r2-candidate-v1",
+  "study_sha256": "219e3d3e8051a7c4774bbee62f33bf89b605f7ac2ed139c76f073a6e6318fdc6",
+  "task_results": [
+    {
+      "compatibility_key": "41162e18a5d1769fe255027be60d94d319d2127c6f144cdca2cd0602eecfac9c",
+      "cost": {
+        "adapter_seconds": 1.1046508270082995,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.233513518003747,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.431294730049558,
+        "wall_seconds": 7.233513518003747
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.55,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 44,
+          "first_pass_step": 30,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 16,
+          "passing_suffix": 16,
+          "stable_from_seconds": null,
+          "stable_from_step": 30
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.24426662921905518,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.7557333707809448
+          },
+          "mean_abs": {
+            "margin": 0.5121861815452575,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.8121861815452576
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.7557333707809448,
+        "mean_abs": 0.8121861815452576
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "c3d21613267af7af3d5ee14b17ce14c5c2e60dc2374810ce86cac39719d46716",
+      "cost": {
+        "adapter_loop_seconds": 19.54328111105133,
+        "adapter_seconds": 19.786263982998207,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 25.87957223097328,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.97214806836564,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3652589418925345
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007820298080332577
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 18.599068828392774
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 21.140188688063063,
+        "wall_seconds": 25.87957223097328
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -1.6220454216003417,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 2.472045421600342
+          },
+          "component_min_eigen_ratio": {
+            "margin": -0.13303222842514514,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.01696777157485485
+          },
+          "hq": {
+            "margin": 0.11264648437500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.962646484375
+          },
+          "mass_tv": {
+            "margin": -0.007958984375000006,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.157958984375
+          },
+          "sw1_normalized": {
+            "margin": -0.1796911097842528,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.18,
+            "value": 0.3596911097842528
+          }
+        },
+        "passed": false,
+        "shortfall": 0.7693028186416007,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.6405481994152069,
+        "component_core_covariance_errors": [
+          0.5815644264221191,
+          0.6995319724082947
+        ],
+        "component_core_eigen_ratios": [
+          0.18952670693397522,
+          0.01738179847598076
+        ],
+        "component_core_min_eigen_ratio": 0.01738179847598076,
+        "component_counts": [
+          2695,
+          1401
+        ],
+        "component_covariance_error": 2.472045421600342,
+        "component_covariance_errors": [
+          0.5815644264221191,
+          4.3625264167785645
+        ],
+        "component_mass": [
+          0.657958984375,
+          0.342041015625
+        ],
+        "component_min_eigen_ratio": 0.01696777157485485,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.005936920177191496,
+          0.0977872982621193
+        ],
+        "covariance_error": 0.3159126937389374,
+        "hq": 0.962646484375,
+        "mass_tv": 0.157958984375,
+        "max_component_spill": 0.0977872982621193,
+        "mean_error": 0.4231503903865814,
+        "min_mass_ratio": 0.68408203125,
+        "resolved_core_covariance_error": 0.6405481994152069,
+        "resolved_core_min_eigen_ratio": 0.01738179847598076,
+        "resolved_max_component_spill": 0.0977872982621193,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.3596911097842528,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "b41ed4f30dffc5bd8b4ba7b7df4b11f6273dbdc3efa9441a1db9890d74e8a16c",
+      "cost": {
+        "adapter_loop_seconds": 34.57760686497204,
+        "adapter_seconds": 34.80813635198865,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 40.94607002695557,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 34.076810518163256,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.03900619805790484
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008870396530255675
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 34.028933923575096
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 36.15994788496755,
+        "wall_seconds": 40.94607002695557
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.302099609375,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.597900390625
+          },
+          "modes": {
+            "margin": -2,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 8,
+            "value": 6
+          }
+        },
+        "passed": false,
+        "shortfall": 0.2928331163194444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.75,
+        "effective_modes": 4.863819122314453,
+        "hq": 0.597900390625,
+        "modes": 6,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mode_hold"
+    },
+    {
+      "compatibility_key": "c2d2b8b43643c041017d121365896b65eef894288af11358bb8be22d1883614f",
+      "cost": {
+        "adapter_loop_seconds": 13.134482217952609,
+        "adapter_seconds": 13.469241227023304,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "1",
+        "execution_seconds": 19.68872147006914,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 12.723362114396878,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.7856368976645172
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.10781633178703487
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 11.829908884945326
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 14.842217726982199,
+        "wall_seconds": 19.68872147006914
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": null,
+        "observations": 24,
+        "passing_observations": 0
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.1793922765254326,
+        "finite_fraction": 1.0,
+        "mean": 2.0607375908002723,
+        "mean_error_sigma": 0.1214751816005446,
+        "sample_count": 4096,
+        "std": 0.350803130895257,
+        "std_ratio": 0.701606261790514,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    }
+  ]
+}

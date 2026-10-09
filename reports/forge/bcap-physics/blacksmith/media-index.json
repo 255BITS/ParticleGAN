@@ -1,0 +1,260 @@
+{
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "receipts": [
+    {
+      "arm": "candidate",
+      "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+      "gif_sha256": "243ae069c8ca660ab8beccfe5fa0044dc5d46343f7318eebab606b13900f7c57",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07970a26c3b8410635b7567850a2ec488715359ea6f34c0e07d80f26f6bb8e0e",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+      "gif_sha256": "9ceb90b2921baca19456512a51d8312455f4cf025825960038151b3cb25a9e00",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "ddcef186a17d556c3e105b29dd69fc266aac84880aa6e30f69a7da0ad439f926",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/cd3d629ebdbf44139ac48c3ae56ae4e0/evaluator/observed-samples.pt": "f94c3544d0a620e42664dcdc203ebfe843c6fda0ca4957488ffa03a71fff05e5"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+      "gif_sha256": "d0efc5b25f207e34ff297d192776ff48b649cdf4b75f301dbb32fb08f1b3bf30",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "c10b10cd65f050242200e4e1286529f1c0290c1aa79cc446c3da27f0c09cbf06",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "60a53518b0a04843aedc915040366135",
+      "gif_sha256": "5eb52d716ab17b7c425ea33536b0de63241512784968cee578dcea2d773e88cd",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "addd294ea1320baed25cc4800ff71cba5c2021d24282bfcb74fc71430bd537e8",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/60a53518b0a04843aedc915040366135/observed-samples.pt": "44964da71498e92d5e326247d950a5196fac50a4dc1db7f0f493afe08e94bda6"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "e9c5297118904f9fbcb12aa83e4b5903",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "eb6cce7f0d0a43439219e9310532d61a",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/eb6cce7f0d0a43439219e9310532d61a/evaluator/observed-samples.pt": "9379190805e3c7e72d2f8970663c87357feafa114d397200e381530a264e7115"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "e6a7a8d03d3e41beb0d9b8cd40b3104b",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/e6a7a8d03d3e41beb0d9b8cd40b3104b/evaluator/observed-samples.pt": "6317a4ed7d450dc2ea719ee4a34dc847bb32094bcc8697cd1a23a374b6745315"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "4d19f87e7519486fa97f63aa88f0d515",
+      "gif_sha256": "f351c0d595a23d50c4fde37342423ab4cff51d20001d6e464c1e7960290d7989",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "8ac530fbd9be2dfb96fc7db280a02ef30e8523cd5a696d306d8b218653a3f260",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "46bd60329b694bdb8384d2e02850a754",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/46bd60329b694bdb8384d2e02850a754/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "sampling_draws_added": 0
+}

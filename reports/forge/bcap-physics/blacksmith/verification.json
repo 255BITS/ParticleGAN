@@ -1,0 +1,96 @@
+{
+  "actual_training_gifs_verified": 9,
+  "attempt_certificates_verified": 9,
+  "disposition_record_id": "lifecycle-17b50f7074ef4aba89072c9e",
+  "exact_batch_sequence_digest": "not_available_for_all_hosts; unchanged stream law and equal checkpoint states verified",
+  "executed_full_allowances_seconds": 8640,
+  "frozen_files_verified": 1200,
+  "paid_worker_seconds": 242.81499983521644,
+  "planned_full_reservations_seconds": 9240,
+  "remaining_reserved_seconds": 0,
+  "scientific_retries": 0,
+  "scorer_cpu_wall_seconds": 0.09586972207762301,
+  "scorer_fixtures_verified": 15,
+  "software_checks": {
+    "compatibility_pass": 162,
+    "focused_pass": 94
+  },
+  "source_file_mismatches": [],
+  "trained_source_commit": "da3bf1da4ca98c1230fb8c44329af7f59fc79508",
+  "trained_source_digest": "7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f",
+  "training_updates_total": 11960,
+  "workers": [
+    {
+      "arm": "candidate",
+      "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+      "full_allowance_seconds": 300,
+      "grade": "PASS",
+      "paid_seconds": 7.233513518003747,
+      "task_id": "two_pole"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+      "full_allowance_seconds": 120,
+      "grade": "FAIL",
+      "paid_seconds": 19.68872147006914,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+      "full_allowance_seconds": 1800,
+      "grade": "FAIL",
+      "paid_seconds": 40.94607002695557,
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "60a53518b0a04843aedc915040366135",
+      "full_allowance_seconds": 1800,
+      "grade": "FAIL",
+      "paid_seconds": 25.87957223097328,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "e9c5297118904f9fbcb12aa83e4b5903",
+      "full_allowance_seconds": 300,
+      "grade": "PASS",
+      "paid_seconds": 6.960982221062295,
+      "task_id": "two_pole"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "eb6cce7f0d0a43439219e9310532d61a",
+      "full_allowance_seconds": 120,
+      "grade": "PASS",
+      "paid_seconds": 17.98257786000613,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "e6a7a8d03d3e41beb0d9b8cd40b3104b",
+      "full_allowance_seconds": 600,
+      "grade": "FAIL",
+      "paid_seconds": 58.49193297105376,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "4d19f87e7519486fa97f63aa88f0d515",
+      "full_allowance_seconds": 1800,
+      "grade": "FAIL",
+      "paid_seconds": 40.57007731101476,
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "46bd60329b694bdb8384d2e02850a754",
+      "full_allowance_seconds": 1800,
+      "grade": "PASS",
+      "paid_seconds": 25.061552226077765,
+      "task_id": "vector_two_broad"
+    }
+  ]
+}

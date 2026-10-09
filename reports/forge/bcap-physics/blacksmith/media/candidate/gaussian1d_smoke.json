@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "9ceb90b2921baca19456512a51d8312455f4cf025825960038151b3cb25a9e00",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "ddcef186a17d556c3e105b29dd69fc266aac84880aa6e30f69a7da0ad439f926",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/cd3d629ebdbf44139ac48c3ae56ae4e0/evaluator/observed-samples.pt": "f94c3544d0a620e42664dcdc203ebfe843c6fda0ca4957488ffa03a71fff05e5"
+  },
+  "task_id": "gaussian1d_smoke"
+}

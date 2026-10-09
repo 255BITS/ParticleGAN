@@ -1,0 +1,2314 @@
+{
+  "candidate": {
+    "attempts": [
+      {
+        "artifact_manifest": null,
+        "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+        "compatibility_key": "41162e18a5d1769fe255027be60d94d319d2127c6f144cdca2cd0602eecfac9c",
+        "envelope_hashes": {
+          "evidence": "73e9b37adac46cf0a3de79d0387682a5c7fa7213b272ff16c4ed869c19a8e3f9",
+          "request": "7f6e7fd01e7528929a1b9324ed048359dce6ed4e33ccf165d295efdbf0cd6e08",
+          "result": "a1a593a592c06515d75e8f9898f7bb905af757f63450e5ba319a09687037b59a"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/5930af3cccf54fac91ec761798d5098c",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "b76873b61c843ac46f67eec562b5bd980199ff8bbf4de33d57ce628053aaaed5",
+                "size": 52489
+              }
+            },
+            "schema_version": 1,
+            "sha256": "a29ae40b35727d31d580990fd6271f1d6e6b7290fb1d522abbe62b57add453ea",
+            "total_bytes": 52489
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/5930af3cccf54fac91ec761798d5098c/provenance",
+          "bytes": 52489,
+          "completed_steps": 80,
+          "named_stream_keys": [
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "b76873b61c843ac46f67eec562b5bd980199ff8bbf4de33d57ce628053aaaed5",
+          "state_sha256": "19c05d9753c2523491e979792ea6540f910201881f3ae6806bfc7891a2a2a35c"
+        },
+        "result_hash": "c9c8414cc4d6308aa087ba1113d17036703f3e03d5764477df79732c9d874958",
+        "task_id": "two_pole"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 3,
+          "files": {
+            "initial-state.pt": {
+              "sha256": "e230198f7762dde25d0787375cc4963258db37a2da645cdd737a0619ff628499",
+              "size": 63575
+            },
+            "observed-samples.pt": {
+              "sha256": "f94c3544d0a620e42664dcdc203ebfe843c6fda0ca4957488ffa03a71fff05e5",
+              "size": 842949
+            },
+            "state.pt": {
+              "sha256": "9a688a31cccd674d27639d036ad0311c948e9d83bf143cf0c4c44369664ca35c",
+              "size": 98399
+            }
+          },
+          "schema_version": 1,
+          "sha256": "19bca7dfb7c1be37693472bb19dc78b76cb0ae995f2ce3ca518a8fb3a93b3997",
+          "total_bytes": 1004923
+        },
+        "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+        "compatibility_key": "c2d2b8b43643c041017d121365896b65eef894288af11358bb8be22d1883614f",
+        "envelope_hashes": {
+          "evidence": "8c4f14d8e5d43fc3ab71380953bc5db9242b3ed0c5a00162b3028a5c73bcad31",
+          "request": "72556ccf40a71162de75a05ff1a2fac6f3082414fc300124f7c3aa2912454ae4",
+          "result": "d4583f44b688d665f75950bd46f679af0171051af84c1659be1bbb8efda78b7a"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/cd3d629ebdbf44139ac48c3ae56ae4e0",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "6c6536ef541da7ce9126e08c9cce43e8a8a1e02235fef3d52551d25ca9d67c27",
+                "size": 102313
+              }
+            },
+            "schema_version": 1,
+            "sha256": "3c0eb9f8bfdb811ef017aea2fcf85e46b9cab369c44891b34f007622ce11f53b",
+            "total_bytes": 102313
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/cd3d629ebdbf44139ac48c3ae56ae4e0/provenance",
+          "bytes": 102313,
+          "completed_steps": 1000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "6c6536ef541da7ce9126e08c9cce43e8a8a1e02235fef3d52551d25ca9d67c27",
+          "state_sha256": "bccc5f8c86a53b935a29f903dc55c6f1502215d000febf0f16ae27d254369666"
+        },
+        "result_hash": "7ab33a88ced3e2ffdd94317625df0c8ebd843bb158c67806a80ca4350c2f4e71",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+        "compatibility_key": "b41ed4f30dffc5bd8b4ba7b7df4b11f6273dbdc3efa9441a1db9890d74e8a16c",
+        "envelope_hashes": {
+          "evidence": "1c1c1c772114fe2c680e8b34d16315a4364065ddb776e30b61cd4e554f9107c8",
+          "request": "54ffcb906ee7556b5be68beb2f88e2d2a401e872a08e6c57be2e79e612b791e0",
+          "result": "f2d4ded1c468f9b407e6c4ca5fc487af4f9b1c37f9db6dc3c4ce1f1da0640065"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/7f4d4b26584b4b9a90402095f54206d7",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "37df3fa23b3bdaad8aa802c426bc115f06fc667ebd976d78b3d91dcd8d222487",
+                "size": 613908
+              }
+            },
+            "schema_version": 1,
+            "sha256": "7abceaea2efcb97e27eaa681814a1eb054c6f44f14a19df9c326599cac64ab1c",
+            "total_bytes": 613908
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/7f4d4b26584b4b9a90402095f54206d7/provenance",
+          "bytes": 613908,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "37df3fa23b3bdaad8aa802c426bc115f06fc667ebd976d78b3d91dcd8d222487",
+          "state_sha256": "efc9253c6ceb2a3fd9cfd829ff4bd30132cd6c8842e4f8e8634b5ff4eb683b9c"
+        },
+        "result_hash": "767fe68d08ca7de5826bff74fc8c1c42b7b23a51675461c4c4a6957625332fa4",
+        "task_id": "mode_hold"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "60a53518b0a04843aedc915040366135",
+        "compatibility_key": "c3d21613267af7af3d5ee14b17ce14c5c2e60dc2374810ce86cac39719d46716",
+        "envelope_hashes": {
+          "evidence": "9f783326e38dad92774bf7936a6344a1a27213ac714951fce00d4985ca00fd92",
+          "request": "5588ddbfb62a34dc88a7442b41427f4683a2bdc2f90aadf773cc51f9f2de3785",
+          "result": "c2d9644b2b549d8085e419c94a4de580b7f306fac987b656ae1f802eabf36bea"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/60a53518b0a04843aedc915040366135",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "e8c374ff4a66a9edaa4509841e0a9dc5025fb7a5872b13a444cd2674b4e8ddc1",
+                "size": 207907
+              }
+            },
+            "schema_version": 1,
+            "sha256": "3aa3968ad4f74fb1e00c110adc48c48d6f1d51faf722d0234417c1034e208fc9",
+            "total_bytes": 207907
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/60a53518b0a04843aedc915040366135/provenance",
+          "bytes": 207907,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "e8c374ff4a66a9edaa4509841e0a9dc5025fb7a5872b13a444cd2674b4e8ddc1",
+          "state_sha256": "26ab564eec72d5eb1307286774a18c83593d176cdc5d1c3834655f8482e9e321"
+        },
+        "result_hash": "b44451110e5dc1a6df05f5c221977032401878b7a44070bb158d6b4fffdd31b1",
+        "task_id": "vector_two_broad"
+      }
+    ],
+    "compute_profiles": {
+      "cuda": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    },
+    "source": {
+      "digest": "7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f",
+      "origin_commit": "da3bf1da4ca98c1230fb8c44329af7f59fc79508",
+      "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/snapshots/7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f"
+    },
+    "study_sha256": "219e3d3e8051a7c4774bbee62f33bf89b605f7ac2ed139c76f073a6e6318fdc6",
+    "task_contracts": {
+      "gaussian1d_smoke": {
+        "dependencies": [],
+        "evaluation": {
+          "confirmation": "independent_draw_same_state",
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-smoke-v1",
+            "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_smoke",
+          "observations": 24,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "d51081ece546da0f5fbc257558611327a53af0baee6a8d9451e67df2ab68bcc6",
+        "updates": 1000
+      },
+      "gaussian1d_stability": {
+        "dependencies": [
+          {
+            "kind": "checkpoint",
+            "task": "gaussian1d_smoke"
+          }
+        ],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-stability-v1",
+            "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_stability",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "reacquisition_deadline": 5000,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "shift_checks": 48,
+          "shift_end": 6000,
+          "shift_hold_checks": 24,
+          "shift_mean": 3.0,
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "stationary_checks": 72,
+          "stationary_end": 4000,
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "2566e58bcff059448542aa0a355a1d21e95c521f1bbece0e4f1df676dde64c5a",
+        "updates": 6000
+      },
+      "mode_hold": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "modes",
+              ">=",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "44e5b756ace7106680a9a3915c0e9e76fdbf8ebc27931d276a8c9ad6322158c2",
+        "updates": 1200
+      },
+      "two_pole": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_sha256": "c9b2e9497c43e20fd1b269f3d990e12086b55986ccb4029c97c30f075405d639",
+        "updates": 80
+      },
+      "vector_two_broad": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "844cf8f13cd4c77cad8a964561551b0b9960f7921afbd77ba8b5c72315c048f3",
+        "updates": 1200
+      }
+    }
+  },
+  "control": {
+    "attempts": [
+      {
+        "artifact_manifest": null,
+        "attempt_id": "e9c5297118904f9fbcb12aa83e4b5903",
+        "compatibility_key": "83f948af9992a7d5f5fb5d6bb051653798843c6720c58abc29e793c21157b07a",
+        "envelope_hashes": {
+          "evidence": "27aa772e0f4016b2bde5fb43653ddcaf8f234ea4daf0a02b6436e43e776aff15",
+          "request": "4b3e684eb53d40f44524ff6e675838ed4fab8f2e5c4e84bde3cade3e8183313d",
+          "result": "ca7b68fddfb64d36b933a93bd50918c967c3a8003d518c118a4bd4023be443f4"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/e9c5297118904f9fbcb12aa83e4b5903",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "8504454f50801b066b05bdc234f8a6fa2550e6f846c1915cd5a32703752d2938",
+                "size": 46575
+              }
+            },
+            "schema_version": 1,
+            "sha256": "115c27ffbfa32268337098ee136d00ad4d9a14fa773bf983fe44e32eb1b3f68e",
+            "total_bytes": 46575
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/e9c5297118904f9fbcb12aa83e4b5903/provenance",
+          "bytes": 46575,
+          "completed_steps": 80,
+          "named_stream_keys": [
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "8504454f50801b066b05bdc234f8a6fa2550e6f846c1915cd5a32703752d2938",
+          "state_sha256": "7d3840eb93488a524465038b83055c11bdc8248f1d4348e157b219fd02bde1f6"
+        },
+        "result_hash": "35e81a0e783269c6a8982d598db7df9b047268414f728bc6cd9ca2d13d2f0648",
+        "task_id": "two_pole"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 3,
+          "files": {
+            "initial-state.pt": {
+              "sha256": "9d0b503dc051a2bd261d06b5d7f0f702d0dbb74151a2227864c0e6a9a2b0f896",
+              "size": 63447
+            },
+            "observed-samples.pt": {
+              "sha256": "9379190805e3c7e72d2f8970663c87357feafa114d397200e381530a264e7115",
+              "size": 842949
+            },
+            "state.pt": {
+              "sha256": "9ba4376d9e53f3623f5c93e3581990787526ab1a7994d86aae8aeaaa1b02b316",
+              "size": 63010
+            }
+          },
+          "schema_version": 1,
+          "sha256": "5fa2f51d96b208439809b761a14ab6425dcc2b505054d20f01027bd6da9aae7b",
+          "total_bytes": 969406
+        },
+        "attempt_id": "eb6cce7f0d0a43439219e9310532d61a",
+        "compatibility_key": "1eeaae31e49bedccddb280add8c020d2f2341fb694ebf8724a374cf93952fcf5",
+        "envelope_hashes": {
+          "evidence": "9a0269ecc6ede9b0f1965d6c232b9c01912c47747013851ecdf2d9083943f95c",
+          "request": "0153741299d63e3978f8a7db999b675408d6cb00c61eb961331897fbc8faaeba",
+          "result": "6f9979b04f3a5945228ef9e1d32974aff5c274b5c3b48fc28b3280b0e2041725"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/eb6cce7f0d0a43439219e9310532d61a",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "1a35716a3be673a4dbe6edc3efc437284057f2615416f031f6b519f11d50e528",
+                "size": 64959
+              }
+            },
+            "schema_version": 1,
+            "sha256": "a78c2903c01c5b38261784262c2a0913ee1250701db93ea04a756e89825c086d",
+            "total_bytes": 64959
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/eb6cce7f0d0a43439219e9310532d61a/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "1a35716a3be673a4dbe6edc3efc437284057f2615416f031f6b519f11d50e528",
+          "state_sha256": "57ea63a0d3044b2dbaecc8d0efdae1d321898ac6d5b2cdf1673de1b92d06f9b3"
+        },
+        "result_hash": "776570c6bce1bb31c5ecba6dd3ba95d796a0f278cb454dc0fb700bfad215f447",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 5,
+          "files": {
+            "frozen-state.pt": {
+              "sha256": "a17686295c35b562b3604334b4a6989b9e12a1f072a924b90ebe0fe220eea274",
+              "size": 64803
+            },
+            "initial-state.pt": {
+              "sha256": "57e848c5676b349cead1c2e2dc73560ad58cccfbcea4de6e975e29ad1a0dee8d",
+              "size": 64922
+            },
+            "observed-samples.pt": {
+              "sha256": "6317a4ed7d450dc2ea719ee4a34dc847bb32094bcc8697cd1a23a374b6745315",
+              "size": 2841428
+            },
+            "pre-shift-state.pt": {
+              "sha256": "2fa068cff2918d2e8e0321f393f2cf4196ecd10639587b003291cf3942f3dff9",
+              "size": 65160
+            },
+            "state.pt": {
+              "sha256": "2985a16b14f8ec82d72e0df943e69bac350f1e5354f46114766a277b18629f98",
+              "size": 63266
+            }
+          },
+          "schema_version": 1,
+          "sha256": "0a892ed7cd71efb554742e287121cd00e284bd1247e868467a860fe5cea0a482",
+          "total_bytes": 3099579
+        },
+        "attempt_id": "e6a7a8d03d3e41beb0d9b8cd40b3104b",
+        "compatibility_key": "432c3bab9fa18d927d466d4102fe2bb98421802db3e81163f1f94957b5ee32bf",
+        "envelope_hashes": {
+          "evidence": "1d654f3db76588f327cf64a758041df77ad5d5d3813f2d3dc2f4080b37f4bb63",
+          "request": "341291be4f8399e78312880dfd95a3ffe42d68652e495e3ff2f93fbebdcd750f",
+          "result": "39f7bc3ed411b1228b32dba39304b9c42729808a344982485490f09a387bc720"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/e6a7a8d03d3e41beb0d9b8cd40b3104b",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "ba2e8ace8d19f1d21eb8dcc96540b42a6c2a895e055d0c9d3b2503bd9aa1440f",
+                "size": 65215
+              }
+            },
+            "schema_version": 1,
+            "sha256": "32ccb640a96c454250ce63bef4667de14a0b87295e36844fa998f96b6f7811a0",
+            "total_bytes": 65215
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/e6a7a8d03d3e41beb0d9b8cd40b3104b/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "ba2e8ace8d19f1d21eb8dcc96540b42a6c2a895e055d0c9d3b2503bd9aa1440f",
+          "state_sha256": "a44b241f9170d9d8b38395930670ce76bd8515b9d91dda91d5e7ae76417e8969"
+        },
+        "result_hash": "0b8af11d6dfaec635631e3adfc60ccd82728f5b3bcc23a21e5507be35ea9a354",
+        "task_id": "gaussian1d_stability"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "4d19f87e7519486fa97f63aa88f0d515",
+        "compatibility_key": "8c41d91740ff0eb423d8a68c387f570a15916110c1d51c3be632723f82f3f35c",
+        "envelope_hashes": {
+          "evidence": "35768d5ff0af3f367288ccb955ba22a86ca5753e2fb8627626efe19051268452",
+          "request": "a37d97a0b5456a3b7f296a951a35a145ab155638eb5f08c6f5143fb97479ccf0",
+          "result": "b55a38f4566667a62ade0186ff6d06402c369aba2a883e076438d0dd7fc05b05"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/4d19f87e7519486fa97f63aa88f0d515",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "31399955bd0169ea5a6c7ed891b9d7a5ff71eedc96bd9e9f55c3ff7c356987c8",
+                "size": 282845
+              }
+            },
+            "schema_version": 1,
+            "sha256": "7b0a6b9553830781acdac8dad118913a1cd3963a1413be936022dcb4e5b3311c",
+            "total_bytes": 282845
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/4d19f87e7519486fa97f63aa88f0d515/provenance",
+          "bytes": 282845,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "31399955bd0169ea5a6c7ed891b9d7a5ff71eedc96bd9e9f55c3ff7c356987c8",
+          "state_sha256": "df6e0f935721f848ead142ecb29e2557c6210030463309ef4f05f0a9fbb8c7f4"
+        },
+        "result_hash": "27f88d4eb76a15ff9a30c9533b9228d0c67e33a062fe8f9ea9d83e6d53994bca",
+        "task_id": "mode_hold"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "46bd60329b694bdb8384d2e02850a754",
+        "compatibility_key": "ca2692bcbc6b2530031f3f6e5d72e6d387610c54bdfa099208d40ea36ad26917",
+        "envelope_hashes": {
+          "evidence": "88aac76e439920de10abdd66637c77e7699d39c021c3e6988342b9179cb582d2",
+          "request": "12f6d22b6eb238efa62f4c6993dbd0788e68c3d7ae997f7022526ee28362a52e",
+          "result": "b0d1059df1e94bed61ea715cf93125b72dbaaf4ecce0850e275a35555772de56"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/46bd60329b694bdb8384d2e02850a754",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "377759be1c088fb5fcdfbefce9124c404f80aae476612d2fe8a19ade081ab95c",
+                "size": 109881
+              }
+            },
+            "schema_version": 1,
+            "sha256": "4d35ab613d7ce6d12ae07dca3f6501fb5f19a20f956c843f64bb07fb9ce18530",
+            "total_bytes": 109881
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/blacksmith-tempering-r2-v1/46bd60329b694bdb8384d2e02850a754/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "377759be1c088fb5fcdfbefce9124c404f80aae476612d2fe8a19ade081ab95c",
+          "state_sha256": "badd6f576bc1dfa388e0b6ea51f75d7c6b1e834fb489e826fb167fedc3f65e54"
+        },
+        "result_hash": "179550bef6337bf40febb67d65438cccbfa3e03e555008f74b161ed4b5e43a47",
+        "task_id": "vector_two_broad"
+      }
+    ],
+    "compute_profiles": {
+      "cuda": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    },
+    "source": {
+      "digest": "7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f",
+      "origin_commit": "da3bf1da4ca98c1230fb8c44329af7f59fc79508",
+      "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue/snapshots/7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f"
+    },
+    "study_sha256": "da82f5e037d3eae933eb9ee08223233fdc5aa963dc9730da600a65c6aec8d8e6",
+    "task_contracts": {
+      "gaussian1d_smoke": {
+        "dependencies": [],
+        "evaluation": {
+          "confirmation": "independent_draw_same_state",
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-smoke-v1",
+            "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_smoke",
+          "observations": 24,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "cca782f65abcf1b6415f2d4ed1640d929f775fe34a53998ab45706caaa1ddc36",
+        "updates": 1000
+      },
+      "gaussian1d_stability": {
+        "dependencies": [
+          {
+            "kind": "checkpoint",
+            "task": "gaussian1d_smoke"
+          }
+        ],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-stability-v1",
+            "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_stability",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "reacquisition_deadline": 5000,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "shift_checks": 48,
+          "shift_end": 6000,
+          "shift_hold_checks": 24,
+          "shift_mean": 3.0,
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "stationary_checks": 72,
+          "stationary_end": 4000,
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "b47ff896bafe98fea007b39f39a9c3ff1bd0e7678adaeff769e665c5a5046eec",
+        "updates": 6000
+      },
+      "mode_hold": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "modes",
+              ">=",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "b5872a9363a1e8be74225e35dfac2852ca566054c2cb0431a93e8ba257859348",
+        "updates": 1200
+      },
+      "two_pole": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_sha256": "af535c151a9832dfb153a67244b1ee360eabebfcbf0607f2a670b1b27548a5a4",
+        "updates": 80
+      },
+      "vector_two_broad": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "b787cd55024861226c72f2f506a77be5096b170dfdb95f29ac5a3fa5e187bfeb",
+        "updates": 1200
+      }
+    }
+  },
+  "matched_checks": {
+    "evidence_stream_projections": {
+      "candidate": {
+        "gaussian1d_smoke": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "optimizer_tempering": 0.95,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "c38f6fc6b2ed45eaefebd60af6be721c8688d7a0b35dedf82e1545414b97184f",
+          "data_sha256": {
+            "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+          },
+          "final_history_coherence": {
+            "count": 268,
+            "max": 0.3772139549255371,
+            "mean": 0.08345081152165493,
+            "min": 0.00021408629254437983
+          },
+          "final_history_coherence_by_role": {
+            "critic": {
+              "count": 6,
+              "max": 0.14177386462688446,
+              "mean": 0.09036608963894348,
+              "min": 0.00442742882296443
+            },
+            "generator": {
+              "count": 6,
+              "max": 0.33095845580101013,
+              "mean": 0.2990039736032486,
+              "min": 0.24898406863212585
+            },
+            "prior": {
+              "count": 256,
+              "max": 0.3772139549255371,
+              "mean": 0.07823670745449363,
+              "min": 0.00021408629254437983
+            }
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 25,
+            "sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 13
+        },
+        "mode_hold": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "optimizer_tempering": 0.95,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "b224613f78e90705712d41d5c99ff7dd4d34a578ce4fc28884fc24422818e889",
+          "final_history_coherence": {
+            "count": 28,
+            "max": 0.5105956792831421,
+            "mean": 0.1337276130715119,
+            "min": 0.009079170413315296
+          },
+          "final_history_coherence_by_role": {
+            "critic": {
+              "count": 8,
+              "max": 0.09866650402545929,
+              "mean": 0.05012854211963713,
+              "min": 0.022931313142180443
+            },
+            "generator": {
+              "count": 8,
+              "max": 0.19385097920894623,
+              "mean": 0.15357802156358957,
+              "min": 0.11690183728933334
+            },
+            "prior": {
+              "count": 12,
+              "max": 0.5105956792831421,
+              "mean": 0.1762267213780433,
+              "min": 0.009079170413315296
+            }
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "2e3c137c8fb1abdd9f6ea1b014a8246a0a95dfeddfa06205bf40594f32503903",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "1d886ab9dad19d6cf2fb381af46bb401b28d1276cf757fb75f5c7c9cceb73057",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "b91435ee9c966ba92b73a22e3847f7e4d3c3eec70fcce72c1ffdf2ff2ca64115",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 17
+        },
+        "two_pole": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "lr_schedule": "cosine",
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.001,
+            "optimizer_tempering": 0.95,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 80
+          },
+          "actual_recipe_sha256": "1ac7ff6cc4f3c919771c6a30edd97498379bf71a54f285afff9e22ec230ac72a",
+          "final_history_coherence": {
+            "count": 5,
+            "max": 0.9333751797676086,
+            "mean": 0.6694835186004638,
+            "min": 0.2960700988769531
+          },
+          "final_history_coherence_by_role": {
+            "critic": {
+              "count": 4,
+              "max": 0.9296759963035583,
+              "mean": 0.6035106033086777,
+              "min": 0.2960700988769531
+            },
+            "generator": {
+              "count": 1,
+              "max": 0.9333751797676086,
+              "mean": 0.9333751797676086,
+              "min": 0.9333751797676086
+            }
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "initialization": {},
+          "optimizer_group_bindings": [
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.012,
+              "beta2_schedule_declared": false,
+              "counter_role": "prior",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.012,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "prior",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "generator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "direct_sample_coordinates"
+            },
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.018000000000000002,
+              "beta2_schedule_declared": false,
+              "counter_role": "discriminator",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.018000000000000002,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "network",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "discriminator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "network"
+            }
+          ],
+          "rng_audit_summary": {
+            "count": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 5
+        },
+        "vector_two_broad": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "optimizer_tempering": 0.95,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "a3daef0749b83057f5c5185437698493c07d40660c08d6fe3167029032b51397",
+          "final_history_coherence": {
+            "count": 268,
+            "max": 0.46695154905319214,
+            "mean": 0.08935902868362783,
+            "min": 0.0005449174204841256
+          },
+          "final_history_coherence_by_role": {
+            "critic": {
+              "count": 6,
+              "max": 0.43691372871398926,
+              "mean": 0.3336174363891284,
+              "min": 0.21140597760677338
+            },
+            "generator": {
+              "count": 6,
+              "max": 0.29694902896881104,
+              "mean": 0.24362094700336456,
+              "min": 0.17705999314785004
+            },
+            "prior": {
+              "count": 256,
+              "max": 0.46695154905319214,
+              "mean": 0.08001870854241133,
+              "min": 0.0005449174204841256
+            }
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 13
+        }
+      },
+      "control": {
+        "gaussian1d_smoke": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "6dbccba08ca18012d36e2963891c8d0dd2054c498a74a543539a8de41a8b13a1",
+          "data_sha256": {
+            "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+          },
+          "final_history_coherence": null,
+          "final_history_coherence_by_role": {},
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 25,
+            "sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 0
+        },
+        "gaussian1d_stability": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "6dbccba08ca18012d36e2963891c8d0dd2054c498a74a543539a8de41a8b13a1",
+          "data_sha256": {
+            "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+            "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+          },
+          "final_history_coherence": null,
+          "final_history_coherence_by_role": {},
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 121,
+            "sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 0
+        },
+        "mode_hold": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "3df75027fe655f10d93057e4e4b14358a644e06c213c0791ab59e39e606e4c9b",
+          "final_history_coherence": null,
+          "final_history_coherence_by_role": {},
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "2e3c137c8fb1abdd9f6ea1b014a8246a0a95dfeddfa06205bf40594f32503903",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "1d886ab9dad19d6cf2fb381af46bb401b28d1276cf757fb75f5c7c9cceb73057",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "b91435ee9c966ba92b73a22e3847f7e4d3c3eec70fcce72c1ffdf2ff2ca64115",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 0
+        },
+        "two_pole": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "lr_schedule": "cosine",
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.001,
+            "optimizer_tempering": 0.0,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 80
+          },
+          "actual_recipe_sha256": "61786a8f45cdf0f1d5dfe02e905bc1e4509e30b9d4a2fbc7ac5c310dd6bb8ccc",
+          "final_history_coherence": null,
+          "final_history_coherence_by_role": {},
+          "final_named_stream_states": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "initialization": {},
+          "optimizer_group_bindings": [
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.012,
+              "beta2_schedule_declared": false,
+              "counter_role": "prior",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.012,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "prior",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "generator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "direct_sample_coordinates"
+            },
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.018000000000000002,
+              "beta2_schedule_declared": false,
+              "counter_role": "discriminator",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.018000000000000002,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "network",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "discriminator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "network"
+            }
+          ],
+          "rng_audit_summary": {
+            "count": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 0
+        },
+        "vector_two_broad": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "31da377596bff7eac7c2cd7d2cb7a73c2e2e789f318f4cd7405e8fffac198cd6",
+          "final_history_coherence": null,
+          "final_history_coherence_by_role": {},
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          },
+          "tempering_history_tensors": 0
+        }
+      }
+    },
+    "runtime_equal": true,
+    "source_equal": true,
+    "task_checks": {
+      "gaussian1d_smoke": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "mode_hold": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "two_pole": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "vector_two_broad": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      }
+    }
+  }
+}

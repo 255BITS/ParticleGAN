@@ -63,6 +63,36 @@ def summarize(task, row):
     return result
 
 
+def optimizer_leaves(value):
+    """Public trainer and behavioral checkpoints use dict/list role containers."""
+    if isinstance(value, dict):
+        if 'state' in value and 'param_groups' in value:
+            yield value
+        else:
+            for packet in value.values():
+                yield from optimizer_leaves(packet)
+    elif isinstance(value, (list, tuple)):
+        for packet in value:
+            yield from optimizer_leaves(packet)
+
+
+def history_gain(history):
+    mean, square, count = [history[k] for k in ('temper_mean', 'temper_square', 'temper_count')]
+    correction = 1 - torch.full_like(count, .95, dtype=mean.dtype).pow(count)
+    if count.ndim:
+        valid = count[:, 0] > 0
+        numerator = mean.square().sum(dim=1)[valid]
+        denominator = (square.sum(dim=1) * correction[:, 0])[valid]
+    else:
+        numerator = mean.square().sum().reshape(1)
+        denominator = (square.sum() * correction).reshape(1)
+    return (numerator / denominator.clamp_min(torch.finfo(mean.dtype).tiny)).clamp(0, 1).tolist()
+
+
+def gain_summary(gains):
+    return {'count':len(gains), 'mean':sum(gains)/len(gains), 'min':min(gains), 'max':max(gains)} if gains else None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--queue', type=Path, required=True)
@@ -133,7 +163,8 @@ def main():
             mirror = ROOT / 'reports/forge/attempts' / attempt
             mirror.mkdir(parents=True, exist_ok=True)
             for name in ('request', 'result', 'evidence'):
-                shutil.copyfile(original / (name + '.json'), mirror / (name + '.json'))
+                if original.resolve() != mirror.resolve():
+                    shutil.copyfile(original / (name + '.json'), mirror / (name + '.json'))
             row = next(r for r in result['task_results'] if r['task_id'] == task_id)
             if row['compatibility_key'] != jobdef['compatibility_key']:
                 raise ValueError('task compatibility differs')
@@ -171,22 +202,19 @@ def main():
                 optimizer_packets = saved.get('optimizers', {})
                 if 'trainer' in saved:
                     optimizer_packets = dict(enumerate(saved['trainer']['optimizers']))
-                histories = [v for opt in optimizer_packets.values() if isinstance(opt, dict)
-                             for v in opt.get('state', {}).values() if 'temper_mean' in v]
+                packets = list(optimizer_leaves(optimizer_packets))
+                histories = [v for opt in packets for v in opt.get('state', {}).values() if 'temper_mean' in v]
                 matched[arm][task_id]['tempering_history_tensors'] = len(histories)
-                gains = []
-                for history in histories:
-                    mean, square, count = [history[k] for k in ('temper_mean', 'temper_square', 'temper_count')]
-                    correction = 1 - torch.full_like(count, .95, dtype=mean.dtype).pow(count)
-                    if count.ndim:
-                        valid = count[:, 0] > 0
-                        numerator = mean.square().sum(dim=1)[valid]
-                        denominator = (square.sum(dim=1) * correction[:, 0])[valid]
-                    else:
-                        numerator = mean.square().sum().reshape(1)
-                        denominator = (square.sum() * correction).reshape(1)
-                    gains.extend((numerator / denominator.clamp_min(torch.finfo(mean.dtype).tiny)).clamp(0, 1).tolist())
-                matched[arm][task_id]['final_history_coherence'] = ({'count': len(gains), 'mean': sum(gains)/len(gains), 'min': min(gains), 'max': max(gains)} if gains else None)
+                matched[arm][task_id]['final_history_coherence'] = gain_summary([g for h in histories for g in history_gain(h)])
+                roles = {}
+                for opt in packets:
+                    for group in opt['param_groups']:
+                        role = group['role']
+                        for identifier in group['params']:
+                            history = opt['state'].get(identifier, {})
+                            if 'temper_mean' in history:
+                                roles.setdefault(role, []).extend(history_gain(history))
+                matched[arm][task_id]['final_history_coherence_by_role'] = {role: gain_summary(gains) for role,gains in roles.items()}
                 if arm == 'candidate' and optimizer_packets and not histories:
                     raise ValueError('candidate did not checkpoint evidence history')
                 if arm == 'control' and histories:

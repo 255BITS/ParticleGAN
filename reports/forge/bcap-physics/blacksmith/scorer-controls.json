@@ -1,0 +1,414 @@
+{
+  "qualification_input": false,
+  "scope": "separate_scorer_fixture_cohort",
+  "seed": 0,
+  "optimizer_updates_added": 0,
+  "model_calls_added": 0,
+  "elapsed_cpu_wall_seconds": 0.09586972207762301,
+  "controls": [
+    {
+      "task": "gaussian1d_smoke",
+      "fixture": "oracle",
+      "metric_status": "PASS",
+      "failed_bounds": [],
+      "metrics": {
+        "sample_count": 4096,
+        "finite_fraction": 1.0,
+        "mean": 1.9951847814954817,
+        "std": 0.4966299921467373,
+        "mean_error_sigma": 0.009630437009036541,
+        "std_ratio": 0.9932599842934746,
+        "cdf_ks": 0.01385398179954156
+      }
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "fixture": "collapsed",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "std_ratio >= 0.8",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "sample_count": 4096,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "std": 0.0,
+        "mean_error_sigma": 0.0,
+        "std_ratio": 0.0,
+        "cdf_ks": 0.5
+      }
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "fixture": "shifted",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "mean_error_sigma <= 0.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "sample_count": 4096,
+        "finite_fraction": 1.0,
+        "mean": 2.495184781611897,
+        "std": 0.4966299922268874,
+        "mean_error_sigma": 0.9903695632237941,
+        "std_ratio": 0.9932599844537748,
+        "cdf_ks": 0.38117501065493076
+      }
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "fixture": "same_moment_atoms",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "sample_count": 4096,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "std": 0.5,
+        "mean_error_sigma": 0.0,
+        "std_ratio": 1.0,
+        "cdf_ks": 0.3413447460685429
+      }
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "fixture": "too_wide",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "std_ratio <= 1.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "sample_count": 4096,
+        "finite_fraction": 1.0,
+        "mean": 1.9903695629909635,
+        "std": 0.9932599842934746,
+        "mean_error_sigma": 0.019260874018073082,
+        "std_ratio": 1.9865199685869492,
+        "cdf_ks": 0.1670717564743175
+      }
+    },
+    {
+      "task": "vector_two_broad",
+      "fixture": "oracle",
+      "metric_status": "PASS",
+      "failed_bounds": [],
+      "metrics": {
+        "sw1_normalized": 0.012816735160678544,
+        "mean_error": 0.014257365837693214,
+        "covariance_error": 0.004867191426455975,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.006103515625,
+        "min_mass_ratio": 0.98779296875,
+        "hq": 0.98974609375,
+        "component_covariance_error": 0.01791555155068636,
+        "component_covariance_errors": [
+          0.015745799988508224,
+          0.020085303112864494
+        ],
+        "component_min_eigen_ratio": 0.9930799603462219,
+        "component_core_covariance_error": 0.017061656340956688,
+        "component_core_covariance_errors": [
+          0.015745799988508224,
+          0.01837751269340515
+        ],
+        "component_core_min_eigen_ratio": 0.9889711737632751,
+        "component_core_eigen_ratios": [
+          1.006472110748291,
+          0.9889711737632751
+        ],
+        "max_component_spill": 0.01087493821978569,
+        "component_spill": [
+          0.01087493821978569,
+          0.009647853672504425
+        ],
+        "component_mass": [
+          0.493896484375,
+          0.506103515625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2023,
+          2073
+        ],
+        "component_resolved": [
+          true,
+          true
+        ],
+        "resolved_core_covariance_error": 0.017061656340956688,
+        "resolved_core_min_eigen_ratio": 0.9889711737632751,
+        "resolved_max_component_spill": 0.01087493821978569
+      }
+    },
+    {
+      "task": "vector_two_broad",
+      "fixture": "collapsed_local_shape",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "sw1_normalized <= 0.18",
+        "component_covariance_error <= 0.85",
+        "component_min_eigen_ratio >= 0.15"
+      ],
+      "metrics": {
+        "sw1_normalized": 0.18438381138443716,
+        "mean_error": 0.01754431426525116,
+        "covariance_error": 0.0775848999619484,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.006103515625,
+        "min_mass_ratio": 0.98779296875,
+        "hq": 1.0,
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0
+        ],
+        "max_component_spill": 0.0,
+        "component_spill": [
+          0.0,
+          0.0
+        ],
+        "component_mass": [
+          0.493896484375,
+          0.506103515625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2023,
+          2073
+        ],
+        "component_resolved": [
+          true,
+          true
+        ],
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 0.0
+      }
+    },
+    {
+      "task": "vector_two_broad",
+      "fixture": "shifted",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "sw1_normalized <= 0.18",
+        "mass_tv <= 0.15",
+        "hq >= 0.85",
+        "component_covariance_error <= 0.85"
+      ],
+      "metrics": {
+        "sw1_normalized": 0.8298889162065609,
+        "mean_error": 1.3480027914047241,
+        "covariance_error": 0.004867192357778549,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.25,
+        "min_mass_ratio": 0.5,
+        "hq": 0.006103515625,
+        "component_covariance_error": 4.138208881020546,
+        "component_covariance_errors": [
+          0.4562378227710724,
+          7.8201799392700195
+        ],
+        "component_min_eigen_ratio": 0.354872465133667,
+        "component_core_covariance_error": 2.2983007431030273,
+        "component_core_covariance_errors": [
+          0.624152660369873,
+          3.9724488258361816
+        ],
+        "component_core_min_eigen_ratio": 0.20360171794891357,
+        "component_core_eigen_ratios": [
+          0.20360171794891357,
+          0.3656172752380371
+        ],
+        "max_component_spill": 0.9954426884651184,
+        "component_spill": [
+          0.9892578125,
+          0.9954426884651184
+        ],
+        "component_mass": [
+          0.25,
+          0.75
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          1024,
+          3072
+        ],
+        "component_resolved": [
+          true,
+          true
+        ],
+        "resolved_core_covariance_error": 2.2983007431030273,
+        "resolved_core_min_eigen_ratio": 0.20360171794891357,
+        "resolved_max_component_spill": 0.9954426884651184
+      }
+    },
+    {
+      "task": "vector_two_broad",
+      "fixture": "missing_component",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "sw1_normalized <= 0.18",
+        "mass_tv <= 0.15",
+        "component_min_eigen_ratio >= 0.15"
+      ],
+      "metrics": {
+        "sw1_normalized": 0.59778984348028,
+        "mean_error": 0.9403794407844543,
+        "covariance_error": 0.9376257658004761,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.5,
+        "min_mass_ratio": 0.0,
+        "hq": 0.9892578125,
+        "component_covariance_error": 0.5072189392521977,
+        "component_covariance_errors": [
+          0.014437878504395485,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_core_covariance_error": 0.5072189392521977,
+        "component_core_covariance_errors": [
+          0.014437878504395485,
+          1.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_core_eigen_ratios": [
+          1.003440260887146,
+          0.0
+        ],
+        "max_component_spill": 1.0,
+        "component_spill": [
+          0.0107421875,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          4096,
+          0
+        ],
+        "component_resolved": [
+          true,
+          true
+        ],
+        "resolved_core_covariance_error": 0.5072189392521977,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0
+      }
+    },
+    {
+      "task": "mode_hold",
+      "fixture": "oracle",
+      "metric_status": "PASS",
+      "failed_bounds": [],
+      "metrics": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.990234375,
+        "cover": 1.0,
+        "effective_modes": 7.992692470550537
+      }
+    },
+    {
+      "task": "mode_hold",
+      "fixture": "missing_modes",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "modes >= 8"
+      ],
+      "metrics": {
+        "modes": 1,
+        "n_modes": 8,
+        "hq": 1.0,
+        "cover": 0.125,
+        "effective_modes": 1.0
+      }
+    },
+    {
+      "task": "mode_hold",
+      "fixture": "off_support",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "modes >= 8",
+        "hq >= 0.9"
+      ],
+      "metrics": {
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      }
+    },
+    {
+      "task": "two_pole",
+      "fixture": "metric_oracle",
+      "metric_status": "PASS",
+      "failed_bounds": [],
+      "metrics": {
+        "mean_abs": 0.5,
+        "grad_med": 0.5
+      },
+      "scope": "metric_only_fixture"
+    },
+    {
+      "task": "two_pole",
+      "fixture": "inactive",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "mean_abs >= 0.3"
+      ],
+      "metrics": {
+        "mean_abs": 0.0,
+        "grad_med": 0.5
+      },
+      "scope": "metric_only_fixture"
+    },
+    {
+      "task": "two_pole",
+      "fixture": "uncapped",
+      "metric_status": "FAIL",
+      "failed_bounds": [
+        "grad_med <= 1.0"
+      ],
+      "metrics": {
+        "mean_abs": 0.5,
+        "grad_med": 2.0
+      },
+      "scope": "metric_only_fixture"
+    }
+  ]
+}
