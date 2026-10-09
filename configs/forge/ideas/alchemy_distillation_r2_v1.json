@@ -1,0 +1,57 @@
+{
+  "api_changes": [
+    {
+      "provider": "particlegan.Recipe.distillation_loss",
+      "variables": [
+        "distillation_weight",
+        "distillation_cells"
+      ],
+      "affected_hosts": "GANTrainer vector batches; frozen public_components tasks explicitly BLOCKED",
+      "migration": "Defaults0/8 preserve serialized recipes and checkpoints; stateless, no added RNG"
+    }
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Add label-free same-batch eight-cell mass/location/shape moment distillation, weight1; all winning game, BCAP, DualNorm, rates, sampling and prior conditions retained"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/alchemy/README.md",
+  "id": "alchemy_distillation_r2_v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "A real-derived partition of unity separates occupancy from centered first and second moments; explicit residuals backpropagate through the existing generator and prior without renewal or labels.",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "prior_art": [
+    "https://proceedings.mlr.press/v70/mroueh17a.html",
+    "https://proceedings.mlr.press/v37/li15.html",
+    "reports/forge/bcap-tier2-search/failure-state-analysis.json"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "distillation_weight": 1.0,
+    "distillation_cells": 8
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "alchemy-distillation"
+}

@@ -72,6 +72,8 @@ def technique_signature(value):
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
+    if recipe.distillation_weight:
+        mechanisms["soft_cell_distillation"] = {"cells": recipe.distillation_cells}
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
         mechanisms["hybrid_adam_rate_override"] = recipe.optimizer_adam_lr is not None
     critic_betas = recipe.d_betas or recipe.betas

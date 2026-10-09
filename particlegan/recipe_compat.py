@@ -1,6 +1,7 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "distillation_weight": 0.0, "distillation_cells": 8,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
     "d_betas": None, "d_eps": None, "prior_eps": None,

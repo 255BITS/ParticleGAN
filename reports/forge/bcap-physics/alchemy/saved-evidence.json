@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "scope": "zero_training_target_aware_witness_diagnostic_only",
+  "qualification_credit": false,
+  "optimizer_updates": 0,
+  "random_draws": 0,
+  "original_source": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+  "original_candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "source_report_sha256": "c462265fc74affcd4d1e39e6363d4b96052883688f468e801e064e801b9edd78",
+  "tasks": {
+    "vector_unequal_mass": {
+      "artifact": {
+        "task": "vector_unequal_mass",
+        "attempt_id": "9fadb126cd3346e0afebf0ae94058452",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/9fadb126cd3346e0afebf0ae94058452/observed-samples.pt",
+        "sha256": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "step": 1200,
+      "samples": 4096,
+      "teacher_law": "deterministic normal quantiles with irrational rotation; separate target-aware diagnostic",
+      "saved_endpoint": {
+        "loss": 3.9522101715671076,
+        "mass": 0.40416210382489887,
+        "location": 0.39512154556677714,
+        "shape": 3.1529265221754317,
+        "gradient_rms": 0.010042853610559566,
+        "finite": true
+      },
+      "empirical_null": {
+        "loss": 0.0,
+        "mass": 0.0,
+        "location": 0.0,
+        "shape": 0.0,
+        "gradient_rms": 0.0,
+        "finite": true
+      },
+      "collapse": {
+        "loss": 0.2788153705320569,
+        "mass": 0.05397141399966643,
+        "location": 0.10746836547820358,
+        "shape": 0.11737559105418688,
+        "gradient_rms": 0.00022780893039326777,
+        "finite": true
+      },
+      "broadening": {
+        "loss": 1.5145318231136957,
+        "mass": 0.01573997516027384,
+        "location": 0.18881860176609788,
+        "shape": 1.309973246187324,
+        "gradient_rms": 0.0032051333701655447,
+        "finite": true
+      },
+      "shift": {
+        "loss": 1.4476881446192535,
+        "mass": 0.2738684824309248,
+        "location": 0.7086974594563633,
+        "shape": 0.4651222027319655,
+        "gradient_rms": 0.0030271334927246315,
+        "finite": true
+      },
+      "missing_component": {
+        "loss": 0.020466281873969844,
+        "mass": 0.020432195622608316,
+        "location": 8.718950188575567e-06,
+        "shape": 2.5367301172952018e-05,
+        "gradient_rms": 7.954079768085717e-06,
+        "finite": true
+      },
+      "original_center_allocation": [
+        142,
+        94,
+        19,
+        1
+      ]
+    },
+    "vector_unequal_width": {
+      "artifact": {
+        "task": "vector_unequal_width",
+        "attempt_id": "c2701b900fb64a748e5d908245eb8feb",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/c2701b900fb64a748e5d908245eb8feb/observed-samples.pt",
+        "sha256": "5012bd6a392e978905e669dfb184d0637ffd1c238b6c61b817f41384ce49c25e"
+      },
+      "step": 1200,
+      "samples": 4096,
+      "teacher_law": "deterministic normal quantiles with irrational rotation; separate target-aware diagnostic",
+      "saved_endpoint": {
+        "loss": 1.6838846957284155,
+        "mass": 0.6502798548981223,
+        "location": 0.2063092083025232,
+        "shape": 0.8272956325277699,
+        "gradient_rms": 0.00354663021897607,
+        "finite": true
+      },
+      "empirical_null": {
+        "loss": 0.0,
+        "mass": 0.0,
+        "location": 0.0,
+        "shape": 0.0,
+        "gradient_rms": 0.0,
+        "finite": true
+      },
+      "collapse": {
+        "loss": 0.3758588526625102,
+        "mass": 0.014729567316748135,
+        "location": 0.21154239052774287,
+        "shape": 0.14958689481801918,
+        "gradient_rms": 0.00012670310500466074,
+        "finite": true
+      },
+      "broadening": {
+        "loss": 1.8210506361419576,
+        "mass": 0.0012375071079265825,
+        "location": 0.2595597896776814,
+        "shape": 1.5602533393563496,
+        "gradient_rms": 0.00437829000932447,
+        "finite": true
+      },
+      "shift": {
+        "loss": 6.543449670383262,
+        "mass": 0.18049318240434759,
+        "location": 1.5892657976994906,
+        "shape": 4.773690690279423,
+        "gradient_rms": 0.023726921193934145,
+        "finite": true
+      },
+      "missing_component": {
+        "loss": 0.3334233713477724,
+        "mass": 0.3333359071280038,
+        "location": 1.3621775616060885e-05,
+        "shape": 7.384244415254263e-05,
+        "gradient_rms": 1.8950071419458072e-05,
+        "finite": true
+      },
+      "original_center_allocation": [
+        95,
+        13,
+        108,
+        40
+      ]
+    }
+  },
+  "global_rng_unchanged": true,
+  "cpu_wall_seconds": 0.18027984199579805
+}

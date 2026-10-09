@@ -47,6 +47,9 @@ class Recipe:
     reg_kappa: float = 1.0
     reg_every: int = 1
     prior_reg: float = 0.0
+    # Same-batch finite soft-cell mass/location/shape witness; no extra draws.
+    distillation_weight: float = 0.0
+    distillation_cells: int = 8
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -200,6 +203,11 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if (type(self.distillation_weight) not in (int, float)
+                or not math.isfinite(self.distillation_weight) or self.distillation_weight < 0):
+            raise ValueError("distillation_weight must be finite and nonnegative")
+        if type(self.distillation_cells) is not int or self.distillation_cells < 1:
+            raise ValueError("distillation_cells must be a positive integer")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -556,6 +564,15 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
+
+    def distillation_loss(self, fake, real, *, return_parts=False):
+        """The opt-in label-free sample-space moment witness."""
+        from .distillation import distillation_loss
+        result = distillation_loss(fake, real, cells=self.distillation_cells, return_parts=return_parts)
+        if return_parts:
+            loss, parts = result
+            return self.distillation_weight * loss, parts
+        return self.distillation_weight * result
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

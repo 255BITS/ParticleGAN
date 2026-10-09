@@ -176,6 +176,9 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.distillation_weight and task.get("execution", {}).get("execution_path") == "public_components":
+        return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
+                "Recipe.distillation_loss; mechanism is unsupported"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "alchemy_distillation_r2_diagnostic",
+  "goal": "discriminator_stability",
+  "revision": 1,
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "order": 0,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "order": 1,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "gaussian1d_stability",
+      "order": 2,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "vector_unequal_mass",
+      "order": 3,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "vector_unequal_width",
+      "order": 4,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "vector_two_broad",
+      "order": 5,
+      "qualification_tier": 1,
+      "importance": "diagnostic"
+    }
+  ],
+  "eligibility": {},
+  "ranking": {
+    "policy": "raw_metrics_only",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Subset mechanism diagnostic supplies no ordinary qualification, profile calibration or default-adoption credit."
+  },
+  "policy_change_reason": "Explicit finite round2 mechanism study on unchanged tasks; independent Gaussian own-state dependency preserved."
+}
