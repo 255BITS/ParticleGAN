@@ -20,7 +20,8 @@ from test_dualnorm_optimizers import assert_state_equal
 def trainer_for(family):
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(0)
-        recipe = get_recipe("bcap", optimizer_family=family,
+        recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0.,
+                            optimizer_convolution="none", optimizer_family=family,
                             optimizer_momentum=.5 if family == "dualnorm" else 0.,
                             lr=.01, d_lr_mult=1.5, prior_lr_mult=3.,
                             z_dim=2, num_particles=8, batch_size=4, total_steps=6,

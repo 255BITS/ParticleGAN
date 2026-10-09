@@ -1,8 +1,9 @@
 # Opt-in fixed-scale DualNorm smoothing
 
-`Recipe.optimizer_smoothing` defaults to `0.0`. Public BCAP keeps its existing
-numerical-rank truncation, constant rates and unsmoothed update rule. Positive
-values opt in to the feature examined in [PR #344](https://github.com/255BITS/ParticleGAN/pull/344).
+`Recipe.optimizer_smoothing` defaults to `0.0`. The named `bcap` preset selects
+`0.001` following the [completed search and owner-directed default selection](../reports/forge/bcap-tier2-search/DEFAULT_SELECTION.md).
+Set `optimizer_smoothing=0.0` explicitly for the historical unsmoothed rule.
+Positive values enable the feature examined in [PR #344](https://github.com/255BITS/ParticleGAN/pull/344).
 That study improved serial Gaussian acquisition but did not repair word holding
 or establish a continuous learner. Its archived receipts remain under their
 original source and gates; this feature does not promote those results.
@@ -87,11 +88,14 @@ matches source, protocol, tasks and runtime across
 categories while preserving their different mechanism signatures. It does not
 relax the ordinary same-technique guard.
 
-The subsequent [BCAP six-task study](../reports/forge/bcap-six/README.md) executes
-these three positive strengths with constant rates. All three pass the six
-required revision-8 Tier 1 tasks; the declared tie-break selects `1e-5`.
-Tier 2 retention and default adoption remain unmeasured. The original example
-declaration above retains its unexecuted identity.
+The subsequent [BCAP six-task study](../reports/forge/bcap-six/README.md) executed
+these three positive strengths with constant rates. All three passed the six
+required revision-8 Tier 1 tasks; its declared tie-break selected `1e-5`.
+The later [96-configuration search](../reports/forge/bcap-tier2-search/README.md)
+selected smoothing `0.001` with non-saturating loss and per-offset convolution,
+passing 6/6 Tier 1 and 7/21 Tier 2. Its owner-directed preset update does not
+establish calibrated scientific promotion. The original example declaration
+above retains its unexecuted identity.
 
 ## Software verification
 

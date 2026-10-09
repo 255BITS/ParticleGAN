@@ -913,16 +913,23 @@ guard, EMA anchor, A2 latent damping, direct-particle gain, prior regularization
 EMA averaging, and additive input/output training noise. Its defaults are
 coefficient 1, cap 1, penalty every update, G/E step `.012`, D step `.018`
 (`d_lr_mult=1.5`), and sampled-prior row step `.03` (`prior_lr_mult=2.5`).
-`optimizer_momentum=0`; `loss` defaults to `relativistic` and can be overridden.
+`optimizer_momentum=0`; `loss` defaults to `non_saturating`, with
+`optimizer_smoothing=.001` and `optimizer_convolution="per_offset"`.
+Each setting can be overridden explicitly.
+When selecting another optimizer family, use `bcap_adam` as the base or also
+set `optimizer_smoothing=0.0` and `optimizer_convolution="none"`.
 The resolved formulation is `bcap`. Selecting this preset does not change
 historical `Recipe(reg_arm="b_cap")` configurations. A declared MoG prior still
 has its kernel noise; that distribution is independent of additive training
 noise. Models, initialization, prior and execution budget belong to the caller.
 
-This owner-selected default passed 4/6 required Tier 1 tasks in the
-[optimizer-only pacing study](../reports/forge/dualnorm-pacing-v2/DEFAULT_SELECTION.md).
-Gaussian CDF fit and full ring-component covariance still fail; calibration,
-independent confirmation and scale transfer remain unestablished.
+This owner-selected default passed **6/6 Tier 1** and **7/21 Tier 2** in the
+[96-configuration search](../reports/forge/bcap-tier2-search/README.md), tying two
+alternatives and improving on the matched relativistic/smoothing-1e-5 control's
+6/21. The [default selection](../reports/forge/bcap-tier2-search/DEFAULT_SELECTION.md)
+records the subsequent API decision. Gaussian stability and broader coverage
+still fail; calibration, independent confirmation and scale transfer remain
+unestablished.
 `get_recipe("bcap_adam")` preserves the earlier native `torch.optim.Adam`
 preset with betas `(0, .999)`, G/D LR `.00425` and prior LR `.0085`.
 Restore old checkpoints with `Recipe(**saved_fields)`; recipe labels also
@@ -1294,9 +1301,9 @@ Numerically null directions receive zero update instead of being amplified to
 unit magnitude. The cutoff uses the computation dtype: float32 and float64 are
 preserved; float16/bfloat16 inputs compute in float32 and cast the result back.
 This replaces the former Newton--Schulz fast path for matrices larger than 1024,
-so large full-rank matrices can cost more per update. Higher-dimensional weight
-tensors require the explicit `optimizer_convolution="per_offset"` adaptation
-for module-bound Conv2d/ConvTranspose2d kernels; unlabelled high-rank tensors
+so large full-rank matrices can cost more per update. Conv2d/ConvTranspose2d
+weights require module bindings and `optimizer_convolution="per_offset"`,
+enabled by the `bcap` preset; unlabelled high-rank tensors
 remain unsupported. The [convolution contract](dualnorm-convolution.md) specifies
 channel-group layout, kernel scaling, smoothing and checkpoint compatibility.
 Older checkpoints load their stored state, but continue

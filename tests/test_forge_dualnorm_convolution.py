@@ -14,8 +14,8 @@ from experiments.forge.views import qualify
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_convolution_is_structural_and_default_recipe_identity_is_compatible():
-    base = get_recipe("bcap", optimizer_smoothing=1e-5)
+def test_convolution_is_structural_and_disabled_recipe_identity_is_compatible():
+    base = get_recipe("bcap", optimizer_smoothing=1e-5, optimizer_convolution="none")
     enabled = base.replace(optimizer_convolution="per_offset")
     assert recipe_field_owner("optimizer_convolution") == "technique"
     old = asdict(base)

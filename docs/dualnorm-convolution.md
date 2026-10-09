@@ -2,8 +2,10 @@
 
 `Recipe.optimizer_convolution="per_offset"` supports `nn.Conv2d` and
 `nn.ConvTranspose2d` kernels through the public Recipe factories and
-`GANTrainer`. The default is `"none"`, retaining the original unsupported-kernel
+`GANTrainer`. The dataclass default is `"none"`, retaining the original unsupported-kernel
 error and all existing dense/vector/prior updates and checkpoint packets.
+The named `bcap` preset enables `"per_offset"` as part of its
+[selected configuration](../reports/forge/bcap-tier2-search/DEFAULT_SELECTION.md).
 Only the `dualnorm` optimizer family supports this adaptation.
 
 ```python
@@ -21,8 +23,10 @@ Move modules to their intended device and apply the public deterministic
 initializer before constructing optimizers. Rates retain their declared
 schedule; the BCAP preset uses constant G/E `.012`, D `.018` and prior `.03`.
 This option adds no learning-rate annealing, random draws or initialization
-change. The recorded Tier 1 selection uses smoothing `1e-5`; that selection does
-not establish image quality for the new convolution rule.
+change. The earlier Tier 1 selection used smoothing `1e-5`; the current named
+BCAP preset uses `0.001` and non-saturating loss. The completed search passes
+stripes but fails bars, blobs and intensity, so convolution support alone does
+not establish image quality.
 
 ## Kernel rule
 

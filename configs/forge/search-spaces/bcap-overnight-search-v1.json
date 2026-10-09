@@ -1,0 +1,344 @@
+{
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 1032480,
+    "candidate_budget_seconds": 43020,
+    "id": "bcap-overnight-search-v1",
+    "purpose": "Separate finite overnight BCAP extension; both GPUs, one worker each; no retries.",
+    "schema_version": 1
+  },
+  "candidates": [
+    {
+      "base_candidate": "bcap-dualnorm-convolution-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.03,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.03,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.03,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 2.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_smoothing": 0.03,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-conv-momentum-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.5,
+              "network_lr_floor": 0.5,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.5,
+              "network_lr_floor": 0.5,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.0003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.15,
+              "network_lr_floor": 0.15,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.5,
+              "network_lr_floor": 0.5,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.5,
+              "network_lr_floor": 0.5,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_momentum": 0.5,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_momentum": 0.9,
+              "optimizer_smoothing": 0.003,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    }
+  ],
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "hypothesis": "Additional fixed positive smoothing strengths, player-rate ratios and enabled network momentum may improve BCAP retention within the existing Tier1/Tier2 gates. Declare all 24 complete recipes before launch; preserve the original 72-candidate study and evaluate the matched 96-recipe union by the same frozen whole-row objective.",
+  "id": "bcap-overnight-search-v1",
+  "protocol": "screening",
+  "rationale": "User asked to keep both GPUs busy overnight toward 06:00 America/Denver. Runtime/accounting estimates alone motivate the extra capacity. The domain is chosen from public supported knobs and archived pacing/smoothing evidence, without ranking or adapting to the first batch's scientific results. All BCAP-on; seed0; unchanged architecture/data/prior/initialization/sampling/horizon/evaluation/gates. Separate immutable 24-candidate campaign starts after the first campaign completes. Stop after its finite population; no scientific retries, Tier3 or default adoption.",
+  "samples": 24,
+  "schema": "forge_search_space_v1",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

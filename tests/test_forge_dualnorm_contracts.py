@@ -69,6 +69,7 @@ def test_forge_v1_bcap_remains_adam_while_public_bcap_selects_the_new_starter():
 def test_forge_bcap_binding_respects_explicit_winner_and_name_overrides():
     candidate = {"recipe_preset": "bcap", "recipe_overrides": {
         "name": "frozen-label", "optimizer_family": "dualnorm", "optimizer_momentum": 0.,
+        "loss": "non_saturating", "optimizer_smoothing": .001, "optimizer_convolution": "per_offset",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5}}
     resolved = resolve_public_recipe(candidate, name="report-label")
     assert asdict(resolved) == asdict(get_recipe("bcap").replace(name="report-label"))

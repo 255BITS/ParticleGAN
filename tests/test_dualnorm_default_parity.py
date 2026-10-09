@@ -1,4 +1,4 @@
-"""CUDA default compatibility against the pre-smoothing DualNorm update rule.
+"""CUDA zero-smoothing compatibility against the pre-smoothing DualNorm rule.
 
 The reference below retains the DualNorm/row-only branches from develop
 83b099d1e4330dda953d5fce4f68ce00f75fa9a6, independent of the new polar helper.
@@ -67,6 +67,7 @@ def test_zero_smoothing_matches_legacy_public_updates_and_checkpoint_packets(mon
 
     def build():
         recipe = get_recipe("bcap", num_particles=8, z_dim=2, batch_size=4, total_steps=8,
+                            loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
                             prior_kind="mog", sigma_rel=.1, standardize=False)
         generator = nn.Sequential(nn.Linear(2, 4), nn.Tanh(), nn.Linear(4, 1))
         critic = nn.Sequential(nn.Linear(1, 4), nn.Tanh(), nn.Linear(4, 1))
