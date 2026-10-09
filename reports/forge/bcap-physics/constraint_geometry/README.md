@@ -293,3 +293,12 @@ task-binding and Forge-study checks pass. Forge validates both declarations;
 final memory compilation uses summaries-only and retains existing qualification
 snapshots. Sharing/contention is explicit, and worker seconds are accounting,
 not a speed claim. The parent keeps the single cross-track leaderboard.
+
+## Corrected-source follow-up
+
+[Round two](round2/README.md) measures corrected schema2 in a separate,
+source-frozen matched comparison. It confirms inactive numerical parity and
+finishes 3 PASS / 3 FAIL for both arms, with no new sustained identity pass.
+The schema1 results and UNMEASURED status of the correction at this report's
+original publication remain historical evidence; round-two receipts carry the
+new measured identity and do not retroactively qualify schema1.

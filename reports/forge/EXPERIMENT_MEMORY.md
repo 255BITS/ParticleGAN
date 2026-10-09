@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 783. Inventory coverage: complete. Unresolved import items: 7.
+Records: 785. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4118,6 +4118,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
 
+### constraint_geometry-round2-nonascent-v1 · readout-99157305f41ca0b884ae5c08
+
+**Scope:** research_diagnostic; scientific; revision `118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139`.
+
+Corrected inactive-step parity eliminates the schema1 confound; projection of actual DualNorm steps protects existing objective derivatives and repairs conditional identity without losing the passing mid-scale guardrail.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 150.525; mechanism `structural`.
+
+
+
+Corrected schema2 is measured without the inactive recomposition confound; trajectory forecast falsified, no new sustained pass, and residual identity worsens.
+
+**Next:** Stop unchanged nonascent research revision; retain winner, no adoption or Tier2 qualification. Any future mechanism must distinguish useful strict progress and identity information using existing objectives and a separately authorized study.
+
+[Evidence](../../reports/forge/attempts/13b3583fd2bd4e24b609060af760115e/result.json) · [Record](records/readout-99157305f41ca0b884ae5c08.json)
+
 ### k3p · readout-9c29229a2baba56de3b40845
 
 **Scope:** calibration_diagnostic; scientific; revision `989a12b2dd014078e0e5dcf7c674be243b5a73bee19289c9500964a941369c69`.
@@ -4469,6 +4485,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
+
+### constraint_geometry-round2-control-v1 · readout-f9ca0b7a952b308fb000ed29
+
+**Scope:** research_diagnostic; scientific; revision `b4957b01e002fcc51b3b52b1e327894d6d44b7cef03b4a2e4f59aa30e3101b64`.
+
+Exact saved BCAP winner recipe is the primary matched baseline for the source-corrected schema2 comparison; conditional identity remains above its complete gate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 204.66; mechanism `structural`.
+
+
+
+Completed exact saved winner matched control for source-corrected schema2 diagnostic; 3 PASS and 3 FAIL with no qualification change.
+
+**Next:** Retain as primary control and historical winner; preserve broader original7/21 under its original source. No rerun for publication, no default change.
+
+[Evidence](../../reports/forge/attempts/08bc23af4da94ae4a0a903421a1abb94/result.json) · [Record](records/readout-f9ca0b7a952b308fb000ed29.json)
 
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
@@ -5006,4 +5038,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `84e39d58d82a5db9bd4578ec9e05b3f55f31c6353ea09f6d606c27dde7c7e1b6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `39eecc17c337985d8e73459a3ff63ac92b9c2ee5ec5535d85f3019650cae9fc8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

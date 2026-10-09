@@ -1,0 +1,624 @@
+{
+  "attempt_ids": [
+    "13b3583fd2bd4e24b609060af760115e",
+    "3453d2f15a3b471ba9666a2a6f7c3f65",
+    "3f335ac024354e3ab4dd4e7bcb136abc",
+    "951ebdbb4a3542c5bb3654e197ba763d",
+    "b15cdc66c3bf4ad8b66609e1eb037da5",
+    "b443bd02c85e414bbf97db9da98363d6"
+  ],
+  "candidate_id": "constraint_geometry-round2-nonascent-v1",
+  "candidate_revision": "118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Exact winner matched in identical source/runtime/seed0/task laws: both 3 PASS and 3 FAIL; trajectory MSE .2437363565 vs .2398618907, residual .0626398921 vs .0610360131 and own landings 5/12 vs 6/12; mid-scale suffix20 vs22; Gaussian and two-pole numeric states match bitwise when projection is inactive.",
+  "conclusion": "Corrected schema2 is measured without the inactive recomposition confound; trajectory forecast falsified, no new sustained pass, and residual identity worsens.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "13b3583fd2bd4e24b609060af760115e",
+        "3453d2f15a3b471ba9666a2a6f7c3f65",
+        "3f335ac024354e3ab4dd4e7bcb136abc",
+        "951ebdbb4a3542c5bb3654e197ba763d",
+        "b15cdc66c3bf4ad8b66609e1eb037da5",
+        "b443bd02c85e414bbf97db9da98363d6"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "3d7d8c27384a95ff6a30797871baaba0eef659d00125ff6c0cc5fcd35efe5dc8",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.2437363564968109
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.2437363564968109
+        }
+      },
+      "outcome": "falsified",
+      "provenance": [
+        {
+          "attempt_id": "13b3583fd2bd4e24b609060af760115e",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "ff7fd8a902c941b00cc27b1f4ee1a6435a221d42a0d207a3c2ea84a3f8269388",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3453d2f15a3b471ba9666a2a6f7c3f65",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "797705798058b07e92a05207704e9c976789dab7273df7f1e575e6e14a34596a",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3f335ac024354e3ab4dd4e7bcb136abc",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "cf9707c02f9e96719a794e32182dfcd171bd7c8148f8b3634a9880d4d814f344",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "951ebdbb4a3542c5bb3654e197ba763d",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "469961c39192aad06cb80b67832033ddc30df99ab832b98fcf3155fd001a7b94",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b15cdc66c3bf4ad8b66609e1eb037da5",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "e39d2123e43fd88b5ec229d6ef03da6019a643d25527ec3d4bbf8416f33821fd",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b443bd02c85e414bbf97db9da98363d6",
+          "producer_request_id": "a23561c3ed3914582a12aec0",
+          "producer_study_id": "constraint_geometry-round2-candidate-study-v1",
+          "result_hash": "d591e04520a2ab5289bda60dbc923099f0b7d526294a1d66febf5b29069f2c32",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "fe30603ebe2deb0ed2845a2bd0c6ab3bbf56ac5b71ad7999ec3672e1767e06e4",
+        "contract_sha256": "3d7d8c27384a95ff6a30797871baaba0eef659d00125ff6c0cc5fcd35efe5dc8",
+        "control_binding_sha256": "a84d2a49ac3a7a975a48edb9125e1683d298dc3f5c5f57ad2265be72dc48457e",
+        "policy_fingerprint": "91a26d4612d3498d5d014698424efb76bde1badd595550631dab4ed1e9f349de",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "5df18e3484bc0a1864c3521ed48147f99be9bcd9351fbceb26f2d51a6cd6c7f7"
+      },
+      "study_id": "constraint_geometry-round2-candidate-study-v1",
+      "study_sha256": "5df18e3484bc0a1864c3521ed48147f99be9bcd9351fbceb26f2d51a6cd6c7f7"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "constraint_geometry-round2-diagnostic-v1",
+  "hypothesis": "Corrected inactive-step parity eliminates the schema1 confound; projection of actual DualNorm steps protects existing objective derivatives and repairs conditional identity without losing the passing mid-scale guardrail.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop unchanged nonascent research revision; retain winner, no adoption or Tier2 qualification. Any future mechanism must distinguish useful strict progress and identity information using existing objectives and a separately authorized study.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "13b3583fd2bd4e24b609060af760115e",
+        "result_hash": "ff7fd8a902c941b00cc27b1f4ee1a6435a221d42a0d207a3c2ea84a3f8269388",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3453d2f15a3b471ba9666a2a6f7c3f65",
+        "result_hash": "797705798058b07e92a05207704e9c976789dab7273df7f1e575e6e14a34596a",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3f335ac024354e3ab4dd4e7bcb136abc",
+        "result_hash": "cf9707c02f9e96719a794e32182dfcd171bd7c8148f8b3634a9880d4d814f344",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "951ebdbb4a3542c5bb3654e197ba763d",
+        "result_hash": "469961c39192aad06cb80b67832033ddc30df99ab832b98fcf3155fd001a7b94",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "b15cdc66c3bf4ad8b66609e1eb037da5",
+        "result_hash": "e39d2123e43fd88b5ec229d6ef03da6019a643d25527ec3d4bbf8416f33821fd",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "b443bd02c85e414bbf97db9da98363d6",
+        "result_hash": "d591e04520a2ab5289bda60dbc923099f0b7d526294a1d66febf5b29069f2c32",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-99157305f41ca0b884ae5c08",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/13b3583fd2bd4e24b609060af760115e/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 12840,
+      "candidate_budget_seconds": 6420,
+      "id": "constraint_geometry-round2-v1"
+    },
+    "candidate": "constraint_geometry-round2-nonascent-v1",
+    "competing_explanation": "Inactive projection must be bitwise neutral; active projection may remove useful motion, protect an identity-ambiguous adversarial objective, or satisfy first-order feasibility without finite-step improvement. No new identity objective is added.",
+    "control": {
+      "candidate_id": "constraint_geometry-round2-control-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "identity_mse",
+      "op": ">",
+      "phase": "final",
+      "task_id": "trajectory",
+      "threshold": 0.02
+    },
+    "hypothesis": "Corrected inactive-step parity eliminates the schema1 confound; projection of actual DualNorm steps protects existing objective derivatives and repairs conditional identity without losing the passing mid-scale guardrail.",
+    "id": "constraint_geometry-round2-candidate-study-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "identity_mse",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "trajectory",
+      "threshold": 0.02
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "seed": 0,
+          "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+        },
+        "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "constraint_geometry-round2-diagnostic-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "constraint_geometry-round2-candidate-study-v1",
+  "study_sha256": "5df18e3484bc0a1864c3521ed48147f99be9bcd9351fbceb26f2d51a6cd6c7f7",
+  "task_results": [
+    {
+      "compatibility_key": "ecefe118665893b732a5ad271926ec9bf8fb4f75f3bc728f8bcf7c670d92946a",
+      "cost": {
+        "adapter_seconds": 1.0234814319992438,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.581461864057928,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.27328453597147,
+        "wall_seconds": 6.581461864057928
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "f9224d6af3bf5a6bb3eb20eb90928aa5f3985e5a0bb754a5b411a75af7f715d9",
+      "cost": {
+        "adapter_loop_seconds": 60.544063584995456,
+        "adapter_seconds": 60.864449257962406,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 66.75605745299254,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 58.46378000639379,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.5439590385649353
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1305837029358372
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 56.78923726489302
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 62.10900864098221,
+        "wall_seconds": 66.75605745299254
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "8c1d011aa40692116f739779d8dcb1c8f76cf7fa7ae1c4831c7e723730d45cfa",
+      "cost": {
+        "adapter_seconds": 8.897165352944285,
+        "charged_task": "residual_student",
+        "device": "0",
+        "execution_seconds": 15.150313825928606,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 10.241767893079668,
+        "wall_seconds": 15.150313825928606
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.04263989210128784,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.06263989210128784
+          },
+          "success_rate": {
+            "margin": -0.5833333134651184,
+            "metric": "success_rate",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 0.4166666865348816
+          },
+          "wrong_pad_rate": {
+            "margin": -0.5833333730697632,
+            "metric": "wrong_pad_rate",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.0,
+            "value": 0.5833333730697632
+          }
+        },
+        "passed": false,
+        "shortfall": 1.055555562178294,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.06263989210128784,
+        "success_rate": 0.4166666865348816,
+        "wrong_pad_rate": 0.5833333730697632
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "residual_student"
+    },
+    {
+      "compatibility_key": "712e50db4ac7da267ffdb3764fb2372a1ef8f16974327ce12abebfeaf4f962f4",
+      "cost": {
+        "adapter_loop_seconds": 12.893424907932058,
+        "adapter_seconds": 13.198540469980799,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 19.74559700791724,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 12.458612407557666,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4795961882919073
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12260048754978925
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 11.85641573171597
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 14.70472068397794,
+        "wall_seconds": 19.74559700791724
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "4c037db2db19af9f4b6f2ecfee5523d5ec57f65dc2932404dea0a87650bd5c45",
+      "cost": {
+        "adapter_seconds": 8.224779198062606,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 14.483609004993923,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 9.583562043029815,
+        "wall_seconds": 14.483609004993923
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.22373635649681092,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.2437363564968109
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.2437363564968109
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    },
+    {
+      "compatibility_key": "9d7f7898edf54238f1dd23ec2aad0873c705249ba33f5f3779b4200a4a5edd3f",
+      "cost": {
+        "adapter_seconds": 21.29212887492031,
+        "charged_task": "mid_scale_identity",
+        "device": "0",
+        "execution_seconds": 27.80765968502965,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 22.609753704047762,
+        "wall_seconds": 27.80765968502965
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 300,
+          "first_pass_step": 167,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 167
+        },
+        "metric_checks": {
+          "concept_cos_minus": {
+            "margin": 0.1499675750732422,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999675750732422
+          },
+          "concept_cos_plus": {
+            "margin": 0.14989634752273562,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9998963475227356
+          },
+          "concept_mag_minus": {
+            "margin": 0.2594141960144043,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 0.9905858039855957
+          },
+          "concept_mag_plus": {
+            "margin": 0.2548791170120239,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 0.9951208829879761
+          },
+          "identity_at_0": {
+            "margin": 0.1490474094423745,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9990474094423745
+          },
+          "identity_at_mid": {
+            "margin": 0.1429557066170406,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9929557066170406
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999675750732422,
+        "concept_cos_plus": 0.9998963475227356,
+        "concept_mag_minus": 0.9905858039855957,
+        "concept_mag_plus": 0.9951208829879761,
+        "identity_at_0": 0.9990474094423745,
+        "identity_at_mid": 0.9929557066170406
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mid_scale_identity"
+    }
+  ]
+}

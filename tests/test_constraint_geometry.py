@@ -143,12 +143,14 @@ def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
     rows = torch.tensor([0, 2, 2, 4], device=device)
 
     def rng_state():
-        return dict(python=random.getstate(), numpy=np.random.get_state()[1].copy(),
+        return dict(python=random.getstate(), numpy=deepcopy(np.random.get_state()),
                     cpu=torch.get_rng_state().clone(),
                     cuda=[x.clone() for x in torch.cuda.get_rng_state_all()] if device == 'cuda' else [])
 
     def assert_rng(a, b):
-        assert np.array_equal(a.pop('numpy'), b.pop('numpy'))
+        left, right = a.pop('numpy'), b.pop('numpy')
+        assert np.array_equal(left[1], right[1])
+        _assert_bitwise_state((left[0], *left[2:]), (right[0], *right[2:]))
         _assert_bitwise_state(a, b)
 
     # Two optimizer steps straddle a checkpoint round trip. No random samples,

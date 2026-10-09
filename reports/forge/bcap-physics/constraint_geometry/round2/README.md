@@ -1,6 +1,11 @@
 # Corrected constraint geometry: round two
 
-This prospective mechanism diagnostic tests corrected schema2 nonascent
+Corrected schema2 nonascent projection adds no sustained pass: both arms finish
+with 3 PASS and 3 FAIL in this six-task diagnostic. It fixes the inactive-update
+confound and preserves both passing guardrails, but trajectory and residual
+identity remain failures. Retain the winner and stop unchanged nonascent work.
+
+This completed mechanism diagnostic tests corrected schema2 nonascent
 projection against the exact saved BCAP winner. The [round-one report](../README.md)
 and its measured schema1 identities remain intact: all round-one causal claims
 are confounded by float32 recomposition of inactive updates. The correction
@@ -78,8 +83,8 @@ be reported as intervals between scheduled evaluations, not per-step descent
 certificates. Scorer controls will use target oracle and wrong-row permutation
 solely to validate metric sensitivity.
 
-The candidate and control studies are ready schema-v3 candidates with new
-round-two study IDs. Each reserves 6,420 worker seconds; campaign
+Both schema-v3 candidates had ready studies with new round-two IDs before
+training. Each reserves 6,420 worker seconds; campaign
 `constraint_geometry-round2-v1` reserves 12,840 total against the authorized
 14,400-second track ceiling. One candidate, one control, no seed repeats,
 sweeps, second candidate, default adoption or ordinary Tier2 qualification.
@@ -107,6 +112,136 @@ tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/constraint_geo
 tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/constraint_geometry/queue/constraint_geometry-round2-v1/ATTEMPT_ID/run.log
 ```
 
-Final numerical readout, exact source receipts and actual-training GIFs will
-be published from saved evidence without additional optimizer updates or
-sampling draws. The parent owns the one current goal leaderboard.
+## Complete numerical readout
+
+All 12 attempts completed, with zero retries, BLOCKED, INCOMPLETE or INVALID
+results. Both arms ran every permitted update and scheduled evaluation.
+Gaussian stability continued its own smoke checkpoint, adding 5,000 updates
+to the 1,000-update prefix. The pair consumed 15,360 training updates in total.
+
+| Task | Corrected projection | Exact winner control | Complete gate |
+| --- | --- | --- | --- |
+| Trajectory | FAIL; MSE **.24373636**, 0/24 passes, suffix 0 | FAIL; MSE **.23986189**, 0/24, suffix 0 | MSE <= .02; five terminal passing checks |
+| Residual student | FAIL; MSE **.06263989**, own landings **5/12**, wrong rate **7/12**, 0/24, suffix 0 | FAIL; MSE **.06103601**, own **6/12**, wrong **6/12**, 0/24, suffix 0 | MSE <= .02, success >= 1, wrong <= 0; five terminal passing checks |
+| Mid-scale identity | PASS; suffix **20**, first pass 167, five-check confirmation 300, mid identity **.99295571** | PASS; suffix **22**, first pass 100, confirmation 234, mid identity **.98144031** | Both concept cosines >= .85, magnitudes [.75,1.25], identity at 0/mid >= .85; five terminal passing checks |
+| Two-pole explicit fixture | PASS; suffix **17**, mean absolute position **.95850247**, median gradient **.95234573** | Identical PASS and metrics | Position >= .3, gradient <= 1; five terminal passing checks |
+| Gaussian smoke | PASS; **3/24** scheduled passes, first confirmed 375; endpoint KS **.07184216** | Identical PASS and every numerical observation | Any scheduled complete pass with independent same-state confirmation |
+| Gaussian stability | FAIL; stationary **2/72**, deadline FAIL, shifted hold **0/24**; endpoint KS **.32062289** | Identical FAIL and every numerical observation | All 72 stationary checks, five-terminal deadline reacquisition, all 24 shifted hold checks |
+
+Both Gaussian gates require at least 4,096 samples, finite fraction 1, normalized
+mean error <= .2, width ratio [.8,1.2], and KS <= .05 at each required check.
+The smoke endpoint can fail while the acquisition gate passes; no endpoint
+substitution is made. Stability ends at normalized mean error **.25523836** and
+width ratio **.66233034** in both arms. Acquisition does not establish retention.
+This diagnostic tally is not the ordinary Tier2 denominator or qualification.
+
+## Mechanism diagnosis
+
+| Candidate task | Projected / consumed steps | Maximum positive protected derivative before | After actual applied rounding |
+| --- | --- | --- | --- |
+| Trajectory | **44/400** | .02028830 | 9.67e-9 |
+| Residual student | **84/400** | .01736269 | 1.14e-8 |
+| Mid-scale identity | **50/800** | .00242274 | 9.27e-9 |
+| Two-pole | **0/80** | 0 | 0 |
+| Gaussian smoke | **0/1000** | 0 | 0 |
+| Gaussian stability, including prefix | **0/6000** | 0 | 0 |
+
+The implemented first-order protection operates where intended, with residual
+positive derivatives below 1.2e-8 after float32 parameter rounding. Nevertheless
+the trajectory forecast is falsified by more than an order of magnitude. Both
+arms retain the exact wrong-row cycle **2 -> 5 -> 8 -> 11 -> 2**, with the other
+eight rows closest to their own target. Residual ends with five own rows in the
+candidate versus six in the control. Projection does not repair allocation.
+
+Trajectory protects only the existing scalar adversarial objective, which
+offers no per-row identity guarantee and no paired-MSE training term. Residual
+does protect an existing paired residual objective that directly carries
+identity information. Its failure shows that missing paired information alone
+cannot explain both failures: nonascent of an informative gradient is still
+weaker than useful finite-step progress. The archived winner critic diagnostics
+suggested an identity-directed signal, but that old-source result is motivation
+and does not certify the round-two critic's endpoint field.
+
+Between the 24 scheduled conditional observations, mean prediction RMS movement
+is **.05952680 versus .06089882** for trajectory and **.05381611 versus .05656722**
+for residual (candidate versus control), reductions of approximately 2.3% and
+4.9%. Trajectory MSE increases in **7/23 versus 11/23** intervals; residual in
+**9/23 versus 8/23**. The candidate moves slightly less and still has worse final
+identity. These multi-update intervals neither measure per-step retained norm
+nor prove that projection removes useful progression on a particular step.
+Strict-progress, finite-step curvature and identity ambiguity remain competing
+explanations; this experiment does not distinguish them completely.
+
+Target-informed scorer controls use only saved panels, with zero new draws or
+updates. Both tasks' oracle has MSE **0** and passes; a one-row target permutation
+has MSE **.12535641** and fails. Residual oracle success/wrong rates are **1/0**,
+versus **0/1** for the permutation. Thus the metric rejects wrong identities;
+these controls are not trained models or replacement initialization cohorts.
+
+## Inactive parity, provenance and publication
+
+[Saved parity audit](inactive-trained-parity.json) verifies exact equality of
+final model tensors, role parameters, base optimizer state, every consumed named
+RNG stream, all numerical observations and retained scored sample arrays for
+two-pole and both Gaussian tasks. The Gaussian checkpoints additionally retain
+ambient CPU/CUDA global RNG states that differ across worker processes. Both
+states are unchanged from each run's certified initial checkpoint to its final
+checkpoint: training binds the isolated named model stream inside `fork_rng`
+and restores the ambient state. These unconsumed states are reported separately,
+not silently reset. Original full-checkpoint and same-state-confirmation hashes
+retain their original bytes; recipe/mode/statistics metadata makes cross-arm
+whole-checkpoint hash equality inappropriate. Named streams also match for all
+three active task pairs. All published task RNG audits report zero deviations.
+
+The exact measured source is commit
+`57aad8ea35fbd6989265db53af9ff39dff70b821`, digest
+`b87904dcae3e2df70006c04b51d3fd65d89979a72c7f5f1e841ae684517f7685`.
+Both arms bind this source and identical runtime/task contracts. The new
+declarations, audit tests and theory were pushed before enqueue. Later commits
+publish saved evidence only; no later optimizer implementation is being credited
+with these measurements.
+
+Candidate revision:
+`118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139`.
+Control revision:
+`b4957b01e002fcc51b3b52b1e327894d6d44b7cef03b4a2e4f59aa30e3101b64`.
+Requests: candidate `a23561c3ed3914582a12aec0`, control
+`5d7c25f3104e880885434fac`. Campaign charged **355.184536 worker seconds**,
+with **zero outstanding reservations**, within its 12,840-second ceiling.
+The remaining 1,560 seconds under the 14,400-second track ceiling cover bounded
+software/checkpoint audits and any execution repair; no scientific retry or
+additional candidate was run. Sharing and contention were authorized; cost is
+accounting and is not an optimizer speed claim.
+
+[Results](results.json), [compact certified receipts](receipts.json),
+[provenance](provenance.json), [validation](validation.json), and
+[GIF index](media/index.json) retain gates, complete source/runtime/recipe/init
+bindings, checkpoint/stream hashes, original certificate identities and local
+artifact paths. Reproduce the saved-only exports with
+[publish.py](publish.py) and [audit_saved_parity.py](audit_saved_parity.py).
+No publication step adds an optimizer update, sampler draw or new task grade.
+
+| Task | Corrected projection actual training | Matched control actual training |
+| --- | --- | --- |
+| Trajectory | [GIF](media/candidate-trajectory.gif) | [GIF](media/control-trajectory.gif) |
+| Residual student | [GIF](media/candidate-residual_student.gif) | [GIF](media/control-residual_student.gif) |
+| Mid-scale identity | [GIF](media/candidate-mid_scale_identity.gif) | [GIF](media/control-mid_scale_identity.gif) |
+| Two-pole explicit fixture | [GIF](media/candidate-two_pole.gif) | [GIF](media/control-two_pole.gif) |
+| Gaussian smoke | [GIF](media/candidate-gaussian1d_smoke.gif) | [GIF](media/control-gaussian1d_smoke.gif) |
+| Gaussian stability | [GIF](media/candidate-gaussian1d_stability.gif) | [GIF](media/control-gaussian1d_stability.gif) |
+
+Every GIF uses actual saved training outputs with uniformly selected scheduled
+states, paired with the task goal. Original observation curves remain complete;
+no images are selected by grade. Bulk stdout, metric events, checkpoints and
+tensors remain in the local queue. The compact audit/report/GIF sources are
+committed, and the parent owns the one current cross-track goal leaderboard.
+
+The focused software suite passes **205 checks**; Forge validates the new
+declarations. Readouts conclude both frozen studies using summaries-only memory
+compilation while preserving all archived qualification snapshots. Recommend
+**no adoption, no Tier2 qualification, and no unchanged nonascent rerun**. A
+future explicitly authorized mechanism should test useful strict progress on
+existing identity-bearing losses without adding hidden oracle supervision.
+
+Frozen study conclusions: [candidate readout](../../../records/readout-99157305f41ca0b884ae5c08.json)
+and [control readout](../../../records/readout-f9ca0b7a952b308fb000ed29.json).
