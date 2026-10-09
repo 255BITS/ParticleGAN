@@ -1,0 +1,67 @@
+{
+  "combined_reservation_ceiling_seconds": 13200,
+  "coordinator_preparation": {
+    "issues": [
+      "Queue.submit returns an entry containing request.request_id; two pre-drain KeyErrors repaired. Same frozen request reused; no extra job or scientific retry."
+    ],
+    "launched_training_updates": 0
+  },
+  "data_reconstruction": {
+    "elapsed_seconds": 3.5987859419547026,
+    "optimizer_updates": 0,
+    "receipt": "batch-sequence-replay.json",
+    "reservation_seconds": 120,
+    "trained_rng_mutations": 0
+  },
+  "final_checks": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/logs/final-software.log",
+    "passed": 109,
+    "pytest_seconds": 11.56,
+    "tests": 109
+  },
+  "publication_cli_correction": {
+    "action": "Interrupted the abandonment CLI implicit full-compile callback; immutable lifecycle receipt retained; discarded regenerated adaptation outputs archived locally; restored exact original adaptation table and reran summaries-only compilation.",
+    "discarded_output_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/logs/aborted-full-compilation",
+    "original_publication_repair": [
+      {
+        "discarded_output_sha256": "d19f1140098710cfa829892d407e148a02e4b627905a6094b85c92d709077ccf",
+        "path": "reports/forge/leaderboards/adaptation.md",
+        "restored_sha256": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24"
+      }
+    ],
+    "raw_log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/logs/disposition.log",
+    "scientific_updates_added": 0,
+    "training_receipts_changed": false
+  },
+  "publication_guard": {
+    "change": "Reject standardized priors for fixed-row finite replay; all trained priors had standardize=false",
+    "passed_checks": 75,
+    "pytest_seconds": 4.91,
+    "status": "UNMEASURED"
+  },
+  "qualification_input": false,
+  "reservation_seconds": 120,
+  "saved_probe_preparation": {
+    "committed_training_updates": 0,
+    "completed_discarded_proposal": 1,
+    "issues": [
+      "Original mutable worktree recipes.py refused; switched to byte-verified original source snapshot before any update.",
+      "Original GANTrainer.sample uses ema=False, not model=live; failed disposable reconstruction was discarded.",
+      "Duplicate checkpoint path serialization key repaired; completed disposable reconstruction was discarded and retried for recovery."
+    ],
+    "reservation_seconds": 120,
+    "successful_probe_seconds": 2.1326222859788686,
+    "unmetered_failed_probe_seconds": "within the explicit 120-second preparation reservation",
+    "unsuccessful_discarded_proposals": 2
+  },
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "Software/protocol/scorer checks, not extra candidate capacity or qualification; fits within 14400-second track ceiling alongside 12840 training reservation and 120 saved-probe reservation.",
+  "scorer_preparation": {
+    "issues": [
+      "Use torch.Generator, scalar Gaussian target sampler, and tensor inputs required by the public scorers."
+    ],
+    "optimizer_updates": 0
+  },
+  "software_verification_only": true
+}

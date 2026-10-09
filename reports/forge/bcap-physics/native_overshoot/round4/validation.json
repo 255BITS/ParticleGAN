@@ -1,0 +1,36 @@
+{
+  "actual_gaussian_batch_digests": "PASS",
+  "attempts": 9,
+  "forge_validate": "PASS",
+  "independent_finite_trace_arithmetic": "PASS",
+  "live_reservations": 0.0,
+  "live_workers": 0,
+  "media_verified": 9,
+  "native_broad_reconstructed_data_final_rng": "PASS",
+  "native_inactive_model_optimizer_parity": "PASS",
+  "original_qualification_and_telemetry_files": {
+    "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+    "reports/forge/leaderboards/adaptation.md": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+    "reports/forge/leaderboards/clockfree_continuous.md": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+    "reports/forge/leaderboards/formulation_comparison.md": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+    "reports/forge/leaderboards/host_profile_transfer.md": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+    "reports/forge/leaderboards/quality_coverage.md": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+    "reports/forge/technique-inventory.json": "87466b6ef0f5d5a60d5202471f9043b79e7b8678ec0a1f32417d0770df402e1c",
+    "reports/forge/technique-inventory.md": "697d350cb7c5fe0a3e74d5f40e2561c376489632fa32c690ade712f70f337de2"
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scientific_source_commit": "6dca6707c404417fec72f29877840225915f5e9f",
+  "scientific_source_digest": "6e9a37a4f370135151fae4e30a02dd64ef565fbff5ada39e6b45a768a682514d",
+  "software_checks": {
+    "after_unmeasured_standardization_guard": 75,
+    "prepublication": 109
+  },
+  "source_runtime_protocol_initialization_stream_checks": "PASS",
+  "summaries_only_compile_check_log": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/logs/compile-check.log",
+    "sha256": "0771e899cac05a9ab44f98a0e8035bd6b6a06542c3ce45763d5ac153153477a4"
+  },
+  "summaries_only_compile_freshness": "PASS"
+}

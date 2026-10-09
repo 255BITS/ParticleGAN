@@ -22,8 +22,8 @@ def main():
         assert not request['preflight_blockers']
         campaign=request['study']['campaign']
         submitted=queue.submit(request,campaign)
-        requests[role]=submitted['request_id']
-        print(json.dumps(dict(event='submitted',role=role,**submitted)),flush=True)
+        requests[role]=submitted['request']['request_id']
+        print(json.dumps(dict(event='submitted',role=role,request_id=requests[role],status=submitted['status'])),flush=True)
     queue.flush_events()
     atomic_json(Path(__file__).parent/'plan.json',plans)
     progress=json.loads(STATUS.read_text())

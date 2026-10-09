@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 784. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3622,6 +3622,22 @@ Administrative abandoned: Concluded preregistered full-native FAIL. Training out
 
 [Evidence](../../) · [Record](records/lifecycle-1fdc4834581ce2e17a87e8e7.json)
 
+### native-overshoot-round4-armijo-v1 · lifecycle-314d39a804ca6bb7f6c68586
+
+**Scope:** administrative; administrative; revision `48b307581e4ac10cb84244722156af552bac7570f7421c86436e6cfc812ab321`.
+
+None
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Complete native/stability gates fail; precision improves but uncensored covariance worsens despite all 7000 finite Armijo checks passing. Stop this exact source-bound revision.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-314d39a804ca6bb7f6c68586.json)
+
 ### k3p-bcap-matched-v1 · lifecycle-78a4ebc4a9d5f08ddeab2fa9
 
 **Scope:** administrative; administrative; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -3685,6 +3701,22 @@ Administrative abandoned: Registered native comparison failed the unchanged full
 **Next:** Retain this revision's evidence and readout; declare a new revision before further work.
 
 [Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
+
+### native-overshoot-round4-control-v1 · readout-0048ca9a69caf48e47bab5f1
+
+**Scope:** research_diagnostic; scientific; revision `e43b7628708a2b9b00998bfcc43e4893e995f8cedfb9cb2fab95fdd0c80309df`.
+
+The unchanged winner still fails native precision under the new matched source.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 834.556; mechanism `structural`.
+
+
+
+Exact winner control completes3PASS2FAIL in the five-task diagnostic scope, with native holdout precision .24072 and full sustained/native and Gaussian stability failures.
+
+**Next:** Retain as the exact matched reference; conclude the bounded study with no unchanged rerun or ordinary qualification transfer.
+
+[Evidence](../../reports/forge/attempts/1efcdb3573f24d78aa0ae1c1eb83defd/result.json) · [Record](records/readout-0048ca9a69caf48e47bab5f1.json)
 
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
@@ -4325,6 +4357,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
 [Evidence](../../reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/result.json) · [Record](records/readout-d5a99d9470252f695a717dfc.json)
+
+### native-overshoot-round4-armijo-v1 · readout-d75f7e01e19ab7d485539969
+
+**Scope:** research_diagnostic; scientific; revision `48b307581e4ac10cb84244722156af552bac7570f7421c86436e6cfc812ab321`.
+
+Bounded Armijo realization of actual G/prior motion repairs sustained native precision without losing distribution shape or broad/Gaussian guardrails.
+
+**Observed:** {'FAIL': 2, 'PASS': 2}; wall seconds 365.394; mechanism `structural`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988; grid100: precision=0.65938, center_rms_sigma=0.41187, mass_tv=0.14892, radial_ks=0.24821
+
+Native holdout precision improves .24072 to .65938, but full sustained density gate and Gaussian stability FAIL; all 7000 finite proposals accept same-batch decrease while uncensored covariance worsens.
+
+**Next:** Stop this exact revision. Preserve the actual overshoot evidence and isolate remaining full density/tail covariance before a separately bounded substantive proposal.
+
+[Evidence](../../reports/forge/attempts/3e05abc618834575900ae6a575e0e368/result.json) · [Record](records/readout-d75f7e01e19ab7d485539969.json)
 
 ### r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e · readout-da2ac34b1675880ab8ace248
 
@@ -4974,4 +5022,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `0d7daf03a4e67776aaa7de4a301131f3402e0730dfb39fa578020f8c1a288867`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

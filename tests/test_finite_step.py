@@ -92,3 +92,5 @@ def test_inactive_default_has_no_recipe_or_checkpoint_addition():
     assert 'finite_step' not in inactive.state_dict()
     with pytest.raises(ValueError,match='requires'):
         get_recipe('bcap',finite_step_mode='armijo',prior_reg=1.)
+    with pytest.raises(ValueError,match='standardization'):
+        get_recipe('bcap',finite_step_mode='armijo',standardize=True)

@@ -1,0 +1,41 @@
+{
+  "optimizer_updates_added": 0,
+  "proofs": [
+    {
+      "batch_size": 2048,
+      "both_actual_data_stream_final_states_match": true,
+      "checkpoint_sha256": {
+        "candidate": "3925be89e3de352bb6c97f65d04d2de0e2e7a812a794383b70bc4e2ad96fe267",
+        "control": "aacf3eb89d827d1135287fda9e180ff30fcc372561dda338d723e4e72502f71b"
+      },
+      "elapsed_seconds": 3.517368667991832,
+      "final_rng_sha256": "05dc102ebbd71d1f926398dc24262e3046606d531dea10d58d9fd82c1351003c",
+      "initial_rng_sha256": "c4ceca2b27438e7e0048f31859e36d4e1af88acb14f4ae4a28477bf697a60c46",
+      "reconstructed_batch_sequence_sha256": "d14f2e6a442334f289de1084ec5e334748040f530e35bbb304f8fa468cc0acc8",
+      "steps": 7000,
+      "stream": "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+      "task_id": "grid100"
+    },
+    {
+      "batch_size": 128,
+      "both_actual_data_stream_final_states_match": true,
+      "checkpoint_sha256": {
+        "candidate": "458b49d1797ff06ee023112e906d7094dc38b5d55d2cde8b0217e3515a210140",
+        "control": "ebb7c3e45be61619756f05c6800d0526f26af89908b53b343fc1782186353e99"
+      },
+      "elapsed_seconds": 0.08141727396287024,
+      "final_rng_sha256": "76b0de1c196894785754fa9f52ee195a913d36242dfde7b5aa59138daf229e0b",
+      "initial_rng_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+      "reconstructed_batch_sequence_sha256": "ded45ce2c9510da5a3dee9b5c16c458857bf22ecb647b1e297b071446232ac19",
+      "steps": 1200,
+      "stream": "[\"data\",\"target\",\"training\",\"cpu\"]",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "qualification_input": false,
+  "reservation_seconds": 120,
+  "schema_version": 1,
+  "scope": "Deterministic reconstruction from unchanged frozen samplers, schedules and named seeds; checked against both actual consumed RNG states; original per-batch tensors were not retained.",
+  "source_digest": "6e9a37a4f370135151fae4e30a02dd64ef565fbff5ada39e6b45a768a682514d",
+  "trained_rng_mutations": 0
+}

@@ -1,0 +1,293 @@
+{
+  "media": [
+    {
+      "gif": "media/candidate-gaussian1d_stability.gif",
+      "gif_sha256": "ec2523c16bd5b4b75525dda4ea6b38ad2e42c676099f546e2b3478b85c0ed40c",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "73ebd9c2299e35409ad7f8351e2af38def80219100d9c2ce6503d1518ddea307",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/f980b6a623194cef9859afd9911fdbc7/evaluator/observed-samples.pt": "ff9230c5ecc9208dafc441ce12b113aafadb83061ae3da159f027647c64825a8"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "gif": "media/candidate-grid100.gif",
+      "gif_sha256": "9c38824e41c825ced411c9c61844cd78d3c2c293c4834749bf40c1a1c9e3c721",
+      "kind": "actual_training_native_saved_observations_gif",
+      "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+      "observation_count": 34,
+      "observations_sha256": "e21db18b862faf7bdc6ef00bdd0fe4fa9ed1fe0efadac471df565aa42136dfb4",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+      "rescored_observations": 0,
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        21,
+        25,
+        29,
+        33
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/config.json": "0dd63653fc8f6abb6804145ce91630fca915dcf7cc0b06cc80b61e3f51d5f4ce",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/events.jsonl": "d00373b963599e99fa22f112054d62832592cc49e85b0b7c30722b8916802e8b",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_000050.npz": "85655e94cd22a8f73c9f06bdff963dae6708cb86dd07bc8293c2a2a3628d37b0",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_000750.npz": "6b9a89f454c62ffa6f7f94bff020f558f70b7d0514d316d2ab55b3a1b493219b",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_001750.npz": "fd3bbb44e637c3c958ae4bd1fd0a3d47e57dfe9ddaef5831eb265820c3231eb5",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_002750.npz": "d0bfd0e4302a8cb6cf488398993a2b158ca317c93a18b337b544188ff214e777",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_004000.npz": "4074ca65fa3dc500602814559b5b404704638353ebdc826b552d012b846d613b",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_005000.npz": "bc136cb85f40d10d8118f4c792cdf1ced8680b48774c00337657224114937bf9",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_006000.npz": "26540d530d9d4a82c8c19f75c93e63cf27f39996facb4547eb216b1e11d67f77",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/snapshots/step_007000.npz": "381371e215b072bd84ed722fb786ca09d478043728a43e748022bb0deddf912f",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/7a456561dc824e728c176b66fefdb338/native100/grid100/summary.json": "0b3dd4255a4df15cade3c09edceb3d4f9d9673f3d7c16fbedad047584dfafe1a"
+      },
+      "task_id": "grid100"
+    },
+    {
+      "gif": "media/candidate-gaussian1d_smoke.gif",
+      "gif_sha256": "2cd767784378a2cabc70f43c659432f9d21dc88b2e1abc60ceb066de636668c7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "dfb6971591c8d1c793b7dcefff7ff13db9ff78fd893b24e8b580864cec0c0933",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/3e05abc618834575900ae6a575e0e368/evaluator/observed-samples.pt": "5d3193648f1f063f9661fd4aeae56ee6c7d711f172bf21055f4147f9bef55fe9"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "gif": "media/candidate-vector_two_broad.gif",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "candidate",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/5555ca6e6d4341d7bc826784bc56bed7/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "gif": "media/control-grid100.gif",
+      "gif_sha256": "0f85d136f34d2dbdec2ed51c5d53fff05c87638aec57762ba7a91d77aa7a1ba8",
+      "kind": "actual_training_native_saved_observations_gif",
+      "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+      "observation_count": 34,
+      "observations_sha256": "447311999188f9406c1b22b038c2d3a4597a8aefb87acb0deb36d3c05ac840dc",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+      "rescored_observations": 0,
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        21,
+        25,
+        29,
+        33
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/config.json": "26f12f80504a9e56e3442ef336c71bceabb3378fe74ef0349d0048979812ea04",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/events.jsonl": "1264eb69a854e8b4d3b67730a2afb381d6d5e394bde1dc370c727c1427960b62",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_000050.npz": "85655e94cd22a8f73c9f06bdff963dae6708cb86dd07bc8293c2a2a3628d37b0",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_000750.npz": "987a65eb0fd8e67ff48fa548a5b32ea174113faa2a69c3a8f244fcd8104ab933",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_001750.npz": "e516d46e2e84dfe8df86f23ef72855514b1e436f8e5330c5e310c7c4d28c46a7",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_002750.npz": "049d2d3467f7dd808565ec912e278521aaab48418da0f2d5fdbd17de315792ba",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_004000.npz": "0fe9452d59ebe33b3a06c18b7fe9d671652f292bf78b90e34eac6e7ee9c616f1",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_005000.npz": "2727ade3e24a47f987446778be9ff3bd3bbe04263c506e188b8aedba6e538828",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_006000.npz": "15359aeeb1a10dc4ff6283e32f5a4650a079ce8d38136795d6b1507391ca0725",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/snapshots/step_007000.npz": "1b53a3a85c1ee1622f4350cd566f334c47d069a415c70502df858b0a450bc4ba",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/native100/grid100/summary.json": "94510db6980a5f9f5e72a7d5d764511a4611681afff85a12579e9502c4ef374f"
+      },
+      "task_id": "grid100"
+    },
+    {
+      "gif": "media/control-gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/9d4f4c7dd58f4e83913321ca96e23178/evaluator/observed-samples.pt": "433c18d94215ce86bea1df697feb8e2993c92b888927e943c8a6c19b1bc05ddb"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "gif": "media/control-two_pole.gif",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "gif": "media/control-vector_two_broad.gif",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/d12cefee06b348ff93a1a59faf2db04e/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "gif": "media/control-gaussian1d_stability.gif",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "control",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/1efcdb3573f24d78aa0ae1c1eb83defd/evaluator/observed-samples.pt": "2b8f3597c60792fbd0b4823b38bf3070946b7b83dbbe6e4c0f2a81a493b52736"
+      },
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

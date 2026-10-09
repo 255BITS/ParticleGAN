@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923",
+  "input_digest": "0d7daf03a4e67776aaa7de4a301131f3402e0730dfb39fa578020f8c1a288867",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -602,6 +602,8 @@
     "configs/forge/ideas/k3p.json": "8830c96552458a1f16973016bb0f5519d875811ce519be08e5652ac325dabe97",
     "configs/forge/ideas/ka2-global-repair-v1.json": "c2cbdbfcb068c16b637b33a385889b847905bdc3f4507b879cfe1e0bb61f01ab",
     "configs/forge/ideas/ka2.json": "bafc216a39aea2453241a01a6bd3b12e4b2d0b516a5f96601e1cbcd7bfebc09c",
+    "configs/forge/ideas/native-overshoot-round4-armijo-v1.json": "0640a666e35badb1b6e5e5ad95fe64163af90fd29121f3aec8cc909d9a9eb525",
+    "configs/forge/ideas/native-overshoot-round4-control-v1.json": "8461c5dede661594cae6b516bbb686ba6cd14a58d78bfbb126bbc65de75b111c",
     "configs/forge/ideas/r1r2-global-repair-v1.json": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add",
     "configs/forge/ideas/r3gan-stacked-training-toy-v1.json": "aa695486c643018f66c6d843cb346b48b0b929efaeb99d0439142b4e4ca991d0",
     "configs/forge/ideas/release07-gan-v3-cloud-v1.json": "daee7bac640a1d000d9b6596b6c458d2b40fa251beeb4c162ae57e0b11fa67ab",
@@ -759,6 +761,8 @@
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
+    "configs/forge/studies/native-overshoot-round4-candidate-study-v1.json": "7c49a14be35caf9f6c79458d1e418b4b536436b939c4cb669ede92b90e08843a",
+    "configs/forge/studies/native-overshoot-round4-control-study-v1.json": "d18eb342612b61a5c58d75e4cbe59c42e0d5539a9ce6fcde6806ff26abb39365",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "41af583480fc0ddce517b227668beb1f3aa2e3de8a41257db4f614cf8d8f3fdf",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json": "7bc42b8af8ce3a3d47f1182bccf6826080a25dafd499cd4e4825804874e18656",
@@ -838,6 +842,7 @@
     "configs/forge/views/formulation_comparison.json": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25",
     "configs/forge/views/host_profile_transfer.json": "41b16932d4d186e4e2e0504d2ff696faad4ec02b493ac5874abd1d7f8be6b993",
     "configs/forge/views/k3p_two_pole_horizon.json": "9355ce6ef0db6e9321641056c1eecf1dd90b057cf6a72315d9755fdbfff99e23",
+    "configs/forge/views/native-overshoot-round4-diagnostic-v1.json": "5d84530cac57865c015c7048c973984801ee1a6f255de1d975580335b2da8995",
     "configs/forge/views/quality_coverage.json": "b8739e334dc1f993a453ae72da2b0b90316a3cd794a0cec0e448438650d3d3c5",
     "configs/forge/views/tier1_policy_coverage.json": "f6c669aede722bac3d957327b55d1db7625f108ada197323b8827c1883efc7f2",
     "experiments/forge/native3_publication_memory.py": "a1fbc7c3f1677c27b747233b677adb925a37109feea8ea78aeb01bcce0715314",
@@ -1297,10 +1302,12 @@
     "reports/forge/records/history-v3-pair-graft-126441aebe6e.json": "2bb43a8af0f972f6211faa8dd2d0afb6378115f555b65816d1edca84076d736b",
     "reports/forge/records/history-v3-repro-50fe3393d8b8.json": "d5551c6f82b8f8973629253e23bb550644717b255191afcbb68a5d55d0b95877",
     "reports/forge/records/lifecycle-1fdc4834581ce2e17a87e8e7.json": "549b7a87a57381ef74cc6750e4fb6edd31e68531109993b85d48cf59df4b43db",
+    "reports/forge/records/lifecycle-314d39a804ca6bb7f6c68586.json": "ad3860a3c5b34579732ea8861a8984984f65a1310e206efcb671f56ead2831c5",
     "reports/forge/records/lifecycle-78a4ebc4a9d5f08ddeab2fa9.json": "b19e0cdc323aaa90a36d37afea6e20c58ecc47b16ec94815f1ff58b809aef6ba",
     "reports/forge/records/lifecycle-a7f0052186f7f049b3b6cf54.json": "340198cdd508aea8f7d7ba8b121d0385d8407f64e4288e6e3d330cacf1802c59",
     "reports/forge/records/lifecycle-afc11349bf0ada8bca0c4c89.json": "8e275c53edf187b1a705b29dfe3ff8e8fb1412ee367eb5a951830d3c8a4644b5",
     "reports/forge/records/lifecycle-e90204eef53f90292d2d1750.json": "293fb0eb42461ef83d130d98ddc275d31c66ec3c632a8cee029e9f9229f47fd5",
+    "reports/forge/records/readout-0048ca9a69caf48e47bab5f1.json": "41bb0b65ecc699fe4784acbf4e51603305233bed9212f9bc690b63e818fb3717",
     "reports/forge/records/readout-0297c36f9f2d9c5feb45b3cb.json": "fb68bde488b1e8850b863a88c2334e145b713885d69f78e129c4b1613d0f74c7",
     "reports/forge/records/readout-060e7be73e2832e314b9573f.json": "7cf9da9238dad9601beadabfacf1b73332e1290b957b39531a73a2582b3e0fe7",
     "reports/forge/records/readout-10242573330bec1494c7602b.json": "a840f77a9149371046766ba73df43cd78d7b6377b414a68c0c874807e54eb553",
@@ -1341,6 +1348,7 @@
     "reports/forge/records/readout-c3df7159c90725fdef1cb700.json": "1c24655914e7975d0fbd0e3917a97aac126faa0eb260038f8407bb9e84e4345f",
     "reports/forge/records/readout-c723a88e5122f97011aabad9.json": "7afb9affa02f648be505384905ad339592a54b996df16d6e3bd1bcfa3b0d0745",
     "reports/forge/records/readout-d5a99d9470252f695a717dfc.json": "9ac98449bb850a20f476d9bbccdfbe51c079828c562abfec57a1b45047ea1ac4",
+    "reports/forge/records/readout-d75f7e01e19ab7d485539969.json": "004b966a043d9fcb42c14a43ddd69fe392f6295daeb3aeb23223b1082dacd209",
     "reports/forge/records/readout-da2ac34b1675880ab8ace248.json": "f34c82b385c53224426a172bc218b0b78669485e18ac2646fcc5d640349e2e29",
     "reports/forge/records/readout-dc31730b85dde3cf85253359.json": "8562263e81c06d703d8d8c10f42a7f7d772cc33a5a4ee29e7efa609063c8261d",
     "reports/forge/records/readout-dd6ff59094d1d766c5b0fe2b.json": "63cd32d46895e1cd2118d7984f8a6dad785885eaecdeea68a6aa645383282751",
@@ -3589,7 +3597,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "6574ef521adb24d05608f1e3de31b7864747bda45833e9b271b6a745cc893eb1",
+    "reports/forge/EXPERIMENT_MEMORY.md": "72d4df82fbbdc851cc43dd63c6d6a74085ef4fb8dcb0a5c9a86cbb4cf9bfd13a",
     "reports/forge/publication-records.json": "1f6664212046adc861ccd05a62ca815cd7b0cf21b5274c015cbb36ac5129205d"
   },
   "pending_readout": [
@@ -3603,7 +3611,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 781,
+  "record_count": 784,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
@@ -3615,5 +3623,5 @@
   "scientific_source_digests": [
     "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
-  "view_count": 9
+  "view_count": 10
 }

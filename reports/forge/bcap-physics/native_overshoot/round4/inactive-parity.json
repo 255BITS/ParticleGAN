@@ -1,0 +1,70 @@
+{
+  "matched": {
+    "models": true,
+    "optimizers": true
+  },
+  "model_digest": "f088afc956bddef0397c6d56f4f96fc5a9d9ca8d8914fa3f9b5aa4d549b724f0",
+  "new_checkpoint": {
+    "artifact_manifest": {
+      "file_count": 1,
+      "files": {
+        "provenance-state.pt": {
+          "sha256": "aacf3eb89d827d1135287fda9e180ff30fcc372561dda338d723e4e72502f71b",
+          "size": 770013
+        }
+      },
+      "schema_version": 1,
+      "sha256": "d1490296bd2a1d84f8dd4a53ca8bc971e8bd2937992bb3fa912ce747425ac672",
+      "total_bytes": 770013
+    },
+    "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/native_overshoot/queue/native-overshoot-round4-v1/a511e55fbf6d486f9e3ec39285a4f4f1/provenance",
+    "bytes": 770013,
+    "completed_steps": 7000,
+    "named_stream_keys": [
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+      "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+      "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+      "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+      "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+      "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+      "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+      "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+    ],
+    "named_stream_state_sha256": {
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+      "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+      "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+      "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+      "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+      "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+      "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+      "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+    },
+    "optimizer_updates_added": 0,
+    "path": "provenance-state.pt",
+    "prerequisite_eligible": false,
+    "purpose": "provenance_only",
+    "sampling_draws_added": 0,
+    "schema_version": 1,
+    "sha256": "aacf3eb89d827d1135287fda9e180ff30fcc372561dda338d723e4e72502f71b",
+    "state_sha256": "46ced520becf8802b15e885f528ee3adc921a83c9373cf0de7d99316ff4f48d5"
+  },
+  "optimizer_digest": "e14aa18072e9e6db5d62b6206b78b13d8bd76441f2a90f8bb9b968c4446e4bad",
+  "original_checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/db79021404c14c91aa5f38f9f1be40fb/native100/grid100/training-state.pt",
+  "original_checkpoint_sha256": "fc58a8e364defbd76e4e4d9942aa23f76bc6aafd7a7289951ecde29347008176",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "Native exact inactive-path software parity across original/new sources, no rerun or qualification transfer"
+}

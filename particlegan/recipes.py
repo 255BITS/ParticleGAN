@@ -207,6 +207,7 @@ class Recipe:
             raise ValueError("finite_step_mode must be none or armijo")
         if self.finite_step_mode != "none" and (
                 self.model != "gan" or self.conditioning != "scalar" or self.encoder_mode != "none"
+                or self.standardize
                 or self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
                 or self.loss != "non_saturating" or self.prior_reg != 0
                 or self.input_noise_std != 0 or self.output_noise_std != 0
@@ -214,7 +215,7 @@ class Recipe:
                 or self.particle_birth_death or self.row_evidence_gate
                 or self.latent_damping_max_rate != 0):
             raise ValueError("finite_step_mode requires scalar nonsaturating DualNorm without momentum, "
-                             "prior regularization, additive noise or policy interventions")
+                             "prior standardization/regularization, additive noise or policy interventions")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
