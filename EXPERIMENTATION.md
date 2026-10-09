@@ -6,6 +6,9 @@ candidate revisions through goal-specific leaderboards.
 
 Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
+For BCAP repair ideas, also read the completed
+[five-theory comparison](reports/forge/bcap-physics/README.md), including its
+source-bound readouts and unresolved gates.
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 The [Forge preparation review map](docs/forge-integration-review-map.md) records
