@@ -1,0 +1,31 @@
+{
+  "actual_training_gifs": {
+    "candidate/gaussian1d_smoke": 9,
+    "candidate/mode_hold": 9,
+    "candidate/trajectory": 9,
+    "candidate/two_pole": 9,
+    "candidate/vector_two_broad": 9,
+    "control/gaussian1d_smoke": 9,
+    "control/gaussian1d_stability": 9,
+    "control/mode_hold": 9,
+    "control/trajectory": 9,
+    "control/two_pole": 9,
+    "control/vector_two_broad": 9
+  },
+  "cached_field_checkpoints_verified": 11,
+  "forecast_namespace_limitation": "Frozen ks signatures differ from cdf_ks emitted by actual receipts; automated forecasts incomplete; unchanged scientific task gates remain valid.",
+  "forge_validation": "valid",
+  "mutually_executed_initializer_and_stream_parity_checks": 5,
+  "optimizer_updates_added_by_publication": 0,
+  "original_certificates_verified": 11,
+  "qualification_snapshots_changed": false,
+  "sampling_draws_added_by_publication": 0,
+  "schema_version": 1,
+  "software_checks": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests/test_thermodynamic_optimism.py tests/test_forge_boundaries.py tests/test_forge_studies.py -q",
+    "failed": 0,
+    "log_sha256": "f601c95295414ecef68c956ef67885f73130be791fcb4067f254a50a09e1558d",
+    "passed": 75
+  },
+  "summary_only_memory_status": "CURRENT"
+}

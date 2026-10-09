@@ -1,0 +1,629 @@
+{
+  "attempt_ids": [
+    "2b9d007872f64d62bbb31077a9c9d1f3",
+    "4ddf649ef1bc40dca6549e4add1ce387",
+    "537309eecfd14b55aa10de83436b4eec",
+    "c195189c3ecf4e76a2059847250985c9",
+    "ef41eadf73be49b7831a5f6d00605f21"
+  ],
+  "candidate_id": "thermodynamic-bcap-optimism-v1",
+  "candidate_revision": "37de3dc839254b12f9c961e0b1b4dc17855bcc854688808f1985f8ea6a1e2e90",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Same frozen source/runtime and task contracts: candidate 2PASS/3FAIL/1BLOCKED versus exact winning BCAP control 3PASS/3FAIL. Mode hold3modes/HQ.1298828125 versus8modes/HQ.9892578125, with suffix0 versus3; broad-vector remains PASS.",
+  "conclusion": "Selective normalized-network optimism fails Gaussian smoke, leaves its stability prerequisite blocked and severely regresses mode hold; two-pole and broad-vector guardrails pass. The Gaussian stability signature is unmeasured, not a fabricated numerical failure.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "2b9d007872f64d62bbb31077a9c9d1f3",
+        "4ddf649ef1bc40dca6549e4add1ce387",
+        "537309eecfd14b55aa10de83436b4eec",
+        "c195189c3ecf4e76a2059847250985c9",
+        "ef41eadf73be49b7831a5f6d00605f21"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "0471b419d5d2f2835a6fcfc881d928b0f4d05abf7e4cd91a2799bdea2d88f6ce",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "2b9d007872f64d62bbb31077a9c9d1f3",
+          "producer_request_id": "db537481b073f306c0e5fde6",
+          "producer_study_id": "thermodynamic-circulation-candidate-v1",
+          "result_hash": "65b92048b546348eae37f4b31e129391f46fb6150c23c56290570741816c8fa7",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "4ddf649ef1bc40dca6549e4add1ce387",
+          "producer_request_id": "db537481b073f306c0e5fde6",
+          "producer_study_id": "thermodynamic-circulation-candidate-v1",
+          "result_hash": "3a1e6df9ffe371562d5d4213c961ecfd97c76b91325aada384147355548cb349",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "537309eecfd14b55aa10de83436b4eec",
+          "producer_request_id": "db537481b073f306c0e5fde6",
+          "producer_study_id": "thermodynamic-circulation-candidate-v1",
+          "result_hash": "82a606bfc5ac6f7f653a28819577f2ac44466d416c78039e007e766c17d19368",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c195189c3ecf4e76a2059847250985c9",
+          "producer_request_id": "db537481b073f306c0e5fde6",
+          "producer_study_id": "thermodynamic-circulation-candidate-v1",
+          "result_hash": "12b4abc0bae74bf9b0c9e2e1d69c5a96b9eee086e32be0cb999babb5f6932221",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "ef41eadf73be49b7831a5f6d00605f21",
+          "producer_request_id": "db537481b073f306c0e5fde6",
+          "producer_study_id": "thermodynamic-circulation-candidate-v1",
+          "result_hash": "fe43ad537122ccd5b9ecc212d11819963842a62dfc4a7741a0c962c255cf4d04",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "d13f7bf319302703ea76acc9b1dd059679a5c3f11cb338b4d51ddc53f79bed30",
+        "contract_sha256": "0471b419d5d2f2835a6fcfc881d928b0f4d05abf7e4cd91a2799bdea2d88f6ce",
+        "control_binding_sha256": "04dca6bc22a92ca2a346d262f1efc11d1576e9748c9860ba5f42f84cd32f1eba",
+        "policy_fingerprint": "00f05ff90875d1d0c265520320508947098878dd86d2fdc3130061682fefcef1",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "f9c7b987661cd45cb48a0152007d7eee53246a03037b95a3d10313508782a940"
+      },
+      "study_id": "thermodynamic-circulation-candidate-v1",
+      "study_sha256": "f9c7b987661cd45cb48a0152007d7eee53246a03037b95a3d10313508782a940"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "thermodynamic-circulation-v1",
+  "hypothesis": "Selective network optimism improves coupled-game retention while preserving the unchanged broad-vector and two-pole guards; fixed task objectives, priors and sampling remain.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact coefficient1 revision. Inspect source-bound direction/circulation diagnostics before another independently bounded timing mechanism; no tuning, continuation, seed study or promotion.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "2b9d007872f64d62bbb31077a9c9d1f3",
+        "result_hash": "65b92048b546348eae37f4b31e129391f46fb6150c23c56290570741816c8fa7",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "4ddf649ef1bc40dca6549e4add1ce387",
+        "result_hash": "3a1e6df9ffe371562d5d4213c961ecfd97c76b91325aada384147355548cb349",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "537309eecfd14b55aa10de83436b4eec",
+        "result_hash": "82a606bfc5ac6f7f653a28819577f2ac44466d416c78039e007e766c17d19368",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "c195189c3ecf4e76a2059847250985c9",
+        "result_hash": "12b4abc0bae74bf9b0c9e2e1d69c5a96b9eee086e32be0cb999babb5f6932221",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "ef41eadf73be49b7831a5f6d00605f21",
+        "result_hash": "fe43ad537122ccd5b9ecc212d11819963842a62dfc4a7741a0c962c255cf4d04",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-f48985fb0a66208013724f4f",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/2b9d007872f64d62bbb31077a9c9d1f3/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 14400,
+      "candidate_budget_seconds": 6420,
+      "id": "thermodynamic-circulation-v1"
+    },
+    "candidate": "thermodynamic-bcap-optimism-v1",
+    "competing_explanation": "Normalized network/prior movement and task objective competition can cause drift without a correctable rotational cycle; optimism amplifies stochastic direction changes, and prior-row motion remains unchanged. Older Adam optimism and capped cached-past comparisons failed under distinct original contracts.",
+    "control": {
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "ks",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "hypothesis": "Selective network optimism improves coupled-game retention while preserving the unchanged broad-vector and two-pole guards; fixed task objectives, priors and sampling remain.",
+    "id": "thermodynamic-circulation-candidate-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "ks",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "seed": 0,
+          "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+        },
+        "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "thermodynamic-circulation-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "thermodynamic-circulation-candidate-v1",
+  "study_sha256": "f9c7b987661cd45cb48a0152007d7eee53246a03037b95a3d10313508782a940",
+  "task_results": [
+    {
+      "compatibility_key": "9b3a09cbab7023145fca6dfeaae27413ea2b65bf6f710843361d503b0712162c",
+      "cost": {
+        "adapter_loop_seconds": 21.100393246044405,
+        "adapter_seconds": 21.46337781404145,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 27.458089759922586,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 19.189869229798205,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5781582441413775
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.11651079903822392
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 18.495200186618604
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 22.763384600984864,
+        "wall_seconds": 27.458089759922586
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": null,
+        "observations": 24,
+        "passing_observations": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.08248480232299482,
+        "finite_fraction": 1.0,
+        "mean": 2.1016144223249285,
+        "mean_error_sigma": 0.2032288446498569,
+        "sample_count": 4096,
+        "std": 0.5069973726642111,
+        "std_ratio": 1.0139947453284222,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "cd94284e22c41127ba6cb9f981a6e0f6f15a8c92c7eb6746a8e3947e59c612c0",
+      "cost": {
+        "adapter_seconds": 7.759640502976254,
+        "charged_task": "trajectory",
+        "device": "1",
+        "execution_seconds": 13.963810206972994,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 9.094218738027848,
+        "wall_seconds": 13.963810206972994
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.2218358772993088,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.24183587729930878
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.24183587729930878
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    },
+    {
+      "compatibility_key": "87d57b8e6e2653ab4b165851a066c208de8e4521df886582511df40cf08de2b7",
+      "cost": {
+        "adapter_loop_seconds": 60.63850962102879,
+        "adapter_seconds": 60.97199760901276,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 67.30326093698386,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 59.01038198033348,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.01259882829617709
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.011416742810979486
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 58.98636640922632
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 62.26770874194335,
+        "wall_seconds": 67.30326093698386
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.7701171875,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.1298828125
+          },
+          "modes": {
+            "margin": -5,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 8,
+            "value": 3
+          }
+        },
+        "passed": false,
+        "shortfall": 0.7403428819444444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.375,
+        "effective_modes": 2.74524188041687,
+        "hq": 0.1298828125,
+        "modes": 3,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mode_hold"
+    },
+    {
+      "compatibility_key": "636fee264764745369a917c8713cf821db0a833d951ef3bcbd4005840f1dbb44",
+      "cost": {
+        "adapter_seconds": 1.079128333949484,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.2527618140447885,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3990898160263896,
+        "wall_seconds": 7.2527618140447885
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.8310626745223999,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.1689373254776001
+          },
+          "mean_abs": {
+            "margin": 0.6579140543937683,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.9579140543937683
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.1689373254776001,
+        "mean_abs": 0.9579140543937683
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "1ddccc6097e07414399ba597c909a71d712d705930668025789e5c50d794c3f0",
+      "cost": {
+        "adapter_loop_seconds": 50.04238039301708,
+        "adapter_seconds": 50.35259666002821,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 56.68528311699629,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 47.46651680325158,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.37091688718646765
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.01074591081123799
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 47.084854005253874
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 51.64201432606205,
+        "wall_seconds": 56.68528311699629
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.4583333333333333,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 550,
+          "first_pass_step": 200,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 19,
+          "passing_suffix": 18,
+          "stable_from_seconds": null,
+          "stable_from_step": 350
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.6096806213259697,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.2403193786740303
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.4508893251419067,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.6008893251419067
+          },
+          "hq": {
+            "margin": 0.14194335937500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.991943359375
+          },
+          "mass_tv": {
+            "margin": 0.097509765625,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.052490234375
+          },
+          "sw1_normalized": {
+            "margin": 0.09157940355069252,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.08842059644930747
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.2403193786740303,
+        "component_core_covariance_errors": [
+          0.28232067823410034,
+          0.19831807911396027
+        ],
+        "component_core_eigen_ratios": [
+          0.6008893251419067,
+          0.7216795682907104
+        ],
+        "component_core_min_eigen_ratio": 0.6008893251419067,
+        "component_counts": [
+          1833,
+          2263
+        ],
+        "component_covariance_error": 0.2403193786740303,
+        "component_covariance_errors": [
+          0.28232067823410034,
+          0.19831807911396027
+        ],
+        "component_mass": [
+          0.447509765625,
+          0.552490234375
+        ],
+        "component_min_eigen_ratio": 0.6008893251419067,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.006001091096550226,
+          0.009721608832478523
+        ],
+        "covariance_error": 0.08180488646030426,
+        "hq": 0.991943359375,
+        "mass_tv": 0.052490234375,
+        "max_component_spill": 0.009721608832478523,
+        "mean_error": 0.13133607804775238,
+        "min_mass_ratio": 0.89501953125,
+        "resolved_core_covariance_error": 0.2403193786740303,
+        "resolved_core_min_eigen_ratio": 0.6008893251419067,
+        "resolved_max_component_spill": 0.009721608832478523,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.08842059644930747,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    }
+  ]
+}

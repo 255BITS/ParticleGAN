@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "b4538bfffb01bb1ee5d6aa6c20976ed0e6822e022b17511f6362b8ee3728b954",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "8cb2e2519554ebea6c358989c3929fc9d8fe0ca6164fbf3545c0bfec1fc2b368",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/thermodynamic-circulation-v1/ef41eadf73be49b7831a5f6d00605f21/observed-samples.pt": "fb3b3e7bfe8d3373a75b7cd0724cde2945b7cb5781dcd2df3c9e67ce1652e7cc"
+  },
+  "task_id": "vector_two_broad"
+}

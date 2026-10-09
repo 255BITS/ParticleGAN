@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "4cc945df9107e595e39f351d24af4c1cdb6d9c0ab2e93c948233f7fd492f3ea2",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "7be69622243c4d4810275fabfe8bbf22f2e900dece2dbea44a55ba885ea8c375",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/thermodynamic-circulation-v1/2b9d007872f64d62bbb31077a9c9d1f3/evaluator/observed-samples.pt": "84410c5879fd7b7395eef5e4f5c338caabe3bb83a65a0c22826b860994ecfc58"
+  },
+  "task_id": "gaussian1d_smoke"
+}

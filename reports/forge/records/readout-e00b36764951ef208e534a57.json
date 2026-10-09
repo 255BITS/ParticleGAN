@@ -1,0 +1,708 @@
+{
+  "attempt_ids": [
+    "03c64e3c2e5c4df3a83cff14bb78a6bc",
+    "37226da43f274280a5af682e3d633ff8",
+    "37d190fbec7e46d7855f7fa9abe151c3",
+    "94fc2df0816c460dbae3520185f5cde4",
+    "e0c02213a05049588023530310caa91c",
+    "f28b8acf22ea444f8578a588f8d2486f"
+  ],
+  "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "candidate_revision": "6eb2b2fbb09d85edefa1f070f45c3e19cd4b63b512152284384f5d3bfc0b3302",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Exact same source/runtime and task conditions as network-only optimism. Control retains confirmed Gaussian smoke, all8mode-hold modes/HQ.9892578125 and broad-vector PASS; optimism loses smoke and severely damages mode hold while retaining broad-vector.",
+  "conclusion": "Matched winner control completes six unchanged diagnostic tasks: 3PASS and 3FAIL. Gaussian stability reproduces2/72stationary and0/24shift-hold passes; mode hold endpoint qualifies but terminal suffix3fails five-required gate.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "03c64e3c2e5c4df3a83cff14bb78a6bc",
+        "37226da43f274280a5af682e3d633ff8",
+        "37d190fbec7e46d7855f7fa9abe151c3",
+        "94fc2df0816c460dbae3520185f5cde4",
+        "e0c02213a05049588023530310caa91c",
+        "f28b8acf22ea444f8578a588f8d2486f"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "f40b5f20b5b3518b2aa2f0f53a152074644ccc2bac53fcf2712e5f747e49878f",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "03c64e3c2e5c4df3a83cff14bb78a6bc",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "140c29eda886dc2bc123df289fba7f1b1a7539c74e2900119d2965991c541db6",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "37226da43f274280a5af682e3d633ff8",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "bb6e3b95485e18f9d8fbbd35821b6b99238294cc8eca89bfd5261195c339ce88",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "37d190fbec7e46d7855f7fa9abe151c3",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "8893f9c4e6b86274234229ad04ffc7a7c3a91d953e3c353f209d21eba6c3c916",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "94fc2df0816c460dbae3520185f5cde4",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "4caa0bf1d31a28af323a44b6f3a39cd23a2faf05a7851e3b59da5298cfbb1be8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "e0c02213a05049588023530310caa91c",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "9d75b1c541fec421191082a251501020ddc4144232b8ce227cbc9070faa318ce",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f28b8acf22ea444f8578a588f8d2486f",
+          "producer_request_id": "fc6b2276923e8b3eb897a82a",
+          "producer_study_id": "thermodynamic-circulation-control-v1",
+          "result_hash": "04082e1cc4b217fae17c9c396a7d5fb6cf97a301ae27fbcb9563778d406faa8e",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "04dca6bc22a92ca2a346d262f1efc11d1576e9748c9860ba5f42f84cd32f1eba",
+        "contract_sha256": "f40b5f20b5b3518b2aa2f0f53a152074644ccc2bac53fcf2712e5f747e49878f",
+        "control_binding_sha256": "d13f7bf319302703ea76acc9b1dd059679a5c3f11cb338b4d51ddc53f79bed30",
+        "policy_fingerprint": "00f05ff90875d1d0c265520320508947098878dd86d2fdc3130061682fefcef1",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "6b64df781a2d78c33e20a209b13ff088decabfcc8c939f2a7d9551cba157f2ca"
+      },
+      "study_id": "thermodynamic-circulation-control-v1",
+      "study_sha256": "6b64df781a2d78c33e20a209b13ff088decabfcc8c939f2a7d9551cba157f2ca"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "thermodynamic-circulation-v1",
+  "hypothesis": "Resolve and execute the exact saved winning BCAP recipe in this source/runtime to provide the matched six-task control; archived outcomes are motivation only.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Retain the winner as this source-bound control, with no Tier2promotion. Stop coefficient1network optimism and inspect saved game direction diagnostics before another independently bounded proposal.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "03c64e3c2e5c4df3a83cff14bb78a6bc",
+        "result_hash": "140c29eda886dc2bc123df289fba7f1b1a7539c74e2900119d2965991c541db6",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "37226da43f274280a5af682e3d633ff8",
+        "result_hash": "bb6e3b95485e18f9d8fbbd35821b6b99238294cc8eca89bfd5261195c339ce88",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "37d190fbec7e46d7855f7fa9abe151c3",
+        "result_hash": "8893f9c4e6b86274234229ad04ffc7a7c3a91d953e3c353f209d21eba6c3c916",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "94fc2df0816c460dbae3520185f5cde4",
+        "result_hash": "4caa0bf1d31a28af323a44b6f3a39cd23a2faf05a7851e3b59da5298cfbb1be8",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "e0c02213a05049588023530310caa91c",
+        "result_hash": "9d75b1c541fec421191082a251501020ddc4144232b8ce227cbc9070faa318ce",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f28b8acf22ea444f8578a588f8d2486f",
+        "result_hash": "04082e1cc4b217fae17c9c396a7d5fb6cf97a301ae27fbcb9563778d406faa8e",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-e00b36764951ef208e534a57",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/03c64e3c2e5c4df3a83cff14bb78a6bc/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 14400,
+      "candidate_budget_seconds": 6420,
+      "id": "thermodynamic-circulation-v1"
+    },
+    "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "competing_explanation": "Normalized network/prior movement and task objective competition can cause drift without a correctable rotational cycle; optimism amplifies stochastic direction changes, and prior-row motion remains unchanged. Older Adam optimism and capped cached-past comparisons failed under distinct original contracts.",
+    "control": {
+      "candidate_id": "thermodynamic-bcap-optimism-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "ks",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "hypothesis": "Resolve and execute the exact saved winning BCAP recipe in this source/runtime to provide the matched six-task control; archived outcomes are motivation only.",
+    "id": "thermodynamic-circulation-control-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "ks",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "seed": 0,
+          "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+        },
+        "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "thermodynamic-circulation-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "thermodynamic-circulation-control-v1",
+  "study_sha256": "6b64df781a2d78c33e20a209b13ff088decabfcc8c939f2a7d9551cba157f2ca",
+  "task_results": [
+    {
+      "compatibility_key": "e987c02e7ce70abe47a405813810eade2cccd4c6f5a3dad36a277180c6449f55",
+      "cost": {
+        "adapter_seconds": 19.270222845952958,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 25.307965448941104,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 20.592699561966583,
+        "wall_seconds": 25.307965448941104
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.2198618906736374,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.2398618906736374
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.2398618906736374
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    },
+    {
+      "compatibility_key": "0feeb126b44768f44e84cdf1a9756ffaffb6fbfc100d22d76fc12744adce23fe",
+      "cost": {
+        "adapter_seconds": 1.1099522199947387,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.015042413026094,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.411584226996638,
+        "wall_seconds": 7.015042413026094
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "fed697c334371143e586d56edf3f781a53ebf63fb7ac7bd7dc304038a75cff6e",
+      "cost": {
+        "adapter_loop_seconds": 78.83691047900356,
+        "adapter_seconds": 79.05335659300908,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 85.28876388596836,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 76.69042144203559,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.013121592928655446
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.013075907016173005
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 76.66422394209076
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 80.42193595797289,
+        "wall_seconds": 85.28876388596836
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 700,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 10,
+          "passing_suffix": 3,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.08925781249999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.9892578125
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 1.0,
+        "effective_modes": 7.157970905303955,
+        "hq": 0.9892578125,
+        "modes": 8,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mode_hold"
+    },
+    {
+      "compatibility_key": "70e32180cd174c2d89cd783753e2a8537e44cbda54484ccce30b31b0a90e62a2",
+      "cost": {
+        "adapter_loop_seconds": 25.792236158973537,
+        "adapter_seconds": 26.164120906032622,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 32.23918141401373,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 23.333482158835977,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4631719650933519
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.1129722420591861
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 22.75733795168344
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 27.497119382955134,
+        "wall_seconds": 32.23918141401373
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "686dc90ef16fd8c6cb56de298c61a6f99de3a4a5c496146bdb6ad2f8666e293d",
+      "cost": {
+        "adapter_loop_seconds": 55.651022454025224,
+        "adapter_seconds": 55.93865541706327,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 62.11896371503826,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 52.90465271018911,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3743150244699791
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.013323497492820024
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 52.51701418822631
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 57.26860606006812,
+        "wall_seconds": 62.11896371503826
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2916666666666667,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 350,
+          "first_pass_step": 150,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 150
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.4644192516803741,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.38558074831962585
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.250066465139389,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.40006646513938904
+          },
+          "hq": {
+            "margin": 0.13876953125000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.98876953125
+          },
+          "mass_tv": {
+            "margin": 0.08701171875,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.06298828125
+          },
+          "sw1_normalized": {
+            "margin": 0.04541049482719112,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.13458950517280888
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.38558074831962585,
+        "component_core_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_core_eigen_ratios": [
+          0.40006646513938904,
+          0.5530211329460144
+        ],
+        "component_core_min_eigen_ratio": 0.40006646513938904,
+        "component_counts": [
+          2306,
+          1790
+        ],
+        "component_covariance_error": 0.38558074831962585,
+        "component_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_mass": [
+          0.56298828125,
+          0.43701171875
+        ],
+        "component_min_eigen_ratio": 0.40006646513938904,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.005637467373162508,
+          0.018435753881931305
+        ],
+        "covariance_error": 0.11147095263004303,
+        "hq": 0.98876953125,
+        "mass_tv": 0.06298828125,
+        "max_component_spill": 0.018435753881931305,
+        "mean_error": 0.1914638876914978,
+        "min_mass_ratio": 0.8740234375,
+        "resolved_core_covariance_error": 0.38558074831962585,
+        "resolved_core_min_eigen_ratio": 0.40006646513938904,
+        "resolved_max_component_spill": 0.018435753881931305,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.13458950517280888,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "cb45307190e97c2bd8e9f025de97df5c2d019dfc61d37e7e8caba4e5b0b62b29",
+      "cost": {
+        "adapter_loop_seconds": 103.89834460103884,
+        "adapter_seconds": 104.29011399392039,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 110.3138400510652,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 94.76808058598544,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.5600915850372985
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.15062618243973702
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 93.05736281850841
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 105.59425986802671,
+        "wall_seconds": 110.3138400510652
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    }
+  ]
+}

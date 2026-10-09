@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4374,6 +4374,22 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 
 [Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-e00b36764951ef208e534a57
+
+**Scope:** research_diagnostic; scientific; revision `6eb2b2fbb09d85edefa1f070f45c3e19cd4b63b512152284384f5d3bfc0b3302`.
+
+Resolve and execute the exact saved winning BCAP recipe in this source/runtime to provide the matched six-task control; archived outcomes are motivation only.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 322.284; mechanism `floor_constant`.
+
+mode_hold: modes=8, hq=0.98926
+
+Matched winner control completes six unchanged diagnostic tasks: 3PASS and 3FAIL. Gaussian stability reproduces2/72stationary and0/24shift-hold passes; mode hold endpoint qualifies but terminal suffix3fails five-required gate.
+
+**Next:** Retain the winner as this source-bound control, with no Tier2promotion. Stop coefficient1network optimism and inspect saved game direction diagnostics before another independently bounded proposal.
+
+[Evidence](../../reports/forge/attempts/03c64e3c2e5c4df3a83cff14bb78a6bc/result.json) · [Record](records/readout-e00b36764951ef208e534a57.json)
+
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
 **Scope:** current; scientific; revision `0cb6ee2042006b122ef7c2c91b9ecdc74b703aa8ee51ac3e36a5164abde58a98`.
@@ -4421,6 +4437,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1,
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### thermodynamic-bcap-optimism-v1 · readout-f48985fb0a66208013724f4f
+
+**Scope:** research_diagnostic; scientific; revision `37de3dc839254b12f9c961e0b1b4dc17855bcc854688808f1985f8ea6a1e2e90`.
+
+Selective network optimism improves coupled-game retention while preserving the unchanged broad-vector and two-pole guards; fixed task objectives, priors and sampling remain.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 172.663; mechanism `structural`.
+
+mode_hold: modes=3, hq=0.12988
+
+Selective normalized-network optimism fails Gaussian smoke, leaves its stability prerequisite blocked and severely regresses mode hold; two-pole and broad-vector guardrails pass. The Gaussian stability signature is unmeasured, not a fabricated numerical failure.
+
+**Next:** Stop this exact coefficient1 revision. Inspect source-bound direction/circulation diagnostics before another independently bounded timing mechanism; no tuning, continuation, seed study or promotion.
+
+[Evidence](../../reports/forge/attempts/2b9d007872f64d62bbb31077a9c9d1f3/result.json) · [Record](records/readout-f48985fb0a66208013724f4f.json)
 
 ### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
 
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f4680977bec486c3bc3d79574479e037723d6679f19295bfb31975b110c1123d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `d2c5485ae20a4bc9aa905d26a33d3544dd7b0e89cd1df4a0b70fa2e5a5f7d758`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
