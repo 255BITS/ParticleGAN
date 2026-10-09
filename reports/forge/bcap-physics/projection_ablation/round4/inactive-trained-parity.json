@@ -1,0 +1,138 @@
+{
+  "checks": [
+    {
+      "ambient_within_run_mismatches": null,
+      "attempt_id": "1b7a4a7e3c9c4bdba45e692884729745",
+      "bitwise_equal": true,
+      "control_attempt_id": "1b7a4a7e3c9c4bdba45e692884729745",
+      "observation_mismatches": [],
+      "role": "nonascent",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "two_pole"
+    },
+    {
+      "ambient_within_run_mismatches": null,
+      "attempt_id": "c1ba4a13cf104ed996c985ed55c7e5cf",
+      "bitwise_equal": true,
+      "control_attempt_id": "1b7a4a7e3c9c4bdba45e692884729745",
+      "observation_mismatches": [],
+      "role": "direction_blend",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "two_pole"
+    },
+    {
+      "ambient_within_run_mismatches": null,
+      "attempt_id": "83fe2f9510934b6e83f1643cea5df859",
+      "bitwise_equal": true,
+      "control_attempt_id": "1b7a4a7e3c9c4bdba45e692884729745",
+      "observation_mismatches": [],
+      "role": "strict_progress",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "two_pole"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "dfeaac1ce1a54347bce94a4f13bebe43",
+      "bitwise_equal": true,
+      "control_attempt_id": "dfeaac1ce1a54347bce94a4f13bebe43",
+      "observation_mismatches": [],
+      "role": "nonascent",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "028a8a5a8d5f4cbb8fec4497df5829c7",
+      "bitwise_equal": true,
+      "control_attempt_id": "dfeaac1ce1a54347bce94a4f13bebe43",
+      "observation_mismatches": [],
+      "role": "direction_blend",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "27d4aa617d8549c38df67cce6494d903",
+      "bitwise_equal": true,
+      "control_attempt_id": "dfeaac1ce1a54347bce94a4f13bebe43",
+      "observation_mismatches": [],
+      "role": "strict_progress",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "2c0f067c75f04eadaad82e0118719174",
+      "bitwise_equal": true,
+      "control_attempt_id": "2c0f067c75f04eadaad82e0118719174",
+      "observation_mismatches": [],
+      "role": "nonascent",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "e0586cd287db4e61b62f12c1727ca96d",
+      "bitwise_equal": true,
+      "control_attempt_id": "2c0f067c75f04eadaad82e0118719174",
+      "observation_mismatches": [],
+      "role": "direction_blend",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "ambient_within_run_mismatches": [],
+      "attempt_id": "0a0cd7346f844db2b076996e3068c384",
+      "bitwise_equal": true,
+      "control_attempt_id": "2c0f067c75f04eadaad82e0118719174",
+      "observation_mismatches": [],
+      "role": "strict_progress",
+      "scored_output_mismatches": [],
+      "state_mismatches": [],
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "excluded_cross_arm_full_checkpoint_hashes": [
+    "training_state_sha256",
+    "primary_state_sha256",
+    "confirmed_state_sha256"
+  ],
+  "excluded_metadata": [
+    "constraint_geometry",
+    "constraint_geometry_mode",
+    "strict_progress",
+    "direction_blend"
+  ],
+  "note": "Original certificate/checkpoint/confirmation hashes retained. Models, base optimizer states, every consumed stream and numerical outputs compared bitwise; ambient globals checked initial-to-final per run.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "separated_unused_ambient_rng": [
+    "trainer.cpu_rng",
+    "trainer.cuda_rng"
+  ],
+  "trajectory_blend_finite_parity": {
+    "attempt_ids": [
+      "99ca91456ff94e788f8ab4e6c6af42db",
+      "8a96f338a90447859cd45dbc8df3daa0"
+    ],
+    "bitwise_equal": true,
+    "observation_mismatches": [],
+    "roles": [
+      "direction_blend",
+      "strict_progress"
+    ],
+    "scored_output_mismatches": [],
+    "state_mismatches": [],
+    "task_id": "trajectory"
+  }
+}

@@ -15,7 +15,7 @@ from reports.forge.regenerate_technique_inventory import project_receipt
 QUEUE = Path('/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_ablation/queue')
 OUT = Path(__file__).resolve().parent
 STATE = read_json(QUEUE / 'queue/state.json')
-REQUESTS = {role: next(rid for rid, entry in STATE['submissions'].items() if entry['request']['candidate_id'] == f'projection-ablation-round4-{role}-v1') for role in ('nonascent', 'direction_blend', 'strict_progress')}
+REQUESTS = {role: next(rid for rid, entry in STATE['submissions'].items() if entry['request']['candidate']['id'] == f'projection-ablation-round4-{role}-v1') for role in ('nonascent', 'direction_blend', 'strict_progress')}
 
 
 def render_saved(task, row, local, gif):
@@ -43,7 +43,7 @@ def main():
     state = read_json(QUEUE / 'queue/state.json')
     if pending():
         raise ValueError('both declared recipes must finish before final publication')
-    rows, receipts, media, proof = [], [], [], []
+    rows, receipts, media, proof, history = [], [], [], [], []
     for role, rid in REQUESTS.items():
         request = state['submissions'][rid]['request']
         for job in state['jobs'].values():
@@ -53,6 +53,18 @@ def main():
                 rows.append(dict(role=role, task_id=job['definition']['task_id'], gate_status='BLOCKED',
                                  reason=job.get('reason', 'own prerequisite did not pass'), metrics={}))
                 continue
+            for previous in job['attempts'][:-1]:
+                old_id=previous['attempt_id']
+                old_root=ROOT/'reports/forge/attempts'/old_id
+                original_result=read_json(old_root/'result.json')
+                certificate=read_json(old_root/'evidence.json')
+                assert certificate['result_hash']==stable_hash(original_result)
+                history.append(dict(role=role,task_id=job['definition']['task_id'],attempt_id=old_id,
+                    source_digest=request['source']['digest'],gate_status=original_result['task_results'][0]['gate_status'],
+                    raw_status=original_result['task_results'][0]['raw_status'],reason=original_result['task_results'][0]['reason'],
+                    cost=original_result['task_results'][0]['cost'],artifact_root=certificate['local_artifact_root'],
+                    original_certificates={n:file_hash(old_root/(n+'.json')) for n in ('request','result','evidence')},
+                    superseded_for_execution_only_by=job['result']['attempt_id']))
             aid = job['result']['attempt_id']
             durable = ROOT / 'reports/forge/attempts' / aid
             assert all((durable / (name + '.json')).exists() for name in ('request', 'result', 'evidence')), aid
@@ -166,11 +178,11 @@ def main():
                 for recipe in recipes:recipe.pop('constraint_geometry_mode',None)
                 assert recipes[0]==recipes[1], task
     summary=dict(schema_version=1,qualification_input=False,scope='research_diagnostic',
-                 arm_ids={role:STATE['submissions'][rid]['request']['candidate_id'] for role,rid in REQUESTS.items()},
+                 arm_ids={role:STATE['submissions'][rid]['request']['candidate']['id'] for role,rid in REQUESTS.items()},
                  requests=REQUESTS,source_digest=state['submissions'][REQUESTS['strict_progress']]['request']['source']['digest'],
                  source_commit=state['submissions'][REQUESTS['strict_progress']]['request']['source']['origin_commit'],
                  arm_revisions={role:state['submissions'][rid]['request']['candidate_revision'] for role,rid in REQUESTS.items()},
-                 reservation_ceiling=19260,campaign_accounting=state['campaigns']['projection-ablation-round4-v1'],
+                 reservation_ceiling=19260,full_reservation_including_retry=19560,execution_retry_history=history,campaign_accounting=state['campaigns']['projection-ablation-round4-v1'],
                  outcomes={role:{status:sum(r['role']==role and r['gate_status']==status for r in rows) for status in ('PASS','FAIL','BLOCKED','INCOMPLETE','INVALID')} for role in REQUESTS},
                  task_results=rows,optimizer_updates_added_by_publication=0,sampling_draws_added_by_publication=0)
     atomic_json(OUT/'results.json',summary)

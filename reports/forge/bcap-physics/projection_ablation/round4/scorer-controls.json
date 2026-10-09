@@ -1,0 +1,229 @@
+{
+  "ambient_rng_unchanged": true,
+  "conditional_controls": [
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "nonascent",
+      "task": "residual_student"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "nonascent",
+      "task": "trajectory"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "direction_blend",
+      "task": "residual_student"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "direction_blend",
+      "task": "trajectory"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "strict_progress",
+      "task": "trajectory"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "strict_progress",
+      "task": "residual_student"
+    }
+  ],
+  "information_access": "Target-informed analytic/fixture scoring witnesses, not training arms or alternate initialized models",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "rows": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "cdf_ks": 0.00012207031250022204,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.49991985549631973,
+        "std_ratio": 0.9998397109926395
+      },
+      "passed": true,
+      "task": "both_gaussian_gates"
+    },
+    {
+      "control": "collapsed",
+      "failed_bounds": [
+        "std_ratio >= 0.8",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.5,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.0,
+        "std_ratio": 0.0
+      },
+      "passed": false,
+      "task": "both_gaussian_gates"
+    },
+    {
+      "control": "wrong_mean",
+      "failed_bounds": [
+        "mean_error_sigma <= 0.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.6828115319313326,
+        "finite_fraction": 1.0,
+        "mean": 3.0,
+        "mean_error_sigma": 2.0,
+        "sample_count": 4096,
+        "std": 0.49991985549631973,
+        "std_ratio": 0.9998397109926395
+      },
+      "passed": false,
+      "task": "both_gaussian_gates"
+    },
+    {
+      "control": "oracle",
+      "metrics": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.0,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": true,
+        "same_dir": 0.0
+      },
+      "passed": true,
+      "task": "mid_scale_identity"
+    },
+    {
+      "control": "mid_identity_swap",
+      "metrics": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "identity_mid",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.8181817496021324e-08,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": false,
+        "same_dir": 0.0
+      },
+      "passed": false,
+      "task": "mid_scale_identity"
+    },
+    {
+      "control": "oracle",
+      "metrics": {
+        "grad_med": 0.11772512644529343,
+        "mean_abs": 1.0
+      },
+      "passed": true,
+      "scope": "Stored-weight fixture critic, separately scoped scoring witness",
+      "task": "two_pole"
+    },
+    {
+      "control": "collapsed",
+      "metrics": {
+        "grad_med": 0.14992676675319672,
+        "mean_abs": 0.0
+      },
+      "passed": false,
+      "scope": "Stored-weight fixture critic, separately scoped scoring witness",
+      "task": "two_pole"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}
