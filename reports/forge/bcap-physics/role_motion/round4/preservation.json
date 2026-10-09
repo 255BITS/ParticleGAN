@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "a6c9ef5a0d86e315ab7351a6d47332ade89e3524",
+  "files": {
+    "reports/forge/technique-inventory.md": "697d350cb7c5fe0a3e74d5f40e2561c376489632fa32c690ade712f70f337de2",
+    "reports/forge/technique-inventory.json": "87466b6ef0f5d5a60d5202471f9043b79e7b8678ec0a1f32417d0770df402e1c",
+    "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+    "configs/forge/tasks/two_pole.json": "d10c35da27c7e9b49636aecff781cdd4b1748344ee4341db565bba45818fefa5",
+    "configs/forge/tasks/gaussian1d_smoke.json": "4cf5029189743f168f01cdbc64e2a7c653cbb642c1fd5ef86f0d9e52a7cdbb11",
+    "configs/forge/tasks/gaussian1d_stability.json": "bfa5e2e562da18894abef64c890a48734d4faa96ffa6f453eb4ed6128c9d05b8",
+    "configs/forge/tasks/grid100.json": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
+    "configs/forge/tasks/vector_unequal_width.json": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
+    "configs/forge/tasks/vector_two_broad.json": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab"
+  }
+}

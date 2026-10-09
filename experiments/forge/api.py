@@ -172,6 +172,10 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 
 def task_policy_blockers(task, candidate):
     """Current Forge tasks certify clean/live component laws, not E22 controls."""
+    if (candidate.get('extensions',{}).get('role_motion_balance')
+            and task.get('adapter')=='transfer_behavior'
+            and task.get('execution',{}).get('host')!='mode_hold'):
+        return [f"{task['id']}: frozen public-component host has no role-motion consumer"]
     try:
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
@@ -285,7 +289,15 @@ def default_registry():
     Add a supported ExtensionSpec here after implementing its public API field;
     ordinary Recipe fields require no extension declaration.
     """
-    return CapabilityRegistry()
+    return CapabilityRegistry().register_extension(ExtensionSpec(
+        name='role_motion_balance',value_type='bool',target='trainer',argument='role_motion_balance',
+        description='Finite generator output RMS capped by same-row prior proposal RMS',
+        ownership='technique',rng_policy='replays consumed rows/jitters without draws',
+        checkpoint='public trainer role_motion rule and cumulative counters',
+        shape='scalar enable; shared batch output norm',producer='public GANTrainer',
+        gradient_ownership='unchanged G/prior objective; generator proposal ray only',
+        optimizer_binding='momentum0 DualNorm; full learned prior proposal retained',
+        initialization='no new state affecting updates',supported_paths=('public_trainer',)))
 
 
 def _resolved_prior(value):

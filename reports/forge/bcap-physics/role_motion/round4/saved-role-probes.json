@@ -1,0 +1,5009 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "scope": "archived source next-update role-decomposition probes, never full-budget grades",
+  "probes": [
+    {
+      "candidate_id": "kinetic_transport_local_v2",
+      "checkpoint": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/2b9ff220ef5c46b48127e03e801faf79/provenance/provenance-state.pt",
+      "checkpoint_sha256": "ec0f7fc42c966cafa0275aa0b22557b4cd4c16c77885286e4562b9129e9db6cb",
+      "cohorts": [
+        {
+          "component": 0,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0017404776299372315,
+              "mean_outward_displacement": 0.024973295629024506,
+              "output_rms": 0.0733332484960556
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001258985255844891,
+              "mean_outward_displacement": 0.013769015669822693,
+              "output_rms": 0.06564672291278839
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007284809253178537,
+              "mean_outward_displacement": 0.01075122132897377,
+              "output_rms": 0.015004990622401237
+            }
+          },
+          "rows": 69
+        },
+        {
+          "component": 1,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001512266811914742,
+              "mean_outward_displacement": -0.047535013407468796,
+              "output_rms": 0.16049866378307343
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0015202447539195418,
+              "mean_outward_displacement": -0.033700130879879,
+              "output_rms": 0.13603129982948303
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004191221669316292,
+              "mean_outward_displacement": -0.013101493008434772,
+              "output_rms": 0.0278017558157444
+            }
+          },
+          "rows": 40
+        },
+        {
+          "component": 1,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0008887494914233685,
+              "mean_outward_displacement": -0.13155445456504822,
+              "output_rms": 0.13227294385433197
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0005717980093322694,
+              "mean_outward_displacement": -0.10016599297523499,
+              "output_rms": 0.10178783535957336
+            },
+            "prior": {
+              "jitter_deformation_rms": 1.6858739115832577e-07,
+              "mean_outward_displacement": -0.030034124851226807,
+              "output_rms": 0.030427714809775352
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 2,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001647943165153265,
+              "mean_outward_displacement": -0.04339195042848587,
+              "output_rms": 0.16417448222637177
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0014162875013425946,
+              "mean_outward_displacement": -0.03441063314676285,
+              "output_rms": 0.13643048703670502
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006777456146664917,
+              "mean_outward_displacement": -0.008961024694144726,
+              "output_rms": 0.03190445527434349
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 2,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0033235582523047924,
+              "mean_outward_displacement": -0.1281210035085678,
+              "output_rms": 0.13147737085819244
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0034262805711477995,
+              "mean_outward_displacement": -0.08563515543937683,
+              "output_rms": 0.09084661304950714
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0001265663595404476,
+              "mean_outward_displacement": -0.039723608642816544,
+              "output_rms": 0.039779387414455414
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 3,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0007798033766448498,
+              "mean_outward_displacement": -0.13442403078079224,
+              "output_rms": 0.18367759883403778
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0006395613308995962,
+              "mean_outward_displacement": -0.11013802886009216,
+              "output_rms": 0.15770107507705688
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00019504754163790494,
+              "mean_outward_displacement": -0.023056671023368835,
+              "output_rms": 0.026764165610074997
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 3,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0012192741269245744,
+              "mean_outward_displacement": -0.14483536779880524,
+              "output_rms": 0.17506423592567444
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0012192741269245744,
+              "mean_outward_displacement": -0.12150035798549652,
+              "output_rms": 0.14813269674777985
+            },
+            "prior": {
+              "jitter_deformation_rms": 7.919840572867543e-05,
+              "mean_outward_displacement": -0.023604178801178932,
+              "output_rms": 0.02768617868423462
+            }
+          },
+          "rows": 1
+        }
+      ],
+      "diagnostic_new_target_batch": true,
+      "extra_evaluation_rng_draws": 0,
+      "full_reserved_seconds": 120,
+      "initial_jitter_output_rms": 0.019984617829322815,
+      "input_checkpoint_unchanged": true,
+      "nonlinear_interaction_rms": 0.0014024671399965882,
+      "paid_probe_seconds": 1.715343879070133,
+      "preview_updates": 1,
+      "prior_latent_drift_rms": 0.029584897682070732,
+      "prior_learnable": true,
+      "qualification_input": false,
+      "restored_full_context_exact": true,
+      "role_motion": {
+        "joint": {
+          "center_rms": 0.12223321199417114,
+          "jitter_deformation_rms": 0.0016607977449893951,
+          "norms": {
+            "max": 0.18613842129707336,
+            "mean": 0.11152420024154708,
+            "median": 0.10372930020093918,
+            "p90": 0.17205195575952528
+          },
+          "output_rms": 0.12220976501703262
+        },
+        "network": {
+          "center_rms": 0.10419291257858276,
+          "jitter_deformation_rms": 0.0013814254198223352,
+          "norms": {
+            "max": 0.15975669026374817,
+            "mean": 0.09586749455775134,
+            "median": 0.09084661304950714,
+            "p90": 0.1451394960284233
+          },
+          "output_rms": 0.1041489988565445
+        },
+        "prior": {
+          "center_rms": 0.02254767343401909,
+          "jitter_deformation_rms": 0.0006260795635171235,
+          "norms": {
+            "max": 0.039779387414455414,
+            "mean": 0.02073591508087702,
+            "median": 0.021173663437366486,
+            "p90": 0.03157227113842964
+          },
+          "output_rms": 0.022605786100029945
+        }
+      },
+      "role_output_cosine": 0.7112866640090942,
+      "sampled_rows": 128,
+      "schema_version": 1,
+      "scope": "one_next_update_disposable_copy_of_frozen_endpoint",
+      "source_commit": "5c2a64682b8900c5b42de94a6c27502e41d500f2",
+      "source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "task_id": "vector_unequal_mass",
+      "trained_prefix_steps": 1200
+    },
+    {
+      "candidate_id": "kinetic_transport_local_v2",
+      "checkpoint": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/458f28edb51246faa84350eb942225c3/provenance/provenance-state.pt",
+      "checkpoint_sha256": "d876a54b7a7b92f259af1f28951cf286bffa0339b167599591199d11a632d639",
+      "cohorts": [
+        {
+          "component": 0,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0015221410430967808,
+              "mean_outward_displacement": -0.09017529338598251,
+              "output_rms": 0.1571863442659378
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0016644916031509638,
+              "mean_outward_displacement": -0.08455304056406021,
+              "output_rms": 0.13998036086559296
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0002362060477025807,
+              "mean_outward_displacement": -0.00520693464204669,
+              "output_rms": 0.024863678961992264
+            }
+          },
+          "rows": 27
+        },
+        {
+          "component": 0,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0015126168727874756,
+              "mean_outward_displacement": 0.09167566150426865,
+              "output_rms": 0.22047214210033417
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0015370885375887156,
+              "mean_outward_displacement": 0.07271818071603775,
+              "output_rms": 0.21783116459846497
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003839106357190758,
+              "mean_outward_displacement": 0.017786076292395592,
+              "output_rms": 0.0258768480271101
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 1,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0018359479727223516,
+              "mean_outward_displacement": -0.07423481345176697,
+              "output_rms": 0.16126105189323425
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0018303729593753815,
+              "mean_outward_displacement": -0.06757673621177673,
+              "output_rms": 0.14617332816123962
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00023857264022808522,
+              "mean_outward_displacement": -0.0063580675050616264,
+              "output_rms": 0.018880147486925125
+            }
+          },
+          "rows": 24
+        },
+        {
+          "component": 1,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001280413125641644,
+              "mean_outward_displacement": 0.2147645503282547,
+              "output_rms": 0.29688283801078796
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001268949476070702,
+              "mean_outward_displacement": 0.21051883697509766,
+              "output_rms": 0.2728172242641449
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00014729020767845213,
+              "mean_outward_displacement": 0.004213767126202583,
+              "output_rms": 0.029974432662129402
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 2,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0009791633347049356,
+              "mean_outward_displacement": 0.0004066023393534124,
+              "output_rms": 0.055341754108667374
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0010695109376683831,
+              "mean_outward_displacement": 0.008253797888755798,
+              "output_rms": 0.04596054553985596
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006188790430314839,
+              "mean_outward_displacement": -0.007602506782859564,
+              "output_rms": 0.022236380726099014
+            }
+          },
+          "rows": 29
+        },
+        {
+          "component": 2,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001539994147606194,
+              "mean_outward_displacement": 0.00442723510786891,
+              "output_rms": 0.05585787817835808
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0011400138027966022,
+              "mean_outward_displacement": 0.03877384588122368,
+              "output_rms": 0.05598469078540802
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00029192317742854357,
+              "mean_outward_displacement": -0.03286200389266014,
+              "output_rms": 0.03627929091453552
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 3,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0014343939255923033,
+              "mean_outward_displacement": -0.010544180870056152,
+              "output_rms": 0.08827278017997742
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0014153552474454045,
+              "mean_outward_displacement": 0.0011385282268747687,
+              "output_rms": 0.07000986486673355
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011024026898667216,
+              "mean_outward_displacement": -0.011170383542776108,
+              "output_rms": 0.027144035324454308
+            }
+          },
+          "rows": 41
+        },
+        {
+          "component": 3,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0021905554458498955,
+              "mean_outward_displacement": -0.03492598235607147,
+              "output_rms": 0.06515858322381973
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0021905815228819847,
+              "mean_outward_displacement": -0.0032910555601119995,
+              "output_rms": 0.043698061257600784
+            },
+            "prior": {
+              "jitter_deformation_rms": 2.980232238769531e-07,
+              "mean_outward_displacement": -0.02965075522661209,
+              "output_rms": 0.03184068202972412
+            }
+          },
+          "rows": 1
+        }
+      ],
+      "diagnostic_new_target_batch": true,
+      "extra_evaluation_rng_draws": 0,
+      "full_reserved_seconds": 120,
+      "initial_jitter_output_rms": 0.024382874369621277,
+      "input_checkpoint_unchanged": true,
+      "nonlinear_interaction_rms": 0.0013560513034462929,
+      "paid_probe_seconds": 1.719256723066792,
+      "preview_updates": 1,
+      "prior_latent_drift_rms": 0.02903462015092373,
+      "prior_learnable": true,
+      "qualification_input": false,
+      "restored_full_context_exact": true,
+      "role_motion": {
+        "joint": {
+          "center_rms": 0.12192566692829132,
+          "jitter_deformation_rms": 0.0014624020550400019,
+          "norms": {
+            "max": 0.29688283801078796,
+            "mean": 0.10999379618442617,
+            "median": 0.09416136890649796,
+            "p90": 0.16923305839300157
+          },
+          "output_rms": 0.12178625166416168
+        },
+        "network": {
+          "center_rms": 0.1078832745552063,
+          "jitter_deformation_rms": 0.001493600895628333,
+          "norms": {
+            "max": 0.2779760956764221,
+            "mean": 0.09610667431843467,
+            "median": 0.0766228437423706,
+            "p90": 0.14826851487159728
+          },
+          "output_rms": 0.10769999027252197
+        },
+        "prior": {
+          "center_rms": 0.024608992040157318,
+          "jitter_deformation_rms": 0.0007091964944265783,
+          "norms": {
+            "max": 0.04930791258811951,
+            "mean": 0.023449666405213065,
+            "median": 0.022353902459144592,
+            "p90": 0.03009562827646732
+          },
+          "output_rms": 0.024525906890630722
+        }
+      },
+      "role_output_cosine": 0.46211910247802734,
+      "sampled_rows": 128,
+      "schema_version": 1,
+      "scope": "one_next_update_disposable_copy_of_frozen_endpoint",
+      "source_commit": "5c2a64682b8900c5b42de94a6c27502e41d500f2",
+      "source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "task_id": "vector_unequal_width",
+      "trained_prefix_steps": 1200
+    },
+    {
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "checkpoint": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/db79021404c14c91aa5f38f9f1be40fb/native100/grid100/training-state.pt",
+      "checkpoint_sha256": "fc58a8e364defbd76e4e4d9942aa23f76bc6aafd7a7289951ecde29347008176",
+      "cohorts": [
+        {
+          "component": 0,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.01539467554539442,
+              "mean_outward_displacement": -0.3387325406074524,
+              "output_rms": 0.36848917603492737
+            },
+            "network": {
+              "jitter_deformation_rms": 0.010462686419487,
+              "mean_outward_displacement": -0.3227149248123169,
+              "output_rms": 0.35490915179252625
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003832179820165038,
+              "mean_outward_displacement": -0.014839987270534039,
+              "output_rms": 0.015035620890557766
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 0,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00429170299321413,
+              "mean_outward_displacement": -0.30990251898765564,
+              "output_rms": 0.3550874888896942
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003799926256760955,
+              "mean_outward_displacement": -0.29792287945747375,
+              "output_rms": 0.3470163643360138
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010878518223762512,
+              "mean_outward_displacement": -0.012226112186908722,
+              "output_rms": 0.01413485687226057
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 1,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0034557548351585865,
+              "mean_outward_displacement": -0.2930026948451996,
+              "output_rms": 0.3327740728855133
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003477304009720683,
+              "mean_outward_displacement": -0.2709870934486389,
+              "output_rms": 0.3172384798526764
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00025912970886565745,
+              "mean_outward_displacement": -0.021528836339712143,
+              "output_rms": 0.023951560258865356
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 2,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0022189607843756676,
+              "mean_outward_displacement": -0.2745307683944702,
+              "output_rms": 0.3055943548679352
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0022058358881622553,
+              "mean_outward_displacement": -0.2548084557056427,
+              "output_rms": 0.28820598125457764
+            },
+            "prior": {
+              "jitter_deformation_rms": 5.285076622385532e-05,
+              "mean_outward_displacement": -0.019125143066048622,
+              "output_rms": 0.020437348634004593
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 3,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006719238590449095,
+              "mean_outward_displacement": -0.14296558499336243,
+              "output_rms": 0.2889769971370697
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00712922215461731,
+              "mean_outward_displacement": -0.11586666107177734,
+              "output_rms": 0.28588762879371643
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00021400600962806493,
+              "mean_outward_displacement": -0.02762182429432869,
+              "output_rms": 0.02977825701236725
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 3,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0022026740480214357,
+              "mean_outward_displacement": -0.27209657430648804,
+              "output_rms": 0.29602083563804626
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0020127082243561745,
+              "mean_outward_displacement": -0.2507239878177643,
+              "output_rms": 0.2804599702358246
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004554756451398134,
+              "mean_outward_displacement": -0.02116137370467186,
+              "output_rms": 0.024133194237947464
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 4,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.011019702069461346,
+              "mean_outward_displacement": -0.2495570182800293,
+              "output_rms": 0.27519941329956055
+            },
+            "network": {
+              "jitter_deformation_rms": 0.009486199356615543,
+              "mean_outward_displacement": -0.23144695162773132,
+              "output_rms": 0.2608172297477722
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.004312201868742704,
+              "mean_outward_displacement": -0.018752984702587128,
+              "output_rms": 0.02089168131351471
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 5,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0036342288367450237,
+              "mean_outward_displacement": -0.2672522962093353,
+              "output_rms": 0.2984495759010315
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0036177963484078646,
+              "mean_outward_displacement": -0.23838210105895996,
+              "output_rms": 0.27888235449790955
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004890827694907784,
+              "mean_outward_displacement": -0.029192626476287842,
+              "output_rms": 0.041220538318157196
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 6,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0062082805670797825,
+              "mean_outward_displacement": -0.27569204568862915,
+              "output_rms": 0.31301507353782654
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005927314516156912,
+              "mean_outward_displacement": -0.25254446268081665,
+              "output_rms": 0.2957640588283539
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010261671850457788,
+              "mean_outward_displacement": -0.02428538165986538,
+              "output_rms": 0.02703190967440605
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 7,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0028058942407369614,
+              "mean_outward_displacement": -0.175842747092247,
+              "output_rms": 0.3308328688144684
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003580796532332897,
+              "mean_outward_displacement": -0.15602803230285645,
+              "output_rms": 0.32201316952705383
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0016325284959748387,
+              "mean_outward_displacement": -0.019634688273072243,
+              "output_rms": 0.019649820402264595
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 7,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0037580577190965414,
+              "mean_outward_displacement": -0.20394335687160492,
+              "output_rms": 0.35113170742988586
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0038269758224487305,
+              "mean_outward_displacement": -0.18282869458198547,
+              "output_rms": 0.33062943816185
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004492505977395922,
+              "mean_outward_displacement": -0.020315108820796013,
+              "output_rms": 0.025459948927164078
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 8,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0036468259058892727,
+              "mean_outward_displacement": -0.10364271700382233,
+              "output_rms": 0.37340205907821655
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003709781216457486,
+              "mean_outward_displacement": -0.09370869398117065,
+              "output_rms": 0.36525818705558777
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00021703097445424646,
+              "mean_outward_displacement": -0.009797233156859875,
+              "output_rms": 0.016095396131277084
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 9,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0070706577971577644,
+              "mean_outward_displacement": -0.3290446996688843,
+              "output_rms": 0.32923540472984314
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005571904592216015,
+              "mean_outward_displacement": -0.32063087821006775,
+              "output_rms": 0.320645809173584
+            },
+            "prior": {
+              "jitter_deformation_rms": 7.067492697387934e-05,
+              "mean_outward_displacement": -0.007164297625422478,
+              "output_rms": 0.011271689087152481
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 9,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0024824244901537895,
+              "mean_outward_displacement": -0.29561853408813477,
+              "output_rms": 0.32177889347076416
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002148423343896866,
+              "mean_outward_displacement": -0.28699183464050293,
+              "output_rms": 0.31657490134239197
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00043337748502381146,
+              "mean_outward_displacement": -0.008766083046793938,
+              "output_rms": 0.011526992544531822
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 10,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0034303604625165462,
+              "mean_outward_displacement": -0.37407106161117554,
+              "output_rms": 0.39876648783683777
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00427831569686532,
+              "mean_outward_displacement": -0.342305451631546,
+              "output_rms": 0.36725401878356934
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0012888737255707383,
+              "mean_outward_displacement": -0.031889770179986954,
+              "output_rms": 0.03261014074087143
+            }
+          },
+          "rows": 20
+        },
+        {
+          "component": 11,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0041807908564805984,
+              "mean_outward_displacement": -0.2903405427932739,
+              "output_rms": 0.3105725347995758
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0030381358228623867,
+              "mean_outward_displacement": -0.271097868680954,
+              "output_rms": 0.29478397965431213
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006539566675201058,
+              "mean_outward_displacement": -0.018886739388108253,
+              "output_rms": 0.022248603403568268
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 12,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003610198386013508,
+              "mean_outward_displacement": -0.24055878818035126,
+              "output_rms": 0.28853484988212585
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032417788170278072,
+              "mean_outward_displacement": -0.2081761360168457,
+              "output_rms": 0.2617267966270447
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007302435114979744,
+              "mean_outward_displacement": -0.03196746110916138,
+              "output_rms": 0.03333716467022896
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 12,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005261447746306658,
+              "mean_outward_displacement": -0.25371333956718445,
+              "output_rms": 0.2915195822715759
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004786740988492966,
+              "mean_outward_displacement": -0.2204267978668213,
+              "output_rms": 0.2608858346939087
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0016653139609843493,
+              "mean_outward_displacement": -0.033470552414655685,
+              "output_rms": 0.03577994927763939
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 13,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0049849096685647964,
+              "mean_outward_displacement": 0.0076964497566223145,
+              "output_rms": 0.24694569408893585
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004888823255896568,
+              "mean_outward_displacement": 0.038223277777433395,
+              "output_rms": 0.23943907022476196
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00034059505560435355,
+              "mean_outward_displacement": -0.031511109322309494,
+              "output_rms": 0.03349939361214638
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 13,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003887714119628072,
+              "mean_outward_displacement": -0.22590260207653046,
+              "output_rms": 0.25795599818229675
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0034295590594410896,
+              "mean_outward_displacement": -0.19341789186000824,
+              "output_rms": 0.2325143963098526
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011920668184757233,
+              "mean_outward_displacement": -0.03259209170937538,
+              "output_rms": 0.034619107842445374
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 14,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0064897360280156136,
+              "mean_outward_displacement": -0.16768351197242737,
+              "output_rms": 0.2334846705198288
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006728522479534149,
+              "mean_outward_displacement": -0.1447077989578247,
+              "output_rms": 0.21747104823589325
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003767996095120907,
+              "mean_outward_displacement": -0.0250707920640707,
+              "output_rms": 0.025902293622493744
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 14,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.010406146757304668,
+              "mean_outward_displacement": -0.2112935185432434,
+              "output_rms": 0.2357737123966217
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006109257694333792,
+              "mean_outward_displacement": -0.18268229067325592,
+              "output_rms": 0.21319220960140228
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.005452009849250317,
+              "mean_outward_displacement": -0.028539199382066727,
+              "output_rms": 0.03042059950530529
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 15,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003062516450881958,
+              "mean_outward_displacement": -0.14328733086585999,
+              "output_rms": 0.23801067471504211
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031039316672831774,
+              "mean_outward_displacement": -0.10993412137031555,
+              "output_rms": 0.22669337689876556
+            },
+            "prior": {
+              "jitter_deformation_rms": 1.7505941286799498e-05,
+              "mean_outward_displacement": -0.03393047675490379,
+              "output_rms": 0.03573330491781235
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 15,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007818084210157394,
+              "mean_outward_displacement": -0.21597249805927277,
+              "output_rms": 0.2464771419763565
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006126835010945797,
+              "mean_outward_displacement": -0.18262110650539398,
+              "output_rms": 0.22331582009792328
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0023352117277681828,
+              "mean_outward_displacement": -0.03331369534134865,
+              "output_rms": 0.03799354285001755
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 16,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0046746134757995605,
+              "mean_outward_displacement": -0.24915428459644318,
+              "output_rms": 0.2755490243434906
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004117130767554045,
+              "mean_outward_displacement": -0.21484141051769257,
+              "output_rms": 0.24792073667049408
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000564296031370759,
+              "mean_outward_displacement": -0.034947652369737625,
+              "output_rms": 0.03919215127825737
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 17,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003492574905976653,
+              "mean_outward_displacement": -0.223981574177742,
+              "output_rms": 0.29086729884147644
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003734568366780877,
+              "mean_outward_displacement": -0.19807186722755432,
+              "output_rms": 0.2723488211631775
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00025707061286084354,
+              "mean_outward_displacement": -0.024388698861002922,
+              "output_rms": 0.02490123361349106
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 17,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006508976221084595,
+              "mean_outward_displacement": -0.22131288051605225,
+              "output_rms": 0.29043087363243103
+            },
+            "network": {
+              "jitter_deformation_rms": 0.009563744068145752,
+              "mean_outward_displacement": -0.19294902682304382,
+              "output_rms": 0.2721918821334839
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.001312855165451765,
+              "mean_outward_displacement": -0.027653958648443222,
+              "output_rms": 0.028067460283637047
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 18,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007282354403287172,
+              "mean_outward_displacement": -0.2583197057247162,
+              "output_rms": 0.27893659472465515
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006598044186830521,
+              "mean_outward_displacement": -0.24736718833446503,
+              "output_rms": 0.2699958384037018
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008330769487656653,
+              "mean_outward_displacement": -0.009021050296723843,
+              "output_rms": 0.013456218875944614
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 18,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035969496238976717,
+              "mean_outward_displacement": -0.23876029253005981,
+              "output_rms": 0.2752012610435486
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0036669292021542788,
+              "mean_outward_displacement": -0.22340358793735504,
+              "output_rms": 0.2669946849346161
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007766135386191308,
+              "mean_outward_displacement": -0.015508389100432396,
+              "output_rms": 0.02173490822315216
+            }
+          },
+          "rows": 25
+        },
+        {
+          "component": 19,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004215983208268881,
+              "mean_outward_displacement": -0.23520436882972717,
+              "output_rms": 0.26570406556129456
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0042374408803880215,
+              "mean_outward_displacement": -0.22309142351150513,
+              "output_rms": 0.2592398226261139
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011369687272235751,
+              "mean_outward_displacement": -0.012826690450310707,
+              "output_rms": 0.015785062685608864
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 20,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0037918456364423037,
+              "mean_outward_displacement": -0.29221901297569275,
+              "output_rms": 0.3881751298904419
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00383301661349833,
+              "mean_outward_displacement": -0.2558414340019226,
+              "output_rms": 0.353244811296463
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00033698801416903734,
+              "mean_outward_displacement": -0.03532826900482178,
+              "output_rms": 0.0374922938644886
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 20,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0030212097335606813,
+              "mean_outward_displacement": -0.3787992596626282,
+              "output_rms": 0.3892510235309601
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00401886273175478,
+              "mean_outward_displacement": -0.34932464361190796,
+              "output_rms": 0.3600904941558838
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.001393863931298256,
+              "mean_outward_displacement": -0.031083734706044197,
+              "output_rms": 0.03148354962468147
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 21,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0033669210970401764,
+              "mean_outward_displacement": -0.2284429520368576,
+              "output_rms": 0.3301166892051697
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0029248862992972136,
+              "mean_outward_displacement": -0.19535109400749207,
+              "output_rms": 0.303681343793869
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0002831100719049573,
+              "mean_outward_displacement": -0.03272795304656029,
+              "output_rms": 0.03448289632797241
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 21,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003324878169223666,
+              "mean_outward_displacement": -0.32551276683807373,
+              "output_rms": 0.34351083636283875
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032505260314792395,
+              "mean_outward_displacement": -0.28335028886795044,
+              "output_rms": 0.3019775450229645
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009018818382173777,
+              "mean_outward_displacement": -0.041891563683748245,
+              "output_rms": 0.04300728812813759
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 22,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007628249935805798,
+              "mean_outward_displacement": -0.2275061160326004,
+              "output_rms": 0.2521536350250244
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0036908965557813644,
+              "mean_outward_displacement": -0.20596852898597717,
+              "output_rms": 0.2338322252035141
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0029771062545478344,
+              "mean_outward_displacement": -0.020505426451563835,
+              "output_rms": 0.020799659192562103
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 22,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.009357188828289509,
+              "mean_outward_displacement": -0.23444072902202606,
+              "output_rms": 0.2558983862400055
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006875442340970039,
+              "mean_outward_displacement": -0.20842351019382477,
+              "output_rms": 0.23262515664100647
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.005234711803495884,
+              "mean_outward_displacement": -0.026878537610173225,
+              "output_rms": 0.028579719364643097
+            }
+          },
+          "rows": 35
+        },
+        {
+          "component": 23,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003415296785533428,
+              "mean_outward_displacement": -0.20390181243419647,
+              "output_rms": 0.2303379774093628
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00348763819783926,
+              "mean_outward_displacement": -0.17441269755363464,
+              "output_rms": 0.2056756317615509
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00013225381553638726,
+              "mean_outward_displacement": -0.028980035334825516,
+              "output_rms": 0.03078332543373108
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 23,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004517620429396629,
+              "mean_outward_displacement": -0.19406360387802124,
+              "output_rms": 0.2278277724981308
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004031227435916662,
+              "mean_outward_displacement": -0.16135825216770172,
+              "output_rms": 0.20218156278133392
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010673132492229342,
+              "mean_outward_displacement": -0.03228091076016426,
+              "output_rms": 0.033144887536764145
+            }
+          },
+          "rows": 22
+        },
+        {
+          "component": 24,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0027269492857158184,
+              "mean_outward_displacement": -0.14065559208393097,
+              "output_rms": 0.19896963238716125
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002845980226993561,
+              "mean_outward_displacement": -0.11637835949659348,
+              "output_rms": 0.17820867896080017
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008033768972381949,
+              "mean_outward_displacement": -0.023668330162763596,
+              "output_rms": 0.024753069505095482
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 24,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005216956604272127,
+              "mean_outward_displacement": -0.18882966041564941,
+              "output_rms": 0.20260082185268402
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031698953825980425,
+              "mean_outward_displacement": -0.15810370445251465,
+              "output_rms": 0.17300541698932648
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003990495577454567,
+              "mean_outward_displacement": -0.02962017059326172,
+              "output_rms": 0.03080248460173607
+            }
+          },
+          "rows": 23
+        },
+        {
+          "component": 25,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001850498840212822,
+              "mean_outward_displacement": -0.18119731545448303,
+              "output_rms": 0.1964869499206543
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0019680450204759836,
+              "mean_outward_displacement": -0.15361134707927704,
+              "output_rms": 0.17502361536026
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000337994220899418,
+              "mean_outward_displacement": -0.027191171422600746,
+              "output_rms": 0.029305007308721542
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 25,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004590882919728756,
+              "mean_outward_displacement": -0.1768205165863037,
+              "output_rms": 0.1943426877260208
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003915028180927038,
+              "mean_outward_displacement": -0.1448555290699005,
+              "output_rms": 0.17132043838500977
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0024843818973749876,
+              "mean_outward_displacement": -0.031902145594358444,
+              "output_rms": 0.03524218127131462
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 26,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035536533687263727,
+              "mean_outward_displacement": -0.13305294513702393,
+              "output_rms": 0.2141786366701126
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00358932139351964,
+              "mean_outward_displacement": -0.1132868304848671,
+              "output_rms": 0.2037305384874344
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00013405318895820528,
+              "mean_outward_displacement": -0.01850304566323757,
+              "output_rms": 0.03146067634224892
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 26,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007683920208364725,
+              "mean_outward_displacement": -0.1920391172170639,
+              "output_rms": 0.22970634698867798
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006032141856849194,
+              "mean_outward_displacement": -0.1573396474123001,
+              "output_rms": 0.20320643484592438
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00324523844756186,
+              "mean_outward_displacement": -0.03575253486633301,
+              "output_rms": 0.03706720098853111
+            }
+          },
+          "rows": 19
+        },
+        {
+          "component": 27,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00840767938643694,
+              "mean_outward_displacement": -0.20056691765785217,
+              "output_rms": 0.22660404443740845
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0066572148352861404,
+              "mean_outward_displacement": -0.1854139119386673,
+              "output_rms": 0.21723221242427826
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0013432459672912955,
+              "mean_outward_displacement": -0.014289755374193192,
+              "output_rms": 0.018789570778608322
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 27,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.008932610973715782,
+              "mean_outward_displacement": -0.20261436700820923,
+              "output_rms": 0.2271854430437088
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006219914648681879,
+              "mean_outward_displacement": -0.18466676771640778,
+              "output_rms": 0.21591748297214508
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0036341340746730566,
+              "mean_outward_displacement": -0.018521981313824654,
+              "output_rms": 0.02303597331047058
+            }
+          },
+          "rows": 34
+        },
+        {
+          "component": 28,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005416329484432936,
+              "mean_outward_displacement": -0.23255085945129395,
+              "output_rms": 0.24899084866046906
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003374636871740222,
+              "mean_outward_displacement": -0.2121923714876175,
+              "output_rms": 0.23277820646762848
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00015165960940066725,
+              "mean_outward_displacement": -0.017266545444726944,
+              "output_rms": 0.021000882610678673
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 28,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0033208783715963364,
+              "mean_outward_displacement": -0.21394240856170654,
+              "output_rms": 0.24315020442008972
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002467008074745536,
+              "mean_outward_displacement": -0.19365188479423523,
+              "output_rms": 0.2306857407093048
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006387088214978576,
+              "mean_outward_displacement": -0.020322471857070923,
+              "output_rms": 0.024452801793813705
+            }
+          },
+          "rows": 24
+        },
+        {
+          "component": 29,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035349528770893812,
+              "mean_outward_displacement": -0.2352060079574585,
+              "output_rms": 0.29324081540107727
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027657984755933285,
+              "mean_outward_displacement": -0.21816040575504303,
+              "output_rms": 0.2793004810810089
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00024663933436386287,
+              "mean_outward_displacement": -0.01680770516395569,
+              "output_rms": 0.018781280145049095
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 29,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004277046769857407,
+              "mean_outward_displacement": -0.2536897361278534,
+              "output_rms": 0.2939103841781616
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004050880204886198,
+              "mean_outward_displacement": -0.23628857731819153,
+              "output_rms": 0.28147053718566895
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000721717718988657,
+              "mean_outward_displacement": -0.018175605684518814,
+              "output_rms": 0.0205509252846241
+            }
+          },
+          "rows": 25
+        },
+        {
+          "component": 30,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.012745210900902748,
+              "mean_outward_displacement": 0.007960140705108643,
+              "output_rms": 0.36117318272590637
+            },
+            "network": {
+              "jitter_deformation_rms": 0.01275110524147749,
+              "mean_outward_displacement": 0.038226768374443054,
+              "output_rms": 0.36827343702316284
+            },
+            "prior": {
+              "jitter_deformation_rms": 7.445237861247733e-05,
+              "mean_outward_displacement": -0.028058506548404694,
+              "output_rms": 0.028058726340532303
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 30,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006058255210518837,
+              "mean_outward_displacement": -0.359145849943161,
+              "output_rms": 0.38312676548957825
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006621709559112787,
+              "mean_outward_displacement": -0.3181346356868744,
+              "output_rms": 0.34423989057540894
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005775314057245851,
+              "mean_outward_displacement": -0.041079118847846985,
+              "output_rms": 0.042103540152311325
+            }
+          },
+          "rows": 17
+        },
+        {
+          "component": 31,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002311561955139041,
+              "mean_outward_displacement": -0.22413788735866547,
+              "output_rms": 0.3048711121082306
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002712939167395234,
+              "mean_outward_displacement": -0.19478581845760345,
+              "output_rms": 0.28235915303230286
+            },
+            "prior": {
+              "jitter_deformation_rms": 3.654887734683143e-07,
+              "mean_outward_displacement": -0.029796743765473366,
+              "output_rms": 0.031543247401714325
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 31,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0029765155632048845,
+              "mean_outward_displacement": -0.2920740246772766,
+              "output_rms": 0.31370118260383606
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0030838996171951294,
+              "mean_outward_displacement": -0.2548463046550751,
+              "output_rms": 0.27968502044677734
+            },
+            "prior": {
+              "jitter_deformation_rms": 1.8408123651170172e-05,
+              "mean_outward_displacement": -0.03695390745997429,
+              "output_rms": 0.03764218091964722
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 32,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004256501328200102,
+              "mean_outward_displacement": -0.2199385166168213,
+              "output_rms": 0.2605016529560089
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0033259352203458548,
+              "mean_outward_displacement": -0.1844567209482193,
+              "output_rms": 0.22582848370075226
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00012802511628251523,
+              "mean_outward_displacement": -0.03545355796813965,
+              "output_rms": 0.03659243509173393
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 32,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004793951753526926,
+              "mean_outward_displacement": -0.2245972454547882,
+              "output_rms": 0.2636803984642029
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005634881090372801,
+              "mean_outward_displacement": -0.18367667496204376,
+              "output_rms": 0.22686919569969177
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0015014022355899215,
+              "mean_outward_displacement": -0.040884602814912796,
+              "output_rms": 0.04171014949679375
+            }
+          },
+          "rows": 22
+        },
+        {
+          "component": 33,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.012040753848850727,
+              "mean_outward_displacement": -0.14317120611667633,
+              "output_rms": 0.20141178369522095
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005753419362008572,
+              "mean_outward_displacement": -0.11638685315847397,
+              "output_rms": 0.18328769505023956
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.01102717686444521,
+              "mean_outward_displacement": -0.02581087127327919,
+              "output_rms": 0.03172146901488304
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 33,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.008455365896224976,
+              "mean_outward_displacement": -0.19394439458847046,
+              "output_rms": 0.20564471185207367
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005268637090921402,
+              "mean_outward_displacement": -0.16736021637916565,
+              "output_rms": 0.18058106303215027
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.007719512563198805,
+              "mean_outward_displacement": -0.026958515867590904,
+              "output_rms": 0.029971402138471603
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 34,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0037478175945580006,
+              "mean_outward_displacement": -0.14257802069187164,
+              "output_rms": 0.17321251332759857
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004315807484090328,
+              "mean_outward_displacement": -0.12925373017787933,
+              "output_rms": 0.15978695452213287
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003731464734300971,
+              "mean_outward_displacement": -0.014191028662025928,
+              "output_rms": 0.015641923993825912
+            }
+          },
+          "rows": 18
+        },
+        {
+          "component": 34,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.011263754218816757,
+              "mean_outward_displacement": -0.1548147350549698,
+              "output_rms": 0.17358016967773438
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005949957296252251,
+              "mean_outward_displacement": -0.13862693309783936,
+              "output_rms": 0.1619311422109604
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.010153482668101788,
+              "mean_outward_displacement": -0.016269253566861153,
+              "output_rms": 0.02133048139512539
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 35,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00551283173263073,
+              "mean_outward_displacement": -0.15648259222507477,
+              "output_rms": 0.1872575730085373
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003489521099254489,
+              "mean_outward_displacement": -0.1386110931634903,
+              "output_rms": 0.1721350997686386
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0026248213835060596,
+              "mean_outward_displacement": -0.017887353897094727,
+              "output_rms": 0.034000784158706665
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 35,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005078458227217197,
+              "mean_outward_displacement": -0.15988706052303314,
+              "output_rms": 0.18457897007465363
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005077185574918985,
+              "mean_outward_displacement": -0.1275768131017685,
+              "output_rms": 0.1707565188407898
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008183085010387003,
+              "mean_outward_displacement": -0.0330929160118103,
+              "output_rms": 0.044212326407432556
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 36,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005052429158240557,
+              "mean_outward_displacement": -0.17766422033309937,
+              "output_rms": 0.18284979462623596
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003822220489382744,
+              "mean_outward_displacement": -0.17172247171401978,
+              "output_rms": 0.17738348245620728
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002421662909910083,
+              "mean_outward_displacement": -0.0049870749935507774,
+              "output_rms": 0.01031332928687334
+            }
+          },
+          "rows": 18
+        },
+        {
+          "component": 36,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.015596364624798298,
+              "mean_outward_displacement": -0.17186971008777618,
+              "output_rms": 0.18617959320545197
+            },
+            "network": {
+              "jitter_deformation_rms": 0.009738652035593987,
+              "mean_outward_displacement": -0.1540863960981369,
+              "output_rms": 0.17298592627048492
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.014184897765517235,
+              "mean_outward_displacement": -0.01826903596520424,
+              "output_rms": 0.023599330335855484
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 37,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003920084331184626,
+              "mean_outward_displacement": -0.17261233925819397,
+              "output_rms": 0.19464047253131866
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004752504639327526,
+              "mean_outward_displacement": -0.16126182675361633,
+              "output_rms": 0.18623487651348114
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002381769008934498,
+              "mean_outward_displacement": -0.011254205368459225,
+              "output_rms": 0.014953765086829662
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 37,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007143265102058649,
+              "mean_outward_displacement": -0.1796744167804718,
+              "output_rms": 0.19674989581108093
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0022706242743879557,
+              "mean_outward_displacement": -0.16455622017383575,
+              "output_rms": 0.1865653395652771
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.007651291321963072,
+              "mean_outward_displacement": -0.016162090003490448,
+              "output_rms": 0.021314838901162148
+            }
+          },
+          "rows": 31
+        },
+        {
+          "component": 38,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006410799454897642,
+              "mean_outward_displacement": -0.16522692143917084,
+              "output_rms": 0.2447851300239563
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005397786386311054,
+              "mean_outward_displacement": -0.14187173545360565,
+              "output_rms": 0.23073282837867737
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0017154666129499674,
+              "mean_outward_displacement": -0.023099368438124657,
+              "output_rms": 0.023755384609103203
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 38,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0022533924784511328,
+              "mean_outward_displacement": -0.22074222564697266,
+              "output_rms": 0.24825601279735565
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002160348230972886,
+              "mean_outward_displacement": -0.20057879388332367,
+              "output_rms": 0.23120877146720886
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006980585167184472,
+              "mean_outward_displacement": -0.020814895629882812,
+              "output_rms": 0.02187914215028286
+            }
+          },
+          "rows": 20
+        },
+        {
+          "component": 39,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002795975189656019,
+              "mean_outward_displacement": -0.3010193705558777,
+              "output_rms": 0.3138207197189331
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0028089159168303013,
+              "mean_outward_displacement": -0.28056350350379944,
+              "output_rms": 0.2943830192089081
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0001062848386936821,
+              "mean_outward_displacement": -0.0213223397731781,
+              "output_rms": 0.021635767072439194
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 40,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004093351308256388,
+              "mean_outward_displacement": -0.3218623399734497,
+              "output_rms": 0.37816131114959717
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031909781973809004,
+              "mean_outward_displacement": -0.2909802496433258,
+              "output_rms": 0.33875134587287903
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005805077962577343,
+              "mean_outward_displacement": -0.030857348814606667,
+              "output_rms": 0.03872988373041153
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 40,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0034834023099392653,
+              "mean_outward_displacement": -0.38338908553123474,
+              "output_rms": 0.39696887135505676
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004589424934238195,
+              "mean_outward_displacement": -0.32533764839172363,
+              "output_rms": 0.34147191047668457
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000571764016058296,
+              "mean_outward_displacement": -0.058923181146383286,
+              "output_rms": 0.06326290220022202
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 41,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002857998013496399,
+              "mean_outward_displacement": -0.28107750415802,
+              "output_rms": 0.3201945126056671
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027626941446214914,
+              "mean_outward_displacement": -0.24726548790931702,
+              "output_rms": 0.28040796518325806
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0012464263709262013,
+              "mean_outward_displacement": -0.03314501792192459,
+              "output_rms": 0.04178248718380928
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 41,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0031931460835039616,
+              "mean_outward_displacement": -0.2629968822002411,
+              "output_rms": 0.3207225799560547
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002958501921966672,
+              "mean_outward_displacement": -0.2116146832704544,
+              "output_rms": 0.28136488795280457
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003175564343109727,
+              "mean_outward_displacement": -0.05074804648756981,
+              "output_rms": 0.05739811062812805
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 42,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0028309242334216833,
+              "mean_outward_displacement": -0.05650302767753601,
+              "output_rms": 0.24123893678188324
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027118846774101257,
+              "mean_outward_displacement": -0.0213366337120533,
+              "output_rms": 0.2261475920677185
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011754273436963558,
+              "mean_outward_displacement": -0.03416794538497925,
+              "output_rms": 0.04537740722298622
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 42,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005208891350775957,
+              "mean_outward_displacement": -0.25425684452056885,
+              "output_rms": 0.28252413868904114
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0049827429465949535,
+              "mean_outward_displacement": -0.1955297738313675,
+              "output_rms": 0.22960256040096283
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0025706763844937086,
+              "mean_outward_displacement": -0.059321243315935135,
+              "output_rms": 0.06453708559274673
+            }
+          },
+          "rows": 17
+        },
+        {
+          "component": 43,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006500022020190954,
+              "mean_outward_displacement": 0.03394945710897446,
+              "output_rms": 0.1734158992767334
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002595925470814109,
+              "mean_outward_displacement": 0.07153090834617615,
+              "output_rms": 0.18329022824764252
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.004216949921101332,
+              "mean_outward_displacement": -0.03732290491461754,
+              "output_rms": 0.05680441856384277
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 43,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0049316915683448315,
+              "mean_outward_displacement": -0.21567009389400482,
+              "output_rms": 0.2408691942691803
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004880387336015701,
+              "mean_outward_displacement": -0.16371697187423706,
+              "output_rms": 0.18516705930233002
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009969030506908894,
+              "mean_outward_displacement": -0.05195450037717819,
+              "output_rms": 0.058362413197755814
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 44,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004331859294325113,
+              "mean_outward_displacement": -0.10093268007040024,
+              "output_rms": 0.1673659086227417
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031031460966914892,
+              "mean_outward_displacement": -0.0651644617319107,
+              "output_rms": 0.13669639825820923
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003469704184681177,
+              "mean_outward_displacement": -0.03608890250325203,
+              "output_rms": 0.0439484678208828
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 44,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.009844206273555756,
+              "mean_outward_displacement": -0.12239926308393478,
+              "output_rms": 0.1729545295238495
+            },
+            "network": {
+              "jitter_deformation_rms": 0.007521118503063917,
+              "mean_outward_displacement": -0.07486061751842499,
+              "output_rms": 0.14092405140399933
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.004999289754778147,
+              "mean_outward_displacement": -0.04875625669956207,
+              "output_rms": 0.05333134904503822
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 45,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0015337677905336022,
+              "mean_outward_displacement": -0.15194013714790344,
+              "output_rms": 0.17377497255802155
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0015357506927102804,
+              "mean_outward_displacement": -0.09955129772424698,
+              "output_rms": 0.1275760978460312
+            },
+            "prior": {
+              "jitter_deformation_rms": 1.1426577657402959e-05,
+              "mean_outward_displacement": -0.052643343806266785,
+              "output_rms": 0.05275409668684006
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 45,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.009186804294586182,
+              "mean_outward_displacement": -0.12643350660800934,
+              "output_rms": 0.16827939450740814
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0054679508320987225,
+              "mean_outward_displacement": -0.06372115761041641,
+              "output_rms": 0.12826095521450043
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.005625911056995392,
+              "mean_outward_displacement": -0.063359335064888,
+              "output_rms": 0.06408156454563141
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 46,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003435104386880994,
+              "mean_outward_displacement": -0.06247543543577194,
+              "output_rms": 0.15100136399269104
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002790256403386593,
+              "mean_outward_displacement": -0.02208874560892582,
+              "output_rms": 0.1513354778289795
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002198658185079694,
+              "mean_outward_displacement": -0.03993304446339607,
+              "output_rms": 0.05314095690846443
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 46,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003472156822681427,
+              "mean_outward_displacement": -0.17604684829711914,
+              "output_rms": 0.1974211037158966
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004443534649908543,
+              "mean_outward_displacement": -0.11548477411270142,
+              "output_rms": 0.15207545459270477
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0019632296171039343,
+              "mean_outward_displacement": -0.05962256342172623,
+              "output_rms": 0.06368616223335266
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 47,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0014553992077708244,
+              "mean_outward_displacement": -0.0570925772190094,
+              "output_rms": 0.18091504275798798
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0008677755831740797,
+              "mean_outward_displacement": -0.01582980901002884,
+              "output_rms": 0.17484688758850098
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0012164658401161432,
+              "mean_outward_displacement": -0.0413769856095314,
+              "output_rms": 0.04713413864374161
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 47,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002207119483500719,
+              "mean_outward_displacement": -0.16410231590270996,
+              "output_rms": 0.2113162875175476
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0022451472468674183,
+              "mean_outward_displacement": -0.11640474945306778,
+              "output_rms": 0.1776234656572342
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009795959340408444,
+              "mean_outward_displacement": -0.04815390333533287,
+              "output_rms": 0.05327295884490013
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 48,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002733539557084441,
+              "mean_outward_displacement": -0.09531179070472717,
+              "output_rms": 0.2352917194366455
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027835401706397533,
+              "mean_outward_displacement": -0.05132226645946503,
+              "output_rms": 0.22237341105937958
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003984954673796892,
+              "mean_outward_displacement": -0.043570809066295624,
+              "output_rms": 0.044734153896570206
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 48,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0018592587439343333,
+              "mean_outward_displacement": -0.2503087818622589,
+              "output_rms": 0.2638976573944092
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001969770062714815,
+              "mean_outward_displacement": -0.21066786348819733,
+              "output_rms": 0.22680746018886566
+            },
+            "prior": {
+              "jitter_deformation_rms": 6.568112098648271e-07,
+              "mean_outward_displacement": -0.04029737040400505,
+              "output_rms": 0.04380980506539345
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 49,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00275978515855968,
+              "mean_outward_displacement": -0.19758011400699615,
+              "output_rms": 0.30489736795425415
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00275822589173913,
+              "mean_outward_displacement": -0.16560077667236328,
+              "output_rms": 0.28166642785072327
+            },
+            "prior": {
+              "jitter_deformation_rms": 4.7678126975370105e-06,
+              "mean_outward_displacement": -0.03246404230594635,
+              "output_rms": 0.03467252478003502
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 49,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003564220853149891,
+              "mean_outward_displacement": -0.27607569098472595,
+              "output_rms": 0.31851115822792053
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004214216023683548,
+              "mean_outward_displacement": -0.23754823207855225,
+              "output_rms": 0.2887642979621887
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00045152599341236055,
+              "mean_outward_displacement": -0.039222437888383865,
+              "output_rms": 0.041376058012247086
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 50,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004269407596439123,
+              "mean_outward_displacement": -0.16368882358074188,
+              "output_rms": 0.348547101020813
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00426721666008234,
+              "mean_outward_displacement": -0.1375761330127716,
+              "output_rms": 0.3428356647491455
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00026050294400192797,
+              "mean_outward_displacement": -0.02767026051878929,
+              "output_rms": 0.02819521352648735
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 50,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006998597644269466,
+              "mean_outward_displacement": -0.34815582633018494,
+              "output_rms": 0.40126052498817444
+            },
+            "network": {
+              "jitter_deformation_rms": 0.009254115633666515,
+              "mean_outward_displacement": -0.2922459840774536,
+              "output_rms": 0.35853472352027893
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0025618423242121935,
+              "mean_outward_displacement": -0.056538574397563934,
+              "output_rms": 0.06638957560062408
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 51,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035392551217228174,
+              "mean_outward_displacement": -0.16572508215904236,
+              "output_rms": 0.3224387764930725
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003590979613363743,
+              "mean_outward_displacement": -0.1430331915616989,
+              "output_rms": 0.27929890155792236
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00031378379208035767,
+              "mean_outward_displacement": -0.023470966145396233,
+              "output_rms": 0.05284407362341881
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 51,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005781223997473717,
+              "mean_outward_displacement": -0.28258025646209717,
+              "output_rms": 0.3314846158027649
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00597906019538641,
+              "mean_outward_displacement": -0.2226300984621048,
+              "output_rms": 0.2822149395942688
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006251416052691638,
+              "mean_outward_displacement": -0.059961237013339996,
+              "output_rms": 0.0657818540930748
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 52,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035898927599191666,
+              "mean_outward_displacement": -0.03419570252299309,
+              "output_rms": 0.21824756264686584
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0028407208155840635,
+              "mean_outward_displacement": 0.01976572535932064,
+              "output_rms": 0.21573792397975922
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005236099241301417,
+              "mean_outward_displacement": -0.053653012961149216,
+              "output_rms": 0.0590381883084774
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 52,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004215576220303774,
+              "mean_outward_displacement": -0.21451647579669952,
+              "output_rms": 0.26779866218566895
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004076224751770496,
+              "mean_outward_displacement": -0.15155039727687836,
+              "output_rms": 0.218594029545784
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0018804853316396475,
+              "mean_outward_displacement": -0.06298064440488815,
+              "output_rms": 0.06685121357440948
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 53,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0024008601903915405,
+              "mean_outward_displacement": -0.14992602169513702,
+              "output_rms": 0.22518227994441986
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002123976359143853,
+              "mean_outward_displacement": -0.0993175208568573,
+              "output_rms": 0.17259937524795532
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010071040596812963,
+              "mean_outward_displacement": -0.05172031745314598,
+              "output_rms": 0.06394888460636139
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 53,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004892323631793261,
+              "mean_outward_displacement": -0.15681633353233337,
+              "output_rms": 0.21942004561424255
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004025597590953112,
+              "mean_outward_displacement": -0.09031440317630768,
+              "output_rms": 0.17366430163383484
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0026790383271872997,
+              "mean_outward_displacement": -0.06657125800848007,
+              "output_rms": 0.06944403797388077
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 54,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002618052763864398,
+              "mean_outward_displacement": -0.10428527742624283,
+              "output_rms": 0.18222157657146454
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027321497909724712,
+              "mean_outward_displacement": -0.047098975628614426,
+              "output_rms": 0.1395961493253708
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.001031688298098743,
+              "mean_outward_displacement": -0.057887740433216095,
+              "output_rms": 0.06340151280164719
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 54,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00641549052670598,
+              "mean_outward_displacement": -0.06873201578855515,
+              "output_rms": 0.15732060372829437
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005324422847479582,
+              "mean_outward_displacement": -0.0028405189514160156,
+              "output_rms": 0.14065560698509216
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003041340969502926,
+              "mean_outward_displacement": -0.06614711880683899,
+              "output_rms": 0.06775966286659241
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 55,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0025395883712917566,
+              "mean_outward_displacement": -0.11296722292900085,
+              "output_rms": 0.1616089642047882
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0019795193802565336,
+              "mean_outward_displacement": -0.05777664855122566,
+              "output_rms": 0.12579110264778137
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002011883072555065,
+              "mean_outward_displacement": -0.05654885619878769,
+              "output_rms": 0.057160038501024246
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 55,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006691280752420425,
+              "mean_outward_displacement": -0.08976384252309799,
+              "output_rms": 0.1527005285024643
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004355433862656355,
+              "mean_outward_displacement": -0.032845910638570786,
+              "output_rms": 0.12581726908683777
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.004772938787937164,
+              "mean_outward_displacement": -0.05828942731022835,
+              "output_rms": 0.060160063207149506
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 56,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006673753261566162,
+              "mean_outward_displacement": -0.14968448877334595,
+              "output_rms": 0.19195377826690674
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004361012019217014,
+              "mean_outward_displacement": -0.0926850363612175,
+              "output_rms": 0.14264516532421112
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002891067648306489,
+              "mean_outward_displacement": -0.05706401169300079,
+              "output_rms": 0.0671750158071518
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 56,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.011957244016230106,
+              "mean_outward_displacement": -0.19294875860214233,
+              "output_rms": 0.20603890717029572
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004985002800822258,
+              "mean_outward_displacement": -0.13178962469100952,
+              "output_rms": 0.14568191766738892
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00906010065227747,
+              "mean_outward_displacement": -0.06269016116857529,
+              "output_rms": 0.06718304008245468
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 57,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001878238981589675,
+              "mean_outward_displacement": -0.09358833730220795,
+              "output_rms": 0.18862022459506989
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0019496447639539838,
+              "mean_outward_displacement": -0.05525428056716919,
+              "output_rms": 0.16774111986160278
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000166522033396177,
+              "mean_outward_displacement": -0.03884821757674217,
+              "output_rms": 0.04246346652507782
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 57,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004076776094734669,
+              "mean_outward_displacement": -0.14737562835216522,
+              "output_rms": 0.20112460851669312
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0038668771740049124,
+              "mean_outward_displacement": -0.1077950969338417,
+              "output_rms": 0.17012950778007507
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009724272531457245,
+              "mean_outward_displacement": -0.04008284956216812,
+              "output_rms": 0.04551887512207031
+            }
+          },
+          "rows": 20
+        },
+        {
+          "component": 58,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0014088904717937112,
+              "mean_outward_displacement": -0.16982951760292053,
+              "output_rms": 0.24651069939136505
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0015779685927554965,
+              "mean_outward_displacement": -0.13589943945407867,
+              "output_rms": 0.2232988029718399
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006607983377762139,
+              "mean_outward_displacement": -0.03448037803173065,
+              "output_rms": 0.03861144557595253
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 58,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002701246878132224,
+              "mean_outward_displacement": -0.20700755715370178,
+              "output_rms": 0.25644686818122864
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0028857244178652763,
+              "mean_outward_displacement": -0.1694115549325943,
+              "output_rms": 0.22745032608509064
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010566913988441229,
+              "mean_outward_displacement": -0.03867548704147339,
+              "output_rms": 0.04236803203821182
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 59,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0036107704509049654,
+              "mean_outward_displacement": -0.22884681820869446,
+              "output_rms": 0.3157893717288971
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003497504396364093,
+              "mean_outward_displacement": -0.20996010303497314,
+              "output_rms": 0.28276726603507996
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006516543799079955,
+              "mean_outward_displacement": -0.020093630999326706,
+              "output_rms": 0.035855215042829514
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 59,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0030966547783464193,
+              "mean_outward_displacement": -0.2769432067871094,
+              "output_rms": 0.31593677401542664
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031036899890750647,
+              "mean_outward_displacement": -0.24621139466762543,
+              "output_rms": 0.28701290488243103
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00023678258003201336,
+              "mean_outward_displacement": -0.03172333911061287,
+              "output_rms": 0.03533005341887474
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 60,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.014121745713055134,
+              "mean_outward_displacement": -0.3244696259498596,
+              "output_rms": 0.3457661271095276
+            },
+            "network": {
+              "jitter_deformation_rms": 0.008947119116783142,
+              "mean_outward_displacement": -0.30039697885513306,
+              "output_rms": 0.32084617018699646
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007823958294466138,
+              "mean_outward_displacement": -0.02598213031888008,
+              "output_rms": 0.02648906596004963
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 60,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.008749235421419144,
+              "mean_outward_displacement": -0.3045091927051544,
+              "output_rms": 0.3587654232978821
+            },
+            "network": {
+              "jitter_deformation_rms": 0.010466817766427994,
+              "mean_outward_displacement": -0.27333569526672363,
+              "output_rms": 0.34248456358909607
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0073507847264409065,
+              "mean_outward_displacement": -0.03260723501443863,
+              "output_rms": 0.038516171276569366
+            }
+          },
+          "rows": 19
+        },
+        {
+          "component": 61,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00660618394613266,
+              "mean_outward_displacement": -0.19412653148174286,
+              "output_rms": 0.27626684308052063
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00813459325581789,
+              "mean_outward_displacement": -0.16374804079532623,
+              "output_rms": 0.2624053955078125
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00045265755034051836,
+              "mean_outward_displacement": -0.029474789276719093,
+              "output_rms": 0.031612470746040344
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 61,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005767832975834608,
+              "mean_outward_displacement": -0.23174893856048584,
+              "output_rms": 0.2880778908729553
+            },
+            "network": {
+              "jitter_deformation_rms": 0.007643636781722307,
+              "mean_outward_displacement": -0.1989494264125824,
+              "output_rms": 0.2696322202682495
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00696082366630435,
+              "mean_outward_displacement": -0.03401246666908264,
+              "output_rms": 0.03680704906582832
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 62,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004478531423956156,
+              "mean_outward_displacement": -0.13810881972312927,
+              "output_rms": 0.2237219363451004
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004641841631382704,
+              "mean_outward_displacement": -0.10369263589382172,
+              "output_rms": 0.20534543693065643
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00035226967884227633,
+              "mean_outward_displacement": -0.034337401390075684,
+              "output_rms": 0.034657787531614304
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 62,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007988374680280685,
+              "mean_outward_displacement": -0.1983291208744049,
+              "output_rms": 0.23971866071224213
+            },
+            "network": {
+              "jitter_deformation_rms": 0.009173884056508541,
+              "mean_outward_displacement": -0.15909218788146973,
+              "output_rms": 0.21352405846118927
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.005796882789582014,
+              "mean_outward_displacement": -0.04113328456878662,
+              "output_rms": 0.043163102120161057
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 63,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004667018074542284,
+              "mean_outward_displacement": -0.0859207957983017,
+              "output_rms": 0.1705974042415619
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004506691358983517,
+              "mean_outward_displacement": -0.04915405809879303,
+              "output_rms": 0.1667964905500412
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0028749906923621893,
+              "mean_outward_displacement": -0.035386860370635986,
+              "output_rms": 0.03661680594086647
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 63,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.012794384732842445,
+              "mean_outward_displacement": -0.15071484446525574,
+              "output_rms": 0.1945125013589859
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006120700389146805,
+              "mean_outward_displacement": -0.10766445100307465,
+              "output_rms": 0.16849654912948608
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.009268227964639664,
+              "mean_outward_displacement": -0.044501326978206635,
+              "output_rms": 0.04666775092482567
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 64,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004103297367691994,
+              "mean_outward_displacement": -0.0987926572561264,
+              "output_rms": 0.15388019382953644
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0029147802852094173,
+              "mean_outward_displacement": -0.06515631079673767,
+              "output_rms": 0.13865669071674347
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.003995174542069435,
+              "mean_outward_displacement": -0.03483803942799568,
+              "output_rms": 0.03681569546461105
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 64,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.008429358713328838,
+              "mean_outward_displacement": -0.1319524645805359,
+              "output_rms": 0.1657462865114212
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006273880135267973,
+              "mean_outward_displacement": -0.08823099732398987,
+              "output_rms": 0.14073441922664642
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0034036217257380486,
+              "mean_outward_displacement": -0.045930713415145874,
+              "output_rms": 0.0488402396440506
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 65,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004095966462045908,
+              "mean_outward_displacement": -0.06189141422510147,
+              "output_rms": 0.13601811230182648
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032023307867348194,
+              "mean_outward_displacement": -0.017977824434638023,
+              "output_rms": 0.1285628229379654
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0021104239858686924,
+              "mean_outward_displacement": -0.0462154895067215,
+              "output_rms": 0.04840870574116707
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 65,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.010779043659567833,
+              "mean_outward_displacement": -0.08728368580341339,
+              "output_rms": 0.14291328191757202
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005017715040594339,
+              "mean_outward_displacement": -0.0453665554523468,
+              "output_rms": 0.13013441860675812
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00764427799731493,
+              "mean_outward_displacement": -0.04377294331789017,
+              "output_rms": 0.04696696996688843
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 66,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006850637961179018,
+              "mean_outward_displacement": -0.12886527180671692,
+              "output_rms": 0.15629370510578156
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004774240776896477,
+              "mean_outward_displacement": -0.10956848412752151,
+              "output_rms": 0.13918748497962952
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002877540187910199,
+              "mean_outward_displacement": -0.020293377339839935,
+              "output_rms": 0.021668648347258568
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 66,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.012916024774312973,
+              "mean_outward_displacement": -0.14078037440776825,
+              "output_rms": 0.15974779427051544
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003976907581090927,
+              "mean_outward_displacement": -0.11577213555574417,
+              "output_rms": 0.14301854372024536
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.010368019342422485,
+              "mean_outward_displacement": -0.025991341099143028,
+              "output_rms": 0.02931155450642109
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 67,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003167500486597419,
+              "mean_outward_displacement": -0.14257702231407166,
+              "output_rms": 0.19420216977596283
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003095438703894615,
+              "mean_outward_displacement": -0.11989708244800568,
+              "output_rms": 0.17349891364574432
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011657620780169964,
+              "mean_outward_displacement": -0.02389625273644924,
+              "output_rms": 0.026311663910746574
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 67,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.01098774466663599,
+              "mean_outward_displacement": -0.2025136649608612,
+              "output_rms": 0.21110115945339203
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00520061980932951,
+              "mean_outward_displacement": -0.17112930119037628,
+              "output_rms": 0.179891437292099
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.007057266775518656,
+              "mean_outward_displacement": -0.03350786864757538,
+              "output_rms": 0.034883126616477966
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 68,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0021939638536423445,
+              "mean_outward_displacement": -0.2274748533964157,
+              "output_rms": 0.2513667941093445
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002331258961930871,
+              "mean_outward_displacement": -0.20280981063842773,
+              "output_rms": 0.22804498672485352
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00025436398573219776,
+              "mean_outward_displacement": -0.025453878566622734,
+              "output_rms": 0.025730235502123833
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 68,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.009982390329241753,
+              "mean_outward_displacement": -0.25610923767089844,
+              "output_rms": 0.2658616304397583
+            },
+            "network": {
+              "jitter_deformation_rms": 0.008083316497504711,
+              "mean_outward_displacement": -0.2247752845287323,
+              "output_rms": 0.23529380559921265
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.006986675783991814,
+              "mean_outward_displacement": -0.035218898206949234,
+              "output_rms": 0.0369965098798275
+            }
+          },
+          "rows": 11
+        },
+        {
+          "component": 69,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0038882780354470015,
+              "mean_outward_displacement": -0.0907711461186409,
+              "output_rms": 0.2952843904495239
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0037184215616434813,
+              "mean_outward_displacement": -0.07624071836471558,
+              "output_rms": 0.2839541733264923
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00023253528343047947,
+              "mean_outward_displacement": -0.014766288921236992,
+              "output_rms": 0.017515122890472412
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 69,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0028554224409163,
+              "mean_outward_displacement": -0.29609593749046326,
+              "output_rms": 0.3176285922527313
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027805666904896498,
+              "mean_outward_displacement": -0.2713124752044678,
+              "output_rms": 0.2926740050315857
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003383943985681981,
+              "mean_outward_displacement": -0.025768732652068138,
+              "output_rms": 0.026779215782880783
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 70,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005455257371068001,
+              "mean_outward_displacement": -0.3501864969730377,
+              "output_rms": 0.3711050748825073
+            },
+            "network": {
+              "jitter_deformation_rms": 0.006481708027422428,
+              "mean_outward_displacement": -0.3151114583015442,
+              "output_rms": 0.33940955996513367
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0016885165823623538,
+              "mean_outward_displacement": -0.037583041936159134,
+              "output_rms": 0.041040290147066116
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 71,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007931584492325783,
+              "mean_outward_displacement": -0.12608745694160461,
+              "output_rms": 0.2838532030582428
+            },
+            "network": {
+              "jitter_deformation_rms": 0.007358389440923929,
+              "mean_outward_displacement": -0.0926789864897728,
+              "output_rms": 0.26963457465171814
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0013412587577477098,
+              "mean_outward_displacement": -0.03409552574157715,
+              "output_rms": 0.034118667244911194
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 71,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002973584458231926,
+              "mean_outward_displacement": -0.2963441014289856,
+              "output_rms": 0.3062277138233185
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0024193553254008293,
+              "mean_outward_displacement": -0.2676769495010376,
+              "output_rms": 0.27793410420417786
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0015535964630544186,
+              "mean_outward_displacement": -0.030255064368247986,
+              "output_rms": 0.03161200135946274
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 72,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003759081708267331,
+              "mean_outward_displacement": -0.16327118873596191,
+              "output_rms": 0.24627120792865753
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003703976748511195,
+              "mean_outward_displacement": -0.1306816041469574,
+              "output_rms": 0.22035524249076843
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00020868938008788973,
+              "mean_outward_displacement": -0.03426462411880493,
+              "output_rms": 0.035570450127124786
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 72,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004725191742181778,
+              "mean_outward_displacement": -0.22673968970775604,
+              "output_rms": 0.26075825095176697
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004059974569827318,
+              "mean_outward_displacement": -0.18624423444271088,
+              "output_rms": 0.22535750269889832
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002371302107349038,
+              "mean_outward_displacement": -0.04175306111574173,
+              "output_rms": 0.04375319182872772
+            }
+          },
+          "rows": 24
+        },
+        {
+          "component": 73,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004662270657718182,
+              "mean_outward_displacement": -0.1196884736418724,
+              "output_rms": 0.19370299577713013
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003941963892430067,
+              "mean_outward_displacement": -0.0904778465628624,
+              "output_rms": 0.17769980430603027
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.001608859864063561,
+              "mean_outward_displacement": -0.0306843351572752,
+              "output_rms": 0.03085975907742977
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 73,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0029589117038995028,
+              "mean_outward_displacement": -0.19466587901115417,
+              "output_rms": 0.20846378803253174
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003318637842312455,
+              "mean_outward_displacement": -0.16554346680641174,
+              "output_rms": 0.18153458833694458
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003929476661141962,
+              "mean_outward_displacement": -0.030215773731470108,
+              "output_rms": 0.030484220013022423
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 74,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003751290263608098,
+              "mean_outward_displacement": -0.06870390474796295,
+              "output_rms": 0.1704607754945755
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002662097569555044,
+              "mean_outward_displacement": -0.02285553701221943,
+              "output_rms": 0.15329617261886597
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0016209485474973917,
+              "mean_outward_displacement": -0.048349663615226746,
+              "output_rms": 0.05158521980047226
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 74,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.008508146740496159,
+              "mean_outward_displacement": -0.15264610946178436,
+              "output_rms": 0.1840430647134781
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005299330223351717,
+              "mean_outward_displacement": -0.1091766357421875,
+              "output_rms": 0.15798282623291016
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.004080690909177065,
+              "mean_outward_displacement": -0.04598056152462959,
+              "output_rms": 0.05010085552930832
+            }
+          },
+          "rows": 19
+        },
+        {
+          "component": 75,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00256931665353477,
+              "mean_outward_displacement": -0.13017849624156952,
+              "output_rms": 0.16893672943115234
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002528858371078968,
+              "mean_outward_displacement": -0.10464644432067871,
+              "output_rms": 0.14823411405086517
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0002950523921754211,
+              "mean_outward_displacement": -0.02718101441860199,
+              "output_rms": 0.02851707488298416
+            }
+          },
+          "rows": 10
+        },
+        {
+          "component": 75,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.010626102797687054,
+              "mean_outward_displacement": -0.1520327478647232,
+              "output_rms": 0.17360807955265045
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004149626009166241,
+              "mean_outward_displacement": -0.12253141403198242,
+              "output_rms": 0.15138310194015503
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.007325629238039255,
+              "mean_outward_displacement": -0.031048763543367386,
+              "output_rms": 0.0336957648396492
+            }
+          },
+          "rows": 21
+        },
+        {
+          "component": 76,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004929480608552694,
+              "mean_outward_displacement": -0.1354741007089615,
+              "output_rms": 0.17582978308200836
+            },
+            "network": {
+              "jitter_deformation_rms": 0.004374183248728514,
+              "mean_outward_displacement": -0.11537446826696396,
+              "output_rms": 0.15521971881389618
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0017583189764991403,
+              "mean_outward_displacement": -0.021558739244937897,
+              "output_rms": 0.0238307174295187
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 76,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.01701364479959011,
+              "mean_outward_displacement": -0.15639306604862213,
+              "output_rms": 0.17979493737220764
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005369752179831266,
+              "mean_outward_displacement": -0.1272118240594864,
+              "output_rms": 0.16057804226875305
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.013540652580559254,
+              "mean_outward_displacement": -0.0306394025683403,
+              "output_rms": 0.03429076820611954
+            }
+          },
+          "rows": 23
+        },
+        {
+          "component": 77,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00479620136320591,
+              "mean_outward_displacement": -0.1644163429737091,
+              "output_rms": 0.21027331054210663
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003700852859765291,
+              "mean_outward_displacement": -0.1380404680967331,
+              "output_rms": 0.18580220639705658
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0025794566608965397,
+              "mean_outward_displacement": -0.02809709683060646,
+              "output_rms": 0.030115904286503792
+            }
+          },
+          "rows": 22
+        },
+        {
+          "component": 77,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002652205526828766,
+              "mean_outward_displacement": -0.21640850603580475,
+              "output_rms": 0.22107689082622528
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0025989790447056293,
+              "mean_outward_displacement": -0.1859334260225296,
+              "output_rms": 0.1906030923128128
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007168304873630404,
+              "mean_outward_displacement": -0.031948816031217575,
+              "output_rms": 0.032525189220905304
+            }
+          },
+          "rows": 17
+        },
+        {
+          "component": 78,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0008811437292024493,
+              "mean_outward_displacement": -0.2497159242630005,
+              "output_rms": 0.2709532678127289
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0008808815036900342,
+              "mean_outward_displacement": -0.21979489922523499,
+              "output_rms": 0.2378058284521103
+            },
+            "prior": {
+              "jitter_deformation_rms": 4.76837158203125e-07,
+              "mean_outward_displacement": -0.031355589628219604,
+              "output_rms": 0.03479905426502228
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 78,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0032944101840257645,
+              "mean_outward_displacement": -0.26251789927482605,
+              "output_rms": 0.27536970376968384
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032516925130039454,
+              "mean_outward_displacement": -0.2308277189731598,
+              "output_rms": 0.2427176833152771
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00022399415320251137,
+              "mean_outward_displacement": -0.0332314558327198,
+              "output_rms": 0.0347868911921978
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 79,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003751019248738885,
+              "mean_outward_displacement": -0.28528451919555664,
+              "output_rms": 0.31877005100250244
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0043230317533016205,
+              "mean_outward_displacement": -0.25663459300994873,
+              "output_rms": 0.291010320186615
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006176130846142769,
+              "mean_outward_displacement": -0.030018240213394165,
+              "output_rms": 0.030511779710650444
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 79,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003307317616418004,
+              "mean_outward_displacement": -0.30876094102859497,
+              "output_rms": 0.3255694806575775
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0035330485552549362,
+              "mean_outward_displacement": -0.2811773419380188,
+              "output_rms": 0.2977448105812073
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006363245192915201,
+              "mean_outward_displacement": -0.02900264598429203,
+              "output_rms": 0.03001849167048931
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 80,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00942081306129694,
+              "mean_outward_displacement": -0.35785096883773804,
+              "output_rms": 0.3902302384376526
+            },
+            "network": {
+              "jitter_deformation_rms": 0.012261656112968922,
+              "mean_outward_displacement": -0.33546796441078186,
+              "output_rms": 0.3701886534690857
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010028351098299026,
+              "mean_outward_displacement": -0.02637566439807415,
+              "output_rms": 0.02861245907843113
+            }
+          },
+          "rows": 15
+        },
+        {
+          "component": 81,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003335531335324049,
+              "mean_outward_displacement": -0.2780996263027191,
+              "output_rms": 0.3177040219306946
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0028399296570569277,
+              "mean_outward_displacement": -0.2531123161315918,
+              "output_rms": 0.29651424288749695
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005910851177759469,
+              "mean_outward_displacement": -0.02663203328847885,
+              "output_rms": 0.026644185185432434
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 81,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003797010751441121,
+              "mean_outward_displacement": -0.3765313923358917,
+              "output_rms": 0.4183187186717987
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0037922027986496687,
+              "mean_outward_displacement": -0.35433804988861084,
+              "output_rms": 0.4000224471092224
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00030700949719175696,
+              "mean_outward_displacement": -0.023299703374505043,
+              "output_rms": 0.025473330169916153
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 82,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003118536900728941,
+              "mean_outward_displacement": -0.2449357509613037,
+              "output_rms": 0.2736022472381592
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0031241329852491617,
+              "mean_outward_displacement": -0.21728765964508057,
+              "output_rms": 0.2484341263771057
+            },
+            "prior": {
+              "jitter_deformation_rms": 3.1987210036277247e-07,
+              "mean_outward_displacement": -0.02924177050590515,
+              "output_rms": 0.03032814711332321
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 82,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0035585283767431974,
+              "mean_outward_displacement": -0.23568876087665558,
+              "output_rms": 0.2758839428424835
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032203218434005976,
+              "mean_outward_displacement": -0.2062586098909378,
+              "output_rms": 0.25320932269096375
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007173679186962545,
+              "mean_outward_displacement": -0.031000709161162376,
+              "output_rms": 0.03180508688092232
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 83,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004939075093716383,
+              "mean_outward_displacement": -0.11944432556629181,
+              "output_rms": 0.22636133432388306
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005128080490976572,
+              "mean_outward_displacement": -0.09424439072608948,
+              "output_rms": 0.21450519561767578
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010732420487329364,
+              "mean_outward_displacement": -0.026902250945568085,
+              "output_rms": 0.03035946935415268
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 83,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004894501529633999,
+              "mean_outward_displacement": -0.21985219419002533,
+              "output_rms": 0.2443995475769043
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00460629491135478,
+              "mean_outward_displacement": -0.19128623604774475,
+              "output_rms": 0.22059975564479828
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00024685647804290056,
+              "mean_outward_displacement": -0.030410703271627426,
+              "output_rms": 0.030993469059467316
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 84,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003607562044635415,
+              "mean_outward_displacement": -0.1521604359149933,
+              "output_rms": 0.21672868728637695
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003546781139448285,
+              "mean_outward_displacement": -0.10904949903488159,
+              "output_rms": 0.19364650547504425
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006949932430870831,
+              "mean_outward_displacement": -0.04576036334037781,
+              "output_rms": 0.05056013911962509
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 84,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0054894667118787766,
+              "mean_outward_displacement": -0.1993144303560257,
+              "output_rms": 0.22361671924591064
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00474608363583684,
+              "mean_outward_displacement": -0.16409796476364136,
+              "output_rms": 0.19795013964176178
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0013163324911147356,
+              "mean_outward_displacement": -0.03730293735861778,
+              "output_rms": 0.04326276853680611
+            }
+          },
+          "rows": 14
+        },
+        {
+          "component": 85,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003933269530534744,
+              "mean_outward_displacement": -0.1829528659582138,
+              "output_rms": 0.20713266730308533
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003976430743932724,
+              "mean_outward_displacement": -0.16084975004196167,
+              "output_rms": 0.19206488132476807
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008427892462350428,
+              "mean_outward_displacement": -0.023337457329034805,
+              "output_rms": 0.025287171825766563
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 85,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006412570830434561,
+              "mean_outward_displacement": -0.2056247591972351,
+              "output_rms": 0.2184428572654724
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005796381272375584,
+              "mean_outward_displacement": -0.17973589897155762,
+              "output_rms": 0.19600535929203033
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0014820003416389227,
+              "mean_outward_displacement": -0.027292847633361816,
+              "output_rms": 0.0280016902834177
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 86,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0034238137304782867,
+              "mean_outward_displacement": -0.1526806503534317,
+              "output_rms": 0.2085336446762085
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003414774779230356,
+              "mean_outward_displacement": -0.12687498331069946,
+              "output_rms": 0.1929166615009308
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000127391453133896,
+              "mean_outward_displacement": -0.02734668180346489,
+              "output_rms": 0.028675924986600876
+            }
+          },
+          "rows": 8
+        },
+        {
+          "component": 86,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.00372754386626184,
+              "mean_outward_displacement": -0.20305286347866058,
+              "output_rms": 0.22034311294555664
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0036844247952103615,
+              "mean_outward_displacement": -0.1748114973306656,
+              "output_rms": 0.19652925431728363
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003060503804590553,
+              "mean_outward_displacement": -0.029877537861466408,
+              "output_rms": 0.03178947791457176
+            }
+          },
+          "rows": 20
+        },
+        {
+          "component": 87,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0022640940733253956,
+              "mean_outward_displacement": -0.15860040485858917,
+              "output_rms": 0.23390422761440277
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002469694474712014,
+              "mean_outward_displacement": -0.13838262856006622,
+              "output_rms": 0.21519328653812408
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009667341946624219,
+              "mean_outward_displacement": -0.021638188511133194,
+              "output_rms": 0.027259405702352524
+            }
+          },
+          "rows": 9
+        },
+        {
+          "component": 87,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0033340502995997667,
+              "mean_outward_displacement": -0.2457243800163269,
+              "output_rms": 0.25261276960372925
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0034971116110682487,
+              "mean_outward_displacement": -0.21526795625686646,
+              "output_rms": 0.22180519998073578
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000637878489214927,
+              "mean_outward_displacement": -0.032256342470645905,
+              "output_rms": 0.0355769544839859
+            }
+          },
+          "rows": 32
+        },
+        {
+          "component": 88,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003197768470272422,
+              "mean_outward_displacement": -0.17359194159507751,
+              "output_rms": 0.26565441489219666
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032841195352375507,
+              "mean_outward_displacement": -0.15558801591396332,
+              "output_rms": 0.24974890053272247
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00040515547152608633,
+              "mean_outward_displacement": -0.018806418403983116,
+              "output_rms": 0.02423640713095665
+            }
+          },
+          "rows": 12
+        },
+        {
+          "component": 88,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002984447870403528,
+              "mean_outward_displacement": -0.24209365248680115,
+              "output_rms": 0.28236669301986694
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0027772567700594664,
+              "mean_outward_displacement": -0.2111581563949585,
+              "output_rms": 0.2547796964645386
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004578427760861814,
+              "mean_outward_displacement": -0.03255978226661682,
+              "output_rms": 0.03405066207051277
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 89,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005766869988292456,
+              "mean_outward_displacement": 0.011268869042396545,
+              "output_rms": 0.3031006455421448
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0057101440615952015,
+              "mean_outward_displacement": 0.035555481910705566,
+              "output_rms": 0.3035500645637512
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.001050491351634264,
+              "mean_outward_displacement": -0.0255567766726017,
+              "output_rms": 0.028761068359017372
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 89,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003206523135304451,
+              "mean_outward_displacement": -0.31325864791870117,
+              "output_rms": 0.3404521346092224
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0032118051312863827,
+              "mean_outward_displacement": -0.28693804144859314,
+              "output_rms": 0.3142555058002472
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0002859297674149275,
+              "mean_outward_displacement": -0.02750173769891262,
+              "output_rms": 0.028416939079761505
+            }
+          },
+          "rows": 13
+        },
+        {
+          "component": 90,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006705660372972488,
+              "mean_outward_displacement": -0.08706784248352051,
+              "output_rms": 0.38757720589637756
+            },
+            "network": {
+              "jitter_deformation_rms": 0.007830222137272358,
+              "mean_outward_displacement": -0.06722347438335419,
+              "output_rms": 0.37553200125694275
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0004696390242315829,
+              "mean_outward_displacement": -0.02129635028541088,
+              "output_rms": 0.02362450771033764
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 90,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007670057937502861,
+              "mean_outward_displacement": -0.38574665784835815,
+              "output_rms": 0.42421138286590576
+            },
+            "network": {
+              "jitter_deformation_rms": 0.011577694676816463,
+              "mean_outward_displacement": -0.3607742190361023,
+              "output_rms": 0.39964622259140015
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0011515223886817694,
+              "mean_outward_displacement": -0.02885536663234234,
+              "output_rms": 0.030436016619205475
+            }
+          },
+          "rows": 21
+        },
+        {
+          "component": 91,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004264120478183031,
+              "mean_outward_displacement": -0.27909642457962036,
+              "output_rms": 0.3499026894569397
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0043774074874818325,
+              "mean_outward_displacement": -0.254801869392395,
+              "output_rms": 0.3308155834674835
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00039686678792349994,
+              "mean_outward_displacement": -0.0257575623691082,
+              "output_rms": 0.026464367285370827
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 91,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004595435224473476,
+              "mean_outward_displacement": -0.3326680660247803,
+              "output_rms": 0.36578568816185
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005204885732382536,
+              "mean_outward_displacement": -0.30340608954429626,
+              "output_rms": 0.3386956751346588
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005014570197090507,
+              "mean_outward_displacement": -0.03185578063130379,
+              "output_rms": 0.03325236588716507
+            }
+          },
+          "rows": 26
+        },
+        {
+          "component": 92,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004355685785412788,
+              "mean_outward_displacement": -0.27442213892936707,
+              "output_rms": 0.3157055377960205
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0043289330787956715,
+              "mean_outward_displacement": -0.24632516503334045,
+              "output_rms": 0.28920137882232666
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0001534520706627518,
+              "mean_outward_displacement": -0.02967609278857708,
+              "output_rms": 0.030456889420747757
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 92,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004607321694493294,
+              "mean_outward_displacement": -0.31058281660079956,
+              "output_rms": 0.3285130262374878
+            },
+            "network": {
+              "jitter_deformation_rms": 0.00543160829693079,
+              "mean_outward_displacement": -0.27828696370124817,
+              "output_rms": 0.29624924063682556
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007893081055954099,
+              "mean_outward_displacement": -0.03478769212961197,
+              "output_rms": 0.0367368645966053
+            }
+          },
+          "rows": 21
+        },
+        {
+          "component": 93,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004230591002851725,
+              "mean_outward_displacement": -0.26776063442230225,
+              "output_rms": 0.2928202450275421
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0042744786478579044,
+              "mean_outward_displacement": -0.23658770322799683,
+              "output_rms": 0.2637404501438141
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0007208063616417348,
+              "mean_outward_displacement": -0.03309047222137451,
+              "output_rms": 0.03406316414475441
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 93,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.006628714967519045,
+              "mean_outward_displacement": -0.26528480648994446,
+              "output_rms": 0.30805882811546326
+            },
+            "network": {
+              "jitter_deformation_rms": 0.008474607951939106,
+              "mean_outward_displacement": -0.23775851726531982,
+              "output_rms": 0.28718096017837524
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0010769463842734694,
+              "mean_outward_displacement": -0.030056891962885857,
+              "output_rms": 0.03349518030881882
+            }
+          },
+          "rows": 23
+        },
+        {
+          "component": 94,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003980522509664297,
+              "mean_outward_displacement": -0.22367563843727112,
+              "output_rms": 0.26752129197120667
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003918855916708708,
+              "mean_outward_displacement": -0.19336669147014618,
+              "output_rms": 0.2456413358449936
+            },
+            "prior": {
+              "jitter_deformation_rms": 5.034543573856354e-05,
+              "mean_outward_displacement": -0.03217685967683792,
+              "output_rms": 0.03435054048895836
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 94,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0066023292019963264,
+              "mean_outward_displacement": -0.24540209770202637,
+              "output_rms": 0.29109975695610046
+            },
+            "network": {
+              "jitter_deformation_rms": 0.007796174380928278,
+              "mean_outward_displacement": -0.21036647260189056,
+              "output_rms": 0.26912906765937805
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.000858367420732975,
+              "mean_outward_displacement": -0.03789032995700836,
+              "output_rms": 0.045416031032800674
+            }
+          },
+          "rows": 16
+        },
+        {
+          "component": 95,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.005291629582643509,
+              "mean_outward_displacement": -0.1512758582830429,
+              "output_rms": 0.25287723541259766
+            },
+            "network": {
+              "jitter_deformation_rms": 0.005396727006882429,
+              "mean_outward_displacement": -0.12025616317987442,
+              "output_rms": 0.23743055760860443
+            },
+            "prior": {
+              "jitter_deformation_rms": 9.023564052768052e-05,
+              "mean_outward_displacement": -0.032832514494657516,
+              "output_rms": 0.0346672385931015
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 95,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0033554271794855595,
+              "mean_outward_displacement": -0.28882813453674316,
+              "output_rms": 0.30515122413635254
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0033236700110137463,
+              "mean_outward_displacement": -0.26966366171836853,
+              "output_rms": 0.2909945547580719
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0002480668481439352,
+              "mean_outward_displacement": -0.02008160762488842,
+              "output_rms": 0.025666678324341774
+            }
+          },
+          "rows": 19
+        },
+        {
+          "component": 96,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003143708221614361,
+              "mean_outward_displacement": -0.24596410989761353,
+              "output_rms": 0.26364728808403015
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0034479275345802307,
+              "mean_outward_displacement": -0.22067919373512268,
+              "output_rms": 0.24225319921970367
+            },
+            "prior": {
+              "jitter_deformation_rms": 6.487357313744724e-05,
+              "mean_outward_displacement": -0.026341794058680534,
+              "output_rms": 0.027136798948049545
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 96,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.007730873767286539,
+              "mean_outward_displacement": -0.2562207281589508,
+              "output_rms": 0.27368849515914917
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0055063338950276375,
+              "mean_outward_displacement": -0.22997421026229858,
+              "output_rms": 0.2530395984649658
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0025935100857168436,
+              "mean_outward_displacement": -0.02792602777481079,
+              "output_rms": 0.03196858987212181
+            }
+          },
+          "rows": 22
+        },
+        {
+          "component": 97,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0026430205907672644,
+              "mean_outward_displacement": -0.13266687095165253,
+              "output_rms": 0.2680235803127289
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002757658250629902,
+              "mean_outward_displacement": -0.10386894643306732,
+              "output_rms": 0.25910449028015137
+            },
+            "prior": {
+              "jitter_deformation_rms": 3.7955865991534665e-05,
+              "mean_outward_displacement": -0.030433451756834984,
+              "output_rms": 0.03401733562350273
+            }
+          },
+          "rows": 7
+        },
+        {
+          "component": 97,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.003101746551692486,
+              "mean_outward_displacement": -0.28821542859077454,
+              "output_rms": 0.3148772716522217
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0033080591820180416,
+              "mean_outward_displacement": -0.265077143907547,
+              "output_rms": 0.2976326644420624
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0006659419159404933,
+              "mean_outward_displacement": -0.024569755420088768,
+              "output_rms": 0.03114727884531021
+            }
+          },
+          "rows": 29
+        },
+        {
+          "component": 98,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.001746105495840311,
+              "mean_outward_displacement": -0.23189379274845123,
+              "output_rms": 0.30519118905067444
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001689834869466722,
+              "mean_outward_displacement": -0.21176671981811523,
+              "output_rms": 0.2869203984737396
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00033510071807540953,
+              "mean_outward_displacement": -0.021256398409605026,
+              "output_rms": 0.024906687438488007
+            }
+          },
+          "rows": 4
+        },
+        {
+          "component": 98,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0017197774723172188,
+              "mean_outward_displacement": -0.3216913938522339,
+              "output_rms": 0.3289545476436615
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0018127902876585722,
+              "mean_outward_displacement": -0.2972910702228546,
+              "output_rms": 0.3057837188243866
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00040268609882332385,
+              "mean_outward_displacement": -0.02562202326953411,
+              "output_rms": 0.029865719377994537
+            }
+          },
+          "rows": 19
+        },
+        {
+          "component": 99,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0029389832634478807,
+              "mean_outward_displacement": -0.3083937168121338,
+              "output_rms": 0.3512432873249054
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002978235250338912,
+              "mean_outward_displacement": -0.28756624460220337,
+              "output_rms": 0.3250480890274048
+            },
+            "prior": {
+              "jitter_deformation_rms": 8.793839515419677e-05,
+              "mean_outward_displacement": -0.022211985662579536,
+              "output_rms": 0.0289719570428133
+            }
+          },
+          "rows": 5
+        },
+        {
+          "component": 99,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0036932567600160837,
+              "mean_outward_displacement": -0.3686298429965973,
+              "output_rms": 0.3712407946586609
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0037132177967578173,
+              "mean_outward_displacement": -0.33776140213012695,
+              "output_rms": 0.3408637046813965
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00020540179684758186,
+              "mean_outward_displacement": -0.03277113288640976,
+              "output_rms": 0.034786518663167953
+            }
+          },
+          "rows": 17
+        }
+      ],
+      "diagnostic_new_target_batch": true,
+      "extra_evaluation_rng_draws": 0,
+      "full_reserved_seconds": 120,
+      "initial_jitter_output_rms": 0.07494866847991943,
+      "input_checkpoint_unchanged": true,
+      "nonlinear_interaction_rms": 0.002467072568833828,
+      "paid_probe_seconds": 2.0093431749846786,
+      "preview_updates": 1,
+      "prior_latent_drift_rms": 0.015410847961902618,
+      "prior_learnable": true,
+      "qualification_input": false,
+      "restored_full_context_exact": true,
+      "role_motion": {
+        "joint": {
+          "center_rms": 0.2679232656955719,
+          "jitter_deformation_rms": 0.006226636935025454,
+          "norms": {
+            "max": 0.6327487826347351,
+            "mean": 0.25935476870472485,
+            "median": 0.25177931785583496,
+            "p90": 0.3588394999504089
+          },
+          "output_rms": 0.26869767904281616
+        },
+        "network": {
+          "center_rms": 0.24505716562271118,
+          "jitter_deformation_rms": 0.00501619977876544,
+          "norms": {
+            "max": 0.6232775449752808,
+            "mean": 0.2362401938153198,
+            "median": 0.22690896689891815,
+            "p90": 0.3344134747982025
+          },
+          "output_rms": 0.24567118287086487
+        },
+        "prior": {
+          "center_rms": 0.03591630235314369,
+          "jitter_deformation_rms": 0.003695401130244136,
+          "norms": {
+            "max": 0.0910315215587616,
+            "mean": 0.03350675363145683,
+            "median": 0.030933905392885208,
+            "p90": 0.05633190050721168
+          },
+          "output_rms": 0.03680453822016716
+        }
+      },
+      "role_output_cosine": 0.6051355004310608,
+      "sampled_rows": 2048,
+      "schema_version": 1,
+      "scope": "one_next_update_disposable_copy_of_frozen_endpoint",
+      "source_commit": "753f28a5ee778fdf7a0d979e6206b1024d9daab3",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task_id": "grid100",
+      "trained_prefix_steps": 7000
+    },
+    {
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "checkpoint": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/9fadb126cd3346e0afebf0ae94058452/provenance/provenance-state.pt",
+      "checkpoint_sha256": "236a450a371f63e7fab93b33868e08368f7c52765bafd29ff4145220e3f97b00",
+      "cohorts": [
+        {
+          "component": 0,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0015930045628920197,
+              "mean_outward_displacement": -0.0010758659336715937,
+              "output_rms": 0.10093539953231812
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0012474156683310866,
+              "mean_outward_displacement": -0.006437806412577629,
+              "output_rms": 0.09115106612443924
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008897674852050841,
+              "mean_outward_displacement": 0.005427702330052853,
+              "output_rms": 0.015456823632121086
+            }
+          },
+          "rows": 71
+        },
+        {
+          "component": 0,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0017455900087952614,
+              "mean_outward_displacement": -0.16875827312469482,
+              "output_rms": 0.18170161545276642
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001901961863040924,
+              "mean_outward_displacement": -0.1739867627620697,
+              "output_rms": 0.1868508905172348
+            },
+            "prior": {
+              "jitter_deformation_rms": 6.529361940010858e-07,
+              "mean_outward_displacement": 0.005409701727330685,
+              "output_rms": 0.0055130221880972385
+            }
+          },
+          "rows": 2
+        },
+        {
+          "component": 1,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002163492375984788,
+              "mean_outward_displacement": -0.03619731590151787,
+              "output_rms": 0.12186206877231598
+            },
+            "network": {
+              "jitter_deformation_rms": 0.002199530601501465,
+              "mean_outward_displacement": -0.03601843863725662,
+              "output_rms": 0.1094210147857666
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00045211773249320686,
+              "mean_outward_displacement": -0.00010438336175866425,
+              "output_rms": 0.016202731058001518
+            }
+          },
+          "rows": 46
+        },
+        {
+          "component": 1,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0011853418545797467,
+              "mean_outward_displacement": 0.015395592898130417,
+              "output_rms": 0.10045017302036285
+            },
+            "network": {
+              "jitter_deformation_rms": 0.001207043882459402,
+              "mean_outward_displacement": 0.02165287733078003,
+              "output_rms": 0.10406322777271271
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00014444014232140034,
+              "mean_outward_displacement": -0.0066664251498878,
+              "output_rms": 0.00709354504942894
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 2,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0024176128208637238,
+              "mean_outward_displacement": -0.12561047077178955,
+              "output_rms": 0.24471256136894226
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0023564558941870928,
+              "mean_outward_displacement": -0.11568649858236313,
+              "output_rms": 0.24133959412574768
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00028536227182485163,
+              "mean_outward_displacement": -0.009883249178528786,
+              "output_rms": 0.032759033143520355
+            }
+          },
+          "rows": 6
+        },
+        {
+          "component": 2,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0021259295754134655,
+              "mean_outward_displacement": 0.38377806544303894,
+              "output_rms": 0.3848758637905121
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0021259509958326817,
+              "mean_outward_displacement": 0.34280258417129517,
+              "output_rms": 0.34372416138648987
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0003816028474830091,
+              "mean_outward_displacement": 0.038712866604328156,
+              "output_rms": 0.03885971009731293
+            }
+          },
+          "rows": 2
+        }
+      ],
+      "diagnostic_new_target_batch": true,
+      "extra_evaluation_rng_draws": 0,
+      "full_reserved_seconds": 120,
+      "initial_jitter_output_rms": 0.02363959699869156,
+      "input_checkpoint_unchanged": true,
+      "nonlinear_interaction_rms": 0.00105867104139179,
+      "paid_probe_seconds": 1.511758117005229,
+      "preview_updates": 1,
+      "prior_latent_drift_rms": 0.01737532950937748,
+      "prior_learnable": true,
+      "qualification_input": false,
+      "restored_full_context_exact": true,
+      "role_motion": {
+        "joint": {
+          "center_rms": 0.1292164921760559,
+          "jitter_deformation_rms": 0.0018689355347305536,
+          "norms": {
+            "max": 0.38509413599967957,
+            "mean": 0.11649626391590573,
+            "median": 0.10403589904308319,
+            "p90": 0.16842292249202728
+          },
+          "output_rms": 0.12924501299858093
+        },
+        "network": {
+          "center_rms": 0.11868744343519211,
+          "jitter_deformation_rms": 0.001732214936055243,
+          "norms": {
+            "max": 0.34394246339797974,
+            "mean": 0.10638962939265184,
+            "median": 0.0936516597867012,
+            "p90": 0.15454592257738115
+          },
+          "output_rms": 0.11881833523511887
+        },
+        "prior": {
+          "center_rms": 0.01750708743929863,
+          "jitter_deformation_rms": 0.0007203151471912861,
+          "norms": {
+            "max": 0.05401496961712837,
+            "mean": 0.014500639513244096,
+            "median": 0.012083972804248333,
+            "p90": 0.02582413349300623
+          },
+          "output_rms": 0.017367657274007797
+        }
+      },
+      "role_output_cosine": 0.5649415254592896,
+      "sampled_rows": 128,
+      "schema_version": 1,
+      "scope": "one_next_update_disposable_copy_of_frozen_endpoint",
+      "source_commit": "753f28a5ee778fdf7a0d979e6206b1024d9daab3",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task_id": "vector_unequal_mass",
+      "trained_prefix_steps": 1200
+    },
+    {
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "checkpoint": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/c2701b900fb64a748e5d908245eb8feb/provenance/provenance-state.pt",
+      "checkpoint_sha256": "1c8a835822b2263562ca7bda5e4a963332557956bcf3ce14b6f6e89fcb8b487d",
+      "cohorts": [
+        {
+          "component": 0,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0012596054002642632,
+              "mean_outward_displacement": -0.021356280893087387,
+              "output_rms": 0.05609046667814255
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0012803671415895224,
+              "mean_outward_displacement": -0.014433218166232109,
+              "output_rms": 0.05064864829182625
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.00010062113142339513,
+              "mean_outward_displacement": -0.007268264889717102,
+              "output_rms": 0.015953343361616135
+            }
+          },
+          "rows": 48
+        },
+        {
+          "component": 1,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.004303286783397198,
+              "mean_outward_displacement": 0.05364355444908142,
+              "output_rms": 0.06457474827766418
+            },
+            "network": {
+              "jitter_deformation_rms": 0.003075673710554838,
+              "mean_outward_displacement": 0.05029433220624924,
+              "output_rms": 0.057565852999687195
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0009072485845535994,
+              "mean_outward_displacement": 0.0034506311640143394,
+              "output_rms": 0.03059455379843712
+            }
+          },
+          "rows": 3
+        },
+        {
+          "component": 2,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0017819642089307308,
+              "mean_outward_displacement": -0.03652326762676239,
+              "output_rms": 0.10173334181308746
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0016021986957639456,
+              "mean_outward_displacement": -0.03131594881415367,
+              "output_rms": 0.09422213584184647
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0005002865218557417,
+              "mean_outward_displacement": -0.005332593340426683,
+              "output_rms": 0.01455243956297636
+            }
+          },
+          "rows": 60
+        },
+        {
+          "component": 2,
+          "region": "spill",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.002036112127825618,
+              "mean_outward_displacement": -0.07255331426858902,
+              "output_rms": 0.1451253890991211
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0006422456935979426,
+              "mean_outward_displacement": -0.07799600809812546,
+              "output_rms": 0.12046748399734497
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.002049490110948682,
+              "mean_outward_displacement": 0.006190781947225332,
+              "output_rms": 0.034631576389074326
+            }
+          },
+          "rows": 1
+        },
+        {
+          "component": 3,
+          "region": "core",
+          "role_motion": {
+            "joint": {
+              "jitter_deformation_rms": 0.0017876880010589957,
+              "mean_outward_displacement": -0.04464863985776901,
+              "output_rms": 0.17755961418151855
+            },
+            "network": {
+              "jitter_deformation_rms": 0.0017133409855887294,
+              "mean_outward_displacement": -0.047736190259456635,
+              "output_rms": 0.16498681902885437
+            },
+            "prior": {
+              "jitter_deformation_rms": 0.0008934090146794915,
+              "mean_outward_displacement": 0.0033187251538038254,
+              "output_rms": 0.021952856332063675
+            }
+          },
+          "rows": 16
+        }
+      ],
+      "diagnostic_new_target_batch": true,
+      "extra_evaluation_rng_draws": 0,
+      "full_reserved_seconds": 120,
+      "initial_jitter_output_rms": 0.025829168036580086,
+      "input_checkpoint_unchanged": true,
+      "nonlinear_interaction_rms": 0.0008561793365515769,
+      "paid_probe_seconds": 1.5253966039745137,
+      "preview_updates": 1,
+      "prior_latent_drift_rms": 0.018127745017409325,
+      "prior_learnable": true,
+      "qualification_input": false,
+      "restored_full_context_exact": true,
+      "role_motion": {
+        "joint": {
+          "center_rms": 0.10115500539541245,
+          "jitter_deformation_rms": 0.0017173623200505972,
+          "norms": {
+            "max": 0.19750139117240906,
+            "mean": 0.09130636429472361,
+            "median": 0.07872379571199417,
+            "p90": 0.16236737668514248
+          },
+          "output_rms": 0.101165272295475
+        },
+        "network": {
+          "center_rms": 0.09336572885513306,
+          "jitter_deformation_rms": 0.0015523951733484864,
+          "norms": {
+            "max": 0.19843396544456482,
+            "mean": 0.08472799921582919,
+            "median": 0.07488136738538742,
+            "p90": 0.14672220796346663
+          },
+          "output_rms": 0.09336531907320023
+        },
+        "prior": {
+          "center_rms": 0.016876524314284325,
+          "jitter_deformation_rms": 0.0005224922206252813,
+          "norms": {
+            "max": 0.03646909445524216,
+            "mean": 0.014625585218141168,
+            "median": 0.015398172661662102,
+            "p90": 0.024283292330801485
+          },
+          "output_rms": 0.01691918447613716
+        }
+      },
+      "role_output_cosine": 0.40295031666755676,
+      "sampled_rows": 128,
+      "schema_version": 1,
+      "scope": "one_next_update_disposable_copy_of_frozen_endpoint",
+      "source_commit": "753f28a5ee778fdf7a0d979e6206b1024d9daab3",
+      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+      "task_id": "vector_unequal_width",
+      "trained_prefix_steps": 1200
+    }
+  ],
+  "completed_disposable_updates": 5,
+  "invalid_pretraining_probes": 1,
+  "full_reservation_seconds": 720,
+  "paid_completed_probe_seconds": 8.481098498101346,
+  "pretraining_error": "CPU vector sampler initially supplied CUDA generator; rejected before any update. Corrected to checkpointed CPU data binding.",
+  "limitations": "One endpoint next-batch preview per cohort; not original preceding update or causal explanation of all failures; posthoc target labels never enter candidate control."
+}

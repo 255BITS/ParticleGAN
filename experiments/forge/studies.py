@@ -145,17 +145,16 @@ def inspect_study(root, request):
     draft = decisions.scaffold(study["control"]["candidate_id"], study["scope"]["view"])
     draft["control"]["task_map"] = study["control"]["task_map"]
     def bind(candidate, tasks, protocol, checkout):
-        # Unsupported candidate cells stay in the denominator and cannot run.
+        # Unsupported candidate or control cells remain in the denominator.
         # A task-local binding refusal must not erase independently runnable
         # peers. Legacy contracts continue using their original strict resolver.
-        if candidate["id"] != study["candidate"]:
-            return decisions._bindings(candidate, tasks, protocol, checkout)
         combined = decisions._bindings(candidate, {}, protocol, checkout)
         for name, task in tasks.items():
             try:
                 resolved = decisions._bindings(candidate, {name: task}, protocol, checkout)
             except ValueError as exc:
-                if not task.get("preflight_blockers"):
+                from .api import task_policy_blockers
+                if not (task.get("preflight_blockers") or task_policy_blockers(task,candidate)):
                     raise  # A missing preflight refusal must never authorize a host.
                 from .views import task_execution_fingerprint, task_evaluation_fingerprint
                 resolved = {key: {name: {"status": "BLOCKED", "reason": str(exc)}} for key in combined}

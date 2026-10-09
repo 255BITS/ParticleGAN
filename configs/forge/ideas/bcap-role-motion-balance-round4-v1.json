@@ -1,0 +1,49 @@
+{
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "id": "bcap-role-motion-balance-round4-v1",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "trainer_family": "bcap-role-motion-balance",
+  "mechanism_class": "structural",
+  "extensions": {
+    "role_motion_balance": true
+  },
+  "api_changes": [
+    "GANTrainer.role_motion_balance: finite generator output RMS cap set by retained prior role proposal; consumes existing rows/jitters and checkpoints counters."
+  ],
+  "changed_factors": [
+    "Cap G-only actual finite output RMS by P-only actual finite output RMS; retain full learned-prior proposal, original losses, rates and data."
+  ],
+  "mechanism_rationale": "Saved exact-source next-update probes show network travel4.4-6.8times prior travel across native, width and rare cohorts; reduce dominating shared-map role rather than scale both roles equally.",
+  "prior_art": [
+    "reports/forge/bcap-physics/role_motion/round4/saved-role-probes.json",
+    "https://bolte.perso.math.cnrs.fr/BST2013.pdf"
+  ],
+  "guide": "reports/forge/bcap-physics/role_motion/round4/README.md"
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "role-motion-candidate-round4-v1",
+  "status": "ready",
+  "candidate": "bcap-role-motion-balance-round4-v1",
+  "control": {
+    "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "task_map": {
+      "two_pole": "two_pole",
+      "gaussian1d_smoke": "gaussian1d_smoke",
+      "gaussian1d_stability": "gaussian1d_stability",
+      "grid100": "grid100",
+      "vector_unequal_width": "vector_unequal_width",
+      "vector_two_broad": "vector_two_broad"
+    }
+  },
+  "hypothesis": "Balancing actual finite G motion to learned-prior motion reduces native overshoot and unequal-width covariance while retaining broad-vector PASS and Gaussian acquisition; full sustained task gates remain decisive.",
+  "competing_explanation": "Prior response is not a target scale; tiny/cancelling latent gradients can suppress useful G travel. Network contraction, rare assignment and cross-role nonlinear motion remain uncontrolled. One saved endpoint does not establish persistent attribution.",
+  "scope": {
+    "view": "role_motion_round4_diagnostic",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "role-motion-round4-v1",
+    "budget_seconds": 16440,
+    "candidate_budget_seconds": 8220
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-physics/role_motion/round4/saved-role-probes.json",
+      "selector": [
+        "probes",
+        2
+      ],
+      "identity": {
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+        "checkpoint_sha256": "fc58a8e364defbd76e4e4d9942aa23f76bc6aafd7a7289951ecde29347008176"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "grid100",
+    "metric": "precision",
+    "op": ">=",
+    "threshold": 0.48,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "grid100",
+    "metric": "precision",
+    "op": "<",
+    "threshold": 0.3,
+    "phase": "final"
+  },
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}
