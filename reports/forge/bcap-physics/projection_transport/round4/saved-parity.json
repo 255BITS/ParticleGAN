@@ -1,0 +1,241 @@
+{
+  "checks": [
+    {
+      "archived_attempt_id": "d3550f211f2a44238fc2000b58da93bf",
+      "archived_checkpoint_sha256": "78f0ea7b9dbfec537ddbe9ac7ed0d5ca0cccdca84e1b6dd1ddce2740861d24cf",
+      "archived_result_sha256": "ed32defad7395b49e273602b1d45a7de0ad1b554165f70a71482aba0db67f433",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "6d0a169680054179865c43dae955bdfd",
+      "new_checkpoint_sha256": "b1ce5c3e2ccef5f894ea14b41ac179ac83a9b73935caf4fcc9a636061f472536",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "trajectory"
+    },
+    {
+      "archived_attempt_id": "318b54ae36cf4aa28b4dddb0a3c911d8",
+      "archived_checkpoint_sha256": "a91e8eca6f0eeccbebec1634d52d56264ce8d9acf2b53db68671975a43300513",
+      "archived_result_sha256": "d7c26d2d74a90075464e28bb7471fc628bee2abcde28c76ce3cdab1c7b7f6b88",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "df584d365b384d4f865060de8cf08516",
+      "new_checkpoint_sha256": "65f54bb0c21e9aa2ce703bfb15f63df9da4440bd0d595945033bd49cab9c7a3c",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "two_pole"
+    },
+    {
+      "archived_attempt_id": "88479a53c6094731b36406059a7e01aa",
+      "archived_checkpoint_sha256": "d675309694b460c03e2905d1cff27687921077915a433083cf87f8936b2bc398",
+      "archived_result_sha256": "b03a7f7a117c4f35453f890f1fc0c2d2bbbe45d51dbf066b5ca59da5ea6dba4b",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "9a279bd670a84ab58baa484bf032ba04",
+      "new_checkpoint_sha256": "3977fe32f86a3f7da73cc3ee604a3ce91a4c9895b782d976ea4099efa5b776ba",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "residual_student"
+    },
+    {
+      "archived_attempt_id": "3f91f8d7d063411b8280d7dddb54a699",
+      "archived_checkpoint_sha256": "8e6d6713b3a1dca5a3faf0c46389965752f9869d70d6cf9f85ac7edf335dc97b",
+      "archived_result_sha256": "08bc798b3147620e84c6014eb40972f077b782ddb5029463663d27828726d90a",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "7dd2ada6550b49ce9a91ca3691b7703f",
+      "new_checkpoint_sha256": "daea551d2667dd1d99d307e7ddc2b12b17173cb8f1bd2ee14e7dc004ed552fbd",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "144f3d8f04a646938052ab5516fecf34",
+      "archived_checkpoint_sha256": "8694fe36f43054ac2c7328b28fb910109e20811c19f472b89dad62767cd39ff5",
+      "archived_result_sha256": "97483784cd4895ba3932bd4c15ed0482edd65963e34dd5a006d5ff02bdc6a714",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "41c961c1e420424b88e6db1318ea7527",
+      "new_checkpoint_sha256": "77b7ea535cd1a62a5b8e46f9f6ec951e358817cfd50c15b0b3f5c3a9feb39ac7",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "071a3ce3c55f4ddfa50078894ac3e3ad",
+      "archived_checkpoint_sha256": "648c5f6e25a38271513f3d0b5561054d48d66012e15503d8403a005426d39aca",
+      "archived_result_sha256": "9681e8738430eafa2e86978eb151eb7699e1aaae43629f67b9c648d82164989b",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "72f92610f9754f79b74ceabf4c4e34f3",
+      "new_checkpoint_sha256": "db787021541a2028bb44bfd7dd6ee723ac08a4e3f1b7a57e6ee30ab79f6d57c3",
+      "role": "projection",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "archived_attempt_id": "6e4e2fb1df754f23b583ae4aadc4edad",
+      "archived_checkpoint_sha256": "e5761c79e388066195ff49d6d80d5d152711457cc4648a31579b51f6c820eeb1",
+      "archived_result_sha256": "22cb0fc7aa59b643cd72a2c1e8fa31ff9f1a4f7b314230980574f2c916b444aa",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "7fe959bc7cea47249df469a730093f74",
+      "new_checkpoint_sha256": "c79765d26741c883871ca778aa485b2c5e80155044c6f30910a37f3dbe9c25eb",
+      "role": "transport",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_attempt_id": "d66895153c4440fb93069f80d0cf7a99",
+      "archived_checkpoint_sha256": "c636d074d75aa26113a597f33f636651d34716453e2bf3e04c12eaf08166b563",
+      "archived_result_sha256": "6ab65635673324081baec5d105d5e2366a48cda0d04c749bb9f30e0e456f98da",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "f318e20ffa2e4aba859a23964a3d0fbf",
+      "new_checkpoint_sha256": "1c6f7065022a8c38f3031c744afd73f2795ea6e8f25dc7f98acd8bc9208141c9",
+      "role": "transport",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "e87d9c4997ce4d67a543c4ba1fd2f07c",
+      "archived_checkpoint_sha256": "7986b11ad3e73e1fdc3d1e3a7386550edb3558b02717c81088738a755c2849d6",
+      "archived_result_sha256": "6bfb3e17ab2ea5184ff5663367358cc7d90987c0e59e556daf70da8878437e9f",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "2865e3889a2e4d23a78be6a89b349435",
+      "new_checkpoint_sha256": "84cd3ba3945d730067784ea4d9826017d659c67763032fa6414a855dcbe45716",
+      "role": "transport",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "2b9ff220ef5c46b48127e03e801faf79",
+      "archived_checkpoint_sha256": "ec0f7fc42c966cafa0275aa0b22557b4cd4c16c77885286e4562b9129e9db6cb",
+      "archived_result_sha256": "1d7094da53b214ddc310da97cde8a012e910174886416feac3d4ea2086950ff9",
+      "bitwise_equal": true,
+      "mismatches": {
+        "endpoint_metrics": [],
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "new_attempt_id": "4171d610187045ada0f7000a0764eef8",
+      "new_checkpoint_sha256": "ff288c5b76c0cabe75dd07e73502d19995dcf2e0ea4d6725b8e8a0074687cf6e",
+      "role": "transport",
+      "scope": "archived_singleton_reproduction_no_qualification",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "bitwise_equal": true,
+      "mismatches": {
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "role": "winner/projection",
+      "scope": "new_source_inactive_projection_parity",
+      "task_id": "two_pole"
+    },
+    {
+      "bitwise_equal": true,
+      "mismatches": {
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "role": "winner/projection",
+      "scope": "new_source_inactive_projection_parity",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "bitwise_equal": true,
+      "mismatches": {
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "role": "winner/projection",
+      "scope": "new_source_inactive_projection_parity",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "bitwise_equal": true,
+      "mismatches": {
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "role": "winner/projection",
+      "scope": "new_source_inactive_projection_parity",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "bitwise_equal": true,
+      "mismatches": {
+        "final_state": [],
+        "numerical_outputs": [],
+        "observations": []
+      },
+      "role": "winner/projection",
+      "scope": "new_source_inactive_projection_parity",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "excluded_provenance_only_component_fields": [
+    "applied.public_optimizers",
+    "applied.optimizer_group_bindings.optimizer"
+  ],
+  "excluded_unused_ambient_state": [
+    "cpu_rng",
+    "cuda_rng"
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

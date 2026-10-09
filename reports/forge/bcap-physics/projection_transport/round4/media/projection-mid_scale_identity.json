@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "0770be5a486d3ece5ecb5cf4693b66a965110975731392afa13ebc0d4702103d",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "e677a871dce90d20652b5b86a7509a2b9c9d1e5c5c03fcf0c4f0665b54216482",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/72f92610f9754f79b74ceabf4c4e34f3/constraint_geometry-scored-outputs.pt": "baff4a4b441309af112990dbe601d69cf97414ab55220a8535544a3ced130615"
+  },
+  "task_id": "mid_scale_identity"
+}

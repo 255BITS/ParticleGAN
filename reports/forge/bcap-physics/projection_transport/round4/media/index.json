@@ -1,0 +1,728 @@
+{
+  "media": [
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/both-gaussian1d_stability.gif",
+      "gif_sha256": "a077b2ad814e29e8d91755c90a52ca081e19ff5d6272801f55208083c8a9c9cc",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "bace500e1f0be6e9321fa7fd2444e723d71048b4dee63cc76e6fb98b346c53cb",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "both",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/e934909ad508480c8ea8368623c0c3aa/evaluator/observed-samples.pt": "72e256900a5b5a5a21a59da772d6e997d8929d32cfefd3de58e4d9dfaacf610e"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/both-gaussian1d_smoke.gif",
+      "gif_sha256": "dda2c4516274375d724ec4aa07fee68c930d3e287c198e0b8e751075ef730d5b",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "f1a03c8005f5b78dc1ec49e003f12b95317dd10a6b893592f0f07e379cc1df92",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "both",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/390665d59b6e43eca17652dbdcbf01d6/evaluator/observed-samples.pt": "d9e43bc208755c88916267ad3418711128223c44904a7f480b526c481379b8e5"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/both-vector_unequal_mass.gif",
+      "gif_sha256": "2b3f060801e9a9041389214f12a3d677b64ee0af494f384c619cf1aff3fa0072",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5212dc775b2e570f04e1fdb9e61f8f88e70ea0c050a7c69cf04bd64b972a08c6",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "both",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/c743172967ff4173a16024b9e462cdb9/observed-samples.pt": "9c3b1901d2d102aae993dc878b99d83f2b0920997f796d1c5cd0933609d9b007"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/both-vector_two_broad.gif",
+      "gif_sha256": "1e844080d3e5e6b30a0334dadb2d3312913e3de33c09e4a35f8274d9bcdde3d7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "2a47f4b7453501dfb3bd9387fbde2a1f90ea53f820b6280cdc23e198ee68a628",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "both",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/4878c8a3beb84f8ab2f3444ba5aa0089/observed-samples.pt": "77ec40df248f9701670409e33f49920dfcf0381c1d904d8aebeaeec424239ca2"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-gaussian1d_stability.gif",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/7dd2ada6550b49ce9a91ca3691b7703f/evaluator/observed-samples.pt": "a24aa57413b6d4945acd7d3d428c9997d93e708f70bea69b10cc0459ec04a044"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/41c961c1e420424b88e6db1318ea7527/evaluator/observed-samples.pt": "eaed1cfc38577c85a5e9543a02c049a2e7d6493f677a1e7d725807e909b32eae"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-vector_two_broad.gif",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/17ca0fd3c353448dbf8be695d2aa2cfa/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-residual_student.gif",
+      "gif_sha256": "5beed1dc5f5c2261b6b450e1544b639ee27f68e2328bd269235f2dcafd220a0c",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "3fada8361e688ed882521eb83402325acff8f074757ee7b92f9b23f2403ce885",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/9a279bd670a84ab58baa484bf032ba04/constraint_geometry-scored-outputs.pt": "bc8e47b519e0891cc10943bec6596dbf95805ec2c2e31d21ca621558653f7e15"
+      },
+      "task_id": "residual_student"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-mid_scale_identity.gif",
+      "gif_sha256": "0770be5a486d3ece5ecb5cf4693b66a965110975731392afa13ebc0d4702103d",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "e677a871dce90d20652b5b86a7509a2b9c9d1e5c5c03fcf0c4f0665b54216482",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/72f92610f9754f79b74ceabf4c4e34f3/constraint_geometry-scored-outputs.pt": "baff4a4b441309af112990dbe601d69cf97414ab55220a8535544a3ced130615"
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-trajectory.gif",
+      "gif_sha256": "635c08d8aca507353e00e499496bcd09d1c9552d53c3ea14c6fc16b9b9a0d62f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "f5445e142a9717f03af7563a8e92929951a2890b109785e9909b2cb3caf1f6ef",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/6d0a169680054179865c43dae955bdfd/constraint_geometry-scored-outputs.pt": "bd361938587f6ec18f2b6ffa9ec4e9347a15895b1666674097cf102341cd41ae"
+      },
+      "task_id": "trajectory"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-two_pole.gif",
+      "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/df584d365b384d4f865060de8cf08516/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+      },
+      "task_id": "two_pole"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/projection-vector_unequal_mass.gif",
+      "gif_sha256": "6b2a7e8fe10e721cad43fb108074cd401f926d0562ff7039c9a61c6efd54512f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a29b7e6a77be9a52394a1dfef5b799cd17f526c925dec7ae7b74f87e3f8486e4",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "projection",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/0cc42773ef0443519958317ae20e0124/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/transport-vector_unequal_mass.gif",
+      "gif_sha256": "83185b013de83720d91faea09ca80d237c0dea60b4f99cdfb191682286d02b3a",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5dd587c0da5754b97ef346152b1f807ea27a584cf5666db37f37023cdff5e086",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "transport",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/4171d610187045ada0f7000a0764eef8/observed-samples.pt": "5bfcd30b8524ce99f93aa9ccd6d934f9150a5484065c4af5913e0e90c4e2e560"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/transport-gaussian1d_stability.gif",
+      "gif_sha256": "0ae91b2b7fca36ba3fa69e86d273a3c4ba46857098e1141bbcb5b6026a4a6c07",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "2f5ede4d119ed207e2ba0a0120be6da6a34c4d3f3ad50c71f67ad27c0b11e332",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "transport",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/2865e3889a2e4d23a78be6a89b349435/evaluator/observed-samples.pt": "49b4e862ab9390bf3e60c49f9daaea6284003b439fc969d698e05b71a110c64f"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/transport-vector_two_broad.gif",
+      "gif_sha256": "329c6be1f169d4363c73a4832e7312bc6168e30c28ee17fa07dc465241da9a5e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "8d1eef16a283cf65b5ed9c4d6d0a88a03cb8a047e7cb6f61f964ceaca1e6bdf8",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "transport",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/7fe959bc7cea47249df469a730093f74/observed-samples.pt": "b8a10e5bc96971a72ccd8e1ce4cf969e0af99ac70dab7161b72311d9113b0606"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/transport-gaussian1d_smoke.gif",
+      "gif_sha256": "d686dadfe7bd8d7f157bcf1d2ad83e65387b2f506ec707f71f09737092f443b7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b56cfc36c046ef9ab680ac70ec9097aab5f6a8b843f5e5133bae38a6764bbbda",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "transport",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/f318e20ffa2e4aba859a23964a3d0fbf/evaluator/observed-samples.pt": "f732224ae4beed53ca120ff3e0d30d0e43ec4a13c7ea714e87a0d63292860c6b"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-two_pole.gif",
+      "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/6978e5121cbf42db8f00c78385b03587/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+      },
+      "task_id": "two_pole"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-gaussian1d_stability.gif",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/8fe5a76997d94f79b034c95ee425c9a5/evaluator/observed-samples.pt": "ac1e17b469156155ccc1225ed93481430fb8929601519091a7f58544aec37427"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-trajectory.gif",
+      "gif_sha256": "19b3ccb272ac36be40f0d6a12050fb9be55f6739c4dac5decaed1f0942954ad4",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b33550191df8369318227c4c11f6a9f930b0487b359bc302bcd719d9c5477c16",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/a5501b08266f4a588b9007631e1b446c/constraint_geometry-scored-outputs.pt": "b33a3aaa6f6aae3d55906ecdac172d7b190f27c80ef0e3256a1b7f587373aa14"
+      },
+      "task_id": "trajectory"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-mid_scale_identity.gif",
+      "gif_sha256": "f99f866c5d3968c4aac348caf530982ea0c6c155335344bf15ad9293fea42f88",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "c34dc77afa29727245b0e0fd15cff8079a6bc52c013dec4b1f102795f2ec3e8b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/86126c8a19af411a835aff615deddc11/constraint_geometry-scored-outputs.pt": "0c6ed3ffa6d03d71f3d97a3319656d7a5196e4cf4ee3b8be7fb0465fcff3cc90"
+      },
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-vector_two_broad.gif",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/1aca0207b7704fa891b1bcc65abce752/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/9a2bf49d2bc648238eb261f0da0dbb46/evaluator/observed-samples.pt": "229d1c5fddc4e8922c242dbaaf8d8cbb9c28d1d7c934b500d0868771da8bf185"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-vector_unequal_mass.gif",
+      "gif_sha256": "6b2a7e8fe10e721cad43fb108074cd401f926d0562ff7039c9a61c6efd54512f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a29b7e6a77be9a52394a1dfef5b799cd17f526c925dec7ae7b74f87e3f8486e4",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/b76ebf4ae35b4e3abc1f7400d3a6398b/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/winner-residual_student.gif",
+      "gif_sha256": "ba369af7d6efef3081c2c6cff92a6881daa8c1fbae227d957a85214ccc1d7cda",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5fbbb4581fb2a0e8b8b26d9ac435aae23a28e35d2baad6570dfcad22b265b743",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "winner",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/projection_transport/queue/projection_transport-round4-v1/850a3d819f764e6eb85560950d5f1583/constraint_geometry-scored-outputs.pt": "1439cc62ffe0e3fa1c5c697c3c6bf467e6c48d4e301a0256678547382b7e165e"
+      },
+      "task_id": "residual_student"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}
