@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3958,6 +3958,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0,
 
 [Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
 
+### kernel_witness_r3_v1 · readout-5f071b81ea649698c9749e68
+
+**Scope:** research_diagnostic; scientific; revision `690dad0a2bf4c00ef53fe9cf82934d305ead00a9d36ede8486d250b7d0fc1b5b`.
+
+A label-free multiscale long-range full-pair kernel witness corrects unequal-width covariance below .85 while preserving mass allocation, broad-vector sustained quality and scalar acquisition.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 162.097; mechanism `structural`.
+
+vector_two_broad: hq=0.99365, mass_tv=0.003418; vector_unequal_width: hq=0.96899, mass_tv=0.075439; vector_unequal_mass: hq=0.96387, mass_tv=0.016797
+
+Reject this exact global weight1 multiscale pairwise Cauchy witness. Gaussian smoke and broad guardrail PASS, Gaussian stability and both unequal mixtures FAIL, two-pole unsupported. Width final full covariance13.431491 falsifies the .85 forecast despite all four populated components; no new sustained pass.
+
+**Next:** Stop this exact global revision and retain the winner. Preserve characteristic-kernel negative evidence and parameter-force diagnostics; no ordinary qualification, tuning, seed repeat, continuation or default adoption.
+
+[Evidence](../../reports/forge/bcap-physics/kernel_witness/round3/results.json) · [Record](records/readout-5f071b81ea649698c9749e68.json)
+
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
 **Scope:** current; scientific; revision `71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108`.
@@ -4085,6 +4101,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.076
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json) · [Record](records/readout-8bfdfb8d2b1c3daf55f9b0bc.json)
+
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-90016963ac69650ac037fb80
+
+**Scope:** research_diagnostic; scientific; revision `df1f0ed1772a9d01b3e39216ac746529d93263965682be987a5fb230e104a348`.
+
+Measure the exact winning recipe as the sole primary matched control on the same source and full-task mechanism subset; the archived parent supplies context only.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 162.546; mechanism `floor_constant`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654
+
+Exact winning recipe primary matched control records3 PASS and3 FAIL; its original fixed two-pole fixture, Gaussian smoke and broad-vector guardrail PASS. Both unequal mixtures and full scalar stability remain FAIL.
+
+**Next:** Retain this control and stop the exact global weight1 pairwise witness. This subset confers no additional ordinary qualification, calibration or default-adoption credit.
+
+[Evidence](../../reports/forge/bcap-physics/kernel_witness/round3/results.json) · [Record](records/readout-90016963ac69650ac037fb80.json)
 
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `0ded7bceb083e97c0d14152fbc7bbb56114cfc8167c88eacf955499ab6e96908`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

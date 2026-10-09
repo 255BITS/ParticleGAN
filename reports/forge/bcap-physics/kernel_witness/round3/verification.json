@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "software_tests": {
+    "count": 159,
+    "status": "PASS",
+    "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/logs/focused-tests.log"
+  },
+  "forge_validate": "PASS",
+  "forge_compile_check": "CURRENT",
+  "matched_frozen_bindings": {
+    "protocol": true,
+    "runtime": true,
+    "rng": true,
+    "compute_profiles": true,
+    "source": true,
+    "task_scientific_declarations": true
+  },
+  "source_commit": "73200f450b10e428dc74ee70842587013f6f13fd",
+  "source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+  "source_files_verified": 1201,
+  "worker_count": 11,
+  "retries": 0,
+  "invalid_or_incomplete_workers": 0,
+  "actual_training_gifs": 11,
+  "remaining_reserved_seconds": 0,
+  "both_request_subscriptions_concluded": true,
+  "drain_process_finished": true,
+  "global_witness_configuration": {
+    "kernel_witness_weight": 1.0
+  },
+  "publication_scientific_delta": "Reporting/reproduction only since executed source; no later scientific fix",
+  "raw_logs_and_checkpoints_committed": false,
+  "all_saved_gaussian_vector_metric_sets_reproduced": true,
+  "two_pole_media": "Saved actual training measurements; no sample-output rescore asserted",
+  "history_catalog_coverage": "valid"
+}

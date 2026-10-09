@@ -1,0 +1,325 @@
+{
+  "media": [
+    {
+      "arm": "candidate",
+      "gif_sha256": "0a611607204e5eccad07dc95fef8325c0e077a151027ed4155dfb9442507d925",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "0262ad869a1dacb5d17b27bcccd0ca866f46866d951c1dec744034ab3fde3d94",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/16a870808ada4cd5afed6abe647d03e5/observed-samples.pt": "6d1a66762edaa47c614508233bb1a598e8a730c17fb1bb2845930651e3f88459"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "19dd7c04f34fc9cebf7111d2783c6458c2a200448a5cd02fd2cf77f1c1d221c0",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "ad9f8a9ce6dd4fe35b85203d77649df6cfbb983eb255c84b1f6b35d61af36a36",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/7bc674a0df3e4d5d9b1557b0898b7df2/observed-samples.pt": "24b14abe226250ab64bfba1aabe5507c98b4f197c16ad872def914905725a794"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "6e9a13eb5394c4a52b8fa9e2509e6b18f64b56bce2a90f46e62506e56c608f92",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "a2ffacb9de5c13110590777b3bd27c6a88a2a78d12f8b25555319daa68d3fb43",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/9b0fca4fc04c4e1781288a2ae171135e/evaluator/observed-samples.pt": "caf322c6dc82b6d85276c61c5091b0d74dc1281ff06483bd2a4e3c422e928f8f"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "088211ab4ffc7eff560ba4c74e398cd1a0cdac9963d073fc47acc97682b52666",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "0f322f84e5195ddd26dc368d2c7ead5622eb7ace39af2e3aaa3032318a6ae959",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/5ee501cb8d70481caad99ef15af3244f/observed-samples.pt": "c20ec2216d89cc74317863a4da45384a668d6d8bce5eefb7934a94d557b55c4c"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "cdee5e594fedf66f13be3e4908f67cf8bef0ebdf826668f8825c3806f61d5e38",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 120,
+      "observation_count": 120,
+      "observations_sha256": "6294835ac907184959db1bb9146186715d5f3d85a69c97b7e31f2452bd83b462",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/9743e7d5d72c40beb55afea275b55816/evaluator/observed-samples.pt": "97d018ec0004bdc7773346a4925a650d7d818d6731d210081374f6373973fae3"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "6b2a7e8fe10e721cad43fb108074cd401f926d0562ff7039c9a61c6efd54512f",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "a29b7e6a77be9a52394a1dfef5b799cd17f526c925dec7ae7b74f87e3f8486e4",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/b9ba057829f24d5dbe92c11f5db2e131/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 120,
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/e760ffc7477e4146b09861b8115b2bf4/evaluator/observed-samples.pt": "f8d29cc1d92a06d80a74ef433dd11304c128404105c6b8245564cb0e5f04cc1e"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/28197ee6c6024e449df50246ad0685de/evaluator/observed-samples.pt": "854ed9949d1d380de79e920e5257d94be7103a0007cc9003d850b04c025dcd67"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "5a7d74f463bb61ae4ba2473303caa696f2644a65c43573ac492fd19bdd961299",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "7f053488ba4cea2574f021b6e0e2aae67be9fc65788efc6a9a83936139144d97",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/eb007c66fc9b4da9a769aa3fd9ad260e/observed-samples.pt": "5012bd6a392e978905e669dfb184d0637ffd1c238b6c61b817f41384ce49c25e"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/e2084a57a13d413d99f0ff61beb8fb11/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": null,
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "scope": "saved_actual_training_measurements",
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

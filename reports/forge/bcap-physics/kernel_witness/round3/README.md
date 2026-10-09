@@ -1,9 +1,91 @@
 # Round3: multiscale pairwise distribution witness
 
-This is a preregistered bounded mechanism diagnostic, with one candidate and
-the exact winning BCAP recipe as its sole primary matched control. Results are
-pending. It supplies no ordinary Tier2 qualification, calibrated screen or
-default-adoption credit. The parent owns the single current goal leaderboard.
+**Reject this exact global weight1 revision.** It preserves the broad-vector
+guardrail and improves scalar retention and mass allocation, but adds no sustained
+task PASS and worsens unequal-width full covariance **6.287559→13.431491**.
+Candidate outcomes are **2 PASS / 3 FAIL / 1 BLOCKED**, versus the exact winning
+BCAP primary control's **3 PASS / 3 FAIL**. On five mutually executable tasks,
+both pass2. Eleven full-budget workers finish once for **324.642767 paid seconds**,
+with zero retries, incomplete/invalid workers or remaining reservations.
+
+This completed round3 mechanism diagnostic supplies no ordinary Tier2
+qualification, calibrated screen or default-adoption credit. The parent owns
+the single current goal leaderboard; the following table is a task readout.
+The original winner's archived7/21 Tier2 identity remains unchanged.
+
+## Complete unchanged task gates
+
+| Task | Exact winner primary control | Kernel witness candidate | Measured outcome |
+| --- | --- | --- | --- |
+| Two-pole fixed fixture | PASS,17/24 checks | BLOCKED before spend | Frozen public-components host has no sample-space witness consumer; no fixture substitution |
+| Gaussian smoke | PASS,3/24 confirmed states | PASS,9/24 confirmed states | First confirmation375→125; both endpoint KS values fail, .071842→.074019, while the original any-confirmed-state smoke gate passes |
+| Gaussian own-state stability | FAIL: stationary2/72, shifted hold0/24, deadline reacquisition FAIL | FAIL: stationary40/72, shifted hold17/24, deadline reacquisition PASS | Final KS .320623→.070755 still exceeds .05; full temporal retention remains FAIL |
+| Unequal mass | FAIL,0/24 checks, suffix0 | FAIL,0/24 checks, suffix0 | Minimum mass ratio .207520→.969460; full covariance3.691653→3.890876 still fails |
+| Unequal width | FAIL,0/24 checks, suffix0 | FAIL,0/24 checks, suffix0 | Full covariance6.287559→13.431491; narrowest component44.654877, despite all four populated modes |
+| Two broad guardrail | PASS,22/24, suffix22 | PASS,23/24, suffix17 | Covariance .385581→.135281, mass TV .062988→.003418; full guardrail retained |
+
+[Final metrics and temporal failures](results.json),
+[source/recipe/stream receipts](provenance.json),
+[unchanged scorer controls](scorer-controls.json),
+[saved-center and actual batch replay](saved-state-diagnostics.json), and
+[11 actual-training GIF receipts](media.json) bind every task. The
+[unequal-width training GIF](candidate-vector_unequal_width.gif) illustrates the
+numerically measured failure. All saved Gaussian/vector metric sets were rescored
+exactly before rendering; media adds no optimizer update or sampling draw.
+
+### Mass and central shape do not bound spill
+
+The candidate's width counts are915/824/1073/1284 and mass TV .075439, with
+minimum full eigen ratio .695481. The four-sigma core covariance average improves
+.444178→.259211, yet the narrowest component's spill fraction rises0→.109290.
+Its full covariance error rises .630566→44.654877. Thus central shape and populated
+modes coexist with a severely wrong complete narrow-component law; the original
+full gates reject it at every observation. Core summaries do not replace them.
+
+Unequal-mass rare served count improves17→113 out of4096, against target mass .02.
+All components are represented and mass TV falls .070654→.016797. Its third
+component still has full covariance error8.927802 and spill .099631. None of the
+24 complete mass-task observations passes. This is allocation improvement, not
+transport-local's previously demonstrated sustained rare-density repair.
+
+### The endpoint witness is present and can agree with the critic
+
+[Final parameter-force diagnostics](final-witness-diagnostics.json) reuse the
+reconstructed actual last real batch and explicitly separate all-row antithetic
+MoG cubature. Width empirical MMD falls .087147→.029458, while full covariance
+worsens. Candidate generator witness/critic cosine is .983449, prior .722043;
+the witness/critic norms are1.194 and1.238. Attraction remains stronger than
+repulsion in both groups. Persistent endpoint critic opposition or absent
+attraction is therefore unsupported by this probe. These are raw float64
+parameter derivatives, not actual last G samples, applied DualNorm proposals,
+population MMD or a causal trajectory decomposition.
+
+A characteristic bounded kernel identifies an exact population equality but does
+not bound relative second-moment error at a finite nonzero discrepancy. For a
+fixed real-derived frame, Q=(1−epsilon)P+epsilon*delta_R gives MMD²≤4 epsilon²
+because k(x,x)=1, while an extreme R can make variance error grow as epsilon R².
+This mathematical counterexample explains why the full spill/covariance gates
+remain necessary; it does not identify the precise training cause. Adaptive
+scales, minibatch rare evidence, shared-network deformation and normalized
+finite motion remain competing explanations. This experiment does not isolate
+the kernel family, each scale, weight, adversarial interaction or optimizer.
+
+The primary covariance forecast is falsified. Rare-mass≥.5, populated modes,
+broad full PASS and confirmed Gaussian smoke forecasts are observed; final
+stability KS≤.05 is falsified. Candidate aggregate study decision stays
+`incomplete` solely because the declared two-pole host is unsupported, with its
+observed numerical falsifier true. Every runnable worker is complete. The control
+study's same primary signature is falsified; it does not regrade archived winner
+qualification. Frozen declarations and forecasts are preserved.
+
+**Recommendation: stop this exact global weight1 candidate and retain the winner.**
+Keep the opt-in implementation and negative evidence. Allocation and scalar
+response are useful observations, but no task-specific improvement supplies a
+new global configuration. Any future proposal needs a separately bounded scope
+and saved-state evidence about tail-sensitive applied forces or network/prior
+deformation; no sweep, seed study, tuning, continuation or adoption follows here.
+Native100, images, conditional identity tasks and the full Tier2 suite are
+unmeasured; the old native/noisy MMD preflight remains a different cohort.
 
 ## Hypothesis and public mechanism
 
@@ -107,8 +189,41 @@ Ready [candidate](../../../../../configs/forge/ideas/kernel_witness_r3_v1.json),
 [candidate study](../../../../../configs/forge/studies/kernel_witness_r3_candidate_v1.json),
 [control study](../../../../../configs/forge/studies/kernel_witness_r3_control_v1.json),
 and [diagnostic view](../../../../../configs/forge/views/kernel_witness_r3_diagnostic.json)
-declare this exact scope. Both arms will be frozen from the same pushed source
-before the bounded public Queue/drain runner executes one shared GPU worker.
+declare this exact scope. [PR365](https://github.com/255BITS/ParticleGAN/pull/365)
+was opened as a draft after scientific commit
+`73200f450b10e428dc74ee70842587013f6f13fd` was pushed, before both arms were
+enqueued. Both executed source digest
+`576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398`;
+all1201 measured scientific source files match publication bytes. Candidate
+revision is `690dad0a2bf4c00ef53fe9cf82934d305ead00a9d36ede8486d250b7d0fc1b5b`,
+control revision `df1f0ed1772a9d01b3e39216ac746529d93263965682be987a5fb230e104a348`.
+Later commits contain reporting/reproduction artifacts only; no later scientific
+fix is presented as trained.
+
+The consumed recipe delta is exactly `kernel_witness_weight:0→1` on each matched
+host. Initial-model receipts, priors, actual data sequences and final named-stream
+states match across both arms. All six control endpoint metrics, observation
+counts, passing suffixes and grades exactly match the separately archived alchemy
+winner control; this is parity, not an independent seed replication or third arm.
+Archived receipts and original source identities remain intact.
+
+The campaign declares12840s; actual full executed allowances total12540s because
+the unsupported candidate fixture spends nothing. Paid worker cost324.642767s
+is below the fresh14400s ceiling. Read-only preflight/final force diagnostics add
+15.840310/13.047172 CPU seconds separately from the worker ledger; these fit within
+the1560s diagnostic reserve even when conservatively added to full allowances.
+No capacity probe, infrastructure retry or additional training was launched.
+GPU0 sharing was authorized with one active scientific worker; contended wall
+cost is accounting, not an optimizer-speed ranking. The bounded drain stopped,
+both request subscriptions are concluded by normal readout, and no watcher or
+active reservation remains.
+
+159 focused public trainer, derivative, null/destructive, equivariance, checkpoint,
+stream, legacy-recipe, mechanism-boundary and Forge study checks pass. Declaration,
+media and source verification pass; Forge memory is CURRENT and the history catalog
+has valid coverage. [Verification receipt](verification.json) records these checks.
+GitHub reports no configured checks on this research branch. Logs and focused-check
+output stay outside Git.
 
 Tail raw logs outside Git:
 
@@ -117,8 +232,17 @@ tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness
 tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/logs/drain.log
 ```
 
-The runner uses `on_completion=None`, `allow_sharing=True`, `watch=False`.
-Publication will retain compact metrics, provenance and actual-training GIFs;
+The runner used `on_completion=None`, `allow_sharing=True`, `watch=False`.
+Publication retains compact metrics, provenance and actual-training GIFs;
 raw traces/checkpoints stay local. Summaries-only reporting preserves archived
-qualification. Any later scientific software change is unmeasured unless
-separately admitted under this round's remaining ceiling.
+qualification. Reproduce reporting after restoring the exact bulk receipt paths
+and original linked archive metadata:
+
+```sh
+PYTHONPATH=$PWD /home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/bcap-physics/kernel_witness/round3/publish.py
+PYTHONPATH=$PWD /home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/bcap-physics/kernel_witness/round3/diagnose_final.py
+```
+
+These commands train nothing. The concluded studies must not be reset for an
+unchanged scientific rerun. The pushed preregistration preserves the original
+forecasts, exact global recipe, applicability and reservation decision.

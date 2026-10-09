@@ -1,0 +1,358 @@
+{
+  "archived_control_parity": [
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "28197ee6c6024e449df50246ad0685de",
+      "original_attempt": "a9a5d955629e4d018bda5c115860c46b",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "e760ffc7477e4146b09861b8115b2bf4",
+      "original_attempt": "5eddcb4fa3fd4cc8a500ed64113f3ab3",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "cfd2a6cb6ca74be4ab050b046d6da2b9",
+      "original_attempt": "0a7286c393b04004926c8d8222c62ce4",
+      "task_id": "two_pole"
+    },
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "e2084a57a13d413d99f0ff61beb8fb11",
+      "original_attempt": "aee8671ba5094f98aad49bc31eda4a86",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "b9ba057829f24d5dbe92c11f5db2e131",
+      "original_attempt": "805b20af930a473e91478890c7403e01",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "equal": {
+        "final": true,
+        "observations": true,
+        "passing_checks": true,
+        "status": true,
+        "terminal_passing_suffix": true
+      },
+      "new_attempt": "eb007c66fc9b4da9a769aa3fd9ad260e",
+      "original_attempt": "838d7c70eea5463d98852787ae8e55b0",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "archived_report": "/home/martyn/dev/ParticleGAN-bcap-physics-alchemy/reports/forge/bcap-physics/alchemy/results.json",
+  "archived_report_sha256": "7cd12cb6b14883804d607cee612b66acea5c276bf52759165e611dbeb25978af",
+  "cpu_wall_seconds": 13.047171741956845,
+  "diagnostics": [
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "16a870808ada4cd5afed6abe647d03e5",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/16a870808ada4cd5afed6abe647d03e5/provenance/provenance-state.pt",
+        "sha256": "6938d599c5dc23fb0f0c3e9df3dcd076d269fcd6c371a5b3dd6877944d57e0ab"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.009373519808779318,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.44602509556043507,
+          "attraction_repulsion_cosine": -0.9459456242345667,
+          "critic_norm": 0.02878770730117104,
+          "finite": true,
+          "repulsion_norm": 0.4287600330842583,
+          "residual_over_term_norms": 0.16554813057631196,
+          "witness_critic_cosine": -0.820720219597602,
+          "witness_norm": 0.14481904270308754,
+          "witness_over_critic_norm": 5.030586186945027
+        },
+        "prior": {
+          "attraction_norm": 0.01710494950302779,
+          "attraction_repulsion_cosine": -0.9502950391734263,
+          "critic_norm": 0.000925428393602399,
+          "finite": true,
+          "repulsion_norm": 0.01530745788792048,
+          "residual_over_term_norms": 0.16688773202618515,
+          "witness_critic_cosine": -0.4751861634643274,
+          "witness_norm": 0.005409233158984118,
+          "witness_over_critic_norm": 5.845112594749433
+        }
+      },
+      "parts": {
+        "attraction": -0.6581568511309698,
+        "global_scale": 1.0432945348456193,
+        "local_scale": 0.040719047143693565,
+        "repulsion": 0.33272410920644896,
+        "target": 0.33480626173330014
+      },
+      "source": "round3_candidate",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "7bc674a0df3e4d5d9b1557b0898b7df2",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/7bc674a0df3e4d5d9b1557b0898b7df2/provenance/provenance-state.pt",
+        "sha256": "c38b3290d26712ad1a3eaec44e5925493ba290c23a38a5ee63946265a359060a"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.014655250724769808,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.2983004184165833,
+          "attraction_repulsion_cosine": -0.8460160472435706,
+          "critic_norm": 0.09482559666828409,
+          "finite": true,
+          "repulsion_norm": 0.2572207128629774,
+          "residual_over_term_norms": 0.2864249892250282,
+          "witness_critic_cosine": 0.007004504819165161,
+          "witness_norm": 0.15911513404102365,
+          "witness_over_critic_norm": 1.6779766184613125
+        },
+        "prior": {
+          "attraction_norm": 0.019641091856930644,
+          "attraction_repulsion_cosine": -0.9446910954988941,
+          "critic_norm": 0.009061191838341694,
+          "finite": true,
+          "repulsion_norm": 0.01830694324030345,
+          "residual_over_term_norms": 0.16987143018020182,
+          "witness_critic_cosine": -0.1732101760142259,
+          "witness_norm": 0.006446286994495649,
+          "witness_over_critic_norm": 0.7114171192379695
+        }
+      },
+      "parts": {
+        "attraction": -0.6819987206416186,
+        "global_scale": 2.515407917800956,
+        "local_scale": 0.03427377298989143,
+        "repulsion": 0.31725358431406336,
+        "target": 0.37940038705232504
+      },
+      "source": "round3_candidate",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "5ee501cb8d70481caad99ef15af3244f",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/5ee501cb8d70481caad99ef15af3244f/provenance/provenance-state.pt",
+        "sha256": "ae91a1b56b4836d9e729151ed62026221252652d00f2452686142a826728ee31"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.029458227392045677,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.7038798729555182,
+          "attraction_repulsion_cosine": -0.7664763847218206,
+          "critic_norm": 0.46797634659757514,
+          "finite": true,
+          "repulsion_norm": 0.21151639340527487,
+          "residual_over_term_norms": 0.6101520575788224,
+          "witness_critic_cosine": 0.9834488158515712,
+          "witness_norm": 0.5585309154200097,
+          "witness_over_critic_norm": 1.1935024483199035
+        },
+        "prior": {
+          "attraction_norm": 0.024169283215526114,
+          "attraction_repulsion_cosine": -0.6175352372882482,
+          "critic_norm": 0.015360557818241447,
+          "finite": true,
+          "repulsion_norm": 0.014807111281006582,
+          "residual_over_term_norms": 0.48774531127477366,
+          "witness_critic_cosine": 0.7220432947707985,
+          "witness_norm": 0.019010553666079715,
+          "witness_over_critic_norm": 1.2376213084855363
+        }
+      },
+      "parts": {
+        "attraction": -0.5038721265488713,
+        "global_scale": 4.476263951375602,
+        "local_scale": 0.031915607449221284,
+        "repulsion": 0.254135181177482,
+        "target": 0.2791951727634349
+      },
+      "source": "round3_candidate",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "b9ba057829f24d5dbe92c11f5db2e131",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/b9ba057829f24d5dbe92c11f5db2e131/provenance/provenance-state.pt",
+        "sha256": "9e8a8bcae242469022b2fb8b39358add1de62846f8cd9c4a0881979e8971f424"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.05748225244220334,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 1.3303411626770452,
+          "attraction_repulsion_cosine": -0.43457356734254704,
+          "critic_norm": 0.23587945895923304,
+          "finite": true,
+          "repulsion_norm": 0.5469159623537426,
+          "residual_over_term_norms": 0.6384634946697287,
+          "witness_critic_cosine": -0.41016758029118794,
+          "witness_norm": 1.1985601444408045,
+          "witness_over_critic_norm": 5.081240010169564
+        },
+        "prior": {
+          "attraction_norm": 0.02500982320718077,
+          "attraction_repulsion_cosine": -0.8333408630634288,
+          "critic_norm": 0.006344302378770693,
+          "finite": true,
+          "repulsion_norm": 0.023283766870265874,
+          "residual_over_term_norms": 0.2906897558673247,
+          "witness_critic_cosine": -0.06747948443264605,
+          "witness_norm": 0.01403845190956962,
+          "witness_over_critic_norm": 2.2127652610860875
+        }
+      },
+      "parts": {
+        "attraction": -0.6843990928431222,
+        "global_scale": 2.515407917800956,
+        "local_scale": 0.03427377298989143,
+        "repulsion": 0.36248095823300047,
+        "target": 0.37940038705232504
+      },
+      "source": "round3_control",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "eb007c66fc9b4da9a769aa3fd9ad260e",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/eb007c66fc9b4da9a769aa3fd9ad260e/provenance/provenance-state.pt",
+        "sha256": "392944b48bc7e7e575178dc18021a548ed936f9bd508d204f647409c3e0a9b2e"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.08714666684564276,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.7420815128202874,
+          "attraction_repulsion_cosine": -0.6367691876986403,
+          "critic_norm": 0.10959964877561118,
+          "finite": true,
+          "repulsion_norm": 0.2719819656065455,
+          "residual_over_term_norms": 0.5979059343788801,
+          "witness_critic_cosine": -0.16958504621055073,
+          "witness_norm": 0.6063145715882928,
+          "witness_over_critic_norm": 5.5320849871483695
+        },
+        "prior": {
+          "attraction_norm": 0.018595988213816413,
+          "attraction_repulsion_cosine": -0.5176911143546009,
+          "critic_norm": 0.005985127185119261,
+          "finite": true,
+          "repulsion_norm": 0.017317623767865713,
+          "residual_over_term_norms": 0.49205277402076236,
+          "witness_critic_cosine": -0.34494811712376866,
+          "witness_norm": 0.017671392400691977,
+          "witness_over_critic_norm": 2.9525508571694377
+        }
+      },
+      "parts": {
+        "attraction": -0.530947058400656,
+        "global_scale": 4.476263951375602,
+        "local_scale": 0.031915607449221284,
+        "repulsion": 0.3388985524828639,
+        "target": 0.2791951727634349
+      },
+      "source": "round3_control",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_last_real_batch_count": 128,
+      "checkpoint": {
+        "attempt_id": "e2084a57a13d413d99f0ff61beb8fb11",
+        "original_source_digest": "576340bea8c650ecdf2ff0bbc0702a8ce8601c6c0ca177b3894aaeaa97751398",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kernel_witness/queue/kernel_witness_r3_v1/e2084a57a13d413d99f0ff61beb8fb11/provenance/provenance-state.pt",
+        "sha256": "8c229510fbf2c3cdadc0719c058d522ac70e682411fd8e0cf56210b67f866ed9"
+      },
+      "data_stream_replay_matches": true,
+      "generated_cubature_count": 2048,
+      "loss": 0.0268031732561288,
+      "parameter_forces": {
+        "generator": {
+          "attraction_norm": 0.799648820413489,
+          "attraction_repulsion_cosine": -0.8408174670819384,
+          "critic_norm": 0.08942949508956007,
+          "finite": true,
+          "repulsion_norm": 0.47379779962294855,
+          "residual_over_term_norms": 0.3739721797975845,
+          "witness_critic_cosine": 0.3558122463874765,
+          "witness_norm": 0.47623360835089296,
+          "witness_over_critic_norm": 5.325240938394699
+        },
+        "prior": {
+          "attraction_norm": 0.020441859469643744,
+          "attraction_repulsion_cosine": -0.7707072381687322,
+          "critic_norm": 0.002878015206834114,
+          "finite": true,
+          "repulsion_norm": 0.01758286505568267,
+          "residual_over_term_norms": 0.3459067262545125,
+          "witness_critic_cosine": 0.3898201888945194,
+          "witness_norm": 0.013153007977285334,
+          "witness_over_critic_norm": 4.57016625417833
+        }
+      },
+      "parts": {
+        "attraction": -0.6527503036876693,
+        "global_scale": 1.0432945348456193,
+        "local_scale": 0.040719047143693565,
+        "repulsion": 0.34474721521049795,
+        "target": 0.33480626173330014
+      },
+      "source": "round3_control",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "global_rng_unchanged": true,
+  "limitations": "Raw derivatives on reconstructed last real minibatch and deterministic all-row antithetic cubature, not the actual last sampled G batch or a reconstructed normalized optimizer update; no causal guarantee.",
+  "new_random_sampling_draws": 0,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "posthoc_saved_endpoint_CPU_float64_cubature_parameter_forces"
+}
