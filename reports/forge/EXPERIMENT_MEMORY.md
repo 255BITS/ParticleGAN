@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3894,6 +3894,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
 
+### kinetic_transport_sliced_v1 · readout-4e91e5241993171fbbd2b5eb
+
+**Scope:** research_diagnostic; scientific; revision `24bacd26b777b7bb90214c0254f92861d20b93bd8c2f83fce4ed59ee76e49997`.
+
+Adding a fixed label-free quantile transport force to the exact winner improves rare mass and reduces spill while retaining the passing broad-vector guardrail.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 248.327; mechanism `structural`.
+
+vector_unequal_mass: hq=0.93579, mass_tv=0.013496
+
+Transport improves rare allocation and Gaussian passing checks but solves no additional full sustained task: 2 PASS, 3 FAIL, 1 BLOCKED. The automated study decision is incomplete because frozen two_pole cannot consume the signal; all runnable jobs completed and no ordinary qualification is claimed.
+
+**Next:** Stop this exact weight1/32-direction revision. Inspect saved transport/adversarial normalized fields and spill before a separately declared successor; no tuning, additional training, seed run or promotion.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/results.json) · [Record](records/readout-4e91e5241993171fbbd2b5eb.json)
+
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
 **Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
@@ -4149,6 +4165,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-a894bcd3b73c299782037bd6
+
+**Scope:** research_diagnostic; scientific; revision `c140b8522f30cae109998c05dae7fc2b9ccefeb320e4151a6308098af1f8a1a7`.
+
+Resolve and measure the exact winning recipe in the same source/runtime on the bounded diagnostic task subset; the historical parent is motivation only, not another launched candidate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 292.838; mechanism `floor_constant`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654
+
+The matched winner completes all six diagnostic tasks: 3 PASS and3 FAIL. Numerical endpoints and saved vector allocations reproduce the original winner. This source-bound control supplies no new ordinary qualification.
+
+**Next:** Retain this exact matched control evidence and stop the completed campaign. Preserve the historical incumbent; compare track-specific results through the parent campaign without pooling task denominators.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/results.json) · [Record](records/readout-a894bcd3b73c299782037bd6.json)
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `57a74746ddd9d88ca1aa3c32d3fb28e6ffb968b0182bab83bb2fe17c2782d51b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
