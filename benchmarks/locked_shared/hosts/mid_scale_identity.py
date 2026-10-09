@@ -15,6 +15,8 @@ from dataclasses import dataclass
 
 from ..observation import checkpoint, schedule_optimizer
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 
 
@@ -507,13 +509,21 @@ def _fit(
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
+        protected_adversarial = g_loss
         g_loss = g_loss + cover_w * cover / n_scales
-        g_loss.backward()
+        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover))
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),
-                   pairing="stranger" if arm == "stranger" else "matched", teacher=teacher))
+        def observe_midscale():
+            metrics = score_hold(student, scales=_eval_scales(arm),
+                                 pairing="stranger" if arm == "stranger" else "matched", teacher=teacher)
+            if components is not None:
+                target = torch.stack([targets[scale] for scale in EVAL_SCALES])
+                prediction = torch.stack([student.state(scale) for scale in EVAL_SCALES])
+                components.constraint_geometry_capture(step + 1, target, prediction, metrics)
+            return metrics
+        checkpoint(step + 1, observe_midscale)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(steps):
             preview_scales = _eval_scales(arm)

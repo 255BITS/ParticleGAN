@@ -36,7 +36,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "row_evidence_exclude", "row_evidence_hold", "birth_death_space", "reopen_signal",
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
-    "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
+    "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",

@@ -1,0 +1,44 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.constraint_geometry_mode=nonascent: project actual combined G/prior displacement onto non-ascent halfspaces of existing adversarial and active paired objectives"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/constraint_geometry/README.md",
+  "id": "constraint_geometry-nonascent-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Post-DualNorm Euclidean projection protects useful first-order descent from conflicting host coverage forces; task objectives, weights, critic and rates are fixed.",
+  "parent": "constraint_geometry-control-v1",
+  "prior_art": [
+    "bcap-dualnorm-convolution-v1",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "constraint_geometry_mode": "nonascent"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

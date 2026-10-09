@@ -10,6 +10,8 @@ from contextlib import nullcontext
 
 from .observation import checkpoint, schedule_optimizer
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -190,13 +192,14 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
             opt_g.zero_grad(set_to_none=True)
             fake = generator(slow, prior.z)
             g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity; only the relativistic pair does that.
             # fm_weight is 0: no feature-matching term is added.
             g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
             g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
             g_loss = g_loss + spread(prior.z)
-            g_loss.backward()
+            constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,))
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:
@@ -205,7 +208,11 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         def measure_identity():
             context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
             with context:
-                return {"identity_mse": identity_mse(generator(slow, prior.z).detach(), fast)}
+                pred = generator(slow, prior.z).detach()
+                metrics = {"identity_mse": identity_mse(pred, fast)}
+                if components is not None:
+                    components.constraint_geometry_capture(step, fast.reshape(12, 8, 2), pred.reshape(12, 8, 2), metrics, kind="line")
+                return metrics
         checkpoint(step, measure_identity)
 
     context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()

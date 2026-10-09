@@ -2,6 +2,8 @@
 from copy import deepcopy
 import math
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 
@@ -384,7 +386,7 @@ class GANTrainer:
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             self.opt_g.zero_grad()
-            loss_g.backward()
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,))
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()

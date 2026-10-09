@@ -526,7 +526,11 @@ class NormalizedOptimizer(Optimizer):
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
-    optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
+    optimizer_class = NormalizedOptimizer
+    if recipe.constraint_geometry_mode == "nonascent" and critic is None:
+        from .constraint_geometry import ConstraintGeometryOptimizer
+        optimizer_class = ConstraintGeometryOptimizer
+    optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
                                     convolution=recipe.optimizer_convolution, **options)
