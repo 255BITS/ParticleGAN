@@ -1,0 +1,940 @@
+{
+  "attempts": [
+    {
+      "arm": "control",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/47d66010d5f341d7bb98b4928f550b8e",
+      "attempt_id": "47d66010d5f341d7bb98b4928f550b8e",
+      "candidate_revision": "5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "19f23f4e7fa54a69ac30918c811904df85615e44876268c5c27d60deed1984f6",
+        "request.json": "806cd4290341ed6a315fba99699a56107048a27bd914441655a508e494f202a9",
+        "result.json": "f16a8cd6784b6b81e84e91ce212387dc6b445b8be38a838cfce7eb42e33ba6d3",
+        "terminal.json": "6b26d2bdc211de7afb7937c56a87323a34e1eaa4200964a19daee9807605db73"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/47d66010d5f341d7bb98b4928f550b8e/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "9f3e8b98690446739ef858767eaf389f7fa66159d2ccb9da439b851fe536c7d4",
+        "state_sha256": "89193d1dbda423cdfb3851185bef2525bfd1cea2ec745ce6d4fe480aabc939ac"
+      },
+      "result_hash": "063214d857e1b6917ebc2b591f48da65497829060e1f839a408892bb462bb6a7",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_unequal_width": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7"
+      },
+      "task_execution_fingerprint": {
+        "vector_unequal_width": "58ff8fb230c73346cdba79289903881b5ef6a996c4474bff157d280921bcc26b"
+      },
+      "task_id": "vector_unequal_width",
+      "task_science_sha256": "09dd738104c55964edd3feb1ed37a80483b1b3645ee2a1d49b6efbd9d12206c8"
+    },
+    {
+      "arm": "control",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/cf66830b70db4897ab7ea5820558eb36",
+      "attempt_id": "cf66830b70db4897ab7ea5820558eb36",
+      "candidate_revision": "5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "f47338cc76ff31ef566aa5eda3f4c0dbf9ee725ebab9c31f84b77019e0bcfc2b",
+        "request.json": "aec6d53b99f09fe848a2d845ecf880f492f91438768a9b3b2c8b06ae10c7c0fa",
+        "result.json": "4531fb7d38fe317fadd7d007f4bf2253e0797c6e65c59f003663a4a388003aa7",
+        "terminal.json": "b252a5364478aa78a0c1985fd8fd4c4491cd98887fa9cc5c5fb51fc146072291"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/cf66830b70db4897ab7ea5820558eb36/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "fe52b10d949c67d409cba71dd3ec2a150c89749f192374ed6350e31a2bf450cb",
+        "state_sha256": "279af2d41fbe72abd100130a5956fff8244188ebf5737a1c47907e6817468444"
+      },
+      "result_hash": "557c848ee6b370412b83773ffe351e8b8120e2f45d40ddae3180853728f58820",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_unequal_mass": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1"
+      },
+      "task_execution_fingerprint": {
+        "vector_unequal_mass": "ae3ebee9a498a6cbaa4397bfd36f80fbda49e35831ad563a24e982687617a432"
+      },
+      "task_id": "vector_unequal_mass",
+      "task_science_sha256": "1bf9f921ffb22005e0429961a8653a59b3a4258e239682603c7366d7c9fb4f59"
+    },
+    {
+      "arm": "control",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/adfdcae07aff467dacc427f389619844",
+      "attempt_id": "adfdcae07aff467dacc427f389619844",
+      "candidate_revision": "5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "346153c1feb0d6fa3f74246d10b51a09b10c9577e73702a843374ebbc5036241",
+        "request.json": "20227ec389fe800d4a7de0dd61535d4bf122fe1f1bed1748efb1bc0d2ae46528",
+        "result.json": "05be182a760ab9a0c6efae6841ed1ece9644c74bb28b50e74aecc49a25bf38f0",
+        "terminal.json": "db282e5d8490d1ab09938591a14694211889bdbe484f480dca36e688130b4e7c"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/adfdcae07aff467dacc427f389619844/provenance",
+        "bytes": 65279,
+        "completed_steps": 6000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "fe13978c6879a149e58aceb9c3f9d3279a613374e8b037c4a72d1a9bf5f54305",
+        "state_sha256": "cd9f6e065dcfaed90df5cf7e2288f3781b6ef794ca871d4c9fae686be8c1b334"
+      },
+      "result_hash": "f6c6a756d4e15aecf01722574b1704f13e7647da4c29a0adbd9607ed6360bb65",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "gaussian1d_stability": "9da67c75dfcd264b61c1aa44a6981c2204dc96dfbb1b67cd7c9612f1bfe25459"
+      },
+      "task_execution_fingerprint": {
+        "gaussian1d_stability": "170a2715047c9760754ace5d85860b8e384b91825b0dc00fb0d7b338c54a46e7"
+      },
+      "task_id": "gaussian1d_stability",
+      "task_science_sha256": "437cf925f5ab95616fc73adbb5e323c51ce418a7c3bdb9239bfad4c00d82809e"
+    },
+    {
+      "arm": "control",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/7b479e23516642beb1c4049bb413675e",
+      "attempt_id": "7b479e23516642beb1c4049bb413675e",
+      "candidate_revision": "5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "92f1f75d6448dabef4157e18c8e7edbde9e6819880c2b2fae8286d6dc4e68aaa",
+        "request.json": "08a1cc9b5d7c96fc74751ce643a8d30aeb2e02ed98be1336d4267fa1b95400c1",
+        "result.json": "696ed931fa7e064dc9d62765bd6ea959a38a308163a775c10097ef53b43c0650",
+        "terminal.json": "50afef515aa4c9cfc63c6541d2fc2402bfb002c52f2b09e6ebe3b35bccbe72af"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/7b479e23516642beb1c4049bb413675e/provenance",
+        "bytes": 110009,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "a159b7d74020341b1e2ce6fc33f4bf751710cc54729abf00f01415021e0c2873",
+        "state_sha256": "c6406d41848c5e39a9a559ce0fa3a67ebb9b48e2a242b2904d1507e412e03b7b"
+      },
+      "result_hash": "f69089393363d9a42d218644bba5334079ac9719012a5a4d296882464bd26c7c",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_two_broad": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7"
+      },
+      "task_execution_fingerprint": {
+        "vector_two_broad": "3b132eedc3306811609231c7751ff6395b89b8695b6b5f3a688de3509a3737a1"
+      },
+      "task_id": "vector_two_broad",
+      "task_science_sha256": "8bb321b7fd188453d26df05c078804cb7e369a1bb7a58fb5365a16e9ffb14215"
+    },
+    {
+      "arm": "control",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/1260c3cac57443d7b12112a9394598a0",
+      "attempt_id": "1260c3cac57443d7b12112a9394598a0",
+      "candidate_revision": "5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "12513be0979c884d9a3b4792848e3085857e28dcd2b2393ce8e6c62340dba9bd",
+        "request.json": "8d21799cbed19f842948057cbb40a0bb8cfd1b1c8d30101b10ed3580326652c6",
+        "result.json": "791ee4ac87d9002701dfcc513ba84d679ba701cf346b05edb0ff69d4a58b7c29",
+        "terminal.json": "f1549526da4c58e0bf51ee3d50ceeb19c0324cfbfecd791e4bf2e65096606195"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/1260c3cac57443d7b12112a9394598a0/provenance",
+        "bytes": 65087,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "2dcd74ff1bcded00a6919cf3d1a88f927cef3663fdbb85b883be082281a37200",
+        "state_sha256": "e9e22e1023c36d8ad2909ba8b7811b06770e8fa5fa449615edf5313537acc200"
+      },
+      "result_hash": "a1a0e98edf5284d9152ca5b4da14895f3effcbc33cbca6892181c929177a3b5e",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "gaussian1d_smoke": "c615a3f490e11bc794e2c1f7e3f746c076d3bfe5c2958176b870d5a8ec9b68d3"
+      },
+      "task_execution_fingerprint": {
+        "gaussian1d_smoke": "6fe9601099bdf9d5a89dde032619097d5bba1beaa6e07e850e78a03fedd34302"
+      },
+      "task_id": "gaussian1d_smoke",
+      "task_science_sha256": "fdf216a3f02825526ccac89edec0e9dbe0318d2062fb35a579659d2f4a4af0c3"
+    },
+    {
+      "arm": "candidate",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/5cb3b4879b504846b72cad212970c13c",
+      "attempt_id": "5cb3b4879b504846b72cad212970c13c",
+      "candidate_revision": "946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "3035c903ddddda101f68b3a2e332c7e16f9dfe21f6647d8464d480f55eb4e1e8",
+        "request.json": "cc61cd89c282ea48d67b8d5aca293a5e966185b362d5b3a0eb5f030a70092454",
+        "result.json": "f76ac29be1601bd8bbefcf80cbda01741b6293541929c036da986fe91fe38c61",
+        "terminal.json": "7a235928e6a9b71f5f928ba2d82444c2340b99f4950c9becb6cfe92f2fcbe2db"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/5cb3b4879b504846b72cad212970c13c/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "b21b4c968b5795e63b5df9b8f01833e06131367dca2d447660eb711e3488b5a3",
+        "state_sha256": "bb775516cab16ea337e7d8a5ee8c57eaf84f51bfa391673a3c397797af3e0cfa"
+      },
+      "result_hash": "4a2d228948518c84fb219d892197e0cd0ad450f0ffc2fb5b80ace1aff51c21e8",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_unequal_width": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7"
+      },
+      "task_execution_fingerprint": {
+        "vector_unequal_width": "58ff8fb230c73346cdba79289903881b5ef6a996c4474bff157d280921bcc26b"
+      },
+      "task_id": "vector_unequal_width",
+      "task_science_sha256": "291f324735f3c2be84e201cfc2bfe305c86d244ac31cc6e0523cb8381e89881a"
+    },
+    {
+      "arm": "candidate",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/465c3ce64ec4484383cdafeacb9b32b3",
+      "attempt_id": "465c3ce64ec4484383cdafeacb9b32b3",
+      "candidate_revision": "946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "33dd329cf19b7dd78afb7d72d65055a7057b61ca46501f28628b56287be5b708",
+        "request.json": "ae6f43b11178fff13674884cb78dd14d38ae179705cd5402603212bd71174d51",
+        "result.json": "dbbfce25150527d41d71f3b1fc660b0aaec873227ad767401488c631d8a983bd",
+        "terminal.json": "35af97af36fcc16acb2d0f8f70094f7c037758d7ee0517f55a94e4c520dfdd71"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/465c3ce64ec4484383cdafeacb9b32b3/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "3a79d0a8b99b098d2ce061caab689e70f30774e1b93db288dbb4b6445f1b2016",
+        "state_sha256": "c45a3d76dbd71fa65b5bf6d9b3d2705b27a87141d9405dfc78d02418080c63dc"
+      },
+      "result_hash": "601efc81e7a1a6befcedda2226799c141cbc64942fae1411c2bc594d34e8d5d8",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_unequal_mass": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1"
+      },
+      "task_execution_fingerprint": {
+        "vector_unequal_mass": "ae3ebee9a498a6cbaa4397bfd36f80fbda49e35831ad563a24e982687617a432"
+      },
+      "task_id": "vector_unequal_mass",
+      "task_science_sha256": "39dca3be53bf3dcfe11eb9bf16fdf451c587e3c47b2d76011e1678a2fa9e5f80"
+    },
+    {
+      "arm": "candidate",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/6359c3a8e75b402e99daa261456ed61a",
+      "attempt_id": "6359c3a8e75b402e99daa261456ed61a",
+      "candidate_revision": "946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "99c45722e9ac1a800ffc01a0026a6c6cd3321488eedfc10cf4055221f4b9150d",
+        "request.json": "080e5c1a5760cef58b6bdcdbf53bb95b9e6432c6f2e4f92c5a9ccbd8074e2996",
+        "result.json": "601b1e2fb33b84ab55d9b4bd36151e629ebbd3a22646e71cca38ff9213310bb4",
+        "terminal.json": "6e23c3e53534c5df253734df97adc6b7d3c7c69af74810995149b09532e23d92"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/6359c3a8e75b402e99daa261456ed61a/provenance",
+        "bytes": 65343,
+        "completed_steps": 6000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "21cf2472cf53541c9c2efa5429d142ad057c3deb2e65676d202d5a7259a16352",
+        "state_sha256": "4bfd35d2afd1e36ffd8638069a2dceb6fefe0a8b55a763d920a489958973d6d2"
+      },
+      "result_hash": "f5f9cfae4d3cce4fe5f00c0339ee6dd07a9dbdff1c06f036aefd407fa3d775bb",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "gaussian1d_stability": "9da67c75dfcd264b61c1aa44a6981c2204dc96dfbb1b67cd7c9612f1bfe25459"
+      },
+      "task_execution_fingerprint": {
+        "gaussian1d_stability": "170a2715047c9760754ace5d85860b8e384b91825b0dc00fb0d7b338c54a46e7"
+      },
+      "task_id": "gaussian1d_stability",
+      "task_science_sha256": "4ae4ee1180b2857ba718827e7321b48d05b0f9a2e4a4b5e09382ee1b56b8be78"
+    },
+    {
+      "arm": "candidate",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/d76483003d564fd982cf295f590360f5",
+      "attempt_id": "d76483003d564fd982cf295f590360f5",
+      "candidate_revision": "946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "893967aabd72e452cb368a62f5c953a71208ed9e72574ab10216b9bade8718f5",
+        "request.json": "98a13b93a4a31fbac025c5b59e6dd6b46680851b3a171eac4eb4971474eff14f",
+        "result.json": "99a5191cfee6bbc313bc27a9686203ede57e14c7b9bc42af2c6e4a4272d34916",
+        "terminal.json": "459ea238e0b6500bd351bf029ea63046979caa3eda6b12239062b0feee3dd87c"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/d76483003d564fd982cf295f590360f5/provenance",
+        "bytes": 110073,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "8d191152aac369dfc002be1170814ae86c93f30c98977150581a7c41ec6ffffd",
+        "state_sha256": "713fc57f335e7e6b9c9baccde61490b571c02b1ada8c78687b5b6414767c85b8"
+      },
+      "result_hash": "6c0469d795c9083e4cf0261698da35aae9efb49fdfc5bb6205cfe8e59c7450b0",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "vector_two_broad": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7"
+      },
+      "task_execution_fingerprint": {
+        "vector_two_broad": "3b132eedc3306811609231c7751ff6395b89b8695b6b5f3a688de3509a3737a1"
+      },
+      "task_id": "vector_two_broad",
+      "task_science_sha256": "7222c20a43acc33494bfd8ed3179be99bde35d27fa4867fdae94444331bdff4e"
+    },
+    {
+      "arm": "candidate",
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/dad89ce5ff49411d8326abd77fa077ef",
+      "attempt_id": "dad89ce5ff49411d8326abd77fa077ef",
+      "candidate_revision": "946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236",
+      "compute": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "inputs": {
+        "raw-result.json": "118150b4cd6cf10af13dc7125f05a92b22cedc23debfda96b9a3263d5f876e2c",
+        "request.json": "6782aea73dfb06e2001eee78cfac0fb87e82de368412110958bca6deb9c5d6d1",
+        "result.json": "e7ccaa52650fc8cc70568fb863621534acb0a7c5102c6872f842f8ed317fe636",
+        "terminal.json": "0b82db0ce8d2b17595b3af28b73e0a8167150a252b060421e4e9439937e68e80"
+      },
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/dad89ce5ff49411d8326abd77fa077ef/provenance",
+        "bytes": 65151,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "sha256": "5aa6f9ede999a422b39be9145bf1ee597429266ba20488768c2f886439656d2f",
+        "state_sha256": "2f6d3b39f73d459644d21fe4628ad2c3ebf1cba5ceabd4745c573dc8215da6fb"
+      },
+      "result_hash": "07cdfd7a77e0b2f002ee22abc098cd05268c54a04b89da0b0b571d70c7fe2693",
+      "rng_binding_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_evaluation_fingerprint": {
+        "gaussian1d_smoke": "c615a3f490e11bc794e2c1f7e3f746c076d3bfe5c2958176b870d5a8ec9b68d3"
+      },
+      "task_execution_fingerprint": {
+        "gaussian1d_smoke": "6fe9601099bdf9d5a89dde032619097d5bba1beaa6e07e850e78a03fedd34302"
+      },
+      "task_id": "gaussian1d_smoke",
+      "task_science_sha256": "dae261574e083e87497dc3eaa866ad77379e0163dcb92a1b50d7b689b8a07405"
+    }
+  ],
+  "bulk_artifacts": "Shared local queue; original bytes retained, not committed.",
+  "campaign": "kinetic_transport_round3",
+  "full_reservations_for_executed_jobs_seconds": 12240,
+  "full_resolved_recipe_example": {
+    "candidate": {
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_backtrack": true,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      }
+    },
+    "control": {
+      "data_sha256": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "named_stream_state_sha256": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 1.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      }
+    }
+  },
+  "matched_conditions": [
+    {
+      "binding_hashes": {
+        "candidate": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "2b1762f19008cd7dbefffa9c2f698fbab6f9a5b5d7c8879491f5e5d947fe2062"
+        },
+        "control": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "b8d0c0b0c41d2eedbcb1a9a088b35a5fc57e3ead9fe043f2399691eef872f7b5"
+        }
+      },
+      "data_digest_reconstruction": "saved-state-diagnostics.json",
+      "declared_and_consumed_recipe_delta": {
+        "kinetic_transport_backtrack": [
+          false,
+          true
+        ]
+      },
+      "equal": {
+        "data_sha256": true,
+        "initialization": true,
+        "named_stream_state_sha256": true,
+        "prior": true
+      },
+      "missing_adapter_data_digest": true,
+      "resolved_task_recipe_resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "standardize": false,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "binding_hashes": {
+        "candidate": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "2b1762f19008cd7dbefffa9c2f698fbab6f9a5b5d7c8879491f5e5d947fe2062"
+        },
+        "control": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "b8d0c0b0c41d2eedbcb1a9a088b35a5fc57e3ead9fe043f2399691eef872f7b5"
+        }
+      },
+      "data_digest_reconstruction": "saved-state-diagnostics.json",
+      "declared_and_consumed_recipe_delta": {
+        "kinetic_transport_backtrack": [
+          false,
+          true
+        ]
+      },
+      "equal": {
+        "data_sha256": true,
+        "initialization": true,
+        "named_stream_state_sha256": true,
+        "prior": true
+      },
+      "missing_adapter_data_digest": true,
+      "resolved_task_recipe_resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "standardize": false,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "binding_hashes": {
+        "candidate": {
+          "data_sha256": "25e4e6c69a13b50f7354f32c08f0fb971a927b1c4213f2bca3d4b5baec80904d",
+          "initialization": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+          "named_stream_state_sha256": "2efb128a5613cfd52eac4dbdbc7011927f331e5944d0df376d01e33d18bb341c",
+          "prior": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+          "recipe": "f0334f19a9ee9f97f0b7fcbf4964f999d605b73af3d22db1d249e6d50a3873f4"
+        },
+        "control": {
+          "data_sha256": "25e4e6c69a13b50f7354f32c08f0fb971a927b1c4213f2bca3d4b5baec80904d",
+          "initialization": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+          "named_stream_state_sha256": "2efb128a5613cfd52eac4dbdbc7011927f331e5944d0df376d01e33d18bb341c",
+          "prior": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+          "recipe": "5357ec022af4b658f3494470e89d2ab796b4ab825c2e47096fd32580f6334e67"
+        }
+      },
+      "data_digest_reconstruction": null,
+      "declared_and_consumed_recipe_delta": {
+        "kinetic_transport_backtrack": [
+          false,
+          true
+        ]
+      },
+      "equal": {
+        "data_sha256": true,
+        "initialization": true,
+        "named_stream_state_sha256": true,
+        "prior": true
+      },
+      "missing_adapter_data_digest": false,
+      "resolved_task_recipe_resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "standardize": false,
+        "total_steps": 1000,
+        "z_dim": 2
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "binding_hashes": {
+        "candidate": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "2b1762f19008cd7dbefffa9c2f698fbab6f9a5b5d7c8879491f5e5d947fe2062"
+        },
+        "control": {
+          "data_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "initialization": "dd6ff6803f98d1055d4b5f55e358bb7c2ece721d64f9f70c9a3bf2d1279103e2",
+          "named_stream_state_sha256": "343288c6e227ff95ecc03917d32e93a6e5d1020701496ef332b505bc47c51672",
+          "prior": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+          "recipe": "b8d0c0b0c41d2eedbcb1a9a088b35a5fc57e3ead9fe043f2399691eef872f7b5"
+        }
+      },
+      "data_digest_reconstruction": "saved-state-diagnostics.json",
+      "declared_and_consumed_recipe_delta": {
+        "kinetic_transport_backtrack": [
+          false,
+          true
+        ]
+      },
+      "equal": {
+        "data_sha256": true,
+        "initialization": true,
+        "named_stream_state_sha256": true,
+        "prior": true
+      },
+      "missing_adapter_data_digest": true,
+      "resolved_task_recipe_resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "standardize": false,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "binding_hashes": {
+        "candidate": {
+          "data_sha256": "ae6809063541911ef1b95dfb385501feb58f2afbc52beb546212eb757fcf78ff",
+          "initialization": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+          "named_stream_state_sha256": "a90d8630f342801dfeea51d4f21a3ae74341ddef0f2b12804a958dd0dfb127ec",
+          "prior": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+          "recipe": "f0334f19a9ee9f97f0b7fcbf4964f999d605b73af3d22db1d249e6d50a3873f4"
+        },
+        "control": {
+          "data_sha256": "ae6809063541911ef1b95dfb385501feb58f2afbc52beb546212eb757fcf78ff",
+          "initialization": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+          "named_stream_state_sha256": "a90d8630f342801dfeea51d4f21a3ae74341ddef0f2b12804a958dd0dfb127ec",
+          "prior": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+          "recipe": "5357ec022af4b658f3494470e89d2ab796b4ab825c2e47096fd32580f6334e67"
+        }
+      },
+      "data_digest_reconstruction": null,
+      "declared_and_consumed_recipe_delta": {
+        "kinetic_transport_backtrack": [
+          false,
+          true
+        ]
+      },
+      "equal": {
+        "data_sha256": true,
+        "initialization": true,
+        "named_stream_state_sha256": true,
+        "prior": true
+      },
+      "missing_adapter_data_digest": false,
+      "resolved_task_recipe_resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "standardize": false,
+        "total_steps": 1000,
+        "z_dim": 2
+      },
+      "task_id": "gaussian1d_smoke"
+    }
+  ],
+  "maximum_declared_reservation_seconds": 12840,
+  "paid_worker_seconds": 344.2333695431007,
+  "public_package": "/home/martyn/dev/ParticleGAN-bcap-physics-kinetic_transport/particlegan/__init__.py",
+  "remaining_reserved_seconds": 0.0,
+  "schema_version": 1
+}

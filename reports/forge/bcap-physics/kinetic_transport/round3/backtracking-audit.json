@@ -1,0 +1,111 @@
+{
+  "audit": [
+    {
+      "all_finite_same_batch_bounds_pass": true,
+      "attempt_id": "5cb3b4879b504846b72cad212970c13c",
+      "first_step": 1,
+      "full_proposals_increasing_loss": 374,
+      "last_step": 1200,
+      "maximum_applied_loss_minus_bound": -8.710385560994904e-05,
+      "nonnegative_directional_derivatives": 0,
+      "rejected_proposals": 0,
+      "run_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/5cb3b4879b504846b72cad212970c13c/run.log",
+      "run_log_sha256": "380c03caa78a15b685bb52cea06725760df9c1b2b48268bbb86353bce7b2a022",
+      "scale_histogram": {
+        "0.25": 16,
+        "0.5": 358,
+        "1.0": 826
+      },
+      "steps_checked": 1200,
+      "task_id": "vector_unequal_width",
+      "total_objective_trials": 1590
+    },
+    {
+      "all_finite_same_batch_bounds_pass": true,
+      "attempt_id": "465c3ce64ec4484383cdafeacb9b32b3",
+      "first_step": 1,
+      "full_proposals_increasing_loss": 31,
+      "last_step": 1200,
+      "maximum_applied_loss_minus_bound": -6.65489532053476e-05,
+      "nonnegative_directional_derivatives": 0,
+      "rejected_proposals": 0,
+      "run_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/465c3ce64ec4484383cdafeacb9b32b3/run.log",
+      "run_log_sha256": "254fbcc74ce727fe7686ed8a417fc74666c8e37cd80d4355ce5c19c4840492dd",
+      "scale_histogram": {
+        "0.5": 31,
+        "1.0": 1169
+      },
+      "steps_checked": 1200,
+      "task_id": "vector_unequal_mass",
+      "total_objective_trials": 1231
+    },
+    {
+      "all_finite_same_batch_bounds_pass": true,
+      "attempt_id": "6359c3a8e75b402e99daa261456ed61a",
+      "first_step": 1001,
+      "full_proposals_increasing_loss": 956,
+      "last_step": 6000,
+      "maximum_applied_loss_minus_bound": -2.896288037290695e-06,
+      "nonnegative_directional_derivatives": 0,
+      "rejected_proposals": 0,
+      "run_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/6359c3a8e75b402e99daa261456ed61a/run.log",
+      "run_log_sha256": "4054029f4da2f919a0e6e8f82f581dca71ac3fc91029cac20b7b69a7bdb7501a",
+      "scale_histogram": {
+        "0.03125": 1,
+        "0.0625": 6,
+        "0.125": 54,
+        "0.25": 226,
+        "0.5": 669,
+        "1.0": 4044
+      },
+      "steps_checked": 5000,
+      "task_id": "gaussian1d_stability",
+      "total_objective_trials": 6312
+    },
+    {
+      "all_finite_same_batch_bounds_pass": true,
+      "attempt_id": "d76483003d564fd982cf295f590360f5",
+      "first_step": 1,
+      "full_proposals_increasing_loss": 0,
+      "last_step": 1200,
+      "maximum_applied_loss_minus_bound": -0.0012875572629272858,
+      "nonnegative_directional_derivatives": 0,
+      "rejected_proposals": 0,
+      "run_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/d76483003d564fd982cf295f590360f5/run.log",
+      "run_log_sha256": "677452ad7b6df800dbfabb84e6edfdfa406a860be1cd3e55fcf32c3cf95a6d91",
+      "scale_histogram": {
+        "1.0": 1200
+      },
+      "steps_checked": 1200,
+      "task_id": "vector_two_broad",
+      "total_objective_trials": 1200
+    },
+    {
+      "all_finite_same_batch_bounds_pass": true,
+      "attempt_id": "dad89ce5ff49411d8326abd77fa077ef",
+      "first_step": 1,
+      "full_proposals_increasing_loss": 156,
+      "last_step": 1000,
+      "maximum_applied_loss_minus_bound": -3.117094933990927e-05,
+      "nonnegative_directional_derivatives": 0,
+      "rejected_proposals": 0,
+      "run_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/kinetic_transport/queue/kinetic_transport_round3/dad89ce5ff49411d8326abd77fa077ef/run.log",
+      "run_log_sha256": "7b75dfa4856346978724594c0ffa09c662466f7ced83664fe6f000819521deca",
+      "scale_histogram": {
+        "0.0625": 2,
+        "0.125": 5,
+        "0.25": 37,
+        "0.5": 112,
+        "1.0": 844
+      },
+      "steps_checked": 1000,
+      "task_id": "gaussian1d_smoke",
+      "total_objective_trials": 1209
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "actual consumed training batches, G rows/jitter and fixed post-D critic; full traces outside Git"
+}

@@ -1,0 +1,15 @@
+{
+  "attempt_ids": {
+    "candidate": "d76483003d564fd982cf295f590360f5",
+    "control": "7b479e23516642beb1c4049bb413675e"
+  },
+  "exact_equality": {
+    "base_optimizer_states": true,
+    "final_models": true,
+    "full_observations": true,
+    "named_rng_states": true
+  },
+  "schema_version": 1,
+  "scope": "actual full-scale-only candidate cohort vs matched control",
+  "task_id": "vector_two_broad"
+}

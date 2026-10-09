@@ -1,5 +1,10 @@
 # Kinetic transport: same-batch quantile forces
 
+[Round-three finite proposal descent](round3/README.md) records the completed
+local-v2 comparison: the numerical descent check works, but the successor loses
+the sustained rare-density PASS and is rejected. Earlier evidence below retains
+its original identities.
+
 [Round-two successor: relative local density moments](round2/README.md) records
 the separately authorized incremental comparison. Round-one results below retain
 their original scientific identities.

@@ -1,0 +1,34 @@
+{
+  "actual_training_gifs": 10,
+  "archived_local_v2_exact_parity_tasks": 5,
+  "bulk_logs_committed": false,
+  "distinct_focused_tests_passed": 141,
+  "final_backtrack_checks": {
+    "overlap_with_focused_suite": true,
+    "passed": 6,
+    "seconds": 1.21
+  },
+  "focused_suite_seconds": 6.47,
+  "forge_compile_check": "CURRENT",
+  "forge_validate": "PASS",
+  "frames_per_gif": 9,
+  "initial_fixture_failure": "Four sampler tests used nonexistent sigma_rel constructor keyword; corrected to public sigma. No trainer correction or scientific retry.",
+  "original_compact_records_and_inventory_bytewise_unchanged": 313,
+  "preservation_reference_commit": "2e42afee1da43bbefb510cc8d01f22a2840b483f",
+  "publication_source_sha256": "1c70ed76246a58b603c6d663f245a6634b9606c972c52c45086cd88f6f67f207",
+  "saved_metric_sets_reproduced": 432,
+  "schema_version": 1,
+  "scorer_controls": "4 oracle PASS / 4 collapse FAIL reused after exact source, law and gate verification",
+  "stdout": {
+    "backtrack-software.log": "e3a106e5a6891a4e61d8f141ff730dcd75a0b6b623da3252aa4083b4953f3281",
+    "candidate-readout.log": "dbce2800f0001f2ec8ca68dd30101a81b381a8aa6b2aaf58c99abbb1a5825595",
+    "control-readout.log": "491bd650a13e597fc1d6ec195cecff2589014586d899551648719bbad62a0b65",
+    "drain.log": "a083399d876b7344505c619d1a2245851a524e88d55e11197961a60a42018345",
+    "prior-response-diagnostics.log": "30edfb6c3d6ef392ea731608a8722c54176a984dca0ce6030c14d645a9a8800e",
+    "progress.log": "d690da7b44aa65f73226fd4507178b43f9782cdc63ca9f69a17f363b1592262c",
+    "software.log": "6aeda5c1355ff74868dbae890b445bafddfbf233d6d0054f42e3a354c0352428",
+    "validate.log": "d0a02772ed3462bdc3e1323cfefcd7868accc7924eda9aec3ba4c04f0bb8d563"
+  },
+  "summaries_only_memory": "CURRENT",
+  "verification_source_sha256": "4f73b0165fc6f96545d70166f9b0351d263717542d72f64891d52ff724cfa80b"
+}

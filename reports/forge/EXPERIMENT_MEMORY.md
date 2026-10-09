@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 785. Inventory coverage: complete. Unresolved import items: 7.
+Records: 787. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4454,6 +4454,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
 
+### kinetic_transport_armijo_v3 · readout-e719b1e0153af333e0a4e6f1
+
+**Scope:** research_diagnostic; scientific; revision `946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236`.
+
+Finite same-batch Armijo acceptance of the joint G/prior proposal reduces unequal-width full covariance error and improves Gaussian retention while preserving local-v2 sustained unequal-mass and broad guardrail passes.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 180.877; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96338, mass_tv=0.015986; vector_unequal_width: hq=0.96704, mass_tv=0.026367
+
+All five runnable jobs complete: 2 PASS, 3 FAIL, 1 BLOCKED versus local-v2 3 PASS, 2 FAIL, 1 BLOCKED. All 9600 finite same-batch acceptance bounds pass, but unequal-mass sustained PASS is lost and width covariance regresses to 3.859733. Gaussian stability remains FAIL at 37/72 stationary and 10/24 shifted checks; broad and smoke PASS.
+
+**Next:** Reject and stop this exact finite-descent successor as a global or rare-density repair. Preserve local-v2 scoped unequal-mass evidence. Same-batch descent is insufficient for served tails and changing-game retention; no further sweep, seed run, candidate, continuation or promotion in this round.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round3/results.json) · [Record](records/readout-e719b1e0153af333e0a4e6f1.json)
+
 ### k3p · readout-eeec25002d17191c315f126b
 
 **Scope:** calibration_diagnostic; scientific; revision `6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325`.
@@ -4485,6 +4501,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1,
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### kinetic_transport_local_v2 · readout-f40b32c69ee3065bf0a587bb
+
+**Scope:** research_diagnostic; scientific; revision `5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a`.
+
+Primary local-v2 control for finite-descent comparison. Transport-v1 is an admission reference only; no third arm is launched.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 163.356; mechanism `structural`.
+
+vector_unequal_width: hq=0.95508, mass_tv=0.020752; vector_two_broad: hq=0.9856, mass_tv=0.00073242
+
+All five full-budget primary-control jobs complete: 3 PASS, 2 FAIL, 1 BLOCKED. Local-v2 retains Gaussian smoke, sustained unequal-mass and broad-vector PASS; Gaussian stability and unequal width FAIL; two-pole is genuinely unsupported.
+
+**Next:** Retain the scoped local-v2 rare-density repair and its unchanged failures. Reject this round finite-descent successor, publish matched evidence, and stop the bounded round. No default adoption or extra training follows.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round3/results.json) · [Record](records/readout-f40b32c69ee3065bf0a587bb.json)
 
 ### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
 
@@ -5038,4 +5070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `206956d2833283780fcdc2b82155eee3c3cbf494b8ee4477da7e69ec8f1ee34a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `004252fdeb40fbd843de1cb58aecf84b66457464bab6b33dabba0e806720500c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
