@@ -18,6 +18,9 @@ SPEC.loader.exec_module(toy)
 
 
 def test_pair_midpoint_contrast_identity_and_codeblind_reference(monkeypatch):
+    cuda_initialized = torch.cuda.is_initialized()
+    cpu_rng = torch.random.get_rng_state().clone()
+    cuda_rng = torch.cuda.get_rng_state_all() if cuda_initialized else []
     def forbidden(*args, **kwargs):
         raise AssertionError(
             "pure algebra contract cannot construct fixture/model/loop"
@@ -48,4 +51,10 @@ def test_pair_midpoint_contrast_identity_and_codeblind_reference(monkeypatch):
         toy.paired_decomposition(target.flatten(), target, variance)
     with pytest.raises(ValueError):
         toy.paired_decomposition(target * float("nan"), target, variance)
-    assert not torch.cuda.is_initialized()
+    # Earlier public GPU tests may have initialized CUDA. This pure tensor
+    # contract must preserve that incoming state and consume no random stream.
+    assert torch.cuda.is_initialized() == cuda_initialized
+    assert torch.equal(torch.random.get_rng_state(), cpu_rng)
+    if cuda_initialized:
+        assert all(torch.equal(before, after) for before, after in
+                   zip(cuda_rng, torch.cuda.get_rng_state_all()))

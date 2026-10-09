@@ -20,12 +20,19 @@ SPEC.loader.exec_module(toy)
 
 @pytest.fixture(autouse=True)
 def cpu_only():
-    assert not torch.cuda.is_initialized()
+    cuda_initialized = torch.cuda.is_initialized()
+    devices = list(range(torch.cuda.device_count())) if cuda_initialized else []
     previous = torch.get_num_threads()
     torch.set_num_threads(1)
-    with torch.random.fork_rng(devices=[]):
-        yield
-    torch.set_num_threads(previous)
+    try:
+        # CPU fixture constructors call manual_seed, which affects existing
+        # CUDA streams too. Preserve those without initializing a cold CUDA
+        # runtime; the tested models and numerical controls remain on CPU.
+        with torch.random.fork_rng(devices=devices):
+            yield
+    finally:
+        torch.set_num_threads(previous)
+        assert torch.cuda.is_initialized() == cuda_initialized
 
 
 def tiny_data():
