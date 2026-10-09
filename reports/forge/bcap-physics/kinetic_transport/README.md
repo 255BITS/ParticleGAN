@@ -1,5 +1,9 @@
 # Kinetic transport: same-batch quantile forces
 
+[Round-two successor: relative local density moments](round2/README.md) records
+the separately authorized incremental comparison. Round-one results below retain
+their original scientific identities.
+
 **The transport signal repairs rare allocation at the endpoint, but solves no
 additional sustained task.** Both arms pass **2/5 mutually runnable tasks**.
 The candidate records two PASS, three numerical FAIL and one explicit BLOCKED;

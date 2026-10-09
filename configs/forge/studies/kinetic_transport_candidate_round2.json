@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "kinetic_transport_round2"
+  },
+  "candidate": "kinetic_transport_local_v2",
+  "competing_explanation": "Finite real anchors and bandwidths fluctuate, especially with rare events. Relative normalization can amplify sparse-batch noise, a finite local feature bank can miss distant spill, and shared normalized pullbacks may widen other neighborhoods. Saved output-field signs do not establish actual update or held-out density improvements.",
+  "control": {
+    "candidate_id": "kinetic_transport_sliced_v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 3.5
+  },
+  "hypothesis": "Adding relative real-anchor local kernel moment matching to transport-v1 reduces unequal-width full covariance spill while preserving allocation, broad-vector quality and Gaussian acquisition/hold.",
+  "id": "kinetic_transport_candidate_round2",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 3.5
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "kinetic_transport_sliced_v1",
+        "revision": "24bacd26b777b7bb90214c0254f92861d20b93bd8c2f83fce4ed59ee76e49997",
+        "source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7"
+      },
+      "path": "reports/forge/bcap-physics/kinetic_transport/results.json",
+      "selector": [
+        "arms",
+        "candidate"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "kinetic_transport_round2_diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

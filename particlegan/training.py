@@ -381,11 +381,15 @@ class GANTrainer:
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             transport = (recipe.kinetic_transport_loss(fake_g, real_g)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+                               if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg + transport
+            if recipe.kinetic_transport_local_weight:
+                loss_g = loss_g + transport_local
             self.opt_g.zero_grad()
             loss_g.backward()
             self.policy.after_generator_backward(
@@ -403,6 +407,8 @@ class GANTrainer:
         result["step"] = self.completed_steps
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
+        if recipe.kinetic_transport_local_weight:
+            result["kinetic_transport_local"] = transport_local.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

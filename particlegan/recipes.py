@@ -80,6 +80,7 @@ class Recipe:
     reconstruction_weight: float = 1.0
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
+    kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
@@ -363,6 +364,9 @@ class Recipe:
         if (type(self.kinetic_transport_weight) not in (int, float)
                 or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
             raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+        if (type(self.kinetic_transport_local_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
+            raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:
@@ -570,6 +574,11 @@ class Recipe:
         from .kinetic_transport import kinetic_transport_loss
         return self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)
+
+    def kinetic_transport_local_loss(self, fake, real):
+        """Public relative local moment residual; caller owns the same batches."""
+        from .kinetic_transport import kinetic_transport_local_loss
+        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

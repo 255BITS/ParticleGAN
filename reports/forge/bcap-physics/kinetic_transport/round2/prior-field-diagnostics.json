@@ -1,0 +1,668 @@
+{
+  "cpu_seconds": 0.48578600701875985,
+  "diagnostics": [
+    {
+      "attempt_id": "dfa63108433648a5a7a2c38f5522ef45",
+      "checkpoint_sha256": "0667489dedb236bb63cb94d0978ca96059fa217d80dc50ced767c139ae31a3b7",
+      "cohorts": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.8051947951316833,
+            "mean_force_norm": 0.0014205132611095905,
+            "mean_outward_radial_force": -0.0007786806090734899
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.8138527870178223,
+            "mean_force_norm": 0.04930843785405159,
+            "mean_outward_radial_force": -0.022546343505382538
+          },
+          "component": 0,
+          "count": 924,
+          "local": {
+            "inward_fraction": 0.8095238208770752,
+            "mean_force_norm": 0.048592787235975266,
+            "mean_outward_radial_force": -0.02198023907840252
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.713203489780426,
+            "mean_force_norm": 0.0014161590952426195,
+            "mean_outward_radial_force": -0.000566101458389312
+          },
+          "transport": {
+            "inward_fraction": 0.5757575631141663,
+            "mean_force_norm": 0.0004409817047417164,
+            "mean_outward_radial_force": 0.0002125791652360931
+          },
+          "transport_adversarial_cosine_mean": 0.0013789031654596329
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.029411764815449715,
+            "mean_force_norm": 0.0030798756051808596,
+            "mean_outward_radial_force": 0.0026174013037234545
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.8235294222831726,
+            "mean_force_norm": 0.0018194698495790362,
+            "mean_outward_radial_force": -0.0007936893380247056
+          },
+          "component": 0,
+          "count": 34,
+          "local": {
+            "inward_fraction": 0.029411764815449715,
+            "mean_force_norm": 0.0001171539188362658,
+            "mean_outward_radial_force": -0.00010906278475886211
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.7941176295280457,
+            "mean_force_norm": 0.0017428952269256115,
+            "mean_outward_radial_force": -0.0006846265750937164
+          },
+          "transport": {
+            "inward_fraction": 0.970588207244873,
+            "mean_force_norm": 0.003737405873835087,
+            "mean_outward_radial_force": -0.0033020279370248318
+          },
+          "transport_adversarial_cosine_mean": -0.8613094091415405
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.6040555238723755,
+            "mean_force_norm": 0.0006265638512559235,
+            "mean_outward_radial_force": -0.00014887706493027508
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.6574172973632812,
+            "mean_force_norm": 0.012211011722683907,
+            "mean_outward_radial_force": -0.0031050811521708965
+          },
+          "component": 1,
+          "count": 937,
+          "local": {
+            "inward_fraction": 0.6787620186805725,
+            "mean_force_norm": 0.012213388457894325,
+            "mean_outward_radial_force": -0.00332081806845963
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.4140875041484833,
+            "mean_force_norm": 0.0009708146681077778,
+            "mean_outward_radial_force": 0.00021573681442532688
+          },
+          "transport": {
+            "inward_fraction": 0.45784419775009155,
+            "mean_force_norm": 0.000640581885818392,
+            "mean_outward_radial_force": 0.0003646138939075172
+          },
+          "transport_adversarial_cosine_mean": 0.1515449583530426
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.25,
+            "mean_force_norm": 0.0031207010615617037,
+            "mean_outward_radial_force": 0.0020422067027539015
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.8833333253860474,
+            "mean_force_norm": 0.00312904198653996,
+            "mean_outward_radial_force": -0.002467640908434987
+          },
+          "component": 1,
+          "count": 60,
+          "local": {
+            "inward_fraction": 0.9333333373069763,
+            "mean_force_norm": 0.0011618129210546613,
+            "mean_outward_radial_force": -0.0010362487519159913
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.75,
+            "mean_force_norm": 0.0024293395690619946,
+            "mean_outward_radial_force": -0.001431392040103674
+          },
+          "transport": {
+            "inward_fraction": 0.7833333611488342,
+            "mean_force_norm": 0.004764283541589975,
+            "mean_outward_radial_force": -0.0034735987428575754
+          },
+          "transport_adversarial_cosine_mean": -0.7983314990997314
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9489603042602539,
+            "mean_force_norm": 0.0012459312565624714,
+            "mean_outward_radial_force": -0.0011744718067348003
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.3185255229473114,
+            "mean_force_norm": 0.007252932526171207,
+            "mean_outward_radial_force": 0.0025559235364198685
+          },
+          "component": 2,
+          "count": 1058,
+          "local": {
+            "inward_fraction": 0.28260868787765503,
+            "mean_force_norm": 0.006873646285384893,
+            "mean_outward_radial_force": 0.0026366906240582466
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.5510396957397461,
+            "mean_force_norm": 0.0011929426109418273,
+            "mean_outward_radial_force": -8.076714584603906e-05
+          },
+          "transport": {
+            "inward_fraction": 0.24858222901821136,
+            "mean_force_norm": 0.0015216754982247949,
+            "mean_outward_radial_force": 0.0010937047190964222
+          },
+          "transport_adversarial_cosine_mean": -0.28898730874061584
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.004955211654305458,
+            "mean_outward_radial_force": -0.0048187668435275555
+          },
+          "candidate_sum": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.005319926887750626,
+            "mean_outward_radial_force": -0.005239815916866064
+          },
+          "component": 2,
+          "count": 9,
+          "local": {
+            "inward_fraction": 0.3333333432674408,
+            "mean_force_norm": 0.0009625114034861326,
+            "mean_outward_radial_force": 0.0003849749336950481
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.0056682429276406765,
+            "mean_outward_radial_force": -0.005624791141599417
+          },
+          "transport": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_force_norm": 0.0014983308501541615,
+            "mean_outward_radial_force": -0.0008060233667492867
+          },
+          "transport_adversarial_cosine_mean": 0.3727199137210846
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7465051412582397,
+            "mean_force_norm": 0.0014000582741573453,
+            "mean_outward_radial_force": -0.0006257457425817847
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.03914259001612663,
+            "mean_force_norm": 0.009890240617096424,
+            "mean_outward_radial_force": 0.009219028055667877
+          },
+          "component": 3,
+          "count": 1073,
+          "local": {
+            "inward_fraction": 0.047530289739370346,
+            "mean_force_norm": 0.008672510273754597,
+            "mean_outward_radial_force": 0.008048408664762974
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.23205964267253876,
+            "mean_force_norm": 0.0019824551418423653,
+            "mean_outward_radial_force": 0.0011706192744895816
+          },
+          "transport": {
+            "inward_fraction": 0.18080149590969086,
+            "mean_force_norm": 0.0024431059136986732,
+            "mean_outward_radial_force": 0.0017963649006560445
+          },
+          "transport_adversarial_cosine_mean": -0.5416265726089478
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.0027500991709530354,
+            "mean_outward_radial_force": -0.0027251141145825386
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.0,
+            "mean_force_norm": 0.01306693535298109,
+            "mean_outward_radial_force": 0.012986745685338974
+          },
+          "component": 3,
+          "count": 1,
+          "local": {
+            "inward_fraction": 0.0,
+            "mean_force_norm": 0.010491792112588882,
+            "mean_outward_radial_force": 0.010401600040495396
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.0,
+            "mean_force_norm": 0.002586167072877288,
+            "mean_outward_radial_force": 0.0025851456448435783
+          },
+          "transport": {
+            "inward_fraction": 0.0,
+            "mean_force_norm": 0.005328667815774679,
+            "mean_outward_radial_force": 0.005310259759426117
+          },
+          "transport_adversarial_cosine_mean": -0.9986609220504761
+        }
+      ],
+      "mean_projected_pair_component_mismatch_fraction": 0.23907470703125,
+      "observed_samples_sha256": "757abe6c3a705debc0088ad2027d918e430aa5db04a26f0481c62bd18e95307c",
+      "probe_count": 4096,
+      "real_batch": "exact final consumed target batch replayed from seed0 named data stream",
+      "source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "b2ce21bffdf94e768affa381f363245f",
+      "checkpoint_sha256": "9298f811ce0cbddf3dfb3e03713510f076b62bf49fcf520109ada57ff356a4f2",
+      "cohorts": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.6442400813102722,
+            "mean_force_norm": 0.00045132465311326087,
+            "mean_outward_radial_force": -0.0002641082101035863
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.7734752893447876,
+            "mean_force_norm": 0.011573049239814281,
+            "mean_outward_radial_force": -0.005065314006060362
+          },
+          "component": 0,
+          "count": 2066,
+          "local": {
+            "inward_fraction": 0.7420135736465454,
+            "mean_force_norm": 0.010562668554484844,
+            "mean_outward_radial_force": -0.004237044602632523
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.6931267976760864,
+            "mean_force_norm": 0.0015419742558151484,
+            "mean_outward_radial_force": -0.0008282697526738048
+          },
+          "transport": {
+            "inward_fraction": 0.653920590877533,
+            "mean_force_norm": 0.0014355293242260814,
+            "mean_outward_radial_force": -0.0005641614552587271
+          },
+          "transport_adversarial_cosine_mean": -0.3847483992576599
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.004058489575982094,
+            "mean_outward_radial_force": -0.0029801842756569386
+          },
+          "candidate_sum": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.01062078308314085,
+            "mean_outward_radial_force": -0.0093992343172431
+          },
+          "component": 0,
+          "count": 40,
+          "local": {
+            "inward_fraction": 0.800000011920929,
+            "mean_force_norm": 0.0007446699892170727,
+            "mean_outward_radial_force": -0.0005708938697353005
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.010012132115662098,
+            "mean_outward_radial_force": -0.008828340098261833
+          },
+          "transport": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.006214194465428591,
+            "mean_outward_radial_force": -0.005848156288266182
+          },
+          "transport_adversarial_cosine_mean": 0.8657905459403992
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7469816207885742,
+            "mean_force_norm": 0.0011635971022769809,
+            "mean_outward_radial_force": -0.0009008143097162247
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.19527558982372284,
+            "mean_force_norm": 0.012360353022813797,
+            "mean_outward_radial_force": 0.005862193647772074
+          },
+          "component": 1,
+          "count": 1905,
+          "local": {
+            "inward_fraction": 0.21994750201702118,
+            "mean_force_norm": 0.010385025292634964,
+            "mean_outward_radial_force": 0.004559860099107027
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.3028871417045593,
+            "mean_force_norm": 0.0025931866839528084,
+            "mean_outward_radial_force": 0.001302333315834403
+          },
+          "transport": {
+            "inward_fraction": 0.24619422852993011,
+            "mean_force_norm": 0.0033472441136837006,
+            "mean_outward_radial_force": 0.002203147392719984
+          },
+          "transport_adversarial_cosine_mean": -0.753390908241272
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7529411911964417,
+            "mean_force_norm": 0.002625072607770562,
+            "mean_outward_radial_force": -0.0014421993400901556
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.1411764770746231,
+            "mean_force_norm": 0.009234038181602955,
+            "mean_outward_radial_force": 0.006270525045692921
+          },
+          "component": 1,
+          "count": 85,
+          "local": {
+            "inward_fraction": 0.25882354378700256,
+            "mean_force_norm": 0.0011594172101467848,
+            "mean_outward_radial_force": 0.0006870139040984213
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.1411764770746231,
+            "mean_force_norm": 0.008356895297765732,
+            "mean_outward_radial_force": 0.00558351119980216
+          },
+          "transport": {
+            "inward_fraction": 0.11764705926179886,
+            "mean_force_norm": 0.008955752477049828,
+            "mean_outward_radial_force": 0.0070257107727229595
+          },
+          "transport_adversarial_cosine_mean": -0.27993959188461304
+        }
+      ],
+      "mean_projected_pair_component_mismatch_fraction": 0.12799072265625,
+      "observed_samples_sha256": "5864d651d7c049f52fa49b4047f01199e7966310cd60d54bc04428cbf023d8ef",
+      "probe_count": 4096,
+      "real_batch": "exact final consumed target batch replayed from seed0 named data stream",
+      "source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "183df95fc16a4eb7b73416e6b1371d73",
+      "checkpoint_sha256": "56c21f5ccfcc8ae0e3faef3b6aa16d91d6a5c0560e76e0d48d0b623f1cc6c786",
+      "cohorts": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.4660901129245758,
+            "mean_force_norm": 0.0003580130578484386,
+            "mean_outward_radial_force": -5.4170344810700044e-05
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.7842512726783752,
+            "mean_force_norm": 0.018326636403799057,
+            "mean_outward_radial_force": -0.007593829650431871
+          },
+          "component": 0,
+          "count": 2197,
+          "local": {
+            "inward_fraction": 0.7787892818450928,
+            "mean_force_norm": 0.017919182777404785,
+            "mean_outward_radial_force": -0.007270280737429857
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.7505689859390259,
+            "mean_force_norm": 0.0006423598970286548,
+            "mean_outward_radial_force": -0.0003235492913518101
+          },
+          "transport": {
+            "inward_fraction": 0.8616294860839844,
+            "mean_force_norm": 0.0005211370880715549,
+            "mean_outward_radial_force": -0.00026937894290313125
+          },
+          "transport_adversarial_cosine_mean": 0.02938203141093254
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.0011970872292295098,
+            "mean_outward_radial_force": -0.0010369570227339864
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.9793814420700073,
+            "mean_force_norm": 0.005629174876958132,
+            "mean_outward_radial_force": -0.005475171376019716
+          },
+          "component": 0,
+          "count": 97,
+          "local": {
+            "inward_fraction": 0.9484536051750183,
+            "mean_force_norm": 0.0008187296334654093,
+            "mean_outward_radial_force": -0.000703385507222265
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.9896907210350037,
+            "mean_force_norm": 0.0048915911465883255,
+            "mean_outward_radial_force": -0.004771786276251078
+          },
+          "transport": {
+            "inward_fraction": 0.969072163105011,
+            "mean_force_norm": 0.003919633571058512,
+            "mean_outward_radial_force": -0.0037348291371017694
+          },
+          "transport_adversarial_cosine_mean": 0.6970816254615784
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9047619104385376,
+            "mean_force_norm": 0.0024553544353693724,
+            "mean_outward_radial_force": -0.002261948073282838
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.3461538553237915,
+            "mean_force_norm": 0.014569231308996677,
+            "mean_outward_radial_force": 0.0033085530158132315
+          },
+          "component": 1,
+          "count": 1092,
+          "local": {
+            "inward_fraction": 0.2747252881526947,
+            "mean_force_norm": 0.013277623802423477,
+            "mean_outward_radial_force": 0.0034177566412836313
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.5998168587684631,
+            "mean_force_norm": 0.0026639304123818874,
+            "mean_outward_radial_force": -0.0001092037491616793
+          },
+          "transport": {
+            "inward_fraction": 0.38461539149284363,
+            "mean_force_norm": 0.002903723856434226,
+            "mean_outward_radial_force": 0.0021527442149817944
+          },
+          "transport_adversarial_cosine_mean": -0.15280216932296753
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7843137383460999,
+            "mean_force_norm": 0.0021977766882628202,
+            "mean_outward_radial_force": -0.0016206905711442232
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.09803921729326248,
+            "mean_force_norm": 0.009032024070620537,
+            "mean_outward_radial_force": 0.007807896938174963
+          },
+          "component": 1,
+          "count": 102,
+          "local": {
+            "inward_fraction": 0.03921568766236305,
+            "mean_force_norm": 0.0025911079719662666,
+            "mean_outward_radial_force": 0.0022326998878270388
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.10784313827753067,
+            "mean_force_norm": 0.006777740549296141,
+            "mean_outward_radial_force": 0.005575196817517281
+          },
+          "transport": {
+            "inward_fraction": 0.05882352963089943,
+            "mean_force_norm": 0.00786388199776411,
+            "mean_outward_radial_force": 0.0071958876214921474
+          },
+          "transport_adversarial_cosine_mean": -0.37079957127571106
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9326087236404419,
+            "mean_force_norm": 0.0014467438450083137,
+            "mean_outward_radial_force": -0.0013202609261497855
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.447826087474823,
+            "mean_force_norm": 0.007736200001090765,
+            "mean_outward_radial_force": 0.00168294133618474
+          },
+          "component": 2,
+          "count": 460,
+          "local": {
+            "inward_fraction": 0.447826087474823,
+            "mean_force_norm": 0.006422050297260284,
+            "mean_outward_radial_force": 0.0013380275340750813
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.560869574546814,
+            "mean_force_norm": 0.0026725882198661566,
+            "mean_outward_radial_force": 0.00034491386031731963
+          },
+          "transport": {
+            "inward_fraction": 0.354347825050354,
+            "mean_force_norm": 0.002762578660622239,
+            "mean_outward_radial_force": 0.0016651747282594442
+          },
+          "transport_adversarial_cosine_mean": -0.2019527703523636
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.75,
+            "mean_force_norm": 0.0029938663356006145,
+            "mean_outward_radial_force": -0.002491517923772335
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.32692307233810425,
+            "mean_force_norm": 0.00655368622392416,
+            "mean_outward_radial_force": 0.0026712045073509216
+          },
+          "component": 2,
+          "count": 52,
+          "local": {
+            "inward_fraction": 0.3461538553237915,
+            "mean_force_norm": 0.0018197682220488787,
+            "mean_outward_radial_force": 0.0003146320814266801
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.3076923191547394,
+            "mean_force_norm": 0.005096509121358395,
+            "mean_outward_radial_force": 0.0023565725423395634
+          },
+          "transport": {
+            "inward_fraction": 0.13461539149284363,
+            "mean_force_norm": 0.005885391496121883,
+            "mean_outward_radial_force": 0.004848090931773186
+          },
+          "transport_adversarial_cosine_mean": -0.31331443786621094
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9523809552192688,
+            "mean_force_norm": 0.0033740010112524033,
+            "mean_outward_radial_force": -0.002867261180654168
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.190476194024086,
+            "mean_force_norm": 0.0046821478754282,
+            "mean_outward_radial_force": 0.001860305666923523
+          },
+          "component": 3,
+          "count": 84,
+          "local": {
+            "inward_fraction": 0.7142857313156128,
+            "mean_force_norm": 4.631143019651063e-05,
+            "mean_outward_radial_force": -1.3869868780602701e-05
+          },
+          "scope": "core",
+          "sum": {
+            "inward_fraction": 0.190476194024086,
+            "mean_force_norm": 0.004691696725785732,
+            "mean_outward_radial_force": 0.0018741756211966276
+          },
+          "transport": {
+            "inward_fraction": 0.095238097012043,
+            "mean_force_norm": 0.007533532567322254,
+            "mean_outward_radial_force": 0.004741436801850796
+          },
+          "transport_adversarial_cosine_mean": -0.8860922455787659
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 0.002285456983372569,
+            "mean_outward_radial_force": -0.0018437138060107827
+          },
+          "candidate_sum": {
+            "inward_fraction": 0.0833333358168602,
+            "mean_force_norm": 0.005281410645693541,
+            "mean_outward_radial_force": 0.00460914196446538
+          },
+          "component": 3,
+          "count": 12,
+          "local": {
+            "inward_fraction": 1.0,
+            "mean_force_norm": 6.155164010124281e-05,
+            "mean_outward_radial_force": -5.196657730266452e-05
+          },
+          "scope": "spill",
+          "sum": {
+            "inward_fraction": 0.0833333358168602,
+            "mean_force_norm": 0.0053244722075760365,
+            "mean_outward_radial_force": 0.004661108832806349
+          },
+          "transport": {
+            "inward_fraction": 0.0,
+            "mean_force_norm": 0.007310764864087105,
+            "mean_outward_radial_force": 0.00650482252240181
+          },
+          "transport_adversarial_cosine_mean": -0.8850460052490234
+        }
+      ],
+      "mean_projected_pair_component_mismatch_fraction": 0.17395782470703125,
+      "observed_samples_sha256": "c81963ccbb2346e71d02c25f4608885b4a75dd65eb94203902ca7bcd4b7a6803",
+      "probe_count": 4096,
+      "real_batch": "exact final consumed target batch replayed from seed0 named data stream",
+      "source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7",
+      "task_id": "vector_unequal_mass"
+    }
+  ],
+  "earlier_baseline_probe_cpu_seconds": 0.38017492298968136,
+  "generated_sampling_draws_added": 0,
+  "local_module_sha256": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+  "numerical_contract": "Signs/norms of negative loss gradients in output space, evaluated with final saved critic and fixed saved served-output chunks. Target component labels used only for posthoc decomposition.",
+  "optimizer_updates_added": 0,
+  "schema_version": 1,
+  "scope": "posthoc_saved_output_field_diagnostic_not_training_phase_reconstruction"
+}
