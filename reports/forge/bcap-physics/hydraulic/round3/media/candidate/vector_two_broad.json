@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "1e2d542b629094ef34a11e3978c59ef39e854b818dc8785ce3f6986c67e29724",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "2b10060d0ef1d46b09616e0e2fe263d5da6c3a04a7c95f27003403133becae8f",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/02cb16db5117474fa3d0dc83e947d0ce/observed-samples.pt": "4886a71a6980409223360c46b43ccc6e0802d170b96d9aa498e0ce7999bc6fed"
+  },
+  "task_id": "vector_two_broad"
+}

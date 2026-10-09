@@ -1,5 +1,6 @@
 # Hydraulic round two: travel and local deformation
 
+Follow-up: [separately source-bound round-three readout](../round3/README.md); original results below retain their original identities.
 **The combined successor still fails the complete Gaussian and native gates.**
 Both arms pass2/4 matched executed tasks. Native precision improves over the
 matched winner (.50133 versus.24072), but the .55 forecast is missed and local

@@ -1,5 +1,6 @@
 # Hydraulic output travel: bounded mechanism study
 
+Follow-up: [separately source-bound round-three readout](round3/README.md); original results below retain their original identities.
 [Round two: separately bounded travel and local-deformation successor](round2/README.md)
 preserves every round-one result and source identity below.
 

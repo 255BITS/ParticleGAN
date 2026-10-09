@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 785. Inventory coverage: complete. Unresolved import items: 7.
+Records: 787. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4166,6 +4166,22 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 
 [Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
 
+### hydraulic-local-shape-v3 · readout-9ceeb0c30717382df4b3fb6f
+
+**Scope:** research_diagnostic; scientific; revision `2518dbf757244d5762cecf1f1bad8321c551eb4b044cadaf6bdff28d098d2c0a`.
+
+Training-local finite shape progress controls excess expansion and increases native precision to at least.60 while retaining broad-vector PASS; exact Gaussian/native full gates remain decisive.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 558.64; mechanism `structural`.
+
+vector_two_broad: hq=0.99487, mass_tv=0.061523; grid100: precision=0.03876, mass_tv=0.94548
+
+Completed all admitted full-budget runnable tasks. Exact outcomes {'BLOCKED': 2, 'FAIL': 2, 'PASS': 1}; native precision 0.03876 against frozen prediction.60/falsifier.48. Finite sampled shape/travel bounds and rounded mean projection are checked in controller-diagnostics.json; complete task gates remain decisive. Own smoke-dependent stability is retained under its actual dependency status.
+
+**Next:** Stop this exact local graph-capacity/mean-separation revision; no sweep, seed repeat, extra arm, continuation or adoption. Retain the winner/default and original qualification. Inspect neighborhood resolution and useful mean/mass transport using saved evidence before any separately frozen substantive successor.
+
+[Evidence](../../reports/forge/attempts/02cb16db5117474fa3d0dc83e947d0ce/result.json) · [Record](records/readout-9ceeb0c30717382df4b3fb6f.json)
+
 ### r1r2-global-repair-v1 · readout-9e297f3a07ea06f0abc19272
 
 **Scope:** current; scientific; revision `5a20a41ac1b78983611d3cfd765d572c436f93fa5b00ace5dba9934c288e4107`.
@@ -4453,6 +4469,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-e3ad733b6fd7e95358ea8214
+
+**Scope:** research_diagnostic; scientific; revision `5baa90d5f2f923663ca75d61e3c8f4224e3d7fb8e87336ce1192fb105e4a9218`.
+
+Measure the exact winner in the same revised scientific source; its named parent is an untrained admission reference only.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 316.903; mechanism `floor_constant`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+Completed all admitted full-budget runnable tasks. Exact outcomes {'FAIL': 2, 'PASS': 3}; native precision 0.24072 against frozen prediction.60/falsifier.48. This is the matched exact-winner diagnostic measurement, not a repair or comparison against its untrained parent.
+
+**Next:** Close the matched control subscription and retain exact receipts. Preserve original selection and qualification; no unchanged rerun follows.
+
+[Evidence](../../reports/forge/attempts/00d7187a8a794ff087480c22c6a0fbdc/result.json) · [Record](records/readout-e3ad733b6fd7e95358ea8214.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5038,4 +5070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `5737aa14d79376938dc10409d9ca5c92c65f009f3b68dcac1a8b35c346c666da`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `175ae67e55a2c8866a5787f4dc77a4654a6b96643ce8ee4d2902193846f4bf83`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

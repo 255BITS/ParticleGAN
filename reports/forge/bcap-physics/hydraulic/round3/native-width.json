@@ -1,0 +1,80 @@
+{
+  "analysis_seconds": 2.066157132969238,
+  "kind": "frozen_all_center_fp64_linearized_MoG_width_diagnostic",
+  "limitations": "sigma^2 J J^T is first-order within-kernel covariance at saved means; it omits activation-boundary crossings, nonlinear width and assignment truncation. Not served-law scoring or qualification.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "random_sampling_draws_added": 0,
+  "results": [
+    {
+      "attempt_id": "b75ab1c1c9d54339b1a5200ed3a256cd",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "centers": 20000,
+      "checkpoint_file": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/b75ab1c1c9d54339b1a5200ed3a256cd/provenance/provenance-state.pt",
+      "checkpoint_sha256": "a7161a9f3eb5684ed4ece372caa8f23afc958a7e65d08801ce150608199b49f1",
+      "checkpoint_unchanged": true,
+      "fraction_local_variance_ratio_gt1": 0.9756,
+      "independent_derivative_max_abs_error": 2.6645352591003757e-15,
+      "local_maximum_covariance_eigen_ratio": {
+        "max": 10.685982179778795,
+        "mean": 4.22056945000502,
+        "median": 3.6576459240792794,
+        "min": 0.6793228277715433,
+        "p90": 7.460195687359826
+      },
+      "local_minimum_covariance_eigen_ratio": {
+        "max": 8.179175420794056,
+        "mean": 1.926096960930249,
+        "median": 2.02216315889146,
+        "min": 1.901371651335042e-05,
+        "p90": 2.9804548917054747
+      },
+      "local_total_variance_over_target_total_variance": {
+        "max": 8.763045007882178,
+        "mean": 3.0733332054676348,
+        "median": 2.976158907665379,
+        "min": 0.4915858472874531,
+        "p90": 4.799168128910006
+      },
+      "prior_sigma": 0.02500000037252903,
+      "target_sigma": 0.03
+    },
+    {
+      "attempt_id": "481dba04c0ae418996fe0de23af730da",
+      "candidate_id": "hydraulic-local-shape-v3",
+      "centers": 20000,
+      "checkpoint_file": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/provenance/provenance-state.pt",
+      "checkpoint_sha256": "3b54bd9b45d783c11613964ac0c2cc684b29d5ee68a3d267ace28a2e2f830d81",
+      "checkpoint_unchanged": true,
+      "fraction_local_variance_ratio_gt1": 0.0033,
+      "independent_derivative_max_abs_error": 1.9984014443252818e-15,
+      "local_maximum_covariance_eigen_ratio": {
+        "max": 2.9327551066103896,
+        "mean": 0.5101704049378688,
+        "median": 0.4627823828208286,
+        "min": 0.04628752720888508,
+        "p90": 0.8143385510759051
+      },
+      "local_minimum_covariance_eigen_ratio": {
+        "max": 0.24495860771262962,
+        "mean": 0.05768025056541553,
+        "median": 0.04386873812873698,
+        "min": 9.658021038792684e-10,
+        "p90": 0.13280118208755787
+      },
+      "local_total_variance_over_target_total_variance": {
+        "max": 1.4777488871633222,
+        "mean": 0.28392532775164225,
+        "median": 0.25921075110309,
+        "min": 0.03463363985613251,
+        "p90": 0.44403691964155073
+      },
+      "prior_sigma": 0.02500000037252903,
+      "target_sigma": 0.03
+    }
+  ],
+  "schema_version": 1,
+  "scope": "CPU FP64 derivatives on restored FP32 generator weights at all20000 saved latent locations, no fixture or sampling substitution",
+  "source_digest": "83c7e1f14ec5409d0b258a0bda18dffa721f5ddecb314d79cb28cebf0af650a7",
+  "torch_global_rng_unchanged": true
+}

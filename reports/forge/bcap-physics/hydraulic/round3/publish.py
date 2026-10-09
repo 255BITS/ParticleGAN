@@ -44,6 +44,8 @@ def main():
     for request_id, entry in entries.items():
         request=entry['request'];name=request['candidate']['id'];label='candidate' if name==CANDIDATE else 'control'
         rows=[]
+        executed={row['task_id']:row for definition in request['jobs']
+                  for row in (state['jobs'][definition['compatibility_key']].get('result') or {}).get('task_results',[])}
         for declaration in request['jobs']:
             job=state['jobs'][declaration['compatibility_key']]
             blockers=group_blockers(request,declaration)
@@ -51,6 +53,19 @@ def main():
                 for task_id in declaration['task_ids']:
                     rows.append(dict(task_id=task_id,gate_status='BLOCKED',raw_status='NOT_RUN',
                                      reason='; '.join(blockers),paid_seconds=0.,attempted=False))
+                continue
+            # A diagnostic request can finish with a dependency-disabled global
+            # job still pending. Report the actual failed prerequisite; do not
+            # mutate queue state or invent an attempt/evidence receipt.
+            members=set(declaration['task_ids'])
+            dependencies={d['task'] if isinstance(d,dict) else d for member in members
+                          for d in request['tasks'][member].get('dependencies',[])}-members
+            failed=[d for d in sorted(dependencies) if d in executed and executed[d]['gate_status']!='PASS']
+            if not job.get('result') and failed:
+                for task_id in declaration['task_ids']:
+                    rows.append(dict(task_id=task_id,gate_status='BLOCKED',raw_status='NOT_RUN',
+                        reason='prerequisites are unsatisfied: '+', '.join(d+': '+executed[d]['gate_status'] for d in failed),
+                        queue_job_status=job['status'],paid_seconds=0.,attempted=False))
                 continue
             if job['status'] not in {'terminal','blocked'}:
                 complete=False
