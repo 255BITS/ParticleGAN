@@ -1,0 +1,34 @@
+{
+  "actual_training_gifs": 12,
+  "all_executed_scientific_bytes_unchanged": true,
+  "archived_v2_exact_parity_tasks": 5,
+  "bulk_logs_committed": false,
+  "focused_distinct_checks": 25,
+  "forge_boundary_study_checks": 69,
+  "forge_compile_check": "CURRENT",
+  "forge_validate": "PASS",
+  "frames_per_gif": 9,
+  "matched_complete_final_stream_registries": 6,
+  "native_media_scope": "saved complete actual-training snapshots and metric curves, no redraw or regrade",
+  "preservation_reference_commit": "1036ce0c637956a4e87cc56255d503f80de578f4",
+  "prior_qualification_inventory_and_telemetry_blobs_unchanged": 317,
+  "pytest_reported_seconds": {
+    "boundaries_studies": 4.35,
+    "focused": 3.29
+  },
+  "reproduction_source_sha256": {
+    "analyze.py": "0a0cd8f89ada65d2fa1796e7ad0f0edf56d00ddb4b71af467ead05d2f491849e",
+    "conclude.py": "8f9d2e50ee77ea8aff5f6e6c51e8580c5cd608c5d5d29ca16219d716c2198bec",
+    "curate_readouts.py": "9f9e6167ce75eb0683a5fa8753d45c8728455f1b6ebd397fccdd8d1635c93cbb",
+    "diagnose.py": "9f6b77d506ab7d58cb37f3100dd7e24dc2393d5184ab5657128828da7b30b21a",
+    "publish.py": "eef1636218ea8a70a81c5446baaddbb964e27421ce5b358f877bf8bd8971a0df",
+    "report.py": "abaccd2857b236f34e698148d6a4123bc633b6508c22a88fd06b8d56b0cf3f04",
+    "run.py": "8677887ae82e52253660f19962f6d6d769f5cc610335c567a76b703e779a86cd",
+    "verify.py": "90b27ab9e0079b72518ee6f6404154c023a576f0d5855e8bbfaead58aeb2cbc1"
+  },
+  "saved_scalar_vector_metric_sets_reproduced": 432,
+  "schema_version": 1,
+  "scorer_controls": "5 oracle PASS / 5 collapse FAIL after exact original source checks",
+  "software_training_outer_updates": 15,
+  "software_training_scope": "tiny gradient/routing, checkpoint and retained transport regression fixtures; separate from quality evidence"
+}

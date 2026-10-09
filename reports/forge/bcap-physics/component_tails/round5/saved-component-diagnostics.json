@@ -688,11 +688,12 @@
   },
   "global_rng_unchanged": true,
   "optimizer_updates_added": 0,
+  "publication_clarification": "Probe input law clarified after inspecting original reproduction source; numerical diagnostic values and original receipt/checkpoint identities unchanged.",
   "quadrature_rule": "5 nodes per latent axis, Gauss-Hermite for independent Gaussian jitter; approximate nonlinear conditional moments",
   "qualification_input": false,
   "retained_finite_G_prior_probe": {
     "path": "reports/forge/bcap-physics/transport_tails/round4/saved-tail-diagnostics.json",
-    "scope": "original six next-batch disposable proposals; not actual past-update attribution",
+    "scope": "original six frozen-critic proposals using retained last target batch and next latent draw; not actual past-update attribution",
     "sha256": "34ff3070354d685704141e008c23cad78a37ac979509a129a17ace79f34c077e"
   },
   "sampling_draws_added": 0,

@@ -1,0 +1,2183 @@
+{
+  "analysis_seconds": 2.06790748401545,
+  "diagnostics": [
+    {
+      "all_centers": 20000,
+      "arm": "control",
+      "average_between_fraction": 0.6458124607244037,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        155,
+        144,
+        132,
+        193,
+        259,
+        262,
+        249,
+        175,
+        187,
+        212,
+        226,
+        126,
+        159,
+        162,
+        199,
+        204,
+        165,
+        156,
+        134,
+        179,
+        224,
+        181,
+        252,
+        255,
+        255,
+        246,
+        227,
+        226,
+        168,
+        165,
+        257,
+        217,
+        260,
+        233,
+        200,
+        191,
+        196,
+        247,
+        165,
+        220,
+        274,
+        211,
+        248,
+        197,
+        185,
+        179,
+        199,
+        252,
+        190,
+        197,
+        277,
+        229,
+        237,
+        196,
+        168,
+        174,
+        200,
+        230,
+        163,
+        216,
+        279,
+        206,
+        235,
+        194,
+        186,
+        201,
+        207,
+        228,
+        148,
+        163,
+        211,
+        153,
+        205,
+        220,
+        241,
+        268,
+        232,
+        221,
+        143,
+        149,
+        193,
+        107,
+        150,
+        146,
+        188,
+        213,
+        181,
+        167,
+        117,
+        137,
+        136,
+        139,
+        161,
+        207,
+        219,
+        282,
+        283,
+        227,
+        201,
+        171
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/f1a3db0b1f6a4b118b50b37962b897b1/provenance/provenance-state.pt",
+      "checkpoint_sha256": "33d8594192139aef56b0a40d96277de970734103a6f4ff6dda1d945711ca503d",
+      "checkpoint_state_sha256": "b63a0c99bbef948e04389b565889b3b510ad37cfb3dd78f9b6f6a36460ee7a7f",
+      "component_summary_aggregate": {
+        "between_fraction_of_fixed_assignment_trace": {
+          "max": 0.9782755667577946,
+          "mean": 0.6458124607244038,
+          "median": 0.6290478500518915,
+          "min": 0.34805582983027483
+        },
+        "center_only_covariance_error": {
+          "max": 165.302057356485,
+          "mean": 7.91071128370245,
+          "median": 3.253620524141726,
+          "min": 0.12096284610924982
+        },
+        "center_output_trace_over_target": {
+          "max": 119.22982365284801,
+          "mean": 7.214834800165894,
+          "median": 3.8816213582821493,
+          "min": 0.9977789620775211
+        },
+        "center_to_conditional_mean_rms": {
+          "max": 0.02587447224253402,
+          "mean": 0.004779240486803592,
+          "median": 0.0027380769549958895,
+          "min": 0.000267454945776569
+        },
+        "conditional_jitter_trace_over_target": {
+          "max": 4.456108189785007,
+          "mean": 2.3858645375526386,
+          "median": 2.268100042012978,
+          "min": 0.6781888141038592
+        },
+        "conditional_mean_trace_over_target": {
+          "max": 119.35094975687878,
+          "mean": 7.35159576570712,
+          "median": 3.962654554561893,
+          "min": 1.1856256850994873
+        },
+        "finite_quadrature_total_covariance_error": {
+          "max": 166.6598168757937,
+          "mean": 10.403924084774854,
+          "median": 6.049347965498608,
+          "min": 1.3057189679646144
+        },
+        "quadrature_decomposition_max_abs_error": {
+          "max": 2.498001805406602e-16,
+          "mean": 8.347137000694338e-18,
+          "median": 2.6020852139652106e-18,
+          "min": 2.168404344971009e-19
+        },
+        "weighted_assignment_migration_fraction": {
+          "max": 0.01953551240910714,
+          "mean": 0.0007860234191930614,
+          "median": 4.058512970346423e-05,
+          "min": 0.0
+        }
+      },
+      "kernel_forward_evaluations": 500000,
+      "missing_or_single_center_components": [],
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 25,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/f1a3db0b1f6a4b118b50b37962b897b1/request.json",
+      "request_sha256": "f73572cfaca62e29ec847544c6cbecf78ca327b9fa5d1f6aed561bfc28fdc23c",
+      "source": "round5-control",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "grid100"
+    },
+    {
+      "all_centers": 256,
+      "arm": "control",
+      "average_between_fraction": 0.9931696072939263,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        61,
+        64,
+        65,
+        66
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/874082b2c52e4205817b55528e09e701/provenance/provenance-state.pt",
+      "checkpoint_sha256": "15be2a85c781c8f058513e7e594c3114acb04d1c0597d7d8e338f8f2f2742ea5",
+      "checkpoint_state_sha256": "c48e7c42d1d646210c527c8650878e99a70237cd6290fd173115fce5b9717d9b",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9889264647625183,
+          "center_only_covariance_error": 5.8085785642486165,
+          "center_output_covariance": [
+            [
+              0.04483205455511327,
+              0.003562506784638455
+            ],
+            [
+              0.003562506784638455,
+              0.005372251660018067
+            ]
+          ],
+          "center_output_trace_over_target": 5.122888328541108,
+          "center_to_conditional_mean_rms": 0.00042719653143037705,
+          "centers": 61,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.00023519308210222681,
+              0.00022671100614382093
+            ],
+            [
+              0.00022671100614382093,
+              0.0003270218381147305
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.05736886872949263,
+          "conditional_mean_covariance": [
+            [
+              0.044838531178871426,
+              0.0035659850575479775
+            ],
+            [
+              0.0035659850575479775,
+              0.0053702956829411435
+            ]
+          ],
+          "conditional_mean_trace_over_target": 5.123349619013314,
+          "finite_quadrature_total_covariance_error": 5.849943807593254,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9952839692634353,
+          "center_only_covariance_error": 4.451028161475598,
+          "center_output_covariance": [
+            [
+              0.10091803589328624,
+              -0.017935570806806234
+            ],
+            [
+              -0.017935570806806234,
+              0.023756704856393845
+            ]
+          ],
+          "center_output_trace_over_target": 4.328984128170446,
+          "center_to_conditional_mean_rms": 0.00045889096682280535,
+          "centers": 64,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.00027437693235519945,
+              -0.00013808019368379584
+            ],
+            [
+              -0.00013808019368379584,
+              0.0003166621269481418
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.02052218991166838,
+          "conditional_mean_covariance": [
+            [
+              0.10094943209842171,
+              -0.017933560714107632
+            ],
+            [
+              -0.017933560714107632,
+              0.02378506048499048
+            ]
+          ],
+          "conditional_mean_trace_over_target": 4.331058844655116,
+          "finite_quadrature_total_covariance_error": 4.469780750411475,
+          "quadrature_decomposition_max_abs_error": 4.163336342344337e-17,
+          "weighted_assignment_migration_fraction": 0.00021899765932073328
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9934522865785026,
+          "center_only_covariance_error": 0.25325663436135776,
+          "center_output_covariance": [
+            [
+              0.05063007344440496,
+              -0.0055350463426316965
+            ],
+            [
+              -0.0055350463426316965,
+              0.04556530120616994
+            ]
+          ],
+          "center_output_trace_over_target": 1.202442210008864,
+          "center_to_conditional_mean_rms": 0.0003880508338222192,
+          "centers": 65,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.0003323353629646358,
+              -0.00011155792985042284
+            ],
+            [
+              -0.00011155792985042284,
+              0.00030192026906316135
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.007928195577556444,
+          "conditional_mean_covariance": [
+            [
+              0.050652670067137945,
+              -0.0055392336340736315
+            ],
+            [
+              -0.0055392336340736315,
+              0.04557981100702718
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.2029060403141092,
+          "finite_quadrature_total_covariance_error": 0.26168208148033406,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9950157085712491,
+          "center_only_covariance_error": 0.17880875591271214,
+          "center_output_covariance": [
+            [
+              0.100627854080923,
+              0.006930810998455756
+            ],
+            [
+              0.006930810998455756,
+              0.07242353618613571
+            ]
+          ],
+          "center_output_trace_over_target": 0.9613965743923031,
+          "center_to_conditional_mean_rms": 0.00047629244079205646,
+          "centers": 66,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.0003945766762087801,
+              3.903079684041926e-05
+            ],
+            [
+              3.903079684041926e-05,
+              0.00047274951948370584
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.004818478673489115,
+          "conditional_mean_covariance": [
+            [
+              0.1006994782393894,
+              0.006934953596779444
+            ],
+            [
+              0.006934953596779444,
+              0.07244513047896817
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.9619144546567181,
+          "finite_quadrature_total_covariance_error": 0.1778037822978286,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/874082b2c52e4205817b55528e09e701/request.json",
+      "request_sha256": "1c5d353a532912d90406bcf429ce9c0ef9e2c77d93594ac913bbc22d8fb40271",
+      "source": "round5-control",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "all_centers": 256,
+      "arm": "control",
+      "average_between_fraction": 0.9867525956431776,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        141,
+        77,
+        32,
+        6
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/254cbe724c594d9a9993ce7fa616fd73/provenance/provenance-state.pt",
+      "checkpoint_sha256": "54ac2317b343a0dda5c209dc1c117f0a06f0369539053e446c48e6dcfc99371a",
+      "checkpoint_state_sha256": "7b4cf010e1d8405d59482c2f30c5ff171cab1b388007a275dce721203668741c",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9960644490238142,
+          "center_only_covariance_error": 0.1936960877797875,
+          "center_output_covariance": [
+            [
+              0.02709776659521777,
+              -0.00429312910216236
+            ],
+            [
+              -0.00429312910216236,
+              0.02868589816541571
+            ]
+          ],
+          "center_output_trace_over_target": 0.8608590017539781,
+          "center_to_conditional_mean_rms": 0.0004830453080320663,
+          "centers": 141,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              8.467216959506777e-05,
+              4.6045429735005234e-05
+            ],
+            [
+              4.6045429735005234e-05,
+              0.00013595753857424767
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.0034047793587405665,
+          "conditional_mean_covariance": [
+            [
+              0.0271273945476781,
+              -0.004305858228480197
+            ],
+            [
+              -0.004305858228480197,
+              0.028712666992812007
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.8617293224082027,
+          "finite_quadrature_total_covariance_error": 0.19003292244529693,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9915869512312395,
+          "center_only_covariance_error": 0.3949929635118393,
+          "center_output_covariance": [
+            [
+              0.03605523098043655,
+              -0.005035700708688598
+            ],
+            [
+              -0.005035700708688598,
+              0.048632335349066406
+            ]
+          ],
+          "center_output_trace_over_target": 1.3069068539010384,
+          "center_to_conditional_mean_rms": 0.0005255361851742921,
+          "centers": 77,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.0001462327516981973,
+              -0.00014640511236202992
+            ],
+            [
+              -0.00014640511236202992,
+              0.0005729119072478435
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.011097911115618921,
+          "conditional_mean_covariance": [
+            [
+              0.03610256788328237,
+              -0.005020902940738048
+            ],
+            [
+              -0.005020902940738048,
+              0.048657960607460415
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.3080328131502243,
+          "finite_quadrature_total_covariance_error": 0.4091652290187946,
+          "quadrature_decomposition_max_abs_error": 2.0816681711721685e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9911712209395752,
+          "center_only_covariance_error": 0.9947376923059453,
+          "center_output_covariance": [
+            [
+              0.07704687634399655,
+              -0.003982439241663971
+            ],
+            [
+              -0.003982439241663971,
+              0.02515994075238903
+            ]
+          ],
+          "center_output_trace_over_target": 1.5772656550190904,
+          "center_to_conditional_mean_rms": 0.0006983017692030673,
+          "centers": 32,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.0007421594081908952,
+              -9.559665793780951e-05
+            ],
+            [
+              -9.559665793780951e-05,
+              0.0001687459369179017
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.014057180887048928,
+          "conditional_mean_covariance": [
+            [
+              0.07703532381125591,
+              -0.003979026783041434
+            ],
+            [
+              -0.003979026783041434,
+              0.02522832520437852
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.5781426907872182,
+          "finite_quadrature_total_covariance_error": 1.0099154841508189,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9681877613780817,
+          "center_only_covariance_error": 0.49088349191717273,
+          "center_output_covariance": [
+            [
+              0.011601812237859437,
+              -0.004131502291451107
+            ],
+            [
+              -0.004131502291451107,
+              0.03866186608150536
+            ]
+          ],
+          "center_output_trace_over_target": 0.7756740280180917,
+          "center_to_conditional_mean_rms": 0.0005460636884188906,
+          "centers": 6,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.0009526501761362305,
+              -0.0002988410149491898
+            ],
+            [
+              -0.0002988410149491898,
+              0.0006993077673964371
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.02549317747966721,
+          "conditional_mean_covariance": [
+            [
+              0.01157027269662354,
+              -0.004145610417587563
+            ],
+            [
+              -0.004145610417587563,
+              0.03870614708785701
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.775870655561074,
+          "finite_quadrature_total_covariance_error": 0.4799759256726973,
+          "quadrature_decomposition_max_abs_error": 1.214306433183765e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/254cbe724c594d9a9993ce7fa616fd73/request.json",
+      "request_sha256": "3b27569b094e49ee8bb51bfd0e9a691613be84a0009af67cdbd1a5dc20dca8b0",
+      "source": "round5-control",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_centers": 256,
+      "arm": "control",
+      "average_between_fraction": 0.9980266429850762,
+      "candidate_id": "kinetic_transport_local_v2",
+      "center_counts": [
+        130,
+        126
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/91f9780af58b4dd68a9c0d0cf342763c/provenance/provenance-state.pt",
+      "checkpoint_sha256": "b76408181a144a298a5f3d28a028339af1c2d5dc68fd864ef2288f2c72bfc2f4",
+      "checkpoint_state_sha256": "9604f71844cbc79f2a5f810c0beb0ed0bd186b238c964d1f1deac4b59cdd27a3",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9979248627628484,
+          "center_only_covariance_error": 0.22523948655118808,
+          "center_output_covariance": [
+            [
+              0.04782545224369095,
+              -0.004655230029379552
+            ],
+            [
+              -0.004655230029379552,
+              0.05076690491054991
+            ]
+          ],
+          "center_output_trace_over_target": 0.7887388572339269,
+          "center_to_conditional_mean_rms": 0.0003687475219755259,
+          "centers": 130,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.00017528731192780543,
+              -1.1695425458553364e-07
+            ],
+            [
+              -1.1695425458553364e-07,
+              2.9827931894725257e-05
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.0016409219505802456,
+          "conditional_mean_covariance": [
+            [
+              0.04787530945526485,
+              -0.004669873900346363
+            ],
+            [
+              -0.004669873900346363,
+              0.050763757820653906
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.7891125382073501,
+          "finite_quadrature_total_covariance_error": 0.2232682383090069,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9981284232073038,
+          "center_only_covariance_error": 0.2862766636515463,
+          "center_output_covariance": [
+            [
+              0.07906525607386694,
+              -0.011841087165529092
+            ],
+            [
+              -0.011841087165529092,
+              0.05325674357343773
+            ]
+          ],
+          "center_output_trace_over_target": 1.0585759971784374,
+          "center_to_conditional_mean_rms": 0.00025555524776572317,
+          "centers": 126,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.0002165988586183618,
+              -2.552313389947749e-05
+            ],
+            [
+              -2.552313389947749e-05,
+              3.152519489308172e-05
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.001984992428091548,
+          "conditional_mean_covariance": [
+            [
+              0.0790771729690381,
+              -0.01184120233808292
+            ],
+            [
+              -0.01184120233808292,
+              0.05324957486073896
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.0586139826382164,
+          "finite_quadrature_total_covariance_error": 0.28814601526052935,
+          "quadrature_decomposition_max_abs_error": 5.551115123125783e-17,
+          "weighted_assignment_migration_fraction": 0.0016988970923056555
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/91f9780af58b4dd68a9c0d0cf342763c/request.json",
+      "request_sha256": "4c94e8a788c9b956efed0ea766e81c7c9fc7126bdb260b77c0893d8251e00775",
+      "source": "round5-control",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_centers": 20000,
+      "arm": "candidate",
+      "average_between_fraction": 0.692227516546377,
+      "candidate_id": "component_prior_transport_r5",
+      "center_counts": [
+        114,
+        95,
+        126,
+        105,
+        108,
+        102,
+        108,
+        89,
+        96,
+        158,
+        130,
+        125,
+        182,
+        173,
+        125,
+        113,
+        121,
+        156,
+        159,
+        244,
+        147,
+        194,
+        272,
+        275,
+        238,
+        223,
+        237,
+        274,
+        246,
+        221,
+        153,
+        193,
+        295,
+        285,
+        243,
+        189,
+        236,
+        284,
+        195,
+        239,
+        135,
+        146,
+        265,
+        239,
+        205,
+        164,
+        220,
+        282,
+        247,
+        302,
+        128,
+        140,
+        238,
+        235,
+        178,
+        155,
+        205,
+        276,
+        155,
+        199,
+        154,
+        150,
+        252,
+        278,
+        236,
+        278,
+        260,
+        292,
+        223,
+        202,
+        126,
+        192,
+        268,
+        326,
+        326,
+        319,
+        317,
+        345,
+        355,
+        311,
+        129,
+        151,
+        240,
+        263,
+        227,
+        187,
+        209,
+        276,
+        260,
+        262,
+        117,
+        129,
+        156,
+        143,
+        106,
+        84,
+        92,
+        117,
+        101,
+        159
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/47590b99421546f1aae747027174958d/provenance/provenance-state.pt",
+      "checkpoint_sha256": "ad0d8f51276e14ec6e5564ca9157bcc955772a4ea2d30a64344bf40d6b211763",
+      "checkpoint_state_sha256": "b2cd8ee6c87280ba6554139d236a2e49008e47a4a5b2ec7a1b3da753cd907cd4",
+      "component_summary_aggregate": {
+        "between_fraction_of_fixed_assignment_trace": {
+          "max": 0.9002349207594674,
+          "mean": 0.692227516546377,
+          "median": 0.6961701929021107,
+          "min": 0.4327637889536715
+        },
+        "center_only_covariance_error": {
+          "max": 24.498607851853823,
+          "mean": 5.570824038264983,
+          "median": 4.590675402958258,
+          "min": 1.2437869175434875
+        },
+        "center_output_trace_over_target": {
+          "max": 21.569729624295636,
+          "mean": 5.670084222351521,
+          "median": 5.189125147675794,
+          "min": 2.2022096084886913
+        },
+        "center_to_conditional_mean_rms": {
+          "max": 0.01602733636745919,
+          "mean": 0.0030103663053190396,
+          "median": 0.0019239919005505832,
+          "min": 0.00014371071489385076
+        },
+        "conditional_jitter_trace_over_target": {
+          "max": 5.849709977457702,
+          "mean": 2.438331075840531,
+          "median": 2.2806756334724163,
+          "min": 0.747395651444295
+        },
+        "conditional_mean_trace_over_target": {
+          "max": 21.55146234763721,
+          "mean": 5.819771986009138,
+          "median": 5.261454952625439,
+          "min": 2.492954882248261
+        },
+        "finite_quadrature_total_covariance_error": {
+          "max": 27.12328672913068,
+          "mean": 8.176631198733423,
+          "median": 7.486664090322246,
+          "min": 3.291344087272768
+        },
+        "quadrature_decomposition_max_abs_error": {
+          "max": 3.122502256758253e-17,
+          "mean": 5.319061976895995e-18,
+          "median": 4.336808689942018e-18,
+          "min": 4.336808689942018e-19
+        },
+        "weighted_assignment_migration_fraction": {
+          "max": 0.009624884757748845,
+          "mean": 0.0006578363404481382,
+          "median": 4.390201896349096e-06,
+          "min": 0.0
+        }
+      },
+      "kernel_forward_evaluations": 500000,
+      "missing_or_single_center_components": [],
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 25,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/47590b99421546f1aae747027174958d/request.json",
+      "request_sha256": "cccc4fbcc2632e5d0da536a0ab7bd4325bce1f43a7726b8a0001799ec82226f8",
+      "source": "round5-candidate",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "grid100"
+    },
+    {
+      "all_centers": 256,
+      "arm": "candidate",
+      "average_between_fraction": 0.9289608162921607,
+      "candidate_id": "component_prior_transport_r5",
+      "center_counts": [
+        75,
+        51,
+        67,
+        63
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/ad4dad48d6744eb19b3ba2b6fb59ad23/provenance/provenance-state.pt",
+      "checkpoint_sha256": "5082041117684b602670bf8df98f4b8fa99e4b750c530bb83e32bc3fbaeeaf37",
+      "checkpoint_state_sha256": "7a33554903a99fdf7801ab7fdbf6a4ad804fc38076b725e829ffb3b982da8427",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9323456246688606,
+          "center_only_covariance_error": 2.0518485290810453,
+          "center_output_covariance": [
+            [
+              0.017828497355654286,
+              -0.0017967270260554136
+            ],
+            [
+              -0.0017967270260554136,
+              0.010244685511946943
+            ]
+          ],
+          "center_output_trace_over_target": 2.8646104627194138,
+          "center_to_conditional_mean_rms": 0.006798288968841289,
+          "centers": 75,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.0017974444848362693,
+              4.564452943277056e-05
+            ],
+            [
+              4.564452943277056e-05,
+              0.0002874465900794915
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.21274398471313552,
+          "conditional_mean_covariance": [
+            [
+              0.018446966965184726,
+              -0.0018254820000486373
+            ],
+            [
+              -0.0018254820000486373,
+              0.010284937839118097
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.9318269860754422,
+          "finite_quadrature_total_covariance_error": 2.3885509826680056,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.8319343256747154,
+          "center_only_covariance_error": 0.27601261367110247,
+          "center_output_covariance": [
+            [
+              0.011026644534931218,
+              0.002726358880309134
+            ],
+            [
+              0.002726358880309134,
+              0.012087207851622532
+            ]
+          ],
+          "center_output_trace_over_target": 0.8025643327637922,
+          "center_to_conditional_mean_rms": 0.0032120237905275423,
+          "centers": 51,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.0009409271737522834,
+              9.129554301762891e-05
+            ],
+            [
+              9.129554301762891e-05,
+              0.0037360371657140573
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.16239459790992922,
+          "conditional_mean_covariance": [
+            [
+              0.011021333571306515,
+              0.0027854223749530236
+            ],
+            [
+              0.0027854223749530236,
+              0.01212989697936431
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.803862185706818,
+          "finite_quadrature_total_covariance_error": 0.24376161296019955,
+          "quadrature_decomposition_max_abs_error": 6.938893903907228e-18,
+          "weighted_assignment_migration_fraction": 0.0
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9709177206318378,
+          "center_only_covariance_error": 0.328335275080237,
+          "center_output_covariance": [
+            [
+              0.048440349487304295,
+              -0.0012566000114542645
+            ],
+            [
+              -0.0012566000114542645,
+              0.056449173918030206
+            ]
+          ],
+          "center_output_trace_over_target": 1.3111190718724761,
+          "center_to_conditional_mean_rms": 0.00628121551325049,
+          "centers": 67,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.002348169727060259,
+              2.629439072498039e-05
+            ],
+            [
+              2.629439072498039e-05,
+              0.0008071200801295922
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.03944112347145095,
+          "conditional_mean_covariance": [
+            [
+              0.049013821887321514,
+              -0.0011615438127823606
+            ],
+            [
+              -0.0011615438127823606,
+              0.056326160194118347
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.3167498054496498,
+          "finite_quadrature_total_covariance_error": 0.3645295765024562,
+          "quadrature_decomposition_max_abs_error": 4.163336342344337e-17,
+          "weighted_assignment_migration_fraction": 4.968411827858186e-09
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9806455941932287,
+          "center_only_covariance_error": 0.38014478590158146,
+          "center_output_covariance": [
+            [
+              0.05010426610402102,
+              0.00974404011891624
+            ],
+            [
+              0.00974404011891624,
+              0.11365376914410628
+            ]
+          ],
+          "center_output_trace_over_target": 0.9097668263387105,
+          "center_to_conditional_mean_rms": 0.0012473780916184957,
+          "centers": 63,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.00030648966972379553,
+              -8.69970832285757e-05
+            ],
+            [
+              -8.69970832285757e-05,
+              0.002927976221664398
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.01796925423812262,
+          "conditional_mean_covariance": [
+            [
+              0.05012822234803866,
+              0.009687618313148802
+            ],
+            [
+              0.009687618313148802,
+              0.11375512068119469
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.9104629806505258,
+          "finite_quadrature_total_covariance_error": 0.3898197926443809,
+          "quadrature_decomposition_max_abs_error": 9.71445146547012e-17,
+          "weighted_assignment_migration_fraction": 0.0
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/ad4dad48d6744eb19b3ba2b6fb59ad23/request.json",
+      "request_sha256": "b811a4f210460a2dc0c8a3f13a4278977b15b2c8315d3f86ed2ad176dfbcbe43",
+      "source": "round5-candidate",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "all_centers": 256,
+      "arm": "candidate",
+      "average_between_fraction": 0.8424792664666771,
+      "candidate_id": "component_prior_transport_r5",
+      "center_counts": [
+        125,
+        131
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/6fc012b38e354b8fa9d1086c1734be70/provenance/provenance-state.pt",
+      "checkpoint_sha256": "7071369e41551e10e8f9396107005739caa79eb9ae07ef5c1a9eff19632b9b8c",
+      "checkpoint_state_sha256": "5a33194b403ca739d76f66d798ae8795ba11b04c33752aad381d52e986290bc0",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.8798033504812823,
+          "center_only_covariance_error": 0.8278072201101689,
+          "center_output_covariance": [
+            [
+              0.13324235003731144,
+              0.0025878443212522663
+            ],
+            [
+              0.0025878443212522663,
+              0.044176320368000344
+            ]
+          ],
+          "center_output_trace_over_target": 1.4193493632424943,
+          "center_to_conditional_mean_rms": 0.04397151670147761,
+          "centers": 125,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.02647508987343105,
+              0.0011784004693092163
+            ],
+            [
+              0.0011784004693092163,
+              0.0001100628505377991
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.21268122179175078,
+          "conditional_mean_covariance": [
+            [
+              0.1504092845165248,
+              0.0030785507809530975
+            ],
+            [
+              0.0030785507809530975,
+              0.04418604350018536
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.5567626241336812,
+          "finite_quadrature_total_covariance_error": 1.3121663366007217,
+          "quadrature_decomposition_max_abs_error": 1.3877787807814457e-16,
+          "weighted_assignment_migration_fraction": 0.022770458252012758
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.805155182452072,
+          "center_only_covariance_error": 0.6512559765979332,
+          "center_output_covariance": [
+            [
+              0.11425843179667179,
+              0.0013138532557719843
+            ],
+            [
+              0.0013138532557719843,
+              0.03737706419310499
+            ]
+          ],
+          "center_output_trace_over_target": 1.2130839679182142,
+          "center_to_conditional_mean_rms": 0.048901457810584414,
+          "centers": 131,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.04064424101724042,
+              0.0012074685470491303
+            ],
+            [
+              0.0012074685470491303,
+              0.00011231635721536102
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.3260524589956463,
+          "conditional_mean_covariance": [
+            [
+              0.13109484167481533,
+              0.0014861594436835703
+            ],
+            [
+              0.0014861594436835703,
+              0.037323050070631594
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.3473431339635753,
+          "finite_quadrature_total_covariance_error": 1.2687467482904797,
+          "quadrature_decomposition_max_abs_error": 1.1102230246251565e-16,
+          "weighted_assignment_migration_fraction": 0.04286717462466363
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/6fc012b38e354b8fa9d1086c1734be70/request.json",
+      "request_sha256": "89d13ed41e019be789e4ae20c344013257e2b486b6447ac55447fc2d8c95dc03",
+      "source": "round5-candidate",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_centers": 256,
+      "arm": "candidate",
+      "average_between_fraction": 0.7764937191390314,
+      "candidate_id": "component_prior_transport_r5",
+      "center_counts": [
+        144,
+        73,
+        33,
+        6
+      ],
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/1ca9286f8423495885302d811ee5b3f3/provenance/provenance-state.pt",
+      "checkpoint_sha256": "d9defd8948efd7b2746244e72855a02fdd40866f5d7e5c37df671022e589eeea",
+      "checkpoint_state_sha256": "939dc5a92d054928c446b2a4f1f55a21ae6434e16e6509f8cc1471b80b3623cb",
+      "component_summary": [
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.9391355452868613,
+          "center_only_covariance_error": 0.37308376278020383,
+          "center_output_covariance": [
+            [
+              0.04474062341248288,
+              0.004514819453164373
+            ],
+            [
+              0.004514819453164373,
+              0.022441226523590433
+            ]
+          ],
+          "center_output_trace_over_target": 1.0367569165654233,
+          "center_to_conditional_mean_rms": 0.012506730395578137,
+          "centers": 144,
+          "component": 0,
+          "conditional_jitter_covariance": [
+            [
+              0.0016961771526085767,
+              -0.0001276682935148142
+            ],
+            [
+              -0.0001276682935148142,
+              0.0027255130349702157
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.06823595791488142,
+          "conditional_mean_covariance": [
+            [
+              0.04528804368257887,
+              0.004538729728692654
+            ],
+            [
+              0.004538729728692654,
+              0.022938418625724082
+            ]
+          ],
+          "conditional_mean_trace_over_target": 1.0528774774471112,
+          "finite_quadrature_total_covariance_error": 0.3761059312117943,
+          "quadrature_decomposition_max_abs_error": 3.469446951953614e-17,
+          "weighted_assignment_migration_fraction": 0.00020237041628598754
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.885403594421159,
+          "center_only_covariance_error": 2.0263381977205994,
+          "center_output_covariance": [
+            [
+              0.0772131875036296,
+              -0.01770620880701616
+            ],
+            [
+              -0.01770620880701616,
+              0.10976592239250123
+            ]
+          ],
+          "center_output_trace_over_target": 2.8854800161430383,
+          "center_to_conditional_mean_rms": 0.02349651785948772,
+          "centers": 73,
+          "component": 1,
+          "conditional_jitter_covariance": [
+            [
+              0.005435441650644833,
+              -0.0024704124603135993
+            ],
+            [
+              -0.0024704124603135993,
+              0.019221360217182685
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.38050619179403256,
+          "conditional_mean_covariance": [
+            [
+              0.07851159846323695,
+              -0.01851674906743561
+            ],
+            [
+              -0.01851674906743561,
+              0.11199368737389372
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.9398963101173314,
+          "finite_quadrature_total_covariance_error": 2.517129239836519,
+          "quadrature_decomposition_max_abs_error": 4.163336342344337e-17,
+          "weighted_assignment_migration_fraction": 0.01921859521110185
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.7921612421603552,
+          "center_only_covariance_error": 2.0418268672648243,
+          "center_output_covariance": [
+            [
+              0.12562621302691646,
+              0.0047598229844456426
+            ],
+            [
+              0.0047598229844456426,
+              0.028328091487116073
+            ]
+          ],
+          "center_output_trace_over_target": 2.375837970996959,
+          "center_to_conditional_mean_rms": 0.020443339588673073,
+          "centers": 33,
+          "component": 2,
+          "conditional_jitter_covariance": [
+            [
+              0.027803453076825663,
+              -0.012699892773219167
+            ],
+            [
+              -0.012699892773219167,
+              0.013242391190810483
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.6334235062182967,
+          "conditional_mean_covariance": [
+            [
+              0.12652592256624576,
+              0.004203344456716044
+            ],
+            [
+              0.004203344456716044,
+              0.029917116829022414
+            ]
+          ],
+          "conditional_mean_trace_over_target": 2.414244372488937,
+          "finite_quadrature_total_covariance_error": 2.6842024344248028,
+          "quadrature_decomposition_max_abs_error": 2.7755575615628914e-17,
+          "weighted_assignment_migration_fraction": 0.011002647848553202
+        },
+        {
+          "between_fraction_of_fixed_assignment_trace": 0.4892744946877501,
+          "center_only_covariance_error": 0.6725502260258682,
+          "center_output_covariance": [
+            [
+              0.0062093502458178615,
+              0.0012566942667417732
+            ],
+            [
+              0.0012566942667417732,
+              0.016258309850374842
+            ]
+          ],
+          "center_output_trace_over_target": 0.34672314063893167,
+          "center_to_conditional_mean_rms": 0.01590120911935503,
+          "centers": 6,
+          "component": 3,
+          "conditional_jitter_covariance": [
+            [
+              0.02010184681898666,
+              -0.0059804158921181235
+            ],
+            [
+              -0.0059804158921181235,
+              0.00606819889687878
+            ]
+          ],
+          "conditional_jitter_trace_over_target": 0.40385871970739373,
+          "conditional_mean_covariance": [
+            [
+              0.006390372930312695,
+              0.0010667990136683765
+            ],
+            [
+              0.0010667990136683765,
+              0.018680503226062153
+            ]
+          ],
+          "conditional_mean_trace_over_target": 0.3868962269453695,
+          "finite_quadrature_total_covariance_error": 0.2598203655707724,
+          "quadrature_decomposition_max_abs_error": 2.0816681711721685e-17,
+          "weighted_assignment_migration_fraction": 2.6767196604605133e-09
+        }
+      ],
+      "kernel_forward_evaluations": 160000,
+      "prior_sigma": 0.025,
+      "quadrature_nodes_per_kernel": 625,
+      "request_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/1ca9286f8423495885302d811ee5b3f3/request.json",
+      "request_sha256": "a153e002a9a9c4997696c1d876e5adc0eb62b2fcfdf7f05c393433041d9d0945",
+      "source": "round5-candidate",
+      "source_commit": "f59b0495c451871a89b777fab890bf72093958cd",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "vector_unequal_mass"
+    }
+  ],
+  "full_artifact": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/current-component-full.json",
+    "sha256": "2d7e4b89e2db633c8c1ed40714c2914cdb044d02aa69aa3ae99fdc9643a8c401"
+  },
+  "global_rng_unchanged": true,
+  "native_uncensored": [
+    {
+      "arm": "control",
+      "authoritative_gates": "original native sustained coverage/accuracy plus independent holdout",
+      "component_counts": [
+        162,
+        121,
+        125,
+        189,
+        243,
+        249,
+        247,
+        200,
+        185,
+        203,
+        203,
+        127,
+        147,
+        146,
+        193,
+        203,
+        180,
+        150,
+        136,
+        194,
+        224,
+        173,
+        243,
+        256,
+        254,
+        243,
+        221,
+        236,
+        178,
+        167,
+        291,
+        228,
+        252,
+        228,
+        182,
+        195,
+        185,
+        257,
+        182,
+        222,
+        278,
+        212,
+        260,
+        193,
+        179,
+        167,
+        199,
+        294,
+        188,
+        214,
+        257,
+        219,
+        230,
+        192,
+        196,
+        167,
+        215,
+        226,
+        172,
+        216,
+        269,
+        218,
+        223,
+        178,
+        173,
+        185,
+        220,
+        236,
+        165,
+        184,
+        210,
+        172,
+        202,
+        229,
+        230,
+        265,
+        210,
+        220,
+        149,
+        157,
+        213,
+        111,
+        177,
+        144,
+        183,
+        190,
+        178,
+        155,
+        110,
+        139,
+        129,
+        147,
+        159,
+        224,
+        205,
+        273,
+        293,
+        229,
+        200,
+        152
+      ],
+      "component_covariance_error": 11.74381762599508,
+      "component_covariance_errors": [
+        7.948416335441146,
+        100.51937911998616,
+        10.164306274587037,
+        32.03807070077702,
+        6.919152281888922,
+        6.579226718483664,
+        12.474848368125757,
+        8.391019051004823,
+        7.944397332070263,
+        7.662441180971732,
+        6.573376931908925,
+        5.178915752535993,
+        10.509993364192347,
+        4.636598175888852,
+        5.352839127274253,
+        4.969583768847865,
+        9.56995181360405,
+        6.058174150131374,
+        5.060834834450014,
+        7.459375412353186,
+        7.407288805405999,
+        4.941401513066779,
+        7.521200092891813,
+        5.121219875581799,
+        4.582822635269868,
+        4.358135760215568,
+        7.127729928157201,
+        6.119735235073119,
+        6.360234532029973,
+        9.001250935193692,
+        5.029338446979364,
+        4.162275674216501,
+        8.958233716612124,
+        4.3524628096796825,
+        2.4677050723235894,
+        2.1710134740941265,
+        11.848483309346442,
+        4.250699842798644,
+        6.685238389821623,
+        6.819532600990598,
+        4.206594634632821,
+        3.976406377298065,
+        4.599515289873236,
+        4.87973474965826,
+        1.6826712633213465,
+        2.0591253719610436,
+        4.651302324861905,
+        4.374235411208482,
+        6.002556185700182,
+        12.275719513265035,
+        267.6440182205881,
+        5.826124906970854,
+        4.847179333574645,
+        4.09249631497052,
+        1.9124930732300054,
+        2.247133702717835,
+        4.963214606294121,
+        5.216286501100118,
+        5.575449158671092,
+        69.37921823550501,
+        51.76705068730743,
+        5.384510707902202,
+        5.71127850863584,
+        1.9888887666639725,
+        2.188614766849995,
+        4.984681404704553,
+        4.329674782826715,
+        6.14175804608412,
+        6.2296627842963614,
+        23.69524130483565,
+        52.11318077736715,
+        6.334303292785288,
+        5.79075228725425,
+        2.9527076201030886,
+        3.296751348566637,
+        4.558766699604596,
+        3.9393953988977612,
+        5.005343508360462,
+        6.678908896312484,
+        12.152887820339206,
+        8.862784214185817,
+        6.694268744846977,
+        8.33946178676058,
+        4.065112338614514,
+        5.245814522050031,
+        3.758308045885825,
+        4.678436296846081,
+        9.155726377698242,
+        7.969153872481237,
+        18.2308143682138,
+        8.673343678820785,
+        9.58898398980973,
+        9.759441659873001,
+        6.592000022737516,
+        5.673718545895091,
+        4.638017997452567,
+        7.912396032059724,
+        7.180578330603918,
+        8.274585482988996,
+        8.136078362311085
+      ],
+      "component_min_eigen_ratio": 0.6335168031500877,
+      "component_spill": [
+        0.7592592592592593,
+        0.8099173553719008,
+        0.864,
+        0.708994708994709,
+        0.8024691358024691,
+        0.8955823293172691,
+        0.9149797570850202,
+        0.985,
+        0.972972972972973,
+        0.9901477832512315,
+        0.9507389162561576,
+        0.7007874015748031,
+        0.8979591836734694,
+        0.8287671232876712,
+        0.8031088082901554,
+        0.7635467980295566,
+        0.8777777777777778,
+        0.9266666666666666,
+        0.9926470588235294,
+        0.9896907216494846,
+        0.9196428571428571,
+        0.7514450867052023,
+        0.7407407407407407,
+        0.5546875,
+        0.7440944881889764,
+        0.6296296296296297,
+        0.8733031674208145,
+        0.8177966101694916,
+        0.9157303370786517,
+        0.9820359281437125,
+        0.7491408934707904,
+        0.7280701754385965,
+        0.7261904761904762,
+        0.40789473684210525,
+        0.42857142857142855,
+        0.441025641025641,
+        0.8378378378378378,
+        0.7042801556420234,
+        0.8406593406593407,
+        0.9684684684684685,
+        0.6726618705035972,
+        0.5518867924528302,
+        0.4076923076923077,
+        0.19689119170984457,
+        0.16759776536312848,
+        0.09580838323353294,
+        0.6030150753768844,
+        0.6224489795918368,
+        0.8723404255319149,
+        0.9299065420560748,
+        0.642023346303502,
+        0.5342465753424658,
+        0.41304347826086957,
+        0.22916666666666666,
+        0.17346938775510204,
+        0.2994011976047904,
+        0.8511627906976744,
+        0.9823008849557522,
+        0.9941860465116279,
+        0.9907407407407407,
+        0.9516728624535316,
+        0.8944954128440367,
+        0.7488789237668162,
+        0.4438202247191011,
+        0.47398843930635837,
+        0.44324324324324327,
+        0.6181818181818182,
+        0.8516949152542372,
+        0.9696969696969697,
+        0.9782608695652174,
+        0.9142857142857143,
+        0.8313953488372093,
+        0.8861386138613861,
+        0.7510917030567685,
+        0.8782608695652174,
+        0.8867924528301887,
+        0.9857142857142858,
+        0.9818181818181818,
+        0.9798657718120806,
+        0.9299363057324841,
+        0.971830985915493,
+        0.972972972972973,
+        0.96045197740113,
+        0.8958333333333334,
+        0.9836065573770492,
+        0.968421052631579,
+        0.9157303370786517,
+        0.8838709677419355,
+        0.9272727272727272,
+        0.9496402877697842,
+        1.0,
+        1.0,
+        0.9937106918238994,
+        0.9866071428571429,
+        0.9902439024390244,
+        0.9963369963369964,
+        0.9863481228668942,
+        0.9606986899563319,
+        0.955,
+        0.9473684210526315
+      ],
+      "covariance_definition": "population covariance about each assigned cell own mean, normalized by target sigma squared",
+      "global_spill": 0.7856,
+      "input_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/f1a3db0b1f6a4b118b50b37962b897b1/native100/grid100/final_samples.npz",
+      "input_sha256": "52f17860ad7d07c648b1ca180c65af438e3c59c0469a450ef8f20bd42f52f11b",
+      "mass_tv": 0.08465000241994858,
+      "max_component_spill": 1.0,
+      "missing_component_policy": "count<10 receives error1/spill1/eigen0, remains explicitly missing",
+      "missing_or_under_10_sample_components": [],
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "samples": 20000,
+      "sampling_draws_added": 0,
+      "scope": "uncensored_final_20k_clean_live_nearest_cells",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "grid100",
+      "uncensored_radial_ks": 0.7997629348135852
+    },
+    {
+      "arm": "candidate",
+      "authoritative_gates": "original native sustained coverage/accuracy plus independent holdout",
+      "component_counts": [
+        104,
+        95,
+        121,
+        103,
+        116,
+        98,
+        128,
+        94,
+        98,
+        166,
+        118,
+        123,
+        180,
+        167,
+        136,
+        120,
+        113,
+        188,
+        146,
+        244,
+        146,
+        193,
+        290,
+        256,
+        242,
+        254,
+        261,
+        289,
+        259,
+        206,
+        145,
+        168,
+        277,
+        292,
+        253,
+        196,
+        276,
+        271,
+        221,
+        243,
+        121,
+        156,
+        257,
+        243,
+        203,
+        148,
+        212,
+        298,
+        260,
+        312,
+        132,
+        130,
+        238,
+        210,
+        188,
+        145,
+        185,
+        264,
+        143,
+        201,
+        164,
+        140,
+        241,
+        277,
+        213,
+        261,
+        250,
+        295,
+        208,
+        196,
+        144,
+        209,
+        264,
+        354,
+        304,
+        335,
+        325,
+        349,
+        331,
+        299,
+        133,
+        164,
+        238,
+        250,
+        222,
+        199,
+        228,
+        260,
+        256,
+        245,
+        104,
+        146,
+        151,
+        153,
+        109,
+        89,
+        94,
+        108,
+        101,
+        149
+      ],
+      "component_covariance_error": 8.59515221054419,
+      "component_covariance_errors": [
+        9.51740092668693,
+        10.421340083995837,
+        7.548824357532406,
+        6.636707385890386,
+        9.33600742618435,
+        31.687345222096905,
+        6.680939481622895,
+        5.096219693568509,
+        6.523274153891763,
+        11.821534474038392,
+        8.815824144672806,
+        11.090056370282095,
+        7.946574251239623,
+        4.920033095914404,
+        7.594381253496516,
+        7.949811532826943,
+        5.276492323359388,
+        5.514146834018095,
+        7.328501978013077,
+        8.63823260286377,
+        9.833061745175021,
+        8.38991071495398,
+        5.407620398489523,
+        6.042504930815093,
+        4.532790759766928,
+        9.580999178997805,
+        5.793403032666727,
+        4.775469636144383,
+        6.28635584871792,
+        8.870205282684902,
+        10.31491748717032,
+        8.687085261279895,
+        7.538285187232387,
+        2.8271418728636046,
+        3.926055069029714,
+        9.297926698147194,
+        5.932908338074045,
+        4.939762779698148,
+        6.441507153740373,
+        8.173199132880585,
+        14.919876275032985,
+        9.848730236638117,
+        9.050135415418625,
+        8.543828218692147,
+        6.129316186904096,
+        9.601842309127466,
+        8.570474636258258,
+        4.2421242608149194,
+        5.787163179745124,
+        8.585796850662218,
+        12.221166963043986,
+        10.329307195695977,
+        9.603223329045075,
+        8.67757711750587,
+        7.673065676754247,
+        8.209697663489266,
+        7.865395452013301,
+        4.112867298644329,
+        4.818951007788708,
+        7.36606735861745,
+        8.079138539508286,
+        2.9888961285757714,
+        4.751321522659584,
+        6.251759786299677,
+        4.623145944869092,
+        8.546941996463852,
+        8.634607487776803,
+        7.3343425458171065,
+        6.083076046173534,
+        9.856246120553918,
+        6.37140264899331,
+        5.668996208456482,
+        4.730753185646145,
+        6.145371826869303,
+        6.795169400469556,
+        8.111403512485072,
+        9.949352689368446,
+        7.545097080259399,
+        8.395677013938633,
+        11.281259073158726,
+        7.067381060456578,
+        6.0129552146433065,
+        5.983284306747895,
+        5.446290084113428,
+        6.134927430961205,
+        7.427865889601007,
+        6.553576336210171,
+        8.46250111200024,
+        8.932080220240229,
+        10.658875618149988,
+        6.23658672541486,
+        7.337864980222741,
+        51.238153691017736,
+        36.85524032841618,
+        7.177635103707388,
+        7.141269226217583,
+        16.491720292334453,
+        6.294779764359258,
+        7.607012118786354,
+        14.219898059859942
+      ],
+      "component_min_eigen_ratio": 0.46499284878415104,
+      "component_spill": [
+        0.9423076923076923,
+        0.9052631578947369,
+        0.859504132231405,
+        0.8349514563106796,
+        0.9051724137931034,
+        0.9183673469387755,
+        0.8359375,
+        0.8404255319148937,
+        0.7551020408163265,
+        0.6506024096385542,
+        0.9491525423728814,
+        0.8455284552845529,
+        0.8833333333333333,
+        0.8023952095808383,
+        0.8235294117647058,
+        0.8,
+        0.7345132743362832,
+        0.6808510638297872,
+        0.7808219178082192,
+        0.7090163934426229,
+        0.9383561643835616,
+        0.8963730569948186,
+        0.7758620689655172,
+        0.73046875,
+        0.6859504132231405,
+        0.7874015748031497,
+        0.6704980842911877,
+        0.5882352941176471,
+        0.6254826254826255,
+        0.6407766990291263,
+        0.896551724137931,
+        0.8392857142857143,
+        0.8086642599277978,
+        0.5993150684931506,
+        0.5928853754940712,
+        0.7551020408163265,
+        0.6739130434782609,
+        0.5830258302583026,
+        0.7285067873303167,
+        0.7119341563786008,
+        0.8760330578512396,
+        0.7692307692307693,
+        0.77431906614786,
+        0.7489711934156379,
+        0.5073891625615764,
+        0.6824324324324325,
+        0.49056603773584906,
+        0.5436241610738255,
+        0.5846153846153846,
+        0.6057692307692307,
+        0.9015151515151515,
+        0.8538461538461538,
+        0.7310924369747899,
+        0.7666666666666667,
+        0.6595744680851063,
+        0.6206896551724138,
+        0.654054054054054,
+        0.6136363636363636,
+        0.7902097902097902,
+        0.7562189054726368,
+        0.9146341463414634,
+        0.9642857142857143,
+        0.9045643153526971,
+        0.8339350180505415,
+        0.5305164319248826,
+        0.5632183908045977,
+        0.376,
+        0.3288135593220339,
+        0.6490384615384616,
+        0.6938775510204082,
+        0.8888888888888888,
+        0.8564593301435407,
+        0.7992424242424242,
+        0.7401129943502824,
+        0.7763157894736842,
+        0.6805970149253732,
+        0.7938461538461539,
+        0.667621776504298,
+        0.5981873111782477,
+        0.68561872909699,
+        0.8796992481203008,
+        0.9024390243902439,
+        0.8571428571428571,
+        0.78,
+        0.8873873873873874,
+        0.8391959798994975,
+        0.9342105263157895,
+        0.8461538461538461,
+        0.7421875,
+        0.8,
+        0.9134615384615384,
+        0.9383561643835616,
+        0.8609271523178808,
+        0.8954248366013072,
+        0.963302752293578,
+        0.9101123595505618,
+        0.9680851063829787,
+        0.9166666666666666,
+        0.9306930693069307,
+        0.9261744966442953
+      ],
+      "covariance_definition": "population covariance about each assigned cell own mean, normalized by target sigma squared",
+      "global_spill": 0.7409,
+      "input_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/47590b99421546f1aae747027174958d/native100/grid100/final_samples.npz",
+      "input_sha256": "9c906a34e04c68f9f433c43e8cdb202162e78e26a8bb3c12b1550999640512ef",
+      "mass_tv": 0.15230000019073486,
+      "max_component_spill": 0.9680851063829787,
+      "missing_component_policy": "count<10 receives error1/spill1/eigen0, remains explicitly missing",
+      "missing_or_under_10_sample_components": [],
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "samples": 20000,
+      "sampling_draws_added": 0,
+      "scope": "uncensored_final_20k_clean_live_nearest_cells",
+      "source_digest": "ae77a5d503f693e7ab3d4fbde0c335fa451c6370c5b3be46a741ae7d5cc55648",
+      "task_id": "grid100",
+      "uncensored_radial_ks": 0.7813578041459789
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "exhaustive_center_outputs; approximate nonlinear Gaussian moments under fixed center assignments",
+  "vector_radial": [
+    {
+      "arm": "control",
+      "component_counts": [
+        959,
+        1004,
+        1057,
+        1076
+      ],
+      "component_whitened_radial_ks": [
+        0.13115815848319956,
+        0.15515091413815751,
+        0.1149553924116282,
+        0.04672608459058547
+      ],
+      "global_whitened_radial_ks": 0.07249448905491174,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/874082b2c52e4205817b55528e09e701/observed-samples.pt": "860f280def6b92591c5d603853f1740c99062d6de6ef1d707f21dc5fc8b9a51a"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 2.4804378859698772,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "control",
+      "component_counts": [
+        2239,
+        1264,
+        479,
+        114
+      ],
+      "component_whitened_radial_ks": [
+        0.07356448848831054,
+        0.13313841583194758,
+        0.19685660314505404,
+        0.2612890883073803
+      ],
+      "global_whitened_radial_ks": 0.054568116284934076,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/254cbe724c594d9a9993ce7fa616fd73/observed-samples.pt": "5bfcd30b8524ce99f93aa9ccd6d934f9150a5484065c4af5913e0e90c4e2e560"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 0.522577092051506,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "arm": "control",
+      "component_counts": [
+        2045,
+        2051
+      ],
+      "component_whitened_radial_ks": [
+        0.06688934862894935,
+        0.030833031334499772
+      ],
+      "global_whitened_radial_ks": 0.04672701545477398,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/91f9780af58b4dd68a9c0d0cf342763c/observed-samples.pt": "b8a10e5bc96971a72ccd8e1ce4cf969e0af99ac70dab7161b72311d9113b0606"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 0.22656399756669998,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "candidate",
+      "component_counts": [
+        1170,
+        816,
+        1109,
+        1001
+      ],
+      "component_whitened_radial_ks": [
+        0.24338674061071486,
+        0.2784547559948121,
+        0.11130856846488468,
+        0.24416247588260565
+      ],
+      "global_whitened_radial_ks": 0.18749319564403,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/ad4dad48d6744eb19b3ba2b6fb59ad23/observed-samples.pt": "6f1c1d92e230cbcb2c2cf6327536a841b671c5c352cdd6f063f814ab2d96baa0"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 0.8436678647994995,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "candidate",
+      "component_counts": [
+        2032,
+        2064
+      ],
+      "component_whitened_radial_ks": [
+        0.17127017965770264,
+        0.052197348871055094
+      ],
+      "global_whitened_radial_ks": 0.08944849926418996,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/6fc012b38e354b8fa9d1086c1734be70/observed-samples.pt": "030e96be41878b9089e1b3f1a35529d70fe400897ef7ef906da51c93b952904d"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 0.733818918466568,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "candidate",
+      "component_counts": [
+        2322,
+        1141,
+        506,
+        127
+      ],
+      "component_whitened_radial_ks": [
+        0.04147605946687642,
+        0.15252504422513335,
+        0.2553094896750302,
+        0.17794647328702828
+      ],
+      "global_whitened_radial_ks": 0.08611715583948798,
+      "inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/queue/component_tails_round5/1ca9286f8423495885302d811ee5b3f3/observed-samples.pt": "a37c2ec0183b256c1d174e9266d6798f1852c25f6dbba08908ac97a228a5dde8"
+      },
+      "optimizer_updates_added": 0,
+      "original_full_covariance_metric": 1.3613992035388947,
+      "reference": "chi-square2 CDF; nearest-cell assignment can alter the reference when target components overlap",
+      "sampling_draws_added": 0,
+      "scope": "uncensored_saved_final_clean_live_radial_diagnostic_not_new_gate",
+      "task_id": "vector_unequal_mass"
+    }
+  ]
+}

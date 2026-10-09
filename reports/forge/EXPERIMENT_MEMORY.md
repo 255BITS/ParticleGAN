@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 789. Inventory coverage: complete. Unresolved import items: 7.
+Records: 791. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4118,6 +4118,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.076
 
 [Evidence](../../reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json) · [Record](records/readout-8bfdfb8d2b1c3daf55f9b0bc.json)
 
+### component_prior_transport_r5 · readout-8dcc6ae422accfbd3c3b3665
+
+**Scope:** research_diagnostic; scientific; revision `34d340e215957646b2e61864d908f9bcdfdb0a9c98a7da90afc096bb5eafb261`.
+
+Prior-only pullbacks of retained sliced/local transport reduce unequal-width uncensored covariance while preserving rare and broad sustained gates, without changing the empirical training objective.
+
+**Observed:** {'FAIL': 4, 'PASS': 2}; wall seconds 995.738; mechanism `structural`.
+
+vector_unequal_mass: hq=0.91187, mass_tv=0.0279; grid100: precision=0.26261, center_rms_sigma=1.282, mass_tv=0.15214, radial_ks=0.44214; vector_two_broad: hq=0.93384, mass_tv=0.0039062
+
+Prior-only transport improves the width endpoint surrogate but fails full temporal width qualification and loses retained unequal-mass PASS. Gaussian endpoint KS improves while full retention/reacquisition fails. Stop this exact routing replacement; a scalar forecast observed is not a complete repair.
+
+**Next:** Retain exact local-v2 scoped rare/broad evidence and original limits. Preserve center-versus-kernel decomposition and full native/temporal failures. Stop this bounded revision: no tuning, seed repeat, extension, second candidate, ordinary qualification or default promotion.
+
+[Evidence](../../reports/forge/bcap-physics/component_tails/round5/results.json) · [Record](records/readout-8dcc6ae422accfbd3c3b3665.json)
+
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
 **Scope:** calibration_diagnostic; scientific; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -4533,6 +4549,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1,
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### kinetic_transport_local_v2 · readout-f4089b4ae02338c0dbb4d854
+
+**Scope:** research_diagnostic; scientific; revision `5cfb3f56056ac604b6f8665a5117e6d3d862ed636188db725f2e1960d1aa5f76`.
+
+New-source exact local-v2 primary control; sliced-v1 is an admission reference only and is never launched.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 1957.222; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96973, mass_tv=0.016426
+
+Matched exact local-v2 primary control completed. Retain its scoped positive gates and unchanged full failures; no ordinary qualification is added.
+
+**Next:** Retain exact local-v2 scoped rare/broad evidence and original limits. Preserve center-versus-kernel decomposition and full native/temporal failures. Stop this bounded revision: no tuning, seed repeat, extension, second candidate, ordinary qualification or default promotion.
+
+[Evidence](../../reports/forge/bcap-physics/component_tails/round5/results.json) · [Record](records/readout-f4089b4ae02338c0dbb4d854.json)
 
 ### kinetic_transport_local_v2 · readout-f40b32c69ee3065bf0a587bb
 
@@ -5102,4 +5134,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `79449bb2f0065baae5a84d05fcc0442251dfdc80373c3bb4d0be76ddea088b8b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `4fba1955e5a23146dbc8a52cceb0b004e6b8d307f9cabcdbdc6a46f5c3de0e0c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

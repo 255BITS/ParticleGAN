@@ -142,7 +142,7 @@ def main():
         'full_allowance_seconds':600,'analysis_seconds':time.monotonic()-start,
         'source_receipts':{str(local_path):file_hash(local_path),str(role_path):file_hash(role_path)},
         'retained_finite_G_prior_probe':{'path':str(finite.relative_to(ROOT)),'sha256':file_hash(finite),
-            'scope':'original six next-batch disposable proposals; not actual past-update attribution'},
+            'scope':'original six frozen-critic proposals using retained last target batch and next latent draw; not actual past-update attribution'},
         'diagnostics':rows}
     archive = Path('/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/component_tails/saved-component-full.json')
     atomic_json(archive,result)

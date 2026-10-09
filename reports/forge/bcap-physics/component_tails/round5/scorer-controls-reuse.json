@@ -1,0 +1,83 @@
+{
+  "collapse_FAIL": 5,
+  "native_controls": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "abs_cov_trace_bias": 0.002483059358359463,
+        "accuracy_pass": true,
+        "accuracy_score": 0.1362815729945808,
+        "all_finite": true,
+        "center_max_sigma": 0.10380235419318293,
+        "center_rms_sigma": 0.04387304454623034,
+        "cov_frob_rms": 0.054571307739215084,
+        "cov_trace_bias": -0.002483059358359463,
+        "frozen_pass": true,
+        "mass_tv": 0.013119999999999998,
+        "n": 100000,
+        "passed": true,
+        "precision": 0.98872,
+        "precision_gap": 0.00017100346175769054,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.0032905523598764086,
+        "valid_n": 100000,
+        "within_radius_n": 98872
+      },
+      "status": "PASS",
+      "task_id": "grid100"
+    },
+    {
+      "control": "center_collapse",
+      "failed_bounds": [
+        "full accuracy gate"
+      ],
+      "metrics": {
+        "abs_cov_trace_bias": 1.0,
+        "accuracy_pass": false,
+        "accuracy_score": 8.804666666666666,
+        "all_finite": true,
+        "center_max_sigma": 0.0,
+        "center_rms_sigma": 0.0,
+        "cov_frob_rms": 1.0,
+        "cov_trace_bias": -1.0,
+        "frozen_pass": false,
+        "mass_tv": 0.013119999999999998,
+        "n": 100000,
+        "passed": false,
+        "precision": 1.0,
+        "precision_gap": 0.011108996538242266,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 1.0,
+        "valid_n": 100000,
+        "within_radius_n": 100000
+      },
+      "status": "FAIL",
+      "task_id": "grid100"
+    }
+  ],
+  "native_original": {
+    "github": "https://github.com/255BITS/ParticleGAN/blob/871b76af18388e70595db1eb9d685f7a8de8af70/reports/forge/bcap-physics/role_motion/round4/scorer-controls.json",
+    "path": "/home/martyn/dev/ParticleGAN-bcap-r4-role_motion/reports/forge/bcap-physics/role_motion/round4/scorer-controls.json",
+    "sha256": "936c1e345b8cf6a70424c0c365fd928587493bb6e6895ec003a2bd64841bfe39"
+  },
+  "optimizer_updates_added": 0,
+  "oracle_PASS": 5,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "five compatible base target/scorer laws; original oracle/destructive controls, no training qualification",
+  "scorer_sources": {
+    "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "shifted_stability_scope": "unchanged original analytic scalar scorer and full paired retention/deadline gates; not a new oracle cohort",
+  "vector_original": {
+    "bound_receipt_sha256": "cfa0d6a34a5f43495816c974b094007c7382168ced11e0cc9628655cd987b7a4",
+    "path": "reports/forge/bcap-physics/kinetic_transport/scorer-controls.json",
+    "sha256": "b6e575a4f84d26307df2b6146224ae746720476ec595da54c6d514b6953c0b0b"
+  }
+}
