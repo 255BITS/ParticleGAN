@@ -82,6 +82,8 @@ class Recipe:
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
+    kinetic_transport_mode: str = "sliced"
+    kinetic_transport_block_size: int = 128
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -374,6 +376,10 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
+        if self.kinetic_transport_mode not in ("sliced", "balanced_assignment"):
+            raise ValueError("kinetic_transport_mode must be sliced or balanced_assignment")
+        if type(self.kinetic_transport_block_size) is not int or self.kinetic_transport_block_size < 2:
+            raise ValueError("kinetic_transport_block_size must be an integer >= 2")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -576,6 +582,10 @@ class Recipe:
 
     def kinetic_transport_loss(self, fake, real):
         """Public sample-space auxiliary objective; the caller owns the batches."""
+        if self.kinetic_transport_mode == "balanced_assignment":
+            from .kinetic_transport import balanced_assignment_loss
+            return self.kinetic_transport_weight * balanced_assignment_loss(
+                fake, real, block_size=self.kinetic_transport_block_size)
         from .kinetic_transport import kinetic_transport_loss
         return self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)

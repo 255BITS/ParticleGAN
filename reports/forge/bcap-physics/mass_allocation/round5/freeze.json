@@ -1,0 +1,35 @@
+{
+  "ancillary_allowances": {
+    "saved_readonly_diagnostics": 120,
+    "software_fixtures": 120,
+    "synthetic_capacity_no_training": 120
+  },
+  "base": "Exact local-v2, projection none; rates/nonsaturating/BCAP/fullDualNorm identical.",
+  "campaign": "mass-allocation-round5-v1",
+  "control_selection": "Retain measured rare/broad positives and isolate one allocation coupling change; winner is historical context, not another matched arm.",
+  "main_reservation_seconds": 19440,
+  "roles": {
+    "candidate": "mass-allocation-round5-candidate-v1",
+    "control": "mass-allocation-round5-control-v1"
+  },
+  "schema_version": 1,
+  "stop": "One candidate only; complete every runnable declared job and publish even negative. No sweep, seed study, second candidate, continuation or promotion.",
+  "tasks": [
+    "gaussian1d_smoke",
+    "gaussian1d_stability",
+    "vector_unequal_mass",
+    "vector_two_broad",
+    "vector_unequal_width",
+    "grid100"
+  ],
+  "track_ceiling_seconds": 21600,
+  "trainer_delta": {
+    "block_size": 128,
+    "kinetic_transport_mode": [
+      "sliced",
+      "balanced_assignment"
+    ]
+  },
+  "unadmitted_remainder_seconds": 1800,
+  "view": "mass-allocation-round5-diagnostic-v1"
+}

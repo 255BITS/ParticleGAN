@@ -9,6 +9,41 @@ import math
 import torch
 
 
+def balanced_assignment_loss(fake, real, *, block_size=128):
+    """Conservative joint-coordinate quadratic transport in contiguous blocks.
+
+    Every row has equal mass and is matched exactly once to a real row in its
+    block. The last block retains all its rows. Assignment is solved on detached
+    float64 CPU coordinates; gradients flow through the selected squared costs.
+    This is exact empirical W2 within each block, divided by dimension and the
+    detached whole-real-batch coordinate variance. It is a minibatch surrogate,
+    not full-batch OT when multiple blocks are used, or a population divergence.
+    No labels, RNG, changed prior weights or persistent state enter.
+
+    Requires SciPy (available in ParticleGAN's ``mog`` extra). At assignment ties
+    the solver selects a minimizing branch; gradients need not be unique.
+    """
+    if (fake.ndim < 2 or fake.shape != real.shape or len(fake) < 2
+            or not fake.is_floating_point() or fake.dtype != real.dtype
+            or fake.device != real.device):
+        raise ValueError("balanced assignment needs matching floating batches of at least two samples")
+    if type(block_size) is not int or block_size < 2:
+        raise ValueError("balanced assignment block_size must be an integer >= 2")
+    from scipy.optimize import linear_sum_assignment
+    from scipy.spatial.distance import cdist
+    x, y = fake.flatten(1), real.detach().flatten(1)
+    detached_x = x.detach().to(device="cpu", dtype=torch.float64).numpy()
+    detached_y = y.to(device="cpu", dtype=torch.float64).numpy()
+    matches = []
+    for start in range(0, len(x), block_size):
+        stop = min(start + block_size, len(x))
+        _, columns = linear_sum_assignment(cdist(detached_x[start:stop], detached_y[start:stop], "sqeuclidean"))
+        matches.extend((columns + start).tolist())
+    indices = torch.tensor(matches, device=x.device, dtype=torch.long)
+    scale = (y - y.mean(0)).square().mean().clamp_min(torch.finfo(x.dtype).eps)
+    return (x - y[indices]).square().mean() / scale
+
+
 def kinetic_transport_loss(fake, real, *, projections=32):
     """Mean projected W2 squared, divided by detached real coordinate variance.
 
