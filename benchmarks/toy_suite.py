@@ -181,8 +181,9 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
             raise ValueError(f"custom-host optimizer trace is incomplete: {name}")
         for item in actions:
             if cap is None:
-                scale = learning_rate_scale(item["step"], steps,
-                                            base.lr_anneal_start, base.lr_floor)
+                scale = (1.0 if getattr(base, "constant_lr", False) else
+                         learning_rate_scale(item["step"], steps,
+                                             base.lr_anneal_start, base.lr_floor))
                 if not _close(item.get("multiplier"), scale):
                     raise ValueError(f"custom-host LR schedule differs from common recipe: {name}")
                 continue
@@ -190,6 +191,7 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
             network, prior = policy_multipliers(
                 item["step"], steps, base.lr_anneal_start, base.lr_floor, cap,
                 network_lr_floor=network_floor,
+                constant_lr=bool(getattr(base, "constant_lr", False)),
             )
             if (item.get("network_lr_horizon_cap") != cap
                     or not _close(item.get("multiplier"), network)
@@ -220,15 +222,17 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
         raise ValueError(f"trainer action or update trace is incomplete: {name}")
     for completed, action in enumerate(actions, start=1):
         if cap is None:
-            network = prior = learning_rate_scale(
-                completed - 1, steps, base.lr_anneal_start, base.lr_floor,
-            )
+            network = prior = (1.0 if getattr(base, "constant_lr", False) else
+                               learning_rate_scale(
+                                   completed - 1, steps, base.lr_anneal_start, base.lr_floor,
+                               ))
             expected_rates = dict(step=completed, multiplier=network)
         else:
             from benchmarks.toy100.schedule import policy_multipliers
             network, prior = policy_multipliers(
                 completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
                 network_lr_floor=network_floor,
+                constant_lr=bool(getattr(base, "constant_lr", False)),
             )
             expected_rates = dict(step=completed, network_multiplier=network,
                                   prior_multiplier=prior,
@@ -840,6 +844,7 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
             network, prior = policy_multipliers(
                 step - 1, steps, config["lr_anneal_start"], config["lr_floor"], cap,
                 network_lr_floor=network_floor,
+                constant_lr=bool(config.get("constant_lr", False)),
             )
             expected = dict(network_lr_horizon_cap=cap,
                             network_multiplier=network, prior_multiplier=prior,
@@ -1327,7 +1332,7 @@ def _run_command(command: list[str], *, cwd: Path, log: Path, env: dict[str, str
 
 
 def run(config: Path, output: Path, *, with_default_control: bool = False,
-        device: str = "auto"):
+        device: str = "auto", init: str | None = None):
     config = config.resolve()
     output = output.resolve()
     if output.exists():
@@ -1347,15 +1352,18 @@ def run(config: Path, output: Path, *, with_default_control: bool = False,
     # CPU runs keep the historical mask so a visible GPU cannot change them.
     if device_flag == "cpu":
         env["CUDA_VISIBLE_DEVICES"] = ""
+    init_args = ["--init", init] if init else []
     commands = [
         ([python, "-u", "-m", "benchmarks.toy100", "run", "--device", device_flag,
           "--config", str(config),
-          "--output", str(output / "toy100"), "--no-render", "--eval-output-noise"], ROOT, output / "toy100.log"),
+          "--output", str(output / "toy100"), "--no-render", "--eval-output-noise",
+          *init_args], ROOT, output / "toy100.log"),
         ([python, "-u", "-m", "benchmarks.toy100.accuracy_gate", "--output",
           str(output / "toy100")], ROOT, output / "accuracy.log"),
         ([python, "-u", "-m", "benchmarks.transfer_suite.toy100_compatibility",
           "--device", device_flag,
-          "--config", str(config), "--all", "--output", str(output / "candidate19")],
+          "--config", str(config), "--all", "--output", str(output / "candidate19"),
+          *init_args],
          ROOT, output / "candidate19.log"),
     ]
     returns = {}
@@ -1396,13 +1404,15 @@ def main(argv=None):
     run_parser.add_argument("--with-default-control", action="store_true")
     run_parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                             help="auto uses cuda when available, else cpu")
+    run_parser.add_argument("--init", default=None,
+                            help="deterministic weight and particle init; omit to keep the PyTorch init")
     regrade_parser = commands.add_parser("regrade", help="independently grade saved evidence")
     regrade_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "run":
         result = run(args.config, args.output,
                      with_default_control=args.with_default_control,
-                     device=args.device)
+                     device=args.device, init=args.init)
     else:
         result = regrade(args.output)
     print(json.dumps(dict(status=result["status"], observed_passes=result["observed_passes"],

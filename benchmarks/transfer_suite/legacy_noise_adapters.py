@@ -411,13 +411,15 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
     schedule = vector_tasks.fixed_policy("cosine")
     cap = (model_policy or {}).get("network_lr_horizon_cap")
     network_floor = (model_policy or {}).get("network_lr_floor")
+    from particlegan.generator_idle import generator_idle_scope
     with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap,
                             network_lr_floor=network_floor):
         control = evaluate.FixedControl(schedule, spec["steps"])
         with bridge.control_host_schedules(control):
-            result = baseline.run_toy(
-                spec["name"], candidate(recipe), noise_policy=policy,
-            )
+            with generator_idle_scope(getattr(recipe, "generator_idle_se", None)):
+                result = baseline.run_toy(
+                    spec["name"], candidate(recipe), noise_policy=policy,
+                )
     result["actions"] = control.trace
     result["seconds"] = time.perf_counter() - started
     receipt = policy.receipt()

@@ -11,6 +11,7 @@ from .observation import checkpoint, schedule_optimizer
 import torch
 from torch import nn
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
+from particlegan.generator_idle import release_generator_step
 
 TOY_STEPS = 80
 TOY_SEED = 0
@@ -147,6 +148,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         g_loss = g_loss + particle_l2 * particles.square().mean()
         g_loss.backward()
         schedule_optimizer(opt_p, step - 1)
+        release_generator_step(opt_p, d_real, paired)
         opt_p.step()
         checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
                                  "grad_med": _grad_median(base_critic, real, particles)})

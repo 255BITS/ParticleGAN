@@ -1175,6 +1175,8 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `eps`, `d_eps`, `prior_eps` | `1e-8`, `None`, `None` (role overrides inherit shared epsilon) |
 | `adam_variant`, `loss_labels` | `pytorch`, `(0,1,1)` |
 | `lr_schedule` | `cosine` (also `constant`, `exponential`) |
+| `constant_lr` | `False` (local overlay; multipliers stay 1, cosine function unchanged) |
+| `generator_idle_se` | `None` (off; a finite value is standard errors of the paired critic gap) |
 | `lr_decay_rate`, `lr_decay_steps`, `lr_decay_staircase` | `.96`, `50000`, `False` (exponential schedule only) |
 | `loss` | `relativistic` (also `non_saturating`, `hinge`, `wasserstein`, `least_squares`) |
 | `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
@@ -1346,6 +1348,11 @@ holds it at one. These schedules do not rescale with an execution budget.
 float: hold 1, then cosine decay to `floor`. `step` counts completed updates
 (zero before the first update). It changes no optimizer state and clamps after
 the horizon. EMA, update ratios, and scheduling remain caller-owned.
+`constant_lr=True` does not edit that function; `learning_rate_scales` returns
+`(1, 1)` before the cosine. `generator_idle_se=None` does not read critic
+scores. A finite value clears the generator step's gradients when the batch
+mean of `real_logits - fake_logits` is within that many unbiased standard
+errors of zero, then the optimizer step still runs.
 
 ## TOML configuration
 

@@ -11,6 +11,7 @@ from dataclasses import dataclass, replace
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -263,7 +264,9 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
         if noise_policy is not None:
             fake_g = noise_policy.output(fake_g, generator_step=True)
-        g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
+        fake_logits = critic(fake_g)
+        real_logits = critic(real).detach()
+        g_loss = gan.g_loss(fake_logits, real_logits)
         # Demo cover and the n=12 cloud are recorded on the card and are
         # not added here. The train pin is the unused-token hold.
         if float(recipe.fm_weight) != 0.0:
@@ -277,6 +280,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         loss.backward()
         critic.requires_grad_(True)
         schedule_optimizer(opt_g, step)
+        release_generator_step(opt_g, real_logits, fake_logits)
         opt_g.step()
         checkpoint(step + 1, lambda: score_student(student))
 

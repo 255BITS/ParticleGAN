@@ -15,6 +15,7 @@ from typing import Callable
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.generator_idle import release_generator_step
 
 import torch
 
@@ -257,7 +258,9 @@ def train(*, pairing: str = "shared", echo: bool = False,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = head(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_logits = critic(slow, fake)
+            real_logits = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_logits, real_logits)
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity. The residual term does, and only on both-land
             # rows. fm_weight is 0: no feature-matching term is added.
@@ -271,6 +274,7 @@ def train(*, pairing: str = "shared", echo: bool = False,
             g_loss = g_loss + RESIDUAL_WEIGHT * residual
             g_loss.backward()
             schedule_optimizer(opt_g, step - 1)
+            release_generator_step(opt_g, real_logits, fake_logits)
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

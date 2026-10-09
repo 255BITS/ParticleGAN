@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.generator_idle import release_generator_step
 
 N_MODES = 8
 RADIUS = 3.0
@@ -197,7 +198,9 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         if noise_policy is not None:
             noise_policy.set_step(step)
         if training_recipe is not None:
-            scale = learning_rate_scale(step, recipe.steps, training_recipe.lr_anneal_start, training_recipe.lr_floor)
+            scale = (1.0 if getattr(training_recipe, "constant_lr", False) else
+                     learning_rate_scale(step, recipe.steps, training_recipe.lr_anneal_start,
+                                         training_recipe.lr_floor))
             for opt, rates in zip((opt_g, opt_d), base_lrs):
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * scale
@@ -217,10 +220,14 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         fake = generator(latent)
         if gan.mode in ("rp", "ra"):
             real_g = sample_ring(means, batch, SIGMA, stream)
-            g_loss = gan.g_loss(critic(fake), critic(real_g))
+            fake_logits = critic(fake)
+            real_logits = critic(real_g)
+            g_loss = gan.g_loss(fake_logits, real_logits)
         else:
             # Stranger / unpaired pairing: real and fake are scored apart.
-            g_loss = gan.g_loss(critic(fake))
+            fake_logits = critic(fake)
+            real_logits = None
+            g_loss = gan.g_loss(fake_logits)
         if recipe.fm_weight > 0.0:
             # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
             real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
@@ -230,6 +237,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         opt_g.zero_grad()
         g_loss.backward()
         schedule_optimizer(opt_g, step)
+        if real_logits is not None:
+            release_generator_step(opt_g, real_logits, fake_logits)
         opt_g.step()
         with torch.no_grad():
             for ema, param in zip(ema_g, generator.parameters()):

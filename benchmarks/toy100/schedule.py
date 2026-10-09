@@ -20,6 +20,7 @@ def policy_multipliers(
     network_lr_horizon_cap: int | None = None,
     *,
     network_lr_floor: float | None = None,
+    constant_lr: bool = False,
 ) -> tuple[float, float]:
     """Return (G/D multiplier, prior multiplier) for the next update."""
     if type(completed_step) is not int or completed_step < 0:
@@ -38,6 +39,10 @@ def policy_multipliers(
                 or not math.isfinite(network_lr_floor)
                 or not 0 <= network_lr_floor <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
+    if type(constant_lr) is not bool:
+        raise ValueError("constant_lr must be a bool")
+    if constant_lr:
+        return 1.0, 1.0
     horizon = min(total_steps, network_lr_horizon_cap or total_steps)
     network = learning_rate_scale(
         completed_step, horizon, anneal_start,
@@ -58,13 +63,14 @@ def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None
     the trainer's base rates are never modified, including in checkpoints.
     """
     total = trainer.recipe.total_steps
+    constant_lr = bool(getattr(trainer.recipe, "constant_lr", False))
     if network_lr_horizon_cap is None and (
             network_lr_floor is None or network_lr_floor == trainer.recipe.resolved_network_lr_floor):
         return trainer.step(real, **step_kwargs)
     network, prior = policy_multipliers(
         trainer.completed_steps, total, trainer.recipe.lr_anneal_start,
         trainer.recipe.lr_floor, network_lr_horizon_cap,
-        network_lr_floor=network_lr_floor,
+        network_lr_floor=network_lr_floor, constant_lr=constant_lr,
     )
     if (network_lr_horizon_cap >= total
             and (network_lr_floor is None or network_lr_floor == trainer.recipe.lr_floor)):
@@ -101,6 +107,7 @@ def policy_rate_action(trainer, completed_step: int, *,
         trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor,
         network_lr_horizon_cap,
         network_lr_floor=network_lr_floor,
+        constant_lr=bool(getattr(trainer.recipe, "constant_lr", False)),
     )
     if len(trainer.opt_g.param_groups) != 2 or len(trainer.opt_d.param_groups) != 1:
         raise RuntimeError("expected G, prior, and D optimizer groups")
