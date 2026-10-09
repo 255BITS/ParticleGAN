@@ -43,7 +43,7 @@ def main():
             state=queue.inspect()
             jobs=[j for j in state['jobs'].values() if any(rid in j['subscribers'] for rid in requests.values())]
             log(phase='progress',jobs=[dict(task=j['definition']['task_id'],status=j['status'],
-                candidate=j['definition'].get('candidate_id'),attempt=j.get('worker',{}).get('attempt_id')) for j in jobs],
+                candidate=j['definition'].get('candidate_id'),attempt=(j.get('worker') or {}).get('attempt_id')) for j in jobs],
                 accounting=state['campaigns'].get(CAMPAIGN))
     reporter=Thread(target=heartbeat,daemon=True);reporter.start()
     try:drain(queue,['0','1'],workers_per_gpu=1,allow_sharing=True,watch=False,campaign=CAMPAIGN)
