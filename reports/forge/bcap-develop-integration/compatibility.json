@@ -1,0 +1,449 @@
+{
+  "artifact_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/compatibility",
+  "baseline_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+  "component_cases": [
+    {
+      "candidate_state_sha256": "2d1b55d9a359201f020d6b969bdcda1064d2e0b05ca0c07fced8f4dd92156b85",
+      "case": "bcap_adam/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "2d1b55d9a359201f020d6b969bdcda1064d2e0b05ca0c07fced8f4dd92156b85"
+    },
+    {
+      "candidate_state_sha256": "a003f9ea7c12a1f12b1454238f742907389aabbe573377b1aac7a1a8ed7f01a2",
+      "case": "bcap_adam/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "a003f9ea7c12a1f12b1454238f742907389aabbe573377b1aac7a1a8ed7f01a2"
+    },
+    {
+      "candidate_state_sha256": "e5ac700c6aee507fcec272ff68accfdad75c262acb9e877cd3fcde811257d8fa",
+      "case": "bcap_winner/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "e5ac700c6aee507fcec272ff68accfdad75c262acb9e877cd3fcde811257d8fa"
+    },
+    {
+      "candidate_state_sha256": "3a17f54c797aaeb2a036d7c6b1f59d5d541145401dcb15d9b2074b190fc9b66e",
+      "case": "bcap_winner/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "3a17f54c797aaeb2a036d7c6b1f59d5d541145401dcb15d9b2074b190fc9b66e"
+    },
+    {
+      "candidate_state_sha256": "c002d572911d47ba9afecccbeb56c5a19fb7b8511047c9f643dd5a19e4435715",
+      "case": "k3p/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "c002d572911d47ba9afecccbeb56c5a19fb7b8511047c9f643dd5a19e4435715"
+    },
+    {
+      "candidate_state_sha256": "8316cbf638758709154c9215f1cb2a628dc93960c6e1e335212b762e1c594e9e",
+      "case": "k3p/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "8316cbf638758709154c9215f1cb2a628dc93960c6e1e335212b762e1c594e9e"
+    },
+    {
+      "candidate_state_sha256": "3de843741f0b14cd17d76fe7af75ac5db98d7055ce99ae50eab67d8b90732994",
+      "case": "ka2/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "3de843741f0b14cd17d76fe7af75ac5db98d7055ce99ae50eab67d8b90732994"
+    },
+    {
+      "candidate_state_sha256": "6bf718450d849f6181f71d984f58417b2a3abed2d6effd09c092b1e047815f0d",
+      "case": "ka2/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "6bf718450d849f6181f71d984f58417b2a3abed2d6effd09c092b1e047815f0d"
+    },
+    {
+      "candidate_state_sha256": "63d8a3186788eaa4b66732be385eaed99d5bd58d44d64564f3466eb6c77af277",
+      "case": "r1r2/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "63d8a3186788eaa4b66732be385eaed99d5bd58d44d64564f3466eb6c77af277"
+    },
+    {
+      "candidate_state_sha256": "8ba63b50580c04293186540d0360ef5ad8e58073434d610456e92656342a94a2",
+      "case": "r1r2/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "8ba63b50580c04293186540d0360ef5ad8e58073434d610456e92656342a94a2"
+    },
+    {
+      "candidate_state_sha256": "dd29a79d2887f22250a79c0f75b714e56b4aa10a3cd7ff7115fdf50e99a25dd4",
+      "case": "released_gan/trajectory",
+      "numerical_differences": 0,
+      "reference_state_sha256": "dd29a79d2887f22250a79c0f75b714e56b4aa10a3cd7ff7115fdf50e99a25dd4"
+    },
+    {
+      "candidate_state_sha256": "450d43159b569c61f1732db09255a8746146aa3bad4a07c2ab8b431daf9b6bb1",
+      "case": "released_gan/ae_gan_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "450d43159b569c61f1732db09255a8746146aa3bad4a07c2ab8b431daf9b6bb1"
+    },
+    {
+      "candidate_state_sha256": "b72943e08843f5f8d20ae0c4a807f86eac981ad36a8a111adfdea5d9107acbb4",
+      "case": "bcap_winner/two_pole",
+      "numerical_differences": 0,
+      "reference_state_sha256": "b72943e08843f5f8d20ae0c4a807f86eac981ad36a8a111adfdea5d9107acbb4"
+    },
+    {
+      "candidate_state_sha256": "d84c105c6c188e2fd504d8ffe19fcb3b8e508809f056b8377059fca4b7df2d47",
+      "case": "bcap_winner/unused_token_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "d84c105c6c188e2fd504d8ffe19fcb3b8e508809f056b8377059fca4b7df2d47"
+    },
+    {
+      "candidate_state_sha256": "d5f6b0789c82839e18c43128b1a24876ac54dd1cab346a8b7f4006338fde1f7b",
+      "case": "bcap_winner/mid_scale_identity",
+      "numerical_differences": 0,
+      "reference_state_sha256": "d5f6b0789c82839e18c43128b1a24876ac54dd1cab346a8b7f4006338fde1f7b"
+    },
+    {
+      "candidate_state_sha256": "2b7fc0e1419a4337db268fa1dd4595f2464338ac87e6de3bbf4e9ee289ce2e28",
+      "case": "bcap_winner/residual_student",
+      "numerical_differences": 0,
+      "reference_state_sha256": "2b7fc0e1419a4337db268fa1dd4595f2464338ac87e6de3bbf4e9ee289ce2e28"
+    },
+    {
+      "candidate_state_sha256": "4f7b521d1e17cc2d8d7f8e2bae1a24a654d4141e370b95bf2cf671b9e1ce68ac",
+      "case": "bcap_winner/unipolar",
+      "numerical_differences": 0,
+      "reference_state_sha256": "4f7b521d1e17cc2d8d7f8e2bae1a24a654d4141e370b95bf2cf671b9e1ce68ac"
+    },
+    {
+      "candidate_state_sha256": "71176ceb3f6941142b13191944417b582415d886088f72c21b5ebb25acaf8ef9",
+      "case": "bcap_winner/cover_leftover",
+      "numerical_differences": 0,
+      "reference_state_sha256": "71176ceb3f6941142b13191944417b582415d886088f72c21b5ebb25acaf8ef9"
+    },
+    {
+      "candidate_state_sha256": "e5548c9bd68d57e2e052379ecf524c4139e7fe73f13956c40ac85faaa522ee80",
+      "case": "ka2/two_pole",
+      "numerical_differences": 0,
+      "reference_state_sha256": "e5548c9bd68d57e2e052379ecf524c4139e7fe73f13956c40ac85faaa522ee80"
+    },
+    {
+      "candidate_state_sha256": "463bc88751a91a5d83f66427907860111d5926ad06bf198e1e86631b922c4214",
+      "case": "ka2/unused_token_hold",
+      "numerical_differences": 0,
+      "reference_state_sha256": "463bc88751a91a5d83f66427907860111d5926ad06bf198e1e86631b922c4214"
+    },
+    {
+      "candidate_state_sha256": "8a8e0730482df423147ba310a492b26af3b073331aeb742c4f4a8d869c05508b",
+      "case": "ka2/mid_scale_identity",
+      "numerical_differences": 0,
+      "reference_state_sha256": "8a8e0730482df423147ba310a492b26af3b073331aeb742c4f4a8d869c05508b"
+    },
+    {
+      "candidate_state_sha256": "56d5fc562e61ee5434c02fb93f99bb451dad4574757ef288f3821239559da71e",
+      "case": "ka2/residual_student",
+      "numerical_differences": 0,
+      "reference_state_sha256": "56d5fc562e61ee5434c02fb93f99bb451dad4574757ef288f3821239559da71e"
+    },
+    {
+      "candidate_state_sha256": "7314624606dc330ce22996be7540206bf961e1f44e3e56d3d7b71ebdbdd211fe",
+      "case": "ka2/unipolar",
+      "numerical_differences": 0,
+      "reference_state_sha256": "7314624606dc330ce22996be7540206bf961e1f44e3e56d3d7b71ebdbdd211fe"
+    },
+    {
+      "candidate_state_sha256": "84b7245727b505fb21abd471a7318ac2a5503d1499d9bcbe693cf638bd348afc",
+      "case": "ka2/cover_leftover",
+      "numerical_differences": 0,
+      "reference_state_sha256": "84b7245727b505fb21abd471a7318ac2a5503d1499d9bcbe693cf638bd348afc"
+    }
+  ],
+  "host_acceptance": {
+    "atlas": {
+      "blocked": 27,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": "undeclared policy-control/served-sampling evidence",
+      "ready": 0
+    },
+    "bcap_adam": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    },
+    "bcap_winner": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    },
+    "e22": {
+      "blocked": 27,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": "undeclared policy-control/served-sampling evidence",
+      "ready": 0
+    },
+    "k3p": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    },
+    "ka2": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    },
+    "r1r2": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    },
+    "released_gan": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "preexisting_blocker": null,
+      "ready": 27
+    }
+  },
+  "limitations": [
+    "CPU software parity does not establish GPU parity or full-budget distribution-quality performance",
+    "Original custom behavioral hosts still declare provenance checkpoints without a continuation API; no new continuation support claimed",
+    "Two-update behavioral and four-update word cohorts are explicit software checks, not original task qualification",
+    "E22 and Atlas original clean/live cohorts remain BLOCKED before spend; their separate policy cohorts were not executed",
+    "Final integrated host production tree must rerun these checks before publication"
+  ],
+  "production_defects_identified": [],
+  "protocol": {
+    "initializer": "public deterministic_orthogonal through FormulationContext",
+    "optional_provenance_projection": "Only explicit new inactive defaults and their ownership metadata; each omitted value checked before projection",
+    "reference": "git archive of pinned develop production/config/profile sources, separate Python interpreter",
+    "seed": 0,
+    "threshold": "exact tensor/dictionary equality; zero numerical differences"
+  },
+  "raw_artifact_identities": {
+    "pytest-reviewed/bcap-compatibility0/candidate.log": {
+      "bytes": 18475,
+      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+    },
+    "pytest-reviewed/bcap-compatibility0/candidate.pt": {
+      "bytes": 51053554,
+      "sha256": "6a4e1afddd0039312f5e26b4e4a7195367bf12dc3e477f13f72f777ac0949e78"
+    },
+    "pytest-reviewed/bcap-compatibility0/develop.log": {
+      "bytes": 18475,
+      "sha256": "ddceb1f2138a2ee0bba6fb831ebd6573ed286e1a73238ef0491ac6f8afd39794"
+    },
+    "pytest-reviewed/bcap-compatibility0/develop.pt": {
+      "bytes": 34084253,
+      "sha256": "274a8036aa3d7b436d5e47366a9599c28bb11741f133cf344ab6345ec5d53e7e"
+    },
+    "reviewed.log": {
+      "bytes": 100,
+      "sha256": "c83b1aeb1df467830a401c907258d4d88cdff00df80c95d9719fd61389133e03"
+    },
+    "reviewed.xml": {
+      "bytes": 9965,
+      "sha256": "639e3b5a8a2a3c03403bc7731c2021072a55335a6d0ef7b40191629734d921ab"
+    }
+  },
+  "reproduction": "PYTHONPATH=. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_bcap_integration_compatibility.py",
+  "runtime": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "python": "3.12.13",
+    "torch": "2.14.0+cu130",
+    "torch_threads": 1
+  },
+  "scalar_cases": [
+    {
+      "candidate_final_state_sha256": "7845e5d19e3dfcf2d71963d3e0562433b83ca1eb6ba750c8afe96d7610e87556",
+      "case": "bcap_adam/particle_cloud",
+      "checkpoint_state_sha256": "66b69aab166359a1d15ab6af96f28bb125a128c1fbd217542da4168c7dd0b54c",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "7845e5d19e3dfcf2d71963d3e0562433b83ca1eb6ba750c8afe96d7610e87556",
+      "initial_state_sha256": "fff4867e82bc7a62395900019dfe99284c2926598554d39897864e2b241a2035",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "b4fed689883df70cc42ca4f9eb7c3b385dcb87cbd4057d4b9e71935a32e5b7f6",
+      "case": "bcap_adam/mog",
+      "checkpoint_state_sha256": "d70d62c1daf08dffa902abec7082e6f33802d75818a685a200164efc5cd5208a",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "b4fed689883df70cc42ca4f9eb7c3b385dcb87cbd4057d4b9e71935a32e5b7f6",
+      "initial_state_sha256": "0bacd684c109aee336e229bf1f19729192610438b84dbe5c5249d0856a156756",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "d5110cac1ae2178f7e7c4b561c11ca8223e974e2fb988ec8bdbdf3ba828918cb",
+      "case": "bcap_winner/particle_cloud",
+      "checkpoint_state_sha256": "62ca147392992fd1121e85391cbbf7299c3f5c19ad904cee672e7bb849db5f28",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "d5110cac1ae2178f7e7c4b561c11ca8223e974e2fb988ec8bdbdf3ba828918cb",
+      "initial_state_sha256": "60d2ad7f2ed1c175c2f90140a94300116b3f4759fc3548ef63195c15a6a26fa1",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "4814fd4197430fde0bc4721a4701878a6e23b9bf376d955e323d1d97d9e7c9ad",
+      "case": "bcap_winner/mog",
+      "checkpoint_state_sha256": "80ac6984e5568d1bf8611640521dab1055e1d778686369d21e5c942f6969c319",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "4814fd4197430fde0bc4721a4701878a6e23b9bf376d955e323d1d97d9e7c9ad",
+      "initial_state_sha256": "ee1c6dfabae60ffea31cf8a2de1760fa469c093600f515e5f61731663bcfabed",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "a9c6376347c59721ffaae288eaa3a56294daa5c3d179b477fa0cc60261b58310",
+      "case": "k3p/particle_cloud",
+      "checkpoint_state_sha256": "edc3763233b7e1123eafe327910f67b991cbf9d4286afb1b1cc90d26bbd5cfbb",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "a9c6376347c59721ffaae288eaa3a56294daa5c3d179b477fa0cc60261b58310",
+      "initial_state_sha256": "02658ef9f58b4d89197c59d1ef2a5c3bc553e1adb1a40a540667d3d1f7e7851b",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "9b71ecbe4fa1ea9c3294d6da524adc287cc329abb3146afc0b7415fdfbc9c01e",
+      "case": "k3p/mog",
+      "checkpoint_state_sha256": "d40644bd70645d28ed44486032cb5206976341ffc743531d52e8fd35b22c77a5",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "9b71ecbe4fa1ea9c3294d6da524adc287cc329abb3146afc0b7415fdfbc9c01e",
+      "initial_state_sha256": "2528c1a531aa2120b6e90d218a57aff834fb1843922674db8047e2d17b81b007",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "fcb950ba96c3a9b936a56def669b9899904f4ee0e49c6e77a743bd56be5fb8bc",
+      "case": "ka2/particle_cloud",
+      "checkpoint_state_sha256": "9a89006c45c6fe601c45151de47b29849b8959a86e870a7d5f8ee420ebc648ec",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "fcb950ba96c3a9b936a56def669b9899904f4ee0e49c6e77a743bd56be5fb8bc",
+      "initial_state_sha256": "d2dc08f414da774effaf7c3de6b0a4101d7377a52c2ec1a007924455d8517367",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "007aa76d662bf3f8c5bea53845066ca59d3794e13e5dc6d77016992f1ea75dc9",
+      "case": "ka2/mog",
+      "checkpoint_state_sha256": "6c265d047407e210205e50ce3544213011ac440f0b60b77f1a686db08c1f99a6",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "007aa76d662bf3f8c5bea53845066ca59d3794e13e5dc6d77016992f1ea75dc9",
+      "initial_state_sha256": "4749a64b7c2150c5fb15a16feae7f82da883b40ce88b394bf1d2f03c15f4564c",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "af97ff111f7e02c032e19e8fff57dd0e09678abcad23ac70fb9dd1df692750c3",
+      "case": "r1r2/particle_cloud",
+      "checkpoint_state_sha256": "b09e295b1033d5f19d7ea609afb8e7bda97ff1d0921f9fef6508e793ec073e05",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "af97ff111f7e02c032e19e8fff57dd0e09678abcad23ac70fb9dd1df692750c3",
+      "initial_state_sha256": "b4aa3500d51749557ab6d71bb9a45dbf0254af6f60742530534894dbe617bb0d",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "feccf9c839d5c0f77719d2cd7b8ad4c086f360e8041c83f96ba862d57a286071",
+      "case": "r1r2/mog",
+      "checkpoint_state_sha256": "e7cceaa3b67b4861590b3b55de1fd518ad28101ce3326c5e2820c4f3853a42b4",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "feccf9c839d5c0f77719d2cd7b8ad4c086f360e8041c83f96ba862d57a286071",
+      "initial_state_sha256": "bfc63f288bd15af99fa9e649f45f69da7d096d04455db3b89743e9956e5bf1b3",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "0a28c02268c8ce8876a37c952a423b8875ef3a98ee5ebb16ba957f18b64f0840",
+      "case": "released_gan/particle_cloud",
+      "checkpoint_state_sha256": "1f98fc05686f42ab2eb491b162ca36ca4db0db9b361207c9e535cfebfcc5190e",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "0a28c02268c8ce8876a37c952a423b8875ef3a98ee5ebb16ba957f18b64f0840",
+      "initial_state_sha256": "d4865b836d013f081bfd88b2dc1eb1a0a79d932d91f91c2879b842eeab79eae9",
+      "numerical_differences": 0
+    },
+    {
+      "candidate_final_state_sha256": "3fe8bfdecafe143542fa36a1e56c276983db5c6e96ef815e03f84232050a33b2",
+      "case": "released_gan/mog",
+      "checkpoint_state_sha256": "333d54b1ae0fe172a6dcb7532a59283a4108c315cb8094a0f7984c04d27ab807",
+      "continuation_variants_passed": 3,
+      "final_state_sha256": "3fe8bfdecafe143542fa36a1e56c276983db5c6e96ef815e03f84232050a33b2",
+      "initial_state_sha256": "85312cf7b8087165155fb5ea08312ce1161148e4d57423ff6e785cd892240765",
+      "numerical_differences": 0
+    }
+  ],
+  "schema_version": 1,
+  "scope": "bounded_software_compatibility",
+  "source_files_sha256": {
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": "48f4d4842ef73ebf92bedbfad83a915d4010cd1b8eed408a913ddcbfb366a06e",
+    "benchmarks/locked_shared/hosts/residual_student.py": "7b4de4b1840c10d62cf608e6e395083fa275f7fd238c1f4c57fbb739cb1a22c6",
+    "benchmarks/locked_shared/trajectory.py": "99d8ea4f3bc16d8dd70452a7a368e8128e5e967abd2197949d7c2ea433e3c7aa",
+    "benchmarks/locked_shared/two_pole.py": "487477821e7cd4f97492eccb9a28407832f46b002563b314c0d21e573a7f51b2",
+    "experiments/forge/api.py": "52adad84942595e6f854043014c1a4c2bc98891e865286fb43c82a49bcf85f54",
+    "experiments/forge/behavior_adapters.py": "1dffd1568c1ed714dd54aa8af6f19b3a7d2b970a7507adf56243b5a7b2a828d2",
+    "experiments/forge/boundaries.py": "5ff3580bf8e0f5213197795668b27195d492e129ff4f40b1c2ebe6918a92bd91",
+    "experiments/forge/studies.py": "7673638f157fbe95fc61f3e526d3b3f60ef2f8e3c336f1eddf9141939293ebe1",
+    "particlegan/conditional_transport.py": "596e6a50039ba0cae2490cc6bbd810968a868728fecccdd010963507f16e7598",
+    "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+    "particlegan/optim/constraint_geometry.py": "b78f2d6dec2d345c1357b3812a7f9adac8c4da0f86c8536ebfe0092c18269c5e",
+    "particlegan/optim/direction_blend.py": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72",
+    "particlegan/optim/dualnorm.py": "9ff1d4cd40effe478cb2afa74fbb418bef80c5b144609a84d4f5e568f787c969",
+    "particlegan/optim/strict_progress.py": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577",
+    "particlegan/recipe_compat.py": "2ab0c555e0420f54a9d26b24f9463f4c2b85114fd9dd53a387e364ff959c8d8e",
+    "particlegan/recipes.py": "be8437f18208f7df5bda942ba1cbb69200c50b746c2c9f2017936d3862fafcf7",
+    "particlegan/training.py": "87c263849ad4ee19aec654f95b63a8bbc90cc39132162a74d77dd2fb4d066b43"
+  },
+  "tail_command": "tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/compatibility/pytest-reviewed/bcap-compatibility0/candidate.log",
+  "test_source": "tests/test_bcap_integration_compatibility.py",
+  "test_source_sha256": "328f519edede0c03ef6d81c1611278461c21fe9ed30914f3eebc862ecca0fdbf",
+  "tested_candidate_production_commit": "d9025840e12b4ec2bc2dbbc783fcc6059cb99555",
+  "tests": {
+    "actual_develop_trainer_checkpoint_continuations": 36,
+    "component_host_cases": 24,
+    "duration_seconds": 13.07,
+    "failed": 0,
+    "original_host_preflight_comparisons": 216,
+    "passed": 62,
+    "public_software_outer_updates": 408,
+    "scalar_formulation_prior_cases": 12,
+    "word_joint_and_resume_cases": 6
+  },
+  "verdict": "PASS",
+  "verified_invariants": [
+    "No protected-loss hook on inactive scalar optimizers",
+    "Inactive sample-space objectives never evaluated",
+    "Complete models, routed parameter values, optimizer histories/clocks, losses, seen data and samples match develop",
+    "Named construction, data, prior, training-noise and evaluation stream checkpoints match develop",
+    "Evaluation preserves consumed training streams and caller global RNG",
+    "Actual develop trainer checkpoint loading supports absent new fields, explicit inactive fields and absent policy metadata",
+    "Actual develop word joint policy/data/named-stream checkpoints resume exactly"
+  ],
+  "word_cases": [
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "36bac6c5b8e8c2d99f12a7d4d8769acc74869b0ba2c1453e1468bd6a6cc32081",
+      "case": "bcap_adam",
+      "final_state_sha256": "36bac6c5b8e8c2d99f12a7d4d8769acc74869b0ba2c1453e1468bd6a6cc32081",
+      "numerical_differences": 0
+    },
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "da7f1fcba336b1b14bcdb94e1c63ffb92e15fc85594241e00ac647d5232de815",
+      "case": "bcap_winner",
+      "final_state_sha256": "da7f1fcba336b1b14bcdb94e1c63ffb92e15fc85594241e00ac647d5232de815",
+      "numerical_differences": 0
+    },
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "b618153e874d7200ac7f65d144e0b84fee1a0fc0c80c898189fe75f8e280ddb5",
+      "case": "k3p",
+      "final_state_sha256": "b618153e874d7200ac7f65d144e0b84fee1a0fc0c80c898189fe75f8e280ddb5",
+      "numerical_differences": 0
+    },
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "ba5b21b6efe76da638d18246d5bcc81f1aa7d9164091597f22f9f72300cb95b5",
+      "case": "ka2",
+      "final_state_sha256": "ba5b21b6efe76da638d18246d5bcc81f1aa7d9164091597f22f9f72300cb95b5",
+      "numerical_differences": 0
+    },
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "3bb8eb46629c2cbaaf37d99bd5fcd73a7f9c0a29ef74988aec648961fc2c30eb",
+      "case": "r1r2",
+      "final_state_sha256": "3bb8eb46629c2cbaaf37d99bd5fcd73a7f9c0a29ef74988aec648961fc2c30eb",
+      "numerical_differences": 0
+    },
+    {
+      "actual_develop_checkpoint_resume": "exact",
+      "candidate_final_state_sha256": "e0710a19810f4356a9bb6aa4f725b50a74d8d1f6a51f66b807b727ab5d9bd58f",
+      "case": "released_gan",
+      "final_state_sha256": "e0710a19810f4356a9bb6aa4f725b50a74d8d1f6a51f66b807b727ab5d9bd58f",
+      "numerical_differences": 0
+    }
+  ]
+}
