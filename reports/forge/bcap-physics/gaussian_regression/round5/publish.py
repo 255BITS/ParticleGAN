@@ -15,7 +15,7 @@ from reports.forge.regenerate_technique_inventory import project_receipt
 QUEUE = Path('/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue')
 OUT = Path(__file__).resolve().parent
 REQUESTS = read_json(Path('/tmp/bcap-physics-round5-20261009/gaussian_regression/progress.json'))['requests']
-DELTAS = {'constraint_geometry_mode', 'kinetic_transport_weight', 'kinetic_transport_local_weight', 'kinetic_transport_projections'}
+DELTAS = {'constraint_geometry_mode'}
 
 
 def render_saved(task, row, local, gif):
@@ -42,7 +42,7 @@ def main():
     torch.set_num_threads(1)
     state = read_json(QUEUE / 'queue/state.json')
     if pending():
-        raise ValueError('both declared recipes must finish before final publication')
+        raise ValueError('all three declared recipes must finish before final publication')
     rows, receipts, media, proof = [], [], [], []
     for role, rid in REQUESTS.items():
         request = state['submissions'][rid]['request']
@@ -150,11 +150,12 @@ def main():
                 else:
                     artifact=render_saved(task,row,local,gif)
                 media.append({**artifact,'role':role,'task_id':row['task_id'],'gif':str(gif.relative_to(OUT))})
+                from audit import data_proof
                 proof.append(dict(role=role,task_id=row['task_id'],attempt_id=aid,
                                   source_digest=request['source']['digest'],runtime=request['runtime'],
                                   recipe=row.get('recipe',row.get('applied',{}).get('recipe')),
                                   initialization=row.get('initialization',row.get('applied',{}).get('initialization')),
-                                  data_sha256=evidence.get('data_sha256'),
+                                  data_sha256=data_proof(task,row,saved),
                                   named_stream_state_sha256=(descriptor or {}).get('named_stream_state_sha256'),
                                   original_certificates={n:file_hash(durable/(n+'.json')) for n in ('request','result','evidence')},
                                   retained_inputs=inputs,provenance_checkpoint=descriptor))

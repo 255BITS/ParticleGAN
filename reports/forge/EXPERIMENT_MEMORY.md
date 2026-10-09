@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 791. Inventory coverage: complete. Unresolved import items: 7.
+Records: 794. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3686,6 +3686,22 @@ Administrative abandoned: Registered native comparison failed the unchanged full
 
 [Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
 
+### gaussian_regression-round5-direction-v1 · readout-0271bed2c3f3ecdfacfe3530
+
+**Scope:** research_diagnostic; scientific; revision `8f51303b00ca155a57f80b0a66fb96e6f083c9c79db870d2058b6f011dde440d`.
+
+Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 1358.385; mechanism `structural`.
+
+vector_unequal_mass: hq=0.95093, mass_tv=0.018623; vector_two_broad: hq=0.97754, mass_tv=0.013184; vector_unequal_width: hq=0.9209, mass_tv=0.022949
+
+direction: {'BLOCKED': 0, 'FAIL': 2, 'INCOMPLETE': 0, 'INVALID': 0, 'PASS': 3}; complete Gaussian stability FAIL; stationary/reacquisition/hold remain authoritative.
+
+**Next:** Stop this bounded comparison. Preserve rare/broad repairs and original failures; removing finite acceptance does not restore complete Gaussian retention. No sweep, continuation, seed experiment, merge, ordinary qualification or promotion.
+
+[Evidence](../../reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/result.json) · [Record](records/readout-0271bed2c3f3ecdfacfe3530.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -4038,6 +4054,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0363295227<0.3; q
 
 [Evidence](../../reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json) · [Record](records/readout-628b01d1adffd11312aff9b1.json)
 
+### gaussian_regression-round5-local-v1 · readout-63a43d70718cc449a6c7b75c
+
+**Scope:** research_diagnostic; scientific; revision `a6a38193aa2ba7e08a9f98a1c4a986071a6174a58e035818f32ac541a124b6f8`.
+
+Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 535.666; mechanism `structural`.
+
+vector_two_broad: hq=0.9856, mass_tv=0.00073242; vector_unequal_mass: hq=0.96973, mass_tv=0.016426
+
+local: {'BLOCKED': 0, 'FAIL': 2, 'INCOMPLETE': 0, 'INVALID': 0, 'PASS': 3}; complete Gaussian stability FAIL; stationary/reacquisition/hold remain authoritative.
+
+**Next:** Stop this bounded comparison. Preserve rare/broad repairs and original failures; removing finite acceptance does not restore complete Gaussian retention. No sweep, continuation, seed experiment, merge, ordinary qualification or promotion.
+
+[Evidence](../../reports/forge/attempts/45209da89af04eebad39683aa5102c85/result.json) · [Record](records/readout-63a43d70718cc449a6c7b75c.json)
+
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
 **Scope:** current; scientific; revision `7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803`.
@@ -4053,6 +4085,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.130
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
+
+### gaussian_regression-round5-finite-v1 · readout-7406e0f94aca37572fd57f84
+
+**Scope:** research_diagnostic; scientific; revision `5db0e75c221feb8dd7963c04b6fa17a5b4c3e6fffc463505eb5eb5d3fe475cf4`.
+
+Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.
+
+**Observed:** {'FAIL': 2, 'INCOMPLETE': 1, 'PASS': 3}; wall seconds 610.55; mechanism `structural`.
+
+vector_two_broad: hq=0.99072, mass_tv=0.005127
+
+finite: {'BLOCKED': 0, 'FAIL': 2, 'INCOMPLETE': 0, 'INVALID': 0, 'PASS': 3}; complete Gaussian stability FAIL; stationary/reacquisition/hold remain authoritative.
+
+**Next:** Stop this bounded comparison. Preserve rare/broad repairs and original failures; removing finite acceptance does not restore complete Gaussian retention. No sweep, continuation, seed experiment, merge, ordinary qualification or promotion.
+
+[Evidence](../../reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/result.json) · [Record](records/readout-7406e0f94aca37572fd57f84.json)
 
 ### forge-no-critic-penalty · readout-75d5cdc5a88167d59ceff1b2
 
@@ -5134,4 +5182,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d89d8d7d319bcd47c4cf1c4a02611ce5ca3121821f3dd0c6a7f71c576e3e0596`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8a83b34e868f33598c82dc83ffc884bce034e7d4ef596ade744415ad7c5cb385`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

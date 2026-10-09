@@ -1,0 +1,91 @@
+{
+  "bulk_logs_committed": false,
+  "capacity_probes": 0,
+  "compile_summaries_check": {
+    "added_inputs": [],
+    "changed_inputs": [],
+    "coverage_scope": "Registered compact publication schemas and normalized records; original artifact availability is separate.",
+    "fresh": true,
+    "inventory_coverage": {
+      "declared_count": 11780,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11780,
+      "unclassified": [],
+      "valid": true
+    },
+    "memory_current": true,
+    "next_action": null,
+    "publication_materialization_current": true,
+    "publication_record_count": 480,
+    "qualification_refresh": {
+      "mode": "preserved_published_evidence",
+      "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+      "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+    },
+    "record_count": 794,
+    "reducer_current": true,
+    "removed_inputs": [],
+    "status": "CURRENT",
+    "view_count": 14
+  },
+  "forge_validation": {
+    "candidates": 524,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "bcap-convolution-images-v1",
+      "bcap-tier2-smoothing-v1",
+      "constraint_geometry-candidate-study-v1",
+      "constraint_geometry-control-study-v1",
+      "constraint_geometry-round2-candidate-study-v1",
+      "constraint_geometry-round2-control-study-v1",
+      "constraint_geometry-round3-candidate-study-v1",
+      "constraint_geometry-round3-control-study-v1",
+      "gaussian_regression-round5-direction-study-v1",
+      "gaussian_regression-round5-finite-study-v1",
+      "gaussian_regression-round5-local-study-v1",
+      "projection_transport-round4-both-study-v1",
+      "projection_transport-round4-projection-study-v1",
+      "projection_transport-round4-transport-study-v1",
+      "projection_transport-round4-winner-study-v1",
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 66,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "bcap_convolution_images",
+      "clockfree_continuous",
+      "constraint_geometry-diagnostic-v1",
+      "constraint_geometry-round2-diagnostic-v1",
+      "constraint_geometry-round3-diagnostic-v1",
+      "discriminator_stability",
+      "formulation_comparison",
+      "gaussian_regression-round5-diagnostic-v1",
+      "host_profile_transfer",
+      "k3p_two_pole_horizon",
+      "projection_transport-round4-diagnostic-v1",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "original_task_qualification_files_preserved": 67,
+  "paid_training_probes": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_retries": 1,
+  "scientific_source_files_unchanged": 471,
+  "software_tests": {
+    "aggregate_pytest_method_seconds": 11.62,
+    "attempt_runs": 3,
+    "failed": 0,
+    "junit_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/logs/junit.xml",
+    "junit_sha256": "7f4262dcaa449d6b21623b89cacd487439cf95ad98c9ea1e3150cf7d5514ce1b",
+    "passed": 58,
+    "scope": "bounded synthetic software checks; not quality arms"
+  }
+}

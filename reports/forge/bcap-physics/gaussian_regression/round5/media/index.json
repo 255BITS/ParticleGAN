@@ -1,0 +1,458 @@
+{
+  "media": [
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/direction-gaussian1d_smoke.gif",
+      "gif_sha256": "189c52d1b54c44b8951558af8c3e4cc0cc63c9cb219db8b4c9caa5098f12178c",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "fb798b3fbf72300f93c02d63e48e1559df5323ea1b6420c4575a229ff930aefe",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "direction",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/d1297cc1d22f41189d6a351cfb1d7074/evaluator/observed-samples.pt": "12965f452e3b73c7b0e3510f73c528955d022a1170d60623762ff88c865ba864"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/direction-vector_two_broad.gif",
+      "gif_sha256": "70a79be300f7d1c1aac9c5c38ad14f70d4b878a0ead2957bb5ff7d3946321299",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "9a0a5ba1a1497a95cee7c4dc7f8c55c015fd2ed0527e9c00f1dd7cf0bc7c4e43",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "direction",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/509ad577f4b14613ad1b858fbde8b4c0/observed-samples.pt": "7e50faf2353cef256240233072691db1d2567038da2db22384fb363722375fca"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/direction-gaussian1d_stability.gif",
+      "gif_sha256": "9d910dcada7dd6e32ac6ab28a1ab95bf92c8593049b5f370d1349ac8e5f6f729",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "a4da11d47da599fa4a975aae6675807d6c1f3a494903c88ce54c832e540c1ba1",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "direction",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8437d9ade5044d4e9bea72e0d8ab4932/evaluator/observed-samples.pt": "332da54c18ce45d182933ca11281c7f59daddbc285a0a63f65469524a20eb315"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/direction-vector_unequal_width.gif",
+      "gif_sha256": "b8ae00b27ed7f663f2d87de86ad38af4a96ea9ec10fbb7e32bbeca3be9555c9a",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "1a801b96fd42fa4329cd216e935b3b3a6fd4cb865e713cf8885d8301b879b269",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "direction",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/5ad840d3b87e49e596c0ed6a5087de55/observed-samples.pt": "4e1704269d2ac681d4a853948c454948ce58df8ee4e6cf026ef523ca8faf2ff6"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/direction-vector_unequal_mass.gif",
+      "gif_sha256": "69d5bd832da2c8dcaa069f261b55996787af460c78c99164651549969f524b10",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "9acca976052f119d29fc290a0d01d66622b1f9970196e4c85e67918ec980c7e2",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "direction",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/079d0cb334b94e86b111017ab4cb2a44/observed-samples.pt": "17e878769d3ee3aa5e3dce09af451805e56f14ec5d4fdb2701e71e89a1173325"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/finite-vector_unequal_mass.gif",
+      "gif_sha256": "2b3f060801e9a9041389214f12a3d677b64ee0af494f384c619cf1aff3fa0072",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5212dc775b2e570f04e1fdb9e61f8f88e70ea0c050a7c69cf04bd64b972a08c6",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "finite",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/ca47fc056da94ce782ee367f1f0bbe06/observed-samples.pt": "9c3b1901d2d102aae993dc878b99d83f2b0920997f796d1c5cd0933609d9b007"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/finite-gaussian1d_stability.gif",
+      "gif_sha256": "a077b2ad814e29e8d91755c90a52ca081e19ff5d6272801f55208083c8a9c9cc",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "bace500e1f0be6e9321fa7fd2444e723d71048b4dee63cc76e6fb98b346c53cb",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "finite",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7259bc7d9e544c1cb2996411e4a804dd/evaluator/observed-samples.pt": "f0c0b5ce47c3fa97c44a6ea5249d4cad0494c6c3ac91510a2a2aee75a2a22500"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/finite-vector_unequal_width.gif",
+      "gif_sha256": "115d0362cadc4d696f799c3ab46db69d1f259e98eea41c986d29f2295dd363cd",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a51f19852e18ec8e922abcc3cff5a2f4a5c7e78ce92804608fd6b97ee176f839",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "finite",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/fd85553200e447ef9d4a09727132c467/observed-samples.pt": "fcca7037112a84da73dfcb5fee1c77559e4bb2e52ec8381b9b63750936fbf4d4"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/finite-gaussian1d_smoke.gif",
+      "gif_sha256": "dda2c4516274375d724ec4aa07fee68c930d3e287c198e0b8e751075ef730d5b",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "f1a03c8005f5b78dc1ec49e003f12b95317dd10a6b893592f0f07e379cc1df92",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "finite",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/38ab3c9fce66428e89a23f434298ad64/evaluator/observed-samples.pt": "3473317e84ac13978af7cae664f80ea9c14e33feaff811a246b1884673fa6b94"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/finite-vector_two_broad.gif",
+      "gif_sha256": "1e844080d3e5e6b30a0334dadb2d3312913e3de33c09e4a35f8274d9bcdde3d7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "2a47f4b7453501dfb3bd9387fbde2a1f90ea53f820b6280cdc23e198ee68a628",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "finite",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/3e1742de098c4362bca360bf51db0ae6/observed-samples.pt": "77ec40df248f9701670409e33f49920dfcf0381c1d904d8aebeaeec424239ca2"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/local-vector_two_broad.gif",
+      "gif_sha256": "329c6be1f169d4363c73a4832e7312bc6168e30c28ee17fa07dc465241da9a5e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "8d1eef16a283cf65b5ed9c4d6d0a88a03cb8a047e7cb6f61f964ceaca1e6bdf8",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "local",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/45209da89af04eebad39683aa5102c85/observed-samples.pt": "b8a10e5bc96971a72ccd8e1ce4cf969e0af99ac70dab7161b72311d9113b0606"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/local-vector_unequal_mass.gif",
+      "gif_sha256": "83185b013de83720d91faea09ca80d237c0dea60b4f99cdfb191682286d02b3a",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "5dd587c0da5754b97ef346152b1f807ea27a584cf5666db37f37023cdff5e086",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "local",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8b0ada219fe94f1a8839835c1c5457cc/observed-samples.pt": "5bfcd30b8524ce99f93aa9ccd6d934f9150a5484065c4af5913e0e90c4e2e560"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/local-gaussian1d_smoke.gif",
+      "gif_sha256": "d686dadfe7bd8d7f157bcf1d2ad83e65387b2f506ec707f71f09737092f443b7",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b56cfc36c046ef9ab680ac70ec9097aab5f6a8b843f5e5133bae38a6764bbbda",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "local",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/a1c387cca49e43e291f80ed5cf0ab03e/evaluator/observed-samples.pt": "b6ea46657ffa2dd19b0ffd83fa2a0b1d26e2787d996aa04430473ef248781621"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/local-vector_unequal_width.gif",
+      "gif_sha256": "b06557f16cc3a68a9d605e63e21e5cce3057bc121c69e933b17e2056a13a341c",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "a93dddaf5a58666739775be42720048ab49b32c5d49b91b63e08b34c8f4a2352",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "local",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/cd34b30fc5b0497eb35b333f0dbc5474/observed-samples.pt": "860f280def6b92591c5d603853f1740c99062d6de6ef1d707f21dc5fc8b9a51a"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+      "gif": "media/local-gaussian1d_stability.gif",
+      "gif_sha256": "0ae91b2b7fca36ba3fa69e86d273a3c4ba46857098e1141bbcb5b6026a4a6c07",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "2f5ede4d119ed207e2ba0a0120be6da6a34c4d3f3ad50c71f67ad27c0b11e332",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "role": "local",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7f0813232e6d4143b1efac8d1b1d8c3b/evaluator/observed-samples.pt": "ff17ded45f47f2774aafb0c5e0d23e36fc0ab3f14094a6f4fb7660c3d73c3a03"
+      },
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

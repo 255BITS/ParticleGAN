@@ -1,0 +1,846 @@
+{
+  "attempt_ids": [
+    "45209da89af04eebad39683aa5102c85",
+    "7f0813232e6d4143b1efac8d1b1d8c3b",
+    "8b0ada219fe94f1a8839835c1c5457cc",
+    "a1c387cca49e43e291f80ed5cf0ab03e",
+    "cd34b30fc5b0497eb35b333f0dbc5474"
+  ],
+  "candidate_id": "gaussian_regression-round5-local-v1",
+  "candidate_revision": "a6a38193aa2ba7e08a9f98a1c4a986071a6174a58e035818f32ac541a124b6f8",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Same-source three-arm local-v2, exact PR367 direction-blend+local-v2 and exact PR368 strict-finite+local-v2; archived controls contextual and verified by saved-state parity.",
+  "conclusion": "local: {'BLOCKED': 0, 'FAIL': 2, 'INCOMPLETE': 0, 'INVALID': 0, 'PASS': 3}; complete Gaussian stability FAIL; stationary/reacquisition/hold remain authoritative.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "45209da89af04eebad39683aa5102c85",
+        "7f0813232e6d4143b1efac8d1b1d8c3b",
+        "8b0ada219fe94f1a8839835c1c5457cc",
+        "a1c387cca49e43e291f80ed5cf0ab03e",
+        "cd34b30fc5b0497eb35b333f0dbc5474"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "9e7d76d838d5e94e0bc56804d94b15954500e596aec7e7ca4f75701c0303597f",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.06065283744125827
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.06065283744125827
+        }
+      },
+      "outcome": "falsified",
+      "provenance": [
+        {
+          "attempt_id": "45209da89af04eebad39683aa5102c85",
+          "producer_request_id": "9b232f25ae2bfe58df29890d",
+          "producer_study_id": "gaussian_regression-round5-local-study-v1",
+          "result_hash": "749ea1e6e57a33003124045bd0b1aa0ad8efb9abdcedd9a54c51a119b69e5773",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "7f0813232e6d4143b1efac8d1b1d8c3b",
+          "producer_request_id": "9b232f25ae2bfe58df29890d",
+          "producer_study_id": "gaussian_regression-round5-local-study-v1",
+          "result_hash": "77f6238a24136c23d5e170ad731157daf0ec8b06eb385b20ecf816bf36cd5bf3",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "8b0ada219fe94f1a8839835c1c5457cc",
+          "producer_request_id": "9b232f25ae2bfe58df29890d",
+          "producer_study_id": "gaussian_regression-round5-local-study-v1",
+          "result_hash": "e4ba251d0c4098c9d781b27399c995fa88fbc89d59bdf04bcea42fd40fc0bc47",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a1c387cca49e43e291f80ed5cf0ab03e",
+          "producer_request_id": "9b232f25ae2bfe58df29890d",
+          "producer_study_id": "gaussian_regression-round5-local-study-v1",
+          "result_hash": "18c1edbb573756301289c2c3f97c87e1d29cd3d51a58b02c640abf94e5d490f8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "cd34b30fc5b0497eb35b333f0dbc5474",
+          "producer_request_id": "9b232f25ae2bfe58df29890d",
+          "producer_study_id": "gaussian_regression-round5-local-study-v1",
+          "result_hash": "2e853ab8951a4ec11daaa01f4f2626d57383829fe34e5ad418b17102a2f83617",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "2617b314bba685dffced89680b3a104e98a6f5412043c0e3adf6f21d9df9407c",
+        "contract_sha256": "9e7d76d838d5e94e0bc56804d94b15954500e596aec7e7ca4f75701c0303597f",
+        "control_binding_sha256": "287e8b099ebcf623b3f1d1c1ea6d82785fa5642208e77ef83d3415c0e623d13d",
+        "policy_fingerprint": "71b62db45a238696945f70e8c595ccb6461db4b147840cff588bf63de1c757c9",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "b6cc9b653c568ebe1cd1397a8bb92b350b1bf89e81c577cb059cfdb5c31a98b6"
+      },
+      "study_id": "gaussian_regression-round5-local-study-v1",
+      "study_sha256": "b6cc9b653c568ebe1cd1397a8bb92b350b1bf89e81c577cb059cfdb5c31a98b6"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "gaussian_regression-round5-diagnostic-v1",
+  "hypothesis": "Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this bounded comparison. Preserve rare/broad repairs and original failures; removing finite acceptance does not restore complete Gaussian retention. No sweep, continuation, seed experiment, merge, ordinary qualification or promotion.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "45209da89af04eebad39683aa5102c85",
+        "result_hash": "749ea1e6e57a33003124045bd0b1aa0ad8efb9abdcedd9a54c51a119b69e5773",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "7f0813232e6d4143b1efac8d1b1d8c3b",
+        "result_hash": "77f6238a24136c23d5e170ad731157daf0ec8b06eb385b20ecf816bf36cd5bf3",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "8b0ada219fe94f1a8839835c1c5457cc",
+        "result_hash": "e4ba251d0c4098c9d781b27399c995fa88fbc89d59bdf04bcea42fd40fc0bc47",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a1c387cca49e43e291f80ed5cf0ab03e",
+        "result_hash": "18c1edbb573756301289c2c3f97c87e1d29cd3d51a58b02c640abf94e5d490f8",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "cd34b30fc5b0497eb35b333f0dbc5474",
+        "result_hash": "2e853ab8951a4ec11daaa01f4f2626d57383829fe34e5ad418b17102a2f83617",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-63a43d70718cc449a6c7b75c",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 21180,
+      "candidate_budget_seconds": 7020,
+      "id": "gaussian_regression-round5-v1"
+    },
+    "candidate": "gaussian_regression-round5-local-v1",
+    "competing_explanation": "The blend direction itself or the changing adversarial/transport game may cause regression. Endpoint KS, fewer conflicts or lower covariance cannot substitute for complete retention gates; whole-history paths differ after the first changed step.",
+    "control": {
+      "candidate_id": "gaussian_regression-round5-finite-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "cdf_ks",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "hypothesis": "Removing strict finite acceptance from the exact common-descent blend may preserve local-v2 rare/broad repair and restore complete Gaussian retention/reacquisition.",
+    "id": "gaussian_regression-round5-local-study-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "cdf_ks",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "gaussian1d_stability",
+      "threshold": 0.05
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "scope": "saved-state Gaussian diagnostic"
+        },
+        "path": "reports/forge/bcap-physics/gaussian_regression/round5/prior-evidence.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "gaussian_regression-round5-diagnostic-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "gaussian_regression-round5-local-study-v1",
+  "study_sha256": "b6cc9b653c568ebe1cd1397a8bb92b350b1bf89e81c577cb059cfdb5c31a98b6",
+  "task_results": [
+    {
+      "compatibility_key": "0cbe42bca3f6fc1642e68c5eac216add56d38eea402468bda9ca8859e82506dc",
+      "cost": {
+        "adapter_loop_seconds": 54.45781951898243,
+        "adapter_seconds": 54.88269991800189,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 63.1175332829589,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 51.42789160483517,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.46154281380586326
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.012906947638839483
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 50.953441843390465
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 56.35240924707614,
+        "wall_seconds": 63.1175332829589
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.20833333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 250,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 24,
+          "passing_suffix": 24,
+          "stable_from_seconds": null,
+          "stable_from_step": 50
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.6234360024333,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.22656399756669998
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.5988236427307129,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.7488236427307129
+          },
+          "hq": {
+            "margin": 0.13559570312500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.985595703125
+          },
+          "mass_tv": {
+            "margin": 0.149267578125,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.000732421875
+          },
+          "sw1_normalized": {
+            "margin": 0.13964049946768184,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.040359500532318154
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.19878360629081726,
+        "component_core_covariance_errors": [
+          0.22050690650939941,
+          0.1770603060722351
+        ],
+        "component_core_eigen_ratios": [
+          0.7118433713912964,
+          0.773719072341919
+        ],
+        "component_core_min_eigen_ratio": 0.7118433713912964,
+        "component_counts": [
+          2045,
+          2051
+        ],
+        "component_covariance_error": 0.22656399756669998,
+        "component_covariance_errors": [
+          0.19631071388721466,
+          0.2568172812461853
+        ],
+        "component_mass": [
+          0.499267578125,
+          0.500732421875
+        ],
+        "component_min_eigen_ratio": 0.7488236427307129,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0034229829907417297,
+          0.025353485718369484
+        ],
+        "covariance_error": 0.11402000486850739,
+        "hq": 0.985595703125,
+        "mass_tv": 0.000732421875,
+        "max_component_spill": 0.025353485718369484,
+        "mean_error": 0.014424647204577923,
+        "min_mass_ratio": 0.99853515625,
+        "resolved_core_covariance_error": 0.19878360629081726,
+        "resolved_core_min_eigen_ratio": 0.7118433713912964,
+        "resolved_max_component_spill": 0.025353485718369484,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.040359500532318154,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "f366c8c9800dc86b372f156f5d6cdca00561743f6ef3a64980af6e25134a1239",
+      "cost": {
+        "adapter_loop_seconds": 111.93694553698879,
+        "adapter_seconds": 112.28410414000973,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 119.15555181610398,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 101.41037764935754,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.59041378099937
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.15899405535310507
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 99.66096981300507
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 113.59069422900211,
+        "wall_seconds": 119.15555181610398
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 11,
+        "stationary_checks": 72,
+        "stationary_passes": 28
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.06065283744125827,
+        "finite_fraction": 1.0,
+        "mean": 2.9644568772637285,
+        "mean_error_sigma": 0.07108624547254294,
+        "sample_count": 4096,
+        "std": 0.5197274541614134,
+        "std_ratio": 1.0394549083228268,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "7606a4a7c01533073b9fe493bca766f49af47eafb291a37660b221157914ada0",
+      "cost": {
+        "adapter_loop_seconds": 54.67728732805699,
+        "adapter_seconds": 55.53794858395122,
+        "charged_task": "vector_unequal_mass",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 265.1287529410329,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 44.296014005783945,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.39121824014000595
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.0111563183600083
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 43.89363944728393
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 56.90384979196824,
+        "wall_seconds": 265.1287529410329
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 1.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1200,
+          "first_pass_step": 300,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 13,
+          "passing_suffix": 5,
+          "stable_from_seconds": null,
+          "stable_from_step": 1000
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.32742290794849394,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.522577092051506
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.21656707525253296,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.36656707525253296
+          },
+          "hq": {
+            "margin": 0.11972656250000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9697265625
+          },
+          "mass_tv": {
+            "margin": 0.13357422091066837,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.016425779089331627
+          },
+          "min_mass_ratio": {
+            "margin": 0.6495643258094788,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.8995643258094788
+          },
+          "sw1_normalized": {
+            "margin": 0.14735568526577372,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.03264431473422628
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.270065825432539,
+        "component_core_covariance_errors": [
+          0.18996238708496094,
+          0.23253881931304932,
+          0.1870991438627243,
+          0.4706629514694214
+        ],
+        "component_core_eigen_ratios": [
+          0.732384443283081,
+          1.0362359285354614,
+          0.8326445817947388,
+          0.36656707525253296
+        ],
+        "component_core_min_eigen_ratio": 0.36656707525253296,
+        "component_counts": [
+          2239,
+          1264,
+          479,
+          114
+        ],
+        "component_covariance_error": 0.522577092051506,
+        "component_covariance_errors": [
+          0.18996238708496094,
+          0.49056118726730347,
+          0.9391218423843384,
+          0.4706629514694214
+        ],
+        "component_mass": [
+          0.546630859375,
+          0.30859375,
+          0.116943359375,
+          0.02783203125
+        ],
+        "component_min_eigen_ratio": 0.36656707525253296,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.004019651561975479,
+          0.05775316432118416,
+          0.05427974835038185,
+          0.14035087823867798
+        ],
+        "covariance_error": 0.04762283340096474,
+        "hq": 0.9697265625,
+        "mass_tv": 0.016425779089331627,
+        "max_component_spill": 0.14035087823867798,
+        "mean_error": 0.020012548193335533,
+        "min_mass_ratio": 0.8995643258094788,
+        "resolved_core_covariance_error": 0.20320011675357819,
+        "resolved_core_min_eigen_ratio": 0.732384443283081,
+        "resolved_max_component_spill": 0.05775316432118416,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.03264431473422628,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "compatibility_key": "7a5a8aa9a285f6be318c63b63a66568ffb528f0a66bd54eb3c6403e0a69bbb59",
+      "cost": {
+        "adapter_loop_seconds": 20.158795286086388,
+        "adapter_seconds": 20.491395961027592,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 26.950707977986895,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.395941124181263,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.476596238440834
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.14951190748251975
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 17.76983297825791
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 21.860211326973513,
+        "wall_seconds": 26.950707977986895
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 167,
+        "observations": 24,
+        "passing_observations": 13
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.02060552649610592,
+        "finite_fraction": 1.0,
+        "mean": 1.9832618783111684,
+        "mean_error_sigma": 0.033476243377663195,
+        "sample_count": 4096,
+        "std": 0.49645831899919346,
+        "std_ratio": 0.9929166379983869,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "bfc42a5c59dc1d6d2a9a88137a0ccf8e13f2ae7aef4a843d3560c16d6c6db26f",
+      "cost": {
+        "adapter_loop_seconds": 52.74127783998847,
+        "adapter_seconds": 53.01982913992833,
+        "charged_task": "vector_unequal_width",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 61.31316177092958,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 49.73624862811994,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.39590482390485704
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.012535005225799978
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 49.32780879898928
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 54.47166811104398,
+        "wall_seconds": 61.31316177092958
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -1.6304378859698772,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 2.4804378859698772
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.6357282161712646,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.7857282161712646
+          },
+          "hq": {
+            "margin": 0.10507812500000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.955078125
+          },
+          "mass_tv": {
+            "margin": 0.129248046875,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.020751953125
+          },
+          "sw1_normalized": {
+            "margin": 0.13090076811511314,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.04909923188488684
+          }
+        },
+        "passed": false,
+        "shortfall": 0.3836324437576182,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.28917114809155464,
+        "component_core_covariance_errors": [
+          0.3355385363101959,
+          0.33738765120506287,
+          0.326093852519989,
+          0.15766455233097076
+        ],
+        "component_core_eigen_ratios": [
+          0.6061838269233704,
+          0.5504463315010071,
+          1.0790529251098633,
+          0.7795868515968323
+        ],
+        "component_core_min_eigen_ratio": 0.5504463315010071,
+        "component_counts": [
+          959,
+          1004,
+          1057,
+          1076
+        ],
+        "component_covariance_error": 2.4804378859698772,
+        "component_covariance_errors": [
+          4.787479877471924,
+          4.601253509521484,
+          0.326093852519989,
+          0.20692430436611176
+        ],
+        "component_mass": [
+          0.234130859375,
+          0.2451171875,
+          0.258056640625,
+          0.2626953125
+        ],
+        "component_min_eigen_ratio": 0.7857282161712646,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.04275286942720413,
+          0.06274900585412979,
+          0.0397351011633873,
+          0.03531598672270775
+        ],
+        "covariance_error": 0.03986996412277222,
+        "hq": 0.955078125,
+        "mass_tv": 0.020751953125,
+        "max_component_spill": 0.06274900585412979,
+        "mean_error": 0.056909359991550446,
+        "min_mass_ratio": 0.9365234375,
+        "resolved_core_covariance_error": 0.28917114809155464,
+        "resolved_core_min_eigen_ratio": 0.5504463315010071,
+        "resolved_max_component_spill": 0.06274900585412979,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.04909923188488684,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_width"
+    }
+  ]
+}

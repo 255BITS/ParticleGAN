@@ -1,0 +1,1311 @@
+{
+  "actual_training_gifs": 15,
+  "archived_control_parity": [
+    {
+      "archived_attempt_id": "4171d610187045ada0f7000a0764eef8",
+      "archived_checkpoint_sha256": "ff288c5b76c0cabe75dd07e73502d19995dcf2e0ea4d6725b8e8a0074687cf6e",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "8b0ada219fe94f1a8839835c1c5457cc",
+      "qualification_credit": false,
+      "role": "local",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_attempt_id": "2865e3889a2e4d23a78be6a89b349435",
+      "archived_checkpoint_sha256": "84cd3ba3945d730067784ea4d9826017d659c67763032fa6414a855dcbe45716",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "7f0813232e6d4143b1efac8d1b1d8c3b",
+      "qualification_credit": false,
+      "role": "local",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "7fe959bc7cea47249df469a730093f74",
+      "archived_checkpoint_sha256": "c79765d26741c883871ca778aa485b2c5e80155044c6f30910a37f3dbe9c25eb",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "45209da89af04eebad39683aa5102c85",
+      "qualification_credit": false,
+      "role": "local",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_attempt_id": "f318e20ffa2e4aba859a23964a3d0fbf",
+      "archived_checkpoint_sha256": "1c6f7065022a8c38f3031c744afd73f2795ea6e8f25dc7f98acd8bc9208141c9",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "a1c387cca49e43e291f80ed5cf0ab03e",
+      "qualification_credit": false,
+      "role": "local",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "e934909ad508480c8ea8368623c0c3aa",
+      "archived_checkpoint_sha256": "657c8b09c175d4d2cfda72760bbf2b8f3b8f8a4e9fce12432337e0acc4a541c7",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "7259bc7d9e544c1cb2996411e4a804dd",
+      "qualification_credit": false,
+      "role": "finite",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "390665d59b6e43eca17652dbdcbf01d6",
+      "archived_checkpoint_sha256": "d39f69f5887ef24b94276003de1dbde5b3cfa095c6f7a32746e33ea549681488",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "38ab3c9fce66428e89a23f434298ad64",
+      "qualification_credit": false,
+      "role": "finite",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "c743172967ff4173a16024b9e462cdb9",
+      "archived_checkpoint_sha256": "16d5c3fd4492a3b053298262a204a7885fdd2ecbedcb3716b2b95e6c0b78d95f",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "ca47fc056da94ce782ee367f1f0bbe06",
+      "qualification_credit": false,
+      "role": "finite",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_attempt_id": "4878c8a3beb84f8ab2f3444ba5aa0089",
+      "archived_checkpoint_sha256": "e8555566b8f18a6625775e4a698d13ea7322a4e0fb784445e10794a74f3588f2",
+      "archived_source_digest": "17cf8181e68a4dfaaab00c5f678c99dcf288f4cbc828a0d8f2ca4833c1c25e2f",
+      "equal": {
+        "metrics": true,
+        "model_optimizer_stream_tensors": true,
+        "observations": true,
+        "samples": true
+      },
+      "new_attempt_id": "3e1742de098c4362bca360bf51db0ae6",
+      "qualification_credit": false,
+      "role": "finite",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "current_scientific_files_verified": 471,
+  "disposable_data_replay_batches": 10800,
+  "elapsed_seconds": 1.2308684539748356,
+  "excluded_opaque_trace_fields": [
+    "training_state_sha256",
+    "primary_state_sha256",
+    "confirmed_state_sha256"
+  ],
+  "excluded_unused_ambient_state": [
+    "trainer.cpu_rng",
+    "trainer.cuda_rng"
+  ],
+  "exclusion_reason": "Opaque hashes include unused ambient states; all numeric outputs/metrics and actual model/optimizer/consumed streams compared",
+  "matched_conditions": [
+    {
+      "arms": [
+        "direction",
+        "finite",
+        "local"
+      ],
+      "initial_models_data_and_consumed_streams_equal": true,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arms": [
+        "direction",
+        "finite",
+        "local"
+      ],
+      "initial_models_data_and_consumed_streams_equal": true,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arms": [
+        "direction",
+        "finite",
+        "local"
+      ],
+      "initial_models_data_and_consumed_streams_equal": true,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arms": [
+        "direction",
+        "finite",
+        "local"
+      ],
+      "initial_models_data_and_consumed_streams_equal": true,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "arms": [
+        "direction",
+        "finite",
+        "local"
+      ],
+      "initial_models_data_and_consumed_streams_equal": true,
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_task_and_qualification_snapshots_preserved": 67,
+  "proofs": [
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "d9f9802c84c290326df96424a8870caec8773d0236d4b9c80ad937efa2359f0e",
+        "trainer": "7ba9d747cc8bed02b918fb685f51f352a7bba2e00dd192eb205e3035e11ec5d0"
+      },
+      "attempt_id": "d1297cc1d22f41189d6a351cfb1d7074",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/d1297cc1d22f41189d6a351cfb1d7074/provenance/provenance-state.pt",
+      "checkpoint_sha256": "83b05f61870095930900df934dabd3acf435c42a0a462d956e4b2e6978b27e92",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        }
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/evidence.json",
+          "sha256": "276b34fd3c0516f31f2b84661fbaf3241347cd37b154a2c9fa60125673d6860d"
+        },
+        "request": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/request.json",
+          "sha256": "8d9a0f6727e07a3f7680d8ce560107edfbf7c30dae8fdb06f74a646ad9a054a6"
+        },
+        "result": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/result.json",
+          "sha256": "eb5a0a8f5e8aed04a38ebe81a32f04565e32aa981676250989ab2c3c63b84303"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+        ],
+        "checks": 25,
+        "original_sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+        "unintended_rng_deviations": 0
+      },
+      "role": "direction",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "509ad577f4b14613ad1b858fbde8b4c0",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/509ad577f4b14613ad1b858fbde8b4c0/provenance/provenance-state.pt",
+      "checkpoint_sha256": "fdf7da7cf3b5f1f5c11259159a75aad1b520ab0025cafcf803437bcf8869c78a",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "ded45ce2c9510da5a3dee9b5c16c458857bf22ecb647b1e297b071446232ac19"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/evidence.json",
+          "sha256": "49fa7f5163f865485cf3f750ed03bf7270ed77f46229f336d381e09151c42d50"
+        },
+        "request": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/request.json",
+          "sha256": "3e598d9bad6ba3a0aef2d733202edf1e4ab664a1d49f1bc80593222ca4cbd6a2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/result.json",
+          "sha256": "4b6e705b5abee02be41265ea4df64010148cdfd52baaa4407956c9b57e290210"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "direction",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "693a8f57e1ffd65ce99476824d13ef36934e8752d8c671bec42c75792d220757",
+        "trainer": "e66d7b0a6a7caccffbac4cf8d8d35dcb0c8cbf7af572a40ca6b45068e831a517"
+      },
+      "attempt_id": "8437d9ade5044d4e9bea72e0d8ab4932",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8437d9ade5044d4e9bea72e0d8ab4932/provenance/provenance-state.pt",
+      "checkpoint_sha256": "19b765d5593f6dd4aef7b327528a055c6bb7bdb881700090523167e7b6539bcf",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+          "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+        }
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/evidence.json",
+          "sha256": "c7392b6ac0f3084478204113191ebd300b217dca0732174079a46dc10dcb67a8"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/request.json",
+          "sha256": "1326ccbc34464505fbded48ba49c3eea4ce33c61fb666a33632bfaf9b71dc8a2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/result.json",
+          "sha256": "74a4bcdbb308b47a8dcc1eea2bd1deaae5beb1b68d02e13231db568f0aa522a0"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 121,
+        "original_sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+        "unintended_rng_deviations": 0
+      },
+      "role": "direction",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "5ad840d3b87e49e596c0ed6a5087de55",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/5ad840d3b87e49e596c0ed6a5087de55/provenance/provenance-state.pt",
+      "checkpoint_sha256": "35b2398721e2bdee34aa05b0093cba52bfd45e87825dda59b7e52bb418951b60",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "b379e7964d7fbf566e34b7db82d91cd11eeaee9f10bbefbe8abdd9b8d7142274"
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/evidence.json",
+          "sha256": "8b1210ead0e2174e0ec3ded1709ed44261ae55a8679ef292cbe4fd6d685f7339"
+        },
+        "request": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/request.json",
+          "sha256": "63e2165ec150cc724220e4f9a1ac2f2eddddc673c2e05a439d196355e96086d5"
+        },
+        "result": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/result.json",
+          "sha256": "000076147e3e67c0ed31d14595cfbed1ab3a79b524f762480e3f91c9f60e9a78"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "direction",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "079d0cb334b94e86b111017ab4cb2a44",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/079d0cb334b94e86b111017ab4cb2a44/provenance/provenance-state.pt",
+      "checkpoint_sha256": "69420933e2508f0ac3cc5676004d84f1de2e26085b48b995d95360797861ee3b",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "2d2b1683475340fe9096c7ea6b61fef36b089dcd065ec7251fa6323b055a94ae"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/evidence.json",
+          "sha256": "5f11ca5bc97e570c3710162fc5798e95566204c5ba22c768e28526981586ed5c"
+        },
+        "request": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/request.json",
+          "sha256": "ee930475a83ca2ecdec772784d51181f7f374a1d13d287d1e6710bdeb12b7640"
+        },
+        "result": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/result.json",
+          "sha256": "21a04b7d5d37c284fb19afa2071b41caeb548d6bbb1a50e4cd66050156462ce8"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "direction",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "ca47fc056da94ce782ee367f1f0bbe06",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/ca47fc056da94ce782ee367f1f0bbe06/provenance/provenance-state.pt",
+      "checkpoint_sha256": "6717d8f3f832745d7ec6ff985f0ca119b51c1ff0c94f4417d26bd10da957079f",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "2d2b1683475340fe9096c7ea6b61fef36b089dcd065ec7251fa6323b055a94ae"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/evidence.json",
+          "sha256": "cbccec6ca25db743f0d3b319efb06b4d294486d5885ba45f8774844075b5140e"
+        },
+        "request": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/request.json",
+          "sha256": "8418f55773b21b685c5f6183c19ada181cf8e7ab467773c3dbe44af2b3a84f06"
+        },
+        "result": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/result.json",
+          "sha256": "8166501275a5aaf748ba72ef96323cd4386c45f04b5c607ebe9326604f301040"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "finite",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "693a8f57e1ffd65ce99476824d13ef36934e8752d8c671bec42c75792d220757",
+        "trainer": "e66d7b0a6a7caccffbac4cf8d8d35dcb0c8cbf7af572a40ca6b45068e831a517"
+      },
+      "attempt_id": "7259bc7d9e544c1cb2996411e4a804dd",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7259bc7d9e544c1cb2996411e4a804dd/provenance/provenance-state.pt",
+      "checkpoint_sha256": "641d05e1da83b20ac6d4caa85063b9163a08a84cb0baaaaa5d090b8d03e63997",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+          "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+        }
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/evidence.json",
+          "sha256": "e3dfdc5486ce5768dd75bdb125360f5d9491fc41e3bdb0fbc955b93e3ce6b0d6"
+        },
+        "request": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/request.json",
+          "sha256": "77e1bcbd506560e50decac21184688b3a4fa4828a7e36a18cf7186351f511fa2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/result.json",
+          "sha256": "c59104316670f5ecc072c3a2ab095a58c65185e9098b808ad6d168eac0b1441e"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 121,
+        "original_sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+        "unintended_rng_deviations": 0
+      },
+      "role": "finite",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "fd85553200e447ef9d4a09727132c467",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/fd85553200e447ef9d4a09727132c467/provenance/provenance-state.pt",
+      "checkpoint_sha256": "fd6bed290da3f4ee9cf69d4389d6b65fa596c4ec05030c8700f3079a6d817607",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "b379e7964d7fbf566e34b7db82d91cd11eeaee9f10bbefbe8abdd9b8d7142274"
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/evidence.json",
+          "sha256": "e2268a2c98fa2bfe8439b39a33b739efed4d043baa9fc6ed2d0dae6f513b1372"
+        },
+        "request": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/request.json",
+          "sha256": "1d7031d494fee19db93d8656ebe4f1b203ec45252399b50f644755afca868e5b"
+        },
+        "result": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/result.json",
+          "sha256": "c7be2c6ef3117b237ccdc5371c86a446834b15afbf70e41c2aefa85b921c1e64"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "finite",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "d9f9802c84c290326df96424a8870caec8773d0236d4b9c80ad937efa2359f0e",
+        "trainer": "7ba9d747cc8bed02b918fb685f51f352a7bba2e00dd192eb205e3035e11ec5d0"
+      },
+      "attempt_id": "38ab3c9fce66428e89a23f434298ad64",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/38ab3c9fce66428e89a23f434298ad64/provenance/provenance-state.pt",
+      "checkpoint_sha256": "0b36871d6aa2327adfe6abf481408d8672bcfeeb794b5b7bd49de6b7141eea87",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        }
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/evidence.json",
+          "sha256": "41258b4f7cae46ccae1d56f290a609293670db3f88a02c5d351ada736e6e8f4d"
+        },
+        "request": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/request.json",
+          "sha256": "622c746ea627fa841d5e1e4678a96e3b706e001f465ebd922c7b93081b14477c"
+        },
+        "result": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/result.json",
+          "sha256": "0ddfe48a51d8daafa8e1b0e09dcc789509f9609cb325cb9a2b65af8aa0583311"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+        ],
+        "checks": 25,
+        "original_sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+        "unintended_rng_deviations": 0
+      },
+      "role": "finite",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "3e1742de098c4362bca360bf51db0ae6",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/3e1742de098c4362bca360bf51db0ae6/provenance/provenance-state.pt",
+      "checkpoint_sha256": "c2f2b43a446ced4fba66a3b87e6ff8cf825c77493b6b86cdf71a758399ecc430",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "ded45ce2c9510da5a3dee9b5c16c458857bf22ecb647b1e297b071446232ac19"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/evidence.json",
+          "sha256": "98725ba70e7f231248620323035fda33f9546c476869ce41d9e107cba53a1d01"
+        },
+        "request": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/request.json",
+          "sha256": "eab232ab3ce8233c86c99a0f4b62d13651fe55179e88787fb62ba06f0b648de9"
+        },
+        "result": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/result.json",
+          "sha256": "7b6bcfcb741269dd8395dc24eacf1fa02b18f6028c4ba4b75be2ff4984c423e9"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "finite",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "45209da89af04eebad39683aa5102c85",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/45209da89af04eebad39683aa5102c85/provenance/provenance-state.pt",
+      "checkpoint_sha256": "be226909e577ced6c3b04248451407b4e80000c1f4e247bda935e0a026dcfdc9",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "ded45ce2c9510da5a3dee9b5c16c458857bf22ecb647b1e297b071446232ac19"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/evidence.json",
+          "sha256": "95c1c37ed1d024f51dd9a1a6fbae059a40c9138f3a52f2255a3061aebe654f21"
+        },
+        "request": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/request.json",
+          "sha256": "3da6f0c1e3cb2e1724a3f1e3283f2d8d6339fe376fdec908bf7ce41d1c3cb887"
+        },
+        "result": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/result.json",
+          "sha256": "9fba5810dd4f259d555da66e675702b5977730f9865a20124bcbdbf72e84fe4f"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "local",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_two_broad"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "8b0ada219fe94f1a8839835c1c5457cc",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8b0ada219fe94f1a8839835c1c5457cc/provenance/provenance-state.pt",
+      "checkpoint_sha256": "5c5a1e2d558053ab3f019eac1bd2ed5f456775806981363649a7366c01dc4545",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "2d2b1683475340fe9096c7ea6b61fef36b089dcd065ec7251fa6323b055a94ae"
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/evidence.json",
+          "sha256": "9e295f147bb51333dc2116f007a6a9d6464dcfad0d5baa298269b1c3a0888fba"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/request.json",
+          "sha256": "b6c35e4784e99766290c8ce90236e0f3ac739a95c4f84d6f7fcef6ff4363e011"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/result.json",
+          "sha256": "5fa1b5f1e9f1ed95b2ab062dfbf759787bc6650bff4ccd9a760b8c59f644f576"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "local",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "d9f9802c84c290326df96424a8870caec8773d0236d4b9c80ad937efa2359f0e",
+        "trainer": "7ba9d747cc8bed02b918fb685f51f352a7bba2e00dd192eb205e3035e11ec5d0"
+      },
+      "attempt_id": "a1c387cca49e43e291f80ed5cf0ab03e",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/a1c387cca49e43e291f80ed5cf0ab03e/provenance/provenance-state.pt",
+      "checkpoint_sha256": "734f90da41dff5a30f41d775c18de39d65433df67252a85acd3608bb420b7b68",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+        }
+      },
+      "gate_status": "PASS",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/evidence.json",
+          "sha256": "088f8209dce794af69d5a955c49f6999b5c011bff63b3bcc0ec6443b17fa3395"
+        },
+        "request": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/request.json",
+          "sha256": "959297b2fda23dce3857487f42d22676b6559862ed096dbf300e6f6b1400e5c7"
+        },
+        "result": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/result.json",
+          "sha256": "06bb36f5781b47384d1e07d232c7f7a093c41d8344736a14de577389fd418962"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+        ],
+        "checks": 25,
+        "original_sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+        "unintended_rng_deviations": 0
+      },
+      "role": "local",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "74a8c94f1625be8969ab2041377b8d0b01b6fa0f188dbd401a941618223b3eed",
+        "trainer": "6fd856c9df8aa2765ffa5edb63c74b0323a14522434b4af1572a6c7a9975cac7"
+      },
+      "attempt_id": "cd34b30fc5b0497eb35b333f0dbc5474",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/cd34b30fc5b0497eb35b333f0dbc5474/provenance/provenance-state.pt",
+      "checkpoint_sha256": "c0996917f8d8bc541815c4e6cdc1ea0b75bd99095553fdfd759bca3978613eee",
+      "data_sha256": {
+        "method": "disposable replay of frozen one-real-batch-per-update law; exact initial/final data stream proof",
+        "replay_batches": 1200,
+        "sha256": "b379e7964d7fbf566e34b7db82d91cd11eeaee9f10bbefbe8abdd9b8d7142274"
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/evidence.json",
+          "sha256": "e169ab9aa02cfbb33e8cf46bfc7339c18922a7cc65d146dcc2368ea87b8c7d32"
+        },
+        "request": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/request.json",
+          "sha256": "b89320e22ce0f15398bacab4245c2a18fc9700bb1541befaaf22f3e73e029666"
+        },
+        "result": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/result.json",
+          "sha256": "57c361ce0917ffc8a3e1a7ef4940255ea6705437db96ae9e5e72bc7f599bedf3"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 24,
+        "original_sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+        "unintended_rng_deviations": 0
+      },
+      "role": "local",
+      "same_real_tensor_D_G": true,
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "actual_consumed_stream_sha256": {
+        "context": "693a8f57e1ffd65ce99476824d13ef36934e8752d8c671bec42c75792d220757",
+        "trainer": "e66d7b0a6a7caccffbac4cf8d8d35dcb0c8cbf7af572a40ca6b45068e831a517"
+      },
+      "attempt_id": "7f0813232e6d4143b1efac8d1b1d8c3b",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7f0813232e6d4143b1efac8d1b1d8c3b/provenance/provenance-state.pt",
+      "checkpoint_sha256": "66616dc5656436ec33c65851b7e1254272e284035a2e6059c79caf3a8fee905a",
+      "data_sha256": {
+        "method": "recorded actual Gaussian batches",
+        "replay_batches": 0,
+        "sha256": {
+          "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+          "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+        }
+      },
+      "gate_status": "FAIL",
+      "initial_model_hashes": {
+        "discriminator": {
+          "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/evidence.json",
+          "sha256": "6e08d1bc966ffe9683eeed565d5f2fe162b2dc0da543351805805f2ca85339b9"
+        },
+        "request": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/request.json",
+          "sha256": "ba176f75d7f1730df4e1953856c792e06ae38880b84629a6707809c5e4981b32"
+        },
+        "result": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/result.json",
+          "sha256": "d8a209bbd1ce92931d8b258bc65f619742a29763c58290677edf34bd51a651df"
+        }
+      },
+      "rng_audits": {
+        "changed_streams": [
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+        ],
+        "checks": 121,
+        "original_sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+        "unintended_rng_deviations": 0
+      },
+      "role": "local",
+      "same_real_tensor_D_G": true,
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "qualification_input": false,
+  "schema_version": 1,
+  "served_model_sampling_draws_added": 0,
+  "source_commit": "8728dac82a318124c1e4f761454ae17893c72c6d",
+  "source_digest": "21e4a3278bb8bd3e7a0386fce8b7ba5f4fe27610f5397e75b3dc3e07f1769552",
+  "source_snapshot_files_verified": 1204
+}

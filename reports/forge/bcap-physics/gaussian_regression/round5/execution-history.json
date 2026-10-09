@@ -1,0 +1,412 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "ca47fc056da94ce782ee367f1f0bbe06",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_mass": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/ca47fc056da94ce782ee367f1f0bbe06",
+      "paid_seconds": 71.68662550998852,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/evidence.json",
+          "sha256": "cbccec6ca25db743f0d3b319efb06b4d294486d5885ba45f8774844075b5140e"
+        },
+        "request": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/request.json",
+          "sha256": "8418f55773b21b685c5f6183c19ada181cf8e7ab467773c3dbe44af2b3a84f06"
+        },
+        "result": {
+          "path": "reports/forge/attempts/ca47fc056da94ce782ee367f1f0bbe06/result.json",
+          "sha256": "8166501275a5aaf748ba72ef96323cd4386c45f04b5c607ebe9326604f301040"
+        }
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "45209da89af04eebad39683aa5102c85",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_two_broad": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/45209da89af04eebad39683aa5102c85",
+      "paid_seconds": 63.1175332829589,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/evidence.json",
+          "sha256": "95c1c37ed1d024f51dd9a1a6fbae059a40c9138f3a52f2255a3061aebe654f21"
+        },
+        "request": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/request.json",
+          "sha256": "3da6f0c1e3cb2e1724a3f1e3283f2d8d6339fe376fdec908bf7ce41d1c3cb887"
+        },
+        "result": {
+          "path": "reports/forge/attempts/45209da89af04eebad39683aa5102c85/result.json",
+          "sha256": "9fba5810dd4f259d555da66e675702b5977730f9865a20124bcbdbf72e84fe4f"
+        }
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "d1297cc1d22f41189d6a351cfb1d7074",
+      "final_attempt": true,
+      "full_reservation": 120,
+      "gate_statuses": {
+        "gaussian1d_smoke": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/d1297cc1d22f41189d6a351cfb1d7074",
+      "paid_seconds": 69.66719154501334,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/evidence.json",
+          "sha256": "276b34fd3c0516f31f2b84661fbaf3241347cd37b154a2c9fa60125673d6860d"
+        },
+        "request": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/request.json",
+          "sha256": "8d9a0f6727e07a3f7680d8ce560107edfbf7c30dae8fdb06f74a646ad9a054a6"
+        },
+        "result": {
+          "path": "reports/forge/attempts/d1297cc1d22f41189d6a351cfb1d7074/result.json",
+          "sha256": "eb5a0a8f5e8aed04a38ebe81a32f04565e32aa981676250989ab2c3c63b84303"
+        }
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "509ad577f4b14613ad1b858fbde8b4c0",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_two_broad": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/509ad577f4b14613ad1b858fbde8b4c0",
+      "paid_seconds": 107.52620304992888,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/evidence.json",
+          "sha256": "49fa7f5163f865485cf3f750ed03bf7270ed77f46229f336d381e09151c42d50"
+        },
+        "request": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/request.json",
+          "sha256": "3e598d9bad6ba3a0aef2d733202edf1e4ab664a1d49f1bc80593222ca4cbd6a2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/509ad577f4b14613ad1b858fbde8b4c0/result.json",
+          "sha256": "4b6e705b5abee02be41265ea4df64010148cdfd52baaa4407956c9b57e290210"
+        }
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "7259bc7d9e544c1cb2996411e4a804dd",
+      "final_attempt": true,
+      "full_reservation": 600,
+      "gate_statuses": {
+        "gaussian1d_stability": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7259bc7d9e544c1cb2996411e4a804dd",
+      "paid_seconds": 171.10335159301758,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/evidence.json",
+          "sha256": "e3dfdc5486ce5768dd75bdb125360f5d9491fc41e3bdb0fbc955b93e3ce6b0d6"
+        },
+        "request": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/request.json",
+          "sha256": "77e1bcbd506560e50decac21184688b3a4fa4828a7e36a18cf7186351f511fa2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/7259bc7d9e544c1cb2996411e4a804dd/result.json",
+          "sha256": "c59104316670f5ecc072c3a2ab095a58c65185e9098b808ad6d168eac0b1441e"
+        }
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "fd85553200e447ef9d4a09727132c467",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_width": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/fd85553200e447ef9d4a09727132c467",
+      "paid_seconds": 105.33606119197793,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/evidence.json",
+          "sha256": "e2268a2c98fa2bfe8439b39a33b739efed4d043baa9fc6ed2d0dae6f513b1372"
+        },
+        "request": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/request.json",
+          "sha256": "1d7031d494fee19db93d8656ebe4f1b203ec45252399b50f644755afca868e5b"
+        },
+        "result": {
+          "path": "reports/forge/attempts/fd85553200e447ef9d4a09727132c467/result.json",
+          "sha256": "c7be2c6ef3117b237ccdc5371c86a446834b15afbf70e41c2aefa85b921c1e64"
+        }
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "e8047495f80e499aa6520968457f07ed",
+      "final_attempt": false,
+      "full_reservation": 120,
+      "gate_statuses": {
+        "gaussian1d_smoke": "INCOMPLETE"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/e8047495f80e499aa6520968457f07ed",
+      "paid_seconds": 121.14906002301723,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/e8047495f80e499aa6520968457f07ed/evidence.json",
+          "sha256": "c73dc9d7267556cfb582a54dd3caae89c8174184d16bca6e9697ae161799645b"
+        },
+        "request": {
+          "path": "reports/forge/attempts/e8047495f80e499aa6520968457f07ed/request.json",
+          "sha256": "7e700c6a77a7ad0f18dbb66548b902206ffac91d9d05788befa44309ef54eea6"
+        },
+        "result": {
+          "path": "reports/forge/attempts/e8047495f80e499aa6520968457f07ed/result.json",
+          "sha256": "eae78de5d4821fd5ef39312c98cd2858ec204a2cbc018fdbf818b334a1a88d10"
+        }
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "38ab3c9fce66428e89a23f434298ad64",
+      "final_attempt": true,
+      "full_reservation": 120,
+      "gate_statuses": {
+        "gaussian1d_smoke": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/38ab3c9fce66428e89a23f434298ad64",
+      "paid_seconds": 37.55007099802606,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/evidence.json",
+          "sha256": "41258b4f7cae46ccae1d56f290a609293670db3f88a02c5d351ada736e6e8f4d"
+        },
+        "request": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/request.json",
+          "sha256": "622c746ea627fa841d5e1e4678a96e3b706e001f465ebd922c7b93081b14477c"
+        },
+        "result": {
+          "path": "reports/forge/attempts/38ab3c9fce66428e89a23f434298ad64/result.json",
+          "sha256": "0ddfe48a51d8daafa8e1b0e09dcc789509f9609cb325cb9a2b65af8aa0583311"
+        }
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "3e1742de098c4362bca360bf51db0ae6",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_two_broad": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/3e1742de098c4362bca360bf51db0ae6",
+      "paid_seconds": 103.7248337760102,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/evidence.json",
+          "sha256": "98725ba70e7f231248620323035fda33f9546c476869ce41d9e107cba53a1d01"
+        },
+        "request": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/request.json",
+          "sha256": "eab232ab3ce8233c86c99a0f4b62d13651fe55179e88787fb62ba06f0b648de9"
+        },
+        "result": {
+          "path": "reports/forge/attempts/3e1742de098c4362bca360bf51db0ae6/result.json",
+          "sha256": "7b6bcfcb741269dd8395dc24eacf1fa02b18f6028c4ba4b75be2ff4984c423e9"
+        }
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "8b0ada219fe94f1a8839835c1c5457cc",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_mass": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8b0ada219fe94f1a8839835c1c5457cc",
+      "paid_seconds": 265.1287529410329,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/evidence.json",
+          "sha256": "9e295f147bb51333dc2116f007a6a9d6464dcfad0d5baa298269b1c3a0888fba"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/request.json",
+          "sha256": "b6c35e4784e99766290c8ce90236e0f3ac739a95c4f84d6f7fcef6ff4363e011"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8b0ada219fe94f1a8839835c1c5457cc/result.json",
+          "sha256": "5fa1b5f1e9f1ed95b2ab062dfbf759787bc6650bff4ccd9a760b8c59f644f576"
+        }
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "a1c387cca49e43e291f80ed5cf0ab03e",
+      "final_attempt": true,
+      "full_reservation": 120,
+      "gate_statuses": {
+        "gaussian1d_smoke": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/a1c387cca49e43e291f80ed5cf0ab03e",
+      "paid_seconds": 26.950707977986895,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/evidence.json",
+          "sha256": "088f8209dce794af69d5a955c49f6999b5c011bff63b3bcc0ec6443b17fa3395"
+        },
+        "request": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/request.json",
+          "sha256": "959297b2fda23dce3857487f42d22676b6559862ed096dbf300e6f6b1400e5c7"
+        },
+        "result": {
+          "path": "reports/forge/attempts/a1c387cca49e43e291f80ed5cf0ab03e/result.json",
+          "sha256": "06bb36f5781b47384d1e07d232c7f7a093c41d8344736a14de577389fd418962"
+        }
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "8437d9ade5044d4e9bea72e0d8ab4932",
+      "final_attempt": true,
+      "full_reservation": 600,
+      "gate_statuses": {
+        "gaussian1d_stability": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/8437d9ade5044d4e9bea72e0d8ab4932",
+      "paid_seconds": 519.7328069809591,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/evidence.json",
+          "sha256": "c7392b6ac0f3084478204113191ebd300b217dca0732174079a46dc10dcb67a8"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/request.json",
+          "sha256": "1326ccbc34464505fbded48ba49c3eea4ce33c61fb666a33632bfaf9b71dc8a2"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8437d9ade5044d4e9bea72e0d8ab4932/result.json",
+          "sha256": "74a4bcdbb308b47a8dcc1eea2bd1deaae5beb1b68d02e13231db568f0aa522a0"
+        }
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "5ad840d3b87e49e596c0ed6a5087de55",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_width": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/5ad840d3b87e49e596c0ed6a5087de55",
+      "paid_seconds": 444.6860521029448,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/evidence.json",
+          "sha256": "8b1210ead0e2174e0ec3ded1709ed44261ae55a8679ef292cbe4fd6d685f7339"
+        },
+        "request": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/request.json",
+          "sha256": "63e2165ec150cc724220e4f9a1ac2f2eddddc673c2e05a439d196355e96086d5"
+        },
+        "result": {
+          "path": "reports/forge/attempts/5ad840d3b87e49e596c0ed6a5087de55/result.json",
+          "sha256": "000076147e3e67c0ed31d14595cfbed1ab3a79b524f762480e3f91c9f60e9a78"
+        }
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "079d0cb334b94e86b111017ab4cb2a44",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_mass": "PASS"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/079d0cb334b94e86b111017ab4cb2a44",
+      "paid_seconds": 216.77280406700447,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/evidence.json",
+          "sha256": "5f11ca5bc97e570c3710162fc5798e95566204c5ba22c768e28526981586ed5c"
+        },
+        "request": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/request.json",
+          "sha256": "ee930475a83ca2ecdec772784d51181f7f374a1d13d287d1e6710bdeb12b7640"
+        },
+        "result": {
+          "path": "reports/forge/attempts/079d0cb334b94e86b111017ab4cb2a44/result.json",
+          "sha256": "21a04b7d5d37c284fb19afa2071b41caeb548d6bbb1a50e4cd66050156462ce8"
+        }
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "cd34b30fc5b0497eb35b333f0dbc5474",
+      "final_attempt": true,
+      "full_reservation": 1800,
+      "gate_statuses": {
+        "vector_unequal_width": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/cd34b30fc5b0497eb35b333f0dbc5474",
+      "paid_seconds": 61.31316177092958,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/evidence.json",
+          "sha256": "e169ab9aa02cfbb33e8cf46bfc7339c18922a7cc65d146dcc2368ea87b8c7d32"
+        },
+        "request": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/request.json",
+          "sha256": "b89320e22ce0f15398bacab4245c2a18fc9700bb1541befaaf22f3e73e029666"
+        },
+        "result": {
+          "path": "reports/forge/attempts/cd34b30fc5b0497eb35b333f0dbc5474/result.json",
+          "sha256": "57c361ce0917ffc8a3e1a7ef4940255ea6705437db96ae9e5e72bc7f599bedf3"
+        }
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "attempt_id": "7f0813232e6d4143b1efac8d1b1d8c3b",
+      "final_attempt": true,
+      "full_reservation": 600,
+      "gate_statuses": {
+        "gaussian1d_stability": "FAIL"
+      },
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/gaussian_regression/queue/gaussian_regression-round5-v1/7f0813232e6d4143b1efac8d1b1d8c3b",
+      "paid_seconds": 119.15555181610398,
+      "receipt_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/evidence.json",
+          "sha256": "6e08d1bc966ffe9683eeed565d5f2fe162b2dc0da543351805805f2ca85339b9"
+        },
+        "request": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/request.json",
+          "sha256": "ba176f75d7f1730df4e1953856c792e06ae38880b84629a6707809c5e4981b32"
+        },
+        "result": {
+          "path": "reports/forge/attempts/7f0813232e6d4143b1efac8d1b1d8c3b/result.json",
+          "sha256": "d8a209bbd1ce92931d8b258bc65f619742a29763c58290677edf34bd51a651df"
+        }
+      },
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "execution_repair": "Same frozen science; physicalGPU1/logicalcuda:0, poll5s, pre-import BLAS/OpenMP threads1; scientific Torch threadbudget1.",
+  "final_attempts": 15,
+  "full_reservations": 18480,
+  "original_timeout_preserved": true,
+  "paid_seconds": 2504.6007686269004,
+  "qualification_input": false,
+  "schema_version": 1,
+  "total_paid_attempts": 16
+}
