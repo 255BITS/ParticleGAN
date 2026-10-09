@@ -18,6 +18,7 @@ from experiments.forge.search_space import enqueue_compilation, report_compilati
 from reports.forge.regenerate_technique_inventory import project_receipt
 
 STUDY = "bcap-tier2-search-v1"
+CONFIGURATIONS = 72
 OUTPUT = ROOT / "reports/forge/bcap-tier2-search"
 MANIFEST = OUTPUT / "compiled.json"
 LOCAL = ROOT / "runs/software/bcap-tier2-search"
@@ -28,7 +29,7 @@ def evaluate_all(queue):
     state = queue.inspect()
     entries = [entry for entry in state["submissions"].values()
                if entry["request"].get("campaign_id") == STUDY]
-    assert len(entries) == 72
+    assert len(entries) == CONFIGURATIONS
     assert all(e["status"] not in {"queued", "running", "paused"} for e in entries)
     report = report_compilation(ROOT, queue.root, MANIFEST, queue=queue)
     assert report["selection"]["selection_complete"]
@@ -104,7 +105,7 @@ def evaluate_all(queue):
         "independent_confirmation": "not_performed", "completed_at": utc_now()}
     atomic_json(OUTPUT / "readout.json", output)
     atomic_json(LOCAL / "full-report.json", report)
-    print({"stage": "all_results_evaluated", "configurations": 72,
+    print({"stage": "all_results_evaluated", "configurations": CONFIGURATIONS,
            "tier1_survivors": output["tier1_survivors"],
            "selected_passes_by_tier": selected["required_passes_by_tier"],
            "target_met": output["target_met"], "paid_seconds": campaign["spent_seconds"]}, flush=True)
@@ -125,14 +126,14 @@ def main():
             # Ensure room for original artifacts before any scientific spend.
             assert shutil.disk_usage(queue.root).free >= 20 * 1024**3
             admitted = enqueue_compilation(ROOT, queue.root, MANIFEST, queue=queue)
-            assert admitted["submitted_count"] == 72
+            assert admitted["submitted_count"] == CONFIGURATIONS
             assert all(not t["submission_blockers"] for t in admitted["trials"])
             atomic_json(LOCAL / "started.json", {"study_id": STUDY, "started_at": utc_now(),
                 "queue_root": str(queue.root), "manifest_hash": admitted["manifest_hash"],
                 "source_origin_commit": __import__("subprocess").check_output(
                     ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                "physical_gpus": [0, 1], "configurations": 72})
-            print({"stage": "admitted", "configurations": 72, "queue_root": str(queue.root)}, flush=True)
+                "physical_gpus": [0, 1], "configurations": CONFIGURATIONS})
+            print({"stage": "admitted", "configurations": CONFIGURATIONS, "queue_root": str(queue.root)}, flush=True)
             # One blocking coordinator call: no intermediate reports, ranking,
             # callbacks, new hypotheses or agent-managed worker interventions.
             drain(queue, args.gpus.split(","), campaign=STUDY, poll_seconds=2.)

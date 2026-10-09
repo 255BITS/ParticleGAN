@@ -6,6 +6,14 @@ requirements. It covers all eight public BCAP optimizer families and all five
 adversarial losses, with extra DualNorm retention tuning. The finite target is
 at least ten Tier 2 passes on one complete configuration.
 
+The user subsequently requested enough work to keep both GPUs busy toward
+6 a.m. Denver time. A [separate frozen overnight extension](overnight/STUDY.md)
+adds **24 distinct BCAP configurations**, for **96 total**, after the original
+campaign completes. Its source/runtime match the original; no initial recipe
+or search declaration changes. The extra domain uses archived evidence and
+runtime/accounting estimates, with no interim scientific ranking. All 24 plans
+are READY, and 34 convolution/Forge integration tests passed.
+
 The [study](STUDY.md) declares hypotheses, exact scope, gates, budgets and
 stopping. [The plan](plan.json) verifies all 72 configurations are READY;
 [the manifest](compiled.json) freezes the finite population, every draw,
@@ -38,3 +46,11 @@ recommendations will be published after completion. The
 [existing technique inventory](../technique-inventory.md) remains the single
 leaderboard for the goal. Archived outcomes keep their original source and
 initialization identity. No public-default adoption or Tier 3 claim follows.
+
+[run_overnight.py](run_overnight.py) waits on the original completion marker,
+then runs its own immutable queue. Its default `complete_batch` policy finishes
+the extra population even if it extends past 6 a.m.; `pause_at_6` stops new
+launches at that time and lets active tasks finish. The chosen policy is saved
+in the launch receipt. Combined whole-configuration selection occurs after
+both batches complete, using the same PASS-count/hash objective and the same
+single goal leaderboard.
