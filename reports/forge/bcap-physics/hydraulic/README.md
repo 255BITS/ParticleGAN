@@ -247,6 +247,12 @@ incomplete executions. The [Forge study readout](../../records/readout-bd78af3e5
 records the prediction as observed but the overall decision as INCOMPLETE,
 because the declared two-pole candidate cell remains unsupported/unmeasured.
 That capability blocker is distinct from the two measured numerical FAILs.
+The separate [frozen control study readout](../../records/readout-3269bf08a67b0ba31bea7bf8.json)
+is also concluded. Its automatic outcome is FALSIFIED on the inherited native
+precision signature (0.24072 < 0.48). That recorded signature does not provide
+an experimental comparison against its untrained admission parent; comparable
+parent measurements remain absent. This closes only the frozen diagnostic
+control study and changes no archived qualification or public selection.
 All authorized runnable work is finished; no additional experiment can fill
 the missing cell without changing the mechanism/public host binding. Paid worker cost is **1661.774794 seconds**, versus the
 **14,400-second ceiling**; full allowances of launched jobs sum to 12,540 seconds

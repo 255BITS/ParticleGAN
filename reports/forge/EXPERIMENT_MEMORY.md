@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 782. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3830,6 +3830,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-3269bf08a67b0ba31bea7bf8
+
+**Scope:** research_diagnostic; scientific; revision `9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186`.
+
+Execute the exact saved BCAP winner in the same new source/runtime as hydraulic-output-travel-v1; its parent recipe is an admission reference only and is not trained.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 741.503; mechanism `floor_constant`.
+
+grid100: precision=0.24072, center_rms_sigma=1.5203, mass_tv=0.14718, radial_ks=0.49088
+
+Exact winning BCAP control completed all five frozen diagnostic tasks: three PASS, Gaussian stability and grid100 FAIL. This measures the hydraulic comparison control; it is not a new repair or qualification.
+
+**Next:** Conclude this frozen control study and retain its exact receipts for the hydraulic comparison. Preserve original winner/default selection and archived qualifications. No parent training, scientific retry, tuning or new evidence is authorized.
+
+[Evidence](../../reports/forge/attempts/0c1cce6e78ba4084b9c094a373603427/result.json) · [Record](records/readout-3269bf08a67b0ba31bea7bf8.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -4990,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `cb95532f270b9b76526339fb103a1fee6a319037ca9640bfa675c77d63b1a914`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `12bb7d560855a2888bc90421bb2809f0ccc0f5f70ae528be3d051939686b2c68`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
