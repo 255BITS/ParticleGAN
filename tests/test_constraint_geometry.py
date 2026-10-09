@@ -61,7 +61,8 @@ def test_disabled_backward_and_exact_winner_resolution():
     recipe = get_recipe(control["recipe_preset"], **control["recipe_overrides"])
     from dataclasses import asdict
     resolved = json.loads(json.dumps(asdict(recipe)))
-    resolved.pop("constraint_geometry_mode")
+    for key in ("constraint_geometry_mode", "kinetic_transport_weight", "kinetic_transport_local_weight", "kinetic_transport_projections"):
+        resolved.pop(key)
     expected = dict(original["resolved_configuration_recipe"])
     # Public task binding supplies prior implementation/resources in both arms.
     for key in ("prior_kind", "sigma_rel", "standardize", "total_steps", "batch_size", "num_particles", "z_dim"):
