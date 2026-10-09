@@ -148,6 +148,8 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         g_loss = gan.g_loss(paired, d_real)
         protected_adversarial = g_loss
         g_loss = g_loss + particle_l2 * particles.square().mean()
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, generated, real)
         def protected_evaluator():
             current = particles if pairing == "live" else stranger
             return (gan.g_loss(critic(current), d_real),)

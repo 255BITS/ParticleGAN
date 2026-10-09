@@ -1063,6 +1063,12 @@ class WordFixture:
         if recipe_name not in ("atlas", "e22", "e22_routed"):
             overrides["total_steps"] = self.case["recipe_schedule_horizon"]
         self.recipe = get_recipe(recipe_name, **overrides) if components is None else components.recipe
+        self.transport = None
+        if self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight:
+            if components is None or components.component_transport != 'output_marginal_v1':
+                raise ValueError('joint word transport requires an explicit output_marginal_v1 consumer')
+            from particlegan.conditional_transport import OutputMarginalTransport
+            self.transport = OutputMarginalTransport(self.recipe)
         if (self.recipe.model != "gan" or self.recipe.conditioning != "scalar"
                 or self.recipe.encoder_mode != "none"
                 or (self.recipe.num_particles, self.recipe.z_dim, self.recipe.batch_size) != (5, 2, 256)):
@@ -1151,9 +1157,21 @@ class WordFixture:
             loss_gan = self.loss.joint_g_loss(self.noisy_critic(_join_words(fake_words, latent)),
                                               self.noisy_critic(_join_words(real_words, encoded)))
             loss_g = loss_gan + self.recipe.prior_reg * self.spread(self.prior.z)
+            if self.transport is not None:
+                # Categorical probability coordinates only. The joint latent
+                # coordinates and inverse encoder retain their original loss.
+                loss_g = self.transport.add(loss_g, fake_words.flatten(1), real_words.flatten(1))
             self.opt_g.zero_grad(set_to_none=True)
             self.policy.before_generator_backward()
-            loss_g.backward()
+            if self.recipe.constraint_geometry_mode == 'strict_progress':
+                width_noise = (latent - self.prior.z[rows]).detach()
+            def protected_evaluator():
+                current_latent = self.prior.z[rows] + width_noise
+                return (self.loss.joint_g_loss(self.noisy_critic(_join_words(self.G(current_latent), current_latent)),
+                    self.noisy_critic(_join_words(real_words, self.E(real_words)))),)
+            from particlegan.optim.constraint_geometry import constraint_geometry_backward
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                         protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(loss_gan=loss_gan.detach(), loss_critic=adversarial_d.detach())
             self.opt_g.step()
             self.policy.after_generator_step()
@@ -1201,4 +1219,19 @@ class WordFixture:
     def state_dict(self):
         return dict(version=VERSION, case=deepcopy(self.case), seed=self.seed, recipe=self.recipe.to_dict(),
                     max_steps=self.max_steps, data_generator=self.data_generator.get_state().clone(),
-                    api_components=self.api_components, api_state=self.policy.state_dict())
+                    api_components=self.api_components, api_state=self.policy.state_dict(),
+                    **({"component_transport": self.transport.state_dict()} if self.transport is not None else {}))
+
+    def restore_component_transport(self, state):
+        """Restore optional consumer counters alongside the existing policy.
+
+        Old inactive fixtures omit this field and require no new mechanism.
+        Active fixtures must retain their own consumer evidence on resume.
+        """
+        if self.transport is None:
+            if state is not None:
+                raise ValueError('inactive word fixture cannot restore active transport')
+        elif state is None:
+            raise ValueError('active word fixture is missing transport checkpoint')
+        else:
+            self.transport.load_state_dict(state)

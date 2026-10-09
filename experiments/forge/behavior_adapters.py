@@ -231,6 +231,7 @@ class BehaviorComponents:
             raise CapabilityError(["these scheduled public components do not implement a clock-free optimizer"])
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
         self.direct_particle_ids, self.initial_group_betas = set(), {}
+        self.sampled_prior_rows = {}
         self.rng_audits, self.observations = [], []
         self.diagnostic, self.diagnostic_observations = None, []
         self.penalty = None
@@ -271,6 +272,7 @@ class BehaviorComponents:
                 kwargs["noise_generator"] = streams.generator(family, component=component, purpose="width")
             result = original(count, *args, **kwargs)
             if family != "eval":
+                self.sampled_prior_rows[prior.z] = result[1]
                 # Row-normalized tables must use the actual sampled rows.
                 # Auxiliary all-table losses can create gradients elsewhere,
                 # so a nonzero-gradient mask is not an equivalent contract.
@@ -286,7 +288,13 @@ class BehaviorComponents:
                             # occur after sampling, so replace earlier D rows
                             # here instead of clearing them at zero_grad.
                             optimizer.clear_sampled_rows()
-                            setter(prior.z, result[1])
+                            # An active joint optimizer may own multiple
+                            # priors. Replacing this table's D draw with its
+                            # G draw must retain the other table's actual rows.
+                            for table, rows in self.sampled_prior_rows.items():
+                                if any(parameter is table for group in optimizer.param_groups
+                                       for parameter in group["params"]):
+                                    setter(table, rows)
             return result
         prior.sample = sample
 
@@ -409,14 +417,15 @@ class BehaviorComponents:
                                         caption="Same scored state and pairing; fixed target, no replay training.",
                                         vmin=-1.5, vmax=1.5)]))
 
-    def add_transport_loss(self, total, fake, real, *, conditioning):
+    def add_transport_loss(self, total, fake, real, *, conditioning=None):
         """Only a declared variant consumes marginal output transport."""
-        if self.context.component_transport is None:
+        if self.context.component_transport is None or not (
+                self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
             return total
         if not hasattr(self, 'transport_consumer'):
             from particlegan.conditional_transport import OutputMarginalTransport
             self.transport_consumer = OutputMarginalTransport(self.recipe)
-        return self.transport_consumer.add(total, fake, real, conditioning=conditioning)
+        return self.transport_consumer.add(total, fake.flatten(1), real.flatten(1), conditioning=conditioning)
 
     def guards(self):
         steps = {}
@@ -440,8 +449,14 @@ class BehaviorComponents:
             return math.isfinite(value) if type(value) in (int, float) else True
         finite = finite and all(finite_state(optimizer.state_dict()) for optimizer in self.optimizers.values())
         mechanisms = self.mechanism_audit.receipt()
+        transport_requested = bool(self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight)
+        transport_calls = self.transport_consumer.active_calls if hasattr(self, 'transport_consumer') else 0
+        transport_exercised = not transport_requested or transport_calls == steps.get('generator', steps.get('prior', 0))
         return dict(all_finite=finite, optimizer_updates=steps,
-                    hooks_exercised=not mechanism_blockers(mechanisms), mechanism_audit=mechanisms,
+                    hooks_exercised=not mechanism_blockers(mechanisms) and transport_exercised,
+                    mechanism_audit=mechanisms,
+                    component_transport_requested=transport_requested,
+                    component_transport_active_calls=transport_calls,
                     unintended_rng_deviations=sum(a["unintended_rng_deviations"] for a in self.rng_audits))
 
     def optimizer_group_bindings(self):
@@ -495,7 +510,9 @@ class BehaviorComponents:
                                                "installed on prior tables; activation is recorded in mechanism_audit" if any(n.startswith("prior") for n in self.models)
                                                else "not applicable: host has no latent-table optimizer"),
                                              "critic_guard": "disabled" if self.recipe.d_guard_ratio == 0 else
-                                             "inactive before its declared minimum steps; see targeted component check" if self.task["execution"]["steps"] <= self.recipe.d_guard_min_steps else "installed; see measured activation counters"})
+                                             "inactive before its declared minimum steps; see targeted component check" if self.task["execution"]["steps"] <= self.recipe.d_guard_min_steps else "installed; see measured activation counters"},
+                    component_transport=(self.transport_consumer.state_dict()
+                        if hasattr(self, 'transport_consumer') else None))
 
     def provenance_state(self):
         """Include standalone coordinates omitted by model/optimizer tables."""
