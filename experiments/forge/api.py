@@ -298,6 +298,13 @@ def default_registry():
         ownership="technique", checkpoint="public trainer hydraulic deformation setting and counters",
         gradient_ownership="Adds generator-only finite-response gradient; prior adversarial gradient unchanged",
         initialization="unchanged public initializer", supported_paths=("public_trainer",)))
+    registry.register_extension(ExtensionSpec(
+        name="hydraulic_finite_shape",value_type="bool",target="trainer",argument="hydraulic_finite_shape",
+        description="Joint finite shape correction from real-neighborhood capacity, with first-order midpoint mean preservation",
+        ownership="technique",checkpoint="public hydraulic shape settings and counters",
+        gradient_ownership="Post-optimizer joint G/prior correction in the null space of sampled midpoint mean derivatives",
+        initialization="unchanged public initializer; expansion allowed below real-data capacity",
+        supported_paths=("public_trainer",)))
     return registry
 
 

@@ -1,0 +1,51 @@
+{
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "id": "hydraulic-local-shape-v3",
+  "parent": "hydraulic-secant-deformation-v2",
+  "mechanism_class": "structural",
+  "extensions": {
+    "hydraulic_travel": 1.0,
+    "hydraulic_finite_shape": true
+  },
+  "api_changes": [
+    "GANTrainer.hydraulic_finite_shape: training-real local capacities, finite G/prior correction and checkpointed fixed settings/counters"
+  ],
+  "changed_factors": [
+    "Replace global network-only secant penalty with joint post-DualNorm finite-excess correction in sampled midpoint-mean Jacobian nullspace; retain actual output travel fraction1"
+  ],
+  "mechanism_rationale": "Training-real epsilon graph estimates local variance capacities; allow initialization expansion within capacity, then constrain finite odd-response excess while preserving midpoint mean to first order. Exact replays enforce sampled shape progress and travel.",
+  "prior_art": [
+    "reports/forge/bcap-physics/hydraulic/round3/saved-finite.json",
+    "https://arxiv.org/abs/1802.08768",
+    "https://aaai.org/papers/kdd96-037-a-density-based-algorithm-for-discovering-clusters-in-large-spatial-databases-with-noise/"
+  ],
+  "guide": "reports/forge/bcap-physics/hydraulic/round3/README.md"
+}

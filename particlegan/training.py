@@ -107,7 +107,7 @@ class GANTrainer:
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
                  optimizer_options=None, penalty_options=None, serial_backward=True,
-                 hydraulic_travel_fraction=0., hydraulic_deformation_weight=0.):
+                 hydraulic_travel_fraction=0., hydraulic_deformation_weight=0., hydraulic_finite_shape=False):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
@@ -122,6 +122,7 @@ class GANTrainer:
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
         from .hydraulic import HydraulicTravel, HydraulicDeformationTravel
+        from .hydraulic_shape import HydraulicShapeTravel
         self.hydraulic = None
         if type(hydraulic_travel_fraction) not in (int, float) or not math.isfinite(hydraulic_travel_fraction):
             raise ValueError("hydraulic_travel_fraction must be a finite nonnegative number")
@@ -129,8 +130,12 @@ class GANTrainer:
                 or not math.isfinite(hydraulic_deformation_weight) or hydraulic_deformation_weight < 0
                 or (hydraulic_deformation_weight and hydraulic_travel_fraction <= 0)):
             raise ValueError("hydraulic deformation requires a nonnegative weight and positive travel fraction")
+        if (type(hydraulic_finite_shape) is not bool or (hydraulic_finite_shape
+                and (hydraulic_deformation_weight!=0 or hydraulic_travel_fraction<=0))):
+            raise ValueError('hydraulic finite shape requires positive travel and no global deformation loss')
         if hydraulic_travel_fraction != 0:
-            self.hydraulic = (HydraulicDeformationTravel(hydraulic_travel_fraction, hydraulic_deformation_weight)
+            self.hydraulic = (HydraulicShapeTravel(hydraulic_travel_fraction) if hydraulic_finite_shape else
+                              HydraulicDeformationTravel(hydraulic_travel_fraction, hydraulic_deformation_weight)
                               if hydraulic_deformation_weight else HydraulicTravel(hydraulic_travel_fraction))
             if (recipe.optimizer_family != "dualnorm" or recipe.optimizer_momentum != 0
                     or recipe.output_noise_std != 0 or recipe.input_noise_std != 0
@@ -155,7 +160,7 @@ class GANTrainer:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
         if type(self.prior) is MoGParticlePrior and self.prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if hydraulic_deformation_weight and (type(self.prior) is not MoGParticlePrior or self.prior.sigma <= 0):
+        if (hydraulic_deformation_weight or hydraulic_finite_shape) and (type(self.prior) is not MoGParticlePrior or self.prior.sigma <= 0):
             raise ValueError("hydraulic deformation requires positive-width MoG jitter")
         if prior_noise_generator is not None and type(self.prior) is not MoGParticlePrior:
             raise ValueError("prior_noise_generator requires a MoG prior")
@@ -365,13 +370,20 @@ class GANTrainer:
             if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
         from .hydraulic import HydraulicDeformationTravel
+        from .hydraulic_shape import HydraulicShapeTravel
         deformation = isinstance(self.hydraulic, HydraulicDeformationTravel)
+        finite_shape = isinstance(self.hydraulic, HydraulicShapeTravel)
         prepared_radius = None
-        if deformation:
+        shape_frame = None
+        if deformation or finite_shape:
             if callable(generator_real):
                 raise ValueError("hydraulic deformation needs a materialized generator_real batch")
             # Resolve all spacing/finite-data failures before the critic update.
-            prepared_radius = self.hydraulic.radius(real if generator_real is None else generator_real)
+            batch = real if generator_real is None else generator_real
+            if finite_shape:
+                shape_frame = self.hydraulic.prepare(batch)
+            else:
+                prepared_radius = self.hydraulic.radius(batch)
         step_noise = self.policy.begin_step(real, game_record=self.penalty.regularizer.record,
                                             execution_limit=self.max_steps)
         sigma_in, sigma_out = step_noise.input_sigma, step_noise.output_sigma
@@ -431,7 +443,14 @@ class GANTrainer:
                 def hydraulic_probe():
                     moved_latent = fixed_latent + self.prior.z[indices] - old_rows
                     return self.G(fixed_latent).detach(), self.G(moved_latent).detach()
-                self.hydraulic.step(self.opt_g, real_g, hydraulic_probe, radius=prepared_radius)
+                if finite_shape:
+                    def shape_probe():
+                        center=self.prior.z[indices]
+                        moved_latent=fixed_latent+center-old_rows
+                        return self.G(torch.cat((moved_latent,2*center-moved_latent),0)).chunk(2)
+                    self.hydraulic.step(self.opt_g,real_g,hydraulic_probe,shape_probe=shape_probe,prepared=shape_frame)
+                else:
+                    self.hydraulic.step(self.opt_g, real_g, hydraulic_probe, radius=prepared_radius)
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
