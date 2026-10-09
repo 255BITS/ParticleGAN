@@ -15,6 +15,8 @@ The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
 sustained conditional identity repairs while preserving the remaining failures.
 The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
 smaller conditional repair and measures composition, finite overshoot and tails.
+The [round-five readout](reports/forge/bcap-physics/round5/README.md) measures a
+combined conditional/rare repair and a width repair with rare/native regressions.
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 The [Forge preparation review map](docs/forge-integration-review-map.md) records

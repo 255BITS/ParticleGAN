@@ -1,5 +1,7 @@
 # BCAP repair research round four
 
+The subsequent [round-five readout](../round5/README.md) measures the conditional/rare union and remaining Gaussian, width and native tradeoffs. This round's conclusions and source identities remain unchanged.
+
 **The common-descent direction blend alone preserves both conditional identity repairs.** Finite acceptance is unnecessary for those measured gates. Projection plus transport local-v2 preserves the rare-density repair on supported vector hosts, with a longer passing suffix, but worsens Gaussian retention and cannot yet run on the conditional hosts. Actual native overshoot is now measured: reducing it improves precision without repairing mass balance, covariance or tails. The tail-moment successor collapses modes; balancing generator and prior motion improves some geometry but creates no complete sustained repair.
 
 These five completed studies answer the [round-three priorities](../round3/README.md) with three-arm projection ablation, two matched mechanism comparisons against the exact BCAP winner, a transport successor against local-v2, and a four-arm composition comparison. Each arm uses one global trainer configuration, protocol seed 0, unchanged task laws and complete original numerical gates. These are bounded diagnostics under provisional profiles. The original winner retains its archived **7/21 Tier 2** result in the [single current technique inventory](../../technique-inventory.md); specialist results do not add passes to that configuration.
