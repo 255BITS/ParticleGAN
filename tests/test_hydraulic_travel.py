@@ -83,3 +83,17 @@ def test_component_host_blocks_before_training():
     task=json.loads((root/'configs/forge/tasks/two_pole.json').read_text())
     with pytest.raises(CapabilityError, match='unsupported by public_components'):
         task_formulation_context(candidate, task, device='cpu', root=root)
+
+
+def test_zero_spacing_refuses_before_generator_motion():
+    weight=torch.nn.Parameter(torch.tensor([[1.]]))
+    optimizer=torch.optim.SGD([weight],lr=1.)
+    weight.grad=torch.ones_like(weight)
+    limiter=HydraulicTravel(1.)
+    def probe():
+        raise AssertionError('zero spacing must fail before output replay or optimizer mutation')
+    with pytest.raises(ValueError,match='positive finite batch spacing'):
+        limiter.step(optimizer,torch.zeros(8,1),probe)
+    assert torch.equal(weight.detach(),torch.ones(1,1))
+    assert optimizer.state=={}
+    assert limiter.summary['updates']==0

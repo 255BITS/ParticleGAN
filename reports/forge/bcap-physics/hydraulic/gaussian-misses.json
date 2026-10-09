@@ -1,0 +1,54 @@
+{
+  "input_file": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/373eb78c6297437ea5b287015925a1af/evaluator/observed-samples.pt",
+  "input_sha256": "fe7ac35f5f09bab148663f1ad6bd5a1601e64220f0c92e7b208f68ba97747846",
+  "interpretation": "Moment bounds passing does not identify shape as the KS cause. Fitted-normal KS is descriptive only; target-law gates remain FAIL.",
+  "kind": "saved_failed_state_descriptive_shape_analysis",
+  "optimizer_updates_added": 0,
+  "original_attempt_id": "373eb78c6297437ea5b287015925a1af",
+  "qualification_input": false,
+  "random_sampling_draws_added": 0,
+  "schema_version": 1,
+  "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+  "states": [
+    {
+      "fitted_normal_ks": 0.01828478784544585,
+      "n": 4096,
+      "original_metrics": {
+        "cdf_ks": 0.06810175678775487,
+        "finite_fraction": 1.0,
+        "mean": 2.0803198612848064,
+        "mean_error_sigma": 0.1606397225696128,
+        "sample_count": 4096,
+        "std": 0.5258414586213053,
+        "std_ratio": 1.0516829172426105
+      },
+      "sample_mean": 2.0803198612848064,
+      "sample_std": 0.5258414586213053,
+      "step": 3959,
+      "target_ks": 0.06810175678775487,
+      "target_ks_failed_margin": 0.018101756787754872,
+      "target_mean": 2.0,
+      "target_sigma": 0.5
+    },
+    {
+      "fitted_normal_ks": 0.007914276306199342,
+      "n": 4096,
+      "original_metrics": {
+        "cdf_ks": 0.05402190223666836,
+        "finite_fraction": 1.0,
+        "mean": 3.059633585100528,
+        "mean_error_sigma": 0.1192671702010557,
+        "sample_count": 4096,
+        "std": 0.5062132760956078,
+        "std_ratio": 1.0124265521912157
+      },
+      "sample_mean": 3.059633585100528,
+      "sample_std": 0.5062132760956077,
+      "step": 5125,
+      "target_ks": 0.05402190223666836,
+      "target_ks_failed_margin": 0.004021902236668359,
+      "target_mean": 3.0,
+      "target_sigma": 0.5
+    }
+  ]
+}

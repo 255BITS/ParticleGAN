@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 782. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4278,6 +4278,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### hydraulic-output-travel-v1 · readout-bd78af3e5a0d3194f1692b77
+
+**Scope:** research_diagnostic; scientific; revision `45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da`.
+
+Bounding realized joint G/prior batch output travel by observed training-data spacing reduces native overshoot and improves retention without losing the broad-vector guardrail.
+
+**Observed:** {'FAIL': 2, 'PASS': 2}; wall seconds 920.272; mechanism `structural`.
+
+vector_two_broad: hq=0.98779, mass_tv=0.074463
+
+The exact positive-spacing travel rule misses full Gaussian/native gates despite71/72 stationary and23/24 shifted hold checks and observed native precision prediction0.49586>=0.48; broad-vector remains PASS.
+
+**Next:** Stop this exact global-repair revision. Keep the winner/default; investigate shared translation separately from local Jacobian spread using the saved diagnostics before another frozen bounded study. No further training, seeds, radius tuning or transfer qualification.
+
+[Evidence](../../reports/forge/attempts/269a87b079ef4bd19ef36954427f347f/result.json) · [Record](records/readout-bd78af3e5a0d3194f1692b77.json)
+
 ### k3p · readout-c3df7159c90725fdef1cb700
 
 **Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
@@ -4974,4 +4990,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `90435d2994d4b1895db8eef18ad74eeec2be9bbcabfd3280942933eec182701b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `cb95532f270b9b76526339fb103a1fee6a319037ca9640bfa675c77d63b1a914`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
