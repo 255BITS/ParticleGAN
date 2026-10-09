@@ -66,7 +66,8 @@
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0"
+      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0",
+      "benchmarks/locked_shared/hosts/ae_gan_hold.py": "2cd9e2ed2cb80cd449a9fe73b7c3c9089e9193def3e364aa75443ef2b9e81b59"
     },
     "guards": {
       "finite_state": true,
@@ -94,6 +95,16 @@
         },
         "previous_revision": null,
         "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged."
+      },
+      "post_execution_compatibility": {
+        "id": "ae-four-argument-observer-v1",
+        "change": "Restore the four-argument AE evaluation observer/media interface only; no trainer, prior, sampling or gate change.",
+        "measured_source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "measured_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "previous_source_sha256": {
+          "benchmarks/locked_shared/hosts/ae_gan_hold.py": "f8391719e77b389d033e469be5fa53dcf1f46c0d74ba3990877add2a36118fea"
+        },
+        "compatibility_proof": "reports/forge/bcap-develop-integration/ae-observer-comparison.json"
       }
     }
   },
