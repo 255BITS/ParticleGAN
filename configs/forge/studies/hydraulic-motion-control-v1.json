@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "ready",
   "max_rounds": 1,
-  "hypothesis": "Bounding realized joint G/prior batch output travel by observed training-data spacing reduces native overshoot and improves retention without losing the broad-vector guardrail.",
+  "hypothesis": "Execute the exact saved BCAP winner in the same new source/runtime as hydraulic-output-travel-v1; its parent recipe is an admission reference only and is not trained.",
   "competing_explanation": "Spacing can slow acquisition excessively; batch-local motion need not stabilize density, critic dynamics or global mass allocation. The native Jacobian may remain too broad even after motion is limited.",
   "scope": {
     "view": "hydraulic_motion_diagnostic",
@@ -49,12 +49,13 @@
   "id": "hydraulic-motion-control-v1",
   "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
   "control": {
-    "candidate_id": "hydraulic-output-travel-v1",
+    "candidate_id": "bcap-dualnorm-conv-non-saturating-v1",
     "task_map": {
       "gaussian1d_smoke": "gaussian1d_smoke",
       "gaussian1d_stability": "gaussian1d_stability",
       "grid100": "grid100",
-      "vector_two_broad": "vector_two_broad"
+      "vector_two_broad": "vector_two_broad",
+      "two_pole": "two_pole"
     }
   }
 }
