@@ -176,6 +176,10 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if (recipe.same_batch_extragradient and task.get("adapter") == "transfer_behavior"
+            and task.get("execution", {}).get("host") != "mode_hold"):
+        return [f"{task.get('id')}: same_batch_extragradient requires GANTrainer; "
+                "this frozen public-components host has no reversible joint-step binding"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -337,6 +341,8 @@ class FormulationContext:
                                              "recipe_overrides": overrides}, **prior_fields)
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
+        if execution_path == "public_components" and self.recipe.same_batch_extragradient:
+            raise CapabilityError(["same_batch_extragradient requires the public GANTrainer joint step"])
         if self.prior_config["kind"] != "particle_cloud" and (
                 self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])

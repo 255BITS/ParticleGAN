@@ -177,6 +177,9 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # GANTrainer-only same-batch predictor/corrector of the alternating
+    # normalized joint network/prior map. No extra data/noise or committed tick.
+    same_batch_extragradient: bool = False
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -200,6 +203,17 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if type(self.same_batch_extragradient) is not bool:
+            raise ValueError("same_batch_extragradient must be a boolean")
+        if self.same_batch_extragradient and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
+                or self.critic_formulation != "bcap" or self.reg_arm != "b_cap"
+                or self.ema_decay != 0 or self.serve_average != 0
+                or self.continuous_policy is not None or self.lr_control != "mobility"
+                or self.row_evidence_gate or self.particle_birth_death
+                or self.output_noise_mode != "fixed"):
+            raise ValueError("same_batch_extragradient requires zero-momentum DualNorm BCAP, "
+                             "zero EMA and the fixed ordinary update policy")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)

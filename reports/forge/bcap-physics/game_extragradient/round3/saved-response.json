@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "scope": "Deterministic finite response at archived Gaussian states; no training.\n\nThis simultaneous full-table cubature probe is explicitly distinct from the\nalternating sampled-row training map. It does not estimate the antisymmetric\nJacobian or grant a quality gate. Archive identity and immutable input hashes\nare retained. Local changes are discarded after each restored-state probe.\n",
+  "original_candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "original_source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+  "protocol_seed": 0,
+  "optimizer_updates_added": 0,
+  "random_draws_added": 0,
+  "seconds": 0.9370468540582806,
+  "rows": [
+    {
+      "input": {
+        "task": "gaussian1d_stability",
+        "attempt_id": "ffc5586829b04e6baf8d0e443551a6b0",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/ffc5586829b04e6baf8d0e443551a6b0/evaluator/initial-state.pt",
+        "sha256": "b96465c3c51c2eb2494613c8f98a5c7f74ca2e105fcf7e38506f33e691e9c08a"
+      },
+      "completed_steps": 1000,
+      "response": {
+        "D": {
+          "cosine": 0.7772986380561522,
+          "predictor_norm": 0.07797714923627691,
+          "corrected_norm": 0.07670176244580448,
+          "relative_response": 0.6621066946998965
+        },
+        "G": {
+          "cosine": 0.8658842558895999,
+          "predictor_norm": 0.07352329714011271,
+          "corrected_norm": 0.07313534394891008,
+          "relative_response": 0.516569433756545
+        },
+        "prior": {
+          "cosine": 0.66919994349196,
+          "predictor_norm": 0.07349117125990165,
+          "corrected_norm": 0.06801847110421944,
+          "relative_response": 0.7860520596940673
+        }
+      }
+    },
+    {
+      "input": {
+        "task": "gaussian1d_stability",
+        "attempt_id": "ffc5586829b04e6baf8d0e443551a6b0",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/ffc5586829b04e6baf8d0e443551a6b0/evaluator/pre-shift-state.pt",
+        "sha256": "deaf01ccaf321365adac7b25092dd70eef4124ca8615afc7a3523759d3c5b94f"
+      },
+      "completed_steps": 4000,
+      "response": {
+        "D": {
+          "cosine": 0.7274303344613203,
+          "predictor_norm": 0.08147083308330579,
+          "corrected_norm": 0.09005936026191337,
+          "relative_response": 0.783402902480008
+        },
+        "G": {
+          "cosine": 0.8947390223598968,
+          "predictor_norm": 0.07006710396667505,
+          "corrected_norm": 0.06709279783400598,
+          "relative_response": 0.4509848964789619
+        },
+        "prior": {
+          "cosine": 0.5996535887854467,
+          "predictor_norm": 0.057381478128208686,
+          "corrected_norm": 0.05460956267323573,
+          "relative_response": 0.8742696740415503
+        }
+      }
+    },
+    {
+      "input": {
+        "task": "gaussian1d_stability",
+        "attempt_id": "ffc5586829b04e6baf8d0e443551a6b0",
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-search-v1/bcap-tier2-search-v1/ffc5586829b04e6baf8d0e443551a6b0/evaluator/state.pt",
+        "sha256": "9854ff0e94bd81c477371fab33df58c7caec6f1156fdc4658179c29dfe974d0e"
+      },
+      "completed_steps": 6000,
+      "response": {
+        "D": {
+          "cosine": 0.8166925976126892,
+          "predictor_norm": 0.07731256310869788,
+          "corrected_norm": 0.08271980092325028,
+          "relative_response": 0.6301963417493368
+        },
+        "G": {
+          "cosine": 0.7717477260838248,
+          "predictor_norm": 0.07297216442371872,
+          "corrected_norm": 0.07236290614579914,
+          "relative_response": 0.6728765226479178
+        },
+        "prior": {
+          "cosine": 0.7186325972698521,
+          "predictor_norm": 0.09377216357127821,
+          "corrected_norm": 0.1001295192036071,
+          "relative_response": 0.7781273085696143
+        }
+      }
+    }
+  ]
+}

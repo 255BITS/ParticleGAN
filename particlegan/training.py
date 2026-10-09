@@ -291,6 +291,9 @@ class GANTrainer:
             # Scope the entire update: graph construction can affect backward
             # accumulation order too. Restore the caller's setting on exit.
             with torch.autograd.set_multithreading_enabled(False):
+                if self.recipe.same_batch_extragradient:
+                    return self._extragradient_step(real, generator_real=generator_real,
+                                                    collect_stats=collect_stats)
                 return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
         except Exception:
             self.policy.abort_step()
@@ -327,6 +330,69 @@ class GANTrainer:
             raise ValueError("execution extension must exceed the current allowance and completed steps")
         self.max_steps = max_total_steps
         return self.max_steps
+
+    def _extragradient_step(self, real, *, generator_real=None, collect_stats=False):
+        """Correct the actual alternating map, with a reversible joint preview.
+
+        For the ordinary step displacement U(w; xi, h), preview w'=w+U(w),
+        then commit w+U(w'; xi, h). Both evaluations start with the same
+        optimizer/policy clocks h, original buffers, and random state xi.
+        The second evaluation still alternates D then G/prior; this is not
+        simultaneous extragradient. The second evaluation's committed clocks,
+        buffers and RNG advance once. Callable generator data is fetched once
+        before the preview and reused. No previous-direction cache is consumed.
+        """
+        real = self._batch(real, "real")
+        real_g = generator_real() if callable(generator_real) else generator_real
+        if real_g is not None:
+            real_g = self._batch(real_g, "generator_real")
+        original = self.state_dict()
+        modules = {name: getattr(self, name) for name in ("G", "D", "prior")}
+        modes = [(child, child.training) for module in modules.values() for child in module.modules()]
+        try:
+            self._step(real, generator_real=real_g, collect_stats=False)
+            predicted = {name: {key: p.detach().clone() for key, p in module.named_parameters()}
+                         for name, module in modules.items()}
+            # Roll back every consumed stream and all policy/optimizer state,
+            # then place just the joint parameters at the predictor state.
+            self.load_state_dict(original)
+            with torch.no_grad():
+                for name, module in modules.items():
+                    for key, p in module.named_parameters():
+                        p.copy_(predicted[name][key])
+            result = self._step(real, generator_real=real_g, collect_stats=collect_stats)
+            stats = {}
+            with torch.no_grad():
+                for name, module in modules.items():
+                    first_sq, second_sq, dot = [], [], []
+                    for key, p in module.named_parameters():
+                        base, preview = original["models"][name][key], predicted[name][key]
+                        first, correction = preview - base, p - preview
+                        if collect_stats:
+                            first_sq.append(first.square().sum())
+                            second_sq.append(correction.square().sum())
+                            dot.append((first * correction).sum())
+                        # Zero correction preserves the base bit for bit,
+                        # including unsampled prior rows. Never subtract/add
+                        # the preview to reconstruct an inactive parameter.
+                        p.copy_(torch.where(correction == 0, base, base + correction))
+                    if collect_stats:
+                        a, b = sum(first_sq).sqrt(), sum(second_sq).sqrt()
+                        stats[name] = {"predictor_norm": float(a), "corrector_norm": float(b),
+                                       "cosine": float(sum(dot) / (a * b)) if a * b > 0 else None}
+                # This capability admits EMA0 only: derived averages must
+                # describe the rebased committed model, not the preview.
+                self.ema_G.load_state_dict(self.G.state_dict())
+                self.ema_prior.load_state_dict(self.prior.state_dict())
+            if collect_stats:
+                result["extragradient_stats"] = stats
+            return result
+        except Exception:
+            self.policy.abort_step()
+            self.load_state_dict(original)
+            for child, mode in modes:
+                child.training = mode
+            raise
 
     def _step(self, real, *, generator_real=None, collect_stats=False):
         self._serve_release()

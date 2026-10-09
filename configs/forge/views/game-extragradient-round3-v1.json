@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "game-extragradient-round3-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 1
+    },
+    {
+      "task": "gaussian1d_stability",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 2
+    },
+    {
+      "task": "mode_hold",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 3
+    },
+    {
+      "task": "vector_two_broad",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 4
+    },
+    {
+      "task": "vector_unequal_width",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 5
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Scoped mechanism diagnostic only; no ordinary qualification or adoption."
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Reversible same-batch joint correction: Gaussian retention, mode-hold and unequal-width failures plus passing broad-vector guardrail; retain two-pole fixed fixture unsupported BLOCKED."
+}
