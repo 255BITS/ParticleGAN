@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 791. Inventory coverage: complete. Unresolved import items: 7.
+Records: 795. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3958,6 +3958,22 @@ Registered mode-hold diagnostic FAIL: 5/8 modes, HQ .992919921875, zero passing 
 
 [Evidence](../../reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json) · [Record](records/readout-5470a57cf1a74abc896c8a55.json)
 
+### conditional-integration-round5-direction-v1 · readout-55b02d23537927a4e1c7f7f7
+
+**Scope:** research_diagnostic; scientific; revision `2d5e67c986110c020221fc8092137d1ced40a211aac545cccc300230ca004baa`.
+
+Direction-only blend plus exact local-v2 may retain both conditional identity repairs and rare/broad density repairs in one global recipe with explicit output-marginal consumers.
+
+**Observed:** {'FAIL': 2, 'PASS': 5}; wall seconds 513.178; mechanism `structural`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654
+
+Exact direction blend retains all three conditional variant PASSes:5PASS2FAIL; rare mixture and Gaussian retention fail.
+
+**Next:** Stop this finite campaign. Retain BOTH as scoped measured conditional/density union, preserve Gaussian failure; no global replacement, ordinary qualification, default adoption, seed study, tuning or continuation.
+
+[Evidence](../../reports/forge/attempts/0675183d216f45bfa31099e3c84f7242/result.json) · [Record](records/readout-55b02d23537927a4e1c7f7f7.json)
+
 ### ka2 · readout-56577544c52c17aa60639d19
 
 **Scope:** current; scientific; revision `2a6cb4b3f19e57bb16599e23df1a83750b1e992634c6428dacd711f0269c83d1`.
@@ -4182,6 +4198,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
 
+### conditional-integration-round5-winner-v1 · readout-9787ecd836f74fc6dc701731
+
+**Scope:** research_diagnostic; scientific; revision `21d77a56360d482c32d06aedefd7a57d17fb46545197ad37c2ef8b3bbd75b5d1`.
+
+Direction-only blend plus exact local-v2 may retain both conditional identity repairs and rare/broad density repairs in one global recipe with explicit output-marginal consumers.
+
+**Observed:** {'FAIL': 4, 'PASS': 3}; wall seconds 205.137; mechanism `structural`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654
+
+Exact winner reproduces 3PASS4FAIL; both original conditional identities, rare mixture and Gaussian retention fail.
+
+**Next:** Stop this finite campaign. Retain BOTH as scoped measured conditional/density union, preserve Gaussian failure; no global replacement, ordinary qualification, default adoption, seed study, tuning or continuation.
+
+[Evidence](../../reports/forge/attempts/1fffbc4fcd094b9c8db342506bb5185d/result.json) · [Record](records/readout-9787ecd836f74fc6dc701731.json)
+
 ### constraint_geometry-round2-nonascent-v1 · readout-99157305f41ca0b884ae5c08
 
 **Scope:** research_diagnostic; scientific; revision `118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139`.
@@ -4358,6 +4390,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 [Evidence](../../reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json) · [Record](records/readout-b214c23e088f39337c3d8784.json)
 
+### conditional-integration-round5-both-v1 · readout-b3d943f0c86281b077a045ec
+
+**Scope:** research_diagnostic; scientific; revision `690923872eca6b008781706d45e8516e569e5517e9898c6dd8c36cf800b98e53`.
+
+Direction-only blend plus exact local-v2 may retain both conditional identity repairs and rare/broad density repairs in one global recipe with explicit output-marginal consumers.
+
+**Observed:** {'FAIL': 1, 'PASS': 6}; wall seconds 1780.45; mechanism `structural`.
+
+vector_unequal_mass: hq=0.95093, mass_tv=0.018623; vector_two_broad: hq=0.97754, mass_tv=0.013184
+
+One global direction+local-v2 recipe retains all three conditional variants and rare/broad density repairs:6PASS1FAIL. Gaussian retention fails (6/72 stationary,2/24 shift hold,deadlineFAIL), despite passing finalKS.
+
+**Next:** Stop this finite campaign. Retain BOTH as scoped measured conditional/density union, preserve Gaussian failure; no global replacement, ordinary qualification, default adoption, seed study, tuning or continuation.
+
+[Evidence](../../reports/forge/attempts/1b9617739f7843b0a50ad2165d613b0d/result.json) · [Record](records/readout-b3d943f0c86281b077a045ec.json)
+
 ### r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad · readout-b42a8f277178ec58808d6b5c
 
 **Scope:** current; scientific; revision `98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc`.
@@ -4485,6 +4533,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 1.0
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/b686547339464e94a60fd692675f1545.json) · [Record](records/readout-dc31730b85dde3cf85253359.json)
+
+### conditional-integration-round5-transport-v1 · readout-dcd0f72e9bb1a52d56f4e755
+
+**Scope:** research_diagnostic; scientific; revision `f1a2c6039a28494e10b29697cbcb5295ddb22d0f5f51c6707c8387ac561691de`.
+
+Direction-only blend plus exact local-v2 may retain both conditional identity repairs and rare/broad density repairs in one global recipe with explicit output-marginal consumers.
+
+**Observed:** {'FAIL': 3, 'PASS': 4}; wall seconds 747.792; mechanism `structural`.
+
+
+
+Exact local-v2 retains rare/broad and mid-scale PASSes:4PASS3FAIL; both conditional identities and Gaussian retention fail.
+
+**Next:** Stop this finite campaign. Retain BOTH as scoped measured conditional/density union, preserve Gaussian failure; no global replacement, ordinary qualification, default adoption, seed study, tuning or continuation.
+
+[Evidence](../../reports/forge/attempts/25749bc2d1204b0b865ae4f10b73b32b/result.json) · [Record](records/readout-dcd0f72e9bb1a52d56f4e755.json)
 
 ### k3p-global-repair-v1 · readout-dd6ff59094d1d766c5b0fe2b
 
@@ -5134,4 +5198,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d89d8d7d319bcd47c4cf1c4a02611ce5ca3121821f3dd0c6a7f71c576e3e0596`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `aac1c6e6c5451531e8f4eb4f97f631d3d878965a29ffa44849833368adce4abe`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

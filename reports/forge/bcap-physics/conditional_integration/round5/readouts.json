@@ -1,0 +1,26 @@
+{
+  "qualification_input": false,
+  "records": [
+    {
+      "path": "reports/forge/records/readout-9787ecd836f74fc6dc701731.json",
+      "record_id": "readout-9787ecd836f74fc6dc701731",
+      "role": "winner"
+    },
+    {
+      "path": "reports/forge/records/readout-55b02d23537927a4e1c7f7f7.json",
+      "record_id": "readout-55b02d23537927a4e1c7f7f7",
+      "role": "direction"
+    },
+    {
+      "path": "reports/forge/records/readout-dcd0f72e9bb1a52d56f4e755.json",
+      "record_id": "readout-dcd0f72e9bb1a52d56f4e755",
+      "role": "transport"
+    },
+    {
+      "path": "reports/forge/records/readout-b3d943f0c86281b077a045ec.json",
+      "record_id": "readout-b3d943f0c86281b077a045ec",
+      "role": "both"
+    }
+  ],
+  "schema_version": 1
+}

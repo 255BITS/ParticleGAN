@@ -274,6 +274,8 @@ def train(*, pairing: str = "shared", echo: bool = False,
             else:
                 residual = fake.new_zeros(())
             g_loss = g_loss + RESIDUAL_WEIGHT * residual
+            if components is not None:
+                g_loss = components.add_transport_loss(g_loss, fake, fast, conditioning=slow)
             protected = (protected_adversarial, residual) if both else (protected_adversarial,)
             def protected_evaluator():
                 current = head(slow, prior.z)

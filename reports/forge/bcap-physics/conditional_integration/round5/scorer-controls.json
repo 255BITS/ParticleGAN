@@ -1,0 +1,498 @@
+{
+  "ambient_rng_unchanged": true,
+  "conditional_controls": [
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "both",
+      "task": "residual_student_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "both",
+      "task": "trajectory_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "direction",
+      "task": "residual_student_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "direction",
+      "task": "trajectory_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "transport",
+      "task": "trajectory_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "transport",
+      "task": "residual_student_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "identity_mse": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "identity_mse": 0.12535640597343445
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "winner",
+      "task": "trajectory_transport_round5_v1"
+    },
+    {
+      "controls": {
+        "information_access": "target-informed scorer controls only; not learned baseline or alternate initializer",
+        "oracle": {
+          "endpoint_l2": 0.0,
+          "identity_mse": 0.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "oracle_pass": true,
+        "wrong_identity": {
+          "endpoint_l2": 0.492552250623703,
+          "identity_mse": 0.12535640597343445,
+          "success_rate": 0.0,
+          "wrong_pad_rate": 1.0
+        },
+        "wrong_identity_pass": false
+      },
+      "role": "winner",
+      "task": "residual_student_transport_round5_v1"
+    }
+  ],
+  "information_access": "Target-informed scoring witnesses only; no trained arm, model, alternate initialization or qualification.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "rows": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "cdf_ks": 0.00012207031250022204,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.49991985549631973,
+        "std_ratio": 0.9998397109926395
+      },
+      "passed": true,
+      "task": "gaussian_smoke_and_retention"
+    },
+    {
+      "control": "collapsed",
+      "failed_bounds": [
+        "std_ratio >= 0.8",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.5,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.0,
+        "std_ratio": 0.0
+      },
+      "passed": false,
+      "task": "gaussian_smoke_and_retention"
+    },
+    {
+      "control": "wrong_mean",
+      "failed_bounds": [
+        "mean_error_sigma <= 0.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.6828115319313326,
+        "finite_fraction": 1.0,
+        "mean": 3.0,
+        "mean_error_sigma": 2.0,
+        "sample_count": 4096,
+        "std": 0.49991985549631973,
+        "std_ratio": 0.9998397109926395
+      },
+      "passed": false,
+      "task": "gaussian_smoke_and_retention"
+    },
+    {
+      "control": "oracle",
+      "metrics": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.0,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": true,
+        "same_dir": 0.0
+      },
+      "passed": true,
+      "task": "mid_scale_identity"
+    },
+    {
+      "control": "mid_identity_swap",
+      "metrics": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "device": "cpu",
+        "fail_reasons": "identity_mid",
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.8181817496021324e-08,
+        "leak_frac": -1.0,
+        "pairing": "matched",
+        "pass": false,
+        "same_dir": 0.0
+      },
+      "passed": false,
+      "task": "mid_scale_identity"
+    },
+    {
+      "control": "oracle",
+      "metrics": {
+        "component_core_covariance_error": 0.061567073687911034,
+        "component_core_covariance_errors": [
+          0.029494334012269974,
+          0.021907344460487366,
+          0.05098052695393562,
+          0.14388608932495117
+        ],
+        "component_core_eigen_ratios": [
+          0.9587520360946655,
+          0.9725953340530396,
+          0.9567702412605286,
+          0.9361756443977356
+        ],
+        "component_core_min_eigen_ratio": 0.9361756443977356,
+        "component_counts": [
+          2289,
+          1192,
+          531,
+          84
+        ],
+        "component_covariance_error": 0.061567073687911034,
+        "component_covariance_errors": [
+          0.029494334012269974,
+          0.021907344460487366,
+          0.05098052695393562,
+          0.14388608932495117
+        ],
+        "component_mass": [
+          0.558837890625,
+          0.291015625,
+          0.129638671875,
+          0.0205078125
+        ],
+        "component_min_eigen_ratio": 0.9361756443977356,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.009611183777451515,
+          0.011744966730475426,
+          0.005649717524647713,
+          0.011904762126505375
+        ],
+        "covariance_error": 0.04003183916211128,
+        "hq": 0.990234375,
+        "mass_tv": 0.009345700964331627,
+        "max_component_spill": 0.011904762126505375,
+        "mean_error": 0.028690103441476822,
+        "min_mass_ratio": 0.9700520634651184,
+        "resolved_core_covariance_error": 0.03412740180889765,
+        "resolved_core_min_eigen_ratio": 0.9567702412605286,
+        "resolved_max_component_spill": 0.011744966730475426,
+        "sample_count": 4096,
+        "sw1_normalized": 0.020994997738564506,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "passed": true,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "control": "point_collapse",
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          4096,
+          0,
+          0,
+          0
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "covariance_error": 1.0,
+        "hq": 0.0,
+        "mass_tv": 0.44999998807907104,
+        "max_component_spill": 1.0,
+        "mean_error": 0.028690103441476822,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.5949677893663406,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "passed": false,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "control": "oracle",
+      "metrics": {
+        "component_core_covariance_error": 0.022980603855103254,
+        "component_core_covariance_errors": [
+          0.030657876282930374,
+          0.015303331427276134
+        ],
+        "component_core_eigen_ratios": [
+          0.9581191539764404,
+          0.9792678356170654
+        ],
+        "component_core_min_eigen_ratio": 0.9581191539764404,
+        "component_counts": [
+          2073,
+          2023
+        ],
+        "component_covariance_error": 0.022980603855103254,
+        "component_covariance_errors": [
+          0.030657876282930374,
+          0.015303331427276134
+        ],
+        "component_mass": [
+          0.506103515625,
+          0.493896484375
+        ],
+        "component_min_eigen_ratio": 0.9581191539764404,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.009647853672504425,
+          0.009886307641863823
+        ],
+        "covariance_error": 0.008670658804476261,
+        "hq": 0.990234375,
+        "mass_tv": 0.006103515625,
+        "max_component_spill": 0.009886307641863823,
+        "mean_error": 0.004741496406495571,
+        "min_mass_ratio": 0.98779296875,
+        "resolved_core_covariance_error": 0.022980603855103254,
+        "resolved_core_min_eigen_ratio": 0.9581191539764404,
+        "resolved_max_component_spill": 0.009886307641863823,
+        "sample_count": 4096,
+        "sw1_normalized": 0.00901454178062258,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "passed": true,
+      "task": "vector_two_broad"
+    },
+    {
+      "control": "point_collapse",
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          4096,
+          0
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          1.0,
+          1.0
+        ],
+        "covariance_error": 1.0,
+        "hq": 0.0,
+        "mass_tv": 0.5,
+        "max_component_spill": 1.0,
+        "mean_error": 0.004741496406495571,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.6114207343991592,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "passed": false,
+      "task": "vector_two_broad"
+    }
+  ],
+  "schema_version": 1,
+  "scoring_only_target_draws": 8192,
+  "training_draws_added": 0
+}

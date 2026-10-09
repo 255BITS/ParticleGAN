@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "189c52d1b54c44b8951558af8c3e4cc0cc63c9cb219db8b4c9caa5098f12178c",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "fb798b3fbf72300f93c02d63e48e1559df5323ea1b6420c4575a229ff930aefe",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/4ce9dc08d6564ff2858f4b8d6da1a8ae/evaluator/observed-samples.pt": "52f8db7c5d190625876ac81cfc2365594f3457926770bf09513bf0e80d9115ba"
+  },
+  "task_id": "gaussian1d_smoke"
+}

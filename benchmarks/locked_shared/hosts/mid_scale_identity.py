@@ -501,16 +501,21 @@ def _fit(
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
             real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
+        transport_panel = []
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
             g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
+            transport_panel.append(fake[0])
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
         protected_adversarial = g_loss
         g_loss = g_loss + cover_w * cover / n_scales
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, torch.stack(transport_panel), cloud,
+                conditioning=cloud.new_tensor(EVAL_SCALES).unsqueeze(1))
         def protected_evaluator():
             adversarial = student.odd.new_zeros(())
             paired_cover = student.odd.new_zeros(())

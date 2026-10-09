@@ -409,6 +409,15 @@ class BehaviorComponents:
                                         caption="Same scored state and pairing; fixed target, no replay training.",
                                         vmin=-1.5, vmax=1.5)]))
 
+    def add_transport_loss(self, total, fake, real, *, conditioning):
+        """Only a declared variant consumes marginal output transport."""
+        if self.context.component_transport is None:
+            return total
+        if not hasattr(self, 'transport_consumer'):
+            from particlegan.conditional_transport import OutputMarginalTransport
+            self.transport_consumer = OutputMarginalTransport(self.recipe)
+        return self.transport_consumer.add(total, fake, real, conditioning=conditioning)
+
     def guards(self):
         steps = {}
         all_state = {}
@@ -504,7 +513,9 @@ class BehaviorComponents:
         return dict(models={name: model.state_dict() for name, model in self.models.items()},
                     role_parameters=roles,
                     optimizers={name: optimizer.state_dict() for name, optimizer in self.optimizers.items()},
-                    streams=self.context.streams.state_dict(), applied=self.receipt())
+                    streams=self.context.streams.state_dict(), applied=self.receipt(),
+                    component_transport=(self.transport_consumer.state_dict()
+                        if hasattr(self, 'transport_consumer') else None))
 
 
 def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu") -> dict:

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; structured scorer metadata remains in original evidence.",
+  "gif_sha256": "1e98dfc809c60f8ce201e01891eb47b4db2d51e4b1bca2a6bd0a36fd29fd48fb",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "5fbbb4581fb2a0e8b8b26d9ac435aae23a28e35d2baad6570dfcad22b265b743",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round5-20261009/conditional_integration/queue/conditional-integration-round5-v1/776745663f0e4fd9a9a914c9a2d9f7fc/constraint_geometry-scored-outputs.pt": "1439cc62ffe0e3fa1c5c697c3c6bf467e6c48d4e301a0256678547382b7e165e"
+  },
+  "task_id": "residual_student_transport_round5_v1"
+}
