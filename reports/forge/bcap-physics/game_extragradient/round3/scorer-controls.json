@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "optimizer_updates_added": 0,
+  "scope": "Independent scorer controls for unchanged Gaussian/vector gates; no training.",
+  "seconds": 0.15618981490842998,
+  "tasks": {
+    "gaussian1d_smoke": {
+      "oracle": {
+        "passed": true,
+        "failed_bounds": [],
+        "metrics": {
+          "sample_count": 4096,
+          "finite_fraction": 1.0,
+          "mean": 2.0,
+          "std": 0.49991985549631973,
+          "mean_error_sigma": 0.0,
+          "std_ratio": 0.9998397109926395,
+          "cdf_ks": 0.00012207031250022204
+        }
+      },
+      "collapsed": {
+        "passed": false,
+        "failed_bounds": [
+          "std_ratio >= 0.8",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "sample_count": 4096,
+          "finite_fraction": 1.0,
+          "mean": 2.0,
+          "std": 0.0,
+          "mean_error_sigma": 0.0,
+          "std_ratio": 0.0,
+          "cdf_ks": 0.5
+        }
+      },
+      "shifted": {
+        "passed": false,
+        "failed_bounds": [
+          "mean_error_sigma <= 0.2",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "sample_count": 4096,
+          "finite_fraction": 1.0,
+          "mean": 3.0,
+          "std": 0.49991985549631973,
+          "mean_error_sigma": 2.0,
+          "std_ratio": 0.9998397109926395,
+          "cdf_ks": 0.6828115319313326
+        }
+      },
+      "too_wide": {
+        "passed": false,
+        "failed_bounds": [
+          "std_ratio <= 1.2",
+          "cdf_ks <= 0.05"
+        ],
+        "metrics": {
+          "sample_count": 4096,
+          "finite_fraction": 1.0,
+          "mean": 2.0,
+          "std": 0.9998397109926395,
+          "mean_error_sigma": 0.0,
+          "std_ratio": 1.999679421985279,
+          "cdf_ks": 0.16145932831779386
+        }
+      }
+    },
+    "vector_two_broad": {
+      "oracle": {
+        "passed": true,
+        "failed_bounds": [],
+        "metrics": {
+          "sw1_normalized": 0.012816735160678544,
+          "mean_error": 0.014257365837693214,
+          "covariance_error": 0.004867191426455975,
+          "target_scale": 1.0555585622787476,
+          "sample_count": 4096,
+          "mass_tv": 0.006103515625,
+          "min_mass_ratio": 0.98779296875,
+          "hq": 0.98974609375,
+          "component_covariance_error": 0.01791555155068636,
+          "component_covariance_errors": [
+            0.015745799988508224,
+            0.020085303112864494
+          ],
+          "component_min_eigen_ratio": 0.9930799603462219,
+          "component_core_covariance_error": 0.017061656340956688,
+          "component_core_covariance_errors": [
+            0.015745799988508224,
+            0.01837751269340515
+          ],
+          "component_core_min_eigen_ratio": 0.9889711737632751,
+          "component_core_eigen_ratios": [
+            1.006472110748291,
+            0.9889711737632751
+          ],
+          "max_component_spill": 0.01087493821978569,
+          "component_spill": [
+            0.01087493821978569,
+            0.009647853672504425
+          ],
+          "component_mass": [
+            0.493896484375,
+            0.506103515625
+          ],
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "component_counts": [
+            2023,
+            2073
+          ],
+          "component_resolved": [
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 0.017061656340956688,
+          "resolved_core_min_eigen_ratio": 0.9889711737632751,
+          "resolved_max_component_spill": 0.01087493821978569
+        }
+      },
+      "collapsed": {
+        "passed": false,
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "mass_tv <= 0.15",
+          "hq >= 0.85",
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.6114822838622842,
+          "mean_error": 0.014257365837693214,
+          "covariance_error": 1.0,
+          "target_scale": 1.0555585622787476,
+          "sample_count": 4096,
+          "mass_tv": 0.5,
+          "min_mass_ratio": 0.0,
+          "hq": 0.0,
+          "component_covariance_error": 1.0,
+          "component_covariance_errors": [
+            1.0,
+            1.0
+          ],
+          "component_min_eigen_ratio": 0.0,
+          "component_core_covariance_error": 1.0,
+          "component_core_covariance_errors": [
+            1.0,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            0.0,
+            0.0
+          ],
+          "max_component_spill": 1.0,
+          "component_spill": [
+            1.0,
+            1.0
+          ],
+          "component_mass": [
+            0.0,
+            1.0
+          ],
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "component_counts": [
+            0,
+            4096
+          ],
+          "component_resolved": [
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 1.0
+        }
+      },
+      "no_width": {
+        "passed": false,
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.18438381138443716,
+          "mean_error": 0.01754431426525116,
+          "covariance_error": 0.0775848999619484,
+          "target_scale": 1.0555585622787476,
+          "sample_count": 4096,
+          "mass_tv": 0.006103515625,
+          "min_mass_ratio": 0.98779296875,
+          "hq": 1.0,
+          "component_covariance_error": 1.0,
+          "component_covariance_errors": [
+            1.0,
+            1.0
+          ],
+          "component_min_eigen_ratio": 0.0,
+          "component_core_covariance_error": 1.0,
+          "component_core_covariance_errors": [
+            1.0,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            0.0,
+            0.0
+          ],
+          "max_component_spill": 0.0,
+          "component_spill": [
+            0.0,
+            0.0
+          ],
+          "component_mass": [
+            0.493896484375,
+            0.506103515625
+          ],
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "component_counts": [
+            2023,
+            2073
+          ],
+          "component_resolved": [
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0
+        }
+      },
+      "one_mode": {
+        "passed": false,
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "mass_tv <= 0.15",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.59778984348028,
+          "mean_error": 0.9403794407844543,
+          "covariance_error": 0.9376257658004761,
+          "target_scale": 1.0555585622787476,
+          "sample_count": 4096,
+          "mass_tv": 0.5,
+          "min_mass_ratio": 0.0,
+          "hq": 0.9892578125,
+          "component_covariance_error": 0.5072189392521977,
+          "component_covariance_errors": [
+            0.014437878504395485,
+            1.0
+          ],
+          "component_min_eigen_ratio": 0.0,
+          "component_core_covariance_error": 0.5072189392521977,
+          "component_core_covariance_errors": [
+            0.014437878504395485,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            1.003440260887146,
+            0.0
+          ],
+          "max_component_spill": 1.0,
+          "component_spill": [
+            0.0107421875,
+            1.0
+          ],
+          "component_mass": [
+            1.0,
+            0.0
+          ],
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "component_counts": [
+            4096,
+            0
+          ],
+          "component_resolved": [
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 0.5072189392521977,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 1.0
+        }
+      }
+    },
+    "vector_unequal_width": {
+      "oracle": {
+        "passed": true,
+        "failed_bounds": [],
+        "metrics": {
+          "sw1_normalized": 0.018086295508396497,
+          "mean_error": 0.025423230603337288,
+          "covariance_error": 0.007211958523839712,
+          "target_scale": 2.1343955993652344,
+          "sample_count": 4096,
+          "mass_tv": 0.008544921875,
+          "min_mass_ratio": 0.9833984375,
+          "hq": 0.98974609375,
+          "component_covariance_error": 0.04612330347299576,
+          "component_covariance_errors": [
+            0.036296091973781586,
+            0.03775685653090477,
+            0.04747417941689491,
+            0.06296608597040176
+          ],
+          "component_min_eigen_ratio": 0.9591584801673889,
+          "component_core_covariance_error": 0.04786188527941704,
+          "component_core_covariance_errors": [
+            0.036296091973781586,
+            0.03775685653090477,
+            0.05442850664258003,
+            0.06296608597040176
+          ],
+          "component_core_min_eigen_ratio": 0.9383412003517151,
+          "component_core_eigen_ratios": [
+            0.9657033085823059,
+            0.9853264689445496,
+            0.9383412003517151,
+            0.9591584801673889
+          ],
+          "max_component_spill": 0.011822660453617573,
+          "component_spill": [
+            0.008937438018620014,
+            0.011822660453617573,
+            0.010387158021330833,
+            0.009852216579020023
+          ],
+          "component_mass": [
+            0.245849609375,
+            0.247802734375,
+            0.258544921875,
+            0.247802734375
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            1007,
+            1015,
+            1059,
+            1015
+          ],
+          "component_resolved": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 0.04786188527941704,
+          "resolved_core_min_eigen_ratio": 0.9383412003517151,
+          "resolved_max_component_spill": 0.011822660453617573
+        }
+      },
+      "collapsed": {
+        "passed": false,
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "mass_tv <= 0.15",
+          "hq >= 0.85",
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.6296505346556596,
+          "mean_error": 0.02542322501540184,
+          "covariance_error": 1.0,
+          "target_scale": 2.1343955993652344,
+          "sample_count": 4096,
+          "mass_tv": 0.75,
+          "min_mass_ratio": 0.0,
+          "hq": 0.0,
+          "component_covariance_error": 1.0,
+          "component_covariance_errors": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_min_eigen_ratio": -2.3264454728053903e-23,
+          "component_core_covariance_error": 1.0,
+          "component_core_covariance_errors": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "max_component_spill": 1.0,
+          "component_spill": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_mass": [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            0,
+            0,
+            4096,
+            0
+          ],
+          "component_resolved": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 1.0
+        }
+      },
+      "no_width": {
+        "passed": false,
+        "failed_bounds": [
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.07259421708646177,
+          "mean_error": 0.0263876561075449,
+          "covariance_error": 0.013186249881982803,
+          "target_scale": 2.1343955993652344,
+          "sample_count": 4096,
+          "mass_tv": 0.008544921875,
+          "min_mass_ratio": 0.9833984375,
+          "hq": 1.0,
+          "component_covariance_error": 1.0,
+          "component_covariance_errors": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_min_eigen_ratio": 0.0,
+          "component_core_covariance_error": 1.0,
+          "component_core_covariance_errors": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "max_component_spill": 0.0,
+          "component_spill": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "component_mass": [
+            0.245849609375,
+            0.247802734375,
+            0.258544921875,
+            0.247802734375
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            1007,
+            1015,
+            1059,
+            1015
+          ],
+          "component_resolved": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0
+        }
+      },
+      "one_mode": {
+        "passed": false,
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "mass_tv <= 0.15",
+          "component_min_eigen_ratio >= 0.15"
+        ],
+        "metrics": {
+          "sw1_normalized": 0.7379417075202094,
+          "mean_error": 0.9698992371559143,
+          "covariance_error": 0.9978509545326233,
+          "target_scale": 2.1343955993652344,
+          "sample_count": 4096,
+          "mass_tv": 0.75,
+          "min_mass_ratio": 0.0,
+          "hq": 0.9912109375,
+          "component_covariance_error": 0.7589547401294112,
+          "component_covariance_errors": [
+            0.03581896051764488,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_min_eigen_ratio": 0.0,
+          "component_core_covariance_error": 0.7589547401294112,
+          "component_core_covariance_errors": [
+            0.03581896051764488,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_core_min_eigen_ratio": 0.0,
+          "component_core_eigen_ratios": [
+            0.9634389877319336,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "max_component_spill": 1.0,
+          "component_spill": [
+            0.0087890625,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "component_mass": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            4096,
+            0,
+            0,
+            0
+          ],
+          "component_resolved": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "resolved_core_covariance_error": 0.7589547401294112,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 1.0
+        }
+      }
+    },
+    "mode_hold": {
+      "oracle": {
+        "passed": true,
+        "failed_bounds": [],
+        "metrics": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.990234375,
+          "cover": 1.0,
+          "effective_modes": 7.992692470550537
+        }
+      },
+      "collapsed": {
+        "passed": false,
+        "failed_bounds": [
+          "modes >= 8",
+          "hq >= 0.9"
+        ],
+        "metrics": {
+          "modes": 0,
+          "n_modes": 8,
+          "hq": 0.0,
+          "cover": 0.0,
+          "effective_modes": 0.0
+        }
+      },
+      "one_mode": {
+        "passed": false,
+        "failed_bounds": [
+          "modes >= 8"
+        ],
+        "metrics": {
+          "modes": 1,
+          "n_modes": 8,
+          "hq": 1.0,
+          "cover": 0.125,
+          "effective_modes": 1.0
+        }
+      }
+    }
+  },
+  "note": "Gaussian oracle quantiles; vector oracle draws use an isolated seed0 control stream. These are scorer controls, not trainer seed experiments or profile calibration."
+}

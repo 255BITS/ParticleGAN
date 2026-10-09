@@ -1,0 +1,2645 @@
+{
+  "candidate": {
+    "attempts": [
+      {
+        "artifact_manifest": {
+          "file_count": 3,
+          "files": {
+            "initial-state.pt": {
+              "sha256": "2b2b9765f24c92f2d9b013782e468ca0eea114a48de2de161782bd09d7e4c7c5",
+              "size": 63511
+            },
+            "observed-samples.pt": {
+              "sha256": "716bec01ad6d9644a753eced4d7786abbae79d7b6b748eec1d005bb1e0302b0d",
+              "size": 842949
+            },
+            "state.pt": {
+              "sha256": "aafd307bd6f17de9c6b8f34a130913aae521677507c952840d8468c620a8c45c",
+              "size": 63074
+            }
+          },
+          "schema_version": 1,
+          "sha256": "8ab6e6ca4bab5ca31162d81d8fa35912549479d3d3815cb9d39d1f8d9a2c38c3",
+          "total_bytes": 969534
+        },
+        "attempt_id": "dcc95b142f334cfda76722edd61af368",
+        "compatibility_key": "dbc522d6047a0d8c9d3fd32a84e77556c5019b04e3b23e571a70af9ddb907425",
+        "envelope_hashes": {
+          "evidence": "b66de31b87c891948d3b55b7fcab25361e3f7f46ab66333cb620dc75cc3e1f38",
+          "request": "0224717b43ca93f8039052d120fb771ea7cdbcb8f2c4e8be221ad0361d89343f",
+          "result": "ecd3538d209c4089f6cfaecdaf4b0753dd6fa960722e0461e19695f0b7834dbc"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/dcc95b142f334cfda76722edd61af368",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "283a40636519dcae217d9c83680bfcf2d314440bce0adb87184479fe6a343fee",
+                "size": 65023
+              }
+            },
+            "schema_version": 1,
+            "sha256": "012f41ff88f5e7ca115c8328d1811f0bdd100861393dbb9403e95314a8b50927",
+            "total_bytes": 65023
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/dcc95b142f334cfda76722edd61af368/provenance",
+          "bytes": 65023,
+          "completed_steps": 1000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "283a40636519dcae217d9c83680bfcf2d314440bce0adb87184479fe6a343fee",
+          "state_sha256": "c9dc7231dedd04757e72772680f1877948fe0a63ba06797cc8d5d5b2e3a31d08"
+        },
+        "result_hash": "199ae3eb7784107fceede01c6904cd02f8144518cc4d22edad3de8a93e0cc707",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 5,
+          "files": {
+            "frozen-state.pt": {
+              "sha256": "ede35763615c48685cef9fe7f3b8dd6b3a4907f8be28d37d271961a309938947",
+              "size": 64867
+            },
+            "initial-state.pt": {
+              "sha256": "4c4e79b0fa074835540a61ee47bd247e646d64cda209b81c118c7f3bb4b8918e",
+              "size": 64922
+            },
+            "observed-samples.pt": {
+              "sha256": "4c4cdc3bd11715824596967690b4b5f9024566ac4c3cc50ca05a52ab6c9a3418",
+              "size": 2841428
+            },
+            "pre-shift-state.pt": {
+              "sha256": "97d3e930d68f18fb6bcd85e3e400cda5de7cdc67279b4076cc1d181051938ee4",
+              "size": 65160
+            },
+            "state.pt": {
+              "sha256": "25f59bfd3e091a4c39e2c19a71e7c82af6bfaa1df41f41141781cf26f00fe1ea",
+              "size": 63266
+            }
+          },
+          "schema_version": 1,
+          "sha256": "33a33c65ce2811a62e770864817eeb5edc495af25f814569e80ebce7dd98200d",
+          "total_bytes": 3099643
+        },
+        "attempt_id": "329919c85bdb4712a1d6c61e4423c341",
+        "compatibility_key": "a4c6c388a1b496ff64be7e820e0ed91035f6ece2688ae27f5ce4e3b91f454c13",
+        "envelope_hashes": {
+          "evidence": "b9e9492fee08b1f6a11f0aed61486e67cea04d20f7851508aa8a6b78d7673e18",
+          "request": "fff40bd6f3aacab9dbfaeef0e2a3630b29c2c3d3f809108a0bd27681fe549336",
+          "result": "798a904c07b2cab8b534b374e36ee966798fb1e534ffde57fbbc1b037c3ff5e5"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/329919c85bdb4712a1d6c61e4423c341",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "c014035d99c239af85d8a9fad974afcba04ca06b932a8df0ef3a72fdee9bc380",
+                "size": 65215
+              }
+            },
+            "schema_version": 1,
+            "sha256": "ca76bd519bfb5e4125ce0bf59df8ac4522fc2e0bcfc37790ddf68655b92c6c0c",
+            "total_bytes": 65215
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/329919c85bdb4712a1d6c61e4423c341/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "c014035d99c239af85d8a9fad974afcba04ca06b932a8df0ef3a72fdee9bc380",
+          "state_sha256": "8428489e65022fd4af4179c8354ca11f74418d89d6aa4cb8d2d9f824f04801fd"
+        },
+        "result_hash": "82353fcc78a4f76e26951922b3934f16bec2c66ad7552daabe5765091a942dab",
+        "task_id": "gaussian1d_stability"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "eaf26e87740647b09dcbc6f2eece8ca7",
+        "compatibility_key": "18ec29b644339eef2f2461436cefc677a73e5b05174931738124e9906008dd70",
+        "envelope_hashes": {
+          "evidence": "9cdda81dac560bb59ad8fb48f401be933d054373ff13f549ee594a0189627373",
+          "request": "8449c7a13ff835de085c74ec69ceba6d66db1f26f4a967146aed9e4397cb74ff",
+          "result": "d0e633ae080acc8f72207b1e0b6e068534568befdae6d6475f1119206fd68d02"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/eaf26e87740647b09dcbc6f2eece8ca7",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "00b2f25d453e9c73c059c9055ecf117d74006bcb6fc03a17fc6349c7571bbc2a",
+                "size": 282909
+              }
+            },
+            "schema_version": 1,
+            "sha256": "9d42564f97fdd4bea17ae5aa2f86501199385a5a459b53c8bbf846c3db6b6a78",
+            "total_bytes": 282909
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/eaf26e87740647b09dcbc6f2eece8ca7/provenance",
+          "bytes": 282909,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "00b2f25d453e9c73c059c9055ecf117d74006bcb6fc03a17fc6349c7571bbc2a",
+          "state_sha256": "ddb36fcc98b8aa16444e0c0da76b71ceaaa78bb0ab3443a865e9cad6246d2dd9"
+        },
+        "result_hash": "18e4fe57e072171ea43df55f8da7efcbdb6ca9cad99c665fdd8d7b70350124a4",
+        "task_id": "mode_hold"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "02f7991bb4224a0fb172eadd4b2f0eef",
+        "compatibility_key": "f1c999f9a02d51e755467db0867b587409f7f3577ed6ebc49f052fea8658023f",
+        "envelope_hashes": {
+          "evidence": "d63fd08a0eba6452d33b2257ef85c2660180c02cf4a7f7d4e4f758331721b448",
+          "request": "7c41ddcb81df6e05afbe9d7b1f3035f542a12083a765e103403df706380e0c34",
+          "result": "7a065f174bef761f5fcc8fd99e6d136a31c49eb213b70ef27aef9d3f1a227b53"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/02f7991bb4224a0fb172eadd4b2f0eef",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "7d88908070bc1e3e7f1cb19e7380fd5f24558870506fd8327e249f75772810d3",
+                "size": 109945
+              }
+            },
+            "schema_version": 1,
+            "sha256": "8d6274e4a50043167e9044371d000f54938c0ea758e5bff3ac86475b94b0b62e",
+            "total_bytes": 109945
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/02f7991bb4224a0fb172eadd4b2f0eef/provenance",
+          "bytes": 109945,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "7d88908070bc1e3e7f1cb19e7380fd5f24558870506fd8327e249f75772810d3",
+          "state_sha256": "9c6acae8984a29eeeff97606833eaa7c0a4d4fcbb3b2731ccd87e148d9302562"
+        },
+        "result_hash": "fc6e4f82f3c0153fb6a5f077b4d071e06bbbe5dbf15fc19052ebc670e6ff3d54",
+        "task_id": "vector_two_broad"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "50f69f605c33452b8d593fcfd8bf338e",
+        "compatibility_key": "9d75df6b4214f4afde0b2347b1efd5f2ccf6040e81bde097b8f41576b979599a",
+        "envelope_hashes": {
+          "evidence": "b67ccc71a457c7875e47a94878f4081cdb9ef2b88a9bc8aa9117ead0cdb10f83",
+          "request": "19394243e25cb9377b79793a6f83d9ea40745b1b2647c1558544fe6348fe61d5",
+          "result": "b1b6c6a0a0947c09aee79f53a6beb6defc52c518a9d10d1ce522ff0069321c12"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/50f69f605c33452b8d593fcfd8bf338e",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "b3091c94c4f2074cf8a22273e677d1d4b737e59fa5809b28e4399f9786cca93a",
+                "size": 109945
+              }
+            },
+            "schema_version": 1,
+            "sha256": "f49f6debac7a4582f16fc62ee76dcec9c708183df44e81a3d5b77630b349cd0c",
+            "total_bytes": 109945
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/50f69f605c33452b8d593fcfd8bf338e/provenance",
+          "bytes": 109945,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "b3091c94c4f2074cf8a22273e677d1d4b737e59fa5809b28e4399f9786cca93a",
+          "state_sha256": "521f06e043c930ee2e61c1b637da785c6b71a610e0ea7f7d24be36721505ab38"
+        },
+        "result_hash": "627a62a6654e607b65a72730dcc53552d9b1738bdc0485dac6a3217779fd9825",
+        "task_id": "vector_unequal_width"
+      }
+    ],
+    "compute_profiles": {
+      "cuda": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    },
+    "source": {
+      "digest": "86e864be4656a32824e13464de7f6d726b0ffe2b825eedf48ac6ff2cdf6a02a3",
+      "origin_commit": "3b9bda7f0ff4f34414eaf2ddbaa292206a217240",
+      "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/snapshots/86e864be4656a32824e13464de7f6d726b0ffe2b825eedf48ac6ff2cdf6a02a3"
+    },
+    "study_sha256": "4a17f3180120bdd560d7132b0eab111a23c2a29f7cac329208e1a825e7d1c6fd",
+    "task_contracts": {
+      "gaussian1d_smoke": {
+        "dependencies": [],
+        "evaluation": {
+          "confirmation": "independent_draw_same_state",
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-smoke-v1",
+            "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_smoke",
+          "observations": 24,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "66e0bf2bbc7c525c8a42adc071a5e4a9cba7a453c1b1dc81d9fd748493a9a33d",
+        "updates": 1000
+      },
+      "gaussian1d_stability": {
+        "dependencies": [
+          {
+            "kind": "checkpoint",
+            "task": "gaussian1d_smoke"
+          }
+        ],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-stability-v1",
+            "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_stability",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "reacquisition_deadline": 5000,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "shift_checks": 48,
+          "shift_end": 6000,
+          "shift_hold_checks": 24,
+          "shift_mean": 3.0,
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "stationary_checks": 72,
+          "stationary_end": 4000,
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "30c37e4fad4db7b92e14c84b2f97ce91b88da15b9aec622e218546deae457471",
+        "updates": 6000
+      },
+      "mode_hold": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "modes",
+              ">=",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "ea608fc9c604eccd1abb54d9c355cf4d51a956df64a9e54bdfaf956f49a0df8e",
+        "updates": 1200
+      },
+      "two_pole": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_sha256": "af233479233a3fbaedd892213dc30393105a089820fbf8835b27c6c3cda524cd",
+        "updates": 80
+      },
+      "vector_two_broad": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "7dcbd3e19d71220be471c106faf0ab915c699d96d5ef29fd1b65d7e71fe0ebdb",
+        "updates": 1200
+      },
+      "vector_unequal_width": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "21ca91e660646d2039ba7cf2ace02e4549e5f4e5d81d1bb528036082f91e28e4",
+        "updates": 1200
+      }
+    }
+  },
+  "control": {
+    "attempts": [
+      {
+        "artifact_manifest": null,
+        "attempt_id": "9b01e7110fde4bcaa0c78fc72546b112",
+        "compatibility_key": "a471be3eac8b2b8ac7b7a449e9281382c7b53561e20a1300675390150b5b40fe",
+        "envelope_hashes": {
+          "evidence": "c4bae0351ea08b0158a9f75bcbed1454c9704ba91edfe60c15c7a96d24d24df6",
+          "request": "a48ffae8e70df20b9382024c4bae499eba20dc9d924326e9e2c9223f30fac436",
+          "result": "20b180fec3fd94e9de43a3414d5d97bbca986323c453106a2b34803e9b9e6b0e"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/9b01e7110fde4bcaa0c78fc72546b112",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "77dddfd8b3ad4d33b0826db18943bf84049ae6427c4a4779ac3c0182969464ad",
+                "size": 46511
+              }
+            },
+            "schema_version": 1,
+            "sha256": "362795e9a49a7ff33c71ecdd9a3cdcb3be4da318dc892ba70c85623083401b99",
+            "total_bytes": 46511
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/9b01e7110fde4bcaa0c78fc72546b112/provenance",
+          "bytes": 46511,
+          "completed_steps": 80,
+          "named_stream_keys": [
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "77dddfd8b3ad4d33b0826db18943bf84049ae6427c4a4779ac3c0182969464ad",
+          "state_sha256": "4a2e054cbe1127187cb892a8be1a644b73d973eca4b9ffc7aa8db1d406752192"
+        },
+        "result_hash": "4988133f020591a27b027c42596833e4887e45b73c4b386ddf9fd5cda0b9725f",
+        "task_id": "two_pole"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 3,
+          "files": {
+            "initial-state.pt": {
+              "sha256": "af3963b6467281ae316409b960ac18a606dabd73686f753f705c64c1121a86a9",
+              "size": 63447
+            },
+            "observed-samples.pt": {
+              "sha256": "3a06027065891fdb907b6a080aaa9f01eb87c90ccf3a4691ae9fc410c7c80f72",
+              "size": 842949
+            },
+            "state.pt": {
+              "sha256": "1b63f5c7a45840a1053a0a2739e2546664c29a2fee28d990675dfe5883760ed1",
+              "size": 63010
+            }
+          },
+          "schema_version": 1,
+          "sha256": "18e3aec8c9bcb8bda815e5053844bf741a1b4eaf4d7af092d9f33df484821562",
+          "total_bytes": 969406
+        },
+        "attempt_id": "d949bfc932524eb2a6eb6cf4ec1fa707",
+        "compatibility_key": "c92911cf2e85ef5b4cb420355b4098021c9177183ae837cbd35c0cc0c64cff49",
+        "envelope_hashes": {
+          "evidence": "aefd55459cdc934c83f116cf57efea0ec8829876e21c3116a33c06f94bd1229b",
+          "request": "2abeaf43e83f2c90912956af76b19532a6bf4264ea1d5579f55217d56f3fbf9d",
+          "result": "dd897eeea70ea9ac7a18d9f6d859b7601f1aa62a63a07921d16d5f7defd5cfb6"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/d949bfc932524eb2a6eb6cf4ec1fa707",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "dfc539e671e260364751f20390c93b6fdd6c8b0ccdfdc9d427f1726b9a277ce7",
+                "size": 64959
+              }
+            },
+            "schema_version": 1,
+            "sha256": "210e436dddff40a9eb50c748b086a961a4b76c0d1f167fbd771d35f4bb94cb52",
+            "total_bytes": 64959
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/d949bfc932524eb2a6eb6cf4ec1fa707/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "dfc539e671e260364751f20390c93b6fdd6c8b0ccdfdc9d427f1726b9a277ce7",
+          "state_sha256": "c8c33df7bf519e613f6ab959a75e0e394d94801474c4fccddab30983c28bce8b"
+        },
+        "result_hash": "6adf59c0f99c267569c89328455cdb126429624f3876545653393d8e4a5c0342",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "artifact_manifest": {
+          "file_count": 5,
+          "files": {
+            "frozen-state.pt": {
+              "sha256": "84385a330c6990a37c68857e529893bbd32d62ee001532d164a3d6e7c63e60bf",
+              "size": 64803
+            },
+            "initial-state.pt": {
+              "sha256": "6bda6afe100bd1952bb17a429f381b9b92e83cbb393572cc8b44422acbf1e9db",
+              "size": 64922
+            },
+            "observed-samples.pt": {
+              "sha256": "b98b314fb2103315dee56a8906af583b4bd27f069a24108b3d283a9b30ff567d",
+              "size": 2841428
+            },
+            "pre-shift-state.pt": {
+              "sha256": "a772d44cc643036d237708a347a50876db3ff039fd39612e80431383e1c69cbc",
+              "size": 65160
+            },
+            "state.pt": {
+              "sha256": "9703fa0d51868ee9229624a04d5ef7e6e08509011246d4259cdf4214d88cafa3",
+              "size": 63266
+            }
+          },
+          "schema_version": 1,
+          "sha256": "f7dee32b1b24770ad203e481ab2b2b5e7c653bef85cb690e27e8387a8df6c31e",
+          "total_bytes": 3099579
+        },
+        "attempt_id": "9515744ed23c468cb3f12da0847de643",
+        "compatibility_key": "a146de897058bff96f8dfd86cf41c24b045a132f02fea8faa67b930712fcb6b4",
+        "envelope_hashes": {
+          "evidence": "3eecf4699612e2e8fd6b561141d7d3c84d1f0a9f5f1f2b5718b014bb4f0d3bdc",
+          "request": "e5e4113b1f783023bc927281b5b52d3ba19b6f2e6db60fcaf5c3b4941208fde5",
+          "result": "ac6e5a3de59529a0cb66094bc899c2b915ec94af682e780aa211be92daf9da0d"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/9515744ed23c468cb3f12da0847de643",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "914db62447e1121dea18a2153214d9e92cd99dac8fc53af88548f924632d51ab",
+                "size": 65215
+              }
+            },
+            "schema_version": 1,
+            "sha256": "930f2770bcf692e4414dd5fc438fce11fcdfe182e6090dc68274401014f16898",
+            "total_bytes": 65215
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/9515744ed23c468cb3f12da0847de643/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "914db62447e1121dea18a2153214d9e92cd99dac8fc53af88548f924632d51ab",
+          "state_sha256": "a2bf87fc2adb0afdee6dce35fbfcd4b0aeaf6c66b58de59ea31b81eafbac64a6"
+        },
+        "result_hash": "21ae3f5a9254ffcef6e7d6185ff8c9f242d4e5c53d08a49ac284de64fd18c7c8",
+        "task_id": "gaussian1d_stability"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "12599248e5954abc8b360ae08171048e",
+        "compatibility_key": "09d9e6bd4f88363b67ea5c494c6e2eae26fe5892b1eca87d94359c6ccd91884e",
+        "envelope_hashes": {
+          "evidence": "b2a24af266a20ea0b5eb6d4908083ffeae3db1026449aad8e7d9c23def7890f9",
+          "request": "493084c1b0a98377b72c9d0a991425df63b38de3692feb5b952d7baaed905ed0",
+          "result": "b9db31328346548f837291b72525bedf83efdb6e7c35723711d0a050c4816fa4"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/12599248e5954abc8b360ae08171048e",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "942b33f680778f016b0c230ad0170dc370d65f6676122b77bcfae50218742bf3",
+                "size": 282845
+              }
+            },
+            "schema_version": 1,
+            "sha256": "d675fff3d4ea2ee49a3d0b45a40192dfa3850203c9e6aef7262a60a00923ebfa",
+            "total_bytes": 282845
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/12599248e5954abc8b360ae08171048e/provenance",
+          "bytes": 282845,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "942b33f680778f016b0c230ad0170dc370d65f6676122b77bcfae50218742bf3",
+          "state_sha256": "28875a6fb72ed128ea6ace7452c2166f093a4cad5b279ffb8af3726572c86c50"
+        },
+        "result_hash": "6385dc29e55aaafc5ab68ca26ac7eb45de4238a1b56ffb49372f933515e1e9b8",
+        "task_id": "mode_hold"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "983a3b0e39f643a4b7203341666133ff",
+        "compatibility_key": "da5b282c32a8c179ce38d3471799f2c3173e45656d2a870cee71bf909963bdd6",
+        "envelope_hashes": {
+          "evidence": "44e7be4def0cbf204507ef8bdb7505dcb69a9f00bec67aba70d4235940f6ec94",
+          "request": "1e42ac5b97159bf95f93b3ec828f16dd14fad6caaf8017ebca7265702e508e53",
+          "result": "d11873402cc7e1f4b88b5e897c9e791bfd49e81c05bb81106bd3e0854ca1797f"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/983a3b0e39f643a4b7203341666133ff",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "635f17e50eddd6618dadf81f2c65e58dbb3797e6a3cae2c6920d7a808cfeaef4",
+                "size": 109881
+              }
+            },
+            "schema_version": 1,
+            "sha256": "ee4f20d2610a1916c1ea11807be52e82d3a5e763cdea0c2eab3b6e816261720d",
+            "total_bytes": 109881
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/983a3b0e39f643a4b7203341666133ff/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "635f17e50eddd6618dadf81f2c65e58dbb3797e6a3cae2c6920d7a808cfeaef4",
+          "state_sha256": "8d206416e28d5b41a95c49c91075261cd45d3b7473c97ebdb07f7f513d1f7973"
+        },
+        "result_hash": "92b7ced6947a650501b80d9da26f73f85ee6dd2b01b87dca49f91947bcae5ba2",
+        "task_id": "vector_two_broad"
+      },
+      {
+        "artifact_manifest": null,
+        "attempt_id": "608ab4b4fb6b458292ef1127545410a3",
+        "compatibility_key": "6bcf6b56fc5c6aa01477a53981f6324f300e5a2a38c434a9a30ff6cd45f05cfd",
+        "envelope_hashes": {
+          "evidence": "1d63ceff517cf37c1a0f1bb381f8bd9440e773fd04d6ca96f66e0b4836932664",
+          "request": "89970f7d5ac7b9d7d85032b5b5d36795ec590cba3bbd0dc98cc31b078d61eff5",
+          "result": "30fab760e16d6d7d10e5cc55f737316b6b29d7af3c894cb2a0ed3fa8fc7d28c9"
+        },
+        "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/608ab4b4fb6b458292ef1127545410a3",
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "82855d79f9ef345421d285e0e7907c9e14f787cdbfbed7ad6364b0deb2d91a9e",
+                "size": 109881
+              }
+            },
+            "schema_version": 1,
+            "sha256": "64a7e372fa499e353336748b154073aea5689ebefda438f9f93faa1847d1fbd2",
+            "total_bytes": 109881
+          },
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/608ab4b4fb6b458292ef1127545410a3/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cpu\"]",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "82855d79f9ef345421d285e0e7907c9e14f787cdbfbed7ad6364b0deb2d91a9e",
+          "state_sha256": "d82792f0c7bcc15bebf1d100fa287ed959794a92cc520db30668056d2a49220e"
+        },
+        "result_hash": "309c8a6a35f172286b3796147c9012aa9d5c5ee0c4270b596fd47cefb41fce40",
+        "task_id": "vector_unequal_width"
+      }
+    ],
+    "compute_profiles": {
+      "cuda": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    },
+    "source": {
+      "digest": "86e864be4656a32824e13464de7f6d726b0ffe2b825eedf48ac6ff2cdf6a02a3",
+      "origin_commit": "3b9bda7f0ff4f34414eaf2ddbaa292206a217240",
+      "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/snapshots/86e864be4656a32824e13464de7f6d726b0ffe2b825eedf48ac6ff2cdf6a02a3"
+    },
+    "study_sha256": "617d4736e21a3748d2d5bbb43b4cf54ddae57137f2679c0e586fc510f405f4eb",
+    "task_contracts": {
+      "gaussian1d_smoke": {
+        "dependencies": [],
+        "evaluation": {
+          "confirmation": "independent_draw_same_state",
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-smoke-v1",
+            "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_smoke",
+          "observations": 24,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "08edf5ff2356d32fe0e93f90d96fa7290ddeee1a9133aaf885a39845b4f584a5",
+        "updates": 1000
+      },
+      "gaussian1d_stability": {
+        "dependencies": [
+          {
+            "kind": "checkpoint",
+            "task": "gaussian1d_smoke"
+          }
+        ],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "eval_samples": 4096,
+          "evaluator": "experiments.forge.gaussian_tasks:grade",
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "gaussian1d-stability-v1",
+            "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "discriminator",
+              "prior"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "gaussian_stability",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "reacquisition_deadline": 5000,
+          "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "shift_checks": 48,
+          "shift_end": 6000,
+          "shift_hold_checks": 24,
+          "shift_mean": 3.0,
+          "sources": {
+            "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+            "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f"
+          },
+          "stationary_checks": 72,
+          "stationary_end": 4000,
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              4096
+            ],
+            [
+              "finite_fraction",
+              "==",
+              1.0
+            ],
+            [
+              "mean_error_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "std_ratio",
+              ">=",
+              0.8
+            ],
+            [
+              "std_ratio",
+              "<=",
+              1.2
+            ],
+            [
+              "cdf_ks",
+              "<=",
+              0.05
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_sha256": "ecf5c905e6febf71202ac8df42c64e29164100c9771f1b8affa33eb0c450cbac",
+        "updates": 6000
+      },
+      "mode_hold": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "modes",
+              ">=",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "997b89d3f3a26a4a9e149d88a2c40cdf1d63541b09c7ef7dca8987a6175fe191",
+        "updates": 1200
+      },
+      "two_pole": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_sha256": "616b491ba0d71b2ccfcf0d96470d3812a1e9c364d651c609b6c02201e1a8730e",
+        "updates": 80
+      },
+      "vector_two_broad": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "f72522fdea51acf0e6ed66bfa29897c11783545b7a797082d6f49fcbbabc3379",
+        "updates": 1200
+      },
+      "vector_unequal_width": {
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "clean",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": null,
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "gate_policy": {
+            "finite_atom_exemptions": false,
+            "id": "forge-vector-full-component-v1",
+            "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+            "retained_from": "transfer-vectors-v2"
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "public_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+          },
+          "thresholds": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ]
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_sha256": "5423d8d1fb8187142bd07d0edabb88ea2ab84377ed60341d664c28aff301e201",
+        "updates": 1200
+      }
+    }
+  },
+  "matched_checks": {
+    "evidence_stream_projections": {
+      "candidate": {
+        "gaussian1d_smoke": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": true,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "e56c31f5517605b9ba1fa5695733a95fb6271c23a184d7b94c7c952fc19cb9e1",
+          "data_sha256": {
+            "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1000,
+            "maximum_parameter_tick": 1000,
+            "minimum_parameter_tick": 1000
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 25,
+            "sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "gaussian1d_stability": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": true,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "e56c31f5517605b9ba1fa5695733a95fb6271c23a184d7b94c7c952fc19cb9e1",
+          "data_sha256": {
+            "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+            "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 6000,
+            "maximum_parameter_tick": 6000,
+            "minimum_parameter_tick": 6000
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 121,
+            "sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "mode_hold": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": true,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "57a8a9efd5690aa64444f293e69b4827629a496f657d2790b350e135f61d61a2",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "2e3c137c8fb1abdd9f6ea1b014a8246a0a95dfeddfa06205bf40594f32503903",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "1d886ab9dad19d6cf2fb381af46bb401b28d1276cf757fb75f5c7c9cceb73057",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "b91435ee9c966ba92b73a22e3847f7e4d3c3eec70fcce72c1ffdf2ff2ca64115",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "vector_two_broad": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": true,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "19a4606ddb82770ca0cf668aa468fe75d45d52b02b51310cbb6299a37d1f3fdb",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "vector_unequal_width": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": true,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "19a4606ddb82770ca0cf668aa468fe75d45d52b02b51310cbb6299a37d1f3fdb",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        }
+      },
+      "control": {
+        "gaussian1d_smoke": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "6dbccba08ca18012d36e2963891c8d0dd2054c498a74a543539a8de41a8b13a1",
+          "data_sha256": {
+            "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1000,
+            "maximum_parameter_tick": 1000,
+            "minimum_parameter_tick": 1000
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 25,
+            "sha256": "8f5e751432465c0e88c2437b9291045ace9f7b614aa66bb7a103a866fd478f0f",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "gaussian1d_stability": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1000
+          },
+          "actual_recipe_sha256": "6dbccba08ca18012d36e2963891c8d0dd2054c498a74a543539a8de41a8b13a1",
+          "data_sha256": {
+            "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+            "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+          },
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 6000,
+            "maximum_parameter_tick": 6000,
+            "minimum_parameter_tick": 6000
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 121,
+            "sha256": "a83324cf08118544297dd5abfd7c9111774baaa9641ba15dbe9f5a7d0ecb010c",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "mode_hold": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "3df75027fe655f10d93057e4e4b14358a644e06c213c0791ab59e39e606e4c9b",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "bc5a31b221f7c164643b0c548aa0d06007cdc5eaee6d5ac6c7b29f3e629c2667",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "a30a0647efc7e6925bd68faa5aecf145ea511aa27e78a5a3c2d062c688bec55e",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "607f03c8ac9b8a59005e9c6355982f9476266922ef96f26c97f99266c43acdd6",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "2e3c137c8fb1abdd9f6ea1b014a8246a0a95dfeddfa06205bf40594f32503903",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "1d886ab9dad19d6cf2fb381af46bb401b28d1276cf757fb75f5c7c9cceb73057",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "b91435ee9c966ba92b73a22e3847f7e4d3c3eec70fcce72c1ffdf2ff2ca64115",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "two_pole": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "lr_schedule": "cosine",
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "same_batch_extragradient": false,
+            "total_steps": 80
+          },
+          "actual_recipe_sha256": "6417dfba8f537aa43bfe3d42d58fc3ca21f276af2d4a613a14d844223b29dbec",
+          "final_named_stream_states": {
+            "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+            "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+            "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+          },
+          "initialization": {},
+          "logical_optimizer_clock": {
+            "completed_steps": null,
+            "maximum_parameter_tick": 80,
+            "minimum_parameter_tick": 80
+          },
+          "optimizer_group_bindings": [
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.012,
+              "beta2_schedule_declared": false,
+              "counter_role": "prior",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.012,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "prior",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "generator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "direct_sample_coordinates"
+            },
+            {
+              "base_betas": [
+                0.0,
+                0.999
+              ],
+              "base_lr": 0.018000000000000002,
+              "beta2_schedule_declared": false,
+              "counter_role": "discriminator",
+              "current_group_betas": [
+                0.0,
+                0.999
+              ],
+              "current_lr": 0.018000000000000002,
+              "direct_particle_response": {
+                "gain_enabled": false,
+                "installed": false,
+                "lr_gain_range": [
+                  1.0,
+                  1.0
+                ],
+                "step_betas": null
+              },
+              "group_betas_overridden_during_step": false,
+              "group_index": 0,
+              "lr_schedule": "network",
+              "optimizer": "NormalizedOptimizer",
+              "optimizer_role": "discriminator",
+              "prior_betas_consumed": false,
+              "prior_lr_mult_consumed": false,
+              "representation": "network"
+            }
+          ],
+          "rng_audit_summary": {
+            "count": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "vector_two_broad": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "31da377596bff7eac7c2cd7d2cb7a73c2e2e789f318f4cd7405e8fffac198cd6",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        },
+        "vector_unequal_width": {
+          "actual_recipe": {
+            "critic_formulation": "bcap",
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.5,
+            "direct_particle_gain": false,
+            "ema_decay": 0.0,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "lr": 0.012,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "optimizer_convolution": "per_offset",
+            "optimizer_family": "dualnorm",
+            "optimizer_smoothing": 0.001,
+            "output_noise_std": 0.0,
+            "prior_lr_mult": 2.5,
+            "prior_reg": 0.0,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "total_steps": 1200
+          },
+          "actual_recipe_sha256": "31da377596bff7eac7c2cd7d2cb7a73c2e2e789f318f4cd7405e8fffac198cd6",
+          "final_named_stream_states": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+          },
+          "initialization": {
+            "discriminator": {
+              "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "generator": {
+              "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            },
+            "prior": {
+              "initial_state_sha256": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af",
+              "initializer": "deterministic_orthogonal_named_parameters_v1"
+            }
+          },
+          "logical_optimizer_clock": {
+            "completed_steps": 1200,
+            "maximum_parameter_tick": 1200,
+            "minimum_parameter_tick": 1200
+          },
+          "optimizer_group_bindings": null,
+          "rng_audit_summary": {
+            "count": 24,
+            "sha256": "b6a8cf084b7b5a5fb167c213694e7be00b5b7effe41e5f3e3c630d6be23cf703",
+            "unintended_rng_deviations": 0
+          }
+        }
+      }
+    },
+    "runtime_equal": true,
+    "source_equal": true,
+    "task_checks": {
+      "gaussian1d_smoke": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "gaussian1d_stability": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "mode_hold": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "vector_two_broad": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      },
+      "vector_unequal_width": {
+        "final_named_stream_states_equal": true,
+        "initialization_equal": true,
+        "note": "Final stream parity is a state audit, not direct bytewise consumed-batch proof."
+      }
+    }
+  },
+  "publication_source_verification": {
+    "changed_measured_files": [],
+    "publication_scripts_are_training_evidence": false,
+    "verified_files": 1200
+  }
+}

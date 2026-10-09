@@ -1,0 +1,320 @@
+{
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "receipts": [
+    {
+      "arm": "candidate",
+      "attempt_id": "dcc95b142f334cfda76722edd61af368",
+      "gif_sha256": "a38392bbae88bb5a4919714ec976012a143ef58072221251635c99d9cda9953f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b52117e09cbfde555f4b47801080271740ceb4172373d6585832674a7258e35f",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/dcc95b142f334cfda76722edd61af368/evaluator/observed-samples.pt": "716bec01ad6d9644a753eced4d7786abbae79d7b6b748eec1d005bb1e0302b0d"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "329919c85bdb4712a1d6c61e4423c341",
+      "gif_sha256": "0315035ff605bf390684c3fc0bb99039bc586c1c0f8e5ea0a5e025025b324a92",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "b4b8a3cdbeef1fa96c54624dfacb0015f9a3c1edc344130e22da12407f3c5b44",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/329919c85bdb4712a1d6c61e4423c341/evaluator/observed-samples.pt": "4c4cdc3bd11715824596967690b4b5f9024566ac4c3cc50ca05a52ab6c9a3418"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "eaf26e87740647b09dcbc6f2eece8ca7",
+      "gif_sha256": "80b271f50a3a909d3b7f37f28857752044978f4f0d6735502c33cb98745c23c4",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "40d830fc5c8eec0d0a0d9d6a0208b03e3d1104d817403b4b77e36f710a039326",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "02f7991bb4224a0fb172eadd4b2f0eef",
+      "gif_sha256": "8319518f8aa3c3ccc098c6e15c92ae0a24f33fc7068447ae9dcce9a799dd772f",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "b0ab56992ac06f05e6e1d1b26fdc911462c416159522a13ba2a4d8844ad1733f",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/02f7991bb4224a0fb172eadd4b2f0eef/observed-samples.pt": "6cd9a1d989ecd20810950763e7c3e9a1d718b5cfa3026beb4d8541136adfdc76"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "candidate",
+      "attempt_id": "50f69f605c33452b8d593fcfd8bf338e",
+      "gif_sha256": "da3516201dec66d55516a9cd48c4f37fae18de0117f55c3d2bd09b4275d76517",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "01b680fef54ddb9cd1df717b0e715953a22d5bd40f1214ae061749886c1cc9b5",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/50f69f605c33452b8d593fcfd8bf338e/observed-samples.pt": "dc1c935c1ac575794c1bd1e4f06c5745ec8776c998ee4bc384b3890213f0a460"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "9b01e7110fde4bcaa0c78fc72546b112",
+      "gif_sha256": "020e7786ef84cfc743fe3072bc106c805213b730927972fcdeaace0c13b92458",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "d949bfc932524eb2a6eb6cf4ec1fa707",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/d949bfc932524eb2a6eb6cf4ec1fa707/evaluator/observed-samples.pt": "3a06027065891fdb907b6a080aaa9f01eb87c90ccf3a4691ae9fc410c7c80f72"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "9515744ed23c468cb3f12da0847de643",
+      "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/9515744ed23c468cb3f12da0847de643/evaluator/observed-samples.pt": "b98b314fb2103315dee56a8906af583b4bd27f069a24108b3d283a9b30ff567d"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "12599248e5954abc8b360ae08171048e",
+      "gif_sha256": "f351c0d595a23d50c4fde37342423ab4cff51d20001d6e464c1e7960290d7989",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "8ac530fbd9be2dfb96fc7db280a02ef30e8523cd5a696d306d8b218653a3f260",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {},
+      "task_id": "mode_hold"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "983a3b0e39f643a4b7203341666133ff",
+      "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/983a3b0e39f643a4b7203341666133ff/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "control",
+      "attempt_id": "608ab4b4fb6b458292ef1127545410a3",
+      "gif_sha256": "5a7d74f463bb61ae4ba2473303caa696f2644a65c43573ac492fd19bdd961299",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "7f053488ba4cea2574f021b6e0e2aae67be9fc65788efc6a9a83936139144d97",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/game_extragradient/queue/game-extragradient-round3-v1/608ab4b4fb6b458292ef1127545410a3/observed-samples.pt": "5012bd6a392e978905e669dfb184d0637ffd1c238b6c61b817f41384ce49c25e"
+      },
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "sampling_draws_added": 0
+}

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3894,6 +3894,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
 
+### game-extragradient-bcap-round3-v1 · readout-5231ef4446c335a94913008f
+
+**Scope:** research_diagnostic; scientific; revision `88dc4cb3594f8847cf15aa2b0d33f4127af2274bf5dc03ba18d28ed156c4a227`.
+
+Same-batch fresh predicted-state game correction improves continuous retention without the cached-direction noise amplification of optimism; task laws and full gates remain fixed.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 354.229; mechanism `structural`.
+
+vector_two_broad: hq=0.98608, mass_tv=0.047607; vector_unequal_width: hq=0.99438, mass_tv=0.085205
+
+Same-batch correction passes Gaussian smoke and broad-vector guard; Gaussian stability, mode hold and unequal width sustained gates FAIL; two-pole remains unsupported BLOCKED. Width endpoint passes all bounds but only four terminal checks.
+
+**Next:** Stop this exact global revision. Preserve width/acquisition diagnostics for separately bounded saved-state analysis; no default adoption, seed repeat, sweep or continuation.
+
+[Evidence](../../reports/forge/attempts/02f7991bb4224a0fb172eadd4b2f0eef/result.json) · [Record](records/readout-5231ef4446c335a94913008f.json)
+
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
 **Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
@@ -4309,6 +4325,22 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
 [Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
+
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-d2e07346387dca9ac14348e8
+
+**Scope:** research_diagnostic; scientific; revision `955fa11d15efffaae1098a0f399b3a3f62019ad5df0fa73e6f78e546a25a7d21`.
+
+Execute the exact saved winner in this current source/runtime as the sole primary matched control for game-extragradient. The supported parent declaration is an admission-only reference, never a third trained or causal arm; the reverse candidate binding is unsupported for two-pole.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 169.8; mechanism `floor_constant`.
+
+mode_hold: modes=8, hq=0.98926; vector_unequal_width: hq=0.97876, mass_tv=0.2915
+
+Exact saved winner matched control: two-pole, Gaussian smoke and broad vector PASS; Gaussian stability, mode hold and unequal width FAIL. Archived qualification unchanged.
+
+**Next:** Conclude matched control subscription. Preserve current source-bound evidence and archived winner; no further training or qualification.
+
+[Evidence](../../reports/forge/attempts/12599248e5954abc8b360ae08171048e/result.json) · [Record](records/readout-d2e07346387dca9ac14348e8.json)
 
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `cf04b12887ef918c2e73267eed897816da2182511f3e551a9ca468df08cef85d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
