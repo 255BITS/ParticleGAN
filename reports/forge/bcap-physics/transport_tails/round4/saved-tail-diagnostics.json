@@ -1,0 +1,2654 @@
+{
+  "archived_checkpoints_streams_mutated": false,
+  "device": "physical GPU1",
+  "diagnostics": [
+    {
+      "archived_arm": "control",
+      "attempt_id": "47d66010d5f341d7bb98b4928f550b8e",
+      "center_counts": [
+        61,
+        64,
+        65,
+        66
+      ],
+      "checkpoint_sha256": "9f3e8b98690446739ef858767eaf389f7fa66159d2ccb9da439b851fe536c7d4",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.1349095106124878,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.03693971037864685,
+              "loss_change": -0.030515044927597046,
+              "losses": {
+                "adversarial": 0.7310128211975098,
+                "local": 0.1303136944770813,
+                "sliced": 0.09925654530525208
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.1292467713356018,
+              "loss_change": -0.005662739276885986,
+              "losses": {
+                "adversarial": 0.7345713376998901,
+                "local": 0.15689073503017426,
+                "sliced": 0.09397329390048981
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.04598996788263321,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.0030891261994838715,
+              "loss_change": -0.019905857741832733,
+              "losses": {
+                "adversarial": 0.7304220199584961,
+                "local": 0.1361149698495865,
+                "sliced": 0.10465525835752487
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.012132950127124786,
+              "loss_change": -0.03385701775550842,
+              "losses": {
+                "adversarial": 0.7296160459518433,
+                "local": 0.12405537813901901,
+                "sliced": 0.10356966406106949
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.1808994710445404,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.05228276550769806,
+              "loss_change": -0.038166970014572144,
+              "losses": {
+                "adversarial": 0.73044753074646,
+                "local": 0.12423160672187805,
+                "sliced": 0.09825199842453003
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.1720566526055336,
+              "loss_change": -0.008842818439006805,
+              "losses": {
+                "adversarial": 0.7345667481422424,
+                "local": 0.1554972380399704,
+                "sliced": 0.09219130128622055
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 37,
+          "generator": {
+            "inward_fraction": 0.37837839126586914,
+            "mean_norm": 0.0955251157283783,
+            "mean_outward_radial": 0.009649069048464298
+          },
+          "joint": {
+            "inward_fraction": 0.5135135054588318,
+            "mean_norm": 0.09726600348949432,
+            "mean_outward_radial": -0.002869319636374712
+          },
+          "prior": {
+            "inward_fraction": 0.8378378748893738,
+            "mean_norm": 0.023414822295308113,
+            "mean_outward_radial": -0.012763189151883125
+          },
+          "scope": "core"
+        },
+        {
+          "component": 0,
+          "count": 2,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.27915436029434204,
+            "mean_outward_radial": 0.11573716998100281
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.3014071583747864,
+            "mean_outward_radial": 0.1306084245443344
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.021552391350269318,
+            "mean_outward_radial": 0.014216115698218346
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 1,
+          "count": 22,
+          "generator": {
+            "inward_fraction": 0.8636363744735718,
+            "mean_norm": 0.14366444945335388,
+            "mean_outward_radial": -0.08843483775854111
+          },
+          "joint": {
+            "inward_fraction": 0.8636363744735718,
+            "mean_norm": 0.16459372639656067,
+            "mean_outward_radial": -0.10756611824035645
+          },
+          "prior": {
+            "inward_fraction": 0.9545454978942871,
+            "mean_norm": 0.022051135078072548,
+            "mean_outward_radial": -0.018303848803043365
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 3,
+          "generator": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.1730441153049469,
+            "mean_outward_radial": -0.047342799603939056
+          },
+          "joint": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.21453385055065155,
+            "mean_outward_radial": -0.07830612361431122
+          },
+          "prior": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.04233270138502121,
+            "mean_outward_radial": -0.031029127538204193
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 2,
+          "count": 31,
+          "generator": {
+            "inward_fraction": 0.7096773982048035,
+            "mean_norm": 0.09443021565675735,
+            "mean_outward_radial": -0.03293849527835846
+          },
+          "joint": {
+            "inward_fraction": 0.7419354915618896,
+            "mean_norm": 0.10431014001369476,
+            "mean_outward_radial": -0.04088928550481796
+          },
+          "prior": {
+            "inward_fraction": 0.8064515590667725,
+            "mean_norm": 0.019189445301890373,
+            "mean_outward_radial": -0.00858994945883751
+          },
+          "scope": "core"
+        },
+        {
+          "component": 2,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0976422056555748,
+            "mean_outward_radial": -0.012308541685342789
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.11251604557037354,
+            "mean_outward_radial": -0.024948585778474808
+          },
+          "prior": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.018437640741467476,
+            "mean_outward_radial": -0.012339879758656025
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 3,
+          "count": 31,
+          "generator": {
+            "inward_fraction": 0.5161290168762207,
+            "mean_norm": 0.09840897470712662,
+            "mean_outward_radial": -0.017414292320609093
+          },
+          "joint": {
+            "inward_fraction": 0.5161290168762207,
+            "mean_norm": 0.1104438528418541,
+            "mean_outward_radial": 0.0006873987149447203
+          },
+          "prior": {
+            "inward_fraction": 0.09677419066429138,
+            "mean_norm": 0.024948980659246445,
+            "mean_outward_radial": 0.017702186480164528
+          },
+          "scope": "core"
+        },
+        {
+          "component": 3,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.05723898485302925,
+            "mean_outward_radial": 0.038917794823646545
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.09522251039743423,
+            "mean_outward_radial": 0.06904670596122742
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.03818954899907112,
+            "mean_outward_radial": 0.030917705968022346
+          },
+          "scope": "tail"
+        }
+      ],
+      "mechanism": "local-v2",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.28917114809155464,
+        "component_core_covariance_errors": [
+          0.3355385363101959,
+          0.33738765120506287,
+          0.326093852519989,
+          0.15766455233097076
+        ],
+        "component_core_eigen_ratios": [
+          0.6061838269233704,
+          0.5504463315010071,
+          1.0790529251098633,
+          0.7795868515968323
+        ],
+        "component_core_min_eigen_ratio": 0.5504463315010071,
+        "component_counts": [
+          959,
+          1004,
+          1057,
+          1076
+        ],
+        "component_covariance_error": 2.4804378859698772,
+        "component_covariance_errors": [
+          4.787479877471924,
+          4.601253509521484,
+          0.326093852519989,
+          0.20692430436611176
+        ],
+        "component_mass": [
+          0.234130859375,
+          0.2451171875,
+          0.258056640625,
+          0.2626953125
+        ],
+        "component_min_eigen_ratio": 0.7857282161712646,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.04275286942720413,
+          0.06274900585412979,
+          0.0397351011633873,
+          0.03531598672270775
+        ],
+        "covariance_error": 0.03986996412277222,
+        "hq": 0.955078125,
+        "mass_tv": 0.020751953125,
+        "max_component_spill": 0.06274900585412979,
+        "mean_error": 0.056909359991550446,
+        "min_mass_ratio": 0.9365234375,
+        "resolved_core_covariance_error": 0.28917114809155464,
+        "resolved_core_min_eigen_ratio": 0.5504463315010071,
+        "resolved_max_component_spill": 0.06274900585412979,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.04909923188488684,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.9074074029922485,
+            "mean_norm": 0.002916669240221381,
+            "mean_outward_radial": -0.002087293192744255
+          },
+          "component": 0,
+          "count": 918,
+          "local": {
+            "inward_fraction": 0.9455337524414062,
+            "mean_norm": 0.051514871418476105,
+            "mean_outward_radial": -0.04049363359808922
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.6895424723625183,
+            "mean_norm": 0.0005434711929410696,
+            "mean_outward_radial": 3.940565147786401e-05
+          },
+          "total": {
+            "inward_fraction": 0.9466230869293213,
+            "mean_norm": 0.05389704927802086,
+            "mean_outward_radial": -0.04254152253270149
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.6829267740249634,
+            "mean_norm": 0.004997489508241415,
+            "mean_outward_radial": 0.00026837794575840235
+          },
+          "component": 0,
+          "count": 41,
+          "local": {
+            "inward_fraction": 0.6829267740249634,
+            "mean_norm": 0.005981541704386473,
+            "mean_outward_radial": -0.005962689407169819
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.9512194991111755,
+            "mean_norm": 0.0014902364928275347,
+            "mean_outward_radial": -0.0011993725784122944
+          },
+          "total": {
+            "inward_fraction": 0.6829267740249634,
+            "mean_norm": 0.010349082760512829,
+            "mean_outward_radial": -0.006893684156239033
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8692879676818848,
+            "mean_norm": 0.0009294231422245502,
+            "mean_outward_radial": -0.0006089716916903853
+          },
+          "component": 1,
+          "count": 941,
+          "local": {
+            "inward_fraction": 0.7566418647766113,
+            "mean_norm": 0.018853729590773582,
+            "mean_outward_radial": -0.008075653575360775
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.6535600423812866,
+            "mean_norm": 0.0010506738908588886,
+            "mean_outward_radial": 1.4382443623617291e-05
+          },
+          "total": {
+            "inward_fraction": 0.776833176612854,
+            "mean_norm": 0.01965673826634884,
+            "mean_outward_radial": -0.008670243434607983
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7301587462425232,
+            "mean_norm": 0.0037159156054258347,
+            "mean_outward_radial": -0.001043419586494565
+          },
+          "component": 1,
+          "count": 63,
+          "local": {
+            "inward_fraction": 0.9206349849700928,
+            "mean_norm": 0.0015754849882796407,
+            "mean_outward_radial": -0.0009316717623732984
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.80952388048172,
+            "mean_norm": 0.0033381753601133823,
+            "mean_outward_radial": -0.0015715229092165828
+          },
+          "total": {
+            "inward_fraction": 0.7936508655548096,
+            "mean_norm": 0.0060189575888216496,
+            "mean_outward_radial": -0.003546614432707429
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8876847624778748,
+            "mean_norm": 0.001679226872511208,
+            "mean_outward_radial": -0.0014315737644210458
+          },
+          "component": 2,
+          "count": 1015,
+          "local": {
+            "inward_fraction": 0.6256157755851746,
+            "mean_norm": 0.007310460787266493,
+            "mean_outward_radial": -0.0012319565284997225
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.47783252596855164,
+            "mean_norm": 0.0016252950299531221,
+            "mean_outward_radial": 0.0005679743480868638
+          },
+          "total": {
+            "inward_fraction": 0.6847290992736816,
+            "mean_norm": 0.008728782646358013,
+            "mean_outward_radial": -0.0020955561194568872
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0022560132201761007,
+            "mean_outward_radial": -0.0021635936573147774
+          },
+          "component": 2,
+          "count": 42,
+          "local": {
+            "inward_fraction": 0.5476190447807312,
+            "mean_norm": 0.0016250155167654157,
+            "mean_outward_radial": -0.00011466308205854148
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.1190476194024086,
+            "mean_norm": 0.0022830842062830925,
+            "mean_outward_radial": 0.0015307271387428045
+          },
+          "total": {
+            "inward_fraction": 0.6428571343421936,
+            "mean_norm": 0.0023180213756859303,
+            "mean_outward_radial": -0.0007475293823517859
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8795761466026306,
+            "mean_norm": 0.0018560122698545456,
+            "mean_outward_radial": -0.001575017930008471
+          },
+          "component": 3,
+          "count": 1038,
+          "local": {
+            "inward_fraction": 0.040462426841259,
+            "mean_norm": 0.009145066142082214,
+            "mean_outward_radial": 0.008291229605674744
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.23410405218601227,
+            "mean_norm": 0.00243817875161767,
+            "mean_outward_radial": 0.00173564360011369
+          },
+          "total": {
+            "inward_fraction": 0.04816955700516701,
+            "mean_norm": 0.009448249824345112,
+            "mean_outward_radial": 0.008451856672763824
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.005642716307193041,
+            "mean_outward_radial": -0.005377356428653002
+          },
+          "component": 3,
+          "count": 38,
+          "local": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.004706171806901693,
+            "mean_outward_radial": 0.004697699099779129
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.004581060726195574,
+            "mean_outward_radial": 0.004408651497215033
+          },
+          "total": {
+            "inward_fraction": 0.02631578966975212,
+            "mean_norm": 0.004517056979238987,
+            "mean_outward_radial": 0.0037289944011718035
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "archived_arm": "control",
+      "attempt_id": "cf66830b70db4897ab7ea5820558eb36",
+      "center_counts": [
+        141,
+        77,
+        32,
+        6
+      ],
+      "checkpoint_sha256": "fe52b10d949c67d409cba71dd3ec2a150c89749f192374ed6350e31a2bf450cb",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.05232563242316246,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.015471091493964195,
+              "loss_change": -0.010691724717617035,
+              "losses": {
+                "adversarial": 0.682339072227478,
+                "local": 0.029886946082115173,
+                "sliced": 0.10514896363019943
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.05717296525835991,
+              "loss_change": 0.004847332835197449,
+              "losses": {
+                "adversarial": 0.6830013990402222,
+                "local": 0.049376413226127625,
+                "sliced": 0.10053622722625732
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.014900597743690014,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.000559584703296423,
+              "loss_change": -0.006890714168548584,
+              "losses": {
+                "adversarial": 0.6831104159355164,
+                "local": 0.02767576277256012,
+                "sliced": 0.1103898137807846
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.002295146696269512,
+              "loss_change": -0.012605451047420502,
+              "losses": {
+                "adversarial": 0.6831337213516235,
+                "local": 0.02348896861076355,
+                "sliced": 0.10883856564760208
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.06722623109817505,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.020726729184389114,
+              "loss_change": -0.01288638636469841,
+              "losses": {
+                "adversarial": 0.6825008392333984,
+                "local": 0.028879981487989426,
+                "sliced": 0.1037994995713234
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.07624363154172897,
+              "loss_change": 0.009017400443553925,
+              "losses": {
+                "adversarial": 0.683885395526886,
+                "local": 0.054835498332977295,
+                "sliced": 0.09836321324110031
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 74,
+          "generator": {
+            "inward_fraction": 0.6351351737976074,
+            "mean_norm": 0.07321438938379288,
+            "mean_outward_radial": -0.011350640095770359
+          },
+          "joint": {
+            "inward_fraction": 0.6756756901741028,
+            "mean_norm": 0.07752854377031326,
+            "mean_outward_radial": -0.017371580004692078
+          },
+          "prior": {
+            "inward_fraction": 0.7702702879905701,
+            "mean_norm": 0.013052144087851048,
+            "mean_outward_radial": -0.006091882009059191
+          },
+          "scope": "core"
+        },
+        {
+          "component": 0,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.07203459739685059,
+            "mean_outward_radial": -0.0456317663192749
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.103987917304039,
+            "mean_outward_radial": -0.07222776114940643
+          },
+          "prior": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.032518111169338226,
+            "mean_outward_radial": -0.025331182405352592
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 1,
+          "count": 29,
+          "generator": {
+            "inward_fraction": 0.517241358757019,
+            "mean_norm": 0.13704879581928253,
+            "mean_outward_radial": -0.010722202248871326
+          },
+          "joint": {
+            "inward_fraction": 0.517241358757019,
+            "mean_norm": 0.15463462471961975,
+            "mean_outward_radial": -0.0165080688893795
+          },
+          "prior": {
+            "inward_fraction": 0.5862069129943848,
+            "mean_norm": 0.024061376228928566,
+            "mean_outward_radial": -0.005900213494896889
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 2,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.08834092319011688,
+            "mean_outward_radial": -0.05863476172089577
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.07679520547389984,
+            "mean_outward_radial": -0.02760264277458191
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.030414395034313202,
+            "mean_outward_radial": 0.02969556674361229
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 2,
+          "count": 17,
+          "generator": {
+            "inward_fraction": 0.47058823704719543,
+            "mean_norm": 0.1412886530160904,
+            "mean_outward_radial": 0.002081173239275813
+          },
+          "joint": {
+            "inward_fraction": 0.529411792755127,
+            "mean_norm": 0.16122302412986755,
+            "mean_outward_radial": 0.003730751108378172
+          },
+          "prior": {
+            "inward_fraction": 0.47058823704719543,
+            "mean_norm": 0.026544658467173576,
+            "mean_outward_radial": 0.0017960792174562812
+          },
+          "scope": "core"
+        },
+        {
+          "component": 2,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.1379578709602356,
+            "mean_outward_radial": 0.13744445145130157
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.17405839264392853,
+            "mean_outward_radial": 0.1730135977268219
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.03415175899863243,
+            "mean_outward_radial": 0.03272886201739311
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 3,
+          "count": 3,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.2403901070356369,
+            "mean_outward_radial": -0.10182380676269531
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.2733366787433624,
+            "mean_outward_radial": -0.10928179323673248
+          },
+          "prior": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.0347442701458931,
+            "mean_outward_radial": -0.008082622662186623
+          },
+          "scope": "core"
+        },
+        {
+          "component": 3,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.2114616483449936,
+            "mean_outward_radial": -0.0869646891951561
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.23381340503692627,
+            "mean_outward_radial": -0.08013883233070374
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.02912701480090618,
+            "mean_outward_radial": 0.006073145195841789
+          },
+          "scope": "tail"
+        }
+      ],
+      "mechanism": "local-v2",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.270065825432539,
+        "component_core_covariance_errors": [
+          0.18996238708496094,
+          0.23253881931304932,
+          0.1870991438627243,
+          0.4706629514694214
+        ],
+        "component_core_eigen_ratios": [
+          0.732384443283081,
+          1.0362359285354614,
+          0.8326445817947388,
+          0.36656707525253296
+        ],
+        "component_core_min_eigen_ratio": 0.36656707525253296,
+        "component_counts": [
+          2239,
+          1264,
+          479,
+          114
+        ],
+        "component_covariance_error": 0.522577092051506,
+        "component_covariance_errors": [
+          0.18996238708496094,
+          0.49056118726730347,
+          0.9391218423843384,
+          0.4706629514694214
+        ],
+        "component_mass": [
+          0.546630859375,
+          0.30859375,
+          0.116943359375,
+          0.02783203125
+        ],
+        "component_min_eigen_ratio": 0.36656707525253296,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.004019651561975479,
+          0.05775316432118416,
+          0.05427974835038185,
+          0.14035087823867798
+        ],
+        "covariance_error": 0.04762283340096474,
+        "hq": 0.9697265625,
+        "mass_tv": 0.016425779089331627,
+        "max_component_spill": 0.14035087823867798,
+        "mean_error": 0.020012548193335533,
+        "min_mass_ratio": 0.8995643258094788,
+        "resolved_core_covariance_error": 0.20320011675357819,
+        "resolved_core_min_eigen_ratio": 0.732384443283081,
+        "resolved_max_component_spill": 0.05775316432118416,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.03264431473422628,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.7278026938438416,
+            "mean_norm": 0.0007598545053042471,
+            "mean_outward_radial": -0.0003298873780295253
+          },
+          "component": 0,
+          "count": 2230,
+          "local": {
+            "inward_fraction": 0.8044843077659607,
+            "mean_norm": 0.013866963796317577,
+            "mean_outward_radial": -0.0072617423720657825
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.7578474879264832,
+            "mean_norm": 0.0005079633556306362,
+            "mean_outward_radial": -0.00016930073616094887
+          },
+          "total": {
+            "inward_fraction": 0.8121076226234436,
+            "mean_norm": 0.01432923972606659,
+            "mean_outward_radial": -0.007760931272059679
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0015455575194209814,
+            "mean_outward_radial": -0.0012581042246893048
+          },
+          "component": 0,
+          "count": 9,
+          "local": {
+            "inward_fraction": 0.8888888955116272,
+            "mean_norm": 0.0026700093876570463,
+            "mean_outward_radial": -0.0024280210491269827
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.8888888955116272,
+            "mean_norm": 0.0015508508076891303,
+            "mean_outward_radial": -0.001219480182044208
+          },
+          "total": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.005033669527620077,
+            "mean_outward_radial": -0.004905605688691139
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8715364933013916,
+            "mean_norm": 0.002532555256038904,
+            "mean_outward_radial": -0.002022179076448083
+          },
+          "component": 1,
+          "count": 1191,
+          "local": {
+            "inward_fraction": 0.12258605659008026,
+            "mean_norm": 0.011506453156471252,
+            "mean_outward_radial": 0.007555629126727581
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.20235095918178558,
+            "mean_norm": 0.0037768601905554533,
+            "mean_outward_radial": 0.003193807089701295
+          },
+          "total": {
+            "inward_fraction": 0.17212426662445068,
+            "mean_norm": 0.013455314561724663,
+            "mean_outward_radial": 0.008727257139980793
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.5753424763679504,
+            "mean_norm": 0.002390179317444563,
+            "mean_outward_radial": -0.0012995625147596002
+          },
+          "component": 1,
+          "count": 73,
+          "local": {
+            "inward_fraction": 0.027397260069847107,
+            "mean_norm": 0.004728792235255241,
+            "mean_outward_radial": 0.004585875663906336
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.009500508196651936,
+            "mean_outward_radial": 0.008914447389543056
+          },
+          "total": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.012752245180308819,
+            "mean_outward_radial": 0.012200760655105114
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7108168005943298,
+            "mean_norm": 0.0019513803999871016,
+            "mean_outward_radial": -0.0010183494305238128
+          },
+          "component": 2,
+          "count": 453,
+          "local": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.005414294544607401,
+            "mean_outward_radial": -0.0023857171181589365
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.30684328079223633,
+            "mean_norm": 0.003050921019166708,
+            "mean_outward_radial": 0.0017379825003445148
+          },
+          "total": {
+            "inward_fraction": 0.5960264801979065,
+            "mean_norm": 0.006449779495596886,
+            "mean_outward_radial": -0.0016660841647535563
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.5,
+            "mean_norm": 0.0017396813491359353,
+            "mean_outward_radial": -0.0005046481965109706
+          },
+          "component": 2,
+          "count": 26,
+          "local": {
+            "inward_fraction": 0.3461538553237915,
+            "mean_norm": 0.0019095436437055469,
+            "mean_outward_radial": -0.00023939998936839402
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.03846153989434242,
+            "mean_norm": 0.00717941764742136,
+            "mean_outward_radial": 0.006760711316019297
+          },
+          "total": {
+            "inward_fraction": 0.1538461595773697,
+            "mean_norm": 0.008211664855480194,
+            "mean_outward_radial": 0.006016662809997797
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8163264989852905,
+            "mean_norm": 0.0033960293512791395,
+            "mean_outward_radial": -0.001555715687572956
+          },
+          "component": 3,
+          "count": 98,
+          "local": {
+            "inward_fraction": 0.4591836631298065,
+            "mean_norm": 4.37329217675142e-05,
+            "mean_outward_radial": 5.334161869541276e-06
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.26530611515045166,
+            "mean_norm": 0.008302571251988411,
+            "mean_outward_radial": 0.0026212383527308702
+          },
+          "total": {
+            "inward_fraction": 0.3265306055545807,
+            "mean_norm": 0.005168259609490633,
+            "mean_outward_radial": 0.0010708565823733807
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0030676405876874924,
+            "mean_outward_radial": -0.001779268030077219
+          },
+          "component": 3,
+          "count": 16,
+          "local": {
+            "inward_fraction": 0.4375,
+            "mean_norm": 5.94712546444498e-05,
+            "mean_outward_radial": 1.8756321878754534e-05
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.007896296679973602,
+            "mean_outward_radial": 0.005633136257529259
+          },
+          "total": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.005195245146751404,
+            "mean_outward_radial": 0.003872624598443508
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_arm": "control",
+      "attempt_id": "7b479e23516642beb1c4049bb413675e",
+      "center_counts": [
+        130,
+        126
+      ],
+      "checkpoint_sha256": "a159b7d74020341b1e2ce6fc33f4bf751710cc54729abf00f01415021e0c2873",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.06772931665182114,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.006098087877035141,
+              "loss_change": -0.027766570448875427,
+              "losses": {
+                "adversarial": 0.6827996969223022,
+                "local": 0.05526600033044815,
+                "sliced": 0.10329220443964005
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.02460460737347603,
+              "loss_change": -0.04312470927834511,
+              "losses": {
+                "adversarial": 0.6835619807243347,
+                "local": 0.04895700141787529,
+                "sliced": 0.09348078072071075
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.018314292654395103,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.0002764342352747917,
+              "loss_change": -0.00888071209192276,
+              "losses": {
+                "adversarial": 0.6830329298973083,
+                "local": 0.06401798129081726,
+                "sliced": 0.1131928488612175
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.001149425283074379,
+              "loss_change": -0.017164867371320724,
+              "losses": {
+                "adversarial": 0.6834096908569336,
+                "local": 0.05800962075591087,
+                "sliced": 0.11054029315710068
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.08604361116886139,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.00869433581829071,
+              "loss_change": -0.034327469766139984,
+              "losses": {
+                "adversarial": 0.6832518577575684,
+                "local": 0.05065256357192993,
+                "sliced": 0.1008925810456276
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.034388553351163864,
+              "loss_change": -0.051655057817697525,
+              "losses": {
+                "adversarial": 0.6846821308135986,
+                "local": 0.043493758887052536,
+                "sliced": 0.08929352462291718
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 64,
+          "generator": {
+            "inward_fraction": 0.484375,
+            "mean_norm": 0.049807801842689514,
+            "mean_outward_radial": -0.0004868679097853601
+          },
+          "joint": {
+            "inward_fraction": 0.484375,
+            "mean_norm": 0.05493881553411484,
+            "mean_outward_radial": -0.005495505873113871
+          },
+          "prior": {
+            "inward_fraction": 0.75,
+            "mean_norm": 0.01097314152866602,
+            "mean_outward_radial": -0.004966930951923132
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 63,
+          "generator": {
+            "inward_fraction": 0.4920635223388672,
+            "mean_norm": 0.09753420203924179,
+            "mean_outward_radial": -0.0038573474157601595
+          },
+          "joint": {
+            "inward_fraction": 0.4920635223388672,
+            "mean_norm": 0.10629650205373764,
+            "mean_outward_radial": 0.002735653892159462
+          },
+          "prior": {
+            "inward_fraction": 0.1904762089252472,
+            "mean_norm": 0.015596873126924038,
+            "mean_outward_radial": 0.0067682284861803055
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.07040005922317505,
+            "mean_outward_radial": 0.07039255648851395
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.09386245161294937,
+            "mean_outward_radial": 0.0937577560544014
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.024587024003267288,
+            "mean_outward_radial": 0.023985493928194046
+          },
+          "scope": "tail"
+        }
+      ],
+      "mechanism": "local-v2",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.19878360629081726,
+        "component_core_covariance_errors": [
+          0.22050690650939941,
+          0.1770603060722351
+        ],
+        "component_core_eigen_ratios": [
+          0.7118433713912964,
+          0.773719072341919
+        ],
+        "component_core_min_eigen_ratio": 0.7118433713912964,
+        "component_counts": [
+          2045,
+          2051
+        ],
+        "component_covariance_error": 0.22656399756669998,
+        "component_covariance_errors": [
+          0.19631071388721466,
+          0.2568172812461853
+        ],
+        "component_mass": [
+          0.499267578125,
+          0.500732421875
+        ],
+        "component_min_eigen_ratio": 0.7488236427307129,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0034229829907417297,
+          0.025353485718369484
+        ],
+        "covariance_error": 0.11402000486850739,
+        "hq": 0.985595703125,
+        "mass_tv": 0.000732421875,
+        "max_component_spill": 0.025353485718369484,
+        "mean_error": 0.014424647204577923,
+        "min_mass_ratio": 0.99853515625,
+        "resolved_core_covariance_error": 0.19878360629081726,
+        "resolved_core_min_eigen_ratio": 0.7118433713912964,
+        "resolved_max_component_spill": 0.025353485718369484,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.040359500532318154,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.5137389898300171,
+            "mean_norm": 0.0007301982259377837,
+            "mean_outward_radial": 8.684287604410201e-05
+          },
+          "component": 0,
+          "count": 2038,
+          "local": {
+            "inward_fraction": 0.8434739708900452,
+            "mean_norm": 0.00974004715681076,
+            "mean_outward_radial": -0.005333443637937307
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.6653581857681274,
+            "mean_norm": 0.0015840567648410797,
+            "mean_outward_radial": -0.0006367383757606149
+          },
+          "total": {
+            "inward_fraction": 0.845436692237854,
+            "mean_norm": 0.010548494756221771,
+            "mean_outward_radial": -0.0058833397924900055
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.003772576805204153,
+            "mean_outward_radial": -0.003537113545462489
+          },
+          "component": 0,
+          "count": 7,
+          "local": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0010946679394692183,
+            "mean_outward_radial": -0.0009152143029496074
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.008106427267193794,
+            "mean_outward_radial": -0.007839967496693134
+          },
+          "total": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.012868012301623821,
+            "mean_outward_radial": -0.012292293831706047
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.979489803314209,
+            "mean_norm": 0.0017448848811909556,
+            "mean_outward_radial": -0.0015785332070663571
+          },
+          "component": 1,
+          "count": 1999,
+          "local": {
+            "inward_fraction": 0.16408205032348633,
+            "mean_norm": 0.009255465120077133,
+            "mean_outward_radial": 0.005504021421074867
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.1825913041830063,
+            "mean_norm": 0.003822445636615157,
+            "mean_outward_radial": 0.002940603531897068
+          },
+          "total": {
+            "inward_fraction": 0.16958479583263397,
+            "mean_norm": 0.011355611495673656,
+            "mean_outward_radial": 0.0068660918623209
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.442307710647583,
+            "mean_norm": 0.0028957112226635218,
+            "mean_outward_radial": -8.156491094268858e-05
+          },
+          "component": 1,
+          "count": 52,
+          "local": {
+            "inward_fraction": 0.09615384787321091,
+            "mean_norm": 0.0014969664625823498,
+            "mean_outward_radial": 0.001395657192915678
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.05769231170415878,
+            "mean_norm": 0.010144341737031937,
+            "mean_outward_radial": 0.00834339763969183
+          },
+          "total": {
+            "inward_fraction": 0.05769231170415878,
+            "mean_norm": 0.011334406211972237,
+            "mean_outward_radial": 0.009657490067183971
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_arm": "candidate",
+      "attempt_id": "5cb3b4879b504846b72cad212970c13c",
+      "center_counts": [
+        62,
+        62,
+        65,
+        67
+      ],
+      "checkpoint_sha256": "b21b4c968b5795e63b5df9b8f01833e06131367dca2d447660eb711e3488b5a3",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.16589948534965515,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.008431807160377502,
+              "loss_change": -0.07451793551445007,
+              "losses": {
+                "adversarial": 0.7060390710830688,
+                "local": 0.10853500664234161,
+                "sliced": 0.11942119896411896
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.10909703373908997,
+              "loss_change": -0.056802451610565186,
+              "losses": {
+                "adversarial": 0.7070456743240356,
+                "local": 0.12885862588882446,
+                "sliced": 0.1158064603805542
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.04968822002410889,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.0007424205541610718,
+              "loss_change": -0.02410168945789337,
+              "losses": {
+                "adversarial": 0.7059453129768372,
+                "local": 0.15530480444431305,
+                "sliced": 0.12316140532493591
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.004042468965053558,
+              "loss_change": -0.04564575105905533,
+              "losses": {
+                "adversarial": 0.7058582305908203,
+                "local": 0.1348780244588852,
+                "sliced": 0.12213120609521866
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.21558770537376404,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.019614435732364655,
+              "loss_change": -0.08817941695451736,
+              "losses": {
+                "adversarial": 0.7060297727584839,
+                "local": 0.0958372950553894,
+                "sliced": 0.11846672743558884
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.16964752227067947,
+              "loss_change": -0.045940183103084564,
+              "losses": {
+                "adversarial": 0.707648754119873,
+                "local": 0.1408858597278595,
+                "sliced": 0.11403841525316238
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 36,
+          "generator": {
+            "inward_fraction": 0.9166666865348816,
+            "mean_norm": 0.12939397990703583,
+            "mean_outward_radial": -0.0956350788474083
+          },
+          "joint": {
+            "inward_fraction": 0.9722222089767456,
+            "mean_norm": 0.14150874316692352,
+            "mean_outward_radial": -0.1129770576953888
+          },
+          "prior": {
+            "inward_fraction": 0.944444477558136,
+            "mean_norm": 0.021892957389354706,
+            "mean_outward_radial": -0.016715381294488907
+          },
+          "scope": "core"
+        },
+        {
+          "component": 0,
+          "count": 3,
+          "generator": {
+            "inward_fraction": 0.3333333432674408,
+            "mean_norm": 0.1770852655172348,
+            "mean_outward_radial": 0.04443066567182541
+          },
+          "joint": {
+            "inward_fraction": 0.3333333432674408,
+            "mean_norm": 0.17495375871658325,
+            "mean_outward_radial": 0.020879654213786125
+          },
+          "prior": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.02374432235956192,
+            "mean_outward_radial": -0.023144252598285675
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 1,
+          "count": 22,
+          "generator": {
+            "inward_fraction": 0.5454545617103577,
+            "mean_norm": 0.10110374540090561,
+            "mean_outward_radial": -0.015507988631725311
+          },
+          "joint": {
+            "inward_fraction": 0.5454545617103577,
+            "mean_norm": 0.11224283277988434,
+            "mean_outward_radial": -0.034619249403476715
+          },
+          "prior": {
+            "inward_fraction": 0.9545454978942871,
+            "mean_norm": 0.02188621647655964,
+            "mean_outward_radial": -0.018549734726548195
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.16824375092983246,
+            "mean_outward_radial": 0.14498396217823029
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.1586947739124298,
+            "mean_outward_radial": 0.13453614711761475
+          },
+          "prior": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.01010945811867714,
+            "mean_outward_radial": -0.010052054189145565
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 2,
+          "count": 33,
+          "generator": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.10729945451021194,
+            "mean_outward_radial": -0.02814292348921299
+          },
+          "joint": {
+            "inward_fraction": 0.696969747543335,
+            "mean_norm": 0.1158936396241188,
+            "mean_outward_radial": -0.03934421017765999
+          },
+          "prior": {
+            "inward_fraction": 0.7878788113594055,
+            "mean_norm": 0.021816013380885124,
+            "mean_outward_radial": -0.011545106768608093
+          },
+          "scope": "core"
+        },
+        {
+          "component": 3,
+          "count": 33,
+          "generator": {
+            "inward_fraction": 0.3636363744735718,
+            "mean_norm": 0.06253570318222046,
+            "mean_outward_radial": 0.009240726940333843
+          },
+          "joint": {
+            "inward_fraction": 0.3333333432674408,
+            "mean_norm": 0.07162943482398987,
+            "mean_outward_radial": 0.03259808570146561
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.025498703122138977,
+            "mean_outward_radial": 0.023362111300230026
+          },
+          "scope": "core"
+        }
+      ],
+      "mechanism": "backtrack-v3",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.17941253446042538,
+        "component_core_covariance_errors": [
+          0.23938311636447906,
+          0.22163662314414978,
+          0.16803327202796936,
+          0.0885971263051033
+        ],
+        "component_core_eigen_ratios": [
+          0.6814960241317749,
+          0.7142754197120667,
+          0.8532100319862366,
+          1.021766185760498
+        ],
+        "component_core_min_eigen_ratio": 0.6814960241317749,
+        "component_counts": [
+          976,
+          964,
+          1063,
+          1093
+        ],
+        "component_covariance_error": 3.8597327657043934,
+        "component_covariance_errors": [
+          11.900117874145508,
+          3.1214935779571533,
+          0.16803327202796936,
+          0.24928633868694305
+        ],
+        "component_mass": [
+          0.23828125,
+          0.2353515625,
+          0.259521484375,
+          0.266845703125
+        ],
+        "component_min_eigen_ratio": 0.7500753402709961,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.10040983557701111,
+          0.02074688859283924,
+          0.0,
+          0.015553522855043411
+        ],
+        "covariance_error": 0.04701189324259758,
+        "hq": 0.967041015625,
+        "mass_tv": 0.0263671875,
+        "max_component_spill": 0.10040983557701111,
+        "mean_error": 0.05591754987835884,
+        "min_mass_ratio": 0.94140625,
+        "resolved_core_covariance_error": 0.17941253446042538,
+        "resolved_core_min_eigen_ratio": 0.6814960241317749,
+        "resolved_max_component_spill": 0.10040983557701111,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.045452352964108454,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.9726651906967163,
+            "mean_norm": 0.0014628128847107291,
+            "mean_outward_radial": -0.00118103192653507
+          },
+          "component": 0,
+          "count": 878,
+          "local": {
+            "inward_fraction": 0.9703872799873352,
+            "mean_norm": 0.04798893257975578,
+            "mean_outward_radial": -0.04155302047729492
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.8917995691299438,
+            "mean_norm": 0.0007026160601526499,
+            "mean_outward_radial": -0.00031183924875222147
+          },
+          "total": {
+            "inward_fraction": 0.9703872799873352,
+            "mean_norm": 0.04960227012634277,
+            "mean_outward_radial": -0.04304588958621025
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9897959232330322,
+            "mean_norm": 0.0030790986493229866,
+            "mean_outward_radial": -0.0027948408387601376
+          },
+          "component": 0,
+          "count": 98,
+          "local": {
+            "inward_fraction": 0.8469387292861938,
+            "mean_norm": 0.0044431607238948345,
+            "mean_outward_radial": -0.004356401041150093
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.9591836333274841,
+            "mean_norm": 0.0015897321281954646,
+            "mean_outward_radial": -0.0013172051403671503
+          },
+          "total": {
+            "inward_fraction": 0.9897959232330322,
+            "mean_norm": 0.008618497289717197,
+            "mean_outward_radial": -0.0084684481844306
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.23411017656326294,
+            "mean_norm": 0.0007085257093422115,
+            "mean_outward_radial": 0.0003381059505045414
+          },
+          "component": 1,
+          "count": 944,
+          "local": {
+            "inward_fraction": 0.8453390002250671,
+            "mean_norm": 0.015295840799808502,
+            "mean_outward_radial": -0.009670950472354889
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.5275423526763916,
+            "mean_norm": 0.0008728854591026902,
+            "mean_outward_radial": 0.00027436637901701033
+          },
+          "total": {
+            "inward_fraction": 0.8283898234367371,
+            "mean_norm": 0.01522949617356062,
+            "mean_outward_radial": -0.00905847828835249
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.45000001788139343,
+            "mean_norm": 0.003904911922290921,
+            "mean_outward_radial": 0.0019223187118768692
+          },
+          "component": 1,
+          "count": 20,
+          "local": {
+            "inward_fraction": 0.9000000357627869,
+            "mean_norm": 0.0018867508042603731,
+            "mean_outward_radial": -0.0011832257732748985
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.949999988079071,
+            "mean_norm": 0.003920606803148985,
+            "mean_outward_radial": -0.0036984493490308523
+          },
+          "total": {
+            "inward_fraction": 0.949999988079071,
+            "mean_norm": 0.0037384144961833954,
+            "mean_outward_radial": -0.0029593564104288816
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.99905925989151,
+            "mean_norm": 0.00190294673666358,
+            "mean_outward_radial": -0.001794490497559309
+          },
+          "component": 2,
+          "count": 1063,
+          "local": {
+            "inward_fraction": 0.4214487373828888,
+            "mean_norm": 0.006524626165628433,
+            "mean_outward_radial": 0.0005521519924513996
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.40263405442237854,
+            "mean_norm": 0.0016073548467829823,
+            "mean_outward_radial": 0.0007181990658864379
+          },
+          "total": {
+            "inward_fraction": 0.5465663075447083,
+            "mean_norm": 0.007281898055225611,
+            "mean_outward_radial": -0.0005241394392214715
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.8847583532333374,
+            "mean_norm": 0.001836569281294942,
+            "mean_outward_radial": -0.001462643500417471
+          },
+          "component": 3,
+          "count": 1076,
+          "local": {
+            "inward_fraction": 0.07156133651733398,
+            "mean_norm": 0.008163989521563053,
+            "mean_outward_radial": 0.007333362940698862
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.19516728818416595,
+            "mean_norm": 0.002567050978541374,
+            "mean_outward_radial": 0.001960715977475047
+          },
+          "total": {
+            "inward_fraction": 0.07992564886808395,
+            "mean_norm": 0.00878971442580223,
+            "mean_outward_radial": 0.007831434719264507
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0018952933605760336,
+            "mean_outward_radial": -0.0012147397501394153
+          },
+          "component": 3,
+          "count": 17,
+          "local": {
+            "inward_fraction": 0.05882352963089943,
+            "mean_norm": 0.0027777899522334337,
+            "mean_outward_radial": 0.0026879191864281893
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.05882352963089943,
+            "mean_norm": 0.0037583301309496164,
+            "mean_outward_radial": 0.003151088487356901
+          },
+          "total": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.004748120903968811,
+            "mean_outward_radial": 0.004624268505722284
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "archived_arm": "candidate",
+      "attempt_id": "465c3ce64ec4484383cdafeacb9b32b3",
+      "center_counts": [
+        142,
+        76,
+        31,
+        7
+      ],
+      "checkpoint_sha256": "3a79d0a8b99b098d2ce061caab689e70f30774e1b93db288dbb4b6445f1b2016",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.08176470547914505,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.01655958592891693,
+              "loss_change": -0.024322766810655594,
+              "losses": {
+                "adversarial": 0.6882190704345703,
+                "local": 0.03322839364409447,
+                "sliced": 0.09903816878795624
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.06902346014976501,
+              "loss_change": -0.012741245329380035,
+              "losses": {
+                "adversarial": 0.6918530464172363,
+                "local": 0.043627284467220306,
+                "sliced": 0.09658682346343994
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.020651845261454582,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.0005034944042563438,
+              "loss_change": -0.009822428226470947,
+              "losses": {
+                "adversarial": 0.6859327554702759,
+                "local": 0.04703619331121445,
+                "sliced": 0.10201702266931534
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.0021492857486009598,
+              "loss_change": -0.018502559512853622,
+              "losses": {
+                "adversarial": 0.685882568359375,
+                "local": 0.039957981556653976,
+                "sliced": 0.10046529024839401
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.10241655260324478,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.022419121116399765,
+              "loss_change": -0.028789155185222626,
+              "losses": {
+                "adversarial": 0.6883636713027954,
+                "local": 0.030027560889720917,
+                "sliced": 0.09762801229953766
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.09132925420999527,
+              "loss_change": -0.011087298393249512,
+              "losses": {
+                "adversarial": 0.6925450563430786,
+                "local": 0.04696865379810333,
+                "sliced": 0.09420739114284515
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 75,
+          "generator": {
+            "inward_fraction": 0.5600000023841858,
+            "mean_norm": 0.0987272635102272,
+            "mean_outward_radial": -0.01610722206532955
+          },
+          "joint": {
+            "inward_fraction": 0.6266666650772095,
+            "mean_norm": 0.10149812698364258,
+            "mean_outward_radial": -0.021498093381524086
+          },
+          "prior": {
+            "inward_fraction": 0.7066667079925537,
+            "mean_norm": 0.013339119032025337,
+            "mean_outward_radial": -0.005898175295442343
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 29,
+          "generator": {
+            "inward_fraction": 0.5517241358757019,
+            "mean_norm": 0.11096089333295822,
+            "mean_outward_radial": -0.008595723658800125
+          },
+          "joint": {
+            "inward_fraction": 0.5517241358757019,
+            "mean_norm": 0.1281701922416687,
+            "mean_outward_radial": -0.013323325663805008
+          },
+          "prior": {
+            "inward_fraction": 0.5517241358757019,
+            "mean_norm": 0.02278459630906582,
+            "mean_outward_radial": -0.004666994791477919
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 2,
+          "generator": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.07480829954147339,
+            "mean_outward_radial": -0.05982191860675812
+          },
+          "joint": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.05814023315906525,
+            "mean_outward_radial": -0.022771939635276794
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.0380445159971714,
+            "mean_outward_radial": 0.036677513271570206
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 2,
+          "count": 17,
+          "generator": {
+            "inward_fraction": 0.529411792755127,
+            "mean_norm": 0.10733067244291306,
+            "mean_outward_radial": -0.011952116154134274
+          },
+          "joint": {
+            "inward_fraction": 0.47058823704719543,
+            "mean_norm": 0.12099675834178925,
+            "mean_outward_radial": 0.0008995581301860511
+          },
+          "prior": {
+            "inward_fraction": 0.11764705926179886,
+            "mean_norm": 0.025434082373976707,
+            "mean_outward_radial": 0.01337005477398634
+          },
+          "scope": "core"
+        },
+        {
+          "component": 2,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.12493878602981567,
+            "mean_outward_radial": 0.06058264523744583
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.15567895770072937,
+            "mean_outward_radial": 0.0917707234621048
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.03661906346678734,
+            "mean_outward_radial": 0.03267338126897812
+          },
+          "scope": "tail"
+        },
+        {
+          "component": 3,
+          "count": 3,
+          "generator": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.15559807419776917,
+            "mean_outward_radial": 0.023851808160543442
+          },
+          "joint": {
+            "inward_fraction": 0.6666666865348816,
+            "mean_norm": 0.17702656984329224,
+            "mean_outward_radial": 0.025629624724388123
+          },
+          "prior": {
+            "inward_fraction": 0.3333333432674408,
+            "mean_norm": 0.029148830100893974,
+            "mean_outward_radial": 0.002186745870858431
+          },
+          "scope": "core"
+        },
+        {
+          "component": 3,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.18832942843437195,
+            "mean_outward_radial": 0.17353130877017975
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.2235376089811325,
+            "mean_outward_radial": 0.20873229205608368
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.03630456700921059,
+            "mean_outward_radial": 0.03568468987941742
+          },
+          "scope": "tail"
+        }
+      ],
+      "mechanism": "backtrack-v3",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.30672210082411766,
+        "component_core_covariance_errors": [
+          0.130678191781044,
+          0.19111040234565735,
+          0.3828623294830322,
+          0.5222374796867371
+        ],
+        "component_core_eigen_ratios": [
+          0.8154913783073425,
+          0.8762477040290833,
+          0.4832710921764374,
+          0.48774996399879456
+        ],
+        "component_core_min_eigen_ratio": 0.4832710921764374,
+        "component_counts": [
+          2254,
+          1249,
+          467,
+          126
+        ],
+        "component_covariance_error": 1.1235103756189346,
+        "component_covariance_errors": [
+          0.32470113039016724,
+          0.6456348896026611,
+          0.5374047756195068,
+          2.9863007068634033
+        ],
+        "component_mass": [
+          0.55029296875,
+          0.304931640625,
+          0.114013671875,
+          0.03076171875
+        ],
+        "component_min_eigen_ratio": 0.6407586336135864,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.006654835771769285,
+          0.0656525194644928,
+          0.040685225278139114,
+          0.2698412835597992
+        ],
+        "covariance_error": 0.05170014873147011,
+        "hq": 0.96337890625,
+        "mass_tv": 0.015986314043402672,
+        "max_component_spill": 0.2698412835597992,
+        "mean_error": 0.020542019978165627,
+        "min_mass_ratio": 0.8770282864570618,
+        "resolved_core_covariance_error": 0.23488364120324454,
+        "resolved_core_min_eigen_ratio": 0.4832710921764374,
+        "resolved_max_component_spill": 0.0656525194644928,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.03159934308263302,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.6208128929138184,
+            "mean_norm": 0.001169697497971356,
+            "mean_outward_radial": -0.0003380632842890918
+          },
+          "component": 0,
+          "count": 2239,
+          "local": {
+            "inward_fraction": 0.8338544368743896,
+            "mean_norm": 0.016804929822683334,
+            "mean_outward_radial": -0.008721912279725075
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.7757927775382996,
+            "mean_norm": 0.0004955895710736513,
+            "mean_outward_radial": -0.00017935519281309098
+          },
+          "total": {
+            "inward_fraction": 0.8401072025299072,
+            "mean_norm": 0.01719117909669876,
+            "mean_outward_radial": -0.009239330887794495
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0015244206879287958,
+            "mean_outward_radial": -0.001412378391250968
+          },
+          "component": 0,
+          "count": 15,
+          "local": {
+            "inward_fraction": 0.9333333969116211,
+            "mean_norm": 0.000636823009699583,
+            "mean_outward_radial": -0.0006025545881129801
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.006610708311200142,
+            "mean_outward_radial": -0.006554790772497654
+          },
+          "total": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.00860868114978075,
+            "mean_outward_radial": -0.008569723926484585
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.9837189316749573,
+            "mean_norm": 0.0023852523881942034,
+            "mean_outward_radial": -0.0020714520942419767
+          },
+          "component": 1,
+          "count": 1167,
+          "local": {
+            "inward_fraction": 0.07883461564779282,
+            "mean_norm": 0.01140606589615345,
+            "mean_outward_radial": 0.008508391678333282
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.19794344902038574,
+            "mean_norm": 0.0036443343851715326,
+            "mean_outward_radial": 0.0031293057836592197
+          },
+          "total": {
+            "inward_fraction": 0.1028277650475502,
+            "mean_norm": 0.012988698668777943,
+            "mean_outward_radial": 0.00956624373793602
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.6219512224197388,
+            "mean_norm": 0.0030568770598620176,
+            "mean_outward_radial": -0.0015578033635392785
+          },
+          "component": 1,
+          "count": 82,
+          "local": {
+            "inward_fraction": 0.03658536449074745,
+            "mean_norm": 0.004673145245760679,
+            "mean_outward_radial": 0.004529927391558886
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.009679492563009262,
+            "mean_outward_radial": 0.009095181711018085
+          },
+          "total": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.012472309172153473,
+            "mean_outward_radial": 0.012067306786775589
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.7433035969734192,
+            "mean_norm": 0.0013979132054373622,
+            "mean_outward_radial": -0.0008620002772659063
+          },
+          "component": 2,
+          "count": 448,
+          "local": {
+            "inward_fraction": 0.660714328289032,
+            "mean_norm": 0.005875044036656618,
+            "mean_outward_radial": -0.0025234108325093985
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.4598214626312256,
+            "mean_norm": 0.0032968702726066113,
+            "mean_outward_radial": 0.0009358112001791596
+          },
+          "total": {
+            "inward_fraction": 0.65625,
+            "mean_norm": 0.007570059970021248,
+            "mean_outward_radial": -0.0024495997931808233
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.0009227822301909328,
+            "mean_outward_radial": 0.000886991445440799
+          },
+          "component": 2,
+          "count": 19,
+          "local": {
+            "inward_fraction": 0.5789473652839661,
+            "mean_norm": 0.0017422267701476812,
+            "mean_outward_radial": -0.00025305472081527114
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.15789473056793213,
+            "mean_norm": 0.00671997107565403,
+            "mean_outward_radial": 0.005499594379216433
+          },
+          "total": {
+            "inward_fraction": 0.2631579041481018,
+            "mean_norm": 0.007837188430130482,
+            "mean_outward_radial": 0.006133530754595995
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.97826087474823,
+            "mean_norm": 0.004284752532839775,
+            "mean_outward_radial": -0.0035283830948174
+          },
+          "component": 3,
+          "count": 92,
+          "local": {
+            "inward_fraction": 0.5760869383811951,
+            "mean_norm": 4.9925547500606626e-05,
+            "mean_outward_radial": -1.3884072359360289e-05
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.15217392146587372,
+            "mean_norm": 0.008353345096111298,
+            "mean_outward_radial": 0.004346882458776236
+          },
+          "total": {
+            "inward_fraction": 0.239130437374115,
+            "mean_norm": 0.004865947179496288,
+            "mean_outward_radial": 0.0008046156144700944
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.529411792755127,
+            "mean_norm": 0.0012236908078193665,
+            "mean_outward_radial": -0.0001058731650118716
+          },
+          "component": 3,
+          "count": 34,
+          "local": {
+            "inward_fraction": 0.6470588445663452,
+            "mean_norm": 0.00012357351079117507,
+            "mean_outward_radial": -6.838175613665953e-05
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.05882352963089943,
+            "mean_norm": 0.007536929566413164,
+            "mean_outward_radial": 0.004464344587177038
+          },
+          "total": {
+            "inward_fraction": 0.05882352963089943,
+            "mean_norm": 0.006733989343047142,
+            "mean_outward_radial": 0.004290089942514896
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_arm": "candidate",
+      "attempt_id": "d76483003d564fd982cf295f590360f5",
+      "center_counts": [
+        130,
+        126
+      ],
+      "checkpoint_sha256": "8d191152aac369dfc002be1170814ae86c93f30c98977150581a7c41ec6ffffd",
+      "exact_final_data_stream_verified": true,
+      "finite_probe": [
+        {
+          "directional_derivative": -0.06772931665182114,
+          "role": "generator",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.006098087877035141,
+              "loss_change": -0.027766570448875427,
+              "losses": {
+                "adversarial": 0.6827996969223022,
+                "local": 0.05526600033044815,
+                "sliced": 0.10329220443964005
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.02460460737347603,
+              "loss_change": -0.04312470927834511,
+              "losses": {
+                "adversarial": 0.6835619807243347,
+                "local": 0.04895700141787529,
+                "sliced": 0.09348078072071075
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.018314292654395103,
+          "role": "prior",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.0002764342352747917,
+              "loss_change": -0.00888071209192276,
+              "losses": {
+                "adversarial": 0.6830329298973083,
+                "local": 0.06401798129081726,
+                "sliced": 0.1131928488612175
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.001149425283074379,
+              "loss_change": -0.017164867371320724,
+              "losses": {
+                "adversarial": 0.6834096908569336,
+                "local": 0.05800962075591087,
+                "sliced": 0.11054029315710068
+              },
+              "scale": 1.0
+            }
+          ]
+        },
+        {
+          "directional_derivative": -0.08604361116886139,
+          "role": "joint",
+          "trials": [
+            {
+              "finite_curvature_remainder": 0.00869433581829071,
+              "loss_change": -0.034327469766139984,
+              "losses": {
+                "adversarial": 0.6832518577575684,
+                "local": 0.05065256357192993,
+                "sliced": 0.1008925810456276
+              },
+              "scale": 0.5
+            },
+            {
+              "finite_curvature_remainder": 0.034388553351163864,
+              "loss_change": -0.051655057817697525,
+              "losses": {
+                "adversarial": 0.6846821308135986,
+                "local": 0.043493758887052536,
+                "sliced": 0.08929352462291718
+              },
+              "scale": 1.0
+            }
+          ]
+        }
+      ],
+      "finite_probe_role_motions": [
+        {
+          "component": 0,
+          "count": 64,
+          "generator": {
+            "inward_fraction": 0.484375,
+            "mean_norm": 0.049807801842689514,
+            "mean_outward_radial": -0.0004868679097853601
+          },
+          "joint": {
+            "inward_fraction": 0.484375,
+            "mean_norm": 0.05493881553411484,
+            "mean_outward_radial": -0.005495505873113871
+          },
+          "prior": {
+            "inward_fraction": 0.75,
+            "mean_norm": 0.01097314152866602,
+            "mean_outward_radial": -0.004966930951923132
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 63,
+          "generator": {
+            "inward_fraction": 0.4920635223388672,
+            "mean_norm": 0.09753420203924179,
+            "mean_outward_radial": -0.0038573474157601595
+          },
+          "joint": {
+            "inward_fraction": 0.4920635223388672,
+            "mean_norm": 0.10629650205373764,
+            "mean_outward_radial": 0.002735653892159462
+          },
+          "prior": {
+            "inward_fraction": 0.1904762089252472,
+            "mean_norm": 0.015596873126924038,
+            "mean_outward_radial": 0.0067682284861803055
+          },
+          "scope": "core"
+        },
+        {
+          "component": 1,
+          "count": 1,
+          "generator": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.07040005922317505,
+            "mean_outward_radial": 0.07039255648851395
+          },
+          "joint": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.09386245161294937,
+            "mean_outward_radial": 0.0937577560544014
+          },
+          "prior": {
+            "inward_fraction": 0.0,
+            "mean_norm": 0.024587024003267288,
+            "mean_outward_radial": 0.023985493928194046
+          },
+          "scope": "tail"
+        }
+      ],
+      "mechanism": "backtrack-v3",
+      "metric_endpoint": {
+        "component_core_covariance_error": 0.19878360629081726,
+        "component_core_covariance_errors": [
+          0.22050690650939941,
+          0.1770603060722351
+        ],
+        "component_core_eigen_ratios": [
+          0.7118433713912964,
+          0.773719072341919
+        ],
+        "component_core_min_eigen_ratio": 0.7118433713912964,
+        "component_counts": [
+          2045,
+          2051
+        ],
+        "component_covariance_error": 0.22656399756669998,
+        "component_covariance_errors": [
+          0.19631071388721466,
+          0.2568172812461853
+        ],
+        "component_mass": [
+          0.499267578125,
+          0.500732421875
+        ],
+        "component_min_eigen_ratio": 0.7488236427307129,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0034229829907417297,
+          0.025353485718369484
+        ],
+        "covariance_error": 0.11402000486850739,
+        "hq": 0.985595703125,
+        "mass_tv": 0.000732421875,
+        "max_component_spill": 0.025353485718369484,
+        "mean_error": 0.014424647204577923,
+        "min_mass_ratio": 0.99853515625,
+        "resolved_core_covariance_error": 0.19878360629081726,
+        "resolved_core_min_eigen_ratio": 0.7118433713912964,
+        "resolved_max_component_spill": 0.025353485718369484,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.040359500532318154,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "probe_generated_draws": 128,
+      "served_output_fields": [
+        {
+          "adversarial": {
+            "inward_fraction": 0.5137389898300171,
+            "mean_norm": 0.0007301982259377837,
+            "mean_outward_radial": 8.684287604410201e-05
+          },
+          "component": 0,
+          "count": 2038,
+          "local": {
+            "inward_fraction": 0.8434739708900452,
+            "mean_norm": 0.00974004715681076,
+            "mean_outward_radial": -0.005333443637937307
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.6653581857681274,
+            "mean_norm": 0.0015840567648410797,
+            "mean_outward_radial": -0.0006367383757606149
+          },
+          "total": {
+            "inward_fraction": 0.845436692237854,
+            "mean_norm": 0.010548494756221771,
+            "mean_outward_radial": -0.0058833397924900055
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.003772576805204153,
+            "mean_outward_radial": -0.003537113545462489
+          },
+          "component": 0,
+          "count": 7,
+          "local": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.0010946679394692183,
+            "mean_outward_radial": -0.0009152143029496074
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.008106427267193794,
+            "mean_outward_radial": -0.007839967496693134
+          },
+          "total": {
+            "inward_fraction": 1.0,
+            "mean_norm": 0.012868012301623821,
+            "mean_outward_radial": -0.012292293831706047
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.979489803314209,
+            "mean_norm": 0.0017448848811909556,
+            "mean_outward_radial": -0.0015785332070663571
+          },
+          "component": 1,
+          "count": 1999,
+          "local": {
+            "inward_fraction": 0.16408205032348633,
+            "mean_norm": 0.009255465120077133,
+            "mean_outward_radial": 0.005504021421074867
+          },
+          "scope": "core",
+          "sliced": {
+            "inward_fraction": 0.1825913041830063,
+            "mean_norm": 0.003822445636615157,
+            "mean_outward_radial": 0.002940603531897068
+          },
+          "total": {
+            "inward_fraction": 0.16958479583263397,
+            "mean_norm": 0.011355611495673656,
+            "mean_outward_radial": 0.0068660918623209
+          }
+        },
+        {
+          "adversarial": {
+            "inward_fraction": 0.442307710647583,
+            "mean_norm": 0.0028957112226635218,
+            "mean_outward_radial": -8.156491094268858e-05
+          },
+          "component": 1,
+          "count": 52,
+          "local": {
+            "inward_fraction": 0.09615384787321091,
+            "mean_norm": 0.0014969664625823498,
+            "mean_outward_radial": 0.001395657192915678
+          },
+          "scope": "tail",
+          "sliced": {
+            "inward_fraction": 0.05769231170415878,
+            "mean_norm": 0.010144341737031937,
+            "mean_outward_radial": 0.00834339763969183
+          },
+          "total": {
+            "inward_fraction": 0.05769231170415878,
+            "mean_norm": 0.011334406211972237,
+            "mean_outward_radial": 0.009657490067183971
+          }
+        }
+      ],
+      "source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "generated_probe_draws": 768,
+  "in_memory_optimizer_proposals": 6,
+  "optimizer_training_updates_added": 0,
+  "schema_version": 1,
+  "scope": "saved_endpoint_diagnostic_separate_from_training_steps",
+  "target_labels_covariances": "posthoc decomposition only; never fed to any training objective",
+  "wall_seconds": 2.550579169066623
+}

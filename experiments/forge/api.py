@@ -176,7 +176,7 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
-    if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight or recipe.kinetic_transport_backtrack) and task.get("execution", {}).get("execution_path") == "public_components":
+    if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight or recipe.kinetic_transport_tail_weight or recipe.kinetic_transport_backtrack) and task.get("execution", {}).get("execution_path") == "public_components":
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
@@ -338,7 +338,7 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
-        if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight or self.recipe.kinetic_transport_backtrack):
+        if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight or self.recipe.kinetic_transport_tail_weight or self.recipe.kinetic_transport_backtrack):
             raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "
                                    "the current Forge host bindings do not support it"])
         if self.recipe.row_policy != "independent":

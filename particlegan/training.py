@@ -392,6 +392,8 @@ class GANTrainer:
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
+            transport_tail = (recipe.kinetic_transport_tail_loss(fake_g, real_g)
+                              if recipe.kinetic_transport_tail_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
@@ -399,6 +401,8 @@ class GANTrainer:
             loss_g = loss_gan + recipe.prior_reg * prior_reg + transport
             if recipe.kinetic_transport_local_weight:
                 loss_g = loss_g + transport_local
+            if recipe.kinetic_transport_tail_weight:
+                loss_g = loss_g + transport_tail
             self.opt_g.zero_grad()
             loss_g.backward()
             self.policy.after_generator_backward(
@@ -421,6 +425,8 @@ class GANTrainer:
                         value = value + recipe.kinetic_transport_loss(replay_fake, real_g)
                     if recipe.kinetic_transport_local_weight:
                         value = value + recipe.kinetic_transport_local_loss(replay_fake, real_g)
+                    if recipe.kinetic_transport_tail_weight:
+                        value = value + recipe.kinetic_transport_tail_loss(replay_fake, real_g)
                     if recipe.prior_reg:
                         raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                         value = value + recipe.prior_reg * self.prior_regularizer(raw)
@@ -440,6 +446,8 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if recipe.kinetic_transport_tail_weight:
+            result["kinetic_transport_tail"] = transport_tail.detach()
         if recipe.kinetic_transport_backtrack:
             result["kinetic_backtrack"] = backtrack
         if collect_stats:

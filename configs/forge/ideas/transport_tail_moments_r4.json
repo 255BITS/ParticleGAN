@@ -1,0 +1,59 @@
+{
+  "api_changes": [
+    {
+      "affected_hosts": "same GANTrainer real/fake tensors; frozen component hosts explicitly BLOCKED",
+      "migration": "default zero follows exact archived path and is omitted by checkpoint compatibility projection",
+      "provider": "particlegan.Recipe.kinetic_transport_tail_loss",
+      "variables": [
+        "kinetic_transport_tail_weight"
+      ]
+    }
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Add weight1 unbounded radial moment residual on a rational partition of detached same-batch real anchors; retain exact local-v2 without backtracking."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/transport_tails/round4/README.md",
+  "id": "transport_tail_moments_r4",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Rational partition weights retain quadratically growing radial features for distant fake samples. Match relative empirical moments to supply tail-sensitive gradients alongside unchanged allocation/local-density forces; no labels, known centers/covariances, additional draws, or serving changes.",
+  "parent": "kinetic_transport_local_v2",
+  "prior_art": [
+    "kinetic_transport_local_v2",
+    "reports/forge/bcap-physics/transport_tails/round4/saved-tail-diagnostics.json",
+    "https://www.jmlr.org/papers/v13/gretton12a.html",
+    "https://proceedings.mlr.press/v267/srinivasan25a.html"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "kinetic_transport_local_weight": 1.0,
+    "kinetic_transport_projections": 32,
+    "kinetic_transport_tail_weight": 1.0,
+    "kinetic_transport_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "kinetic-transport-tail-moments"
+}

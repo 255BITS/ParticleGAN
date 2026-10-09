@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "transport_tails_round4"
+  },
+  "candidate": "kinetic_transport_local_v2",
+  "competing_explanation": "Data-dependent anchors and widths fluctuate; relative moment normalization can amplify sparse-batch noise, rational partition leakage can mix components, and the joint generator/prior normalized proposal can still overshoot. Tail force may sacrifice core eigenvalues or rare allocation despite an unbounded feature. This finite feature family is not convergence-determining.",
+  "control": {
+    "candidate_id": "kinetic_transport_sliced_v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "hypothesis": "Matched local-v2 primary control for tail-moment diagnostic; sliced-v1 remains an admission reference, never a launched third arm.",
+  "id": "transport_tails_control_round4",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "kinetic_transport_local_v2",
+        "revision": "4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188",
+        "source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09"
+      },
+      "path": "reports/forge/bcap-physics/kinetic_transport/round2/results.json",
+      "selector": [
+        "arms",
+        "candidate"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "transport_tails_round4_diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

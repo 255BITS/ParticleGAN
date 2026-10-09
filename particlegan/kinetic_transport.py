@@ -69,3 +69,36 @@ def kinetic_transport_local_loss(fake, real):
         # p >= 1/n because every anchor contributes its own unit kernel value.
         residuals.append(((q-p)/p).square().mean())
     return torch.stack(residuals).mean()
+
+
+def kinetic_transport_tail_loss(fake, real):
+    """Relative unbounded radial moments on a rational partition of real anchors.
+
+    Use detached fourth-neighbor squared radii h_i² and their median b².
+    w_i(x) is the normalized (1 + ||x-y_i||²/b²)^-2 weight. The feature
+    w_i(x)||x-y_i||²/h_i² grows quadratically along every escaping ray.
+    Match its empirical fake/real means, normalized by p_i + 1/n. This finite
+    moment objective is neither a density estimator nor a convergence theorem.
+    It consumes only the same training batches; labels and target moments are
+    absent. Assignment weights remain differentiable in fake coordinates.
+    """
+    if (fake.ndim < 2 or fake.shape != real.shape or len(fake) < 2
+            or not fake.is_floating_point() or fake.dtype != real.dtype
+            or fake.device != real.device):
+        raise ValueError("tail transport needs matching floating batches of at least two samples")
+    x, y = fake.flatten(1), real.detach().flatten(1)
+    distance_real = torch.cdist(y, y, compute_mode="donot_use_mm_for_euclid_dist").square()
+    neighbor_distance = distance_real.clone()
+    neighbor_distance.fill_diagonal_(float("inf"))
+    scale = (y-y.mean(0)).square().mean().clamp_min(torch.finfo(x.dtype).eps)
+    width_squared = neighbor_distance.kthvalue(min(4, len(y)-1), dim=0).values
+    width_squared = width_squared.clamp_min(torch.finfo(x.dtype).eps * scale)
+    bandwidth_squared = width_squared.median()
+    def feature_mean(distance):
+        # Softmax of log weights avoids underflow for distant samples.
+        weights = (-2 * torch.log1p(distance / bandwidth_squared)).softmax(dim=1)
+        return (weights * (distance / width_squared[None, :])).mean(0)
+    p = feature_mean(distance_real)
+    distance_fake = torch.cdist(x, y, compute_mode="donot_use_mm_for_euclid_dist").square()
+    q = feature_mean(distance_fake)
+    return ((q-p)/(p+1/len(y))).square().mean()

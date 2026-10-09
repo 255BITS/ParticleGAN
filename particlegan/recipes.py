@@ -81,6 +81,7 @@ class Recipe:
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
+    kinetic_transport_tail_weight: float = 0.0
     kinetic_transport_backtrack: bool = False
     kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
@@ -370,6 +371,9 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_backtrack) is not bool:
             raise ValueError("kinetic_transport_backtrack must be a boolean")
+        if (type(self.kinetic_transport_tail_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_tail_weight) or self.kinetic_transport_tail_weight < 0):
+            raise ValueError("kinetic_transport_tail_weight must be finite and nonnegative")
         if self.kinetic_transport_backtrack and (self.input_noise_std or self.output_noise_std):
             raise ValueError("kinetic backtracking requires zero additive input/output noise")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
@@ -584,6 +588,11 @@ class Recipe:
         """Public relative local moment residual; caller owns the same batches."""
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+
+    def kinetic_transport_tail_loss(self, fake, real):
+        """Weighted real-anchor radial moment objective on ordinary batches."""
+        from .kinetic_transport import kinetic_transport_tail_loss
+        return self.kinetic_transport_tail_weight * kinetic_transport_tail_loss(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
