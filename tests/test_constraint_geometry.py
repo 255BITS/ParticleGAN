@@ -97,3 +97,92 @@ def test_inactive_projection_preserves_already_applied_step_bitwise():
     legacy['constraint_geometry']['schema'] = 1
     with pytest.raises(ValueError, match='checkpoint'):
         candidate.load_state_dict(legacy)
+
+
+def _assert_bitwise_state(a, b):
+    if isinstance(a, torch.Tensor):
+        assert torch.equal(a, b)
+    elif isinstance(a, dict):
+        assert a.keys() == b.keys()
+        for key in a:
+            _assert_bitwise_state(a[key], b[key])
+    elif isinstance(a, (tuple, list)):
+        assert len(a) == len(b)
+        for left, right in zip(a, b):
+            _assert_bitwise_state(left, right)
+    else:
+        assert a == b
+
+
+@pytest.mark.parametrize('dtype', [torch.float32, torch.float64])
+@pytest.mark.parametrize('device', ['cpu', 'cuda'])
+def test_extra_backward_and_inactive_checkpoint_resume_parity(dtype, device):
+    """Software fixture: public initialization, sampled ownership, no training gate."""
+    if device == 'cuda' and not torch.cuda.is_available():
+        pytest.skip('CUDA unavailable')
+    from particlegan.init import deterministic_orthogonal_
+    from particlegan.optim.dualnorm import NormalizedOptimizer
+    import random
+    import numpy as np
+
+    with torch.random.fork_rng(devices=[]):
+        network = torch.nn.Sequential(torch.nn.Linear(2, 3), torch.nn.Tanh(), torch.nn.Linear(3, 2))
+    deterministic_orthogonal_(network, seed=0)
+    network = network.to(device=device, dtype=dtype)
+    networks = [network, deepcopy(network)]
+    tables = [torch.nn.Parameter(torch.arange(10, device=device, dtype=dtype).reshape(5, 2) / 10)
+              for _ in range(2)]
+    parameters = [list(net.parameters()) + [table] for net, table in zip(networks, tables)]
+    options = dict(lr=.012, smoothing=.001, convolution='per_offset')
+    groups = [dict(params=list(networks[0].parameters()), role='generator'),
+              dict(params=[tables[0]], role='prior', lr=.030)]
+    plain = NormalizedOptimizer(groups, **options)
+    guarded = ConstraintGeometryOptimizer([
+        dict(params=list(networks[1].parameters()), role='generator'),
+        dict(params=[tables[1]], role='prior', lr=.030)], **options)
+    rows = torch.tensor([0, 2, 2, 4], device=device)
+
+    def rng_state():
+        return dict(python=random.getstate(), numpy=np.random.get_state()[1].copy(),
+                    cpu=torch.get_rng_state().clone(),
+                    cuda=[x.clone() for x in torch.cuda.get_rng_state_all()] if device == 'cuda' else [])
+
+    def assert_rng(a, b):
+        assert np.array_equal(a.pop('numpy'), b.pop('numpy'))
+        _assert_bitwise_state(a, b)
+
+    # Two optimizer steps straddle a checkpoint round trip. No random samples,
+    # alternate seed, task grading, or private trainer are involved.
+    for index in range(2):
+        for opt, table in zip((plain, guarded), tables):
+            opt.zero_grad(set_to_none=False)
+            opt.set_sampled_rows(table, rows)
+        losses = [net(table[rows]).square().mean() for net, table in zip(networks, tables)]
+        before_grad = [None if p.grad is None else p.grad.clone() for p in parameters[1]]
+        before_rng = rng_state()
+        guarded.bind_protected_losses((losses[1],))
+        assert_rng(before_rng, rng_state())
+        for p, old_grad in zip(parameters[1], before_grad):
+            if old_grad is None:
+                assert p.grad is None
+            else:
+                assert torch.equal(p.grad, old_grad)
+        for loss in losses:
+            loss.backward()
+        for left, right in zip(*parameters):
+            assert torch.equal(left.grad, right.grad)
+        before_rng = rng_state()
+        plain.step()
+        guarded.step()
+        assert_rng(before_rng, rng_state())
+        assert guarded.constraint_geometry_stats['projected_steps'] == 0
+        for left, right in zip(*parameters):
+            assert torch.equal(left, right)
+        saved = deepcopy(guarded.state_dict())
+        base_saved = deepcopy(saved)
+        base_saved.pop('constraint_geometry')
+        _assert_bitwise_state(plain.state_dict(), base_saved)
+        if index == 0:
+            guarded.load_state_dict(saved)
+            plain.load_state_dict(deepcopy(plain.state_dict()))
+            _assert_bitwise_state(guarded.state_dict(), saved)
