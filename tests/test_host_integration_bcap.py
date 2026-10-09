@@ -84,7 +84,8 @@ def test_every_component_host_consumes_active_recipe_and_advances_once(tmp_path,
     saved = torch.load(tmp_path / "component-state.pt", weights_only=False)
     joint = saved["optimizers"]["generator"]
     assert len(joint) == 1
-    assert joint[0]["constraint_geometry"]["mode"] == "direction_blend"
+    assert joint[0]["direction_blend"]["schema"] == 1
+    assert joint[0]["direction_blend"]["stats"]["conflict_steps"] >= 0
     assert joint[0]["constraint_geometry"]["stats"]["steps"] == 2
 
 
