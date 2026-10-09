@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "ceb969b052ae507fb9f15bc8b983c809b7dd1c1ccd8ddec90d57e0b75215620e",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f01e82635bbf022d553087dc4fdd1e81577f900fa6d9f0b5f215b1fb7a985b76",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/ba288e2a21a64d7d8bf8e41f7d5f8f81/evaluator/observed-samples.pt": "4cf6eb021e99dcceccee133ad5fcb1644f4dc6aa006738f2cfbb64f94878dc93"
+  },
+  "task_id": "gaussian1d_smoke"
+}

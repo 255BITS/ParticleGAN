@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 783. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3830,6 +3830,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-2e050957415b792baba17f63
+
+**Scope:** research_diagnostic; scientific; revision `c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235`.
+
+Balancing actual finite G motion to learned-prior motion reduces native overshoot and unequal-width covariance while retaining broad-vector PASS and Gaussian acquisition; full sustained task gates remain decisive.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 462.865; mechanism `floor_constant`.
+
+vector_unequal_width: hq=0.97876, mass_tv=0.2915
+
+All admitted runnable full-budget tasks complete; {'FAIL': 3, 'PASS': 3}. Native precision 0.24072 with frozen forecast>=.48/falsifier<.30. Controller counters and independent saved-center Jacobians are separate from actual served-law gates. Exact blocked two-pole applicability remains declared.
+
+**Next:** Close the matched control subscription, preserve exact receipts and original qualification; no unchanged rerun.
+
+[Evidence](../../reports/forge/attempts/0fb06a4d5fbf4039bb800d2b979f0c25/result.json) · [Record](records/readout-2e050957415b792baba17f63.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -4454,6 +4470,22 @@ Frozen BCAP smoothing=1e-5 retains 6/6 required Tier 1 passes; Tier 2 records {'
 
 [Evidence](../../reports/forge/bcap-tier2/readout.json) · [Record](records/readout-fa5fada954b7b255ec86d748.json)
 
+### bcap-role-motion-balance-round4-v1 · readout-fa914551e4b0e09207d2960c
+
+**Scope:** research_diagnostic; scientific; revision `23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc`.
+
+Balancing actual finite G motion to learned-prior motion reduces native overshoot and unequal-width covariance while retaining broad-vector PASS and Gaussian acquisition; full sustained task gates remain decisive.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 1032.444; mechanism `structural`.
+
+vector_two_broad: hq=0.9917, mass_tv=0.0078125; vector_unequal_width: hq=0.95459, mass_tv=0.29419
+
+All admitted runnable full-budget tasks complete; {'BLOCKED': 1, 'FAIL': 3, 'PASS': 2}. Native precision 0.63726 with frozen forecast>=.48/falsifier<.30. Controller counters and independent saved-center Jacobians are separate from actual served-law gates. Exact blocked two-pole applicability remains declared.
+
+**Next:** Stop this exact generator/prior RMS-balance revision; retain original winner/default qualification. Inspect saved early role gradients and deformation before any separately frozen substantive successor. No seed repeat, sweep, extra arm, continuation or default adoption.
+
+[Evidence](../../reports/forge/attempts/20d051578f3e491a88f81ff18fbf3369/result.json) · [Record](records/readout-fa914551e4b0e09207d2960c.json)
+
 ### k3p · readout-faf4999394106140c8a2052e
 
 **Scope:** current; scientific; revision `2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce`.
@@ -4974,4 +5006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `42993893cca6b742c34d1f0d1fd20e8c34aecd35496bccea9ec292844619c2b6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

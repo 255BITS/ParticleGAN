@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "3c0bf5bceccdf22674dbc6078c1946e2df3badb55bb5b16739013d2feff5b3e6",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "934216d84fb077ff251466f80655a32ed37df3dc6f506f8bf9da1d04f67426f7",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/config.json": "26f12f80504a9e56e3442ef336c71bceabb3378fe74ef0349d0048979812ea04",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/events.jsonl": "34d07fd1148f3d74ce85c6af95688edbdd790de9e931cd12724fc5849131dc00",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_000050.npz": "d085e4e546ef1fd3a130f395819f5e4cc4f7fc63f8fceaf74adc39fd414f3086",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_000750.npz": "3fcb97cccd511cc20f8cdd89c9d91d1ff0cf380b511e768d7e1615c92a1ca306",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_001750.npz": "c2a007a010c4d13f23d5557546fff3ea8d3502ad2ff45a83e0a0aeb03cdfdf49",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_002750.npz": "70353482c7bc75057e95a3e11aa1c170610e86771a4c5902461cdd0c529ac63a",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_004000.npz": "127cf5f6ab340596893fc922809e3ce70507678c3db87a2ac53ffadc92ba3a8d",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_005000.npz": "725f33e0fe25b08eabc2b42099030104ad6182e6b4c95541c9649c3f56cd9813",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_006000.npz": "07921d353b4fa9a80b8725942a9386b79e2bcf8a63930b4677cd14f09b7a729c",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/snapshots/step_007000.npz": "d632f6cdacdadad6531137ab9998653e4265bfa757de628bfbb3bcacc3ccc844",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100/grid100/summary.json": "31edefb162792b2c21f96cdf485fc888801fe62df3d0d39b46dfc766dae3490a"
+  },
+  "task_id": "grid100"
+}

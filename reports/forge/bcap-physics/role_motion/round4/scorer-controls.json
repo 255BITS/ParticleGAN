@@ -1,0 +1,367 @@
+{
+  "controls": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "cdf_ks": 0.01385398179954156,
+        "finite_fraction": 1.0,
+        "mean": 1.9951847814954817,
+        "mean_error_sigma": 0.009630437009036541,
+        "sample_count": 4096,
+        "std": 0.4966299921467373,
+        "std_ratio": 0.9932599842934746
+      },
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "control": "center_collapse",
+      "failed_bounds": [
+        "std_ratio >= 0.8",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.5,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.0,
+        "std_ratio": 0.0
+      },
+      "status": "FAIL",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "component_core_covariance_error": 0.04786188527941704,
+        "component_core_covariance_errors": [
+          0.036296091973781586,
+          0.03775685653090477,
+          0.05442850664258003,
+          0.06296608597040176
+        ],
+        "component_core_eigen_ratios": [
+          0.9657033085823059,
+          0.9853264689445496,
+          0.9383412003517151,
+          0.9591584801673889
+        ],
+        "component_core_min_eigen_ratio": 0.9383412003517151,
+        "component_counts": [
+          1007,
+          1015,
+          1059,
+          1015
+        ],
+        "component_covariance_error": 0.04612330347299576,
+        "component_covariance_errors": [
+          0.036296091973781586,
+          0.03775685653090477,
+          0.04747417941689491,
+          0.06296608597040176
+        ],
+        "component_mass": [
+          0.245849609375,
+          0.247802734375,
+          0.258544921875,
+          0.247802734375
+        ],
+        "component_min_eigen_ratio": 0.9591584801673889,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.008937438018620014,
+          0.011822660453617573,
+          0.010387158021330833,
+          0.009852216579020023
+        ],
+        "covariance_error": 0.007211958523839712,
+        "hq": 0.98974609375,
+        "mass_tv": 0.008544921875,
+        "max_component_spill": 0.011822660453617573,
+        "mean_error": 0.025423230603337288,
+        "min_mass_ratio": 0.9833984375,
+        "resolved_core_covariance_error": 0.04786188527941704,
+        "resolved_core_min_eigen_ratio": 0.9383412003517151,
+        "resolved_max_component_spill": 0.011822660453617573,
+        "sample_count": 4096,
+        "sw1_normalized": 0.018086295508396497,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "status": "PASS",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "center_collapse",
+      "failed_bounds": [
+        "component_covariance_error <= 0.85",
+        "component_min_eigen_ratio >= 0.15"
+      ],
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          1007,
+          1015,
+          1059,
+          1015
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          0.245849609375,
+          0.247802734375,
+          0.258544921875,
+          0.247802734375
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "covariance_error": 0.013186249881982803,
+        "hq": 1.0,
+        "mass_tv": 0.008544921875,
+        "max_component_spill": 0.0,
+        "mean_error": 0.0263876561075449,
+        "min_mass_ratio": 0.9833984375,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.07259421708646177,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "status": "FAIL",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "component_core_covariance_error": 0.017061656340956688,
+        "component_core_covariance_errors": [
+          0.015745799988508224,
+          0.01837751269340515
+        ],
+        "component_core_eigen_ratios": [
+          1.006472110748291,
+          0.9889711737632751
+        ],
+        "component_core_min_eigen_ratio": 0.9889711737632751,
+        "component_counts": [
+          2023,
+          2073
+        ],
+        "component_covariance_error": 0.01791555155068636,
+        "component_covariance_errors": [
+          0.015745799988508224,
+          0.020085303112864494
+        ],
+        "component_mass": [
+          0.493896484375,
+          0.506103515625
+        ],
+        "component_min_eigen_ratio": 0.9930799603462219,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.01087493821978569,
+          0.009647853672504425
+        ],
+        "covariance_error": 0.004867191426455975,
+        "hq": 0.98974609375,
+        "mass_tv": 0.006103515625,
+        "max_component_spill": 0.01087493821978569,
+        "mean_error": 0.014257365837693214,
+        "min_mass_ratio": 0.98779296875,
+        "resolved_core_covariance_error": 0.017061656340956688,
+        "resolved_core_min_eigen_ratio": 0.9889711737632751,
+        "resolved_max_component_spill": 0.01087493821978569,
+        "sample_count": 4096,
+        "sw1_normalized": 0.012816735160678544,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "status": "PASS",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "center_collapse",
+      "failed_bounds": [
+        "sw1_normalized <= 0.18",
+        "component_covariance_error <= 0.85",
+        "component_min_eigen_ratio >= 0.15"
+      ],
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          2023,
+          2073
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          0.493896484375,
+          0.506103515625
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0,
+          0.0
+        ],
+        "covariance_error": 0.0775848999619484,
+        "hq": 1.0,
+        "mass_tv": 0.006103515625,
+        "max_component_spill": 0.0,
+        "mean_error": 0.01754431426525116,
+        "min_mass_ratio": 0.98779296875,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.18438381138443716,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "status": "FAIL",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "abs_cov_trace_bias": 0.002483059358359463,
+        "accuracy_pass": true,
+        "accuracy_score": 0.1362815729945808,
+        "all_finite": true,
+        "center_max_sigma": 0.10380235419318293,
+        "center_rms_sigma": 0.04387304454623034,
+        "cov_frob_rms": 0.054571307739215084,
+        "cov_trace_bias": -0.002483059358359463,
+        "frozen_pass": true,
+        "mass_tv": 0.013119999999999998,
+        "n": 100000,
+        "passed": true,
+        "precision": 0.98872,
+        "precision_gap": 0.00017100346175769054,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.0032905523598764086,
+        "valid_n": 100000,
+        "within_radius_n": 98872
+      },
+      "status": "PASS",
+      "task_id": "grid100"
+    },
+    {
+      "control": "center_collapse",
+      "failed_bounds": [
+        "full accuracy gate"
+      ],
+      "metrics": {
+        "abs_cov_trace_bias": 1.0,
+        "accuracy_pass": false,
+        "accuracy_score": 8.804666666666666,
+        "all_finite": true,
+        "center_max_sigma": 0.0,
+        "center_rms_sigma": 0.0,
+        "cov_frob_rms": 1.0,
+        "cov_trace_bias": -1.0,
+        "frozen_pass": false,
+        "mass_tv": 0.013119999999999998,
+        "n": 100000,
+        "passed": false,
+        "precision": 1.0,
+        "precision_gap": 0.011108996538242266,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 1.0,
+        "valid_n": 100000,
+        "within_radius_n": 100000
+      },
+      "status": "FAIL",
+      "task_id": "grid100"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "independent_oracle_and_destructive_scorer_controls",
+  "scorer_sources": {
+    "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "seconds": 3.5249798810109496,
+  "seed": 0
+}

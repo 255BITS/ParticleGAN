@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "8cda82acd2938af35cf55a450ab722f86e2b28f132da1c29f7220ef44ed36105",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "2bdf9cd204ecc08a3b5810388771debbef5366a524d89da3a29105068fb9868e",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/32ab4d1748dd4589be78776c059efc2b/observed-samples.pt": "3e45098cd7ed7019d83f22a2b07186449bd3e418da17c3355c61313edc1850ab"
+  },
+  "task_id": "vector_unequal_width"
+}

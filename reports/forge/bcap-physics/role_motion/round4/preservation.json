@@ -11,5 +11,8 @@
     "configs/forge/tasks/grid100.json": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
     "configs/forge/tasks/vector_unequal_width.json": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
     "configs/forge/tasks/vector_two_broad.json": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab"
-  }
+  },
+  "all_archived_qualification_publications_unchanged": true,
+  "archived_qualification_file_count": 190,
+  "verification": "git diff of all original JSON qualification/calibration/automation/evidence/snapshot publications against the frozen base, plus SHA256 on tasks/current board"
 }

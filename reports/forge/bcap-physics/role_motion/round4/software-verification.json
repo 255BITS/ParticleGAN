@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scope": "software_mechanism_protocol_checks_not_scientific_quality",
+  "focused_checks_passed": 84,
+  "tests": [
+    "tests/test_role_motion.py",
+    "tests/test_forge_studies.py",
+    "tests/test_forge_api.py"
+  ],
+  "pytest_seconds": 4.67,
+  "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/logs/software.log",
+  "log_sha256": "e1da291bf88462dd5f6ddc7324d834f14d1e06f172db2bc3dfb23aaa5b00966d",
+  "full_reservation_seconds": 120,
+  "source_commit": "313b437cd",
+  "properties": [
+    "Default false retains checkpoint/streams exactly",
+    "Finite network output RMS never exceeds prior proposal RMS",
+    "Full prior and critic proposal first-step equality",
+    "Exact checkpoint continuation",
+    "Invalid controller counters reject before mutation",
+    "Zero response restores G exactly and retains learned prior",
+    "Scale1 does not recompose floating parameters; output units invariance",
+    "Unsupported two-pole binding remains blocked on candidate/control study admission"
+  ],
+  "notes": "Two initial regression fixture issues (particles preset instead of explicit MoG, omitted CPU RNG scope) corrected before freezing. No scientific retry, source correction or follow-up arm."
+}

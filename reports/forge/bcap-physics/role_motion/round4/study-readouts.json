@@ -1,0 +1,186 @@
+{
+  "items": [
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "20d051578f3e491a88f81ff18fbf3369",
+            "32ab4d1748dd4589be78776c059efc2b",
+            "372ffb868b884be2bd4414dc6d31c341",
+            "4cb1f59f94a642abba52d10d47de59a6",
+            "ba288e2a21a64d7d8bf8e41f7d5f8f81"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "699d1c0b04821af268051ec6f2212c9c517c6239d110a22771f11d7328a73114",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "request_missing_evidence",
+          "observed": {
+            "falsifier": {
+              "satisfied": false,
+              "value": 0.63726
+            },
+            "prediction": {
+              "satisfied": true,
+              "value": 0.63726
+            }
+          },
+          "outcome": "incomplete",
+          "provenance": [
+            {
+              "attempt_id": "20d051578f3e491a88f81ff18fbf3369",
+              "producer_request_id": "726b063ce7895445dfde2f52",
+              "producer_study_id": "role-motion-candidate-round4-v1",
+              "result_hash": "36a6754c9ad1f62fbad118141e038a5a06f92a5f9d79b1d5ac4fa55f542c761c",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "32ab4d1748dd4589be78776c059efc2b",
+              "producer_request_id": "726b063ce7895445dfde2f52",
+              "producer_study_id": "role-motion-candidate-round4-v1",
+              "result_hash": "744a043005619b68f4ac49c985b4d32cfc6a90a1f145bf79b4b8c9de8fed84b1",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "372ffb868b884be2bd4414dc6d31c341",
+              "producer_request_id": "726b063ce7895445dfde2f52",
+              "producer_study_id": "role-motion-candidate-round4-v1",
+              "result_hash": "275a78c801b9a86b3a0701284fb18d01f103829c2d049bce80aa9a83eb303ca2",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "4cb1f59f94a642abba52d10d47de59a6",
+              "producer_request_id": "726b063ce7895445dfde2f52",
+              "producer_study_id": "role-motion-candidate-round4-v1",
+              "result_hash": "432283d3badfb5fc76c1a83e7d072bfb7f5b3bb28ef6a354e78b29d8c1fa5cbb",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "ba288e2a21a64d7d8bf8e41f7d5f8f81",
+              "producer_request_id": "726b063ce7895445dfde2f52",
+              "producer_study_id": "role-motion-candidate-round4-v1",
+              "result_hash": "826d32db862c5a5d9f895f54f76f41ace46e75c20d9ed1f7939436f54ae39ea1",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "2c80ba3e11d0b83ec3203b577af51ff67c28ed25c5eb268d518a3c987ef3f360",
+            "contract_sha256": "699d1c0b04821af268051ec6f2212c9c517c6239d110a22771f11d7328a73114",
+            "control_binding_sha256": "3254389ef35f8115a0730276ee182ba5469cd77f0679091385f2b4b5d674640c",
+            "policy_fingerprint": "348eaf3fa27cb539ee5196ddedcb5f525106e484898c33dc8264ebb8f1a610a4",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "f5c5ba99bc2885026e9c5f969b3dbb47778e771074ead328ec9785c254f93ce8"
+          },
+          "study_id": "role-motion-candidate-round4-v1",
+          "study_sha256": "f5c5ba99bc2885026e9c5f969b3dbb47778e771074ead328ec9785c254f93ce8"
+        }
+      ],
+      "label": "candidate",
+      "lifecycle": "concluded",
+      "record_id": "readout-fa914551e4b0e09207d2960c",
+      "study_id": "role-motion-candidate-round4-v1"
+    },
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "0fb06a4d5fbf4039bb800d2b979f0c25",
+            "12e03a3ff68b48029bd4d31e27ae0122",
+            "172d948db683491ba1ab746d7148c9b9",
+            "2b9a27a93bec4c8d84bda1fe2dbe13b9",
+            "3edfe9ab274847f3bde1c8b3f56717c9",
+            "7a2bbf6ee25f4116b19df624a48bb0fe"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "fdef2be87a270f9cb59579b9254edd267f59f2521057fb9fa4e166720b2adcc0",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "stop_revision",
+          "observed": {
+            "falsifier": {
+              "satisfied": true,
+              "value": 0.24072
+            },
+            "prediction": {
+              "satisfied": false,
+              "value": 0.24072
+            }
+          },
+          "outcome": "falsified",
+          "provenance": [
+            {
+              "attempt_id": "0fb06a4d5fbf4039bb800d2b979f0c25",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "e22da61eed23181aac6131482dc96b2a69386725316a8c791bcbb995d8fc3c35",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "12e03a3ff68b48029bd4d31e27ae0122",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "768adbe21e43264895eeb2febfcf36aaf7cab17a8c3c3ea17c8d35c4672ad9ca",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "172d948db683491ba1ab746d7148c9b9",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "41354350d71b0d5a46733efb2f2bbadf252d4c0008beef7ac8ea9b28e443a329",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "2b9a27a93bec4c8d84bda1fe2dbe13b9",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "dda5ebad692964645c2fc254f9e326d9cee4a89b8bd0c772f620ddc76879b9bb",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "3edfe9ab274847f3bde1c8b3f56717c9",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "90de91811eac3e69472747ab8ac65b709fb8b1dbc9892fd1917a06f8e77fb6d3",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "7a2bbf6ee25f4116b19df624a48bb0fe",
+              "producer_request_id": "386d1739e75584db7db3c521",
+              "producer_study_id": "role-motion-control-round4-v1",
+              "result_hash": "3f406a100c13a114de76a5c964f8dbda1082fda844012e7e4013a5a55852777e",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "3254389ef35f8115a0730276ee182ba5469cd77f0679091385f2b4b5d674640c",
+            "contract_sha256": "fdef2be87a270f9cb59579b9254edd267f59f2521057fb9fa4e166720b2adcc0",
+            "control_binding_sha256": "2c80ba3e11d0b83ec3203b577af51ff67c28ed25c5eb268d518a3c987ef3f360",
+            "policy_fingerprint": "348eaf3fa27cb539ee5196ddedcb5f525106e484898c33dc8264ebb8f1a610a4",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "ac4ef67b90987707d679a55ad7908680a45b48b9a0b61515924a2065c8d5954c"
+          },
+          "study_id": "role-motion-control-round4-v1",
+          "study_sha256": "ac4ef67b90987707d679a55ad7908680a45b48b9a0b61515924a2065c8d5954c"
+        }
+      ],
+      "label": "control",
+      "lifecycle": "concluded",
+      "record_id": "readout-2e050957415b792baba17f63",
+      "study_id": "role-motion-control-round4-v1"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

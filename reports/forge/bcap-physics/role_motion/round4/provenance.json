@@ -1,0 +1,845 @@
+{
+  "publication_sampling_draws_added": 0,
+  "publication_updates_added": 0,
+  "receipts": [
+    {
+      "artifact_root": null,
+      "attempt_id": "12e03a3ff68b48029bd4d31e27ae0122",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "e7ce8f4bcc2d0e5da05eb60515d91b853884bf9cf4a4a4f823aa58956431d4ad",
+        "request.json": "19dffa7ada638199a2a8a53b921b887521841a04705ca7e6ec857afe865f9fd5",
+        "result.json": "d424bd6a206a948ca090ed238630876b96e3469e95c0badcafd129614b264139"
+      },
+      "compatibility_key": "064c13317aeea6e0893ad779957b09a5c34417b2ca53888c7611fe5dd92004ca",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/12e03a3ff68b48029bd4d31e27ae0122",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "a81a05820145cbc82e0bec1c9e6be5c8b799af3a5078262898599287c3b9094f",
+              "size": 46447
+            }
+          },
+          "schema_version": 1,
+          "sha256": "ebd0bcbc42face69446071bc9157e5d676fef868a8aff7553ddb266bb820388e",
+          "total_bytes": 46447
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/12e03a3ff68b48029bd4d31e27ae0122/provenance",
+        "bytes": 46447,
+        "completed_steps": 80,
+        "named_stream_keys": [
+          "[\"data\",\"host\",\"batches\",\"cuda:0\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"eval\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"eval\",\"host\",\"global\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+          "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+          "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "a81a05820145cbc82e0bec1c9e6be5c8b799af3a5078262898599287c3b9094f",
+        "state_sha256": "0f8f584c0a65a530886917299e782a6f5ccad9b7a049915b21817a57b1618e87"
+      },
+      "result_sha256": "768adbe21e43264895eeb2febfcf36aaf7cab17a8c3c3ea17c8d35c4672ad9ca",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "two_pole"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/7a2bbf6ee25f4116b19df624a48bb0fe/evaluator",
+      "attempt_id": "7a2bbf6ee25f4116b19df624a48bb0fe",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "206052091e0951541368cf9202afc193f1adb5dede3337c1c614ec953466e4c8",
+        "request.json": "f274cceff5b7037eb2e8242b65ef9c8b1e4ec39cd5e26a13896343f5872cb3f7",
+        "result.json": "69b895cf3084de813ab33d543122f554fe2b3d0015a10c5386e398614e7cfe20"
+      },
+      "compatibility_key": "d62d63bd31c2810f70e62f732ec60f3efdcea9ee1824cbcec2b5953456ee1e43",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/7a2bbf6ee25f4116b19df624a48bb0fe",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "7e90f9c882f804711369325e60e0b196fd9d86aef9258d0969ccba8a2c5dd35d",
+              "size": 64959
+            }
+          },
+          "schema_version": 1,
+          "sha256": "9b4f2001fb280e7349c546fdf4e40f07ae6a91a53f3a76e04231a8b8724b22e2",
+          "total_bytes": 64959
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/7a2bbf6ee25f4116b19df624a48bb0fe/provenance",
+        "bytes": 64959,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "7e90f9c882f804711369325e60e0b196fd9d86aef9258d0969ccba8a2c5dd35d",
+        "state_sha256": "99e8e1a88c8d080787049691173ead714636f05493ec2c92ee6ec48e9ead5764"
+      },
+      "result_sha256": "3f406a100c13a114de76a5c964f8dbda1082fda844012e7e4013a5a55852777e",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/172d948db683491ba1ab746d7148c9b9/evaluator",
+      "attempt_id": "172d948db683491ba1ab746d7148c9b9",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "86a2b65e810a8a07a882c557b238b66fc62bb21ce974d74d067f05ff8aed1fce",
+        "request.json": "1defd4909c5630ed022051e562d81a251a4fc8e57a46fc764bdce7182efd90b2",
+        "result.json": "298f7577d8f980adf2c298dbb75fecea19a17b3d7fd89b87849af8c2636e5e99"
+      },
+      "compatibility_key": "ee26fa52b0975cd5bb108f3e93f7f0c91d2a0ad78fa32065d1c87d399eb90a2c",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/172d948db683491ba1ab746d7148c9b9",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "284aa9f7c5139b5ed7f4fde7c87f342b9c831f2903b92ed5aa38bbd28b267aa9",
+              "size": 65215
+            }
+          },
+          "schema_version": 1,
+          "sha256": "8cbc06afd5d34823eefeb6762d7775fefa8cdd9527cf1d5f7c724f8b21b22aab",
+          "total_bytes": 65215
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/172d948db683491ba1ab746d7148c9b9/provenance",
+        "bytes": 65215,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "284aa9f7c5139b5ed7f4fde7c87f342b9c831f2903b92ed5aa38bbd28b267aa9",
+        "state_sha256": "cd67b6867eb2b5beee418e55177d6a817f2a548881c6af3eb9d32faa220a2b2b"
+      },
+      "result_sha256": "41354350d71b0d5a46733efb2f2bbadf252d4c0008beef7ac8ea9b28e443a329",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/3edfe9ab274847f3bde1c8b3f56717c9/native100",
+      "attempt_id": "3edfe9ab274847f3bde1c8b3f56717c9",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "8c93bd0ecad46e82886ce082c86f7e89d38f3f0dae6466344f9d9cfbaef81c9b",
+        "request.json": "bec8634134d958648327eaeffe2bf8af59773c6db9dfc8fd19a2d1d746943f3d",
+        "result.json": "8fe4e0141393b76f6fb7094114e1c11eb0962a5ebddf1a8cc998f75362a3e186"
+      },
+      "compatibility_key": "cd8b07a0b522d851d17f9ce9c9e894ac4af2db5d3bff60ef58d876befbd01b1a",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/3edfe9ab274847f3bde1c8b3f56717c9",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "2954f8d2e266b1781666bb3691f58535c1d3818ef4fc9ee39a6be5d93ce38e6e",
+              "size": 770013
+            }
+          },
+          "schema_version": 1,
+          "sha256": "f2b42e5cff393043a56e6c0fa5af8da8d87deb7369c8a8ea98e711aa57058905",
+          "total_bytes": 770013
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/3edfe9ab274847f3bde1c8b3f56717c9/provenance",
+        "bytes": 770013,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "2954f8d2e266b1781666bb3691f58535c1d3818ef4fc9ee39a6be5d93ce38e6e",
+        "state_sha256": "483074f6b1bb689a6ea814791a7d2b7f0e104f5325d328546e3e0600b36f19ad"
+      },
+      "result_sha256": "90de91811eac3e69472747ab8ac65b709fb8b1dbc9892fd1917a06f8e77fb6d3",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "grid100"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "0fb06a4d5fbf4039bb800d2b979f0c25",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "9dd9720caa5bd8ca20d75c7ba323fd78a1e5feddfe221ed22d367f2f6b0583f8",
+        "request.json": "a9cd043c2de6b86fe172b16e4b4cfa996c86135651158b7a221500cbc8031369",
+        "result.json": "46f354d60e26b74dd9bc1326e16dff31d4f55f5934d735102780bc69b6d3fcaf"
+      },
+      "compatibility_key": "8ea7a1f54f6353b15a3088281b5631aa73b04185f792fb5bd121a30b946c10dd",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/0fb06a4d5fbf4039bb800d2b979f0c25",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "82a00da4b19c438f013bffa491051488c5cb5e91f4daac9a3f2e08599835f789",
+              "size": 109881
+            }
+          },
+          "schema_version": 1,
+          "sha256": "302c71d0ae5c50e10f92c53a09d8e9440964e8160683cdf3de32cb3a0a58660c",
+          "total_bytes": 109881
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/0fb06a4d5fbf4039bb800d2b979f0c25/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "82a00da4b19c438f013bffa491051488c5cb5e91f4daac9a3f2e08599835f789",
+        "state_sha256": "c232bff584c0adc03eed619dcaa47e11a12c3bdee57f9e1a010ec5a37799acf7"
+      },
+      "result_sha256": "e22da61eed23181aac6131482dc96b2a69386725316a8c791bcbb995d8fc3c35",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "2b9a27a93bec4c8d84bda1fe2dbe13b9",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "c5bc797a92039da24fab5dc163364494b770c91559d9f310dc8a5202bb23c235",
+      "certificate_files": {
+        "evidence.json": "54e597433a0213b32f5bde9412d9761bbcafc6324723e37918bd81a96a2fcd22",
+        "request.json": "28d344bee1044aac2c0a13f3dbbbf9edc0f14fdfda8d4e17ceab8dd674b0dfa3",
+        "result.json": "1142531928e59c60e2c50508c676dfda160974f4ee854058ee8c4d3c83fb74ad"
+      },
+      "compatibility_key": "3abf2a1673cc776e96e4d9912c8cb285171e6bbc7cfe29ce69a4872a37c88257",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/2b9a27a93bec4c8d84bda1fe2dbe13b9",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "3b145fb8a93c6c5767fcf8d434c48a0513554baae3b4bcb71ca21c7c6955c755",
+              "size": 109881
+            }
+          },
+          "schema_version": 1,
+          "sha256": "d214df9809e879a52f246be8e642d6a024b47755c63ec6637074ad93f18eab0d",
+          "total_bytes": 109881
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/2b9a27a93bec4c8d84bda1fe2dbe13b9/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "3b145fb8a93c6c5767fcf8d434c48a0513554baae3b4bcb71ca21c7c6955c755",
+        "state_sha256": "01adcb2e7ccfba5d4d0f1cd6b3f1aac77959072ea34255eaa37eaad34a676552"
+      },
+      "result_sha256": "dda5ebad692964645c2fc254f9e326d9cee4a89b8bd0c772f620ddc76879b9bb",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/ba288e2a21a64d7d8bf8e41f7d5f8f81/evaluator",
+      "attempt_id": "ba288e2a21a64d7d8bf8e41f7d5f8f81",
+      "candidate_id": "bcap-role-motion-balance-round4-v1",
+      "candidate_revision": "23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc",
+      "certificate_files": {
+        "evidence.json": "dcfa56a354615571f05a53248df3174640b5c5935a7c0cf566dd80259a4f2cdd",
+        "request.json": "a0a5f3d58350b7b765853e57c4132bd9e88f833222697548cd97ba90c336904f",
+        "result.json": "8f0a4e9155ba7dee8390abe05aab5e155fdd773e38ddd9121c95cdd11c257a41"
+      },
+      "compatibility_key": "3d06221a333c9bd2a7eb23411eda399037c8097f4e710f85bedf0a86a5221538",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/ba288e2a21a64d7d8bf8e41f7d5f8f81",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "649925eb799f8c37e7f126a8459d4563263f65f8f22f6d22ffea9d79420aac18",
+              "size": 65663
+            }
+          },
+          "schema_version": 1,
+          "sha256": "b985cb20d55ff7b15f6576ba2c625dc51ef78ad3274f025bda9ecd5843386889",
+          "total_bytes": 65663
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/ba288e2a21a64d7d8bf8e41f7d5f8f81/provenance",
+        "bytes": 65663,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "649925eb799f8c37e7f126a8459d4563263f65f8f22f6d22ffea9d79420aac18",
+        "state_sha256": "c69eba0cb602a841e530c4756aad9c80d6825fab44af6853de2f21ff78dd8b73"
+      },
+      "result_sha256": "826d32db862c5a5d9f895f54f76f41ace46e75c20d9ed1f7939436f54ae39ea1",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/372ffb868b884be2bd4414dc6d31c341/evaluator",
+      "attempt_id": "372ffb868b884be2bd4414dc6d31c341",
+      "candidate_id": "bcap-role-motion-balance-round4-v1",
+      "candidate_revision": "23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc",
+      "certificate_files": {
+        "evidence.json": "06339e1b22fa3663f5111040f2286cfb38718cecce969f01ff30a1b54b7133c7",
+        "request.json": "d1bc645deef477117f325bd85e0573bfd2ee561ba40fffd835b34c9a5819ea9c",
+        "result.json": "39a5c1cd849152adc193f23a46571098a7db7892c82ac3a300ac3909853ba550"
+      },
+      "compatibility_key": "f9014549cf0a29a96aa5bdefddfb787cec66fa0010804755aa59e6ffcf5a9a73",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/372ffb868b884be2bd4414dc6d31c341",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "9465ce029105af79eceeafa08ffadb614ba3b071b48d17d611942d88023b4695",
+              "size": 65919
+            }
+          },
+          "schema_version": 1,
+          "sha256": "642c00a7481560d94b6238f860dd1488879cacf64f201083e5effce008d63178",
+          "total_bytes": 65919
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/372ffb868b884be2bd4414dc6d31c341/provenance",
+        "bytes": 65919,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "9465ce029105af79eceeafa08ffadb614ba3b071b48d17d611942d88023b4695",
+        "state_sha256": "026377e6cd5329abb75bc76238f623518b3234a2440363b4911ec4859f23f3b5"
+      },
+      "result_sha256": "275a78c801b9a86b3a0701284fb18d01f103829c2d049bce80aa9a83eb303ca2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/native100",
+      "attempt_id": "4cb1f59f94a642abba52d10d47de59a6",
+      "candidate_id": "bcap-role-motion-balance-round4-v1",
+      "candidate_revision": "23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc",
+      "certificate_files": {
+        "evidence.json": "5556570e1a2d9fe99816506e53042e369f03bd4a7bb306d0f4cb5f431e254616",
+        "request.json": "77b133738be25a69c6270f7c27d6baf14fbafd9abf047f9a19ef796a03273190",
+        "result.json": "6c6a9b2806484972689a82795f9dea733632037a5e3b52ad982a4ab68b8fe88b"
+      },
+      "compatibility_key": "b691a94fcd88b32ae59b28971c8166e77a092ddd209e49381464b41d434924c0",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "43aeaacb839e0209270436881867020c7dbe61dc975e79a336e28e2a42523164",
+              "size": 770717
+            }
+          },
+          "schema_version": 1,
+          "sha256": "585d2a84a8938edea8959154bedf8ed6b189577f7db3b428e02e55f9b19e82bb",
+          "total_bytes": 770717
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/4cb1f59f94a642abba52d10d47de59a6/provenance",
+        "bytes": 770717,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "43aeaacb839e0209270436881867020c7dbe61dc975e79a336e28e2a42523164",
+        "state_sha256": "aa5c927e1ca67eb613a2e430187d8804ac03d367804a1ab8626251000d23d328"
+      },
+      "result_sha256": "432283d3badfb5fc76c1a83e7d072bfb7f5b3bb28ef6a354e78b29d8c1fa5cbb",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "grid100"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "32ab4d1748dd4589be78776c059efc2b",
+      "candidate_id": "bcap-role-motion-balance-round4-v1",
+      "candidate_revision": "23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc",
+      "certificate_files": {
+        "evidence.json": "dbc49f02e50b359f681c1da18e9c8fd983205e07c1b18028f4fd296231f1413c",
+        "request.json": "5e77c6fcce55cb01ca53848afbe24013c8cdc9157f46ae3808a2d55797ab3a63",
+        "result.json": "422122a45f9158a39f0eba68adac8fe9eba3e4eedc1dbf4ae87b068714af13ac"
+      },
+      "compatibility_key": "ee90f7634473c1e08febcabbd8e70a47701c7ca3e39bbf722ff8090f54243a52",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/32ab4d1748dd4589be78776c059efc2b",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "9b33cd0bcb2c9f52af0c9e3709b8f989cae7044d58e31819ee966641ec01e7ce",
+              "size": 110649
+            }
+          },
+          "schema_version": 1,
+          "sha256": "7a3f36b330610bf9c16797e4b0c5253fcf493483d89bb10f2942bf6c14adeefe",
+          "total_bytes": 110649
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/32ab4d1748dd4589be78776c059efc2b/provenance",
+        "bytes": 110649,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "9b33cd0bcb2c9f52af0c9e3709b8f989cae7044d58e31819ee966641ec01e7ce",
+        "state_sha256": "5915d41e830c3075e3ff184c70bca8dec73ef3921c3363072736d1550ab960f9"
+      },
+      "result_sha256": "744a043005619b68f4ac49c985b4d32cfc6a90a1f145bf79b4b8c9de8fed84b1",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "20d051578f3e491a88f81ff18fbf3369",
+      "candidate_id": "bcap-role-motion-balance-round4-v1",
+      "candidate_revision": "23a5a5dcc3f444de893f6122c72c66120847def0ed335cda167da3deebe95dcc",
+      "certificate_files": {
+        "evidence.json": "7e5e2394ffa0f7ba5884f428eda473db45b4814c0061bd8e971e0bde57bc8e57",
+        "request.json": "d565b7f1335bdca3ad2363ccff361afa355f2496af3f1462d7c3c82b3b748a3e",
+        "result.json": "b181afd98891efc5e5f1cca016a11f7ee553e94637c0c8d7aa25f88e2b0e7295"
+      },
+      "compatibility_key": "29f6fb0a0d43e67abaf74330bab62f48481cc2105072325cc00f547f43ca90af",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/20d051578f3e491a88f81ff18fbf3369",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "bb4e6dfed726b573033e89e67bfd95e0f3ab12e40431ee9dd9e20d25b7c56dc9",
+              "size": 110649
+            }
+          },
+          "schema_version": 1,
+          "sha256": "a44825a325688f34edcb8a67344680f84507d37b45879176d02b1290700231e5",
+          "total_bytes": 110649
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round4-20261009/role_motion/queue/role-motion-round4-v1/20d051578f3e491a88f81ff18fbf3369/provenance",
+        "bytes": 110649,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "bb4e6dfed726b573033e89e67bfd95e0f3ab12e40431ee9dd9e20d25b7c56dc9",
+        "state_sha256": "823c5c85524831f38a90f71ff29d728684f7c5862df0bab2359b66c0662068f4"
+      },
+      "result_sha256": "36a6754c9ad1f62fbad118141e038a5a06f92a5f9d79b1d5ac4fa55f542c761c",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "6c28f92aab96366aa6fd3b7d0bae3929ea83ebd458c719365259d5da70084ebb",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "schema_version": 1,
+  "software_checks": "84 focused checks; no scientific qualification"
+}
