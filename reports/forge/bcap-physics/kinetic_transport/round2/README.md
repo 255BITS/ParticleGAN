@@ -1,5 +1,125 @@
 # Round 2: relative local density moments
 
+**The local density residual converts unequal mass to a complete sustained PASS.**
+The successor passes **3/5 mutually runnable tasks**, versus **2/5** for its
+matched transport-v1 primary control. Both arms additionally retain one explicit
+two-pole BLOCKED cell. All ten runnable jobs finish once for **326.971374 paid
+worker seconds**, with zero scientific retries and no remaining reservations.
+
+## Completed matched results
+
+| Unchanged task | Transport-v1 primary control | Local-density successor | Exact retained outcome |
+| --- | --- | --- | --- |
+| Two-pole | BLOCKED | BLOCKED | Both frozen component hosts lack the sample-space signal consumer |
+| Gaussian smoke | PASS, 13/24 confirmed states | PASS, 13/24 confirmed states | First confirmation 84→167; endpoint KS .026218→.020606 |
+| Gaussian stability | FAIL, 33/72 stationary and 12/24 shifted hold | FAIL, 28/72 stationary and 11/24 shifted hold | Both miss deadline reacquisition; final KS .090741→.060653 still exceeds .05 |
+| Unequal mass | FAIL, 11/24 checks, terminal suffix 2 | **PASS, 13/24 checks, terminal suffix 5** | Full covariance .773642→.522577; minimum mass ratio .961538→.899564; all five terminal gates now pass |
+| Unequal width | FAIL, 0/24 checks | FAIL, 0/24 checks | Full covariance 7.038571→2.480438 meets the forecast≤3.5, but still fails the original≤.85 gate |
+| Two broad | PASS, 24/24 checks, suffix 24 | PASS, 24/24 checks, suffix 24 | Full covariance .244338→.226564; mass TV .014160→.000732; passing guardrail retained |
+
+[Exact metrics and temporal failures](results.json),
+[trained-source and matched-condition receipts](provenance.json),
+[deterministic center/data diagnostics](saved-state-diagnostics.json), and
+[unchanged predecessor parity](predecessor-parity.json) support this readout.
+The five primary-control trajectories, endpoint metrics, graders and named
+final RNG states exactly reproduce the archived transport-v1 cohort. They are
+new matched receipts under the current source, with no archived qualification
+credit. The original BCAP winner is contextual rather than a third causal arm.
+
+The unequal-mass last-five minimum eigen ratios are
+`.478403, .159678, .442112, .486961, .366567`; the retained floor is `.15`.
+Control fails at 1050/1100 with `.084535/.096804`. The update 1050 candidate margin
+is small, so this measured terminal suffix does not establish wider robustness.
+Saved centers change `144/73/34/5`→`141/77/32/6`. Rare served mass is
+114/4096 (`.027832`) versus 96/4096 (`.023438`) for target `.02`; allocation
+remains sufficient but slightly overshoots. Overall mass TV worsens
+`.013496`→`.016426`, despite the new full quality pass. The gain concerns
+sustained local variance and fidelity, rather than every endpoint mass metric.
+
+Unequal-width centers remain almost unchanged: `62/63/65/66`→`61/64/65/66`.
+The first two full component covariance errors fall from
+`18.292221/9.450035` to `4.787480/4.601254`, but remain far above the original
+bound. Their reported spill fractions increase from `.035491/.060181` to
+`.042753/.062749`. Thus covariance reduction cannot be described as removing
+stray events. Four-sigma core-average covariance worsens `.248193`→`.289171`,
+and HQ falls `.974609`→`.955078`; neither endpoint improvement is universal.
+These certified four-sigma core/spill summaries differ from the explicitly
+three-sigma diagnostic cohorts used in the preflight above.
+
+The candidate's Gaussian endpoint mean error `.071086` and width ratio
+`1.039455` pass their individual bounds, while target KS `.060653` fails.
+Stationary/shift pass counts regress, and the additional frozen expectations
+≥33/72 and ≥12/24 are falsified. The unequal-width half-spill forecast and
+rare minimum mass ratio≥.5 are observed; the broad guardrail passes. Automatic
+study decisions remain **incomplete** because two-pole is unsupported, despite
+all runnable training being complete. Numerical task gates are unchanged.
+
+**Retain the opt-in local-density mechanism as a scoped sustained rare-variance
+repair; stop this exact revision as a global repair.** Inspect remaining narrow
+spill distances and Gaussian empirical-field fluctuations before any separately
+preregistered successor or broader matched comparison. This completed round
+launches no further tuning, candidate, continuation, seed run or promotion.
+Full unequal-width and continuous-learning failures still block a global claim;
+native, image, conditional and arbitrary high-dimensional transfer remain
+unmeasured. A finite real-anchor witness can miss remote outliers and can trade
+local shape against shared-map motion.
+
+## Source, cost and validation
+
+Executed scientific commit: `5c2a64682b8900c5b42de94a6c27502e41d500f2`.
+Both arms execute source digest
+`a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09`.
+Candidate revision: `4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188`;
+primary-control revision: `10116a6345f68563f4193750613049e9cdd28965409b5be2fdba554946afaaae`.
+Publication later changes only reports and reproduction sources; no later
+unmeasured trainer correction is presented as trained evidence.
+
+Python 3.12.13, Torch 2.14.0, NumPy 2.5.2, RTX A6000, deterministic execution,
+one Torch thread, TF32 off. Initial model/prior tensors, same target batches,
+complete consumed named RNG states, prior/sampling laws and budgets match
+between arms. Only effective local weight 0→1 differs. Both Gaussian continuations
+restore their own passing smoke exactly, including all streams and prefix steps.
+All 1200 vector batches replay to the checkpointed data stream exactly.
+
+Each arm adds 9600 outer updates, 19200 total. Paid workers:
+candidate 168.815268 + control 158.156105 = 326.971374 seconds.
+Declared ceiling 12840, executed full reservations 12240, remaining reservation 0,
+scientific retries 0, track allowance 14400. The bounded local drain finishes and
+leaves no watcher. Shared-device contention is included; no speed claim follows.
+Read-only field probes add no training/sampling and take a separately recorded
+CPU budget below one second. Software/media work is outside the paid worker
+ledger and supplies no scientific qualification.
+
+[109 distinct meaningful software checks](software-verification.json) pass,
+including exact empirical null/gradient, units/permutation/RNG invariance,
+contraction direction, duplicate-neighbor floor, public-trainer consumption,
+unchanged critic/streams, default checkpoints and unsupported-control admission.
+The final transport/study check set passes 52 checks, overlapping the initial 108.
+Forge declarations validate. [Scorer controls](scorer-controls-reuse.json) reuse
+four oracle PASS/four collapse FAIL after verifying both unchanged scorer source
+hashes, task laws and gates; no unchanged scientific training is rerun for them.
+Publication reproduces **432 saved primary metric sets exactly** and renders
+**10 actual-training GIFs**, each with nine fixed-index frames. Complete logs,
+per-update events, saved arrays and checkpoints stay in this track's local queue.
+
+| Task | Primary control actual-training GIF | Candidate actual-training GIF |
+| --- | --- | --- |
+| Gaussian smoke | [Target and draws](control-gaussian1d_smoke.gif) | [Target and draws](candidate-gaussian1d_smoke.gif) |
+| Gaussian stability | [Hold and shift](control-gaussian1d_stability.gif) | [Hold and shift](candidate-gaussian1d_stability.gif) |
+| Unequal mass | [Density and gates](control-vector_unequal_mass.gif) | [Density and gates](candidate-vector_unequal_mass.gif) |
+| Unequal width | [Density and gates](control-vector_unequal_width.gif) | [Density and gates](candidate-vector_unequal_width.gif) |
+| Two broad | [Density and gates](control-vector_two_broad.gif) | [Density and gates](candidate-vector_two_broad.gif) |
+
+[Media receipts](media.json) bind each GIF to saved observation bytes. Reproduce
+this readout without training or model sampling:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONPATH=. .venv/bin/python reports/forge/bcap-physics/kinetic_transport/round2/publish.py
+```
+
+The declaration, mechanism, forecast and stopping contract below were pushed
+before these runs and retain their original values.
+
 This authorized successor retains transport-v1 as its **one primary matched
 control**. It adds local real-anchor density moments to the existing allocation
 signal. The [round-one report](../README.md), forecasts, receipts and failed
@@ -153,7 +273,7 @@ QUEUE=/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transpor
 PYTHONPATH=. .venv/bin/python -m experiments.forge --queue-root "$QUEUE" plan kinetic_transport_local_v2 --study kinetic_transport_candidate_round2 --show-boundaries
 PYTHONPATH=. .venv/bin/python -m experiments.forge --queue-root "$QUEUE" enqueue kinetic_transport_local_v2 --study kinetic_transport_candidate_round2
 PYTHONPATH=. .venv/bin/python -m experiments.forge --queue-root "$QUEUE" enqueue kinetic_transport_sliced_v1 --study kinetic_transport_control_round2
-tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/logs/coordinator.log
+tail -F /mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/progress.jsonl
 ```
 
 Run the read-only field probe with project Python 3.12:
@@ -171,3 +291,19 @@ the primary control, while retaining unsupported cells and their frozen task
 identities. This repairs the previous whole-study refusal for transport-v1 as
 control. It does not authorize an unsupported host or change a worker/gate.
 The regression checks both BLOCKED bindings and the supported local-weight delta.
+
+The runner uses physical GPU index `"1"`, one worker, sharing enabled:
+
+```python
+from pathlib import Path
+from experiments.forge.queue import Queue, drain
+queue = Queue(Path("/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue"),
+              report_root=Path.cwd() / "reports/forge", on_completion=None)
+drain(queue, ["1"], workers_per_gpu=1, allow_sharing=True, watch=False,
+      campaign="kinetic_transport_round2")
+```
+
+An initial coordinator invocation supplied `cuda:1` where the public queue
+requires a physical numeric index. It failed before any claim or worker;
+correcting only the local runner launches the original two frozen requests.
+This is not a scientific retry or source revision.

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 783. Inventory coverage: complete. Unresolved import items: 7.
+Records: 785. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3958,6 +3958,22 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 
 [Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
 
+### kinetic_transport_sliced_v1 · readout-58690d30963166a8bd4f39f5
+
+**Scope:** research_diagnostic; scientific; revision `10116a6345f68563f4193750613049e9cdd28965409b5be2fdba554946afaaae`.
+
+Primary transport-v1 control for incremental local-density comparison. The parent winner reference only admits the existing predecessor; no third arm is launched.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 158.156; mechanism `structural`.
+
+vector_unequal_mass: hq=0.93579, mass_tv=0.013496; vector_two_broad: hq=0.96948, mass_tv=0.01416
+
+Primary transport-v1 control completes 2 PASS, 3 FAIL, 1 BLOCKED under the same new source/runtime. Gaussian smoke and broad-vector pass; unequal mass, unequal width and Gaussian stability fail. Recorded numerical trajectories reproduce the predecessor source cohort; no archived qualification is reused.
+
+**Next:** Preserve this matched incremental control and all original source identities. Retain local-density successor evidence for the scoped rare-variance repair; no global promotion or third arm. Stop the completed round and inspect saved failures before new work.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round2/results.json) · [Record](records/readout-58690d30963166a8bd4f39f5.json)
+
 ### r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd · readout-5bc30fee4d41b69294b1e32e
 
 **Scope:** current; scientific; revision `7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1`.
@@ -4213,6 +4229,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.064
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/87f406b78184409396a26f61680a5da0.json) · [Record](records/readout-a9c44ece3a8e2265db452db4.json)
+
+### kinetic_transport_local_v2 · readout-ab71c397f4f4eee9fe1acafb
+
+**Scope:** research_diagnostic; scientific; revision `4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188`.
+
+Adding relative real-anchor local kernel moment matching to transport-v1 reduces unequal-width full covariance spill while preserving allocation, broad-vector quality and Gaussian acquisition/hold.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 168.815; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96973, mass_tv=0.016426; vector_unequal_width: hq=0.95508, mass_tv=0.020752; vector_two_broad: hq=0.9856, mass_tv=0.00073242
+
+Relative local moments add one complete sustained PASS: candidate 3 PASS, 2 FAIL, 1 BLOCKED versus transport-v1 2 PASS, 3 FAIL, 1 BLOCKED. Unequal mass passes all five terminal checks; broad-vector and Gaussian smoke pass. Unequal width and Gaussian stability fail; both two-pole cells remain explicitly unsupported. All ten runnable jobs complete.
+
+**Next:** Retain this source-bound allocation/local-density repair as opt-in evidence; stop this exact revision as a global repair. Inspect remaining narrow-component covariance spill and Gaussian fluctuations before a separately declared successor or broader comparison. No ordinary qualification, promotion, tuning or further run in this round.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round2/results.json) · [Record](records/readout-ab71c397f4f4eee9fe1acafb.json)
 
 ### k3p-no-output-noise-diagnostic · readout-abd06840fa1f42a4f64c13ab
 
@@ -5006,4 +5038,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9fb3ac355750761247a562af3cf89cf846f4d0fb16ed214da73e839905528a39`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `206956d2833283780fcdc2b82155eee3c3cbf494b8ee4477da7e69ec8f1ee34a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
