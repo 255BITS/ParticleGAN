@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "34fcae1ab2d7016d6c369eabdcea7268ae9d0d1ac6e3f3bad07907d78ea50451",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "080213c107a58bc009da71f8364fa5d44b150f4a8d62469b8f956cd050d6d16c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/a9d7487431684124acf648bbee1735d4/constraint_geometry-scored-outputs.pt": "a9272ca58d0e16a6b820b37b185384e4a8c60b1c9e7c4561a2e6567fa043b8a6"
+  },
+  "task_id": "residual_student"
+}

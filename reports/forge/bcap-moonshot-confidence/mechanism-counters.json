@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "scope": "saved_only_confidence_counters",
+  "qualification_input": false,
+  "source_commit": "4bf7d44e6a88faca6e132d19d4755370474ec1dd",
+  "source_digest": "cd167606890d8d30a78df130e5ef1e6c399b35cf87a3dfda2775eec7cda3bf77",
+  "estimator": {
+    "mode": "block_mmd_v1",
+    "rows": "all existing G-phase real/fake rows; deterministic contiguous blocks",
+    "block_count": "min(max(2,ceil(n/32)),floor(n/2))",
+    "bandwidth_squared": "real total coordinate variance, clamped at dtype epsilon",
+    "signal": "mean of paired off-diagonal block MMD",
+    "standard_error": "unbiased block standard deviation / sqrt(B)",
+    "mobility": "max(mu-SE,0)/(max(mu,0)+SE+dtype_epsilon)",
+    "high_threshold": 0.9,
+    "minimum_panel_rows": 2,
+    "two_or_three_rows_mobility": 0.0,
+    "statistical_limit": "One-SE heuristic; no calibrated testing guarantee under this data-dependent learned frame"
+  },
+  "counter_scope": "Each checkpoint is cumulative. Gaussian hold includes 1000 producer updates; word hold includes its own 834-step passing prefix. Never sum overlapping counters across these tasks. Duplicate component/applied copies are verified equal and counted once.",
+  "baseline": "Inactive estimator and counters omitted, preserving old packet shape.",
+  "rows": [
+    {
+      "task_id": "gaussian1d_smoke",
+      "attempt_id": "5f8a061d3515460c96f57bc291cf8b77",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "89519b61e451d81149e1570b3c9d4a19909e5e70c6a3d59d14c99915ec84bf97",
+        "bytes": 65535,
+        "state_sha256": "2583877b24146a8379444a98a08f7b3f2879f1d63e8f8e7e896e6d52922784f1",
+        "completed_steps": 1000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/5f8a061d3515460c96f57bc291cf8b77/provenance",
+        "artifact_manifest_sha256": "d0180393d6c36c0d3d3dfdc0ed903b46b2461234100b9456889cdabfb77c9cd7",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 1000,
+        "zero_calls": 709,
+        "high_calls": 22,
+        "rows": 128000,
+        "blocks": 4000,
+        "mobility_sum": 92.68125192206935,
+        "signal_sum": 42.915152579778805,
+        "standard_error_sum": 13.952510072500445
+      },
+      "mean_mobility": 0.09268125192206934,
+      "zero_fraction": 0.709,
+      "high_fraction": 0.022,
+      "mean_signal": 0.042915152579778806,
+      "mean_standard_error": 0.013952510072500444,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "two_pole",
+      "attempt_id": "16b6c97e6a2b4224a08d7bcca76e1944",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "71c83ec92cd88075279e330de2fed8bc01cbe70ee620d9b6784396f83a4857ed",
+        "bytes": 49327,
+        "state_sha256": "314149b8c147d9dbcefb49ebc2aa273af55e6d39946f9bc95978677aba0e2a83",
+        "completed_steps": 80,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/16b6c97e6a2b4224a08d7bcca76e1944/provenance",
+        "artifact_manifest_sha256": "2659b83605f0fb02190682cacf697afe4018ca5f847c6643bebbd611b7d55695",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.applied.component_transport.transport_mobility",
+        "state.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 80,
+        "zero_calls": 0,
+        "high_calls": 61,
+        "rows": 960,
+        "blocks": 160,
+        "mobility_sum": 75.53626954555511,
+        "signal_sum": 34.80914890766144,
+        "standard_error_sum": 0.5374494785573916
+      },
+      "mean_mobility": 0.9442033693194389,
+      "zero_fraction": 0.0,
+      "high_fraction": 0.7625,
+      "mean_signal": 0.435114361345768,
+      "mean_standard_error": 0.006718118481967394,
+      "mean_blocks": 2.0,
+      "mean_rows": 12.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "unused_token_hold",
+      "attempt_id": "da4b414376d84fa6b2809c5b4ca72abf",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "ef52d4e387cdfdae833098c0f7b45f2dad0c31ab0a43c69f4a1db31888c9138a",
+        "bytes": 53255,
+        "state_sha256": "bd0381b44743523b0777b771c87ba8d6ff4ea433537874f340679d7e9d943eae",
+        "completed_steps": 200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/da4b414376d84fa6b2809c5b4ca72abf/provenance",
+        "artifact_manifest_sha256": "be1cddb95c57f837b68da325cfa4f7e6787f192544b2988a453b68da3e6d53b2",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.applied.component_transport.transport_mobility",
+        "state.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 200,
+        "zero_calls": 0,
+        "high_calls": 200,
+        "rows": 1600,
+        "blocks": 400,
+        "mobility_sum": 200.0,
+        "signal_sum": 400.0,
+        "standard_error_sum": 0.0
+      },
+      "mean_mobility": 1.0,
+      "zero_fraction": 0.0,
+      "high_fraction": 1.0,
+      "mean_signal": 2.0,
+      "mean_standard_error": 0.0,
+      "mean_blocks": 2.0,
+      "mean_rows": 8.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "ae_gan_hold",
+      "attempt_id": "871aa3a23133474894afe5eb15e7796f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "c15911f964bd10af59cf123bd563824c65e369a7a7cdfb2b582df4315fffd0f5",
+        "bytes": 67449,
+        "state_sha256": "e30acddcd14c8e0ea52ac79ccf61df43ccc3811541782688cf35251fea8f794e",
+        "completed_steps": 250,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/871aa3a23133474894afe5eb15e7796f/provenance",
+        "artifact_manifest_sha256": "64791fb5efeff38d00e77e9273ce0618e39c42fc566fc709756f07e09431daf2",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.applied.component_transport.transport_mobility",
+        "state.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 250,
+        "zero_calls": 173,
+        "high_calls": 9,
+        "rows": 16000,
+        "blocks": 500,
+        "mobility_sum": 38.52409254107624,
+        "signal_sum": 6.383262902032584,
+        "standard_error_sum": 4.403991025694268
+      },
+      "mean_mobility": 0.15409637016430497,
+      "zero_fraction": 0.692,
+      "high_fraction": 0.036,
+      "mean_signal": 0.025533051608130335,
+      "mean_standard_error": 0.01761596410277707,
+      "mean_blocks": 2.0,
+      "mean_rows": 64.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "ring16_acquisition",
+      "attempt_id": "9e70e09b314a48cb80c541e56bfd3da3",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "2a0e75b8d992bb47d2f848280cac0ac67f4c3f8f05e2a42a1f788be5dd492cb7",
+        "bytes": 110521,
+        "state_sha256": "1a683ed2516910905ed4bab3deaf35b14c0d81a0d126bae49c32752297f3d59a",
+        "completed_steps": 1600,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/9e70e09b314a48cb80c541e56bfd3da3/provenance",
+        "artifact_manifest_sha256": "13f55a6b5b9fb703eb3f23319e7e0a48cf247e69725a80d3ae489e251c43e56a",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 1600,
+        "zero_calls": 1336,
+        "high_calls": 22,
+        "rows": 204800,
+        "blocks": 6400,
+        "mobility_sum": 80.6153921521036,
+        "signal_sum": 9.09484755876474,
+        "standard_error_sum": 18.969142488320358
+      },
+      "mean_mobility": 0.050384620095064746,
+      "zero_fraction": 0.835,
+      "high_fraction": 0.01375,
+      "mean_signal": 0.005684279724227963,
+      "mean_standard_error": 0.011855714055200224,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {
+        "component_core_covariance_errors": [
+          0.3283339738845825,
+          0.3739749491214752,
+          0.37899890542030334,
+          0.33176955580711365,
+          0.38336700201034546,
+          0.39964720606803894,
+          0.4645234942436218,
+          0.4304763972759247,
+          0.28228023648262024,
+          0.30113881826400757,
+          0.3656568229198456,
+          0.29908517003059387,
+          0.221892312169075,
+          0.4089023470878601,
+          0.34717869758605957,
+          0.12050027400255203
+        ],
+        "component_core_eigen_ratios": [
+          0.6588261127471924,
+          0.5275256633758545,
+          0.659098744392395,
+          0.5956487655639648,
+          0.5492421984672546,
+          0.4497244358062744,
+          0.3623291254043579,
+          0.4300321936607361,
+          0.6094076633453369,
+          0.5991891026496887,
+          0.5711081027984619,
+          0.5813928246498108,
+          0.6866635680198669,
+          0.6329482793807983,
+          0.5522816777229309,
+          0.9246698617935181
+        ],
+        "component_counts": [
+          286,
+          217,
+          280,
+          251,
+          267,
+          272,
+          236,
+          214,
+          276,
+          290,
+          220,
+          227,
+          330,
+          227,
+          247,
+          256
+        ],
+        "component_covariance_errors": [
+          0.3283339738845825,
+          0.4107723832130432,
+          0.39557895064353943,
+          0.33176955580711365,
+          0.39998966455459595,
+          0.39964720606803894,
+          0.4645234942436218,
+          0.45507001876831055,
+          0.28228023648262024,
+          0.3149409890174866,
+          0.44785943627357483,
+          0.30630284547805786,
+          0.21808908879756927,
+          0.4569663405418396,
+          0.34717869758605957,
+          0.1807442009449005
+        ],
+        "component_mass": [
+          0.06982421875,
+          0.052978515625,
+          0.068359375,
+          0.061279296875,
+          0.065185546875,
+          0.06640625,
+          0.0576171875,
+          0.05224609375,
+          0.0673828125,
+          0.07080078125,
+          0.0537109375,
+          0.055419921875,
+          0.08056640625,
+          0.055419921875,
+          0.060302734375,
+          0.0625
+        ],
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.0279720276594162,
+          0.04147465527057648,
+          0.06071428582072258,
+          0.023904383182525635,
+          0.03745318204164505,
+          0.025735294446349144,
+          0.02118644118309021,
+          0.032710280269384384,
+          0.014492753893136978,
+          0.02068965509533882,
+          0.08636363595724106,
+          0.035242289304733276,
+          0.03030303120613098,
+          0.07488986849784851,
+          0.03238866478204727,
+          0.06640625
+        ]
+      }
+    },
+    {
+      "task_id": "five_word_joint_smoke",
+      "attempt_id": "8aa0696cc5e74218b4a66b918eb15064",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "c33dc2e0ffa982257a27f62c2fde3c97e1c7da2f80e939a3361c114c87999d27",
+        "bytes": 841269,
+        "state_sha256": "d8a984442cbdaaed552fda915411eabfbd78e8203380b43f77dd15a8394d7f2e",
+        "completed_steps": 20001,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/8aa0696cc5e74218b4a66b918eb15064/provenance",
+        "artifact_manifest_sha256": "5ab4dfb9326c90c327ed316549c2ac9a8ba74e9e61e6c7ae563fb1090d3692b6",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.fixture.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 20001,
+        "zero_calls": 17337,
+        "high_calls": 76,
+        "rows": 5120256,
+        "blocks": 160008,
+        "mobility_sum": 598.9893691469479,
+        "signal_sum": 38.09399510460207,
+        "standard_error_sum": 171.98848574864678
+      },
+      "mean_mobility": 0.029947971058794452,
+      "zero_fraction": 0.8668066596670166,
+      "high_fraction": 0.003799810009499525,
+      "mean_signal": 0.0019046045250038534,
+      "mean_standard_error": 0.008598994337715453,
+      "mean_blocks": 8.0,
+      "mean_rows": 256.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "gaussian1d_stability",
+      "attempt_id": "630cb272890a4b8a9999efd0ab770872",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "2c89a939625d53b3efa92281099e9b9e3d7b2bb127eaa8fb48aa6fc2b06f4ea3",
+        "bytes": 65919,
+        "state_sha256": "4505325fe9fb46debb0468b5804448fb9156523337f9c204831ea18567c74b13",
+        "completed_steps": 6000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/630cb272890a4b8a9999efd0ab770872/provenance",
+        "artifact_manifest_sha256": "9ee6ba7c59411a71eb3bf0c20dc15f63b8aa7c56877f840533f5d9b512ad4ec5",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 6000,
+        "zero_calls": 4611,
+        "high_calls": 23,
+        "rows": 768000,
+        "blocks": 24000,
+        "mobility_sum": 329.6552634825057,
+        "signal_sum": 73.52736573692528,
+        "standard_error_sum": 75.58969818157493
+      },
+      "mean_mobility": 0.054942543913750946,
+      "zero_fraction": 0.7685,
+      "high_fraction": 0.003833333333333333,
+      "mean_signal": 0.012254560956154213,
+      "mean_standard_error": 0.012598283030262489,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "five_word_joint_hold",
+      "attempt_id": "800db88d56a94ea49b5b240b46c22735",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "30f649679095b5ad1e80c86029a4fca3ecc94b4cf8e4c3e6f14444da36bc8bac",
+        "bytes": 842293,
+        "state_sha256": "b1be92c131c169876b8083e503d4c684de3ee9cc58837ec9d3ee5ef31bbd3277",
+        "completed_steps": 4834,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/800db88d56a94ea49b5b240b46c22735/provenance",
+        "artifact_manifest_sha256": "5633850ee3958f44ae3bbeb0a2708b191af01da409b0c98307875b95d4ab7724",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.fixture.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 4834,
+        "zero_calls": 3983,
+        "high_calls": 76,
+        "rows": 1237504,
+        "blocks": 38672,
+        "mobility_sum": 291.3467836884229,
+        "signal_sum": 39.836500170233194,
+        "standard_error_sum": 41.744721835129894
+      },
+      "mean_mobility": 0.06027033175184586,
+      "zero_fraction": 0.8239553165080679,
+      "high_fraction": 0.015721969383533305,
+      "mean_signal": 0.00824089784241481,
+      "mean_standard_error": 0.008635647876526664,
+      "mean_blocks": 8.0,
+      "mean_rows": 256.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "trajectory",
+      "attempt_id": "1c131679a39a465c9fa90ff09a0715ac",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "585faafcfdd7d5013a9088e1b4f41e636982f5097146e643ed0773a319390d9f",
+        "bytes": 165025,
+        "state_sha256": "78a0e4fdeedcb943b5d3ce74669e4b2ecee43a91f966bea067c989c9ae1b084f",
+        "completed_steps": 400,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/1c131679a39a465c9fa90ff09a0715ac/provenance",
+        "artifact_manifest_sha256": "6fecda18a76bf5b649e221b1f1770016c79d4e67bf565fdfbb6fa1a548569ea6",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.applied.component_transport.transport_mobility",
+        "state.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 400,
+        "zero_calls": 350,
+        "high_calls": 18,
+        "rows": 4800,
+        "blocks": 800,
+        "mobility_sum": 37.38340975344181,
+        "signal_sum": -2.998549905139953,
+        "standard_error_sum": 2.0557513436995123
+      },
+      "mean_mobility": 0.09345852438360452,
+      "zero_fraction": 0.875,
+      "high_fraction": 0.045,
+      "mean_signal": -0.007496374762849882,
+      "mean_standard_error": 0.005139378359248781,
+      "mean_blocks": 2.0,
+      "mean_rows": 12.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "residual_student",
+      "attempt_id": "a9d7487431684124acf648bbee1735d4",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "24fcbea26978c8f6528a14aec0cf7d1821f6079e6d4121e7aa620fec9b801ca4",
+        "bytes": 165281,
+        "state_sha256": "62e51f7a6995534fdd1ffce4880b7f41ef451e6b567d86f631325481ff20bd36",
+        "completed_steps": 400,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/a9d7487431684124acf648bbee1735d4/provenance",
+        "artifact_manifest_sha256": "75bff30b88d1de6253af6e5fa8cc24b124a4cb5eeb965817b125d95ff65f246b",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.applied.component_transport.transport_mobility",
+        "state.component_transport.transport_mobility"
+      ],
+      "stats": {
+        "calls": 400,
+        "zero_calls": 299,
+        "high_calls": 21,
+        "rows": 4800,
+        "blocks": 800,
+        "mobility_sum": 60.084868878126144,
+        "signal_sum": 2.8749979130225256,
+        "standard_error_sum": 1.6117599359122323
+      },
+      "mean_mobility": 0.15021217219531535,
+      "zero_fraction": 0.7475,
+      "high_fraction": 0.0525,
+      "mean_signal": 0.007187494782556314,
+      "mean_standard_error": 0.0040293998397805805,
+      "mean_blocks": 2.0,
+      "mean_rows": 12.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "vector_unequal_mass",
+      "attempt_id": "d4e56195086b4c308021e860b0d4e41d",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "640ecddaf4ee67eeff40bc6cbe1684be4c13e7b470f4a09f3f467d782da849d2",
+        "bytes": 110457,
+        "state_sha256": "58e49354ddec571133dd0fb98db97d780c70fe34ec04bd6b5726843fc482b713",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/d4e56195086b4c308021e860b0d4e41d/provenance",
+        "artifact_manifest_sha256": "9beeb810701fa6704fa27634484687d7a15b1dac0fd2fd0213080c9a98877ec6",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 1200,
+        "zero_calls": 987,
+        "high_calls": 13,
+        "rows": 153600,
+        "blocks": 4800,
+        "mobility_sum": 64.08633070881478,
+        "signal_sum": 10.567250490305014,
+        "standard_error_sum": 14.6900202606339
+      },
+      "mean_mobility": 0.05340527559067899,
+      "zero_fraction": 0.8225,
+      "high_fraction": 0.010833333333333334,
+      "mean_signal": 0.008806042075254178,
+      "mean_standard_error": 0.012241683550528251,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {
+        "component_core_covariance_errors": [
+          0.2532728612422943,
+          0.3950612246990204,
+          0.33690065145492554,
+          1.7012050151824951
+        ],
+        "component_core_eigen_ratios": [
+          0.7181287407875061,
+          0.5357270240783691,
+          0.5283033847808838,
+          0.6947485208511353
+        ],
+        "component_counts": [
+          2211,
+          1342,
+          482,
+          61
+        ],
+        "component_covariance_errors": [
+          1.22916841506958,
+          0.5205720067024231,
+          5.147891521453857,
+          1.7012050151824951
+        ],
+        "component_mass": [
+          0.539794921875,
+          0.32763671875,
+          0.11767578125,
+          0.014892578125
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.023518769070506096,
+          0.032786883413791656,
+          0.04356846585869789,
+          0.2786885201931
+        ]
+      }
+    },
+    {
+      "task_id": "vector_unequal_width",
+      "attempt_id": "2751b2daf82e47808a2060d8fa9c36ad",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "032ed39d4056a65629d78b171288d5823508aee91d10a047efec9ab3f030d420",
+        "bytes": 110457,
+        "state_sha256": "232ca6ab64994d589e76866bbdc68ddb1d9dc91f1a6bf0212549f7cefcb04059",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/2751b2daf82e47808a2060d8fa9c36ad/provenance",
+        "artifact_manifest_sha256": "494b156b3c54b92e8ef20847c2a1fc62a379865bb7066af88350c4799dd27012",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 1200,
+        "zero_calls": 914,
+        "high_calls": 15,
+        "rows": 153600,
+        "blocks": 4800,
+        "mobility_sum": 85.34318090928718,
+        "signal_sum": 13.535360838402994,
+        "standard_error_sum": 17.212515863357112
+      },
+      "mean_mobility": 0.07111931742440598,
+      "zero_fraction": 0.7616666666666667,
+      "high_fraction": 0.0125,
+      "mean_signal": 0.011279467365335829,
+      "mean_standard_error": 0.01434376321946426,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {
+        "component_core_covariance_errors": [
+          0.5508115887641907,
+          0.42021578550338745,
+          0.17753873765468597,
+          0.257875919342041
+        ],
+        "component_core_eigen_ratios": [
+          0.26050689816474915,
+          0.49380308389663696,
+          0.7755237817764282,
+          0.8819783329963684
+        ],
+        "component_counts": [
+          880,
+          828,
+          1146,
+          1242
+        ],
+        "component_covariance_errors": [
+          33.87095642089844,
+          8.945230484008789,
+          0.17753873765468597,
+          0.257875919342041
+        ],
+        "component_mass": [
+          0.21484375,
+          0.2021484375,
+          0.27978515625,
+          0.30322265625
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.07386363297700882,
+          0.036231882870197296,
+          0.007853402756154537,
+          0.020933978259563446
+        ]
+      }
+    },
+    {
+      "task_id": "vector_anisotropic",
+      "attempt_id": "2bb08b870fc7479f8de3b430c3e78a35",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "40ca446e4b894f4cffa0fa939b19e1dc7a4bbcba9f912de6332f440ee8bd4a05",
+        "bytes": 110457,
+        "state_sha256": "d3d9b49c9b56bcfea2d43a844d3810e5f7d6a40056cd7a43ea971e4a2f94fb94",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/2bb08b870fc7479f8de3b430c3e78a35/provenance",
+        "artifact_manifest_sha256": "55b3d8333a308f733aeb6099f7a80f1f8b00ba60ec53d94a14a0e848c7e28fbd",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 1200,
+        "zero_calls": 949,
+        "high_calls": 10,
+        "rows": 153600,
+        "blocks": 4800,
+        "mobility_sum": 69.92344754404621,
+        "signal_sum": 11.123777747212444,
+        "standard_error_sum": 17.335749694961123
+      },
+      "mean_mobility": 0.05826953962003851,
+      "zero_fraction": 0.7908333333333334,
+      "high_fraction": 0.008333333333333333,
+      "mean_signal": 0.009269814789343703,
+      "mean_standard_error": 0.01444645807913427,
+      "mean_blocks": 4.0,
+      "mean_rows": 128.0,
+      "terminal_component_diagnostics": {
+        "component_core_covariance_errors": [
+          0.1601313352584839,
+          0.24370291829109192,
+          0.39179885387420654
+        ],
+        "component_core_eigen_ratios": [
+          0.43110325932502747,
+          0.23076027631759644,
+          0.5678125619888306
+        ],
+        "component_counts": [
+          1227,
+          1333,
+          1536
+        ],
+        "component_covariance_errors": [
+          0.2829272747039795,
+          0.22695668041706085,
+          0.3929096758365631
+        ],
+        "component_mass": [
+          0.299560546875,
+          0.325439453125,
+          0.375
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.026079868897795677,
+          0.024756189435720444,
+          0.01888020895421505
+        ]
+      }
+    },
+    {
+      "task_id": "grid100",
+      "attempt_id": "5d9792f7e1994820ac738f497cc0760b",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "19b224c2759966daa8e760268089534a0fab01815681f6b06a2953b4b1e30d69",
+        "bytes": 770525,
+        "state_sha256": "abb277b67a889bab25b6c09e809a1af2aff07e047649513b8ef1975247311395",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/5d9792f7e1994820ac738f497cc0760b/provenance",
+        "artifact_manifest_sha256": "1b1e51f6310d41b45a13b0c07eb69821177eb8e892cbe62dfc97d4e958aa15f7",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 7000,
+        "zero_calls": 5522,
+        "high_calls": 35,
+        "rows": 14336000,
+        "blocks": 448000,
+        "mobility_sum": 315.5595883927308,
+        "signal_sum": 11.473836700883112,
+        "standard_error_sum": 20.43358388962224
+      },
+      "mean_mobility": 0.04507994119896154,
+      "zero_fraction": 0.7888571428571428,
+      "high_fraction": 0.005,
+      "mean_signal": 0.0016391195286975873,
+      "mean_standard_error": 0.0029190834128031773,
+      "mean_blocks": 64.0,
+      "mean_rows": 2048.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "rotated100",
+      "attempt_id": "204631ba9cdb4f4d99e67e0921154bb3",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "56187863de15e7777f8e20552a037228f6c6d1508b4456d5d360d1afd2713910",
+        "bytes": 770525,
+        "state_sha256": "6f13dc7ec414854e4c451f50935776b5438a080e592d689cf367c9294f038a4e",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/204631ba9cdb4f4d99e67e0921154bb3/provenance",
+        "artifact_manifest_sha256": "f6499f0907a86fb0d41547336327f82a454578fd98f13b27842915cd654dc952",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 7000,
+        "zero_calls": 5360,
+        "high_calls": 35,
+        "rows": 14336000,
+        "blocks": 448000,
+        "mobility_sum": 350.95649761287495,
+        "signal_sum": 13.782987298516673,
+        "standard_error_sum": 20.68804919323884
+      },
+      "mean_mobility": 0.05013664251612499,
+      "zero_fraction": 0.7657142857142857,
+      "high_fraction": 0.005,
+      "mean_signal": 0.0019689981855023817,
+      "mean_standard_error": 0.00295543559903412,
+      "mean_blocks": 64.0,
+      "mean_rows": 2048.0,
+      "terminal_component_diagnostics": {}
+    },
+    {
+      "task_id": "staggered100",
+      "attempt_id": "92264f3d4d304710af781e823b89a60c",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "6ef9f996c9963b0785c87e1d53c5269f12329c2ff510d9d24070e3c98ab498b6",
+        "bytes": 770525,
+        "state_sha256": "396fc943068859e13a2ee9f2873be825e1e92cd2d1fdfbb3c708cd2116a293d2",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/92264f3d4d304710af781e823b89a60c/provenance",
+        "artifact_manifest_sha256": "c45651d7c5abb56efe9f7c8cc989ebc65c04f5368c260424f2a91e893816fef6",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "counter_paths": [
+        "state.trainer.transport_mobility"
+      ],
+      "stats": {
+        "calls": 7000,
+        "zero_calls": 5016,
+        "high_calls": 37,
+        "rows": 14336000,
+        "blocks": 448000,
+        "mobility_sum": 421.550992898603,
+        "signal_sum": 16.988795689190738,
+        "standard_error_sum": 20.9866820438765
+      },
+      "mean_mobility": 0.06022157041408614,
+      "zero_fraction": 0.7165714285714285,
+      "high_fraction": 0.005285714285714286,
+      "mean_signal": 0.002426970812741534,
+      "mean_standard_error": 0.0029980974348395,
+      "mean_blocks": 64.0,
+      "mean_rows": 2048.0,
+      "terminal_component_diagnostics": {}
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0
+}

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "f748b548ca817498d569e03be8d4fc37fd2f029a1ca3af3bf018c03e118e977a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f1de3771852584f5f95c0a1f73a8bdc27eeedf0de443b9fe83e2c6442a5636da",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/2bb08b870fc7479f8de3b430c3e78a35/observed-samples.pt": "25a6eaaf16e9cbef070df4f9ca84da55189953a0ecb6f714105a65da25374ee8"
+  },
+  "task_id": "vector_anisotropic"
+}

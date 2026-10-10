@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "ecf9ab73df508305e27388325dafe54693ec909d98d3290fed26bf51b665943a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "e2c0127a6371086262d958b95b1a0886d47bbe96da5e25822b9d097960849df9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/confidence/phase3-queue/bcap-moonshot-confidence-v1/630cb272890a4b8a9999efd0ab770872/evaluator/observed-samples.pt": "589b4ca6856ed9c782694611a5c77c18d7407009f618dcc778148d9528c96506"
+  },
+  "task_id": "gaussian1d_stability"
+}
