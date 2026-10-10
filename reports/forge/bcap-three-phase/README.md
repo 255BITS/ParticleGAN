@@ -56,6 +56,8 @@ The [shared runner](phase3-workflow.md) validates the complete roster, reserves 
 
 ## Comparison and publication
 
+An eligible research replacement must pass all six Tier 1 gates, repair at least one complete paired Tier 2 failure, preserve every baseline Tier 2 PASS, and leave no unresolved paired comparisons. Numerical endpoints alone cannot satisfy this rule. The [saved comparison](compare_saved.py) keeps all five source cohorts and all predecessor costs separate. This selection is a research recommendation, not ordinary qualification or a merge decision.
+
 Keep seed 0, public deterministic initialization, each task's architecture, original fixture, actual batch sequence, prior, sampling, update allowance, schedule horizon, evaluation cadence, and numerical gates fixed across compared trainers. Declare every trainer delta; checkpoint all consumed named streams. Execution optimizations require exact state parity, otherwise they are numerical trainer changes. Disabled features must preserve other techniques and old checkpoint loading.
 
 Use numerical gates and compact source-bound metrics to compare approaches. Keep the repository's [single current technique inventory](../technique-inventory.md) as the goal leaderboard; individual workflows publish evidence and readouts, not additional generated goal leaderboards. Completed public-API tests retain actual-training GIFs. Raw stdout, JSONL traces, JUnit, checkpoints, and state dumps stay outside Git. No seed experiments, task-specific repairs, threshold changes, endpoint rescue, or automatic promotion.
