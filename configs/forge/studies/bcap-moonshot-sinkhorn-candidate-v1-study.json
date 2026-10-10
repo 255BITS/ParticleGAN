@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-moonshot-sinkhorn-v1"
+  },
+  "candidate": "bcap-moonshot-sinkhorn-candidate-v1",
+  "competing_explanation": "128-row auxiliary panels may miss native cells; finite solver residual, global scale and shared-network pullback may still distort narrow/rare density. CPU full-SVD rounding also changes the path. Lower final covariance alone cannot establish sustained or native density repair; the compound comparison cannot isolate Sinkhorn from the backend.",
+  "control": {
+    "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 0.85
+  },
+  "hypothesis": "Under one global recipe the candidate reduces entropic contraction and reaches vector_unequal_width final component_covariance_error<=.85 with all original terminal checks retained. Finite dual potentials update simultaneously with half damping for24 rounds; full finite dual objective and both fake arguments of its self term are differentiated. Predict original sustained width PASS and no loss of baseline Tier1 gates; only full task gates decide outcomes.",
+  "id": "bcap-moonshot-sinkhorn-candidate-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bcap-three-phase-incumbent-v1",
+        "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      },
+      "path": "reports/forge/bcap-three-phase/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-moonshot-sinkhorn-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

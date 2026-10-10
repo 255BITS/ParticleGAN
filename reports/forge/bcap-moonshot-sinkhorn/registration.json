@@ -1,0 +1,653 @@
+{
+  "arms": {
+    "baseline": {
+      "active_tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "admission": "READY",
+      "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+      "candidate_revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282",
+      "full_reservation_seconds": 22920,
+      "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+      "study_admission": {
+        "binding_sha256": "c05eaa9bd66fe2a2a74b6844e3a93624fea5778a480ad8c8a1c798d593dfb78f",
+        "contract_sha256": "59997cc439d134e161afca8ba47461008e41b17cbae463d4a15cdc01f507e873",
+        "control_binding_sha256": "16c60faaa46d4213a90718e8471cf367d02ef27afeb4141c8080c5b53fdbe2e3",
+        "policy_fingerprint": "764cec84640e8e9b4dc4736744065cf9a29f9a6f3dc09fa88a02c3832349f79b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "88492986713c03b22e62486626a37fb0765dcd5ec31006eeb29e8da2b18cb523"
+      },
+      "study_id": "bcap-moonshot-sinkhorn-baseline-v1-study"
+    },
+    "candidate": {
+      "active_tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "admission": "READY",
+      "candidate_id": "bcap-moonshot-sinkhorn-candidate-v1",
+      "candidate_revision": "3cd446d18eb95ed58b9ff33ac9c675d6fac82bc2ec076eedf220d87df7cf950b",
+      "full_reservation_seconds": 22920,
+      "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+      "study_admission": {
+        "binding_sha256": "16c60faaa46d4213a90718e8471cf367d02ef27afeb4141c8080c5b53fdbe2e3",
+        "contract_sha256": "bf834f1d146152bd19d64fb11664c64227fbf4eee3589cf0af4a5faa2edac478",
+        "control_binding_sha256": "c05eaa9bd66fe2a2a74b6844e3a93624fea5778a480ad8c8a1c798d593dfb78f",
+        "policy_fingerprint": "764cec84640e8e9b4dc4736744065cf9a29f9a6f3dc09fa88a02c3832349f79b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "4b489c2c1ae221c11aca0948a5b428afb03c92834d9571b1aee430e45cb33eea"
+      },
+      "study_id": "bcap-moonshot-sinkhorn-candidate-v1-study"
+    }
+  },
+  "campaign_ceiling_seconds": 48000,
+  "campaign_id": "bcap-moonshot-sinkhorn-v1",
+  "candidate_ceiling_seconds": 24000,
+  "full_reservation_seconds": 45840,
+  "original_requirements": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 2,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 2,
+      "task": "five_word_joint_hold"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 2,
+      "task": "trajectory"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 2,
+      "task": "residual_student"
+    },
+    {
+      "importance": "required",
+      "order": 9,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "required",
+      "order": 10,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "required",
+      "order": 11,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "required",
+      "order": 18,
+      "qualification_tier": 2,
+      "task": "grid100"
+    },
+    {
+      "importance": "required",
+      "order": 19,
+      "qualification_tier": 2,
+      "task": "rotated100"
+    },
+    {
+      "importance": "required",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "staggered100"
+    }
+  ],
+  "per_arm_full_reservation_seconds": 22920,
+  "prepared_commit": "ac973f38dbfef063a3e6a79809e65822c5a11a5b",
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "registration_path": "reports/forge/bcap-moonshot-sinkhorn/registration.json",
+  "schema_version": 1,
+  "scope": "phase3_paired_research_diagnostic",
+  "software_allowance_seconds": 300,
+  "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+  "source_rebindings": {
+    "ae_gan_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "five_word_joint_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "five_word_joint_smoke": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "residual_student": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "trajectory": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "two_pole": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "unused_token_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "6c70c7debf22cb9bbc82cf8b358e6e1b749c3f0b93ad9174b057a62b99b14445",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    }
+  },
+  "spec_path": "reports/forge/bcap-moonshot-sinkhorn/spec.json",
+  "spec_sha256": "0cffeca29cc9438e97dfd8b84101779cd77e064d5090a55ca078370563f75382",
+  "stop": "One baseline and one global substantive candidate; full original questions, no seed experiments, scientific retry/tuning, ordinary qualification or automatic promotion.",
+  "task_contracts": {
+    "ae_gan_hold": "9bf13151918f91c292a85c5f61336b1f1415f9cae7907f3687d9ddd512cc7765",
+    "five_word_joint_hold": "09b7b3889b32f3c6f37fa0de4be6968775ad7e89dbf4570c6dbc76d8a5cf0f89",
+    "five_word_joint_smoke": "5bc2db3fd437cdf3540ee6a8df066e53070e28b066a2566d37abdb6dd7a5c918",
+    "gaussian1d_smoke": "4460635c069d10da44c5f7199d940fdd1531b604eddf64675120510e0f3fb7d1",
+    "gaussian1d_stability": "65d760ce7a45ee3ec062e76f57026ff09b29463711ea749bcd7079acbc0038d7",
+    "grid100": "e1b414bd92140a95338f0bc62d6c5328efa919e2913457a258ac2de33daeac3f",
+    "residual_student": "5cd1bb283bcc975ce3472ce46b29f24fa4fa4daa4ea5e96f2b2cec1fc3d7fb45",
+    "ring16_acquisition": "21a9156304afc6f6612faf834532612415b631a5cfa1664b68a353119cc712ab",
+    "rotated100": "282ecf1465be0d861b1d500249fb1aadc0303310f74e9b8ec9b7240684e274ed",
+    "staggered100": "278129827827015bd53d13f1b7136f37eaafc9cbf34f46fcbf531bfb7eb5ba72",
+    "trajectory": "7fe5bce7b9aee48cd1b4478416d1b08cac990c91358f0a42ec99160d60c14a17",
+    "two_pole": "fb2530f12c15ada77332a0032f8826ba03f062f6be6b8b5ee559d6f988ed4e68",
+    "unused_token_hold": "e66f75def16b825cb82d276ea6de7562d84ee03dc536e92050876e87977d6062",
+    "vector_anisotropic": "ce96f89823835509b1869ae6aff565270b06cf5e2cd018c6cf946e587352d0f5",
+    "vector_unequal_mass": "b0f07e1064fa9c13271f630bc93f4979625c5c96ba79930349c8c8a76b1ebe46",
+    "vector_unequal_width": "7cc03a981745e52719fead313c50cd4e9f048dfa7e8cff55ca30a9d22889ca15"
+  },
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "through_tier": 1,
+  "view": "bcap-moonshot-sinkhorn-diagnostic-v1",
+  "view_revision": 1
+}
