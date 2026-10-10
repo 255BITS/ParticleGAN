@@ -21,6 +21,31 @@ def load(name, path):
     return module
 
 
+def authorized_retries(state, collection, authorization):
+    """Validate explicitly authorized infrastructure retries without regrading."""
+    from experiments.forge.contracts import stable_hash
+    allowed = {item["predecessor_attempt_id"]: item for item in authorization.get("retries", [])}
+    verified = []
+    for job in state["jobs"].values():
+        attempts = job.get("attempts", [])
+        for previous, current in zip(attempts, attempts[1:]):
+            predecessor = collection["attempts"][previous["attempt_id"]]["result"]
+            successor = collection["attempts"][current["attempt_id"]]["result"]
+            binding = successor.get("retry_of", {})
+            approval = allowed.get(predecessor["attempt_id"], {})
+            if not (predecessor["raw"]["attempt_status"] in {"error", "timeout", "cancelled"}
+                    and all(row["gate_status"] == "INCOMPLETE" for row in predecessor["task_results"])
+                    and binding.get("attempt_id") == predecessor["attempt_id"]
+                    and binding.get("result_hash") == stable_hash(predecessor)
+                    and approval.get("predecessor_result_hash") == stable_hash(predecessor)
+                    and binding.get("reason") == approval.get("reason")
+                    and predecessor["candidate_revision"] == successor["candidate_revision"]):
+                raise ValueError("Retry must bind an explicitly authorized incomplete execution predecessor")
+            verified.append(dict(predecessor=predecessor["attempt_id"], successor=successor["attempt_id"],
+                                 reason=binding["reason"]))
+    return verified
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repository", required=True, type=Path)
@@ -61,6 +86,8 @@ def main():
     publisher.scopes = lambda _options: module.diagnostic_scopes(
         publisher, artifacts, artifacts / "phase3-progress.json")
     collection = publisher.collect(argparse.Namespace(repository=root, allow_partial=False))
+    availability = load("independent_publication_availability", Path(__file__).with_name("publication_adapter.py"))
+    availability.annotate(collection)
     require(result["task_cells"] == collection["cells"]
             and result["task_results"] == [entry["item"] for entry in collection["final"]]
             and result["accounting"] == collection["accounting"],
@@ -88,8 +115,12 @@ def main():
                 "Publication cannot execute new updates or draws")
 
     state = read_json(artifacts / "phase3-queue/queue/state.json")
-    require(all(not accounting["pending_work"] and not accounting["execution_retries"]
-                for accounting in collection["accounting"]), "No active work or undeclared retry")
+    require(all(not accounting["pending_work"] for accounting in collection["accounting"]), "No active work")
+    authorization_path = artifacts.parents[1] / "restart-20261010/authorized-retries.json"
+    authorization = read_json(authorization_path) if authorization_path.exists() else {}
+    retries = authorized_retries(state, collection, authorization)
+    require(sum(accounting["execution_retries"] for accounting in collection["accounting"]) == len(retries),
+            "Every execution retry requires an explicit predecessor and authorization")
     paid = sum(accounting["selected_paid_seconds"] for accounting in collection["accounting"])
     require(paid <= 48000 and result["full_reservation_seconds"] == 45840
             and result["paid_ceiling_seconds"] == 48000, "Declared paid budget exceeded")
@@ -108,7 +139,8 @@ def main():
         source_checks=audit["frozen_source_checks"], own_checkpoint_producers=producers,
         actual_training_gifs=len(media), paid_seconds=paid,
         accounting=collection["accounting"], protected_historical_files=len(protected),
-        queue_jobs=len(state["jobs"]), optimizer_updates_added=0, sampling_draws_added=0)
+        queue_jobs=len(state["jobs"]), authorized_execution_retries=retries,
+        optimizer_updates_added=0, sampling_draws_added=0)
     atomic_json(options.output, proof)
     print(json.dumps({key: proof[key] for key in
                       ("status", "source_commit", "outcomes", "actual_training_gifs", "paid_seconds")}))
