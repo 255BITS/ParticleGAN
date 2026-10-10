@@ -135,7 +135,9 @@ def reproduce(repository, archive_root, checkout, output):
     shared = ["--repository", str(checkout), "--queue", str(ordinary / "queue"),
               "--progress", str(ordinary / "progress.json"), "--diagnostic-queue", str(diagnostic / "queue"),
               "--diagnostic-progress", str(diagnostic / "progress.json"), "--output", str(output)]
-    environment = dict(os.environ, PYTHONPATH=str(repository), CUDA_VISIBLE_DEVICES="",
+    # Named-stream validation restores private generators on their declared
+    # devices even though it never samples. Preserve the caller's GPU visibility.
+    environment = dict(os.environ, PYTHONPATH=str(repository),
                        OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
     for name in ("audit.py", "publish.py"):
         command = [sys.executable, str(tooling / name), *shared]

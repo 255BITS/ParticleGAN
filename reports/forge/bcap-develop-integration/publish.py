@@ -313,24 +313,41 @@ def render_saved(entry, output, renderer):
         return original(case, records, *args, **kwargs)
     with patch.object(api_run, 'render_gif', scalar_display), patch.object(tier1_media, '_scored_outputs',
             lambda *_args: (samples, inputs)):
-        if samples and task['adapter'] == 'transfer_image':
+        spiral = task['execution'].get('host_definition', {}).get('kind') == 'spiral'
+        if samples and (task['adapter'] == 'transfer_image' or spiral):
             observations = row['evidence']['observations']
             indices = _indices(len(samples))
             ops = {'<=': operator.le, '>=': operator.ge, '==': operator.eq, '<': operator.lt, '>': operator.gt}
             def failures(point):
                 return [f'{name} {op} {bound}' for name, op, bound in task['evaluation']['thresholds']
                         if not ops[op](point[name], bound)]
+            if spiral:
+                # Display the declared centerline analytically. No target draws,
+                # model calls, or scoring replace the retained trained samples.
+                spec = task['execution']['host_definition']
+                u = torch.linspace(0., 1., 256, dtype=samples[0]['samples'].dtype)
+                angle = u * (2 * math.pi * spec['turns'])
+                radius = spec['radius_min'] + (spec['radius_max'] - spec['radius_min']) * u
+                centerline = torch.stack((radius * angle.cos(), radius * angle.sin()), dim=1)
+                views = [dict(kind='scatter', title='Declared spiral centerline and saved scored outputs',
+                    target=centerline, samples=samples[i]['samples'],
+                    caption=f'Analytic noiseless centerline; declared target noise std {spec["noise"]}. Generated points are actual saved training outputs.')
+                    for i in indices]
+            else:
+                views = [dict(kind='image', title='Original target templates and saved generated outputs',
+                    target=samples[i]['targets'], samples=samples[i]['samples'],
+                    caption='Actual scored training outputs; display preserves the original clean enumeration.')
+                    for i in indices]
             records = [dict(step=samples[i]['step'], metrics=observations[i],
                 passed=not failures(observations[i]), failed_bounds=failures(observations[i]),
-                views=[dict(kind='image', title='Original target templates and saved generated outputs',
-                    target=samples[i]['targets'], samples=samples[i]['samples'],
-                    caption='Actual scored training outputs; display preserves the original clean enumeration.')]) for i in indices]
+                views=[view]) for i, view in zip(indices, views)]
             case = dict(id=task['id'], goal=task.get('description', task['id']),
                         default_steps=task['execution']['steps'], sampling=row['evidence']['sampling_law'])
             api_run.render_gif(case, records, output, full_budget=True, requested_steps=task['execution']['steps'],
                                final_verdict=row['gate_status'])
             receipt = dict(schema_version=1, task_id=task['id'], recorded_grade=row['gate_status'],
-                kind='actual_training_saved_images_gif', source_inputs=inputs, observation_count=len(observations),
+                kind='actual_training_saved_spiral_gif' if spiral else 'actual_training_saved_images_gif',
+                source_inputs=inputs, observation_count=len(observations),
                 selected_observation_indices=indices, observations_sha256=stable_hash(observations),
                 gif_sha256=file_hash(output), optimizer_updates_added=0, sampling_draws_added=0,
                 qualification_input=False, renderer_sha256=file_hash(Path(__file__)))
