@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "29c9cf030d92347d4fbff383dbda18752d17582c31273c1735d1a9b5482fb741",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "d80d81fba3d9f8494ea28785f4926f12ba3a79dc155debfb6eaa49613c460c4a",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/config.json": "04a7a7b5bba686c864b0fc53b64621cf58393a82ffcd00f68ce730a7f01a339b",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/events.jsonl": "efde42918eee915d045f806038679a5786e8131bc4a24d9475eee645845d3cb0",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_000000.npz": "4f2ee8a085f73e834db1ae8c0b33c5f964b4611eeb8163eb93c5d83a6d3fbb34",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_000050.npz": "1a312b7779ec8fcfd885eb2c87792e0392984d90e9f8f7ee6144a2dd3cf727f2",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_000750.npz": "0049c97882f1353c90cf634c438cca493019e02f27436987d4c6704eebd781c6",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_001750.npz": "df027a8c63a352665736be599e8892adeb07e9ba92a1c046d5fbd3081f3571ff",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_002750.npz": "c0bd36aa37e24a22e99dd2eb05ee98351e2facd95d973a159a9c82ae6ec973e3",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_004000.npz": "19fdb71c38739e15e8afe8cf9ddacee4a2e5ab4b6ab4aacc950316719a3669a5",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_005000.npz": "1478711fdc4a867b0e1768bea90963c3088817ead9d81cb54136cb8c35814723",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_006000.npz": "8a3d932ce12e715572554632fb68020140ee79eee4233579b070180ab736df42",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/snapshots/step_007000.npz": "6b435c32aa9303b14a6039fc6fc8793065b09418eb34da48bf5da0206410773f",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/native100/staggered100/summary.json": "51ea199f9e51e093ec564d6ee489fdaf1564f1acf726a375b191a02efeba1391"
+  },
+  "task_id": "staggered100"
+}

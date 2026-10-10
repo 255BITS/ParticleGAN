@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "archive_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic",
+  "frozen_source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+  "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+  "baseline_publication_commit": "9005ed73a09a740174f590fbfd543440935040eb",
+  "baseline_measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+  "baseline_measured_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "publication_adapter": {
+    "source_commit": "f90591b85383052e803903088b775f4e9e95d8e1",
+    "sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5"
+  },
+  "retry_authorization": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/authorized-retries.json",
+    "sha256": "476afbbdefdc024978e0165581b623183b37307618bc239c79466037a21eedd0",
+    "user_instruction": "use subagents and restart anything you need to to reach our goal",
+    "original_paid_ceilings_unchanged": true,
+    "retries": [
+      {
+        "track": "optimistic",
+        "task_id": "five_word_joint_smoke",
+        "compatibility_key": "b521a7a224d2dd591586ccb6865493dc43f34de001d021c12821093768c8800a",
+        "predecessor_attempt_id": "99cd2b12eb4a40a2b7804d8115d134ba",
+        "predecessor_result_hash": "6ecaa5b4ff532390a02453e170fd77dbf7f86ae8d4ec01826e9cf055bc56eb5e",
+        "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+        "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+      },
+      {
+        "track": "optimistic",
+        "task_id": "grid100",
+        "compatibility_key": "d7ab8169e1d4c7dafd6b130f5e4508db17dd6e30fc0d1b2e838d16602a07a081",
+        "predecessor_attempt_id": "e939011f991640c3a7676abc9c595e41",
+        "predecessor_result_hash": "d09a095cab4fb66abad919666b5b2626e959173b3dda7ff90751a6aba173b68c",
+        "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+        "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+      }
+    ]
+  },
+  "actual_training_gifs": 30,
+  "gif_bytes": 8190810,
+  "canonical_files_sha256": {
+    "phase3-results.json": "e8936340b8f266d2c85027d81c9f37fd3e634333d381f79adfc8540627cc85c0",
+    "phase3-audit.json": "337ff0b83c93ff6279b348364616db0b80798fb58acc847aaf456a31fe401fd5",
+    "optimism-counters.json": "73c01189ecd0e9ec187e7cbfe34a802ed38583e6acbacd83dae25e43f2ced839",
+    "media/index.json": "14ae82a082bddaf3c7838aa86bb03b872e8b3ef5e41d101eca23a61539a7639c",
+    "paired-summary.json": "4cbfd12bcc5631dbda6b19bcac0be99001a0e0d935a7834c51e353f3aff6b838",
+    "export_counters.py": "f58c81e069ffe7478496a91f21fac84b1ddec5eea049ac378f6a0ebfc55dd6f1",
+    "regression-details.json": "bef3ed787633968c9a4c0ba866c73970cebdc5558a715316ed0cfe45d81e14e5",
+    "publication-command.json": "08b3dabff4a133a35a813cb0fe6292c01829b92dbc778b64ea642dfc259bdc68"
+  },
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0
+}

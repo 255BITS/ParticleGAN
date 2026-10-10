@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "/home/martyn/dev/ParticleGAN-bcap-develop-integration/reports/forge/bcap-three-phase/publication_adapter.py",
+    "--publish",
+    "--repository",
+    "/home/martyn/dev/ParticleGAN-bcap-moonshot-optimistic",
+    "--registration",
+    "reports/forge/bcap-moonshot-optimistic/registration.json",
+    "--source-commit",
+    "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+    "--artifacts",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic",
+    "--output",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/publication"
+  ],
+  "elapsed_seconds": 67.06557001099964,
+  "returncode": 0,
+  "adapter_source_commit": "f90591b85383052e803903088b775f4e9e95d8e1",
+  "adapter_sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5",
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0
+}

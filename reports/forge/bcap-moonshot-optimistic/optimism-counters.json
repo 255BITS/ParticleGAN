@@ -1,0 +1,1518 @@
+{
+  "interpretation": "Counters come from final saved state, including consumed producer history in continuations. Summing task totals double-counts such prefixes; these are per-checkpoint counters, not campaign work totals.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_optimizer_history_audit",
+  "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+  "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+  "status": "PASS",
+  "task_checkpoints": [
+    {
+      "attempt_id": "ad56692c15604de4bb53587de0d4ce13",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/ad56692c15604de4bb53587de0d4ce13/provenance/provenance-state.pt",
+      "checkpoint_sha256": "607f8cb3cff9f0d499e2403599fcbfb152bc4d2c4194ae8759865ce5f12662eb",
+      "checkpoint_state_sha256": "b43667a202b109743169bd1bc89eff8002d6916318b99a0186763e1f6965dedd",
+      "completed_steps": 1000,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke",
+      "totals": {}
+    },
+    {
+      "attempt_id": "710c07a38dc9425081ac59725b9481fd",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/710c07a38dc9425081ac59725b9481fd/provenance/provenance-state.pt",
+      "checkpoint_sha256": "a78bff1d7875f0f97a619ac22068f0e2a6a69c629eb429ae9694aa333e285cef",
+      "checkpoint_state_sha256": "ae3c3e069d6fdedc71c25b49612d977028ef53a24ddf88df6eb9253794733004",
+      "completed_steps": 250,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "ae_gan_hold",
+      "totals": {}
+    },
+    {
+      "attempt_id": "d956d18dc19f4ecd8a14bace6fd6ffa9",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d956d18dc19f4ecd8a14bace6fd6ffa9/provenance/provenance-state.pt",
+      "checkpoint_sha256": "e2f7bd226a49e627e5e11601b23f3292cf32622c60302ec8c779827ee919cb69",
+      "checkpoint_state_sha256": "97db7b025c6964bfed7434c3d6c0910e1f4b93352f289377ed3aad4ceabab000",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "vector_anisotropic",
+      "totals": {}
+    },
+    {
+      "attempt_id": "eea5fd6969d7441dbcd007abee76d1a5",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/eea5fd6969d7441dbcd007abee76d1a5/provenance/provenance-state.pt",
+      "checkpoint_sha256": "8ed68a81045024c117a5fdee790655a7e037612f61ec7c95151bbd145c6e12ba",
+      "checkpoint_state_sha256": "ba89e1473d359d80896b47e7353ae0a6d09ef5998ee9bca58b8201ee0210bcb4",
+      "completed_steps": 200,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "unused_token_hold",
+      "totals": {}
+    },
+    {
+      "attempt_id": "6c075bfdc9764da0ab1fc8b42f178509",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/6c075bfdc9764da0ab1fc8b42f178509/provenance/provenance-state.pt",
+      "checkpoint_sha256": "eadfa38fd155dce7712a2f6e3c88fc8cd7ab52b1b9bdedb946254e3c3a576182",
+      "checkpoint_state_sha256": "765247582b49ea0074382caa64a89f7ced616a0cee7b91be32c4af86391796d4",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "vector_unequal_width",
+      "totals": {}
+    },
+    {
+      "attempt_id": "06fcb77f8ab54566a73d4ee4eab4cb54",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/06fcb77f8ab54566a73d4ee4eab4cb54/provenance/provenance-state.pt",
+      "checkpoint_sha256": "567e93300bb676d4b1ed9a5eda0f9ae2eb72e39bd24e69a109e5fd44a388139f",
+      "checkpoint_state_sha256": "0543aa0891bfbeed0e1c4c78b9be370c7865ee323447590605191fb4953f10e4",
+      "completed_steps": 1600,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "ring16_acquisition",
+      "totals": {}
+    },
+    {
+      "attempt_id": "c083b3d2018e45afaa30bd334e50ed98",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/c083b3d2018e45afaa30bd334e50ed98/provenance/provenance-state.pt",
+      "checkpoint_sha256": "c42e4522abf2cfd1daf168f20d9bd82c10c0e88a71ad37f6a6cc302d36f565a3",
+      "checkpoint_state_sha256": "6a706cab946da75a24014d747df2f2d7635b32fec35695d02d1102d6fcfb05b6",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "staggered100",
+      "totals": {}
+    },
+    {
+      "attempt_id": "7cd89448d31d4bd59e5ae867ab2b823a",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/7cd89448d31d4bd59e5ae867ab2b823a/provenance/provenance-state.pt",
+      "checkpoint_sha256": "c42528a3a9c3ce2149a0f90c231e27da0a695435973ea24d76a43d6bf6a44cee",
+      "checkpoint_state_sha256": "99954048a8d0ddfb60915359149d767e9415ec07b2ebff092c1a8c0555ade018",
+      "completed_steps": 6000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "gaussian1d_stability",
+      "totals": {}
+    },
+    {
+      "attempt_id": "d91782c6aae249dfaf0f2635e723a021",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d91782c6aae249dfaf0f2635e723a021/provenance/provenance-state.pt",
+      "checkpoint_sha256": "f7f18b217947ef62df2394e8d8ef9bafc7cf6eac03ca2c3da9ced80ee0342783",
+      "checkpoint_state_sha256": "a26d8046cc528834b1eac82e3698b99abcb2db299073068cff8f0f350fa26296",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "rotated100",
+      "totals": {}
+    },
+    {
+      "attempt_id": "b3f715451602481094efcfafb66008a3",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/b3f715451602481094efcfafb66008a3/provenance/provenance-state.pt",
+      "checkpoint_sha256": "be60e4337a9f6f452fba39c6c508c806ae5bed96f13d49e47907359cd69f02db",
+      "checkpoint_state_sha256": "d90ff21ffeb74fec79bf1a4768c930c60902051a520f6911f23240d12f6bc24d",
+      "completed_steps": 20001,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/fixture/api_state/optimizers/0",
+          "roles": [
+            "generator",
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/fixture/api_state/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "five_word_joint_smoke",
+      "totals": {}
+    },
+    {
+      "attempt_id": "10caa7a57fee4c9e8f076f8b974d42f0",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/10caa7a57fee4c9e8f076f8b974d42f0/provenance/provenance-state.pt",
+      "checkpoint_sha256": "f7da90672c8469933df4850b6eeb3f9d0633866cf893d8f9cd1bc1c033fac1fc",
+      "checkpoint_state_sha256": "26ed95dd3f7f9f4a17bf584b88c5c86cc297515828c696d9409f082c7caa25a2",
+      "completed_steps": 400,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "trajectory",
+      "totals": {}
+    },
+    {
+      "attempt_id": "dc403bb329524b649b45d56c7b56e465",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/dc403bb329524b649b45d56c7b56e465/provenance/provenance-state.pt",
+      "checkpoint_sha256": "d8fcadf05cc5f94d71f57d004de325f5e481291973bebad32951dfce29f1c0b8",
+      "checkpoint_state_sha256": "53b968e9f031f7ee491042c4896e6779569cf1c1dc85899c44b1b2c6c28605b1",
+      "completed_steps": 4834,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/fixture/api_state/optimizers/0",
+          "roles": [
+            "generator",
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/fixture/api_state/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "five_word_joint_hold",
+      "totals": {}
+    },
+    {
+      "attempt_id": "9840fac6881a4ffaa1ee73f55d25827a",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/9840fac6881a4ffaa1ee73f55d25827a/provenance/provenance-state.pt",
+      "checkpoint_sha256": "8e0f57c5db34980a7035d424b77656bd4dc56c1f6b74134a47de6045fe2e4c17",
+      "checkpoint_state_sha256": "97ce167277677936fe9087dd16fc6a01049ea8932db20bd33dc98c0fc78ae382",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "vector_unequal_mass",
+      "totals": {}
+    },
+    {
+      "attempt_id": "5a29230c9c504ac398e327555334e5d1",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5a29230c9c504ac398e327555334e5d1/provenance/provenance-state.pt",
+      "checkpoint_sha256": "784e47a337666bfd13d11696ea695aad7cbb4bb6aa51c778e3b7a47b48da2dfb",
+      "checkpoint_state_sha256": "b69f36d1f87bfffaf531c45e168f0c94138820ab24b37aff0d86c6178af9df80",
+      "completed_steps": 400,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "residual_student",
+      "totals": {}
+    },
+    {
+      "attempt_id": "a381e8d7e57649a3a0f83e38641c41c6",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/a381e8d7e57649a3a0f83e38641c41c6/provenance/provenance-state.pt",
+      "checkpoint_sha256": "761519c94eadb40fefb110dca9b0fab63c281898d27617d998d01364c39acbf3",
+      "checkpoint_state_sha256": "91d382f350af6b1bb732402e64f42d61cece3d087a2c242857f8b5a1e07e567b",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "grid100",
+      "totals": {}
+    },
+    {
+      "attempt_id": "79e9c9cf65764cdabfba6d2c24d29a34",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/79e9c9cf65764cdabfba6d2c24d29a34/provenance/provenance-state.pt",
+      "checkpoint_sha256": "ae3c4a0bd6a10f3139cfd936f6e8bb716c2da4e17225cd226fdd380c9c0bb4af",
+      "checkpoint_state_sha256": "1872ff94a771b204a1467045d2cc1a7a96eb6f031158e02d5c6b004521a1e6c7",
+      "completed_steps": 80,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        },
+        {
+          "active": false,
+          "history_sha256": "8f4c665e55d37d763f3379ef6d883f4cda5232710911a596343e9d84bae07850",
+          "parameter_histories": 0,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": null
+        }
+      ],
+      "role": "baseline",
+      "status": "PASS",
+      "task_id": "two_pole",
+      "totals": {}
+    },
+    {
+      "attempt_id": "5a9ecda5b7ba4f18b70c1131c2ffafe9",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5a9ecda5b7ba4f18b70c1131c2ffafe9/provenance/provenance-state.pt",
+      "checkpoint_sha256": "584505bfaef37c4de57372b62c61bda11684ac786418b3f3637f1f088155509a",
+      "checkpoint_state_sha256": "e0d7967861872c001049d7718015b994b6d2fecb7d3da5304b1c13a2df05cbf7",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "61e064df6610f4292f321679fb5869af6ce3db18d2f42ac153b7e4ef76e4ca35",
+          "parameter_histories": 7,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 256,
+          "stats": {
+            "extrapolated_applications": 8393,
+            "extrapolated_row_applications": 120818,
+            "parameter_applications": 8400,
+            "sampled_row_applications": 121074,
+            "steps": 1200
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "710fdd3e55ea67803353199c5c383db615aeb6562552c81f6167784460b8856c",
+          "parameter_histories": 6,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 7194,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 7200,
+            "sampled_row_applications": 0,
+            "steps": 1200
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "vector_anisotropic",
+      "totals": {
+        "extrapolated_applications": 15587,
+        "extrapolated_row_applications": 120818,
+        "parameter_applications": 15600,
+        "sampled_row_applications": 121074,
+        "steps": 2400
+      }
+    },
+    {
+      "attempt_id": "e8080343e4f74876a749c4354fa16728",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/e8080343e4f74876a749c4354fa16728/provenance/provenance-state.pt",
+      "checkpoint_sha256": "1ac6bd95280d7426fade5c30a41aca2b30ca23364890dca7ab8dc49ed151f330",
+      "checkpoint_state_sha256": "a450bf6fa9340525c2fa75982619cd500a896900f5fbc0d0675bb9105aed4965",
+      "completed_steps": 1600,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "155ab9b69e2955edc29d08cbd524738d520d2f3201b35effe9215425248bf811",
+          "parameter_histories": 7,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 256,
+          "stats": {
+            "extrapolated_applications": 11193,
+            "extrapolated_row_applications": 161134,
+            "parameter_applications": 11200,
+            "sampled_row_applications": 161390,
+            "steps": 1600
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "d3cea78d7fd24efab9b71f25fe379b76f6ed7345bcf14b596d79ff46b218fe53",
+          "parameter_histories": 6,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 9594,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 9600,
+            "sampled_row_applications": 0,
+            "steps": 1600
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "ring16_acquisition",
+      "totals": {
+        "extrapolated_applications": 20787,
+        "extrapolated_row_applications": 161134,
+        "parameter_applications": 20800,
+        "sampled_row_applications": 161390,
+        "steps": 3200
+      }
+    },
+    {
+      "attempt_id": "31677609d5c647bd81b7d8343377d88f",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/31677609d5c647bd81b7d8343377d88f/provenance/provenance-state.pt",
+      "checkpoint_sha256": "c0ca5f21d53734e4cf2ab3f81716cbe949fcf6eb4a81b92b890a565cf1e5efe5",
+      "checkpoint_state_sha256": "3ae82790fd38611d284105cb9672a6b43a9a18eeadd89832b11094caaf5c7dae",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "dd0c57fe97126562dc4b8941bb13104b36a1f98b671a5d73af0a13671ba615d1",
+          "parameter_histories": 7,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 256,
+          "stats": {
+            "extrapolated_applications": 8393,
+            "extrapolated_row_applications": 120818,
+            "parameter_applications": 8400,
+            "sampled_row_applications": 121074,
+            "steps": 1200
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "8b3da233e8c30a1739baf3e2ab46aa50a5b1060fe1635e484a0df5996ff45c47",
+          "parameter_histories": 6,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 7194,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 7200,
+            "sampled_row_applications": 0,
+            "steps": 1200
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "vector_unequal_width",
+      "totals": {
+        "extrapolated_applications": 15587,
+        "extrapolated_row_applications": 120818,
+        "parameter_applications": 15600,
+        "sampled_row_applications": 121074,
+        "steps": 2400
+      }
+    },
+    {
+      "attempt_id": "fe6e41653bd944beba7ee6c07ff12eda",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/fe6e41653bd944beba7ee6c07ff12eda/provenance/provenance-state.pt",
+      "checkpoint_sha256": "4226baebfc775ae90c3498794e5983633f44322b844f22b8db8d83113c4294fe",
+      "checkpoint_state_sha256": "213314408f3dd9602ef34362b87f26373d0c01f047571f42f728339a81d3fc58",
+      "completed_steps": 250,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "3c1f2df3120528879f865973a86f1d9cd0058477d6b2919bd5684a41fb870d41",
+          "parameter_histories": 8,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 1992,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 2000,
+            "sampled_row_applications": 0,
+            "steps": 250
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "d22f224af7da02bdb4ef0ebe519bf8ae5a870ce0b399dedcd3a7110c0bd159d6",
+          "parameter_histories": 1,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 12,
+          "stats": {
+            "extrapolated_applications": 249,
+            "extrapolated_row_applications": 2971,
+            "parameter_applications": 250,
+            "sampled_row_applications": 2983,
+            "steps": 250
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "6b1511e436a1db6c8cfa62c86c40ac967cf6e3b67be64726677e56dae38bd831",
+          "parameter_histories": 4,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 996,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 1000,
+            "sampled_row_applications": 0,
+            "steps": 250
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "ae_gan_hold",
+      "totals": {
+        "extrapolated_applications": 3237,
+        "extrapolated_row_applications": 2971,
+        "parameter_applications": 3250,
+        "sampled_row_applications": 2983,
+        "steps": 750
+      }
+    },
+    {
+      "attempt_id": "15de7403874c4d08b890bd8ce013d29a",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/15de7403874c4d08b890bd8ce013d29a/provenance/provenance-state.pt",
+      "checkpoint_sha256": "8e327bdf83b854312519898e70734138fa522273f5a2247b566ff829ab0d1ddb",
+      "checkpoint_state_sha256": "762545465a4c677e2a42668c274813a005f181444ce9cc2581bd07e41811056a",
+      "completed_steps": 20001,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "1ebcdab2b1f83aec406b704d358b97599cf92afa460d099b84351dd2516daaba",
+          "parameter_histories": 13,
+          "path": "root/fixture/api_state/optimizers/0",
+          "roles": [
+            "generator",
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 5,
+          "stats": {
+            "extrapolated_applications": 260000,
+            "extrapolated_row_applications": 100000,
+            "parameter_applications": 260013,
+            "sampled_row_applications": 100005,
+            "steps": 20001
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "d6918558850645bd1c58f0d4c0c79f4d3795d1ea438e3e1f4e5b08bcd6e6a31a",
+          "parameter_histories": 6,
+          "path": "root/fixture/api_state/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 120000,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 120006,
+            "sampled_row_applications": 0,
+            "steps": 20001
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "five_word_joint_smoke",
+      "totals": {
+        "extrapolated_applications": 380000,
+        "extrapolated_row_applications": 100000,
+        "parameter_applications": 380019,
+        "sampled_row_applications": 100005,
+        "steps": 40002
+      }
+    },
+    {
+      "attempt_id": "0e3cd03bcfbf49e495a00a736cc6f496",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/0e3cd03bcfbf49e495a00a736cc6f496/provenance/provenance-state.pt",
+      "checkpoint_sha256": "3e487214d373eac9f5066fd2a03418e61307ad59e247e15477854ad252bce2e7",
+      "checkpoint_state_sha256": "58f007c30f38a9eec00f5818e7b7be4ffc08fa400279aa4b8159240651aeb44e",
+      "completed_steps": 80,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "8c927a0ae5bd7c748f26f459832f9d2480453c08400affedc02b4f41fcd426a9",
+          "parameter_histories": 1,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 79,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 80,
+            "sampled_row_applications": 0,
+            "steps": 80
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "813d696377b131c235b51db3e05c573e6dd6eb43d22da12396025096c1d3cd7f",
+          "parameter_histories": 4,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 316,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 320,
+            "sampled_row_applications": 0,
+            "steps": 80
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "two_pole",
+      "totals": {
+        "extrapolated_applications": 395,
+        "extrapolated_row_applications": 0,
+        "parameter_applications": 400,
+        "sampled_row_applications": 0,
+        "steps": 160
+      }
+    },
+    {
+      "attempt_id": "3f83503bf4584ed7a2ecf96c986bfc81",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/3f83503bf4584ed7a2ecf96c986bfc81/provenance/provenance-state.pt",
+      "checkpoint_sha256": "9b96e16935a5d0de372e1c96dca7a3e8888acfc7b08d015522d7d7ac87912588",
+      "checkpoint_state_sha256": "275c94992edafd7db929d232fad50c6877851ab74adebf6cf2efbd1f079984c6",
+      "completed_steps": 400,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "3ddbebcf80ea3f7181f10c610b421e055fe61a04ccc9e9e1f5314504bc5d9b93",
+          "parameter_histories": 6,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 2394,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 2400,
+            "sampled_row_applications": 0,
+            "steps": 400
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "ff2bfa7f2c23d28d38c69a1255948a5d28418dcd51a41b150fb103ed161a0513",
+          "parameter_histories": 1,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 12,
+          "stats": {
+            "extrapolated_applications": 399,
+            "extrapolated_row_applications": 4788,
+            "parameter_applications": 400,
+            "sampled_row_applications": 4800,
+            "steps": 400
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "d56d0cb513dc8c10157432cfc6098feb31495f58e744f7e27d541cdbfc825500",
+          "parameter_histories": 6,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 2394,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 2400,
+            "sampled_row_applications": 0,
+            "steps": 400
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "trajectory",
+      "totals": {
+        "extrapolated_applications": 5187,
+        "extrapolated_row_applications": 4788,
+        "parameter_applications": 5200,
+        "sampled_row_applications": 4800,
+        "steps": 1200
+      }
+    },
+    {
+      "attempt_id": "5231e094a7cf46488905edf12176a5af",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/provenance/provenance-state.pt",
+      "checkpoint_sha256": "1801a900619a38f6a48d3e9658cb14c2c16fc0a831dc306ba43896da0c5a155f",
+      "checkpoint_state_sha256": "c0a13e622e756db5966195ac9ee052ecf1cc1f7cb9cb59cf01fd82a1e6712ed7",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "abdee31625365dd3e5de75a57dd158087a731f1f3d868fdd19b018f7b3a2dc71",
+          "parameter_histories": 9,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 20000,
+          "stats": {
+            "extrapolated_applications": 62991,
+            "extrapolated_row_applications": 13605515,
+            "parameter_applications": 63000,
+            "sampled_row_applications": 13625515,
+            "steps": 7000
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "5e79301495cefcdd4964524fa6ee8eb910798622f1daf1e3bdfbf60b5208a1a2",
+          "parameter_histories": 8,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 55992,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 56000,
+            "sampled_row_applications": 0,
+            "steps": 7000
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "staggered100",
+      "totals": {
+        "extrapolated_applications": 118983,
+        "extrapolated_row_applications": 13605515,
+        "parameter_applications": 119000,
+        "sampled_row_applications": 13625515,
+        "steps": 14000
+      }
+    },
+    {
+      "attempt_id": "49703b54274d438f8f25f4a357d27a21",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/49703b54274d438f8f25f4a357d27a21/provenance/provenance-state.pt",
+      "checkpoint_sha256": "ccba0e10e8df165a71d1e200c2b1266dcd6d80e36c7fab565441bc97a2003ba0",
+      "checkpoint_state_sha256": "87d08b071d672731af00dbb624a9a2e12794c899c274a5057f410500f6a9e334",
+      "completed_steps": 200,
+      "gate_status": "PASS",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "83db0caf76e3087964f98ce4364f7143120405fdf93fa291e3008c53f64a3d35",
+          "parameter_histories": 2,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 398,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 400,
+            "sampled_row_applications": 0,
+            "steps": 200
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "e1846c47f4f99b3a988fe038b4c7a11d57fc429c0ac8bd42c1c1dc72958804e4",
+          "parameter_histories": 4,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 796,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 800,
+            "sampled_row_applications": 0,
+            "steps": 200
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "unused_token_hold",
+      "totals": {
+        "extrapolated_applications": 1194,
+        "extrapolated_row_applications": 0,
+        "parameter_applications": 1200,
+        "sampled_row_applications": 0,
+        "steps": 400
+      }
+    },
+    {
+      "attempt_id": "d5f87d27c68c4cff9c7d4fb24d7fc2de",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d5f87d27c68c4cff9c7d4fb24d7fc2de/provenance/provenance-state.pt",
+      "checkpoint_sha256": "cc64c39d87920108093b7e404c8216176ac861b29366a778e76b9069c6097f02",
+      "checkpoint_state_sha256": "6ee1256d5a68b0d97afb8b4d0e72809b2ce81ea515f33067d8812d109d08d909",
+      "completed_steps": 1200,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "455f6fc09a746e3d4d3b2ea6f8520fc64b7c2616e15f0539a611005ef5762cd5",
+          "parameter_histories": 7,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 256,
+          "stats": {
+            "extrapolated_applications": 8393,
+            "extrapolated_row_applications": 120818,
+            "parameter_applications": 8400,
+            "sampled_row_applications": 121074,
+            "steps": 1200
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "84546731425736458726672e5880a08d686a81629158d5e5402c479a0a92bdaa",
+          "parameter_histories": 6,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 7194,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 7200,
+            "sampled_row_applications": 0,
+            "steps": 1200
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "vector_unequal_mass",
+      "totals": {
+        "extrapolated_applications": 15587,
+        "extrapolated_row_applications": 120818,
+        "parameter_applications": 15600,
+        "sampled_row_applications": 121074,
+        "steps": 2400
+      }
+    },
+    {
+      "attempt_id": "ac767e9ac39a4dab901575bac487a2c1",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/ac767e9ac39a4dab901575bac487a2c1/provenance/provenance-state.pt",
+      "checkpoint_sha256": "57d23fd0b4cbaf70f0638a58c7029d8ccf1fcaccf338201ae28116d744f5e73a",
+      "checkpoint_state_sha256": "e0a06bd282f196d85520b58a011b6f8860ec97ccef74d63cc71d5f17755d3fbb",
+      "completed_steps": 400,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "6612ff6eaefdb397b63ea04b0fcbb34e5c1b96214b00dd537084f14d046d36b9",
+          "parameter_histories": 6,
+          "path": "root/optimizers/generator/0",
+          "roles": [
+            "generator"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 2394,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 2400,
+            "sampled_row_applications": 0,
+            "steps": 400
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "b558098717545ef3cbc4d85d6672856ead420b81f01ab232b355a923f101ee7c",
+          "parameter_histories": 1,
+          "path": "root/optimizers/generator/1",
+          "roles": [
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 12,
+          "stats": {
+            "extrapolated_applications": 399,
+            "extrapolated_row_applications": 4788,
+            "parameter_applications": 400,
+            "sampled_row_applications": 4800,
+            "steps": 400
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "3d99e73ac73ada7f537dbcb9d40783ff45846e9a78b10ff92f4c5e8e28383ea2",
+          "parameter_histories": 6,
+          "path": "root/optimizers/discriminator",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 2394,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 2400,
+            "sampled_row_applications": 0,
+            "steps": 400
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "residual_student",
+      "totals": {
+        "extrapolated_applications": 5187,
+        "extrapolated_row_applications": 4788,
+        "parameter_applications": 5200,
+        "sampled_row_applications": 4800,
+        "steps": 1200
+      }
+    },
+    {
+      "attempt_id": "0d9652d58f9046ce9a758095d24bc277",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/0d9652d58f9046ce9a758095d24bc277/provenance/provenance-state.pt",
+      "checkpoint_sha256": "db08bb71f3e469b507223d4162cdd0d2daaf01f10306425d9a0e855c8c3fca66",
+      "checkpoint_state_sha256": "ef455d4ad57a7d8f1e8b382a3295816fb0890ae41e990ed7d48d872642d6e520",
+      "completed_steps": 1000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "e4c29af09c943cf20a3975c3c22bfc3b064ab8c85fd70a23cde35c10cd938b22",
+          "parameter_histories": 7,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 256,
+          "stats": {
+            "extrapolated_applications": 6993,
+            "extrapolated_row_applications": 100678,
+            "parameter_applications": 7000,
+            "sampled_row_applications": 100934,
+            "steps": 1000
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "69f4f74db11f9fcc5945ac5ec0199b4a732026d3f230701d560abc016af553aa",
+          "parameter_histories": 6,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 5994,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 6000,
+            "sampled_row_applications": 0,
+            "steps": 1000
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke",
+      "totals": {
+        "extrapolated_applications": 12987,
+        "extrapolated_row_applications": 100678,
+        "parameter_applications": 13000,
+        "sampled_row_applications": 100934,
+        "steps": 2000
+      }
+    },
+    {
+      "attempt_id": "931c0ef677494db2b39fea029b0f979b",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/931c0ef677494db2b39fea029b0f979b/provenance/provenance-state.pt",
+      "checkpoint_sha256": "f8a233c77398dbbce5ac611f8ee457f215c334d8957a112334a85e2a009acd38",
+      "checkpoint_state_sha256": "8e91287f6cc4f5c686daaa2206f42e961261e2613ce96d1b41f350d78e7ecd57",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "80a0cfcd4cc3fa6bead8f0b1f1aeff3688855efd454c217df17c76627872a042",
+          "parameter_histories": 9,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 20000,
+          "stats": {
+            "extrapolated_applications": 62991,
+            "extrapolated_row_applications": 13605515,
+            "parameter_applications": 63000,
+            "sampled_row_applications": 13625515,
+            "steps": 7000
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "8e6d9e2a70e5d2d1729ea4cbec727cf5341fa4d3ce05d72aca4dd4eeaba28baa",
+          "parameter_histories": 8,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 55992,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 56000,
+            "sampled_row_applications": 0,
+            "steps": 7000
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "grid100",
+      "totals": {
+        "extrapolated_applications": 118983,
+        "extrapolated_row_applications": 13605515,
+        "parameter_applications": 119000,
+        "sampled_row_applications": 13625515,
+        "steps": 14000
+      }
+    },
+    {
+      "attempt_id": "579e45af316f4f2d9008a56a0a8b6008",
+      "checkpoint_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/579e45af316f4f2d9008a56a0a8b6008/provenance/provenance-state.pt",
+      "checkpoint_sha256": "8a2f80fd9a8ef60348ad724e92f1267c4424aacd4deb18fc917f137e622ea1b4",
+      "checkpoint_state_sha256": "6d39f629fcab9a96c4fc8eb104692b7d46cf26d49a19c70b0a2db5dd252587e1",
+      "completed_steps": 7000,
+      "gate_status": "FAIL",
+      "optimizers": [
+        {
+          "active": true,
+          "history_sha256": "47960883d0b7132a65c5656ba00f5c976fd661a1aaa804360a405d0b99912278",
+          "parameter_histories": 9,
+          "path": "root/trainer/optimizers/0",
+          "roles": [
+            "generator",
+            "prior"
+          ],
+          "row_masks": 1,
+          "seen_rows": 20000,
+          "stats": {
+            "extrapolated_applications": 62991,
+            "extrapolated_row_applications": 13605515,
+            "parameter_applications": 63000,
+            "sampled_row_applications": 13625515,
+            "steps": 7000
+          }
+        },
+        {
+          "active": true,
+          "history_sha256": "f921680af53874e1e461c29531b5befa7e52a11064a85b94c69c3adc4961f243",
+          "parameter_histories": 8,
+          "path": "root/trainer/optimizers/1",
+          "roles": [
+            "critic"
+          ],
+          "row_masks": 0,
+          "seen_rows": 0,
+          "stats": {
+            "extrapolated_applications": 55992,
+            "extrapolated_row_applications": 0,
+            "parameter_applications": 56000,
+            "sampled_row_applications": 0,
+            "steps": 7000
+          }
+        }
+      ],
+      "role": "candidate",
+      "status": "PASS",
+      "task_id": "rotated100",
+      "totals": {
+        "extrapolated_applications": 118983,
+        "extrapolated_row_applications": 13605515,
+        "parameter_applications": 119000,
+        "sampled_row_applications": 13625515,
+        "steps": 14000
+      }
+    }
+  ]
+}

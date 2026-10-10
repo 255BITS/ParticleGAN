@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "090bca2bc7b6ce681f5bf06639baf3a36848b032eb537002f7a4282412b8c2c5",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "9de4b8b7d962ec8399379b83bddc2b3fa3670ad1e9d05b974c2b0b2ef74f8b46",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/15de7403874c4d08b890bd8ce013d29a/observed-records.pt": "f00fcc5495c754e12d287c19c245414b4deaaf956d51c088e203544c52e65a84"
+  },
+  "task_id": "five_word_joint_smoke"
+}

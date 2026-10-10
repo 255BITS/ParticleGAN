@@ -1,0 +1,104 @@
+{
+  "scope": "saved_original_bound_explanation",
+  "qualification_input": false,
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "tasks": [
+    {
+      "task_id": "ring16_acquisition",
+      "attempt_id": "e8080343e4f74876a749c4354fa16728",
+      "certified_status": "FAIL",
+      "last_five_primary_observations": [
+        {
+          "step": 1534,
+          "failed_bounds": []
+        },
+        {
+          "step": 1550,
+          "failed_bounds": [
+            {
+              "metric": "component_covariance_error",
+              "value": 0.8732300270348787,
+              "op": "<=",
+              "threshold": 0.85
+            }
+          ]
+        },
+        {
+          "step": 1567,
+          "failed_bounds": [
+            {
+              "metric": "component_covariance_error",
+              "value": 0.8604290038347244,
+              "op": "<=",
+              "threshold": 0.85
+            }
+          ]
+        },
+        {
+          "step": 1584,
+          "failed_bounds": []
+        },
+        {
+          "step": 1600,
+          "failed_bounds": []
+        }
+      ]
+    },
+    {
+      "task_id": "gaussian1d_smoke",
+      "attempt_id": "0d9652d58f9046ce9a758095d24bc277",
+      "certified_status": "FAIL",
+      "last_five_primary_observations": [
+        {
+          "step": 834,
+          "failed_bounds": [
+            {
+              "metric": "std_ratio",
+              "value": 1.2428244203188037,
+              "op": "<=",
+              "threshold": 1.2
+            }
+          ]
+        },
+        {
+          "step": 875,
+          "failed_bounds": [
+            {
+              "metric": "std_ratio",
+              "value": 1.2222018105589034,
+              "op": "<=",
+              "threshold": 1.2
+            }
+          ]
+        },
+        {
+          "step": 917,
+          "failed_bounds": [
+            {
+              "metric": "std_ratio",
+              "value": 1.2590557552918078,
+              "op": "<=",
+              "threshold": 1.2
+            }
+          ]
+        },
+        {
+          "step": 959,
+          "failed_bounds": []
+        },
+        {
+          "step": 1000,
+          "failed_bounds": [
+            {
+              "metric": "cdf_ks",
+              "value": 0.06111638854424617,
+              "op": "<=",
+              "threshold": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

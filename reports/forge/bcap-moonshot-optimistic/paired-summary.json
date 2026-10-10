@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "scope": "paired_saved_gate_comparison",
+  "qualification_input": false,
+  "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+  "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+  "outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "BLOCKED": 2,
+      "FAIL": 11,
+      "PASS": 3
+    }
+  },
+  "paired_changes": {
+    "repaired": [],
+    "retained_pass": [
+      {
+        "task_id": "two_pole",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "unused_token_hold",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "ae_gan_hold",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      }
+    ],
+    "regressed": [
+      {
+        "task_id": "gaussian1d_smoke",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "ring16_acquisition",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "five_word_joint_smoke",
+        "tier": 1,
+        "baseline": "PASS",
+        "candidate": "FAIL"
+      }
+    ],
+    "persistent_failure": [
+      {
+        "task_id": "trajectory",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "residual_student",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_mass",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_width",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_anisotropic",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "grid100",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "rotated100",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "staggered100",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      }
+    ],
+    "unresolved": [
+      {
+        "task_id": "gaussian1d_stability",
+        "tier": 2,
+        "baseline": "FAIL",
+        "candidate": "BLOCKED"
+      },
+      {
+        "task_id": "five_word_joint_hold",
+        "tier": 2,
+        "baseline": "PASS",
+        "candidate": "BLOCKED"
+      }
+    ]
+  },
+  "eligible_research_baseline": false,
+  "selection_rule": "Preserve6/6 originalTier1, repair at least one complete pairedTier2failure, preserve baselineTier2passes, no unresolved comparisons.",
+  "paid_seconds_by_role": {
+    "baseline": 6212.7482161924145,
+    "candidate": 1734.3672385089044
+  },
+  "selected_complete_seconds_by_role": {
+    "baseline": 1860.9863300750167,
+    "candidate": 1734.3672385089044
+  },
+  "paid_seconds_including_predecessors": 7947.115454701319,
+  "execution_retries": 2,
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "recommendation": "Retain incumbent and stop this exact optimistic revision."
+}
