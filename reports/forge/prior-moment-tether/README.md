@@ -1,8 +1,8 @@
 # Fixed initial moment tether for the learned prior
 
 `Recipe.prior_regularizer="moment_tether"` adds a two-sided penalty on latent
-mean and full covariance drift. This is an opt-in implementation, ready for a
-bounded coefficient search against the exact BCAP direction-blend leader.
+mean and full covariance drift. This is an opt-in implementation with a
+registered bounded coefficient search against the exact BCAP direction-blend leader.
 No Tier 2 repair is claimed by this PR.
 
 The BCAP leader passes 6/6 Tier 1 and 9/21 Tier 2 under the current
@@ -13,7 +13,7 @@ particle relocation, permutation, non-Gaussian topology and higher-moment
 changes. It cannot by itself guarantee output mass allocation or density.
 
 The sole structural delta is `prior_regularizer="moment_tether"`; the strength
-is the existing global `prior_reg`. The future comparisons retain the complete
+is the existing global `prior_reg`. The registered comparisons retain the complete
 [leader recipe](../../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json):
 non-saturating BCAP, direction blend, zero-momentum DualNorm with smoothing .001,
 G/E .012, D multiplier 1.5, prior multiplier 2.5, constant rates, no added noise,
@@ -89,8 +89,15 @@ qualification. [Compact receipt](software-receipt.json).
 
 ## Starting-value search recommendation
 
-Use three positive global strengths **`prior_reg = [.001, .01, .1]`**, with a
-separate same-source unchanged leader control. At the toy's declared initial
+The [prepared spec](../bcap-prior-search/covariance/spec.json) and
+[registration](../bcap-prior-search/covariance/registration.json) declare three
+positive global strengths **`prior_reg = [.001, .01, .1]`**, with a separate
+same-source unchanged leader control. Their source digest is
+`c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2`.
+All four arms preflight as ready; no scientific run has been submitted.
+The full worst-case reservation is 172,080 seconds, with a 45,000-second control
+cap and a 135,000-second three-candidate search cap. No Tier 3, retries or extra
+seeds are authorized by this registration. At the toy's declared initial
 perturbation, maximum weighted row-gradient norms are `6.41e-5`, `6.41e-4` and
 `6.41e-3`, respectively. This brackets the optimizer's .001 smoothing scale
 without claiming calibration on the research tasks. Initial exact full-table
