@@ -109,6 +109,7 @@ def published_develop_checkout(tmp_path):
     # Restore their original compact report and whole-selection inputs from
     # the exact immutable publication commit, without hydrating raw artifacts.
     for relative in ("reports/forge/technique-inventory.json",
+                     "reports/forge/technique-inventory.md",
                      "configs/forge/selections/family-current-v1.json",
                      "configs/forge/trainer-families.json"):
         data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
@@ -117,6 +118,24 @@ def published_develop_checkout(tmp_path):
         assert hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == blob
         (root / relative).parent.mkdir(parents=True, exist_ok=True)
         (root / relative).write_bytes(data)
+    # Documentation validates its local source and illustration targets too;
+    # those navigation-only files are outside the numerical input manifest.
+    family_ids = {row["trainer_family"] for row in
+                  publication["rows"] + publication.get("historical_family_rows", [])}
+    navigation = set()
+    for family_id in family_ids:
+        documentation = json.loads((root / "configs/forge/family-documentation" /
+                                    (family_id + ".json")).read_text())
+        navigation.update(path for path in documentation["sources"] if path.startswith("reports/"))
+        illustration = documentation.get("illustration", {}).get("path", "")
+        if illustration.startswith("reports/"):
+            navigation.add(illustration)
+    for relative in sorted(navigation):
+        destination = root / relative
+        if not destination.is_file():
+            data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
     return restore_published_view_roster(root)
 
 

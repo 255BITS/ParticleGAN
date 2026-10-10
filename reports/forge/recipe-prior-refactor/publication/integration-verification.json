@@ -1,0 +1,15 @@
+{
+  "executed_files_verified": 1206,
+  "executed_freezes_are_ancestors": [
+    "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+    "f3631bf94f457e0325f6992aa1252d9ac3f3f582"
+  ],
+  "executed_manifest_sha256": "11b262c19d2129cebc102e5f2bfc1bcd354f3fd44e8310e3bb375f3a8050f5b5",
+  "executed_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "integrated_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+  "mismatches": [],
+  "original_user_checkout_head": "653c38045618ad240524237a9c141c8d06b28c03",
+  "original_user_tracked_files_unchanged": true,
+  "scope": "Exact executed source files; incoming unrelated analysis files are outside this frozen boundary.",
+  "status": "PASS"
+}
