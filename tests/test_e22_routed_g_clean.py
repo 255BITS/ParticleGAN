@@ -19,12 +19,15 @@ def flags():
 
 def test_public_CPU_shape_ownership_and_private_evaluation_preflight_has_no_updates():
     before = torch.get_rng_state().clone()
+    cuda_initialized_before = torch.cuda.is_initialized()
     torch.set_num_threads(1)
     result = toy.preflight(toy.make_data())
     assert result["pass"] and result["quality_updates"] == result["native_updates"] == 0
     assert result["initial_owners_exact"] and result["private_evaluation_state_immutable"]
     assert torch.equal(before,torch.get_rng_state())
-    assert not torch.cuda.is_initialized()
+    # Other public-host tests may already have initialized CUDA. This CPU
+    # preflight must preserve that incoming state, including a cold context.
+    assert torch.cuda.is_initialized() == cuda_initialized_before
 
 
 def test_terminal_game_metric_and_threshold_are_explicit():

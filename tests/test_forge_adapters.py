@@ -9,6 +9,7 @@ import torch
 
 from experiments.forge import adapters
 from experiments.forge.api import CapabilityError, FormulationContext
+from experiments.forge.contracts import file_hash
 from experiments.forge.sampling import FIELDS, expected_policy
 from experiments.forge.views import grade_result
 from particlegan import GANTrainer
@@ -104,6 +105,11 @@ def test_saved_vector_outputs_are_scored_draws_without_changing_state_or_rng(tmp
     assert descriptor == {"path": "observed-samples.pt", "sha256": file_hash(archived_path),
         "bytes": archived_path.stat().st_size, "observation_count": 2,
         "kind": "scored_vector_samples_v1", "optimizer_updates_added": 0, "sampling_draws_added": 0}
+    # Absolute artifact locations differ between the two output directories;
+    # compare the certified scientific state separately from its storage path.
+    checkpoints = [receipt["evidence"].pop("provenance_checkpoint") for receipt in receipts]
+    assert checkpoints[0]["state_sha256"] == checkpoints[1]["state_sha256"]
+    assert checkpoints[0]["completed_steps"] == checkpoints[1]["completed_steps"] == 2
     assert receipts[0]["evidence"] == receipts[1]["evidence"]
     assert not (tmp_path / "False/observed-samples.pt").exists()
 
@@ -137,6 +143,17 @@ def test_image_explicit_cloud_scores_clean_enumeration_without_rng_draws(tmp_pat
     assert evidence["guards"]["optimizer_updates"]["prior"] == 2
     assert evidence["guards"]["unintended_rng_deviations"] == 0
     assert "hq" in evidence["live"] and "modes" in evidence["live"]
+    from benchmarks.transfer_suite.image_tasks import image_metrics
+    descriptor = evidence["saved_observer_outputs"]
+    saved_path = tmp_path / descriptor["path"]
+    assert descriptor["sha256"] == file_hash(saved_path)
+    assert descriptor["optimizer_updates_added"] == descriptor["sampling_draws_added"] == 0
+    saved = torch.load(saved_path, weights_only=True)
+    assert len(saved) == len(evidence["observations"]) == 2
+    for observed, record in zip(evidence["observations"], saved):
+        metrics = image_metrics(record["samples"], record["targets"], value["evaluation"]["measurement"])
+        assert metrics == record["metrics"]
+        assert observed == {"step": record["step"], **metrics}
 
 
 @pytest.mark.parametrize("kind", ["mog", "particle_cloud"])

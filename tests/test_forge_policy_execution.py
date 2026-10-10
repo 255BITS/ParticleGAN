@@ -151,6 +151,10 @@ def frozen_control(tmp_path):
     original = Path(execution.__file__).parent
     for name in ("__init__", "policy_execution", "contracts", "queue", "sources", "execution_policy"):
         (package / f"{name}.py").write_bytes((original / f"{name}.py").read_bytes())
+    # The frozen supervisor imports Forge's real serial-autograd policy.
+    # Include its public dependency instead of substituting a fake policy.
+    (root / "particlegan/execution.py").write_bytes(
+        (original.parents[1] / "particlegan/execution.py").read_bytes())
     expected = {"commit": "control", "files_sha256": {"particlegan/control.py": api_run.file_hash(code)}}
     manifest = execution.freeze_source(root, tmp_path / "queue", expected)
     return root, code, {**packet_for_admission(), "execution_source": manifest}

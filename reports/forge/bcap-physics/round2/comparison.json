@@ -1,0 +1,2031 @@
+{
+  "schema_version": 1,
+  "scope": "source_bound_mechanism_diagnostic_comparison",
+  "round": 2,
+  "qualification_input": false,
+  "protocol_seed": 0,
+  "tracks": [
+    {
+      "track": "hydraulic",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/360",
+      "publication_commit": "322123f201ff338b7dd4ed466570cc4b16217e20",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/322123f201ff338b7dd4ed466570cc4b16217e20/reports/forge/bcap-physics/hydraulic/round2/README.md",
+      "report_sha256": "bd9c9dcc3d4c68742ae45f86310ac71860595f538dd058e3aaf756aa1f9737bf",
+      "executed_source_digest": "2ebd7377a68b5db8783006c3cb59ff84b7a625027974bf3387db722a940f8357",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "arms": [
+        {
+          "role": "candidate",
+          "candidate_id": "hydraulic-secant-deformation-v2",
+          "candidate_revision": "fa836befe1a9b010280a21f7a487a096cf5206686ca49f91078890499410269e",
+          "request_id": "924a53edb67811f7ba0d29d1",
+          "study_id": "hydraulic-deformation-candidate-round2-v1",
+          "declared_primary_control": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "source_origin_commit": "38c6cd52796eb1b760ae025eadd8a98c9703c101",
+          "readout_record_id": "readout-9f6ac354828f6069c1e83b87",
+          "task_grades": {
+            "gaussian1d_stability": "FAIL",
+            "vector_two_broad": "PASS",
+            "gaussian1d_smoke": "PASS",
+            "grid100": "FAIL",
+            "two_pole": "BLOCKED"
+          },
+          "outcomes": {
+            "FAIL": 2,
+            "PASS": 2,
+            "BLOCKED": 1
+          },
+          "workers": [
+            {
+              "attempt_id": "faa168c7fc9f46af9584294cd8433c21",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 36.6688897840213,
+              "result_hash": "be0395b4eb184e5fb59c21b8c5b2d9295472298ac61f94690dd78ce37adc4556",
+              "final_metrics": {
+                "cdf_ks": 0.045371780989323145,
+                "finite_fraction": 1.0,
+                "mean": 1.9921083780063782,
+                "mean_error_sigma": 0.015783243987243623,
+                "sample_count": 4096,
+                "std": 0.4633708693828737,
+                "std_ratio": 0.9267417387657474,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "927604292f2e421a8f67e037f7a3aa2a",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 129.9255478249397,
+              "result_hash": "fc138b0c2417b651acd2a315be9ca9157b5a9eb42813b773c6b52f01ed116665",
+              "final_metrics": {
+                "cdf_ks": 0.01609074811658718,
+                "finite_fraction": 1.0,
+                "mean": 3.003934582724469,
+                "mean_error_sigma": 0.007869165448937565,
+                "sample_count": 4096,
+                "std": 0.4829456502095472,
+                "std_ratio": 0.9658913004190944,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "fa8e7d8841b741f085a80b50826c55e8",
+              "task_id": "grid100",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 448.04684375901707,
+              "result_hash": "769f589975b674dd1354f8961d697aa9838f1c652dc2862b5645811120334069",
+              "final_metrics": {
+                "abs_cov_trace_bias": 0.9018326113632633,
+                "accuracy_pass": false,
+                "accuracy_score": 5.083733612685106,
+                "all_finite": true,
+                "center_max_sigma": 0.9036682207214112,
+                "center_rms_sigma": 0.3636200337153175,
+                "cov_frob_rms": 0.9644933730532502,
+                "cov_trace_bias": 0.9018326113632633,
+                "frozen_pass": false,
+                "mass_tv": 0.06899999999999999,
+                "n": 100000,
+                "passed": false,
+                "precision": 0.50133,
+                "precision_gap": 0.4875610034617577,
+                "problem": "grid100",
+                "protocol": "toy100-accuracy-v1",
+                "radial_ks": 0.3339403267412482,
+                "valid_n": 100000,
+                "within_radius_n": 50133
+              }
+            },
+            {
+              "attempt_id": "ffadaeed6d8e44288e043de0ea1b5125",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 26.87419946701266,
+              "result_hash": "7e034a4d661371774862419495caa9d8f1a2aba73b63c66f503b183705846588",
+              "final_metrics": {
+                "component_core_covariance_error": 0.27675576508045197,
+                "component_core_covariance_errors": [
+                  0.27890685200691223,
+                  0.2746046781539917
+                ],
+                "component_core_eigen_ratios": [
+                  0.625647783279419,
+                  0.6433668732643127
+                ],
+                "component_core_min_eigen_ratio": 0.625647783279419,
+                "component_counts": [
+                  2390,
+                  1706
+                ],
+                "component_covariance_error": 0.27747222781181335,
+                "component_covariance_errors": [
+                  0.280339777469635,
+                  0.2746046781539917
+                ],
+                "component_mass": [
+                  0.58349609375,
+                  0.41650390625
+                ],
+                "component_min_eigen_ratio": 0.6255695223808289,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.00794979091733694,
+                  0.004103165119886398
+                ],
+                "covariance_error": 0.1117054745554924,
+                "hq": 0.99365234375,
+                "mass_tv": 0.08349609375,
+                "max_component_spill": 0.00794979091733694,
+                "mean_error": 0.18546684086322784,
+                "min_mass_ratio": 0.8330078125,
+                "resolved_core_covariance_error": 0.27675576508045197,
+                "resolved_core_min_eigen_ratio": 0.625647783279419,
+                "resolved_max_component_spill": 0.00794979091733694,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.1281669880979149,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            }
+          ]
+        },
+        {
+          "role": "primary_control",
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "candidate_revision": "607425144b6578b5887c26af2ced7a8637087d929584613f268dcf64b7b5edb8",
+          "request_id": "76967ee468dc4797a66821a7",
+          "study_id": "hydraulic-deformation-control-round2-v1",
+          "declared_primary_control": "bcap-dualnorm-conv-non-saturating-v1",
+          "source_origin_commit": "38c6cd52796eb1b760ae025eadd8a98c9703c101",
+          "readout_record_id": "readout-783482660df5696a6ed50f75",
+          "task_grades": {
+            "grid100": "FAIL",
+            "gaussian1d_smoke": "PASS",
+            "two_pole": "PASS",
+            "gaussian1d_stability": "FAIL",
+            "vector_two_broad": "PASS"
+          },
+          "outcomes": {
+            "FAIL": 2,
+            "PASS": 3
+          },
+          "workers": [
+            {
+              "attempt_id": "0617d2b8a1de42b3ab66897f93354540",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 16.540033465018496,
+              "result_hash": "8397e6c481dab05401fbae90f9a6b8bc7dd360b64c83c8ae2eaa3935f6c834aa",
+              "final_metrics": {
+                "cdf_ks": 0.07184216175355329,
+                "finite_fraction": 1.0,
+                "mean": 2.062949220009614,
+                "mean_error_sigma": 0.12589844001922756,
+                "sample_count": 4096,
+                "std": 0.5315217191133498,
+                "std_ratio": 1.0630434382266996,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "7dcf4901b7dc4659876c6deaa8bc16bd",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 55.55576536001172,
+              "result_hash": "42f7836a3d60480b54337dcb92b196b7e759187eb4abd92e4000ea421c44c0f9",
+              "final_metrics": {
+                "cdf_ks": 0.3206228939608994,
+                "finite_fraction": 1.0,
+                "mean": 3.1276191812357865,
+                "mean_error_sigma": 0.25523836247157305,
+                "sample_count": 4096,
+                "std": 0.33116516834734117,
+                "std_ratio": 0.6623303366946823,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "abdc1966fa8d4567adbd9b9c9a445bd2",
+              "task_id": "grid100",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 216.5389505700441,
+              "result_hash": "95c3c260d3c24f113b3252a188191cf9d73d219908d2fcaa6852a29e42d5aaff",
+              "final_metrics": {
+                "abs_cov_trace_bias": 0.3713849420827151,
+                "accuracy_pass": false,
+                "accuracy_score": 6.510124117988179,
+                "all_finite": true,
+                "center_max_sigma": 2.4968593612372434,
+                "center_rms_sigma": 1.5203146254152577,
+                "cov_frob_rms": 0.6628660086721742,
+                "cov_trace_bias": 0.3713849420827151,
+                "frozen_pass": false,
+                "mass_tv": 0.14717999999999998,
+                "n": 100000,
+                "passed": false,
+                "precision": 0.24072,
+                "precision_gap": 0.7481710034617577,
+                "problem": "grid100",
+                "protocol": "toy100-accuracy-v1",
+                "radial_ks": 0.49088295696197104,
+                "valid_n": 100000,
+                "within_radius_n": 24072
+              }
+            },
+            {
+              "attempt_id": "f102eed1442f4a3dbe83df712b688060",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 6.680756613030098,
+              "result_hash": "439126e7f13ceb44ca362d613faa5365444bb581d1b6520acd1aec3f82980720",
+              "final_metrics": {
+                "grad_med": 0.9523457288742065,
+                "mean_abs": 0.958502471446991
+              }
+            },
+            {
+              "attempt_id": "03edce6bd630456ea92f35eb7e8671ff",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 22.940683858003467,
+              "result_hash": "c9f7e996ad09242077b04274c402db3f6287ae55c1a2dfc968b61d900440a591",
+              "final_metrics": {
+                "component_core_covariance_error": 0.38558074831962585,
+                "component_core_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_core_eigen_ratios": [
+                  0.40006646513938904,
+                  0.5530211329460144
+                ],
+                "component_core_min_eigen_ratio": 0.40006646513938904,
+                "component_counts": [
+                  2306,
+                  1790
+                ],
+                "component_covariance_error": 0.38558074831962585,
+                "component_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_mass": [
+                  0.56298828125,
+                  0.43701171875
+                ],
+                "component_min_eigen_ratio": 0.40006646513938904,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.005637467373162508,
+                  0.018435753881931305
+                ],
+                "covariance_error": 0.11147095263004303,
+                "hq": 0.98876953125,
+                "mass_tv": 0.06298828125,
+                "max_component_spill": 0.018435753881931305,
+                "mean_error": 0.1914638876914978,
+                "min_mass_ratio": 0.8740234375,
+                "resolved_core_covariance_error": 0.38558074831962585,
+                "resolved_core_min_eigen_ratio": 0.40006646513938904,
+                "resolved_max_component_spill": 0.018435753881931305,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.13458950517280888,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            }
+          ]
+        }
+      ],
+      "paid_worker_seconds": 959.7716707010986,
+      "campaign_ceiling_seconds": 14400,
+      "remaining_reserved_seconds": 0.0,
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/hydraulic/queue",
+      "declared_full_allowances_seconds": 12840,
+      "executed_full_allowances_seconds": 12540,
+      "scientific_retries": 0,
+      "published_scientific_files_verified": 1201
+    },
+    {
+      "track": "kinetic_transport",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/358",
+      "publication_commit": "9507a9e5c471a1d3f80f49e895acafac730dbf21",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/9507a9e5c471a1d3f80f49e895acafac730dbf21/reports/forge/bcap-physics/kinetic_transport/round2/README.md",
+      "report_sha256": "9823a4919346b73c317051546fde0b0506906a224fcda9bb380167fcc1c9230b",
+      "executed_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "arms": [
+        {
+          "role": "candidate",
+          "candidate_id": "kinetic_transport_local_v2",
+          "candidate_revision": "4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188",
+          "request_id": "84725284d3890ac76fa6d077",
+          "study_id": "kinetic_transport_candidate_round2",
+          "declared_primary_control": "kinetic_transport_sliced_v1",
+          "source_origin_commit": "5c2a64682b8900c5b42de94a6c27502e41d500f2",
+          "readout_record_id": "readout-ab71c397f4f4eee9fe1acafb",
+          "task_grades": {
+            "vector_two_broad": "PASS",
+            "gaussian1d_smoke": "PASS",
+            "vector_unequal_width": "FAIL",
+            "gaussian1d_stability": "FAIL",
+            "vector_unequal_mass": "PASS",
+            "two_pole": "BLOCKED"
+          },
+          "outcomes": {
+            "PASS": 3,
+            "FAIL": 2,
+            "BLOCKED": 1
+          },
+          "workers": [
+            {
+              "attempt_id": "d66895153c4440fb93069f80d0cf7a99",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 20.126854026922956,
+              "result_hash": "a8d38a071f8610f695ab5e78cbcd8f4f43ec86565a0ebc27921eeab5e70068b5",
+              "final_metrics": {
+                "cdf_ks": 0.02060552649610592,
+                "finite_fraction": 1.0,
+                "mean": 1.9832618783111684,
+                "mean_error_sigma": 0.033476243377663195,
+                "sample_count": 4096,
+                "std": 0.49645831899919346,
+                "std_ratio": 0.9929166379983869,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "e87d9c4997ce4d67a543c4ba1fd2f07c",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 67.36833211709745,
+              "result_hash": "9393a1e10a4350c778caa6b2175b4a81d09c4b09222e91cc48b3acd84ab974b5",
+              "final_metrics": {
+                "cdf_ks": 0.06065283744125827,
+                "finite_fraction": 1.0,
+                "mean": 2.9644568772637285,
+                "mean_error_sigma": 0.07108624547254294,
+                "sample_count": 4096,
+                "std": 0.5197274541614134,
+                "std_ratio": 1.0394549083228268,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "6e4e2fb1df754f23b583ae4aadc4edad",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 26.39277969300747,
+              "result_hash": "4da311601defef227cd333ae3c5c97ced81680da885580cf863883eb2c6f085d",
+              "final_metrics": {
+                "component_core_covariance_error": 0.19878360629081726,
+                "component_core_covariance_errors": [
+                  0.22050690650939941,
+                  0.1770603060722351
+                ],
+                "component_core_eigen_ratios": [
+                  0.7118433713912964,
+                  0.773719072341919
+                ],
+                "component_core_min_eigen_ratio": 0.7118433713912964,
+                "component_counts": [
+                  2045,
+                  2051
+                ],
+                "component_covariance_error": 0.22656399756669998,
+                "component_covariance_errors": [
+                  0.19631071388721466,
+                  0.2568172812461853
+                ],
+                "component_mass": [
+                  0.499267578125,
+                  0.500732421875
+                ],
+                "component_min_eigen_ratio": 0.7488236427307129,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.0034229829907417297,
+                  0.025353485718369484
+                ],
+                "covariance_error": 0.11402000486850739,
+                "hq": 0.985595703125,
+                "mass_tv": 0.000732421875,
+                "max_component_spill": 0.025353485718369484,
+                "mean_error": 0.014424647204577923,
+                "min_mass_ratio": 0.99853515625,
+                "resolved_core_covariance_error": 0.19878360629081726,
+                "resolved_core_min_eigen_ratio": 0.7118433713912964,
+                "resolved_max_component_spill": 0.025353485718369484,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.040359500532318154,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            },
+            {
+              "attempt_id": "2b9ff220ef5c46b48127e03e801faf79",
+              "task_id": "vector_unequal_mass",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 28.09882455097977,
+              "result_hash": "995d225ce3e37019b366a3c6984ad2fbf9a0d8c06fbb8f8733839af26dd1a440",
+              "final_metrics": {
+                "component_core_covariance_error": 0.270065825432539,
+                "component_core_covariance_errors": [
+                  0.18996238708496094,
+                  0.23253881931304932,
+                  0.1870991438627243,
+                  0.4706629514694214
+                ],
+                "component_core_eigen_ratios": [
+                  0.732384443283081,
+                  1.0362359285354614,
+                  0.8326445817947388,
+                  0.36656707525253296
+                ],
+                "component_core_min_eigen_ratio": 0.36656707525253296,
+                "component_counts": [
+                  2239,
+                  1264,
+                  479,
+                  114
+                ],
+                "component_covariance_error": 0.522577092051506,
+                "component_covariance_errors": [
+                  0.18996238708496094,
+                  0.49056118726730347,
+                  0.9391218423843384,
+                  0.4706629514694214
+                ],
+                "component_mass": [
+                  0.546630859375,
+                  0.30859375,
+                  0.116943359375,
+                  0.02783203125
+                ],
+                "component_min_eigen_ratio": 0.36656707525253296,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  false
+                ],
+                "component_spill": [
+                  0.004019651561975479,
+                  0.05775316432118416,
+                  0.05427974835038185,
+                  0.14035087823867798
+                ],
+                "covariance_error": 0.04762283340096474,
+                "hq": 0.9697265625,
+                "mass_tv": 0.016425779089331627,
+                "max_component_spill": 0.14035087823867798,
+                "mean_error": 0.020012548193335533,
+                "min_mass_ratio": 0.8995643258094788,
+                "resolved_core_covariance_error": 0.20320011675357819,
+                "resolved_core_min_eigen_ratio": 0.732384443283081,
+                "resolved_max_component_spill": 0.05775316432118416,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.03264431473422628,
+                "target_mass": [
+                  0.550000011920929,
+                  0.30000001192092896,
+                  0.12999999523162842,
+                  0.019999999552965164
+                ],
+                "target_scale": 1.7593294382095337
+              }
+            },
+            {
+              "attempt_id": "458f28edb51246faa84350eb942225c3",
+              "task_id": "vector_unequal_width",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 26.828478003037162,
+              "result_hash": "88de369e2a5022f7295970bbf548d7ba5c34412cd3db5392aed8e7d2cb3eeac3",
+              "final_metrics": {
+                "component_core_covariance_error": 0.28917114809155464,
+                "component_core_covariance_errors": [
+                  0.3355385363101959,
+                  0.33738765120506287,
+                  0.326093852519989,
+                  0.15766455233097076
+                ],
+                "component_core_eigen_ratios": [
+                  0.6061838269233704,
+                  0.5504463315010071,
+                  1.0790529251098633,
+                  0.7795868515968323
+                ],
+                "component_core_min_eigen_ratio": 0.5504463315010071,
+                "component_counts": [
+                  959,
+                  1004,
+                  1057,
+                  1076
+                ],
+                "component_covariance_error": 2.4804378859698772,
+                "component_covariance_errors": [
+                  4.787479877471924,
+                  4.601253509521484,
+                  0.326093852519989,
+                  0.20692430436611176
+                ],
+                "component_mass": [
+                  0.234130859375,
+                  0.2451171875,
+                  0.258056640625,
+                  0.2626953125
+                ],
+                "component_min_eigen_ratio": 0.7857282161712646,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.04275286942720413,
+                  0.06274900585412979,
+                  0.0397351011633873,
+                  0.03531598672270775
+                ],
+                "covariance_error": 0.03986996412277222,
+                "hq": 0.955078125,
+                "mass_tv": 0.020751953125,
+                "max_component_spill": 0.06274900585412979,
+                "mean_error": 0.056909359991550446,
+                "min_mass_ratio": 0.9365234375,
+                "resolved_core_covariance_error": 0.28917114809155464,
+                "resolved_core_min_eigen_ratio": 0.5504463315010071,
+                "resolved_max_component_spill": 0.06274900585412979,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.04909923188488684,
+                "target_mass": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ],
+                "target_scale": 2.1343955993652344
+              }
+            }
+          ]
+        },
+        {
+          "role": "primary_control",
+          "candidate_id": "kinetic_transport_sliced_v1",
+          "candidate_revision": "10116a6345f68563f4193750613049e9cdd28965409b5be2fdba554946afaaae",
+          "request_id": "49b37a8f232d24ad1fb385ce",
+          "study_id": "kinetic_transport_control_round2",
+          "declared_primary_control": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "source_origin_commit": "5c2a64682b8900c5b42de94a6c27502e41d500f2",
+          "readout_record_id": "readout-58690d30963166a8bd4f39f5",
+          "task_grades": {
+            "gaussian1d_stability": "FAIL",
+            "vector_unequal_width": "FAIL",
+            "gaussian1d_smoke": "PASS",
+            "vector_two_broad": "PASS",
+            "vector_unequal_mass": "FAIL",
+            "two_pole": "BLOCKED"
+          },
+          "outcomes": {
+            "FAIL": 3,
+            "PASS": 2,
+            "BLOCKED": 1
+          },
+          "workers": [
+            {
+              "attempt_id": "ccf40b95dbe14260bc71905d181ca378",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 18.53884867404122,
+              "result_hash": "3f51ba8539c44b071ed7e14b8afe32aebe632da4e8f8a857b0bb18cf3546ee97",
+              "final_metrics": {
+                "cdf_ks": 0.026218445052601957,
+                "finite_fraction": 1.0,
+                "mean": 2.017043683488737,
+                "mean_error_sigma": 0.03408736697747372,
+                "sample_count": 4096,
+                "std": 0.49984745800180763,
+                "std_ratio": 0.9996949160036153,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "7cb27efb36f44a558f4380e409a8ce28",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 63.39489194902126,
+              "result_hash": "8915ee4aa6d9f37440ec1f2bb8e72ea51144d731f82c73e250f35df9fd01d1e6",
+              "final_metrics": {
+                "cdf_ks": 0.09074137425630424,
+                "finite_fraction": 1.0,
+                "mean": 3.119175723346416,
+                "mean_error_sigma": 0.23835144669283181,
+                "sample_count": 4096,
+                "std": 0.5013049077685922,
+                "std_ratio": 1.0026098155371843,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "b8f2cc7fd3c04f8e938b80abf2dc0450",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 25.210860415012576,
+              "result_hash": "65622a90ec6085af346955a82723142bedc9bba8e4a488d2797fbbe2d5027fe9",
+              "final_metrics": {
+                "component_core_covariance_error": 0.23405516892671585,
+                "component_core_covariance_errors": [
+                  0.19795028865337372,
+                  0.270160049200058
+                ],
+                "component_core_eigen_ratios": [
+                  0.7232549786567688,
+                  0.814214825630188
+                ],
+                "component_core_min_eigen_ratio": 0.7232549786567688,
+                "component_counts": [
+                  2106,
+                  1990
+                ],
+                "component_covariance_error": 0.24433792382478714,
+                "component_covariance_errors": [
+                  0.20583520829677582,
+                  0.28284063935279846
+                ],
+                "component_mass": [
+                  0.51416015625,
+                  0.48583984375
+                ],
+                "component_min_eigen_ratio": 0.725287139415741,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.018993351608514786,
+                  0.04271356761455536
+                ],
+                "covariance_error": 0.07786305248737335,
+                "hq": 0.969482421875,
+                "mass_tv": 0.01416015625,
+                "max_component_spill": 0.04271356761455536,
+                "mean_error": 0.023620856925845146,
+                "min_mass_ratio": 0.9716796875,
+                "resolved_core_covariance_error": 0.23405516892671585,
+                "resolved_core_min_eigen_ratio": 0.7232549786567688,
+                "resolved_max_component_spill": 0.04271356761455536,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.040532523696260966,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            },
+            {
+              "attempt_id": "5422f512bcc34589991231d35b1b7f08",
+              "task_id": "vector_unequal_mass",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 25.55954005208332,
+              "result_hash": "6fba846a14d36dab9302f9c530aa1e0342768d586bbc6c7e774da768869b4f8a",
+              "final_metrics": {
+                "component_core_covariance_error": 0.21813070587813854,
+                "component_core_covariance_errors": [
+                  0.17736782133579254,
+                  0.2131981998682022,
+                  0.10817914456129074,
+                  0.3737776577472687
+                ],
+                "component_core_eigen_ratios": [
+                  0.7928006052970886,
+                  0.6989773511886597,
+                  0.8847776055335999,
+                  0.5107957720756531
+                ],
+                "component_core_min_eigen_ratio": 0.5107957720756531,
+                "component_counts": [
+                  2294,
+                  1194,
+                  512,
+                  96
+                ],
+                "component_covariance_error": 0.773641787469387,
+                "component_covariance_errors": [
+                  0.9199143052101135,
+                  0.959102213382721,
+                  0.8417729735374451,
+                  0.3737776577472687
+                ],
+                "component_mass": [
+                  0.56005859375,
+                  0.29150390625,
+                  0.125,
+                  0.0234375
+                ],
+                "component_min_eigen_ratio": 0.5107957720756531,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  false
+                ],
+                "component_spill": [
+                  0.042284220457077026,
+                  0.08542713522911072,
+                  0.1015625,
+                  0.125
+                ],
+                "covariance_error": 0.12549537420272827,
+                "hq": 0.935791015625,
+                "mass_tv": 0.013496091589331627,
+                "max_component_spill": 0.125,
+                "mean_error": 0.07073856890201569,
+                "min_mass_ratio": 0.9615384936332703,
+                "resolved_core_covariance_error": 0.1662483885884285,
+                "resolved_core_min_eigen_ratio": 0.6989773511886597,
+                "resolved_max_component_spill": 0.1015625,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.05657180354139105,
+                "target_mass": [
+                  0.550000011920929,
+                  0.30000001192092896,
+                  0.12999999523162842,
+                  0.019999999552965164
+                ],
+                "target_scale": 1.7593294382095337
+              }
+            },
+            {
+              "attempt_id": "c11e3c33fb9a49a2a970f3fbbe4c72bd",
+              "task_id": "vector_unequal_width",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 25.451964398962446,
+              "result_hash": "03eb7deb129cb99d3e886b73c07de15f624bbe13546114fc078dcb00b4b073ae",
+              "final_metrics": {
+                "component_core_covariance_error": 0.24819309264421463,
+                "component_core_covariance_errors": [
+                  0.38886961340904236,
+                  0.1918748915195465,
+                  0.23312009871006012,
+                  0.17890776693820953
+                ],
+                "component_core_eigen_ratios": [
+                  0.4740754961967468,
+                  0.7302155494689941,
+                  0.6708518266677856,
+                  0.7483299374580383
+                ],
+                "component_core_min_eigen_ratio": 0.4740754961967468,
+                "component_counts": [
+                  958,
+                  997,
+                  1067,
+                  1074
+                ],
+                "component_covariance_error": 7.038571007549763,
+                "component_covariance_errors": [
+                  18.292221069335938,
+                  9.450035095214844,
+                  0.23312009871006012,
+                  0.17890776693820953
+                ],
+                "component_mass": [
+                  0.23388671875,
+                  0.243408203125,
+                  0.260498046875,
+                  0.26220703125
+                ],
+                "component_min_eigen_ratio": 0.6708518266677856,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.03549060598015785,
+                  0.06018054112792015,
+                  0.00843486376106739,
+                  0.0009310987079516053
+                ],
+                "covariance_error": 0.05189264193177223,
+                "hq": 0.974609375,
+                "mass_tv": 0.022705078125,
+                "max_component_spill": 0.06018054112792015,
+                "mean_error": 0.032916732132434845,
+                "min_mass_ratio": 0.935546875,
+                "resolved_core_covariance_error": 0.24819309264421463,
+                "resolved_core_min_eigen_ratio": 0.4740754961967468,
+                "resolved_max_component_spill": 0.06018054112792015,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.04159108789201082,
+                "target_mass": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ],
+                "target_scale": 2.1343955993652344
+              }
+            }
+          ]
+        }
+      ],
+      "paid_worker_seconds": 326.97137388016563,
+      "campaign_ceiling_seconds": 12840,
+      "remaining_reserved_seconds": 0.0,
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue",
+      "declared_full_allowances_seconds": 12840,
+      "executed_full_allowances_seconds": 12240,
+      "scientific_retries": 0,
+      "published_scientific_files_verified": 1201
+    },
+    {
+      "track": "constraint_geometry",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/361",
+      "publication_commit": "5d898fdbb2ab635bd6fff81cb2f525529505de74",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/5d898fdbb2ab635bd6fff81cb2f525529505de74/reports/forge/bcap-physics/constraint_geometry/round2/README.md",
+      "report_sha256": "7ea306495a314d4db2a8c3b6224043ff183265a44ed041323d98daaa8dd9b0d7",
+      "executed_source_digest": "b87904dcae3e2df70006c04b51d3fd65d89979a72c7f5f1e841ae684517f7685",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "arms": [
+        {
+          "role": "candidate",
+          "candidate_id": "constraint_geometry-round2-nonascent-v1",
+          "candidate_revision": "118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139",
+          "request_id": "a23561c3ed3914582a12aec0",
+          "study_id": "constraint_geometry-round2-candidate-study-v1",
+          "declared_primary_control": "constraint_geometry-round2-control-v1",
+          "source_origin_commit": "57aad8ea35fbd6989265db53af9ff39dff70b821",
+          "readout_record_id": "readout-99157305f41ca0b884ae5c08",
+          "task_grades": {
+            "trajectory": "FAIL",
+            "gaussian1d_smoke": "PASS",
+            "residual_student": "FAIL",
+            "mid_scale_identity": "PASS",
+            "two_pole": "PASS",
+            "gaussian1d_stability": "FAIL"
+          },
+          "outcomes": {
+            "FAIL": 3,
+            "PASS": 3
+          },
+          "workers": [
+            {
+              "attempt_id": "951ebdbb4a3542c5bb3654e197ba763d",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 19.74559700791724,
+              "result_hash": "469961c39192aad06cb80b67832033ddc30df99ab832b98fcf3155fd001a7b94",
+              "final_metrics": {
+                "cdf_ks": 0.07184216175355329,
+                "finite_fraction": 1.0,
+                "mean": 2.062949220009614,
+                "mean_error_sigma": 0.12589844001922756,
+                "sample_count": 4096,
+                "std": 0.5315217191133498,
+                "std_ratio": 1.0630434382266996,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "3453d2f15a3b471ba9666a2a6f7c3f65",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 66.75605745299254,
+              "result_hash": "797705798058b07e92a05207704e9c976789dab7273df7f1e575e6e14a34596a",
+              "final_metrics": {
+                "cdf_ks": 0.3206228939608994,
+                "finite_fraction": 1.0,
+                "mean": 3.1276191812357865,
+                "mean_error_sigma": 0.25523836247157305,
+                "sample_count": 4096,
+                "std": 0.33116516834734117,
+                "std_ratio": 0.6623303366946823,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "b443bd02c85e414bbf97db9da98363d6",
+              "task_id": "mid_scale_identity",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 27.80765968502965,
+              "result_hash": "d591e04520a2ab5289bda60dbc923099f0b7d526294a1d66febf5b29069f2c32",
+              "final_metrics": {
+                "concept_cos_minus": 0.9999675750732422,
+                "concept_cos_plus": 0.9998963475227356,
+                "concept_mag_minus": 0.9905858039855957,
+                "concept_mag_plus": 0.9951208829879761,
+                "identity_at_0": 0.9990474094423745,
+                "identity_at_mid": 0.9929557066170406
+              }
+            },
+            {
+              "attempt_id": "3f335ac024354e3ab4dd4e7bcb136abc",
+              "task_id": "residual_student",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 15.150313825928606,
+              "result_hash": "cf9707c02f9e96719a794e32182dfcd171bd7c8148f8b3634a9880d4d814f344",
+              "final_metrics": {
+                "identity_mse": 0.06263989210128784,
+                "success_rate": 0.4166666865348816,
+                "wrong_pad_rate": 0.5833333730697632
+              }
+            },
+            {
+              "attempt_id": "b15cdc66c3bf4ad8b66609e1eb037da5",
+              "task_id": "trajectory",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 14.483609004993923,
+              "result_hash": "e39d2123e43fd88b5ec229d6ef03da6019a643d25527ec3d4bbf8416f33821fd",
+              "final_metrics": {
+                "identity_mse": 0.2437363564968109
+              }
+            },
+            {
+              "attempt_id": "13b3583fd2bd4e24b609060af760115e",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 6.581461864057928,
+              "result_hash": "ff7fd8a902c941b00cc27b1f4ee1a6435a221d42a0d207a3c2ea84a3f8269388",
+              "final_metrics": {
+                "grad_med": 0.9523457288742065,
+                "mean_abs": 0.958502471446991
+              }
+            }
+          ]
+        },
+        {
+          "role": "primary_control",
+          "candidate_id": "constraint_geometry-round2-control-v1",
+          "candidate_revision": "b4957b01e002fcc51b3b52b1e327894d6d44b7cef03b4a2e4f59aa30e3101b64",
+          "request_id": "5d7c25f3104e880885434fac",
+          "study_id": "constraint_geometry-round2-control-study-v1",
+          "declared_primary_control": "constraint_geometry-round2-nonascent-v1",
+          "source_origin_commit": "57aad8ea35fbd6989265db53af9ff39dff70b821",
+          "readout_record_id": "readout-f9ca0b7a952b308fb000ed29",
+          "task_grades": {
+            "gaussian1d_stability": "FAIL",
+            "mid_scale_identity": "PASS",
+            "trajectory": "FAIL",
+            "two_pole": "PASS",
+            "residual_student": "FAIL",
+            "gaussian1d_smoke": "PASS"
+          },
+          "outcomes": {
+            "FAIL": 3,
+            "PASS": 3
+          },
+          "workers": [
+            {
+              "attempt_id": "2fd712c80b4641a2a2ff560189a9e4db",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 18.388058102922514,
+              "result_hash": "f94889fe30d6867a7f04187893631b4ec289a6a28cdc606af5740454c4dafb59",
+              "final_metrics": {
+                "cdf_ks": 0.07184216175355329,
+                "finite_fraction": 1.0,
+                "mean": 2.062949220009614,
+                "mean_error_sigma": 0.12589844001922756,
+                "sample_count": 4096,
+                "std": 0.5315217191133498,
+                "std_ratio": 1.0630434382266996,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "79a61dc2f0f14ac4a8e6438c07b307a5",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 93.97573248797562,
+              "result_hash": "0e288c200aefea5e5cafc1b1e6a16632ab7e6cea839808eb339ef334547a7dd5",
+              "final_metrics": {
+                "cdf_ks": 0.3206228939608994,
+                "finite_fraction": 1.0,
+                "mean": 3.1276191812357865,
+                "mean_error_sigma": 0.25523836247157305,
+                "sample_count": 4096,
+                "std": 0.33116516834734117,
+                "std_ratio": 0.6623303366946823,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "ed0750a3f33046138637bfcdcc24ee9d",
+              "task_id": "mid_scale_identity",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 35.2226998769911,
+              "result_hash": "eeb3941ffeb2db1815735930fcc98df74ac5b6fe047ada2d3b0803f4e63efb5d",
+              "final_metrics": {
+                "concept_cos_minus": 0.9999747276306152,
+                "concept_cos_plus": 0.999987781047821,
+                "concept_mag_minus": 1.0091748237609863,
+                "concept_mag_plus": 1.0149178504943848,
+                "identity_at_0": 0.999150904775996,
+                "identity_at_mid": 0.9814403064495584
+              }
+            },
+            {
+              "attempt_id": "675664f37fee4d518670b6e79c8a4f73",
+              "task_id": "residual_student",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 27.069826660095714,
+              "result_hash": "291094921fd106bb9e1b3f7f5adc8b846759bb767b1a26f7dfa467e1915706e7",
+              "final_metrics": {
+                "identity_mse": 0.061036013066768646,
+                "success_rate": 0.5,
+                "wrong_pad_rate": 0.5
+              }
+            },
+            {
+              "attempt_id": "08bc23af4da94ae4a0a903421a1abb94",
+              "task_id": "trajectory",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 22.371569972019643,
+              "result_hash": "4b3ee1591ef8135c78bd1555608dfaaaa907433350e5830cff9a84689048c0b7",
+              "final_metrics": {
+                "identity_mse": 0.2398618906736374
+              }
+            },
+            {
+              "attempt_id": "c38c77e99e3a4f69858912503e708afa",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 7.631949766888283,
+              "result_hash": "a83ef2d143964c5e490e27f4148f3cc8111963faf4b02f8fc81d3be79f1e1a38",
+              "final_metrics": {
+                "grad_med": 0.9523457288742065,
+                "mean_abs": 0.958502471446991
+              }
+            }
+          ]
+        }
+      ],
+      "paid_worker_seconds": 355.18453570781276,
+      "campaign_ceiling_seconds": 12840,
+      "remaining_reserved_seconds": 0.0,
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/constraint_geometry/queue",
+      "declared_full_allowances_seconds": 12840,
+      "executed_full_allowances_seconds": 12840,
+      "scientific_retries": 0,
+      "published_scientific_files_verified": 1201
+    },
+    {
+      "track": "blacksmith",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/362",
+      "publication_commit": "40f9324e3a05492255684662c75847e20074ee9f",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/40f9324e3a05492255684662c75847e20074ee9f/reports/forge/bcap-physics/blacksmith/README.md",
+      "report_sha256": "7e25424b781fcc1fa5525382e84af7331dc68d97a43ba9ce5bc02006874dab75",
+      "executed_source_digest": "7fb61d42bf7631d17c7404ae29cf5ec1de1458d76eb0da210e1fe05dfde75b8f",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "arms": [
+        {
+          "role": "candidate",
+          "candidate_id": "blacksmith-evidence-tempering-r2-v1",
+          "candidate_revision": "00065f7a14a602a983465cf857363208b70c558779fd02c138d97ef2ab0d6c1a",
+          "request_id": "510bc14c4f15267e2d9dd7d0",
+          "study_id": "blacksmith-tempering-r2-candidate-v1",
+          "declared_primary_control": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "source_origin_commit": "da3bf1da4ca98c1230fb8c44329af7f59fc79508",
+          "readout_record_id": "readout-f5e2ea80cc94d27e6d17f91d",
+          "task_grades": {
+            "two_pole": "PASS",
+            "mode_hold": "FAIL",
+            "gaussian1d_smoke": "FAIL",
+            "vector_two_broad": "FAIL",
+            "gaussian1d_stability": "BLOCKED"
+          },
+          "outcomes": {
+            "PASS": 1,
+            "FAIL": 3,
+            "BLOCKED": 1
+          },
+          "workers": [
+            {
+              "attempt_id": "cd3d629ebdbf44139ac48c3ae56ae4e0",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 19.68872147006914,
+              "result_hash": "7ab33a88ced3e2ffdd94317625df0c8ebd843bb158c67806a80ca4350c2f4e71",
+              "final_metrics": {
+                "cdf_ks": 0.1793922765254326,
+                "finite_fraction": 1.0,
+                "mean": 2.0607375908002723,
+                "mean_error_sigma": 0.1214751816005446,
+                "sample_count": 4096,
+                "std": 0.350803130895257,
+                "std_ratio": 0.701606261790514,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "7f4d4b26584b4b9a90402095f54206d7",
+              "task_id": "mode_hold",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 40.94607002695557,
+              "result_hash": "767fe68d08ca7de5826bff74fc8c1c42b7b23a51675461c4c4a6957625332fa4",
+              "final_metrics": {
+                "cover": 0.75,
+                "effective_modes": 4.863819122314453,
+                "hq": 0.597900390625,
+                "modes": 6,
+                "n_modes": 8,
+                "step": 1200
+              }
+            },
+            {
+              "attempt_id": "5930af3cccf54fac91ec761798d5098c",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 7.233513518003747,
+              "result_hash": "c9c8414cc4d6308aa087ba1113d17036703f3e03d5764477df79732c9d874958",
+              "final_metrics": {
+                "grad_med": 0.7557333707809448,
+                "mean_abs": 0.8121861815452576
+              }
+            },
+            {
+              "attempt_id": "60a53518b0a04843aedc915040366135",
+              "task_id": "vector_two_broad",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 25.87957223097328,
+              "result_hash": "b44451110e5dc1a6df05f5c221977032401878b7a44070bb158d6b4fffdd31b1",
+              "final_metrics": {
+                "component_core_covariance_error": 0.6405481994152069,
+                "component_core_covariance_errors": [
+                  0.5815644264221191,
+                  0.6995319724082947
+                ],
+                "component_core_eigen_ratios": [
+                  0.18952670693397522,
+                  0.01738179847598076
+                ],
+                "component_core_min_eigen_ratio": 0.01738179847598076,
+                "component_counts": [
+                  2695,
+                  1401
+                ],
+                "component_covariance_error": 2.472045421600342,
+                "component_covariance_errors": [
+                  0.5815644264221191,
+                  4.3625264167785645
+                ],
+                "component_mass": [
+                  0.657958984375,
+                  0.342041015625
+                ],
+                "component_min_eigen_ratio": 0.01696777157485485,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.005936920177191496,
+                  0.0977872982621193
+                ],
+                "covariance_error": 0.3159126937389374,
+                "hq": 0.962646484375,
+                "mass_tv": 0.157958984375,
+                "max_component_spill": 0.0977872982621193,
+                "mean_error": 0.4231503903865814,
+                "min_mass_ratio": 0.68408203125,
+                "resolved_core_covariance_error": 0.6405481994152069,
+                "resolved_core_min_eigen_ratio": 0.01738179847598076,
+                "resolved_max_component_spill": 0.0977872982621193,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.3596911097842528,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            }
+          ]
+        },
+        {
+          "role": "primary_control",
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "candidate_revision": "c284991a0e1f2ad94a66bb693f3553c8916c59c483ba059b946ba3198583f1a7",
+          "request_id": "460b4139687e8ce58149d7f8",
+          "study_id": "blacksmith-tempering-r2-control-v1",
+          "declared_primary_control": "blacksmith-evidence-tempering-r2-v1",
+          "source_origin_commit": "da3bf1da4ca98c1230fb8c44329af7f59fc79508",
+          "readout_record_id": "readout-8f79e41c278ebdb50f9e2b1e",
+          "task_grades": {
+            "gaussian1d_smoke": "PASS",
+            "gaussian1d_stability": "FAIL",
+            "two_pole": "PASS",
+            "mode_hold": "FAIL",
+            "vector_two_broad": "PASS"
+          },
+          "outcomes": {
+            "PASS": 3,
+            "FAIL": 2
+          },
+          "workers": [
+            {
+              "attempt_id": "eb6cce7f0d0a43439219e9310532d61a",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 17.98257786000613,
+              "result_hash": "776570c6bce1bb31c5ecba6dd3ba95d796a0f278cb454dc0fb700bfad215f447",
+              "final_metrics": {
+                "cdf_ks": 0.07184216175355329,
+                "finite_fraction": 1.0,
+                "mean": 2.062949220009614,
+                "mean_error_sigma": 0.12589844001922756,
+                "sample_count": 4096,
+                "std": 0.5315217191133498,
+                "std_ratio": 1.0630434382266996,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "e6a7a8d03d3e41beb0d9b8cd40b3104b",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 58.49193297105376,
+              "result_hash": "0b8af11d6dfaec635631e3adfc60ccd82728f5b3bcc23a21e5507be35ea9a354",
+              "final_metrics": {
+                "cdf_ks": 0.3206228939608994,
+                "finite_fraction": 1.0,
+                "mean": 3.1276191812357865,
+                "mean_error_sigma": 0.25523836247157305,
+                "sample_count": 4096,
+                "std": 0.33116516834734117,
+                "std_ratio": 0.6623303366946823,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "4d19f87e7519486fa97f63aa88f0d515",
+              "task_id": "mode_hold",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 40.57007731101476,
+              "result_hash": "27f88d4eb76a15ff9a30c9533b9228d0c67e33a062fe8f9ea9d83e6d53994bca",
+              "final_metrics": {
+                "cover": 1.0,
+                "effective_modes": 7.157970905303955,
+                "hq": 0.9892578125,
+                "modes": 8,
+                "n_modes": 8,
+                "step": 1200
+              }
+            },
+            {
+              "attempt_id": "e9c5297118904f9fbcb12aa83e4b5903",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 6.960982221062295,
+              "result_hash": "35e81a0e783269c6a8982d598db7df9b047268414f728bc6cd9ca2d13d2f0648",
+              "final_metrics": {
+                "grad_med": 0.9523457288742065,
+                "mean_abs": 0.958502471446991
+              }
+            },
+            {
+              "attempt_id": "46bd60329b694bdb8384d2e02850a754",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 25.061552226077765,
+              "result_hash": "179550bef6337bf40febb67d65438cccbfa3e03e555008f74b161ed4b5e43a47",
+              "final_metrics": {
+                "component_core_covariance_error": 0.38558074831962585,
+                "component_core_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_core_eigen_ratios": [
+                  0.40006646513938904,
+                  0.5530211329460144
+                ],
+                "component_core_min_eigen_ratio": 0.40006646513938904,
+                "component_counts": [
+                  2306,
+                  1790
+                ],
+                "component_covariance_error": 0.38558074831962585,
+                "component_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_mass": [
+                  0.56298828125,
+                  0.43701171875
+                ],
+                "component_min_eigen_ratio": 0.40006646513938904,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.005637467373162508,
+                  0.018435753881931305
+                ],
+                "covariance_error": 0.11147095263004303,
+                "hq": 0.98876953125,
+                "mass_tv": 0.06298828125,
+                "max_component_spill": 0.018435753881931305,
+                "mean_error": 0.1914638876914978,
+                "min_mass_ratio": 0.8740234375,
+                "resolved_core_covariance_error": 0.38558074831962585,
+                "resolved_core_min_eigen_ratio": 0.40006646513938904,
+                "resolved_max_component_spill": 0.018435753881931305,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.13458950517280888,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            }
+          ]
+        }
+      ],
+      "paid_worker_seconds": 242.81499983521644,
+      "campaign_ceiling_seconds": 14400,
+      "remaining_reserved_seconds": 0.0,
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/blacksmith/queue",
+      "declared_full_allowances_seconds": 9240,
+      "executed_full_allowances_seconds": 8640,
+      "scientific_retries": 0,
+      "published_scientific_files_verified": 1200
+    },
+    {
+      "track": "alchemy",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/363",
+      "publication_commit": "966711e0efa4b16c663ae8040390b05e34d72a7e",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/966711e0efa4b16c663ae8040390b05e34d72a7e/reports/forge/bcap-physics/alchemy/README.md",
+      "report_sha256": "6da58ff6798847c8b80969f44b00b184763483f48905fd920fc0c4ebbdc6ed1c",
+      "executed_source_digest": "587006be44148b1a2adfd905bd01d5631061ed4206c27c85e7751cc2a3f29d5a",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "arms": [
+        {
+          "role": "candidate",
+          "candidate_id": "alchemy_distillation_r2_v1",
+          "candidate_revision": "523df0e2d667fb2b1fb59e80127bfb96525a7d8c6c0ce705bb3122de7c05d377",
+          "request_id": "b3d43d7b536e6ea7354bc3e0",
+          "study_id": "alchemy_distillation_r2_candidate_v1",
+          "declared_primary_control": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "source_origin_commit": "e5b607481eb5f2cbb2e09781acbefd678192f8e3",
+          "readout_record_id": "readout-4a265ca0fa26203e460347be",
+          "task_grades": {
+            "vector_unequal_mass": "FAIL",
+            "vector_two_broad": "FAIL",
+            "gaussian1d_smoke": "PASS",
+            "gaussian1d_stability": "FAIL",
+            "vector_unequal_width": "FAIL",
+            "two_pole": "BLOCKED"
+          },
+          "outcomes": {
+            "FAIL": 4,
+            "PASS": 1,
+            "BLOCKED": 1
+          },
+          "workers": [
+            {
+              "attempt_id": "e0f79a0f61fa41538685d2be07a5c1a2",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 24.04051504796371,
+              "result_hash": "c6d5d51aabbc4be484694b14adf67d8c855ef1c610c186e8f28a77a0643f5838",
+              "final_metrics": {
+                "cdf_ks": 0.04249247400555761,
+                "finite_fraction": 1.0,
+                "mean": 2.0390862901404034,
+                "mean_error_sigma": 0.07817258028080687,
+                "sample_count": 4096,
+                "std": 0.47413090139838693,
+                "std_ratio": 0.9482618027967739,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "a952a8ec94f0499e91d905017ac4b3b1",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 113.74016333906911,
+              "result_hash": "b87eee52cd7bdc633c1c0a0b76571faf74666f069a7142fc3656003bd21eaae6",
+              "final_metrics": {
+                "cdf_ks": 0.08894062493610078,
+                "finite_fraction": 1.0,
+                "mean": 2.900971945549827,
+                "mean_error_sigma": 0.19805610890034586,
+                "sample_count": 4096,
+                "std": 0.4428310478671465,
+                "std_ratio": 0.885662095734293,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "b22229a4c61d40659ccacd6f627afffa",
+              "task_id": "vector_two_broad",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 59.5339499139227,
+              "result_hash": "0134aab734c46ad6cf304f64584b5bcd90fb86126099fa3a07b7a0401c30ba52",
+              "final_metrics": {
+                "component_core_covariance_error": 0.599785678088665,
+                "component_core_covariance_errors": [
+                  0.19957135617733002,
+                  1.0
+                ],
+                "component_core_eigen_ratios": [
+                  0.7177808880805969,
+                  0.0
+                ],
+                "component_core_min_eigen_ratio": 0.0,
+                "component_counts": [
+                  4096,
+                  0
+                ],
+                "component_covariance_error": 0.599785678088665,
+                "component_covariance_errors": [
+                  0.19957135617733002,
+                  1.0
+                ],
+                "component_mass": [
+                  1.0,
+                  0.0
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.0,
+                  1.0
+                ],
+                "covariance_error": 0.9525260329246521,
+                "hq": 1.0,
+                "mass_tv": 0.5,
+                "max_component_spill": 1.0,
+                "mean_error": 0.8831666707992554,
+                "min_mass_ratio": 0.0,
+                "resolved_core_covariance_error": 0.599785678088665,
+                "resolved_core_min_eigen_ratio": 0.0,
+                "resolved_max_component_spill": 1.0,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.5687604062354914,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            },
+            {
+              "attempt_id": "6b2ec25273594710a553d6cf5a030f63",
+              "task_id": "vector_unequal_mass",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 59.116419599042274,
+              "result_hash": "e5796cfd6d9f4185ed1d10b687bbc97115128da8e2e30281a4770597f908893a",
+              "final_metrics": {
+                "component_core_covariance_error": 0.6198595613241196,
+                "component_core_covariance_errors": [
+                  0.1396433711051941,
+                  0.3397948741912842,
+                  1.0,
+                  1.0
+                ],
+                "component_core_eigen_ratios": [
+                  0.8040758967399597,
+                  0.5253667831420898,
+                  0.0,
+                  0.0
+                ],
+                "component_core_min_eigen_ratio": 0.0,
+                "component_counts": [
+                  3574,
+                  522,
+                  0,
+                  0
+                ],
+                "component_covariance_error": 0.6198595613241196,
+                "component_covariance_errors": [
+                  0.1396433711051941,
+                  0.3397948741912842,
+                  1.0,
+                  1.0
+                ],
+                "component_mass": [
+                  0.87255859375,
+                  0.12744140625,
+                  0.0,
+                  0.0
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  false
+                ],
+                "component_spill": [
+                  0.001119194203056395,
+                  0.0,
+                  1.0,
+                  1.0
+                ],
+                "covariance_error": 0.6739722490310669,
+                "hq": 0.9990234375,
+                "mass_tv": 0.32255858182907104,
+                "max_component_spill": 1.0,
+                "mean_error": 0.3588773310184479,
+                "min_mass_ratio": 0.0,
+                "resolved_core_covariance_error": 0.49314608176549274,
+                "resolved_core_min_eigen_ratio": 0.0,
+                "resolved_max_component_spill": 1.0,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.3365737642991329,
+                "target_mass": [
+                  0.550000011920929,
+                  0.30000001192092896,
+                  0.12999999523162842,
+                  0.019999999552965164
+                ],
+                "target_scale": 1.7593294382095337
+              }
+            },
+            {
+              "attempt_id": "37784a3e210f43f3b3553d56565c84d1",
+              "task_id": "vector_unequal_width",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 50.1666842889972,
+              "result_hash": "8205f0cdb41151758cfbfd9b2421cfdd93ff7b2fe381e606b8c1c9e2e72e69bc",
+              "final_metrics": {
+                "component_core_covariance_error": 0.6097766496241093,
+                "component_core_covariance_errors": [
+                  1.0,
+                  1.0,
+                  0.19643957912921906,
+                  0.24266701936721802
+                ],
+                "component_core_eigen_ratios": [
+                  0.0,
+                  0.0,
+                  0.7339057922363281,
+                  0.7431003451347351
+                ],
+                "component_core_min_eigen_ratio": 0.0,
+                "component_counts": [
+                  0,
+                  0,
+                  912,
+                  3184
+                ],
+                "component_covariance_error": 0.6097766496241093,
+                "component_covariance_errors": [
+                  1.0,
+                  1.0,
+                  0.19643957912921906,
+                  0.24266701936721802
+                ],
+                "component_mass": [
+                  0.0,
+                  0.0,
+                  0.22265625,
+                  0.77734375
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "covariance_error": 0.71464604139328,
+                "hq": 1.0,
+                "mass_tv": 0.52734375,
+                "max_component_spill": 1.0,
+                "mean_error": 0.7876653075218201,
+                "min_mass_ratio": 0.0,
+                "resolved_core_covariance_error": 0.6097766496241093,
+                "resolved_core_min_eigen_ratio": 0.0,
+                "resolved_max_component_spill": 1.0,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.5333967657934762,
+                "target_mass": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ],
+                "target_scale": 2.1343955993652344
+              }
+            }
+          ]
+        },
+        {
+          "role": "primary_control",
+          "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+          "candidate_revision": "b80c8204aa299cd190869dd05ff26b422786499213476f2c67d8df084e889945",
+          "request_id": "2d1d3e17fe1510e44613ffc9",
+          "study_id": "alchemy_distillation_r2_control_v1",
+          "declared_primary_control": "bcap-dualnorm-conv-non-saturating-v1",
+          "source_origin_commit": "e5b607481eb5f2cbb2e09781acbefd678192f8e3",
+          "readout_record_id": "readout-914c6b8619f3896918f06ca1",
+          "task_grades": {
+            "gaussian1d_stability": "FAIL",
+            "gaussian1d_smoke": "PASS",
+            "vector_two_broad": "PASS",
+            "two_pole": "PASS",
+            "vector_unequal_width": "FAIL",
+            "vector_unequal_mass": "FAIL"
+          },
+          "outcomes": {
+            "FAIL": 3,
+            "PASS": 3
+          },
+          "workers": [
+            {
+              "attempt_id": "a9a5d955629e4d018bda5c115860c46b",
+              "task_id": "gaussian1d_smoke",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 30.14119893393945,
+              "result_hash": "d15a018bef1800ad123f6b422848aa6ca3086629cb82663ad3d53d8915511f74",
+              "final_metrics": {
+                "cdf_ks": 0.07184216175355329,
+                "finite_fraction": 1.0,
+                "mean": 2.062949220009614,
+                "mean_error_sigma": 0.12589844001922756,
+                "sample_count": 4096,
+                "std": 0.5315217191133498,
+                "std_ratio": 1.0630434382266996,
+                "step": 1000
+              }
+            },
+            {
+              "attempt_id": "5eddcb4fa3fd4cc8a500ed64113f3ab3",
+              "task_id": "gaussian1d_stability",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 121.64668140199501,
+              "result_hash": "01ced9939df8af6f40f591a77df51c3f7562c5cbecc6f88eb85068140bda09c0",
+              "final_metrics": {
+                "cdf_ks": 0.3206228939608994,
+                "finite_fraction": 1.0,
+                "mean": 3.1276191812357865,
+                "mean_error_sigma": 0.25523836247157305,
+                "sample_count": 4096,
+                "std": 0.33116516834734117,
+                "std_ratio": 0.6623303366946823,
+                "step": 6000
+              }
+            },
+            {
+              "attempt_id": "0a7286c393b04004926c8d8222c62ce4",
+              "task_id": "two_pole",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 7.880545847932808,
+              "result_hash": "2ba9134c01a25d2d439f2b90e2fc7bfc4e02085758fc0710dc68ae07d99a764e",
+              "final_metrics": {
+                "grad_med": 0.9523457288742065,
+                "mean_abs": 0.958502471446991
+              }
+            },
+            {
+              "attempt_id": "aee8671ba5094f98aad49bc31eda4a86",
+              "task_id": "vector_two_broad",
+              "gate_status": "PASS",
+              "paid_worker_seconds": 57.1993292120751,
+              "result_hash": "48ab2365dd2e0a61c8923c4e5480055efe2d1af4dcf3fb506319d2bd58787ac1",
+              "final_metrics": {
+                "component_core_covariance_error": 0.38558074831962585,
+                "component_core_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_core_eigen_ratios": [
+                  0.40006646513938904,
+                  0.5530211329460144
+                ],
+                "component_core_min_eigen_ratio": 0.40006646513938904,
+                "component_counts": [
+                  2306,
+                  1790
+                ],
+                "component_covariance_error": 0.38558074831962585,
+                "component_covariance_errors": [
+                  0.45504456758499146,
+                  0.31611692905426025
+                ],
+                "component_mass": [
+                  0.56298828125,
+                  0.43701171875
+                ],
+                "component_min_eigen_ratio": 0.40006646513938904,
+                "component_resolved": [
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.005637467373162508,
+                  0.018435753881931305
+                ],
+                "covariance_error": 0.11147095263004303,
+                "hq": 0.98876953125,
+                "mass_tv": 0.06298828125,
+                "max_component_spill": 0.018435753881931305,
+                "mean_error": 0.1914638876914978,
+                "min_mass_ratio": 0.8740234375,
+                "resolved_core_covariance_error": 0.38558074831962585,
+                "resolved_core_min_eigen_ratio": 0.40006646513938904,
+                "resolved_max_component_spill": 0.018435753881931305,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.13458950517280888,
+                "target_mass": [
+                  0.5,
+                  0.5
+                ],
+                "target_scale": 1.0555585622787476
+              }
+            },
+            {
+              "attempt_id": "805b20af930a473e91478890c7403e01",
+              "task_id": "vector_unequal_mass",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 57.62592194695026,
+              "result_hash": "875adf4af5656465ce30cb0faf69690644604747f7d9fd2b472efc4f557ca5ca",
+              "final_metrics": {
+                "component_core_covariance_error": 0.5303929001092911,
+                "component_core_covariance_errors": [
+                  0.2456076443195343,
+                  0.4634510278701782,
+                  0.4541144073009491,
+                  0.9583985209465027
+                ],
+                "component_core_eigen_ratios": [
+                  0.7341277003288269,
+                  0.3805922865867615,
+                  0.41528597474098206,
+                  0.009072906337678432
+                ],
+                "component_core_min_eigen_ratio": 0.009072906337678432,
+                "component_counts": [
+                  2273,
+                  1498,
+                  308,
+                  17
+                ],
+                "component_covariance_error": 3.691653147339821,
+                "component_covariance_errors": [
+                  1.027569055557251,
+                  0.4634510278701782,
+                  12.317193984985352,
+                  0.9583985209465027
+                ],
+                "component_mass": [
+                  0.554931640625,
+                  0.36572265625,
+                  0.0751953125,
+                  0.004150390625
+                ],
+                "component_min_eigen_ratio": 0.009072906337678432,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  false
+                ],
+                "component_spill": [
+                  0.018477782607078552,
+                  0.04939919710159302,
+                  0.22727273404598236,
+                  0.0
+                ],
+                "covariance_error": 0.08032716810703278,
+                "hq": 0.95458984375,
+                "mass_tv": 0.07065428048372269,
+                "max_component_spill": 0.22727273404598236,
+                "mean_error": 0.21188154816627502,
+                "min_mass_ratio": 0.20751953125,
+                "resolved_core_covariance_error": 0.3877243598302205,
+                "resolved_core_min_eigen_ratio": 0.3805922865867615,
+                "resolved_max_component_spill": 0.22727273404598236,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.15463841594489888,
+                "target_mass": [
+                  0.550000011920929,
+                  0.30000001192092896,
+                  0.12999999523162842,
+                  0.019999999552965164
+                ],
+                "target_scale": 1.7593294382095337
+              }
+            },
+            {
+              "attempt_id": "838d7c70eea5463d98852787ae8e55b0",
+              "task_id": "vector_unequal_width",
+              "gate_status": "FAIL",
+              "paid_worker_seconds": 57.64898375503253,
+              "result_hash": "71d3b42992db8e49f8595c923af283fa6786b62d7ae2bc41be153d3caf3cb51b",
+              "final_metrics": {
+                "component_core_covariance_error": 0.44417809322476387,
+                "component_core_covariance_errors": [
+                  0.6305663585662842,
+                  0.5511184930801392,
+                  0.41263189911842346,
+                  0.18239562213420868
+                ],
+                "component_core_eigen_ratios": [
+                  0.3074720501899719,
+                  0.30803200602531433,
+                  0.4326742887496948,
+                  1.0473675727844238
+                ],
+                "component_core_min_eigen_ratio": 0.3074720501899719,
+                "component_counts": [
+                  1475,
+                  197,
+                  1767,
+                  657
+                ],
+                "component_covariance_error": 6.287559386342764,
+                "component_covariance_errors": [
+                  0.6305663585662842,
+                  23.92778778076172,
+                  0.409487783908844,
+                  0.18239562213420868
+                ],
+                "component_mass": [
+                  0.360107421875,
+                  0.048095703125,
+                  0.431396484375,
+                  0.160400390625
+                ],
+                "component_min_eigen_ratio": 0.3074720501899719,
+                "component_resolved": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "component_spill": [
+                  0.0,
+                  0.08629441261291504,
+                  0.029428409412503242,
+                  0.027397260069847107
+                ],
+                "covariance_error": 0.2580900490283966,
+                "hq": 0.978759765625,
+                "mass_tv": 0.29150390625,
+                "max_component_spill": 0.08629441261291504,
+                "mean_error": 0.4099489450454712,
+                "min_mass_ratio": 0.1923828125,
+                "resolved_core_covariance_error": 0.44417809322476387,
+                "resolved_core_min_eigen_ratio": 0.3074720501899719,
+                "resolved_max_component_spill": 0.08629441261291504,
+                "sample_count": 4096,
+                "step": 1200,
+                "sw1_normalized": 0.29586492482829,
+                "target_mass": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ],
+                "target_scale": 2.1343955993652344
+              }
+            }
+          ]
+        }
+      ],
+      "paid_worker_seconds": 638.7403932869202,
+      "campaign_ceiling_seconds": 12840,
+      "remaining_reserved_seconds": 0.0,
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/alchemy/queue",
+      "declared_full_allowances_seconds": 12840,
+      "executed_full_allowances_seconds": 12540,
+      "scientific_retries": 0,
+      "published_scientific_files_verified": 1201
+    }
+  ],
+  "totals": {
+    "completed_runnable_scientific_jobs": 51,
+    "measured_task_grades": {
+      "FAIL": 27,
+      "PASS": 24
+    },
+    "declared_task_cells": 56,
+    "unexecuted_BLOCKED_cells": 5,
+    "paid_worker_seconds": 2523.4829734112136,
+    "campaign_ceiling_seconds": 67320,
+    "planned_full_allowances_seconds": 60600,
+    "executed_full_allowances_seconds": 58800,
+    "scientific_retries": 0,
+    "remaining_reserved_seconds": 0
+  },
+  "interpretation": {
+    "full_ordinary_suite_qualification": false,
+    "default_adoption": false,
+    "ranking": "Specialist subsets and potentially different controls; no pooled PASS ranking",
+    "source_overlap": "Same-seed shared-task controls are not independent statistical replications"
+  }
+}

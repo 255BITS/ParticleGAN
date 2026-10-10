@@ -1,0 +1,318 @@
+{
+  "artifacts": {
+    "files": {
+      "backend-junit.xml": "abbd50b8798a3a42a4fd761ca09bde663fc1d1f3cc62579ec2d5a8d83cbc2b31",
+      "backend-tests.log": "081f1a38d19e5b7eae1210f06ee88b02f474efedf8c14369ed7aad13e4c4f39d",
+      "baseline-profile.log": "ca38e0fbaa5e6b7d78ef9c44f6a070cd99bc515f9d07d9327b199e39131285f6",
+      "cpu-svd-profile.log": "ea8ff93eb8472d177437ea1b572bf4e6d6a3e01e7228b9aeae505fc485b59fc1",
+      "focused-junit.xml": "138dde798497d6cff9ab39881dacd06d007769062105a7e5f5507cd1710809d9",
+      "focused-tests.log": "f99c01a67783fe6baa2a3fd4f11ba2674721d6b49080c49718f23d2015bcfdd8",
+      "gesvd-profile.log": "502c0a2a4c8bac6c0dd852d21aa5c195cd0f40a74a863f7bf50a12ec9b2060ae",
+      "implemented-cpu-profile.log": "ab47cfdfef668fefe7f3ee3c65fea68a3a5ff8cfa704296367dfe51aa4c6556c",
+      "implemented-cpu/actual-training.gif": "0be06c4e5c28df58278e290cdb1139a3385f6d11dc7695b152405f0f668c846b",
+      "implemented-native-profile.log": "7e25a707336226580cdc87a61f20dbb30bae428fee082bfda0ab21c9a26fe33e",
+      "implemented-native/actual-training.gif": "4514faeb3284c011a40daf5b53a83c47b3f3c736b58afb48cfe947764d6a3c1a",
+      "native-replay/replay.json": "c37e22cbe20f3652e967c1b04f80e320f33b1746d12339c04182e9464e658f4f",
+      "parity.json": "243c025d33675e9d69e03c5c5ad9ea0c4ee220988af6baa1bfa5c6553705287c"
+    },
+    "root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/performance"
+  },
+  "backend_source_commit": "eca024857",
+  "baseline_source_commit": "79f7ddb512f0bc1e1457257e85c97adbe6d11bd1",
+  "diagnosis": {
+    "backward_ms_per_update_approx": 3.25,
+    "implemented_speedup": 2.4822034545802065,
+    "native_cprofile_svd_seconds": 0.966,
+    "native_cprofile_total_seconds": 1.354,
+    "native_svd_self_cuda_percent": 89.74,
+    "native_svd_wall_percent": 71.3,
+    "protected_gradient_bind_ms_per_update_approx": 1.25,
+    "svd_calls_per_update": 9,
+    "transport_ms_per_update_approx": 1.03
+  },
+  "fixed_host": {
+    "batch_size": 256,
+    "original_execution_cap": 20001,
+    "original_schedule_horizon": 20000,
+    "prior_rows": 5,
+    "software_execution_conservative_upper_bound_seconds": 180,
+    "software_profile_budget_seconds": 800,
+    "task": "five_word_joint_smoke",
+    "timing_prefix": {
+      "cprofile_updates": 32,
+      "kineto_updates": 8,
+      "timed_updates": 200,
+      "warmup_updates": 16
+    },
+    "z_dim": 2
+  },
+  "limitations": [
+    "Training-only extrapolation excludes ordinary evaluation/checkpoint cost and contention; no full-budget completion or quality claim.",
+    "CUDA CPU full-SVD changes floating-point trajectories and projection conflict counts; active candidate needs new source/recipe evidence.",
+    "CPU speedup depends on matrix dimensions, CPU threading and hardware; no task-specific dispatch is used.",
+    "Earlier profile processes have different unconsumed ambient RNG starts, recorded explicitly; independent aligned-ambient actual-source replay is exact."
+  ],
+  "production_sources": {
+    "experiments/forge/boundaries.py": "f95e2856725c9e872cc8bc9becc95adacdda0c5248c3411433fb3f3c0e0c93f3",
+    "particlegan/optim/dualnorm.py": "98d9f867ae145b4e08912a7b3c6fcac62c584a481de99270bcabe22c4934d47e",
+    "particlegan/recipe_compat.py": "5cd82a40f5d6d698077dd6fba2bc0a7cbe8c7b9310cca4e3b656d0fba86650af",
+    "particlegan/recipes.py": "04ee315cfb5c524029cad34093440039284e10d7656daba65db8a69a3ab89715"
+  },
+  "profiles": {
+    "baseline": {
+      "completed_steps": 256,
+      "gpu": "NVIDIA RTX A6000",
+      "metrics_sha256": "80c81e1ae72d86549ffdacbd23c367f2287f250e01957c70d01c888e5647a0fd",
+      "milliseconds_per_update": 44.0335924498504,
+      "projected_20001_training_seconds": 880.7158825894579,
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "timing_seconds": 8.80671848997008,
+      "torch_version": "2.14.0+cu130"
+    },
+    "cpu-svd": {
+      "completed_steps": 256,
+      "gpu": "NVIDIA RTX A6000",
+      "metrics_sha256": "c520e47e55fec0000b0a60de737879f2c8545123e13dad5a48ef87f95123e73e",
+      "milliseconds_per_update": 17.82013368967455,
+      "projected_20001_training_seconds": 356.42049392718064,
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "timing_seconds": 3.5640267379349098,
+      "torch_version": "2.14.0+cu130"
+    },
+    "gesvd-driver": {
+      "completed_steps": 256,
+      "gpu": "NVIDIA RTX A6000",
+      "metrics_sha256": "b1cfa12414c51c3720833e1819952eccaf1e1c814570c2a45cf91af074eb7e57",
+      "milliseconds_per_update": 41.91384467994794,
+      "projected_20001_training_seconds": 838.3188074436388,
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "timing_seconds": 8.382768935989588,
+      "torch_version": "2.14.0+cu130"
+    },
+    "implemented-cpu": {
+      "completed_steps": 256,
+      "diagnostic_observation_metrics": {
+        "completed_steps": 256.0,
+        "mass_apple": 0.2109375,
+        "mass_berry": 0.2041015625,
+        "mass_grape": 0.185546875,
+        "mass_lemon": 0.1982421875,
+        "mass_melon": 0.201171875,
+        "mass_tv": 0.016210937499999994,
+        "minimum_reconstruction_token_probability": 0.997632622718811,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": 0.00012332587785111963,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "gpu": "NVIDIA RTX A6000",
+      "metrics_sha256": "b512c885ca5a906195e1c527ae8323820475f2d0d7ea4e3bee1a69c44dc2a5bf",
+      "milliseconds_per_update": 17.635255075292662,
+      "projected_20001_training_seconds": 352.7227367609285,
+      "projection": {
+        "blended_steps": 0,
+        "conflict_steps": 0,
+        "max_retained_norm_ratio": 0.0,
+        "pareto_stalls": 0,
+        "retained_norm_ratio_sum": 0.0
+      },
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "timing_seconds": 3.5270510150585324,
+      "torch_version": "2.14.0+cu130"
+    },
+    "implemented-native": {
+      "completed_steps": 256,
+      "diagnostic_observation_metrics": {
+        "completed_steps": 256.0,
+        "mass_apple": 0.2109375,
+        "mass_berry": 0.2041015625,
+        "mass_grape": 0.185546875,
+        "mass_lemon": 0.1982421875,
+        "mass_melon": 0.201171875,
+        "mass_tv": 0.016210937499999994,
+        "minimum_reconstruction_token_probability": 0.9535921216011047,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": 0.006515055281233545,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "gpu": "NVIDIA RTX A6000",
+      "metrics_sha256": "69eb6608c9345a69692e9a36250502a5de28d084136c968992e35df7c2eefe35",
+      "milliseconds_per_update": 43.77429107029457,
+      "projected_20001_training_seconds": 875.5295956969617,
+      "projection": {
+        "blended_steps": 2,
+        "conflict_steps": 2,
+        "max_retained_norm_ratio": 0.7071066686307258,
+        "pareto_stalls": 0,
+        "retained_norm_ratio_sum": 1.4141316353608788
+      },
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "timing_seconds": 8.754858214058913,
+      "torch_version": "2.14.0+cu130"
+    }
+  },
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "recommendation": "Freeze CPU backend explicitly into at most two global causal-repair candidates, rebind actual source pins, and execute original full-budget gates without changes.",
+  "schema_version": 1,
+  "scope": "software_diagnostic_only",
+  "trainer_delta": {
+    "active_serialization": "Recipe.optimizer_svd_backend=cpu; dualnorm.svd_backend=cpu; cross-backend load rejects before mutation",
+    "active_value": "cpu",
+    "default": "native",
+    "default_serialization": "optional field absent; archived schema unchanged",
+    "field": "optimizer_svd_backend",
+    "meaning": "complete full polar/SVD on CPU; explicit numerical trainer change on accelerator inputs; no objective/forwards/batches/prior/initialization/schedule/cadence/RNG/history change",
+    "ownership": "technique/structural; not a tunable hyperparameter"
+  },
+  "verification": {
+    "aligned_actual_source_native_replay": {
+      "baseline_archive_sha256": "ae4a7a44f8b2cb77ab5bdaff4c47b5b644e2414c52ecb54b5b83a77daa2a5d94",
+      "differences": [],
+      "original_execution_cap": 20001,
+      "original_schedule_horizon": 20000,
+      "original_source_commit": "79f7ddb512f0bc1e1457257e85c97adbe6d11bd1",
+      "packets": {
+        "candidate": "c053fe872076a99015b2a05984dc106627101cea7386ead92121509f967ccc4d",
+        "original": "d2b96be083327d104b7dcc06b4155929eb78a5a9525013577c531f9f2b08b194"
+      },
+      "probe_sha256": "fc2bfe723186bd7cdf1a7576a8182c56f2742fbfe503dd80db052dd02d27fd6a",
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "scope": "software_diagnostic_only",
+      "updates": 8,
+      "whole_state_outputs_observation_exact": true
+    },
+    "focused_checks_passed": 213,
+    "focused_seconds": 4.96,
+    "new_backend_checks_passed": 54,
+    "new_backend_seconds": 2.15,
+    "retained_256_update_state_comparison": {
+      "ambient_rng_differences": {
+        "cpu": [
+          {
+            "kind": "tensor",
+            "max_abs": 252.0,
+            "path": "/fixture/api_state/cpu_rng"
+          },
+          {
+            "kind": "tensor",
+            "max_abs": 192.0,
+            "path": "/fixture/api_state/cuda_rng"
+          }
+        ],
+        "native": [
+          {
+            "kind": "tensor",
+            "max_abs": 244.0,
+            "path": "/fixture/api_state/cpu_rng"
+          },
+          {
+            "kind": "tensor",
+            "max_abs": 219.0,
+            "path": "/fixture/api_state/cuda_rng"
+          }
+        ]
+      },
+      "ambient_scope": "Original exploratory processes had unmatched ambient initialization; independent replay.json checks aligned whole-state parity.",
+      "baseline_source_commit": "79f7ddb512f0bc1e1457257e85c97adbe6d11bd1",
+      "cpu_backend_matches_exploratory_tensor_path": true,
+      "data_rng_exact_across_numerical_modes": true,
+      "declared_projection": [
+        "Recipe.optimizer_svd_backend",
+        "dualnorm.svd_backend"
+      ],
+      "implementation_differences": [],
+      "matched_completed_updates": 256,
+      "named_streams_exact_across_numerical_modes": true,
+      "native_consumed_state_exact": true,
+      "native_differences": [],
+      "numerical_delta_different_tensor_leaves": 34,
+      "numerical_delta_examples": [
+        {
+          "kind": "tensor",
+          "max_abs": 0.793316125869751,
+          "path": "/fixture/api_state/averaged_table"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.06883318722248077,
+          "path": "/fixture/api_state/averages/encoder/net.1.bias"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.10021549556404352,
+          "path": "/fixture/api_state/averages/encoder/net.1.weight"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.04776754975318909,
+          "path": "/fixture/api_state/averages/encoder/net.3.bias"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.09008009545505047,
+          "path": "/fixture/api_state/averages/encoder/net.3.weight"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.08864286914467812,
+          "path": "/fixture/api_state/averages/encoder/net.5.bias"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.09121060371398926,
+          "path": "/fixture/api_state/averages/encoder/net.5.weight"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.14047026634216309,
+          "path": "/fixture/api_state/averages/generator/net.0.bias"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.9252988770604134,
+          "path": "/fixture/api_state/averages/generator/net.0.weight"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.08945423364639282,
+          "path": "/fixture/api_state/averages/generator/net.2.bias"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.11061836034059525,
+          "path": "/fixture/api_state/averages/generator/net.2.weight"
+        },
+        {
+          "kind": "tensor",
+          "max_abs": 0.16628123074769974,
+          "path": "/fixture/api_state/averages/generator/net.4.bias"
+        }
+      ],
+      "numerical_delta_max_abs": 0.9252988770604134,
+      "packets": {
+        "baseline": "ba02278773db5520fe8f5680101f65d0f5772bd1490f4a403075d97071a8f63f",
+        "cpu-svd": "bc981187a71aab7988292bc8c0dbd3fec44d5b28a41041beefb9ad32bff23a74",
+        "implemented-cpu": "7fa161a772f4e0b3fcdbadab1b031d2abdcd27d4efa9753ce40dbb544b48581d",
+        "implemented-native": "f20bde6353a48d23da616f87e616a2f09672454c48522875390c077d318b7825"
+      },
+      "qualification_input": false,
+      "scope": "software_diagnostic_only"
+    }
+  }
+}

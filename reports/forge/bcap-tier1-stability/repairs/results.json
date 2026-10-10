@@ -1,0 +1,370 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/repairs",
+  "evidence_scope": "research_diagnostic",
+  "execution_retries": 0,
+  "full_reservation_seconds": 600,
+  "paid_attempts": 2,
+  "paid_seconds": 15.236134713049978,
+  "qualification_input": false,
+  "requests": {
+    "cap-margin": "8acbc1a62be1dd37662b65c2",
+    "finite-cap": "6a77ad74669c973cdccbdd91"
+  },
+  "rows": [
+    {
+      "attempt_id": "84e4a8d37e8c468896df95d2b7d8bda6",
+      "checkpoint": {
+        "artifact_manifest_sha256": "90cd911648c62f7cae37035960d86800517c8123f584c4b42a373b99eae0f1a9",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/repairs/queue/bcap-tier1-stability-repairs-ablations-v1/84e4a8d37e8c468896df95d2b7d8bda6/provenance",
+        "bytes": 48815,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "98cd7a8c7b9d099e81ea58f46dde5095e0edfe13855f9077df29b642c8200151",
+        "state_sha256": "c57d34d67c4f52a7d43f7f111287d9523d43518be5e057249a7519b23d0bc805"
+      },
+      "cost": {
+        "adapter_seconds": 1.2913858779938892,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.353796728071757,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.6909911750117317,
+        "wall_seconds": 7.353796728071757
+      },
+      "final_five": [
+        {
+          "grad_med": 0.9355696439743042,
+          "mean_abs": 0.7975020408630371,
+          "step": 67
+        },
+        {
+          "grad_med": 0.8978664875030518,
+          "mean_abs": 0.8285636305809021,
+          "step": 70
+        },
+        {
+          "grad_med": 0.8914793133735657,
+          "mean_abs": 0.8696286082267761,
+          "step": 74
+        },
+        {
+          "grad_med": 0.9175708293914795,
+          "mean_abs": 0.8993144035339355,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9713634848594666,
+          "mean_abs": 0.9274786710739136,
+          "step": 80
+        }
+      ],
+      "gate_status": "PASS",
+      "grad_cap_violations": 1,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.8477143868804,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.8477143868804,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/repairs/media/cap-margin.gif",
+      "media_sha256": "61b808ce787e50dc1cb3d30bdae5257b7c31212d1065662ecc8b1d7c64cd7e17",
+      "metrics": {
+        "grad_med": 0.9713634848594666,
+        "mean_abs": 0.9274786710739136
+      },
+      "observations": 24,
+      "passing_checks": 16,
+      "result_hash": "acb65dd54e9b756f904fcf51866f2df96523ecd030671e6208d5c6adafe4c3fb",
+      "role": "cap-margin",
+      "source": {
+        "digest": "4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d",
+        "origin_commit": "dea70adebf458a64827be0b4447abf1e167cb19a"
+      },
+      "terminal_suffix": 9,
+      "worst_grad_med": 1.0005056858062744
+    },
+    {
+      "attempt_id": "9bdf6b5080044334860549cd80741e99",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b0d5274b8d052e51bb0a7484692c17e859ddd57b6325509346fc587157ef4c4f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/repairs/queue/bcap-tier1-stability-repairs-ablations-v1/9bdf6b5080044334860549cd80741e99/provenance",
+        "bytes": 49199,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b918da35c2182fd2049260550b1f34d232651023acd6bc6b0c53bf8f5c7fe42e",
+        "state_sha256": "700e63dd107723b96bdaff848e6dcc358776aac1f451a307e6e720819af3c01f"
+      },
+      "cost": {
+        "adapter_seconds": 1.9616552470251918,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.882337984978221,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.2907780550885946,
+        "wall_seconds": 7.882337984978221
+      },
+      "final_five": [
+        {
+          "grad_med": 0.8246952295303345,
+          "mean_abs": 0.7938855886459351,
+          "step": 67
+        },
+        {
+          "grad_med": 0.9021360874176025,
+          "mean_abs": 0.8250221610069275,
+          "step": 70
+        },
+        {
+          "grad_med": 0.9209561347961426,
+          "mean_abs": 0.8650634288787842,
+          "step": 74
+        },
+        {
+          "grad_med": 0.9568732380867004,
+          "mean_abs": 0.8933662176132202,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9199178814888,
+          "mean_abs": 0.9204027652740479,
+          "step": 80
+        }
+      ],
+      "gate_status": "PASS",
+      "grad_cap_violations": 0,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "critic_step_damping": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "Actual original-training-panel finite cap checked on every critic update",
+              "requested": true,
+              "stats": {
+                "accepted_scale_sum": 19.12890625,
+                "accepted_steps": 31,
+                "attempted_scales": 540,
+                "backtracks": 460,
+                "damped_steps": 62,
+                "maximum_after": 0.9999952912330627,
+                "maximum_before": 0.9999952912330627,
+                "minimum_scale": 0.0,
+                "probes": 620,
+                "rejected_steps": 49,
+                "steps": 80
+              }
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.86931264400482,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.86931264400482,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.optimizers.discriminator.critic_cap": {
+          "accepted_scale_sum": 19.12890625,
+          "accepted_steps": 31,
+          "attempted_scales": 540,
+          "backtracks": 460,
+          "damped_steps": 62,
+          "maximum_after": 0.9999952912330627,
+          "maximum_before": 0.9999952912330627,
+          "minimum_scale": 0.0,
+          "probes": 620,
+          "rejected_steps": 49,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/repairs/media/finite-cap.gif",
+      "media_sha256": "d02462fa33a4c659337ab069356d293f4710cd05f90aac17496bf105ef9b8282",
+      "metrics": {
+        "grad_med": 0.9199178814888,
+        "mean_abs": 0.9204027652740479
+      },
+      "observations": 24,
+      "passing_checks": 17,
+      "result_hash": "737458704d951b70778cc7a12b571cb3b2204c64e590e5f65c41cfc4a668890f",
+      "role": "finite-cap",
+      "source": {
+        "digest": "4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d",
+        "origin_commit": "dea70adebf458a64827be0b4447abf1e167cb19a"
+      },
+      "terminal_suffix": 17,
+      "worst_grad_med": 0.9568732380867004
+    }
+  ],
+  "schema_version": 1
+}

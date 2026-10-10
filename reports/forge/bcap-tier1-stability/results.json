@@ -1,0 +1,917 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability",
+  "evidence_scope": "research_diagnostic",
+  "execution_retries": 0,
+  "full_reservation_seconds": 1800,
+  "paid_attempts": 6,
+  "paid_seconds": 46.43256083596498,
+  "qualification_input": false,
+  "requests": {
+    "combined": "7768f4bff21e87569c4e8ad3",
+    "incumbent": "30c93c07358608b3024e5e1d",
+    "projection": "fa5da798dcc09f193369f864",
+    "projection-global": "b00fa943600ff6e4a619f73a",
+    "projection-local": "9ad801cea1e81437c54b01bb",
+    "transport": "5f184aa47eb7da3bc8c5aee1"
+  },
+  "rows": [
+    {
+      "attempt_id": "f68850b95d2345f4a9ebb0c7e6f7083f",
+      "checkpoint": {
+        "artifact_manifest_sha256": "1019bd14b1c73482184f34044585da60281f9525d3ee2677a79deaa58cae95ac",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/f68850b95d2345f4a9ebb0c7e6f7083f/provenance",
+        "bytes": 47919,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "51ec23282282bd3fc92d2feccd438796e729c1673e5dc3b4f7ebd6a726c61407",
+        "state_sha256": "1b5a6603459ed430909f5c88bd63bca266c438505006c727b6ee8ca02a01a924"
+      },
+      "cost": {
+        "adapter_seconds": 1.6667864320334047,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 8.4667484969832,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.0119622129714116,
+        "wall_seconds": 8.4667484969832
+      },
+      "final_five": [
+        {
+          "grad_med": 0.8796496391296387,
+          "mean_abs": 0.8025056719779968,
+          "step": 67
+        },
+        {
+          "grad_med": 0.9774032831192017,
+          "mean_abs": 0.8385049700737,
+          "step": 70
+        },
+        {
+          "grad_med": 0.9832586050033569,
+          "mean_abs": 0.8865039348602295,
+          "step": 74
+        },
+        {
+          "grad_med": 0.8326534032821655,
+          "mean_abs": 0.9225031733512878,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9523457288742065,
+          "mean_abs": 0.958502471446991,
+          "step": 80
+        }
+      ],
+      "gate_status": "PASS",
+      "grad_cap_violations": 0,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 0,
+        "component_transport_requested": false,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {},
+      "media": "reports/forge/bcap-tier1-stability/media/incumbent.gif",
+      "media_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "observations": 24,
+      "passing_checks": 17,
+      "result_hash": "4c2fcb308b98a8fead438655250910c652cd726d749fec4a94c60c06bfa77b65",
+      "role": "incumbent",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 17,
+      "worst_grad_med": 0.9832586050033569
+    },
+    {
+      "attempt_id": "48fe9f3d5ee143a1b5b5eb125962c787",
+      "checkpoint": {
+        "artifact_manifest_sha256": "fa15f2136407d824456fc5a59725234d570f7f9e5ad197d8a069f7a1b2865921",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/48fe9f3d5ee143a1b5b5eb125962c787/provenance",
+        "bytes": 48495,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "025916f26f544e45bca808034af264ca9e29837b00fc458f388bcd64f7c17f58",
+        "state_sha256": "71607423c6bf8c1b4ce53d0219395e0a7606d6a032f9ea71ff6995f1fd0e1478"
+      },
+      "cost": {
+        "adapter_seconds": 1.0535848030121997,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.966009414987639,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3936659729806706,
+        "wall_seconds": 7.966009414987639
+      },
+      "final_five": [
+        {
+          "grad_med": 0.8796496391296387,
+          "mean_abs": 0.8025056719779968,
+          "step": 67
+        },
+        {
+          "grad_med": 0.9774032831192017,
+          "mean_abs": 0.8385049700737,
+          "step": 70
+        },
+        {
+          "grad_med": 0.9832586050033569,
+          "mean_abs": 0.8865039348602295,
+          "step": 74
+        },
+        {
+          "grad_med": 0.8326534032821655,
+          "mean_abs": 0.9225031733512878,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9523457288742065,
+          "mean_abs": 0.958502471446991,
+          "step": 80
+        }
+      ],
+      "gate_status": "PASS",
+      "grad_cap_violations": 0,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 0,
+        "component_transport_requested": false,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/media/projection.gif",
+      "media_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "observations": 24,
+      "passing_checks": 17,
+      "result_hash": "7fcd51020a3e0d5582f675be89c09b235108c48f27377bc654e22dc0d3fbb966",
+      "role": "projection",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 17,
+      "worst_grad_med": 0.9832586050033569
+    },
+    {
+      "attempt_id": "3572a759b40840cab4800b13af096788",
+      "checkpoint": {
+        "artifact_manifest_sha256": "df5cda07be78d68dbc7dc2df0c4cd5f4359da097142b7cda173f8953c5ccdf57",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/3572a759b40840cab4800b13af096788/provenance",
+        "bytes": 48175,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "7b723dde5c8a0a8be56c78111c29a095b0661fee081ad7b62a8e746b8e5620c7",
+        "state_sha256": "d1559429e394597dce5932cfc5a89128bb058ab07d3f3d747b3cf56a74b14cc0"
+      },
+      "cost": {
+        "adapter_seconds": 1.282094235997647,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.540622800937854,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.618865475989878,
+        "wall_seconds": 7.540622800937854
+      },
+      "final_five": [
+        {
+          "grad_med": 1.006780982017517,
+          "mean_abs": 0.7979418039321899,
+          "step": 67
+        },
+        {
+          "grad_med": 1.0266129970550537,
+          "mean_abs": 0.8292157053947449,
+          "step": 70
+        },
+        {
+          "grad_med": 1.0193992853164673,
+          "mean_abs": 0.870600700378418,
+          "step": 74
+        },
+        {
+          "grad_med": 1.0278288125991821,
+          "mean_abs": 0.900516152381897,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9851563572883606,
+          "mean_abs": 0.9287881255149841,
+          "step": 80
+        }
+      ],
+      "gate_status": "FAIL",
+      "grad_cap_violations": 11,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/media/transport.gif",
+      "media_sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2",
+      "metrics": {
+        "grad_med": 0.9851563572883606,
+        "mean_abs": 0.9287881255149841
+      },
+      "observations": 24,
+      "passing_checks": 6,
+      "result_hash": "095b6717199c7b8f00953b519dd77565fd52606bfd55261e8c3d2300b5869f64",
+      "role": "transport",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 1,
+      "worst_grad_med": 1.0958653688430786
+    },
+    {
+      "attempt_id": "6eb07b25f9f649e1881096486f79ac8d",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b2f9102dde55a7a92a72bff7ca1c7c8e9406ce892cdaf605cb22ddd656865811",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/6eb07b25f9f649e1881096486f79ac8d/provenance",
+        "bytes": 48751,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "9e6c14b94798fd407aed5a2ece2c68b44bd3e8034b86879c811703d0dc7a1f03",
+        "state_sha256": "5d6a6d4179222c8084083bc4e47ec271bbeccf9587d77de51b96d7188823d718"
+      },
+      "cost": {
+        "adapter_seconds": 1.1772351970430464,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.308270765002817,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.4675618530018255,
+        "wall_seconds": 7.308270765002817
+      },
+      "final_five": [
+        {
+          "grad_med": 1.0044182538986206,
+          "mean_abs": 0.803536593914032,
+          "step": 67
+        },
+        {
+          "grad_med": 1.0232291221618652,
+          "mean_abs": 0.839526355266571,
+          "step": 70
+        },
+        {
+          "grad_med": 1.0158673524856567,
+          "mean_abs": 0.8875106573104858,
+          "step": 74
+        },
+        {
+          "grad_med": 1.0380182266235352,
+          "mean_abs": 0.9234989881515503,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9790606498718262,
+          "mean_abs": 0.9594869613647461,
+          "step": 80
+        }
+      ],
+      "gate_status": "FAIL",
+      "grad_cap_violations": 11,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 28.299827127717435,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 28.299827127717435,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/media/projection-global.gif",
+      "media_sha256": "e4cf05df9127daf190d406a290560d7d6fd3b4f0813a72ba37866d767b1cb725",
+      "metrics": {
+        "grad_med": 0.9790606498718262,
+        "mean_abs": 0.9594869613647461
+      },
+      "observations": 24,
+      "passing_checks": 6,
+      "result_hash": "b262ee1856bcf9e06ee54305ac9c787ba6025e5530631ea640016f27086d9449",
+      "role": "projection-global",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 1,
+      "worst_grad_med": 1.0922465324401855
+    },
+    {
+      "attempt_id": "e27d2855c32e40c989f589f98dc9b690",
+      "checkpoint": {
+        "artifact_manifest_sha256": "e268d20b3b4fca59c5d8894f351aaf65c30834f5019408a4d310e0e8cebb3e82",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/e27d2855c32e40c989f589f98dc9b690/provenance",
+        "bytes": 48751,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "9a40e48837f849c17678ed3287f2d42cf675cb38b1c01f516705fb99eda8a901",
+        "state_sha256": "15e2ecad5ea7330863ab9039b1feb7d7738ce85f465e4ca1489c2a606aa4ecd3"
+      },
+      "cost": {
+        "adapter_seconds": 1.469978381996043,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.740718511049636,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.7458614399656653,
+        "wall_seconds": 7.740718511049636
+      },
+      "final_five": [
+        {
+          "grad_med": 0.8793566226959229,
+          "mean_abs": 0.8037185668945312,
+          "step": 67
+        },
+        {
+          "grad_med": 0.9773218631744385,
+          "mean_abs": 0.8397183418273926,
+          "step": 70
+        },
+        {
+          "grad_med": 0.9796034097671509,
+          "mean_abs": 0.8817094564437866,
+          "step": 74
+        },
+        {
+          "grad_med": 0.840670108795166,
+          "mean_abs": 0.8997092247009277,
+          "step": 77
+        },
+        {
+          "grad_med": 1.0094252824783325,
+          "mean_abs": 0.9177091121673584,
+          "step": 80
+        }
+      ],
+      "gate_status": "FAIL",
+      "grad_cap_violations": 1,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 71.98155677318573,
+          "maximum_loss": 0.9961549639701843,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 71.98155677318573,
+          "maximum_loss": 0.9961549639701843,
+          "schema_version": 1
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.007661052192524664,
+          "projected_steps": 7,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 7,
+          "conflict_steps": 7,
+          "max_retained_norm_ratio": 0.5016459160117925,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 3.503760566599226
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/media/projection-local.gif",
+      "media_sha256": "11f896e58e099d56ec74af14ac0f3443027d69c6dc5029430a3342548be27dc3",
+      "metrics": {
+        "grad_med": 1.0094252824783325,
+        "mean_abs": 0.9177091121673584
+      },
+      "observations": 24,
+      "passing_checks": 16,
+      "result_hash": "27f47a3acc129a3678d6011d78df8fea2ec29e051d786777d007ad0c3a628103",
+      "role": "projection-local",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 0,
+      "worst_grad_med": 1.0094252824783325
+    },
+    {
+      "attempt_id": "cb5ed608f06148e4b746fee8924afdfa",
+      "checkpoint": {
+        "artifact_manifest_sha256": "a3523ed3d2611ec7a2d27ce79d79700caf24a0006973df3adb3c6ae2a288bb87",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/bcap-tier1-stability-ablations-v1/cb5ed608f06148e4b746fee8924afdfa/provenance",
+        "bytes": 48751,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "a4e8e801a6faeeed63b07faa8bd5031d48e2b35e7d63352fba1f9a02561200e3",
+        "state_sha256": "7e5dad133d1fb8304b663f612bab1b576488b988b078eaf8270fb5840c8f204f"
+      },
+      "cost": {
+        "adapter_seconds": 1.3270200599217787,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.4101908470038325,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.588898753048852,
+        "wall_seconds": 7.4101908470038325
+      },
+      "final_five": [
+        {
+          "grad_med": 1.006780982017517,
+          "mean_abs": 0.7979418039321899,
+          "step": 67
+        },
+        {
+          "grad_med": 1.0266129970550537,
+          "mean_abs": 0.8292157053947449,
+          "step": 70
+        },
+        {
+          "grad_med": 1.0193992853164673,
+          "mean_abs": 0.870600700378418,
+          "step": 74
+        },
+        {
+          "grad_med": 1.0278288125991821,
+          "mean_abs": 0.900516152381897,
+          "step": 77
+        },
+        {
+          "grad_med": 0.9851563572883606,
+          "mean_abs": 0.9287881255149841,
+          "step": 80
+        }
+      ],
+      "gate_status": "FAIL",
+      "grad_cap_violations": 11,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "media": "reports/forge/bcap-tier1-stability/media/combined.gif",
+      "media_sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2",
+      "metrics": {
+        "grad_med": 0.9851563572883606,
+        "mean_abs": 0.9287881255149841
+      },
+      "observations": 24,
+      "passing_checks": 6,
+      "result_hash": "4a26ec8ffb58eb13d9069c0117868ce054d95ec8174996fc45c3b7bbed4cfd2b",
+      "role": "combined",
+      "source": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "terminal_suffix": 1,
+      "worst_grad_med": 1.0958653688430786
+    }
+  ],
+  "schema_version": 1
+}

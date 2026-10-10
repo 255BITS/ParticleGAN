@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -113,7 +114,7 @@ def _hold_distance(fake: torch.Tensor) -> float:
 
 
 @torch.no_grad()
-def evaluate(encoder, decoder, prior, recipe) -> dict[str, float]:
+def evaluate(encoder, decoder, prior, recipe, *, output_callback=None) -> dict[str, float]:
     """Score reconstruction and unconditional hold without moving the train RNG."""
     state = torch.get_rng_state()
     try:
@@ -124,7 +125,12 @@ def evaluate(encoder, decoder, prior, recipe) -> dict[str, float]:
         recon_mse = float((recon - data).square().mean())
         codes, _ = prior.sample(1024)
         fake = decoder(codes)
-        return {"recon_mse": recon_mse, "hold": _hold_distance(fake)}
+        metrics = {"recon_mse": recon_mse, "hold": _hold_distance(fake)}
+        if output_callback is None:
+            output_callback = getattr(decoder, "_evaluation_output_callback", None)
+        if output_callback is not None:
+            output_callback(data, recon, fake, metrics)
+        return metrics
     finally:
         torch.set_rng_state(state)
 
@@ -190,6 +196,20 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
     def measure(step: int):
         context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
         with context:
+            if components is not None and components.context.component_transport is not None:
+                def capture(data, recon, fake, metrics):
+                    components.constraint_geometry_capture(step, data, recon, metrics)
+                previous = getattr(decoder, "_evaluation_output_callback", None)
+                decoder._evaluation_output_callback = capture
+                try:
+                    # Retain the original four-argument evaluator call so
+                    # wrappers for inactive techniques require no new hook.
+                    return evaluate(encoder, decoder, prior, recipe)
+                finally:
+                    if previous is None:
+                        del decoder._evaluation_output_callback
+                    else:
+                        decoder._evaluation_output_callback = previous
             return evaluate(encoder, decoder, prior, recipe)
 
     opened = measure(0)
@@ -218,12 +238,13 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
         encoded = recipe.encode(query, prior, offset=offset)
         reconstructed = decoder(encoded.codes[:, 0])
         recon = encoded.reconstruction_loss(reconstructed[:, None], data)
-        codes, _ = prior.sample(cfg.batch)
+        codes, rows = prior.sample(cfg.batch)
         generated = decoder(codes)
         opt_g.zero_grad(set_to_none=True)
         for param in critic.parameters():
             param.requires_grad_(False)
         loss = cfg.reconstruction_weight * recon + cfg.particle_l2 * prior.z.square().mean()
+        protected = [recon] if cfg.reconstruction_weight > 0 else []
         if cfg.adversarial_weight > 0:
             real_logits = critic(data).squeeze(-1).detach()
             fake_logits = critic(generated).squeeze(-1)
@@ -235,8 +256,27 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
                 real_feat = critic.features(data).detach().mean(0)
                 fake_feat = critic.features(generated).mean(0)
                 loss = loss + cfg.fm_weight * (real_feat - fake_feat).square().mean()
+            # Protect the original generated branch (adversarial + cover),
+            # separately from the existing reconstruction branch.
+            protected.append(cfg.adversarial_weight * adv + cfg.cover_weight * cover)
             adv_steps += 1
-        loss.backward()
+        if components is not None:
+            loss = components.add_transport_loss(loss, generated, data)
+        if recipe.constraint_geometry_mode == "strict_progress":
+            width_noise = (codes - prior.z[rows]).detach()
+        def protected_evaluator():
+            query_now, offset_now = encoder(data).chunk(2, dim=1)
+            encoded_now = recipe.encode(query_now, prior, offset=offset_now)
+            reconstructed_now = decoder(encoded_now.codes[:, 0])
+            result = ([encoded_now.reconstruction_loss(reconstructed_now[:, None], data)]
+                      if cfg.reconstruction_weight > 0 else [])
+            if cfg.adversarial_weight > 0:
+                current = decoder(prior.z[rows] + width_noise)
+                adversarial = gan.g_loss(critic(current).squeeze(-1), real_logits)
+                covered = torch.cdist(anchors, current).min(dim=1).values.mean()
+                result.append(cfg.adversarial_weight * adversarial + cfg.cover_weight * covered)
+            return tuple(result)
+        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator)
         for param in critic.parameters():
             param.requires_grad_(True)
         schedule_optimizer(opt_g, step - 1)

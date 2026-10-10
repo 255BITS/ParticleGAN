@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 import torch
 
+from tests.archived_forge_contracts import current_policy_software_checkout
 from experiments.forge.adapters import adapter_preflight
 from experiments.forge.api import task_formulation_context
 from experiments.forge.tier1_policy import materialize, validate, clock_measurement
@@ -23,20 +24,20 @@ def candidate(name):
     return json.loads((ROOT / 'configs/forge/ideas' / (name + '.json')).read_text())
 
 
+@pytest.fixture(scope='module')
+def original_parent_checkout(tmp_path_factory):
+    return current_policy_software_checkout(tmp_path_factory.mktemp('original-policy-parents'))
+
+
+@pytest.fixture(autouse=True)
+def original_parent_contracts(original_parent_checkout, monkeypatch):
+    # Materialize the original questions with current policy implementation
+    # pins. New component-transport task cohorts are a separate contract.
+    monkeypatch.setattr(__import__(__name__, fromlist=['ROOT']), 'ROOT', original_parent_checkout)
+
+
 def current_software_checkout(tmp_path):
-    """Private positive controls bind current bytes; historical cards stay frozen."""
-    import shutil
-    from experiments.forge.planning import resolve_idea
-    from experiments.forge.tier1_policy import write_declarations
-    checkout = tmp_path / 'software-checkout'
-    source = resolve_idea(ROOT, 'k3p')['source']
-    for relative in source['files']:
-        destination = checkout / relative
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / relative, destination)
-    shutil.copytree(ROOT / 'configs/forge', checkout / 'configs/forge', dirs_exist_ok=True)
-    write_declarations(checkout)
-    return checkout
+    return current_policy_software_checkout(tmp_path)
 
 
 @pytest.mark.parametrize('family', ['atlas', 'e22'])
@@ -200,3 +201,22 @@ def test_frozen_complete_tier_submission_preserves_policy_sibling_blockers(famil
     assert submission['request']['execution_policy']['mode'] == 'complete_current_tier'
     assert sum(not bool(task.get('preflight_blockers')) for task in submission['request']['tasks'].values()) == 4
     assert all(not job['attempts'] for job in state['jobs'].values())
+
+
+def test_new_transport_parent_cannot_fill_original_policy_cohort():
+    from tests.archived_forge_contracts import ROOT as live_root
+    parent = json.loads((live_root / 'configs/forge/tasks/two_pole.json').read_text())
+    assert parent['task_cohort'] == 'component_output_transport_v1'
+    variant = materialize(parent, live_root)
+    assert adapter_preflight(variant, candidate('atlas'), root=live_root) == [
+        'unsupported explicit component transport consumer']
+
+
+def test_changed_original_parent_bytes_block_private_policy_request(tmp_path):
+    checkout = current_software_checkout(tmp_path)
+    parent = checkout / 'configs/forge/tasks/two_pole.json'
+    variant = json.loads((checkout / 'configs/forge/task-variants/tier1_policy_selected_cloud_v1/'
+                         'two_pole_tier1_policy_selected_cloud_v1.json').read_text())
+    parent.write_bytes(parent.read_bytes() + b' ')
+    assert adapter_preflight(variant, candidate('atlas'), root=checkout) == [
+        'on-disk policy parent identity differs']

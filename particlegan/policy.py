@@ -1251,7 +1251,10 @@ class UpdatePolicy:
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match policy")
         steps = state["completed_steps"]
-        if type(steps) is not int or steps < 0 or (self.recipe.total_steps is not None and steps > self.recipe.total_steps):
+        # total_steps is the recipe's schedule horizon. Caller-owned loops may
+        # continue past it with begin_step(execution_limit=...), so it is not a
+        # checkpoint budget. The host validates its own external execution cap.
+        if type(steps) is not int or steps < 0:
             raise ValueError("invalid policy checkpoint step count")
         for label in ("models", "averages"):
             if not isinstance(state[label], dict) or state[label].keys() != expected[label].keys():

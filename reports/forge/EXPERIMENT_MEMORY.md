@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 650. Inventory coverage: complete. Unresolved import items: 7.
+Records: 794. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -630,6 +630,38 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
 
+### bcap-default-baseline-direction-v1 · bcap-default-baseline-concluded-context-v1
+
+**Scope:** historical; family_context; revision `unknown`.
+
+A single global direction-blend delta preserves all six ordinary Tier 1 gates and strictly extends the matched incumbent Tier 2 pass set under the seed-0 public initializer and original task budgets, priors and sampling laws.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `protected_actual_parameter_direction`.
+
+
+
+Completed ordinary matched comparison: direction_blend passes 6/6 Tier 1 and 9/21 Tier 2 versus none at 6/6 and 7/21, with no lost passes. Trajectory identity MSE improves from .239861891 to .000258480; residual improves from .061036013 to .000249089, with sustained suffixes 19/21 repairing their gates. Own word hold remains PASS from matched 834-step prefixes through local step 4834. All 27 required final consumed-state pairs verify; all 21 zero-activation task pairs have byte-identical actual trained tensors for every applicable role. Six tasks activate 337 blends with zero stalls. All 12 remaining Tier 2 failures are inactive and have unchanged final metrics; direction protection does not establish missing mass/density forces. Both requested Tier 3 tasks remain BLOCKED with no spend. The 56 paid attempts charge 4187.683586815016 seconds with zero retries; 56 actual-training GIFs come from saved events. The owner selected the whole measured BCAP research pin and named preset; calibration remains provisional and default_adoption=false. The full CPU run with 5938 passes and 24 failures is preserved; narrowly corrected compatibility metadata checks resolve its exact 24 failures without changing comparator bytes or numerical assertions. Reporting reconstruction restores exact admitted study authority and Git-pinned motivation, leaving numerical task statuses and original receipts unchanged. This context supplies no qualification or cross-cohort pooling.
+
+**Next:** Use the exact direction-blend research baseline. Investigate one globally configured mass/density mechanism with an explicit numerical falsifier and measurements of actual force/displacement; preserve all six Tier 1 gates, trajectory, residual and own word hold. Inspect full/core component density, allocation and spill on the 12 remaining failures. Retain negative moonshot evidence and unavailable fields; do not rerun unchanged experiments for a merge or perform seed-only experiments.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/README.md) · [Record](records/bcap-default-baseline-concluded-context-v1.json)
+
+### bcap-three-phase-concluded-research · bcap-three-phase-concluded-context-v1
+
+**Scope:** research_diagnostic; family_context; revision `unknown`.
+
+Repair BCAP globally while preserving all six Tier 1 gates and the original task budgets, priors, deterministic initializer, sampling laws, gates and own-checkpoint continuation.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `source_bound_global_trainer_research`.
+
+
+
+Direction-only projection (PR383, constraint_geometry_mode=direction_blend) is the measured research baseline: 6/6 Tier 1 and 3/10 selected Tier 2 versus control 6/6 and 1/10. Trajectory and residual student fully repair with identity MSE .000258480/.000249089 and terminal suffixes 19/21; own word hold remains PASS. All 16 complete consumed-state pairs match and 11 inactive model/prior tensor comparisons pass. Only 12/400 trajectory and 55/400 residual steps blend, with no stalls; the stored derivative maximum is floored at zero and does not prove finite-step descent. Seven studied Tier 2 gates remain FAIL, eleven original Tier 2 questions are unmeasured. Five moonshots have no eligible replacement: optimism 3/6 + 0/10, anisotropic geometry 4/6 + 1/10, entropic transport 4/6 + 2/10, bounded secant 4/6 + 0/10, confidence transport 4/6 + 2/10. Entropic/confidence each repair anisotropic density but regress pole and unused token. Aggregate moments, mass allocation and core shape can improve while full component density fails. Secant ring global covariance .098413 coexists with full component error 57.418460. Secant word is INCOMPLETE at its original 900-second limit; own hold BLOCKED. Anisotropic/entropic valid word holds use unequal own prefixes, so consumed-state pairing is unverified. Confidence alpha scales losses before the normalized optimizer, not displacement or calibrated confidence; it retains a software allowance violation (at least 2279.158 seconds against 300). The entropic constant-panel normalization amplifies squared error by 4194304; zero residual alone establishes no useful force. Five pairs charge 44305.65891298147 seconds including 18 user-authorized infrastructure predecessors; projection separately charges 3541.1636059249986 seconds with zero retries. Costs are not pooled speed comparisons. All six independent audits pass with 188 actual-training GIFs. These source-bound diagnostics grant no ordinary qualification, default adoption or automatic merge.
+
+**Next:** Base future BCAP research on the exact PR383 direction-only recipe; stop all five exact moonshot revisions and retain their negative evidence. Inspect saved equal-clock full/core density, mass allocation, spill and controller evidence before composition; keep unavailable gradient-force measurements explicit. Any next global trainer comparison should isolate one causal mechanism with a fixed backend and numerical falsifier, measure force scaling and actual displacement, and preserve all six Tier 1 gates, trajectory, residual and word hold. A common-clock word hold would be a separately declared new cohort; never regrade these original own-prefix results.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/README.md) · [Record](records/bcap-three-phase-concluded-context-v1.json)
+
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
 **Scope:** historical; family_context; revision `7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade`.
@@ -661,6 +693,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · five-word-tier-split-v1-readout
+
+**Scope:** task_only_diagnostic; family_context; revision `d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990`.
+
+Separate acquisition of the full joint five-word goal from retention under continuing learning, retaining all numerical thresholds and original evidence.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `task_policy_and_own_checkpoint_continuation`.
+
+
+
+Selected BCAP DualNorm full CUDA smoke PASS:13/24 independently confirmed checks, earliest update1,667. Exact own-state hold FAIL:20/25 checks; failures at3,001/5,001/5,167/5,334/5,501; both endpoints PASS. At3,001 generation passes while paired inverse fails. Exactly24,001 research updates;930.430 loop seconds,947.754 total wall seconds,1,200 reserved.100 saved metric sets and complete checkpoints verified;372 software checks pass, including9 CUDA numerical/provenance checks. New ordinary contracts remain UNKNOWN; scientific rows and historical task bytes unchanged. One automatic cuSOLVER fallback warning; no driver change or causal claim.
+
+**Next:** Adopt acquisition/hold placement, retain the holding failure, and use the separate saved-state diagnosis before declaring another bounded mechanism experiment. No automatic research repeat or ordinary qualification credit.
+
+[Evidence](../../reports/forge/five-word-tier-split/readout.json) · [Record](records/five-word-tier-split-v1-readout.json)
 
 ### fivewords-saved-endpoint-dynamics-v1 · fivewords-saved-endpoint-dynamics-v1-readout
 
@@ -3686,6 +3734,86 @@ Administrative abandoned: Registered native comparison failed the unchanged full
 
 [Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
 
+### bcap-pure-budget10x-v1 · pr311-bcap-pure-budget10x-context-v1
+
+**Scope:** historical; family_context; revision `beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30`.
+
+Does 10x longer training with the same constant-step BCAP-pure recipe fix the Gaussian and Ring16 sustained Tier 1 failures?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `training_budget_extension`.
+
+
+
+No: 0/2 sustained passes. Gaussian keeps oscillating and fails distribution accuracy; Ring16 removes most tail error but repeatedly loses component spread and fails the five-terminal-observation hold. Closed unmerged in PR triage 2026-10-10; superseded by develop's 22/22 Tier 1 pass.
+
+**Next:** Do not use longer budgets as a fix for BCAP oscillation or ring hold; change the dynamics instead.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30/reports/forge/bcap-pure-budget10x-v1/README.md) · [Record](records/pr311-bcap-pure-budget10x-context-v1.json)
+
+### bcap-gaussian-frozen-prior · pr318-gaussian-frozen-prior-context-v1
+
+**Scope:** historical; family_context; revision `dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e`.
+
+Does freezing the initial MoG prior let G/D acquire and retain the 1D Gaussian at the selected constant BCAP rates?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `fixed_prior_control`.
+
+
+
+No: a frozen prior does not rescue Gaussian retention under alternating, simultaneous or past-extrapolation timing; extrapolation reaches a passing final shifted snapshot but cannot retain full quality, and all three fixed-prior ring arms fail. Explicit fixed-prior control cohort. Closed unmerged in PR triage 2026-10-10.
+
+**Next:** Prior motion is not the cause of Gaussian retention failure; look at G/D dynamics.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e/reports/forge/gaussian-frozen-prior/README.md) · [Record](records/pr318-gaussian-frozen-prior-context-v1.json)
+
+### ring16-tiny-weak-subspace-noise · pr335-ring16-tiny-noise-context-v1
+
+**Scope:** historical; family_context; revision `a570d722949b4bf26f3641b8d020a7a1cf67ec3b`.
+
+Does continuous tiny noise on weak gradient subspaces fix Ring16 acquisition and hold?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `weak_subspace_gradient_noise`.
+
+
+
+Yes: every-update tiny weak-subspace noise passes confirmed Ring16 smoke (acquires at 817) and ends with 45 consecutive full passes; noise at update 401 only fails confirmation on covariance. Slower than merged rank truncation (acquires 684, develop default via PR332). Closed unmerged in PR triage 2026-10-10; absorbed into PR331 Ring16 report.
+
+**Next:** Fallback candidate if truncation is removed or regresses; not needed while truncation is default.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/a570d722949b4bf26f3641b8d020a7a1cf67ec3b/reports/forge/ring16-noise/README.md) · [Record](records/pr335-ring16-tiny-noise-context-v1.json)
+
+### bcap-runtime-margin-pr342-pr343 · pr342-343-bcap-gate-margin-context-v1
+
+**Scope:** historical; family_context; revision `ba593aab5c0e150da1c36005aece17816f074c7b`.
+
+Did serial autograd scheduling and/or numerical rank truncation cause the BCAP Gaussian-smoke and five-word-hold regressions?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `runtime_scheduling_and_rank_truncation_sensitivity`.
+
+
+
+BCAP gate margins are thin. On Gaussian smoke (PR342), disabling autograd multithreading (serial scheduling) flips PASS to FAIL for both polar rules (KS .0692/.0646 vs limit .05); truncation alone does not. On five-word hold (PR343), serial scheduling alone and rank truncation alone each flip the historical PASS to FAIL; together they reproduce V6 FAIL. All word arms still acquire; the regression is retention. Closed unmerged in PR triage 2026-10-10; superseded by develop's smoothing=1e-5 + direction_blend 22/22 Tier 1 pass.
+
+**Next:** Treat runtime scheduling and polar truncation as confounders when attributing BCAP gate changes; compare under matched runtime before crediting a formulation change.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/ba593aab5c0e150da1c36005aece17816f074c7b/reports/forge/bcap-gaussian-regression/README.md) · [Record](records/pr342-343-bcap-gate-margin-context-v1.json)
+
+### bcap-smooth-polar-1e-4 · pr344-smoothed-dualnorm-1e-4-context-v1
+
+**Scope:** historical; family_context; revision `6d3d5b21144d85061fce6349b706e9c2800b0f96`.
+
+Does a fixed smoothed DualNorm scale of 1e-4 repair both serial Gaussian acquisition and word stability across the four truncation/threading combinations?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `smoothed_polar_dualnorm_scale`.
+
+
+
+Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four combinations, but words fail the original terminal stability gate in all four runs. 1e-5 was selected instead (merged PR345). Closed unmerged in PR triage 2026-10-10.
+
+**Next:** Keep smoothing at the selected 1e-5; do not raise it to 1e-4 without a word-stability falsifier.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -4053,6 +4181,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
+
+### bcap-dualnorm-convolution-v1 · readout-8b207a728977752808cf002c
+
+**Scope:** research_diagnostic; scientific; revision `dd0702302681db384f1f1a23e10bfd29a40bae4ccbfea5e01e872d8a4d1a9061`.
+
+Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.
+
+**Observed:** {'FAIL': 4}; wall seconds 100.267; mechanism `structural`.
+
+img_intensity2: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1; img_bars4: modes=2, hq=0.65625
+
+Per-offset smoothed DualNorm completed all four unchanged image tasks: {'FAIL': 4}; all 2400 declared updates ran. The prior four optimizer setup errors remain under the original source. Constant rates, fixed smoothing, seed0, no retries or annealing.
+
+**Next:** Use the recorded quality/coverage trajectories to assess the convolution adaptation. Keep the six original Tier1 passes and full original Tier2 readout; other eleven failures and Tier3 remain unaddressed.
+
+[Evidence](../../reports/forge/bcap-convolution/readout.json) · [Record](records/readout-8b207a728977752808cf002c.json)
 
 ### forge-onboarding-anchor-ablation · readout-8bfdfb8d2b1c3daf55f9b0bc
 
@@ -4422,6 +4566,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
 
+### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
+
+**Scope:** current; scientific; revision `72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8`.
+
+The single selected constant-rate BCAP/DualNorm smoothing=1e-5 recipe that acquired all six Tier 1 tasks can retain live quality and continued learning across the unchanged 21 required Tier 2 tasks. This is a frozen-recipe qualification stage, with no further tuning, seeds or learning-rate annealing.
+
+**Observed:** {'FAIL': 11, 'INCOMPLETE': 4, 'PASS': 13}; wall seconds 2005.605; mechanism `floor_constant`.
+
+
+
+Frozen BCAP smoothing=1e-5 retains 6/6 required Tier 1 passes; Tier 2 records {'FAIL': 11, 'PASS': 6, 'INCOMPLETE': 4}. Gaussian retains only 1/72 stationary checks and misses shifted reacquisition/hold. Words retain generation but lose inverse reconstruction; four image hosts reject convolution tensors before training. No learning-rate annealing, scientific retries, Tier 1 reruns, Tier 3 or default adoption. The frozen hypothesis signature misnames cdf_ks as ks; preserve its incomplete decision and report the actual scalar separately.
+
+**Next:** Keep the Tier 1 selection and these complete Tier 2 failures. Inspect saved retention and inverse-map trajectories; declare any smaller constant global rates or stronger fixed smoothing as a new bounded comparison. Convolution support requires a separately declared optimizer adaptation. Do not spend on Tier 3.
+
+[Evidence](../../reports/forge/bcap-tier2/readout.json) · [Record](records/readout-fa5fada954b7b255ec86d748.json)
+
 ### k3p · readout-faf4999394106140c8a2052e
 
 **Scope:** current; scientific; revision `2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce`.
@@ -4437,6 +4597,86 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-failure-saved-diagnosis-v1
+
+**Scope:** saved_output_and_checkpoint_diagnosis; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Explain why the adopted 1600-update Ring16 conditions retain an archived continuation PASS but fail current uninterrupted training before proposing another solution.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+The archived restored 1600-update PASS and current uninterrupted 1600-update FAIL share recipe, prior, initializer, 91 scientific files and all 14 final named RNG states. All 24 prefix observations through 400 match exactly; the first differing saved observation is 417. All 96 v3/v4 samples and metrics match. Current covariance error 2.22027 fails with zero full passes: 21 of 4096 outputs exceed 20 target sigmas, all assigned to component 11, which contributes 82.3% of the summed covariance errors. The other 15 components average 0.41875. The current roster records 22 numerical FAIL and one API BLOCKED. The exact first differing optimizer update and causal mechanism remain unresolved; original grades are preserved.
+
+**Next:** Declare a bounded CUDA diagnostic comparing continuation of a shared live prefix with restoration of its checkpoint before tuning. Then attribute far outputs to sampled prior rows and local generator mappings. A pass-once rule cannot repair zero full passing observations. This report adds no training, qualification or policy change.
+
+[Evidence](../../reports/forge/ring16-failure/results.json) · [Record](records/ring16-failure-saved-diagnosis-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-restart-diagnostic-v1
+
+**Scope:** cuda_checkpoint_boundary_reproduction; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Reproduce what actually changes when restoring Ring16 at400 versus continuing the live objects, with seed0, public initialization, recipe and draws fixed.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `numerical_sensitivity_diagnostic`.
+
+
+
+Restoring the fresh 400-update state and the original archived state each reproduces all 96 historical passing sample tensors exactly (covariance .514315, six terminal passes). Live continuation reproduces all 96 current failing covariance/HQ observations (final covariance 2.220268), but retains its postexecution metadata-error INCOMPLETE receipt and no qualification. At update 401, weights, real/latent inputs and the first six forwards agree; critic weight gradients differ by 1e-9 to 1e-8. A 1.03e-7 relative hidden-gradient change becomes a .252 relative polar-direction change because near-null singular directions receive unit weight. Named and ambient RNG states, batches and sampled indices match all 16 traced updates; four controls match the restored path exactly. Restoring live gradient buffers and module flags does not alter that result. No seed variation, scheduled randomization or subbatch repeats were tested.
+
+**Next:** Investigate damping or truncating almost-null singular directions under a separately declared global trainer delta, constant rates and unchanged full gates. Exact backward accumulation mechanism remains unresolved. Do not promote periodic reloads from this one fixed-state reproduction.
+
+[Evidence](../../reports/forge/ring16-failure/reproduction-results.json) · [Record](records/ring16-restart-diagnostic-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-runtime-and-interventions-v1
+
+**Scope:** cuda_runtime_and_weak_direction_diagnostics; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Isolate runtime rounding after Ring16 reload and test fixed weak-direction interventions under the same public initialization, prior, batches, constant rates and full distribution bounds.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `numerical_sensitivity_diagnostic`.
+
+
+
+Four CUDA controls exactly reproduce historical ordinary critic gradients. Serializing autograd only during update401 makes complete live/restored contexts identical but chooses a third trajectory; actual engine execution order and serialized1600 quality remain unmeasured. Identical topology but 1054/7503 changed sequence relations, versus zero for serialized controls, supports thread-local autograd counter history and accumulation ordering. No lossy checkpoint dtype conversion found. Continuous truncation confirms acquisition at684 (47terminal passes), continuous tiny-gradient noise at817 (45), and one-time sign flips at1300 (19). Truncation fails covariance at717/734/750/817 and noise at850 after acquisition, so never-leaves-goal retention is not established. Damping/noise at401 pass terminal quality but fail their one first-pass confirmation; continuous damping/sign flips have zero full passes. All original receipt statuses and gates are preserved.
+
+**Next:** Prioritize deterministic continuous truncation and retain weak-gradient noise as a second supported candidate for a separately frozen whole-configuration Tier1 comparison. Exact reload attribution needs scoped graph-construction/scheduling controls or executed-node order capture. Run Tier2 retention only after required ordinary gates pass. Stop completed every-step damping/sign-flip negatives; no seed study, automatic continuation, default adoption or qualification follows.
+
+[Evidence](../../reports/forge/ring16-followup/results.json) · [Record](records/ring16-runtime-and-interventions-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-live-v1
+
+**Scope:** cuda_uninterrupted_serialized_autograd_quality; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Does always-serialized fresh live Ring16 reach the target without restart, and does the previously measured serialization-only401 third trajectory acquire it?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `autograd_execution_order_diagnostic`.
+
+
+
+Both CUDA arms complete1600 uninterrupted updates. Always-serialized first passes1400 but fails its one independent confirmation (covariance .894789); then fails1417 and passes final11 checks1434..1600, final covariance .385800. Serializing only401 matches original400 and third-trajectory401 contexts exactly; confirms acquisition867 and passes all45 checks867..1600, final covariance .424426. Identical initial tensors, recipe, prior, target batches, gates and cadence verified against prior continuous truncation/noise; every public numerical package file is unchanged. Truncation/noise acquire earlier and retain their original post-acquisition failures. No indefinite retention, ordinary qualification or default adoption follows.
+
+**Next:** Prioritize deterministic continuous truncation for a separately frozen whole-configuration Tier1 comparison; keep weak-gradient noise second. Serialization reaches late quality and preserves execution mode in checkpoints, but failed first-state confirmation prevents this continuous arm claiming smoke. Do not adopt scheduled401 interventions/restarts or spend automatically on Tier2.
+
+[Evidence](../../reports/forge/ring16-followup/serialized-live-results.json) · [Record](records/ring16-serialized-live-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-truncation-v1
+
+**Scope:** cuda_uninterrupted_serialized_truncation_quality; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Do continuous serialized autograd and the fixed measured spectral truncation rule together acquire Ring16 and retain full scheduled quality through1600 without restart?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `spectral_truncation_and_autograd_execution_order`.
+
+
+
+One fresh live CUDA run completes1600 updates, confirms acquisition1050 (independent covariance .817187), and passes every scheduled check1050..1600:34 full passes, zero post-acquisition failures. Final covariance .470678, HQ .956055, massTV .078613 and min eigen ratio .387340 pass all original bounds. Matched initialization/recipe/prior/all1600 target batches/cadence/gates and unchanged public numerical package verified against source-bound continuous truncation and serialization; no controls rerun. Truncation acquires earlier684 and settles834; the combination settles1050 with lower final covariance. Compatibility is demonstrated in this fixed cohort; universal superiority, combined restart parity, indefinite retention and ordinary qualification are not established.
+
+**Next:** Retain continuous truncation and the combination for a separately frozen whole-configuration Tier1 comparison. Preserve failed individual-arm confirmations; no scheduled interventions/restarts, empirical speed ranking, default adoption or automatic Tier2 spend.
+
+[Evidence](../../reports/forge/ring16-followup/serialized-truncation-results.json) · [Record](records/ring16-serialized-truncation-v1.json)
 
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
 
@@ -4790,14 +5030,32 @@ All three existing families pass the unchanged 20,001-update, 24-check/five-term
 
 [Evidence](../../reports/forge/word-root-cause/summary.json) · [Record](records/word-diagnostic-readout-46dd1b58096a2b9d65e90c5a.json)
 
+### technique-inventory-word-split-v1 · word-split-inventory-v1-readout
+
+**Scope:** source_bound_campaign_readout; scientific; revision `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`.
+
+A confirmed can-it-pass joint five-word smoke separates acquisition from continuing hold while preserving all generation and inverse bounds.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `task_gate_reform`.
+
+
+
+Five runnable selected families each pass 5/6 required Tier 1 tasks and all acquire five words. BCAP fails only Gaussian; K3P, KA2, R1/R2 and released GAN v3 MoG fail only ring16. E22/Atlas remain preflight-blocked. No ordinary Tier 2 work is eligible. All 35 CUDA attempts complete for 1796.544469 paid seconds; all 31 available scalar endpoint comparisons match the previous post-truncation cohort. No scientific retries or source pooling.
+
+**Next:** Keep the acquisition/hold split. The prepared constant positive-smoothing BCAP comparison is the next bounded option; preserve full smoke gates and require all six passes before Tier 2. No search or default adoption follows automatically.
+
+[Evidence](../../reports/forge/word-split-inventory/readout.json) · [Record](records/word-split-inventory-v1-readout.json)
+
 ## Compact publications and closed partial cuts
 
 These study and trial projections preserve recorded outcomes, unknowns and source cohorts. They do not regrade archived science or replace original receipts. Overlapping study/trial costs must not be summed.
 
 [Normalized publication records](publication-records.json). Search exact IDs, failed requirement metric names, mechanisms and goals with `forge recall`. Check current input coverage with `forge compile --check`.
 
+- **bcap-tier2-search-v1--7**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--7.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-global-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-ka2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-ka2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-original-full19-retest**: Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-prefix5-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier1-refresh-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v6.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4806,12 +5064,14 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-bcap-nsgda-global-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round3-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **pr223-original-full19-retest**: Closed original19 cut: 16/19 PASS, 0 FAIL, 3 unavailable. Final accepted status INCOMPLETE; required execution counts {'INVALID': 1, 'NOT_RUN': 2, 'PASS': 16}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-stopped17-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-six-smoothing-v1**: Concluded 3 whole configurations. Recorded selection: qualified_winner; default adoption False. [Source](../../reports/forge/configuration-search/bcap-six-smoothing-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-sgda-tier1-v1**: Concluded 5 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-sgda-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-k3p-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-k3p-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-sgda-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-sgda-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-bcap-dualnorm-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-bcap-dualnorm-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-tier1-refresh-v1**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-input-noise-tier1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-input-noise-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4830,35 +5090,47 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-dualnorm-pacing-v2-a**: Concluded 20 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-a.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-dualnorm-momentum-tier1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-dualnorm-momentum-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--11**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--11.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-ada-nsgda-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-ada-nsgda-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-nsgda-layer-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-nsgda-layer-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--13**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--13.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-sgda-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-sgda-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pure-bcap-non-saturating-joint-rates-v2**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-non-saturating-joint-rates-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-release07-gan-v3-mog-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-release07-gan-v3-mog-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-ada-nsgda-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-ada-nsgda-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-direct-moments-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--5**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-k3p-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-k3p-v6.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--0**: Concluded 24 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--0.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--6**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-tier1-v3**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-ka2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-ka2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--12**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--12.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-r1r2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-r1r2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pure-bcap-relativistic-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-modern-toy-v1**: Concluded 4 whole configurations. Recorded selection: qualified_winner; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-modern-toy-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-dualnorm-d-only-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-dualnorm-d-only-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **family-winner-round1**: 60 configurations; finite_screen_complete_no_fully_qualified_config. Capacity, a smoke pass or a good final endpoint does not qualify a whole configuration. Calibration and separately registered confirmation/robustness remain required. External GPU contention disables speed ranking. [Source](../../reports/forge/family-winner-round1/campaign-completion.json) · [Board](../../reports/forge/family-winner-round1/README.md)
 - **pure-bcap-least-squares-joint-rates-v2**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-least-squares-joint-rates-v2.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--8**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--8.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-sgda-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-sgda-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-tier1-v2**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--10**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--10.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--9**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--9.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-release07-gan-v3-mog-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-release07-gan-v3-mog-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-nsgda-global-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-nsgda-global-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-overnight-search-v1--0**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-overnight-search-v1--0.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-continuation**: Native3 continuation: 0/3 PASS, 0 FAIL, 3 unavailable; final accepted INCOMPLETE. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes prior case debit once and cumulative metadata once. [Source](../../reports/forge/pr223-native3-first-invalid-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-release07-gan-v3-mog-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-release07-gan-v3-mog-v4.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4871,6 +5143,9 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-bcap-dualnorm-d-only-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-d-only-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-repaired-continuation**: Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once. [Source](../../reports/forge/pr223-native3-repaired-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-bcap**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-bcap.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--15**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--15.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--3**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--3.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-release07-gan-v3-mog-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-release07-gan-v3-mog-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pure-bcap-wasserstein-joint-rates-v2**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/pure-bcap-wasserstein-joint-rates-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-dualnorm-zero-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-r1r2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-r1r2.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4881,13 +5156,18 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v4.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-overnight-search-v1--1**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-overnight-search-v1--1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **word-split-inventory-k3p-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-k3p-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v5.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-release07-gan-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-dualnorm-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-dualnorm-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--4**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round4-prior-balance-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **ka2-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--14**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--14.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-sgda-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-sgda-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-dualnorm-pacing-v2-b-006d03f6c1648102**: Concluded 3 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-b-006d03f6c1648102.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-tier2-search-v1--2**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 
 ## Unresolved imports and limitations
@@ -4902,4 +5182,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `8bb5dac739151d52d7884344f1c975925e32db36c15d906dc90f8072864323a3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `2b6d180877a78478a3557abb890a2e3a1df47e736140fc26ee0a41fea7684faa`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -70,6 +70,7 @@ For each task-owned training update:
 - The cap is a soft loss penalty on critic input gradients, not a hard bound on parameter gradients. The L2 norm is not divided by input dimension.
 - Corrected joint-host candidates use both generator and encoder adversarial terms. Earlier incompatible receipts preserve their original source and verdicts.
 - BCAP with K3P retains its additional K3P training mechanisms and is reported as a separate formulation.
+- The opt-in per-offset DualNorm convolution extension completes the four previously unsupported image tasks, but all four sustained gates fail. This separate source-bound diagnostic retains constant learning rates and does not replace the selected configuration or original Tier 2 setup errors. See [the convolution readout](../bcap-convolution/README.md).
 
 <details>
 <summary>Implementation and recipe sources</summary>
@@ -83,6 +84,9 @@ These links support the explanation. Recorded results below remain bound to thei
 - [configs/forge/ideas/bcap-pure-adam-v2.json](../../../configs/forge/ideas/bcap-pure-adam-v2.json)
 - [reports/forge/pure-bcap/README.md](../pure-bcap/README.md)
 - [particlegan/optim/dualnorm.py](../../../particlegan/optim/dualnorm.py)
+- [docs/dualnorm-convolution.md](../../../docs/dualnorm-convolution.md)
+- [reports/forge/bcap-convolution/README.md](../bcap-convolution/README.md)
+- [reports/forge/bcap-convolution/readout.json](../bcap-convolution/readout.json)
 
 </details>
 
@@ -96,16 +100,16 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [bcap-pure-adam-v2](../../../configs/forge/ideas/bcap-pure-adam-v2.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895`. Candidate revision: `7ba8741d2362acb8d7952bbba5742725e62a7d255bd5c3676c2c339bce82c347`. Runtime cohort: `518c5f0cc2d48256a2ad06c42640bd9a1bfee09d871e6eadfc8074076d55fe2c`.
+Source digest: `cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec`. Candidate revision: `806ae1707bf9ca246f21fc3a4a11eb8b536dc3002bf5c1febbbb166ad141dfcc`. Runtime cohort: `d5b60bbfb8572dae1be7de3d1c951499ca7cec4e91824b8154dfcd5257d13510`.
 
-[Frozen numerical evidence](../technique-evidence/7c4e188f1ee495526c2decf6f02a45f392123aaf4f33f1f6fb9a398fe3ac05e7.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: unmeasured_declaration. No new execution: the preselected configuration refuses its control task map. Display the actual canonical CUDA declaration, which requires a registered study before enqueue; preserve every unresolved alternative and all historical evidence separately, with no source/outcome ranking or qualification.
+Selection: historical_incumbent. Preserve the exact existing unmeasured CUDA declaration when measured family selections use different sources. No attempt, measured gate, qualification or default-adoption credit.
 
 </details>
 
@@ -113,7 +117,7 @@ Selection: unmeasured_declaration. No new execution: the preselected configurati
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation) | [0(*)/3](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0(*)/23](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0(*)/4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0(*)/30](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0(*)/6](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/20](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0(*)/28](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0(*)/6](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0(*)/21](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0(*)/29](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
 | [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0(*)/3](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0(*)/24](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0(*)/3](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0(*)/24](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0(*)/3](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0(*)/22](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
@@ -134,13 +138,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | matches recorded run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | changed since run |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | UNKNOWN | matches recorded run |
-| [five_word_joint_acquisition](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | matches recorded run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | changed since run |
 | [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | matches recorded run |
 | [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | matches recorded run |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-2"></a>
 
@@ -150,20 +154,21 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | changed since run |
 | [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
 | [grid100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_bars4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_blobs4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_intensity2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_stripes2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [rotated100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [staggered100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [vector_anisotropic](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [vector_overlap](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [vector_spiral](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
@@ -203,9 +208,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-2"></a>
 
@@ -213,11 +218,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -240,6 +245,194 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [target_shift_recovery](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1"></a>
+
+## bcap-develop-integration-deeper-diagnostic-v1
+
+**bcap-develop-integration-deeper-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-develop-integration-deeper-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | UNKNOWN | matches recorded run |
+| [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
+| [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_width](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_anisotropic](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_overlap](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_spiral](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | diagnostic | UNKNOWN | matches recorded run |
+| [img_stripes2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | diagnostic | UNKNOWN | matches recorded run |
+| [img_bars4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_blobs4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_intensity2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | UNKNOWN | matches recorded run |
+| [grid100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | UNKNOWN | matches recorded run |
+| [rotated100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | UNKNOWN | matches recorded run |
+| [staggered100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1"></a>
+
+## bcap-projection-baseline-repair-diagnostic-v1
+
+**bcap-projection-baseline-repair-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-projection-baseline-repair-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | UNKNOWN | changed since run |
+| [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | UNKNOWN | changed since run |
+| [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_width](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_anisotropic](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | UNKNOWN | matches recorded run |
+| [grid100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | UNKNOWN | matches recorded run |
+| [rotated100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | UNKNOWN | matches recorded run |
+| [staggered100](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1"></a>
+
+## bcap-tier1-stability-diagnostic-v1
+
+**bcap-tier1-stability-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-tier1-stability-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | UNKNOWN | changed since run |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1"></a>
+
+## bcap-tier1-stability-repairs-diagnostic-v1
+
+**bcap-tier1-stability-repairs-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | UNKNOWN | changed since run |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap_convolution_images"></a>
+
+## bcap_convolution_images
+
+**bcap_convolution_images — revision 1**. [View declaration](../../../configs/forge/views/bcap_convolution_images.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Four source-bound image diagnostics do not qualify a new source or adopt public defaults.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [img_stripes2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | diagnostic | UNKNOWN | matches recorded run |
+| [img_bars4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_blobs4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_intensity2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous"></a>
 
@@ -264,9 +457,9 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2"></a>
@@ -275,11 +468,11 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -313,11 +506,11 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 7**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 8**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 20 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 21 / 2**.
 
-Calibration: **provisional**. Revision7 smoke/stability separation is provisional and requires bounded calibration before default adoption. Historical Gaussian acquisition evidence retains its original sigma.025 cohort and five-terminal gate.
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1"></a>
 
@@ -326,11 +519,11 @@ Calibration: **provisional**. Revision7 smoke/stability separation is provisiona
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | UNKNOWN | matches recorded run |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 | [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | UNKNOWN | matches recorded run |
-| [five_word_joint_acquisition](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition) | required | UNKNOWN | matches recorded run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | UNKNOWN | changed since run |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -340,11 +533,12 @@ Calibration: **provisional**. Revision7 smoke/stability separation is provisiona
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | required | UNKNOWN | matches recorded run |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | changed since run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -385,9 +579,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2"></a>
 
@@ -395,11 +589,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -455,9 +649,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2"></a>
 
@@ -465,11 +659,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -554,9 +748,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | matches recorded run |
-| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | matches recorded run |
-| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | matches recorded run |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | UNKNOWN | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | UNKNOWN | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | UNKNOWN | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-2"></a>
 
@@ -564,11 +758,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -640,11 +834,11 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -762,11 +956,11 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -787,41 +981,6 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
-
-<a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition"></a>
-
-### five_word_joint_acquisition
-
-**five_word_joint_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
-
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
-
-Execution: **no recorded execution (*)**.
-
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
-
-Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
-
-Current pass criteria:
-
-| Metric | Required bound |
-| --- | --- |
-| sample_count | >= 1024 |
-| quality_fraction | >= 0.95 |
-| modes | == 5 |
-| mass_tv | <= 0.1 |
-| reconstruction_exact | == 1 |
-| minimum_reconstruction_token_probability | >= 0.9 |
-
-At least 5 consecutive passing terminal observations.
-All 24 declared observations and final live metrics are required.
-Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = True.
-
-Declared budget: 20001 updates; timeout 900 seconds.
-
-Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
-
-[Explanation and existing training artifacts](../five-word-joint/README.md)
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -857,6 +1016,74 @@ Declared budget: 20001 updates; timeout 900 seconds.
 Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../five-word-joint/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold"></a>
+
+### five_word_joint_hold
+
+**five_word_joint_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
+
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+
+Execution: **no recorded execution (*)**.
+
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = False.
+
+Declared budget: 4000 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: five_word_joint_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke"></a>
+
+### five_word_joint_smoke
+
+**five_word_joint_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
+
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
+
+Execution: **no recorded execution (*)**.
+
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -902,7 +1129,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -935,7 +1162,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -971,7 +1198,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1170,7 +1397,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1224,7 +1451,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1278,7 +1505,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1332,7 +1559,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1382,11 +1609,11 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -1420,7 +1647,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1444,11 +1671,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1477,7 +1704,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1605,7 +1832,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1726,7 +1953,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1866,11 +2093,11 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1893,11 +2120,11 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2009,11 +2236,11 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2038,11 +2265,11 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2100,7 +2327,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2160,7 +2387,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2216,7 +2443,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2272,7 +2499,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2332,7 +2559,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2394,7 +2621,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2450,7 +2677,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [bcap-pure · 5ea5bdbb2d71](../../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 7. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 8. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -2467,7 +2694,7 @@ Selection: historical_incumbent. Initial finite Pure BCAP round: required Tier 1
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4(*)/30](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3(*)/6](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/20](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/28](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3(*)/6](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/21](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/29](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage) |
@@ -2490,7 +2717,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | --- | --- | --- | --- |
 | [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | changed since run |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | PASS | matches recorded run |
-| [five_word_joint_acquisition](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | changed since run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | changed since run |
 | [two_pole](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | changed since run |
@@ -2505,6 +2732,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [grid100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-grid100) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_bars4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
@@ -2595,6 +2823,194 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | --- | --- | --- | --- |
 | [target_shift_recovery](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
+<a name="cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1"></a>
+
+## bcap-develop-integration-deeper-diagnostic-v1
+
+**bcap-develop-integration-deeper-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-develop-integration-deeper-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
+| [mode_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_two_broad](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_width](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_anisotropic](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_overlap](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_spiral](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | diagnostic | UNKNOWN | matches recorded run |
+| [img_stripes2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | diagnostic | UNKNOWN | matches recorded run |
+| [img_bars4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_blobs4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_intensity2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | diagnostic | UNKNOWN | matches recorded run |
+| [grid100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-grid100) | diagnostic | UNKNOWN | matches recorded run |
+| [rotated100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | diagnostic | UNKNOWN | matches recorded run |
+| [staggered100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1"></a>
+
+## bcap-projection-baseline-repair-diagnostic-v1
+
+**bcap-projection-baseline-repair-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-projection-baseline-repair-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | diagnostic | PASS | changed since run |
+| [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | diagnostic | PASS | changed since run |
+| [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | diagnostic | PASS | changed since run |
+| [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | diagnostic | FAIL | changed since run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [trajectory](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [vector_unequal_mass](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_unequal_width](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | diagnostic | UNKNOWN | matches recorded run |
+| [vector_anisotropic](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | diagnostic | UNKNOWN | matches recorded run |
+| [grid100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-grid100) | diagnostic | UNKNOWN | matches recorded run |
+| [rotated100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | diagnostic | UNKNOWN | matches recorded run |
+| [staggered100](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-diagnostic-v1"></a>
+
+## bcap-tier1-stability-diagnostic-v1
+
+**bcap-tier1-stability-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-tier1-stability-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | diagnostic | PASS | changed since run |
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-repairs-diagnostic-v1"></a>
+
+## bcap-tier1-stability-repairs-diagnostic-v1
+
+**bcap-tier1-stability-repairs-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-repairs-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | diagnostic | PASS | changed since run |
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-repairs-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap-tier1-stability-repairs-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap_convolution_images"></a>
+
+## bcap_convolution_images
+
+**bcap_convolution_images — revision 1**. [View declaration](../../../configs/forge/views/bcap_convolution_images.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Four source-bound image diagnostics do not qualify a new source or adopt public defaults.
+
+<a name="cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [img_stripes2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | diagnostic | UNKNOWN | matches recorded run |
+| [img_bars4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_blobs4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | diagnostic | UNKNOWN | matches recorded run |
+| [img_intensity2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | diagnostic | UNKNOWN | matches recorded run |
+
+<a name="cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous"></a>
 
 ## clockfree_continuous
@@ -2667,11 +3083,11 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 7**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 8**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 20 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 21 / 2**.
 
-Calibration: **provisional**. Revision7 smoke/stability separation is provisional and requires bounded calibration before default adoption. Historical Gaussian acquisition evidence retains its original sigma.025 cohort and five-terminal gate.
+Calibration: **provisional**. Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-1"></a>
 
@@ -2684,7 +3100,7 @@ Calibration: **provisional**. Revision7 smoke/stability separation is provisiona
 | [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | changed since run |
 | [ae_gan_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [ring16_acquisition](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | FAIL | changed since run |
-| [five_word_joint_acquisition](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | FAIL | changed since run |
+| [five_word_joint_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
@@ -2694,6 +3110,7 @@ Calibration: **provisional**. Revision7 smoke/stability separation is provisiona
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold) | required | UNKNOWN | recorded definition unavailable |
 | [trajectory](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | changed since run |
 | [residual_student](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | changed since run |
 | [unipolar](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | changed since run |
@@ -2994,11 +3411,11 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -3139,11 +3556,11 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -3164,58 +3581,6 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
-
-<a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition"></a>
-
-### five_word_joint_acquisition
-
-**five_word_joint_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
-
-Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
-
-Actual task device: `1` (recorded execution receipt).
-
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
-
-Recorded final metric checks:
-
-| Metric | Measured | Recorded bound | Recorded check |
-| --- | ---: | --- | --- |
-| mass_tv | 1 | <= 0.1 | FAIL |
-| minimum_reconstruction_token_probability | 0 | >= 0.9 | FAIL |
-| modes | 0 | == 5 | FAIL |
-| quality_fraction | 0 | >= 0.95 | FAIL |
-| reconstruction_exact | 0 | == 1 | FAIL |
-| sample_count | 1024 | >= 1024 | PASS |
-
-Recorded terminal passing observations: **0**; required: 5.
-
-[Compact metrics and receipt provenance](../technique-receipts/6f806410852b4ff0a3482569b3b3fc99.json)
-
-[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/five_word_joint_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
-
-Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
-
-Current pass criteria:
-
-| Metric | Required bound |
-| --- | --- |
-| sample_count | >= 1024 |
-| quality_fraction | >= 0.95 |
-| modes | == 5 |
-| mass_tv | <= 0.1 |
-| reconstruction_exact | == 1 |
-| minimum_reconstruction_token_probability | >= 0.9 |
-
-At least 5 consecutive passing terminal observations.
-All 24 declared observations and final live metrics are required.
-Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = True.
-
-Declared budget: 20001 updates; timeout 900 seconds.
-
-Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
-
-[Explanation and existing training artifacts](../five-word-joint/README.md)
 
 <a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -3251,6 +3616,70 @@ Declared budget: 20001 updates; timeout 900 seconds.
 Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../five-word-joint/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold"></a>
+
+### five_word_joint_hold
+
+**five_word_joint_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
+
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = False.
+
+Declared budget: 4000 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: five_word_joint_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke"></a>
+
+### five_word_joint_smoke
+
+**five_word_joint_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
+
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
 <a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -3296,7 +3725,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
 Current pass criteria:
 
@@ -3327,7 +3756,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Used by: [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2).
 
 Current pass criteria:
 
@@ -3361,7 +3790,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -3560,7 +3989,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3614,7 +4043,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3668,7 +4097,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3722,7 +4151,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3772,11 +4201,11 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -3810,7 +4239,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -3834,11 +4263,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -3867,7 +4296,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
 Recorded final metric checks:
 
@@ -4012,7 +4441,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4133,7 +4562,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4273,11 +4702,11 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4300,11 +4729,11 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -4429,11 +4858,11 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -4458,11 +4887,11 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -4533,7 +4962,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4593,7 +5022,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4649,7 +5078,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4705,7 +5134,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4765,7 +5194,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4827,7 +5256,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
+Used by: [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 

@@ -519,8 +519,10 @@ def test_current_report_has_one_guide_per_question_and_preserves_receipt_identit
     assert "restart" in clock["goal"]
 
 
-def test_committed_tier_report_matches_current_declarations_and_artifacts():
+def test_committed_tier_report_matches_current_declarations_and_artifacts(tmp_path):
     from experiments.forge.tier_report import REPORT_PATH
-    assert (ROOT / REPORT_PATH).read_text() == render_markdown(build_report(ROOT), ROOT, ROOT / REPORT_PATH), (
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
+    assert (root / REPORT_PATH).read_text() == render_markdown(build_report(root), root, root / REPORT_PATH), (
         "Regenerate with: python -m experiments.forge experiments-by-tier "
         "--output reports/forge/EXPERIMENTS_BY_TIER.md")

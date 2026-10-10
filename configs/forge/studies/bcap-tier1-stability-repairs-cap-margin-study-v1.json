@@ -1,0 +1,58 @@
+{
+  "campaign": {
+    "budget_seconds": 600,
+    "candidate_budget_seconds": 300,
+    "id": "bcap-tier1-stability-repairs-ablations-v1"
+  },
+  "candidate": "bcap-tier1-stability-repairs-cap-margin-v1",
+  "competing_explanation": "Subsequent particle movement changes slope probe locations; stronger critic restraint may prevent sufficient movement or alter other tasks.",
+  "control": {
+    "candidate_id": "bcap-tier1-stability-combined-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "A 0.1 cap margin absorbs observed finite critic-step excursions.",
+  "id": "bcap-tier1-stability-repairs-cap-margin-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "cb5ed608f06148e4b746fee8924afdfa",
+        "gate_status": "FAIL"
+      },
+      "path": "reports/forge/bcap-tier1-stability/results.json",
+      "selector": [
+        "rows",
+        5
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-tier1-stability-repairs-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

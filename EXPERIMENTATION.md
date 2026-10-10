@@ -6,6 +6,17 @@ candidate revisions through goal-specific leaderboards.
 
 Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
+For BCAP repair ideas, also read the completed
+[five-theory comparison](reports/forge/bcap-physics/README.md), including its
+source-bound readouts and unresolved gates.
+The subsequent [round-two readout](reports/forge/bcap-physics/round2/README.md)
+records a scoped sustained unequal-mass repair and remaining failures.
+The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
+sustained conditional identity repairs while preserving the remaining failures.
+The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
+smaller conditional repair and measures composition, finite overshoot and tails.
+The [round-five readout](reports/forge/bcap-physics/round5/README.md) measures a
+combined conditional/rare repair and a width repair with rare/native regressions.
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 The [Forge preparation review map](docs/forge-integration-review-map.md) records
@@ -271,15 +282,27 @@ task, source, prior, initialization, sampling and runtime bindings.
 
 The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
 scalar Gaussian can-it-pass smoke, three existing 300-second behavior tasks,
-the 300-second ring acquisition and the 900-second word acquisition.
-The explicit `tier1-gaussian-smoke-v1` campaign caps required-smoke campaign and
+the 300-second ring acquisition and the 900-second confirmed word smoke.
+The explicit `tier1-word-smoke-v1` campaign caps required-smoke campaign and
 candidate reservations at that amount. Its Gaussian task requires any passing
 scheduled state plus independent same-state confirmation, and completes all
 1,000 updates. The continuing Gaussian retention/target-shift task is required
 Tier 2 with its own passing smoke checkpoint dependency and 600-second allowance.
-Revision 7 has required counts 6/20/2; its full through-Tier-2 reservation is
-42,420 seconds per candidate (42,720 including the optional 300-second clock
-audit diagnostic). The historical `tier1-acquisition-v2` remains unchanged. Revision 3's `tier1-acquisition-v1` retains its
+The five-word Tier 1 smoke also completes all 20,001 updates, with 24 independent
+same-state confirmation pairs and the unchanged full generation/inverse bounds.
+It certifies its earliest confirmed passing checkpoint. Required Tier 2 word hold
+restores that exact own state and checks the restored state plus 24 scheduled
+states during 4,000 additional updates; every primary and confirmation check
+must pass. Its allowance is 300 seconds, and its recipe, prior, architecture,
+optimizer histories, streams and original 20,000-update schedule horizon remain
+unchanged. The original sustained `five_word_joint_acquisition` declaration and
+its evidence remain historical. See the [split readout](reports/forge/five-word-tier-split/README.md).
+Revision 8 has required counts 6/21/2; its full through-Tier-2 reservation is
+42,720 seconds per candidate (43,020 including the optional 300-second clock
+audit diagnostic). The new default `technique-inventory-word-split-v1` campaign
+reserves 46,620 seconds per family through Tier 3, including the diagnostic,
+and 326,340 seconds for the seven selected families. Historical campaigns,
+including `tier1-gaussian-smoke-v1` and `tier1-acquisition-v2`, remain unchanged. Revision 3's `tier1-acquisition-v1` retains its
 2,100-second cap; historical `smoke.json` retains its 900-second cap. Neither
 covers the complete revision-4 Tier 1.
 Task timeouts live in each task's `resources.timeout_seconds`. Larger campaigns
@@ -381,13 +404,13 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 4) | Purpose |
+| Qualification tier | Current stability profile (revision 8) | Purpose |
 | --- | --- | --- |
-| 1: smoke | `gaussian1d_acquisition`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_acquisition`; 21,931 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and acquisition checks; placement remains provisional |
-| 2: quality | 19 hosts, including three 7,000-update native coverage/accuracy gates | Require useful sustained live quality across families |
+| 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
+| 2: quality | 21 hosts, including own-checkpoint Gaussian stability, five-word hold and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
 | 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
 
-The current required denominator is 6/19/2. Revision 3's 5/19/2 and revision 2's
+The current required denominator is 6/21/2. Revision 7's 6/20/2, revision 3's 5/19/2 and revision 2's
 published 3/19/2 results remain historical evidence; adding acquisition requirements
 does not regrade them or transfer API demonstrations into Forge qualification.
 The expanded smoke profile needs calibration before scientific adoption.
@@ -576,9 +599,9 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/20/2
-for the current revision-7 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 3 (5/19/2) until
+techniques reserve no training resources. Required denominators are 6/21/2
+for the current revision-8 `discriminator_stability` view, including unknown and blocked
+cells. The current publication retains its recorded revision 7 (6/20/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.

@@ -303,7 +303,8 @@
       },
       "candidates": [
         "bcap-dualnorm-zero-v1",
-        "bcap-dualnorm-momentum-v1"
+        "bcap-dualnorm-momentum-v1",
+        "bcap-dualnorm-smoothed-v1"
       ],
       "canonical_candidate": "bcap-dualnorm-momentum-v1",
       "id": "bcap-dualnorm",
@@ -371,6 +372,261 @@
       ],
       "unmeasured_display_backend": "cuda",
       "unmeasured_display_reason": "Declaration-only placeholder in the CUDA view used by all current measurement pins; no execution or qualification credit."
+    },
+    {
+      "candidates": [
+        "bcap-develop-integration-combined-v1"
+      ],
+      "canonical_candidate": "bcap-develop-integration-combined-v1",
+      "id": "bcap-develop-integration-combined-v1",
+      "label": "BCAP historical configuration: develop integration combined",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-develop-integration-winner-v1"
+      ],
+      "canonical_candidate": "bcap-develop-integration-winner-v1",
+      "id": "bcap-develop-integration-winner-v1",
+      "label": "BCAP historical configuration: develop integration winner",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-projection-baseline-review-baseline-v1"
+      ],
+      "canonical_candidate": "bcap-projection-baseline-review-baseline-v1",
+      "id": "bcap-projection-baseline-review-baseline-v1",
+      "label": "BCAP historical configuration: projection baseline review baseline",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-projection-baseline-review-direction-v1"
+      ],
+      "canonical_candidate": "bcap-projection-baseline-review-direction-v1",
+      "id": "bcap-projection-baseline-review-direction-v1",
+      "label": "BCAP historical configuration: projection baseline review direction",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-three-phase-cap-margin-v1"
+      ],
+      "canonical_candidate": "bcap-three-phase-cap-margin-v1",
+      "id": "bcap-three-phase-cap-margin-v1",
+      "label": "BCAP historical configuration: three phase cap margin",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-three-phase-finite-cap-v1"
+      ],
+      "canonical_candidate": "bcap-three-phase-finite-cap-v1",
+      "id": "bcap-three-phase-finite-cap-v1",
+      "label": "BCAP historical configuration: three phase finite cap",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-three-phase-incumbent-v1"
+      ],
+      "canonical_candidate": "bcap-three-phase-incumbent-v1",
+      "id": "bcap-three-phase-incumbent-v1",
+      "label": "BCAP historical configuration: three phase incumbent",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-combined-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-combined-v1",
+      "id": "bcap-tier1-stability-combined-v1",
+      "label": "BCAP historical configuration: tier1 stability combined",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-incumbent-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-incumbent-v1",
+      "id": "bcap-tier1-stability-incumbent-v1",
+      "label": "BCAP historical configuration: tier1 stability incumbent",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-projection-global-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-projection-global-v1",
+      "id": "bcap-tier1-stability-projection-global-v1",
+      "label": "BCAP historical configuration: tier1 stability projection global",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-projection-local-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-projection-local-v1",
+      "id": "bcap-tier1-stability-projection-local-v1",
+      "label": "BCAP historical configuration: tier1 stability projection local",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-projection-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-projection-v1",
+      "id": "bcap-tier1-stability-projection-v1",
+      "label": "BCAP historical configuration: tier1 stability projection",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-repairs-cap-margin-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-repairs-cap-margin-v1",
+      "id": "bcap-tier1-stability-repairs-cap-margin-v1",
+      "label": "BCAP historical configuration: tier1 stability repairs cap margin",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-repairs-finite-cap-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-repairs-finite-cap-v1",
+      "id": "bcap-tier1-stability-repairs-finite-cap-v1",
+      "label": "BCAP historical configuration: tier1 stability repairs finite cap",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "bcap-tier1-stability-transport-v1"
+      ],
+      "canonical_candidate": "bcap-tier1-stability-transport-v1",
+      "id": "bcap-tier1-stability-transport-v1",
+      "label": "BCAP historical configuration: tier1 stability transport",
+      "rationale": "Editorial registration of the existing source-bound research card. Original family and candidate identities remain exact. This configuration is an archived alternative; the explicitly pinned BCAP configuration remains the current benchmark. No gate, qualification or outcome-based reselection follows.",
+      "reporting_family": "bcap-pure",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "optimizer-interventions"
+      ]
     }
   ],
   "historical_families": [

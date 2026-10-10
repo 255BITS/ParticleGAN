@@ -1,0 +1,34 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "all_arms_complete": true,
+    "all_boundary_prefixes_exact": true,
+    "all_frozen_bindings_match": true,
+    "all_receipt_artifact_hashes_match": true,
+    "all_training_batches_match": true,
+    "five_raw_archive_sha256_match": true,
+    "qualification_unchanged": true
+  },
+  "compiled_memory_refresh": "PASS; summaries-only in clean reporting checkout; published qualification manifest preserved",
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "qualification_input": false,
+  "raw_artifact_hashes_checked": 68,
+  "relative_report_links_checked": 24,
+  "scope": "saved_receipt_and_frozen_source_validation",
+  "software_checks": {
+    "compile-check": {
+      "sha256": "7848c0017f6da660e8d530a635ca17ba298f4e42995598b14f411797657598d2",
+      "status": "PASS"
+    },
+    "forge-validate": {
+      "sha256": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a",
+      "status": "PASS"
+    },
+    "history-check": {
+      "sha256": "14e129453be38d973f9434b1d77486eff685300afb525aa59686f106fe28bd62",
+      "status": "PASS"
+    }
+  },
+  "source_result_sha256": "883a107ee646612ee59f0f3aad3c57e4b30723f6f36161d47d4ee23639289b8d"
+}

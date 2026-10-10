@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.loss=hinge; public two-stream joint objective",
+    "Retain positive BCAP and per-offset smoothed DualNorm"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-tier2-search/STUDY.md",
+  "id": "bcap-dualnorm-conv-hinge-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Combine the existing public adversarial loss with the enabled BCAP convolution optimizer. No new training loop or host adaptation.",
+  "parent": "bcap-dualnorm-convolution-v1",
+  "prior_art": [
+    "bcap-dualnorm-convolution-v1",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "hinge",
+    "lr": 0.012,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 1e-05,
+    "prior_lr_mult": 2.5
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}

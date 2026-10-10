@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 import math
+import os
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,8 @@ from experiments.forge.word_adapter import run_word, word_context
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DEVICE = os.environ.get("PARTICLEGAN_TEST_CUDA_DEVICE", "cuda:0")
+CUDA_ONLY = pytest.mark.skipif(not torch.cuda.is_available(), reason="word numerical fixtures require CUDA")
 
 
 @pytest.fixture(autouse=True)
@@ -115,11 +118,14 @@ def test_frozen_word_boundary_checks_sources_and_candidate_overrides_with_cached
         validate_request_host_profiles(current)
 
 
+@CUDA_ONLY
 def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tmp_path):
     frozen, task = request()
     global_rng = torch.get_rng_state().clone()
-    raw, records = run_word(frozen, task, tmp_path, "cpu", execution_limit=2, capture_media=True)
+    cuda_rng = torch.cuda.get_rng_state(DEVICE).clone()
+    raw, records = run_word(frozen, task, tmp_path, DEVICE, execution_limit=2, capture_media=True)
     assert torch.equal(global_rng, torch.get_rng_state())
+    assert torch.equal(cuda_rng, torch.cuda.get_rng_state(DEVICE))
     assert raw["recipe"]["prior_kind"] == "particles"
     assert raw["prior"]["kind"] == "particle_cloud" and raw["prior"]["sigma"] == 0
     assert raw["recipe"]["total_steps"] == 20000
@@ -148,6 +154,7 @@ def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tm
     assert set(raw["evidence"]["host"]["models"]) == {"generator", "discriminator", "encoder"}
 
 
+@CUDA_ONLY
 @pytest.mark.parametrize("capture_media", [False, True])
 def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path, monkeypatch, capture_media):
     from experiments.forge.contracts import file_hash
@@ -164,7 +171,7 @@ def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path,
     for retain in (False, True):
         output = tmp_path / str(retain)
         options = {} if retain else {"retain_scored_outputs": False}
-        result = run_word(frozen, task, output, "cpu", execution_limit=2,
+        result = run_word(frozen, task, output, DEVICE, execution_limit=2,
                           capture_media=capture_media, **options)
         if capture_media:
             raw, records = result
@@ -187,20 +194,28 @@ def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path,
     assert descriptor == {"path": "observed-records.pt", "sha256": file_hash(archived_path),
         "bytes": archived_path.stat().st_size, "observation_count": 2,
         "kind": "scored_word_records_v1", "optimizer_updates_added": 0, "sampling_draws_added": 0}
-    assert receipts[0]["evidence"] == receipts[1]["evidence"]
+    compared = [deepcopy(receipt["evidence"]) for receipt in receipts]
+    # Separate output directories have different certificate roots; the
+    # certified state, byte identities and every actual observation must match.
+    for evidence in compared:
+        evidence["provenance_checkpoint"].pop("artifact_root")
+    assert compared[0] == compared[1]
     assert not (tmp_path / "False/observed-records.pt").exists()
 
 
+@CUDA_ONLY
 def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     # Existing published cases remain on the original constructor path.
-    fixture = WordFixture(device="cpu", seed=24002, recipe_name="ka2", max_steps=1)
+    fixture = WordFixture(device=DEVICE, seed=24002, recipe_name="ka2", max_steps=1)
     published = next(row for row in read_json(ROOT / "reports/toy_audit/api_contract/runs.json")["cases"]
                      if row["id"] == "image-five-words-joint-ae")
     assert json.loads(json.dumps(fixture.recipe.to_dict())) == published["recipe"]
-    assert torch.equal(fixture.data_generator.get_state(), torch.Generator().manual_seed(24103).get_state())
-    assert torch.equal(fixture.policy.latent_generator.get_state(), torch.Generator().manual_seed(24004).get_state())
+    assert all(parameter.is_cuda for model in (fixture.G, fixture.D, fixture.E) for parameter in model.parameters())
+    assert torch.equal(fixture.data_generator.get_state(), torch.Generator(device=DEVICE).manual_seed(24103).get_state())
+    assert torch.equal(fixture.policy.latent_generator.get_state(), torch.Generator(device=DEVICE).manual_seed(24004).get_state())
 
 
+@CUDA_ONLY
 @pytest.mark.parametrize("optimizer_family", ["formulation", "adam"])
 def test_joint_prior_optimizer_honors_distinct_prior_betas(optimizer_family):
     frozen, task = request()
@@ -208,8 +223,8 @@ def test_joint_prior_optimizer_honors_distinct_prior_betas(optimizer_family):
         frozen["candidate"] = read_json(next((ROOT / "configs/forge/configurations").glob("r1r2--302b*.json")))
     frozen["candidate"]["recipe_overrides"].update(
         optimizer_family=optimizer_family, betas=[0., .999], prior_betas=[0., .9])
-    components = word_context(frozen, task, "cpu")
-    fixture = WordFixture(device="cpu", seed=0, recipe_name=None, max_steps=1, components=components)
+    components = word_context(frozen, task, DEVICE)
+    fixture = WordFixture(device=DEVICE, seed=0, recipe_name=None, max_steps=1, components=components)
     prior = fixture.opt_g.param_groups[2]
     assert tuple(prior["betas"]) == (0., .9)
     assert prior["params"] == list(fixture.prior.parameters())
@@ -220,8 +235,8 @@ def test_joint_acquisition_is_required_smoke_after_existing_prerequisites():
     view = load_view(ROOT, "discriminator_stability")
     tier1 = [row["task"] for row in view["assignments"] if row["qualification_tier"] == 1]
     assert tier1[:4] == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold"]
-    assert next(row for row in view["assignments"] if row["task"] == "five_word_joint_acquisition") == {
-        "task": "five_word_joint_acquisition", "qualification_tier": 1, "importance": "required", "order": 5}
+    assert next(row for row in view["assignments"] if row["task"] == "five_word_joint_smoke") == {
+        "task": "five_word_joint_smoke", "qualification_tier": 1, "importance": "required", "order": 5}
     task = load_tasks(ROOT)["five_word_joint_acquisition"]
     assert task["execution"]["steps"] == 20001
     assert task["execution"]["original_schedule_horizon"] == 20000

@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "ec248f7fa4f50ffd2b8b4db557c575e475a21356af9675ba257e3c00e309540f",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "bb351c87c1cc611ec9e1b8b601b48ad162746143d99dacc7b9e3d8b1fbfeda11",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "vector_spiral"
+}

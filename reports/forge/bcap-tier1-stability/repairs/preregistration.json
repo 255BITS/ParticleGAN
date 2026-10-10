@@ -1,0 +1,86 @@
+{
+  "arms": {
+    "cap-margin": [
+      "direction_blend",
+      1.0,
+      1.0
+    ],
+    "finite-cap": [
+      "direction_blend",
+      1.0,
+      1.0
+    ]
+  },
+  "causal_falsifiers": [
+    "Any paired state/curve discrepancy despite zero conflicts falsifies projection inactivity.",
+    "Neither separated transport signal reproducing the combined excursion supports interaction rather than a single-factor explanation."
+  ],
+  "causal_predictions": [
+    "Projection-only equals incumbent actual models/particles and all metrics when conflict count is zero.",
+    "Transport-only equals combined actual models/particles and all metrics when conflict count is zero.",
+    "Global-only versus local-only isolates which finite signal creates persistent critic-cap excursions."
+  ],
+  "evidence_scope": "research_diagnostic",
+  "exact_task": "two_pole",
+  "full_reservation_seconds": 600,
+  "gates": [
+    [
+      "mean_abs",
+      ">=",
+      0.3
+    ],
+    [
+      "grad_med",
+      "<=",
+      1.0
+    ]
+  ],
+  "matched_conditions": [
+    "stored critic and zero-particle fixture",
+    "architecture",
+    "actual fixed target panel",
+    "prior",
+    "sampling",
+    "constructor/data/noise/evaluation named streams",
+    "schedule horizon",
+    "updates",
+    "cadence",
+    "all original gates"
+  ],
+  "minimum_stable_checks": 5,
+  "observations": 24,
+  "plans": {
+    "cap-margin": {
+      "admission": "READY",
+      "candidate_revision": "f83e80e09865de4dadb138a13855684616b6dd5ab39b4a7d0f9e22a11a8731e3",
+      "source_digest": "4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d",
+      "task_hash": "5963d98c8221330fc09ccc0a7853cad69d54d5b7252e1875818ecb326bea4e7c"
+    },
+    "finite-cap": {
+      "admission": "READY",
+      "candidate_revision": "9ec648b4129c64e88735b66d72809f866fa9eccc92e5d17b3414acbd27d1580f",
+      "source_digest": "4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d",
+      "task_hash": "291be5f341701681a8f57b263141e2f207f685265c2fa0bedae283db130f930d"
+    }
+  },
+  "qualification_input": false,
+  "repair_equations": {
+    "cap_margin": "kappa=0.9; all other combined settings unchanged",
+    "control": "Existing combined arm has identical task/runtime and an older frozen source; explicit inactive source parity is required, and Phase2 fresh same-source incumbent is reserved by parent.",
+    "falsifier": "Original terminal suffix<5 or final movement<0.3; no global Lipschitz claim; subsequent particle motion remains unconstrained",
+    "finite_cap": "M=max original training-panel per-sample input-gradient norm; alpha=max passing 2^-j, j=0..8, M(D+alpha*Delta)<=max(kappa,M(D)); zero if none; one optimizer clock",
+    "prediction": "Both must attain movement>=0.3 and all final five scheduled slopes<=1; endpoint-only success is insufficient",
+    "probe_delta": "One baseline plus at most nine finite measurements, each reusing all original penalty panels with two critic forward/input-gradient probes per panel pair; no extra draws or evaluation calls"
+  },
+  "repair_screens": {
+    "maximum_arms": 2,
+    "status": "not_admitted",
+    "total_reservation_seconds": 600
+  },
+  "schema_version": 1,
+  "seed": 0,
+  "source_base": "79f7ddb512f0bc1e1457257e85c97adbe6d11bd1",
+  "steps": 80,
+  "stopping_rule": "Complete declared original-gate diagnostics once. No seeds, full suite, Tier2, default adoption, or merge.",
+  "timeout_seconds": 300
+}

@@ -1,0 +1,74 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-projection-baseline-repair-v1"
+  },
+  "candidate": "bcap-projection-baseline-review-baseline-v1",
+  "competing_explanation": "Host contention or source/consumer incompatibility can invalidate the control; historical task grades cannot substitute for fresh complete measurements.",
+  "control": {
+    "candidate_id": "bcap-projection-baseline-review-direction-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "The unchanged incumbent preserves all six original Tier1 gates and exposes source-bound conditional Tier2 failures without a transport/backend/cap change.",
+  "id": "bcap-projection-baseline-review-baseline-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "phase2_fresh_ordinary_tier1",
+        "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      },
+      "path": "reports/forge/bcap-three-phase/phase2-results.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "evidence_scope": "research_diagnostic",
+        "paid_attempts": 6
+      },
+      "path": "reports/forge/bcap-tier1-stability/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "archive_publication_commit": "fed122eed540a100a83d0b2614895f35d6c9e5c9",
+        "measured_source_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+        "original_result_sha256": "58164399b3ffb3ae712046a40d04be2f4e1bbf6ba24766eae24628cc8f2902fa"
+      },
+      "path": "reports/forge/bcap-projection-baseline-review/prior-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-projection-baseline-repair-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

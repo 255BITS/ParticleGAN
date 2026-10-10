@@ -372,10 +372,16 @@ def _image(request, task, output, device):
     host_receipt = _host_receipt(spec, task["execution"].get("image_profile"), g, d)
     centers = templates(spec).to(device)
     data = context.streams.generator("data", component="target", purpose="training")
+    records = []
     def evaluate():
         generated = trainer.sample(context.recipe.num_particles, fixed_first_n=True,
             generator=context.streams.generator("eval", component="live", purpose="enumerated_samples"))
-        return image_metrics(generated, centers, task["evaluation"]["measurement"])
+        metrics = image_metrics(generated, centers, task["evaluation"]["measurement"])
+        # Retain the already scored outputs; publication adds no forward pass,
+        # optimizer update or sampling draw to the frozen evaluation schedule.
+        records.append({"step": step, "samples": generated.detach().cpu().clone(),
+                        "targets": centers.detach().cpu().clone(), "metrics": metrics})
+        return metrics
     observations = []
     checkpoints = set(_checkpoints(task))
     for step in range(1, task["execution"]["steps"] + 1):
@@ -388,8 +394,10 @@ def _image(request, task, output, device):
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
-    return run.receipt({"observations": observations, "live": observations[-1], "host": host_receipt},
-                       save_state=task["execution"].get("produces_state", False))
+    evidence = {"observations": observations, "live": observations[-1], "host": host_receipt,
+                "saved_observer_outputs": _save_observer_outputs(
+                    output, "observed-images.pt", records, kind="scored_image_samples_v1")}
+    return run.receipt(evidence, save_state=task["execution"].get("produces_state", False))
 
 
 def _ring(request, task, output, device, *, endurance=False):
@@ -576,7 +584,7 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     adapter = task["adapter"]
     if adapter == "word_joint":
         from .word_adapter import run_word
-        return run_word(request, task, output_dir, device)
+        return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
     if adapter == "transfer_behavior":
         if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
             from .policy_behavior_adapters import run_behavior

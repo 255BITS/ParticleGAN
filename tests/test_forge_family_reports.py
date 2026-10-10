@@ -271,6 +271,25 @@ def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
     assert "worker launch failed" in next(iter(generated_pages(root, publication).values()))
 
 
+@pytest.mark.parametrize("catalogued", [True, False])
+def test_structured_setup_error_renders_without_changing_recorded_grade(report, catalogued):
+    root, publication = report
+    task = publication["rows"][0]["tasks"][1]
+    task["status"] = "INCOMPLETE"
+    reasons = [{"type": "ValueError", "message": "dualnorm supports matrix weights and vector/scalar biases only"}]
+    if catalogued:
+        task["reasons_sha256"] = stable_hash(reasons)
+        publication["status_reasons"] = {stable_hash(reasons): reasons}
+    else:
+        task["reasons"] = reasons
+    before = deepcopy(publication)
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["status"] == "INCOMPLETE"
+    assert "dualnorm supports matrix weights" in next(iter(generated_pages(root, publication).values()))
+    assert publication["rows"] == before["rows"]
+    assert publication.get("status_reasons") == before.get("status_reasons")
+
+
 @pytest.mark.parametrize("field", ["candidate_id", "candidate_revision", "source_digest"])
 def test_receipt_cannot_supply_metrics_from_another_configuration_or_source(report, field):
     root, publication = report
@@ -486,8 +505,9 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
     assert pages == generated_pages(root, publication)
 
 
-def test_committed_pages_and_every_drilldown_link_match_the_generator():
-    root = Path(__file__).resolve().parents[1]
+def test_committed_pages_and_every_drilldown_link_match_the_generator(tmp_path):
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     assert publication["family_progress"] == build_progress(root, publication)
     pages = generated_pages(root, publication)
@@ -506,37 +526,46 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator():
                 assert f'<a name="{fragment}"></a>' in pages.get(linked, linked.read_text()), (page, target)
 
 
-def test_current_clock_measurement_retains_original_evidence_alongside_contract_drift():
+def test_current_clock_measurement_retains_original_evidence_alongside_policy_advance():
+    from experiments.forge.trainer_families import scientific_row_hash
     root = Path(__file__).resolve().parents[1]
     publication = read_json(root / "reports/forge/technique-inventory.json")
     recorded = deepcopy(publication["rows"])
     progress = build_progress(root, publication)
     assert publication["rows"] == recorded
     assert progress["qualification_input"] is False
-    round_definition = read_json(root / "configs/forge/rounds/tier1-completion-v1.json")
-    original_families = {row["family"] for row in round_definition["candidate_roster"]}
-    cohorts = {family["id"]: family["cohorts"][0] for family in
-               progress["families"] + progress["configuration_families"]
-               if family["id"] in original_families}
-    assert set(cohorts) == original_families
-    for name, cohort in cohorts.items():
+    for family in progress["families"]:
+        cohort = next(item for item in family["cohorts"] if item["anchor"] == family["current_cohort_anchor"])
+        original = recorded[cohort["row_index"]]
+        tasks = {task["task_id"]: task for task in original["tasks"] + original.get("nonrequired_tasks", [])}
         clock = cohort["tasks"]["clockfree_audit_measurement_v1"]
-        if name in {"atlas", "e22"}:
-            assert cohort["tiers"]["1"]["incomplete"] is True
-            assert clock["status"] == "BLOCKED"
-            continue
-        # A later scorer binding does not make an executed word test unrun;
-        # its recorded grade still supplies no new qualification.
-        assert cohort["tiers"]["1"]["incomplete"] is False
-        assert sum(cohort["tiers"]["1"]["counts"].values()) == 22
-        assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
+        assert clock["status"] == tasks["clockfree_audit_measurement_v1"]["status"]
+        if original["attempt_ids"]:
+            assert clock["status"] in {"PASS", "FAIL"} and clock["current_contract"] == "matches"
+            assert cohort["tasks"]["five_word_joint_smoke"]["status"] == "PASS"
+        else:
+            assert clock["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
         assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
-        assert recorded[cohort["row_index"]]["qualified_tier"] == 0
-    bcap = cohorts["bcap"]
-    assert score(bcap["tiers"]["1"]) == "20/22"
-    clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
-    assert score(clock_view["tiers"]["1"]) == "3/4"
+        # The clock diagnostic grants no qualification. A configured standard
+        # can now qualify independently by passing every ordinary smoke gate.
+        if original["qualified_tier"]:
+            assert original["tiers"]["1"]["passed"] == original["tiers"]["1"]["total"]
+            assert all(task["status"] == "PASS" for task in original["tasks"]
+                       if task["task_id"] in publication["tier_requirements"]["1"])
+    # Advancing the policy retains the exact previous selection and failed
+    # clock verdict, even though the current BCAP DualNorm audit passes.
+    previous = publication["archived_policies"][-1]
+    card = read_json(root / previous["family_selection"]["path"])
+    pin = next(item for item in card["selections"] if item["trainer_family"] == "bcap")
+    archived = [{key: value for key, value in row.items() if key != "evidence_policy"}
+                for row in publication["archived_evidence_rows"]
+                if row["candidate_id"] == pin["candidate_id"]]
+    archived = [row for row in archived if scientific_row_hash(row) == pin["scientific_row_sha256"]]
+    assert len(archived) == 1
+    clock = next(task for task in archived[0]["nonrequired_tasks"]
+                 if task["task_id"] == "clockfree_audit_measurement_v1")
+    assert clock["status"] == "FAIL"
     # Detailed historical clock diagnostics retain their original cohort.
     clock = next(cohort["tasks"]["clockfree_audit_measurement_v1"]
                  for family in progress["families"] + progress["configuration_families"] if family["id"] == "bcap"
@@ -546,34 +575,34 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
     assert clock["training_media"][0]["recorded_grade"] == "FAIL"
 
 
-def test_all_current_non_policy_families_have_executed_tier1_without_new_qualification():
+def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
+    from experiments.forge.trainer_families import scientific_row_hash
     root = Path(__file__).resolve().parents[1]
     publication = read_json(root / "reports/forge/technique-inventory.json")
     rows = deepcopy(publication["rows"])
     progress = build_progress(root, publication)
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
-    original_families = {pin["trainer_family"] for pin in selection["selections"]
-                         if pin["selection_kind"] != "current_measurement"} - {"atlas", "e22"}
-    registry = read_json(root / "configs/forge/trainer-families.json")["families"]
-    original_families -= {family["id"] for family in registry if family.get("inventory_visible") is False}
-    ordinary = [family for family in progress["families"] + progress["configuration_families"]
-                if family["id"] in original_families]
-    assert {family["id"] for family in ordinary} == original_families
-    for family in ordinary:
-        for cohort in family["cohorts"]:
-            assert cohort["tiers"]["1"]["incomplete"] is False
-            assert "(*)" not in score(cohort["tiers"]["1"])
-            assert set(cohort["tiers"]["1"]["counts"]) <= {"PASS", "FAIL"}
-            assert (rows + publication.get("historical_family_rows", []))[cohort["row_index"]]["qualified_tier"] == 0
+    for pin in selection["selections"]:
+        if pin["selection_kind"] != "historical_incumbent":
+            continue
+        selected = [row for row in rows if scientific_row_hash(row) == pin["scientific_row_sha256"]]
+        assert len(selected) == 1
+        row = selected[0]
+        assert row["attempt_ids"] == [] and row["qualified_tier"] == 0
+        assert row["selection"]["qualified"] is False and row["selection"]["default_adoption"] is False
+        assert row["cost"]["wall_seconds"] is None
+        assert all(task["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
+                   for task in row["tasks"] + row.get("nonrequired_tasks", []))
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
     assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
     assert publication["rows"] == rows
 
 
-def test_current_measurement_families_complete_only_their_declared_view_scope():
+def test_current_measurement_families_complete_only_their_declared_view_scope(tmp_path):
     from experiments.forge.trainer_families import scientific_row_hash
-    root = Path(__file__).resolve().parents[1]
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     rows = deepcopy(publication["rows"])
     selection = read_json(root / "configs/forge/selections/family-current-v1.json")
@@ -581,12 +610,12 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
     progress = build_progress(root, publication)
     families = {family["id"]: family for family in progress["families"] + progress["configuration_families"]}
     unmeasured = {row["trainer_family"] for row in rows
-                  if row["selection"]["selection_kind"] == "unmeasured_declaration"}
+                  if not row["attempt_ids"] and row["qualified_tier"] == 0}
     registry = read_json(root / "configs/forge/trainer-families.json")["families"]
     hidden = {family["id"] for family in registry if family.get("inventory_visible") is False}
     assert set(families) == (set(pins) | unmeasured) - hidden
-    assert unmeasured == {family["id"] for family in registry
-                          if family.get("unmeasured_display_backend")} - hidden
+    assert {family["id"] for family in registry
+            if family.get("unmeasured_display_backend")} - hidden <= unmeasured
     for row in rows:
         if row["trainer_family"] in unmeasured:
             assert not row["attempt_ids"] and row["qualified_tier"] == 0
@@ -607,11 +636,15 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
                    and scientific_row_hash(rows[cohort["row_index"]]) == pin["scientific_row_sha256"]]
         assert len(current) == 1
         for cohort in current:
-            assert all(cohort["tasks"][task]["status"] in {"PASS", "FAIL"} for task in required)
+            original = rows[cohort["row_index"]]
+            recorded_tasks = {task["task_id"]: task for task in original["tasks"] + original.get("nonrequired_tasks", [])}
+            assert all(recorded_tasks[task]["status"] in {"PASS", "FAIL"} for task in required)
             views = {view["id"]: view for view in cohort["views"] + cohort.get("scoped_views", [])}
             for view_name in pin["measurement_views"]:
                 tier = views[view_name]["tiers"]["1"]
-                assert tier["incomplete"] is False and set(tier["counts"]) <= {"PASS", "FAIL"}
+                assert tier["incomplete"] is False
+                assert set(tier["counts"]) <= {"PASS", "FAIL"}
+                assert all(cohort["tasks"][task]["current_contract"] == "matches" for task in required)
             # Other goal views retain any unknown cells; a bounded measurement
             # grants neither execution nor qualification outside its scope.
             for view in cohort["views"]:

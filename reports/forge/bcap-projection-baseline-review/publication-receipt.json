@@ -1,0 +1,40 @@
+{
+  "actual_training_gifs": 32,
+  "artifacts": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection",
+  "execution_retries": 0,
+  "execution_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+  "files": {
+    "README.md": "0f2dd7dacce99a06e3169dcb449f35fa8def1982b73b148fbd61c57daeefe474",
+    "analysis.md": "0aee489044ee4800570f5e8c8d9f5a2a743d44c9ea5e1c327067f9d169d59e07",
+    "comparison.json": "05b4cd615952c2b1d05dff8e5219304c022925ff7026b9e7559f466e925d1bf0",
+    "counter-proof-history.json": "bb826d985da3f4b56fc8c5ef370f3e442eda1355499a1ec5a6bdf19098c4985d",
+    "counter-proof.json": "23f458cf4b38e38980638723f48a4536c443ac3bdd53bcf1de545fcd113d5b75",
+    "independent-audit.json": "d83f24a388771aac36cb8af962895d97860aa00d191e99c582eb73b277581393",
+    "media/index.json": "d4cb571e97fdb3cd58096af3c3cd7f8af4f804066571ca6a96506d9aa9f6c9e4",
+    "native-evidence.json": "b23dba87db6d8d9b148f2445bcf2e18de5010e08077d691b5838e2c91cccccc8",
+    "phase3-audit.json": "f899ae8ca16e7e2e64af882b539dc3ea38920f7ccb25c82ec501635df36da80d",
+    "phase3-results.json": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+    "scheduling-repair.json": "ae7422d561258acad194444eada9e813eeb93b3a6d381fed4899dce23abf7495"
+  },
+  "frozen_progress_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-progress.json",
+  "frozen_progress_sha256": "7035ec693d14e15227746ebe34eb79920f0c6c656dc623f8367e3391e06d1e56",
+  "full_reservation_seconds": 45840,
+  "media_bytes": 8894010,
+  "optimizer_updates_added": 0,
+  "paid_attempts": 32,
+  "paid_ceiling_seconds": 48000,
+  "paid_seconds": 3541.1636059249986,
+  "publication_adapter": {
+    "path": "reports/forge/bcap-three-phase/publication_adapter.py",
+    "sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5",
+    "source_commit": "f90591b85383052e803903088b775f4e9e95d8e1"
+  },
+  "qualification_input": false,
+  "registration_sha256": "91e303bf4422f80cd07cc94d8bec021bcdea0c3ee6c80d0102f514b830e1ad1b",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_direction_only_followup_publication",
+  "selection": "Root independently selected direction-only as the measured research baseline after all16 complete paired consumption proofs and the declared replacement rule passed; no ordinary qualification/default change/merge.",
+  "software_allowance_seconds": 300,
+  "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+}

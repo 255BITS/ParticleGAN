@@ -316,11 +316,19 @@ from pathlib import Path
 import sys
 from .contracts import atomic_json
 atomic_json(Path(sys.argv[1]).parent / "raw-result.json", {"measured": 1})
-''')
+''', budget=10)
     queue = Queue(tmp_path / "queue", grader=grade)
     queue.submit(req, campaign())
     claim = queue.claim(SLOTS)
-    assert queue.launch(claim).wait(timeout=5) == 0
+    # This receipt control includes two real Torch-importing processes. Its
+    # software allowance accommodates cold startup during concurrent jobs.
+    process = queue.launch(claim)
+    try:
+        assert process.wait(timeout=20) == 0
+    finally:
+        if process.poll() is None:
+            queue.cancel(claim["request"]["request_id"])
+            process.wait(timeout=10)
     terminal = read_json(Path(claim["worker"]["directory"]) / "terminal.json")
     measured = terminal["telemetry"]
     assert measured["interval"]["finished_at"] >= measured["interval"]["started_at"]

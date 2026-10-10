@@ -110,6 +110,9 @@ def _validate_measurement_contract(task):
     if kind in {"gaussian_smoke", "gaussian_stability"}:
         from .gaussian_tasks import validate_task
         validate_task(task)
+    elif kind in {"word_smoke", "word_hold"}:
+        from .word_adapter import validate_word_task
+        validate_word_task(task)
     elif kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         declared = evaluation.get("evaluator") == "experiments.forge.transfer_cadence:test_verdict"
@@ -576,7 +579,9 @@ def grade_result(task: dict, result: dict | None) -> dict:
     if guard is not None:
         return guard
     from .gaussian_tasks import grade as gaussian_grade
+    from .word_tasks import grade as word_grade
     graders = {"gaussian_smoke": gaussian_grade, "gaussian_stability": gaussian_grade,
+               "word_smoke": word_grade, "word_hold": word_grade,
                "transfer_sustained": _transfer, "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree}

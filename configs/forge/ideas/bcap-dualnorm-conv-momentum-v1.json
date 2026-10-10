@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Enable positive network gradient momentum before the existing smoothed polar update",
+    "Keep sampled-prior row momentum zero and per-offset convolution enabled"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-tier2-search/overnight/STUDY.md",
+  "id": "bcap-dualnorm-conv-momentum-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Existing public DualNorm network momentum plus positive smoothing/convolution; a separate structural base for activation, not a numerical crossing from zero.",
+  "parent": "bcap-dualnorm-convolution-v1",
+  "prior_art": [
+    "reports/forge/dualnorm-pacing-v2/README.md",
+    "reports/forge/bcap-search-options/README.md"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_momentum": 0.5,
+    "optimizer_smoothing": 1e-05,
+    "prior_lr_mult": 2.5
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}

@@ -8,7 +8,7 @@ import subprocess
 import pytest
 
 from experiments.forge.configuration_search import materialize_search
-from experiments.forge.contracts import atomic_json, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.queue import Queue
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,6 +90,25 @@ def test_private_full_roster_submit_registration_and_resume_without_training(tmp
     # Bind its policy fixtures to the copied current implementation so the
     # positive admission path can be exercised after public API changes.
     from experiments.forge.tier1_policy import write_declarations
+    from tests.archived_forge_contracts import restore_archived_contracts
+    restore_archived_contracts(root, "tier1_completion")
+    # Exercise current admission against the original questions. Source pins
+    # are explicitly private software bindings, with the prior evaluator kept
+    # as ancestry; no archived card or qualification is changed.
+    for path in (root / "configs/forge/tasks").glob("*.json"):
+        declared = read_json(path)
+        sources = dict(declared["evaluation"].get("sources", {}))
+        changed = {name: file_hash(root / name) for name, digest in sources.items()
+                   if file_hash(root / name) != digest}
+        if changed:
+            declared["evaluation"]["sources"].update(changed)
+            declared["evaluation"]["evaluator_revision"] = {
+                "id": "archived-question-current-software-fixture-v1",
+                "qualification_input": False,
+                "previous_revision": declared["evaluation"].get("evaluator_revision"),
+                "previous_source_sha256": {name: sources[name] for name in changed},
+            }
+            atomic_json(path, declared)
     write_declarations(root)
     from experiments.forge.views import load_tasks
     tasks = load_tasks(root)

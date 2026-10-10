@@ -16,7 +16,7 @@ from .planning import plan_summary, resolve_idea
 from .queue import Queue, drain
 
 
-DEFAULT_CAMPAIGN = Path("configs/forge/campaigns/technique-inventory.json")
+DEFAULT_CAMPAIGN = Path("configs/forge/campaigns/technique-inventory-word-split-v1.json")
 
 
 def discover_techniques(root: Path) -> list[str]:

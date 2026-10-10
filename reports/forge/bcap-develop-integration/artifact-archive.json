@@ -1,0 +1,22 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next",
+  "archived_certificate_files": 168,
+  "archived_terminal_metadata_files": 5,
+  "certificate_manifest": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/certificates/manifest.json",
+    "sha256": "f8789425fdf31965f1e83dad0f4c3cbc0dc83f847a46763ec756098090a5001a"
+  },
+  "certified_attempts": 56,
+  "optimizer_updates_added": 0,
+  "original_artifact_paths_retained": true,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scientific_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+  "scores_recomputed": 0,
+  "source_compatible_commit": "e1c7fcc22086c290868ea47b989a998a86e913e4",
+  "source_origins": [
+    "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+    "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+  ]
+}

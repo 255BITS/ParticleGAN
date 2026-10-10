@@ -22,6 +22,10 @@ and selection of the quickest stable solution from comparable family finalists.
 Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 
+The [BCAP search options report](../reports/forge/bcap-search-options/README.md)
+flattens every public Recipe field and inventories optimizer/loss categories,
+conditional numerical settings, current evidence and read-only compiler checks.
+
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
 membership and a canonical fallback. Families identify formulations;
 each new search also records its stricter public technique signature. Historical
@@ -121,6 +125,17 @@ an existing public optimizer setting without changing its update rule.
 Technique signatures are additional provenance in newly planned studies.
 Existing configuration hashes, saved studies, qualification results and
 historical family/cohort distinctions retain their original identity.
+
+`optimizer_smoothing` exposes fixed-scale DualNorm smoothing with a zero
+dataclass default; the named `bcap` preset selects `.001`. Enabling or disabling
+it crosses a structural technique boundary;
+positive scales can vary within the explicitly enabled base. The
+[smoothing guide](dualnorm-smoothing.md) supplies a reusable structural card,
+an unexecuted CUDA Tier 1 search example, and the separate categorical comparison
+path for unsmoothed versus smoothed controls. The later
+[BCAP default selection](../reports/forge/bcap-tier2-search/DEFAULT_SELECTION.md)
+records the owner-directed preset update; versioned Forge recipes and archived
+qualification retain their original identities.
 
 The initial [R1/R2 search](../configs/forge/searches/r1r2-modern-toy-v1.json)
 tests four substantive toy-host adaptations of the existing Modern GAN recipe:
