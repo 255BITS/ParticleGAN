@@ -282,9 +282,10 @@ def sections(row, card):
                     measurement("terminal live accuracy passing checks", evaluator.get("terminal_summary", {}).get("passing_checks"), [("==", evaluation["minimum_stable_checks"])])]
         result = [dict(name="Live endpoint coverage, 20000 saved draws", rows=metric_rows({}, native_thresholds(card, 20000))),
                   dict(name="Live endpoint accuracy, 20000 saved draws", rows=metric_rows({}, native_thresholds(card, 20000, accuracy=True))),
-                  dict(name="Independent live holdout accuracy, 100000 saved draws", rows=metric_rows({}, native_thresholds(card, 100000, accuracy=True))),
+                  dict(name="Independent live holdout accuracy, 100000 saved draws", rows=metric_rows(row.get("metrics", {}), native_thresholds(card, 100000, accuracy=True))),
                   dict(name="Independent holdout coverage from the same saved draws", rows=metric_rows({}, native_thresholds(card, 100000)))]
-    if card["adapter"] == "native100" and evaluator:
+    if (card["adapter"] == "native100" and "final_metrics" in evaluator
+            and "_artifact_root" in row and "_artifact_manifest" in row):
         artifact_root = Path(row["_artifact_root"])
         manifest = row["_artifact_manifest"]["files"]
         summary_file = artifact_root / card["id"] / "summary.json"
@@ -325,7 +326,7 @@ def publish(args):
     control = {r["task_id"]: r for r in control_results}
     comparisons = []
     for trial in summary["trials"]:
-        repaired, regressed = [], []
+        repaired, regressed, unresolved = [], [], []
         for cell in trial["tasks"]:
             if cell["qualification_tier"] != 2 or cell["importance"] != "required":
                 continue
@@ -334,8 +335,13 @@ def publish(args):
                 repaired.append(cell["task"])
             if before == "PASS" and after == "FAIL":
                 regressed.append(cell["task"])
+            if before == "PASS" and after not in ("PASS", "FAIL"):
+                unresolved.append(cell["task"])
         comparisons.append(dict(configuration_id=trial["configuration_id"], settings=trial["settings"],
-                                repaired=repaired, regressed=regressed, qualification=trial["qualification"]))
+                                repaired=repaired, regressed=regressed,
+                                unresolved_control_passes=unresolved,
+                                preserves_recorded_control_passes=not (regressed or unresolved),
+                                qualification=trial["qualification"]))
     measured = []
     for role, request_id in [("control", progress["control_request"])] + [
             (str(trial["settings"]), trial["request_id"]) for trial in summary["trials"]]:
@@ -349,9 +355,11 @@ def publish(args):
             name = assignment["task"]
             raw_row = raw_rows.get(name, {})
             projected = compact_row(raw_row)
-            if raw_row and entry["request"]["tasks"][name]["adapter"] == "native100":
-                projected["_artifact_root"] = raw_row["evidence"]["artifact_root"]
-                projected["_artifact_manifest"] = raw_row["evidence"]["artifact_manifest"]
+            evidence = raw_row.get("evidence", {})
+            if (entry["request"]["tasks"][name]["adapter"] == "native100"
+                    and evidence.get("artifact_root") and evidence.get("artifact_manifest")):
+                projected["_artifact_root"] = evidence["artifact_root"]
+                projected["_artifact_manifest"] = evidence["artifact_manifest"]
             rows = sections(projected, entry["request"]["tasks"][name])
             measured.append(dict(role=role, task_id=name, tier=assignment["qualification_tier"],
                                  status=projected.get("gate_status", "UNMEASURED"), measurements=rows))
@@ -365,10 +373,10 @@ def publish(args):
     atomic_json(p["report"] / "results.json", result)
     text = [f"# BCAP prior {args.name} search", "", f"Executed source `{progress['source_commit']}`; protocol seed 0; ordinary revision 9.", "",
             "Matched BCAP leader control and three global strengths. All six Tier 1 gates govern Tier 2 admission. This is tuning evidence.", "",
-            "| Strength | Tier 1 passes | Tier 2 passes | Repaired | Regressed |", "| --- | --- | --- | --- | --- |"]
+            "| Strength | Tier 1 passes | Tier 2 passes | Repaired | Regressed | Unresolved control passes |", "| --- | --- | --- | --- | --- | --- |"]
     for trial, comparison in zip(summary["trials"], comparisons):
         tiers = {r["tier"]: r for r in trial["qualification"]["tiers"]}
-        text.append(f"| {trial['settings']} | {tiers[1]['required_passed']}/6 | {tiers[2]['required_passed']}/21 | {', '.join(comparison['repaired']) or 'none'} | {', '.join(comparison['regressed']) or 'none'} |")
+        text.append(f"| {trial['settings']} | {tiers[1]['required_passed']}/6 | {tiers[2]['required_passed']}/21 | {', '.join(comparison['repaired']) or 'none'} | {', '.join(comparison['regressed']) or 'none'} | {', '.join(comparison['unresolved_control_passes']) or 'none'} |")
     text += ["", "Every task metric and its frozen numerical gate are retained below and in [results.json](results.json). Unreached tasks remain unmeasured.", "", "The goal's [current leaderboard](../../technique-inventory.md) remains the sole generated leaderboard; this table is a source-bound experimental comparison.", ""]
     for task in measured:
         text += [f"## {task['role']}: {task['task_id']} — {task['status']}", ""]
