@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "3a50f6cbe66200caa2a7e39bd6e0d8830f89296616eacf10923e9b865eb7e9f3",
+  "kind": "actual_training_saved_spiral_gif",
+  "observation_count": 24,
+  "observations_sha256": "f6880dc56cead21f8fc6d2f39784ad8a68bd6be93204d2c2e20b22dcb69cdfa1",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/e80e0574f092425ebb1ec502fe9cb04b/observed-samples.pt": "f0f17baf478f2b90cb51a0b69efffc1ed9a300cae8d17a2354a7cdd44bbcd2ef"
+  },
+  "task_id": "vector_spiral"
+}

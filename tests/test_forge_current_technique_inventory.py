@@ -2,6 +2,7 @@
 from copy import deepcopy
 from collections import Counter
 import importlib.util
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -714,6 +715,103 @@ def test_equal_time_different_cohorts_cannot_silently_choose_a_winner(evidence, 
     assert _outputs(root) == before
 
 
+def test_declaration_fallback_requires_unanimous_backend_source():
+    pins = {"first": {"execution_backend": "cuda", "source_digest": "a" * 64},
+            "second": {"execution_backend": "cuda", "source_digest": "b" * 64},
+            "third": {"execution_backend": "cpu", "source_digest": "c" * 64}}
+    assert publication._declaration_fallback_sources(pins) == {"cpu": "c" * 64}
+    pins["second"]["source_digest"] = "a" * 64
+    assert publication._declaration_fallback_sources(pins) == {"cuda": "a" * 64, "cpu": "c" * 64}
+    pins["second"]["source_digest"] = None
+    assert publication._declaration_fallback_sources(pins) == {"cpu": "c" * 64}
+
+
+@pytest.mark.parametrize("execution", ["attempt", "paid", "pass", "fail", "qualified", "tier_pass"])
+def test_declaration_source_preference_cannot_hide_execution(execution):
+    previous = {"status": "BLOCKED", "qualified_tier": 0, "attempt_ids": [],
+                "bindings": {"source_digest": "old"}, "tasks": [{"status": "UNKNOWN"}],
+                "cost": {"wall_seconds": None}, "tiers": {"1": {"passed": 0}}}
+    current = deepcopy(previous)
+    current["bindings"]["source_digest"] = "new"
+    assert publication._declaration_source_preference(current, previous, "new") is True
+    assert publication._declaration_source_preference(previous, current, "new") is False
+    assert publication._declaration_source_preference(current, previous, None) is None
+    assert publication._declaration_source_preference(current, previous, "other") is None
+    assert publication._declaration_source_preference(current, current, "new") is None
+    if execution == "attempt":
+        current["attempt_ids"] = ["executed"]
+    elif execution == "paid":
+        current["cost"]["wall_seconds"] = 1
+    elif execution in {"pass", "fail"}:
+        current["tasks"][0]["status"] = execution.upper()
+    elif execution == "qualified":
+        current["qualified_tier"] = 1
+    else:
+        current["tiers"]["1"]["passed"] = 1
+    assert publication._declaration_source_preference(current, previous, "new") is None
+    assert publication._declaration_source_preference(previous, current, "new") is None
+
+
+@pytest.mark.parametrize("historical_pin", [False, True])
+@pytest.mark.parametrize("duplicate_snapshot", [False, True])
+def test_current_source_declaration_fallback_retains_old_evidence_and_cached_identity(
+        evidence, historical_pin, duplicate_snapshot):
+    root, manifest = evidence
+    atomic_json(root / "configs/forge/trainer-families.json", {"schema_version": 1, "families": [
+        {"id": "bcap", "label": "BCAP", "candidates": ["bcap"], "canonical_candidate": "bcap"},
+        {"id": "atlas", "label": "Atlas", "candidates": ["atlas"], "canonical_candidate": "atlas",
+         "unmeasured_display_backend": "cuda", "unmeasured_display_reason": "Explicit declaration fixture."}]})
+    incumbent = read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0]
+    incumbent["trainer_family"] = "bcap"
+    _family_pin(root, manifest, incumbent)
+
+    def mark_declaration(entry, report, source):
+        row = report["rows"][0]
+        row.update(status="BLOCKED", qualified_tier=0)
+        row["bindings"]["source_digest"] = source * 64
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+        atomic_json(root / entry["snapshot"], report)
+        entry["json_sha256"] = file_hash(root / entry["snapshot"])
+        atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+
+    old_entry = manifest["cohorts"][1]
+    mark_declaration(old_entry, read_json(root / old_entry["snapshot"]), "b")
+    old_bytes = (root / old_entry["snapshot"]).read_bytes()
+    if duplicate_snapshot:
+        duplicate = deepcopy(old_entry)
+        duplicate["snapshot"] = "reports/forge/technique-evidence/b-again.json"
+        (root / duplicate["snapshot"]).write_bytes(old_bytes)
+        manifest["cohorts"].append(duplicate)
+        atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    if historical_pin:
+        card = read_json(root / CURRENT_SELECTION)
+        old_row = read_json(root / old_entry["snapshot"])["rows"][0]
+        old_row["trainer_family"] = "atlas"
+        card["historical_selections"] = [family_row_pin(old_row, selection_kind="historical_incumbent",
+                                                       reason="Retain the original declaration only.")]
+        atomic_json(root / CURRENT_SELECTION, card)
+    # Explicit metadata fixtures only: no model, sample, training or new gate.
+    entry, report = _register(root, manifest, "atlas", "c")
+    mark_declaration(entry, report, "a")
+    published = publication.publish_current(root)
+    result = read_json(published["json"])
+    row = next(row for row in result["rows"] if row["candidate_id"] == "atlas")
+    assert row["candidate_revision"] == "revision-c"
+    assert row["qualified_tier"] == 0 and row["attempt_ids"] == []
+    assert row["selection"]["selection_kind"] == "unmeasured_declaration"
+    assert row["tiers"]["1"]["passed"] == 0 and row["cost"]["wall_seconds"] is None
+    assert {row["candidate_revision"] for row in result["evidence_rows"]
+            if row["candidate_id"] == "atlas"} == {"revision-b", "revision-c"}
+    assert (root / old_entry["snapshot"]).read_bytes() == old_bytes
+    if historical_pin:
+        assert next(row for row in result["historical_family_rows"]
+                    if row["candidate_id"] == "atlas")["candidate_revision"] == "revision-b"
+    assert result["provenance"]["declaration_fallback_source_by_backend"] == {"cuda": "a" * 64}
+    before = _outputs(root)
+    assert publication.publish_current(root) == published and _outputs(root) == before
+
+
 @pytest.mark.parametrize("unresolved", [False, True])
 def test_new_card_is_discovered_with_truthful_unknown_or_blocked_status(evidence, monkeypatch, unresolved):
     root, manifest = evidence
@@ -936,6 +1034,130 @@ def test_policy_advance_refuses_old_source_and_retains_current_files(evidence, m
         publication.publish_current(root, source_commit="commit-c", advance_policy=True)
     assert _outputs(root) == before
     assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_bytes
+
+
+def _pin_existing_policy_rows(root, manifest):
+    rows = [read_json(root / entry["snapshot"])["rows"][0] for entry in manifest["cohorts"]]
+    atomic_json(root / "configs/forge/trainer-families.json", {
+        "schema_version": 1, "families": [{"id": row["candidate_id"], "label": row["candidate_id"],
+                                           "candidates": [row["candidate_id"]], "canonical_candidate": row["candidate_id"]}
+                                          for row in rows]})
+    card = _family_pin(root, manifest, {**rows[0], "trainer_family": rows[0]["candidate_id"]})
+    card["selections"] += [family_row_pin({**row, "trainer_family": row["candidate_id"]},
+                                         selection_kind="historical_incumbent", reason="Recorded incumbent.")
+                           for row in rows[1:]]
+    card["historical_selections"] = []
+    atomic_json(root / CURRENT_SELECTION, card)
+    return card
+
+
+@pytest.mark.parametrize("blocked", [True, False])
+def test_policy_advance_rebinds_same_selected_recipes_and_archives_exact_card(evidence, monkeypatch, blocked):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    if not blocked:
+        path = root / CURRENT_SELECTION
+        path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    publication.publish_current(root)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    protected = {entry["snapshot"]: (root / entry["snapshot"]).read_bytes() for entry in manifest["cohorts"]}
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    if not blocked:
+        report["rows"][1]["status"] = "UNKNOWN"
+        report["rows"][1]["tasks"][0]["status"] = "UNKNOWN"
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+    result = publication.publish_current(root, source_commit="commit-c",
+                                         execution_backend="cuda" if blocked else None, advance_policy=True)
+    advanced = read_json(root / CURRENT_SELECTION)
+    assert advanced["policy_fingerprint"] == report["policy_fingerprint"]
+    assert advanced["historical_selections"] == card["historical_selections"]
+    assert [(pin["trainer_family"], pin["candidate_id"], pin["execution_backend"]) for pin in advanced["selections"]] == [
+        (pin["trainer_family"], pin["candidate_id"], pin["execution_backend"]) for pin in card["selections"]]
+    assert [pin["candidate_revision"] for pin in advanced["selections"]] == ["revision-c", "revision-d"]
+    assert all(pin["selection_kind"] == "historical_incumbent" for pin in advanced["selections"])
+    updated = read_json(root / publication.EVIDENCE_MANIFEST)
+    archive = updated["archived_policies"][0]["family_selection"]
+    assert (root / archive["path"]).read_bytes() == original
+    assert file_hash(root / archive["path"]) == archive["sha256"]
+    current = read_json(result["json"])
+    assert current["provenance"]["family_current_selection_sha256"] == file_hash(root / CURRENT_SELECTION)
+    assert all(row["qualified_tier"] == 0 for row in current["rows"])
+    assert all((root / path).read_bytes() == data for path, data in protected.items())
+    outputs = _outputs(root)
+    assert publication.publish_current(root, execution_backend="cuda") == result
+    assert _outputs(root) == outputs
+    assert publication.publish_current(root, source_commit="commit-c", execution_backend="cuda", advance_policy=True) == result
+    assert read_json(root / publication.EVIDENCE_MANIFEST) == updated
+    (root / archive["path"]).write_text("{}\n")
+    with pytest.raises(ValueError, match="archived family selection hash mismatch"):
+        publication.publish_current(root)
+    assert _outputs(root) == outputs
+
+
+@pytest.mark.parametrize("failure", ["missing_new_row", "invalid_old_pin", "late_validation"])
+def test_failed_policy_pin_advance_leaves_selection_and_publication_unchanged(evidence, monkeypatch, failure):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    publication.publish_current(root)
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    if failure == "missing_new_row":
+        report["rows"].pop()
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+    elif failure == "invalid_old_pin":
+        card["selections"][0]["scientific_row_sha256"] = "invalid"
+        atomic_json(root / CURRENT_SELECTION, card)
+    else:
+        def fail_after_selection_validation(*args, **kwargs):
+            raise ValueError("late publication validation failed")
+        monkeypatch.setattr(publication, "_family_pages", fail_after_selection_validation)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    manifest_bytes = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    outputs = _outputs(root)
+    with pytest.raises(ValueError):
+        publication.publish_current(root, source_commit="commit-c", execution_backend="cuda", advance_policy=True)
+    assert (root / CURRENT_SELECTION).read_bytes() == original
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_bytes
+    assert _outputs(root) == outputs
+    assert not (root / CURRENT_SELECTION.parent / "history").exists()
+
+
+def test_policy_pin_advance_marks_fully_observed_new_failures_as_measurements(evidence, monkeypatch):
+    root, manifest = evidence
+    original = _pin_existing_policy_rows(root, manifest)
+    original["historical_selections"] = deepcopy(original["selections"])
+    atomic_json(root / CURRENT_SELECTION, original)
+    prior = [(entry, *publication._snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    row = report["rows"][0]
+    row["tasks"] = [{"task_id": name, "status": "FAIL" if name == "ring" else "PASS"}
+                    for name in report["tier_requirements"]["1"]]
+    staged, _ = publication._advanced_family_selection(
+        root, manifest, report, {item["candidate_id"]: item for item in report["rows"]}, prior)
+    assert staged["selections"][0]["selection_kind"] == "current_measurement"
+    assert staged["selections"][0]["measurement_views"] == [manifest["view"]]
+    assert staged["selections"][1]["selection_kind"] == "historical_incumbent"
+    assert staged["historical_selections"] == original["historical_selections"]
+    assert read_json(root / CURRENT_SELECTION)["policy_fingerprint"] == manifest["policy_fingerprint"]
+
+
+def test_policy_pin_advance_requires_explicit_backend_for_mixed_selections(evidence, monkeypatch):
+    root, manifest = evidence
+    card = _pin_existing_policy_rows(root, manifest)
+    publication.publish_current(root)
+    _later_policy_evidence(root, manifest, monkeypatch)
+    card["selections"][1]["execution_backend"] = "cpu"
+    atomic_json(root / CURRENT_SELECTION, card)
+    original = (root / CURRENT_SELECTION).read_bytes()
+    outputs = _outputs(root)
+    def unexpected(*args, **kwargs):
+        pytest.fail("ambiguous backend must be refused before source regrade")
+    monkeypatch.setattr(publication, "regenerate", unexpected)
+    with pytest.raises(ValueError, match="mixed selected backends requires an explicit --device"):
+        publication.publish_current(root, source_commit="commit-c", advance_policy=True)
+    assert (root / CURRENT_SELECTION).read_bytes() == original
+    assert _outputs(root) == outputs
 
 
 def test_policy_advance_requires_later_revision_and_source(evidence, monkeypatch):
@@ -1309,7 +1531,8 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
-    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == len(result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
+    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == cohort_count
     assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
 
 
@@ -1549,18 +1772,24 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    assert len([line for line in table if line.startswith("| **[")]) == len(result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
+    assert len([line for line in table if line.startswith("| **[")]) == cohort_count
     labels = [family["label"] for family in result["family_progress"]["families"]]
-    assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 1
+    assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 0
     assert "tensorflow" not in text.lower() and "halloween" not in text.lower()
     bcap = next(family for family in result["family_progress"]["families"] if family["label"] == "BCAP")
     for cohort in bcap["cohorts"]:
-        assert cohort["total"]["passed"] == max(item["total"]["passed"] for item in cohort["configuration_alternatives"])
+        if cohort["anchor"] == bcap["current_cohort_anchor"]:
+            selected = result["rows"][cohort["row_index"]]
+            assert selected["candidate_id"] == bcap["benchmark_configuration"]["candidate_id"]
+            assert selected["trainer_family"] == "bcap-dualnorm"
+        else:
+            assert cohort["total"]["passed"] == max(item["total"]["passed"] for item in cohort["configuration_alternatives"])
     page = _family_text(ROOT, result, bcap["id"])
-    assert "Best recorded configuration" in page and "optimizer_family=" in page
+    assert "Current benchmark configuration" in page and "optimizer_family=dualnorm" in page
     assert "Recorded observations" in page or "Metric" in page
     view_rows = sum(len(cohort["views"]) for family in result["family_progress"]["families"]
-                    for cohort in family["cohorts"])
+                    for cohort in family["cohorts"] if cohort["anchor"] == family["current_cohort_anchor"])
     assert len([line for line in table if line.startswith("| ↳ [")]) == view_rows
     assert all("families/" in line for line in table)
     assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
@@ -1589,7 +1818,8 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
     assert "Original Atlas recipe and serving-law evidence" in _family_text(ROOT, result, "atlas")
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
-    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == len(result["family_progress"]["families"])
+    cohort_count = len(result["family_progress"]["families"])
+    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
     assert result == before
 
 
@@ -1685,41 +1915,31 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     frozen = read_json(ROOT / "configs/forge/rounds/tier1-completion-v1.json")
     original_families = {row["family"] for row in frozen["candidate_roster"]}
     assert len(original_families) == len(frozen["candidate_roster"]) == 11
-    selection = read_json(tmp_path / CURRENT_SELECTION)
-    migration_path = ROOT / "reports/forge/dualnorm-tier1/selection-migration.json"
-    if migration_path.is_file():
-        # Replay the immutable original card, including its former measurement
-        # metadata; today's contract-drift classification is separate history.
-        migration = read_json(migration_path)
-        original_pins = {item["trainer_family"]: item["original_selection"]
-                         for item in migration["migrations"]}
-        selection["selections"] = [deepcopy(original_pins.get(pin["trainer_family"], pin))
-                                   for pin in selection["selections"]]
-        # Remove only the later starter's documented history entry. The two
-        # original release-prior history pins predate this publication and stay.
-        starter_history = migration.get("starter_change", {}).get("retained_history_pin")
-        if starter_history is not None:
-            selection["historical_selections"] = [pin for pin in selection["historical_selections"]
-                                                  if pin != starter_history]
-    selection["selections"] = [pin for pin in selection["selections"]
-                               if pin["trainer_family"] in original_families]
-    atomic_json(tmp_path / CURRENT_SELECTION, selection)
+    # Restore the exact original publication card rather than deriving it
+    # from later source refreshes or migrations. No recorded outcome changes.
+    selection_archive = read_json(ROOT / "reports/forge/tier1-completion/selection-archive.json")
+    assert selection_archive["scientific_source_commit"] == original["source_commit"]
+    blob = subprocess.check_output(["git", "rev-parse",
+                                   selection_archive["archive_commit"] + ":" + selection_archive["path"]], cwd=ROOT, text=True).strip()
+    assert blob == selection_archive["git_blob"]
+    (tmp_path / CURRENT_SELECTION).write_bytes(subprocess.check_output(
+        ["git", "show", blob], cwd=ROOT))
     assert file_hash(tmp_path / CURRENT_SELECTION) == original["selection_sha256"]
     registry_path = tmp_path / "configs/forge/trainer-families.json"
-    registry = read_json(registry_path)
+    registry = json.loads(subprocess.check_output(
+        ["git", "show", original["source_commit"] + ":configs/forge/trainer-families.json"], cwd=ROOT))
     registry["families"] = [family for family in registry["families"] if family["id"] in original_families]
     atomic_json(registry_path, registry)
+    (tmp_path / publication.EVIDENCE_MANIFEST).write_bytes(subprocess.check_output(
+        ["git", "show", selection_archive["archive_commit"] + ":" + publication.EVIDENCE_MANIFEST.as_posix()], cwd=ROOT))
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
-    manifest["cohorts"] = [entry for entry in manifest["cohorts"]
-                           if entry["source_commit"] == original["source_commit"]]
     assert len(manifest["cohorts"]) == 1
-    atomic_json(tmp_path / publication.EVIDENCE_MANIFEST, manifest)
+    assert manifest["cohorts"][0]["source_commit"] == original["source_commit"]
     # Rebuild this recorded publication against its exact archived denominator.
     # The new scalar task does not relabel any of these scientific rows.
-    archived = tmp_path / "configs/forge/view-history" / f"discriminator_stability-v{manifest['view_revision']}.json"
     policy_path = tmp_path / "configs/forge/views/discriminator_stability.json"
-    if archived.is_file():
-        shutil.copyfile(archived, policy_path)
+    policy_path.write_bytes(subprocess.check_output(
+        ["git", "show", original["source_commit"] + ":configs/forge/views/discriminator_stability.json"], cwd=ROOT))
     assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
     # Restore parent declarations from this publication's pinned source.
     # Current policy variants follow current task bindings and cannot supply

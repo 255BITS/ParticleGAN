@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "campaign_id": "bcap-three-phase-tier1-v1",
+  "arms": [
+    {
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-tier1-stability/results.json",
+          "selector": [],
+          "identity": {
+            "evidence_scope": "research_diagnostic",
+            "paid_attempts": 6
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "role": "incumbent",
+      "candidate_id": "bcap-three-phase-incumbent-v1",
+      "parent": "bcap-develop-integration-winner-v1",
+      "control": "bcap-develop-integration-combined-v1",
+      "recipe_overrides": {},
+      "changed_factors": [
+        "Fresh source control: original winning BCAP recipe; projection, transport, finite critic guard disabled; native full SVD retained."
+      ],
+      "mechanism_rationale": "Measure the complete incumbent configuration against two compound repairs on one frozen implementation.",
+      "hypothesis": "The original winner retains all six original Tier1 passes on the newly integrated source.",
+      "competing_explanation": "A disabled-feature or host regression could change training despite the original recipe."
+    },
+    {
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-tier1-stability/results.json",
+          "selector": [],
+          "identity": {
+            "evidence_scope": "research_diagnostic",
+            "paid_attempts": 6
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "role": "cap-margin",
+      "candidate_id": "bcap-three-phase-cap-margin-v1",
+      "parent": "bcap-develop-integration-combined-v1",
+      "control": "bcap-three-phase-incumbent-v1",
+      "recipe_overrides": {
+        "reg_kappa": 0.9,
+        "optimizer_svd_backend": "cpu"
+      },
+      "changed_factors": [
+        "Retain direction_blend plus global/local transport weights1 and32directions relative to incumbent.",
+        "reg_kappa=0.9; explicit global trainer delta",
+        "optimizer_svd_backend=cpu; explicit global trainer delta"
+      ],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Constant training-cap margin kappa0.9 leaves room below the unchanged evaluator bound1; explicit CPU full-SVD numerical backend provides measured word runtime headroom.",
+      "hypothesis": "Constant training-cap margin kappa0.9 leaves room below the unchanged evaluator bound1; explicit CPU full-SVD numerical backend provides measured word runtime headroom. Predict all six full original Tier1 gates pass, including sustained two-pole suffix>=5 and completed20001-update words within900seconds.",
+      "competing_explanation": "Cap changes can reduce useful critic response, and CPU-vs-CUDA SVD rounding can alter paths. Transport plus cap and backend are a compound repair, not an isolated quality attribution."
+    },
+    {
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-tier1-stability/results.json",
+          "selector": [],
+          "identity": {
+            "evidence_scope": "research_diagnostic",
+            "paid_attempts": 6
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "role": "finite-cap",
+      "candidate_id": "bcap-three-phase-finite-cap-v1",
+      "parent": "bcap-develop-integration-combined-v1",
+      "control": "bcap-three-phase-incumbent-v1",
+      "recipe_overrides": {
+        "critic_step_mode": "finite_cap",
+        "optimizer_svd_backend": "cpu"
+      },
+      "changed_factors": [
+        "Retain direction_blend plus global/local transport weights1 and32directions relative to incumbent.",
+        "critic_step_mode=finite_cap; explicit global trainer delta",
+        "optimizer_svd_backend=cpu; explicit global trainer delta"
+      ],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Structural same-training-panel finite critic displacement guard; explicit CPU full-SVD numerical backend provides measured word runtime headroom.",
+      "hypothesis": "Structural same-training-panel finite critic displacement guard; explicit CPU full-SVD numerical backend provides measured word runtime headroom. Predict all six full original Tier1 gates pass, including sustained two-pole suffix>=5 and completed20001-update words within900seconds.",
+      "competing_explanation": "Cap changes can reduce useful critic response, and CPU-vs-CUDA SVD rounding can alter paths. Transport plus cap and backend are a compound repair, not an isolated quality attribution."
+    }
+  ],
+  "paid_ceiling_seconds": 10000,
+  "full_phase1_phase2_reservations_seconds": 9960,
+  "selection": {
+    "eligibility": "six_original_required_Tier1_gates_PASS",
+    "prefer_repaired_candidate": true,
+    "tie_break": [
+      "fewer_recipe_override_fields_changed_relative_to_combined_reference",
+      "lexicographic_candidate_id"
+    ]
+  },
+  "stop": "At most these three complete Tier1 arms; no scientific rerun, seeds, new tuning or Tier2 in Phase2."
+}

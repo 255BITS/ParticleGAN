@@ -11,8 +11,10 @@ import random
 import numpy as np
 import torch
 
+from particlegan.execution import serial_autograd
+
 DEFAULT_SEED = 0
-VERSION = "toy-comparison-v2"
+VERSION = "toy-comparison-v3-serial-autograd"
 
 
 @contextmanager
@@ -55,7 +57,7 @@ def reproducible_execution(function):
             torch.backends.cudnn.benchmark = False
             torch.backends.cuda.matmul.allow_tf32 = False
             torch.backends.cudnn.allow_tf32 = False
-            with construction_rng(kwargs.get("seed", DEFAULT_SEED), kwargs.get("device", "cpu")):
+            with serial_autograd(), construction_rng(kwargs.get("seed", DEFAULT_SEED), kwargs.get("device", "cpu")):
                 return function(*args, **kwargs)
         finally:
             torch.set_num_threads(settings[0])

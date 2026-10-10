@@ -96,20 +96,27 @@ Raw execution envelopes, per-update streams and source snapshots remain under
 ignored `runs/forge/` or an artifact archive. Commit the compact readout, final
 metrics, archive manifest and publication summaries.
 
-When a completed measurement advances the view policy, update the whole-row
-selection and register its source together:
+When completed measurements advance the view policy, register the source and
+advance the whole-row selections together:
 
-1. Reconstruct the exact executed source with `technique_board.regenerate`, using
-   `execution_backend="cuda"`, `source_commit=<executed commit>` and an output
-   prefix under ignored `runs/forge/`. This reports evidence without registering
-   it or launching training.
-2. Build pins from those complete rows, using each candidate's current solution
-   family. Set the selection card's policy fingerprint to the reconstructed
-   report. Use `current_measurement` with explicit views/scoped probes for fully
-   measured rows; retain unsupported parent rows as exact `historical_incumbent`
-   selections from this source. Keep `historical_selections` unchanged.
-3. Run `python reports/forge/regenerate_technique_inventory.py --source-commit
-   <executed commit> --device cuda --advance-policy`. The publisher validates the
-   new pins against the pending snapshot before writing. Do not refresh between
-   changing the pins and this registration; the old publication still binds its
-   earlier policy. Original numerical snapshots remain archived without regrade.
+```sh
+python reports/forge/regenerate_technique_inventory.py \
+  --source-commit <executed-commit> --device cuda --advance-policy
+```
+
+The publisher reconstructs the executed source and stages new pins for the same
+selected candidates and backend. It validates both the previous selection and
+the new complete rows before writing; no outcome-based recipe reselection occurs.
+Fully observed required measurements become `current_measurement`, including
+failed gates. Incomplete or unsupported rows retain `historical_incumbent` status
+with no qualification transfer. Unmeasured incumbent declarations are frozen
+under the explicitly selected backend. A missing or ambiguous selected row
+refuses publication instead of silently substituting another configuration.
+If `--device` is omitted, advancement preserves the single backend recorded by
+the previous pins; mixed selected backends require an explicit choice.
+
+The exact previous selection card is archived under
+`configs/forge/selections/history/`, with its hash bound to the archived policy.
+`historical_selections` and original numerical snapshots remain unchanged.
+Validation failures leave the selection card, registry and current publication
+untouched. Ordinary cached refreshes need neither training nor original logs.

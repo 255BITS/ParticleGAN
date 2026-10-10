@@ -46,6 +46,8 @@ class Recipe:
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
+    # Optional finite same-training-panel critic step guard; none preserves history.
+    critic_step_mode: str = "none"
     prior_reg: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
@@ -78,6 +80,10 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Opt-in label-free transport signal on the same G-phase target batch.
+    kinetic_transport_weight: float = 0.0
+    kinetic_transport_local_weight: float = 0.0
+    kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -172,6 +178,17 @@ class Recipe:
     # lr is their step size; isolation arms can pin native Adam groups to the
     # original baseline rate independently of the normalized-step sweep.
     optimizer_momentum: float = 0.0
+    # Fixed gradient scale for smoothed polar, bias and sampled-prior updates.
+    # epsilon in the smoothed-polar paper is optimizer_smoothing ** 2.
+    optimizer_smoothing: float = 0.0
+    # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
+    optimizer_convolution: str = "none"
+    # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
+    # Native retains the original computation and archived checkpoint identity.
+    optimizer_svd_backend: str = "native"
+    # Opt-in protection of existing G/encoder/prior objectives. Component
+    # callers bind their protected losses before backward only when enabled.
+    constraint_geometry_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -205,6 +222,30 @@ class Recipe:
             raise ValueError("optimizer_momentum must be 0, 0.5 or 0.9")
         if self.optimizer_momentum != 0 and self.optimizer_family not in ("dualnorm", "dualnorm_D_only"):
             raise ValueError("optimizer_momentum requires a dualnorm optimizer family")
+        if (type(self.optimizer_smoothing) not in (int, float)
+                or not math.isfinite(self.optimizer_smoothing) or self.optimizer_smoothing < 0):
+            raise ValueError("optimizer_smoothing must be finite and nonnegative")
+        if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress", "direction_blend"):
+            raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
+        if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
+            raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if self.critic_step_mode not in ("none", "finite_cap"):
+            raise ValueError("critic_step_mode must be none or finite_cap")
+        if self.critic_step_mode == "finite_cap" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.effective_critic_formulation != "bcap" or self.reg_every != 1
+                or self.input_noise_std or self.output_noise_std):
+            raise ValueError("finite_cap requires zero-momentum full DualNorm, every-update BCAP, and zero input/output noise")
+        if self.optimizer_convolution not in ("none", "per_offset"):
+            raise ValueError("optimizer_convolution must be none or per_offset")
+        if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if self.optimizer_svd_backend not in ("native", "cpu"):
+            raise ValueError("optimizer_svd_backend must be native or cpu")
+        if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_svd_backend requires optimizer_family='dualnorm'")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -343,6 +384,14 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if (type(self.kinetic_transport_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
+            raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+        if (type(self.kinetic_transport_local_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
+            raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
+        if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
+            raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -461,6 +510,8 @@ class Recipe:
             result.pop("optimizer_family")
         if self.optimizer_momentum == 0:
             result.pop("optimizer_momentum")
+        if self.optimizer_convolution == "none":
+            result.pop("optimizer_convolution", None)
         if self.optimizer_adam_lr is None:
             result.pop("optimizer_adam_lr")
         if self.eps == 1e-8:
@@ -541,6 +592,26 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
+    def kinetic_transport_loss(self, fake, real):
+        """Weighted empirical transport on caller-owned G-phase output batches.
+
+        Enabling this objective requires a host consumer. It draws no samples,
+        detaches real targets and retains gradients through fake outputs. Hosts
+        with zero weight retain their original objective without calling it.
+        """
+        from .kinetic_transport import kinetic_transport_loss
+        return self.kinetic_transport_weight * kinetic_transport_loss(
+            fake, real, projections=self.kinetic_transport_projections)
+
+    def kinetic_transport_local_loss(self, fake, real):
+        """Weighted local-v2 residual on the same caller-owned output batches.
+
+        Anchors, bandwidths and normalizers come from detached real targets.
+        This auxiliary term does not become a protected projection objective.
+        """
+        from .kinetic_transport import kinetic_transport_local_loss
+        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
 
@@ -607,10 +678,12 @@ class Recipe:
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, [p for p in critic.parameters() if p.requires_grad], critic=critic, **options)
         if self.optimizer_family != "formulation":
-            from .optim.dualnorm import make_normalized_optimizer
+            from .optim.dualnorm import convolution_parameter_groups, make_normalized_optimizer
             if self.optimizer_family == "particle_rownorm_only" and self.optimizer_adam_lr is not None:
                 options["lr"] = self.optimizer_adam_lr * self.d_lr_mult
             params = [{"params": [p for p in critic.parameters() if p.requires_grad], "role": "critic"}]
+            if self.optimizer_convolution == "per_offset":
+                params = convolution_parameter_groups(params, [critic], family=self.optimizer_family)
             return make_normalized_optimizer(self, params, critic=critic, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
@@ -623,7 +696,7 @@ class Recipe:
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
-        """Optimizer over ``params`` (tensors or param groups) whose ``step()`` does the
+        """Optimizer over ``params`` (module, tensors or param groups) whose ``step()`` does the
         recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
         and the direct-particle response for the param group ``direct_particles``).
@@ -635,13 +708,27 @@ class Recipe:
         Normalized families accept role-named groups. Their row-normalized
         prior requires ``set_sampled_rows(prior.z, indices)`` before stepping;
         the public trainer/policy records generator-side sample IDs automatically.
+        A supplied module binds Conv2d/ConvTranspose2d weights automatically when
+        ``optimizer_convolution='per_offset'``. Bare high-rank tensor iterables
+        lack this layout contract and are rejected by DualNorm.
+
+        With ``constraint_geometry_mode != 'none'``, call
+        ``particlegan.optim.constraint_geometry.constraint_geometry_backward``
+        before ``step()`` with the host's existing protected scalar losses.
+        Protection must cover the joint generator/encoder/prior optimizer.
+        The default mode requires no protected-loss hook and retains the
+        original optimizer type and checkpoint format.
         """
+        from torch import nn
+        module = params if isinstance(params, nn.Module) else None
+        if module is not None:
+            params = [p for p in module.parameters() if p.requires_grad]
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, params, **options)
         if self.optimizer_family != "formulation":
-            from .optim.dualnorm import make_normalized_optimizer
+            from .optim.dualnorm import convolution_parameter_groups, make_normalized_optimizer
             params = list(params)
             if params and not isinstance(params[0], dict):
                 params = [{"params": params}]
@@ -663,6 +750,8 @@ class Recipe:
                 if uses_adam and self.optimizer_adam_lr is not None:
                     group["lr"] = self.optimizer_adam_lr * (self.prior_lr_mult if is_prior else 1.)
                 groups.append(group)
+            if module is not None and self.optimizer_convolution == "per_offset":
+                groups = convolution_parameter_groups(groups, [module], family=self.optimizer_family)
             return make_normalized_optimizer(self, groups, **options)
         from .k3p import K3PGeneratorAdam
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
@@ -734,7 +823,12 @@ class Recipe:
                         role_params.append(p)
                         seen.add(id(p))
             if normalized and role_params:
-                groups.append({"params": role_params, "lr": self.lr, "role": role})
+                role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
+                if self.optimizer_convolution == "per_offset":
+                    from .optim.dualnorm import convolution_parameter_groups
+                    role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
+                                                               family=self.optimizer_family)
+                groups.extend(role_groups)
         if g_params and not normalized:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
@@ -774,8 +868,12 @@ def get_recipe(name="gan", **overrides):
     settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
     ``"k3p"`` explicitly selects the earlier critic formulation.
     ``"bcap"`` selects zero-momentum dualnorm with G/E step .012, D step
-    .018 and sampled-prior row step .03, fixed real/fake input-gradient caps
-    and constant rates. ``"bcap_adam"`` retains the earlier native-Adam
+    .018 and sampled-prior row step .03, non-saturating loss, smoothing .001,
+    per-offset convolution updates, fixed real/fake input-gradient caps,
+    direction blending for conflicting task-owned objectives and constant
+    rates. This is the selected research recipe, not a calibrated robustness
+    claim. Set ``constraint_geometry_mode="none"`` for the earlier DualNorm
+    recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
     No research configuration file is read at runtime.
@@ -821,6 +919,9 @@ def get_recipe(name="gan", **overrides):
         **families["bcap_adam"], "optimizer_family": "dualnorm",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5,
         "optimizer_momentum": 0.,
+        "loss": "non_saturating", "optimizer_smoothing": .001,
+        "optimizer_convolution": "per_offset",
+        "constraint_geometry_mode": "direction_blend",
     }
     families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}

@@ -1,0 +1,1118 @@
+{
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 3097440,
+    "candidate_budget_seconds": 43020,
+    "id": "bcap-tier2-search-v1",
+    "purpose": "Finite 72-recipe BCAP search through Tier2; two A6000 workers plus the coordinator's CPU slot (at most three workers); no retries or expansion.",
+    "schema_version": 1
+  },
+  "candidates": [
+    {
+      "base_candidate": "bcap-dualnorm-convolution-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 1e-05,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 1e-05,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.01,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.01,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.1,
+              "network_lr_floor": 0.1,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.1,
+              "network_lr_floor": 0.1,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 1e-05,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 1e-05,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.25,
+              "lr_floor": 0.3,
+              "network_lr_floor": 0.3,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.25,
+              "lr_floor": 0.3,
+              "network_lr_floor": 0.3,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.008,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.3,
+              "network_lr_floor": 0.3,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.008,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.3,
+              "network_lr_floor": 0.3,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.75,
+              "lr": 0.016,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 1.875,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.75,
+              "lr": 0.016,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 1.875,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.75,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 0.75,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 1.25,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-conv-non-saturating-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-conv-hinge-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-conv-wasserstein-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-conv-least-squares-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_floor": 1.0,
+              "network_lr_floor": 1.0,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "optimizer_smoothing": 0.001,
+              "prior_lr_mult": 2.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "base_candidate": "bcap-pure-adam-v2",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "bcap-pure-non-saturating-joint-v2",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "bcap-pure-hinge-joint-v2",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "bcap-pure-wasserstein-joint-v2",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "bcap-pure-least-squares-joint-v2",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 0.75,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 1.0,
+              "reg_every": 4,
+              "reg_kappa": 1.0
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "bcap-sgda-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.08,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.08,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-sgda"
+    },
+    {
+      "base_candidate": "bcap-nsgda-global-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.02,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.02,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 1.5,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-nsgda-global"
+    },
+    {
+      "base_candidate": "bcap-nsgda-layer-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-nsgda-layer"
+    },
+    {
+      "base_candidate": "bcap-ada-nsgda-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "betas": [
+                0.0,
+                0.9
+              ],
+              "d_lr_mult": 1.0,
+              "lr": 0.006,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-ada-nsgda"
+    },
+    {
+      "base_candidate": "bcap-dualnorm-d-only-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.5,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-dualnorm-d-only"
+    },
+    {
+      "base_candidate": "bcap-particle-rownorm-only-v1",
+      "parameters": {
+        "configuration": {
+          "kind": "choice",
+          "values": [
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 1,
+              "reg_kappa": 0.5
+            },
+            {
+              "d_lr_mult": 1.0,
+              "lr": 0.012,
+              "lr_anneal_start": 0.0,
+              "lr_floor": 0.2,
+              "network_lr_floor": 0.2,
+              "prior_lr_mult": 2.0,
+              "reg_coeff": 4.0,
+              "reg_every": 4,
+              "reg_kappa": 0.5
+            }
+          ]
+        }
+      },
+      "trainer_family": "bcap-particle-rownorm-only"
+    }
+  ],
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "hypothesis": "One global positive-BCAP recipe can preserve all six acquisition gates and improve sustained Tier2 coverage by reducing terminal player motion, adjusting critic cap/strength/cadence, or changing the public optimizer/loss. Success requires 6/6 Tier1 and at least 10/21 Tier2; select the complete recipe by required PASS counts by tier, then content hash.",
+  "id": "bcap-tier2-search-v1",
+  "protocol": "screening",
+  "rationale": "User-authorized 72 complete configurations, all BCAP-on. Frozen full population covers all eight optimizer families and five losses on Adam and convolution-enabled DualNorm, with extra relativistic DualNorm retention hypotheses. Two explicit penalty cadences (1,4) double 36 declared recipe points. This is a scoped subset of the 40 optimizer/loss pairs, not an exhaustive numerical search. See STUDY.md for predictions, falsifiers, source identities and stopping. Seed0; fixed task architecture, data/prior/sampling/initialization/RNG/horizon/cadence/gates. No scientific retry, adaptive expansion, seed experiment, Tier3 or default adoption. Every Tier1 survivor independently finishes all runnable Tier2 peers. Evaluate all candidates only after the single unattended drain completes.",
+  "samples": 72,
+  "schema": "forge_search_space_v1",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

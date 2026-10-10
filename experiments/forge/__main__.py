@@ -109,7 +109,7 @@ def parser():
     techniques.add_argument("--device", choices=("cpu", "cuda"), help="show one execution cohort (default both)")
     techniques.add_argument("--json", action="store_true")
     techniques.add_argument("--output", type=Path, help="write Markdown and compact JSON using this path prefix")
-    inventory = commands.add_parser("inventory", help="discover and run all declared techniques through ordinary Forge gates")
+    inventory = commands.add_parser("inventory", help="run one selected current configuration per family through ordinary Forge gates")
     inventory_stages = inventory.add_subparsers(dest="stage", required=True)
     for stage in ("plan", "enqueue", "run"):
         inv = inventory_stages.add_parser(stage)
@@ -117,7 +117,7 @@ def parser():
         inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
         inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
         inv.add_argument("--cuda-model")
-        inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory.json"))
+        inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
         if stage == "run":
             inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
     tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")

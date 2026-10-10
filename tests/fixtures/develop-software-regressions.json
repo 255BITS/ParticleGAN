@@ -1,0 +1,76 @@
+{
+  "archived_qualification_changed": false,
+  "artifacts": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/logs",
+  "baseline": {
+    "failed": 2,
+    "junit_sha256": "f6e6d904c9bba7d466380eb5d8738e84b67491b041b9ba605f201ec56e14a863",
+    "log_sha256": "f456050e62c5afea4d715395b47bd593478bbc4574a67167d7e9d5fe16a40dc6",
+    "node_ids": [
+      "tests/test_dualnorm_pacing_study.py::test_expired_clock_before_first_admission_is_an_unmeasured_stop",
+      "tests/test_forge_tier1_policy_coverage.py::test_scalar_policy_software_control_retains_selected_observation",
+      "tests/test_toy_canonical_selection.py::test_standalone_listing_does_not_import_training_stack"
+    ],
+    "passed": 1,
+    "pytest_seconds": 2.53,
+    "scope": "exact git-archive develop; pacing producer before scalar consumer"
+  },
+  "followup": {
+    "failed": 0,
+    "junit_sha256": "bfd5c792f05d9501c5bd2cbc3a0f143b10826258e41e8d3bce9a7cab2f5c11fd",
+    "log_sha256": "0dd1d98931bbdf6ac38dba1af403d4843ee9a154428513515e82c6de7aff4242",
+    "passed": 17,
+    "pytest_seconds": 19.52,
+    "scope": "ordered producer then scalar consumer; four corrected checks and archival destructive controls"
+  },
+  "original_develop_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+  "original_sources": {
+    "benchmarks/__init__.py": {
+      "git_blob": "dda963fa076fd409bc3de9d338e7a372064cf58e",
+      "sha256": "5b3d047f10122eef719de3126e7424b671376d0c1b4392208a5f487f15eed0f7"
+    },
+    "benchmarks/toy_audit/canonical_selection.py": {
+      "git_blob": "2a809ca8ef71c4b43db82380cbf9fb5235574f22",
+      "sha256": "b4ca13f7d4ad41b6532ffa7ee063ed2acf0a6f3e43dd9e5562164386d6e67790"
+    },
+    "experiments/forge/optimizer_diagnostics.py": {
+      "git_blob": "c8ce541122c2429c687c0acc5fb9a63423e63dd0",
+      "sha256": "18c26fc82d76db849597e2e4293fe161c69d7582ddf83ad4977cd8ceafa2ba30"
+    },
+    "reports/forge/dualnorm-pacing-v2/run.py": {
+      "git_blob": "9a41c2fe4d07f8bee11e96ed3bd6b08f7308cabb",
+      "sha256": "0534a7b83270fefb9b8a815061a1b6924cde29755ea17d79122813180951335f"
+    },
+    "tests/test_dualnorm_pacing_study.py": {
+      "git_blob": "20cacb780c840aa9f9402df5756e7a9eb98d9857",
+      "sha256": "9eb4e89401d1ca23b07b30b42e110867fad7b7635a3d6ff02de70a1100216272"
+    },
+    "tests/test_toy_canonical_selection.py": {
+      "git_blob": "11d78da5fb0b2a0d32b977cf74cbbec34f82ff0a",
+      "sha256": "1311fb07d1dae27c666710da1ac40a8b8859c3aa297c515ca1241ab7f8382359"
+    }
+  },
+  "pacing_environment_control": {
+    "cause": "existing pacing driver sets diagnostics environment opt-in and the software test did not restore it",
+    "correction": "monkeypatch scopes only the existing driver environment mutation",
+    "original_verdict": "pacing producer PASS; subsequent scalar consumer FAIL on exact original develop and integrated source",
+    "production_logging_changed": false
+  },
+  "package_import_control": {
+    "cause": "benchmarks package initializes project serial autograd scheduling, which imports Torch",
+    "corrected_node_id": "tests/test_toy_canonical_selection.py::test_direct_script_metadata_cli_listing_does_not_import_training_stack",
+    "corrected_scope": "direct-script metadata CLI, excluding benchmark package initialization",
+    "original_assertion": "assert 'torch' not in sys.modules",
+    "original_script": "import sys; from benchmarks.toy_audit import canonical_selection as s; s.main(['cases','--id','pr58','--json']); assert 'torch' not in sys.modules",
+    "original_verdict": "FAIL on exact original develop and integrated source",
+    "package_import_became_torch_free": false,
+    "retained_controls": [
+      "Torch absent from direct-script metadata CLI",
+      "exact pr58 catalog identity",
+      "exact develop-img_intensity2 canonical identity",
+      "original FAIL / PASS status retained"
+    ]
+  },
+  "production_changed": false,
+  "qualification_input": false,
+  "schema": "forge_develop_software_regressions_v1"
+}

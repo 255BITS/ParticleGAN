@@ -6,7 +6,8 @@ Current selection pins one whole ordinary evidence row per formulation family.
 new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
 --advance-policy explicitly archives an earlier policy before registering new
-source evidence under the current view. Archived outcomes are never regraded.
+source evidence and rebinding the same selected configurations under the current
+view. Archived outcomes and selection cards are preserved without regrade.
 --refresh-publication updates display evidence and declared-view coverage while
 preserving verified selected rows and their recorded qualification policy.
 """
@@ -17,6 +18,7 @@ from collections import Counter
 from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
+import inspect
 import json
 import math
 import os
@@ -209,7 +211,101 @@ def _receipt_manifests(root, commit):
     return manifests
 
 
-def _extract_source(root, commit, destination, manifests):
+def _recorded_studies(root, manifests):
+    """Bind report reconstruction to original, admitted study requests only."""
+    from experiments.forge.technique_inventory import _signature
+    records, support = {}, {}
+    for path in sorted((root / "reports/forge/attempts").glob("*/request.json")):
+        resolved = read_json(path)
+        request = resolved.get("request", resolved)
+        source = request.get("source", {})
+        expected = manifests.get(source.get("digest"))
+        if expected is None or source.get("origin_commit") != expected.get("origin_commit"):
+            continue
+        if source.get("files") != expected.get("files"):
+            raise ValueError("recorded study source manifest differs from validated originals")
+        candidate = request.get("candidate", {})
+        if "study" not in request:
+            if (candidate.get("schema_version") == 3 and "configuration_id" not in candidate
+                    and "decision_contract" not in candidate):
+                raise ValueError("recorded v3 candidate is missing its admitted study binding")
+            continue
+        study, admission, review = request["study"], request.get("study_admission", {}), request.get("study_review", {})
+        if (study.get("candidate") != candidate.get("id") or study.get("status") != "ready"
+                or study.get("scope", {}).get("view") != request.get("view", {}).get("id")
+                or study.get("scope", {}).get("execution_backend") != request.get("execution_backend")
+                or study.get("scope", {}).get("through_tier") != request.get("through_tier")
+                or admission.get("study_sha256") != stable_hash(study)
+                or admission.get("policy_fingerprint") != request.get("policy_fingerprint")
+                or admission.get("protocol_sha256") != stable_hash(request.get("protocol"))
+                or review.get("receipt") != admission or review.get("status") != "READY"
+                or review.get("blockers") or request.get("preflight_blockers")):
+            raise ValueError("recorded study declaration/admission fingerprint is missing or mismatched")
+        prior = review.get("expected", {}).get("prior_evidence", [])
+        if len(prior) != len(study["prior_evidence"]):
+            raise ValueError("recorded study prior-evidence binding is missing")
+        for declared, bound in zip(study["prior_evidence"], prior):
+            binding = {key: value for key, value in bound.items() if key != "sha256"}
+            name, digest = bound.get("path"), bound.get("sha256")
+            if (binding != declared or not isinstance(name, str) or Path(name).is_absolute()
+                    or ".." in Path(name).parts or Path(name).suffix != ".json"
+                    or not isinstance(digest, str) or len(digest) != 64):
+                raise ValueError("recorded study prior-evidence identity is missing or unsafe")
+            if name in support and support[name] != digest:
+                raise ValueError("conflicting recorded study prior-evidence hashes")
+            support[name] = digest
+        identity = stable_hash({"study": study, "admission": admission, "review": review, "signature": _signature(request),
+                                "source": {key: source[key] for key in ("origin_commit", "digest", "files")}})
+        record = records.setdefault(identity, {"request": request, "original_receipts": []})
+        record["original_receipts"].append({"request_path": path.relative_to(root).as_posix(), "request_sha256": file_hash(path)})
+    return list(records.values()), support
+
+
+def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model, records, proofs):
+    """Standalone adapter also embedded in the isolated frozen reader."""
+    from experiments.forge import planning
+    from experiments.forge.contracts import stable_hash
+    from experiments.forge.technique_inventory import _signature
+    matched = [record for record in records
+               if record["request"]["candidate"]["id"] == idea_id
+               and record["request"]["view"]["id"] == view_id
+               and record["request"]["execution_backend"] == execution_backend
+               and (cuda_model is None or record["request"]["compute_profiles"].get("cuda", {}).get("model") == cuda_model)]
+    if not matched:
+        idea = planning.load_idea(root, idea_id)
+        tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
+        return planning.resolve_idea(root, idea_id, view_id=view_id, through_tier=tier,
+                                    freeze_source=False, execution_backend=execution_backend, cuda_model=cuda_model)
+    if len(matched) != 1:
+        raise ValueError("ambiguous original study execution binding for this source/view/cohort")
+    record, original = matched[0], matched[0]["request"]
+    current = planning.resolve_idea(root, idea_id, study=original["study"]["id"],
+                                    view_id=view_id, through_tier=original["through_tier"], freeze_source=False,
+                                    execution_backend=execution_backend, cuda_model=cuda_model)
+    if (current.get("study") != original["study"]
+            or current.get("study_admission") != original["study_admission"]
+            or current.get("study_review") != original["study_review"]
+            or current.get("study_review", {}).get("status") != "READY"
+            or current.get("preflight_blockers")
+            or current.get("source", {}).get("digest") != original["source"]["digest"]
+            or current.get("source", {}).get("files") != original["source"]["files"]
+            or current.get("view") != original["view"] or _signature(current) != _signature(original)):
+        raise ValueError("reconstructed study/source/view/cohort differs from the original admitted request")
+    proof = {"candidate_id": idea_id, "study_id": original["study"]["id"],
+             "study_sha256": stable_hash(original["study"]), "admission_sha256": stable_hash(original["study_admission"]),
+             "request_signature": _signature(original), "source_digest": original["source"]["digest"],
+             "recorded_source_origin_commit": original["source"]["origin_commit"],
+             "policy_fingerprint": original["policy_fingerprint"], "original_receipts": record["original_receipts"]}
+    if proof not in proofs:
+        proofs.append(proof)
+    return current
+
+
+def _extract_source(root, commit, destination, manifests, study_support=None):
+    for name, digest in (study_support or {}).items():
+        if (Path(name).is_absolute() or ".." in Path(name).parts or Path(name).suffix != ".json"
+                or not isinstance(digest, str) or len(digest) != 64):
+            raise ValueError("unsafe recorded study prior-evidence path/hash")
     # Historical reports dominate this repository's 924 MB checkout. Extract
     # all scientific roots/configs plus explicitly bound support instead.
     top_level = set(subprocess.check_output(["git", "ls-tree", "--name-only", commit], cwd=root, text=True).splitlines())
@@ -217,6 +313,9 @@ def _extract_source(root, commit, destination, manifests):
              if name in top_level}
     extras = {name for source in manifests.values() for name in source["files"]
               if name.split("/", 1)[0] not in roots}
+    # Study motivation is not scientific source, but its exact admitted Git
+    # bytes must be inside this checkout: live report symlinks are not evidence.
+    extras.update(study_support or {})
     archive = destination.parent / "frozen-source.tar"
     try:
         with archive.open("wb") as output:
@@ -237,6 +336,9 @@ def _extract_source(root, commit, destination, manifests):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 with bundle.extractfile(member) as stream:
                     target.write_bytes(stream.read())
+    for name, digest in (study_support or {}).items():
+        if not (destination / name).is_file() or file_hash(destination / name) != digest:
+            raise ValueError("frozen Git study prior-evidence differs from its original admission hash")
     _overlay_reports(root / "reports", destination / "reports")
 
 
@@ -306,23 +408,28 @@ def _bound_publication_rows(result, allowed_sources):
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary):
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
+    studies, support = _recorded_studies(root, manifests)
     frozen_root = temporary / "source"
-    _extract_source(root, commit, frozen_root, manifests)
+    _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
     atomic_text(contract, _json_text(manifests))
+    study_contract = temporary / "recorded-studies.json"
+    atomic_text(study_contract, _json_text(studies))
     prefix = temporary / "inventory"
     # A fresh process is essential: already imported live model/resolver
     # modules cannot grade a reconstructed older checkout faithfully.
-    program = """
+    program = inspect.getsource(_recorded_study_question) + """
 import json, sys
 import torch
 torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
-root, contract, prefix, goal, backend = sys.argv[1:]
+root, contract, study_contract, prefix, goal, backend = sys.argv[1:]
 root = Path(root)
 manifests = json.loads(Path(contract).read_text())
+recorded_studies = json.loads(Path(study_contract).read_text())
+study_proofs = []
 for expected in manifests.values():
     actual = inspect_source(root, list(expected['files']))
     if actual['digest'] != expected['digest'] or actual['files'] != expected['files']:
@@ -357,20 +464,24 @@ if (root / 'experiments/forge/knowledge.py').is_file():
                                             path.stem not in canonical_candidates, path.stem))
         planning.declaration_paths = receipt_first_declarations
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
-        idea = planning.load_idea(root, idea_id)
-        through_tier = idea.get('decision_contract', {}).get('scope', {}).get('through_tier', 3)
-        return planning.resolve_idea(root, idea_id, view_id=view_id, through_tier=through_tier,
-                                    freeze_source=False, execution_backend=execution_backend,
-                                    cuda_model=cuda_model)
+        return _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
+                                       recorded_studies, study_proofs)
     knowledge._current_request = question_request
+if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
+    from reports.forge.word_checkpoint_publication import install
+    install()
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
+report_path = Path(result['json'])
+report = json.loads(report_path.read_text())
+report['registered_study_reconstruction'] = study_proofs
+report_path.write_text(json.dumps(report, sort_keys=True))
 print(json.dumps(result, sort_keys=True))
 """
     environment = {**os.environ, "PYTHONPATH": str(frozen_root), "PYTHONDONTWRITEBYTECODE": "1",
                    "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
-                                          str(contract), str(prefix), view_id, execution_backend or "all"],
+                                          str(contract), str(study_contract), str(prefix), view_id, execution_backend or "all"],
                                          cwd=frozen_root, env=environment, text=True, stderr=subprocess.PIPE)
     except subprocess.CalledProcessError as error:
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
@@ -425,6 +536,15 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
     if commit:
         result["frozen_source"] = {"commit": commit, "source_digests": frozen_digests,
                                    "qualifies_latest_checkout": False}
+        adapter = root / "reports/forge/word_checkpoint_publication.py"
+        if adapter.is_file():
+            result.setdefault("reporting_adapters", {})["word_checkpoint_publication"] = {
+                "path": "reports/forge/word_checkpoint_publication.py",
+                "sha256": file_hash(adapter),
+                "scope": "Bind the existing word grader's own-checkpoint proof to its selected smoke parent; numerical grading and original task declarations remain frozen."}
+        result.setdefault("reporting_adapters", {})["registered_study_reconstruction"] = {
+            "path": "reports/forge/regenerate_technique_inventory.py", "sha256": file_hash(Path(__file__)),
+            "scope": "Resolve only the exact original admitted study ID and Git-pinned motivation; require unchanged study/admission/source/view/full scientific cohort. No training or numerical gate changes."}
     _publication_provenance(result, summaries)
     repo_prefix = os.path.relpath(root, markdown_path.parent.resolve())
     markdown = render_markdown(result, json_link=json_path.name, repo_link_prefix=repo_prefix)
@@ -730,8 +850,71 @@ def _archived_reports(root, manifest):
                 policy.get("policy_fingerprint") in fingerprints):
             raise ValueError("invalid archived technique evidence policy")
         fingerprints.add(policy["policy_fingerprint"])
+        selection = policy.get("family_selection")
+        if selection is not None and file_hash(root / selection["path"]) != selection["sha256"]:
+            raise ValueError("archived family selection hash mismatch")
         reports.extend((policy, entry, *_snapshot(root, entry, policy)) for entry in policy["cohorts"])
     return reports
+
+
+def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports):
+    """Stage exact new pins for the existing choices; never rank new recipes."""
+    from experiments.forge.trainer_families import (CURRENT_SELECTION, family_for_candidate,
+                                                   family_row_pin, load_current_selection)
+    from experiments.forge.planning import declaration_paths
+    from experiments.forge.views import load_view
+    path = root / CURRENT_SELECTION
+    if not path.is_file():
+        return None, None
+    card = read_json(path)
+    # Preserve compatibility with an explicitly prepared selection card.
+    if card.get("policy_fingerprint") == report["policy_fingerprint"]:
+        return None, None
+    pins = load_current_selection(root, view_id=manifest["view"],
+                                  policy_fingerprint=manifest["policy_fingerprint"])
+    declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
+    selections = []
+    for family, pin in pins.items():
+        original_matches = []
+        for _, _, rows in prior_reports:
+            for original in rows.values():
+                row = {**original, "trainer_family": family}
+                if family_row_pin(row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+                                  measurement_views=pin.get("measurement_views"),
+                                  measurement_tasks=pin.get("measurement_tasks")) == pin:
+                    original_matches.append(row)
+        if not original_matches:
+            raise ValueError(f"policy advance requires verified previous family selection: {family}")
+        matches = [row for row in registered_rows.values() if row["candidate_id"] == pin["candidate_id"]
+                   and row.get("runtime_cohort", {}).get("execution_backend") == pin["execution_backend"]]
+        if len(matches) != 1:
+            raise ValueError(f"policy advance requires one new verified row for selected family: {family}")
+        row = {**matches[0], "trainer_family": family}
+        if family_for_candidate(root, row["candidate_id"], declarations.get(row["candidate_id"]),
+                                current_presentation=True)["id"] != family:
+            raise ValueError(f"policy advance cannot change selected configuration family: {family}")
+        views = pin.get("measurement_views", [manifest["view"]])
+        tasks = pin.get("measurement_tasks")
+        required = {assignment["task"] for view in views for assignment in load_view(root, view)["assignments"]
+                    if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        required.update(tasks or [])
+        observations = row.get("tasks", []) + row.get("nonrequired_tasks", [])
+        observed = {task["task_id"]: task["status"] for task in observations}
+        complete = (bool(row.get("attempt_ids")) and bool(required) and len(observed) == len(observations)
+                    and all(observed.get(task) in {"PASS", "FAIL"} for task in required))
+        reason = ("Retain the previously selected configuration in its verified new-policy source cohort; "
+                  "no outcome-based recipe reselection, qualification transfer or default adoption.")
+        selections.append(family_row_pin(row, selection_kind="current_measurement" if complete else "historical_incumbent",
+                                         reason=reason, measurement_views=views if complete else None,
+                                         measurement_tasks=tasks if complete else None))
+    advanced = {**deepcopy(card), "policy_fingerprint": report["policy_fingerprint"], "selections": selections}
+    original = path.read_bytes().decode("utf-8")
+    digest = file_hash(path)
+    relative = CURRENT_SELECTION.parent / "history" / f"family-current-{digest}.json"
+    archive = root / relative
+    if archive.exists() and archive.read_bytes() != original.encode("utf-8"):
+        raise ValueError("archived family selection conflicts with original bytes")
+    return advanced, (relative, original, digest)
 
 
 def _current_tier_cell(row, tier, required, json_link):
@@ -1416,6 +1599,8 @@ def _common26_current_markdown(result, root, path):
     for row in projection["rows"]:
         family = row["family_id"]
         label = _common26_label(row["label"])
+        if scientific.get(family, {}).get("selection", {}).get("freshness") == "stale":
+            label += "<br>Recorded source measurement · **stale**; no current qualification"
         requested, chosen = row["requested_configuration"], row["chosen_configuration"]
         if requested:
             label += (f" · [{requested['path']}@{requested['sha256'][:12]}]"
@@ -1462,10 +1647,28 @@ def _common26_current_markdown(result, root, path):
 
 
 
+def _stale_measurement_labels(markdown, result, root, path):
+    """Expose recorded-only scope on the main family rows, preserving scores."""
+    stale = {row["trainer_family"] for row in result["rows"]
+             if row.get("selection", {}).get("freshness") == "stale"}
+    lines = markdown.splitlines()
+    for family in result.get("family_progress", {}).get("families", []):
+        if family["id"] not in stale:
+            continue
+        target = "](" + os.path.relpath(root / family["page"], path.parent) + ")** |"
+        matching = [index for index, line in enumerate(lines) if line.startswith("| **") and target in line]
+        if len(matching) != 1:
+            raise ValueError("recorded measurement needs one explicit stale label in the family table")
+        index = matching[0]
+        lines[index] = lines[index].replace(target, target[:-2] +
+            "<br>Recorded source measurement · **stale**; no current qualification |", 1)
+    return "\n".join(lines)
+
+
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
-        markdown = render_leaderboard(root, result, path)
+        markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
         pure = root / "reports/forge/pure-bcap"
         if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
             import importlib.util
@@ -1595,7 +1798,9 @@ def _current_markdown(result, root, path):
             scores = "<br>".join(f"Tier {tier}: " + _current_tier_cell(
                 row, tier, result["tier_requirements"][tier], json_link) for tier in tiers)
             unresolved = f"<br>Revision/cohort: {revision} / {cohort}" if not row.get("candidate_revision") or not row.get("cohort") else ""
-            values = [f"{row['technique']} · {configuration_link}<br>{backend} · ordinary qualification",
+            scope = ("recorded source measurement · stale; no current qualification"
+                     if selection.get("freshness") == "stale" else "ordinary qualification")
+            values = [f"{row['technique']} · {configuration_link}<br>{backend} · {scope}",
                       _ordinary_representation(result, row),
                       scores + f"<br>Recorded tier: {row['qualified_tier']} · [source]({json_link})" + unresolved]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
@@ -1830,6 +2035,7 @@ def _family_registry_structure(registry):
             family.pop("tags", None)
             family.pop("reporting_family", None)
             family.pop("inventory_visible", None)
+            family.pop("current_configuration_family", None)
     return value
 
 
@@ -2006,10 +2212,180 @@ def _write_family_pages(root, pages):
             path.unlink()
 
 
+def _declaration_fallback_sources(current_pins):
+    """A unanimous pinned source can bind an otherwise unmeasured display."""
+    sources = {}
+    for pin in current_pins.values():
+        source = pin.get("source_digest")
+        sources.setdefault(pin["execution_backend"], set()).add(source if isinstance(source, str) else None)
+    preferred = {}
+    for backend, digests in sources.items():
+        if len(digests) != 1:
+            continue
+        digest = next(iter(digests))
+        if isinstance(digest, str) and len(digest) == 64 and set(digest) <= set("0123456789abcdef"):
+            preferred[backend] = digest
+    return preferred
+
+
+def _declaration_source_preference(row, previous, preferred_source):
+    """Resolve only source-bound declarations; executed evidence still ties."""
+    from experiments.forge.trainer_families import _declaration_only_row
+    if not preferred_source or not all(_declaration_only_row(item) for item in (row, previous)):
+        return None
+    current_matches = row.get("bindings", {}).get("source_digest") == preferred_source
+    previous_matches = previous.get("bindings", {}).get("source_digest") == preferred_source
+    if current_matches != previous_matches:
+        return current_matches
+    return None
+
+
+def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, previous, reports, guard):
+    """Retain a published whole measurement only under its original Git laws."""
+    from experiments.forge.trainer_families import family_row_pin, scientific_row_hash
+    from experiments.forge.views import load_view, load_tasks, task_execution_fingerprint, task_evaluation_fingerprint
+    if pin["selection_kind"] != "current_measurement" or not previous:
+        raise ValueError("stale measurement requires an already-published current_measurement pin")
+    checked = deepcopy(previous)
+    claimed = checked.get("provenance", {}).pop("input_digest", None)
+    if (claimed != stable_hash(checked) or previous.get("publication_scope") != "current_technique_inventory"
+            or previous.get("view") != view_id or previous.get("recorded_policy")):
+        raise ValueError("stale measurement requires a verified previous current publication")
+    def matches(row):
+        return family_row_pin(row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+                              measurement_views=pin.get("measurement_views"),
+                              measurement_tasks=pin.get("measurement_tasks")) == pin
+    old = [row for row in previous["rows"] if matches(row)]
+    live = [row for row in rows if matches(row)]
+    if len(old) != 1 or len(live) != 1:
+        raise ValueError("stale measurement must retain one exact already-published whole pin")
+    old, selected = old[0], live[0]
+    prior_selection = old.get("selection", {})
+    if prior_selection.get("selection_kind") == "recorded_source_measurement":
+        if prior_selection.get("original_pin") != pin:
+            raise ValueError("recorded measurement original pin changed")
+    elif (prior_selection.get("selection_kind") != "current_measurement"
+          or prior_selection.get("reason") != pin["reason"]
+          or prior_selection.get("measurement_views") != pin["measurement_views"]
+          or prior_selection.get("measurement_tasks") != pin.get("measurement_tasks")):
+        raise ValueError("stale measurement was not an originally selected current measurement")
+    sources = [(entry, report, saved) for entry, report, saved in reports
+               if entry["json_sha256"] == old.get("publication_key")]
+    if len(sources) != 1:
+        raise ValueError("stale measurement requires one unique registered source snapshot")
+    entry, report, saved = sources[0]
+    source_row = deepcopy(saved.get(pin["candidate_id"], {}))
+    source_row["trainer_family"] = family_id
+    origin = old.get("bindings", {}).get("source_origin_commit")
+    if (not matches(source_row) or not isinstance(origin, str)
+            or len(origin) != 40 or any(char not in "0123456789abcdef" for char in origin)
+            or old["bindings"].get("recorded_source_origin_commits") != [origin]
+            or entry["source_commit"] != origin
+            or report.get("frozen_source", {}).get("commit") != origin
+            or pin["source_digest"] not in report.get("frozen_source", {}).get("source_digests", [])):
+        raise ValueError("stale measurement source identity is missing or ambiguous")
+    _validate_published_row(root, report, source_row)
+    receipts = []
+    for attempt in source_row["attempt_ids"]:
+        path = root / "reports/forge/technique-receipts" / (attempt + ".json")
+        summary = read_json(path)
+        if summary["provenance"].get("source_origin_commit") != origin:
+            raise ValueError("stale measurement receipt has a different source origin")
+        receipts.append({"attempt_id": attempt, "summary_sha256": file_hash(path),
+                         "original_files": summary["provenance"]["original_files"]})
+    with tempfile.TemporaryDirectory(prefix="forge-recorded-measurement-") as temporary:
+        frozen = Path(temporary)
+        prefixes = ("configs/forge/tasks/", "configs/forge/views/", "configs/forge/task-variants/")
+        names = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", origin, "--",
+                                         *[name.rstrip("/") for name in prefixes]], cwd=root, text=True).splitlines()
+        git_files = {}
+        for name in names:
+            if not name.startswith(prefixes) or ".." in Path(name).parts or Path(name).suffix != ".json":
+                raise ValueError("unsafe recorded measurement declaration path")
+            data = subprocess.check_output(["git", "show", origin + ":" + name], cwd=root)
+            path = frozen / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+            git_files[name] = hashlib.sha256(data).hexdigest()
+        original_view = load_view(frozen, view_id)
+        if stable_hash(original_view) != report["policy_fingerprint"]:
+            raise ValueError("stale measurement recorded Git view differs from its publication")
+        required = {assignment["task"] for name in pin["measurement_views"]
+                    for assignment in load_view(frozen, name)["assignments"]
+                    if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        required.update(pin.get("measurement_tasks", []))
+        live_tasks, frozen_tasks = load_tasks(root), load_tasks(frozen)
+        drift, contracts = [], {}
+        for name in sorted(required):
+            digest = selected["bindings"]["task_contracts"][name]
+            contract = catalogs.get("task_contracts", {}).get(digest)
+            if (not isinstance(contract, dict) or stable_hash(contract) != digest
+                    or report.get("task_contracts", {}).get(digest) != contract):
+                raise ValueError("stale measurement task catalog changed")
+            task, original = live_tasks[name], frozen_tasks[name]
+            if (task["resources"] != original["resources"]
+                    or task["execution"].get("steps") != original["execution"].get("steps")):
+                raise ValueError("stale measurement cannot retain a changed live budget")
+            values = {"execution_sha256": task_execution_fingerprint(task),
+                      "evaluation_sha256": task_evaluation_fingerprint(task),
+                      "timeout_seconds": task["resources"]["timeout_seconds"]}
+            differences = {key: {"recorded": contract.get(key), "live": value}
+                           for key, value in values.items() if contract.get(key) != value}
+            if differences:
+                drift.append({"task": name, "fields": differences})
+            contracts[name] = digest
+        if not drift:
+            raise ValueError("recorded measurement fallback requires actual contract drift")
+        _, metadata = guard(frozen, family_id, [selected], pin, view_id=view_id, catalogs=catalogs)
+    proof = {"trainer_family": family_id, "original_pin": deepcopy(pin), "source_origin_commit": origin,
+             "source_digest": pin["source_digest"], "source_snapshot": deepcopy(entry),
+             "previous_publication_input_digest": claimed,
+             "scientific_row_sha256": scientific_row_hash(selected), "task_contracts": contracts,
+             "git_declarations_sha256": git_files, "original_receipts": receipts, "contract_drift": drift,
+             "recorded_guard_pass": True, "live_guard_error": "current measurement requires current execution, evaluation and budget contracts"}
+    metadata.update(selection_kind="recorded_source_measurement", original_pin=deepcopy(pin), qualified=False,
+                    measurement_complete=False, current_measurement_complete=False,
+                    recorded_measurement_complete=True, current_contracts=False,
+                    qualification_reuse=False, qualification_input=False, freshness="stale",
+                    recorded_source_origin_commit=origin, contract_drift=drift,
+                    reason="Recorded source-bound original measurement retained; stale against current task contracts. "
+                           "No current measurement, qualification reuse or comparable live ranking. Original selection: " + pin["reason"])
+    return selected, metadata, proof
+
+
+@contextmanager
+def _retain_recorded_measurements(root, reports):
+    """Reporting scope only; the ordinary live family guard remains unchanged."""
+    from experiments.forge import trainer_families
+    path = root / CURRENT_PREFIX.with_suffix(".json")
+    previous = read_json(path) if path.is_file() else None
+    original, proofs = trainer_families._current_pin, []
+    def current_pin(directory, family_id, rows, pin, *, view_id, catalogs):
+        try:
+            return original(directory, family_id, rows, pin, view_id=view_id, catalogs=catalogs)
+        except ValueError as error:
+            if (Path(directory).resolve() != root or pin["selection_kind"] != "current_measurement"
+                    or str(error) != "current measurement requires current execution, evaluation and budget contracts"):
+                raise
+            selected, metadata, proof = _recorded_measurement_pin(
+                root, family_id, rows, pin, view_id=view_id, catalogs=catalogs,
+                previous=previous, reports=reports, guard=original)
+            proofs.append(proof)
+            return selected, metadata
+    trainer_families._current_pin = current_pin
+    try:
+        yield proofs
+    finally:
+        trainer_families._current_pin = original
+
+
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
+    if (root / "reports/forge/word_checkpoint_publication.py").is_file():
+        from reports.forge.word_checkpoint_publication import install
+        install()
     manifest_path = root / EVIDENCE_MANIFEST
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
     if recorded_policy is not None and source_commit is not None:
@@ -2044,7 +2420,17 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                 advancing = True
         reports = [(entry, *_snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
         archived_reports = _archived_reports(root, manifest)
-    pending_snapshot = None
+    pending_snapshot = pending_selection = pending_selection_text = selection_archive = None
+    prior_manifest, prior_reports = deepcopy(manifest), list(reports)
+    if advancing and execution_backend is None:
+        from experiments.forge.trainer_families import CURRENT_SELECTION
+        selection_path = root / CURRENT_SELECTION
+        backends = ({pin["execution_backend"] for pin in read_json(selection_path)["selections"]}
+                    if selection_path.is_file() else set())
+        if len(backends) > 1:
+            raise ValueError("policy advance with mixed selected backends requires an explicit --device")
+        if backends:
+            execution_backend = backends.pop()
     if source_commit is not None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
@@ -2078,9 +2464,14 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         # credit; it prevents cached regeneration from inventing CPU shadows or
         # resolving those same blockers against later source changes.
         if execution_backend is not None:
+            from experiments.forge.trainer_families import CURRENT_SELECTION
+            selection_path = root / CURRENT_SELECTION
+            incumbents = ({pin["candidate_id"] for pin in read_json(selection_path)["selections"]}
+                          if selection_path.is_file() else set())
             unmeasured = {}
             for row in report["rows"]:
-                if row["candidate_id"] in candidates or row.get("attempt_ids") or row.get("status") != "BLOCKED":
+                if (row["candidate_id"] in candidates or row.get("attempt_ids")
+                        or (row.get("status") != "BLOCKED" and row["candidate_id"] not in incumbents)):
                     continue
                 unmeasured.setdefault(row["candidate_id"], []).append(row)
             for name, rows in unmeasured.items():
@@ -2122,8 +2513,18 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         selected = {row["candidate_id"]: row for row in report["rows"]
                     if row["candidate_id"] in candidates and
                     (bool(row.get("attempt_ids")) if isinstance(candidates[row["candidate_id"]], str) else True)}
+        selected = dict(sorted(selected.items()))
         for row in selected.values():
             _validate_published_row(root, report, row)
+        if advancing:
+            pending_selection, selection_archive = _advanced_family_selection(
+                root, prior_manifest, report, selected, prior_reports)
+            if selection_archive:
+                relative_selection, _, digest = selection_archive
+                manifest["archived_policies"][-1]["family_selection"] = {
+                    "path": relative_selection.as_posix(), "sha256": digest}
+            if pending_selection is not None:
+                pending_selection_text = json.dumps(pending_selection, sort_keys=True, indent=2) + "\n"
         if not any(old == entry for old, _, _ in reports):
             reports.append((entry, report, selected))
         pending_snapshot = root / relative, data
@@ -2134,8 +2535,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                                     scientific_row_hash, select_family_rows)
     declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
     candidates = set(declarations)
-    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"])
+    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"],
+                                         selection_card=pending_selection)
                     if recorded_view is None else {})
+    declaration_sources = _declaration_fallback_sources(current_pins)
     selected = {}
     for entry, report, rows in reports:
         for name, row in rows.items():
@@ -2148,10 +2551,14 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             if previous is None or rank > previous[0]:
                 selected[key] = rank, entry, report, deepcopy(row)
             elif (rank == previous[0] and any(row.get(field) != previous[3].get(field)
-                                             for field in ("candidate_revision", "cohort", "runtime_cohort"))
-                  and family_for_candidate(root, name, declarations.get(name),
-                                           current_presentation=True)["id"] not in current_pins):
-                raise ValueError("ambiguous latest recorded technique cohort")
+                                             for field in ("candidate_revision", "cohort", "runtime_cohort"))):
+                preference = (_declaration_source_preference(row, previous[3], declaration_sources.get(backend))
+                              if rank == "" else None)
+                if preference is True:
+                    selected[key] = rank, entry, report, deepcopy(row)
+                elif preference is None and family_for_candidate(root, name, declarations.get(name),
+                                                                current_presentation=True)["id"] not in current_pins:
+                    raise ValueError("ambiguous latest recorded technique cohort")
     # A search runtime needs the actual canonical declaration as its fallback;
     # never present an arbitrary unmeasured tuning trial as the family default.
     canonical_missing = set()
@@ -2192,17 +2599,40 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("register new measured technique evidence with --source-commit")
                 row.setdefault("bindings", {})["source_origin_commit"] = None
                 selected[row["candidate_id"], backend, runtime_key] = "", None, live, deepcopy(row)
+    declaration_history = {}
     if current_pins:
         # Exact historical incumbents must survive newer observations of the
         # same card. Keep complete source/runtime alternatives, never cells.
         retained = {}
+        from experiments.forge.trainer_families import _declaration_only_row
+        preferred_declarations = {(item[3]["candidate_id"], item[3].get("runtime_cohort", {}).get("execution_backend"))
+                                  for item in selected.values()
+                                  if _declaration_only_row(item[3])
+                                  and declaration_sources.get(item[3].get("runtime_cohort", {}).get("execution_backend"))
+                                  and item[3].get("bindings", {}).get("source_digest") == declaration_sources.get(
+                                      item[3].get("runtime_cohort", {}).get("execution_backend"))}
+        def excluded_declaration(row):
+            name = row["candidate_id"]
+            backend = row.get("runtime_cohort", {}).get("execution_backend")
+            return ((name, backend) in preferred_declarations and _declaration_only_row(row)
+                    and row.get("bindings", {}).get("source_digest") != declaration_sources.get(backend)
+                    and family_for_candidate(root, name, declarations.get(name),
+                                             current_presentation=True)["id"] not in current_pins)
         for entry, report, rows in reports:
             for name, row in rows.items():
                 backend = row.get("runtime_cohort", {}).get("execution_backend")
                 if name not in candidates or (execution_backend is not None and backend != execution_backend):
                     continue
+                if excluded_declaration(row):
+                    # Keep this row below in immutable evidence/history, rather
+                    # than supplying a second canonical declaration fallback.
+                    declaration_history.setdefault(scientific_row_hash(row),
+                                                   {**deepcopy(row), "publication_key": entry["json_sha256"]})
+                    continue
                 retained.setdefault(scientific_row_hash(row), ("", entry, report, deepcopy(row)))
         for item in selected.values():
+            if excluded_declaration(item[3]):
+                continue
             retained.setdefault(scientific_row_hash(item[3]), item)
         selected = retained
     from experiments.forge.technique_board import DEFAULT_LABELS
@@ -2236,12 +2666,19 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("conflicting scientific contract identities")
                 combined[digest] = deepcopy(contract)
         result[catalog] = dict(sorted(combined.items()))
-    family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
-                                       policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
-                                       view_policy=recorded_view, execution_backend=execution_backend,
-                                       historical_rows=[{**row, "publication_key": entry["json_sha256"]}
-                                           for _, entry, _, rows in archived_reports for row in rows.values()])
+    with _retain_recorded_measurements(root, prior_reports) as retained_measurements:
+        family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
+                                           policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
+                                           view_policy=recorded_view, execution_backend=execution_backend,
+                                           selection_card=pending_selection,
+                                           historical_rows=[*declaration_history.values(), *[{**row, "publication_key": entry["json_sha256"]}
+                                               for _, entry, _, rows in archived_reports for row in rows.values()]])
     result.update(family_result)
+    if retained_measurements:
+        result["retained_recorded_measurements"] = {"qualification_input": False, "qualification_reuse": False,
+            "reporter_sha256": file_hash(Path(__file__)), "pins_unchanged": True,
+            "scope": "Previously selected measurements remain under exact original Git task/view contracts; stale against live tasks.",
+            "proofs": retained_measurements}
     # Immutable scientific history stays numerical, including earlier revisions
     # of the same configuration. It cannot fill cells in the selected row.
     result["evidence_rows"] = []
@@ -2297,11 +2734,13 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             "scope": "Exact original C6 baseline selection and retained-data causal diagnosis; no new qualification",
         }
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
+                            "declaration_fallback_source_by_backend": declaration_sources,
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
                                 if (root / "configs/forge/trainer-families.json").is_file() else None,
                             "selected_rows_sha256": stable_hash(result["rows"]),
-                            "family_current_selection_sha256": file_hash(root / CURRENT_SELECTION)
+                            "family_current_selection_sha256": (hashlib.sha256(pending_selection_text.encode()).hexdigest()
+                                if pending_selection_text is not None else file_hash(root / CURRENT_SELECTION))
                                 if current_pins else None}
     registry_path = root / "configs/forge/trainer-families.json"
     if registry_path.is_file():
@@ -2320,7 +2759,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["provenance"]["passive_publications_reducer_sha256"] = file_hash(Path(publication_memory.__file__))
     if not recorded_policy and view_id == "discriminator_stability":
         from experiments.forge.family_reports import build_progress
-        result["family_progress"] = build_progress(root, result)
+        result["family_progress"] = build_progress(root, result, selection_card=pending_selection)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -2329,7 +2768,12 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
-    # Validate all inputs before changing evidence registry or public outputs.
+    # Validate all inputs before changing selection cards, registry or outputs.
+    if selection_archive:
+        relative_selection, original, _ = selection_archive
+        _write_changed(root / relative_selection, original)
+    if pending_selection is not None:
+        _write_changed(root / CURRENT_SELECTION, pending_selection_text)
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")

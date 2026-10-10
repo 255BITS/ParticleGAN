@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "scope": "explicit_infrastructure_repair",
+  "user_instruction": "use subagents and restart anything you need to to reach our goal",
+  "authorized_at": "2026-10-10T03:21:31.386284+00:00",
+  "original_paid_ceilings_unchanged": true,
+  "max_additional_attempts_per_job": 1,
+  "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+  "retries": [
+    {
+      "track": "anisotropic",
+      "task_id": "vector_anisotropic",
+      "compatibility_key": "512401368b879f3a4e64abb6b0ef07138633b470b69c2614fb2c0d98e345edbf",
+      "predecessor_attempt_id": "69894d36f3904b9db6ac4ecfe38421e5",
+      "predecessor_result_hash": "3974480d8db3ff1444994f9710d464205f0e62183225e1eec4c0912b854746bb",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "anisotropic",
+      "task_id": "ae_gan_hold",
+      "compatibility_key": "553377166cdfcb52059c7eaa1e3b8f3f819c7133e64ad30816f6bd5dc852b824",
+      "predecessor_attempt_id": "468c00791d814762b918e8d69572d79f",
+      "predecessor_result_hash": "f6114fe9c7bbd593b0976d98ab2b6ad236ed3e567ee6a60a61466e3be5bad31a",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "anisotropic",
+      "task_id": "trajectory",
+      "compatibility_key": "68855393c79413bd78fd30f4632e00fc05ae3eef830901bd0e5c9004ba7c0f67",
+      "predecessor_attempt_id": "dde64c4c1d444f64ac01f52f752717a1",
+      "predecessor_result_hash": "4f9556c9a5b6add4c32f2f8f5626c4b6f5c1f5b227c1269916fe72f7bb5da2c6",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "anisotropic",
+      "task_id": "residual_student",
+      "compatibility_key": "85701e6b55dcbe12825948cde387b52863631d6a29e944dd2f26b4be581df313",
+      "predecessor_attempt_id": "cdaff831a260432f9152883bc80e934d",
+      "predecessor_result_hash": "08fc3a35967f51c1b6f995c7f735f9b78af97dd8b96328ef77e16dbabf58b711",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "anisotropic",
+      "task_id": "five_word_joint_smoke",
+      "compatibility_key": "b2178232b2da25616518536d2b59eccf23bae6466b7384911f013806bf24188d",
+      "predecessor_attempt_id": "c809708519b545ee863589785a4a34c4",
+      "predecessor_result_hash": "0767d38b22f9ca441b2c024b567279b3efe971f00a0a116f6e6ef1141b39c6f4",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "anisotropic",
+      "task_id": "grid100",
+      "compatibility_key": "f442ec8b376254d83586680346825a789c43ecb19010c822826f798da671a17d",
+      "predecessor_attempt_id": "a00c63aaf8e64580ab0a7066b93a32d3",
+      "predecessor_result_hash": "592778262db729b61f3d96f712e8187fbb2641f9d32700f50fd8d9c648ad1b33",
+      "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "optimistic",
+      "task_id": "five_word_joint_smoke",
+      "compatibility_key": "b521a7a224d2dd591586ccb6865493dc43f34de001d021c12821093768c8800a",
+      "predecessor_attempt_id": "99cd2b12eb4a40a2b7804d8115d134ba",
+      "predecessor_result_hash": "6ecaa5b4ff532390a02453e170fd77dbf7f86ae8d4ec01826e9cf055bc56eb5e",
+      "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "optimistic",
+      "task_id": "grid100",
+      "compatibility_key": "d7ab8169e1d4c7dafd6b130f5e4508db17dd6e30fc0d1b2e838d16602a07a081",
+      "predecessor_attempt_id": "e939011f991640c3a7676abc9c595e41",
+      "predecessor_result_hash": "d09a095cab4fb66abad919666b5b2626e959173b3dda7ff90751a6aba173b68c",
+      "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "trajectory",
+      "compatibility_key": "3cbcb1de269602723136f41b10d2bd37e01eb0c3fefaf9b428b3fe49fa160f04",
+      "predecessor_attempt_id": "b3415718e75a481995c6a1902ca56945",
+      "predecessor_result_hash": "2779fb7a90b8e0c0aa17622d29731b1a492ae59348071b3b5d16e5019cd0a634",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "residual_student",
+      "compatibility_key": "94d882801dbffd636b164fa7a039368b2d58004c6c50e30c26bb6063127b0a32",
+      "predecessor_attempt_id": "d81dffeab9c14c00b8eade4e010c028d",
+      "predecessor_result_hash": "722a1ae5f1801b56dfc915be069db244bb33b73919b197d9e0bbacad7c32c012",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "ring16_acquisition",
+      "compatibility_key": "a37d2be2cc4f2c3502ad1a6ee2a162036d47f232ea1d69c9d7b156e8aa0bc4ef",
+      "predecessor_attempt_id": "385a9d3b5e9a4c189e1c0c1c71f4458a",
+      "predecessor_result_hash": "3aa45b1451cfd70b530940234f69f719cfda6063573335a308bf70bd089185de",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "gaussian1d_smoke",
+      "compatibility_key": "a7969220477e05ccc299921aae910e3b6b4a935a23d362da0be8bd342aa3f300",
+      "predecessor_attempt_id": "45bca8c300fa44ecac715213e618c807",
+      "predecessor_result_hash": "0186f1a82e36ec7e6aa140d75c92e62339d528df67a771df52df264b4d56ec62",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "ae_gan_hold",
+      "compatibility_key": "c9343f5294cb6bad6803067a864a296b69d93f309ef7387c90e947f04b06cca6",
+      "predecessor_attempt_id": "04d40a363c8b4e70be4372a2e70b5ca3",
+      "predecessor_result_hash": "a6a028bcaf30cdaf7df8d7ed608c21d9129a46ab0e2f37e56749ab01a52a1a9a",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "five_word_joint_smoke",
+      "compatibility_key": "de5b1f2824236b6a918c718ed0812796ee2a8ca51a4d5bd414213f9c0d78f625",
+      "predecessor_attempt_id": "356cdb4e16104947b7ad3294b9e90e98",
+      "predecessor_result_hash": "87f8d57cc78eb05b34ac562875566d4d32d131d3be1d8e5a83a206946f5f191a",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "secant",
+      "task_id": "two_pole",
+      "compatibility_key": "f124a9827e3e21f5ff3865229b18bd172526efc5a5e8624bfebaa7952314cc86",
+      "predecessor_attempt_id": "203b6a2bbfab45bf8c260d73d8122b75",
+      "predecessor_result_hash": "a7595bc17cb3d2bd379d7f59ac0dfc71b89d58a8d33a2d10f9a7c5e54dd2e002",
+      "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "sinkhorn",
+      "task_id": "grid100",
+      "compatibility_key": "689856cab045b35e184c412347aeaedcf7fb7d96b8e6c5ee59fc761cb543933c",
+      "predecessor_attempt_id": "35131b71037848818236a1cb3e86dc66",
+      "predecessor_result_hash": "0d9e3ae4d79c4dab457796cb0df68a41185781635619ada26368a0dfb33dbca0",
+      "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "sinkhorn",
+      "task_id": "rotated100",
+      "compatibility_key": "c2e239b57391e9c14ff15e9dbc8975f7f95634d8404e2616d7129baecf23ac53",
+      "predecessor_attempt_id": "3d777395319c4583aae36c3458ad4987",
+      "predecessor_result_hash": "9d163ec9a7c6e62d199381ae75914837298e9cc32c74f1d8e3369c39edc75460",
+      "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    },
+    {
+      "track": "sinkhorn",
+      "task_id": "five_word_joint_smoke",
+      "compatibility_key": "ca119493a29fa60627e60186bf3dc9f243b049b58efc9a2a5c34d5be5b90730d",
+      "predecessor_attempt_id": "48c6c0a8293d4b8ebbe74b271e0c80d6",
+      "predecessor_result_hash": "26d5516527a02a7f710747d7def290a6a4a608b353650092fc9a37173bd95479",
+      "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried."
+    }
+  ]
+}

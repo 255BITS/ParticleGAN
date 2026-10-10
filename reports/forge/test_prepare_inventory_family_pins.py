@@ -5,10 +5,10 @@ import shutil
 import tempfile
 import unittest
 
-from experiments.forge.contracts import atomic_json, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.trainer_families import family_row_pin, scientific_row_hash
 from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
-from reports.forge.prepare_inventory_family_pins import ROOT, propose
+from reports.forge.prepare_inventory_family_pins import ROOT, _validate_refresh_sources, propose
 
 
 def certify(report):
@@ -94,6 +94,14 @@ class SavedPinTests(unittest.TestCase):
     def call(self, **options):
         return propose(self.root, self.staged, self.old_board, self.old_selection, self.round,
                        self.manifest, [self.old_row], self.declarations, **options)
+
+    def same_view(self):
+        self.manifest.update(view_revision=self.view["revision"], policy_fingerprint=stable_hash(self.view),
+                             cohorts=[{"source_commit": "8" * 40}])
+        self.old_board.update({key: deepcopy(self.manifest[key]) for key in
+                               ("view", "view_revision", "policy_fingerprint", "tier_requirements")})
+        certify(self.old_board)
+        self.old_selection["policy_fingerprint"] = self.manifest["policy_fingerprint"]
 
     def test_preserves_preselected_failure_instead_of_better_canonical_and_archives_exact_old_row(self):
         before = deepcopy((self.staged, self.old_board, self.old_selection, self.round, self.manifest))
@@ -189,6 +197,80 @@ class SavedPinTests(unittest.TestCase):
         self.assertEqual(pin["selection_kind"], "configured_standard")
         self.assertFalse(card["default_adoption"])
         self.assertFalse(audit["default_adoption"])
+
+    def test_same_view_source_refresh_is_explicit_and_preserves_pre_run_failed_choice(self):
+        self.same_view()
+        before = deepcopy((self.staged, self.old_board, self.old_selection, self.round, self.manifest))
+        with self.assertRaisesRegex(ValueError, "later view revision"):
+            self.call()
+        card, audit = self.call(refresh_source=True)
+        selected = next(pin for pin in card["selections"] if pin["trainer_family"] == "family-a")
+        self.assertEqual(selected["candidate_id"], "selected-a")
+        self.assertEqual(selected["scientific_row_sha256"], scientific_row_hash(self.staged["rows"][1]))
+        self.assertEqual(card["historical_selections"][0]["scientific_row_sha256"], scientific_row_hash(self.old_row))
+        self.assertEqual(audit["archived_pins"][0]["original_qualified_tier"], 1)
+        self.assertEqual(audit["preparation_mode"], "same_view_source_refresh")
+        self.assertEqual(audit["evidence_manifest_unchanged_sha256"], stable_hash(self.manifest))
+        self.assertEqual(card["policy_fingerprint"], self.old_selection["policy_fingerprint"])
+        self.assertFalse(audit["publication_performed"])
+        self.assertFalse(audit["qualification_reuse"])
+        self.assertEqual(before, (self.staged, self.old_board, self.old_selection, self.round, self.manifest))
+
+    def test_source_refresh_refuses_policy_changes_and_already_registered_identity(self):
+        with self.assertRaisesRegex(ValueError, "identical registered view policy"):
+            self.call(refresh_source=True)
+        self.same_view()
+        self.staged["tier_requirements"] = deepcopy(self.staged["tier_requirements"])
+        self.staged["tier_requirements"]["1"] = list(reversed(self.staged["tier_requirements"]["1"]))
+        certify(self.staged)
+        with self.assertRaisesRegex(ValueError, "identical registered view policy"):
+            self.call(refresh_source=True)
+        self.staged["tier_requirements"] = deepcopy(self.manifest["tier_requirements"])
+        certify(self.staged)
+        self.manifest["cohorts"][0]["source_commit"] = self.staged["frozen_source"]["commit"]
+        with self.assertRaisesRegex(ValueError, "new executed frozen source identity"):
+            self.call(refresh_source=True)
+        self.manifest["cohorts"][0]["source_commit"] = "8" * 40
+        self.staged["frozen_source"]["source_digests"] = [self.old_row["bindings"]["source_digest"]]
+        certify(self.staged)
+        with self.assertRaisesRegex(ValueError, "new executed frozen source identity"):
+            self.call(refresh_source=True)
+
+    def test_source_refresh_verifies_original_origin_and_snapshot_bytes_without_loading(self):
+        snapshot = self.root / "snapshot"
+        snapshot.mkdir()
+        (snapshot / "fixture.py").write_text("fixture = 1\n")
+        files = {"fixture.py": file_hash(snapshot / "fixture.py")}
+        source = {"schema_version": 1, "origin_commit": "a" * 40, "files": files, "digest": stable_hash(files)}
+        atomic_json(snapshot / "forge-source.json", source)
+        row = deepcopy(self.staged["rows"][0])
+        row["bindings"]["source_digest"] = source["digest"]
+        staged = {"frozen_source": {"commit": source["origin_commit"], "source_digests": [source["digest"]]}, "rows": [row]}
+        attempt = row["attempt_ids"][0]
+        request_path = self.root / "reports/forge/attempts" / attempt / "request.json"
+        request = {"candidate": {"id": row["candidate_id"]}, "candidate_revision": row["candidate_revision"],
+                   "source": {**source, "snapshot_path": str(snapshot)}}
+        atomic_json(request_path, {"request": request})
+        proof_path = self.root / "reports/forge/technique-receipts" / (attempt + ".json")
+        proof = {"provenance": {"source_origin_commit": source["origin_commit"], "source_digest": source["digest"]}}
+        atomic_json(proof_path, proof)
+        verified = _validate_refresh_sources(self.root, staged)
+        self.assertEqual(len(verified), 1)
+        self.assertTrue(verified[0]["source_bytes_verified"])
+        self.assertEqual(verified[0]["manifest_sha256"], file_hash(snapshot / "forge-source.json"))
+        proof["provenance"]["source_origin_commit"] = "b" * 40
+        atomic_json(proof_path, proof)
+        with self.assertRaisesRegex(ValueError, "exact staged receipt/source identity"):
+            _validate_refresh_sources(self.root, staged)
+        proof["provenance"]["source_origin_commit"] = source["origin_commit"]
+        atomic_json(proof_path, proof)
+        staged["frozen_source"]["source_digests"].append("0" * 64)
+        with self.assertRaisesRegex(ValueError, "manifest without a measured original source"):
+            _validate_refresh_sources(self.root, staged)
+        staged["frozen_source"]["source_digests"].pop()
+        (snapshot / "fixture.py").write_text("fixture = 2\n")
+        with self.assertRaisesRegex(ValueError, "source snapshot was changed"):
+            _validate_refresh_sources(self.root, staged)
 
 
 if __name__ == "__main__":

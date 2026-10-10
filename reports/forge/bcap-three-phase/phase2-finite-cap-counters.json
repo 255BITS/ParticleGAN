@@ -1,0 +1,306 @@
+{
+  "scope": "certified_final_checkpoints_only",
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "invariants_checked": [
+    "accepted+rejected=steps",
+    "base optimizer calls=observed_steps=guard steps",
+    "probes=steps+attempted_scales",
+    "backtracks=attempted_scales-steps"
+  ],
+  "rows": [
+    {
+      "task_id": "gaussian1d_smoke",
+      "gate_status": "PASS",
+      "attempt_id": "ca04d428879742cd865240926ce4a70b",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "db9dd1da30cf6708dea4a9a1e228c36e1df63e43dca17c80c2b71589a7043190",
+        "bytes": 66047,
+        "state_sha256": "094a80826f67cd1dc61673a6821c3b9711a18d486f846c7f2db1ce8a04501e52",
+        "completed_steps": 1000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/ca04d428879742cd865240926ce4a70b/provenance",
+        "artifact_manifest_sha256": "a4a81e07c21eced40bb1ddfbf5274929ec06dd63e3474990d420e79ccd3e63f4",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 24.082228195038624,
+      "guards": [
+        {
+          "path": "state.trainer.optimizers[1]",
+          "stats": {
+            "steps": 1000,
+            "probes": 3670,
+            "attempted_scales": 2670,
+            "accepted_steps": 846,
+            "damped_steps": 347,
+            "rejected_steps": 154,
+            "backtracks": 1670,
+            "accepted_scale_sum": 710.7578125,
+            "minimum_scale": 0.0,
+            "maximum_before": 1.4376263618469238,
+            "maximum_after": 1.4362952709197998
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.018000000000000002,
+            "anchor_started": false,
+            "calls": 1000,
+            "observed_steps": 1000
+          },
+          "mean_accepted_fraction": 0.7107578125,
+          "rejection_fraction": 0.154
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "ae_gan_hold",
+      "gate_status": "PASS",
+      "attempt_id": "5aca8344567242eabf6710ea7634b8f4",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "7367d5f053db1e05b447e58b148ea1a8e90bc7064da05770a07dd2122226dd10",
+        "bytes": 67257,
+        "state_sha256": "850a8484af6f243fe2f7ee8ed73285e0ab808645c01abc5c1dc2ca4618322842",
+        "completed_steps": 250,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/5aca8344567242eabf6710ea7634b8f4/provenance",
+        "artifact_manifest_sha256": "859536987536c8060ddffda454b98c7c2480a0f4f2a105aa395af69dc5b2594f",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 10.985711174900644,
+      "guards": [
+        {
+          "path": "state.optimizers.discriminator",
+          "stats": {
+            "steps": 250,
+            "probes": 788,
+            "attempted_scales": 538,
+            "accepted_steps": 238,
+            "damped_steps": 88,
+            "rejected_steps": 12,
+            "backtracks": 288,
+            "accepted_scale_sum": 183.65234375,
+            "minimum_scale": 0.0,
+            "maximum_before": 1.044614315032959,
+            "maximum_after": 1.0346325635910034
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.009000000000000001,
+            "anchor_started": false,
+            "calls": 250,
+            "observed_steps": 250
+          },
+          "mean_accepted_fraction": 0.734609375,
+          "rejection_fraction": 0.048
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "two_pole",
+      "gate_status": "PASS",
+      "attempt_id": "d3ddcb39e17c49e3aa6d1c99e7b26b3e",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "a359e0681b9818515aac8e26997748c6c0f63f9f63bcae3a0cb75e83a2c12e1a",
+        "bytes": 49391,
+        "state_sha256": "682f604bc117be1358aa6560cbff527981ad2cd5d0d92de366793afb39840f76",
+        "completed_steps": 80,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/d3ddcb39e17c49e3aa6d1c99e7b26b3e/provenance",
+        "artifact_manifest_sha256": "7754045e3a991cd9489f754a5477db45a87914637b33b9a67f790b4e48f43723",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 7.798734856070951,
+      "guards": [
+        {
+          "path": "state.optimizers.discriminator",
+          "stats": {
+            "steps": 80,
+            "probes": 620,
+            "attempted_scales": 540,
+            "accepted_steps": 31,
+            "damped_steps": 62,
+            "rejected_steps": 49,
+            "backtracks": 460,
+            "accepted_scale_sum": 19.12890625,
+            "minimum_scale": 0.0,
+            "maximum_before": 0.999995231628418,
+            "maximum_after": 0.999995231628418
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.018000000000000002,
+            "anchor_started": false,
+            "calls": 80,
+            "observed_steps": 80
+          },
+          "mean_accepted_fraction": 0.239111328125,
+          "rejection_fraction": 0.6125
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "ring16_acquisition",
+      "gate_status": "FAIL",
+      "attempt_id": "e30252cacfef4d8f9c635065ad962805",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "cffb429b8b6aeff548260ae489e0da4066d2ad3da371c73b7a7d4a06b859b345",
+        "bytes": 111033,
+        "state_sha256": "2206357b755ed8357e62c0e0beba515078924825ac3824b9041584498ac331d5",
+        "completed_steps": 1600,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/e30252cacfef4d8f9c635065ad962805/provenance",
+        "artifact_manifest_sha256": "9c737975ab952fbfd00cd6fae37785a47daa5764aee37ef7a9aaa40941e29e7a",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 36.552321169991046,
+      "guards": [
+        {
+          "path": "state.trainer.optimizers[1]",
+          "stats": {
+            "steps": 1600,
+            "probes": 6553,
+            "attempted_scales": 4953,
+            "accepted_steps": 1301,
+            "damped_steps": 813,
+            "rejected_steps": 299,
+            "backtracks": 3353,
+            "accepted_scale_sum": 965.95703125,
+            "minimum_scale": 0.0,
+            "maximum_before": 1.7273931503295898,
+            "maximum_after": 1.63962984085083
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.009000000000000001,
+            "anchor_started": false,
+            "calls": 1600,
+            "observed_steps": 1600
+          },
+          "mean_accepted_fraction": 0.60372314453125,
+          "rejection_fraction": 0.186875
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "five_word_joint_smoke",
+      "gate_status": "PASS",
+      "attempt_id": "7b965a24fc974e37bdd2365fd6543f9b",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "1ac456b6e993ca2cb8d1cdfe36f5207a04919992381e3870c87ff7a11739acd7",
+        "bytes": 841845,
+        "state_sha256": "9db8f4721e4ed7254acb1421fa26eed91f845ed7e9a912d968a617d5a22415b8",
+        "completed_steps": 20001,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/7b965a24fc974e37bdd2365fd6543f9b/provenance",
+        "artifact_manifest_sha256": "bbce7b4c549510c87b92490a83c5b2a885cbfd68aeec29487910841b7a742b0b",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 470.2508765190141,
+      "guards": [
+        {
+          "path": "state.fixture.api_state.optimizers[1]",
+          "stats": {
+            "steps": 20001,
+            "probes": 76963,
+            "attempted_scales": 56962,
+            "accepted_steps": 15616,
+            "damped_steps": 5119,
+            "rejected_steps": 4385,
+            "backtracks": 36961,
+            "accepted_scale_sum": 15063.45703125,
+            "minimum_scale": 0.0,
+            "maximum_before": 1.5506219863891602,
+            "maximum_after": 1.4386799335479736
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.018000000000000002,
+            "anchor_started": false,
+            "calls": 20001,
+            "observed_steps": 20001
+          },
+          "mean_accepted_fraction": 0.7531351948027598,
+          "rejection_fraction": 0.2192390380480976
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "unused_token_hold",
+      "gate_status": "PASS",
+      "attempt_id": "43974d7fa92449fa9e3a5b8f6c108380",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "2dbee2275d773c4debd35bd96f68dbff7de8e5b79a4f50d40a6708d8ee724f98",
+        "bytes": 53767,
+        "state_sha256": "05a78eacf52e424bd0cec124db44226213890d6036ab4f69ad2b580c95d98970",
+        "completed_steps": 200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/43974d7fa92449fa9e3a5b8f6c108380/provenance",
+        "artifact_manifest_sha256": "3be081adeec1b290439773de16edb3ef402dc76d349d810b859ec28acf0a59f5",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "wall_seconds": 9.406752550974488,
+      "guards": [
+        {
+          "path": "state.optimizers.discriminator",
+          "stats": {
+            "steps": 200,
+            "probes": 605,
+            "attempted_scales": 405,
+            "accepted_steps": 185,
+            "damped_steps": 41,
+            "rejected_steps": 15,
+            "backtracks": 205,
+            "accepted_scale_sum": 164.6484375,
+            "minimum_scale": 0.0,
+            "maximum_before": 0.9999909996986389,
+            "maximum_after": 0.9999909996986389
+          },
+          "optimizer_record": {
+            "lr_max": 0.018000000000000002,
+            "lr_last": 0.018000000000000002,
+            "anchor_started": false,
+            "calls": 200,
+            "observed_steps": 200
+          },
+          "mean_accepted_fraction": 0.8232421875,
+          "rejection_fraction": 0.075
+        }
+      ],
+      "unintended_rng_deviations": 0
+    },
+    {
+      "task_id": "clockfree_audit_measurement_v1",
+      "gate_status": "PASS",
+      "attempt_id": "b3b5dd85b3f0493f9fc7cf3c6808fe29",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "checkpoint": null,
+      "wall_seconds": 7.146424207021482,
+      "guards": [],
+      "unintended_rng_deviations": 0
+    }
+  ]
+}

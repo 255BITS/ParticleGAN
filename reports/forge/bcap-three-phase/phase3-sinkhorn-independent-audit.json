@@ -1,0 +1,827 @@
+{
+  "accounting": [
+    {
+      "campaign_accounting": {
+        "bcap-moonshot-sinkhorn-v1": {
+          "definition": {
+            "budget_seconds": 48000,
+            "candidate_budget_seconds": 24000,
+            "id": "bcap-moonshot-sinkhorn-v1"
+          },
+          "paused": false,
+          "reserved_seconds": 0.0,
+          "spent_seconds": 11763.451632810375
+        }
+      },
+      "executed_full_allowances_seconds": 53940,
+      "execution_retries": 3,
+      "paid_attempts": 35,
+      "pending_work": [],
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue",
+      "scope": "research_diagnostic",
+      "selected_paid_seconds": 11763.451632810375
+    }
+  ],
+  "actual_training_gifs": 32,
+  "authorized_execution_retries": [
+    {
+      "predecessor": "35131b71037848818236a1cb3e86dc66",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+      "successor": "984d92a018fb44c39eebdfb577a862e9"
+    },
+    {
+      "predecessor": "3d777395319c4583aae36c3458ad4987",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+      "successor": "566bbd52b7294ace86c986f03c964a73"
+    },
+    {
+      "predecessor": "48c6c0a8293d4b8ebbe74b271e0c80d6",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+      "successor": "9fdaef65696c4c51a6bc2630ffad1bc0"
+    }
+  ],
+  "exact_chosen_baseline": true,
+  "optimizer_updates_added": 0,
+  "original_placement_counts": {
+    "tier1": 6,
+    "tier2": 10
+  },
+  "original_task_count": 16,
+  "outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "FAIL": 10,
+      "PASS": 6
+    }
+  },
+  "own_checkpoint_producers": [
+    {
+      "history_reset": false,
+      "parent_attempt_id": "9fdaef65696c4c51a6bc2630ffad1bc0",
+      "parent_checkpoint_sha256": "74732211be9cf234be2350c939e3298c6fd64b95d0c077b73fc66d22a6f81fa7",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "parent_state_sha256": "e39df4e74b988d9034cc457c8b97c945b937ad5c804d653ecc0a7e0836053191",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "2a25f5ed1f7641a1af06b0b186f9364c",
+      "parent_checkpoint_sha256": "0d52683f96835ec62b0d277f08e28a94f083e86c8a0629b02eebe131026628fc",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "parent_state_sha256": "16b8d8a0a168908a3133596aa32a52403438b5efb61654e5a8b16cfdf344b8c5",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "fac18fa910d64227ad4b8344d703fbb6",
+      "parent_checkpoint_sha256": "a37d577a2234eaf3e71f4898ee6bc756ae033c5b8ddec6dab1c949c883e34312",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "parent_state_sha256": "7b9945a65516866a5b0474a7e4c4670dfe4a1af14f6d9a10e2206dda5139f5ad",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 2501,
+      "restored_exactly": true,
+      "role": "candidate",
+      "scope": "research_diagnostic",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "bb607cec2df04d87aba02f5b7125495e",
+      "parent_checkpoint_sha256": "e009fd98c350d793ce9e7a96ebfec9b2575aedaab958ba9267fee93102d7f0b2",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "parent_state_sha256": "c6d28f6670af97ca31f91f72219df4b6cec8ec854678a37be9f028e965056666",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "candidate",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "paid_seconds": 11763.451632810375,
+  "protected_historical_files": 10,
+  "publication": "/home/martyn/dev/ParticleGAN-bcap-moonshot-sinkhorn/reports/forge/bcap-moonshot-sinkhorn",
+  "qualification_input": false,
+  "queue_jobs": 32,
+  "repository": "/home/martyn/dev/ParticleGAN-bcap-moonshot-sinkhorn",
+  "sampling_draws_added": 0,
+  "saved_state_comparisons": [
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 250,
+        "candidate": 250
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "967955e268a7f54a389d13afeb1f9e629a4f935232a48f9e6f29a7c92faab5ef",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/546d9dff6a8c46669e89112dd919a22a/provenance",
+          "bytes": 66937,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3578050621356ca794836fd91b99a61a34cae74b44f56f174f32069e90cf1309",
+          "state_sha256": "ee77dd658358afdc421415781ea35e4e9ded304e2c0faca955b3548d555ed085"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "09e4ab81e09dc90e456db70a3f48314f59e121783fc7b781894681ef2b4b5347",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/d369d1f54f154383a9e711136b2dae6b/provenance",
+          "bytes": 67705,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "db5378a3b244793c0b8bd4f630212d67e8368fc8e7b7f1db665fe04e922d235a",
+          "state_sha256": "d2f52c61a19d7c2da77730ed1eec3647bbe8d1030fe9dc6830f77be6fc5d2ba0"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 4834,
+        "candidate": 6501
+      },
+      "consumed_non_eval_streams_and_batches_equal": false,
+      "consumption_comparison": "Only available complete states; missing arms/different completed budgets remain unverified",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "2463c5d486ed7ca1de882906694e2c21240fce553aca76f974610c63457fd7cd",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/748f9131caad446b839b93b5abb47ed6/provenance",
+          "bytes": 841461,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "477f8f6f26ae4d242243248f3956c14b476d4507cc626b162770adf7465c549b",
+          "state_sha256": "5ee870efc95a485092a203597cccdc3510b37bf15eb0333c14b19d53e942b982"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "b2694a0f62ee7d50f62f305198f0e6efccf0d66921560f625b02a53fd216c979",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e5ff0950ce104c18a7be9b29a7af9c19/provenance",
+          "bytes": 842165,
+          "completed_steps": 6501,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3f3c21f4661883fab2b106a73631854487a52a8778aa147c4eac4bd8e9a9cd35",
+          "state_sha256": "84a38d95591bf6b4b8d6179fb3373db516524c7b86c5deaf71c5ab189296c7c1"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 20001,
+        "candidate": 20001
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "037774e3f9c086b4ae34ffefb379112d531104f3952f976d0c8d08607c10a1a2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/9fdaef65696c4c51a6bc2630ffad1bc0/provenance",
+          "bytes": 840501,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b16d40951e99a7b8238e330db030a34b1c8b237d1efaa9c0c0bfb8965742869b",
+          "state_sha256": "176b3be29c947faee6291519680bdce77b9efe7a9596415ca6f68c21dfbf96ba"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "0ac4467d1c416a7765ec70545541a7c038c92c4bfd5ddae21bba7fdb338e6821",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/fac18fa910d64227ad4b8344d703fbb6/provenance",
+          "bytes": 841205,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "0437d216b6fb215cf526a79e0f977318af317415e7286ac2e4d294eacd7728cb",
+          "state_sha256": "a912920658137a24a07ffacd2e2b16d1f15ef6498426fd6da5f182ff48c7c437"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1000,
+        "candidate": 1000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "ab27e0a797c12e0bd1f27b05ab0712e1bc72fb35d12fe4667fe596198288cbe8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/2a25f5ed1f7641a1af06b0b186f9364c/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "58efb5ead9ed9e17ccbb985782bed1215f76f32d4f4f88ec8e275b6b240bdc1b",
+          "state_sha256": "16b8d8a0a168908a3133596aa32a52403438b5efb61654e5a8b16cfdf344b8c5"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "bc479458d5046f9d26c413264fe4c575b144ffb0f0ccb37c4c99f401bab79a81",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/bb607cec2df04d87aba02f5b7125495e/provenance",
+          "bytes": 65471,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "74d92c9cbad32be64c981ac0816039c3006bcb824006b4557fb6fa98286b7352",
+          "state_sha256": "c6d28f6670af97ca31f91f72219df4b6cec8ec854678a37be9f028e965056666"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 6000,
+        "candidate": 6000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "de54ced30a45db073312f8db6746c68eb0bc5615b4308183cb5f8c96129dbaf1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/5a0e9a88e82e465bb28d5c2f004471f4/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c8161853b2c86fb1a0b5affdda458d6dab5fd88960c1d500d711ad404960d84e",
+          "state_sha256": "75bf03890e1f0cafed90e2875a1bd88f24451121974128ad39090de7ff6c5742"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "cadfa2af1a2d6ef87648002472f33704e2adc57aa5f553309decc310afd04f9f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/49e8a84942a8454ebfe1415c5c4de55e/provenance",
+          "bytes": 65855,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7dbb3cf2fb739086f895407f59318298fdd3b769ed52f293c634c12b74aee637",
+          "state_sha256": "94b15eacd633b70b873efb08770980925af2307ead8fa2903e03c6a4cc9ba46e"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "99b20d005a4e87fc7ba3f81e7e249fc77e02f19ca8b9a8abf5b6cef683fc4f0d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/984d92a018fb44c39eebdfb577a862e9/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ba33838a78d5ded0f378e40a67ac4e7602c15619925cc0ea4fa682b542262b2c",
+          "state_sha256": "2e44b8c1d464557d268e7492a0e7ee54b67b49528dee63077b115c8276e29f47"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "7a38071d1abeaf23a75d2be45b8b9e148cae37fee917ccd9f080d1ae470ca185",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/provenance",
+          "bytes": 770461,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "229c4b8d50d27264fa8770ecc798b8292fcb6cdd44bf5eb2bdc4eb23fa41f13e",
+          "state_sha256": "9e2415ca045d4a3fe36489d06a37b682a14e25d42a593d25ae89d8475e4062a7"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "grid100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "a07e83b7414eba62c89ced006cc918f43d8d64b40515a2efa7bc4680c8006659",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/499c3eb92c2e47118c8bfe4bfc4d29e4/provenance",
+          "bytes": 164769,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5612e1f83247fe9d35ba9d33879c4831cc2b536ea4fb7b98c325c6a0a4b053dd",
+          "state_sha256": "289593be82ed8000e6745ad519fc72c85d0d6804a4a3b282a54e327f284c0579"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "ff3ecff67f19a2c7e0f28ecca4f33ba1b910e013a13071e2f7af1c12ea0b8249",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/9796a68885d045ec9d4f771a95462dce/provenance",
+          "bytes": 165537,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "cc00fd7903ec1d1fcfb94183260cd8944b313c8f1b6e5c0d62920d5a98ab08f9",
+          "state_sha256": "3ed7746dc9db944d5bf230550fce3845254d2a3f44aeb8dee7fc319b0694a417"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "residual_student"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1600,
+        "candidate": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "d3c17fe52fe8dbe4f77428c1ba414541b562153614d5e08cdf65c62ac70f6c1c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/2d4adc821f57470baa984117fd735e8b/provenance",
+          "bytes": 109945,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "054e0cff021b3e48e91edbb8d0e80260d1f0b13f848df4dd94b9062af486ffb1",
+          "state_sha256": "dcca6c6872459c91efa36268be4427801a4533d8d7c775c99c0290b52d8524bb"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "c8460c8427b19f89f74e5d4b73445b2305af05eb04fb2f631df36365c98bece2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e3ab07ac01e34af3b0e21742114da722/provenance",
+          "bytes": 110457,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2ee4c3756dfd069b550cdadd91707900e4fdbc4f848f600c40ca1cf2527efa13",
+          "state_sha256": "fd4c09f760bc4e5844d76e708c713ae15aa3eb47186d4550b39466d689a4211f"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "390989e42d88ddf6f2546f9e32f7b69b0e5b33833dcf7be700893c26c874677c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/566bbd52b7294ace86c986f03c964a73/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a16cf94b5058fcad857585c88318832e0e39688c5a5b555b9b534b1d0407b706",
+          "state_sha256": "00e60630b9095ee0e5fd7afc611c681d6c7ce3014721896fd9198f2dc9e2cebf"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "5235417519b2dbdecd60d70c2bcddb3a0873b711620591e66d70cab722c5b6af",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/f41d2a9fdd9b4ac99c7845c923ebceff/provenance",
+          "bytes": 770461,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e52abb486687cadd2c77bedd765c3eb927ba3c8e44ad5e2d9b3eab7fd1e653d9",
+          "state_sha256": "3ca83b2cdbc0ee2d443b8dbcd0805fc4dc81a9e9158d92a8e2459381a7886271"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "rotated100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "8e5148812ea059845691703509a6902aff9aa31921be44e46949bf404e10c867",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/bbb59c32f82d46f4bc6c286910787a0e/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "81e345d4fd5ec271d48f89ad59da8526f52de1d158df5b8838678d5e1288e827",
+          "state_sha256": "4d6a604935de88b0da8f04bf99dcbe15c8d57cc5f7062a1f55501618d0ab8fa6"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "8c80fc37419631a005f1b3213c2969842db4872c9c45c11da2547108e6e51602",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/ea7213fb452d4001a826fcd22227d988/provenance",
+          "bytes": 770461,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6d96c1d4881855dae1ecba14cdff4eddb2ebcd6b14dfd05ba4e545eb4b768207",
+          "state_sha256": "1e477d64f6337b0110782ac8b7a29c10093257cbe3df051a493873ffc805f53c"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "staggered100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "abec143e765a3f5df6ce8d4b2fa0556df3230831734cd28de549d8c4261e908a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/8a9a587a79b747bc8e6e8c65d2bae88a/provenance",
+          "bytes": 164513,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9c2f50eeb89104b5dd99d3b2fe4cb3138b6a6c3a4c1c2faab8a45bf1908de26a",
+          "state_sha256": "7f6bc63aace470bcd3b32d9105edff66d7212fb994e5622abcd86ad78a2a80c3"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "5b0414039f445c1688674fd31ab084de25bcc5ce7bd4b4351afc4e677b481af6",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/388a2fe0fba44232ab80e44916e0b22c/provenance",
+          "bytes": 165345,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a20b55c40b493de522cd15d9502c77136685ff4897e2178daa7c62343e48f5f5",
+          "state_sha256": "edf39e062c18695f8959d2de52216246e1e0ac87ee4c4ed7d3ca5e6accc6ec82"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "trajectory"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 80,
+        "candidate": 80
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "f31dedac68d88398b10e4d9b1e71a9d7f9434091bfad56db24d2ca2c940530ab",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/8ed3886a85a04761bc08fd3739b73b23/provenance",
+          "bytes": 48879,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "58e41d3d685db9ba0d1ea6abd855e85906f6d18ce89affca4cb0774b75eeffed",
+          "state_sha256": "9a31e642e9968d4e39401c5c812b12e1755d38b6fe6efbafee774f81058b230b"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "02e38a5b0c0de6282c8b50719ecb492b4cc32cd3a09aa55488ec8ce21a2fa6d8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/a306c4066da54bafb907fe0812af82b5/provenance",
+          "bytes": 49647,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5e2525f88fa02d6c21d23c1392077aa5f88a23ed849c6814e5a8d9241c8d26b3",
+          "state_sha256": "67fe7506d55f5cb3fdfcd80a9446bf068970c9fbe3e2333faee0027e1dafd399"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "two_pole"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 200,
+        "candidate": 200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "5c4c37003e22ba20d5c140e26a04bd54017c80a2c9340fa07884a865185e0c3c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/ca6fa0fba4b64809b032c4b69d86cd34/provenance",
+          "bytes": 52743,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "fc465d2507a098a9322b09e3822e762b3cda3a1c7accbd0c109efd831c57fb70",
+          "state_sha256": "cda10e6118e06f500cb95626a69d2750c5d0d4a2dc2f6cbe414cef16da5c79d8"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "7f6d454544927c14959b111316bafa5539452f45fd62f96b7f0ee32527fa2ddb",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/863c64852ad64b7ab3e2baddb2b0cf2d/provenance",
+          "bytes": 53511,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3ef7439ad6fbf88d8bad0d848ee42ba7e934074693cc948cdb6a452b16e14b92",
+          "state_sha256": "c248cfe8624fa979996fd14917733d6de4e7a7eb31a9e8dbd94f0f6def3f75db"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "94f9921180659656d18469e2753ffd611ac30da59ec97dfe31a3bcd20595b72c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/82d937c5b3ee4a919f0b98835ffc2899/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7debc38e254d354cf87506cfbdccfd37993fb799645bce833c966bfd158d72ad",
+          "state_sha256": "c99d9aa366aabed2086f08dfcae8f7633223d0ed66109bfef4d095efc5c011a6"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "85b0c63ddbfa4b7260e929b22d7d479ae2e89c81023dbee8a37c07d315cffc93",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e45afe0b000c4926969cd3d32b0dd0c8/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7b47a91aa74eac39ba32d5d53556cd1b6de0815dc2fa1419dd7b817a2fb3f69b",
+          "state_sha256": "c454967e6224623eb7623d66d983e9285580c634f3cc18638c7492a9f5e827b7"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "fdfc3293c41e8394cd6e81a287e59742c3ae00ab343cb4f3be5dabd19fc8d130",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/d15134770a5041a4aca03dd529e77a46/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "71a7bfb7833c6fe010b2398f97196b8e95873722f71caee4ffd7f408fb853b79",
+          "state_sha256": "4e1ab5540187d1508a611f690ab92f7a43aac19cf8f93d6dcacadc2937821ded"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "38cbcbe4e683e6fc01e54837e3d9dbd0bbd8f8fd054d99d22926006bffd94674",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/c5b157b5c76b43d8ba5e4c01c20e279a/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a32fbfdc7a3db44d00ac8a1b376e636d21dfd8a10df750a81454f342fa3b5179",
+          "state_sha256": "1814193fd35088215402dbf0d401a830e738ea44a99a0bef40e64d8128753d35"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "e48b787573745801d0f22f8023e40786d7d2681ae02ca18548c13939565a9972",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e5d91501ce6440ff8f2a836ffd20afcc/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f01ff4c264217617420b8b6fc24435398487e2a7c90aa4a8683be1f4e882da0f",
+          "state_sha256": "0656d170d63b6cc5327c9bbd02d48f42b7f2a0ddc9db07d3154d899240f9f8bf"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "81f97a5fe1bdf9d553ae5164bdfcc074b2ca9429d989f70561afae685f65d577",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/8fbf10c0f473435da4d24da741e97cbd/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "49e2c4a86fed442ec45886939394cc0ab16ea516d22862cd2df4b7a5903d87b5",
+          "state_sha256": "8d01c527b9b691e8a06f52b6a7522766ce448b86fddb6bbea5c0dcbfa49fe379"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "scope": "independent_phase3_saved_evidence_audit",
+  "source_checks": [
+    {
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/snapshots/1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/snapshots/1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1207,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/snapshots/1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668/forge-source.json",
+          "sha256": "e89a26fea1542fe5cac680fa67b52c2c5a544db31adc5ce839db0b84fb55063f"
+        }
+      ],
+      "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+      "source_commits": [
+        "80d165fc3550625e08cfb7e696cf7e86adfa91ec"
+      ],
+      "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668"
+    }
+  ],
+  "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+  "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+  "status": "PASS",
+  "task_results_sha256": "27a3b22941bd7a87f4c261e119a567ed780f6c515b2eed7cf14237d872337f1e",
+  "unavailable_complete_states": []
+}

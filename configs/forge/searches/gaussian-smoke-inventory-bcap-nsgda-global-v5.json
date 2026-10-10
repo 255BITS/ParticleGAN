@@ -1,0 +1,32 @@
+{
+  "base_candidate": "bcap-nsgda-global-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling.",
+    "id": "gaussian-smoke-inventory-v5",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "d_lr_mult": [
+      1.5
+    ],
+    "lr": [
+      0.1
+    ],
+    "prior_lr_mult": [
+      0.3
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact preselected global recipe after adopting default numerical-rank truncation for DualNorm and disabling autograd multithreaded backward scheduling project-wide. Complete all runnable Tier1 and unlock Tier2 only for a whole six-task Tier1 PASS. No hyperparameter search, seed variation or retuning.",
+  "id": "gaussian-smoke-inventory-bcap-nsgda-global-v5",
+  "protocol": "screening",
+  "schema_version": 2,
+  "trainer_family": "bcap-nsgda-global",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

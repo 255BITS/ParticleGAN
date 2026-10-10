@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "44de286fe6adfe3bde97f27a927fe224328391025083c3d15759c2fc89a16ab8",
+  "archived_selection_script_sha256": "ebb97522544a58f1529500f42d23df8fb189ad997e5917b6a6082cd15dca570c",
+  "current_selection_script_sha256": "c51c8aa22ab12d3d70c6473c881ed95a43d5ee86cf51a30a3384097676233fe3",
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "qualification_input": false,
+  "reason": "The archived selection helper refused historical current-measurement selectors. The corrected helper preserves the exact retired pin in a change receipt, keeps its verified scientific row as an unranked alternative, supplies the existing historical rows, and explicitly retains the existing unmeasured canonical declaration with zero qualification credit when family selections span sources. No second selected configuration is added for the same runtime. Use the committed helper for publication; restore only original execution paths from the immutable archive.",
+  "schema_version": 1,
+  "scientific_source_unchanged": true,
+  "scope": "publication_metadata_only"
+}

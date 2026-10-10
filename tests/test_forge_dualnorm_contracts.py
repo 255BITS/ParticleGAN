@@ -19,6 +19,14 @@ from experiments.forge.techniques import recipe_field_active, validate_same_tech
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.fixture
+def cuda_behavior_contract():
+    if not torch.cuda.is_available():
+        pytest.skip("CUDA is required for numerical optimizer checks")
+    with torch.device("cuda:0"), torch.autograd.set_multithreading_enabled(False):
+        yield
+
+
 def test_implicit_optimizer_defaults_preserve_all_archived_configuration_ids():
     for path in (ROOT / "configs/forge/configurations").glob("*.json"):
         card = json.loads(path.read_text())
@@ -55,15 +63,19 @@ def test_forge_v1_bcap_remains_adam_while_public_bcap_selects_the_new_starter():
     assert get_recipe("bcap").lr == .012
     assert get_recipe("bcap").d_lr_mult == 1.5
     assert get_recipe("bcap").prior_lr_mult == 2.5
+    assert get_recipe("bcap").constraint_geometry_mode == "direction_blend"
     assert candidate["recipe_overrides"] == {}
 
 
 def test_forge_bcap_binding_respects_explicit_winner_and_name_overrides():
     candidate = {"recipe_preset": "bcap", "recipe_overrides": {
         "name": "frozen-label", "optimizer_family": "dualnorm", "optimizer_momentum": 0.,
+        "loss": "non_saturating", "optimizer_smoothing": .001, "optimizer_convolution": "per_offset",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5}}
     resolved = resolve_public_recipe(candidate, name="report-label")
-    assert asdict(resolved) == asdict(get_recipe("bcap").replace(name="report-label"))
+    # This historical winner declaration has no projection override. Forge v1
+    # keeps its original resolved recipe despite the current public preset.
+    assert asdict(resolved) == asdict(get_recipe("bcap", constraint_geometry_mode="none").replace(name="report-label"))
     assert resolve_public_recipe(candidate).name == "frozen-label"
     assert candidate["recipe_overrides"]["name"] == "frozen-label"
 
@@ -77,7 +89,8 @@ def test_optimizer_controls_have_explicit_ownership_and_momentum_boundary():
     assert recipe_field_owner("optimizer_family") == "technique"
     for name in ("optimizer_momentum", "optimizer_adam_lr"):
         assert recipe_field_owner(name) == "hyperparameter"
-    base = get_recipe("bcap", optimizer_family="dualnorm", optimizer_momentum=.5)
+    base = get_recipe("bcap", optimizer_family="dualnorm", optimizer_momentum=.5,
+                      constraint_geometry_mode="none")
     validate_same_technique(base, base.replace(optimizer_momentum=.9, lr=.03))
     with pytest.raises(ValueError, match="dualnorm_momentum"):
         validate_same_technique(base, base.replace(optimizer_momentum=0))
@@ -132,7 +145,7 @@ def test_hybrid_isolation_rates_preserve_native_adam_incumbent():
 
 
 @pytest.mark.parametrize("family", ["dualnorm", "particle_rownorm_only"])
-def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family):
+def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family, cuda_behavior_contract):
     from experiments.forge.behavior_adapters import BehaviorComponents
 
     task = json.loads((ROOT / "configs/forge/tasks/ae_gan_hold.json").read_text())
@@ -140,8 +153,9 @@ def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family
     if family == "particle_rownorm_only":
         overrides["optimizer_adam_lr"] = .00425
     components = BehaviorComponents({"candidate": {"recipe_preset": "bcap", "recipe_overrides": overrides},
-                                     "protocol": {"seed": 0}}, task)
+                                     "protocol": {"seed": 0}}, task, device="cuda:0")
     prior = components.make_prior(components.recipe)
+    assert prior.z.device.type == "cuda"
     opt_g, _, _, _ = components.bind(generator=torch.nn.Linear(2, 2), critic=torch.nn.Linear(2, 1),
                                      priors=[prior], opt_g=None, opt_d=None)
     table_opt = next(optimizer for optimizer in opt_g.optimizers

@@ -19,35 +19,129 @@ NORMALIZED_FAMILIES = (
     "dualnorm_D_only", "particle_rownorm_only",
 )
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
+_CONVOLUTION_VERSION = "per_offset_polar_v1"
 
 
-def polar_factor(matrix):
-    """Return U Vᵀ; large matrices try bounded Newton--Schulz first.
+def convolution_parameter_groups(groups, modules, *, family):
+    """Bind kernel updates to module semantics, never infer layout from shape.
 
-    The zero-gradient guard belongs to the caller. Reduced SVD includes the
-    unit singular-value completion for rank-deficient nonzero matrices.
-    Ill-conditioning or rank deficiency can prevent finite iterations from
-    reaching unit singular values. A Frobenius orthogonality residual above
-    1e-3 falls back to SVD, preserving the declared polar-factor step rule.
+    Only DualNorm kernel groups are split. Groups without eligible kernels
+    retain their original parameters and fields, including checkpoint layout.
+    A bare parameter iterable has no module contract and cannot use this hook.
     """
+    if family not in ("dualnorm", "dualnorm_D_only"):
+        return groups
+    kernels = {}
+    for root in modules:
+        if root is None:
+            continue
+        for module in root.modules():
+            if not isinstance(module, (torch.nn.Conv2d, torch.nn.ConvTranspose2d)):
+                continue
+            metadata = {
+                "update_version": _CONVOLUTION_VERSION,
+                "layout": ("conv_transpose2d_in_out" if isinstance(module, torch.nn.ConvTranspose2d)
+                           else "conv2d_out_in"),
+                "groups": module.groups, "in_channels": module.in_channels,
+                "out_channels": module.out_channels, "kernel_size": list(module.kernel_size),
+            }
+            identifier = id(module.weight)
+            if identifier in kernels and kernels[identifier] != metadata:
+                raise ValueError("shared convolution weight has incompatible module layouts")
+            kernels[identifier] = metadata
+    result = []
+    for original in groups:
+        role = original.get("role", original.get("forge_role", "generator"))
+        eligible = role not in ("prior", "table") and (family == "dualnorm" or role == "critic")
+        parameters = list(original["params"])
+        if not eligible or not any(id(p) in kernels for p in parameters):
+            result.append({**original, "params": parameters})
+            continue
+        if "dualnorm_convolution" in original:
+            raise ValueError("module convolution metadata cannot replace explicit group metadata")
+        pending = []
+        for parameter in parameters:
+            metadata = kernels.get(id(parameter))
+            if metadata is None:
+                pending.append(parameter)
+                continue
+            if pending:
+                result.append({**original, "params": pending})
+                pending = []
+            result.append({**original, "params": [parameter],
+                           "dualnorm_convolution": deepcopy(metadata)})
+        if pending:
+            result.append({**original, "params": pending})
+    return result
+
+
+def _validate_convolution_group(group):
+    metadata = group["dualnorm_convolution"]
+    fields = {"update_version", "layout", "groups", "in_channels", "out_channels", "kernel_size"}
+    if (group["algorithm"] != "dualnorm" or len(group["params"]) != 1
+            or not isinstance(metadata, dict) or set(metadata) != fields
+            or metadata["update_version"] != _CONVOLUTION_VERSION
+            or metadata["layout"] not in ("conv2d_out_in", "conv_transpose2d_in_out")):
+        raise ValueError("invalid DualNorm convolution group or update version")
+    for key in ("groups", "in_channels", "out_channels"):
+        if type(metadata[key]) is not int or metadata[key] <= 0:
+            raise ValueError("invalid DualNorm convolution channels or groups")
+    groups, inputs, outputs = (metadata[key] for key in ("groups", "in_channels", "out_channels"))
+    kernel = metadata["kernel_size"]
+    if (inputs % groups or outputs % groups or not isinstance(kernel, list) or len(kernel) != 2
+            or any(type(size) is not int or size <= 0 for size in kernel)):
+        raise ValueError("invalid DualNorm convolution kernel or channel groups")
+    channels = ((outputs, inputs // groups) if metadata["layout"] == "conv2d_out_in"
+                else (inputs, outputs // groups))
+    parameter = group["params"][0]
+    if not parameter.is_floating_point() or tuple(parameter.shape) != (*channels, *kernel):
+        raise ValueError("DualNorm convolution metadata differs from the kernel shape")
+
+
+def _convolution_matrices(tensor, metadata):
+    """Yield writable [output/group, input/group] views in storage order."""
+    transposed = metadata["layout"] == "conv_transpose2d_in_out"
+    channels = metadata["in_channels"] if transposed else metadata["out_channels"]
+    per_group = channels // metadata["groups"]
+    for group in range(metadata["groups"]):
+        for row in range(metadata["kernel_size"][0]):
+            for column in range(metadata["kernel_size"][1]):
+                matrix = tensor[group * per_group:(group + 1) * per_group, :, row, column]
+                yield matrix.T if transposed else matrix
+
+
+def polar_factor(matrix, *, smoothing=0., backend="native"):
+    """Return the polar direction with optional fixed-scale spectral smoothing.
+
+    tau = max(rows, columns) * eps * s_max uses the SVD computation dtype.
+    With smoothing > 0, singular weights are s / hypot(s, smoothing).
+    Otherwise retained weights are one. Weights at or below tau stay zero.
+    Float16/bfloat16 inputs retain the existing float32 computation policy;
+    float32/float64 inputs are not cast. Exact SVD at every size makes the
+    cutoff independent of an iterative polar approximation. No RNG is used.
+    The opt-in CPU backend computes the entire polar operation on CPU, then
+    returns to the input device/dtype. Accelerator rounding can differ; this
+    is a declared numerical trainer change rather than a parity optimization.
+    """
+    if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
+        raise ValueError("polar smoothing must be finite and nonnegative")
     if matrix.ndim != 2 or not matrix.is_floating_point():
         raise ValueError("polar_factor requires a floating-point matrix")
+    if backend not in ("native", "cpu"):
+        raise ValueError("polar backend must be native or cpu")
+    if backend == "cpu" and matrix.device.type != "cpu":
+        return polar_factor(matrix.cpu(), smoothing=smoothing).to(matrix)
     original_dtype = matrix.dtype
     value = matrix if original_dtype in (torch.float32, torch.float64) else matrix.float()
-    if max(value.shape) <= 1024:
-        left, _, right = torch.linalg.svd(value, full_matrices=False)
-        return (left @ right).to(dtype=original_dtype)
-    original = value
-    transposed = value.shape[0] > value.shape[1]
-    value = value.T if transposed else value
-    value = value / value.norm().clamp_min(torch.finfo(value.dtype).tiny)
-    for _ in range(30):
-        value = .5 * (3 * value - (value @ value.T) @ value)
-    residual = value @ value.T - torch.eye(value.shape[0], device=value.device, dtype=value.dtype)
-    if not bool(torch.isfinite(residual).all()) or bool(residual.norm() > 1e-3):
-        left, _, right = torch.linalg.svd(original, full_matrices=False)
-        return (left @ right).to(dtype=original_dtype)
-    return (value.T if transposed else value).to(dtype=original_dtype)
+    if 0 in value.shape:
+        return torch.zeros_like(matrix)
+    left, singular, right = torch.linalg.svd(value, full_matrices=False)
+    threshold = max(value.shape) * torch.finfo(value.dtype).eps * singular[0]
+    if smoothing:
+        weights = singular / torch.hypot(singular, torch.full_like(singular, smoothing))
+        weights = weights * (singular > threshold)
+        return ((left * weights) @ right).to(dtype=original_dtype)
+    return ((left * (singular > threshold)) @ right).to(dtype=original_dtype)
 
 
 class NormalizedOptimizer(Optimizer):
@@ -64,13 +158,26 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, **options):
+                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
+                 svd_backend="native", **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
             raise ValueError("optimizer momentum must be 0, 0.5 or 0.9")
         if momentum != 0 and family not in ("dualnorm", "dualnorm_D_only"):
             raise ValueError("momentum is supported only by dualnorm arms")
+        if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
+            raise ValueError("optimizer smoothing must be finite and nonnegative")
+        if smoothing and family != "dualnorm":
+            raise ValueError("optimizer smoothing requires the dualnorm family")
+        if convolution not in ("none", "per_offset"):
+            raise ValueError("optimizer convolution must be none or per_offset")
+        if convolution != "none" and family != "dualnorm":
+            raise ValueError("optimizer convolution requires the dualnorm family")
+        if svd_backend not in ("native", "cpu"):
+            raise ValueError("optimizer SVD backend must be native or cpu")
+        if svd_backend != "native" and family != "dualnorm":
+            raise ValueError("optimizer SVD backend requires the dualnorm family")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -84,6 +191,9 @@ class NormalizedOptimizer(Optimizer):
             if value not in (None, False, 0):
                 raise ValueError(f"normalized optimizers require disabled {key}")
         self.family, self.momentum = family, float(momentum)
+        self.smoothing = float(smoothing)
+        self.convolution = convolution
+        self.svd_backend = svd_backend
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -131,8 +241,12 @@ class NormalizedOptimizer(Optimizer):
             group.setdefault("sampled_rows_required", True)
         if algorithm == "ada_nsgda" and group["betas"][0] != 0:
             raise ValueError("ada_nsgda requires beta1=0 in every group")
-        if algorithm == "dualnorm" and any(p.ndim > 2 for p in group["params"]):
-            raise ValueError("dualnorm supports matrix weights and vector/scalar biases only")
+        if "dualnorm_convolution" in group:
+            if self.convolution != "per_offset":
+                raise ValueError("DualNorm convolution metadata requires convolution='per_offset'")
+            _validate_convolution_group(group)
+        elif algorithm == "dualnorm" and any(p.ndim > 2 for p in group["params"]):
+            raise ValueError("dualnorm high-rank weights require explicit Conv2d/ConvTranspose2d module metadata")
 
     def _refresh_adam(self):
         adam_groups = [g for g in self.param_groups if g["algorithm"] == "adam"]
@@ -196,6 +310,8 @@ class NormalizedOptimizer(Optimizer):
         # Fail before mutating any parameters if ownership is absent or the
         # chosen rule cannot consume a gradient.
         for group in self.param_groups:
+            if "dualnorm_convolution" in group:
+                _validate_convolution_group(group)
             for parameter in group["params"]:
                 if parameter.grad is None:
                     continue
@@ -244,7 +360,10 @@ class NormalizedOptimizer(Optimizer):
                     rows = (self._sampled_rows[parameter] if group["sampled_rows_required"]
                             else torch.arange(len(parameter), device=parameter.device))
                     selected = gradient[rows]
-                    update = selected / (selected.norm(dim=1, keepdim=True) + eps)
+                    norm = selected.norm(dim=1, keepdim=True)
+                    denominator = (torch.hypot(norm, torch.full_like(norm, self.smoothing))
+                                   if self.smoothing else norm + eps)
+                    update = selected / denominator
                     parameter.index_add_(0, rows, update, alpha=-rate)
                 elif algorithm == "dualnorm":
                     direction = gradient
@@ -253,13 +372,39 @@ class NormalizedOptimizer(Optimizer):
                             state["momentum_buffer"] = torch.zeros_like(parameter)
                         direction = state["momentum_buffer"]
                         direction.mul_(self.momentum).add_(gradient)
-                    if parameter.ndim == 2:
+                    if "dualnorm_convolution" in group:
+                        metadata = group["dualnorm_convolution"]
+                        factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
+                        factor /= math.prod(metadata["kernel_size"])
+                        matrices = zip(_convolution_matrices(parameter, metadata),
+                                       _convolution_matrices(gradient, metadata),
+                                       _convolution_matrices(direction, metadata))
+                        for weight_matrix, gradient_matrix, direction_matrix in matrices:
+                            # Mirror the dense rule per channel matrix: a zero
+                            # current slice does not move on stale momentum.
+                            if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
+                                continue
+                            update = (polar_factor(direction_matrix, smoothing=self.smoothing)
+                                      if self.svd_backend == "native" else
+                                      polar_factor(direction_matrix, smoothing=self.smoothing,
+                                                   backend=self.svd_backend))
+                            weight_matrix.add_(update, alpha=-rate * factor)
+                    elif parameter.ndim == 2:
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        parameter.add_(polar_factor(direction), alpha=-rate * factor)
+                        if self.svd_backend == "native":
+                            update = (polar_factor(direction, smoothing=self.smoothing)
+                                      if self.smoothing else polar_factor(direction))
+                        else:
+                            update = polar_factor(direction, smoothing=self.smoothing,
+                                                  backend=self.svd_backend)
+                        parameter.add_(update, alpha=-rate * factor)
                     else:
-                        parameter.add_(direction / (direction.norm() + eps), alpha=-rate)
+                        norm = direction.norm()
+                        denominator = (torch.hypot(norm, norm.new_tensor(self.smoothing))
+                                       if self.smoothing else norm + eps)
+                        parameter.add_(direction / denominator, alpha=-rate)
         if self._adam is not None:
             self._adam.step()
         self.clear_sampled_rows()
@@ -275,6 +420,12 @@ class NormalizedOptimizer(Optimizer):
                              if group["algorithm"] == "rownorm" else None
                              for group in self.param_groups],
         }
+        if self.smoothing:
+            result["dualnorm"]["smoothing"] = self.smoothing
+        if self.convolution != "none":
+            result["dualnorm"]["convolution"] = self.convolution
+        if self.svd_backend != "native":
+            result["dualnorm"]["svd_backend"] = self.svd_backend
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -288,9 +439,22 @@ class NormalizedOptimizer(Optimizer):
         if not isinstance(saved, dict) or saved.keys() != expected_keys:
             raise ValueError("invalid normalized optimizer checkpoint schema")
         meta = saved["dualnorm"]
-        if (not isinstance(meta, dict) or set(meta) != {"schema", "family", "momentum", "sampled_rows"}
+        expected_meta = {"schema", "family", "momentum", "sampled_rows"}
+        if self.smoothing:
+            expected_meta.add("smoothing")
+        if self.convolution != "none":
+            expected_meta.add("convolution")
+        if self.svd_backend != "native":
+            expected_meta.add("svd_backend")
+        if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
+        if meta.get("smoothing", 0.) != self.smoothing:
+            raise ValueError("checkpoint optimizer smoothing differs")
+        if meta.get("convolution", "none") != self.convolution:
+            raise ValueError("checkpoint optimizer convolution differs")
+        if meta.get("svd_backend", "native") != self.svd_backend:
+            raise ValueError("checkpoint optimizer SVD backend differs")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -298,6 +462,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("invalid normalized optimizer groups")
         seen = set()
         for index, (actual, group) in enumerate(zip(self.param_groups, groups)):
+            if "dualnorm_convolution" in actual:
+                _validate_convolution_group(actual)
             if not isinstance(group, dict) or set(group) != set(actual) or not isinstance(group.get("params"), list):
                 raise ValueError("invalid normalized optimizer group fields")
             if len(group["params"]) != len(actual["params"]):
@@ -386,8 +552,24 @@ class NormalizedOptimizer(Optimizer):
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
-    optimizer = NormalizedOptimizer(params, family=recipe.optimizer_family,
-                                    momentum=recipe.optimizer_momentum, **options)
+    optimizer_class = NormalizedOptimizer
+    if critic is not None and recipe.critic_step_mode == "finite_cap":
+        from .critic_cap import CriticCapOptimizer
+        optimizer_class = CriticCapOptimizer
+    if recipe.constraint_geometry_mode == "nonascent" and critic is None:
+        from .constraint_geometry import ConstraintGeometryOptimizer
+        optimizer_class = ConstraintGeometryOptimizer
+    elif recipe.constraint_geometry_mode == "strict_progress" and critic is None:
+        from .strict_progress import StrictProgressOptimizer
+        optimizer_class = StrictProgressOptimizer
+    elif recipe.constraint_geometry_mode == "direction_blend" and critic is None:
+        from .direction_blend import DirectionBlendOptimizer
+        optimizer_class = DirectionBlendOptimizer
+    optimizer = optimizer_class(params, family=recipe.optimizer_family,
+                                    momentum=recipe.optimizer_momentum,
+                                    smoothing=recipe.optimizer_smoothing,
+                                    convolution=recipe.optimizer_convolution,
+                                    svd_backend=recipe.optimizer_svd_backend, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "concluded_research_context_refresh",
+  "qualification_input": false,
+  "training_launched": false,
+  "scientific_regrading": false,
+  "historical_archive_source_commit": "b235112dee4dd6d06a4e3eca7c1e31918a6a8b51",
+  "context": {
+    "path": "reports/forge/records/bcap-three-phase-concluded-context-v1.json",
+    "sha256": "8d021ebe420c90660c2bae2774e193f90105c2309b993c696867532098ed6842"
+  },
+  "changed_memory_outputs": [
+    {
+      "path": "reports/forge/EXPERIMENT_MEMORY.md",
+      "previous": {
+        "path": "reports/forge/EXPERIMENT_MEMORY.md",
+        "sha256": "023cb146b194680c97b915e4a6711dd22869dbd7b0a6bb8638bc64bed2410764",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/EXPERIMENT_MEMORY.md",
+        "git_blob": "3d65d65a1dbadf14fa2e9a04c0b2efa59b319985"
+      },
+      "current_sha256": "17c73af14a1adada0579a92c2030b4cccc9a2bff9351aa882f359facc9a3c9ba"
+    },
+    {
+      "path": "reports/forge/compilation.json",
+      "previous": {
+        "path": "reports/forge/compilation.json",
+        "sha256": "88571665ac0d66add6edada9806d2ff4fc61836813ae5c1caab404f0f30e55e0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/compilation.json",
+        "git_blob": "4e3436852b76bb4e8e490c55f67eb406ea6cb396"
+      },
+      "current_sha256": "ee0cf059cf00623f5d33a387acf4a0491bd957acaf2a20c0b191fc00c99d8e15"
+    }
+  ],
+  "preserved_qualification_and_automation_files": [
+    {
+      "path": "reports/forge/automation.json",
+      "sha256": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+      "previous_git_blob": "bbece50f35358e15969a5533320bcf054f4a21b0"
+    },
+    {
+      "path": "reports/forge/leaderboards/adaptation.md",
+      "sha256": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+      "previous_git_blob": "d2b0c180b57aa8f2f499dddef5051128580deb22"
+    },
+    {
+      "path": "reports/forge/leaderboards/clockfree_continuous.md",
+      "sha256": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+      "previous_git_blob": "43672ea6ddbcb2ff6c510a6b643a3dcfb73f8d7f"
+    },
+    {
+      "path": "reports/forge/leaderboards/formulation_comparison.md",
+      "sha256": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+      "previous_git_blob": "705a4540c997e92062d2a314d42d2410ca084555"
+    },
+    {
+      "path": "reports/forge/leaderboards/host_profile_transfer.md",
+      "sha256": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+      "previous_git_blob": "5aac402bee5c2a5dd9b494847697b81028a2abb6"
+    },
+    {
+      "path": "reports/forge/leaderboards/quality_coverage.md",
+      "sha256": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+      "previous_git_blob": "91e29c47fc8bc9f74329e4380774a9b227e938ca"
+    },
+    {
+      "path": "reports/forge/technique-inventory.json",
+      "sha256": "87466b6ef0f5d5a60d5202471f9043b79e7b8678ec0a1f32417d0770df402e1c",
+      "previous_git_blob": "ef98ca5d0a515063f8e9fe938e07a4a8a158ba35"
+    },
+    {
+      "path": "reports/forge/technique-inventory.md",
+      "sha256": "697d350cb7c5fe0a3e74d5f40e2561c376489632fa32c690ade712f70f337de2",
+      "previous_git_blob": "283a34416b297b838e833cf6e25c61a68f3a5f93"
+    }
+  ],
+  "preserved_manifest_fields": [
+    "qualification_refresh",
+    "pending_readout",
+    "scientific_source_digests",
+    "operational_lifecycle_digest",
+    "automation_digest",
+    "publication_record_count",
+    "conflicts",
+    "import_gap_count"
+  ],
+  "records_before": 781,
+  "records_after": 782,
+  "publication_records_unchanged": true,
+  "reducer_hashes": {
+    "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
+    "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
+  },
+  "freshness_status": "CURRENT",
+  "recall_exact_context_matches": 1,
+  "commands": [
+    {
+      "command": "python -m experiments.forge compile --summaries-only",
+      "exit_code": 0,
+      "raw_stdout_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/logs/memory-refresh.log",
+      "raw_stdout_sha256": "d72fb63d9369c75daeb3af7354a4c737e6d1f4a644757abde7b31f158e208bf9"
+    },
+    {
+      "command": "python -m experiments.forge compile --check",
+      "exit_code": 0,
+      "raw_stdout_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/logs/memory-check.log",
+      "raw_stdout_sha256": "bb1bf0f8a2f2a2aa6e313b4a2d98cf747223d0676f9334717444d392380e0680"
+    },
+    {
+      "command": "python -m experiments.forge recall --goal discriminator_stability --query bcap-three-phase-concluded-research",
+      "exit_code": 0,
+      "raw_stdout_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/logs/memory-recall.log",
+      "raw_stdout_sha256": "86b7e95f479cd6db91cea2413a4e170eb0694788e5c7ecf2d81c3bd639025d28"
+    }
+  ],
+  "limitations": "The normalized family context summarizes source-bound publications. Its provenance pins were byte-checked at construction, not recursively certified by the compiler; it supplies no new scientific verdict or qualification."
+}

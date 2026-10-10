@@ -16,6 +16,12 @@ remain historical receipts from before device access returned. They are not
 current blockers. Original [PR331](https://github.com/255BITS/ParticleGAN/pull/331)
 and all five follow-up PRs remain unmerged.
 
+**PR triage (2026-10-10):** follow-ups #333–#338 were closed unmerged with branches
+retained; truncation (#332) is the develop default. #337: the continuous serialized
+arm fails its first confirmation (covariance .8948), while serializing only update
+401 passes. #338: serialized+truncation passes 34/34 checks and acquires at 1050,
+redundant with truncation alone (684). Details of both are below.
+
 ## Later continuous combination follow-up
 
 [PR338](https://github.com/255BITS/ParticleGAN/pull/338) tests both mechanisms

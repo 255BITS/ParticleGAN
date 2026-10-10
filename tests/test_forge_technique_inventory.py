@@ -52,7 +52,27 @@ def alias(root, name):
     idea = read_json(root / "configs/forge/ideas/base.json")
     idea.update(id=name, hypothesis="same mechanism with another label")
     atomic_json(root / f"configs/forge/ideas/{name}.json", idea)
-    pin_legacy(root)
+    pin_legacy(root)  # These metadata fixtures explicitly retain their v1 controls.
+
+
+def test_default_inventory_uses_one_current_family_config_and_explicit_rosters_remain_reproducible(checkout):
+    from experiments.forge.trainer_families import CURRENT_SELECTION
+    alias(checkout, "archived")
+    atomic_json(checkout / "configs/forge/trainer-families.json", {"schema_version": 1, "families": [
+        {"id": "baseline", "label": "Baseline", "candidates": ["base", "archived"], "canonical_candidate": "base"}]})
+    atomic_json(checkout / CURRENT_SELECTION, {"schema_version": 1, "scope": "whole_candidate_family_current",
+        "default_adoption": False, "view": "stability", "policy_fingerprint": "fixture", "selections": [
+            {"trainer_family": "baseline", "candidate_id": "base", "execution_backend": "cpu",
+             "selection_kind": "historical_incumbent", "reason": "Current whole configuration."}]})
+    plan = inventory.plan_inventory(checkout, checkout / "runs", **options())
+    assert plan["technique_count"] == 1
+    assert plan["selection_scope"] == "one_current_configuration_per_family"
+    assert [row["candidate"] for row in plan["candidates"]] == ["base"]
+    assert plan["unrequested_technique_ids"] == ["archived"]
+    assert not (checkout / "runs").exists()
+    explicit = inventory.plan_inventory(checkout, checkout / "runs", technique_ids=["base", "archived"], **options())
+    assert explicit["technique_count"] == 2
+    assert "selection_scope" not in explicit
 
 
 def test_plan_discovers_new_cards_preserves_denominators_and_writes_nothing(checkout):

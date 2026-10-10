@@ -8,6 +8,8 @@ from __future__ import annotations
 
 from .observation import checkpoint, schedule_optimizer
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -144,12 +146,24 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
             generated = noise_policy.output(generated, generator_step=True)
         paired = critic(generated)
         g_loss = gan.g_loss(paired, d_real)
+        protected_adversarial = g_loss
         g_loss = g_loss + particle_l2 * particles.square().mean()
-        g_loss.backward()
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, generated, real)
+        def protected_evaluator():
+            current = particles if pairing == "live" else stranger
+            return (gan.g_loss(critic(current), d_real),)
+        constraint_geometry_backward(g_loss, opt_p, (protected_adversarial,),
+                                     protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_p, step - 1)
         opt_p.step()
-        checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
-                                 "grad_med": _grad_median(base_critic, real, particles)})
+        def observe_poles():
+            metrics = {"mean_abs": float(particles.detach().abs().mean()),
+                       "grad_med": _grad_median(base_critic, real, particles)}
+            if components is not None:
+                components.constraint_geometry_capture(step, real, particles.detach(), metrics)
+            return metrics
+        checkpoint(step, observe_poles)
 
     with torch.no_grad():
         mean_abs = float(particles.abs().mean())

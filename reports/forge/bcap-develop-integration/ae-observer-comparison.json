@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scope": "CPU two-update public API compatibility/media proof, no task quality credit",
+  "measured_source_commit": "beb7b1df5",
+  "original_worktree_head": "63380b2bf68e3443340810fbd32d450e7f92ed59",
+  "compatibility_commit": "68127e2b5cde98c72ff50e4c42255535eab83842",
+  "training_updates": 8,
+  "repeated_training_updates_after_failed_render": 0,
+  "original_host_sha256": "f8391719e77b389d033e469be5fa53dcf1f46c0d74ba3990877add2a36118fea",
+  "compatible_host_sha256": "2cd9e2ed2cb80cd449a9fe73b7c3c9089e9193def3e364aa75443ef2b9e81b59",
+  "exact_equality_fields": [
+    "observations",
+    "guards",
+    "model_parameters",
+    "role_parameters",
+    "optimizer_states",
+    "named_rng_streams",
+    "all_scored_output_tensors",
+    "gif_encoded_bytes",
+    "gif_rgb_frame_pixels"
+  ],
+  "arms": {
+    "winner": {
+      "all_equal": true,
+      "actual_updates_per_source": 2,
+      "numerical_state": {
+        "models": "4150128f2c5b5a0d689767b91d15fee6f2d242d07014a52151f9265da0622661",
+        "role_parameters": "1061de66bc950459cef60333240dc863b5e96420cf324b99c5913be71a06fb9e",
+        "optimizers": "094d12c38062418babf4c0bc5a4c663b06de85d08e653da50f92ec535bacdf9c",
+        "streams": "17cf07f4c39bdb2d7a1628fa249b7262edbb5279bdd8e03912bbbb437db7c653"
+      },
+      "scored_outputs": "bd61427cb4bde6f005ce42eb51dfc2d03737ae271e0d2fe224fab627849df18a",
+      "gif_sha256": "ddec9c16173514ecf065f10c0cdb467d5cceb2fbecc4a50861470a057509330b",
+      "gif_pixel_sha256": [
+        "a9aa5020ca07cf7f9438e56a5cded038ff327c585d33243c3e3042289e828438",
+        "b69f4f0d2efb25ba85df20671ed51a5cbb50d429d76fe259c88a2247812f0f36",
+        "fd2fe4b9eb6d9abd3000c836d85db94b495132cbd9107376b1f3a93a1272aebd"
+      ],
+      "unintended_rng_deviations": 0
+    },
+    "combined": {
+      "all_equal": true,
+      "actual_updates_per_source": 2,
+      "numerical_state": {
+        "models": "05b3ab8b75be1796b9771711917664252d9d8b93067490742e696473466f83cd",
+        "role_parameters": "512a35dd6c4581371c3e3b56b9ede61b3c8707798a657ca47a290c97294b47b3",
+        "optimizers": "3c9197b5bd7aa6ecb85c53d90b2c2f343d132dbb00c4068fdd83f70d20ec4828",
+        "streams": "17cf07f4c39bdb2d7a1628fa249b7262edbb5279bdd8e03912bbbb437db7c653"
+      },
+      "scored_outputs": "4120d2eb271fae6d026f49d5689a66ee403875bae9953318471ae1e8849d7971",
+      "gif_sha256": "5a69784f6457f69da19a3f6fd1a934d703abbf83d26af2abd23aa9bb10823661",
+      "gif_pixel_sha256": [
+        "a9aa5020ca07cf7f9438e56a5cded038ff327c585d33243c3e3042289e828438",
+        "4f44594b27e05e38b364a894d76df235edbb61bfceeb0cf9380d380361034105",
+        "085a5627f20150ea6708d2e168299a9aad4423b69c828920adf30f61f3ad34b3"
+      ],
+      "unintended_rng_deviations": 0
+    }
+  },
+  "render_recovery": "Retain all original scored records; render one original record per actual update. First failed exports and logs retained; completed winner updates reused.",
+  "reproduction_source_sha256": "579f832a5e733fc43a09da14e3c5a562caab9168a602d642646eb8e905645458",
+  "files": {
+    "ae-observer-old/final.json": "b3f9953389e9b41504ea072b45e9e41445603b4f1f6e8705b5cd56707bd11788",
+    "ae-observer-new/final.json": "988730e4f71e31c91ee04e9645145d3d73f546fd296b824839fbb677b3795f1b",
+    "observer-tests.log": "c5de96f58cc28e58fe5d73f491bfb45b0c6ac4ce47dde6c1dab7bfb0e805d2d2"
+  }
+}

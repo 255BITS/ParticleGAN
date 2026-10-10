@@ -38,8 +38,11 @@ def validate_word_task(task, *, root=None):
         raise ValueError("word host definition differs from the shared retained fixture")
     if execution.get("execution_path") != "public_components":
         raise ValueError("joint word host requires its explicit public_components execution path")
-    if (execution.get("steps") != 20001 or execution.get("original_schedule_horizon") != 20000
-            or execution.get("produces_state") is not False):
+    if evaluation.get("kind") in {"word_smoke", "word_hold"}:
+        from .word_tasks import validate_task
+        validate_task(task)
+    elif (execution.get("steps") != 20001 or execution.get("original_schedule_horizon") != 20000
+          or execution.get("produces_state") is not False):
         raise ValueError("word task requires 20,001 updates / 20,000-update schedule; no continuation claim")
     prior = execution.get("prior", {})
     if any(prior.get(key) != value for key, value in
@@ -77,6 +80,7 @@ def word_preflight(task, candidate, *, root=None):
 
 
 def run_word(request, task, output, device, *, execution_limit=None, capture_media=False,
+             prerequisites=None,
              retain_scored_outputs=True):
     """Bounded API execution. A reduced cap is only an explicit integration demo."""
     from benchmarks.toy_audit.api_images import WordFixture
@@ -84,6 +88,11 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     from .mechanisms import MechanismAudit, mechanism_blockers
 
     context = word_context(request, task, device)
+    if task["evaluation"]["kind"] in {"word_smoke", "word_hold"}:
+        from .word_tasks import run_ladder
+        return run_ladder(request, task, output, device, context=context,
+            execution_limit=execution_limit, capture_media=capture_media,
+            prerequisites=prerequisites, retain_scored_outputs=retain_scored_outputs)
     steps = task["execution"]["steps"] if execution_limit is None else execution_limit
     if type(steps) is not int or not 1 <= steps <= task["execution"]["steps"]:
         raise ValueError("word execution limit must fit the preregistered task budget")
@@ -165,6 +174,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
                  "adapter_loop_seconds": time.monotonic() - started, "phase_timing": timing.snapshot()},
         "scope": "ordinary_full_task" if steps == task["execution"]["steps"] else "integration_demo_only",
         "declared_task_updates": task["execution"]["steps"], "execution_limit": steps}
+    if fixture.transport is not None:
+        receipt["evidence"]["component_transport"] = fixture.transport.state_dict()
     if optimizer_diagnostics is not None:
         receipt["evidence"]["optimizer_diagnostics"] = optimizer_diagnostics.receipt()
     if retain_scored_outputs:

@@ -1,0 +1,29 @@
+{
+  "correction": "V1 rejected all eleven inactive comparisons because complete task identities intentionally include trainer field ownership. Final proof validates the exact registered ownership delta (including preserved owner/status), retains both original identities and requires all other task fields equal. V2 assertion exposed retained owner/status metadata and has its own unchanged error log. No checkpoint, recipe, API, task, sampled tensor, scorer or training output was changed.",
+  "final_helper_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/saved_counters.py",
+  "final_helper_sha256": "14ba9d85b45990ee1ce78b064cf85c204bc4debde28b61bcf3e13d50c4b3d470",
+  "final_log_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/logs/saved-counters-final.log",
+  "final_log_sha256": "531757ed2c136a097c5bdcee1517882c7982591b425d5537aa68a0f50a7f6aae",
+  "optimizer_updates_added": 0,
+  "original_helper_history": {
+    "helper-v1": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/analysis/helper-v1",
+      "files": {
+        "preservation.json": "8a1f2875ec80d94548d80e5021f8130833a6a8107c6100d27a47b42941586af3",
+        "saved-counters.json": "e6792fffee5c8a1e7b8c0ffbf7d94fbe17cfbabec011fecbcba3d06319723e2e",
+        "saved-counters.log": "c79f9dc682883612e8437f241d0d4548ea42d9d736dba18c09efd3f4e6ffac21",
+        "saved_counters.py": "0db21977e96d7e78633252d5eb7a6a7eee11aa261b03cf761140af71b94924f1"
+      }
+    },
+    "helper-v2": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/analysis/helper-v2",
+      "files": {
+        "saved-counters.log": "efaeb8cd15d7c0694806ff4beb501ba6d69936032105cf521f19acf5339acb56",
+        "saved_counters.py": "ade097e7c323ef98a06646ebfac8943c9c2e52b5abac1bde41239225cba97298"
+      }
+    }
+  },
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

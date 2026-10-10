@@ -1,0 +1,597 @@
+{
+  "attempt_ids": [
+    "00c234acacda4ace9c31694a5eded91e",
+    "2924ddfceed4462a957ff9295d4689ed",
+    "72b249143b324f41aa7d6b15d32f6f0f",
+    "881d3aa88d7b46a89ead5372e79f5216"
+  ],
+  "candidate_id": "bcap-dualnorm-convolution-v1",
+  "candidate_revision": "dd0702302681db384f1f1a23e10bfd29a40bae4ccbfea5e01e872d8a4d1a9061",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "One global recipe differs from the selected incumbent only by optimizer_convolution=per_offset. Four explicitly scoped Tier2 image diagnostics preserve all gates and task conditions; no source pooling or ordinary qualification credit.",
+  "conclusion": "Per-offset smoothed DualNorm completed all four unchanged image tasks: {'FAIL': 4}; all 2400 declared updates ran. The prior four optimizer setup errors remain under the original source. Constant rates, fixed smoothing, seed0, no retries or annealing.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "00c234acacda4ace9c31694a5eded91e",
+        "2924ddfceed4462a957ff9295d4689ed",
+        "72b249143b324f41aa7d6b15d32f6f0f",
+        "881d3aa88d7b46a89ead5372e79f5216"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "b883a66ac2bf05f10b36912c8fe237c03742509ce5b247bcbe41ed154baf8455",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 1.0
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 1.0
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "00c234acacda4ace9c31694a5eded91e",
+          "producer_request_id": "56dea41d0667b569d6ee22e0",
+          "producer_study_id": "bcap-convolution-images-v1",
+          "result_hash": "49c1c84718c02e2ab34af5c218e6fab7902b9a1a3f98f15bf1417282b009ac0c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "2924ddfceed4462a957ff9295d4689ed",
+          "producer_request_id": "56dea41d0667b569d6ee22e0",
+          "producer_study_id": "bcap-convolution-images-v1",
+          "result_hash": "9372bba060adb4d5e146b2bcbb654eddc07c21513c2060130f62f854f6009b05",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "72b249143b324f41aa7d6b15d32f6f0f",
+          "producer_request_id": "56dea41d0667b569d6ee22e0",
+          "producer_study_id": "bcap-convolution-images-v1",
+          "result_hash": "cbd2bb6162f7783c313948c9df92dffb06f60a1bcad7d2342093e06c21a09712",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "881d3aa88d7b46a89ead5372e79f5216",
+          "producer_request_id": "56dea41d0667b569d6ee22e0",
+          "producer_study_id": "bcap-convolution-images-v1",
+          "result_hash": "255a8f5cc79fb0af36e38e3d73ddf530cb60de7b72b1fe29ce314afefa084e39",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "db273908fbd45aad22c11cb9ab1d15c948729d2c9eebe4d4098519eb38cb0eac",
+        "contract_sha256": "b883a66ac2bf05f10b36912c8fe237c03742509ce5b247bcbe41ed154baf8455",
+        "control_binding_sha256": "f37e064f41cd6007b2e807bbf192fb7d7f9bd42d531087bbbd5744cebd7d6185",
+        "policy_fingerprint": "fdd48ac4c3069a08a53aa1b66f550282e3656b8c7f8ba94aeb1826ad6a768538",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "8dd3b0a0600902412bc9bcf3c25bd190105e9ea7344964d2494fce85cd6bc127"
+      },
+      "study_id": "bcap-convolution-images-v1",
+      "study_sha256": "8dd3b0a0600902412bc9bcf3c25bd190105e9ea7344964d2494fce85cd6bc127"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bcap_convolution_images",
+  "hypothesis": "Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Use the recorded quality/coverage trajectories to assess the convolution adaptation. Keep the six original Tier1 passes and full original Tier2 readout; other eleven failures and Tier3 remain unaddressed.",
+  "original_source": {
+    "path": "reports/forge/attempts/00c234acacda4ace9c31694a5eded91e/result.json"
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "00c234acacda4ace9c31694a5eded91e",
+        "result_hash": "49c1c84718c02e2ab34af5c218e6fab7902b9a1a3f98f15bf1417282b009ac0c",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "2924ddfceed4462a957ff9295d4689ed",
+        "result_hash": "9372bba060adb4d5e146b2bcbb654eddc07c21513c2060130f62f854f6009b05",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "72b249143b324f41aa7d6b15d32f6f0f",
+        "result_hash": "cbd2bb6162f7783c313948c9df92dffb06f60a1bcad7d2342093e06c21a09712",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "881d3aa88d7b46a89ead5372e79f5216",
+        "result_hash": "255a8f5cc79fb0af36e38e3d73ddf530cb60de7b72b1fe29ce314afefa084e39",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-8b207a728977752808cf002c",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-convolution/readout.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 7200,
+      "candidate_budget_seconds": 7200,
+      "id": "bcap-convolution-images-v1"
+    },
+    "candidate": "bcap-dualnorm-convolution-v1",
+    "competing_explanation": "Kernel support may permit all declared updates but fail sustained image coverage or quality. A numerical failure is distinct from an optimizer setup error; the old unsupported receipts are motivation rather than a matched trained control. The selected incumbent has other genuine Tier2 failures and none is addressed by this four-image diagnostic.",
+    "control": {
+      "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2",
+      "threshold": 0.9
+    },
+    "hypothesis": "Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.",
+    "id": "bcap-convolution-images-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "source_origin_commit": "f96819ddb2b8510c3496b1883d73439e8691db83",
+          "study_id": "bcap-tier2-smoothing-v1"
+        },
+        "path": "reports/forge/bcap-tier2/readout.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bcap_convolution_images"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bcap-convolution-images-v1",
+  "study_sha256": "8dd3b0a0600902412bc9bcf3c25bd190105e9ea7344964d2494fce85cd6bc127",
+  "summary_curation": "Committed compact readout navigation; original receipt identities and numerical verdicts unchanged.",
+  "task_results": [
+    {
+      "compatibility_key": "f56545c8bee465b6ee4811495d91897b2cbaaca02ba75fa7316e32c30f29702b",
+      "cost": {
+        "adapter_loop_seconds": 18.6623604609631,
+        "adapter_seconds": 18.897239342099056,
+        "charged_task": "img_intensity2",
+        "completed_steps": 600,
+        "device": "1",
+        "execution_seconds": 24.696062842966057,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.365589119726792,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.046856777742505074
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008756886119954288
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 18.309975455864333
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.158009959966876,
+        "wall_seconds": 24.696062842966057
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 525,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 4,
+          "passing_suffix": 4,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.06874999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.96875
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.0,
+        "hq": 0.96875,
+        "mean_rmse": 0.040408991277217865,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.5,
+          0.46875
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_intensity2"
+    },
+    {
+      "compatibility_key": "7f2ffe28617104beb79bf1025a9ea9c8398d2bb2b2357c1e6f3ef2cfeec8aada",
+      "cost": {
+        "adapter_loop_seconds": 19.187514585093595,
+        "adapter_seconds": 19.430967429070733,
+        "charged_task": "img_stripes2",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 25.654700374114327,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.88330084318295,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.0483244190691039
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008613293874077499
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 18.82636313023977
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.74349634698592,
+        "wall_seconds": 25.654700374114327
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 275,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 1,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.125,
+        "hq": 1.0,
+        "mean_rmse": 0.0018378691747784615,
+        "mode_fractions": [
+          0.625,
+          0.375
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.625,
+          0.375
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_stripes2"
+    },
+    {
+      "compatibility_key": "5e45085fad837bc82c2b95283eaa26c8628ca7df3ee8ef1e08f9adc98670fd45",
+      "cost": {
+        "adapter_loop_seconds": 18.482722491957247,
+        "adapter_seconds": 18.74046027404256,
+        "charged_task": "img_bars4",
+        "completed_steps": 600,
+        "device": "1",
+        "execution_seconds": 25.327946256031282,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.1902906477917,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.0452713614795357
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008772211498580873
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 18.136247074813582
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 19.97445209696889,
+        "wall_seconds": 25.327946256031282
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.24375000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.65625
+          },
+          "modes": {
+            "margin": -2,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.3854166666666667,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.46875,
+        "hq": 0.65625,
+        "mean_rmse": 0.06793595105409622,
+        "mode_fractions": [
+          0.3125,
+          0.65625,
+          0.0,
+          0.03125
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.28125,
+          0.34375,
+          0.0,
+          0.03125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_bars4"
+    },
+    {
+      "compatibility_key": "54ee31499e0ace8107c48a2f8f400d64d667a08995609d11e098b1a884c0d71f",
+      "cost": {
+        "adapter_loop_seconds": 18.510276451008394,
+        "adapter_seconds": 18.763651537010446,
+        "charged_task": "img_blobs4",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 24.588234306895174,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.218254741164856,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.04652479663491249
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008024289389140904
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 18.163705655140802
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.045654356013983,
+        "wall_seconds": 24.588234306895174
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.06874999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.96875
+          },
+          "modes": {
+            "margin": -1,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 3
+          }
+        },
+        "passed": false,
+        "shortfall": 0.125,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.125,
+        "hq": 0.96875,
+        "mean_rmse": 0.008316963911056519,
+        "mode_fractions": [
+          0.28125,
+          0.25,
+          0.125,
+          0.34375
+        ],
+        "modes": 3,
+        "quality_mode_fractions": [
+          0.28125,
+          0.25,
+          0.09375,
+          0.34375
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_blobs4"
+    }
+  ]
+}

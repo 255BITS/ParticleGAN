@@ -2,6 +2,8 @@
 from copy import deepcopy
 import math
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 
@@ -94,13 +96,11 @@ class GANTrainer:
     Optional named RNG streams isolate input/output noise, MoG kernel noise,
     evaluation and stochastic model layers and travel with checkpoints.
 
-    ``serial_backward=True`` executes the whole update with autograd
-    multithreading disabled. Use it for exact CUDA checkpoint continuation
-    with higher-order critic penalties. This changes gradient summation order
-    from the historical runtime, so it is explicit and checkpointed; loading
-    across execution modes is rejected. The caller's autograd mode is restored.
-    False inherits the caller's autograd setting; that ambient setting is not
-    captured by a legacy checkpoint. True enforces the serialized constraint.
+    The whole update always disables autograd multithreading, including graph
+    construction and higher-order critic penalties. ``serial_backward=True``
+    remains a compatibility assertion; False is rejected. The checkpoint
+    records this constraint, and unmarked or False historical checkpoints
+    require their original source. The caller's autograd mode is restored.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -108,12 +108,13 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=False):
+                 optimizer_options=None, penalty_options=None, serial_backward=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
-        self.serial_backward = serial_backward
+        if not serial_backward:
+            raise ValueError("ParticleGAN requires serial_backward=True; autograd multithreading is disabled")
         if getattr(recipe, "row_policy", "independent") != "independent":
             raise ValueError("GANTrainer requires row_policy='independent'; use E22Policy with RoutedRows "
                              "and a caller-owned loop for paired conditional contexts")
@@ -121,6 +122,12 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
+            raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
+        if recipe.constraint_geometry_mode == "strict_progress" and any(
+                isinstance(module, (torch.nn.modules.batchnorm._BatchNorm, torch.nn.modules.dropout._DropoutNd))
+                for module in self.G.modules()):
+            raise ValueError("strict_progress requires generator forwards without stochastic layers or running buffers")
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -282,14 +289,17 @@ class GANTrainer:
                 state = torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else torch.get_rng_state()
                 self.model_generator.set_state(state)
 
+    @property
+    def serial_backward(self):
+        """The fixed project execution policy, retained for compatibility."""
+        return True
+
     def _execute_step(self, real, *, generator_real=None, collect_stats=False):
         try:
-            if self.serial_backward:
-                # Serialized backward preserves exact CUDA continuation while
-                # leaving the caller's autograd execution mode unchanged.
-                with torch.autograd.set_multithreading_enabled(False):
-                    return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
-            return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
+            # Scope the entire update: graph construction can affect backward
+            # accumulation order too. Restore the caller's setting on exit.
+            with torch.autograd.set_multithreading_enabled(False):
+                return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
         except Exception:
             self.policy.abort_step()
             raise
@@ -367,7 +377,8 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -376,13 +387,32 @@ class GANTrainer:
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
+            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+                         if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+                               if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if recipe.kinetic_transport_weight:
+                loss_g = loss_g + transport
+            if recipe.kinetic_transport_local_weight:
+                loss_g = loss_g + transport_local
             self.opt_g.zero_grad()
-            loss_g.backward()
+            protected_evaluator = None
+            if recipe.constraint_geometry_mode == "strict_progress":
+                # Same sampled indices and fixed within-component perturbation;
+                # probes never call a sampler or draw training/output noise.
+                locations = self.prior.z.detach().clone()
+                sampled_latent = latent.detach().clone()
+                def protected_evaluator():
+                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    return (self.loss.g_loss(logits, real_logits),)
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                         protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()
@@ -396,6 +426,10 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if recipe.kinetic_transport_weight:
+            result["kinetic_transport"] = transport.detach()
+        if recipe.kinetic_transport_local_weight:
+            result["kinetic_transport_local"] = transport_local.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
@@ -458,7 +492,7 @@ class GANTrainer:
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
-            **({"serial_backward": True} if self.serial_backward else {}),
+            "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
@@ -520,7 +554,8 @@ class GANTrainer:
         if isinstance(state, dict) and (
                 type(state.get("serial_backward", False)) is not bool
                 or state.get("serial_backward", False) != self.serial_backward):
-            raise ValueError("checkpoint serial_backward execution mode does not match trainer")
+            raise ValueError("checkpoint serial_backward execution mode does not match trainer; "
+                             "resume unmarked or False historical checkpoints from their pinned original source")
         if (not isinstance(state, dict) or state.get("schema") != 4
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "campaign_id": "replace-track-id",
+  "view_id": "replace-track-id-diagnostic-v1",
+  "paid_ceiling_seconds": 48000,
+  "candidate_budget_seconds": 24000,
+  "software_allowance_seconds": 300,
+  "task_ids": [
+    "gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold",
+    "ring16_acquisition", "five_word_joint_smoke", "gaussian1d_stability",
+    "five_word_joint_hold", "trajectory", "residual_student",
+    "vector_unequal_mass", "vector_unequal_width", "vector_anisotropic",
+    "grid100", "rotated100", "staggered100"
+  ],
+  "arms": [
+    {
+      "role": "baseline",
+      "candidate_id": "replace-track-id-baseline-v1",
+      "parent": "replace-chosen-phase2-baseline-id",
+      "control": "replace-track-id-candidate-v1",
+      "recipe_overrides": {},
+      "changed_factors": ["Unchanged chosen baseline on this track's common frozen source"],
+      "mechanism_rationale": "TODO: identify the chosen baseline and source-specific control",
+      "hypothesis": "TODO: specify the baseline prediction on the diagnostic subset",
+      "competing_explanation": "TODO: explain which source or compatibility regression could invalidate the control",
+      "prior_evidence": [
+        {
+          "path": "TODO: committed compact phase2 JSON",
+          "selector": [],
+          "identity": {"source_digest": "TODO: exact phase2 source identity"},
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {"task_id": "two_pole", "metric": "TODO", "op": "<=", "threshold": 1, "phase": "final"},
+      "falsifier": {"task_id": "two_pole", "metric": "TODO", "op": ">", "threshold": 1, "phase": "final"}
+    },
+    {
+      "role": "candidate",
+      "candidate_id": "replace-track-id-candidate-v1",
+      "parent": "replace-chosen-phase2-baseline-id",
+      "control": "replace-track-id-baseline-v1",
+      "recipe_overrides": {},
+      "changed_factors": ["TODO: declare the substantive global trainer delta"],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "TODO: consistent falsifiable theory and public implementation",
+      "hypothesis": "TODO: specify the equation and numerical prediction before paid admission",
+      "competing_explanation": "TODO: distinguish competing causes",
+      "prior_evidence": [
+        {
+          "path": "TODO: committed compact phase2 JSON",
+          "selector": [],
+          "identity": {"source_digest": "TODO: exact phase2 source identity"},
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {"task_id": "vector_unequal_mass", "metric": "TODO", "op": "<=", "threshold": 1, "phase": "final"},
+      "falsifier": {"task_id": "vector_unequal_mass", "metric": "TODO", "op": ">", "threshold": 1, "phase": "final"}
+    }
+  ]
+}
