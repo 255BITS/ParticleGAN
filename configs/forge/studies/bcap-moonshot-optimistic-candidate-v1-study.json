@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-moonshot-optimistic-v1"
+  },
+  "candidate": "bcap-moonshot-optimistic-candidate-v1",
+  "competing_explanation": "Minibatch gradient differences and stale sampled-row history may be amplified by FullDualNorm; shape, nonrotational critic information and nonlinear geometry may dominate rather than predictable game rotation.",
+  "control": {
+    "candidate_id": "bcap-moonshot-optimistic-baseline-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "hypothesis": "One-step raw-gradient anticipation h=g+(g-g_previous), first h=g, reduces game rotation sufficiently to repair sustained unequal-mass density while preserving six original Tier1 gates. Registered final component covariance <=0.85; repair additionally requires unchanged sustained full gate. Gaussian full retention is secondary.",
+  "id": "bcap-moonshot-optimistic-candidate-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+        "status": "measured_tier1_baseline"
+      },
+      "path": "reports/forge/bcap-three-phase/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-moonshot-optimistic-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

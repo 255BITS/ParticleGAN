@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "scope": "bounded_software_verification",
+  "qualification_input": false,
+  "status": "PASS",
+  "software_allowance_seconds": 300,
+  "final_targeted_checks": 91,
+  "final_targeted_elapsed_seconds": 3.299,
+  "compatibility_checks": 78,
+  "compatibility_elapsed_seconds": 19.2223193020327,
+  "inactive_exact_state_pairs": 42,
+  "previous_development_failures": [
+    "TorchOptimizer cast Boolean history to float; repaired mask dtype during load",
+    "Word original host labels E group generator; assertion corrected to inspect actual E histories"
+  ],
+  "test_source_sha256": "8d6be8c553bc3e8e8e29f17c0882e430f00a86598a9fa079dc57f7fb21fc8230",
+  "junit_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/software-junit.xml",
+  "junit_sha256": "1fc2a798d36cbca048206544ead02c6148779e820af0ae7addc7a1a5b9a1ba14",
+  "logs": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/logs",
+  "total_software_execution_seconds_upper_bound": 60
+}

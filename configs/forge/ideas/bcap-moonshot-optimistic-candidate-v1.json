@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Only optimizer_optimism=raw_gradient: forecast 2g_t-g_previous before existing smoothed FullDualNorm across all owned network and sampled prior-row applications; first application g_t. No extra forward/backward/draw, transport, projection, finite guard, backend, architecture or task delta."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-three-phase/README.md",
+  "id": "bcap-moonshot-optimistic-candidate-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Anticipate the raw joint game field before nonlinear normalization to reduce rotational lag; independent checkpointed last-owned-application history. Materially differs from archived evaluator-only moving-critic payoff extrapolation and scratch post-Adam direction extrapolation. See reports/forge/bcap-moonshot-optimistic/protocol.md and primary arxiv1711.00141/1807.02629; no convergence guarantee for alternating normalized stochastic nonconvex updates. Archived raw-gradient-before-Adam also failed unequal-mass shape (min eigen ratio .033979); this distinct downstream smoothed spectral polar/sampled-row operator has no Adam second-moment accumulator, so anticipation changes orientation without feeding historical moment preconditioning.",
+  "parent": "bcap-three-phase-incumbent-v1",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_optimism": "raw_gradient",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}
