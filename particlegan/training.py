@@ -149,6 +149,12 @@ class GANTrainer:
             raise ValueError("prior dimensions must match the recipe")
         if not any(p.requires_grad for p in discriminator.parameters()):
             raise ValueError("discriminator must have trainable parameters")
+        self.hydraulic = recipe.make_hydraulic_travel()
+        if self.hydraulic is not None:
+            from .hydraulic import require_stateless_generator
+            require_stateless_generator(self.G)
+            if getattr(self.prior, "standardize", False):
+                raise ValueError("hydraulic travel does not support standardized prior reads")
         seen = set()
         for module in (self.G, self.D, self.prior):
             for value in (*module.parameters(), *module.buffers()):
@@ -415,7 +421,17 @@ class GANTrainer:
                                          protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
+            if self.hydraulic is None:
+                self.opt_g.step()
+            else:
+                # Replay the same consumed latents/rows; no sampler or RNG draw.
+                fixed_latent = latent.detach().clone()
+                old_rows = self.prior.z[indices].detach().clone()
+                def hydraulic_probe():
+                    moved = fixed_latent + self.prior.z[indices].detach() - old_rows
+                    return (self._generate(self.G, fixed_latent, sigma_out, noise, rows=indices).detach(),
+                            self._generate(self.G, moved, sigma_out, noise, rows=indices).detach())
+                self.hydraulic.step(self.opt_g, real_g, hydraulic_probe)
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
@@ -493,6 +509,7 @@ class GANTrainer:
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
             "serial_backward": True,
+            **({"hydraulic": self.hydraulic.state_dict()} if self.hydraulic is not None else {}),
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
@@ -572,6 +589,8 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
+        if self.hydraulic is not None:
+            self.hydraulic.validate_state_dict(state["hydraulic"], steps)
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -690,6 +709,8 @@ class GANTrainer:
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        if self.hydraulic is not None:
+            self.hydraulic.load_state_dict(state["hydraulic"])
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

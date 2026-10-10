@@ -189,6 +189,14 @@ class Recipe:
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
+    # Opt-in hydraulic travel bound (public GANTrainer only): scale the joint
+    # G/prior update along its own direction so the replayed RMS output travel
+    # on the consumed batch stays within ``fraction * radius``. ``real_spacing``
+    # is the median real-batch nearest-neighbour distance (PR360 v1);
+    # ``gap_adaptive`` uses max(real spacing, median generated-to-real
+    # nearest distance). 0 disables it and keeps the original update bytes.
+    hydraulic_travel_fraction: float = 0.0
+    hydraulic_travel_radius: str = "real_spacing"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -231,6 +239,16 @@ class Recipe:
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
             raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if (type(self.hydraulic_travel_fraction) not in (int, float)
+                or not math.isfinite(self.hydraulic_travel_fraction) or self.hydraulic_travel_fraction < 0):
+            raise ValueError("hydraulic_travel_fraction must be finite and nonnegative")
+        if self.hydraulic_travel_radius not in ("real_spacing", "gap_adaptive"):
+            raise ValueError("hydraulic_travel_radius must be real_spacing or gap_adaptive")
+        if self.hydraulic_travel_fraction and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.input_noise_std or self.output_noise_std
+                or self.continuous_policy is not None or self.serve_average):
+            raise ValueError("hydraulic travel requires zero-momentum DualNorm and deterministic clean training")
         if self.critic_step_mode not in ("none", "finite_cap"):
             raise ValueError("critic_step_mode must be none or finite_cap")
         if self.critic_step_mode == "finite_cap" and (
@@ -611,6 +629,17 @@ class Recipe:
         """
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+
+    def make_hydraulic_travel(self):
+        """The opt-in joint output travel bound, or None when disabled.
+
+        The public trainer passes the consumed real batch and an exact replay
+        probe; see ``particlegan.hydraulic.HydraulicTravel``.
+        """
+        if not self.hydraulic_travel_fraction:
+            return None
+        from .hydraulic import HydraulicTravel
+        return HydraulicTravel(self.hydraulic_travel_fraction, radius=self.hydraulic_travel_radius)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

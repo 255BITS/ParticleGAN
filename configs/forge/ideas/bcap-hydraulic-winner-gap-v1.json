@@ -1,0 +1,49 @@
+{
+  "api_changes": [
+    "Recipe.hydraulic_travel_fraction / hydraulic_travel_radius: opt-in public GANTrainer joint output travel bound; Recipe.make_hydraulic_travel factory; checkpointed counters"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Gap-adaptive hydraulic travel bound (fraction 1, radius max(real spacing, median generated-to-real nearest distance)) on the selected direction-blend BCAP recipe"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-physics/hydraulic/winner/README.md",
+  "id": "bcap-hydraulic-winner-gap-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Same v1 bound at stationarity; radius relaxes while generated samples are far from the consumed real batch, testing whether v1 retention survives without its travel-limited acquisition cost.",
+  "parent": "bcap-default-baseline-direction-v1",
+  "prior_art": [
+    "https://github.com/255BITS/ParticleGAN/pull/360",
+    "reports/forge/bcap-default-baseline/README.md",
+    "https://jmlr.org/papers/v21/17-678.html"
+  ],
+  "recipe_overrides": {
+    "constraint_geometry_mode": "direction_blend",
+    "d_lr_mult": 1.5,
+    "hydraulic_travel_fraction": 1.0,
+    "hydraulic_travel_radius": "gap_adaptive",
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}
