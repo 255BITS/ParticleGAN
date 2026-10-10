@@ -645,6 +645,10 @@ class FormulationContext:
                 "api_changes": [self.registry.extensions[name].declaration() for name in sorted(self.extension_values)],
                 "initializer": self.initializer, "initialization": deepcopy(self.initialization),
                 "rng": self.streams.manifest(), "policy_lifecycle": policy,
+                **({"transport_mobility": dict(mode=self.recipe.transport_mobility_mode,
+                     information="current G-phase real/fake output batches only",
+                     state="audit counters; no history-dependent decision", calibrated_test=False)}
+                   if self.recipe.transport_mobility_mode != 'none' else {}),
                 "prior_mechanisms": None if self._trainer is None else deepcopy(self._trainer.prior_mechanisms)}
 
     def state_dict(self):

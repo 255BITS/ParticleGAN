@@ -172,6 +172,7 @@ class GANTrainer:
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
+        self.transport_mobility = recipe.make_transport_mobility()
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         if eval_generator is not None and any(eval_generator is stream for stream in (
@@ -387,9 +388,11 @@ class GANTrainer:
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
-            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+            mobility = (None if self.transport_mobility is None else
+                        self.transport_mobility.observe(fake_g, real_g))
+            transport = (recipe.kinetic_transport_loss(fake_g, real_g, mobility=mobility)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
-            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g, mobility=mobility)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
@@ -430,6 +433,8 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if mobility is not None:
+            result['transport_mobility'] = mobility.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
@@ -501,6 +506,8 @@ class GANTrainer:
             "requires_grad": {name: {key: p.requires_grad for key, p in getattr(self, name).named_parameters()}
                               for name in names},
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
+            **({"transport_mobility": self.transport_mobility.state_dict()}
+               if self.transport_mobility is not None else {}),
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
             **({} if self.policy._feature_selection is None else {
                 "backend_selection": self.policy._feature_selection.state_dict()}),
@@ -627,6 +634,10 @@ class GANTrainer:
                 raise ValueError("invalid checkpoint learnable output noise")
         if self.controller is not None:
             deepcopy(self.controller).load_state_dict(_state_to_device(state["controller"], self.device))
+        if self.transport_mobility is not None:
+            deepcopy(self.transport_mobility).load_state_dict(state['transport_mobility'])
+            if state['transport_mobility']['stats']['calls'] != steps:
+                raise ValueError('transport mobility clock differs from completed updates')
         prepared = (None if self.policy._feature_selection is None else
                     self.policy._feature_selection.prepare_restore(state["backend_selection"], state))
         validation_birth, validation_settle = ((self.birth_death, self.lr_settle) if prepared is None
@@ -676,6 +687,8 @@ class GANTrainer:
             optimizer.load_state_dict(deepcopy(values))
         if self.controller is not None:
             self.controller.load_state_dict(_state_to_device(state["controller"], self.device))
+        if self.transport_mobility is not None:
+            self.transport_mobility.load_state_dict(state['transport_mobility'])
         if self.lr_settle is not None:
             self.lr_settle.load_state_dict(_state_to_device(state["lr_settle"], self.device),
                                           (self.opt_g, self.opt_d))

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "campaign_id": "bcap-moonshot-confidence-v1",
+  "view_id": "bcap-moonshot-confidence-diagnostic-v1",
+  "paid_ceiling_seconds": 48000,
+  "candidate_budget_seconds": 24000,
+  "software_allowance_seconds": 300,
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "arms": [
+    {
+      "role": "baseline",
+      "candidate_id": "bcap-moonshot-confidence-baseline-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-confidence-candidate-v1",
+      "recipe_overrides": {},
+      "changed_factors": [
+        "Exact selected Phase2 incumbent; zero recipe overrides on common frozen confidence source."
+      ],
+      "mechanism_rationale": "Unchanged freshly measured 6/6 Tier1 BCAP incumbent, explicit source control.",
+      "hypothesis": "The new inactive feature retains the complete original six Tier1 gates and the unchanged incumbent training path; Gaussian retention remains a separately measured question.",
+      "competing_explanation": "A source compatibility regression or contention timeout could invalidate transfer of the prior 6/6 label; only fresh complete gates count.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/baseline.json",
+          "selector": [],
+          "identity": {
+            "candidate_id": "bcap-three-phase-incumbent-v1",
+            "measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+            "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1.0,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1.0,
+        "phase": "final"
+      }
+    },
+    {
+      "role": "candidate",
+      "candidate_id": "bcap-moonshot-confidence-candidate-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-confidence-baseline-v1",
+      "recipe_overrides": {
+        "kinetic_transport_weight": 1.0,
+        "kinetic_transport_local_weight": 1.0,
+        "transport_mobility_mode": "block_mmd_v1",
+        "optimizer_svd_backend": "cpu"
+      },
+      "changed_factors": [
+        "Activate both unchanged output transport losses with unit weights.",
+        "Scale both transport losses by detached alpha=max(0,mu-se)/(max(0,mu)+se+dtype_epsilon) from contiguous block-MMD statistics on the same G-phase real/fake training panels; maximum block size32, real-batch total-variance RBF bandwidth.",
+        "Use explicit CPU full-SVD backend, a numerical trainer change; no projection or finite critic guard."
+      ],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Selective transport mobility responds to systematic distribution mismatch and damps finite-batch fluctuations near equilibrium. No evaluation feedback, draw, critic history or persistent decision state. Complete compound delta prevents isolated attribution to confidence.",
+      "hypothesis": "The one-SE positive discrepancy fraction suppresses empirical transport forcing near equilibrium while retaining original adversarial/paired objectives: predict full Gaussian retention/reacquisition and final KS<=.05, improved rare density/width, and all six original Tier1 passes. Endpoint alone cannot certify a sustained repair.",
+      "competing_explanation": "The real-adaptive coarse RBF test is uncalibrated for dependent GAN rows and may suppress needed local rare/width forces. Original adversarial drift may still prevent retention; transport activation and CPU-SVD rounding are compound confounds. Marginal equality does not establish conditional identity.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/baseline.json",
+          "selector": [],
+          "identity": {
+            "candidate_id": "bcap-three-phase-incumbent-v1",
+            "measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+            "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "gaussian1d_stability",
+        "metric": "cdf_ks",
+        "op": "<=",
+        "threshold": 0.05,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "gaussian1d_stability",
+        "metric": "cdf_ks",
+        "op": ">",
+        "threshold": 0.05,
+        "phase": "final"
+      }
+    }
+  ]
+}

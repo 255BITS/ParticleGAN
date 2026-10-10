@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "source_commit": "653c38045618ad240524237a9c141c8d06b28c03",
+      "path": "reports/forge/bcap-physics/round5/README.md",
+      "git_blob": "bec22c403d1eb4f0a28075ec1b0343883e50ca90",
+      "sha256": "c4df319688fed342ae13c0e2d8c69915f69098a70d17dc66a92a8859c69c5b93",
+      "conclusion": "CG4/prior-only global repairs rejected; strict finite projection is not the sole Gaussian retention cause.",
+      "use": "motivation_only",
+      "archived_evidence_not_regraded": true
+    },
+    {
+      "source_commit": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md",
+      "git_blob": "f501d6a4d9fb9281350859249901598eebebcc2f",
+      "sha256": "e74ae8ec796697396aaa542866401d9174c0185de28449e9a1e01892918ee921",
+      "conclusion": "Moving-critic controller diagnostics negative; a global guard does not validate row direction.",
+      "use": "motivation_only",
+      "archived_evidence_not_regraded": true
+    }
+  ],
+  "primary_method_source": "https://arxiv.org/abs/1307.1954",
+  "calibrated_gan_guarantee": false
+}

@@ -6,6 +6,7 @@ must still come from the host's original objectives and numerical identity gates
 """
 import torch
 import math
+from copy import deepcopy
 
 
 class OutputMarginalTransport:
@@ -15,6 +16,7 @@ class OutputMarginalTransport:
         self.active_calls = 0
         self.loss_sum = 0.0
         self.maximum_loss = 0.0
+        self.mobility = recipe.make_transport_mobility()
 
     def add(self, total, fake, real, *, conditioning=None):
         if not (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
@@ -26,11 +28,12 @@ class OutputMarginalTransport:
                     or not bool(torch.isfinite(conditioning).all())))):
             raise ValueError('output marginal transport requires matched panels and conditioning')
         self.calls += 1
+        mobility = None if self.mobility is None else self.mobility.observe(fake, real)
         term = fake.new_zeros(())
         if self.recipe.kinetic_transport_weight:
-            term = term + self.recipe.kinetic_transport_loss(fake, real)
+            term = term + self.recipe.kinetic_transport_loss(fake, real, mobility=mobility)
         if self.recipe.kinetic_transport_local_weight:
-            term = term + self.recipe.kinetic_transport_local_loss(fake, real)
+            term = term + self.recipe.kinetic_transport_local_loss(fake, real, mobility=mobility)
         value = float(term.detach())
         self.active_calls += 1
         self.loss_sum += value
@@ -41,7 +44,8 @@ class OutputMarginalTransport:
         return dict(schema_version=1, consumer='output_marginal_v1',
                     conditioning_used_in_distance=False, calls=self.calls,
                     active_calls=self.active_calls, loss_sum=self.loss_sum,
-                    maximum_loss=self.maximum_loss)
+                    maximum_loss=self.maximum_loss,
+                    **({"transport_mobility": self.mobility.state_dict()} if self.mobility is not None else {}))
 
     def load_state_dict(self, state):
         expected = self.state_dict()
@@ -53,5 +57,11 @@ class OutputMarginalTransport:
                 or any(type(state[key]) not in (int, float) or not math.isfinite(state[key])
                        or state[key] < 0 for key in ('loss_sum', 'maximum_loss'))):
             raise ValueError('invalid output marginal transport checkpoint')
+        if self.mobility is not None:
+            deepcopy(self.mobility).load_state_dict(state['transport_mobility'])
+            if state['transport_mobility']['stats']['calls'] != state['active_calls']:
+                raise ValueError('output transport and mobility clocks disagree')
         for key in ('calls', 'active_calls', 'loss_sum', 'maximum_loss'):
             setattr(self, key, state[key])
+        if self.mobility is not None:
+            self.mobility.load_state_dict(state['transport_mobility'])

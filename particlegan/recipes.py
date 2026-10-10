@@ -84,6 +84,7 @@ class Recipe:
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
+    transport_mobility_mode: str = "none"
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -392,6 +393,11 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
+        if self.transport_mobility_mode not in ("none", "block_mmd_v1"):
+            raise ValueError("transport_mobility_mode must be none or block_mmd_v1")
+        if self.transport_mobility_mode != "none" and not (
+                self.kinetic_transport_weight or self.kinetic_transport_local_weight):
+            raise ValueError("transport mobility requires an active transport objective")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -592,7 +598,22 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
-    def kinetic_transport_loss(self, fake, real):
+    def make_transport_mobility(self):
+        """Optional current-batch multiplier with checkpointed audit counters."""
+        if self.transport_mobility_mode == "none":
+            return None
+        from .transport_mobility import TransportMobility
+        return TransportMobility()
+
+    def _transport_with_mobility(self, term, fake, real, mobility):
+        if self.transport_mobility_mode == "none":
+            return term
+        if mobility is None:
+            from .transport_mobility import block_mmd_mobility
+            mobility, _ = block_mmd_mobility(fake, real)
+        return term * mobility.detach()
+
+    def kinetic_transport_loss(self, fake, real, *, mobility=None):
         """Weighted empirical transport on caller-owned G-phase output batches.
 
         Enabling this objective requires a host consumer. It draws no samples,
@@ -600,17 +621,19 @@ class Recipe:
         with zero weight retain their original objective without calling it.
         """
         from .kinetic_transport import kinetic_transport_loss
-        return self.kinetic_transport_weight * kinetic_transport_loss(
+        term = self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)
+        return self._transport_with_mobility(term, fake, real, mobility)
 
-    def kinetic_transport_local_loss(self, fake, real):
+    def kinetic_transport_local_loss(self, fake, real, *, mobility=None):
         """Weighted local-v2 residual on the same caller-owned output batches.
 
         Anchors, bandwidths and normalizers come from detached real targets.
         This auxiliary term does not become a protected projection objective.
         """
         from .kinetic_transport import kinetic_transport_local_loss
-        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+        term = self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+        return self._transport_with_mobility(term, fake, real, mobility)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
