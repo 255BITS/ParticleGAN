@@ -42,7 +42,7 @@ alpha=0. Matched identical panels return zero; repeated systematic shifted
 blocks approach alpha=1. Negative unbiased MMD estimates are suppressed. The
 alpha branch does not consume RNG, compare critic history, draw more data,
 consult evaluator geometry, tune to a task, or change the serving distribution.
-Audit counters record calls, rows, blocks, zero calls and sums of alpha/mu/se;
+Audit counters record calls, rows, blocks, zero calls, alpha>=.9 calls and sums of alpha/mu/se;
 the next decision never depends on those counters. Active checkpoints validate
 counter clocks and resume exactly; disabled packets omit the new default/state.
 

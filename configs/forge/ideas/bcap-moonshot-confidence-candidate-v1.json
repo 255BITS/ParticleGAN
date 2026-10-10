@@ -1,0 +1,44 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Activate both unchanged output transport losses with unit weights.",
+    "Scale both transport losses by detached alpha=max(0,mu-se)/(max(0,mu)+se+dtype_epsilon) from contiguous block-MMD statistics on the same G-phase real/fake training panels; maximum block size32, real-batch total-variance RBF bandwidth.",
+    "Use explicit CPU full-SVD backend, a numerical trainer change; no projection or finite critic guard."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-three-phase/README.md",
+  "id": "bcap-moonshot-confidence-candidate-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Selective transport mobility responds to systematic distribution mismatch and damps finite-batch fluctuations near equilibrium. No evaluation feedback, draw, critic history or persistent decision state. Complete compound delta prevents isolated attribution to confidence.",
+  "parent": "bcap-three-phase-incumbent-v1",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "kinetic_transport_local_weight": 1.0,
+    "kinetic_transport_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "optimizer_svd_backend": "cpu",
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "transport_mobility_mode": "block_mmd_v1"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

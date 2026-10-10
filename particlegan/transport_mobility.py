@@ -56,7 +56,7 @@ def block_mmd_mobility(fake, real):
 class TransportMobility:
     """Audit counters only: the next multiplier never depends on stored state."""
     def __init__(self):
-        self.stats = dict(calls=0, zero_calls=0, rows=0, blocks=0,
+        self.stats = dict(calls=0, zero_calls=0, high_calls=0, rows=0, blocks=0,
                           mobility_sum=0., signal_sum=0., standard_error_sum=0.)
 
     def observe(self, fake, real):
@@ -64,6 +64,7 @@ class TransportMobility:
         value = float(mobility)
         self.stats['calls'] += 1
         self.stats['zero_calls'] += int(value == 0)
+        self.stats['high_calls'] += int(value >= .9)
         for name in ('rows', 'blocks'):
             self.stats[name] += evidence[name]
         self.stats['mobility_sum'] += value
@@ -81,8 +82,9 @@ class TransportMobility:
                 or not isinstance(state['stats'], dict) or state['stats'].keys() != self.stats.keys()):
             raise ValueError('invalid transport mobility checkpoint')
         stats = state['stats']
-        if (any(type(stats[k]) is not int or stats[k] < 0 for k in ('calls', 'zero_calls', 'rows', 'blocks'))
+        if (any(type(stats[k]) is not int or stats[k] < 0 for k in ('calls', 'zero_calls', 'high_calls', 'rows', 'blocks'))
                 or stats['zero_calls'] > stats['calls']
+                or stats['high_calls'] > stats['calls'] - stats['zero_calls']
                 or any(type(stats[k]) not in (int, float) or not math.isfinite(stats[k])
                        for k in ('mobility_sum', 'signal_sum', 'standard_error_sum'))
                 or not 0 <= stats['mobility_sum'] <= stats['calls']

@@ -1,52 +1,56 @@
 {
-  "schema_version": 1,
-  "id": "unused_token_hold",
   "adapter": "transfer_behavior",
-  "execution": {
-    "initializer": "deterministic_orthogonal",
-    "host": "unused_token_hold",
-    "steps": 200,
-    "prior": {
-      "kind": "particle_cloud",
-      "sigma": 0.0,
-      "standardize": false,
-      "learnable": true,
-      "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer."
-    },
-    "protocol": "screening",
-    "produces_state": false,
-    "host_source": "benchmarks/locked_shared/baseline.py",
-    "host_definition": {
-      "family": "existing_behavior",
-      "runner": "legacy",
-      "split": "development",
-      "phase": "fit",
-      "steps": 200
-    },
-    "execution_path": "public_components",
-    "prior_applicability": "not_sampled",
-    "device": "cuda",
-    "schedule_policy": "public_recipe_with_frozen_host_horizon",
-    "transport_consumer": "output_marginal_v1",
-    "transport_contract": {
-      "version": 1,
-      "sample_space": "original trained-concept output panel",
-      "target_law": "repeated trained concept only; held-out token excluded",
-      "conditioning_in_distance": false,
-      "new_paired_supervision": false,
-      "new_forward_passes": false,
-      "new_random_draws": false,
-      "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
-      "protected_objectives": "original adversarial and feature matching; existing hold",
-      "inactive": "original losses, updates, clocks and RNG; no hook requirement"
-    }
-  },
+  "dependencies": [],
   "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Bind current public implementation for fresh execution; original question, fixed fixtures, laws, initialization, budgets, cadence and all numerical gates retained. Earlier receipts keep their original source identity.",
+      "id": "bcap-moonshot-confidence-v1-source-binding-v1",
+      "previous_revision": {
+        "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+        "id": "opt-in-component-objective-hooks-v1",
+        "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+        "original_task_path": "configs/forge/tasks/unused_token_hold.json",
+        "previous_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": null,
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "previous_source_sha256": {}
+      },
+      "previous_source_sha256": {
+        "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "guards": {
+      "finite_state": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "discriminator"
+      ],
+      "rng_isolation": true
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
     "sampling_contract_version": 1,
     "sampling_law": "learned_parameter_measurement",
-    "eval_output_noise": "not_applied_to_measurement",
-    "kind": "transfer_sustained",
-    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0",
+      "particlegan/conditional_transport.py": "6a3cc242cb63d8d20704a50dc3d2bb857be883382c6b01cc923bfcc7a022ef8d",
+      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+    },
     "thresholds": [
       [
         "unused_hold",
@@ -58,57 +62,60 @@
         ">=",
         0.85
       ]
-    ],
-    "observations": 24,
-    "minimum_stable_checks": 5,
-    "scoring_weights": "live",
-    "sources": {
-      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
-      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
-      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
-      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0"
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "unused_token_hold",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 200
     },
-    "guards": {
-      "finite_state": true,
-      "optimizer_roles": [
-        "generator",
-        "discriminator"
-      ],
-      "mechanism_exercised": true,
-      "rng_isolation": true
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "initializer": "deterministic_orthogonal",
+    "prior": {
+      "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
     },
-    "evaluator_revision": {
-      "id": "opt-in-component-objective-hooks-v1",
-      "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
-      "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
-      "original_task_path": "configs/forge/tasks/unused_token_hold.json",
-      "previous_source_sha256": {},
-      "previous_revision": {
-        "id": "explicit-equality-and-word-prior-betas-v3",
-        "previous_source_sha256": {
-          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
-          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
-        },
-        "previous_revision": null,
-        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged."
-      }
+    "prior_applicability": "not_sampled",
+    "produces_state": false,
+    "protocol": "screening",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon",
+    "steps": 200,
+    "transport_consumer": "output_marginal_v1",
+    "transport_contract": {
+      "conditioning_in_distance": false,
+      "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+      "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+      "new_forward_passes": false,
+      "new_paired_supervision": false,
+      "new_random_draws": false,
+      "protected_objectives": "original adversarial and feature matching; existing hold",
+      "sample_space": "original trained-concept output panel",
+      "target_law": "repeated trained concept only; held-out token excluded",
+      "version": 1
     }
   },
-  "resources": {
-    "gpus": 1,
-    "gpu_memory_mb": 512,
-    "cpu_threads": 1,
-    "timeout_seconds": 300,
-    "allow_cpu": false
-  },
+  "id": "unused_token_hold",
   "requires_capabilities": [
     "named_rng",
     "live_sampling",
     "particle_cloud"
   ],
-  "dependencies": [],
+  "resources": {
+    "allow_cpu": false,
+    "cpu_threads": 1,
+    "gpu_memory_mb": 512,
+    "gpus": 1,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1,
   "task_cohort": "component_output_transport_v1"
 }
