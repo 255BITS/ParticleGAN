@@ -293,11 +293,13 @@ class MoGParticlePrior(ParticlePrior):
         self.sigma.copy_(value)
         self._noise_enabled = bool(self.sigma > 0)
 
-    def forward(self, idx, generator=None, *, eps=None):
+    def forward(self, idx, generator=None, *, eps=None, return_noise=False):
         """Draw from the indexed components; use means()[idx] for centers only.
 
         Explicit eps must match the output shape/device/dtype and replaces the
         Gaussian RNG draw. At sigma=0 no noise RNG is consumed.
+        With return_noise=True, also return the detached actual
+        additive jitter for exact replay without another random draw.
         """
         z = self.means()[idx.to(self.z.device)]
         if self._noise_enabled:
@@ -305,22 +307,32 @@ class MoGParticlePrior(ParticlePrior):
                 eps = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=generator)
             elif eps.shape != z.shape or eps.device != z.device or eps.dtype != z.dtype:
                 raise ValueError("eps must match sampled codes' shape, device and dtype")
-            z = z + self.sigma * eps
-        return z
+            jitter = self.sigma * eps
+            z = z + jitter
+        elif return_noise:
+            jitter = torch.zeros_like(z)
+        return (z, jitter.detach()) if return_noise else z
 
     def sample(self, batch_size, generator=None, *, fixed_first_n=False,
-               offset=0, eps=None, noise_generator=None):
+               offset=0, eps=None, noise_generator=None, return_noise=False):
         """Return noisy codes and component indices, uniformly with replacement.
 
         fixed_first_n fixes indices only; also supply fixed eps for reproducible
         positive-noise snapshots. By default a generator controls both indices
         and noise. ``noise_generator`` optionally isolates the Gaussian draws
         from component-index draws; sigma=0 consumes neither noise stream.
+        return_noise=True adds the detached consumed jitter as a third return
+        value; the default two-value return and RNG consumption are unchanged.
         """
         # Reuse index validation and RNG consumption exactly, including r=0.
         _, idx = super().sample(batch_size, generator,
                                 fixed_first_n=fixed_first_n, offset=offset)
-        return self(idx, generator=generator if noise_generator is None else noise_generator, eps=eps), idx
+        result = self(idx, generator=generator if noise_generator is None else noise_generator,
+                      eps=eps, return_noise=return_noise)
+        if return_noise:
+            latent, jitter = result
+            return latent, idx, jitter
+        return result, idx
 
     def get_extra_state(self):
         return {"sigma_rel": self.sigma_rel, "standardize": self.standardize}

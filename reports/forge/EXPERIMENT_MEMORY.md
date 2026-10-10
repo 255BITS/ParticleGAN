@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 787. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3894,6 +3894,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
 
+### kinetic_transport_sliced_v1 · readout-4e91e5241993171fbbd2b5eb
+
+**Scope:** research_diagnostic; scientific; revision `24bacd26b777b7bb90214c0254f92861d20b93bd8c2f83fce4ed59ee76e49997`.
+
+Adding a fixed label-free quantile transport force to the exact winner improves rare mass and reduces spill while retaining the passing broad-vector guardrail.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 248.327; mechanism `structural`.
+
+vector_unequal_mass: hq=0.93579, mass_tv=0.013496
+
+Transport improves rare allocation and Gaussian passing checks but solves no additional full sustained task: 2 PASS, 3 FAIL, 1 BLOCKED. The automated study decision is incomplete because frozen two_pole cannot consume the signal; all runnable jobs completed and no ordinary qualification is claimed.
+
+**Next:** Stop this exact weight1/32-direction revision. Inspect saved transport/adversarial normalized fields and spill before a separately declared successor; no tuning, additional training, seed run or promotion.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/results.json) · [Record](records/readout-4e91e5241993171fbbd2b5eb.json)
+
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
 **Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
@@ -3941,6 +3957,22 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 **Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
 
 [Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+
+### kinetic_transport_sliced_v1 · readout-58690d30963166a8bd4f39f5
+
+**Scope:** research_diagnostic; scientific; revision `10116a6345f68563f4193750613049e9cdd28965409b5be2fdba554946afaaae`.
+
+Primary transport-v1 control for incremental local-density comparison. The parent winner reference only admits the existing predecessor; no third arm is launched.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 158.156; mechanism `structural`.
+
+vector_unequal_mass: hq=0.93579, mass_tv=0.013496; vector_two_broad: hq=0.96948, mass_tv=0.01416
+
+Primary transport-v1 control completes 2 PASS, 3 FAIL, 1 BLOCKED under the same new source/runtime. Gaussian smoke and broad-vector pass; unequal mass, unequal width and Gaussian stability fail. Recorded numerical trajectories reproduce the predecessor source cohort; no archived qualification is reused.
+
+**Next:** Preserve this matched incremental control and all original source identities. Retain local-density successor evidence for the scoped rare-variance repair; no global promotion or third arm. Stop the completed round and inspect saved failures before new work.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round2/results.json) · [Record](records/readout-58690d30963166a8bd4f39f5.json)
 
 ### r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd · readout-5bc30fee4d41b69294b1e32e
 
@@ -4150,6 +4182,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-a894bcd3b73c299782037bd6
+
+**Scope:** research_diagnostic; scientific; revision `c140b8522f30cae109998c05dae7fc2b9ccefeb320e4151a6308098af1f8a1a7`.
+
+Resolve and measure the exact winning recipe in the same source/runtime on the bounded diagnostic task subset; the historical parent is motivation only, not another launched candidate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 292.838; mechanism `floor_constant`.
+
+vector_unequal_mass: hq=0.95459, mass_tv=0.070654
+
+The matched winner completes all six diagnostic tasks: 3 PASS and3 FAIL. Numerical endpoints and saved vector allocations reproduce the original winner. This source-bound control supplies no new ordinary qualification.
+
+**Next:** Retain this exact matched control evidence and stop the completed campaign. Preserve the historical incumbent; compare track-specific results through the parent campaign without pooling task denominators.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/results.json) · [Record](records/readout-a894bcd3b73c299782037bd6.json)
+
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
 **Scope:** research_diagnostic; scientific; revision `3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402`.
@@ -4181,6 +4229,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.064
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/87f406b78184409396a26f61680a5da0.json) · [Record](records/readout-a9c44ece3a8e2265db452db4.json)
+
+### kinetic_transport_local_v2 · readout-ab71c397f4f4eee9fe1acafb
+
+**Scope:** research_diagnostic; scientific; revision `4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188`.
+
+Adding relative real-anchor local kernel moment matching to transport-v1 reduces unequal-width full covariance spill while preserving allocation, broad-vector quality and Gaussian acquisition/hold.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 168.815; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96973, mass_tv=0.016426; vector_unequal_width: hq=0.95508, mass_tv=0.020752; vector_two_broad: hq=0.9856, mass_tv=0.00073242
+
+Relative local moments add one complete sustained PASS: candidate 3 PASS, 2 FAIL, 1 BLOCKED versus transport-v1 2 PASS, 3 FAIL, 1 BLOCKED. Unequal mass passes all five terminal checks; broad-vector and Gaussian smoke pass. Unequal width and Gaussian stability fail; both two-pole cells remain explicitly unsupported. All ten runnable jobs complete.
+
+**Next:** Retain this source-bound allocation/local-density repair as opt-in evidence; stop this exact revision as a global repair. Inspect remaining narrow-component covariance spill and Gaussian fluctuations before a separately declared successor or broader comparison. No ordinary qualification, promotion, tuning or further run in this round.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round2/results.json) · [Record](records/readout-ab71c397f4f4eee9fe1acafb.json)
 
 ### k3p-no-output-noise-diagnostic · readout-abd06840fa1f42a4f64c13ab
 
@@ -4390,6 +4454,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
 
+### kinetic_transport_armijo_v3 · readout-e719b1e0153af333e0a4e6f1
+
+**Scope:** research_diagnostic; scientific; revision `946b56de446aad0b362661c0110da16a34098fa74fff4a88b2eaa53249d75236`.
+
+Finite same-batch Armijo acceptance of the joint G/prior proposal reduces unequal-width full covariance error and improves Gaussian retention while preserving local-v2 sustained unequal-mass and broad guardrail passes.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 180.877; mechanism `structural`.
+
+vector_unequal_mass: hq=0.96338, mass_tv=0.015986; vector_unequal_width: hq=0.96704, mass_tv=0.026367
+
+All five runnable jobs complete: 2 PASS, 3 FAIL, 1 BLOCKED versus local-v2 3 PASS, 2 FAIL, 1 BLOCKED. All 9600 finite same-batch acceptance bounds pass, but unequal-mass sustained PASS is lost and width covariance regresses to 3.859733. Gaussian stability remains FAIL at 37/72 stationary and 10/24 shifted checks; broad and smoke PASS.
+
+**Next:** Reject and stop this exact finite-descent successor as a global or rare-density repair. Preserve local-v2 scoped unequal-mass evidence. Same-batch descent is insufficient for served tails and changing-game retention; no further sweep, seed run, candidate, continuation or promotion in this round.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round3/results.json) · [Record](records/readout-e719b1e0153af333e0a4e6f1.json)
+
 ### k3p · readout-eeec25002d17191c315f126b
 
 **Scope:** calibration_diagnostic; scientific; revision `6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325`.
@@ -4421,6 +4501,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1,
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### kinetic_transport_local_v2 · readout-f40b32c69ee3065bf0a587bb
+
+**Scope:** research_diagnostic; scientific; revision `5f1aa24fb58837b8f1b2de1150ee4925db1d035bea77fe0366fad4924634d81a`.
+
+Primary local-v2 control for finite-descent comparison. Transport-v1 is an admission reference only; no third arm is launched.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 163.356; mechanism `structural`.
+
+vector_unequal_width: hq=0.95508, mass_tv=0.020752; vector_two_broad: hq=0.9856, mass_tv=0.00073242
+
+All five full-budget primary-control jobs complete: 3 PASS, 2 FAIL, 1 BLOCKED. Local-v2 retains Gaussian smoke, sustained unequal-mass and broad-vector PASS; Gaussian stability and unequal width FAIL; two-pole is genuinely unsupported.
+
+**Next:** Retain the scoped local-v2 rare-density repair and its unchanged failures. Reject this round finite-descent successor, publish matched evidence, and stop the bounded round. No default adoption or extra training follows.
+
+[Evidence](../../reports/forge/bcap-physics/kinetic_transport/round3/results.json) · [Record](records/readout-f40b32c69ee3065bf0a587bb.json)
 
 ### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
 
@@ -4974,4 +5070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `004252fdeb40fbd843de1cb58aecf84b66457464bab6b33dabba0e806720500c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

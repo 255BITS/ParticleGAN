@@ -1,0 +1,41 @@
+{
+  "actual_training_gifs": 10,
+  "bulk_logs_committed": false,
+  "distinct_focused_tests_passed": 109,
+  "final_transport_and_study_checks": {
+    "passed": 52,
+    "seconds": 4.84
+  },
+  "forge_compile_check": "CURRENT",
+  "forge_validate": "PASS",
+  "frames_per_gif": 9,
+  "initial_admission_test_fixture_failure": "Used nonexistent make_request helper; corrected to public resolve_idea. No trainer change or scientific retry.",
+  "initial_focused_suite": {
+    "passed": 108,
+    "seconds": 5.36
+  },
+  "initial_software_warning": "CPU test fork_rng initialized CUDA devices; fixture now explicitly devices=[].",
+  "overlap_between_check_sets": true,
+  "publication_saved_metric_sets": 432,
+  "publication_source_sha256": "e341833e9b13236396e789c2937c2248b508a78bf289b75e0a287c1f135e53f8",
+  "saved_field_probe_cpu_seconds": 0.8659609300084412,
+  "schema_version": 1,
+  "scorer_controls": "4 oracle PASS / 4 collapse FAIL reused after exact scorer-source hash verification",
+  "stdout": {
+    "admission-tests-final.log": "773bcbc071de6c9392a326e3a00929a2ab0818d1a6889f1fe3604fa426c41110",
+    "admission-tests.log": "6cd5c039b4159997c4d8b73a50d6c64396dde7ca16b50dcedb6e0a9a7f9847e6",
+    "candidate-readout.log": "f38c6f3274122c4ee7f904bbbba05287bc2a225475fd86bfa544bab6129df7d4",
+    "compile-check.log": "9dbb20e241d83046768c069c7bcc2385b3a1271375a3d6fa9336c9091741fa4d",
+    "compile.log": "504927a7dcce122145f6b6fd083d5a313e39254f209929882ed7ac376c461789",
+    "control-readout.log": "a2f73f18264cb301763b2d5da09c0740ad2800c529805238c44f8b863abcde0b",
+    "coordinator.log": "bd3fc00f6e902a6c7aa0bc1bbf03fdd019239af0b3886ba6755dc097b255c61b",
+    "final-validate.log": "5039b3a0cdd744a541382908ee669b478666639916259b4f906c369164a03fdc",
+    "focused-final.log": "4cbbaefb687bc9f679e9e216a1dcc798bff6e0d522d16dfa4abe63dfe82b16f8",
+    "prepare-compile.log": "f911ce96342b9d2ff152a38c7aeb6a3491d165307b86924e18b12c84d40136aa",
+    "prior-field-diagnostics.log": "091c6cc0d7645513058b7aa1aa1b440ea48a3ce908caad98141c7f941a9902e0",
+    "publication.log": "a2646edd84731348bcfc71051c1764ad5cc452e6945f145e6dcf7a4ee21764d7",
+    "software.log": "4676b430bb98469dfd7dadde2cf39c1345c9e253516b0e8c38e8668b6ee9df5c",
+    "validate.log": "5039b3a0cdd744a541382908ee669b478666639916259b4f906c369164a03fdc"
+  },
+  "summaries_only_memory": "PASS"
+}

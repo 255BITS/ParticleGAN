@@ -1,0 +1,90 @@
+{
+  "new_source_digest": "6d5401c4d567480d4a4ec197dd7ace9ac5bea3db9b14a15b9789507216340eb8",
+  "optimizer_updates_added": 0,
+  "original_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "archived_local_v2_parity_diagnostic_no_qualification_reuse",
+  "tasks": [
+    {
+      "archived_attempt_id": "458f28edb51246faa84350eb942225c3",
+      "archived_result_sha256": "8f4784fca225e7f41459afdcefe8b8148100694a878ef4ae5d4fd691b45116f6",
+      "exact_equality": {
+        "base_optimizer_states": true,
+        "endpoint_metrics": true,
+        "final_model_tensors": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true,
+        "original_full_gates": true,
+        "original_task_execution": true
+      },
+      "new_attempt_id": "47d66010d5f341d7bb98b4928f550b8e",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "archived_attempt_id": "2b9ff220ef5c46b48127e03e801faf79",
+      "archived_result_sha256": "1d7094da53b214ddc310da97cde8a012e910174886416feac3d4ea2086950ff9",
+      "exact_equality": {
+        "base_optimizer_states": true,
+        "endpoint_metrics": true,
+        "final_model_tensors": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true,
+        "original_full_gates": true,
+        "original_task_execution": true
+      },
+      "new_attempt_id": "cf66830b70db4897ab7ea5820558eb36",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "archived_attempt_id": "e87d9c4997ce4d67a543c4ba1fd2f07c",
+      "archived_result_sha256": "6bfb3e17ab2ea5184ff5663367358cc7d90987c0e59e556daf70da8878437e9f",
+      "exact_equality": {
+        "base_optimizer_states": true,
+        "endpoint_metrics": true,
+        "final_model_tensors": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true,
+        "original_full_gates": true,
+        "original_task_execution": true
+      },
+      "new_attempt_id": "adfdcae07aff467dacc427f389619844",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "6e4e2fb1df754f23b583ae4aadc4edad",
+      "archived_result_sha256": "22cb0fc7aa59b643cd72a2c1e8fa31ff9f1a4f7b314230980574f2c916b444aa",
+      "exact_equality": {
+        "base_optimizer_states": true,
+        "endpoint_metrics": true,
+        "final_model_tensors": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true,
+        "original_full_gates": true,
+        "original_task_execution": true
+      },
+      "new_attempt_id": "7b479e23516642beb1c4049bb413675e",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_attempt_id": "d66895153c4440fb93069f80d0cf7a99",
+      "archived_result_sha256": "6ab65635673324081baec5d105d5e2366a48cda0d04c749bb9f30e0e456f98da",
+      "exact_equality": {
+        "base_optimizer_states": true,
+        "endpoint_metrics": true,
+        "final_model_tensors": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true,
+        "original_full_gates": true,
+        "original_task_execution": true
+      },
+      "new_attempt_id": "1260c3cac57443d7b12112a9394598a0",
+      "task_id": "gaussian1d_smoke"
+    }
+  ]
+}

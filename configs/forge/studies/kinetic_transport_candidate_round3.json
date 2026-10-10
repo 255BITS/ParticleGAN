@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "kinetic_transport_round3"
+  },
+  "candidate": "kinetic_transport_armijo_v3",
+  "competing_explanation": "The fluctuating finite real-anchor objective can descend on every consumed batch yet misrepresent held-out tails or Gaussian KS. Clipping joint motion may suppress useful allocation, while unchanged critic steps and optimizer histories can still destabilize the game.",
+  "control": {
+    "candidate_id": "kinetic_transport_local_v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "hypothesis": "Finite same-batch Armijo acceptance of the joint G/prior proposal reduces unequal-width full covariance error and improves Gaussian retention while preserving local-v2 sustained unequal-mass and broad guardrail passes.",
+  "id": "kinetic_transport_candidate_round3",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 1.25
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "kinetic_transport_local_v2",
+        "revision": "4e91e9f5ad0cf89e14b2f4e73538693341bd9df1a591221cf5af15f8a6aff188",
+        "source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09"
+      },
+      "path": "reports/forge/bcap-physics/kinetic_transport/round2/results.json",
+      "selector": [
+        "arms",
+        "candidate"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "kinetic_transport_round3_diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

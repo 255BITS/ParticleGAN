@@ -1,0 +1,58 @@
+{
+  "api_changes": [
+    {
+      "affected_hosts": "deterministic GANTrainer with zero additive input/output noise; frozen two-pole component host explicitly BLOCKED",
+      "migration": "default False preserves old paths/recipes; stateless check, exact consumed-jitter replay, no new RNG; base optimizer state advances once regardless of accepted scale",
+      "provider": "particlegan.GANTrainer and MoGParticlePrior.sample(return_noise=True)",
+      "variables": [
+        "kinetic_transport_backtrack"
+      ]
+    }
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Enable finite Armijo backtracking of the actual joint G/prior DualNorm proposal on the unchanged same-batch composite objective; replay consumed rows/jitter, eight fixed trials, c=1e-4; preserve optimizer clocks/state and all local-v2 settings"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "reports/forge/bcap-physics/kinetic_transport/round3/README.md",
+  "id": "kinetic_transport_armijo_v3",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Negative parameter directional derivatives need not predict finite nonlinear proposal loss. Test actual rounded proposals and seven halvings against the same frozen-critic composite objective. This guarantees only measured same-batch nonincrease, not held-out covariance or stability.",
+  "parent": "kinetic_transport_local_v2",
+  "prior_art": [
+    "kinetic_transport_local_v2",
+    "reports/forge/bcap-physics/kinetic_transport/round3/prior-response-diagnostics.json",
+    "https://msp.org/pjm/1966/16-1/pjm-v16-n1-p01-s.pdf"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "kinetic_transport_backtrack": true,
+    "kinetic_transport_local_weight": 1.0,
+    "kinetic_transport_projections": 32,
+    "kinetic_transport_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "kinetic-transport-finite-descent"
+}

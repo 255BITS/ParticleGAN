@@ -1,0 +1,297 @@
+{
+  "media": [
+    {
+      "arm": "control",
+      "gif_sha256": "1e6fdf9e16c6f3c0f65a45e141472839d13da2e8806f4fb281554abaa7d67a6c",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 120,
+      "observation_count": 120,
+      "observations_sha256": "9852e0e4cb59c70b3686d2d2b642dbffd857a37b5e2d59439ebb119b4b4ccdf0",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/7cb27efb36f44a558f4380e409a8ce28/evaluator/observed-samples.pt": "424b49f4fab566190dff1d319fee6fe3b35bdb732f2ce9ea322a2baf9f755358"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "fd6d587d4a6db90003ef5c70064787535b71247bfee10a2472d8713dcbc5035f",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "edb3006efd0ff51166f846c4eaee4237450c507c1961d029980155227bf87974",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/c11e3c33fb9a49a2a970f3fbbe4c72bd/observed-samples.pt": "757abe6c3a705debc0088ad2027d918e430aa5db04a26f0481c62bd18e95307c"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "06898fa445ac7fa88ed35631265ee9ac8387983f1b2eaad12f66afcf27817747",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "9d6898d54d5c536ba454d4639436e8014697a8be3f80815455167bf8680aaecd",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/ccf40b95dbe14260bc71905d181ca378/evaluator/observed-samples.pt": "34df798b8451c30369b556eb4e642ae1813cf9723ca4c339122403516ad870eb"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "d7f81645e193d5c5cabf5816534a8a237714bfeeeb3b1e7d98291abbec4cb654",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "906a67c85c5de6d6ea879897bd567e6dd90f3054ced777ed7ad5ae0efec938f6",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/b8f2cc7fd3c04f8e938b80abf2dc0450/observed-samples.pt": "5864d651d7c049f52fa49b4047f01199e7966310cd60d54bc04428cbf023d8ef"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "control",
+      "gif_sha256": "5bf03435e531c1c489c234e1fb7cf531718b1b34d2ee46af50daf993c55eb88b",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "3eec3a62fccad0f649054d542265ba4a8125fe34d444d75bbb3878ba7679125c",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/5422f512bcc34589991231d35b1b7f08/observed-samples.pt": "c81963ccbb2346e71d02c25f4608885b4a75dd65eb94203902ca7bcd4b7a6803"
+      },
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "329c6be1f169d4363c73a4832e7312bc6168e30c28ee17fa07dc465241da9a5e",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "8d1eef16a283cf65b5ed9c4d6d0a88a03cb8a047e7cb6f61f964ceaca1e6bdf8",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/6e4e2fb1df754f23b583ae4aadc4edad/observed-samples.pt": "b8a10e5bc96971a72ccd8e1ce4cf969e0af99ac70dab7161b72311d9113b0606"
+      },
+      "task_id": "vector_two_broad"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "d686dadfe7bd8d7f157bcf1d2ad83e65387b2f506ec707f71f09737092f443b7",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "b56cfc36c046ef9ab680ac70ec9097aab5f6a8b843f5e5133bae38a6764bbbda",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/d66895153c4440fb93069f80d0cf7a99/evaluator/observed-samples.pt": "6ca6659773724ba8c758391528e85e2eac776fc1e13c768cb5df551348f34fcb"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "b06557f16cc3a68a9d605e63e21e5cce3057bc121c69e933b17e2056a13a341c",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "a93dddaf5a58666739775be42720048ab49b32c5d49b91b63e08b34c8f4a2352",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/458f28edb51246faa84350eb942225c3/observed-samples.pt": "860f280def6b92591c5d603853f1740c99062d6de6ef1d707f21dc5fc8b9a51a"
+      },
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "0ae91b2b7fca36ba3fa69e86d273a3c4ba46857098e1141bbcb5b6026a4a6c07",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 120,
+      "observation_count": 120,
+      "observations_sha256": "2f5ede4d119ed207e2ba0a0120be6da6a34c4d3f3ad50c71f67ad27c0b11e332",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/e87d9c4997ce4d67a543c4ba1fd2f07c/evaluator/observed-samples.pt": "50a449a7220bb529b00ba9d48b720267e4e4f0aa2251a642842b450f8e8e4ef5"
+      },
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "candidate",
+      "gif_sha256": "83185b013de83720d91faea09ca80d237c0dea60b4f99cdfb191682286d02b3a",
+      "kind": "actual_training_saved_observations_gif",
+      "metric_sets_reproduced": 24,
+      "observation_count": 24,
+      "observations_sha256": "5dd587c0da5754b97ef346152b1f807ea27a584cf5666db37f37023cdff5e086",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/kinetic_transport/queue/kinetic_transport_round2/2b9ff220ef5c46b48127e03e801faf79/observed-samples.pt": "5bfcd30b8524ce99f93aa9ccd6d934f9150a5484065c4af5913e0e90c4e2e560"
+      },
+      "task_id": "vector_unequal_mass"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

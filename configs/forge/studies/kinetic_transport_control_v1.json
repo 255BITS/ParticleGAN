@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "kinetic_transport_v1"
+  },
+  "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "competing_explanation": "Finite-direction minibatch OT can pull between true clusters; rare target observations fluctuate; unit-normalized response may overwhelm magnitude or distort covariance. Underallocation may be a shared-map/critic instability rather than a missing mass signal. Endpoint allocation alone cannot establish full sustained quality.",
+  "control": {
+    "candidate_id": "bcap-dualnorm-conv-non-saturating-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "min_mass_ratio",
+    "op": "<",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.5
+  },
+  "hypothesis": "Resolve and measure the exact winning recipe in the same source/runtime on the bounded diagnostic task subset; the historical parent is motivation only, not another launched candidate.",
+  "id": "kinetic_transport_control_v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "min_mass_ratio",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.5
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "kinetic_transport_diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

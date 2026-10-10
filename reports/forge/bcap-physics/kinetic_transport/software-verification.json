@@ -1,0 +1,32 @@
+{
+  "actual_training_gifs": 11,
+  "bulk_logs_in_git": false,
+  "focused_mathematical_API_ownership_tests": {
+    "passed": 60,
+    "seconds": 1.34
+  },
+  "forge_compile_check": "CURRENT",
+  "forge_validate": "PASS",
+  "frames_per_gif": 9,
+  "initial_software_failures": "Two test fixtures corrected: avoid nondifferentiable projected ties for gradcheck, compare normalized checkpoint defaults with old normalized defaults. No scientific retry or mechanism change.",
+  "public_training_checkpoint_study_regressions": {
+    "passed": 78,
+    "seconds": 5.82
+  },
+  "publication_saved_metric_sets": 432,
+  "publication_source": "daea3e47dc7b1ceab6328670f3a9755f4ad56d3bbb5d45bde707ae75d2f9e45f",
+  "schema_version": 1,
+  "scorer_controls": "4 analytic-law oracle PASS; 4 point-collapse FAIL",
+  "stdout": {
+    "runs/software/kinetic_transport/candidate-readout.log": "8531de68aa70e07e617e6d2fbda33ac98e8b306b08332eaf751b4dd608b86509",
+    "runs/software/kinetic_transport/compile-check.log": "4e121a976655f306859db422920dce4913768fffdbbafde326409fcd264e3f64",
+    "runs/software/kinetic_transport/compile.log": "f7be32476db54f4b159ecbfc5ec0d61fd416d930d9d38197b18b57dafe5eb500",
+    "runs/software/kinetic_transport/control-readout.log": "73d57c7f558eadcd9b0c3caea0a94b2c47ee6d18ffb7fc9c9c4cebb4de830b8c",
+    "runs/software/kinetic_transport/final-validate.log": "c3963f7c2c863d2e5e731e843796c485cbf53d40e0e012dabea34e6a7405ee1b",
+    "runs/software/kinetic_transport/publication.log": "da8ef6c066afce541e67c5b419f832d02cbc2499fdf4e3a682928815e7746105",
+    "runs/software/kinetic_transport/software.log": "730396517db7e3df714a5482411fb950bfb434e389a66a633e994fa2e3da48d2",
+    "runs/software/kinetic_transport/training-software.log": "be59424bb6ae4b251644202ae9f8a2d73306191319cf0eee59e0dcaac5d14533",
+    "runs/software/kinetic_transport/validate.log": "c3963f7c2c863d2e5e731e843796c485cbf53d40e0e012dabea34e6a7405ee1b"
+  },
+  "summaries_only_memory": "PASS"
+}

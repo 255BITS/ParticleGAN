@@ -1,0 +1,70 @@
+{
+  "new_source_digest": "a22f9f4fe82b9d932f1dad635793d993708e155905b50fb090f758f844b65b09",
+  "optimizer_updates_added": 0,
+  "original_source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "archived_predecessor_parity_diagnostic_no_qualification_reuse",
+  "tasks": [
+    {
+      "archived_attempt_id": "8314ce32f63c424d9464a01bdaf734f9",
+      "archived_result_sha256": "a33c6cdda8ca2069f505116ec5e28183faed1e923119a598461a22ed20188cfb",
+      "exact_equality": {
+        "endpoint_metrics": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true
+      },
+      "new_attempt_id": "7cb27efb36f44a558f4380e409a8ce28",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "archived_attempt_id": "dfa63108433648a5a7a2c38f5522ef45",
+      "archived_result_sha256": "b2c14c611beeccd2253a976180ecb86e5cd2de5805eb9516125c0b8dad7b4707",
+      "exact_equality": {
+        "endpoint_metrics": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true
+      },
+      "new_attempt_id": "c11e3c33fb9a49a2a970f3fbbe4c72bd",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "archived_attempt_id": "a1ff0275d07b469faa657be9ff6751e5",
+      "archived_result_sha256": "aa2d8d9e6e2cd46b56e3f71d5e6df8a69d5ba86af15ab16ea8a261a0dbf8db75",
+      "exact_equality": {
+        "endpoint_metrics": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true
+      },
+      "new_attempt_id": "ccf40b95dbe14260bc71905d181ca378",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "archived_attempt_id": "b2ce21bffdf94e768affa381f363245f",
+      "archived_result_sha256": "a4ddf8112059c8ea478d8e11917021c46bcd0f1ace265b79a398196ad153528b",
+      "exact_equality": {
+        "endpoint_metrics": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true
+      },
+      "new_attempt_id": "b8f2cc7fd3c04f8e938b80abf2dc0450",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "archived_attempt_id": "183df95fc16a4eb7b73416e6b1371d73",
+      "archived_result_sha256": "6f17d9df4498b9289fa80b739b2f16d657eb0f4149736392d89bd0aa829dae56",
+      "exact_equality": {
+        "endpoint_metrics": true,
+        "full_primary_observation_metrics": true,
+        "grader_result": true,
+        "named_final_rng_states": true
+      },
+      "new_attempt_id": "5422f512bcc34589991231d35b1b7f08",
+      "task_id": "vector_unequal_mass"
+    }
+  ]
+}

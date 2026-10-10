@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "06898fa445ac7fa88ed35631265ee9ac8387983f1b2eaad12f66afcf27817747",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "9d6898d54d5c536ba454d4639436e8014697a8be3f80815455167bf8680aaecd",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/kinetic_transport_v1/a1ff0275d07b469faa657be9ff6751e5/evaluator/observed-samples.pt": "4d98b3e3a298a4f67db8e62f047cfb71a3de5e4852f47384a6f0be529606cf81"
+  },
+  "task_id": "gaussian1d_smoke"
+}

@@ -1,0 +1,538 @@
+{
+  "controls": [
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "component_core_covariance_error": 0.08741815481334925,
+        "component_core_covariance_errors": [
+          0.031505271792411804,
+          0.02705128863453865,
+          0.08936251699924469,
+          0.20175354182720184
+        ],
+        "component_core_eigen_ratios": [
+          1.0140124559402466,
+          0.9791284799575806,
+          0.952938437461853,
+          0.8248550891876221
+        ],
+        "component_core_min_eigen_ratio": 0.8248550891876221,
+        "component_counts": [
+          2237,
+          1244,
+          535,
+          80
+        ],
+        "component_covariance_error": 0.08741815481334925,
+        "component_covariance_errors": [
+          0.031505271792411804,
+          0.02705128863453865,
+          0.08936251699924469,
+          0.20175354182720184
+        ],
+        "component_mass": [
+          0.546142578125,
+          0.3037109375,
+          0.130615234375,
+          0.01953125
+        ],
+        "component_min_eigen_ratio": 0.8248550891876221,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.012963790446519852,
+          0.015273312106728554,
+          0.009345794096589088,
+          0.0
+        ],
+        "covariance_error": 0.037272896617650986,
+        "hq": 0.987060546875,
+        "mass_tv": 0.004326174035668373,
+        "max_component_spill": 0.015273312106728554,
+        "mean_error": 0.02215040847659111,
+        "min_mass_ratio": 0.9765625,
+        "resolved_core_covariance_error": 0.04930635914206505,
+        "resolved_core_min_eigen_ratio": 0.952938437461853,
+        "resolved_max_component_spill": 0.015273312106728554,
+        "sample_count": 4096,
+        "sw1_normalized": 0.015320794576959106,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "status": "PASS",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.546370878809079
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.44999998807907104
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25,
+          0.0
+        ]
+      ],
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          4096,
+          0,
+          0,
+          0
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "covariance_error": 1.0,
+        "hq": 1.0,
+        "mass_tv": 0.44999998807907104,
+        "max_component_spill": 1.0,
+        "mean_error": 0.5984225869178772,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.546370878809079,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "status": "FAIL",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "component_core_covariance_error": 0.06002708803862333,
+        "component_core_covariance_errors": [
+          0.07506012916564941,
+          0.06105297431349754,
+          0.06964067369699478,
+          0.03435457497835159
+        ],
+        "component_core_eigen_ratios": [
+          0.9528155326843262,
+          0.9137274622917175,
+          0.9040055274963379,
+          0.965378999710083
+        ],
+        "component_core_min_eigen_ratio": 0.9040055274963379,
+        "component_counts": [
+          1019,
+          1009,
+          1052,
+          1016
+        ],
+        "component_covariance_error": 0.05878605227917433,
+        "component_covariance_errors": [
+          0.0700959861278534,
+          0.06105297431349754,
+          0.06964067369699478,
+          0.03435457497835159
+        ],
+        "component_mass": [
+          0.248779296875,
+          0.246337890625,
+          0.2568359375,
+          0.248046875
+        ],
+        "component_min_eigen_ratio": 0.9040055274963379,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.013738960027694702,
+          0.006937562022358179,
+          0.015209125354886055,
+          0.007874015718698502
+        ],
+        "covariance_error": 0.0050152018666267395,
+        "hq": 0.989013671875,
+        "mass_tv": 0.0068359375,
+        "max_component_spill": 0.015209125354886055,
+        "mean_error": 0.024054860696196556,
+        "min_mass_ratio": 0.9853515625,
+        "resolved_core_covariance_error": 0.06002708803862333,
+        "resolved_core_min_eigen_ratio": 0.9040055274963379,
+        "resolved_max_component_spill": 0.015209125354886055,
+        "sample_count": 4096,
+        "sw1_normalized": 0.01702355931221728,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "status": "PASS",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.7550261362884907
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.75
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ]
+      ],
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          4096,
+          0,
+          0,
+          0
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "covariance_error": 1.0,
+        "hq": 1.0,
+        "mass_tv": 0.75,
+        "max_component_spill": 1.0,
+        "mean_error": 0.9705842137336731,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.7550261362884907,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "status": "FAIL",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "component_core_covariance_error": 0.032053956761956215,
+        "component_core_covariance_errors": [
+          0.04282132908701897,
+          0.021286584436893463
+        ],
+        "component_core_eigen_ratios": [
+          0.9474624395370483,
+          0.9704650640487671
+        ],
+        "component_core_min_eigen_ratio": 0.9474624395370483,
+        "component_counts": [
+          2046,
+          2050
+        ],
+        "component_covariance_error": 0.027300341986119747,
+        "component_covariance_errors": [
+          0.03865162283182144,
+          0.015949061140418053
+        ],
+        "component_mass": [
+          0.49951171875,
+          0.50048828125
+        ],
+        "component_min_eigen_ratio": 0.953528642654419,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.008308895863592625,
+          0.012195121496915817
+        ],
+        "covariance_error": 0.006527412217110395,
+        "hq": 0.98974609375,
+        "mass_tv": 0.00048828125,
+        "max_component_spill": 0.012195121496915817,
+        "mean_error": 0.0129979457706213,
+        "min_mass_ratio": 0.9990234375,
+        "resolved_core_covariance_error": 0.032053956761956215,
+        "resolved_core_min_eigen_ratio": 0.9474624395370483,
+        "resolved_max_component_spill": 0.012195121496915817,
+        "sample_count": 4096,
+        "sw1_normalized": 0.011098945759337986,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "status": "PASS",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18,
+          0.6945207538578243
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15,
+          0.5
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85,
+          1.0
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15,
+          0.0
+        ]
+      ],
+      "metrics": {
+        "component_core_covariance_error": 1.0,
+        "component_core_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_core_eigen_ratios": [
+          0.0,
+          0.0
+        ],
+        "component_core_min_eigen_ratio": 0.0,
+        "component_counts": [
+          4096,
+          0
+        ],
+        "component_covariance_error": 1.0,
+        "component_covariance_errors": [
+          1.0,
+          1.0
+        ],
+        "component_mass": [
+          1.0,
+          0.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.0,
+          1.0
+        ],
+        "covariance_error": 1.0,
+        "hq": 1.0,
+        "mass_tv": 0.5,
+        "max_component_spill": 1.0,
+        "mean_error": 0.941635012626648,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 1.0,
+        "resolved_core_min_eigen_ratio": 0.0,
+        "resolved_max_component_spill": 1.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.6945207538578243,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "status": "FAIL",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "control": "oracle",
+      "failed_bounds": [],
+      "metrics": {
+        "cdf_ks": 0.020216352432723017,
+        "finite_fraction": 1.0,
+        "mean": 2.0131174685957376,
+        "mean_error_sigma": 0.026234937191475183,
+        "sample_count": 4096,
+        "std": 0.5087876431048224,
+        "std_ratio": 1.0175752862096448
+      },
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "control": "point_collapse",
+      "failed_bounds": [
+        [
+          "std_ratio",
+          ">=",
+          0.8,
+          0.0
+        ],
+        [
+          "cdf_ks",
+          "<=",
+          0.05,
+          0.5
+        ]
+      ],
+      "metrics": {
+        "cdf_ks": 0.5,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.0,
+        "std_ratio": 0.0
+      },
+      "status": "FAIL",
+      "task_id": "gaussian1d_smoke"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "protocol_seed": 0,
+  "public_package": "/home/martyn/dev/ParticleGAN-bcap-physics-kinetic_transport/particlegan/__init__.py",
+  "schema_version": 1,
+  "scope": "scorer_control_no_training",
+  "scorer_sources": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "wall_seconds": 0.0834152769530192
+}

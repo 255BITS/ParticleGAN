@@ -1,0 +1,15 @@
+{
+  "collapse_FAIL": 4,
+  "optimizer_updates_added": 0,
+  "oracle_PASS": 4,
+  "original_receipt": "reports/forge/bcap-physics/kinetic_transport/scorer-controls.json",
+  "original_receipt_sha256": "b6e575a4f84d26307df2b6146224ae746720476ec595da54c6d514b6953c0b0b",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "reused_compatible_scorer_controls_not_new_training_or_source_qualification",
+  "scorer_sources": {
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "unchanged_gates_and_target_laws": true
+}
