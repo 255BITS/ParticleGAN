@@ -51,7 +51,7 @@ def test_invalid_backend_is_rejected(backend):
 def test_cpu_backend_requires_full_dualnorm(family):
     with pytest.raises(ValueError, match="dualnorm"):
         get_recipe("bcap", optimizer_family=family, optimizer_smoothing=0.,
-                   optimizer_convolution="none", optimizer_svd_backend="cpu")
+                   optimizer_convolution="none", optimizer_svd_backend="cpu", constraint_geometry_mode="none")
 
 
 def test_native_defaults_preserve_old_recipe_and_optimizer_packet_fields():
@@ -143,7 +143,7 @@ def test_grouped_convolution_cpu_reference_and_resume(kind, device):
             for p in module.parameters():
                 p.zero_()
         recipe = get_recipe("bcap", optimizer_svd_backend="cpu", optimizer_convolution="per_offset",
-                            optimizer_smoothing=.001, lr=.03)
+                            optimizer_smoothing=.001, lr=.03, constraint_geometry_mode="none")
         return module, recipe.make_generator_optimizer(module)
     module, optimizer = build(device)
     reference, cpu = build("cpu")

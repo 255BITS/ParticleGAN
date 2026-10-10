@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "b4a75183457d18844c4ff389479cfa672e19c48e1b7ef4ee0d79e156ca524e05",
+  "input_digest": "98c9085413a334bdfbf871e22aa99194edd6d51a12de2ae7f9e8302d20a4a24e",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -563,6 +563,8 @@
     "configs/forge/family-tags.json": "3a4aa728a133c35b56da6a027d70b93425fad58e47ce6c2cd0a19bf0965ba9c9",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
     "configs/forge/ideas/bcap-ada-nsgda-v1.json": "54a9d5bb1a67886015544142339fab9bf23988ba60cf759c38cafbce9d89e1c6",
+    "configs/forge/ideas/bcap-default-baseline-control-v1.json": "04fff5076a7eeb436526e2d80832232231bc7e758194d1a2f9a3213f72343595",
+    "configs/forge/ideas/bcap-default-baseline-direction-v1.json": "38f5b4d8a6b08562d331b1a41dda972c04961d45693fd50046bd2b384dc9df41",
     "configs/forge/ideas/bcap-develop-integration-combined-v1.json": "1e9758369765615af46819dec81b3e38ed57e858be041df7c885f0b088068e06",
     "configs/forge/ideas/bcap-develop-integration-winner-v1.json": "65400f9f2eba6f7ecc98d657684f4cbcb256ce3a8d4ef4dfb79fe967222c4ea2",
     "configs/forge/ideas/bcap-dualnorm-conv-hinge-v1.json": "8f6725f9dd32cee1f970a0cbf36d99277d6e7cf36a8dd0500afa98935e8d3307",
@@ -578,6 +580,8 @@
     "configs/forge/ideas/bcap-nsgda-global-v1.json": "7d9e93670cf5a9231b93c80c4a26f862f8b4c92246d85a3adf52037597dc557f",
     "configs/forge/ideas/bcap-nsgda-layer-v1.json": "6a6f8fd1114dd2b948bc74e170534ec0639a63fe7e2c3b6d3ae14297e7e048f3",
     "configs/forge/ideas/bcap-particle-rownorm-only-v1.json": "c7e837726646af8fb781dacb4d0353cef2e0c075337615e2e1dfbe3dfe02f6f1",
+    "configs/forge/ideas/bcap-projection-baseline-review-baseline-v1.json": "a736913736e17512c4350b8438dac0a07d55f356f8d5b1859b16dc97f9707197",
+    "configs/forge/ideas/bcap-projection-baseline-review-direction-v1.json": "80d868eda025859643c70cefe5bbd33f83f5a6f5b69686c3ea9e71e1b0bfad28",
     "configs/forge/ideas/bcap-pure-adam-example-v3.json": "ddbad0ba62627831f94cc2e0c77c635a48eaf5a7566b7b2a239fe3e011c10092",
     "configs/forge/ideas/bcap-pure-adam-v1.json": "be942e6d8b0b327b4f2b78c368e0495500f77e9f09bd8365be7c8332f69c5e11",
     "configs/forge/ideas/bcap-pure-adam-v2.json": "135e50efa75164230f72bc93a10e76dbe2b1094b1eb9a3eba44d83f792905dc4",
@@ -771,9 +775,13 @@
     "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
+    "configs/forge/studies/bcap-default-baseline-control-v1-study.json": "9454d24b52a070f35e7e742aa6c006e93b2d823ba6deb8500144e80d2eb1414a",
+    "configs/forge/studies/bcap-default-baseline-direction-v1-study.json": "aad39e1fe9e8131fda8f3cdaebeaa41d80f444736438e4fd24770b0ef8d90291",
     "configs/forge/studies/bcap-develop-integration-combined-deeper-study-v1.json": "0412d4f7419dbeb456216234efd86621a0296a27a31e3395aadea342bdc9618c",
     "configs/forge/studies/bcap-develop-integration-combined-study-v1.json": "b99628fa8b0597c3e97ca541b89531b4940c6b1174826d19588f00b20d239a78",
     "configs/forge/studies/bcap-develop-integration-winner-study-v1.json": "876c11d3b793740bd988e42faa08c618e889f9d560c4fc674d87279de2868357",
+    "configs/forge/studies/bcap-projection-baseline-review-baseline-v1-study.json": "0e6c30cdb97ec53cfc4e58433723c558392ef9e7c6192e10b54ec4a32a22cec5",
+    "configs/forge/studies/bcap-projection-baseline-review-direction-v1-study.json": "29ccd2330cf5b1e93c21cd865a7641e3c7afd21dfd89e5d04231e96df01c8128",
     "configs/forge/studies/bcap-three-phase-cap-margin-v1-study.json": "ed92e2b6fb1def77263d9ae3001d51e61506aef0029e75b5631339a1e080e349",
     "configs/forge/studies/bcap-three-phase-finite-cap-v1-study.json": "d9c9a6d90e6f2d4c27e436ead745672b43012a9c253c2dd0073b89d8717e7141",
     "configs/forge/studies/bcap-three-phase-incumbent-v1-study.json": "44ff39ae1859ed7e45244afca460841053c8ce5439a9b12439e805c7a1827246",
@@ -860,6 +868,7 @@
     "configs/forge/view-history/discriminator_stability-v7.json": "5dee961803741452be1a2af5476a4e29159d43eef05a1cf991af2988e6dcff0e",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/views/bcap-develop-integration-deeper-diagnostic-v1.json": "a01fb889a38052a45d2f997be2ccc4681274b635568dcc91aaf9261c0550e074",
+    "configs/forge/views/bcap-projection-baseline-repair-diagnostic-v1.json": "2316c80b54e83891af0c4fab9415acfdca3898a3147c0d3f2efacb1ef4687c99",
     "configs/forge/views/bcap-tier1-stability-diagnostic-v1.json": "004ed4629a08d2887976f8efea051f18daaade8722dbc143a2179e24e8fcec3c",
     "configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json": "553fc656444317300ae6e52880dd5143ac00f2e5e8311fca4b368bead0741615",
     "configs/forge/views/bcap_convolution_images.json": "ae8329bd6e82c1e3adb6641a1bf3d404f4ec52509e776a805263eab9880c7b0a",
@@ -3620,7 +3629,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "17c73af14a1adada0579a92c2030b4cccc9a2bff9351aa882f359facc9a3c9ba",
+    "reports/forge/EXPERIMENT_MEMORY.md": "a9e3a077f5f2e0ebc29e7a4a43805bc9345f9f42ac78dc735ab9c35765f697c6",
     "reports/forge/publication-records.json": "1f6664212046adc861ccd05a62ca815cd7b0cf21b5274c015cbb36ac5129205d"
   },
   "pending_readout": [
@@ -3646,5 +3655,5 @@
   "scientific_source_digests": [
     "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
-  "view_count": 12
+  "view_count": 13
 }
