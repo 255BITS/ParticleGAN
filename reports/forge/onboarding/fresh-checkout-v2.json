@@ -1,0 +1,38 @@
+{
+  "attempt_id": "2dcfab451e2b4c2087c4c2dcdcfddb44",
+  "campaign": {
+    "definition": {
+      "budget_seconds": 900,
+      "candidate_budget_seconds": 900,
+      "id": "fresh-checkout-pilot",
+      "purpose": "Fresh-checkout onboarding for one substantive critic-penalty ablation, through Tier 1 only; CPU task workers and no GPU ownership.",
+      "schema_version": 1
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 4.800435357999959
+  },
+  "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+  "checkout_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+  "checkout_method": "fresh local clone of the same feature branch with independent working tree and queue, shared Git objects",
+  "gpu_attempts": 0,
+  "launched_attempts": 1,
+  "lifecycle": "concluded",
+  "readout_sha256": "4a29d9154437f515cf5f3d755631ca99c04250ac39bb26ecd4d2924e9ac782bd",
+  "readout_snapshot": "reports/forge/onboarding/fresh-checkout-v2-readout.json",
+  "request_id": "397c486fb1b97b0f8e581b42",
+  "result_sha256": "1cccc2924fae8e4b2c3ce318990c44d586b6ff4f1a5a484526851ea73d244ed9",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "source_sha256": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d"
+}

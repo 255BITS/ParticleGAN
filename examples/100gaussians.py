@@ -11,8 +11,8 @@ This is deliberately nastier than the 25-Gaussian grid:
   - D: simple MLP with Fourier input features, x -> scalar score.
   - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
     plus the recipe's critic penalty (``recipe.make_critic_penalty``, currently
-    K3P: RMS R1 plus a fake-side cap, handing over to one-sided caps with an
-    EMA-critic anchor as the critic LR falls).
+    KA2: RMS R1 plus a fake-side cap, then an even blend with one-sided caps and
+    an EMA-critic anchor gated by the critic's Adam statistics).
 
 The recipe defaults (``particlegan.get_recipe()``) are the one supported
 configuration; this example only exposes sizes, rates and schedule fields:
@@ -56,7 +56,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, InputNoise, ParticlePrior, get_recipe, learning_rate_scales,
+    GANTrainer, InputNoise, ParticlePrior, get_recipe, init, learning_rate_scales,
 )
 from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
@@ -225,6 +225,13 @@ def train(
             nn.init.xavier_uniform_(m.weight)
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
+    # The recipe's deterministic init replaces the Xavier init above; learnable
+    # recipe tables get R2 points (MoG spacing recalibrated). The fresh-Gaussian
+    # control's supplied prior keeps its draw.
+    init.deterministic_orthogonal_(G, seed=0)
+    init.deterministic_orthogonal_(D, seed=1)
+    if learnable_prior:
+        init.deterministic_orthogonal_(prior)
 
     if use_training_api:
         trainer = GANTrainer(
@@ -235,6 +242,10 @@ def train(
         ema_G, ema_prior = trainer.ema_G, trainer.ema_prior
         opt_G, opt_D, opt_prior = trainer.opt_g, trainer.opt_d, None
     else:
+        # The recipe's optimizers do its step-time work in step() (currently
+        # KA2: spike guard + moment-surprise controller + EMA-critic update for D);
+        # we allocate the EMA critic.
+        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # EMA copies of G + prior for snapshots/eval; the live weights orbit the
         # equilibrium, the averaged ones sit on it.
         ema_G = copy.deepcopy(G)
@@ -245,9 +256,6 @@ def train(
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
-        # The recipe's optimizers do its step-time work in step() (currently
-        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
-        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
         penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
@@ -321,7 +329,7 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # K3P schedule: G/D anneal over the network horizon to the
+                # Recipe schedule: G/D anneal over the network horizon to the
                 # network floor; the prior anneals over the full budget.
                 network, prior_scale = learning_rate_scales(global_step, recipe)
                 for opt in all_opts:

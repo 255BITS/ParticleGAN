@@ -1,0 +1,15 @@
+{
+  "cohorts": [
+    {
+      "path": "reports/forge/tier1-completion/scoped-evidence.json",
+      "sha256": "70fdfa1c341f0c919ce44dd6e2096160755ed8af8c26f89551035ba7f7c1d696",
+      "view": "tier1_policy_coverage"
+    }
+  ],
+  "media": {
+    "path": "reports/forge/pure-bcap/current-media-index.json",
+    "sha256": "b6ac8f9be74b288254a3c9561da6b5a477247040962b58636b2aab1041a483e4"
+  },
+  "qualification_input": false,
+  "schema": "forge_scoped_publications_v1"
+}

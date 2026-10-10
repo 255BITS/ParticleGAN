@@ -22,7 +22,7 @@ from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, spars
 from lib.gym_state_control import training_recipe
 from lib.gym_gan_control import (MODULE_KEYS, build_gan_models, initial_hashes, real_views,
     fake_views, discriminator_loss, generator_loss)
-from particlegan import scale_learning_rates
+from particlegan import init, scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24003, device="cuda:1", z_dim=32, num_particles=1024,
@@ -103,13 +103,14 @@ def train(cfg):
     bundle = build_gan_models(cfg, scaler, device)
     np.savez_compressed(out / "sparse_records.npz", **records)
     write_json(out / "label_selection.json", selection)
-    provenance = capture_provenance(out, cfg, records, selection, bundle)
     values = {k: torch.as_tensor(records[k], device=device) for k in ("states", "next_states", "terrain")}
     labeled_indices = torch.as_tensor(records["labeled_indices"], device=device)
     labeled_actions = torch.as_tensor(records["labeled_actions"], device=device)
     recipe = training_recipe(cfg)
+    init.deterministic_orthogonal_(bundle["D"], seed=1)
     optimizer, optimizer_d = recipe.make_optimizers(bundle["G"], bundle["D"], bundle["prior"],
         encoder=bundle["E"], ema_critic=copy.deepcopy(bundle["D"]), fused=device.type == "cuda")
+    provenance = capture_provenance(out, cfg, records, selection, bundle)
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     prior_regularizer = recipe.make_prior_regularizer()

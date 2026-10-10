@@ -1,0 +1,28 @@
+diff -ruN '--exclude=__pycache__' pkg-E19/particlegan/birth_death.py pkg-E22/particlegan/birth_death.py
+--- pkg-E19/particlegan/birth_death.py	2026-09-29 08:30:47.994652497 -0600
++++ pkg-E22/particlegan/birth_death.py	2026-09-29 11:42:20.400929528 -0600
+@@ -116,7 +116,7 @@
+                                         "realised_births", "stays", "moves", "matched", "normalised",
+                                         "waited_deaths", "waited_births", "stale_resets")}
+         if self.isolation:
+-            self.counters.update({k: 0 for k in ("iso_evals", "iso_flagged", "iso_acted", "iso_skipped", "iso_moves")})
++            self.counters.update({k: 0 for k in ("iso_evals", "iso_flagged", "iso_acted", "iso_skipped", "iso_moves", "iso_dup_skips")})
+         self.last = {}
+         self.moved_rows = None  # transient (not checkpointed): rows moved by the latest maybe_apply
+ 
+@@ -229,8 +229,14 @@
+         with the fake law when that law equals the real law, so p_i = (1 + #{R2 scores >= score_i}) / (1 + |R2|) is a valid p-value for row i
+         (a row scored at its clean centre is, if anything, closer to the bulk than a draw: conservative). Benjamini-Hochberg at Q over the table
+         (conformal p-values with a shared calibration set are positively dependent, for which BH keeps its level). The local scale is floored at 1e-3 of the
+-        median positive leave-one-out radius so that exact duplicates in the reservoir cannot make it zero (numerical only)."""
++        median positive leave-one-out radius so that exact duplicates in the reservoir cannot make it zero (numerical only).
++        Duplicate guard: exchangeability fails when the reservoir contains exact copies of its own rows (a finite data pool sampled with replacement: a
++        copy of a reference point lands in the calibration half and looks perfectly supported, while a fresh row does not: P(p <= 1e-3) was 21 x the
++        nominal level at 1,000 distinct rows); nothing is flagged when more than Q of the reservoir's feature rows are copies of another row."""
+         R1, R2 = R[0::2], R[1::2]
++        if 1. - len(torch.unique(R, dim=0)) / len(R) > self.Q:
++            self.counters["iso_dup_skips"] += 1
++            return torch.zeros(len(q), dtype=torch.bool, device=q.device)
+         rho = _knn(R1, R1, k, exclude=torch.arange(len(R1), device=R.device), shortlist_dtype=fast)[0][:, -1]
+         positive = rho[rho > 0]
+         floor = float(positive.median()) * 1e-3 if len(positive) else 1.

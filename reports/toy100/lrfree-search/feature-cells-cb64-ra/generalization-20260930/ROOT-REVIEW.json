@@ -1,0 +1,40 @@
+{
+  "candidate_full_suite": "PENDING",
+  "changed_package_files": [
+    "anchor_birth.py",
+    "birth_phase.py",
+    "feature_cells.py",
+    "feature_policy.py",
+    "feature_reference.py",
+    "mean_transport.py",
+    "output_moments.py",
+    "policy.py",
+    "population_continuity.py",
+    "recipes.py",
+    "training.py"
+  ],
+  "config_sha256": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4",
+  "current_pr155_baseline_tests": {
+    "passed": 1350,
+    "skipped": 12,
+    "subtests_passed": 18
+  },
+  "focused_contracts_passed": 22,
+  "numerical_quality": "PENDING",
+  "original_reference_fixture_passed": true,
+  "package_sha256": "52cf04c3b629f054f81c9f9efdc8648ce71124c70e5d12d245a5c4876c5611b7",
+  "reviewed_contracts": [
+    "current UpdatePolicy and ParticleRows API",
+    "reference Recipe dictionary compatibility",
+    "selection before first update and checkpointed representation",
+    "generator/noise-only empirical feature calibration",
+    "caller table/routed ownership",
+    "sample row IDs and frozen served geometry",
+    "atomic rejected checkpoint values and tensor versions",
+    "typed R1 state and original source/scorer adapters"
+  ],
+  "reviewer": "root",
+  "source_closure_sha256": "5afc3e3e653ac04ae230b5ecff4c46df30fb9324f2974cf158abf1f62b871fc2",
+  "status": "ROOT_REVIEWED_READY_FOR_ORIGINAL_CUDA_VALIDATION",
+  "worktree": "/ml2/hypergan/ParticleGAN-ra11-pr155"
+}

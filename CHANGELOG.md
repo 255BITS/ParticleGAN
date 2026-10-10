@@ -1,5 +1,128 @@
 # Changelog
 
+## Unreleased
+
+- **Learned-noise floor release:** exclude the noise group's own stationarity
+  scale from the model/table settlement gate, preventing clamped noise from
+  holding its floor high indefinitely. E22 and `e22_routed` share this repair;
+  noise learning-rate control and checkpoint/configuration formats are retained.
+  CPU/CUDA regressions cover a real frozen verdict, resumed learning, exact
+  recovery and served noise after release.
+- **Many-site synchronization:** DV12 retains only the last two detached
+  applications and computes their diagnostics on demand. Accelerator routing
+  batches finite checks once per complete forward; CPU validation stays eager.
+  Checkpoint format, training noise, row controls and R1 defaults are unchanged.
+  The 71-site CUDA fixture reduces forward-pair scalar reads from 1,014 to 22,
+  with exact before/after recovery state. See the
+  [measurement and integration notes](docs/e22_routed_readbacks.md).
+- **Routed game units and mass invariance:** the pooled-token example applies
+  KA2 through a contextual token penalty view; RpGAN scores stay pooled.
+  Routed DV12 ignores inactive rows and aggregates duplicate-position mass
+  for bandwidth and support. Selected serving copies use their matching
+  routed row buffers. Checkpoints record `mass_atoms_v1`; older raw-row-law
+  routed checkpoints require the prior release or a new training trajectory.
+  Example checkpoints record penalty units and explicit feature-harm bounds.
+  New private-RNG candidate probes report noisy game gradients, and matched
+  longer comparisons retain frozen/movable controls. These diagnostics do not
+  select moves or certify game repair. See the
+  [qualification guide](docs/e22_routed_game.md).
+- **R1 is the E22 default** ([docs](docs/r1-rotation.md)): the E22 preset (and
+  `e22_routed`, `configs/100gaussians/e22-noout.json`) sets
+  `reopen_signal="optimizer"` (an Adam-memory surprise detector that, on an
+  abrupt rise, re-opens the LR ladders and rescales the shocked second moments)
+  and `reopen_anchor="release"` (the re-open lets KA2's EMA-critic anchor
+  release). It passes the native rotation test 3/3 (E22 before R1: 1/3) and
+  the routed moving-target example; on static targets it does not fire and
+  matches E22 exactly. `reopen_signal="none", reopen_anchor="hold"` restores
+  the previous behaviour. `examples/e22_routed_moving.py` runs the routed
+  paired-edit example with a turning target.
+  `e22_routed_sites.make_loop` and `e22_routed_support.make_loop` accept
+  `recipe_overrides=`; `reports/r1-integrations` checks R1 in every E22
+  integration loop.
+- **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
+  preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
+  same lifecycle controls used by `GANTrainer`, explicit optimizer/table
+  ownership and callbacks, recovery state and served-model snapshots. The
+  independent formulation retains its unconditional particle contract. See the
+  [external-loop and migration guide](docs/e22.md).
+- **Conditional routed paired adaptation:** `get_recipe("e22_routed", ...)`
+  supports dense softmax banks through explicit `RoutedRows` and `RoutedBatch`
+  inputs. Row controls use conditional counterfactual evidence and guarded
+  whole-bank moves, including routing state, averages and optimizer/controller
+  recovery. Clean served forwards preserve the selected conditional bank.
+  Frozen BF16 modules can accompany FP32 trainable tensors; averages copy
+  frozen parameters exactly. See the [design and validation](docs/e22_routed.md).
+- **Shared-bank token routing:** a full-model `RoutedRows` callback supports
+  multiple sequential routing sites using one particle bank and controller.
+  Candidates rerun downstream routing and guard the final paired output.
+  Usage averages over tokens within each context and then over sites.
+  Routed evidence now refreshes when birth/death is disabled; disabling both
+  row controls also permits a frozen bank. See the
+  [site contract and spatial comparison](docs/e22_routed_sites.md).
+- **Routed split recovery and probe cost:** split rows inherit half the parent
+  first Adam moment and one quarter of its second/AMSGrad moments, preserving
+  optimizer age and avoiding a late-split update spike. `RoutedRows` accepts
+  checkpointed `probe_interval` (default 1), independent of context eligibility,
+  and an optional `output_error_guard` for fast and averaged paired-output MSE.
+  Per-update gradient observations continue between probe passes.
+- **CUDA learned-noise initialization:** repair the rounding case where
+  `exp(log_sigma)` falls below the physical floor while `log_sigma` is at or
+  above its log floor. The initial gradient stays active; ordinary floor
+  gradients, native FP64 behavior and checkpoint parameter layout are retained.
+- **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
+  K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
+  is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
+  one-sided caps and an EMA-critic gradient anchor. The anchor's gate and the
+  EMA critic's decay (`reg_anchor_min_decay`, default .9, replacing
+  `reg_anchor_decay`) follow the critic's own Adam moment surprise instead of
+  its learning rate, with guarded EMA reseeds. `recipe.name` is `"ka2"`.
+  `critic_r1_real=False` drops the R1 term.
+- **Trainer checkpoints use schema 4.** Schema 1–3 checkpoints come from older
+  formulations and raise `ValueError`; resume them with the release that wrote
+  them (0.8.0 for K3P). Checkpoints that record removed fixed choices or
+  `initialization` still load.
+- **Opt-in controllers, all off by default:** a continuous LR controller
+  (`continuous_policy`, `lr_control="stationarity"`), learnable output noise
+  (`output_noise_mode`), AMSGrad (`amsgrad`), particle birth-death
+  (`particle_birth_death`, `birth_death_space`, `birth_death_feature_scale`,
+  `birth_death_isolation`), per-row gradient evidence (`row_evidence_*`), the
+  table release rule, a served averaged model (`serve_average`) and
+  `reopen_signal`.
+- **[E22](docs/e22.md)** (`configs/100gaussians/e22-noout.json`) switches them on:
+  a schedule-free configuration for the native 100-Gaussian problems with no
+  data-space statistic in its control path. It passes grid100, rotated100 and
+  staggered100 (precision .982–.985), the ×0.75/×1.33 LR stress, 14k and 28k
+  updates, and the 13-gate portability suite.
+- K3P replays through `benchmarks.legacy.recipe` ([docs](docs/k3p.md#replaying-k3p)).
+
+- **`GANTrainer.sample()` returns clean samples by default.** It previously
+  added the current training output noise; pass `output_noise=True` for that.
+  Training is unchanged (sampling uses only its own stream). The toy100
+  benchmark now scores clean evaluation and holdout draws too (its summary
+  records `"eval_output_noise": "clean"`), so its scores are not directly
+  comparable with earlier runs trained with output noise.
+- **Explicit initialization API, `particlegan.init`**, in the style of
+  `torch.nn.init`. `init.deterministic_orthogonal_(module, *, seed=0,
+  strict=True)` gives trainable weights deterministic orthogonal matrices at
+  PyTorch's default scale and patterned biases, particle tables an R2 cloud
+  (MoG spacing recalibrated), and a `BatchDistanceDiscriminator` zero initial
+  batch-feature coefficients. It hashes `seed`, so it consumes no RNG; the
+  examples use G=0, D=1, E=2. Layers declare their parameters with
+  `init.register(cls, {name: Uniform/Normal/R2Normal/KEEP})`, and undeclared
+  trainable parameters raise unless `strict=False`; `init.declarations(module)`
+  shows what a network would get. NumPy is now a core dependency. See the
+  [API reference](docs/api.md#initialization).
+- The recipe, `make_prior`, `make_optimizers` and `GANTrainer` never change
+  weights; `Recipe.initialization` and `initialize_` from earlier development
+  builds are removed (`initialize_(m, key=k)` is
+  `init.deterministic_orthogonal_(m, seed=k)`). `GANTrainer` still loads
+  checkpoints whose saved recipe records `initialization`.
+- The research initializer registry, including the exact historical
+  `batch_feature_zero` replay hook, moved to `benchmarks/init_research`
+  (`python -m benchmarks.init_research.init_registry --init NAME -- script.py`).
+  Its report documents the 22/22 fixed-suite result, passing long hold,
+  unresolved shifted-target recovery, and mathematical limits.
+
 ## 0.8.0 — 2026-09-25
 
 - **K3P is the default and only formulation.** The critic penalty blends R1 +

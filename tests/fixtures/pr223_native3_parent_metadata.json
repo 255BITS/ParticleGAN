@@ -1,0 +1,99 @@
+{
+  "aggregate_cap_seconds": 10800.0,
+  "blocked": false,
+  "cap_seconds": 180.0,
+  "charged_seconds": 44.37232269323431,
+  "current_phase": null,
+  "overrun_seconds": 0.0,
+  "paid_wall_seconds": 44.37232269323431,
+  "phases": [
+    {
+      "index": 0,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 4.288754801964387,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 1,
+      "name": "copied_source_model_free_preflight",
+      "paid_wall_seconds": 0.9554615039378405,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 2,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 0.7411605787929147,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 3,
+      "name": "registration_parent_validation_and_finalization",
+      "paid_wall_seconds": 9.974449557485059,
+      "paused_wall_seconds": 204.76545672956854,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 4,
+      "name": "final_metadata_receipt",
+      "paid_wall_seconds": 0.02348529500886798,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 5,
+      "name": "terminal_card_sealing",
+      "paid_wall_seconds": 0.05940263997763395,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 6,
+      "name": "passive_publication",
+      "paid_wall_seconds": 1.5808596848510206,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 7,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 0.7204084228724241,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 8,
+      "name": "registration_parent_validation_and_finalization",
+      "paid_wall_seconds": 23.648079049540684,
+      "paused_wall_seconds": 2956.525608784519,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 9,
+      "name": "final_metadata_receipt",
+      "paid_wall_seconds": 0.025068286806344986,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 10,
+      "name": "terminal_card_sealing",
+      "paid_wall_seconds": 0.054056860972195864,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 11,
+      "name": "passive_publication",
+      "paid_wall_seconds": 2.301136011024937,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    }
+  ],
+  "reason": null,
+  "reserved_seconds": 0.0,
+  "schema": "pg_pr223_original_full_retest_metadata_budget_v1",
+  "unmeasured_interrupt_reserved_seconds": 0.0
+}

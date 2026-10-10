@@ -1,0 +1,168 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "059c462672891d6d5ca3a71e3e203149a66a85c21a3bdbca79b90b83bf759e6a",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-vector_overlap",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-9525caf87f89",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 78.76605590595864,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_overlap/result.json",
+            "artifact_sha256": "a8721c97cda3ea49d4d8ed8d8a505fd5f6749ecb1075c5d997cad3e8dbd4bf2b",
+            "id": "k3p-toy-vector_overlap",
+            "snapshot": "results/k3p-toy-vector_overlap.json.gz",
+            "snapshot_sha256": "b541b0924915fa584d9ce59d381521ce6460373b92fff8c1ac01a5057d289d38"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_overlap/result.json",
+        "artifact_sha256": "a8721c97cda3ea49d4d8ed8d8a505fd5f6749ecb1075c5d997cad3e8dbd4bf2b",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-vector_overlap",
+        "kind": "toy",
+        "live": {
+          "covariance_error": 0.07493229955434799,
+          "mean_error": 0.013500864617526531,
+          "sample_count": 4096,
+          "sw1_normalized": 0.03302034102956933,
+          "target_scale": 0.8509407043457031
+        },
+        "raw_status": "PASS",
+        "seconds": 78.76605590595864,
+        "snapshot": "results/k3p-toy-vector_overlap.json.gz",
+        "snapshot_sha256": "b541b0924915fa584d9ce59d381521ce6460373b92fff8c1ac01a5057d289d38",
+        "task": "vector_overlap",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.75,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 59.82628829497844,
+            "confirmed_step": 900,
+            "first_pass_step": 50,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 11,
+            "stable_from_seconds": 46.82608890905976,
+            "stable_from_step": 700
+          },
+          "metrics": [
+            {
+              "margin": 0.14697965897043067,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.03302034102956933
+            },
+            {
+              "margin": 0.13649913538247346,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.013500864617526531
+            },
+            {
+              "margin": 0.375067700445652,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.07493229955434799
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "vector_overlap"
+    }
+  ]
+}

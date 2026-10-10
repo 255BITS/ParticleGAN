@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/sample_reload.py",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra8-positive-lease-gpu/result.json"
+  ],
+  "pid": 812221,
+  "startticks": "165837690",
+  "started_utc": "2026-09-30T08:22:36.755452+00:00",
+  "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+  "phase_ready_sha256": "0320ea8caae255352d008b702f39365aae7a7c6d78eaf061e048c3bd5f560fe3",
+  "source_integrity": "VALID",
+  "numerical_parallelism": 1
+}

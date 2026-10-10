@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "tier1-acquisition-v1",
+  "budget_seconds": 2100,
+  "candidate_budget_seconds": 2100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Bounded main-view revision 3 Tier 1 execution: three 300-second mechanism tasks, one 300-second ring16 acquisition task and one 900-second joint-word task. Stops on required failures; provisional placement grants no default adoption."
+}

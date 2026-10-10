@@ -1,0 +1,66 @@
+{
+  "candidate_id": "context:lrfree/row-em-sampling",
+  "candidate_revision": "fbdba5c333161dcabf0a2c03cd52b6ea975362cf1ee2a31aa71bcb4bbf68e671",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": false
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Sampling-only row-mass and width calibration for PR 155",
+  "mechanism_class": "sampling_only_patch",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/row-em-sampling",
+      "narrative_sources": [
+        {
+          "git_blob": "a29a88000a0828ce3a4aaccf2766d25924e32044",
+          "path": "reports/toy100/lrfree-search/row-em-sampling/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "70e7a5f2ed52b2d020c84c944c7b3ce2914380e170ddb60c7d29fde65acd6534",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-sampling/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/row-em-sampling/grid100-result.json",
+        "reports/toy100/lrfree-search/row-em-sampling/rotated100-result.json",
+        "reports/toy100/lrfree-search/row-em-sampling/staggered100-result.json"
+      ],
+      "summary_excerpt": "# Sampling-only row-mass and width calibration for PR 155\n\nThe preceding online row EM candidate changed the fake distribution used by\nthe adversarial game and failed the frozen grid100 five-check streak. This\nisolated successor keeps the critic-floor GAN update and birth/death draw law\nuniform, including the original training output sigma. It learns a separate\nsampling law from real batches seen by `GANTrainer.step`.\n\nAt the first non-sigma G stationarity scale at or below 1/64, the existing\nrow-associated EM update fits particle-row weights and a shared Gaussian\nsampling width from a 16,384-real-example FIFO reservoir. It uses five\nindependently jittered generator outputs per row, a private random stream,\nand no task names or frozen evaluator values. Public `sample()` and the native\nharness draw from the weighted rows with the fitted width. The G and D updates\nand birth/death continue to draw uniformly with the original training width.\nThe sampler resets on a detected data-law reopen and can refit after a later\noptimizer reopen and new settle transition.\n\n`candidate.patch` is the complete difference against the critic-floor source\npackage named in `manifest.json`; it applies after the committed\n`critic-floor/package.patch` and was verified byte for byte against all\ncandidate Python sources. `smoke.py` compares an activated calibration\nwith an inactive copy across the same upd"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-row-em-sampling-cbeebf17f26a",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a29a88000a0828ce3a4aaccf2766d25924e32044",
+    "path": "reports/toy100/lrfree-search/row-em-sampling/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "70e7a5f2ed52b2d020c84c944c7b3ce2914380e170ddb60c7d29fde65acd6534",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-sampling/README.md"
+  },
+  "task_results": []
+}

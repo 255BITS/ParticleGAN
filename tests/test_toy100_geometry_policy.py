@@ -6,6 +6,7 @@ import math
 import struct
 from copy import deepcopy
 from pathlib import Path
+import shutil
 
 import numpy as np
 import pytest
@@ -181,10 +182,25 @@ def test_all_cpu_affine_archives_replay_initialization(tmp_path, model):
             )
 
 
-def test_historical_cpu_square_policy_archive_still_regrades():
-    directory = Path(__file__).resolve().parents[1] / "reports/toy100/shared22/toy100/grid100"
-    summary = json.loads((directory / "summary.json").read_text())
+def test_historical_cpu_square_policy_archive_still_regrades(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    archive = root / "reports/toy100/shared22/toy100/grid100"
+    summary = json.loads((archive / "summary.json").read_text())
+    for name in ("provenance.json", "source.tar.gz"):
+        shutil.copyfile(archive / name, tmp_path / name)
+    # Project all 7,000 original policy actions, without retaining the bulk
+    # log or regenerating observations from today's schedule implementation.
+    with np.load(root / "tests/fixtures/toy100-shared22-policy.npz", allow_pickle=False) as fixture:
+        assert str(fixture["source_commit"]) == "bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f"
+        columns = [name for name in fixture.files if not name.startswith("source_")]
+        events = [dict(event="train", **{name: fixture[name][index].item() for name in columns})
+                  for index in range(len(fixture["step"]))]
+    (tmp_path / "events.jsonl").write_text("".join(json.dumps(event) + "\n" for event in events))
     config = summary["config"]
     assert _check_toy100_policy(
-        directory, summary, config, declared_model_policy(config),
+        tmp_path, summary, config, declared_model_policy(config),
     )
+    events[-1]["lr_prior"] *= 2
+    (tmp_path / "events.jsonl").write_text("".join(json.dumps(event) + "\n" for event in events))
+    with pytest.raises(ValueError, match="policy action differs"):
+        _check_toy100_policy(tmp_path, summary, config, declared_model_policy(config))

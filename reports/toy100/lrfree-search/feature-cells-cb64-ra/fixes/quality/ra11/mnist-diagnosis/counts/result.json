@@ -1,0 +1,4248 @@
+{
+  "status": "PASS_JSON_FACTUAL_DIAGNOSIS",
+  "utc": "2026-09-30T17:32:35.700763+00:00",
+  "source_input_freeze_sha256": "0af5493cce0b186496b80ffea2b5e8d69225cf3471c5cd57d28a5be443c457de",
+  "identities": {
+    "seed": [
+      314159,
+      314159,
+      314159
+    ],
+    "steps": [
+      2000,
+      2000,
+      2000
+    ],
+    "initial_generator_sha256": [
+      "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917"
+    ],
+    "initial_critic_sha256": [
+      "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978"
+    ],
+    "initial_prior_sha256": [
+      "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286",
+      "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286",
+      "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    ]
+  },
+  "RA11_RA4_evaluator_fields_exact": {
+    "active_dimensions": true,
+    "active_mask_sha256": true,
+    "active_mean_sha256": true,
+    "active_std_sha256": true,
+    "raw_reference_sha256": true,
+    "active_reference_sha256": true,
+    "evaluator_model_sha256": true
+  },
+  "milestones": {
+    "RA11": [
+      0,
+      100,
+      250,
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      1750,
+      2000
+    ],
+    "RA4": [
+      0,
+      100,
+      250,
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      1750,
+      2000
+    ],
+    "E22": [
+      0,
+      100,
+      250,
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      1750,
+      2000
+    ]
+  },
+  "timeline": {
+    "RA11": [
+      {
+        "step": 0,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.8415400981903076,
+          "pixel_clipping_fraction": 0.0,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 887.1404462589763,
+            "embedding_precision": 1.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 56.84234015761439,
+            "embedding_precision": 1.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.029000001028180122,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 0,
+          "discoveries": 0,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 0,
+          "novel_birth_moves": 0,
+          "mean_evals": 0,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 0,
+          "iso_skipped": 0
+        },
+        "eligible_now": 0,
+        "last_eligible": null,
+        "last_iso_flagged": null,
+        "last_iso_moves": null,
+        "last_moves": null,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": 128,
+        "count_multiplicity": null,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "initial",
+          "reason": "not_evaluated",
+          "step": 0,
+          "snapshot": 0,
+          "cells": 0,
+          "chart_rank": 0,
+          "moment_rank": 0,
+          "output_dim": null,
+          "selected_axes": [],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 0,
+          "observations": 0,
+          "attempts": 0,
+          "moves": 0,
+          "alpha": null,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 0,
+          "step": 0,
+          "rows": 1024,
+          "required": 973,
+          "cells": 0,
+          "rank": 0,
+          "groups": 0,
+          "calibration_rows": 0,
+          "chart_valid": false,
+          "duplicate_ok": false,
+          "finite_rows": 0,
+          "same_group_rows": 0,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 0,
+        "table_settler": {
+          "s": 1.0,
+          "b": 1.0,
+          "last": {},
+          "counts": {
+            "drift": 0,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {}
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 100,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.3566805124282837,
+          "pixel_clipping_fraction": 0.49293702840805054,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1828.983879177952,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 109.45267044337844,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.03294363617897034,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            4.223046648176964e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 12,
+          "discoveries": 629,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 48,
+          "novel_birth_moves": 0,
+          "mean_evals": 12,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 12288,
+          "iso_skipped": 12
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 25,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 96,
+          "snapshot": 12,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            381,
+            462,
+            406,
+            354,
+            461,
+            214,
+            573,
+            181
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 12,
+          "step": 96,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 512,
+        "table_settler": {
+          "s": 1.0,
+          "b": 4.0,
+          "last": {
+            "decision": "drift",
+            "step": 24,
+            "tested_b": 1.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 1.0,
+            "t_b": 11.53608709098108,
+            "t_2b": 9.326167859482263,
+            "mean_r_b": 0.5757862503329912,
+            "mean_r_2b": 0.5638842533032099,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 1,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 24,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2216,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 250,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.3649667203426361,
+          "pixel_clipping_fraction": 0.49720701575279236,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1816.8276897619567,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 108.79348002363477,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.040219925343990326,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.4820175199391998e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 31,
+          "discoveries": 1595,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 124,
+          "novel_birth_moves": 0,
+          "mean_evals": 31,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 31744,
+          "iso_skipped": 31
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 27,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 248,
+          "snapshot": 31,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            409,
+            182,
+            381,
+            378,
+            628,
+            406,
+            490,
+            183
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 31,
+          "step": 248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 27,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 256,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 158.67996511991473,
+            "t_2b": 86.14763998251786,
+            "mean_r_b": 0.6993621438741684,
+            "mean_r_2b": 0.7208810150623322,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 120,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2353,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 500,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.38672366738319397,
+          "pixel_clipping_fraction": 0.4993656575679779,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1789.201378866192,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 107.13384822944758,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.05840834230184555,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.0074306500804434e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 62,
+          "discoveries": 3182,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 248,
+          "novel_birth_moves": 0,
+          "mean_evals": 62,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 63488,
+          "iso_skipped": 62
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 20,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 496,
+          "snapshot": 62,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            406,
+            433,
+            461,
+            184,
+            382,
+            490,
+            209,
+            546
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 62,
+          "step": 496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 20,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 512,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 158.67996511991473,
+            "t_2b": 86.14763998251786,
+            "mean_r_b": 0.6993621438741684,
+            "mean_r_2b": 0.7208810150623322,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 120,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2149,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 750,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.39745309948921204,
+          "pixel_clipping_fraction": 0.4994998872280121,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1750.7009120052421,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 104.92465173810184,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.0898953303694725,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            1.816510281286051e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 93,
+          "discoveries": 4784,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 372,
+          "novel_birth_moves": 0,
+          "mean_evals": 93,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 95232,
+          "iso_skipped": 93
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 30,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 744,
+          "snapshot": 93,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            628,
+            378,
+            630,
+            433,
+            546,
+            462,
+            631,
+            182
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 93,
+          "step": 744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 30,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 768,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2344,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 1000,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.41408801078796387,
+          "pixel_clipping_fraction": 0.49952197074890137,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1682.5244080902241,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 101.02095072567332,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.1387816220521927,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.1284863403452668e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 125,
+          "discoveries": 6453,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 500,
+          "novel_birth_moves": 0,
+          "mean_evals": 125,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 128000,
+          "iso_skipped": 125
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 21,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 1000,
+          "snapshot": 125,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            461,
+            183,
+            437,
+            628,
+            406,
+            378,
+            409,
+            462
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 125,
+          "step": 1000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 21,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 0,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2225,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 1250,
+        "metrics": {
+          "class_mass_tv": 0.8816171875000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.44805213809013367,
+          "pixel_clipping_fraction": 0.49953383207321167,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1506.4827268664985,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 90.71463703637919,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.24560226500034332,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.03886320581328e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 156,
+          "discoveries": 8089,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 624,
+          "novel_birth_moves": 0,
+          "mean_evals": 156,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 159744,
+          "iso_skipped": 156
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 42,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 1248,
+          "snapshot": 156,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            406,
+            184,
+            182,
+            462,
+            545,
+            382,
+            378,
+            262
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 156,
+          "step": 1248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 42,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 256,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2187,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 1500,
+        "metrics": {
+          "class_mass_tv": 0.7794777343749999,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.4853500425815582,
+          "pixel_clipping_fraction": 0.49954625964164734,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 1088.6387915638095,
+            "embedding_precision": 0.17626953125,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 65.94660270321947,
+            "embedding_precision": 0.93701171875,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.4577523171901703,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.0615126260813414e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 187,
+          "discoveries": 9691,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 748,
+          "novel_birth_moves": 0,
+          "mean_evals": 187,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 191488,
+          "iso_skipped": 187
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 16,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 1496,
+          "snapshot": 187,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            185,
+            461,
+            437,
+            599,
+            519,
+            574,
+            378,
+            214
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 187,
+          "step": 1496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 16,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 512,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2261,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 1750,
+        "metrics": {
+          "class_mass_tv": 0.5530015625,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.008056640625,
+          "mean_classifier_confidence": 0.5186198949813843,
+          "pixel_clipping_fraction": 0.5092729926109314,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 574.9368504118122,
+            "embedding_precision": 0.95458984375,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 35.611914920584255,
+            "embedding_precision": 0.97314453125,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.8561466336250305,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.1101624300384277e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 218,
+          "discoveries": 11302,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 872,
+          "novel_birth_moves": 0,
+          "mean_evals": 218,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 223232,
+          "iso_skipped": 218
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 30,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 1744,
+          "snapshot": 218,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            406,
+            382,
+            627,
+            491,
+            378,
+            379,
+            262,
+            461
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 218,
+          "step": 1744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 30,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 768,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2243,
+        "selected_axes_fraction": 0.01020408163265306
+      },
+      {
+        "step": 2000,
+        "metrics": {
+          "class_mass_tv": 0.58571640625,
+          "confident_class_coverage": 1,
+          "confident_fraction": 0.087646484375,
+          "mean_classifier_confidence": 0.6366055011749268,
+          "pixel_clipping_fraction": 0.5632903575897217,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 635.4397458252502,
+            "embedding_precision": 0.27197265625,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 40.54441017804998,
+            "embedding_precision": 0.28125,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 1.310713768005371,
+        "lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            1.9760388177501512e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 250,
+          "discoveries": 12954,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": 1000,
+          "novel_birth_moves": 0,
+          "mean_evals": 250,
+          "mean_witness_fires": 0,
+          "mean_moves": 0,
+          "mean_preview_rows": 0,
+          "iso_flagged": 256000,
+          "iso_skipped": 250
+        },
+        "eligible_now": 0,
+        "last_eligible": 0,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 20,
+        "requested_cells": 128,
+        "count_multiplicity": 195,
+        "mean": {
+          "schema": 2,
+          "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+          "status": "invalid",
+          "reason": "missing_or_insufficient_even_group",
+          "step": 2000,
+          "snapshot": 250,
+          "cells": 64,
+          "chart_rank": 8,
+          "moment_rank": 8,
+          "output_dim": 784,
+          "selected_axes": [
+            378,
+            406,
+            627,
+            183,
+            574,
+            185,
+            381,
+            462
+          ],
+          "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+          "fitted_rows": 512,
+          "observations": 512,
+          "alpha": 0.0002564102564102564,
+          "radius": null,
+          "known_range": null,
+          "mean": null,
+          "variance_ddof1": null,
+          "variance_penalty": null,
+          "range_penalty": null,
+          "lower_bound": null,
+          "attempts": 0,
+          "moves": 0,
+          "objective_before_mean": null,
+          "objective_after_mean": null
+        },
+        "lease": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 250,
+          "step": 2000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 20,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "lease_age_real_rows": 0,
+        "table_settler": {
+          "s": 1.0,
+          "b": 64.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 16.0,
+            "t_b": 53.44721804189913,
+            "t_2b": 14.006664518956455,
+            "mean_r_b": 0.7878499279419581,
+            "mean_r_2b": 0.7942158480485281,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0,
+            "population_coverage_rejections": 0,
+            "population_expiries": 0
+          },
+          "population_active": false,
+          "last_population": {
+            "event": "decision",
+            "step": 504,
+            "participating_rows": null,
+            "required_rows": 973,
+            "coverage_rejected": false,
+            "scheduling_decision": "drift"
+          }
+        },
+        "novel_attempted_cells_last": 4,
+        "ordinary_inaccessible_birth_quota_last": 2258,
+        "selected_axes_fraction": 0.01020408163265306
+      }
+    ],
+    "RA4": [
+      {
+        "step": 0,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.8415400981903076,
+          "pixel_clipping_fraction": 0.0,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 887.1404462589763,
+            "embedding_precision": 1.0,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 56.84234015761439,
+            "embedding_precision": 1.0,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.029000001028180122,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 0,
+          "discoveries": 0,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 0,
+          "iso_skipped": 0
+        },
+        "eligible_now": 0,
+        "last_eligible": null,
+        "last_iso_flagged": null,
+        "last_iso_moves": null,
+        "last_moves": null,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": 64,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 1.0,
+          "last": {},
+          "counts": {
+            "drift": 0,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 100,
+        "metrics": {
+          "class_mass_tv": 0.672230859375,
+          "confident_class_coverage": 2,
+          "confident_fraction": 0.139892578125,
+          "mean_classifier_confidence": 0.6209811568260193,
+          "pixel_clipping_fraction": 0.4426247775554657,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 786.7858024173626,
+            "embedding_precision": 0.04443359375,
+            "embedding_recall": 0.0
+          },
+          "active_embedding": {
+            "embedding_frechet": 54.789240704475326,
+            "embedding_precision": 0.03564453125,
+            "embedding_recall": 0.0
+          }
+        },
+        "output_sigma": 0.04756723344326019,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            8.953670148715781e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 12,
+          "discoveries": 634,
+          "moves": 0,
+          "ordinary_moves": 0,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 12270,
+          "iso_skipped": 12
+        },
+        "eligible_now": 0,
+        "last_eligible": 18,
+        "last_iso_flagged": 1006,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 26,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 4.0,
+          "last": {
+            "decision": "drift",
+            "step": 24,
+            "tested_b": 1.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 1.0,
+            "t_b": 8.633483893341465,
+            "t_2b": 7.223717480140918,
+            "mean_r_b": 0.544725968890513,
+            "mean_r_2b": 0.5409994299213091,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 1,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 2228,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 250,
+        "metrics": {
+          "class_mass_tv": 0.481847265625,
+          "confident_class_coverage": 3,
+          "confident_fraction": 0.168212890625,
+          "mean_classifier_confidence": 0.674522340297699,
+          "pixel_clipping_fraction": 0.33159372210502625,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 242.49009620538283,
+            "embedding_precision": 0.9013671875,
+            "embedding_recall": 0.0185546875
+          },
+          "active_embedding": {
+            "embedding_frechet": 14.961041422872846,
+            "embedding_precision": 0.91455078125,
+            "embedding_recall": 0.02099609375
+          }
+        },
+        "output_sigma": 0.03572561591863632,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0013999542815807116
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 31,
+          "discoveries": 1350,
+          "moves": 469,
+          "ordinary_moves": 469,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14123,
+          "iso_skipped": 16
+        },
+        "eligible_now": 0,
+        "last_eligible": 526,
+        "last_iso_flagged": 391,
+        "last_iso_moves": 0,
+        "last_moves": 51,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 21,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 5.987988514890333,
+            "t_2b": 3.686989024030926,
+            "mean_r_b": 0.4362224464615186,
+            "mean_r_2b": 0.4072054326534271,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 18,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 966,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 500,
+        "metrics": {
+          "class_mass_tv": 0.18257812499999998,
+          "confident_class_coverage": 9,
+          "confident_fraction": 0.395751953125,
+          "mean_classifier_confidence": 0.7814840078353882,
+          "pixel_clipping_fraction": 0.40579408407211304,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 44.187866180419405,
+            "embedding_precision": 0.64892578125,
+            "embedding_recall": 0.6796875
+          },
+          "active_embedding": {
+            "embedding_frechet": 2.8513092391691544,
+            "embedding_precision": 0.630859375,
+            "embedding_recall": 0.6826171875
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.004155238508652868
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 62,
+          "discoveries": 1606,
+          "moves": 782,
+          "ordinary_moves": 782,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 946,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 19,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 5.987988514890333,
+            "t_2b": 3.686989024030926,
+            "mean_r_b": 0.4362224464615186,
+            "mean_r_2b": 0.4072054326534271,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 37,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 750,
+        "metrics": {
+          "class_mass_tv": 0.10349921875000001,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.471435546875,
+          "mean_classifier_confidence": 0.809934139251709,
+          "pixel_clipping_fraction": 0.4105190336704254,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 34.25818180474653,
+            "embedding_precision": 0.7783203125,
+            "embedding_recall": 0.654296875
+          },
+          "active_embedding": {
+            "embedding_frechet": 2.1851310458450612,
+            "embedding_precision": 0.76123046875,
+            "embedding_recall": 0.658203125
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.004220438575491494
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 93,
+          "discoveries": 1691,
+          "moves": 820,
+          "ordinary_moves": 820,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 944,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 24,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 3.699463307363201,
+            "t_2b": 1.8047849008887615,
+            "mean_r_b": 0.07586618392573048,
+            "mean_r_2b": 0.05898490113516649,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 42,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1000,
+        "metrics": {
+          "class_mass_tv": 0.06962226562500001,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.621337890625,
+          "mean_classifier_confidence": 0.8661237955093384,
+          "pixel_clipping_fraction": 0.40574800968170166,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 11.230688137409288,
+            "embedding_precision": 0.82177734375,
+            "embedding_recall": 0.7412109375
+          },
+          "active_embedding": {
+            "embedding_frechet": 0.8189881791637248,
+            "embedding_precision": 0.80859375,
+            "embedding_recall": 0.73876953125
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00422597696692063
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 125,
+          "discoveries": 1731,
+          "moves": 820,
+          "ordinary_moves": 820,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 951,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 19,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 3.699463307363201,
+            "t_2b": 1.8047849008887615,
+            "mean_r_b": 0.07586618392573048,
+            "mean_r_2b": 0.05898490113516649,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 42,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1250,
+        "metrics": {
+          "class_mass_tv": 0.047080078125,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.7236328125,
+          "mean_classifier_confidence": 0.8992434740066528,
+          "pixel_clipping_fraction": 0.406093031167984,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 10.293152662844477,
+            "embedding_precision": 0.8349609375,
+            "embedding_recall": 0.7744140625
+          },
+          "active_embedding": {
+            "embedding_frechet": 0.780700957363635,
+            "embedding_precision": 0.82763671875,
+            "embedding_recall": 0.76708984375
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031852693294965127
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 156,
+          "discoveries": 1748,
+          "moves": 824,
+          "ordinary_moves": 824,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 961,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 20,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "drift",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 1,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 3.699463307363201,
+            "t_2b": 1.8047849008887615,
+            "mean_r_b": 0.07586618392573048,
+            "mean_r_2b": 0.05898490113516649,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 43,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1500,
+        "metrics": {
+          "class_mass_tv": 0.040412890624999996,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.751220703125,
+          "mean_classifier_confidence": 0.9113792777061462,
+          "pixel_clipping_fraction": 0.4088013172149658,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 6.817761950611839,
+            "embedding_precision": 0.880859375,
+            "embedding_recall": 0.80517578125
+          },
+          "active_embedding": {
+            "embedding_frechet": 0.5402591748804326,
+            "embedding_precision": 0.88525390625,
+            "embedding_recall": 0.80126953125
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003186956102709063
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 187,
+          "discoveries": 1756,
+          "moves": 824,
+          "ordinary_moves": 824,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 924,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 15,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 42.02815368547261,
+            "t_2b": 24.33430601139779,
+            "mean_r_b": 0.1789108837644259,
+            "mean_r_2b": 0.20192686716715494,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 4,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 43,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1750,
+        "metrics": {
+          "class_mass_tv": 0.033677734375,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.7734375,
+          "mean_classifier_confidence": 0.9234542846679688,
+          "pixel_clipping_fraction": 0.4064767062664032,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 6.935944734132363,
+            "embedding_precision": 0.90576171875,
+            "embedding_recall": 0.7978515625
+          },
+          "active_embedding": {
+            "embedding_frechet": 0.5515865308091321,
+            "embedding_precision": 0.89404296875,
+            "embedding_recall": 0.7880859375
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031872172638526784
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 218,
+          "discoveries": 1759,
+          "moves": 824,
+          "ordinary_moves": 824,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 965,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 24,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 42.02815368547261,
+            "t_2b": 24.33430601139779,
+            "mean_r_b": 0.1789108837644259,
+            "mean_r_2b": 0.20192686716715494,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 4,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 43,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 2000,
+        "metrics": {
+          "class_mass_tv": 0.045684375000000006,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.785400390625,
+          "mean_classifier_confidence": 0.9288269877433777,
+          "pixel_clipping_fraction": 0.4079502522945404,
+          "native_flat_embedding": null,
+          "raw_embedding": {
+            "embedding_frechet": 5.277246475809534,
+            "embedding_precision": 0.90869140625,
+            "embedding_recall": 0.78857421875
+          },
+          "active_embedding": {
+            "embedding_frechet": 0.3934020514487315,
+            "embedding_precision": 0.8955078125,
+            "embedding_recall": 0.7861328125
+          }
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031873378724271025
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 250,
+          "discoveries": 1765,
+          "moves": 824,
+          "ordinary_moves": 824,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 14256,
+          "iso_skipped": 17
+        },
+        "eligible_now": 0,
+        "last_eligible": 947,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": 64,
+        "chart_rank": 8,
+        "learned_groups": 29,
+        "requested_cells": 64,
+        "count_multiplicity": 194,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 42.02815368547261,
+            "t_2b": 24.33430601139779,
+            "mean_r_b": 0.1789108837644259,
+            "mean_r_2b": 0.20192686716715494,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 4,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 43,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": 0,
+        "selected_axes_fraction": null
+      }
+    ],
+    "E22": [
+      {
+        "step": 0,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 0,
+          "confident_fraction": 0.0,
+          "mean_classifier_confidence": 0.8414809703826904,
+          "pixel_clipping_fraction": 0.0,
+          "native_flat_embedding": {
+            "embedding_frechet": 56.842754493394835,
+            "embedding_precision": 1.0,
+            "embedding_recall": 0.0
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.029000001028180122,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 0,
+          "discoveries": 0,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 0,
+          "iso_skipped": 0
+        },
+        "eligible_now": 0,
+        "last_eligible": null,
+        "last_iso_flagged": null,
+        "last_iso_moves": null,
+        "last_moves": null,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 1.0,
+          "last": {},
+          "counts": {
+            "drift": 0,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 100,
+        "metrics": {
+          "class_mass_tv": 0.8865000000000001,
+          "confident_class_coverage": 1,
+          "confident_fraction": 1.0,
+          "mean_classifier_confidence": 0.9892617464065552,
+          "pixel_clipping_fraction": 0.4999791383743286,
+          "native_flat_embedding": {
+            "embedding_frechet": 199.78731463710832,
+            "embedding_precision": 0.0,
+            "embedding_recall": 0.0
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.051547542214393616,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            4.6954596458586106e-05
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 12,
+          "discoveries": 11264,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 12288,
+          "iso_skipped": 12
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 1024,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 4.0,
+          "last": {
+            "decision": "drift",
+            "step": 24,
+            "tested_b": 1.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 1.0,
+            "t_b": 8.656477917868909,
+            "t_2b": 7.3169084172107635,
+            "mean_r_b": 0.5412276606075466,
+            "mean_r_2b": 0.5461212148269018,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 1,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 250,
+        "metrics": {
+          "class_mass_tv": 0.573972265625,
+          "confident_class_coverage": 3,
+          "confident_fraction": 0.505859375,
+          "mean_classifier_confidence": 0.8169568777084351,
+          "pixel_clipping_fraction": 0.4841028153896332,
+          "native_flat_embedding": {
+            "embedding_frechet": 16.810072900599646,
+            "embedding_precision": 0.93701171875,
+            "embedding_recall": 0.0810546875
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.06425187736749649,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00030079073222320026
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 31,
+          "discoveries": 30720,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 29480,
+          "iso_skipped": 29
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 12.595967286193224,
+            "t_2b": 4.292634228804772,
+            "mean_r_b": 0.6764449514448643,
+            "mean_r_2b": 0.5851616822183132,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 500,
+        "metrics": {
+          "class_mass_tv": 0.26035625,
+          "confident_class_coverage": 5,
+          "confident_fraction": 0.240478515625,
+          "mean_classifier_confidence": 0.7123367786407471,
+          "pixel_clipping_fraction": 0.3971068561077118,
+          "native_flat_embedding": {
+            "embedding_frechet": 8.6008339452877,
+            "embedding_precision": 0.66796875,
+            "embedding_recall": 0.2587890625
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.001977648387018093
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 62,
+          "discoveries": 62464,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38235,
+          "iso_skipped": 44
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 16.0,
+          "last": {
+            "decision": "drift",
+            "step": 120,
+            "tested_b": 4.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 12.595967286193224,
+            "t_2b": 4.292634228804772,
+            "mean_r_b": 0.6764449514448643,
+            "mean_r_2b": 0.5851616822183132,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 0,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 750,
+        "metrics": {
+          "class_mass_tv": 0.20924492187500002,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.379638671875,
+          "mean_classifier_confidence": 0.7720215320587158,
+          "pixel_clipping_fraction": 0.4057224690914154,
+          "native_flat_embedding": {
+            "embedding_frechet": 108.76566348358448,
+            "embedding_precision": 0.7412109375,
+            "embedding_recall": 0.71484375
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0030181246805387734
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 93,
+          "discoveries": 94208,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38365,
+          "iso_skipped": 45
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "inconclusive",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 0,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 1.8302136187263107,
+            "t_2b": 1.326154154834834,
+            "mean_r_b": 0.15166844299528748,
+            "mean_r_2b": 0.13045039866119623,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1000,
+        "metrics": {
+          "class_mass_tv": 0.13008789062499998,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.544189453125,
+          "mean_classifier_confidence": 0.839049220085144,
+          "pixel_clipping_fraction": 0.40602827072143555,
+          "native_flat_embedding": {
+            "embedding_frechet": 1.7858435391005014,
+            "embedding_precision": 0.7587890625,
+            "embedding_recall": 0.8603515625
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003643389947462892
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 125,
+          "discoveries": 126976,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38423,
+          "iso_skipped": 46
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "inconclusive",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 0,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 1.8302136187263107,
+            "t_2b": 1.326154154834834,
+            "mean_r_b": 0.15166844299528748,
+            "mean_r_2b": 0.13045039866119623,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1250,
+        "metrics": {
+          "class_mass_tv": 0.08665624999999999,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.6474609375,
+          "mean_classifier_confidence": 0.8777846097946167,
+          "pixel_clipping_fraction": 0.40742334723472595,
+          "native_flat_embedding": {
+            "embedding_frechet": 0.9733415843736283,
+            "embedding_precision": 0.8037109375,
+            "embedding_recall": 0.89599609375
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.002969992000385567
+          ]
+        ],
+        "controller_closed": false,
+        "counters": {
+          "evals": 156,
+          "discoveries": 158710,
+          "moves": 0,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38423,
+          "iso_skipped": 46
+        },
+        "eligible_now": 1024,
+        "last_eligible": 1024,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 0,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 32.0,
+          "last": {
+            "decision": "inconclusive",
+            "step": 504,
+            "tested_b": 16.0,
+            "verdict_b": 0,
+            "verdict_2b": 0,
+            "evidence_scale": 16.0,
+            "t_b": 1.8302136187263107,
+            "t_2b": 1.326154154834834,
+            "mean_r_b": 0.15166844299528748,
+            "mean_r_2b": 0.13045039866119623,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 2,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 0,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1500,
+        "metrics": {
+          "class_mass_tv": 0.061021484375,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.719970703125,
+          "mean_classifier_confidence": 0.9030648469924927,
+          "pixel_clipping_fraction": 0.41118761897087097,
+          "native_flat_embedding": {
+            "embedding_frechet": 0.944241248663998,
+            "embedding_precision": 0.822265625,
+            "embedding_recall": 0.9150390625
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003115489170213035
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 187,
+          "discoveries": 190206,
+          "moves": 1,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38423,
+          "iso_skipped": 46
+        },
+        "eligible_now": 1011,
+        "last_eligible": 1019,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 1,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 21.291786687690394,
+            "t_2b": 6.011642964125239,
+            "mean_r_b": 0.16128573939204216,
+            "mean_r_2b": 0.18765203778942427,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 1,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 1750,
+        "metrics": {
+          "class_mass_tv": 0.05296484375,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.752685546875,
+          "mean_classifier_confidence": 0.9131900072097778,
+          "pixel_clipping_fraction": 0.41094160079956055,
+          "native_flat_embedding": {
+            "embedding_frechet": 1.1120948791798884,
+            "embedding_precision": 0.83544921875,
+            "embedding_recall": 0.89990234375
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003152672670232167
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 218,
+          "discoveries": 215494,
+          "moves": 24,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38423,
+          "iso_skipped": 46
+        },
+        "eligible_now": 679,
+        "last_eligible": 913,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 2,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 21.291786687690394,
+            "t_2b": 6.011642964125239,
+            "mean_r_b": 0.16128573939204216,
+            "mean_r_2b": 0.18765203778942427,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 14,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      },
+      {
+        "step": 2000,
+        "metrics": {
+          "class_mass_tv": 0.054328906249999996,
+          "confident_class_coverage": 10,
+          "confident_fraction": 0.751220703125,
+          "mean_classifier_confidence": 0.9129657745361328,
+          "pixel_clipping_fraction": 0.4118459224700928,
+          "native_flat_embedding": {
+            "embedding_frechet": 0.6104252125240835,
+            "embedding_precision": 0.89306640625,
+            "embedding_recall": 0.9013671875
+          },
+          "raw_embedding": null,
+          "active_embedding": null
+        },
+        "output_sigma": 0.028999999165534973,
+        "lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031645138377162296
+          ]
+        ],
+        "controller_closed": true,
+        "counters": {
+          "evals": 250,
+          "discoveries": 223590,
+          "moves": 54,
+          "ordinary_moves": null,
+          "iso_moves": 0,
+          "novel_birth_attempts": null,
+          "novel_birth_moves": null,
+          "mean_evals": null,
+          "mean_witness_fires": null,
+          "mean_moves": null,
+          "mean_preview_rows": null,
+          "iso_flagged": 38423,
+          "iso_skipped": 46
+        },
+        "eligible_now": 776,
+        "last_eligible": 866,
+        "last_iso_flagged": 0,
+        "last_iso_moves": 0,
+        "last_moves": 1,
+        "actual_cells": null,
+        "chart_rank": null,
+        "learned_groups": null,
+        "requested_cells": null,
+        "count_multiplicity": null,
+        "mean": null,
+        "lease": null,
+        "lease_age_real_rows": null,
+        "table_settler": {
+          "s": 1.0,
+          "b": 128.0,
+          "last": {
+            "decision": "drift",
+            "step": 1272,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 32.0,
+            "t_b": 21.291786687690394,
+            "t_2b": 6.011642964125239,
+            "mean_r_b": 0.16128573939204216,
+            "mean_r_2b": 0.18765203778942427,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 3,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 0,
+            "restarts": 0,
+            "rebases": 32,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "population_active": null,
+          "last_population": null
+        },
+        "novel_attempted_cells_last": null,
+        "ordinary_inaccessible_birth_quota_last": null,
+        "selected_axes_fraction": null
+      }
+    ]
+  },
+  "progress": {
+    "RA11": [
+      {
+        "event": "training_progress",
+        "step": 100,
+        "loss_d": 0.003896478796377778,
+        "loss_g": 8.559136390686035,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 200,
+        "loss_d": 0.0034969912376254797,
+        "loss_g": 8.897056579589844,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 300,
+        "loss_d": 0.0029216150287538767,
+        "loss_g": 9.447669982910156,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 400,
+        "loss_d": 0.0029274742119014263,
+        "loss_g": 10.15333366394043,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 500,
+        "loss_d": 0.003033678513020277,
+        "loss_g": 9.900446891784668,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 600,
+        "loss_d": 0.003193628042936325,
+        "loss_g": 10.61506462097168,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 700,
+        "loss_d": 0.0024351628962904215,
+        "loss_g": 10.557737350463867,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 800,
+        "loss_d": 0.014654330909252167,
+        "loss_g": 10.78563404083252,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 900,
+        "loss_d": 0.0018014360684901476,
+        "loss_g": 9.877408027648926,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1000,
+        "loss_d": 0.0015610663685947657,
+        "loss_g": 10.06690788269043,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1100,
+        "loss_d": 0.0013401961186900735,
+        "loss_g": 9.852742195129395,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1200,
+        "loss_d": 0.0014600212452933192,
+        "loss_g": 9.8709077835083,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1300,
+        "loss_d": 0.0016152590978890657,
+        "loss_g": 10.754846572875977,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1400,
+        "loss_d": 0.0013883349020034075,
+        "loss_g": 10.245278358459473,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1500,
+        "loss_d": 0.001432763529010117,
+        "loss_g": 9.731362342834473,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1600,
+        "loss_d": 0.0017703722696751356,
+        "loss_g": 10.001842498779297,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1700,
+        "loss_d": 0.0023524498101323843,
+        "loss_g": 10.004814147949219,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1800,
+        "loss_d": 0.002077770885080099,
+        "loss_g": 9.97532844543457,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1900,
+        "loss_d": 0.0023302389308810234,
+        "loss_g": 9.972615242004395,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 2000,
+        "loss_d": 0.0019352168310433626,
+        "loss_g": 10.165190696716309,
+        "output_sigma": null
+      }
+    ],
+    "RA4": [
+      {
+        "event": "training_progress",
+        "step": 100,
+        "loss_d": 2.994647264480591,
+        "loss_g": 0.14775370061397552,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 200,
+        "loss_d": 0.654994010925293,
+        "loss_g": 1.8841865062713623,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 300,
+        "loss_d": 0.6683886647224426,
+        "loss_g": 0.8665650486946106,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 400,
+        "loss_d": 0.6477697491645813,
+        "loss_g": 0.8045660257339478,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 500,
+        "loss_d": 0.6897264122962952,
+        "loss_g": 0.7224857807159424,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 600,
+        "loss_d": 0.699161171913147,
+        "loss_g": 0.7071914076805115,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 700,
+        "loss_d": 0.6740699410438538,
+        "loss_g": 0.7171748280525208,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 800,
+        "loss_d": 0.6698129773139954,
+        "loss_g": 0.7179848551750183,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 900,
+        "loss_d": 0.6783879995346069,
+        "loss_g": 0.7337054014205933,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1000,
+        "loss_d": 0.6771222949028015,
+        "loss_g": 0.7523796558380127,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1100,
+        "loss_d": 0.692267894744873,
+        "loss_g": 0.7072254419326782,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1200,
+        "loss_d": 0.6974762678146362,
+        "loss_g": 0.708402156829834,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1300,
+        "loss_d": 0.68730229139328,
+        "loss_g": 0.7011568546295166,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1400,
+        "loss_d": 0.6878169178962708,
+        "loss_g": 0.7046211957931519,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1500,
+        "loss_d": 0.6967030167579651,
+        "loss_g": 0.7016559839248657,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1600,
+        "loss_d": 0.6907413601875305,
+        "loss_g": 0.70714271068573,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1700,
+        "loss_d": 0.6901530027389526,
+        "loss_g": 0.6937196850776672,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1800,
+        "loss_d": 0.6880409717559814,
+        "loss_g": 0.6983780860900879,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 1900,
+        "loss_d": 0.6974175572395325,
+        "loss_g": 0.6992720365524292,
+        "output_sigma": null
+      },
+      {
+        "event": "training_progress",
+        "step": 2000,
+        "loss_d": 0.6831734776496887,
+        "loss_g": 0.7069126963615417,
+        "output_sigma": null
+      }
+    ]
+  },
+  "recipes": {
+    "RA11": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 128,
+      "num_particles": 1024,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 128,
+      "total_steps": null,
+      "continuous_policy": "dv12",
+      "lr": 0.0010625,
+      "d_lr_mult": 4.0,
+      "prior_lr_mult": 8.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0,
+      "initialization": "batch_feature_zero",
+      "amsgrad": true,
+      "critic_r1_real": true,
+      "critic_payoff_damping": true,
+      "output_noise_mode": "learnable",
+      "lr_control": "stationarity",
+      "particle_birth_death": true,
+      "row_evidence_gate": true,
+      "table_release_rule": "anchor",
+      "row_evidence_hot": true,
+      "row_evidence_exclude": true,
+      "row_evidence_hold": true,
+      "birth_death_space": "critic",
+      "serve_average": 4.0,
+      "reopen_signal": "none",
+      "row_evidence_null": "scaled",
+      "birth_death_isolation": true,
+      "birth_death_feature_scale": "std",
+      "birth_death_backend": "feature_cells",
+      "birth_death_cells": 128,
+      "birth_death_metric_rank": 8,
+      "birth_death_chunk": 256,
+      "birth_death_parent_policy": "real_anchor"
+    },
+    "RA4": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 128,
+      "num_particles": 1024,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 128,
+      "total_steps": null,
+      "continuous_policy": "dv12",
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0,
+      "initialization": "batch_feature_zero",
+      "amsgrad": true,
+      "critic_r1_real": true,
+      "critic_payoff_damping": true,
+      "output_noise_mode": "learnable",
+      "lr_control": "stationarity",
+      "particle_birth_death": true,
+      "row_evidence_gate": true,
+      "table_release_rule": "anchor",
+      "row_evidence_hot": true,
+      "row_evidence_exclude": true,
+      "row_evidence_hold": true,
+      "birth_death_space": "critic",
+      "serve_average": 4.0,
+      "reopen_signal": "none",
+      "row_evidence_null": "scaled",
+      "birth_death_isolation": true,
+      "birth_death_feature_scale": "std",
+      "birth_death_backend": "feature_cells",
+      "birth_death_cells": 64,
+      "birth_death_metric_rank": 8,
+      "birth_death_chunk": 256,
+      "birth_death_parent_policy": "real_anchor"
+    },
+    "E22": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 128,
+      "num_particles": 1024,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 128,
+      "total_steps": null,
+      "continuous_policy": "dv12",
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0,
+      "initialization": "batch_feature_zero",
+      "amsgrad": true,
+      "critic_r1_real": true,
+      "critic_payoff_damping": true,
+      "output_noise_mode": "learnable",
+      "lr_control": "stationarity",
+      "particle_birth_death": true,
+      "row_evidence_gate": true,
+      "table_release_rule": "anchor",
+      "row_evidence_hot": true,
+      "row_evidence_exclude": true,
+      "row_evidence_hold": true,
+      "birth_death_space": "critic",
+      "serve_average": 4.0,
+      "reopen_signal": "none",
+      "row_evidence_null": "scaled",
+      "birth_death_isolation": true,
+      "birth_death_feature_scale": "std"
+    }
+  },
+  "sampled_RA11_axis_union": [
+    181,
+    182,
+    183,
+    184,
+    185,
+    209,
+    214,
+    262,
+    354,
+    378,
+    379,
+    381,
+    382,
+    406,
+    409,
+    433,
+    437,
+    461,
+    462,
+    490,
+    491,
+    519,
+    545,
+    546,
+    573,
+    574,
+    599,
+    627,
+    628,
+    630,
+    631
+  ],
+  "sampled_RA11_axis_union_count": 31,
+  "sampled_RA11_axis_union_fraction": 0.039540816326530615,
+  "PT_objects_loaded": 0,
+  "Torch_imported": false,
+  "model_forwards": 0,
+  "new_draws": 0,
+  "new_training_updates": 0,
+  "limits": [
+    "Native E22 flat embedding normalization differs from later active/raw metrics; FD values are not interchangeable.",
+    "Recorded milestone axes/reasons do not describe every intervening reaction; cumulative counters bound accepted actions.",
+    "Matching initialization/fixture receipts do not isolate causal changes among package/rate/serving differences.",
+    "No output-coordinate variance coverage or raw/EMA/G/D geometry is measured from JSON."
+  ]
+}

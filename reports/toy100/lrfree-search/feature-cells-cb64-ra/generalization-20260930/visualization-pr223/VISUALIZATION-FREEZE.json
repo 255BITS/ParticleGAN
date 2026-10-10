@@ -1,0 +1,62 @@
+{
+  "actual_frame_durations_ms": [
+    1200,
+    2200,
+    2200,
+    4400
+  ],
+  "actual_render_command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /tmp/pr38-default-env/bin/python render_rotated100_comparison.py > generation.log 2>&1",
+  "actual_render_working_directory": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223",
+  "all_original_scores_match": true,
+  "earlier_layout_attempts_preserved": [
+    "attempt-1",
+    "attempt-2",
+    "attempt-3"
+  ],
+  "files": {
+    "CAPTION.md": {
+      "bytes": 857,
+      "sha256": "c09eadacf54a90b6549a87946a00c7a90a9f8693222a8b0ea4e53028a493b795"
+    },
+    "GIF-RECEIPT.json": {
+      "bytes": 8636,
+      "sha256": "c542aa0ac26df1cc112a25151b3d75d7f6bca8ee8560487d094b2afba2fc9387"
+    },
+    "README.md": {
+      "bytes": 3686,
+      "sha256": "b65f0bdf68e369577cd42c9b12611aebff970ca90e6a3944d8d4e5002318cd23"
+    },
+    "generation.log": {
+      "bytes": 505,
+      "sha256": "d5650f719e77d1e259ee678bc8657fc3c0e16f0c9541b4b9519b82e1447c90d3"
+    },
+    "moving-score-comparison.json": {
+      "bytes": 3305,
+      "sha256": "deafeb7e61282e5809c28a404066c5ac016a5320d88f9352122b19763045b5b9"
+    },
+    "moving-score-comparison.md": {
+      "bytes": 1351,
+      "sha256": "d8b796bf82517dc788a1a096be85e660638d314638c0c624e33ade54f8459f19"
+    },
+    "render_rotated100_comparison.py": {
+      "bytes": 19888,
+      "sha256": "ff64c7b7bc29f0bf3c41dc0efbf36fd8ba42dc5cc5d661cf669ca2ec89e95be6"
+    },
+    "rotated100-shift-comparison.gif": {
+      "bytes": 245027,
+      "sha256": "299861d5f83c906284414fc9b767c00d396fd9305db03647c3b6ba71c2d429f0"
+    },
+    "rotated100-shift-comparison.png": {
+      "bytes": 132940,
+      "sha256": "1349bca168b0872508517dd20b485feb97b3d9b79d9c0b177623d7ce932c943c"
+    }
+  },
+  "final_preview_visually_inspected": true,
+  "gif_bytes": 245027,
+  "gif_frames": 4,
+  "input_files_verified": 30,
+  "no_training_or_model_sampling": true,
+  "output_files_verified": 6,
+  "receipt_command_note": "The receipt records the equivalent command with resolved source, study-root and output-dir paths.",
+  "status": "VERIFIED_ORIGINAL_OBSERVATIONS_AND_FINAL_RENDER"
+}

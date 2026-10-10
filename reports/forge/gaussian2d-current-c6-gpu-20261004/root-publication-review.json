@@ -1,0 +1,50 @@
+{
+  "accepted_numeric_status": "UNAVAILABLE",
+  "copied_public_files": {
+    "README.md": {
+      "bytes": 3027,
+      "sha256": "825d2f4e5fcc1a0b447372bad1a9007e4f722d815062fd4ebff28df5c434488e"
+    },
+    "gifs/goal-context.json": {
+      "bytes": 379,
+      "sha256": "2b08d6043d14e33c0272a45f4102ca49c3d473b05fe856c0049a09434643ec70"
+    },
+    "gifs/goal.gif": {
+      "bytes": 327221,
+      "sha256": "77c14c8058f4cfd03922e34934dfdf1040997ea6945fbbe68b2d17601ec0ef36"
+    },
+    "input-index.json": {
+      "bytes": 272675,
+      "sha256": "1625dbb3137b064f51f7902578a20cd660ab9b65653b928446334b4a07fc117d"
+    },
+    "results.json": {
+      "bytes": 10818,
+      "sha256": "2ef6bdbbb22047b5448286a65bce0db4420b1047c07facf51dec5887d194d84a"
+    },
+    "verification.json": {
+      "bytes": 883,
+      "sha256": "8125a3ef0e5a209bad10e6e696fa76d1099da509d9349771dc8bf4238310b119"
+    }
+  },
+  "decoded_original_gif_frames": 9,
+  "final_supervisor_attestation_present": false,
+  "independently_rehashed_input_count": 1231,
+  "models_restored": 0,
+  "paid_seconds": 180.21387464087456,
+  "private_terminal_token_and_lease_details_published": false,
+  "publisher_sha256": "c4763a202a75e916358965672e752ec51fa86e5c5582e2081b2f9f4aab445e97",
+  "raw_arrays_checkpoints_logs_copied": false,
+  "raw_completed_updates": 1000,
+  "raw_observations": 25,
+  "raw_terminal_five_all_fail": true,
+  "reserve_seconds": 0,
+  "retained_raw_verdict_unaccepted": "FAIL",
+  "sample_draws": 0,
+  "schema": "pg_gaussian2d_root_publication_review_v1",
+  "scorer_calls": 0,
+  "source_digest": "889fcdb097e3ed6e45296faf83b92364b41441d28cd3030c5eb8ce2fd127a2bd",
+  "status": "VERIFIED",
+  "supervised_status": "BUDGET_EXCEEDED",
+  "terminal_card_sha256": "e7fe31d335776e028151de055b651878da7344141c386322847d91d5b809a020",
+  "updates": 0
+}

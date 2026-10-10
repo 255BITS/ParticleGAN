@@ -1,0 +1,23 @@
+{
+  "id": "fivewords-latent-line-supplement-v1",
+  "scope": "Retrospective zero-update geometry diagnostic using original eight endpoints and retained first E-only encoded coordinates; separate from frozen384-update protocol",
+  "device": "CUDA physicalGPU1 only",
+  "cohorts": "All eight original endpoint cohorts, no selection",
+  "line_parameters": [0, 0.1, 0.25, 0.5, 0.75, 1],
+  "line": "e(t)=(1-t)*E_original(words)+t*encoded_coordinates_retained_after_first_E_only_step",
+  "fixed": ["Original G", "Original D", "Original five prior rows", "Original25 independent Cartesian word/prior pairs", "Original loss/BCAP/constants", "Original per-arm autograd mode"],
+  "measurements": ["Joint adversarial minimization loss", "Critic adversarial loss and original BCAP", "Paired inverse exactness and minimum correct-token probability", "Generated exact-five-atom law unchanged"],
+  "endpoint_controls": "t0/t1 inverse probabilities and exactness match original/frozen first-E-only saved records, maximum absolute probability error1e-5",
+  "maximum_model_updates": 0,
+  "maximum_sampling_draws": 0,
+  "maximum_forward_points": 48,
+  "maximum_runtime_seconds": 120,
+  "predictions": [
+    "Joint surrogate decreases at actual E-only endpoint while reconstruction fails: local objective/output-goal tension is present, not solely a loss-increasing oversized step",
+    "Joint surrogate increases at actual E-only endpoint while smaller latent moves decrease surrogate and retain inversion: compatible with overshoot but latent line is not a parameter trajectory",
+    "No surrogate/reconstruction disagreement: this endpoint probe does not identify mismatch"
+  ],
+  "limits": "Only t0/t1 correspond to actual E parameter states. Intermediate latent interpolation is decoder/objective geometry, not optimizer steps or a claim that interpolated parameters yield these codes. Does not diagnose chronic stochastic retention, full-game equilibrium, or global convergence.",
+  "qualification_input": false,
+  "stop_rule": "All8 endpoints once, no optimizer updates, sampling, retries, seedvariants or training changes"
+}

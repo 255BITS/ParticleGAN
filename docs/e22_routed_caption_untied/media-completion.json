@@ -1,0 +1,23 @@
+{
+  "complete": true,
+  "report_sha256": "d1fcf6383c245b5a7c1da9b10ae7c84bffde9637b4aace856b97336e8d9479fd",
+  "completion_sha256": "6f22da16795e837ef9931a4be6ba1e33f1bcec09e1c2102c16a461cdc4ad4db3",
+  "observed_media_sha256": "20c7626c4d1ef171b5feef38fa6ffa5051f8ccdc1eef4f6a9c2fa2f3288c5316",
+  "renderer_source_sha256": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b",
+  "gif_sha256": "08aa97e0f355256cad9b3026c3d7220f0e62e08aab029b33aedeb0f362abb7c3",
+  "png_sha256": "9825016cf739cc6cf8eec9871c42d0fd86c33a7cd27f27e4512c79061389bf2e",
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "fixed_initial_only_color_limit": 0.026183441794510952,
+  "native_updates": 0,
+  "host_forwards": 0,
+  "scientific_status_unchanged": "PASS",
+  "seconds": 1.3502198560163379,
+  "limit_seconds": 60
+}

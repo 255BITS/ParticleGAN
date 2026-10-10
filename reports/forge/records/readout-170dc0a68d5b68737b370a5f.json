@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "b86f62c3e4f84a43b85d366e4cc43824"
+  ],
+  "candidate_id": "k3p-a2-off-native-diagnostic",
+  "candidate_revision": "b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "BCap passed the same fixed smoke and five quality tasks in this source/runtime cohort. K3P, KA2 and matched R1/R2 remain smoke-negative; this does not rank unmeasured quality or replace earlier protocol-specific evidence. two_pole has no latent-table optimizer, so it cannot exercise A2; its metrics match K3P and establish no A2 causal conclusion.",
+  "conclusion": "This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.0637243241071701, 'mean_abs': 0.10652091354131699}. One completed attempt cost 5.425771753 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Diagnostic hypothesis: removing the active A2 sparse-row damping may change the late covariance undershoot on the unchanged named affine grid100 learned-MoG host. This isolates one mechanism; saved evidence does not predict a positive result, and no full-reference or adoption claim is made.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "b86f62c3e4f84a43b85d366e4cc43824",
+        "result_hash": "c8c8412758a87271e9fc941935b0e88043e4e117abdaa16039af7fad53740718",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "full-readouts/readout-170dc0a68d5b68737b370a5f.json",
+    "original_file_sha256": "1e7bdb45f2f332b1fd6104bd59bf8141d9cab6877b5527d78fdb791cf46a1145",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-170dc0a68d5b68737b370a5f",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "b86f62c3e4f84a43b85d366e4cc43824",
+      "compatibility_key": "48424ca3df4faba1ef6cc29ed8e8553c5464e19753d3c0c50ac2c8599cdd8d6d",
+      "cost": {
+        "adapter_seconds": 0.3454370590043254,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.425771753012668,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3114860120113008,
+        "wall_seconds": 5.425771753012668
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.0637243241071701,
+        "mean_abs": 0.10652091354131699
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

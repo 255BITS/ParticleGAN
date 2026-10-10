@@ -1,0 +1,25 @@
+{
+  "scope": "Completed saved-state/gradient/count diagnosis; immutable evidence",
+  "local_artifact_sha256": {
+    "LEADERBOARD.md": "312f0545143694e66b7380392d6ce87c0d026abd3c2f82bbfd8e548581550f66",
+    "PROTOCOL.md": "e05eb9aa3808a2c0cbc5eede11997b944d30ef6ee3ad4c57ad9a47df5e28f169",
+    "REPORT.md": "b425143a1dd7ded4d057aef77d2d45fb9d4e6ce3f138717bf38d85381798c12c",
+    "diagnose_state.py": "c48221c6393592c1509beca0917cbd30cecc2438904f2f978dfd5eeae28c8056",
+    "diagnose_support_counts.py": "872cc81397b1d3ac59d771b319f3241854cd2fde43018dbd40d938dd11ce7c55",
+    "failed-default-python.log": "9ab278e1f92337c25e704116c5f284bea27b3798af9af33d7d0ae230bb90cfd3",
+    "failed-strict-json.log": "23d521d4f5f52353b4bd874c379c5e3be7bfcdce1ae7d91b51641f5acb41b4aa",
+    "initial-state-diagnosis.json": "88ea0a4a352894725cb91f86104a38be6777ef486fbd8ed1fa2d9e10214d6f92",
+    "initial-state-diagnosis.log": "66af6b160070d4a9f0564c00465962909e933ab9773a3b3c45aff55774f09e78",
+    "manifest.json": "5339b6d9086f14cdc21f53c148ce66487bf723c26612a3703dcafdedba0eab14",
+    "results.json": "f45a018f54ad414a4ec8b67b7f311b5fef9d1d6393babeaba25b9179f507ee7f",
+    "state-diagnosis.json": "1ef3be619daa60e57b8ef49e0a82099208f83da31056f27c78455a2d6b2c28ea",
+    "state-diagnosis.log": "27357a6472b66e13eb74615842467e13095e1859f7b4f819040de3faa6e4955a",
+    "summarize.py": "faf54cc9c07d7992d4c6f9307a96fa930573d048b20b9850d6d37ef21b30d79c",
+    "support-count-diagnosis.json": "07debfadf12096aede7d5c8b5ae7bb2d26cff5992d6c39b0a8a1a733c942be2d",
+    "support-count-diagnosis.log": "0be75e2cc9c2f9e533c9d6e56e4f93ce046b692186edb6a4fa057457f8baea0b"
+  },
+  "adopted_patch": false,
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "cuda_initialized": false
+}

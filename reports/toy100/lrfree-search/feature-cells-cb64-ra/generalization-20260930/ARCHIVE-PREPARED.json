@@ -1,0 +1,3091 @@
+{
+  "bytes": 18355340,
+  "copies": [
+    {
+      "bytes": 1372,
+      "path": "PR155-BASELINE-TESTS.json",
+      "sha256": "b5f4ae9399a2718c3d354746e71e41ba1043a57014deff820129288a326609ab",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/PR155-BASELINE-TESTS.json"
+    },
+    {
+      "bytes": 690,
+      "path": "R1-CPU-PREFLIGHT.json",
+      "sha256": "c15f7e26e9995fd804f214792e715b235945252952ba7d00bdd2ed42c6d9151b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/R1-CPU-PREFLIGHT.json"
+    },
+    {
+      "bytes": 3841,
+      "path": "R1-PREPARATION.json",
+      "sha256": "240a8ac5894537dee90546b43e83b4ba30ce3d1ab033e22fb692e435a0949e08",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/R1-PREPARATION.json"
+    },
+    {
+      "bytes": 6725,
+      "path": "RA12-SOURCE-CLOSURE.json",
+      "sha256": "5afc3e3e653ac04ae230b5ecff4c46df30fb9324f2974cf158abf1f62b871fc2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA12-SOURCE-CLOSURE.json"
+    },
+    {
+      "bytes": 6683,
+      "path": "RA13-SOURCE-CLOSURE.json",
+      "sha256": "100d607781db8dacb9561ec13f4aed182a0dfa8f9647216e3560551df64115ea",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA13-SOURCE-CLOSURE.json"
+    },
+    {
+      "bytes": 1091,
+      "path": "RA13-SOURCE-REVIEW.json",
+      "sha256": "cfc23d27e01fe69f9d8c44e428dea5f844dab296a8914d1464ab605458c4be1b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA13-SOURCE-REVIEW.json"
+    },
+    {
+      "bytes": 6932,
+      "path": "RA14-SOURCE-CLOSURE.json",
+      "sha256": "a5fc0725f15a4b081bbfbb558680175165fb3bc619bac3ca7dda85d9d542c399",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA14-SOURCE-CLOSURE.json"
+    },
+    {
+      "bytes": 1481,
+      "path": "RA14-SOURCE-REVIEW.json",
+      "sha256": "80831db925dfe48d3a6bc15074067718a7f08d00dfe20a1a3346911587571d96",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA14-SOURCE-REVIEW.json"
+    },
+    {
+      "bytes": 1420,
+      "path": "ROOT-REVIEW.json",
+      "sha256": "e7ee9a8e7dbe6a34c3a6fd363ee4f6dbdc204f9a262c6c17d2edd7a75b0230b9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/ROOT-REVIEW.json"
+    },
+    {
+      "bytes": 6661,
+      "path": "build_r1.py",
+      "sha256": "a20ce8c88fe0ec84bd64b5d4c2604052fecff60f8a172c2328b7adc50dca6fba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/build_r1.py"
+    },
+    {
+      "bytes": 1769,
+      "path": "configs/RA12-auto.json",
+      "sha256": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA12-auto.json"
+    },
+    {
+      "bytes": 1798,
+      "path": "configs/RA13-settled.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA13-settled.json"
+    },
+    {
+      "bytes": 1798,
+      "path": "configs/RA14-replay.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA14-replay.json"
+    },
+    {
+      "bytes": 99,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/EXIT.json",
+      "sha256": "fa7e090b6bc80ad62122ab43e9e7c63c284351193695d26fb8bc666a42ac530c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/EXIT.json"
+    },
+    {
+      "bytes": 20145,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/FROZEN.json",
+      "sha256": "8bc21f96cbb971020f1f581a2ae10707180b5e88e85a034735464452d090d02c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/FROZEN.json"
+    },
+    {
+      "bytes": 19351,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/INPUTS-FROZEN.json",
+      "sha256": "e7b7a001715fdda943bcfa4509cf5d3dc388069a539fa184d72edb705e4f8898",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/INPUTS-FROZEN.json"
+    },
+    {
+      "bytes": 2347,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/REPORT.md",
+      "sha256": "b3b1d28472d12f6b25d6fa9ed495924e7d3445ca94fca1a28b7ca215f7e65465",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/REPORT.md"
+    },
+    {
+      "bytes": 1086,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/receipt.json",
+      "sha256": "1c86ba67973866dc3e2ac94b205a1755d28b367dcc22b008dcc88bdc6fa3b4f2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/receipt.json"
+    },
+    {
+      "bytes": 8256,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/review.py",
+      "sha256": "f4444d6a1bcc031e8f81f2017679a81c0dd59d020149aa3f5da5a98c9a4fbfba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/review.py"
+    },
+    {
+      "bytes": 105,
+      "path": "diagnostics/optimizer-surprise-dynamics/lane-review/run.log",
+      "sha256": "031b98c09f1221fd2e203e94a0a8ca5738e90f688c1d1d637c8d89f17b72cb0d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/lane-review/run.log"
+    },
+    {
+      "bytes": 99,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/EXIT.json",
+      "sha256": "13b1caa555faf6e7ad1903d51594fa9dff2ef5cccc8752b3802bfd988840b7b0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/EXIT.json"
+    },
+    {
+      "bytes": 17700,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/FROZEN.json",
+      "sha256": "1c8bdcfe9c87f33d9b15fd22ea81c5478615fcabf172780e2fe5f06667bf529f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/FROZEN.json"
+    },
+    {
+      "bytes": 16583,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/INPUTS-FROZEN.json",
+      "sha256": "6512c33fb8f00d3b52c162f68527c77fe0e69b63879c86eb19fdc971aa889826",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/INPUTS-FROZEN.json"
+    },
+    {
+      "bytes": 2892,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/REPORT.md",
+      "sha256": "75185bb5e605fb649e9d4233b6d79f70b689f2b5bd9e48a45f333d00e41bed8e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/REPORT.md"
+    },
+    {
+      "bytes": 2864,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/receipt.json",
+      "sha256": "f4dfe18f77d5f5c2834fce56173f7c3325ef2aaba49c8ee09c37d321de0e1b42",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/receipt.json"
+    },
+    {
+      "bytes": 6731,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/review.py",
+      "sha256": "acf9983337418c2c1eb58ca532b079805f9fc2aa23597c682929a1acfa9f8165",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/review.py"
+    },
+    {
+      "bytes": 105,
+      "path": "diagnostics/optimizer-surprise-dynamics/replay-alias-review/run.log",
+      "sha256": "25337426747ae7ab4f7920387916343c62ed6b2759f22410391cd530eb4df912",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/replay-alias-review/run.log"
+    },
+    {
+      "bytes": 203,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/EXIT.json",
+      "sha256": "d6a109d5eb3d9309b7c6845fa3818a5de5e91ea4a6feb6c2d8d9f37f6343f44b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/EXIT.json"
+    },
+    {
+      "bytes": 3371,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/FROZEN.json",
+      "sha256": "a1a7194763e3ecf6d83233a4cc52c5898e5007c02a96698ae1204f0b42a2365d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/FROZEN.json"
+    },
+    {
+      "bytes": 2539,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/INPUTS-FROZEN.json",
+      "sha256": "6b0011b236c4d6bff8799f44ad06dfe7fc5ee9d8b75336163ef333c98c4fa2b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/INPUTS-FROZEN.json"
+    },
+    {
+      "bytes": 428,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/LAUNCH.json",
+      "sha256": "d4b54e5b02bc3f43466d38910bb39ce568e0698d86c1a8324b7074a84e7607af",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/LAUNCH.json"
+    },
+    {
+      "bytes": 1713,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/PROTOCOL.md",
+      "sha256": "912fb7b32ce7b80cb38ea5fc9ed1f5d75118668ad90aa5cc9b0893b85b999b65",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/PROTOCOL.md"
+    },
+    {
+      "bytes": 3118,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/REPORT.md",
+      "sha256": "53b942188eb567ba71f53b63e8c71faa6d3b9a19e47d8a146217661cd2406d33",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/REPORT.md"
+    },
+    {
+      "bytes": 1202,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/receipt.json",
+      "sha256": "215633e12e8451082777c6e6da3430e72214959a1d41e8a36e1fbc0f6fa09910",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/receipt.json"
+    },
+    {
+      "bytes": 6614,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py",
+      "sha256": "af3d4f7b5abb56238baedc5779e97235a332503ef172dbf84f165cc00251b96b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py"
+    },
+    {
+      "bytes": 138896,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/result.json",
+      "sha256": "559bf3b63e134ec58bcb02a8b4c596bd0efdac09422fb7b0fd3e9b7d4dd0ba3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/result.json"
+    },
+    {
+      "bytes": 323,
+      "path": "diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/run.log",
+      "sha256": "7780cf6b5bbfff5640c2b46eebab327aa4ac8b757223110f5d9946e5ed2643b4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/run.log"
+    },
+    {
+      "bytes": 4805,
+      "path": "diagnostics/optimizer-surprise-dynamics/source-review/FROZEN.json",
+      "sha256": "706338a2a620098566b89b437061e5124fcd4930cca96fe458e1967dfc63dbbf",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/FROZEN.json"
+    },
+    {
+      "bytes": 4445,
+      "path": "diagnostics/optimizer-surprise-dynamics/source-review/PREPARATION-FROZEN.json",
+      "sha256": "542a65e5fe3037650231f69c59a1f1c6b3fa6c40ac7f2d6993eb0b1226e00dd1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/PREPARATION-FROZEN.json"
+    },
+    {
+      "bytes": 5826,
+      "path": "diagnostics/optimizer-surprise-dynamics/source-review/REPORT.md",
+      "sha256": "34e46e4ebc7a0e56eb35e1660c723433ca155595c010598794998013bd8e77d5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/REPORT.md"
+    },
+    {
+      "bytes": 20395,
+      "path": "diagnostics/optimizer-surprise-dynamics/source-review/receipt.json",
+      "sha256": "89f8d5d2201294cd7350155e974274d658e0380c26a2debf1658f6daddc25b4e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/receipt.json"
+    },
+    {
+      "bytes": 4315,
+      "path": "diagnostics/optimizer-surprise-dynamics/source-review/review_source.py",
+      "sha256": "bb43560ee583ae054e9beff71f6d1c8578e21ed2eaa5e9271aa12fb31c685285",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/review_source.py"
+    },
+    {
+      "bytes": 1213,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/CLOSURE.md",
+      "sha256": "c82d39f5517b48860618394754d767b33fe8ff2c9fdff0a9cb390b6152ee19b3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/CLOSURE.md"
+    },
+    {
+      "bytes": 99,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/EXIT-v2.json",
+      "sha256": "cdbd0070c0a7d5b672d432259028f88deb2f7bf586bedbe62ed14282f1142287",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/EXIT-v2.json"
+    },
+    {
+      "bytes": 99,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/EXIT.json",
+      "sha256": "ac97dd5ed22f40f13bb5e7a4774d08424798719734d1ada9ec30582b8b929dcf",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/EXIT.json"
+    },
+    {
+      "bytes": 16561,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/FAILED-ATTEMPT1-FROZEN.json",
+      "sha256": "f85a8c6e7783cde4734bf8a3900a0415d2f9463ccb7445396c9c876aa7b93edd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/FAILED-ATTEMPT1-FROZEN.json"
+    },
+    {
+      "bytes": 18171,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/FROZEN.json",
+      "sha256": "bb5dff93c4ec8c2a0839a262a8db5ca373dd2ba36f7238b48aea52aed6289a59",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/FROZEN.json"
+    },
+    {
+      "bytes": 17135,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/INPUTS-FROZEN-v2.json",
+      "sha256": "f2f91bcecab35a61f6ff824dcde493c33bade7c8ea3b79893793caf30baee867",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/INPUTS-FROZEN-v2.json"
+    },
+    {
+      "bytes": 15987,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/INPUTS-FROZEN.json",
+      "sha256": "77abc3080bb617494d6379efcb67b377681552feed921b3b0aadbd3e8dea7677",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/INPUTS-FROZEN.json"
+    },
+    {
+      "bytes": 2822,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/REPORT.md",
+      "sha256": "30c6763b67b9bc4910b7edda98819ecdfea823a54967a894a665712036c719a0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/REPORT.md"
+    },
+    {
+      "bytes": 7289,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review.py",
+      "sha256": "3e25b27f63a7715731fad31e471778ec4175bcfa50be8d29f249e3174fcf3460",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review.py"
+    },
+    {
+      "bytes": 7330,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review_v2.py",
+      "sha256": "e70b503790b0561ebcf46b907f1ebc246322064c0a1d7c7b5e7a532266467d17",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review_v2.py"
+    },
+    {
+      "bytes": 1686,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/receipt.json",
+      "sha256": "4cae7eebafbc3dac73c761483448daff8769b1fc6131aeb3a949194a8eba51bd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/receipt.json"
+    },
+    {
+      "bytes": 105,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/run-v2.log",
+      "sha256": "1a3fbc490532d89d59bd164613e9f3c2349aaaedcf4af00e260360b2946cdb6f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/run-v2.log"
+    },
+    {
+      "bytes": 448,
+      "path": "diagnostics/optimizer-surprise-dynamics/wiring-review/run.log",
+      "sha256": "00a9c7a5d79202dd2647e8c2158d9cf688ccc42ed5e6b2beaa451e8dd38936a7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/run.log"
+    },
+    {
+      "bytes": 2197,
+      "path": "mnist/r1-moving-observe/CLOSED.json",
+      "sha256": "72557765a534fb177b36bd0c33b5be5f7b93bd2a77c5cc8efc07f8ab09f54d48",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/CLOSED.json"
+    },
+    {
+      "bytes": 1034,
+      "path": "mnist/r1-moving-observe/COMPLETION.json",
+      "sha256": "b83d8962fd4d81c1d827fd4db58e8559f4f295d364e616c468e2edabe5b733d6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/COMPLETION.json"
+    },
+    {
+      "bytes": 9049,
+      "path": "mnist/r1-moving-observe/INPUTS.json",
+      "sha256": "29dcf35a0a679adb223c55ca539fe0843ba8e80ef0fef2b6e9e953a1a80c3542",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/INPUTS.json"
+    },
+    {
+      "bytes": 1000,
+      "path": "mnist/r1-moving-observe/LAUNCH.json",
+      "sha256": "fa8d02aa80a8872fcd4a8f6d1ca9459fdf974157de6c0e6242130caca4686166",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/LAUNCH.json"
+    },
+    {
+      "bytes": 569,
+      "path": "mnist/r1-moving-observe/PREFLIGHT.json",
+      "sha256": "93d5905b2d406e0a1509857c360b8671da34db4c07359913205c907ba02f1aff",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/PREFLIGHT.json"
+    },
+    {
+      "bytes": 1691,
+      "path": "mnist/r1-moving-observe/REPORT.md",
+      "sha256": "c8384215689abc99ad0162dcb4d1525c294f7218401d3a0d62296586c383352d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/REPORT.md"
+    },
+    {
+      "bytes": 524,
+      "path": "mnist/r1-moving-observe/SOURCE-FREEZE.json",
+      "sha256": "35ea2c173c42e795de4f61c9d37e3c520a2a0e9c7d83902e50f1bfe33bbbe743",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 2742,
+      "path": "mnist/r1-moving-observe/analysis.json",
+      "sha256": "cc36cb864f2430d37c21386e9bc96a81f45678ed94c49c1427a2308157ea6c01",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/analysis.json"
+    },
+    {
+      "bytes": 4021,
+      "path": "mnist/r1-moving-observe/capture.py",
+      "sha256": "64fac01bbff1c4fb4bfea3ce71c0fd77f929704a1c2cb31e8564785c2cb0f958",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/capture.py"
+    },
+    {
+      "bytes": 567,
+      "path": "mnist/r1-moving-observe/frozen_data.py",
+      "sha256": "8fd623a048e243ba8c61f1f4e03d785ff6d9683ac515ee14c435582d520b78ae",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/frozen_data.py"
+    },
+    {
+      "bytes": 4447,
+      "path": "mnist/r1-moving-observe/launch.py",
+      "sha256": "952419d6a93a35451bcacbc058ff26f7f0e0771e70bf69f453bfc1ec172da59f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/launch.py"
+    },
+    {
+      "bytes": 35085,
+      "path": "mnist/r1-moving-observe/observe.log",
+      "sha256": "066d406e0468daa08b8bcda6b3ebd887991480d90a70c3b4c93afc7b0deea4c0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/observe.log"
+    },
+    {
+      "bytes": 16670,
+      "path": "mnist/r1-moving-observe/result.json",
+      "sha256": "8ada56fd775c3a9f9eb9be71ed42525fd6f32d728612c3a15a7366e749bbca75",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/result.json"
+    },
+    {
+      "bytes": 11430,
+      "path": "mnist/r1-moving-observe/run_observe.py",
+      "sha256": "7977613fcc8561ea54d74e8b480795e0096ace880c3f9cf237bc39fa718b36b0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/run_observe.py"
+    },
+    {
+      "bytes": 10753,
+      "path": "mnist/r1-moving-observe/window-1000/result.json",
+      "sha256": "5af081572b0a363da53725b54bce4314bf0d8a8034c1c99be483a89fdd6eabc8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/result.json"
+    },
+    {
+      "bytes": 1105561,
+      "path": "mnist/r1-moving-observe/window-1000/trace.jsonl",
+      "sha256": "439f2ca9bb63d188674d8d9be68f05f50505717516e63bdbfc14fb07da7f0b4a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/trace.jsonl"
+    },
+    {
+      "bytes": 3938,
+      "path": "mnist/r1-moving-observe/window-500/result.json",
+      "sha256": "18d406bf79066332b5c2f515e918254df238bc80f60e2e2761217e6092a25056",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/result.json"
+    },
+    {
+      "bytes": 799344,
+      "path": "mnist/r1-moving-observe/window-500/trace.jsonl",
+      "sha256": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/trace.jsonl"
+    },
+    {
+      "bytes": 941,
+      "path": "mnist/r1-observation-supplement/CLOSED.json",
+      "sha256": "27d61bf204a02f327c730b88f5de0665fea37ef35d415fe1ff0839662ab2786b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observation-supplement/CLOSED.json"
+    },
+    {
+      "bytes": 913,
+      "path": "mnist/r1-observation-supplement/ERRATUM.json",
+      "sha256": "9799e880231c1d7c22f76c6e88b4024380d36ebc6303d40350f4803b88390cc3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observation-supplement/ERRATUM.json"
+    },
+    {
+      "bytes": 1841,
+      "path": "mnist/r1-observe/CLOSED.json",
+      "sha256": "39f50d2f54e04c06ad0bcd441b6057295bc90a2944fb5c051d45c8baf087716c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/CLOSED.json"
+    },
+    {
+      "bytes": 1013,
+      "path": "mnist/r1-observe/COMPLETION.json",
+      "sha256": "a9b1908d73b708659842868dd2141ac9a995831612686036c9cd6c1e9c6d4528",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/COMPLETION.json"
+    },
+    {
+      "bytes": 2612,
+      "path": "mnist/r1-observe/INPUTS.json",
+      "sha256": "9b8e8c9c266f59d9e39a86d8386a5d8b65b8f3a54eca0bd4ce2bce7172beb4e7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/INPUTS.json"
+    },
+    {
+      "bytes": 969,
+      "path": "mnist/r1-observe/LAUNCH.json",
+      "sha256": "b36de6fa2ac82bcfab68b0d9d0eef71cf2abf90d51592a6b3e57f0e320afad51",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/LAUNCH.json"
+    },
+    {
+      "bytes": 564,
+      "path": "mnist/r1-observe/PREFLIGHT.json",
+      "sha256": "ed323e4a3111a196897f5f72dafc2bedf231021e4aabbbd4dfc8ac817f6a4d87",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/PREFLIGHT.json"
+    },
+    {
+      "bytes": 3098,
+      "path": "mnist/r1-observe/REPORT.md",
+      "sha256": "9607d053d0f0c368935e40c48715c9107b20407ff7f8026706de2f65e904ae3c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/REPORT.md"
+    },
+    {
+      "bytes": 332,
+      "path": "mnist/r1-observe/SOURCE-FREEZE.json",
+      "sha256": "fead51eb3eea982610295a3b1f608d60eab1705856b2a192e792662d436c22ea",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 57796,
+      "path": "mnist/r1-observe/analysis.json",
+      "sha256": "35f4aa07d3445e72b235a065b8c113729e5ec7838905ece574d8c00e6421bae8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/analysis.json"
+    },
+    {
+      "bytes": 4424,
+      "path": "mnist/r1-observe/launch.py",
+      "sha256": "d51c6fd4299fadc464d12877e0907fd0b459cc1d1e360b643be6119cdc409df5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/launch.py"
+    },
+    {
+      "bytes": 19386,
+      "path": "mnist/r1-observe/mnist/result.json",
+      "sha256": "ca3933d2d731130270b1fc5dfe3e5f29152ab9394f62cb2d1ac0b0dff0a9a3e4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/result.json"
+    },
+    {
+      "bytes": 1092467,
+      "path": "mnist/r1-observe/mnist/trace.jsonl",
+      "sha256": "26f8b0ae35aeb3eac2e6eb6e25d1edab5dd3ef80a17d0eb8f2694ee98f2f9691",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/trace.jsonl"
+    },
+    {
+      "bytes": 20193,
+      "path": "mnist/r1-observe/observe.log",
+      "sha256": "a45d4acfda5542dd1e474c9822da903df589c351562eb6cccb71bf2041434992",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/observe.log"
+    },
+    {
+      "bytes": 57499,
+      "path": "mnist/r1-observe/result.json",
+      "sha256": "8b714aa1715488e5abf1a927d83f18e0aadfd71019349874838bb730f6d2b8f7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/result.json"
+    },
+    {
+      "bytes": 11699,
+      "path": "mnist/r1-observe/run_observe.py",
+      "sha256": "77b2d6b89839ed3c43c8cd40fa7943b7bda0b0ecc0073ba2aea8a6cb2aa7a31e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/run_observe.py"
+    },
+    {
+      "bytes": 32075,
+      "path": "mnist/r1-observe/toy/result.json",
+      "sha256": "3028e56eba958ce96aec4ddc69ba0e702fd034d180495cf492b977a65aa5065a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/result.json"
+    },
+    {
+      "bytes": 1918891,
+      "path": "mnist/r1-observe/toy/trace.jsonl",
+      "sha256": "58ca9b634ba8bd3a2d4b1f2e2fbfa29d3f03515334c482d17f70622da37f09d5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/trace.jsonl"
+    },
+    {
+      "bytes": 2217,
+      "path": "mnist/ra12-auto/ADAPTER-PREPARATION.json",
+      "sha256": "f39c136e88ba27f6b2b9952c9a4c6f421df049aaeaa15e9945def667c0278d15",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/ADAPTER-PREPARATION.json"
+    },
+    {
+      "bytes": 2442,
+      "path": "mnist/ra12-auto/AUDIT-SOURCE.json",
+      "sha256": "28a0d2f61eaa84425d284651d1045d09af4fc21cb678fdf03ad7c59aa81a98a5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/AUDIT-SOURCE.json"
+    },
+    {
+      "bytes": 6940,
+      "path": "mnist/ra12-auto/CLOSED.json",
+      "sha256": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CLOSED.json"
+    },
+    {
+      "bytes": 1114,
+      "path": "mnist/ra12-auto/COMPLETION-mnist.json",
+      "sha256": "a7ac0b4d2f4422ec760fc4f2e16943c81a83d8578042177d9cccd2037f176770",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/COMPLETION-mnist.json"
+    },
+    {
+      "bytes": 1047,
+      "path": "mnist/ra12-auto/COMPLETION-replay.json",
+      "sha256": "a2ba3d17a1aab14f22579db6d70857fd81bef2c2d4d18a6cbb51df80a37497f4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/COMPLETION-replay.json"
+    },
+    {
+      "bytes": 1108,
+      "path": "mnist/ra12-auto/COMPLETION-toy.json",
+      "sha256": "291f2e35b8b2a22215ae366cbceb70728219f25af5f6d39cd7acdedef2edcf27",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/COMPLETION-toy.json"
+    },
+    {
+      "bytes": 896,
+      "path": "mnist/ra12-auto/CPU-CLOSED.json",
+      "sha256": "8c2c88bc4df5676ac1b87ad8383f204ffe63b5318646ae1ce48eab218e135348",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CPU-CLOSED.json"
+    },
+    {
+      "bytes": 16152,
+      "path": "mnist/ra12-auto/INPUTS.json",
+      "sha256": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/INPUTS.json"
+    },
+    {
+      "bytes": 1030,
+      "path": "mnist/ra12-auto/LAUNCH-mnist.json",
+      "sha256": "924b3c4b7469d85a82221cfe63ab6c8fe87c0a691657cec523be5de2de79d3a0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/LAUNCH-mnist.json"
+    },
+    {
+      "bytes": 978,
+      "path": "mnist/ra12-auto/LAUNCH-replay.json",
+      "sha256": "87003edd4e7ae89ea4930e3381c94f40a305f89dc1095942ff1206124df57796",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/LAUNCH-replay.json"
+    },
+    {
+      "bytes": 1026,
+      "path": "mnist/ra12-auto/LAUNCH-toy.json",
+      "sha256": "4e84334e6561f362c054750ab1af0b974aecc7267f70013fc69ff298461dd14c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/LAUNCH-toy.json"
+    },
+    {
+      "bytes": 3386,
+      "path": "mnist/ra12-auto/PROTOCOL.md",
+      "sha256": "20a055787e3a7d02ebe975e0de939dc1862f4e34712d5ab164f45f41229f0ec7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/PROTOCOL.md"
+    },
+    {
+      "bytes": 4824,
+      "path": "mnist/ra12-auto/REPORT.md",
+      "sha256": "3ab23bba05042a95a265af13789ff9e838d10e80835f5def95a9fd180a725d57",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/REPORT.md"
+    },
+    {
+      "bytes": 1294,
+      "path": "mnist/ra12-auto/SOURCE-FREEZE.json",
+      "sha256": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 1355,
+      "path": "mnist/ra12-auto/adapter.py",
+      "sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/adapter.py"
+    },
+    {
+      "bytes": 4076,
+      "path": "mnist/ra12-auto/audit_source.py",
+      "sha256": "f09d2e2a469136044389d928c726fc4a4a827f1af7f7990e230a1854f8deb4b5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/audit_source.py"
+    },
+    {
+      "bytes": 10483,
+      "path": "mnist/ra12-auto/build_adapter.py",
+      "sha256": "1eca8fd9bac7693f5a7c98c033e61379a9297370a6af731d85afe6280e0f345f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/build_adapter.py"
+    },
+    {
+      "bytes": 7690,
+      "path": "mnist/ra12-auto/common.py",
+      "sha256": "ca88dc6087369d5d7b6f9ff13109032f965a2c661989ef7adaa39a75ac0776f9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/common.py"
+    },
+    {
+      "bytes": 15469,
+      "path": "mnist/ra12-auto/comparison.json",
+      "sha256": "2d05519b6d1c8883f712bef727107f7dfc3e05ae666167c51e806dfd87dbb981",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/comparison.json"
+    },
+    {
+      "bytes": 7275,
+      "path": "mnist/ra12-auto/contracts.py",
+      "sha256": "9209d33c76ce9cb00b1f50aeb16644e319d633f73e850278a3b42ef83836bd68",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/contracts.py"
+    },
+    {
+      "bytes": 6547,
+      "path": "mnist/ra12-auto/freeze.py",
+      "sha256": "92ba2eea7accb1875fb0c2d23bb64449ed5b3f1c3e80422ea134a4f2107c5f10",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/freeze.py"
+    },
+    {
+      "bytes": 2802,
+      "path": "mnist/ra12-auto/init-parity-current155.json",
+      "sha256": "5b120b410353deaf4faa443326375abfaac4a4690af5aca0fe6702965545ef90",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/init-parity-current155.json"
+    },
+    {
+      "bytes": 2701,
+      "path": "mnist/ra12-auto/init_parity_cpu.py",
+      "sha256": "c1c234f2800c5e616f98a5d0a00dae7c926f8ddc09a2d91250224b9440710bbe",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/init_parity_cpu.py"
+    },
+    {
+      "bytes": 4634,
+      "path": "mnist/ra12-auto/launch_first.py",
+      "sha256": "8c7f225175e31d042fb216ccdcdc9c860bf48267a172ea5cd682c0ae346d6c81",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/launch_first.py"
+    },
+    {
+      "bytes": 137472,
+      "path": "mnist/ra12-auto/logs/RA12-auto-mnist.log",
+      "sha256": "f6f3f83ca9fd9f66a613b24c8fb4273243a860c51b53b684dd6ad91b95e90050",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-mnist.log"
+    },
+    {
+      "bytes": 5173,
+      "path": "mnist/ra12-auto/logs/RA12-auto-replay.log",
+      "sha256": "55dae336b83a8d45712d838f4088d54d300f3e098d49768c103e75ff4ede3779",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-replay.log"
+    },
+    {
+      "bytes": 234654,
+      "path": "mnist/ra12-auto/logs/RA12-auto-toy.log",
+      "sha256": "caec8b6680e0dd56d7f4508cae4ac02330bfee5c3390ddb4570fbd2c953beb40",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-toy.log"
+    },
+    {
+      "bytes": 5191,
+      "path": "mnist/ra12-auto/logs/preflight-cpu.log",
+      "sha256": "3e34c749045b9c1bbd9887d46e64093d39311c3e0797af897ec04cfff28984d1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/preflight-cpu.log"
+    },
+    {
+      "bytes": 7539,
+      "path": "mnist/ra12-auto/preflight-cpu.json",
+      "sha256": "d989d293292b0eed9391a0dc409e402e6782b514fe1d5b8d345fe2f196e5082d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/preflight-cpu.json"
+    },
+    {
+      "bytes": 3061,
+      "path": "mnist/ra12-auto/preflight_cpu.py",
+      "sha256": "06848eec2dc87b61a2355f898246cde3be95aec69d0a5c375473c2651191f148",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/preflight_cpu.py"
+    },
+    {
+      "bytes": 1504,
+      "path": "mnist/ra12-auto/preparation-receipt.json",
+      "sha256": "1e2c7d70fdd6e829aff6c6e9bf2c49ac281df34974ce2f2fe08f583772f9ee45",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/preparation-receipt.json"
+    },
+    {
+      "bytes": 447633,
+      "path": "mnist/ra12-auto/replay-RA12-auto.json",
+      "sha256": "cdf551415793347fa76f3a056497391556d32d235da429b985ac86c63196c54e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay-RA12-auto.json"
+    },
+    {
+      "bytes": 15045,
+      "path": "mnist/ra12-auto/replay.py",
+      "sha256": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay.py"
+    },
+    {
+      "bytes": 219937,
+      "path": "mnist/ra12-auto/replay/mnist/RA12-auto/result.json",
+      "sha256": "86dba32f149a53d765110fde549674354df4314bd18c2cdc9cbe2700d0d1e224",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay/mnist/RA12-auto/result.json"
+    },
+    {
+      "bytes": 201531,
+      "path": "mnist/ra12-auto/replay/toy/RA12-auto/result.json",
+      "sha256": "7b39d082ea993c6810d3dde42955fe8b95dcfe797667b187171cebad8ab9274d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay/toy/RA12-auto/result.json"
+    },
+    {
+      "bytes": 14017,
+      "path": "mnist/ra12-auto/run_training.py",
+      "sha256": "9741adf986b80bba6667d2355e37731961294d79ad4416cfc389a9d320187e47",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/run_training.py"
+    },
+    {
+      "bytes": 7711,
+      "path": "mnist/ra12-auto/source-transform-receipt.json",
+      "sha256": "d8d3d67067d7c90e191effa491984203aaf79d0d42a0e72c6380b67f773da2d5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/source-transform-receipt.json"
+    },
+    {
+      "bytes": 1904,
+      "path": "mnist/ra12-auto/summarize.py",
+      "sha256": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/summarize.py"
+    },
+    {
+      "bytes": 169081,
+      "path": "mnist/ra12-auto/summary.json",
+      "sha256": "9e3b39c3750b7a397fe7e7b43377c1bb29f5e3256e484a56b9cbf0e5a018f21e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/summary.json"
+    },
+    {
+      "bytes": 19526,
+      "path": "mnist/ra12-auto/training/mnist/RA12-auto/config.json",
+      "sha256": "bd00fb5d90c029c4aab3eff4bf2735c042aa3846c3e4e8b99ccc1a238281c28b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/config.json"
+    },
+    {
+      "bytes": 1660,
+      "path": "mnist/ra12-auto/training/mnist/RA12-auto/evaluator.json",
+      "sha256": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/evaluator.json"
+    },
+    {
+      "bytes": 100166,
+      "path": "mnist/ra12-auto/training/mnist/RA12-auto/metrics.jsonl",
+      "sha256": "b0f003b1cf4db6b4c0750c9b293f67ef6cb22ca5838b5d9a89fdb87d012a08a5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/metrics.jsonl"
+    },
+    {
+      "bytes": 44239,
+      "path": "mnist/ra12-auto/training/mnist/RA12-auto/result.json",
+      "sha256": "ab9e6944490c2a9a27e04face9a64c55434ca41181c78c05d7f91f2204015501",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/result.json"
+    },
+    {
+      "bytes": 19520,
+      "path": "mnist/ra12-auto/training/toy/RA12-auto/config.json",
+      "sha256": "8718e043966bd788bcbf14011c9983792b6253d2e8b48519d172dae196feea0a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/config.json"
+    },
+    {
+      "bytes": 189066,
+      "path": "mnist/ra12-auto/training/toy/RA12-auto/metrics.jsonl",
+      "sha256": "3cfd6754dfc67b73c21520c7cc87921a1194afb6d5eccc8a1c481fd336d2c740",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/metrics.jsonl"
+    },
+    {
+      "bytes": 60156,
+      "path": "mnist/ra12-auto/training/toy/RA12-auto/result.json",
+      "sha256": "d663758b7012163a8a6f410f02e9bda9727997d80d3107bd9d03a56ae91f3e80",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/result.json"
+    },
+    {
+      "bytes": 262,
+      "path": "mnist/ra13-replay-diagnosis/CLOSED.json",
+      "sha256": "7014c8c07904c5df51bbe49d1049ac3fe6b415aa61fe0e30d38f448f4af2818d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-replay-diagnosis/CLOSED.json"
+    },
+    {
+      "bytes": 8659,
+      "path": "mnist/ra13-replay-diagnosis/DIAGNOSIS.json",
+      "sha256": "bd1ed1f2e8c4beeba7b064490669eb897b6ba911e259c1552f53324abd833056",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-replay-diagnosis/DIAGNOSIS.json"
+    },
+    {
+      "bytes": 1538,
+      "path": "mnist/ra13-replay-diagnosis/REPORT.md",
+      "sha256": "3042f0aa4a6ff426b2a24ff29cc850399d824a02cb1e9c8391eccdc260b41077",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-replay-diagnosis/REPORT.md"
+    },
+    {
+      "bytes": 2226,
+      "path": "mnist/ra13-settled/ADAPTER-PREPARATION.json",
+      "sha256": "d20dd5536d2f3d6ff4b40f508def481cec2e2969c52cc40d4731ccb5d3a84e4b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/ADAPTER-PREPARATION.json"
+    },
+    {
+      "bytes": 2442,
+      "path": "mnist/ra13-settled/AUDIT-SOURCE.json",
+      "sha256": "4ae0c086c8f86fa19cce0eaa87bda6b40c6fa7d5c325c61b9a9496c7db8818a1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/AUDIT-SOURCE.json"
+    },
+    {
+      "bytes": 8658,
+      "path": "mnist/ra13-settled/CLOSED.json",
+      "sha256": "b1fdad84be2a18918f25220fd8118a9a4181d56fe90ec90997d7a7be4522d971",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/CLOSED.json"
+    },
+    {
+      "bytes": 1130,
+      "path": "mnist/ra13-settled/COMPLETION-mnist.json",
+      "sha256": "5c137b459c0371e90c350259174a98ef4c65220961abed928fe4bdbcf701d086",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/COMPLETION-mnist.json"
+    },
+    {
+      "bytes": 1062,
+      "path": "mnist/ra13-settled/COMPLETION-replay.json",
+      "sha256": "555dd997a3afe6eba7d69a423e684b79f74e43aff69b7273f9849278f1978151",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/COMPLETION-replay.json"
+    },
+    {
+      "bytes": 1126,
+      "path": "mnist/ra13-settled/COMPLETION-toy.json",
+      "sha256": "ea3bc58ea4e65fd6468256ef73eee0f567dafa3910a3f82bec4b82fc30e6c1e4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/COMPLETION-toy.json"
+    },
+    {
+      "bytes": 896,
+      "path": "mnist/ra13-settled/CPU-CLOSED.json",
+      "sha256": "329e8243c6cdfd3e92302dcc20f0e33228caa8fd8d89dd0037fe22f0642b24d2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/CPU-CLOSED.json"
+    },
+    {
+      "bytes": 18051,
+      "path": "mnist/ra13-settled/INPUTS.json",
+      "sha256": "86b89fc333279fa6a8dca22af4790b940314fec1b2fdbb71ef2db7ac4ade86b0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/INPUTS.json"
+    },
+    {
+      "bytes": 1042,
+      "path": "mnist/ra13-settled/LAUNCH-mnist.json",
+      "sha256": "889448e48290b2ebd58c218321ef1a59e5f6e5e7efa867877cbc2e20b5262c7b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/LAUNCH-mnist.json"
+    },
+    {
+      "bytes": 990,
+      "path": "mnist/ra13-settled/LAUNCH-replay.json",
+      "sha256": "d59c7f50d1a25756478bb0ff9dc845e2a220c5de2b4108d5799519f1a5595d9f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/LAUNCH-replay.json"
+    },
+    {
+      "bytes": 1038,
+      "path": "mnist/ra13-settled/LAUNCH-toy.json",
+      "sha256": "631bb4edea732009c4da0148aef6ee505843049206f7d5b9a25ba22c58568ac7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/LAUNCH-toy.json"
+    },
+    {
+      "bytes": 2127,
+      "path": "mnist/ra13-settled/PARENT-ADAPTER.json",
+      "sha256": "e982b59a8419195edf2a6e39b3b5d8f680c9a3f699b471252afec8c5acf2ec56",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/PARENT-ADAPTER.json"
+    },
+    {
+      "bytes": 4194,
+      "path": "mnist/ra13-settled/PROTOCOL.md",
+      "sha256": "907289486b66abef6c5c57e5c3f146158e71fdf654353f1af9187e11d5f8f7ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/PROTOCOL.md"
+    },
+    {
+      "bytes": 4875,
+      "path": "mnist/ra13-settled/REPORT.md",
+      "sha256": "b3a7340514c3e05a26406ce843c28a5aacb058c62719ec6d0ef9554a47b039f7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/REPORT.md"
+    },
+    {
+      "bytes": 1294,
+      "path": "mnist/ra13-settled/SOURCE-FREEZE.json",
+      "sha256": "26c3654df83056303135c12312e5f9b74c75b2063deda1cb84e598e17228c3a5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 1355,
+      "path": "mnist/ra13-settled/adapter.py",
+      "sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/adapter.py"
+    },
+    {
+      "bytes": 4077,
+      "path": "mnist/ra13-settled/audit_source.py",
+      "sha256": "ec9f114d40c85fce203cda78d661886d8555374f976477b4251d5edf25f7ba5d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/audit_source.py"
+    },
+    {
+      "bytes": 10758,
+      "path": "mnist/ra13-settled/build_adapter.py",
+      "sha256": "52509a9f59d4783de2eb1666d595cee4da83d3bdb4143db051a192e0aa3c8de0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/build_adapter.py"
+    },
+    {
+      "bytes": 7693,
+      "path": "mnist/ra13-settled/common.py",
+      "sha256": "8da895fad8baf14c5478dcc30d37b6b79e1087488528d87e81438b2556a0aa3c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/common.py"
+    },
+    {
+      "bytes": 59207,
+      "path": "mnist/ra13-settled/comparison.json",
+      "sha256": "6704373bbcefa64002adb94ca755c26d3f654f92a78386071c74ad2bba196b9d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/comparison.json"
+    },
+    {
+      "bytes": 9833,
+      "path": "mnist/ra13-settled/contracts.py",
+      "sha256": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/contracts.py"
+    },
+    {
+      "bytes": 6783,
+      "path": "mnist/ra13-settled/freeze.py",
+      "sha256": "ee8cbfca9322e70fe24ce612cc4ca3d0b141fcaeec17cf2ba24ef2009e105d2c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/freeze.py"
+    },
+    {
+      "bytes": 2985,
+      "path": "mnist/ra13-settled/init-parity-candidate.json",
+      "sha256": "36ae9d4f8d77615808215461246b675bc4b6143d90a744e63ada5874d97974be",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/init-parity-candidate.json"
+    },
+    {
+      "bytes": 2711,
+      "path": "mnist/ra13-settled/init_parity_cpu.py",
+      "sha256": "78ab91a2492bbdaae1ba06abde2ada6e8898f135b7cba3e8023c982458cbcc85",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/init_parity_cpu.py"
+    },
+    {
+      "bytes": 4637,
+      "path": "mnist/ra13-settled/launch_first.py",
+      "sha256": "c1e38df1938a10fe786b0f1239acbc73d893886966b628502dfe1c70df520d57",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/launch_first.py"
+    },
+    {
+      "bytes": 138930,
+      "path": "mnist/ra13-settled/logs/RA13-settled-mnist.log",
+      "sha256": "f9108a421f73a72ddc91596811fa30f5001d23a149f1941071a3b879727f447c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/RA13-settled-mnist.log"
+    },
+    {
+      "bytes": 5226,
+      "path": "mnist/ra13-settled/logs/RA13-settled-replay.log",
+      "sha256": "3a7cfa087ef583d1698939b5e5987d868f84b7612442da94180dc68fea78ebc0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/RA13-settled-replay.log"
+    },
+    {
+      "bytes": 235329,
+      "path": "mnist/ra13-settled/logs/RA13-settled-toy.log",
+      "sha256": "06cfc559e889cd4d2ec64e9a38d0e58f4545afe89711eb40d24035473402732e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/RA13-settled-toy.log"
+    },
+    {
+      "bytes": 5429,
+      "path": "mnist/ra13-settled/logs/preflight-cpu.log",
+      "sha256": "7f34a3458aff4253a10cc48d72a2a2bda680c3bd251756b901bae77163e6cfd1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/preflight-cpu.log"
+    },
+    {
+      "bytes": 7885,
+      "path": "mnist/ra13-settled/preflight-cpu.json",
+      "sha256": "85dc2c0f2bd8561782d4cf2f949ddabbe840384e30c85a5bd8c466ffb0120667",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/preflight-cpu.json"
+    },
+    {
+      "bytes": 3122,
+      "path": "mnist/ra13-settled/preflight_cpu.py",
+      "sha256": "b8ff1b483514524f93abd8546dec5b66d5ae673d25cc911252d9f67adc9dd99a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/preflight_cpu.py"
+    },
+    {
+      "bytes": 1523,
+      "path": "mnist/ra13-settled/preparation-receipt.json",
+      "sha256": "5a0c1aa9b6957c983e6e2882609fc72627ac0af1b467ed3b5481640f9960e228",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/preparation-receipt.json"
+    },
+    {
+      "bytes": 487022,
+      "path": "mnist/ra13-settled/replay-RA13-settled.json",
+      "sha256": "64ef34a21d9d09cfde32a3e06e33dad2671846796b0723365e2b0950b7103d27",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay-RA13-settled.json"
+    },
+    {
+      "bytes": 15045,
+      "path": "mnist/ra13-settled/replay.py",
+      "sha256": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay.py"
+    },
+    {
+      "bytes": 247505,
+      "path": "mnist/ra13-settled/replay/mnist/RA13-settled/result.json",
+      "sha256": "2f88dbcbcc115939ce93cd4f4a3c5681114d9aac22af2dd89efde0d713cb4ce8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/mnist/RA13-settled/result.json"
+    },
+    {
+      "bytes": 210892,
+      "path": "mnist/ra13-settled/replay/toy/RA13-settled/result.json",
+      "sha256": "0c6c796f5f26d345ca7d9088b9fbc6a9ac795f8211c61b1f5b78dc11eaca9f6c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/toy/RA13-settled/result.json"
+    },
+    {
+      "bytes": 14262,
+      "path": "mnist/ra13-settled/run_training.py",
+      "sha256": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/run_training.py"
+    },
+    {
+      "bytes": 7958,
+      "path": "mnist/ra13-settled/source-transform-receipt.json",
+      "sha256": "d76bc9e9f5545dbea6cc64b26e85f8b69fdc30ba2298dbfd5cf8571986d4e144",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/source-transform-receipt.json"
+    },
+    {
+      "bytes": 1904,
+      "path": "mnist/ra13-settled/summarize.py",
+      "sha256": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/summarize.py"
+    },
+    {
+      "bytes": 21343,
+      "path": "mnist/ra13-settled/training/mnist/RA13-settled/config.json",
+      "sha256": "e7f54390a97e68a2df1da7ea03d1a13ebc7a669446c080a18afe5c43d56a259c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/config.json"
+    },
+    {
+      "bytes": 1660,
+      "path": "mnist/ra13-settled/training/mnist/RA13-settled/evaluator.json",
+      "sha256": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/evaluator.json"
+    },
+    {
+      "bytes": 101441,
+      "path": "mnist/ra13-settled/training/mnist/RA13-settled/metrics.jsonl",
+      "sha256": "93b930c21a0c27df56e7fddd111111ff5b6455de4ddc3fe715aa09dbc2b05fbb",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/metrics.jsonl"
+    },
+    {
+      "bytes": 46037,
+      "path": "mnist/ra13-settled/training/mnist/RA13-settled/result.json",
+      "sha256": "53efa51a09e75598950507bb13a698fa39355c36092f5e364267f93a0761e36d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/result.json"
+    },
+    {
+      "bytes": 21337,
+      "path": "mnist/ra13-settled/training/toy/RA13-settled/config.json",
+      "sha256": "f8fe4fc4794430ae3f84b7e2809b9fa96c677e91026264e5c081d47210b22e20",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/config.json"
+    },
+    {
+      "bytes": 189493,
+      "path": "mnist/ra13-settled/training/toy/RA13-settled/metrics.jsonl",
+      "sha256": "bb3a5b905645df4e1efc2812750aa99897e84a835d2f4d87b44938d05b5b02ca",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/metrics.jsonl"
+    },
+    {
+      "bytes": 62182,
+      "path": "mnist/ra13-settled/training/toy/RA13-settled/result.json",
+      "sha256": "48fd19d855c29196b145744aba6b941f3962bc73aa1a0f7d7c1d6e86e8991103",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/result.json"
+    },
+    {
+      "bytes": 2314,
+      "path": "mnist/ra14-replay-r2/ADAPTER-PREPARATION.json",
+      "sha256": "a6403f19de2187965f6b82dfd7b0551a2a2fbe41750f3061aa683215e40c3f2e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/ADAPTER-PREPARATION.json"
+    },
+    {
+      "bytes": 2527,
+      "path": "mnist/ra14-replay-r2/AUDIT-SOURCE.json",
+      "sha256": "872081954726cfdabfcd43664b87b3a4066b58a0e6112f8c6aa203c51ff95988",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/AUDIT-SOURCE.json"
+    },
+    {
+      "bytes": 4840,
+      "path": "mnist/ra14-replay-r2/CLOSED.json",
+      "sha256": "07ac938ad49588b320d2bc83943bf691d85aa97db55d937c081267a8c9df3d97",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/CLOSED.json"
+    },
+    {
+      "bytes": 1066,
+      "path": "mnist/ra14-replay-r2/COMPLETION-replay.json",
+      "sha256": "8c973a342c69bc2cdcecd0ea15bb2a3fefe3817b263ab0b7da9a4be06d976f0d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/COMPLETION-replay.json"
+    },
+    {
+      "bytes": 1096,
+      "path": "mnist/ra14-replay-r2/CPU-CLOSED.json",
+      "sha256": "e5f59ffe57add7542cc2f2936082fb7108661e851d90d77c21f129a92afb6de7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/CPU-CLOSED.json"
+    },
+    {
+      "bytes": 47305,
+      "path": "mnist/ra14-replay-r2/INPUTS.json",
+      "sha256": "a24ca2248affefed5f8c3c660d1b398095776d61e6a496573eaacc15824073ec",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/INPUTS.json"
+    },
+    {
+      "bytes": 992,
+      "path": "mnist/ra14-replay-r2/LAUNCH-replay.json",
+      "sha256": "e860b2458a948f3c463d4b95ccde0c1903f183cceaf258870b02ea055ffb4337",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/LAUNCH-replay.json"
+    },
+    {
+      "bytes": 1992,
+      "path": "mnist/ra14-replay-r2/PARENT-ADAPTER.json",
+      "sha256": "e85ffc5e7fe2e83697342fd0813be8535004d259780de7b8d7e3136173a1d5d3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/PARENT-ADAPTER.json"
+    },
+    {
+      "bytes": 871,
+      "path": "mnist/ra14-replay-r2/PREPARATION-REVISION.json",
+      "sha256": "466fd4b8c1486b01990e30733198d69c28e037d002b9ce39f44b92f60acf793a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/PREPARATION-REVISION.json"
+    },
+    {
+      "bytes": 5038,
+      "path": "mnist/ra14-replay-r2/PROTOCOL.md",
+      "sha256": "06cfe8291b1dca7d44fc918af461ae73564904daec48fa111fcee81186b81237",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/PROTOCOL.md"
+    },
+    {
+      "bytes": 3299,
+      "path": "mnist/ra14-replay-r2/REPORT.md",
+      "sha256": "d6c23231db804b27a8c1fd3694a2cc77cea47a4225f8a8fe346b4843c690166c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/REPORT.md"
+    },
+    {
+      "bytes": 24991,
+      "path": "mnist/ra14-replay-r2/RESTORATION-BRIDGE.json",
+      "sha256": "3e62f776b3be351d067915315951db640fec73e002f62c99bf6b73284707964e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/RESTORATION-BRIDGE.json"
+    },
+    {
+      "bytes": 1379,
+      "path": "mnist/ra14-replay-r2/SOURCE-FREEZE.json",
+      "sha256": "8a94e5da8c8e5f3978160f92becf11ce542b66f47d063eb157cca931fce51514",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 1355,
+      "path": "mnist/ra14-replay-r2/adapter.py",
+      "sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/adapter.py"
+    },
+    {
+      "bytes": 4076,
+      "path": "mnist/ra14-replay-r2/audit_source.py",
+      "sha256": "1acb25e3d2532790fe6dbef431f1e0b1a35dc91fd2056376eb4162868e90f59c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/audit_source.py"
+    },
+    {
+      "bytes": 944,
+      "path": "mnist/ra14-replay-r2/bridge-preflight-cpu.json",
+      "sha256": "0274d51e3cfc121719249087ef97722ae370b88fb669a9033c5567af31f9954e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/bridge-preflight-cpu.json"
+    },
+    {
+      "bytes": 11969,
+      "path": "mnist/ra14-replay-r2/bridge.py",
+      "sha256": "3508c3310263f3fa3ecfe35389699c43ed4039d9d48411c637a278c640a01bdf",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/bridge.py"
+    },
+    {
+      "bytes": 12894,
+      "path": "mnist/ra14-replay-r2/build_adapter.py",
+      "sha256": "fe13d13508ca2aa4c611bf6e19f1421d9df64e3e297f4ff1d92f742c1d287384",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/build_adapter.py"
+    },
+    {
+      "bytes": 7692,
+      "path": "mnist/ra14-replay-r2/common.py",
+      "sha256": "131562c85d78b9897515ee5988ed2ac326c8a5417de2248768ef0ca1533a66f7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/common.py"
+    },
+    {
+      "bytes": 9833,
+      "path": "mnist/ra14-replay-r2/contracts.py",
+      "sha256": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/contracts.py"
+    },
+    {
+      "bytes": 7180,
+      "path": "mnist/ra14-replay-r2/freeze.py",
+      "sha256": "79d438ed64ee0102aa1324108295e202c829cdfa19b93680636e95c52fc16e75",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/freeze.py"
+    },
+    {
+      "bytes": 2983,
+      "path": "mnist/ra14-replay-r2/init-parity-candidate.json",
+      "sha256": "addf071332f912a0ae293dc68554976a3fee182bc9bc61bf696efaceae2090c9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/init-parity-candidate.json"
+    },
+    {
+      "bytes": 2710,
+      "path": "mnist/ra14-replay-r2/init_parity_cpu.py",
+      "sha256": "df6ea9496b2bfbb4d848c39657af4d5adfe53c8e6ee045ac090bf930d2c55267",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/init_parity_cpu.py"
+    },
+    {
+      "bytes": 4636,
+      "path": "mnist/ra14-replay-r2/launch_first.py",
+      "sha256": "3c34b5ea34dbc8d6e2f47c8e3b732773a3b2be47b0b57afbef4b0636b5ac9999",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/launch_first.py"
+    },
+    {
+      "bytes": 5215,
+      "path": "mnist/ra14-replay-r2/logs/RA14-replay-replay.log",
+      "sha256": "20c790a8e9f40c1779106f225f23ab389cc3157f6316ac52952332f881378441",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/logs/RA14-replay-replay.log"
+    },
+    {
+      "bytes": 6292,
+      "path": "mnist/ra14-replay-r2/logs/preflight-cpu.log",
+      "sha256": "6be9a21639a0084a2935cd2b329255e83232145845c137b537bbc69125e81013",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/logs/preflight-cpu.log"
+    },
+    {
+      "bytes": 8904,
+      "path": "mnist/ra14-replay-r2/preflight-cpu.json",
+      "sha256": "d2162adab71aca27a67229fab72a1c06186ccf0dcf340e14362ade01cf727498",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/preflight-cpu.json"
+    },
+    {
+      "bytes": 3313,
+      "path": "mnist/ra14-replay-r2/preflight_cpu.py",
+      "sha256": "05fc36d53e31aecca0b6d4bd5bc396c9de15d0535bbc6c9b28d7c3e837240c1f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/preflight_cpu.py"
+    },
+    {
+      "bytes": 1058,
+      "path": "mnist/ra14-replay-r2/preparation-receipt.json",
+      "sha256": "d30c44124ad7c1fb3f56878c9fb1a3713411bea14c09c5bd2fdc9781157bcfb7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/preparation-receipt.json"
+    },
+    {
+      "bytes": 498608,
+      "path": "mnist/ra14-replay-r2/replay-RA14-replay.json",
+      "sha256": "27f08739ec5d47cc4fc9aa1d61ecb28a6c045d48dd6dc3fdc0e9ae899ad50d2d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay-RA14-replay.json"
+    },
+    {
+      "bytes": 15698,
+      "path": "mnist/ra14-replay-r2/replay.py",
+      "sha256": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay.py"
+    },
+    {
+      "bytes": 253109,
+      "path": "mnist/ra14-replay-r2/replay/mnist/RA14-replay/result.json",
+      "sha256": "c038825a0c4c1296167a737c7b3952d019189594de695268f0f964d57b657012",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay/mnist/RA14-replay/result.json"
+    },
+    {
+      "bytes": 216494,
+      "path": "mnist/ra14-replay-r2/replay/toy/RA14-replay/result.json",
+      "sha256": "e2930d51429250fd899a7085dfb95b83da4ef4182c865f1ed64184acdd41c818",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay/toy/RA14-replay/result.json"
+    },
+    {
+      "bytes": 14262,
+      "path": "mnist/ra14-replay-r2/run_training.py",
+      "sha256": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/run_training.py"
+    },
+    {
+      "bytes": 9894,
+      "path": "mnist/ra14-replay-r2/source-transform-receipt.json",
+      "sha256": "66033be2b5ea0bd67a41c65fac31f833d5497a22ae52ad32f521b0b198b9ff54",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/source-transform-receipt.json"
+    },
+    {
+      "bytes": 1904,
+      "path": "mnist/ra14-replay-r2/summarize.py",
+      "sha256": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/summarize.py"
+    },
+    {
+      "bytes": 9227,
+      "path": "mnist/ra14-replay-r2/summary.json",
+      "sha256": "2b826cc7b6c80df430e5014cb4e501c1ff80fb3fe270744612f0f7de60d6fd19",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/summary.json"
+    },
+    {
+      "bytes": 2308,
+      "path": "mnist/ra14-replay/ADAPTER-PREPARATION.json",
+      "sha256": "f9bb5766d45ff00bab3b6f645fe4e118ee6c882c6160212dbe21e586d2ed05f5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/ADAPTER-PREPARATION.json"
+    },
+    {
+      "bytes": 2527,
+      "path": "mnist/ra14-replay/AUDIT-SOURCE.json",
+      "sha256": "db407c8fc832657d37a8374fc2b843abcfa53161cd0dccf73c6b981436a551a6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/AUDIT-SOURCE.json"
+    },
+    {
+      "bytes": 2707,
+      "path": "mnist/ra14-replay/CPU-FAILED-CLOSED.json",
+      "sha256": "b05707edfaaa01db0b87f1e9c655b77c7ed669dc86440d5aedd5ebef5e0cc989",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/CPU-FAILED-CLOSED.json"
+    },
+    {
+      "bytes": 47112,
+      "path": "mnist/ra14-replay/INPUTS.json",
+      "sha256": "c9a8167d7e9164dfd79ebd800fb4f7eee79948ac8fa891fd8b1403e1041183ab",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/INPUTS.json"
+    },
+    {
+      "bytes": 1992,
+      "path": "mnist/ra14-replay/PARENT-ADAPTER.json",
+      "sha256": "e85ffc5e7fe2e83697342fd0813be8535004d259780de7b8d7e3136173a1d5d3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/PARENT-ADAPTER.json"
+    },
+    {
+      "bytes": 5038,
+      "path": "mnist/ra14-replay/PROTOCOL.md",
+      "sha256": "06cfe8291b1dca7d44fc918af461ae73564904daec48fa111fcee81186b81237",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/PROTOCOL.md"
+    },
+    {
+      "bytes": 24991,
+      "path": "mnist/ra14-replay/RESTORATION-BRIDGE.json",
+      "sha256": "3e62f776b3be351d067915315951db640fec73e002f62c99bf6b73284707964e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/RESTORATION-BRIDGE.json"
+    },
+    {
+      "bytes": 1379,
+      "path": "mnist/ra14-replay/SOURCE-FREEZE.json",
+      "sha256": "03e94e0e3c9f640e317b93bd4f2c63e42e49326b96f91799fb235d581be7ad99",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 1355,
+      "path": "mnist/ra14-replay/adapter.py",
+      "sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/adapter.py"
+    },
+    {
+      "bytes": 4076,
+      "path": "mnist/ra14-replay/audit_source.py",
+      "sha256": "1acb25e3d2532790fe6dbef431f1e0b1a35dc91fd2056376eb4162868e90f59c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/audit_source.py"
+    },
+    {
+      "bytes": 11917,
+      "path": "mnist/ra14-replay/bridge.py",
+      "sha256": "a54229aa2c4451097ea8a5a77dea1dca37db11731747963aecffbfcf18194f98",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/bridge.py"
+    },
+    {
+      "bytes": 12894,
+      "path": "mnist/ra14-replay/build_adapter.py",
+      "sha256": "fe13d13508ca2aa4c611bf6e19f1421d9df64e3e297f4ff1d92f742c1d287384",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/build_adapter.py"
+    },
+    {
+      "bytes": 7692,
+      "path": "mnist/ra14-replay/common.py",
+      "sha256": "131562c85d78b9897515ee5988ed2ac326c8a5417de2248768ef0ca1533a66f7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/common.py"
+    },
+    {
+      "bytes": 9833,
+      "path": "mnist/ra14-replay/contracts.py",
+      "sha256": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/contracts.py"
+    },
+    {
+      "bytes": 7144,
+      "path": "mnist/ra14-replay/freeze.py",
+      "sha256": "30945406ee0d836797727c4f2844dacdf6e203e806d03cbf96981c72d27885a3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/freeze.py"
+    },
+    {
+      "bytes": 2980,
+      "path": "mnist/ra14-replay/init-parity-candidate.json",
+      "sha256": "33afcd0ca817b172b1075d3312aa354f905a43f89a529f15f775eba33d0d749a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/init-parity-candidate.json"
+    },
+    {
+      "bytes": 2710,
+      "path": "mnist/ra14-replay/init_parity_cpu.py",
+      "sha256": "df6ea9496b2bfbb4d848c39657af4d5adfe53c8e6ee045ac090bf930d2c55267",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/init_parity_cpu.py"
+    },
+    {
+      "bytes": 4636,
+      "path": "mnist/ra14-replay/launch_first.py",
+      "sha256": "3c34b5ea34dbc8d6e2f47c8e3b732773a3b2be47b0b57afbef4b0636b5ac9999",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/launch_first.py"
+    },
+    {
+      "bytes": 628,
+      "path": "mnist/ra14-replay/logs/preflight-cpu.log",
+      "sha256": "fd0e1e356f7183f5745641ddaab9077128fdb63d2d7c2c31f3aaa909ff02b100",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/logs/preflight-cpu.log"
+    },
+    {
+      "bytes": 3313,
+      "path": "mnist/ra14-replay/preflight_cpu.py",
+      "sha256": "05fc36d53e31aecca0b6d4bd5bc396c9de15d0535bbc6c9b28d7c3e837240c1f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/preflight_cpu.py"
+    },
+    {
+      "bytes": 1055,
+      "path": "mnist/ra14-replay/preparation-receipt.json",
+      "sha256": "44b34526706f337e7da94fffbfff1a2a3c5e3cb138018c9e4e7959b2ad9de7fc",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/preparation-receipt.json"
+    },
+    {
+      "bytes": 15698,
+      "path": "mnist/ra14-replay/replay.py",
+      "sha256": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/replay.py"
+    },
+    {
+      "bytes": 14262,
+      "path": "mnist/ra14-replay/run_training.py",
+      "sha256": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/run_training.py"
+    },
+    {
+      "bytes": 9894,
+      "path": "mnist/ra14-replay/source-transform-receipt.json",
+      "sha256": "66033be2b5ea0bd67a41c65fac31f833d5497a22ae52ad32f521b0b198b9ff54",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/source-transform-receipt.json"
+    },
+    {
+      "bytes": 1904,
+      "path": "mnist/ra14-replay/summarize.py",
+      "sha256": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/summarize.py"
+    },
+    {
+      "bytes": 1702,
+      "path": "pkg-RA12-auto/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "pkg-RA12-auto/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6401,
+      "path": "pkg-RA12-auto/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/anchor_birth.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "pkg-RA12-auto/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "pkg-RA12-auto/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 21144,
+      "path": "pkg-RA12-auto/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/birth_phase.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "pkg-RA12-auto/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 53783,
+      "path": "pkg-RA12-auto/particlegan/continuous.py",
+      "sha256": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "pkg-RA12-auto/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "pkg-RA12-auto/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 125137,
+      "path": "pkg-RA12-auto/particlegan/feature_cells.py",
+      "sha256": "8503386c3170dd265d79eced6204ac7b60b500c874eb9a653317172ef12d9f18",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/feature_cells.py"
+    },
+    {
+      "bytes": 13747,
+      "path": "pkg-RA12-auto/particlegan/feature_policy.py",
+      "sha256": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/feature_policy.py"
+    },
+    {
+      "bytes": 32354,
+      "path": "pkg-RA12-auto/particlegan/feature_reference.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/feature_reference.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "pkg-RA12-auto/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "pkg-RA12-auto/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "pkg-RA12-auto/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/init.py"
+    },
+    {
+      "bytes": 31092,
+      "path": "pkg-RA12-auto/particlegan/k3p.py",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "pkg-RA12-auto/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/ka2.py"
+    },
+    {
+      "bytes": 38859,
+      "path": "pkg-RA12-auto/particlegan/mean_transport.py",
+      "sha256": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/mean_transport.py"
+    },
+    {
+      "bytes": 7740,
+      "path": "pkg-RA12-auto/particlegan/output_moments.py",
+      "sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/output_moments.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "pkg-RA12-auto/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 76633,
+      "path": "pkg-RA12-auto/particlegan/policy.py",
+      "sha256": "025464e7e5a57245f76209951a946370ce4f2b5c387d0b582d0964973ff97f6a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/policy.py"
+    },
+    {
+      "bytes": 20301,
+      "path": "pkg-RA12-auto/particlegan/population_continuity.py",
+      "sha256": "94fbbbc63e58e508682fea66f3afdf4500d19d27ec27089ba09b37076ea7f27c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/population_continuity.py"
+    },
+    {
+      "bytes": 45053,
+      "path": "pkg-RA12-auto/particlegan/recipes.py",
+      "sha256": "8f7b841fdd4f24822c0d1a39ab4a36e7eb6f641c0ad156ee3676dace03831f1c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/recipes.py"
+    },
+    {
+      "bytes": 63314,
+      "path": "pkg-RA12-auto/particlegan/routing.py",
+      "sha256": "77d28f7b67765a06ef5c60302a7605ce2583b727018784806e2c01180cc55197",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "pkg-RA12-auto/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 31460,
+      "path": "pkg-RA12-auto/particlegan/training.py",
+      "sha256": "6a92fd42eb05729e36454f42bb76466103315efb9a64a358f825071cffafb8db",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "pkg-RA12-auto/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 1702,
+      "path": "pkg-RA12-cpu-fix/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "pkg-RA12-cpu-fix/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6401,
+      "path": "pkg-RA12-cpu-fix/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/anchor_birth.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "pkg-RA12-cpu-fix/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "pkg-RA12-cpu-fix/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 21144,
+      "path": "pkg-RA12-cpu-fix/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/birth_phase.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "pkg-RA12-cpu-fix/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 53783,
+      "path": "pkg-RA12-cpu-fix/particlegan/continuous.py",
+      "sha256": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "pkg-RA12-cpu-fix/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "pkg-RA12-cpu-fix/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 125137,
+      "path": "pkg-RA12-cpu-fix/particlegan/feature_cells.py",
+      "sha256": "8503386c3170dd265d79eced6204ac7b60b500c874eb9a653317172ef12d9f18",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/feature_cells.py"
+    },
+    {
+      "bytes": 13747,
+      "path": "pkg-RA12-cpu-fix/particlegan/feature_policy.py",
+      "sha256": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/feature_policy.py"
+    },
+    {
+      "bytes": 32354,
+      "path": "pkg-RA12-cpu-fix/particlegan/feature_reference.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/feature_reference.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "pkg-RA12-cpu-fix/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "pkg-RA12-cpu-fix/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "pkg-RA12-cpu-fix/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/init.py"
+    },
+    {
+      "bytes": 32329,
+      "path": "pkg-RA12-cpu-fix/particlegan/k3p.py",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "pkg-RA12-cpu-fix/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/ka2.py"
+    },
+    {
+      "bytes": 38859,
+      "path": "pkg-RA12-cpu-fix/particlegan/mean_transport.py",
+      "sha256": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/mean_transport.py"
+    },
+    {
+      "bytes": 7740,
+      "path": "pkg-RA12-cpu-fix/particlegan/output_moments.py",
+      "sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/output_moments.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "pkg-RA12-cpu-fix/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 76793,
+      "path": "pkg-RA12-cpu-fix/particlegan/policy.py",
+      "sha256": "7833d8b2ef792aade646fa46231b603ac60fdf66a8d01addbee8f0f29be50931",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/policy.py"
+    },
+    {
+      "bytes": 20301,
+      "path": "pkg-RA12-cpu-fix/particlegan/population_continuity.py",
+      "sha256": "94fbbbc63e58e508682fea66f3afdf4500d19d27ec27089ba09b37076ea7f27c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/population_continuity.py"
+    },
+    {
+      "bytes": 45053,
+      "path": "pkg-RA12-cpu-fix/particlegan/recipes.py",
+      "sha256": "8f7b841fdd4f24822c0d1a39ab4a36e7eb6f641c0ad156ee3676dace03831f1c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/recipes.py"
+    },
+    {
+      "bytes": 63314,
+      "path": "pkg-RA12-cpu-fix/particlegan/routing.py",
+      "sha256": "77d28f7b67765a06ef5c60302a7605ce2583b727018784806e2c01180cc55197",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "pkg-RA12-cpu-fix/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 31460,
+      "path": "pkg-RA12-cpu-fix/particlegan/training.py",
+      "sha256": "6a92fd42eb05729e36454f42bb76466103315efb9a64a358f825071cffafb8db",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "pkg-RA12-cpu-fix/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-cpu-fix/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 1702,
+      "path": "pkg-RA13-settled/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "pkg-RA13-settled/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6401,
+      "path": "pkg-RA13-settled/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/anchor_birth.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "pkg-RA13-settled/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "pkg-RA13-settled/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 21144,
+      "path": "pkg-RA13-settled/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/birth_phase.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "pkg-RA13-settled/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 58657,
+      "path": "pkg-RA13-settled/particlegan/continuous.py",
+      "sha256": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "pkg-RA13-settled/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "pkg-RA13-settled/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 125137,
+      "path": "pkg-RA13-settled/particlegan/feature_cells.py",
+      "sha256": "8503386c3170dd265d79eced6204ac7b60b500c874eb9a653317172ef12d9f18",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/feature_cells.py"
+    },
+    {
+      "bytes": 13747,
+      "path": "pkg-RA13-settled/particlegan/feature_policy.py",
+      "sha256": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/feature_policy.py"
+    },
+    {
+      "bytes": 32354,
+      "path": "pkg-RA13-settled/particlegan/feature_reference.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/feature_reference.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "pkg-RA13-settled/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "pkg-RA13-settled/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "pkg-RA13-settled/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/init.py"
+    },
+    {
+      "bytes": 32329,
+      "path": "pkg-RA13-settled/particlegan/k3p.py",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "pkg-RA13-settled/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/ka2.py"
+    },
+    {
+      "bytes": 38859,
+      "path": "pkg-RA13-settled/particlegan/mean_transport.py",
+      "sha256": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/mean_transport.py"
+    },
+    {
+      "bytes": 7740,
+      "path": "pkg-RA13-settled/particlegan/output_moments.py",
+      "sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/output_moments.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "pkg-RA13-settled/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 79059,
+      "path": "pkg-RA13-settled/particlegan/policy.py",
+      "sha256": "b25431d38e7fa3e1bc8b6adac039485b0dda9ddd906b080e598cf7e11235194f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/policy.py"
+    },
+    {
+      "bytes": 20301,
+      "path": "pkg-RA13-settled/particlegan/population_continuity.py",
+      "sha256": "94fbbbc63e58e508682fea66f3afdf4500d19d27ec27089ba09b37076ea7f27c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/population_continuity.py"
+    },
+    {
+      "bytes": 45757,
+      "path": "pkg-RA13-settled/particlegan/recipes.py",
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/recipes.py"
+    },
+    {
+      "bytes": 63314,
+      "path": "pkg-RA13-settled/particlegan/routing.py",
+      "sha256": "77d28f7b67765a06ef5c60302a7605ce2583b727018784806e2c01180cc55197",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "pkg-RA13-settled/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 32475,
+      "path": "pkg-RA13-settled/particlegan/training.py",
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "pkg-RA13-settled/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 1702,
+      "path": "pkg-RA14-replay/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "pkg-RA14-replay/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6401,
+      "path": "pkg-RA14-replay/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/anchor_birth.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "pkg-RA14-replay/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "pkg-RA14-replay/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 21144,
+      "path": "pkg-RA14-replay/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/birth_phase.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "pkg-RA14-replay/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 58657,
+      "path": "pkg-RA14-replay/particlegan/continuous.py",
+      "sha256": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "pkg-RA14-replay/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "pkg-RA14-replay/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 125137,
+      "path": "pkg-RA14-replay/particlegan/feature_cells.py",
+      "sha256": "8503386c3170dd265d79eced6204ac7b60b500c874eb9a653317172ef12d9f18",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/feature_cells.py"
+    },
+    {
+      "bytes": 13747,
+      "path": "pkg-RA14-replay/particlegan/feature_policy.py",
+      "sha256": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/feature_policy.py"
+    },
+    {
+      "bytes": 32354,
+      "path": "pkg-RA14-replay/particlegan/feature_reference.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/feature_reference.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "pkg-RA14-replay/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "pkg-RA14-replay/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "pkg-RA14-replay/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/init.py"
+    },
+    {
+      "bytes": 32329,
+      "path": "pkg-RA14-replay/particlegan/k3p.py",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "pkg-RA14-replay/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/ka2.py"
+    },
+    {
+      "bytes": 38859,
+      "path": "pkg-RA14-replay/particlegan/mean_transport.py",
+      "sha256": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/mean_transport.py"
+    },
+    {
+      "bytes": 7740,
+      "path": "pkg-RA14-replay/particlegan/output_moments.py",
+      "sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/output_moments.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "pkg-RA14-replay/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 79220,
+      "path": "pkg-RA14-replay/particlegan/policy.py",
+      "sha256": "390e8b03df87ee72e81a11c6c242fa9dcb2934b903e6143f4eae919c0950ae08",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/policy.py"
+    },
+    {
+      "bytes": 20301,
+      "path": "pkg-RA14-replay/particlegan/population_continuity.py",
+      "sha256": "94fbbbc63e58e508682fea66f3afdf4500d19d27ec27089ba09b37076ea7f27c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/population_continuity.py"
+    },
+    {
+      "bytes": 45757,
+      "path": "pkg-RA14-replay/particlegan/recipes.py",
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/recipes.py"
+    },
+    {
+      "bytes": 63314,
+      "path": "pkg-RA14-replay/particlegan/routing.py",
+      "sha256": "77d28f7b67765a06ef5c60302a7605ce2583b727018784806e2c01180cc55197",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "pkg-RA14-replay/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 32475,
+      "path": "pkg-RA14-replay/particlegan/training.py",
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "pkg-RA14-replay/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 6016,
+      "path": "portability/cpu-fix/COMPLETION.json",
+      "sha256": "2d594a55772e971daa1bf96e4c3bcc5ee3abae44077217037b8f96d02711d2f9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/COMPLETION.json"
+    },
+    {
+      "bytes": 1555,
+      "path": "portability/cpu-fix/REPORT.md",
+      "sha256": "5d155cbfff5f594aeebca97a32dbbc621de234bbd4fd7b47813eb96aaca50a8a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/REPORT.md"
+    },
+    {
+      "bytes": 2164,
+      "path": "portability/cpu-fix/check_cpu_no_cuda.py",
+      "sha256": "18a6930436518dfb396962967bd35818fe130b43ad15ba851d28cb0e82997170",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/check_cpu_no_cuda.py"
+    },
+    {
+      "bytes": 2506,
+      "path": "portability/cpu-fix/cpu-adam-context.patch",
+      "sha256": "f92ec47a74717209f6b1a3703f77e0f759862f1051a56322318c442b5728da6c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/cpu-adam-context.patch"
+    },
+    {
+      "bytes": 2714,
+      "path": "portability/cpu-fix/frozen-reproduction.log",
+      "sha256": "be3a62660ba63d0942d842b43493004960cc69ca4ccab276ab591728145a254a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/frozen-reproduction.log"
+    },
+    {
+      "bytes": 488,
+      "path": "portability/cpu-fix/native-visible-contracts.log",
+      "sha256": "e76b779e7d05a98200356ed5594ca2d6f6bbe946d994cfbc362e1463307d0f8d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/native-visible-contracts.log"
+    },
+    {
+      "bytes": 4067,
+      "path": "portability/cpu-fix/test_cpu_optimizer_scope.py",
+      "sha256": "b2917552a6730e76de102a2eb9b29d9a687c6645fcb7cc0d95e9bdc957f4d2c5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/test_cpu_optimizer_scope.py"
+    },
+    {
+      "bytes": 488,
+      "path": "portability/cpu-fix/visible-contracts.log",
+      "sha256": "e76b779e7d05a98200356ed5594ca2d6f6bbe946d994cfbc362e1463307d0f8d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/cpu-fix/visible-contracts.log"
+    },
+    {
+      "bytes": 6932,
+      "path": "portability/replay-alias/COMPLETION.json",
+      "sha256": "a5fc0725f15a4b081bbfbb558680175165fb3bc619bac3ca7dda85d9d542c399",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/COMPLETION.json"
+    },
+    {
+      "bytes": 2207,
+      "path": "portability/replay-alias/REPORT.md",
+      "sha256": "ce6bbbaa69939cc8ac8785995ed1591961000f88821648a15b09736460a72ee5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/REPORT.md"
+    },
+    {
+      "bytes": 5767,
+      "path": "portability/replay-alias/SOURCE-BRIDGE.json",
+      "sha256": "0bd0406bf5afb4d82ad619c726af6a0f8a8dbb668bda99107c02ccfee750576a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/SOURCE-BRIDGE.json"
+    },
+    {
+      "bytes": 121,
+      "path": "portability/replay-alias/alias-contracts.log",
+      "sha256": "1d824ff287462aa45e18f2d855ff2045709b1bc9e1bdb244460c05d2375583a9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/alias-contracts.log"
+    },
+    {
+      "bytes": 234,
+      "path": "portability/replay-alias/all-contracts.log",
+      "sha256": "f954e908ccba2adbee7933608619880d03d10962f095137c8856aacf14fe7125",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/all-contracts.log"
+    },
+    {
+      "bytes": 1242,
+      "path": "portability/replay-alias/helper-only.patch",
+      "sha256": "c25a891994f4001c086b11f56c23c82666728b7097d7efbe56fb6487c7aceb93",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/helper-only.patch"
+    },
+    {
+      "bytes": 5444,
+      "path": "portability/replay-alias/test_state_transfer_alias.py",
+      "sha256": "a07fc35e6c94ca5db6f82981ca78812195c47d80c2e5113dc02ef7eef8307abe",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/replay-alias/test_state_transfer_alias.py"
+    },
+    {
+      "bytes": 6683,
+      "path": "portability/settled-guard/COMPLETION.json",
+      "sha256": "100d607781db8dacb9561ec13f4aed182a0dfa8f9647216e3560551df64115ea",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/COMPLETION.json"
+    },
+    {
+      "bytes": 2102,
+      "path": "portability/settled-guard/REPORT.md",
+      "sha256": "916df1f2eafc1e4f159a643c9db17a5579ce4f4c8b8221382a824d2cf3f11844",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/REPORT.md"
+    },
+    {
+      "bytes": 488,
+      "path": "portability/settled-guard/default-35-contracts.log",
+      "sha256": "72e5f624229542266a8fe522f95077b93baebf7d640e939d0c609ea7994189be",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/default-35-contracts.log"
+    },
+    {
+      "bytes": 271,
+      "path": "portability/settled-guard/default-r1-contracts.log",
+      "sha256": "feebd1af9b7045139831bcefa51b31890fcf94bc8b295031c6e11b256a721e73",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/default-r1-contracts.log"
+    },
+    {
+      "bytes": 148,
+      "path": "portability/settled-guard/focused-contracts.log",
+      "sha256": "6e7992232e15e0b36fc3537f4b83032f019fd7d7ef0a7243d5caf7b02e29079b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/focused-contracts.log"
+    },
+    {
+      "bytes": 18743,
+      "path": "portability/settled-guard/settled-reopen.patch",
+      "sha256": "3b290d49c6ba99a45032725a96f8a3b184da61c8d7202f3d7358f74f8e3c7d5e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/settled-reopen.patch"
+    },
+    {
+      "bytes": 11246,
+      "path": "portability/settled-guard/test_settled_guard.py",
+      "sha256": "17b0b9e5e9c6e6909f0b2b046400bdaabb7c58e0f273936a2dc0e0ac9d6645b0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/settled-guard/test_settled_guard.py"
+    },
+    {
+      "bytes": 2585,
+      "path": "pr155-baseline-pytest.log",
+      "sha256": "71450d9d9f49b46de5bd15cb1a8e853275dc2a224adc07073f545d088d333291",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pr155-baseline-pytest.log"
+    },
+    {
+      "bytes": 4205,
+      "path": "test_r1_composition.py",
+      "sha256": "94cef0c98d27de1cc43d0256a56538f8c3d4a9499b4c9fc06dbdf0668373cd07",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/test_r1_composition.py"
+    },
+    {
+      "bytes": 28787,
+      "path": "validation-ra13-r2/FULL-TESTS.json",
+      "sha256": "26622adecad4c83c8545b929edf40fa476ea550f645f62ee0264658f33b72831",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/FULL-TESTS.json"
+    },
+    {
+      "bytes": 551,
+      "path": "validation-ra13-r2/PREPARATION.json",
+      "sha256": "aa783fcf9ec5506e865468552dd5bc664bda3774b09f37ef1a8e3437a45a376c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/PREPARATION.json"
+    },
+    {
+      "bytes": 784,
+      "path": "validation-ra13-r2/SCREEN-ADAPTER.json",
+      "sha256": "013b3b7d1d8eac19ef36d0bfb4c2e998c596cec7e9eb0036283ee6422d35ad16",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/SCREEN-ADAPTER.json"
+    },
+    {
+      "bytes": 17462,
+      "path": "validation-ra13-r2/SOURCE-FREEZE.json",
+      "sha256": "2fbf6aa851e74ce3fa8f2ec0849568db919bfc7f616b530b5b0747b030ddd120",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 4402,
+      "path": "validation-ra13-r2/adapt_screen.py",
+      "sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/adapt_screen.py"
+    },
+    {
+      "bytes": 7504,
+      "path": "validation-ra13-r2/collect.py",
+      "sha256": "984dfa2ada7ff7847af3977e3352f0c8d99ba3a2a8bf7b2c9ae5361779dd2218",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/collect.py"
+    },
+    {
+      "bytes": 1885,
+      "path": "validation-ra13-r2/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/current_api_fixtures.py"
+    },
+    {
+      "bytes": 3081,
+      "path": "validation-ra13-r2/freeze.py",
+      "sha256": "3f2690e1a9e84accce35200b0513fb452a2ff48b362b6f4783706e8ce4e23001",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/freeze.py"
+    },
+    {
+      "bytes": 2577,
+      "path": "validation-ra13-r2/full-pytest.log",
+      "sha256": "f8eac0d5371d833a7ae280db88495dfb8fec22843be2314c351a83ff4c5bfd07",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/full-pytest.log"
+    },
+    {
+      "bytes": 3427,
+      "path": "validation-ra13-r2/run_all.py",
+      "sha256": "477e6869e67f0b0b3e535f991cae9999fe7bb3a77544aa5ca3c6193af24ed45c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/run_all.py"
+    },
+    {
+      "bytes": 3253,
+      "path": "validation-ra13-r2/run_full_suite.py",
+      "sha256": "6a7f1684ab9fcb5f0c7c731b9ab653a444e449dd00413b029d4162a40842d229",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/run_full_suite.py"
+    },
+    {
+      "bytes": 5244,
+      "path": "validation-ra13-r2/run_moving.py",
+      "sha256": "e90bcf468ef50a4df64dbf47102aa41c899fdb464f3e2e7339bad47a16dc42fd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/run_moving.py"
+    },
+    {
+      "bytes": 5503,
+      "path": "validation-ra13-r2/run_screen.py",
+      "sha256": "1eb139bf71a05957078ba7bbdbe3ca00552607d68a1b7c2a66e9a11ab6d42562",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/run_screen.py"
+    },
+    {
+      "bytes": 66175,
+      "path": "validation-ra13-r2/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/screen_current.py"
+    },
+    {
+      "bytes": 634,
+      "path": "validation-ra13/PREPARATION.json",
+      "sha256": "023a74b9f8c80a7ff4d75417543bd96c2082d1d73c268e5c02250340832cae65",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/PREPARATION.json"
+    },
+    {
+      "bytes": 784,
+      "path": "validation-ra13/SCREEN-ADAPTER.json",
+      "sha256": "013b3b7d1d8eac19ef36d0bfb4c2e998c596cec7e9eb0036283ee6422d35ad16",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/SCREEN-ADAPTER.json"
+    },
+    {
+      "bytes": 17093,
+      "path": "validation-ra13/SOURCE-FREEZE.json",
+      "sha256": "50b21e9fce4ca0d75f6ec8467ca0ea96d99cfd211da80c3a352c0f500a6b8f8f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 4402,
+      "path": "validation-ra13/adapt_screen.py",
+      "sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/adapt_screen.py"
+    },
+    {
+      "bytes": 7504,
+      "path": "validation-ra13/collect.py",
+      "sha256": "984dfa2ada7ff7847af3977e3352f0c8d99ba3a2a8bf7b2c9ae5361779dd2218",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/collect.py"
+    },
+    {
+      "bytes": 1885,
+      "path": "validation-ra13/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/current_api_fixtures.py"
+    },
+    {
+      "bytes": 2838,
+      "path": "validation-ra13/freeze.py",
+      "sha256": "535a2bbf787ee27fd2acebedc24a9c568124200e67116bb19324211faeabfca6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/freeze.py"
+    },
+    {
+      "bytes": 3427,
+      "path": "validation-ra13/run_all.py",
+      "sha256": "477e6869e67f0b0b3e535f991cae9999fe7bb3a77544aa5ca3c6193af24ed45c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/run_all.py"
+    },
+    {
+      "bytes": 3253,
+      "path": "validation-ra13/run_full_suite.py",
+      "sha256": "6a7f1684ab9fcb5f0c7c731b9ab653a444e449dd00413b029d4162a40842d229",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/run_full_suite.py"
+    },
+    {
+      "bytes": 5244,
+      "path": "validation-ra13/run_moving.py",
+      "sha256": "e90bcf468ef50a4df64dbf47102aa41c899fdb464f3e2e7339bad47a16dc42fd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/run_moving.py"
+    },
+    {
+      "bytes": 5503,
+      "path": "validation-ra13/run_screen.py",
+      "sha256": "1eb139bf71a05957078ba7bbdbe3ca00552607d68a1b7c2a66e9a11ab6d42562",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/run_screen.py"
+    },
+    {
+      "bytes": 66175,
+      "path": "validation-ra13/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13/screen_current.py"
+    },
+    {
+      "bytes": 374,
+      "path": "validation-ra14/PREPARATION.json",
+      "sha256": "46567fa9731152a90a8f5c3ba670d21e44c42573ae4dfff430702cf7677659ff",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/PREPARATION.json"
+    },
+    {
+      "bytes": 784,
+      "path": "validation-ra14/SCREEN-ADAPTER.json",
+      "sha256": "013b3b7d1d8eac19ef36d0bfb4c2e998c596cec7e9eb0036283ee6422d35ad16",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/SCREEN-ADAPTER.json"
+    },
+    {
+      "bytes": 17400,
+      "path": "validation-ra14/SOURCE-FREEZE.json",
+      "sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 4402,
+      "path": "validation-ra14/adapt_screen.py",
+      "sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/adapt_screen.py"
+    },
+    {
+      "bytes": 7504,
+      "path": "validation-ra14/collect.py",
+      "sha256": "984dfa2ada7ff7847af3977e3352f0c8d99ba3a2a8bf7b2c9ae5361779dd2218",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/collect.py"
+    },
+    {
+      "bytes": 1885,
+      "path": "validation-ra14/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/current_api_fixtures.py"
+    },
+    {
+      "bytes": 3078,
+      "path": "validation-ra14/freeze.py",
+      "sha256": "bbbcf376e254e6347bffd0b9953802f2871a7f499d565cc012098f8a37f2b6d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/freeze.py"
+    },
+    {
+      "bytes": 117,
+      "path": "validation-ra14/logs/collect-img_bars4.log",
+      "sha256": "464c80055b25253aaf78c7e52919eefffb436732a56d52dd60dddb51fd615f69",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-img_bars4.log"
+    },
+    {
+      "bytes": 118,
+      "path": "validation-ra14/logs/collect-img_blobs4.log",
+      "sha256": "ab9c39f0b15819b08b2a56f92410036ac5a18a7a28cebe8eaf09e4daf9b99aed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-img_blobs4.log"
+    },
+    {
+      "bytes": 122,
+      "path": "validation-ra14/logs/collect-img_intensity2.log",
+      "sha256": "dbda8b604c0c1e803e41477ec9b4a8059d37107f856783c3540c1285ff4f0f09",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-img_intensity2.log"
+    },
+    {
+      "bytes": 120,
+      "path": "validation-ra14/logs/collect-img_stripes2.log",
+      "sha256": "95147dd2fbf0ec1f9500e3223d43c03be97c74d4f39d17d1ba2ec97c7d81b477",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-img_stripes2.log"
+    },
+    {
+      "bytes": 117,
+      "path": "validation-ra14/logs/collect-mode_hold.log",
+      "sha256": "ad9764089e740ec8b6bd7fd756e0f0e89f6e5cc808271a996a4d0a8f7230e43d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-mode_hold.log"
+    },
+    {
+      "bytes": 126,
+      "path": "validation-ra14/logs/collect-vector_anisotropic.log",
+      "sha256": "114dd3cf1ff2224d99d6e5d0b193b470afd3604265312834eb9822b9b126cece",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_anisotropic.log"
+    },
+    {
+      "bytes": 122,
+      "path": "validation-ra14/logs/collect-vector_overlap.log",
+      "sha256": "4978b7744a25d4d9056feace6f23a55b2911b07457b6cd8f699e3e0e279c1706",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_overlap.log"
+    },
+    {
+      "bytes": 121,
+      "path": "validation-ra14/logs/collect-vector_spiral.log",
+      "sha256": "9496939ea8076f8303eebb1576ea0f0cee5e1950ac5d0f826ddc4843e2aff3bd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_spiral.log"
+    },
+    {
+      "bytes": 124,
+      "path": "validation-ra14/logs/collect-vector_two_broad.log",
+      "sha256": "fafc42b1026edcef6ccac91b8d5de45361fcc8b1f5ea639db1bf5376c00ecf97",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_two_broad.log"
+    },
+    {
+      "bytes": 127,
+      "path": "validation-ra14/logs/collect-vector_unequal_mass.log",
+      "sha256": "176eff9e67f06f3b47a99598cd8de94aca96f0b1b8279d1c32591f76534567fe",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_unequal_mass.log"
+    },
+    {
+      "bytes": 128,
+      "path": "validation-ra14/logs/collect-vector_unequal_width.log",
+      "sha256": "b5e07155c4199e0f3179940bea7d9dd6ffbaed27e85153bba00045fde870c8ae",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/collect-vector_unequal_width.log"
+    },
+    {
+      "bytes": 2295,
+      "path": "validation-ra14/logs/screen-img_bars4.log",
+      "sha256": "8ceed3148a32fa5979e496e4d4023477111c8722517ead9d0f274e505ea5fc8c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-img_bars4.log"
+    },
+    {
+      "bytes": 2329,
+      "path": "validation-ra14/logs/screen-img_blobs4.log",
+      "sha256": "012a6cc0f5f7c21aafca92a79750ca6e5fc06c8924e355a57a4a0a1e229e3126",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-img_blobs4.log"
+    },
+    {
+      "bytes": 2294,
+      "path": "validation-ra14/logs/screen-img_intensity2.log",
+      "sha256": "0521fda9a85bd0423b379b9b3884656b6939ee0a658a606bd895950b0df0b0f2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-img_intensity2.log"
+    },
+    {
+      "bytes": 2309,
+      "path": "validation-ra14/logs/screen-img_stripes2.log",
+      "sha256": "819b05ec7399beb2636bf8f53f734b378d7b8f8db26274e083185472cb0ef5b5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-img_stripes2.log"
+    },
+    {
+      "bytes": 2365,
+      "path": "validation-ra14/logs/screen-mode_hold.log",
+      "sha256": "ded5a4584aa8a6d81997f083b1a136115983c3fab0233786dbf657cc34e492b9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-mode_hold.log"
+    },
+    {
+      "bytes": 9419,
+      "path": "validation-ra14/logs/screen-vector_anisotropic.log",
+      "sha256": "a93b01219fe4f624ac8825ef998de182b3ec15dc57eb5b07b0f64ebe1c173f08",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_anisotropic.log"
+    },
+    {
+      "bytes": 4773,
+      "path": "validation-ra14/logs/screen-vector_overlap.log",
+      "sha256": "5c0c2e3d0c9ea1703e13f0b681d81d3b5a55acecc397da3b2e792e1587a88ed1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_overlap.log"
+    },
+    {
+      "bytes": 4771,
+      "path": "validation-ra14/logs/screen-vector_spiral.log",
+      "sha256": "d37fd75506466a18d32ea4bfcb8a995157a0c197a7e14e64ae49ccc4386098a3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_spiral.log"
+    },
+    {
+      "bytes": 9422,
+      "path": "validation-ra14/logs/screen-vector_two_broad.log",
+      "sha256": "d1d6b5fceff0d5ac462320406b47737704cd174cd89ed7dacaf519dbe7f920dd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_two_broad.log"
+    },
+    {
+      "bytes": 9424,
+      "path": "validation-ra14/logs/screen-vector_unequal_mass.log",
+      "sha256": "1309850e03247ed29811afc4dec806514c6f2b1453b029f9469ac52461be908d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_unequal_mass.log"
+    },
+    {
+      "bytes": 9407,
+      "path": "validation-ra14/logs/screen-vector_unequal_width.log",
+      "sha256": "5b87d07b8d26e2be01e8776956d951c093c69d98336df3f00793052a883b629e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-vector_unequal_width.log"
+    },
+    {
+      "bytes": 3427,
+      "path": "validation-ra14/run_all.py",
+      "sha256": "477e6869e67f0b0b3e535f991cae9999fe7bb3a77544aa5ca3c6193af24ed45c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/run_all.py"
+    },
+    {
+      "bytes": 3253,
+      "path": "validation-ra14/run_full_suite.py",
+      "sha256": "6a7f1684ab9fcb5f0c7c731b9ab653a444e449dd00413b029d4162a40842d229",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/run_full_suite.py"
+    },
+    {
+      "bytes": 5244,
+      "path": "validation-ra14/run_moving.py",
+      "sha256": "bc3e8eda5d838c942999eada6b1d51cf4cef04009432609f580639bf6559a3a4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/run_moving.py"
+    },
+    {
+      "bytes": 5502,
+      "path": "validation-ra14/run_screen.py",
+      "sha256": "7161705fabe419616d5ec93021014011f9a24d1833e925751c73b985b12da5ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/run_screen.py"
+    },
+    {
+      "bytes": 4844,
+      "path": "validation-ra14/runs/img_bars4/acceptance-receipt.json",
+      "sha256": "c4e2bdd445130bef664b9f477226ef963a80341de06af685835ac876970c80c3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2536,
+      "path": "validation-ra14/runs/img_bars4/execution-receipt.json",
+      "sha256": "107bd0be8bd0e141dfbb7cd62ffb9896b82c541f7f778e6d3581c968fb036481",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/execution-receipt.json"
+    },
+    {
+      "bytes": 2693,
+      "path": "validation-ra14/runs/img_bars4/job-header.json",
+      "sha256": "d40a62f81ce5d4e2409dc4de915c6dab4d6327152c6e60ae5fe0dda18d1d0ae8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/job-header.json"
+    },
+    {
+      "bytes": 172493,
+      "path": "validation-ra14/runs/img_bars4/metrics.jsonl",
+      "sha256": "022711158af85796aae0cea6975667f820ae3ecfd834f4f10e6cd7c464d85e39",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/metrics.jsonl"
+    },
+    {
+      "bytes": 75743,
+      "path": "validation-ra14/runs/img_bars4/rates.jsonl",
+      "sha256": "d206c196caf7ad6f0796495e5826e4976184c92afe0ae4b7a7b6f4f7366a638e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/rates.jsonl"
+    },
+    {
+      "bytes": 6710,
+      "path": "validation-ra14/runs/img_bars4/result.json",
+      "sha256": "20da0e951443849c05fc2d5fded4a6ab24fd4fbb71ce916da2b003e0be236bc3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/result.json"
+    },
+    {
+      "bytes": 4668,
+      "path": "validation-ra14/runs/img_blobs4/acceptance-receipt.json",
+      "sha256": "4d047fac8cbcd59f17b7ce8f26f6e85d296c090b7dc88fe3af5eaa9c3c80ac4e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2536,
+      "path": "validation-ra14/runs/img_blobs4/execution-receipt.json",
+      "sha256": "c926fa0efab9e5d5b0830d83ad88bd1506a649c12d3ccb45865c812c9652bd05",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/execution-receipt.json"
+    },
+    {
+      "bytes": 2694,
+      "path": "validation-ra14/runs/img_blobs4/job-header.json",
+      "sha256": "c9a4bcb22bb4d2d7ca3e9ea6574a27cdfae3c1ff19de2bd08f7ece7413fefcee",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/job-header.json"
+    },
+    {
+      "bytes": 173099,
+      "path": "validation-ra14/runs/img_blobs4/metrics.jsonl",
+      "sha256": "db557f20287fd2d3c57e34434e0c99809967e8087fe4a29d2a4d966ab569733e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/metrics.jsonl"
+    },
+    {
+      "bytes": 75562,
+      "path": "validation-ra14/runs/img_blobs4/rates.jsonl",
+      "sha256": "3d6f94b854d39321eb9994d48b2b52e933b5d86bd6e406a90a1aa8fd0d9acc87",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/rates.jsonl"
+    },
+    {
+      "bytes": 6722,
+      "path": "validation-ra14/runs/img_blobs4/result.json",
+      "sha256": "17dd707b69c8297b879b24329826b541f3faf9b08f4ade29e9a8603d864d4933",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/result.json"
+    },
+    {
+      "bytes": 4752,
+      "path": "validation-ra14/runs/img_intensity2/acceptance-receipt.json",
+      "sha256": "5da50ed61c004a0269142e7a6eb723d964f9046ff0b487c9566f7b40ee44160f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2548,
+      "path": "validation-ra14/runs/img_intensity2/execution-receipt.json",
+      "sha256": "6dd6ede5bb0b32b5fa9c9690895dd9b50ff2fbf5710bbecd3e6a732a33373b3a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/execution-receipt.json"
+    },
+    {
+      "bytes": 2698,
+      "path": "validation-ra14/runs/img_intensity2/job-header.json",
+      "sha256": "cd9e235edba61e1d66874f98e5cf125e0a8eee938da694196a147fcc90fa343b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/job-header.json"
+    },
+    {
+      "bytes": 169722,
+      "path": "validation-ra14/runs/img_intensity2/metrics.jsonl",
+      "sha256": "0b732ccc4e09cfdfec9959ed47d37b881a405802bee86b6cc2fe8f59dfd375c6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/metrics.jsonl"
+    },
+    {
+      "bytes": 75994,
+      "path": "validation-ra14/runs/img_intensity2/rates.jsonl",
+      "sha256": "a3fca095a8f9506a3b1cd92991a27cf909ba56561ed49e774cb129bf91f9db33",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/rates.jsonl"
+    },
+    {
+      "bytes": 6619,
+      "path": "validation-ra14/runs/img_intensity2/result.json",
+      "sha256": "8c294b0a1516a9cee556375843e939376071610535b87a67f8cc1a63472700be",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/result.json"
+    },
+    {
+      "bytes": 4552,
+      "path": "validation-ra14/runs/img_stripes2/acceptance-receipt.json",
+      "sha256": "683c7c4630837cf8beb456ed641e1017a237e3e82b844408fb683d0cad862d5a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2541,
+      "path": "validation-ra14/runs/img_stripes2/execution-receipt.json",
+      "sha256": "b0c57ab004f1fced2b9826396374bd1cb7039b0d323724c621c85c5596593cd7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/execution-receipt.json"
+    },
+    {
+      "bytes": 2696,
+      "path": "validation-ra14/runs/img_stripes2/job-header.json",
+      "sha256": "311bcf3ed61c8b348be3423033b456b38c1a0fa54886430e76689745f6349e9a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/job-header.json"
+    },
+    {
+      "bytes": 169126,
+      "path": "validation-ra14/runs/img_stripes2/metrics.jsonl",
+      "sha256": "48e1c9c533fed305b7af01b7e7a338ac5d66fa25cc56560ffb5d4397c1822789",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/metrics.jsonl"
+    },
+    {
+      "bytes": 75555,
+      "path": "validation-ra14/runs/img_stripes2/rates.jsonl",
+      "sha256": "f609db2b879b4dfaaec51ce13dbb21e6342f6dc0e38912f2bf30b7ac916224da",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/rates.jsonl"
+    },
+    {
+      "bytes": 6550,
+      "path": "validation-ra14/runs/img_stripes2/result.json",
+      "sha256": "74ef5d71a191f90119f448fb0edce19380d8f9f1e3b72bbca7c60e1c780d03f8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/result.json"
+    },
+    {
+      "bytes": 4504,
+      "path": "validation-ra14/runs/mode_hold/acceptance-receipt.json",
+      "sha256": "c6d33e0f438a03c23fbadb5dd577b96c4bc2f29ed6eca904b48efa3e65f03990",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2537,
+      "path": "validation-ra14/runs/mode_hold/execution-receipt.json",
+      "sha256": "faff824dc52854d993e0cf387f98c30bd24bfb1342ad966a75d763900add496f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/execution-receipt.json"
+    },
+    {
+      "bytes": 2693,
+      "path": "validation-ra14/runs/mode_hold/job-header.json",
+      "sha256": "d7d5dc4710d6d27636acc8129cc27724b161c0a91a09aa65368c2b6913a7c151",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/job-header.json"
+    },
+    {
+      "bytes": 161797,
+      "path": "validation-ra14/runs/mode_hold/metrics.jsonl",
+      "sha256": "b469359e09614971559acc5cdf2b9c5bed9204a795ec50ffbdcf3c1ec2376de6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/metrics.jsonl"
+    },
+    {
+      "bytes": 152853,
+      "path": "validation-ra14/runs/mode_hold/rates.jsonl",
+      "sha256": "bd9841f68351a89c701efdf4e80a64088bfe3150c160532c7b35301aa3ad245b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/rates.jsonl"
+    },
+    {
+      "bytes": 6742,
+      "path": "validation-ra14/runs/mode_hold/result.json",
+      "sha256": "05e082e53bb37c0a50a52fd92213a58c386bf9ad0760b175c4239c01c8f708c1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/result.json"
+    },
+    {
+      "bytes": 5141,
+      "path": "validation-ra14/runs/vector_anisotropic/acceptance-receipt.json",
+      "sha256": "a927e6d3ca8998734050f961c43327b9de1596ead6d5796986fe155d3bbd7bb0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2554,
+      "path": "validation-ra14/runs/vector_anisotropic/execution-receipt.json",
+      "sha256": "7f7b1d2570b84be55e5ac6e1ce52b1d49fa8ac50be02267df88587f91c301d2e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/execution-receipt.json"
+    },
+    {
+      "bytes": 2702,
+      "path": "validation-ra14/runs/vector_anisotropic/job-header.json",
+      "sha256": "6edaba00b85a5de68b4985ec66cae6a65cde6b8ae112342e3dc73066b24b83f1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/job-header.json"
+    },
+    {
+      "bytes": 208176,
+      "path": "validation-ra14/runs/vector_anisotropic/metrics.jsonl",
+      "sha256": "2dacc377e444e5beee38cd19c070a25f97ba5d412e53c5c37b0de1c7a0f0cb08",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/metrics.jsonl"
+    },
+    {
+      "bytes": 153674,
+      "path": "validation-ra14/runs/vector_anisotropic/rates.jsonl",
+      "sha256": "1e57085301395b20ca28a04a0410c6ccbd98e4814171e14895cc78d233974fc7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/rates.jsonl"
+    },
+    {
+      "bytes": 9219,
+      "path": "validation-ra14/runs/vector_anisotropic/result.json",
+      "sha256": "5a9a8602171371cbf8e6fb5e40cf58b4ed585ca4eae60f1511087e211c09e33f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/result.json"
+    },
+    {
+      "bytes": 4524,
+      "path": "validation-ra14/runs/vector_overlap/acceptance-receipt.json",
+      "sha256": "51901bd19617f06097cab8bfed89cbd39b1a7151778246fcaffd953a47513ded",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2546,
+      "path": "validation-ra14/runs/vector_overlap/execution-receipt.json",
+      "sha256": "ed8a800a938765013ee1dd6c38bfbf9fc7091190c48523e94bb227d9a28a997a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/execution-receipt.json"
+    },
+    {
+      "bytes": 2698,
+      "path": "validation-ra14/runs/vector_overlap/job-header.json",
+      "sha256": "ae7a5303a6e13a13191bb342d8769ace8022189937c4ed74a1bfd41a3eb5462c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/job-header.json"
+    },
+    {
+      "bytes": 165320,
+      "path": "validation-ra14/runs/vector_overlap/metrics.jsonl",
+      "sha256": "da42d55845ddaec1c810309255eddfa0de9e5abe3d7c0da255c01fad196e098a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/metrics.jsonl"
+    },
+    {
+      "bytes": 154916,
+      "path": "validation-ra14/runs/vector_overlap/rates.jsonl",
+      "sha256": "e5859508427e56c062308af400e7ba0e0b2341fefc87b72754a9f57f84e33c3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/rates.jsonl"
+    },
+    {
+      "bytes": 7142,
+      "path": "validation-ra14/runs/vector_overlap/result.json",
+      "sha256": "22aed56ad9330051323bccdaa2c11267c9ca7675e4f9c9ecd417507263a030d3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/result.json"
+    },
+    {
+      "bytes": 4532,
+      "path": "validation-ra14/runs/vector_spiral/acceptance-receipt.json",
+      "sha256": "fbf95deab9a6a2f030a872a6e03f7b5f77d8922dc69d4238399311591c2fec5e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2545,
+      "path": "validation-ra14/runs/vector_spiral/execution-receipt.json",
+      "sha256": "9ae8b7bb217e2fd1f331eb69ca4719748b0ea5bc3ede304651584e7e8539eca0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/execution-receipt.json"
+    },
+    {
+      "bytes": 2697,
+      "path": "validation-ra14/runs/vector_spiral/job-header.json",
+      "sha256": "84e18d126252f6e13a26685cc550c43ea395de5f05a50d32ebdbe88148ccb6e9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/job-header.json"
+    },
+    {
+      "bytes": 166343,
+      "path": "validation-ra14/runs/vector_spiral/metrics.jsonl",
+      "sha256": "0b34c54883dc8185da91ba99998ef4595e9a2f72c395f1145823fcb5e4a4069a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/metrics.jsonl"
+    },
+    {
+      "bytes": 205165,
+      "path": "validation-ra14/runs/vector_spiral/rates.jsonl",
+      "sha256": "401929e77fd9e6e738dd42a350c1c2302e57134c4dfcb83c5a7bb37ab27c32bd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/rates.jsonl"
+    },
+    {
+      "bytes": 7139,
+      "path": "validation-ra14/runs/vector_spiral/result.json",
+      "sha256": "94a09d15115525d3b0e57167fc86cc7e85e76d33c13af2db66f161ac9dd871a1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/result.json"
+    },
+    {
+      "bytes": 5003,
+      "path": "validation-ra14/runs/vector_two_broad/acceptance-receipt.json",
+      "sha256": "4b4b706117f115b2242a29de4cb1b7708e84af0ae050283a50942ef125de4a6d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2547,
+      "path": "validation-ra14/runs/vector_two_broad/execution-receipt.json",
+      "sha256": "0b0396f0ba6361b20d3b2a2d2847d4a90cdbfe93b1ca23e4d97bbe86f24a9040",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/execution-receipt.json"
+    },
+    {
+      "bytes": 2700,
+      "path": "validation-ra14/runs/vector_two_broad/job-header.json",
+      "sha256": "3fc2ee216fb55c770af91abf81fafe7558ea25893c773e565e8e1cb1cae25cba",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/job-header.json"
+    },
+    {
+      "bytes": 199653,
+      "path": "validation-ra14/runs/vector_two_broad/metrics.jsonl",
+      "sha256": "f9dcdd6f01853b6d7eadd7c9b1440c440c97ec02a84470153bba7348d7331ee6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/metrics.jsonl"
+    },
+    {
+      "bytes": 152503,
+      "path": "validation-ra14/runs/vector_two_broad/rates.jsonl",
+      "sha256": "d302fbf97922f10767e0547ed6866508bedcca8f8b56549580362f9b47a40c3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/rates.jsonl"
+    },
+    {
+      "bytes": 8843,
+      "path": "validation-ra14/runs/vector_two_broad/result.json",
+      "sha256": "ecfda819dfbb94df39b31057806cd08a536b2d4aa9f155160de0df9ea12fdb65",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/result.json"
+    },
+    {
+      "bytes": 5214,
+      "path": "validation-ra14/runs/vector_unequal_mass/acceptance-receipt.json",
+      "sha256": "c7419cbb59808c770fa5827a91a277bddfb2e0cb38facab5d9110472d40811f6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2556,
+      "path": "validation-ra14/runs/vector_unequal_mass/execution-receipt.json",
+      "sha256": "d50ca0a5b0f95d9dd560944a45da4dc80d5234294679f5388dfd36c5e9ac6228",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/execution-receipt.json"
+    },
+    {
+      "bytes": 2703,
+      "path": "validation-ra14/runs/vector_unequal_mass/job-header.json",
+      "sha256": "0b861799c5dbbf27c4c4fb81b6efc151849d832a23667e70b9eb80edea648996",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/job-header.json"
+    },
+    {
+      "bytes": 212895,
+      "path": "validation-ra14/runs/vector_unequal_mass/metrics.jsonl",
+      "sha256": "9149b7ee626a64762e956b4bd32bd519599444134a307214a0724d93fcb0d375",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/metrics.jsonl"
+    },
+    {
+      "bytes": 152734,
+      "path": "validation-ra14/runs/vector_unequal_mass/rates.jsonl",
+      "sha256": "95a83f4550050528e244df83dc5f9a27cf5eb69f7c3ba44d508d531048913fd8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/rates.jsonl"
+    },
+    {
+      "bytes": 9603,
+      "path": "validation-ra14/runs/vector_unequal_mass/result.json",
+      "sha256": "145062fb770f1ba95cbf5ee1ef2a9fc82954dbc8ff402347f12b72aee5ee9523",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/result.json"
+    },
+    {
+      "bytes": 5159,
+      "path": "validation-ra14/runs/vector_unequal_width/acceptance-receipt.json",
+      "sha256": "bc6d08e61ad311a0fc6a04208541fc1b3bb272747d3074ff03e56a960c35b8d4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/acceptance-receipt.json"
+    },
+    {
+      "bytes": 2559,
+      "path": "validation-ra14/runs/vector_unequal_width/execution-receipt.json",
+      "sha256": "54177b4709adb8afa7d0c173cd9c554f044bf0c1c7877a0c38484832dd7fbcb4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/execution-receipt.json"
+    },
+    {
+      "bytes": 2704,
+      "path": "validation-ra14/runs/vector_unequal_width/job-header.json",
+      "sha256": "03a3b3e8632d8a464779f1dfbc7dd310b4aefb50dac56e950fb3417d9a2fb894",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/job-header.json"
+    },
+    {
+      "bytes": 208680,
+      "path": "validation-ra14/runs/vector_unequal_width/metrics.jsonl",
+      "sha256": "a76a1378275b645a42f0eeebd4f39e6469dd7ce71e0237284cdc27b633da1e6f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/metrics.jsonl"
+    },
+    {
+      "bytes": 152253,
+      "path": "validation-ra14/runs/vector_unequal_width/rates.jsonl",
+      "sha256": "8a41c1b94c66f047fcd21956fce5d9d39aba5d62a909890e76ed5a50201b24e6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/rates.jsonl"
+    },
+    {
+      "bytes": 9228,
+      "path": "validation-ra14/runs/vector_unequal_width/result.json",
+      "sha256": "f56e013ac33245fa0708c6eacc473947ad1d012e643530c4e0f39f756b490bd6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/result.json"
+    },
+    {
+      "bytes": 66175,
+      "path": "validation-ra14/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/screen_current.py"
+    },
+    {
+      "bytes": 6591,
+      "path": "preparation/REPORT-DRAFT.md",
+      "sha256": "a00a5c3a25811a567dd45b63ea9b8fe0712c5c29d42c10cfc576f5a6f8a71bf0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/REPORT-DRAFT.md"
+    },
+    {
+      "bytes": 233633,
+      "path": "preparation/INVENTORY.json",
+      "sha256": "484bb263f164473054c05d15ac5f428d5b47cda635700b17ed352f0f97087177",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/INVENTORY.json"
+    },
+    {
+      "bytes": 899,
+      "path": "preparation/FROZEN.json",
+      "sha256": "456ea94ba6b57dfcb5123ceddfe06cea597513c32f344db93aea7af3b15addc2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/FROZEN.json"
+    },
+    {
+      "bytes": 1511,
+      "path": "preparation/QUEUE-SNAPSHOT.json",
+      "sha256": "bc13a17a30b75942f62b116c37f55d37d9293b0410eb6b7a494c26b2e689b760",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/QUEUE-SNAPSHOT.json"
+    }
+  ],
+  "files": 514,
+  "status": "PREPARED_FINAL_GATES_PENDING"
+}

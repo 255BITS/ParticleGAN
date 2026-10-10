@@ -1,0 +1,209 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "add962b4d0bedb71deb050640538fc3a99994a42e66ddb399a53e4c59aa1e919",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-mid_scale_identity",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-af5b9867d53f",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 55.66584592894651,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-mid_scale_identity/result.json",
+            "artifact_sha256": "d81f3556c54fa82275e48eb3bce0d6672cca1c9432639d05f68c4cb5d3be5b37",
+            "id": "k3p-toy-mid_scale_identity",
+            "snapshot": "results/k3p-toy-mid_scale_identity.json.gz",
+            "snapshot_sha256": "24b671a6e00f76009f0ac4f9a5ddd6e6718fdc64e05c5230304f645f6d583c8d"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-mid_scale_identity/result.json",
+        "artifact_sha256": "d81f3556c54fa82275e48eb3bce0d6672cca1c9432639d05f68c4cb5d3be5b37",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-mid_scale_identity",
+        "kind": "toy",
+        "live": {
+          "concept_cos_minus": 0.9999856948852539,
+          "concept_cos_plus": 0.999912440776825,
+          "concept_mag_minus": 0.9949060678482056,
+          "concept_mag_plus": 0.9975622892379761,
+          "identity_at_0": 0.9966030772435983,
+          "identity_at_mid": 0.9900592461126427
+        },
+        "raw_status": "PASS",
+        "seconds": 55.66584592894651,
+        "snapshot": "results/k3p-toy-mid_scale_identity.json.gz",
+        "snapshot_sha256": "24b671a6e00f76009f0ac4f9a5ddd6e6718fdc64e05c5230304f645f6d583c8d",
+        "task": "mid_scale_identity",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 27.239992985036224,
+            "confirmed_step": 400,
+            "first_pass_step": 267,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 17,
+            "passing_suffix": 17,
+            "stable_from_seconds": 19.00332416384481,
+            "stable_from_step": 267
+          },
+          "metrics": [
+            {
+              "margin": 0.14991244077682497,
+              "metric": "concept_cos_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.999912440776825
+            },
+            {
+              "margin": 0.14998569488525393,
+              "metric": "concept_cos_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9999856948852539
+            },
+            {
+              "margin": 0.24756228923797607,
+              "metric": "concept_mag_plus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9975622892379761
+            },
+            {
+              "margin": 0.2524377107620239,
+              "metric": "concept_mag_plus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9975622892379761
+            },
+            {
+              "margin": 0.24490606784820557,
+              "metric": "concept_mag_minus",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.75,
+              "value": 0.9949060678482056
+            },
+            {
+              "margin": 0.25509393215179443,
+              "metric": "concept_mag_minus",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.25,
+              "value": 0.9949060678482056
+            },
+            {
+              "margin": 0.14660307724359833,
+              "metric": "identity_at_0",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9966030772435983
+            },
+            {
+              "margin": 0.14005924611264275,
+              "metric": "identity_at_mid",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9900592461126427
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "mid_scale_identity"
+    }
+  ]
+}

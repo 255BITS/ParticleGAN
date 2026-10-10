@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "id": "grid100_affine_square_named_v1_14k",
+  "adapter": "native100_continuation",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "problem": "grid100",
+    "steps": 14000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "incremental_steps": 7000,
+    "continuation_of": "grid100_affine_square_named_v1",
+    "claim": "clockfree",
+    "preserve_prefix_steps": 7000,
+    "original_schedule_horizon": 7000,
+    "native_profile": {
+      "id": "native_affine_square_named_v1",
+      "revision": 1,
+      "source": {
+        "path": "configs/toy100/constraints_simple_regularization.json",
+        "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+      }
+    },
+    "host_definition": {
+      "generator": {
+        "kind": "linear",
+        "in_features": 2,
+        "out_features": 2,
+        "bias": true
+      },
+      "discriminator": {
+        "kind": "simple_mlp",
+        "in_dim": 2,
+        "hidden_dim": 128,
+        "n_hidden": 3,
+        "fourier": 3
+      },
+      "resources": {
+        "z_dim": 2,
+        "num_particles": 20000,
+        "batch_size": 2048
+      },
+      "initialization": {
+        "generator": {
+          "method": "identity_linear_v1"
+        },
+        "discriminator": {
+          "method": "xavier_uniform_zero_bias_v1",
+          "gain": 1.0
+        },
+        "prior": {
+          "method": "sample_distributions_v1",
+          "parameters": {
+            "z": {
+              "kind": "uniform",
+              "low": -5.0,
+              "high": 5.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "native_accuracy",
+    "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+    "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+    "scoring_weights": "live",
+    "eval_interval": 250,
+    "early_eval_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100
+    ],
+    "eval_samples": 20000,
+    "minimum_stable_checks": 5,
+    "holdout_samples": 100000,
+    "coverage_thresholds": {
+      "min_samples": 20000,
+      "min_modes": 100,
+      "min_hq_mode_mass": 0.005,
+      "min_precision": 0.97,
+      "max_mass_tv": 0.1,
+      "max_mode_mass": 0.02,
+      "min_cov_eig_ratio": 0.4,
+      "max_cov_eig_ratio": 1.7,
+      "min_radial_median_ratio": 0.65,
+      "max_radial_median_ratio": 1.4,
+      "all_finite": true
+    },
+    "accuracy_limits": {
+      "mass_tv": 0.06,
+      "center_rms_sigma": 0.2,
+      "abs_cov_trace_bias": 0.1,
+      "radial_ks": 0.04
+    },
+    "sources": {
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    "evaluator_revision": {
+      "id": "native100-manifest-sampling-v2",
+      "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+      "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged."
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 7200
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": [
+    {
+      "task": "grid100_affine_square_named_v1",
+      "kind": "checkpoint"
+    },
+    {
+      "task": "clockfree_audit",
+      "kind": "gate"
+    }
+  ]
+}

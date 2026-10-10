@@ -1,0 +1,7 @@
+{
+  "GPU_operations": 0,
+  "error": "apply_patch rejected duplicate operations on PROTOCOL.md before any edits; retried with separate operations",
+  "model_calls": 0,
+  "status": "RETAINED_PRE_FREEZE_ADAPTER_EDIT_ERROR",
+  "training_updates": 0
+}

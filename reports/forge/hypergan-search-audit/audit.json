@@ -1,0 +1,104 @@
+{
+  "current_recipe_critic_group": {
+    "amsgrad": false,
+    "betas": [
+      0.6119661196611966,
+      0.5612256122561226
+    ],
+    "eps": 0.3087330873308733,
+    "lr": 0.003947939479394794
+  },
+  "current_recipe_generator_group": {
+    "amsgrad": false,
+    "betas": [
+      0.6119661196611966,
+      0.5612256122561226
+    ],
+    "eps": 0.3087330873308733,
+    "lr": 0.008020980209802098
+  },
+  "dense_adam_analytic_probe": {
+    "d": {
+      "absolute_gap": 0.00020441590867593322,
+      "equivalent_pytorch_eps_at_step_1": 0.014181844834777656,
+      "equivalent_pytorch_eps_at_step_100": 0.007500075000750029,
+      "gradient": 0.001,
+      "pytorch_first_step_magnitude_same_numeric_eps": 0.00046445936995219997,
+      "tf_dense_first_step_magnitude": 0.00026004346127626675
+    },
+    "g": {
+      "absolute_gap": 8.72390388080633e-06,
+      "equivalent_pytorch_eps_at_step_1": 0.4660822259696909,
+      "equivalent_pytorch_eps_at_step_100": 0.3087330873308733,
+      "gradient": 0.001,
+      "pytorch_first_step_magnitude_same_numeric_eps": 2.5896426755445927e-05,
+      "tf_dense_first_step_magnitude": 1.7172522874639596e-05
+    }
+  },
+  "direct_factory_critic_override_group": {
+    "amsgrad": false,
+    "betas": [
+      0.1051710517105171,
+      0.7203172031720317
+    ],
+    "eps": 0.007500075000750007,
+    "lr": 0.003947939479394794
+  },
+  "expected_rejections": {
+    "d_betas": "unknown or forbidden Recipe grid field: d_betas",
+    "d_eps": "unknown or forbidden Recipe grid field: d_eps",
+    "duplicate": "grid axis contains duplicate choices",
+    "enable_beta1": "search changes technique mechanisms: network_moments, prior_moments; declare a structural idea instead of a hyperparameter trial",
+    "g_betas": "unknown or forbidden Recipe grid field: g_betas",
+    "g_eps": "unknown or forbidden Recipe grid field: g_eps",
+    "loss": "forbidden Recipe grid field (fixed host/protocol/sampling law): loss",
+    "optimizer_family": "forbidden Recipe grid field (fixed host/protocol/sampling law): optimizer_family",
+    "over_256": "search grid exceeds the 256-configuration declaration limit",
+    "random_strategy": "search spec contains unsupported fields",
+    "seed": "unknown or forbidden Recipe grid field: seed"
+  },
+  "grid_counts": {
+    "cartesian": 4,
+    "coupled": 2,
+    "pair_as_literal_choice": 2,
+    "union": 3
+  },
+  "historical_file_sha256": "158eefe34b89eace25d206a8dc4ee8d5990f2658f396f632984832cd122ef223",
+  "installed_adam_source_sha256": "6f4a96e7bccd5e233a66f846c39f7a9da0157cf657c2275d2a269a78a6b90921",
+  "loss_probe": {
+    "current_d": 0.6666666666666666,
+    "d_absolute_gap": 0.5000000000000001,
+    "d_fake_gradient_max_gap": 0.3333333333333333,
+    "fake_scores": [
+      -1.0,
+      0.0,
+      1.0
+    ],
+    "g_absolute_gap": 0.0,
+    "legacy_d": 1.1666666666666667,
+    "real_scores": [
+      0.0,
+      1.0,
+      2.0
+    ]
+  },
+  "rate_mapping": {
+    "d_lr_mult": 0.4922016232592352,
+    "lr": 0.008020980209802098
+  },
+  "schema": "forge_hypergan_search_audit_v1",
+  "scope": "configuration and analytic software audit; no training qualification",
+  "software_checks": "PASS",
+  "source_sha256": {
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/views/discriminator_stability.json": "584c73bed0a5bab6db1112cb3b2d68c9c05475d6382d1477c3cc5ee583114871",
+    "experiments/forge/boundaries.py": "9a290d98182cd62e4e72338d04ef03ec2f9f66eeca581c3667d6b750758a2412",
+    "experiments/forge/configuration_search.py": "1a0876f126e7746bc1226d901cc33561df262f5f7253bb002bbf57e7054bb4cd",
+    "experiments/forge/techniques.py": "2479978300898bdd5da5ec48cac371d124fb686e4f0763b2b607d29ac0ae1cd0",
+    "particlegan/gan_loss.py": "2ba031aa3c162bc6c4666c7dd43a2aac295ed2a841f7855e6b0a28b29eca6b2f",
+    "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+    "particlegan/recipes.py": "f22cbd46e8d2b30a8e984e688595b8dd914b60a99a807399080180fbf55d5dc1"
+  },
+  "torch_version": "2.14.0+cu130",
+  "training_updates": 0
+}

@@ -1,0 +1,32 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 5400,
+    "task_seconds": {
+      "img_bars4": 1800,
+      "img_intensity2": 1800,
+      "mode_hold": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "develop-20260929-quick-baseline-v1",
+  "profile": "develop-20260929-quick-v1",
+  "profile_sha256": "b830c83f70f639573f82ca1590d02df8711bedec7574c3eae01293201bceaf89",
+  "purpose": "Measure the three-task quick screen against merged develop on K3P before expanding to controls or references. Use live clean samples, the learned-MoG mode_hold prior and explicitly declared image particle-cloud exceptions. Diagnostic-only results cannot confer ordinary qualification. Review all three outcomes and costs before expanding.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "The original three-lineage screen cannot meet adoption. Measure the already-proposed alternate screen on the substantive baseline first; review the complete bounded result before any further expansion.",
+      "tasks": [
+        "mode_hold",
+        "img_bars4",
+        "img_intensity2"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

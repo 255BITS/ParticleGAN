@@ -1,0 +1,42 @@
+{
+  "all_npz_loads_allow_pickle_false": true,
+  "changed_terminal_card_rejected": true,
+  "exact_repeated_json_identity": true,
+  "input_count": 99,
+  "matched_clocks": 24,
+  "numpy_rng_unchanged": true,
+  "old_existing_diagnostic_counts_decodes_and_geometry_equal": true,
+  "python_rng_unchanged": true,
+  "reader": {
+    "bytes": 20677,
+    "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/compare_retained.py",
+    "sha256": "0266c399b3034e87e8c6ab515dff374fedfd6d56fed510ce29b312c18aa9424e"
+  },
+  "report": {
+    "bytes": 250771,
+    "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/comparison-final.json",
+    "sha256": "f533b7bf9daa97c02f3fd2ec41acaa4c67cce7ed9e05021e8acfc9d77c8e68d9"
+  },
+  "schema": "pg_word_retained_comparison_verification_v1",
+  "scope": {
+    "checkpoint_deserializations": 0,
+    "cuda_initialized": false,
+    "default_credit": false,
+    "forwards": 0,
+    "model_constructions": 0,
+    "model_restores": 0,
+    "numerical_grades_changed": false,
+    "official_scorer_calls": 0,
+    "old_invalid_recertified": false,
+    "optimizer_updates": 0,
+    "qualification_input": false,
+    "samples_drawn": 0,
+    "speed_credit": false
+  },
+  "spec": {
+    "bytes": 1236,
+    "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/inputs.json",
+    "sha256": "42dc978d05b41bffd513ba69e7e2981d0aa4d4ea1ed98a78e79b19211e111570"
+  },
+  "status": "PASS_SAVED_ARRAY_REPRODUCTION"
+}

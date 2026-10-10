@@ -1,0 +1,38 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Disable the public critic gradient penalty by setting reg_coeff=0; preserve the other K3P components, prior, initialization and screening RNG streams.",
+    "Pin the K3P formulation explicitly: parent records provenance, not recipe inheritance; the current public default is KA2."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.",
+  "id": "forge-no-critic-penalty",
+  "lifecycle": "proposed",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Structural ablation: remove the critic penalty contribution. This is a negative-control hypothesis, not an assumed negative outcome.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p",
+    "forge-onboarding-anchor-ablation",
+    "reports/forge/EXPERIMENT_MEMORY.md"
+  ],
+  "recipe_overrides": {
+    "reg_coeff": 0.0,
+    "name": "k3p",
+    "critic_formulation": "k3p"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 1
+}

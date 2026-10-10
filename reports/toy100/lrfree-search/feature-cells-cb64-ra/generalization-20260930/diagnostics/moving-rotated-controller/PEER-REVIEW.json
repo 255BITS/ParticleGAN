@@ -1,0 +1,52 @@
+{
+  "active_groups": 99,
+  "alpha": 0.00012919896640826875,
+  "authoritative": false,
+  "checkpoint_loads": 0,
+  "gpu_operations": 0,
+  "inactive_zero_observations": 112,
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-recovery/isolation-arrays.npz": "23fd6083e8a77abe10ee17cb82180ef743698196f4f26ffc19d57dc7a4db67e1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-recovery/raw-space-isolation.json": "1d45afb206c1aa0ee8e19e8901dac55c706aa02fbbdbce83ff005cc4c7fa8a6f"
+  },
+  "known_range": 25.298221281347036,
+  "limitations": [
+    "Raw-space isolation uses evaluator-only target centers; production must use its own frozen critic chart.",
+    "Original ephemeral critic chart is absent from saved checkpoint, so raw group99 is not a critic group assertion.",
+    "Bounded conditional iid algebra is not a new population guarantee for an adaptive trained chart/FIFO.",
+    "Positive witness does not guarantee legal packets, serving coherence or an original quality-gate pass."
+  ],
+  "lower_bound": 0.5195955732330525,
+  "mean": 0.6245780718230066,
+  "missing_raw_groups": [
+    99
+  ],
+  "model_calls": 0,
+  "multiplicity": 387,
+  "observations": 10000,
+  "original_critic_chart_reproduced": false,
+  "original_even_mass": 1.0,
+  "radius": 6.324555320336759,
+  "range_penalty": 0.05695294348035773,
+  "requirements": [
+    "Freeze active groups using even-real and pre-action EMA support before odd data or count actions.",
+    "Set both inactive weights and inactive directions to zero without renormalization.",
+    "Retain every odd row, including zero-direction observations, and unchanged alpha and 4r range.",
+    "Exclude initially inactive groups from pair and packet eligibility before division by EMA count.",
+    "After count actions, veto if any initially active group is empty; never expand the frozen mask.",
+    "Retain complete raw-output axes up to8, shared action budget and95percent serving coherence.",
+    "Activate only feature backend after existing typed R1 fires; default and no-fire code remain equivalent."
+  ],
+  "retained_even_mass": 0.9891,
+  "rng_draws": 0,
+  "scalar_max": 5.071459671669559,
+  "scalar_min": -3.834743175665311,
+  "scope": "Raw-space isolation, not original critic chart reproduction",
+  "scorer_calls": 0,
+  "status": "PASS_CPU_ALGEBRA_ONLY",
+  "training_updates": 0,
+  "variance_ddof1": 1.195586937470374,
+  "variance_penalty": 0.04802955510959642,
+  "verdict": "APPROVE conditional bounded-score algebra and source-only causal test",
+  "weights_renormalized": false
+}

@@ -1,0 +1,13 @@
+# Fixed bounded function-motion feasibility
+
+This private design is prospective. No production source, gate, seed, output noise, serving choice, or saved input may change. Two fixed RA7 checkpoints, 100 and 2000, test early and late behavior. The repeated saved beta1=0 gradient constructs one private next joint Adam/A2 proposal; it is neither a historical action nor the actual next gradient.
+
+The chart uses the saved current FIFO's last 128 rows plus 256 deterministic older rows, forwarded through the current saved D once. It fits the original reference/calibration feature chart on those 384 rows with a private copy of saved CPU RNG state. Probes are 128 evenly spaced saved table rows held detached across every candidate. No whole-table generator forward or Jacobian is allowed.
+
+Each fitted cell's even-reference members supply an at most rank-eight covariance, shrunk with the existing SCALE_PRIOR=4 toward cell_scale squared/rank. No cross-cell neighbors enter covariance. Each probe is paired to the original observed real representative of its initial cell. Displacement is normalized by the larger of local real RMS width and initial distance to that real representative in this covariance. The existing Q=.05 declares a fixed 95% probe motion quantile budget of sqrt(Q). This is an engineering budget, not a p-value or quality certificate.
+
+Activation requires initial p>Q/inside probes to represent at least 1-Q of even real reference mass in the original real-only coarse topology. It uses no step number, ground-truth mode, oracle annotation or quality metric. The first acceptable fraction in 1, 1/2, 1/4, 1/8 is chosen; at most four candidate feature forwards are permitted. If active and all fail, G parameters stay fixed. If the real chart is invalid or no compatible learned feature backend exists, the original update must be an explicit neutral fallback.
+
+Only G parameter displacement is interpolated. The joint optimizer advances exactly once, retaining full prior, sigma, moments, A2 history and step count. The G tester must receive applied LR/base (fraction times nominal/base), with the original prior/sigma ratios; EMA runs once after acceptance using the unchanged averaging rate. Mode, buffers, hooks, gradients and all RNG streams must be unchanged by probing. These contracts are demonstrated on private copies; production integration and CUDA timing are not authorized by this proof.
+
+The bounded real chart is rebuilt deterministically from current saved state for each decision. No stale D or guard cache is retained, so no hidden cache affects resume. A production law would still need declared policy/settings/schema and complete same-law continuation tests before use.

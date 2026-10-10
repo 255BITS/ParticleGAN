@@ -1,0 +1,48 @@
+{
+  "evaluator_result": {
+    "attempted": true,
+    "confirmation_fraction": 2.0,
+    "convergence": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": null,
+      "first_pass_step": null,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "stable_from_seconds": null,
+      "stable_from_step": null
+    },
+    "metrics": [
+      {
+        "margin": -0.2975543525069952,
+        "metric": "mean_abs",
+        "op": ">=",
+        "status": "FAIL",
+        "threshold": 0.3,
+        "value": 0.002445647493004799
+      },
+      {
+        "margin": 0.9891030043363571,
+        "metric": "grad_med",
+        "op": "<=",
+        "status": "PASS",
+        "threshold": 1.0,
+        "value": 0.010896995663642883
+      }
+    ],
+    "passed": false,
+    "shortfall": 0.495923920844992,
+    "status": "FAIL"
+  },
+  "gate_status": "FAIL",
+  "metrics": {
+    "grad_med": 0.010896995663642883,
+    "mean_abs": 0.002445647493004799
+  },
+  "reasons": [
+    "recomputed complete live curve and terminal suffix"
+  ],
+  "status": "FAIL"
+}

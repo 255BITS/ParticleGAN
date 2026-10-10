@@ -1,0 +1,1086 @@
+{
+  "accepted_native3_status": "PENDING_PUBLICATION_COST_FINALIZATION",
+  "accepted_original_gate_counts": {
+    "FAIL": 0,
+    "PASS": 0,
+    "UNAVAILABLE": 3
+  },
+  "all_required_case_evidence_complete": false,
+  "authoritative_metadata_cost_addendum": "FINAL_COST.json",
+  "authoritative_metadata_ledger_path": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+  "claims": {
+    "clean_or_forced_ema_primary_credit": false,
+    "current26_qualification": false,
+    "default_adoption": false,
+    "full_new_source_original19_credit": false,
+    "named10500_cost_pooling": false,
+    "old_grades_are_current_credit": false,
+    "scope": "three fresh native geometry cases under the original full-winner noisy selected law",
+    "speed_ranking": false
+  },
+  "completed": 0,
+  "cost_snapshot_before_publication": {
+    "aggregate_cap_seconds": 10800,
+    "aggregate_overrun_seconds": 0.0,
+    "case_caps_sum_seconds": 4290,
+    "charged_seconds": 3226.540324063506,
+    "current_case_charged_seconds": 2.0496059330180287,
+    "current_case_paid_wall_seconds": 2.0496059330180287,
+    "current_case_reserved_seconds": 0.0,
+    "export_grace_seconds": 0,
+    "halt_required": false,
+    "metadata": {
+      "blocked": false,
+      "charged_seconds": 58.64882700750604,
+      "overrun_seconds": 0.0,
+      "paid_wall_seconds": 58.64882700750604,
+      "reserved_seconds": 0.0
+    },
+    "metadata_cap_seconds": 180,
+    "overrun_seconds": 0.0,
+    "prior_case_charged_seconds": 3165.841891122982,
+    "remaining_seconds": 7573.459675936494,
+    "retries": 0
+  },
+  "counts": {
+    "BLOCKED": 0,
+    "BUDGET_EXCEEDED": 0,
+    "FAIL": 0,
+    "INCOMPLETE": 0,
+    "INVALID": 1,
+    "NOT_RUN": 2,
+    "PASS": 0,
+    "UNKNOWN": 0
+  },
+  "family": "atlas",
+  "metadata_phase_count_before_publication": 23,
+  "metadata_phase_history_before_publication": [
+    {
+      "index": 0,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 4.288754801964387,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 1,
+      "name": "copied_source_model_free_preflight",
+      "paid_wall_seconds": 0.9554615039378405,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 2,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 0.7411605787929147,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 3,
+      "name": "registration_parent_validation_and_finalization",
+      "paid_wall_seconds": 9.974449557485059,
+      "paused_wall_seconds": 204.76545672956854,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 4,
+      "name": "final_metadata_receipt",
+      "paid_wall_seconds": 0.02348529500886798,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 5,
+      "name": "terminal_card_sealing",
+      "paid_wall_seconds": 0.05940263997763395,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 6,
+      "name": "passive_publication",
+      "paid_wall_seconds": 1.5808596848510206,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 7,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 0.7204084228724241,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 8,
+      "name": "registration_parent_validation_and_finalization",
+      "paid_wall_seconds": 23.648079049540684,
+      "paused_wall_seconds": 2956.525608784519,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 9,
+      "name": "final_metadata_receipt",
+      "paid_wall_seconds": 0.025068286806344986,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 10,
+      "name": "terminal_card_sealing",
+      "paid_wall_seconds": 0.054056860972195864,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 11,
+      "name": "passive_publication",
+      "paid_wall_seconds": 2.301136011024937,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 12,
+      "name": "native_three_parent_anchor_sealing",
+      "paid_wall_seconds": 0.002600732957944274,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 13,
+      "name": "copied_source_model_free_preflight",
+      "paid_wall_seconds": 0.0016906650271266699,
+      "paused_wall_seconds": 0.0,
+      "status": "ERROR"
+    },
+    {
+      "index": 14,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 4.287426132010296,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 15,
+      "name": "copied_source_model_free_preflight",
+      "paid_wall_seconds": 3.2512104709167033,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 16,
+      "name": "native3_exact_source_fit_packet_sealing",
+      "paid_wall_seconds": 0.8209532739128917,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 17,
+      "name": "native3_authenticated_exact_fit_binding_check",
+      "paid_wall_seconds": 0.8313202550634742,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 18,
+      "name": "original_source_preflight_and_snapshot",
+      "paid_wall_seconds": 0.75218849000521,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 19,
+      "name": "registration_parent_validation_and_finalization",
+      "paid_wall_seconds": 4.285899922018871,
+      "paused_wall_seconds": 1.7445638738572598,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 20,
+      "name": "final_metadata_receipt",
+      "paid_wall_seconds": 0.025742469122633338,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 21,
+      "name": "native3_first_attempt_metadata_diagnostic",
+      "paid_wall_seconds": 0.008291337173432112,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    },
+    {
+      "index": 22,
+      "name": "native3_first_invalid_debit_anchor_sealing",
+      "paid_wall_seconds": 0.009180566063150764,
+      "paused_wall_seconds": 0.0,
+      "status": "COMPLETE"
+    }
+  ],
+  "original_required": 19,
+  "parent_metadata_anchor": {
+    "bytes": 2675,
+    "phases": 12,
+    "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369",
+    "snapshot_relative": "reports/forge/pr223-native3-continuation-20261004/inputs/closed-parent-metadata.json"
+  },
+  "prior_reference": {
+    "accepted_original_gate_counts": {
+      "FAIL": 0,
+      "PASS": 16,
+      "UNAVAILABLE": 3
+    },
+    "case_charged_seconds": 3165.841891122982,
+    "execution_counts": {
+      "INVALID": 1,
+      "NOT_RUN": 2,
+      "PASS": 16
+    },
+    "files_sha256": {
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+    },
+    "old_grades_are_current_credit": false,
+    "original_evidence_unchanged": true,
+    "required": 19,
+    "source": {
+      "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+      "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+    }
+  },
+  "producer": {
+    "draws": 0,
+    "models": 0,
+    "regrades": 0,
+    "rendered_frames": 0,
+    "scorer_calls": 0,
+    "sha256": "45db8cc53106317840e0ca1751f727c86e3dbaf0a5a0bf69ca04c2a0b644bf74"
+  },
+  "publication_scope": "native3",
+  "raw_native3_protocol_gate": "UNAVAILABLE",
+  "recorded_completed": 0,
+  "required": 3,
+  "rows": [
+    {
+      "acceptance_status": "UNAVAILABLE",
+      "accepted_original_gate": null,
+      "attempt_token_sha256": "35098588f278fa43c262505dca85be48fe941ecb4568435f288f45622aa50752",
+      "case_sha256": "dec3624a14a3cd0ce9393221ba79a2dcffb8ccfcbacaa9e3d14644fc261d49cc",
+      "complete_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "cost": {
+        "allowance_seconds": 1470.0,
+        "certified": false,
+        "charged_seconds": 2.0496059330180287,
+        "completed_terminal": true,
+        "overrun_seconds": 0.0,
+        "paid_wall_seconds": 2.0496059330180287,
+        "reserved_seconds": 0.0,
+        "terminal_status": "completed",
+        "unmeasured_interrupt_reserved_seconds": 0.0
+      },
+      "execution_status": "INVALID",
+      "full_protocol_complete": false,
+      "group": "native",
+      "id": "pr223-native3-continuation-v1-native-grid100",
+      "media": null,
+      "native_gates": null,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "observer": {
+        "clean_diagnostic": "output-noise-off same selected law",
+        "evaluation_noise_seed": 1636,
+        "evaluation_prior_seed": 1637,
+        "evaluation_target_seed": 1635,
+        "forced_ema_diagnostic": "separate original EMA branch",
+        "holdout_seed_offsets": {
+          "latent": 1603,
+          "noise": 1602,
+          "target": 1601
+        },
+        "independent_holdout_samples": 100000,
+        "observations": 34,
+        "primary_law": "state-selected weights/current learned output kernel",
+        "public_policy_latent_perturbation": "retained",
+        "samples": 20000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "original_options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "parent_full19_retest_id": "pr223-faithful19-retest-v1-native-grid100",
+      "parent_original_id": "atlas-original19-native-grid100",
+      "raw_reported_status": null,
+      "recorded_full_protocol_complete": false,
+      "required_host": {
+        "batch_size": 2048,
+        "evaluation_samples": 20000,
+        "holdout_samples": 100000,
+        "laws": [
+          "noisy primary",
+          "clean diagnostic"
+        ],
+        "num_particles": 20000,
+        "seed": 1234,
+        "steps": 7000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "z_dim": 2
+      },
+      "sampling": "original noisy state-selected primary; clean diagnostics separate",
+      "task": "grid100"
+    },
+    {
+      "acceptance_status": "UNAVAILABLE",
+      "accepted_original_gate": null,
+      "case_sha256": "900ef2e9b228f1c7faad63324192ace0ab87da2c0c9d2ff8e287183be27257f7",
+      "complete_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "cost": {
+        "allowance_seconds": 1440.0,
+        "certified": false,
+        "charged_seconds": 0.0,
+        "completed_terminal": false,
+        "overrun_seconds": 0.0,
+        "paid_wall_seconds": 0.0,
+        "reserved_seconds": 0.0,
+        "terminal_status": "missing",
+        "unmeasured_interrupt_reserved_seconds": 0.0
+      },
+      "execution_status": "NOT_RUN",
+      "full_protocol_complete": false,
+      "group": "native",
+      "id": "pr223-native3-continuation-v1-native-rotated100",
+      "media": null,
+      "native_gates": null,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "observer": {
+        "clean_diagnostic": "output-noise-off same selected law",
+        "evaluation_noise_seed": 1636,
+        "evaluation_prior_seed": 1637,
+        "evaluation_target_seed": 1635,
+        "forced_ema_diagnostic": "separate original EMA branch",
+        "holdout_seed_offsets": {
+          "latent": 1603,
+          "noise": 1602,
+          "target": 1601
+        },
+        "independent_holdout_samples": 100000,
+        "observations": 34,
+        "primary_law": "state-selected weights/current learned output kernel",
+        "public_policy_latent_perturbation": "retained",
+        "samples": 20000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "original_options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "parent_full19_retest_id": "pr223-faithful19-retest-v1-native-rotated100",
+      "parent_original_id": "atlas-original19-native-rotated100",
+      "raw_reported_status": null,
+      "recorded_full_protocol_complete": false,
+      "required_host": {
+        "batch_size": 2048,
+        "evaluation_samples": 20000,
+        "holdout_samples": 100000,
+        "laws": [
+          "noisy primary",
+          "clean diagnostic"
+        ],
+        "num_particles": 20000,
+        "seed": 1234,
+        "steps": 7000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "z_dim": 2
+      },
+      "sampling": "original noisy state-selected primary; clean diagnostics separate",
+      "task": "rotated100"
+    },
+    {
+      "acceptance_status": "UNAVAILABLE",
+      "accepted_original_gate": null,
+      "case_sha256": "b70e3c9cf6df2e1ebed25b2295cd314bbb347c8dac55eb8c326e06b2bd6f2550",
+      "complete_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "cost": {
+        "allowance_seconds": 1380.0,
+        "certified": false,
+        "charged_seconds": 0.0,
+        "completed_terminal": false,
+        "overrun_seconds": 0.0,
+        "paid_wall_seconds": 0.0,
+        "reserved_seconds": 0.0,
+        "terminal_status": "missing",
+        "unmeasured_interrupt_reserved_seconds": 0.0
+      },
+      "execution_status": "NOT_RUN",
+      "full_protocol_complete": false,
+      "group": "native",
+      "id": "pr223-native3-continuation-v1-native-staggered100",
+      "media": null,
+      "native_gates": null,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "observer": {
+        "clean_diagnostic": "output-noise-off same selected law",
+        "evaluation_noise_seed": 1636,
+        "evaluation_prior_seed": 1637,
+        "evaluation_target_seed": 1635,
+        "forced_ema_diagnostic": "separate original EMA branch",
+        "holdout_seed_offsets": {
+          "latent": 1603,
+          "noise": 1602,
+          "target": 1601
+        },
+        "independent_holdout_samples": 100000,
+        "observations": 34,
+        "primary_law": "state-selected weights/current learned output kernel",
+        "public_policy_latent_perturbation": "retained",
+        "samples": 20000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "original_options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "parent_full19_retest_id": "pr223-faithful19-retest-v1-native-staggered100",
+      "parent_original_id": "atlas-original19-native-staggered100",
+      "raw_reported_status": null,
+      "recorded_full_protocol_complete": false,
+      "required_host": {
+        "batch_size": 2048,
+        "evaluation_samples": 20000,
+        "holdout_samples": 100000,
+        "laws": [
+          "noisy primary",
+          "clean diagnostic"
+        ],
+        "num_particles": 20000,
+        "seed": 1234,
+        "steps": 7000,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "z_dim": 2
+      },
+      "sampling": "original noisy state-selected primary; clean diagnostics separate",
+      "task": "staggered100"
+    }
+  ],
+  "schema": "pg_pr223_native3_passive_publication_v1",
+  "source": {
+    "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+    "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+  },
+  "trusted_terminal_card": {
+    "bytes": 6719,
+    "sha256": "a11ce814dfde25872e921311ae2b1f7b50417f8585ce6ca8b025714723e36b8f"
+  }
+}

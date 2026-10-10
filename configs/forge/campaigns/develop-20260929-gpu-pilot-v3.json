@@ -1,0 +1,35 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "vector_two_broad": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "develop-20260929-gpu-pilot-v3",
+  "profile": "develop-20260929-quick-v3",
+  "profile_sha256": "b8a302735ae152fb3d6a67b8d39728d2f3f65772103a143e0a51e3532cd7e05d",
+  "purpose": "Pins the image real-data clamp repair, prospective sampling-contract validation and CUDA telemetry initialization/device repair. No prior-source imports, seed changes, relaxed gates or ordinary qualification credit. Bounded physical two-GPU placement, duplicate submission, coordinator restart and cancellation/recovery pilot on the same two substantive vector_two_broad cells. Preserve 1800 seconds per attempt, 3600 per candidate and 5400 campaign seconds: two first attempts plus at most one cancellation repair. Recheck and record available non-overlapping device ownership before execution.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    },
+    {
+      "lineage_id": "forge-no-critic-penalty",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

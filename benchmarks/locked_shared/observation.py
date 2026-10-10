@@ -15,18 +15,31 @@ OBSERVATIONS = 24
 MIN_STABLE_CHECKS = 5
 
 
+def threshold_margin(value, operator, bound):
+    """Signed numerical shortfall, with exact equality for discrete gates."""
+    if operator == ">=":
+        return value - bound
+    if operator == "<=":
+        return bound - value
+    if operator == "==":
+        return -abs(value - bound)
+    raise ValueError(f"unsupported metric operator: {operator}")
+
+
 def sustained(curve, requirements, *, expected_steps, minimum=MIN_STABLE_CHECKS):
     """Find a passing suffix, never count a transient pass as convergence.
 
     Only recorded observations are certified. First/confirmation times include
     setup and measurement overhead, and are not inferred for historical rows.
     """
+    for _, op, bound in requirements:
+        threshold_margin(bound, op, bound)
     def passes(point):
         for key, op, bound in requirements:
             value = point.get(key)
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
                 return False
-            if not (value >= bound if op == ">=" else value <= bound):
+            if not threshold_margin(value, op, bound) >= 0:
                 return False
         return True
     if minimum < 2:

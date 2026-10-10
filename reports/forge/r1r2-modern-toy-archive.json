@@ -1,0 +1,40 @@
+{
+  "archive": "runs/forge/artifacts/r1r2-modern-toy-v1/receipts-and-source.tar.gz",
+  "archive_bytes": 3844657,
+  "archive_sha256": "96e1cb72b9ea8a5fe5b6debfd6a208ee9f5f7ae7791837fab4fcda6221bf50dd",
+  "attempt_count": 7,
+  "files": {
+    "reports/forge/attempts/2a719ec706924f0ab120961cd58f7582/evidence.json": "4b29adbb085d2b5c5549617eefe5d0b9de35a6a18cda217eba3fbb787308320f",
+    "reports/forge/attempts/2a719ec706924f0ab120961cd58f7582/request.json": "64c961a0e6f25bc69e9aea13ead96de97f9174aa2ab1054fb14bb1a73c6ab526",
+    "reports/forge/attempts/2a719ec706924f0ab120961cd58f7582/result.json": "5a57b8446ff34276e80da7071920a1c07b6d541cb98f7daa66d455275bbfd7c4",
+    "reports/forge/attempts/3c6a84341114445da149f04ab7541f01/evidence.json": "57d7c3c4dbc966b6b7c1e3a8481eb200ecf32e7f130dd248d1456a2b9d19801b",
+    "reports/forge/attempts/3c6a84341114445da149f04ab7541f01/request.json": "cb63674bde576701fd9f59ac92bbcef0de207323bc3d11137002ce0aebaa134f",
+    "reports/forge/attempts/3c6a84341114445da149f04ab7541f01/result.json": "4a0369b40aed94fb6406f41c884add142b329a0415c76523c976c60ad5fc70c4",
+    "reports/forge/attempts/6c44b7cbaff34277a9da6bb0ccb98321/evidence.json": "7f83fbe508ebd7231476135138f07b71ceef1b37d5a66e571238f5a8ced56b0d",
+    "reports/forge/attempts/6c44b7cbaff34277a9da6bb0ccb98321/request.json": "9a1b4ca0475b78053b23871cb19ce77ebf8be31234f40093d049561a54e91400",
+    "reports/forge/attempts/6c44b7cbaff34277a9da6bb0ccb98321/result.json": "1ba8056077138e1e7cb37d8891c2c1962ba5ec6ee3bf7873ae901cfffb9b3f17",
+    "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/evidence.json": "8d6dd727c9e0f8bcc2013cf951c357e3ca6b4f160719367689fc2c0cecedc068",
+    "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/request.json": "5092ad79e012cb80ca4362b565d5a1f4adc603c6542f27ac75bd4a73ea090597",
+    "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/result.json": "6d308a51fe83f14460e09c16b3e34b59bc5e0abc6da57f32e29465e5f4b3d3f4",
+    "reports/forge/attempts/8ff64e32bf294e5597d8deb036527075/evidence.json": "012dfb430352cddfad7eb87518fb17105b0a5c4f98b156d0dfa90fbfda6b4086",
+    "reports/forge/attempts/8ff64e32bf294e5597d8deb036527075/request.json": "ca24caed0c46f2aca79b4ee171ba592bc8e198a66ee858471f61e3c9a10b53fa",
+    "reports/forge/attempts/8ff64e32bf294e5597d8deb036527075/result.json": "4b6d3c12dfaf81a5b954add6c444808810cc4cad846c0ef27f0031b754b28273",
+    "reports/forge/attempts/b686547339464e94a60fd692675f1545/evidence.json": "225413c6f0d733c6ad2eb37224345a6fc990116b7f70d140d5ba940d51f90dc4",
+    "reports/forge/attempts/b686547339464e94a60fd692675f1545/request.json": "12df94d17ba9613f57e49404f93a6e1ff842dc493c4f5192bb6982b8da70fc47",
+    "reports/forge/attempts/b686547339464e94a60fd692675f1545/result.json": "6a8b85506ff233aa9995d5e6df1aedd5d4bfba608e02ef26a29aa9f8754b72a6",
+    "reports/forge/attempts/bcaebd15d92841d0b99aec185a446a46/evidence.json": "4282d09e4c2d4a7feaa1c270d2df8de3d0e0ec0d103b2a287376d20671a712ca",
+    "reports/forge/attempts/bcaebd15d92841d0b99aec185a446a46/request.json": "642f08621ebfb284efc3385e9ca0b8a5a666581df6bf81ef3a108bac15ff18ec",
+    "reports/forge/attempts/bcaebd15d92841d0b99aec185a446a46/result.json": "916e534a8da0689472b270cd0d991586dc5b17f68e057c135371690d84fa8f24"
+  },
+  "full_readouts": {
+    "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-5bc30fee4d41b69294b1e32e.json": "88d39b2f561e7a85ea734f1d953adefc5403563c2ff153acfc4d59d7befc59d4",
+    "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-dc31730b85dde3cf85253359.json": "210f6d0003f15797fd7c5090f44c648153110960e524f380a716675c3fad4aeb",
+    "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-f0dadd320f7db48cbf5d7b20.json": "0f05ff6a1f8187c89fe22fbf3b0c00e5b646b12f029fb9b33b0c21b7bc41fc60",
+    "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-f61373e09376e33fc4c501c8.json": "682bc2ecead7318c5ef8c382a8e0a28369e783e95edd78501622a23f0f0068f7"
+  },
+  "restoration": "Obtain the exact local archive, verify SHA256 and extract from the repository root. Original execution envelopes, source snapshot, worker artifacts and logs remain ignored. Regrade with the recorded source commit and runtime. Compact projections and search reports are display artifacts, never qualification inputs.",
+  "schema_version": 1,
+  "source_digest": "f23a47fab9058c4e16590c5c8ebf6a8bbed9f1d6b5406d4107db395096658f54",
+  "source_origin_commit": "cd0ba9feba7aae79723f8581fe29eb4bd3c9050b",
+  "study_id": "r1r2-modern-toy-v1"
+}

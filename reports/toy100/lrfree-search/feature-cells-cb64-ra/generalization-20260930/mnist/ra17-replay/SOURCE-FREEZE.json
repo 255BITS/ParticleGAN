@@ -1,0 +1,20 @@
+{
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "local_source_sha256": {
+    "INPUTS.json": "f6fa0b84dbcf21eacf20314086517f0d53cba30b059a78c639e69bd3034f7209",
+    "PROTOCOL.md": "d3b078ec55352149bf13e7c847f882fbd84759bc50e9cd2c71beee84ef0e99ee",
+    "RESTORATION-BRIDGE.json": "a76bbafdce0072d17543c4b4670a2a6b0ebfc6f6685d66215cd0fb87aeec3a0b",
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "bridge.py": "98f6d5a96492d302838dc3f9e9b2700153be50d3efa84b3542f8620d76041aa2",
+    "close_replay.py": "7c1235db22a9fb8d850d23cf855da5645707cd89598aa3b0dad992fb82a865c4",
+    "common.py": "fba6152da18064687187466cd2d0350a533df88e6bcceca426333c35fb97035e",
+    "contracts.py": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+    "launch_replay.py": "6c7ced89afefab83f73faca1f727d62662d7f6e0fea181dd6f4b8a06d8969737",
+    "preflight_cpu.py": "a8c0d98eb20b339ffaa0061ca10a8c46c521a206d2b773c521d487992cddba4d",
+    "preparation-receipt.json": "79b37d41c648df148b03ae47cddd5fa9448e782b3ebd5125913f8da06045116c",
+    "prepare.py": "99a63f17843b3b5e0f4ff73b2dfd279a0d42a5f56ce12656094e98da64b62969",
+    "replay.py": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8"
+  },
+  "package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+  "status": "FROZEN_REPLAY_ONLY_NOT_LAUNCHED"
+}

@@ -1,0 +1,85 @@
+{
+  "archive": {
+    "bytes": 59447213,
+    "format": "tar.gz",
+    "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/word-root-cause-18-arms-v1.tar.gz",
+    "sha256": "f67ffff63dc71c1490b77618660c8d8154975742f0b889c6e1511e7b0ee3f796"
+  },
+  "archive_builder": {
+    "path": "reports/forge/word-root-cause/archive.py",
+    "sha256": "e5ea5a9bd4c58d099eb934faca0856ebd15a89405e308eae2411967d9e9f7496"
+  },
+  "audit": {
+    "binding": "External proof binds archive SHA and script SHA; it is not included in this archive.",
+    "inventory_entries_checked": 3599,
+    "pass": true,
+    "proof": "reports/forge/word-root-cause/publication-audit.json",
+    "proof_identity": {
+      "bytes": 65160,
+      "sha256": "f803f6a5739d656afebbbf44109adbc4d09210c28a5286cd5b83045a3ef1f1ae"
+    },
+    "regular_files_checked": 3600,
+    "source": "reports/forge/word-root-cause/publication_audit.py",
+    "source_identity": {
+      "bytes": 15933,
+      "sha256": "6edf3074a6a2336b4201d8ed49c00333895d259bb59759cd036cbd78b12de467"
+    },
+    "source_note": "Final external audit source/proof advance beyond the earlier analysis copy in the immutable archive. Executed training sources and archive bytes are unchanged. Archive-mode replay can use archived raw evidence when original absolute run directories disappear."
+  },
+  "historical_archive_audit": {
+    "pass": true,
+    "proof": "reports/forge/word-root-cause/historical-archive-audit.json",
+    "proof_identity": {
+      "bytes": 1945,
+      "sha256": "bbc5a4ee0dab75571e6f494f4c5a7b81b35938eda982f2e0e33412c7fb8268a3"
+    },
+    "source": "reports/forge/word-root-cause/historical_archive_audit.py",
+    "source_identity": {
+      "bytes": 4356,
+      "sha256": "2819645be93e501c581043824dac8a8687ae07e06d351bda6df8868123e74448"
+    }
+  },
+  "id": "word-root-cause-18-arms-v1",
+  "members_in_inventory": 3599,
+  "primary_locator": "Main repository artifacts/forge/word-root-cause-18-arms-v1.tar.gz; ignored local artifact, not a remote-hosted download.",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "raw_directories_retained": [
+    "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round1",
+    "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round2",
+    "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round3"
+  ],
+  "raw_runs": 18,
+  "restore": "Extract into a new directory. Raw runs retain their runs/forge/word-root-cause-roundN layout. sources/<commit> contains every file in that executed source manifest; restore into a clean checkout of the matching commit for scientific replay. Compare inventory hashes and original source-manifest.json before execution. Existing raw absolute locators may be replaced in an external read-only audit adapter, never in frozen receipts.",
+  "schema_version": 1,
+  "scope": "Raw task-only diagnostic evidence; no qualification input or reuse",
+  "source_snapshots": [
+    {
+      "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+      "directory": "sources/1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+      "files_union": 1140,
+      "request_source_digests": [
+        "00c263395d21a58ee30645968d793ddb2b7b550065d821a6e7f7686fe6439b75",
+        "4c08e90d89bcde6da9387d85bf8fc75171c1ca58b553f07dd7c04666f741109d"
+      ]
+    },
+    {
+      "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+      "directory": "sources/575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+      "files_union": 1139,
+      "request_source_digests": [
+        "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef"
+      ]
+    },
+    {
+      "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "directory": "sources/ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "files_union": 1141,
+      "request_source_digests": [
+        "22308b845a9c7b566c402e4972b1c06098745c1d79bae00e17e33523e08ceb92",
+        "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+        "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0"
+      ]
+    }
+  ]
+}

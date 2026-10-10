@@ -1,0 +1,218 @@
+{
+  "status": "CLOSED_CPU_DIAGNOSIS_SERIALIZED_ALIAS_FAILURE",
+  "time_utc": "2026-09-30T22:07:53.274824+00:00",
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "package_mutations": 0,
+  "adapter_mutations": 0,
+  "numerical_replays": 0,
+  "conclusion": "Actual repeated-tensor identity is lost by device restoration; strict replay failure remains valid. Frozen quality results remain intact. No training discrepancy demonstrated within the original 10-update continuation.",
+  "source_chain": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/policy.py",
+      "line": 86,
+      "finding": "Recursive _state_to_device independently calls Tensor.to for each occurrence. Same-device no-op preserves repeated tensor identity; cross-device conversions break it."
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py",
+      "line": 463,
+      "finding": "observe assigns the same displacement tensor to last_block and appends it to blocks."
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py",
+      "line": 410,
+      "finding": "rebase invalidates moved rows in blocks. Native alias updates last_block; CPU-map detached copy remains stale."
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py",
+      "line": 562,
+      "finding": "last_block consumers found by full source search are diagnostic row energy only; active blocks and tests remain exact in saved endpoints."
+    }
+  ],
+  "fixtures": {
+    "toy": {
+      "original_replay_status": "FAIL",
+      "restoration_semantic_bit_identical": true,
+      "losses_bit_identical": true,
+      "samples_bit_identical": true,
+      "first_nonidentical_step": 1008,
+      "all_endpoint_differing_leaves": [
+        "trainer.birth_death.last.eval_seconds",
+        "trainer.lr_settle.0.1.last_block"
+      ],
+      "semantic_endpoint_differing_leaves": [
+        "trainer.lr_settle.0.1.last_block"
+      ],
+      "checkpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 39552,
+        "same_object_as_final_block": true,
+        "same_storage_as_final_block": true,
+        "block_nan_counts": [
+          39552
+        ]
+      },
+      "native_endpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 44928,
+        "same_object_as_final_block": true,
+        "same_storage_as_final_block": true,
+        "block_nan_counts": [
+          44928
+        ]
+      },
+      "cpu_map_endpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 39552,
+        "same_object_as_final_block": false,
+        "same_storage_as_final_block": false,
+        "block_nan_counts": [
+          44928
+        ]
+      },
+      "differing_coordinates": 5376,
+      "row_width": 128,
+      "differing_rows": [
+        14,
+        16,
+        49,
+        63,
+        97,
+        101,
+        165,
+        168,
+        178,
+        196,
+        214,
+        247,
+        264,
+        341,
+        363,
+        423,
+        449,
+        460,
+        508,
+        515,
+        526,
+        540,
+        677,
+        679,
+        696,
+        706,
+        727,
+        732,
+        759,
+        771,
+        784,
+        789,
+        793,
+        801,
+        821,
+        839,
+        872,
+        874,
+        893,
+        900,
+        913,
+        1017
+      ],
+      "native_differing_coordinates_all_nan": true,
+      "cpu_map_differing_coordinates_all_finite": true,
+      "raw_last_block_byte_sha256": [
+        "d29e702e5956fa2457b3f275b335b1106e731f3d2de498320ecf2a84374af95d",
+        "312995e272908d9e185c6289714ea792656433350ce49a9362c13410ffd1a94b"
+      ]
+    },
+    "mnist": {
+      "original_replay_status": "FAIL",
+      "restoration_semantic_bit_identical": true,
+      "losses_bit_identical": true,
+      "samples_bit_identical": true,
+      "first_nonidentical_step": 1008,
+      "all_endpoint_differing_leaves": [
+        "trainer.lr_settle.0.1.last_block"
+      ],
+      "semantic_endpoint_differing_leaves": [
+        "trainer.lr_settle.0.1.last_block"
+      ],
+      "checkpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 2944,
+        "same_object_as_final_block": true,
+        "same_storage_as_final_block": true,
+        "block_nan_counts": [
+          3968,
+          3584,
+          2944
+        ]
+      },
+      "native_endpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 3072,
+        "same_object_as_final_block": true,
+        "same_storage_as_final_block": true,
+        "block_nan_counts": [
+          4096,
+          3712,
+          3072
+        ]
+      },
+      "cpu_map_endpoint_alias": {
+        "last_block_dtype": "torch.float32",
+        "last_block_shape": [
+          131072
+        ],
+        "last_block_nan": 2944,
+        "same_object_as_final_block": false,
+        "same_storage_as_final_block": false,
+        "block_nan_counts": [
+          4096,
+          3712,
+          3072
+        ]
+      },
+      "differing_coordinates": 128,
+      "row_width": 128,
+      "differing_rows": [
+        717
+      ],
+      "native_differing_coordinates_all_nan": true,
+      "cpu_map_differing_coordinates_all_finite": true,
+      "raw_last_block_byte_sha256": [
+        "a31a6f40b20ca71e45ea911d26f3bbaea78b83d75ca587b8b0c1ec3ac25b93ac",
+        "1058bfde31ab1739294658a175fb35a737e3845c01ef026f346be9ba0491717e"
+      ]
+    }
+  },
+  "file_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/checkpoint-1000.pt": "4388d45f7e157cca89a3b1b035757c6b1264ae11e86e217208b6b62a9a1db884",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/toy/RA13-settled/branch-0.pt": "0589b84a793fbd55f5b9a988f3309348a2ee2335d17752f8705f413dd3e7580c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/toy/RA13-settled/branch-1.pt": "5aefd4c9a1f76a57979e49a79e86fab0d598daeecb1ceca42091e141e34f3bbc",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/toy/RA13-settled/result.json": "0c6c796f5f26d345ca7d9088b9fbc6a9ac795f8211c61b1f5b78dc11eaca9f6c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/checkpoint-1000.pt": "e19d6b656d18c62d73b19d5454ef059054ce3f086cd90cb9bb983488b3069491",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/mnist/RA13-settled/branch-0.pt": "0ec619ff782ba4b86e6889105c7345bd0d182aa7e0eba782b7e444db3d2c40ac",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/mnist/RA13-settled/branch-1.pt": "7e7e7a3eab657681108ef0a86d6d0130f9a01c4f06e9c91064b43b26be73d20b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay/mnist/RA13-settled/result.json": "2f88dbcbcc115939ce93cd4f4a3c5681114d9aac22af2dd89efde0d713cb4ce8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/policy.py": "b25431d38e7fa3e1bc8b6adac039485b0dda9ddd906b080e598cf7e11235194f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/training.py": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/SOURCE-FREEZE.json": "26c3654df83056303135c12312e5f9b74c75b2063deda1cb84e598e17228c3a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/COMPLETION-replay.json": "555dd997a3afe6eba7d69a423e684b79f74e43aff69b7273f9849278f1978151",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay.py": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c"
+  }
+}

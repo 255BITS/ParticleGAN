@@ -1,0 +1,37 @@
+{
+  "archive": {
+    "bytes": 231319616,
+    "local_path": "/home/martyn/dev/ParticleGAN-dualnorm-pacing-v2/artifacts/forge/bcap-dualnorm-pacing-v2.tar.gz",
+    "path": "artifacts/forge/bcap-dualnorm-pacing-v2.tar.gz",
+    "sha256": "136c907e4a46cdcfffc7b2a904d2f1b684d06cdd44eabbba537ec64a0a680741"
+  },
+  "attempts": 175,
+  "availability": "LOCAL_ONLY",
+  "campaign": "bcap-dualnorm-pacing-v2",
+  "executed_source_commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be",
+  "gifs": 175,
+  "manifest": {
+    "archive_member": "archive-member-manifest.json",
+    "bytes": 912317,
+    "local_path": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-dualnorm-pacing-v2-queue/archive-member-manifest.json",
+    "sha256": "aa2dc68ba8e111fe46428d4ff2ee7508b4d820463769fb5cc76a58676add32ae"
+  },
+  "member_count": 4406,
+  "members_by_prefix": {
+    "campaign": 2251,
+    "durable": 525,
+    "executed-inputs": 4,
+    "execution": 41,
+    "publication": 369,
+    "queue": 26,
+    "snapshots": 1186,
+    "verification": 3
+  },
+  "payload_bytes": 1664276074,
+  "qualification_input": false,
+  "remote_replication": "NOT_PERFORMED",
+  "schema_version": 1,
+  "source_digests": [
+    "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+  ]
+}

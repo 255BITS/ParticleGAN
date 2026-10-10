@@ -1,0 +1,8 @@
+{
+  "accept_shared_cost_transfer": false,
+  "budget_seconds": 2221440,
+  "candidate_budget_seconds": 42720,
+  "description": "Post-merge CUDA rerun of every registered idea and the previously selected complete family configurations; complete Tier1 then eligible Tier2, no tuning or new seeds. Software-only admission successor to v1; v1 spent zero updates and zero attempts.",
+  "id": "gaussian-smoke-inventory-v2",
+  "schema_version": 1
+}

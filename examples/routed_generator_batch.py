@@ -1,0 +1,555 @@
+"""Fixed public-E22 G16/G64 diagnostic; every optimizer loss is GAN-only.
+
+Run once from the repository root, with artifacts outside Git::
+
+    timeout 60s env PYTHONPATH=. python -u examples/routed_generator_batch.py \
+        --output /tmp/routed-generator-batch
+
+Exit zero requires BOTH arms' endpoint population excess error <= .9 initial,
+and G64 endpoint <= .9 G16, plus finite/native ownership/control contracts.
+This is a late-common profile initialized fresh, not a mature saved critic.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import subprocess
+import time
+from copy import deepcopy
+from dataclasses import dataclass
+from pathlib import Path
+
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+from particlegan import (
+    E22Policy,
+    ParticlePrior,
+    RoutedBatch,
+    RoutedRows,
+    get_recipe,
+    init,
+)
+
+STEPS = 500
+SECONDS = 60.
+BASE_SHA = "c4b53495d04a2052e266739a82053317b7f49698"
+SEEDS = {"constructor": 123, "generator_init": 0, "critic_init": 1,
+         "encoder_init": 2, "router_init": 3, "teacher_init": 4, "policy": 21,
+         "d_data": 21, "d_gaussian": 22, "g_data": 23, "g_gaussian": 24,
+         "source": 44, "time": 45, "nuisance": 47}
+
+
+def digest_tensors(values):
+    digest = hashlib.sha256()
+    for name, value in sorted(values.items()):
+        value = value.detach().cpu().contiguous()
+        digest.update(name.encode())
+        digest.update(str((tuple(value.shape), value.dtype)).encode())
+        digest.update(value.reshape(-1).view(torch.uint8).numpy().tobytes())
+    return digest.hexdigest()
+
+
+def time_features(context):
+    u = context[:, 2, 0, 0]
+    return torch.stack((u, (math.pi * u).sin(), (math.pi * u).cos()), 1)
+
+
+class FrozenHost(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.prefix = nn.Conv2d(2, 3, 1, bias=False).bfloat16()
+        self.head = nn.Conv2d(3, 2, 1, bias=False).bfloat16()
+        with torch.no_grad():
+            self.prefix.weight.copy_(torch.tensor([[1., 0.], [0., 1.], [.5, .5]])[:, :, None, None])
+            self.head.weight.copy_(torch.tensor([[.8, .1, .2], [-.1, .8, .2]])[:, :, None, None])
+        self.eval().requires_grad_(False)
+
+    def train(self, mode=True):
+        return super().train(False)
+
+    @torch.no_grad()
+    def encode(self, source):
+        return self.prefix(source.bfloat16()).float()
+
+    def decode(self, features):
+        return self.head(features.bfloat16()).float()
+
+
+class ResidualBlock(nn.Module):
+    def __init__(self, width=4):
+        super().__init__()
+        self.first = nn.Conv2d(width, width, 3, padding=1)
+        self.second = nn.Conv2d(width, width, 3, padding=1)
+
+    def forward(self, value):
+        return value + .1 * self.second(F.silu(self.first(F.silu(value))))
+
+
+class Generator(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.host = FrozenHost()
+        self.project = nn.Conv2d(3, 4, 1)
+        self.input = nn.Conv2d(4, 4, 3, padding=1)
+        self.condition = nn.Linear(7, 8)
+        self.blocks = nn.Sequential(ResidualBlock())
+        self.output = nn.Conv2d(4, 3, 3, padding=1)
+        self.skip = nn.Conv2d(4, 3, 1)
+        with torch.no_grad():
+            for layer in (self.condition, self.output, self.skip):
+                layer.bias.zero_()
+                layer.weight.mul_(.1)
+
+    def forward(self, context, code):
+        source = self.project(self.host.encode(context[:, :2]))
+        condition = torch.cat((F.layer_norm(code, (4,), eps=1e-3), time_features(context)), 1)
+        gain, shift = (.25 * self.condition(condition).tanh()).chunk(2, 1)
+        hidden = self.input(source) * (1 + gain[:, :, None, None]) + shift[:, :, None, None]
+        recipient = self.skip(source) + self.output(F.silu(self.blocks(hidden)))
+        return self.host.decode(recipient)
+
+
+def constructor_gains(module):
+    for layer in (module.condition, module.output, module.skip):
+        layer.weight.mul_(.1)
+
+
+init.register(Generator, {}, finalize=constructor_gains)
+
+
+class Encoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.features = nn.Sequential(nn.Conv2d(2, 4, 3, padding=1), nn.SiLU(),
+                                      nn.Conv2d(4, 4, 3, stride=2, padding=1), nn.SiLU())
+        self.query = nn.Linear(4 * 4 * 4 + 3, 4)
+
+    def forward(self, context):
+        features = self.features(context[:, :2]).flatten(1)
+        return F.layer_norm(self.query(torch.cat((features, time_features(context)), 1)), (4,), eps=1e-3)
+
+
+class Router(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.register_buffer("log_mass", torch.zeros(128))
+
+    def logits(self, query, table):
+        return 2. * (F.normalize(query, dim=-1, eps=1e-4)
+                     @ F.normalize(table, dim=-1, eps=1e-4).T)
+
+
+class NeutralEnergy(nn.Linear):
+    def __init__(self):
+        super().__init__(2, 1, bias=False)
+        with torch.no_grad():
+            self.weight.zero_()
+
+
+init.register(NeutralEnergy, {"weight": init.KEEP})
+
+
+class Critic(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.local = nn.Sequential(nn.Conv2d(2, 4, 3, padding=1), nn.LeakyReLU(.2),
+                                   nn.Conv2d(4, 4, 3, padding=1), nn.LeakyReLU(.2))
+        self.local_score = nn.Conv2d(4, 1, 1)
+        self.global_features = nn.Sequential(nn.Linear(128, 16), nn.LeakyReLU(.2),
+                                            nn.Linear(16, 4), nn.LeakyReLU(.2))
+        self.global_score = nn.Linear(4, 1)
+        self.quadratic = NeutralEnergy()
+        self.register_buffer("global_gain", torch.tensor(0.))
+        self.register_buffer("local_gain", torch.tensor(.0625))
+
+    @staticmethod
+    def energy(error):
+        return error.square().mean((2, 3)) * math.sqrt(64 / 2)
+
+    def features(self, error):
+        # Original global features remain in routed DV12 even though score0.
+        # Energy features retain their actual learned head channel weights.
+        return torch.cat((self.global_features(error.flatten(1)),
+                          self.local_gain * self.local(error).mean((2, 3)),
+                          self.energy(error) * self.quadratic.weight), 1)
+
+    def forward(self, error):
+        global_score = self.global_score(self.global_features(error.flatten(1)))
+        local_score = self.local_score(self.local(error)).mean((2, 3))
+        return (self.global_gain * global_score + self.local_gain * local_score
+                + self.quadratic(self.energy(error))) / math.sqrt(3.)
+
+
+def routed_forward(models, context, candidate, routing):
+    query = models["encoder"](context)
+    code = routing.mix("global", models["router"].logits(query, candidate.table))
+    return models["generator"](context, code)
+
+
+def paired_features(models, context, samples, targets):
+    return models["critic"].features(samples - targets)
+
+
+@torch.no_grad()
+def fixture():
+    source_rng = torch.Generator().manual_seed(SEEDS["source"])
+    time_rng = torch.Generator().manual_seed(SEEDS["time"])
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(SEEDS["constructor"])
+        teacher = Generator()
+    init.deterministic_orthogonal_(teacher, seed=SEEDS["teacher_init"])
+    # A same-family capacity witness. This frozen teacher is never optimized,
+    # and its mean targets are never used in an optimizer or row-control loss.
+    teacher.condition.weight[:, :4].zero_()
+    teacher.eval().requires_grad_(False)
+    nuisance = torch.randn(8, 2, 8, 8, generator=torch.Generator().manual_seed(SEEDS["nuisance"]))
+    nuisance *= .15 / nuisance.square().mean((1, 2, 3), keepdim=True).sqrt()
+    nuisance = torch.cat((nuisance, -nuisance))
+    data = {"nuisance": nuisance}
+    for name, count in (("fit", 16), ("guard", 4), ("population", 64)):
+        source = .2 * torch.randn(count, 2, 8, 8, generator=source_rng)
+        u = .02 + .93 * torch.rand(count, generator=time_rng)
+        contexts = torch.cat((source, u[:, None, None, None].expand(-1, 1, 8, 8)), 1)
+        means = teacher(contexts, torch.zeros(count, 4))
+        data[name + "_context"] = contexts
+        data[name + "_mean"] = means
+        if name != "population":
+            data[name + "_rows"] = contexts.repeat_interleave(16, dim=0)
+            data[name + "_target"] = (means[:, None] + nuisance[None]).flatten(0, 1)
+    data["teacher_hash"] = digest_tensors(teacher.state_dict())
+    return data
+
+
+@dataclass
+class Loop:
+    policy: E22Policy
+    g_batch: int
+    data: dict
+    streams: dict
+    caller_history: list
+    frozen_hash: str
+    initial: dict
+    initial_hashes: dict
+    health: dict
+
+
+def caller_stream_hashes(loop):
+    return {name: digest_tensors({"state": stream.get_state()}) for name, stream in loop.streams.items()}
+
+
+def assert_ownership(policy):
+    owners = [parameter for optimizer in policy.optimizers
+              for group in optimizer.param_groups for parameter in group["params"]]
+    required = [parameter for model in (policy.G, policy.encoder, policy.router, policy.D)
+                for parameter in model.parameters() if parameter.requires_grad]
+    required += [policy.table, policy.log_output_sigma]
+    if len({id(p) for p in owners}) != len(owners) or {id(p) for p in owners} != {id(p) for p in required}:
+        raise RuntimeError("each live trainable parameter must have one native optimizer owner")
+    if policy.opt_d.ema_critic is policy.D:
+        raise RuntimeError("KA2 EMA must be independent")
+
+
+def make_loop(g_batch, data=None):
+    if g_batch not in (16, 64):
+        raise ValueError("the frozen arms are G16 and G64")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(SEEDS["constructor"])
+        G, E, D, R, prior = Generator(), Encoder(), Critic(), Router(), ParticlePrior(128, 4)
+    for module, role in ((G, "generator"), (E, "encoder"), (D, "critic"), (R, "router")):
+        init.deterministic_orthogonal_(module, seed=SEEDS[role + "_init"])
+    init.deterministic_orthogonal_(prior)
+    recipe = get_recipe("e22_routed", num_particles=128, z_dim=4, batch_size=16,
+                        lr=.000204, d_lr_mult=1.5, prior_lr_mult=10., output_noise_std=1.3,
+                        betas=(0., .999), birth_death_backend="auto", reopen_guard="settled")
+    opt_g = recipe.make_generator_optimizer([
+        {"params": [p for p in G.parameters() if p.requires_grad]},
+        {"params": list(E.parameters())}, {"params": [prior.z], "lr": recipe.lr * recipe.prior_lr_mult},
+    ], latent_table=prior.z, foreach=False)
+    opt_d = recipe.make_critic_optimizer(D, ema_critic=deepcopy(D), foreach=False)
+    rows = RoutedRows(model_forward=routed_forward, features=paired_features, sites=("global",),
+                      probe_interval=16, probe_budget=8, reservoir_size=64, min_observations=8)
+    p = E22Policy(recipe, G, D, prior=prior, encoder=E, router=R,
+                  generator_optimizer=opt_g, critic_optimizer=opt_d,
+                  roles=[["generator", "encoder", "table"], ["critic"]], routed_rows=rows, seed=21)
+    p.attach_penalty(recipe.make_critic_penalty(opt_d, collect_stats=True))
+    assert_ownership(p)
+    initial_hashes = {name: digest_tensors(module.state_dict()) for name, module in
+                      (("generator", p.G), ("encoder", p.encoder), ("critic", p.D), ("router", p.router))}
+    initial_hashes["table"] = digest_tensors({"table": p.table})
+    loop = Loop(p, g_batch, fixture() if data is None else data,
+                {name: torch.Generator().manual_seed(SEEDS[name])
+                 for name in ("d_data", "d_gaussian", "g_data", "g_gaussian")},
+                [], digest_tensors(p.G.host.state_dict()), {}, initial_hashes,
+                {"min_dense_rows": 128, "finite_steps": 0, "ka2_applied_calls": 0,
+                 "critic_score_active_gradients": True, "generator_live_gradients": True,
+                 "ownership": True, "frozen_host": True})
+    loop.initial = evaluate(loop)
+    return loop
+
+
+def require_finite(label, values):
+    if any(not bool(torch.isfinite(value).all()) for value in values):
+        raise FloatingPointError("nonfinite " + label)
+
+
+def gradients(model, *, inactive_prefixes=()):
+    for name, parameter in model.named_parameters():
+        if not parameter.requires_grad or name.startswith(inactive_prefixes):
+            continue
+        if parameter.grad is None:
+            raise RuntimeError("missing score-active gradient: " + name)
+        require_finite("gradient " + name, (parameter.grad,))
+
+
+def draw_panel(loop):
+    streams = loop.streams
+    d_indices = torch.randint(256, (16,), generator=streams["d_data"])
+    # Match the actual caller: G16 reuses D16 examples after the D update;
+    # G64 extends those exact examples by48 independent caller draws.
+    g_indices = torch.cat((d_indices, torch.randint(256, (48,), generator=streams["g_data"])))
+    panel = {"d_indices": d_indices,
+             "g_indices": g_indices,
+             "d_gaussian": torch.randn(16, 2, 8, 8, generator=streams["d_gaussian"]),
+             "g_gaussian": torch.randn(64, 2, 8, 8, generator=streams["g_gaussian"])}
+    # G16 consumes the common64 rows/Gaussians but trains on the first16.
+    # Its remaining48 are declared shadow caller draws; no private RNG claim.
+    loop.caller_history.append(digest_tensors(panel))
+    return panel
+
+
+def update(loop):
+    p, data = loop.policy, loop.data
+    panel = draw_panel(loop)
+    d_ids, g_ids = panel["d_indices"], panel["g_indices"][:loop.g_batch]
+    context, target = data["fit_rows"][d_ids], data["fit_target"][d_ids]
+    noise = p.begin_step(target, routed=RoutedBatch(context, target, data["guard_rows"], data["guard_target"]),
+                         execution_limit=STEPS)
+    # Same late-common applied G factor; E/table rates remain native.
+    p.opt_g.param_groups[0]["lr"] *= .25
+    loss = p.recipe.make_loss()
+    p.G.eval()
+    p.encoder.eval()
+    p.router.eval()
+    p.D.train()
+    with torch.no_grad():
+        prediction = p.routed_generate(context, sigma=0, perturb=True)
+        real = noise.output_sigma * panel["d_gaussian"]
+        fake = real + prediction - target
+    p.observe_critic_pair(real, fake)
+    pure_d = loss.d_loss(p.D(real), p.D(fake))
+    penalty = p.penalty(p.D, real, fake)
+    loss_d = pure_d + penalty
+    require_finite("D loss", (loss_d, pure_d, penalty))
+    p.opt_d.zero_grad(set_to_none=True)
+    p.before_critic_backward()
+    loss_d.backward()
+    gradients(p.D, inactive_prefixes=("global_features.", "global_score."))
+    p.opt_d.step()
+    p.after_critic_step()
+    p.D.eval()
+    p.G.train()
+    p.encoder.train()
+    p.router.train()
+    flags = [parameter.requires_grad for parameter in p.D.parameters()]
+    try:
+        p.D.requires_grad_(False)
+        g_context, g_target = data["fit_rows"][g_ids], data["fit_target"][g_ids]
+        prediction = p.routed_generate(g_context, sigma=0, perturb=True)
+        residual = prediction - g_target
+        real_g = noise.output_sigma * panel["g_gaussian"][:loop.g_batch]
+        positive_ref, negative_ref = p.D(real_g).detach(), p.D(-real_g).detach()
+        loss_g = .5 * (loss.g_loss(p.D(real_g + residual), positive_ref)
+                       + loss.g_loss(p.D(-real_g + residual), negative_ref))
+        require_finite("G loss", (loss_g,))
+        p.opt_g.zero_grad(set_to_none=True)
+        p.before_generator_backward()
+        loss_g.backward()
+        gradients(p.G)
+        gradients(p.encoder)
+        if p.table.grad is None or p.log_output_sigma.grad is None:
+            raise RuntimeError("native table/noise gradient must be present")
+        require_finite("table/noise gradient", (p.table.grad, p.log_output_sigma.grad))
+        dense = int(p.table.grad.norm(dim=1).gt(0).sum())
+        p.after_generator_backward(loss_gan=loss_g.detach(), loss_critic=pure_d.detach())
+        p.opt_g.step()
+        p.after_generator_step()
+    finally:
+        for parameter, flag in zip(p.D.parameters(), flags):
+            parameter.requires_grad_(flag)
+    event = p.finish_step()
+    assert_ownership(p)
+    require_finite("updated parameters", (parameter for optimizer in p.optimizers
+                   for group in optimizer.param_groups for parameter in group["params"]))
+    if digest_tensors(p.G.host.state_dict()) != loop.frozen_hash:
+        raise RuntimeError("frozen host changed")
+    if any(parameter.grad is not None for parameter in p.G.host.parameters()):
+        raise RuntimeError("frozen host received parameter gradients")
+    loop.health["min_dense_rows"] = min(loop.health["min_dense_rows"], dense)
+    loop.health["finite_steps"] += 1
+    loop.health["ka2_applied_calls"] += int(p.penalty.last_stats["applied"])
+    return {"step": p.completed_steps, "g_batch": loop.g_batch, "d_batch": 16,
+            "loss_g": float(loss_g.detach()), "loss_d": float(pure_d.detach()),
+            "penalty": float(penalty.detach()), "dense_rows": dense,
+            "sigma": p.output_sigma(), "quadratic_weights": p.D.quadratic.weight.detach().flatten().tolist(),
+            "row_event": event, "settle": p.lr_settle.diagnostics(),
+            "caller_panel_sha256": digest_tensors(panel)}
+
+
+@torch.no_grad()
+def evaluate(loop):
+    p, context, target = loop.policy, loop.data["population_context"], loop.data["population_mean"]
+    weights = (p.router.logits(p.encoder(context), p.table) + p.router.log_mass).softmax(-1)
+    live = p.G(context, weights @ p.table)
+    served = p.served_model()
+    prediction = served.routed_forward(context)
+    require_finite("evaluation", (live, prediction))
+    return {"live_excess_error": float((live - target).square().mean()),
+            "served_excess_error": float((prediction - target).square().mean()),
+            "served_source": served.source, "irreducible_population_error": .15 ** 2,
+            "metric": "fixed64 held-context Euclidean population excess; evaluation only"}
+
+
+def checkpoint(loop):
+    return {"policy": loop.policy.state_dict(),
+            "caller_streams": {name: stream.get_state() for name, stream in loop.streams.items()},
+            "g_batch": loop.g_batch, "health": deepcopy(loop.health),
+            "caller_history": list(loop.caller_history)}
+
+
+def restore(loop, state):
+    if state["g_batch"] != loop.g_batch:
+        raise ValueError("G caller batch is part of the frozen checkpoint cohort")
+    loop.policy.load_state_dict(state["policy"])
+    for name, stream in loop.streams.items():
+        stream.set_state(state["caller_streams"][name].cpu())
+    loop.health = deepcopy(state["health"])
+    loop.caller_history = list(state["caller_history"])
+
+
+def json_safe(value):
+    if isinstance(value, torch.Tensor):
+        return json_safe(value.detach().cpu().tolist())
+    if isinstance(value, dict):
+        return {str(k): json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(v) for v in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
+def source_readback(protocol, *, root=None):
+    root = Path(__file__).resolve().parents[1] if root is None else Path(root)
+    return all((root / path).is_file()
+               and hashlib.sha256((root / path).read_bytes()).hexdigest() == expected
+               for path, expected in protocol["source_hashes"].items())
+
+
+def execution_identity(protocol, *, root=None):
+    """Accept publication commits only while every frozen source byte matches."""
+    root = Path(__file__).resolve().parents[1] if root is None else Path(root)
+    if not source_readback(protocol, root=root):
+        raise RuntimeError("frozen protocol source identity differs")
+    checkout_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    return {"reference_package_git_sha": protocol["package_git_sha"],
+            "checkout_git_sha": checkout_sha,
+            "identity_guard": "sha256 of every frozen package/driver/contract/guide source",
+            "verified_source_files": len(protocol["source_hashes"])}
+
+
+def gates(arms, *, streams_match, source_match):
+    checks = {"completed_fixed_budget": all(arm["steps"] == STEPS for arm in arms.values()),
+              "caller_streams_match": streams_match, "frozen_sources_match": source_match}
+    for name, arm in arms.items():
+        health = arm["health"]
+        checks[name + "_finite_native_health"] = (
+            health["finite_steps"] == STEPS and health["min_dense_rows"] == 128
+            and health["ka2_applied_calls"] > 0 and health["ownership"] and health["frozen_host"]
+            and arm["control"]["rows"]["counters"]["updates"] == STEPS
+            and arm["control"]["counters"]["evals"] > 0 and arm["control"]["counters"]["probes"] > 0)
+        checks[name + "_converges_10_percent"] = (
+            arm["endpoint"]["live_excess_error"] <= .9 * arm["initial"]["live_excess_error"])
+    checks["G64_improves_10_percent"] = (
+        arms["G64"]["endpoint"]["live_excess_error"] <= .9 * arms["G16"]["endpoint"]["live_excess_error"])
+    return checks
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if args.output.exists() and any(args.output.iterdir()):
+        parser.error("output must be new or empty; no overwriting a scientific attempt")
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
+    root = Path(__file__).resolve().parents[1]
+    protocol_path = Path(__file__).with_name("routed_generator_batch_protocol.json")
+    protocol = json.loads(protocol_path.read_text())
+    identity = execution_identity(protocol, root=root)
+    args.output.mkdir(parents=True, exist_ok=True)
+    (args.output / "protocol.json").write_bytes(protocol_path.read_bytes())
+    (args.output / "source.py").write_bytes(Path(__file__).read_bytes())
+    started = time.monotonic()
+    data = fixture()
+    loops = {name: make_loop(batch, data) for name, batch in (("G16", 16), ("G64", 64))}
+    if loops["G16"].initial_hashes != loops["G64"].initial_hashes:
+        raise RuntimeError("arms must start from identical public initialized state")
+    summary = {"scope": protocol["scope"], "status": "running", "arms": {}, "checks": {},
+               "execution_identity": identity,
+               "protocol_sha256": hashlib.sha256(protocol_path.read_bytes()).hexdigest(),
+               "fixture_sha256": digest_tensors({k: v for k, v in data.items() if isinstance(v, torch.Tensor)}),
+               "teacher_sha256": data["teacher_hash"], "initial_hashes": loops["G16"].initial_hashes}
+    failure = None
+    traces = {name: (args.output / (name + ".jsonl")).open("w") for name in loops}
+    try:
+        for step in range(1, STEPS + 1):
+            for name, loop in loops.items():
+                if time.monotonic() - started >= SECONDS:
+                    raise TimeoutError("fixed60s campaign budget reached; no extension")
+                row = update(loop)
+                if step == 1 or step % 50 == 0:
+                    row["evaluation"] = evaluate(loop)
+                    print(json.dumps(json_safe({"arm": name, "step": step,
+                          "excess": row["evaluation"]["live_excess_error"],
+                          "served_excess": row["evaluation"]["served_excess_error"],
+                          "elapsed": time.monotonic() - started})), flush=True)
+                traces[name].write(json.dumps(json_safe(row)) + "\n")
+                traces[name].flush()
+    except (RuntimeError, FloatingPointError, TimeoutError, ValueError) as error:
+        failure = {"type": type(error).__name__, "message": str(error)}
+    finally:
+        for trace in traces.values():
+            trace.close()
+        for name, loop in loops.items():
+            try:
+                endpoint = evaluate(loop)
+            except (RuntimeError, FloatingPointError, ValueError) as error:
+                endpoint = {"live_excess_error": float("inf"), "served_excess_error": float("inf"),
+                            "error": str(error)}
+                failure = failure or {"type": type(error).__name__, "message": str(error)}
+            summary["arms"][name] = {"steps": loop.policy.completed_steps, "initial": loop.initial,
+                "endpoint": endpoint, "health": loop.health,
+                "control": loop.policy.routed_control.diagnostics(),
+                "caller_stream_hashes": caller_stream_hashes(loop),
+                "caller_panel_history_sha256": hashlib.sha256("\n".join(loop.caller_history).encode()).hexdigest()}
+            torch.save(checkpoint(loop), args.output / (name + "-checkpoint.pt"))
+        a, b = summary["arms"]["G16"], summary["arms"]["G64"]
+        summary["checks"] = gates(summary["arms"], streams_match=(
+            a["caller_stream_hashes"] == b["caller_stream_hashes"]
+            and a["caller_panel_history_sha256"] == b["caller_panel_history_sha256"]),
+            source_match=source_readback(protocol))
+        summary["failure"] = failure
+        summary["elapsed_seconds"] = time.monotonic() - started
+        summary["status"] = "passed" if failure is None and all(summary["checks"].values()) else "failed"
+        (args.output / "result.json").write_text(json.dumps(json_safe(summary), indent=2) + "\n")
+        print(json.dumps({"status": summary["status"], "checks": summary["checks"], "failure": failure}), flush=True)
+    return 0 if summary["status"] == "passed" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

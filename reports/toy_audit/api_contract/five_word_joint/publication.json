@@ -1,0 +1,559 @@
+{
+  "cases": [
+    {
+      "default_recipe": "ka2",
+      "default_steps": 20001,
+      "eval_samples": 1024,
+      "goal": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+      "id": "forge-five-word-joint-api-demo-v1",
+      "legacy_ids": [
+        "source-family-15",
+        "develop-five_word_joint"
+      ],
+      "sampling": {
+        "evaluation": "generated_and_paired_reconstructed_prior_without_output_noise"
+      },
+      "scope": "One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task.",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ]
+    }
+  ],
+  "readouts": [
+    {
+      "completed_updates": 32,
+      "default_updates": 20001,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "quality_fraction",
+        "modes",
+        "mass_tv",
+        "reconstruction_exact",
+        "minimum_reconstruction_token_probability"
+      ],
+      "gif": "goal.gif",
+      "goal": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+      "id": "forge-five-word-joint-api-demo-v1",
+      "legacy_ids": [
+        "source-family-15",
+        "develop-five_word_joint"
+      ],
+      "scope": "One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task.",
+      "source_commit": "1ff8e3858bd711b67e391063b52f5dcdfa99b9b6",
+      "verdict": "INCOMPLETE"
+    }
+  ],
+  "runs": [
+    {
+      "api_components": [
+        "get_recipe",
+        "Recipe.make_prior",
+        "init.deterministic_orthogonal_",
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_loss",
+        "Recipe.make_critic_penalty",
+        "UpdatePolicy",
+        "ServedModel.generate"
+      ],
+      "candidate_revision": "0761a5f67e9a83d697d3ea768929a99e8d71a6b79b429daad01f4a28eea95068",
+      "candidate_sha256": "afac13d8cc56a058029c4a505df59fa2a487efd32a20fd001738b65e4914600e",
+      "completed_updates": 32,
+      "cost": {
+        "adapter_loop_seconds": 0.7805249509983696,
+        "completed_steps": 32,
+        "optimizer_updates": {
+          "discriminator": 32,
+          "encoder": 32,
+          "generator": 32,
+          "prior": 32
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 0.7632974142325111,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.26891758205601946
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 32,
+              "seconds": 0.4943798321764916
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        }
+      },
+      "default_updates": 20001,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "quality_fraction",
+        "modes",
+        "mass_tv",
+        "reconstruction_exact",
+        "minimum_reconstruction_token_probability"
+      ],
+      "final_metrics": {
+        "completed_steps": 32.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 0.11827081441879272,
+        "modes": 0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 1.2114763237018025,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 32
+      },
+      "full_task_grade": {
+        "gate_status": "INCOMPLETE",
+        "reasons": [
+          "generator optimizer updates do not complete the declared task budget"
+        ],
+        "status": "INCOMPLETE"
+      },
+      "gif": "goal.gif",
+      "gif_sha256": "87b10d5e7265d9771085d9313d4581d9047813fadea087dbcccdfa886ace3b88",
+      "goal": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 32,
+              "eligible": 0,
+              "enabled": true,
+              "probe": {
+                "kind": "synthetic_public_component",
+                "measurements": {
+                  "damping_branch_applied": true,
+                  "initial_sparse_history_total": 8,
+                  "optimizer_updates": 2
+                },
+                "status": "PASS",
+                "synthetic_state": true,
+                "training_evidence": false
+              },
+              "reason": "host conditions did not activate the branch; targeted component check required",
+              "requested": true
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 32,
+              "eligible": 0,
+              "enabled": true,
+              "probe": {
+                "kind": "synthetic_public_component",
+                "measurements": {
+                  "critic_formulation": "ka2",
+                  "declared_lr_ratio": 0.0,
+                  "initial_observed_optimizer_steps": 1,
+                  "initial_penalty_calls": 799,
+                  "optimizer_updates": 0,
+                  "penalty_calls": 2,
+                  "phase": "blend",
+                  "prox": 1.0
+                },
+                "status": "PASS",
+                "synthetic_state": true,
+                "training_evidence": false
+              },
+              "reason": "host conditions did not activate the branch; targeted component check required",
+              "requested": true
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 32,
+              "eligible": 0,
+              "enabled": true,
+              "probe": {
+                "kind": "synthetic_public_component",
+                "measurements": {
+                  "clipped_tensors": 1,
+                  "initial_adam_step": 200,
+                  "optimizer_updates": 1
+                },
+                "status": "PASS",
+                "synthetic_state": true,
+                "training_evidence": false
+              },
+              "reason": "host conditions did not activate the branch; targeted component check required",
+              "requested": true
+            },
+            "critic_penalty": {
+              "applied": 32,
+              "calls": 32,
+              "eligible": 32,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "probe": {
+                "kind": "synthetic_public_component",
+                "measurements": {
+                  "gain": 2.0,
+                  "optimizer_updates": 2
+                },
+                "status": "PASS",
+                "synthetic_state": true,
+                "training_evidence": false
+              },
+              "reason": "host has no applicable component",
+              "requested": true
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 32,
+          "encoder": 32,
+          "generator": 32,
+          "prior": 32
+        },
+        "unintended_rng_deviations": 0
+      },
+      "host": {
+        "definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "initial_prior_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "models": {
+          "discriminator": {
+            "class": "benchmarks.toy_audit.api_images.WordJointCritic",
+            "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+            "parameter_shapes": {
+              "net.0.bias": [
+                256
+              ],
+              "net.0.weight": [
+                256,
+                170
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                256
+              ],
+              "net.4.bias": [
+                1
+              ],
+              "net.4.weight": [
+                1,
+                128
+              ]
+            },
+            "parameters": 76801
+          },
+          "encoder": {
+            "class": "benchmarks.toy_audit.api_images.WordEncoder",
+            "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+            "parameter_shapes": {
+              "net.1.bias": [
+                128
+              ],
+              "net.1.weight": [
+                128,
+                168
+              ],
+              "net.3.bias": [
+                64
+              ],
+              "net.3.weight": [
+                64,
+                128
+              ],
+              "net.5.bias": [
+                2
+              ],
+              "net.5.weight": [
+                2,
+                64
+              ]
+            },
+            "parameters": 30018
+          },
+          "generator": {
+            "class": "benchmarks.toy_audit.api_images.WordGenerator",
+            "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+            "parameter_shapes": {
+              "net.0.bias": [
+                64
+              ],
+              "net.0.weight": [
+                64,
+                2
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                64
+              ],
+              "net.4.bias": [
+                168
+              ],
+              "net.4.weight": [
+                168,
+                128
+              ]
+            },
+            "parameters": 30184
+          }
+        },
+        "profile": null
+      },
+      "id": "forge-five-word-joint-api-demo-v1",
+      "initialization_sha256": "164ed94a6881a65ae23b0f473e09d9e2f0bb73f240de1ebd505f2238152f836f",
+      "initializer": "deterministic_orthogonal",
+      "instantaneous_metric": "FAIL",
+      "legacy_ids": [
+        "source-family-15",
+        "develop-five_word_joint"
+      ],
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol": {
+        "candidate": "five-word-joint-ka2-v1",
+        "cpu_threads": 1,
+        "device": "cpu",
+        "eval_samples": 1024,
+        "execution_limit": 32,
+        "id": "forge-five-word-joint-api-demo-v1",
+        "media_frames": 9,
+        "purpose": "One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task.",
+        "schema_version": 1,
+        "scoring_observations": 24,
+        "seed": 0,
+        "task": "five_word_joint_acquisition",
+        "wall_seconds": 60
+      },
+      "protocol_sha256": "5b9ca3d6bed0ac8ece47c6077a998178cc347574ab28a3df67f6b0c56e57a112",
+      "qualification_input": false,
+      "raw_artifact_directory": "/home/martyn/dev/ParticleGAN-aligan-five-mode/runs/forge/five-word-joint-demo-v1",
+      "raw_artifacts": {
+        "adapter-receipt.json": {
+          "bytes": 37383,
+          "sha256": "12ca7a728ce6564d4b935b7c307c6b34adaab32f26b3cb6c00ccac1dc53acb8b"
+        },
+        "goal.gif": {
+          "bytes": 677295,
+          "sha256": "87b10d5e7265d9771085d9313d4581d9047813fadea087dbcccdfa886ace3b88"
+        },
+        "observations.npz": {
+          "bytes": 672058,
+          "sha256": "e17a4307d5c8b3977a06393464b46ec38df85e8b0d69adca153c0a74c9dc3bf5"
+        },
+        "state.pt": {
+          "bytes": 2338647,
+          "sha256": "78922a1e83c5e9d7f161e9973cbee1926271dc9fc44045162be14e2f39e46e53"
+        }
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 1.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "85382ac90ab5d3ffd8880739f1d81adeb36752248e9a797f14d39a970c20f219",
+      "rng_version": "forge-rng-v1",
+      "runtime": {
+        "device": "cpu",
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "scope": "One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task.",
+      "source_bindings": {
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/toy_audit/api_images.py": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+        "experiments/forge/api.py": "fb4d49b9702aa1569f5ad9c9ed459904fcf5ab33d33a6f6a43b58f7f3df3a468",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/sampling.py": "b208ae580347d9f70375035ce26d0f7b628a273aa3443037ee8d5f8ee3855e70",
+        "experiments/forge/word_adapter.py": "c202130a8fb5ca592b5d6f78a4319cbcf555603da51b38f3bf3d0315b84aa92d",
+        "reports/forge/five-word-joint/reproduce_demo.py": "4ae0b0133ced1d898c8b3240a6dfa197cdffe2a4b7200510b3033290712c4b21"
+      },
+      "source_commit": "1ff8e3858bd711b67e391063b52f5dcdfa99b9b6",
+      "source_identity": "997c7f01b99aed5cff38b17d060100f4eab8562d88a597b6e924797c316d5fba",
+      "task_fingerprint": "09a21c6b4d8aa9f3d9cd54ab0c112754d0dd57a7a5a42a14dbf5f9fbc721cbe2",
+      "verdict": "INCOMPLETE"
+    }
+  ],
+  "schema_version": 1,
+  "source_identities": {
+    "997c7f01b99aed5cff38b17d060100f4eab8562d88a597b6e924797c316d5fba": {
+      "files": {
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/toy_audit/api_images.py": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+        "experiments/forge/api.py": "fb4d49b9702aa1569f5ad9c9ed459904fcf5ab33d33a6f6a43b58f7f3df3a468",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/sampling.py": "b208ae580347d9f70375035ce26d0f7b628a273aa3443037ee8d5f8ee3855e70",
+        "experiments/forge/word_adapter.py": "c202130a8fb5ca592b5d6f78a4319cbcf555603da51b38f3bf3d0315b84aa92d",
+        "reports/forge/five-word-joint/reproduce_demo.py": "4ae0b0133ced1d898c8b3240a6dfa197cdffe2a4b7200510b3033290712c4b21"
+      },
+      "origin_commit": "1ff8e3858bd711b67e391063b52f5dcdfa99b9b6"
+    }
+  }
+}

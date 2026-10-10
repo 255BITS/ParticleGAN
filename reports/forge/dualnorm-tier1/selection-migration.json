@@ -1,0 +1,662 @@
+{
+  "added_measurements": [
+    {
+      "candidate_id": "bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+      "candidate_revision": "dad44084a46fcf106d17815c75b70e80b09f4600c9386908a486ad1577631feb",
+      "cohort": "224dbc5465be9d73a265c68609f97c8dfea5cbb8a5496f5727c1c15334db8f44",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "c5d6cee45ee7b85483f95b6aeb7af682154c0d4f6399a2e73f203428b3bb544d",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "78b961bb4b8e8b381bb17e1024cb51342e246b43a16481a6715bb27ee1e5fa0a",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "e41a41e7c1416ed7881edc10c86fcc54f3dbabdbe2aedd6b1325bd4084de90c4",
+      "trainer_family": "bcap-ada-nsgda"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+      "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+      "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+      "candidate_revision": "f02bd4cbfe6c9b6f720ed99b1c628eb785aa23a06cd33dc1d80d0f8844c69e62",
+      "cohort": "c3afbd30cd6bb0c6c79516597a4a9f8cec34a5c9aa0af4f4325285d1c3d548e6",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "c52c1f6a00344acb0e338812f3eb4e77aec238908d2023acdeb934383b435158",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "8620450822e315c2e6c480326552945de8f733905c9182bb53747bfede171318",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "8145d7a6dd79a0eedfd0e31c6a03bda5a072c3b98fa8e5d6904e6ae2f18152c1",
+      "trainer_family": "bcap-dualnorm-d-only"
+    },
+    {
+      "candidate_id": "bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0",
+      "candidate_revision": "788a4045e8ca846833fe659487e7e53c0a2e60e9d84321dc79529d8b04030b7c",
+      "cohort": "30ac2f24d0d54e415da73dc23dcbe2d08d7ae32cf88c65387d4f99f7d38f4aa4",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "dd95a16522b1a139bb30d301100100fb1f897209bdfcc67b96a3bb200d722069",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "c55eb1d00cf23ccaaa382e7e8caaaf69fa035a662b857b2e3e90028aee72a7e6",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "0f24c2f947500039d1726bf180011d67e314112696f44bb608df370a092f921f",
+      "trainer_family": "bcap-nsgda-global"
+    },
+    {
+      "candidate_id": "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+      "candidate_revision": "be94777bee52b4c8e2aeddfb17e396df09b1e77b29de075dffe5272dfce4e610",
+      "cohort": "8b6906650cc9fc886c7f51525e80d47a2facbc46c6ea8032d3ecbd3c1e9a8a96",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "6c73b43105eee1afd93e3c131f3cf440102f7075bea7ca753e03949bd8c2dbea",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "cdf196f65293a2df7b2b803502967ec2add1d59e7afb230986dc51ce28dbbd81",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "e42ec8e5724ac0f422dc3ee4c8038b55ae1a78c8d414cb8a2fb4140e88214b2a",
+      "trainer_family": "bcap-nsgda-layer"
+    },
+    {
+      "candidate_id": "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
+      "candidate_revision": "20ef614bfa89e2b9de84a6a5645fea30f490370757639b8f58e677b37f1402d7",
+      "cohort": "6916b412e569a72966a4b8759ff125b68837a759d7ebaee9ae13a8423ba65dd8",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "a614c1ba2986cfca41f48e02992e62116b99919bdf07791dec83868fde3dba8d",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "0137dba58e1d64875e3da675d544aa63df98b4c9489280b5dc9b69da328fc230",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "6b109867c1e62faf475282e12d5a56754fd0b9903cbc2f860d4feb55e7939c74",
+      "trainer_family": "bcap-particle-rownorm-only"
+    },
+    {
+      "candidate_id": "bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201",
+      "candidate_revision": "704ce2fd3b33a0c79dcfaea0b7d6af606dbe9f0a2919863c48653e83b0cd72bf",
+      "cohort": "a9b90b364cccca3d0a864434b29f64dad5f239fdc437904e2540df3cd135e63e",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "b2fc6a6d3cf7c41e420c2ec0ee4e5014ae8bbd7d21deba1b216d14821535460b",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "93b14014f286a1dab817ae99641915d36af61d2709105ed08596ea89b83bf928",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "5e88dfc907d3fb1f54eedcd5b331404893222a67e008e8c0e02f66b293e72e77",
+      "trainer_family": "bcap-sgda"
+    }
+  ],
+  "bcap_pure_incumbent_unchanged": true,
+  "contract_difference": {
+    "current_evaluation_sha256": "9023e1024da135caa1bec9ad36685cc76964a066cccde5f6e5227292fd5a31de",
+    "execution_and_budget": "unchanged: execution b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654,20001 updates,900 seconds",
+    "original_evaluation_sha256": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+    "task": "five_word_joint_acquisition"
+  },
+  "executed_source_publication": {
+    "json_sha256": "f77dbeadf719731e5faa0728ac9ea3b850daf0a80a4857a0163986a5bed0096c",
+    "snapshot": "reports/forge/technique-evidence/0239350844b13b7e346b446dbd668e1469625f55755e4989e4f0660e780cff6e.json",
+    "source_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97"
+  },
+  "final_card": {
+    "path": "configs/forge/selections/family-current-v1.json",
+    "sha256": "357647545062db6c1050b4156d90320100f804582c085b907b37e472b12d1df4"
+  },
+  "migrations": [
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+        "cohort": "de1faf2ca5cd1417f6fec32350070a74ded53fef94424a96667e51be3886d769",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "dc0ab7855facf1f8b0431b08f4656587a59ee2de249ff0deeb62b11c50e12540",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "f80096afa43674c86183944f7f20d70a295c7d8e6417296466338b874fe36579",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "eb2cd2a11e027c05dbea4dd3068feb71e762cd73f5b362092926851935d2d197",
+        "trainer_family": "bcap"
+      },
+      "retained_selection": {
+        "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+        "cohort": "de1faf2ca5cd1417f6fec32350070a74ded53fef94424a96667e51be3886d769",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "dc0ab7855facf1f8b0431b08f4656587a59ee2de249ff0deeb62b11c50e12540",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "f80096afa43674c86183944f7f20d70a295c7d8e6417296466338b874fe36579",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "eb2cd2a11e027c05dbea4dd3068feb71e762cd73f5b362092926851935d2d197",
+        "trainer_family": "bcap"
+      },
+      "trainer_family": "bcap"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+        "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+        "cohort": "942ae9802bd828bc36d093df0b2bebecfcbe074fe8c8a45c44ab9a4ffd5fcc01",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "dac00138248531ae613ea8b97b008b6f0745f6ae4328449925c2e7b8f126bf90",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "1fc38d4432d89aadf926be0d4d23855f11eba57660b718faa1486e9634f470e8",
+        "trainer_family": "k3p"
+      },
+      "retained_selection": {
+        "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+        "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+        "cohort": "942ae9802bd828bc36d093df0b2bebecfcbe074fe8c8a45c44ab9a4ffd5fcc01",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "dac00138248531ae613ea8b97b008b6f0745f6ae4328449925c2e7b8f126bf90",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "1fc38d4432d89aadf926be0d4d23855f11eba57660b718faa1486e9634f470e8",
+        "trainer_family": "k3p"
+      },
+      "trainer_family": "k3p"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "k3p-a2-off-native-diagnostic",
+        "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+        "cohort": "e17da7e5ab34592e5a61340f3e79312fcd3ef1c2207de52d0936794f1e36c86f",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "2e5964def21fbb363e2915762c5969e52d0ba34fee38334f5623c9285dee9ed0",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "3cf3186fee0d132f0efb5380336efeab3f641b4fadc8083d8b48d14d85433402",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "7653461d6e8bc1aef66046e8a7a40d8abe9de69e9bde93839581406b8926c242",
+        "trainer_family": "k3p-no-a2"
+      },
+      "retained_selection": {
+        "candidate_id": "k3p-a2-off-native-diagnostic",
+        "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+        "cohort": "e17da7e5ab34592e5a61340f3e79312fcd3ef1c2207de52d0936794f1e36c86f",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "2e5964def21fbb363e2915762c5969e52d0ba34fee38334f5623c9285dee9ed0",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "3cf3186fee0d132f0efb5380336efeab3f641b4fadc8083d8b48d14d85433402",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "7653461d6e8bc1aef66046e8a7a40d8abe9de69e9bde93839581406b8926c242",
+        "trainer_family": "k3p-no-a2"
+      },
+      "trainer_family": "k3p-no-a2"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "forge-onboarding-anchor-ablation",
+        "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+        "cohort": "7b8167f5367db65ee37271f29f3c87ad4021663196c1f7114b0e9c43a55eca5a",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "6250b24f40b10103053e5916d8478085e8d89d64b04dc4fbff16307e5aa15227",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "4307ba1e8f2bac4871159a216efde31c73d11ba1872a670916a3489d63698719",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "c81ed03739e65d6cb22e4148a5d85009f63946ae99d7fd7ce66901ee91594f35",
+        "trainer_family": "k3p-no-anchor"
+      },
+      "retained_selection": {
+        "candidate_id": "forge-onboarding-anchor-ablation",
+        "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+        "cohort": "7b8167f5367db65ee37271f29f3c87ad4021663196c1f7114b0e9c43a55eca5a",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "6250b24f40b10103053e5916d8478085e8d89d64b04dc4fbff16307e5aa15227",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "4307ba1e8f2bac4871159a216efde31c73d11ba1872a670916a3489d63698719",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "c81ed03739e65d6cb22e4148a5d85009f63946ae99d7fd7ce66901ee91594f35",
+        "trainer_family": "k3p-no-anchor"
+      },
+      "trainer_family": "k3p-no-anchor"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "forge-no-critic-penalty",
+        "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+        "cohort": "861df90816c5c76aec34000815d1d0c6cc59bd390d5a99cbf6693064c327e776",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "503488733e3aee1288fa1519a59075acf114ab66a1f1a566215d102b448e0adf",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "aae0815fb3c2b4b31bb840f3f6ee281a78708f0cea06c8ea6ea7d12befeab973",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "4fc77310f8bb4d2320e8a691712999799199e694d3f86e25d5ea52ce80119edf",
+        "trainer_family": "k3p-no-penalty"
+      },
+      "retained_selection": {
+        "candidate_id": "forge-no-critic-penalty",
+        "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+        "cohort": "861df90816c5c76aec34000815d1d0c6cc59bd390d5a99cbf6693064c327e776",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "503488733e3aee1288fa1519a59075acf114ab66a1f1a566215d102b448e0adf",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "aae0815fb3c2b4b31bb840f3f6ee281a78708f0cea06c8ea6ea7d12befeab973",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "4fc77310f8bb4d2320e8a691712999799199e694d3f86e25d5ea52ce80119edf",
+        "trainer_family": "k3p-no-penalty"
+      },
+      "trainer_family": "k3p-no-penalty"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "k3p-no-output-noise-diagnostic",
+        "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+        "cohort": "03c79722db9abe1daa6c02f9a6377f95e5b2368df608d4dc46b064be3e46eb33",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "70f9101e378bf94a50b2f667262c567a358524d3f61f39d1d4e10ebd87668418",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "e5733efa9a715fdd3bd774ff2cf475ccc58d49e9e63bfbe5e5798ca8b409e3d5",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "96f379fc484a037651e317a8d78da13299130bfb6c787426c23daab7b49d5418",
+        "trainer_family": "k3p-no-training-noise"
+      },
+      "retained_selection": {
+        "candidate_id": "k3p-no-output-noise-diagnostic",
+        "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+        "cohort": "03c79722db9abe1daa6c02f9a6377f95e5b2368df608d4dc46b064be3e46eb33",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "70f9101e378bf94a50b2f667262c567a358524d3f61f39d1d4e10ebd87668418",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "e5733efa9a715fdd3bd774ff2cf475ccc58d49e9e63bfbe5e5798ca8b409e3d5",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "96f379fc484a037651e317a8d78da13299130bfb6c787426c23daab7b49d5418",
+        "trainer_family": "k3p-no-training-noise"
+      },
+      "trainer_family": "k3p-no-training-noise"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+        "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+        "cohort": "fb17123bbc348e7f21c906529039fcbc098648b5cf2fe1c0f2d8e1cdcf72a416",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "bce6bbe1c461f153d9b5f8d3105e3c349ac5e09f590bd834c2355ec33a8b7fe9",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "58f91e4cdb9634906303c2931bff1baac175e91dd56e87efe0849d7e8467fc19",
+        "trainer_family": "ka2"
+      },
+      "retained_selection": {
+        "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+        "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+        "cohort": "fb17123bbc348e7f21c906529039fcbc098648b5cf2fe1c0f2d8e1cdcf72a416",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "bce6bbe1c461f153d9b5f8d3105e3c349ac5e09f590bd834c2355ec33a8b7fe9",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "58f91e4cdb9634906303c2931bff1baac175e91dd56e87efe0849d7e8467fc19",
+        "trainer_family": "ka2"
+      },
+      "trainer_family": "ka2"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+        "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+        "cohort": "a56cbab763fa33d4500250e4ed20bff8aec7ca686d33f71ebb0afd805e3b549d",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "64a1bd4ef1a63ed55a4d0dfb2120582c5aa5fd57d26c209e724f2cba8b83a8bf",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "a84147df1591167e226d80fc7b3f6f91189adee0d75817ce2366332d1d6be4e0",
+        "trainer_family": "r1r2"
+      },
+      "retained_selection": {
+        "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+        "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+        "cohort": "a56cbab763fa33d4500250e4ed20bff8aec7ca686d33f71ebb0afd805e3b549d",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "64a1bd4ef1a63ed55a4d0dfb2120582c5aa5fd57d26c209e724f2cba8b83a8bf",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "a84147df1591167e226d80fc7b3f6f91189adee0d75817ce2366332d1d6be4e0",
+        "trainer_family": "r1r2"
+      },
+      "trainer_family": "r1r2"
+    },
+    {
+      "changed_metadata_only": [
+        "selection_kind",
+        "reason",
+        "measurement_views",
+        "measurement_tasks"
+      ],
+      "original_selection": {
+        "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+        "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+        "cohort": "83376d33973c9470008315c573baf53fa7b35beb0e1e2dfd5849fe0305e961b3",
+        "execution_backend": "cuda",
+        "measurement_tasks": [
+          "clockfree_audit_measurement_v1"
+        ],
+        "measurement_views": [
+          "discriminator_stability"
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.",
+        "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "4eaba09d2426109bb1e12082cea5f8f93a46199e006736732b05eca749acd34c",
+        "selection_kind": "current_measurement",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "9b3866d15e168d771833d758b7322c0e47947f444859b94be904b7aa2f9ccbf7",
+        "trainer_family": "release07-gan-v3"
+      },
+      "retained_selection": {
+        "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+        "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+        "cohort": "83376d33973c9470008315c573baf53fa7b35beb0e1e2dfd5849fe0305e961b3",
+        "execution_backend": "cuda",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "reason": "Retain the exact complete measurement under its original joint-word evaluator source binding. The current v4 evaluator contract differs; this archived evidence grants no current-measurement or default-adoption claim.",
+        "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+        "scientific_row_sha256": "4eaba09d2426109bb1e12082cea5f8f93a46199e006736732b05eca749acd34c",
+        "selection_kind": "historical_incumbent",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "task_keys_sha256": "9b3866d15e168d771833d758b7322c0e47947f444859b94be904b7aa2f9ccbf7",
+        "trainer_family": "release07-gan-v3"
+      },
+      "trainer_family": "release07-gan-v3"
+    }
+  ],
+  "original_card": {
+    "git_blob": "bf711fb21b18a766c06e98a942ba31998405abbf",
+    "git_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+    "path": "configs/forge/selections/family-current-v1.json",
+    "sha256": "4426535e9e1f27feb4fcc365182a512ddab4335ed6bcf0436a99ee6dd70ac011"
+  },
+  "qualification_input": false,
+  "reason": "Nine existing measurement pins predate the current joint-word evaluator v4 source contract. Preserve original numerical evidence and all recipe/source/runtime/RNG/task/scientific-row identities; classify those selections as historical instead of weakening current-contract validation. This is publication maintenance, with no training or regrading into a new task contract.",
+  "schema_version": 1,
+  "starter_change": {
+    "bcap_pure_adam_pin_unchanged": true,
+    "default_adoption": false,
+    "history_scope": "compact migration and frozen source; no additional current leaderboard row",
+    "new_card": {
+      "path": "configs/forge/selections/family-current-v1.json",
+      "sha256": "5d11656aa7126855a8bbd01549dc1c3c5d340f918447ccb431ea3356e507bc54"
+    },
+    "original_search_selections_unchanged": true,
+    "previous_card": {
+      "git_blob": "a33c0b697d7d4926ac7169741c48eff64fc5c915",
+      "git_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+      "path": "configs/forge/selections/family-current-v1.json",
+      "sha256": "357647545062db6c1050b4156d90320100f804582c085b907b37e472b12d1df4"
+    },
+    "previous_pin": {
+      "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+      "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+      "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "reason": "Separate user-directed tie preference for the experimental BCAP starter; original nine metadata migrations, seven added count/hash measurements and all frozen search selections are retained.",
+    "retained_history_pin": {
+      "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+      "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+      "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate. Retained as the original display selection after the user-directed experimental starter choice.",
+      "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "selected_pin": {
+      "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+      "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+      "cohort": "2d8cee20b23e8d7ed96d20d442df358846fc46d4681d0799cc8ba5081638c975",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. Original frozen PASS/hash search selections remain unchanged. This selects a measured starting point, with no calibrated default adoption or qualification claim.",
+      "recipe_sha256": "1d15d3ab991724ee353548cb6c3638ff4be4a108b71266ede80b7c62b5375272",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "c666dc1059462623cdb8c60ce0448ef86845fd200a3346434b8f528912a653dc",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "55cf9efb1cf6160a9d450dcb5ef5462d6dda4c397bf7abd10eaef33f0159307f",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "starter_receipt": {
+      "path": "reports/forge/dualnorm-tier1/starter-selection.json",
+      "sha256": "4c760be5aef6eb1ae92a488602b95b8f2cf0fba4dbe1e0dfef04b9d18f8bd245"
+    }
+  }
+}

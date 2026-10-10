@@ -22,7 +22,7 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import get_recipe, scale_learning_rates
+from particlegan import get_recipe, init, scale_learning_rates
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -106,22 +106,27 @@ def build_models(cfg, scaler, device):
     torch.manual_seed(cfg["seed"])
     g = GymTransitionGenerator(z_dim=cfg["z_dim"], width=cfg["width"],
         context_dim=cfg["context_dim"], scaler=scaler).to(device)
-    prior = recipe.make_prior(device=device,
-        generator=torch.Generator(device=device).manual_seed(cfg["seed"] + 101))
+    prior = init.deterministic_orthogonal_(recipe.make_prior(device=device,
+        generator=torch.Generator(device=device).manual_seed(cfg["seed"] + 101)))
     torch.manual_seed(cfg["seed"] + 102)
     e = GymTransitionEncoder(z_dim=cfg["z_dim"], width=cfg["encoder_width"],
                              context_dim=cfg["context_dim"]).to(device)
+    # Deterministic G/E initialization for every arm (D is initialized below).
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(e, seed=2)
     inference_target = parameter_count(e) + parameter_count(g.branches[2]) + parameter_count(prior)
     d = direct = None
     if cfg["arm"] == "direct":
         torch.manual_seed(cfg["seed"] + 103)
         direct = DirectPredictor(context_dim=cfg["context_dim"],
                                  target_parameters=inference_target).to(device)
+        init.deterministic_orthogonal_(direct, seed=0)
         g = e = prior = None
     elif cfg["arm"] == "adversarial":
         torch.manual_seed(cfg["seed"] + 100)
         d = GymTransitionCritics(width=cfg["d_width"], marginal_width=cfg["marginal_width"],
                                 context_dim=cfg["context_dim"]).to(device)
+        init.deterministic_orthogonal_(d, seed=1)
     return dict(G=g, E=e, prior=prior, D=d, direct=direct, scaler=scaler,
                 config=cfg, device=torch.device(device), inference_target=inference_target)
 
@@ -241,10 +246,6 @@ def train(cfg):
     models = build_models(cfg, scaler, device)
     recipe = training_recipe(cfg)
     g, e, prior, d, direct = [models[k] for k in ("G", "E", "prior", "D", "direct")]
-    ema = {**models}
-    for key in ("G", "E", "prior", "direct"):
-        if models[key] is not None:
-            ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     if d is not None:
         opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
                                               fused=device.type == "cuda")
@@ -256,6 +257,10 @@ def train(cfg):
                                betas=recipe.prior_betas or recipe.betas))
         opt_g = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
+    ema = {**models}
+    for key in ("G", "E", "prior", "direct"):
+        if models[key] is not None:
+            ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()

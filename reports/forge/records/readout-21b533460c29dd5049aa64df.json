@@ -1,0 +1,354 @@
+{
+  "attempt_ids": [
+    "0184ca1327794ab58168d853ce0ad978",
+    "275efc25a9e34f25824d502e7f9c20b6",
+    "297db233ae0d459caf35e6aa60f3d0d5",
+    "2ff413e61d794dec8e3ce91c90ad16a2",
+    "4d69405651764ab6b700c6b1e37844db",
+    "b9e3dadcca1b4a4099814d1c5150db6b",
+    "bf43170e7806426c906d8f0134a7287c",
+    "bfd92d6f12174f8289903745f545e83c",
+    "df2a9933e92b4c59a1c872ab189be7b0"
+  ],
+  "candidate_id": "k3p-bcap-matched-v1",
+  "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Within this exact source/runtime/host cohort, BCap attained tier 1; matched R1/R2, K3P, KA2 and the four K3P ablations stopped at two_pole. Earlier cloud/noisy, clean-native and calibration outcomes remain separate.",
+  "conclusion": "Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality requirements, then failed mode_hold: {'cover': 0.625, 'effective_modes': 4.520427227020264, 'hq': 0.999755859375, 'modes': 5, 'n_modes': 8, 'step': 1200}. Endurance and remaining quality tasks are unknown. Nine completed attempts cost 86.356708358 paid seconds; no execution errors or remaining reservations.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Replace only the critic penalty by frozen historical bcap while retaining the K3P optimizer, noise, A2, host and sampling contracts.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this frozen failed cohort; do not continue mode hold or infer native/shape quality from cloud behavioral passes. Investigate the saved mode-hold state under a separately bounded hypothesis before new training; calibration and policy-aware tasks remain required for adoption and broader comparisons.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "0184ca1327794ab58168d853ce0ad978",
+        "result_hash": "d71a25927f2d4c924121b5142e7602fc7034781f3d53634b4e54ab75e2460473",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "275efc25a9e34f25824d502e7f9c20b6",
+        "result_hash": "2fae4128e22b2d3a6b4eba95fa394dbd1ae2fae5f4d20ff602e8ac80eba0eb44",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "297db233ae0d459caf35e6aa60f3d0d5",
+        "result_hash": "e7cbfcd0d0a3765ac5d082cec56b81a0bc34fb33ca90a8b9f86f66f9e1f72c84",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "2ff413e61d794dec8e3ce91c90ad16a2",
+        "result_hash": "81fd42cab8eea3dcec78e549a53e32aee3ab943e75315744a5db8c01af08c539",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "4d69405651764ab6b700c6b1e37844db",
+        "result_hash": "3384cff1b3dee03d1c5290148fce9408858bae2cfaaf48ff7009810d82b151bd",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "b9e3dadcca1b4a4099814d1c5150db6b",
+        "result_hash": "3e37b7700a17073379945a48cd232c97a78719d19382961f16dc3cf6de81fe2f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bf43170e7806426c906d8f0134a7287c",
+        "result_hash": "c8ec5cf24f1be27f1ceb51b3032b0377ab7ea46a4f3869a5c37a0470c646db69",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bfd92d6f12174f8289903745f545e83c",
+        "result_hash": "c0dff1d078e833699c337a14c19f5b9521ee9e508cc3fe011d8e231f3eb0efcb",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "df2a9933e92b4c59a1c872ab189be7b0",
+        "result_hash": "6d1e1a35106edac512a521d5273f210162b7dc88a83b66544a579ab2a5f25973",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "full-readouts/readout-21b533460c29dd5049aa64df.json",
+    "original_file_sha256": "aadbc87704f6a343c8621b095f1349673adbaad5cc5d583878fb0c585c882d47",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-21b533460c29dd5049aa64df",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "0184ca1327794ab58168d853ce0ad978",
+      "compatibility_key": "261650773b8bdb77aaf2ed5accbb064ae74591fc2a2635536eb9c0dc09da9017",
+      "cost": {
+        "adapter_seconds": 7.602422237978317,
+        "charged_task": "mid_scale_identity",
+        "device": "cpu",
+        "execution_seconds": 12.786716587026604,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 9.576318473962601,
+        "wall_seconds": 12.786716587026604
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.999994695186615,
+        "concept_cos_plus": 0.9999629855155945,
+        "concept_mag_minus": 1.005644679069519,
+        "concept_mag_plus": 0.9984474182128906,
+        "identity_at_0": 0.998119961206634,
+        "identity_at_mid": 0.9927391792070137
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "_attempt_id": "275efc25a9e34f25824d502e7f9c20b6",
+      "compatibility_key": "61aebd3b2b7b735271a5721e9d7755052bfab6e74f3cca960fb30b03ce5133ec",
+      "cost": {
+        "adapter_seconds": 0.33847674896242097,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.536816539010033,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3557072049588896,
+        "wall_seconds": 5.536816539010033
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.46526971459388733,
+        "mean_abs": 0.40319982171058655
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "_attempt_id": "297db233ae0d459caf35e6aa60f3d0d5",
+      "compatibility_key": "4968ca88e86d1c22d5c441641f8314722edb9f06124c54923b271cc0e0fbd308",
+      "cost": {
+        "adapter_seconds": 1.9498239799868315,
+        "charged_task": "ae_gan_hold",
+        "device": "cpu",
+        "execution_seconds": 7.114446987048723,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.91201979102334,
+        "wall_seconds": 7.114446987048723
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.004685889929533005,
+        "recon_mse": 0.00524659501388669
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "_attempt_id": "2ff413e61d794dec8e3ce91c90ad16a2",
+      "compatibility_key": "955a2348e42bfe8016f5b75bd0e9a306ffc3f179af1a367c0c066e28ce86c309",
+      "cost": {
+        "adapter_seconds": 1.8583887160057202,
+        "charged_task": "residual_student",
+        "device": "cpu",
+        "execution_seconds": 6.943519086984452,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.867100143979769,
+        "wall_seconds": 6.943519086984452
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0008810099097900093,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "residual_student"
+    },
+    {
+      "_attempt_id": "4d69405651764ab6b700c6b1e37844db",
+      "compatibility_key": "e22c3556dd3f7d1fbf69d9d51f748f5b52daf1ba4b88a4623dbd7bb601064cc0",
+      "cost": {
+        "adapter_seconds": 2.1879722320009023,
+        "charged_task": "unipolar",
+        "device": "cpu",
+        "execution_seconds": 7.384662661002949,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.141555131995119,
+        "wall_seconds": 7.384662661002949
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 0.9993072350099297,
+        "neu_hold": 0.9915355993434787,
+        "off_caption": 7.029599094490724e-06
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "unipolar"
+    },
+    {
+      "_attempt_id": "b9e3dadcca1b4a4099814d1c5150db6b",
+      "compatibility_key": "abf0157acc3b503124ee9752514f84877cefad1c580f5a5eeb0515d8112c33a8",
+      "cost": {
+        "adapter_seconds": 5.716468375001568,
+        "charged_task": "cover_leftover",
+        "device": "cpu",
+        "execution_seconds": 13.03948252403643,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 7.6968157480005175,
+        "wall_seconds": 13.03948252403643
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "content_kept": 0.9936638131240145,
+        "leak_ratio": 0.0002619880968296335,
+        "pole_rel_err_minus": 0.009503724053502083,
+        "pole_rel_err_plus": 0.0153648117557168,
+        "same_dir": 0.004551637849364317,
+        "u_kept": 0.9771081707518371
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "cover_leftover"
+    },
+    {
+      "_attempt_id": "bf43170e7806426c906d8f0134a7287c",
+      "compatibility_key": "32dff83ee07713bd43bc674b6c6236668bf65dfdb13dcbb9ef6f64ce793a3a71",
+      "cost": {
+        "adapter_seconds": 1.8281356130028144,
+        "charged_task": "trajectory",
+        "device": "cpu",
+        "execution_seconds": 7.055008236027788,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.861666211974807,
+        "wall_seconds": 7.055008236027788
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0008982741856016219
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "trajectory"
+    },
+    {
+      "_attempt_id": "bfd92d6f12174f8289903745f545e83c",
+      "compatibility_key": "2edd2791f351eae3fac8ff392c5125dc169037ba8d0cc6742dba03307e424ca3",
+      "cost": {
+        "adapter_loop_seconds": 11.77278085402213,
+        "adapter_seconds": 12.034822273009922,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 17.346143360016868,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.301731319807004,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.011637725925538689
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007692302868235856
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 11.28240129101323
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 14.080834711960051,
+        "wall_seconds": 17.346143360016868
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.520427227020264,
+        "hq": 0.999755859375,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mode_hold"
+    },
+    {
+      "_attempt_id": "df2a9933e92b4c59a1c872ab189be7b0",
+      "compatibility_key": "1268db172056b4ca91b0b950ce8b54d53679b06ae96b76b08584df42fe1fdbf1",
+      "cost": {
+        "adapter_seconds": 1.8146499560098164,
+        "charged_task": "unused_token_hold",
+        "device": "cpu",
+        "execution_seconds": 9.149912377004512,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.8061428149812855,
+        "wall_seconds": 9.149912377004512
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_move": 0.9587822900436365,
+        "unused_hold": 0.9855841333046556
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

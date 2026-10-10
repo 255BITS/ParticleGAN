@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "implementation-pilot-cpu-v1",
+  "budget_seconds": 900,
+  "candidate_budget_seconds": 900,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Bounded full-budget initial smoke to validate real Forge execution and receipts; no production promotion.",
+  "resource_reservation": {
+    "backend": "cpu",
+    "threads_per_worker": 1,
+    "gpu_devices": [],
+    "legacy_queue_changes": "none"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "status": "PROSPECTIVE_MEAN_COPY_CANDIDATE_SELECTED",
+  "variant": "CB64-RA10",
+  "selected_utc": "2026-09-30T11:04:30.438109+00:00",
+  "verified_map_entries": 120,
+  "numerical_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/select_ra10.py": "875dc679aa3befca7839f29353c22fc23a341830100b1c6fee8c55b23bbfd15e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/RA10-PLAN.md": "db1daf051a330022835a06eedb0fc08720549bf5556216bd85644a319e1780ef",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-transport/SOURCE-FROZEN.json": "9818d0439d36b6801ee9c5c21554c5e9b504bf1f1494b1443ebcc89d1ee520ab",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-transport/receipt.json": "b72ee75a0e02fed39a7f95af57b41c3ad5ce70bf339dabe3d4bcdd3fb57c44ce",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-transport/FROZEN.json": "05ef8258fc8b7b7dc40f72555cff85357f66c1f9df10ccae4111ded389fdefb7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-transport/attempt1/result.json": "64795daed9bf2aa8a1e5a49aff350295308a488c292611359ae0eda5c7131077",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9.json": "6c6b727c4a7b493afb368baf75c8ffaea2fe885f3883a0962f604366c4fa62b3"
+  },
+  "base_package": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9",
+  "config_change": null,
+  "backend_schema": 9,
+  "trainer_schema": 5,
+  "evidence": {
+    "grid_lower_bound": 0.682708046932392,
+    "grid_accepted_copies": 936,
+    "objective_before": 0.9722231410691482,
+    "objective_after": 0.849238721341556,
+    "toy_lower_bound": -2.1384009413595684,
+    "toy_actions": 0
+  },
+  "production_source_tested": false,
+  "quality_verdict": null,
+  "limits": "One saved-state CPU feature-objective prototype; no emitted quality, independent prospective certificate or CUDA training replication.",
+  "next_gate": "Independently reviewed and frozen production contracts, then fresh unchanged full CUDA toy and canonical grid; required replay and portability regressions follow both passing."
+}

@@ -1,0 +1,699 @@
+{
+  "schema": "particlegan_recent_open_toy_pr_review_v1",
+  "reviewed_at_utc": "2026-10-02T21:21:36Z",
+  "review_integration_base": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+  "scope": [
+    245,
+    246,
+    253
+  ],
+  "follow_up_scope": [
+    254
+  ],
+  "older_toy_prs_reaudited": false,
+  "is_configuration_board": false,
+  "scientific_training_or_sampling_performed_by_this_review": false,
+  "existing_ratings_and_original_scientific_receipts_rewritten": false,
+  "review_methods": [
+    "Exact Git source/card comparisons",
+    "Existing numeric receipts and pair-law algebra",
+    "Pure retained file/GIF hashes",
+    "Rendered actual checkpoint readability",
+    "Root-provided18 current-base PR245 software controls",
+    "Exact-head GitHub CI metadata snapshots"
+  ],
+  "review_role_limits": "Reported original reviewer/software counts are preserved attestations; no original readers or scientific campaigns were repeated. Parent owns remote state/merges and final family-search board.",
+  "records": [
+    {
+      "pr": 245,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/245",
+      "reviewed_head": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+      "definition_quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "bounded diagnostic usefulness; separate from learned convergence and original frozen ratings"
+      },
+      "github_metadata_snapshot": {
+        "path": "/ml2/hypergan/forge-open-pr-review-20261002/pr-245.json",
+        "sha256": "a5e144e9d1924702be8e4622bf02a8ec8d169b7fdeb7109b3ef29f0b704d053f",
+        "state_at_capture": "OPEN",
+        "mergeable_at_capture": "UNKNOWN"
+      },
+      "exact_head_checks": [
+        {
+          "name": "CPU / Python 3.10",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37025540040/job/110899099360",
+          "completedAt": "2026-10-02T15:16:17Z"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37025540040/job/110899099977",
+          "completedAt": "2026-10-02T15:20:43Z"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37025540040/job/110899099925",
+          "completedAt": "2026-10-02T15:33:49Z"
+        },
+        {
+          "name": "Build release distributions",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37025540040/job/110906952015",
+          "completedAt": "2026-10-02T15:34:26Z"
+        }
+      ],
+      "forge_qualification_credit": false,
+      "family_search_qualification_credit": false,
+      "default_adoption": false,
+      "disposition": "MERGED_POSITIVE_BOUNDED_TOY",
+      "merge_commit": "848a70621bc9008e0b14b9fe3e1122f16758799e",
+      "question": "Does the generated caption fixture satisfy terminal accuracy and beneficial-code bounds after extending the three arms to2048 updates, beyond the earlier512-update penalty exposure?",
+      "distinct_from": [
+        "earlier512-update caption fixture",
+        "PR246 remote-cue conditional reconstruction",
+        "PR253 constructed terminal precision cancellation"
+      ],
+      "original_scientific_status": "PASS",
+      "scientific_updates": {
+        "per_arm": 2048,
+        "arms": 3,
+        "total": 6144
+      },
+      "original_wall_budget_seconds": 900,
+      "reported_external_elapsed_seconds": 610.6340055079199,
+      "terminal_metrics": {
+        "ordinary_BF16": 0.546611430701668,
+        "particle_BF16": 0.5182846123906831,
+        "particle_untied_BF16": 0.48423498203739546,
+        "zero_code": 0.6983391186720715
+      },
+      "gate": {
+        "pass": true,
+        "versus_ordinary": {
+          "pass": true,
+          "aggregate_accuracy_improved": true,
+          "no_source_harmed": true,
+          "relative_accuracy_improvement": 0.11411479006979752
+        },
+        "versus_shared": {
+          "pass": true,
+          "aggregate_accuracy_improved": true,
+          "no_source_harmed": true,
+          "relative_accuracy_improvement": 0.06569678037753712
+        },
+        "aggregate_code_benefit": true,
+        "code_beneficial_each_source": true,
+        "bank_live": true,
+        "query_live": true,
+        "C_live_all_six_sites": true,
+        "particle_Up_live_all_six_sites": true,
+        "relative_code_benefit": 0.4421492551691395,
+        "relative_margin": 0.001,
+        "per_source_harm_tolerance": 1e-06,
+        "live_fraction_threshold": 0.9,
+        "live_denominator": 2047
+      },
+      "source_card": {
+        "git_commit": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+        "path": "docs/e22_routed_caption_late_phase_v1.json",
+        "sha256": "740f96f96764026cda84f728986e9920007c96a9b948ecc0edbbe0a9a5b05b6b"
+      },
+      "source_hashes": {
+        "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+        "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+        "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+        "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+        "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+        "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+        "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+        "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+        "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+        "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+        "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b",
+        "examples/e22_routed_caption_late_phase.py": "f4bad83b5ff9944a14c75bcf5d51d82e26fd3ed432a0730122255fffdc313b65",
+        "examples/render_e22_routed_caption_late_phase.py": "61fd56ad58bdbe6b76fe292f57251533e6beef0d493d05dea62124fbe0e0823f",
+        "tests/test_e22_routed_caption_late_phase.py": "8f19fab86157995acdf20f3965e2c963f02c08a9cd39ec984e6ab3afcb5e2a7d",
+        "tests/test_e22_routed_caption_late_phase_renderer.py": "d99a095adaf81043704a01d401e503cd68fe133151f353751c1e77c7a27b236a"
+      },
+      "all_source_card_pins_verified": true,
+      "source_card_pin_count": 15,
+      "integration_checks": {
+        "total_passed": 18,
+        "benchmark": {
+          "passed": 15,
+          "seconds": 2.04,
+          "command": "python -m pytest -q tests/test_e22_routed_caption_late_phase.py",
+          "log": {
+            "path": "/ml2/hypergan/forge-open-pr-review-20261002/pr245-integration-controls.log",
+            "sha256": "8c77c4bb551bd653495fc23fd803bfd9416704c5c322a9a2f01936fb6d5909c4"
+          }
+        },
+        "renderer_fresh_process": {
+          "passed": 3,
+          "seconds": 0.28,
+          "command": "timeout --signal=INT --kill-after=5s 60s python -m pytest -q tests/test_e22_routed_caption_late_phase_renderer.py",
+          "log": {
+            "path": "/ml2/hypergan/forge-open-pr-review-20261002/pr245-renderer-integration-controls.log",
+            "sha256": "36628d9288a7053a36fef344f7d77295a6fb21e8ab5726fbbb262ff5e21f2dc0"
+          }
+        },
+        "science_reexecuted_for_integration": false
+      },
+      "current_base_assessment": {
+        "base_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+        "overlapping_changed_paths": [],
+        "read_only_three_tree_exit_code": 0,
+        "conflict_markers": 0,
+        "inherited_source_profile_pins_match": true,
+        "particlegan_tree_byte_equal": true
+      },
+      "media": {
+        "gif": {
+          "git_commit": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+          "path": "docs/media/e22_routed_caption_late_phase/goal.gif",
+          "sha256": "53e67a3f616ee198baa703715f608b86db253a0b4c2e24c16130b4af89096dae"
+        },
+        "final_png": {
+          "git_commit": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+          "path": "docs/media/e22_routed_caption_late_phase/goal-final.png",
+          "sha256": "6293d58fa012e5324acf06c627731764d5c9958f013fb486f446feb84e952ad3"
+        },
+        "receipt": {
+          "git_commit": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+          "path": "docs/media/e22_routed_caption_late_phase/media-completion.json",
+          "sha256": "a1f53fbb31e6b61e8d900f5a22f26a1d397434a24d67d21ee3d98c55928b1527"
+        },
+        "actual_steps": [
+          0,
+          256,
+          512,
+          768,
+          800,
+          1024,
+          1536,
+          2048
+        ],
+        "frames": 8,
+        "bound_retained_input_hashes_verified": 7,
+        "gif_and_final_png_hashes_verified": true,
+        "visual_readability_checked": true,
+        "new_model_calls_in_this_review": 0
+      },
+      "reported_original_independent_saved_data_checks": 147,
+      "independent_reader_rerun_for_this_review": false,
+      "limits": [
+        "Only the fixed2048 endpoint determines PASS; no sustained-learning qualification.",
+        "Observed penalty phase exposure is descriptive; longer training and native adaptation are not isolated causal factors.",
+        "Untied heads add capacity; this is not an equal-capacity efficiency proof.",
+        "Generated toy PASS does not establish actual-caption/Supra recovery or defaults."
+      ],
+      "original_compact_result": {
+        "git_commit": "3c3a366475d7e82947844302ed3a4deffa9354ed",
+        "path": "docs/e22_routed_caption_late_phase_results.json",
+        "sha256": "64aaff08df789972997fba5372c732df30ffc3664309a9414c4bc60f4798f16d"
+      }
+    },
+    {
+      "pr": 246,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/246",
+      "reviewed_head": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+      "definition_quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "bounded diagnostic usefulness; separate from learned convergence and original frozen ratings"
+      },
+      "github_metadata_snapshot": {
+        "path": "/ml2/hypergan/forge-open-pr-review-20261002/pr-246.json",
+        "sha256": "a7a12e7e5a2375f3ec34e20870c621d3d5eecbab041bcf5aeb6a178fc73e0989",
+        "state_at_capture": "OPEN",
+        "mergeable_at_capture": "UNKNOWN"
+      },
+      "exact_head_checks": [
+        {
+          "name": "CPU / Python 3.10",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37034233003/job/110928346074",
+          "completedAt": "2026-10-02T16:31:16Z"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37034233003/job/110928346350",
+          "completedAt": "2026-10-02T16:31:18Z"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37034233003/job/110928346348",
+          "completedAt": "2026-10-02T16:47:17Z"
+        },
+        {
+          "name": "Build release distributions",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37034233003/job/110935209671",
+          "completedAt": "2026-10-02T16:47:51Z"
+        }
+      ],
+      "forge_qualification_credit": false,
+      "family_search_qualification_credit": false,
+      "default_adoption": false,
+      "disposition": "RETAIN_USEFUL_DISTINCT_NEGATIVE_WITH_OBSERVATION_FOLLOWUP",
+      "original_scientific_status": "VALID_NEGATIVE_FIXED_GATE_FAIL",
+      "question": "Does G64 versus G16 with D16 fixed improve deterministic observed remote-marker reconstruction by10% at100/200 and beat the marker-blind reference at200?",
+      "distinct_from": [
+        "PR236 hidden-nuisance conditional-mean batch diagnostic",
+        "PR245 late caption penalty exposure",
+        "PR253 terminal precision cancellation"
+      ],
+      "scientific_updates": {
+        "per_arm": 200,
+        "arms": 2,
+        "total": 400
+      },
+      "original_wall_budget_seconds": 60,
+      "original_elapsed_seconds": 16.410747226094827,
+      "original_checks": {
+        "source_exact": true,
+        "teacher_qualified": true,
+        "initial_owners_match": true,
+        "G16_native_health": true,
+        "G64_native_health": true,
+        "G16_converges_at100": true,
+        "G64_converges_at100": true,
+        "G64_better_at100": false,
+        "G16_converges_at200": true,
+        "G64_converges_at200": true,
+        "G64_better_at200": false,
+        "G16_beats_codeblind_bound": false,
+        "G64_beats_codeblind_bound": false,
+        "caller_streams_match": true,
+        "fixed400_complete": true,
+        "within60s": true
+      },
+      "original_failed_checks": [
+        "G64_better_at100",
+        "G64_better_at200",
+        "G16_beats_codeblind_bound",
+        "G64_beats_codeblind_bound"
+      ],
+      "original_endpoint_metrics": {
+        "G16": {
+          "100": {
+            "live_mask_error": 2.9455859661102295,
+            "live_full_error": 2.673997640609741,
+            "served_mask_error": 2.9455859661102295,
+            "served_source": "fast",
+            "codeblind_mask_lower_bound": 0.0005061657866463065,
+            "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+          },
+          "200": {
+            "live_mask_error": 1.5986964702606201,
+            "live_full_error": 1.4933761358261108,
+            "served_mask_error": 1.5986964702606201,
+            "served_source": "fast",
+            "codeblind_mask_lower_bound": 0.0005061657866463065,
+            "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+          }
+        },
+        "G64": {
+          "100": {
+            "live_mask_error": 2.9461498260498047,
+            "live_full_error": 2.673090934753418,
+            "served_mask_error": 2.9461498260498047,
+            "served_source": "fast",
+            "codeblind_mask_lower_bound": 0.0005061657866463065,
+            "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+          },
+          "200": {
+            "live_mask_error": 1.5947275161743164,
+            "live_full_error": 1.490707278251648,
+            "served_mask_error": 1.5947275161743164,
+            "served_source": "fast",
+            "codeblind_mask_lower_bound": 0.0005061657866463065,
+            "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+          }
+        }
+      },
+      "g64_benefit_fraction": {
+        "100": -0.00019142538906097387,
+        "200": 0.002482618908676699
+      },
+      "sources": {
+        "published_driver": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "examples/routed_remote_conditioning.py",
+          "sha256": "4db96c11b15176eafea404fa6f27cc3b1eca98852c46fb10a4c8bef2e8abca2d"
+        },
+        "published_protocol": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "examples/routed_remote_conditioning_protocol.json",
+          "sha256": "ccc7c3477cf7edc6a417044e321f583b9ddb989f86a4e1d9db27e38ef6da4c6c"
+        },
+        "original_executed_driver": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_driver.py.txt",
+          "sha256": "6b0b65d39e4cf5bc9588ae8de4632e9c0ede784d41884560509197d7a89f1c34"
+        },
+        "original_executed_protocol": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_protocol.json",
+          "sha256": "b1cd007e46f8c616bbfad8a56dfee5a0da4d33fe0a126802045b68095f504ed5"
+        },
+        "public_card": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_results_20261002.json",
+          "sha256": "c0e70b1b9b47866b49ea487e97460de42301d1bce1b82f4c45bc9c80e21b0996"
+        },
+        "original_raw_result_sha256": "5d7cfc667692d6c9fc32a654b51560405aeae37700a4d24f5177d7f2562cd45d",
+        "published_source_manifest_entry_count": 40,
+        "published_source_manifest_location": "source_hashes in the exact published_protocol above"
+      },
+      "definition_math": {
+        "primary_sampling": "live routed_generate(context,sigma=0,perturb=False); deterministic teacher targets use the same clean call",
+        "input_information": "Fully observed content,time and paired remote marker; no hidden nuisance.",
+        "analytic_clean_representation_witness": {
+          "status": "ANALYTIC_EXISTENCE_ONLY",
+          "construction": "Match teacher raw generator, same-shape encoder/router/table parameters in the student topology; identical FrozenHost and frozen fit target normalization then give zero clean prediction error.",
+          "actual_sampler_capture_performed_for_this_review": false,
+          "proves_fixed_200_update_optimizer_reachability": false,
+          "proves_native_noisy_sampler_capacity": false
+        },
+        "primary_bound_proven_impossible": false,
+        "irreducible_noise_floor_in_primary_score_established": false,
+        "native_noise_scope": "DV12 perturbations and shared Gaussian output-error noise affect training, not the primary clean evaluation.",
+        "paired_identity": "MSE(p_plus,p_minus;y_plus,y_minus)=mean((predicted_midpoint-target_midpoint)^2)+mean((predicted_halfcontrast-target_halfcontrast)^2)",
+        "codeblind_bound": "A marker-blind predictor has identical paired patch outputs and halfcontrast0; its optimal total error is V=mean(target_halfcontrast^2), attained by the target midpoint among unrestricted marker-blind functions.",
+        "marker_pixels": [
+          0,
+          1
+        ],
+        "held_patch_first_coordinate": 12,
+        "direct_g_radius": 4,
+        "held_direct_local_support_first_coordinate": 8,
+        "V": 0.0005061657866463065,
+        "original_total_mse_upper_bound": 0.00025308289332315326,
+        "original_total_rmse_upper_bound": 0.01590857923647342,
+        "bound_scope": "Restricted marker-blind reference, not irreducible error for complete observed inputs. Total<=.5V entails conditional fidelity but can fail from midpoint error despite perfect contrast.",
+        "ten_percent_gate_boundary": "Original direct inequalities accept zero-versus-zero baseline without a percentage-gain interpretation; actual baseline errors are positive.",
+        "future_variant": "Preregister separate contrast and midpoint fidelity; preserve batch comparison as unequal compute; any noisy-serving claim needs its own target/sampler witness and calibration."
+      },
+      "separate_saved_endpoint_diagnostic": {
+        "authority": "Already executed after the original campaign; does not replace or rescue original gates.",
+        "available_steps": [
+          200
+        ],
+        "predictor_forwards": 9,
+        "native_updates": 0,
+        "optimizer_steps": 0,
+        "new_execution_in_this_review": false,
+        "contrast_criterion": "conditional_error<=.5V",
+        "ratio_identity": "conditional_error/V=target_contrast_power/V-2*alpha+predicted_contrast_power/V",
+        "recorded_status": "failed",
+        "metrics": {
+          "G16": {
+            "pair_MSE": 1.5986967302194772,
+            "midpoint_loss": 1.5981903897461365,
+            "conditional_error": 0.0005063404733407389,
+            "conditional_error_over_V": 1.000345117546545,
+            "alpha": 0.00030064236355146454,
+            "predicted_contrast_power_over_V": 0.000946466857368776,
+            "target_contrast_power_over_V": 0.9999999354162792,
+            "decomposition_identity_error": 1.0625181290357943e-17,
+            "marker_learned": false,
+            "prediction_sha256": "5dc434f10ad2292119168df5173329ffe295da86926763d76cdfa36455ad267a",
+            "public_native_and_caller_replay_exact": true
+          },
+          "G64": {
+            "pair_MSE": 1.5947275253341386,
+            "midpoint_loss": 1.5942232442037811,
+            "conditional_error": 0.0005042811303575079,
+            "conditional_error_over_V": 0.9962766027682634,
+            "alpha": 0.004269536803996634,
+            "predicted_contrast_power_over_V": 0.004815740959977524,
+            "target_contrast_power_over_V": 0.9999999354162792,
+            "decomposition_identity_error": 9.974659986866641e-18,
+            "marker_learned": false,
+            "prediction_sha256": "d5cd0cdb5af472ed73389f80f1a5bd81ab0940624ed9c1c72c7b05716c632e07",
+            "public_native_and_caller_replay_exact": true
+          }
+        },
+        "source_sha256": "a71651547c3968145a92c73d9b65c133774633840aecaee3741e38becc40c610",
+        "original_result_sha256": "b04ad4f8e44ddb193a2131211b6458b0d2a335f889abe45b325424a71919b558",
+        "interpretation": "Both contrast ratios remain near1 and fail the separate bound; midpoint dominates total MSE. This is endpoint contrast recovery, not a native/real-task failure mechanism."
+      },
+      "follow_up": {
+        "pr": 254,
+        "url": "https://github.com/255BITS/ParticleGAN/pull/254",
+        "tip": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+        "exporter_commit": "7afd6e3ca021f5b3cf69daf28513986cf6092ef8",
+        "exporter_files_sha256": {
+          "benchmarks/toy_audit/remote_conditioning_media.py": "3474fd610e6fe218f54c8df7943d7cb124736d9f2792dcc9983067a1519f5a8b",
+          "benchmarks/toy_audit/recent_toy_media.py": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+        },
+        "file_change_count": 6,
+        "caller_package_gates_and_original_scientific_results_changed": false,
+        "focused_controls_passed": 26,
+        "focused_seconds": 2.23,
+        "recorded_identity_guard": "Exact reference packageSHA, guard string, source filecount, and40hex checkoutSHA; byte-equivalent publication checkout may differ.",
+        "receipt": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/receipt.json",
+          "sha256": "09abab990ed4ff70396c42260c89b8e3eeb8746adb9294bb722c5772f1689ade"
+        },
+        "media_checks": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/media-checks.json",
+          "sha256": "d25c0e8afe217987d7023db31b1e33d6929e0972664e345c1daf9ce471b869cf"
+        },
+        "gif": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/goal.gif",
+          "sha256": "06280ca31807fab3ef3e78f45635b9c0f0463c0e4bbf1958519c56d487887f2e"
+        },
+        "actual_metric_steps": [
+          0,
+          100,
+          200
+        ],
+        "frames": 3,
+        "bytes": 210467,
+        "consumed_files_hash_verified": 9,
+        "exporter_and_dependency_commit_bytes_verified": true,
+        "committed_gif_copy_matches_verified_export": true,
+        "visual_readability_checked": true,
+        "model_image_arrays_retained": false,
+        "earlier_contrast_unknown": true,
+        "contrast_available_steps": [
+          200
+        ],
+        "original_public_vs_review_time_only_attestations_separate": true,
+        "export_activity": {
+          "model_forwards": 0,
+          "training_updates": 0,
+          "new_draws": 0,
+          "model_metric_rescoring": false
+        },
+        "scientific_status_unchanged": "FAIL",
+        "original_failed_metric_check_count": 4
+      },
+      "limits": [
+        "Clean representability is not a trained positive reference/calibration proof.",
+        "200-update/60s exact algorithm success is not established by static capacity.",
+        "G64 consumes4x G examples; private DV12 streams can differ across batch sizes.",
+        "No real-task Nova/Qwen defect, FiLM-only cause or generic arbitrary-recipe qualification follows."
+      ]
+    },
+    {
+      "pr": 253,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/253",
+      "reviewed_head": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+      "definition_quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "bounded diagnostic usefulness; separate from learned convergence and original frozen ratings"
+      },
+      "github_metadata_snapshot": {
+        "path": "/ml2/hypergan/forge-open-pr-review-20261002/pr-253.json",
+        "sha256": "e40b1e0f9a45650440eae57fdf987dce47254a2da2cccc8fcbc0d9bde60e8a21",
+        "state_at_capture": "OPEN",
+        "mergeable_at_capture": "UNKNOWN"
+      },
+      "exact_head_checks": [
+        {
+          "name": "CPU / Python 3.10",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37057156050/job/111004550430",
+          "completedAt": "2026-10-02T19:56:44Z"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37057156050/job/111004550825",
+          "completedAt": "2026-10-02T19:56:32Z"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37057156050/job/111004550764",
+          "completedAt": "2026-10-02T20:12:36Z"
+        },
+        {
+          "name": "Build release distributions",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37057156050/job/111010958592",
+          "completedAt": "2026-10-02T20:13:38Z"
+        }
+      ],
+      "forge_qualification_credit": false,
+      "family_search_qualification_credit": false,
+      "default_adoption": false,
+      "disposition": "RETAIN_DISTINCT_NEGATIVE_DIAGNOSTIC_NO_CONVERGENCE_WINNER_MERGE_CREDIT",
+      "original_scientific_status": "FAIL",
+      "question": "In constructed frozen[W,-W] terminal cancellation, are routed edits beneficial under BF16/FP32 arithmetic, and what does the last native update show about precision?",
+      "distinct_from": [
+        "PR245 late caption native-phase horizon",
+        "PR246 observed remote-cue conditional reconstruction"
+      ],
+      "scientific_updates": {
+        "per_arm": 512,
+        "arms": 4,
+        "total": 2048
+      },
+      "original_wall_budget_seconds": 300,
+      "reported_external_elapsed_seconds": 65.87559020798653,
+      "terminal_metrics": {
+        "ordinary_BF16": 0.0038544907783017845,
+        "ordinary_FP32": 0.003457183103780683,
+        "particle_BF16": 0.004136584638735471,
+        "particle_FP32": 0.003563903105829141,
+        "zero_code": 0.003422291633746467
+      },
+      "gate": {
+        "pass": false,
+        "checks": {
+          "aggregate": false,
+          "no_source_harm": false,
+          "code_aggregate": false,
+          "code_each_source": false,
+          "bank_live": true,
+          "query_live": true,
+          "heads_live": true
+        },
+        "failed_bounds": [
+          "aggregate",
+          "no_source_harm",
+          "code_aggregate",
+          "code_each_source"
+        ],
+        "candidate": "particle_FP32",
+        "control": "ordinary_FP32",
+        "offline_terminal_steps": 512
+      },
+      "source_card": {
+        "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+        "path": "docs/e22_routed_terminal_cancellation_v1.json",
+        "sha256": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01"
+      },
+      "source_hashes": {
+        "examples/e22_routed_terminal_cancellation.py": "999f8e984ce17b821d3330d313eddde183e5ab313df69fa0360c28f144cdf5e5",
+        "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+        "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+        "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+        "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+        "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+      },
+      "source_card_pin_count": 6,
+      "all_source_card_pins_verified": true,
+      "source_bindings": {
+        "renderer": {
+          "path": "examples/render_e22_routed_terminal_cancellation.py",
+          "sha256": "aae4b682966004c7d031bff3a83e77ac11c104d893e4eeb2f13211c44be82ab3"
+        },
+        "software_test": {
+          "path": "tests/test_e22_routed_terminal_cancellation.py",
+          "sha256": "e3d58c45ebac41286d55f3bf606b9015d18f4ebd1cd7d09c97955daefe0b6cff"
+        },
+        "qualification_summary": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/e22_routed_terminal_cancellation_qualification.json",
+          "sha256": "48867d9542fb28f4b383643fb39a936ac93d32ee491d27cf39ebb0ac27b984d7"
+        },
+        "original_raw_report_sha256": "579a1b6b7fde9e0b7b2ffb3f6d116792cad5aa0d22163617f02a4e32c88d310d",
+        "original_raw_completion_sha256": "ccd2313265a37d893068997f48090af54752b8538d9ebf9b43904b672f41f38b",
+        "original_observed_media_sha256": "caa7c8f285f18110bfd617874bf5932874e13280a216a2faf80740712834425c"
+      },
+      "separate_local_precision_diagnostic": {
+        "scope": "local final native update, same Parameters/delta; not a convergence criterion",
+        "status": "PASS",
+        "ratios": {
+          "Q": 0.019547671067292025,
+          "discrepancy": 0.3595713809779189
+        },
+        "both_ratios_upper_bound": 0.75,
+        "parameter_slopes": {
+          "BF16": 5.124758790418722e-09,
+          "FP32": 5.171057372959217e-09
+        },
+        "helpful_parameter_slope_and_finite_harm": false,
+        "convergence_criterion": false,
+        "rescues_scientific_status": false
+      },
+      "reported_original_software_controls": {
+        "passed": 4,
+        "tiny_native_replay_updates": 4,
+        "full_scientific_rerun_for_software": false
+      },
+      "reported_original_saved_data_validation": {
+        "passed": 565,
+        "model_forwards": 0,
+        "native_updates": 0,
+        "rerun_for_this_review": false,
+        "separate_reader_v2_fix": "Canonical JSON tuple/list recipe metadata equality only; original v1 failure/source preserved."
+      },
+      "media": {
+        "gif": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal.gif",
+          "sha256": "f6209413dda1c26bc961753eb90b05f7a72355593a551abcb084185088ec615e"
+        },
+        "final_png": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal-final.png",
+          "sha256": "903e1bee35e9fb8ab9a150877cd3df9c22578bd3410483fe8a4fcd8761210db7"
+        },
+        "receipt": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/media-completion.json",
+          "sha256": "00628bdb2cf058222c23564c3fd6db405a7eba09bb04d0f1bfebadd9ce59c0c7"
+        },
+        "actual_steps": [
+          0,
+          64,
+          128,
+          256,
+          384,
+          512
+        ],
+        "frames": 6,
+        "bound_original_report_completion_and_media_inputs_hash_verified": 3,
+        "gif_and_final_png_hashes_verified": true,
+        "terminal_failure_readable": true
+      },
+      "limits": [
+        "The[W,-W] terminal is constructed, not a measurement of actual full-Supra geometry.",
+        "Local precision-ratio PASS with harmful/non-beneficial slopes does not prove useful learned edits or convergence.",
+        "The actual full-model code ablation has a different cohort and helps there; toy harmful-code failure is not a demonstrated full-model mechanism.",
+        "Source/metadata qualification PASS means evidence validation, not learned convergence.",
+        "Producer ownership/gradient/restore assertions remain source-bound; saved-data review did not independently rebuild models."
+      ],
+      "original_compact_result": {
+        "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+        "path": "docs/e22_routed_terminal_cancellation_results.json",
+        "sha256": "64640b3bf57f24510074bb185cff2feb2e19be9cb796f53567323e6abf353d5b"
+      }
+    }
+  ]
+}

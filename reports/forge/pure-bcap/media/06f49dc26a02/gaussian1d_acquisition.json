@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "23fba0658fbaa1ff4461a6b2b930cca94e084fa3fc706e525dfe4add235ed4c8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b628d81585cb96b4bb0f641470a616474f7a5794268285bf4aecffb34f2af99d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/pure-bcap-joint-loss-repair-v2/b7f0f752dd704fe782e3a241107fe945/observed-samples.pt": "3f3fa61cf0c4ca5c738915fa722f6042ddd3eb48911f24d0665cf33ee6bb56c1"
+  },
+  "task_id": "gaussian1d_acquisition"
+}

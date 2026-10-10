@@ -1,0 +1,56 @@
+{
+  "attestation_counts": {
+    "original_public_receipt": 7,
+    "review_time_only": 2
+  },
+  "checks": {
+    "all_three_frames_visually_readable": true,
+    "committed_exporter_bytes_match": true,
+    "earlier_contrast_unavailable_not_synthesized": true,
+    "exact_actual_media_steps": [
+      0,
+      100,
+      200
+    ],
+    "exact_decoded_frames": 3,
+    "model_image_arrays_not_invented": true,
+    "original_four_metric_failures_unchanged": true,
+    "raw_inputs_byte_unchanged": true,
+    "saved200_contrast_separate_authority": true
+  },
+  "exporter_commit": "7afd6e3ca021f5b3cf69daf28513986cf6092ef8",
+  "gif": {
+    "actual_updates": [
+      0,
+      100,
+      200
+    ],
+    "bytes": 210467,
+    "frames": 3,
+    "path": "goal.gif",
+    "sha256": "06280ca31807fab3ef3e78f45635b9c0f0463c0e4bbf1958519c56d487887f2e"
+  },
+  "limitations": [
+    "Only three actual training metric observations retained; no intermediate model output image arrays.",
+    "Original per-step trace file hashes were not in the public card; trace identities are export-time observations.",
+    "Clean teacher construction does not establish exact native noisy-code capacity.",
+    "Completed scientific FAIL does not qualify learned convergence or defaults."
+  ],
+  "model_metric_rescoring": false,
+  "new_draws": 0,
+  "new_model_forwards": 0,
+  "receipt_sha256": "09abab990ed4ff70396c42260c89b8e3eeb8746adb9294bb722c5772f1689ade",
+  "schema": "pr246_media_checks_v1",
+  "scientific_status_unchanged": "FAIL",
+  "software_validation": {
+    "ruff": "PASS",
+    "scope": "Self-contained synthetic publication/immutability/negative controls only",
+    "seconds": 2.23,
+    "status": "PASS",
+    "tests": 26
+  },
+  "source_bound_input_count": 9,
+  "source_pr_head": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+  "status": "PASS",
+  "training_updates": 0
+}

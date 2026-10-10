@@ -1,0 +1,62 @@
+{
+  "closed_native_scope_pins": [
+    {
+      "bytes": 4175,
+      "charged_seconds": 9.271260887850076,
+      "halt_required_preserved": true,
+      "paid_wall_seconds": 9.271260887850076,
+      "reserved_seconds": 0.0,
+      "sha256": "ca9d2645accd94e114751b4f2b1c20c1906938497d95fdcb028826f69039ea9c",
+      "source_commit": "69035402e4edf0028443f2c09afbe6bb80c33f6c",
+      "source_digest": "9596de75b6ae3da982446433ac54b678e6871e72ab9965e4aa039e541946ff11"
+    },
+    {
+      "bytes": 5712,
+      "charged_seconds": 9.818318207049742,
+      "halt_required_preserved": true,
+      "paid_wall_seconds": 9.818318207049742,
+      "reserved_seconds": 0.0,
+      "sha256": "6ed649ea9cf40ee2abac34e0fbc4cfee03e4fb6161bd925b531ce7410672f643",
+      "source_commit": "f0ed5fe9c6169b71199fbf7bb7f4c1cdd827b4ea",
+      "source_digest": "dd885af22ffcd3bf7ac65fd5aeb5a776601de47c23d891084cec0ee1af262c96"
+    },
+    {
+      "bytes": 14435,
+      "charged_seconds": 2782.4676650378387,
+      "halt_required_preserved": false,
+      "paid_wall_seconds": 2782.4676650378387,
+      "reserved_seconds": 0.0,
+      "sha256": "e1638b4b66d3a30d5a5e367e37e19b8b07ef11a57403c340abf6696df3639e8a",
+      "source_commit": "9da0e927a0a4242ee813ceb0340e9fee70ccdc40",
+      "source_digest": "00c19ef01f68e3222888a9b0edc6fcc5f635a384b982260c4e005832c1ed09ae"
+    }
+  ],
+  "costs": {
+    "aggregate_overrun_seconds": 0.0,
+    "cap_seconds": 41288.0,
+    "charged_seconds": 12356.766666798154,
+    "current_ae_charged_seconds": 25.656658787978813,
+    "current_ae_paid_wall_seconds": 25.656658787978813,
+    "current_ae_reserved_seconds": 0.0,
+    "failed_ae_case_charged_seconds": 4.60291067417711,
+    "metadata_charged_seconds": 288.1076926602982,
+    "native_case_charged_seconds": 2801.5572441327386,
+    "old_diagnostic_case_charged_seconds": 3146.539957230212,
+    "overrun_seconds": 0.0,
+    "prior_charged_seconds": 6090.302203312749,
+    "remaining_seconds": 28931.233333201846
+  },
+  "failed_ae_scope_pin": {
+    "bytes": 5564,
+    "sha256": "67f6b2a5f2f5f60a2bbe5d983cc9ece9d1da0be5abfeed6a20119ca1d7a13c9d",
+    "source_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db",
+    "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb"
+  },
+  "frozen_predecessor_metadata_charged_again": false,
+  "halt_required": false,
+  "is_final_cumulative_cost": false,
+  "later_publication_metadata_included": false,
+  "old_inclusive_totals_added_again": false,
+  "schema": "pg_atlas_restoration_public_cost_checkpoint_v1",
+  "scope": "CURRENT_IN_PHASE"
+}

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "ae1b0b5e94974df2bc66c3d35c26036db83439707eef617484d9b4e549c299e8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "444c763609ab61cb5de50d892d50533cf0f168a56051432489bfe41b0568a1ea",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/experiments/ParticleGAN/tier1-completion-v1/queue/d8185ca486b54af79ef422395eac8065/observed-samples.pt": "2a6a01c7d86b20e06ccb6d1cd5e25705d3b3ca5b4564008a84f550638de64e76"
+  },
+  "task_id": "ring16_acquisition"
+}

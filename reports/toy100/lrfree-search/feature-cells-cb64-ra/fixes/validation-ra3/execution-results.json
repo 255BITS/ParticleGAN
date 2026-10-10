@@ -1,0 +1,29 @@
+[
+  {
+    "name": "learned-toy-CB64-RA3",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 963.8179121930152,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/learned/training/toy/CB64-RA3/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/logs/learned-toy-CB64-RA3.log",
+    "result_sha256": "6ee3313aceaa34a82425a0543abdfd8fa38695cb35fd19e3cd4466822987c4cf"
+  },
+  {
+    "name": "learned-mnist-CB64-RA3",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 118.23256177199073,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/learned/training/mnist/CB64-RA3/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/logs/learned-mnist-CB64-RA3.log",
+    "result_sha256": "55a17db66d4ffe377feb47a7dd85adbc0f8d6feb9b8a589ee4e493a127b314f7"
+  },
+  {
+    "name": "replay-CB64-RA3",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 13.588185052853078,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/learned/replay-CB64-RA3.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/logs/replay-CB64-RA3.log",
+    "result_sha256": "ea07442ec1a7ae1bb610dfb3bf3e788067997e0742a79e861fcc9adb9a004b5c"
+  }
+]

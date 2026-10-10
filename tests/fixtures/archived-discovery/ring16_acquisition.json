@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "id": "ring16_acquisition",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "ring16_acquisition",
+    "steps": 400,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/transfer_suite/vector_tasks.py",
+    "host_definition": {
+      "hidden": 64,
+      "layers": 2,
+      "fourier": 2,
+      "z_dim": 4,
+      "particles": 256,
+      "batch": 128,
+      "steps": 400,
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "ema_decay": 0.995,
+      "reg_arm": "k3p",
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "d_every": 1,
+      "g_every": 1,
+      "family": "ring16_acquisition",
+      "split": "development",
+      "kind": "gaussian_mixture",
+      "means": [
+        [
+          3.0,
+          0.0
+        ],
+        [
+          2.77163859753386,
+          1.1480502970952693
+        ],
+        [
+          2.121320343559643,
+          2.1213203435596424
+        ],
+        [
+          1.1480502970952695,
+          2.77163859753386
+        ],
+        [
+          1.8369701987210297e-16,
+          3.0
+        ],
+        [
+          -1.1480502970952693,
+          2.77163859753386
+        ],
+        [
+          -2.1213203435596424,
+          2.121320343559643
+        ],
+        [
+          -2.77163859753386,
+          1.1480502970952697
+        ],
+        [
+          -3.0,
+          3.6739403974420594e-16
+        ],
+        [
+          -2.7716385975338604,
+          -1.148050297095269
+        ],
+        [
+          -2.121320343559643,
+          -2.1213203435596424
+        ],
+        [
+          -1.148050297095271,
+          -2.7716385975338595
+        ],
+        [
+          -5.51091059616309e-16,
+          -3.0
+        ],
+        [
+          1.14805029709527,
+          -2.77163859753386
+        ],
+        [
+          2.121320343559642,
+          -2.121320343559643
+        ],
+        [
+          2.7716385975338595,
+          -1.148050297095271
+        ]
+      ],
+      "covariances": [
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ],
+        [
+          [
+            0.01,
+            0.0
+          ],
+          [
+            0.0,
+            0.01
+          ]
+        ]
+      ],
+      "masses": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "identifiable": true
+    }
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "eval_output_noise": "clean",
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "gate_policy": {
+      "id": "ring16-acquisition-smoke-v1",
+      "finite_atom_exemptions": false,
+      "rationale": "Provisional broad acquisition bounds: every cluster receives at least one quarter of its target mass; balance, 3-sigma precision and all-component spread reject collapsed surrogates. Thresholds are validated by independent target/destructive samples, not tuned to training."
+    },
+    "sampling_law": "public_prior_without_output_noise",
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6"
+    },
+    "sample_evaluator": "benchmarks.toy_audit.ring16_quality:score_samples",
+    "evaluator_revision": {
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_source_sha256": {
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8"
+      },
+      "previous_revision": null,
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged."
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 300
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": [],
+  "description": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.",
+  "research_artifacts": {
+    "api_publication": "reports/toy_audit/api_contract/ring16/publication.json"
+  }
+}

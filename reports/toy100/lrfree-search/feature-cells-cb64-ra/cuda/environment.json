@@ -1,0 +1,30 @@
+{
+  "checked_utc": "2026-09-29T22:45:16.154074+00:00",
+  "cwd": "/ml2/hypergan",
+  "sandbox": "disabled",
+  "approval_policy": "never",
+  "python": "/tmp/pr38-default-env/bin/python",
+  "python_version": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "torch_version": "2.13.0+cu126",
+  "torch_cuda": "12.6",
+  "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+  "cuda_available": true,
+  "cuda_device_count": 2,
+  "nvidia_device_nodes": {
+    "/dev/nvidia0": true,
+    "/dev/nvidia1": true,
+    "/dev/nvidiactl": true,
+    "/dev/nvidia-uvm": true
+  },
+  "cpu_affinity_count": 24,
+  "selected_physical_gpu": 0,
+  "gpu_memory_fraction": 0.2,
+  "numerical_gpu_parallelism": 1,
+  "previous_probe": {
+    "cuda0_tensor_squared_sum": 140.0,
+    "checked_utc": "2026-09-29 22:36:28 UTC"
+  },
+  "other_jobs_untouched": true,
+  "gpu_info": "index, uuid, name, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%]\n0, GPU-72c1b506-891d-b8bc-b353-e020585e1c47, NVIDIA RTX A6000, 580.173.02, 49140 MiB, 2891 MiB, 39 %\n1, GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, NVIDIA RTX A6000, 580.173.02, 49140 MiB, 41813 MiB, 13 %",
+  "gpu_processes": "gpu_uuid, pid, process_name, used_gpu_memory [MiB]\nGPU-72c1b506-891d-b8bc-b353-e020585e1c47, 2489, /home/mikkel/nano-work-server/target/release/nano-work-server, 262 MiB\nGPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 3918083, /ml2/ntc-image-studio/.venv-anima/bin/python, 330 MiB\nGPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 1576877, VLLM::EngineCore, 24274 MiB\nGPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69, 3620619, /ml2/work/autojev/jev.cpp/build/bin/llama-server, 17172 MiB"
+}

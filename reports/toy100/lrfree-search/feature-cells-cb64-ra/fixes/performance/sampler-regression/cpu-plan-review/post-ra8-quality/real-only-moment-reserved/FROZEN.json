@@ -1,0 +1,10 @@
+{
+  "status": "RESERVED_UNMEASURED",
+  "utc": "2026-09-30T08:55:11.948971+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/real-only-moment-reserved/DESIGN.md": "c3cbaf1d87b456469e0fbd7acfa1ec3b2bfb17e6d8dbde801853de07a594a012"
+  },
+  "numerical_executions": 0,
+  "production_changes": 0,
+  "reason": "New resolution candidate has priority; no measurement design/helper had been frozen or run."
+}

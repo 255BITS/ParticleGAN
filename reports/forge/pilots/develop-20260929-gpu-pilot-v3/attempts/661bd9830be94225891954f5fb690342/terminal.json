@@ -1,0 +1,23 @@
+{
+  "attempt_status": "cancelled",
+  "elapsed_seconds": 8.452047889993992,
+  "finished_at": "2026-09-30T03:20:14.116+00:00",
+  "reason": "request cancelled",
+  "result": {},
+  "schema_version": 1,
+  "telemetry": {
+    "grading_process_seconds": null,
+    "interval": {
+      "device": "0",
+      "finished_at": 1790738414.116639,
+      "scope": "supervised attempt, including process startup and independent grading",
+      "started_at": 1790738405.6646106
+    },
+    "maximum_reaped_child_peak_rss_bytes": 1637404672,
+    "memory_scope": "Peak RSS of supervisor and maximum individual reaped child, not summed concurrent process memory.",
+    "runner_process_seconds": 8.29369433800457,
+    "schema_version": 1,
+    "supervisor_peak_rss_bytes": 66277376
+  },
+  "token": "d1959092261a44febf34eb3a6c9c51b8"
+}

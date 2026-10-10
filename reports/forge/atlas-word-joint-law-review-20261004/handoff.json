@@ -1,0 +1,26 @@
+{
+  "files": {
+    "WORD_LAW.md": {
+      "bytes": 8336,
+      "sha256": "4ddbe89ff5a60783ebea388d67f356ce8ea2ed69c64ef0052741e8dac183b6b8"
+    },
+    "check_retained_codes.py": {
+      "bytes": 6458,
+      "sha256": "52d271adaa8f094a8c196168e5505266dd32d0c4626c205c678d0940a0702228"
+    },
+    "passive-check.json": {
+      "bytes": 1468,
+      "sha256": "3038d348b3f3b323716ac5e89f99409cf86a06a608b2c94f2ffdcf56fb21242f"
+    },
+    "review.json": {
+      "bytes": 43160,
+      "sha256": "d82ce66dcb84b4bbf262e744dc16de0b7442760aba0a1bbe28d1a35b8ebf2624"
+    }
+  },
+  "models_forwards_draws_official_scoring": 0,
+  "negative_controls": 4,
+  "proof_inputs": 46,
+  "schema": "pg_word_joint_law_handoff_v1",
+  "scope": "saved evidence documentation; original INVALID/numerical UNAVAILABLE unchanged; proposed rates unexecuted",
+  "status": "NO_WRITE"
+}

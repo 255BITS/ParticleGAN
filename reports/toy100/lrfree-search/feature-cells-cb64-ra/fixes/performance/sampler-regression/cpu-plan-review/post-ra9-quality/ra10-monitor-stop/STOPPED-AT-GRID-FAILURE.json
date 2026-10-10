@@ -1,0 +1,84 @@
+{
+  "status": "STOPPED_OWNED_CPU_WATCHER_AT_COMPLETED_GRID_FAILURE",
+  "utc": "2026-09-30T14:07:49.449184+00:00",
+  "pid": 1030112,
+  "startticks": 167460340,
+  "two_exact_identity_nochild_checks": [
+    {
+      "pid": 1030112,
+      "startticks": 167460340,
+      "state": "S",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-B",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+        "--validation",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+        "--output",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+        "--watch"
+      ],
+      "all_thread_children": {
+        "1030112": []
+      },
+      "cpu_environment_checked": true
+    },
+    {
+      "pid": 1030112,
+      "startticks": 167460340,
+      "state": "S",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-B",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+        "--validation",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+        "--output",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+        "--watch"
+      ],
+      "all_thread_children": {
+        "1030112": []
+      },
+      "cpu_environment_checked": true
+    }
+  ],
+  "signal_sent": "SIGTERM",
+  "signals_sent": 1,
+  "pidfd_identity_bound_signal": false,
+  "signal_identity_method": "Two immediately preceding exact PID/startticks/command/nochild checks, original RA9 pattern",
+  "termination": "absent",
+  "monitor_start_sha256": "dfcee3d1662f74d0057de38fa55ff3534fcba56040f9597f4180fe50acff2c38",
+  "canonical_receipt_sha256": "1a354e6acbdc097233e9afc83c167383d917e0462bcb904f89958af56f02f147",
+  "stop_source_sha256": "787d23a303a97ccbf0380215e3f1d0400b5394fcb844f025494a2c57579c4224",
+  "summary_snapshot_sha256": "a6e7d6f5e2343a2d78ddea52b4795422b4ffafa3d85b2aa214224d6e46d1bfc2",
+  "completed_screens": 1,
+  "total_screens": 16,
+  "pending_tasks": [
+    "mode_hold",
+    "img_intensity2",
+    "img_blobs4",
+    "img_stripes2",
+    "img_bars4",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "ring_shift",
+    "stationary",
+    "rotated100",
+    "staggered100"
+  ],
+  "summary_status": "PENDING",
+  "remaining15_original_screens": "Deliberately not run after original grid quality failure; PENDING with fixtures UNVERIFIED; no quality verdict.",
+  "artifact_validity": "VALID",
+  "quality_verdict": "FAIL",
+  "original_gates_preserved": true,
+  "cpu_only": true,
+  "other_queues_or_watchers_signaled": false,
+  "numerical_jobs_started": 0,
+  "frozen_sources_or_prior_receipts_changed": false,
+  "source_guards_checked_before_signal": 299
+}

@@ -1,0 +1,112 @@
+{
+  "candidate_id": "context:report/transfer_suite/silu_rare_collapse",
+  "candidate_revision": "a45cc1de416e2f5a0bf403cf6057c8f15c42d67f0651b1b00758d2d1493d3f9f",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Why axis_silu collapses the rare component on vector_unequal_mass",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "narrative_headings": [
+        "Why axis_silu collapses the rare component on vector_unequal_mass",
+        "Diagnosis",
+        "Arm leaderboard (vector_unequal_mass)",
+        "Cross-check (8 dev vector tasks, current protocol)",
+        "Recommendations",
+        "Protocol v5: particle-resolution floor",
+        "Oracle (how 32 was chosen)",
+        "Rescore (vector_unequal_mass, fixed cosine recipe, seed 0, sustained rule)",
+        "Suite (8 dev vector tasks, sustained)",
+        "Recommendations (v5)"
+      ],
+      "narrative_sources": [
+        {
+          "git_blob": "0830c1a83bcafb0d29d789036def14d0cff8a440",
+          "path": "reports/transfer_suite/silu_rare_collapse/README.md",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "ce7316090e6ea15709eae81a77c68e41474056e2057cb302b2cdbecb3e6c2a2d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/README.md"
+        }
+      ],
+      "normalization_limit": "JSONL summary/oracle schemas are not normalized by this importer; linked prose and rows do not establish Forge task verdicts or compatible sampling laws.",
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Why axis_silu collapses the rare component on vector_unequal_mass\n\nProtocol v4, fixed cosine recipe, seed 0, sustained rule. Everything is the same as\n`../anisotropic_core_metric/run.py`. The target is four corners at \u03c3=.18 with masses\n.55/.30/.13/.02, and the 2% component sits at (1.5, 1.5). Each episode runs on the CPU\nwith 1 thread and takes 10\u201325 s.\n\n```\npython run.py --diagnose [ARM ...]   # per-observation rare-component probe -> diagnose_<arm>.log\npython run.py --arms                 # 17 arms on unequal_mass -> arms.log / arms.jsonl\npython run.py --crosscheck ARM ...   # arms x 8 dev vector tasks -> crosscheck.log / crosscheck.jsonl\npython summarize.py diagnose|arms|crosscheck   # the tables below\npython oracle.py                     # protocol v5 finite-atom oracle -> oracle.log / oracle.jsonl\npython run.py --v5                   # protocol v5 rescore (18 episodes) -> v5.log / v5.jsonl\npython summarize.py v5\n```\n\nResearch code only. No default critic, recipe or protocol changes. Two opt-in options were\nadded to `benchmarks/transfer_suite/smooth_critic_research.py`: `first_activation`\n(`axis_leaky1_silu`) and `raw_skip` (`axis_silu_raw_skip`). Neither changes the MLP's\ninitialization, and `tests/test_smooth_critic_research.py` pins this.\n\n## Diagnosis\n\nThe generator's output is atomic. `ParticlePrior.sample` indexes into 256 fixed particles\nwith no per-sample noise, s",
+      "unmapped_structured_sources": [
+        {
+          "git_blob": "f032229860c8bd85897839c8093d24599be9ae1e",
+          "path": "reports/transfer_suite/silu_rare_collapse/arms.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "45b0f005fdb1350862e43876cca478b1d6ed25eab56bb99e813e1aca4830872f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/arms.jsonl"
+        },
+        {
+          "git_blob": "05a12155b517226b5ff4ffa1f245c395ae1cfbd2",
+          "path": "reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "717e166a953b508131fc940a5ec7846bc0b4c9b57460379d0f1d05444d4457ff",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl"
+        },
+        {
+          "git_blob": "fa7c85337b9a4705b1e31b0eb1bccba2db6f0ba7",
+          "path": "reports/transfer_suite/silu_rare_collapse/diagnose.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "79e24603951c9eb21e98d3d3787e4ca5bf3e19b4e29db12444bba61708e5170f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/diagnose.jsonl"
+        },
+        {
+          "git_blob": "2ae8a01b3a1b9ccaeb346cccc889a5d80a46df05",
+          "path": "reports/transfer_suite/silu_rare_collapse/oracle.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "27b01834a817adb8118edb6afa98d1e59d98a7d76b99e800760aa3f22fd1ec07",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/oracle.jsonl"
+        },
+        {
+          "git_blob": "46f44f32cd2b6c977a95b193e7ce4378c1b6c716",
+          "path": "reports/transfer_suite/silu_rare_collapse/v5.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "b2326e1b50d49253138f250c621b70968feb7306e1c8cb41e0aa85ace1fca405",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/v5.jsonl"
+        }
+      ]
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-transfer-suite-silu-rare-collapse-fbfea951783c",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0830c1a83bcafb0d29d789036def14d0cff8a440",
+    "path": "reports/transfer_suite/silu_rare_collapse/README.md",
+    "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+    "sha256": "ce7316090e6ea15709eae81a77c68e41474056e2057cb302b2cdbecb3e6c2a2d",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/README.md"
+  },
+  "task_results": []
+}

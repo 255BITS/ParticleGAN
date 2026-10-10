@@ -10,6 +10,8 @@ from contextlib import nullcontext
 
 from .observation import checkpoint, schedule_optimizer
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -135,7 +137,7 @@ def _cover(fake: torch.Tensor, real: torch.Tensor) -> torch.Tensor:
 
 
 def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
-          diagnostics=False, noise_policy=None) -> dict:
+          diagnostics=False, noise_policy=None, components=None) -> dict:
     """Train and measure identity error; every pairing is allowed."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -152,7 +154,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     view = _FastView(critic)
     prior = ParticlePrior(
         PROTOCOL["n_particles"], PROTOCOL["z_dim"], init_std=0.1,
-        generator=torch.Generator().manual_seed(PROTOCOL["seed"]),
+        generator=torch.Generator(device=slow.device).manual_seed(PROTOCOL["seed"]),
     )
     gan = (gan_factory or make_gan_loss)()
     regularizer = (cap_factory or make_b_cap)()
@@ -166,6 +168,9 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     )
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, regularizer = components.bind(
+            generator=generator, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
     steps = PROTOCOL["steps"]
     for step in range(1, steps + 1):
         if noise_policy is not None:
@@ -186,14 +191,23 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = generator(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_scores = critic(slow, fake)
+            protected_real_scores = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_scores, protected_real_scores)
+            protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity; only the relativistic pair does that.
             # fm_weight is 0: no feature-matching term is added.
             g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
             g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
             g_loss = g_loss + spread(prior.z)
-            g_loss.backward()
+            if components is not None:
+                g_loss = components.add_transport_loss(g_loss, fake, fast, conditioning=slow)
+            # Reuse the original real logits; do not add a second real forward.
+            def protected_evaluator():
+                return (gan.g_loss(critic(slow, generator(slow, prior.z)), protected_real_scores),)
+            constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
+                                         protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:
@@ -202,7 +216,11 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         def measure_identity():
             context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
             with context:
-                return {"identity_mse": identity_mse(generator(slow, prior.z).detach(), fast)}
+                pred = generator(slow, prior.z).detach()
+                metrics = {"identity_mse": identity_mse(pred, fast)}
+                if components is not None:
+                    components.constraint_geometry_capture(step, fast.reshape(12, 8, 2), pred.reshape(12, 8, 2), metrics, kind="line")
+                return metrics
         checkpoint(step, measure_identity)
 
     context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()

@@ -1,0 +1,94 @@
+{
+  "chosen_configurations": {
+    "atlas": null,
+    "bcap": {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "8d2031fe492f23ff16897c7d26b9d8dc1d1ecae33e35fa793c23d08a87332965",
+      "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "declaration_sha256": "d195513a90344155c4a65e5a69c96eab709efedb30c9143a09c944c531bdcf96",
+      "recipe_sha256": "dc0ab7855facf1f8b0431b08f4656587a59ee2de249ff0deeb62b11c50e12540",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "e22": {
+      "candidate_id": "e22",
+      "candidate_revision": "cf5d3fdcbb1d395a36dbaa487597185853433b7a4127127494d77b115630c242",
+      "configuration_id": "e22",
+      "declaration_sha256": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0",
+      "recipe_sha256": "563e9c1a40681807e4c9e7700dee871a164aadce9b31ab23364cea8293ccac8e",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "k3p": {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "412dbcba924680e57d9b0874082220f04b43e8b31f8e81fc60a7bcbad5f701a1",
+      "configuration_id": "0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "declaration_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "k3p-no-a2": {
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "b51787a935f07f6f61c0dc777455a8b30ad2e16bc39e022bb2bae3004c30ce89",
+      "configuration_id": "k3p-a2-off-native-diagnostic",
+      "declaration_sha256": "66e366ea1fced5d6575a5b4acd322e39564ce582ac591449cd5a79b5831907be",
+      "recipe_sha256": "2e5964def21fbb363e2915762c5969e52d0ba34fee38334f5623c9285dee9ed0",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "k3p-no-anchor": {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "0fa611b1ebcc59007bd8a184d772b865ee6aa575a4d09475b373f2b8165ff54a",
+      "configuration_id": "forge-onboarding-anchor-ablation",
+      "declaration_sha256": "b4b8b0ef96aaca94bdd29ef9b5edfe0f2bb17166571f7bd35c8b7b9aaf7249ac",
+      "recipe_sha256": "6250b24f40b10103053e5916d8478085e8d89d64b04dc4fbff16307e5aa15227",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "k3p-no-penalty": {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "ea1e0bdda2f81b8214e9b4cb0fc273348f536d542c6b85655361fb8b577f55e0",
+      "configuration_id": "forge-no-critic-penalty",
+      "declaration_sha256": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
+      "recipe_sha256": "503488733e3aee1288fa1519a59075acf114ab66a1f1a566215d102b448e0adf",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "k3p-no-training-noise": {
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "b66c72f805f4deb3026709c05774414fb12a72f1b99311eb825ab0dc1241b22c",
+      "configuration_id": "k3p-no-output-noise-diagnostic",
+      "declaration_sha256": "bf49d3ef0619e561fb1cad1c7fff36987c93f76fd882af18f200a2ea5d117595",
+      "recipe_sha256": "70f9101e378bf94a50b2f667262c567a358524d3f61f39d1d4e10ebd87668418",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "ka2": {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "d5ebfc250aac0490ef7281aa1aa44d904beebcbc81ee507d9d857b58d917b3aa",
+      "configuration_id": "093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "declaration_sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+      "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "r1r2": {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "2727e20c5a10a9391f5298cbb6a73da1c8b80add1d29303ffcab3f26b0d2d26d",
+      "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "declaration_sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+      "recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "release07-gan-v3-cloud": {
+      "candidate_id": "release07-gan-v3-cloud-v1",
+      "candidate_revision": "95e403581ebf0d72da9e36b0bcc668ec4512daa4e1aafe06013b465b7a8b06da",
+      "configuration_id": "release07-gan-v3-cloud-v1",
+      "declaration_sha256": "daee7bac640a1d000d9b6596b6c458d2b40fa251beeb4c162ae57e0b11fa67ab",
+      "recipe_sha256": "b9bb3c0216c0e10a3455f40082f0f50759fb30e58bf5bf9275c5bcba74c0fb2d",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    "release07-gan-v3-mog": {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "47630167ae31039bb209a2245097e4b9d5b2379ae0c526d4d3aa57e6204b0f33",
+      "configuration_id": "1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "declaration_sha256": "16e248f5e004b906c1455ba022063173f122406dfad12ee4372b204d931a4ef9",
+      "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    }
+  },
+  "schema": "pg_common26_display_identity_audit_v1"
+}

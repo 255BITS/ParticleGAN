@@ -1,0 +1,751 @@
+{
+  "attempt_outcomes": {
+    "cancelled": 1,
+    "completed": 69
+  },
+  "component_timing": {
+    "measured_attempts": 22,
+    "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
+    "seconds": {
+      "evaluation": 68.42078059531923,
+      "sampling": 0.769850275319186,
+      "training_updates": 659.339497676352
+    },
+    "unmeasured_attempts": 48
+  },
+  "concurrency": {
+    "mean_active_workers": 0.003959117879063414,
+    "measured_attempts": 68,
+    "missing_interval_attempts": 2,
+    "observation_window_seconds": 304161.2448194027,
+    "peak_distinct_gpu_devices": 2,
+    "peak_workers": 2,
+    "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
+  },
+  "cost_to_qualify": {
+    "maximum_seconds": 17.334850379033014,
+    "mean_seconds": 17.334850379033014,
+    "measured_outcomes": 1,
+    "median_seconds": 17.334850379033014,
+    "outcomes": 1,
+    "unknown_cost_outcomes": 0
+  },
+  "cost_to_reject": {
+    "maximum_seconds": 86.35670835815836,
+    "mean_seconds": 10.509261490061666,
+    "measured_outcomes": 18,
+    "median_seconds": 5.5470435855095275,
+    "outcomes": 18,
+    "unknown_cost_outcomes": 0
+  },
+  "execution_error_rate": {
+    "denominator": 70,
+    "fraction": 0.014285714285714285,
+    "numerator": 1
+  },
+  "execution_jobs_avoided": 245,
+  "flops": {
+    "kind": "unavailable",
+    "value": null
+  },
+  "incomplete_task_rate": {
+    "denominator": 70,
+    "fraction": 0.014285714285714285,
+    "numerator": 1
+  },
+  "limits": [
+    "Cost-to-outcome uses owned incremental paid costs. Evidence costs may overlap across requests and are not additive spending.",
+    "Avoided tasks are requested work left unattempted after a required scientific failure; cap-excluded work is not counted.",
+    "Queue-only paid attempts contribute spend, but require durable certified receipts for outcome/timing metrics."
+  ],
+  "memory": {
+    "cuda_peak_allocated_bytes": {
+      "maximum_bytes": 175847936,
+      "measured_attempts": 19
+    },
+    "cuda_peak_reserved_bytes": {
+      "maximum_bytes": 226492416,
+      "measured_attempts": 19
+    },
+    "maximum_reaped_child_peak_rss_bytes": {
+      "maximum_bytes": 2168516608,
+      "measured_attempts": 68
+    },
+    "process_peak_rss_bytes": {
+      "maximum_bytes": 2168516608,
+      "measured_attempts": 67
+    },
+    "supervisor_peak_rss_bytes": {
+      "maximum_bytes": 868331520,
+      "measured_attempts": 68
+    }
+  },
+  "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
+  "public_default_claim": false,
+  "qualification_scope": "Recorded attainment under each frozen request view and cap; not a current-source regrade or accepted public-default claim.",
+  "qualification_units": [
+    {
+      "attempt_ids": [
+        "fafc3da7cecf4b1780bbaedf66141092"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
+      "evidence_wall_seconds": 7.371452854000381,
+      "incremental_paid_seconds": 7.371452854000381,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "acde0787eb4675361a9ef0b8"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "evidence_wall_seconds": 4.800435357999959,
+      "incremental_paid_seconds": 4.800435357999959,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "397c486fb1b97b0f8e581b42"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3e1d8ca0f47a4954b41119cbe605548e"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce",
+      "evidence_wall_seconds": 5.581290133995935,
+      "incremental_paid_seconds": 5.581290133995935,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "fa2212d2788972d08f4361b3"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b86f62c3e4f84a43b85d366e4cc43824"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9",
+      "evidence_wall_seconds": 5.425771753012668,
+      "incremental_paid_seconds": 5.425771753012668,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "f4e7f793f73f5ecf280e959e"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "df1794ebea6444c5a10c2a953843257d"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc",
+      "evidence_wall_seconds": 5.508408382942434,
+      "incremental_paid_seconds": 5.508408382942434,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "f2ef545b54285551f616bbdd"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "c0178716dd3c4d5695b391919bf9ab81"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f",
+      "evidence_wall_seconds": 5.974550719001854,
+      "incremental_paid_seconds": 5.974550719001854,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "ac458f106e3b9533fe224b77"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "33bc62d63509425e9f7237ef19ee7374"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9",
+      "evidence_wall_seconds": 7.827370991988573,
+      "incremental_paid_seconds": 7.827370991988573,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "6aecf10df94ba76bd23bb42f"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "87f406b78184409396a26f61680a5da0"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "0a2b2de1a8a75005f8f76ca17130010f477c520425761cff04dd2a4f81f2bc3a",
+      "evidence_wall_seconds": 5.811797589994967,
+      "incremental_paid_seconds": 5.811797589994967,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "4c44c5be3985e85540a24a9d"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0142b29ed9154d9fbf065c2934545c0c"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "2a6cb4b3f19e57bb16599e23df1a83750b1e992634c6428dacd711f0269c83d1",
+      "evidence_wall_seconds": 5.459934226993937,
+      "incremental_paid_seconds": 5.459934226993937,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "35563aa1d745b00ba0051f50"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "8ff64e32bf294e5597d8deb036527075"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "ff171334c936fd2a0bc7ad4e4beb25ba6582bc35e3baf2042db7345738705493",
+      "evidence_wall_seconds": 5.456266971013974,
+      "incremental_paid_seconds": 5.456266971013974,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "1f92bc90b3948253f7d3723c"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "2a719ec706924f0ab120961cd58f7582"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "158a5e917e91a158e45de1e37434b11e2469a8e39fbca5b99edac6069c7764aa",
+      "evidence_wall_seconds": 5.51279703702312,
+      "incremental_paid_seconds": 5.51279703702312,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "eab9a2dfe43a0b31556df609"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "813505867f5348bfbe113791d78ce0c5"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803",
+      "evidence_wall_seconds": 5.876473599986639,
+      "incremental_paid_seconds": 5.876473599986639,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "ea6deb2d5f05519b0f422f69"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "ea66e44192c048eaa97f8595c5e55508"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44",
+      "evidence_wall_seconds": 5.347339480998926,
+      "incremental_paid_seconds": 5.347339480998926,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "14fd1b0dcf6cbcd237a98055"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0184ca1327794ab58168d853ce0ad978",
+        "275efc25a9e34f25824d502e7f9c20b6",
+        "297db233ae0d459caf35e6aa60f3d0d5",
+        "2ff413e61d794dec8e3ce91c90ad16a2",
+        "4d69405651764ab6b700c6b1e37844db",
+        "b9e3dadcca1b4a4099814d1c5150db6b",
+        "bf43170e7806426c906d8f0134a7287c",
+        "bfd92d6f12174f8289903745f545e83c",
+        "df2a9933e92b4c59a1c872ab189be7b0"
+      ],
+      "avoided_execution_jobs": 14,
+      "avoided_tasks": [
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "evidence_wall_seconds": 86.35670835815836,
+      "incremental_paid_seconds": 86.35670835815836,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "b4cb56bd10358df6b6705ce7"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "299aba837ed24be8a61b0b48074fc7a1"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7",
+      "evidence_wall_seconds": 5.449001096014399,
+      "incremental_paid_seconds": 5.449001096014399,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "d4e7405c151d01d615dc92d5"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b766e89d1a0843ba9af94f2ce94e4273"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
+      "evidence_wall_seconds": 5.255199994000577,
+      "incremental_paid_seconds": 5.255199994000577,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "043465ae751e26417aad2e9a"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3c6a84341114445da149f04ab7541f01",
+        "6c44b7cbaff34277a9da6bb0ccb98321",
+        "bcaebd15d92841d0b99aec185a446a46"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+      "evidence_wall_seconds": 17.334850379033014,
+      "incremental_paid_seconds": 17.334850379033014,
+      "qualified_tier": 1,
+      "rejected_tier": null,
+      "request_ids": [
+        "f5103684e4a70ca14892d2fe"
+      ],
+      "status": "PASS",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b686547339464e94a60fd692675f1545"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "059128df90e1bcb0af7f4596f5f9dd034686b171c24177f080a2b971e0f79fe2",
+      "evidence_wall_seconds": 9.51561203901656,
+      "incremental_paid_seconds": 9.51561203901656,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "9073785ce55366058c397caf"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3c6a84341114445da149f04ab7541f01",
+        "6c44b7cbaff34277a9da6bb0ccb98321",
+        "8f6e156ef20f47ae939597d0fdcfde65",
+        "bcaebd15d92841d0b99aec185a446a46"
+      ],
+      "avoided_execution_jobs": 19,
+      "avoided_tasks": [
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+      "evidence_wall_seconds": 23.971146613999736,
+      "incremental_paid_seconds": 6.636296234966721,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "8b14a136693890e59481ab01"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    }
+  ],
+  "queue_available": true,
+  "queue_locations": [
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
+    "/home/martyn/dev/ParticleGAN/runs/forge"
+  ],
+  "receipt_issues": [],
+  "requests_with_unavailable_cap": 0,
+  "reuse": {
+    "evidence_uses": 32,
+    "reused_evidence_uses": 3,
+    "submitted_execution_demands": 277,
+    "unique_evidence_jobs": 29
+  },
+  "schema_version": 1,
+  "scope": "recorded current Forge receipts; historical imports are excluded",
+  "spend": {
+    "attempts": 70,
+    "known_wall_seconds": 1215.4411803991388,
+    "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
+    "unknown_cost_attempts": 0,
+    "wall_seconds": 1215.4411803991388
+  },
+  "task_gate_counts": {
+    "FAIL": 39,
+    "INCOMPLETE": 1,
+    "PASS": 30
+  },
+  "tasks_avoided": 256,
+  "tier_rejections": {
+    "1": 16,
+    "2": 2
+  }
+}

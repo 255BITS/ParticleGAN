@@ -1,0 +1,65 @@
+{
+  "candidate_id": "context:lrfree/paired-bd-graft",
+  "candidate_revision": "2bbc5594692f88e508e1644c0cd114512ad170871f0e83e41a4117666a65e12c",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Best measured native lead: paired birth/death on the sigma-floor candidate",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/paired-bd-graft",
+      "narrative_sources": [
+        {
+          "git_blob": "b5d29a9fa094f873cce0f80190721959df6b1437",
+          "path": "reports/toy100/lrfree-search/paired-bd-graft/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "aade10a95211c8b7a7043f38b4f74b63ec278e8be8eeee2de65cd3e23d678e93",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/paired-bd-graft/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/paired-bd-graft/baseline-result.json",
+        "reports/toy100/lrfree-search/paired-bd-graft/graft-result.json"
+      ],
+      "summary_excerpt": "# Best measured native lead: paired birth/death on the sigma-floor candidate\n\nThis is the strongest **completed** grid100 directional result in the latest\nstructural batch. It is committed before further native variants are judged.\nIt does **not** pass the frozen 100-Gaussian gate.\n\nThe candidate starts from `sigfloor-v3` and changes exactly one source file:\n`birth_death.py` is replaced by the previously tested `bdguard-dRpair`\nimplementation. The only recipe change is `particle_birth_death: false \u2192 true`.\n`training.py` remains byte-identical; both use QR `batch_feature_zero`\ninitialization, learnable output noise initialized at `.02`, and\n`total_steps: null`. `birth_death.patch`, `overrides.json` and\n`source-sha256.json` reconstruct the candidate from the local LR-free harness.\n\nThe baseline was rerun first and reproduced the prior `sigfloor-v3` grid100\nresult bitwise. Both arms used the same frozen 7,000-update native grid100\nfixture, seed, and **noisy** sampling-law score.\n\n| Final live measure | Baseline | Paired BD graft | Frozen requirement |\n|---|---:|---:|---:|\n| Precision | .97325 | .97365 | \u2265.97 |\n| Centre RMS / data \u03c3 | .3027 | .2595 | \u2264.20 |\n| Covariance eigenvalue ratios | .338\u20132.553 | .427\u20132.012 | .40\u20131.70 |\n| Mass TV | .0610 | .0388 | \u2264.06 |\n| Radial KS | .0553 | .0117 | \u2264.04 |\n| Frozen verdict | **FAIL 0/34** | **FAIL 0/34** | final five + holdout |\n\nThe indepen"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-paired-bd-graft-2a88f7c9f74a",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "b5d29a9fa094f873cce0f80190721959df6b1437",
+    "path": "reports/toy100/lrfree-search/paired-bd-graft/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "aade10a95211c8b7a7043f38b4f74b63ec278e8be8eeee2de65cd3e23d678e93",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/paired-bd-graft/README.md"
+  },
+  "task_results": []
+}

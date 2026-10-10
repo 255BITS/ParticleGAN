@@ -1,0 +1,931 @@
+{
+  "classification_note": "K3P/KA2 clean/full recipes cross the original parents' training noise, output warmup, and network cap activation boundaries. These are authorized existing-control ablation diagnostics, not ordinary same-signature Forge configuration_search outputs. Round2 prior-rate and round3 positive coefficient/cap contrasts preserve their actual measured clean/full comparator signatures. Frozen legacy numeric-knob labels are not ordinary search qualification.",
+  "eligible_for_default": false,
+  "id": "word-joint-task-v1",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipes": [
+    {
+      "activation_transitions_from_original_parent": {
+        "network_horizon_cap": {
+          "executed": false,
+          "parent": true
+        },
+        "output_noise_warmup": {
+          "executed": false,
+          "parent": true
+        },
+        "training_input_noise": {
+          "executed": false,
+          "parent": true
+        },
+        "training_output_noise": {
+          "executed": false,
+          "parent": true
+        }
+      },
+      "arm": "k3p-coeff170-cap1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 4167,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 24,
+        "passing_suffix": 24,
+        "stable_from_seconds": null,
+        "stable_from_step": 834
+      },
+      "eligible_for_default": false,
+      "family": "k3p",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.17578125,
+        "mass_berry": 0.2099609375,
+        "mass_grape": 0.201171875,
+        "mass_lemon": 0.208984375,
+        "mass_melon": 0.2041015625,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9971027970314026,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.00048118084492783153,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "full_recipe_sha256": "64782df39059682002e457daa3c2ba4ef8d6c2a819d2643f3c9ba87c4efc8bb3",
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "normalized_recipe_sha256": "3a83914fb3685d239f6b2283590c7440062047b3919117279f62b35b911f5fea",
+      "parent": {
+        "path": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+        "sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9"
+      },
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol_round": 3,
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "receipt": {
+        "bytes": 40177,
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 170.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+      "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef",
+      "task": {
+        "observations": 24,
+        "path": "configs/forge/tasks/five_word_joint_acquisition.json",
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "schedule_horizon": 20000,
+        "terminal_passes": 5,
+        "updates": 20001
+      },
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837",
+      "technique_signature": {
+        "digest": "a8d9b9c2248c7cd74c6f00e3cebe29ec75e8f9a73570bf31588aee20e2ada07b",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": null,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": true,
+          "critic_guard": true,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": true,
+          "latent_damping": true,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      }
+    },
+    {
+      "activation_transitions_from_original_parent": {
+        "network_horizon_cap": {
+          "executed": false,
+          "parent": true
+        },
+        "output_noise_warmup": {
+          "executed": false,
+          "parent": true
+        },
+        "training_input_noise": {
+          "executed": false,
+          "parent": true
+        },
+        "training_output_noise": {
+          "executed": false,
+          "parent": true
+        }
+      },
+      "arm": "ka2-slow-prior-0p1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 6667,
+        "first_pass_step": 3334,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 21,
+        "passing_suffix": 21,
+        "stable_from_seconds": null,
+        "stable_from_step": 3334
+      },
+      "eligible_for_default": false,
+      "family": "ka2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.17578125,
+        "mass_berry": 0.201171875,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9999419450759888,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 1.1384660690803121e-05,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "full_recipe_sha256": "b7062ebda2ce46a9d56e18225e383f022cfcc7b58d4bd8207daff38ca6c5fec8",
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "normalized_recipe_sha256": "2506e7be53699ba32afa6dd68be77e0be733ce15293e4ad437dee4825e9c70fd",
+      "parent": {
+        "path": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+        "sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7"
+      },
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol_round": 2,
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "receipt": {
+        "bytes": 40024,
+        "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+        "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 0.1,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+      "source_digest": "4c08e90d89bcde6da9387d85bf8fc75171c1ca58b553f07dd7c04666f741109d",
+      "task": {
+        "observations": 24,
+        "path": "configs/forge/tasks/five_word_joint_acquisition.json",
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "schedule_horizon": 20000,
+        "terminal_passes": 5,
+        "updates": 20001
+      },
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837",
+      "technique_signature": {
+        "digest": "b6a1c40023721f95575fea4bbafe290d7fcce3f6e68613d604db27c2edc90b0a",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": null,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": true,
+          "critic_guard": true,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": true,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      }
+    },
+    {
+      "activation_transitions_from_original_parent": {},
+      "arm": "r1r2-mid-rate-fast-roles",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 5834,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 22,
+        "stable_from_seconds": null,
+        "stable_from_step": 2501
+      },
+      "eligible_for_default": false,
+      "family": "r1r2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.17578125,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9961368441581726,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0001700372792314255,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "full_recipe_sha256": "f38a3e9a989509d8c3890f6bd7b9eee1a89495c5715a9f5691766d1a7005d63e",
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "normalized_recipe_sha256": "31846539c62b0d533351ccb22ee7a37166c1e78fb3878b3bb97589555b7f2a40",
+      "parent": {
+        "path": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+        "sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c"
+      },
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol_round": 1,
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "receipt": {
+        "bytes": 39856,
+        "path": "reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json",
+        "sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": 0.99,
+        "betas": [
+          0.0,
+          0.9
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "lr": 0.0012,
+        "lr_anneal_start": 0.2,
+        "lr_control": "mobility",
+        "lr_floor": 0.1,
+        "model": "gan",
+        "name": "r3gan-stacked-training-toy-v1",
+        "network_lr_floor": 0.1,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": 0.1,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+      "task": {
+        "observations": 24,
+        "path": "configs/forge/tasks/five_word_joint_acquisition.json",
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "schedule_horizon": 20000,
+        "terminal_passes": 5,
+        "updates": 20001
+      },
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837",
+      "technique_signature": {
+        "digest": "f3a60a05d94abdf6c151c92112e0545d25217654e5e2eb27d6140d784892b78b",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "a_r1r2",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": true,
+            "network_changing": true,
+            "prior_changing": true
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "gradient_cap": null,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": true,
+            "declared": true
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "scope": "task_only_diagnostic",
+  "selection_rule": "Post-study task-only recommendations: coefficient-only K3P contrast, KA2 prior0.1 sustained pass, and R1/R2 mid-rate long sustained suffix; no cross-task or speed ranking."
+}

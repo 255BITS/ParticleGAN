@@ -1,0 +1,117 @@
+{
+  "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-losses-v1",
+  "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+  "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-losses-v1",
+    "request": "18076fc3a99ea36263414c4e",
+    "revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "6b003883730e7ed649d44830429d7ab45cabbc7f2c1bd09149692e6bc27239d8",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/3a777010b37a48339e81a32d06ce5c45/evidence.json",
+        "sha256": "92984bab37b8bcc474535bfd3bd152b6ff0cb775a0fde0cb3545cdd8a23b0de8"
+      },
+      "request": {
+        "path": "reports/forge/attempts/3a777010b37a48339e81a32d06ce5c45/request.json",
+        "sha256": "260acc7a2973a7f6beac1c8b22ecb0acc313e6510d1b100798d7799f370954da"
+      },
+      "result": {
+        "path": "reports/forge/attempts/3a777010b37a48339e81a32d06ce5c45/result.json",
+        "sha256": "e4feb61a21d4e351a043917997017791e8fd33f234467db89dc1be308b60f741"
+      }
+    },
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+    "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "18076fc3a99ea36263414c4e",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "80bc8e782774dc481b95797a18517770e92eaa66553882e452b4a082e1128756",
+      "cost": {
+        "adapter_loop_seconds": 124.8119430259103,
+        "adapter_seconds": 125.09816326596774,
+        "charged_task": "five_word_joint_acquisition",
+        "completed_steps": 20001,
+        "device": "0",
+        "execution_seconds": 131.16836533299647,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 0,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 120.57476785732433,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.30532635119743645
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 120.2694415061269
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 127.37099595705513,
+        "wall_seconds": 131.16836533299647
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "raw_status": "completed",
+      "reason": "encoder did not perform an intended optimizer update",
+      "reasons": [
+        "encoder did not perform an intended optimizer update"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    }
+  ]
+}

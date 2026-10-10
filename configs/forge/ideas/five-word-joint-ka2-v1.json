@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "five-word-joint-ka2-v1",
+  "parent": "ka2",
+  "goal": "discriminator_stability",
+  "hypothesis": "The source-shaped KA2 joint BiGAN recipe can acquire balanced confident word modes and the paired inverse mapping under explicitly bound clean/live, named-stream Forge execution.",
+  "changed_factors": [
+    "retained finite-word G/E/joint-D host",
+    "five-row particle-cloud exception, nonstandardized prior",
+    "named per-parameter initialization and independent data/prior/noise/evaluation streams",
+    "source-shaped LR, spread and no-output-noise recipe; paired reconstruction gate"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Joint adversarial real/text-encoder and generated/text-prior pairs retain inverse learning; no reconstruction lookup or auxiliary reconstruction loss.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_components",
+  "recipe_overrides": {
+    "critic_formulation": "ka2",
+    "lr": 0.0006,
+    "d_lr_mult": 1.5,
+    "prior_reg": 1.0,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "ema_decay": 0.995,
+    "network_lr_horizon_cap": null,
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "output_noise_mode": "fixed",
+    "row_evidence_gate": false,
+    "particle_birth_death": false
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "examples/five_modes.py",
+    "reports/toy_audit/source-demos.json",
+    "reports/toy_audit/api_contract/images/README.md",
+    "reports/toy_audit/api_contract/runs.json"
+  ],
+  "guide": "reports/forge/five-word-joint/README.md",
+  "recipe_preset": "ka2",
+  "host_adaptation": {
+    "schema_version": 1,
+    "recipe_fields": [
+      "prior_reg"
+    ]
+  }
+}

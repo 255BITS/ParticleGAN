@@ -1,0 +1,31 @@
+{
+ "task": "rotated100",
+ "status": "PASS",
+ "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+ "pre_turn_hq": 0.881,
+ "periods": [
+  {
+   "task": "rotated100",
+   "period_end": 500,
+   "target_deg": 0,
+   "modes": 100,
+   "hq": 0.881
+  },
+  {
+   "task": "rotated100",
+   "period_end": 1000,
+   "target_deg": 30,
+   "modes": 100,
+   "hq": 0.8399
+  },
+  {
+   "task": "rotated100",
+   "period_end": 1500,
+   "target_deg": 60,
+   "modes": 100,
+   "hq": 0.9473
+  }
+ ],
+ "passed_periods": 2,
+ "turns": 2
+}

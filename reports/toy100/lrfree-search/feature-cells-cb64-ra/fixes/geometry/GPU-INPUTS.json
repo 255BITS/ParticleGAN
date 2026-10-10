@@ -1,0 +1,60 @@
+{
+  "input_sha256": "07bfa15a806659459bd4f1bb634cf58969bff7a9f25ec69924e1fe8ba22fb263",
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "scope": "matched saved CPU tensors/noise for one CUDA geometry diagnostic; no training or native acceptance",
+  "cases": [
+    {
+      "name": "fold2",
+      "n": 2048,
+      "dim": 2,
+      "query_rows": 2048,
+      "seed": 20260929
+    },
+    {
+      "name": "fold128",
+      "n": 2048,
+      "dim": 128,
+      "query_rows": 2048,
+      "seed": 20260929
+    },
+    {
+      "name": "native_cpu_saved_density",
+      "n": 20000,
+      "dim": 2,
+      "query_rows": 256,
+      "seed": 1234
+    },
+    {
+      "name": "mnist_E22_0",
+      "n": 1024,
+      "dim": 128,
+      "query_rows": 256,
+      "seed": 314259
+    },
+    {
+      "name": "mnist_E22_2000",
+      "n": 1024,
+      "dim": 128,
+      "query_rows": 256,
+      "seed": 314259
+    },
+    {
+      "name": "mnist_CB64-RA_2000",
+      "n": 1024,
+      "dim": 128,
+      "query_rows": 256,
+      "seed": 314259
+    }
+  ],
+  "read_only_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/screen/grid100/final-state.pt": "2b66a4c34d18f8832e05a1db16dab012ef05e2e1d506add058a1bea22494bcc6",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/bundle.pt": "483f21ee5245a77123e316567dd4af2801db1ec81a195ae419bcd966bb694aa9",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/toy_family.py": "00dbc16067b90cb035df968d4e0bff9664afcc07c3028a4f8f58e1c6a390fc80",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/geometry/run_validation.py": "b03b895eda47ec43fad8f8a40fb111f731459ca0bbcd4c73d499e7ed1e7082c7",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/configs/overrides-CB64-RA.json": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/checkpoint-0000.pt": "4e42639cdee1133700cfb3a4087cd11da7669256393f639ed3ae9b366f21d01d",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/checkpoint-2000.pt": "7d57cc47607833b37ea9d2f34d6272400254d290f00536b1e58a409436d10aea",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/CB64-RA/checkpoint-2000.pt": "b9184e8e4d8a1e92ce510890e1700525340a3e636ed89d71e0b69f5505bc7aea"
+  }
+}

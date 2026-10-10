@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "release07-gan-v3-mog-tier1-refresh-v1",
+  "trainer_family": "release07-gan-v3-mog",
+  "base_candidate": "release07-gan-v3-task-adapted-v1",
+  "grid": {
+    "lr": [
+      0.006375,
+      0.0085
+    ],
+    "prior_lr_mult": [
+      1.0,
+      2.0
+    ]
+  },
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "campaign": {
+    "schema_version": 1,
+    "id": "tier1-existing-configs-v1",
+    "budget_seconds": 98700,
+    "candidate_budget_seconds": 2100,
+    "accept_shared_cost_transfer": false,
+    "purpose": "Updated revision-3 Tier 1 readout for exactly 15 existing ideas and 32 existing configurations, without new parameters or seed changes. All five refreshed finite studies and ordinary idea requests share this immutable campaign. The complete five-task allowance is 2100 seconds per candidate and 47 candidates reserve at most 98700 seconds. Required non-passes stop remaining ordinary work, including within Tier 1; unsupported hosts spend nothing. Existing incompatible receipts retain their original identity. Tier 2 and Tier 3 are not authorized; provisional gates grant no calibration, robustness, or default adoption."
+  },
+  "hypothesis": "Re-evaluate the exact previously declared complete release07-gan-v3-mog configurations against all five current Tier 1 requirements, including ring acquisition and paired five-word joint acquisition, under one frozen source and CUDA runtime.",
+  "rationale": "User-requested updated Tier 1 readout of existing configurations only. The finite recipe settings are the exact union of release07-gan-v3-mog-family-defaults-round1-v1. No new parameter combinations, seeds, host definitions, gate thresholds or task budgets are introduced. Earlier receipts retain their recorded source/view/runtime and are reused only for identical scientific task keys. All ordinary required failures stop the configuration immediately; every unknown and blocked requirement remains in the 5/19/2 denominator. Selection uses complete configuration PASS counts and the existing content-hash tie-break, confined to Tier 1. Quality and endurance stay unmeasured holdouts; provisional placement supplies no default adoption.",
+  "guide": "EXPERIMENTATION.md"
+}

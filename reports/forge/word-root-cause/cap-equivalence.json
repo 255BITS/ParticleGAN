@@ -1,0 +1,45 @@
+{
+  "scope": "Exact comparison of final model tensors and recorded observations; no training or new sampling.",
+  "arms": [
+    {
+      "id": "k3p-coeff170-cap1",
+      "raw_artifacts": {
+        "state.pt": {
+          "bytes": 2254995,
+          "sha256": "e494cdb887281cf085c85d29e6bbafafb6d2d318e8b0985adb708b2fcacf693c"
+        },
+        "observations.npz": {
+          "bytes": 692092,
+          "sha256": "72995d1334f7fe733f49ce6693bd382d00135ca56803579f1496a54269bdfcd1"
+        },
+        "observed-records.pt": {
+          "bytes": 35388269,
+          "sha256": "9586c1e3c9e5600c3987185cfc39f280babcbd7cd908763b915cd5ce4b3948b8"
+        }
+      }
+    },
+    {
+      "id": "k3p-coeff170-cap0p1",
+      "raw_artifacts": {
+        "state.pt": {
+          "bytes": 2254995,
+          "sha256": "49dc84aee5fae7f96f0e3aeccc615e1c0c33f8a9c3ca1ed69b44b89103bdf535"
+        },
+        "observations.npz": {
+          "bytes": 692092,
+          "sha256": "72995d1334f7fe733f49ce6693bd382d00135ca56803579f1496a54269bdfcd1"
+        },
+        "observed-records.pt": {
+          "bytes": 35388269,
+          "sha256": "9586c1e3c9e5600c3987185cfc39f280babcbd7cd908763b915cd5ce4b3948b8"
+        }
+      }
+    }
+  ],
+  "model_tensor_count": 19,
+  "observation_array_count": 200,
+  "observations_bit_identical": true,
+  "all_model_tensors_bit_identical": true,
+  "unequal_model_tensors": [],
+  "interpretation": "No observed incremental benefit of lowering the cap under coefficient170; select cap1 as the coefficient-only intervention. Recorded observations and final model tensors do not establish equality of the unobserved parameter trajectory or global cap inactivity."
+}

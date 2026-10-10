@@ -1,0 +1,2118 @@
+{
+  "candidate_count": 47,
+  "candidates": [
+    {
+      "blockers": [],
+      "candidate_id": "atlas",
+      "candidate_revision": "506319d4621e284ded8897c02670c7c51c2d50c759e6a459b39848114e346667",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "atlas"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "8d2031fe492f23ff16897c7d26b9d8dc1d1ecae33e35fa793c23d08a87332965",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 30.559230890125036
+      },
+      "evidence": {
+        "attempt_ids": [
+          "32cc30ed839c4a5ba13cb4b8ba1bdf09",
+          "67003acf6cb64561a013684f9c825452",
+          "92fd5aa74ffe47e18b38e4ad98b52d4c",
+          "a9ae47ea776a4575a33dad99dd862151"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/32cc30ed839c4a5ba13cb4b8ba1bdf09.json",
+          "reports/forge/technique-receipts/67003acf6cb64561a013684f9c825452.json",
+          "reports/forge/technique-receipts/92fd5aa74ffe47e18b38e4ad98b52d4c.json",
+          "reports/forge/technique-receipts/a9ae47ea776a4575a33dad99dd862151.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5",
+      "candidate_revision": "f29b4cbcdf81565886085d7a9c678fa8c002abe50b9044c0722ccabce0bb1fcc",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 30.50288654596079
+      },
+      "evidence": {
+        "attempt_ids": [
+          "4be3ae19f06640af9122eb6b4d908f42",
+          "7234ec71ff4142628201307c2b63dcf1",
+          "d21f74a9ad8b4ceb803134d828f7f790",
+          "e28302f35767429e879ca172a258ca20"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/4be3ae19f06640af9122eb6b4d908f42.json",
+          "reports/forge/technique-receipts/7234ec71ff4142628201307c2b63dcf1.json",
+          "reports/forge/technique-receipts/d21f74a9ad8b4ceb803134d828f7f790.json",
+          "reports/forge/technique-receipts/e28302f35767429e879ca172a258ca20.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604",
+      "candidate_revision": "6a6fdf0100eeb8625f29aaaec86cb0ef85f32b82c5c52309486dab5a8e37cdf1",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.043495392019395
+      },
+      "evidence": {
+        "attempt_ids": [
+          "d642664571fe4263a219f1d4998a5c30"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/d642664571fe4263a219f1d4998a5c30.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3",
+      "candidate_revision": "d6130d9a1603dd91600b59c03e04582409f53e1eb872616d4ffc1c938a6306a1",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.992124982003588
+      },
+      "evidence": {
+        "attempt_ids": [
+          "b26c2b84cce846508c11d50bed2edafc"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/b26c2b84cce846508c11d50bed2edafc.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0",
+      "candidate_revision": "52be4491f12130aa891864e902c98ce7e10acbf0810bd4cb5798796d570c5da6",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.881322794011794
+      },
+      "evidence": {
+        "attempt_ids": [
+          "07889313d33c4e8192dcf57930ff6476",
+          "3ee6d154a9a34fdeb083eccf1701a0f2",
+          "8dc9bdfbd37543ab9b441174f7ba5a05",
+          "f4e849bcf9564ab6809d576aa6afb22d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/07889313d33c4e8192dcf57930ff6476.json",
+          "reports/forge/technique-receipts/3ee6d154a9a34fdeb083eccf1701a0f2.json",
+          "reports/forge/technique-receipts/8dc9bdfbd37543ab9b441174f7ba5a05.json",
+          "reports/forge/technique-receipts/f4e849bcf9564ab6809d576aa6afb22d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc",
+      "candidate_revision": "d8c3d7d83cb655d9091d939aec924dc49d0a504aec8fc03b333236dc35d0474b",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.964059441059362
+      },
+      "evidence": {
+        "attempt_ids": [
+          "09c94148195440b2a1e4eb1137c1081b",
+          "25747b8fa6314a709277d40f43117944",
+          "bf7bec142100433fb24d3d9fc77054b6",
+          "c7e54a011a7f4b87ba3b047b10a0d754"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/09c94148195440b2a1e4eb1137c1081b.json",
+          "reports/forge/technique-receipts/25747b8fa6314a709277d40f43117944.json",
+          "reports/forge/technique-receipts/bf7bec142100433fb24d3d9fc77054b6.json",
+          "reports/forge/technique-receipts/c7e54a011a7f4b87ba3b047b10a0d754.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e",
+      "candidate_revision": "2e4c7273266e94647d74da18d1415ecef57e5de7783cb3259982ba4e2e4e9e06",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.057714252965525
+      },
+      "evidence": {
+        "attempt_ids": [
+          "345adb6eedcc46ca91560e0469278754"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/345adb6eedcc46ca91560e0469278754.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383",
+      "candidate_revision": "62821742d34def35c0693f6b3e4f7db5929ba434253eb438ad0d7793a8bfd4e7",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.716961846977938
+      },
+      "evidence": {
+        "attempt_ids": [
+          "570d1badaa89408c8838d7702518344d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/570d1badaa89408c8838d7702518344d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "e22",
+      "candidate_revision": "cf5d3fdcbb1d395a36dbaa487597185853433b7a4127127494d77b115630c242",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "e22"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "five-word-joint-ka2-v1",
+      "candidate_revision": "1b10bb148f0e243166bbe62f58f1cce8042ba77be67ccb39048afce650f86bbf",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.6368885730043985
+      },
+      "evidence": {
+        "attempt_ids": [
+          "19aa5222079e4b779aea48d63aa8539c"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/19aa5222079e4b779aea48d63aa8539c.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "five-word-joint-ka2-v1"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "ea1e0bdda2f81b8214e9b4cb0fc273348f536d542c6b85655361fb8b577f55e0",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.51677786197979
+      },
+      "evidence": {
+        "attempt_ids": [
+          "9002a85292de458db238146e747801af"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/9002a85292de458db238146e747801af.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "k3p-no-penalty"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "0fa611b1ebcc59007bd8a184d772b865ee6aa575a4d09475b373f2b8165ff54a",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.418764899019152
+      },
+      "evidence": {
+        "attempt_ids": [
+          "f27418a634a94b4cb5be67ae35410b0c"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/f27418a634a94b4cb5be67ae35410b0c.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "k3p-no-anchor"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p",
+      "candidate_revision": "b65b2e85287fabbbfbf888eefcc6ac53db145f14e15740dbd740f163b2ec8a2f",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.481602396001108
+      },
+      "evidence": {
+        "attempt_ids": [
+          "cc10034c84aa4e709e9e030c7e6c116d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/cc10034c84aa4e709e9e030c7e6c116d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "k3p"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b",
+      "candidate_revision": "370569798888ba55de4f9ff8324abb648afa2a057876a4f0da013be5d67514f2",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 30.406456711993087
+      },
+      "evidence": {
+        "attempt_ids": [
+          "1b1bf04acac94f5f83e92367a0be0c7f",
+          "44488828b7284d87809e1834ca72926f",
+          "466e6e18c58a4910b4ee226213823eb8",
+          "bff231e3a7724b2ba2f7013b85048bd6"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/1b1bf04acac94f5f83e92367a0be0c7f.json",
+          "reports/forge/technique-receipts/44488828b7284d87809e1834ca72926f.json",
+          "reports/forge/technique-receipts/466e6e18c58a4910b4ee226213823eb8.json",
+          "reports/forge/technique-receipts/bff231e3a7724b2ba2f7013b85048bd6.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "k3p"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "412dbcba924680e57d9b0874082220f04b43e8b31f8e81fc60a7bcbad5f701a1",
+      "conclusion": "Stopped at five_word_joint_acquisition (FAIL) after 4/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 5,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 210.976942106965
+      },
+      "evidence": {
+        "attempt_ids": [
+          "2027122f195445f0b591c31875e6dea6",
+          "51169502a0e64466b5005e7c870b5592",
+          "6e5894c5919440b5ac59f2b975c2b603",
+          "8235957023aa443bb6ddca752b291dbb",
+          "963d53ff7437426389c6b7a7e052a656"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/2027122f195445f0b591c31875e6dea6.json",
+          "reports/forge/technique-receipts/51169502a0e64466b5005e7c870b5592.json",
+          "reports/forge/technique-receipts/6e5894c5919440b5ac59f2b975c2b603.json",
+          "reports/forge/technique-receipts/8235957023aa443bb6ddca752b291dbb.json",
+          "reports/forge/technique-receipts/963d53ff7437426389c6b7a7e052a656.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "five_word_joint_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "five_word_joint_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "FAIL",
+        "ring16_acquisition": "PASS",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 4,
+      "tier1_required": 5,
+      "trainer_family": "k3p"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a",
+      "candidate_revision": "69e1c86c9867aaceaac10b5de639036862b5f1ec7e7ae5078972ea5ddebf47ea",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.929212112969253
+      },
+      "evidence": {
+        "attempt_ids": [
+          "1c31fd5e14954293bfee6a2aed74f120",
+          "4df211509ab6405398207b2784dc9269",
+          "e1c4389a9fe84b78986a967a63176b59",
+          "fa6d50ec974c4f2e95a8b0012ac3af2b"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/1c31fd5e14954293bfee6a2aed74f120.json",
+          "reports/forge/technique-receipts/4df211509ab6405398207b2784dc9269.json",
+          "reports/forge/technique-receipts/e1c4389a9fe84b78986a967a63176b59.json",
+          "reports/forge/technique-receipts/fa6d50ec974c4f2e95a8b0012ac3af2b.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "k3p"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f",
+      "candidate_revision": "c37fbb0f22742d4660a4258f1137da3336219502f3438347747aad3b06909da4",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.76657920796424
+      },
+      "evidence": {
+        "attempt_ids": [
+          "438d8c8589244281948c752f6472e7a2",
+          "7e9f238f900e44b0b336eae506c62bfb",
+          "91059be8ce2f483e91a6e56922ee9349",
+          "e6103b237025451bbd9ae7536f88a1cc"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/438d8c8589244281948c752f6472e7a2.json",
+          "reports/forge/technique-receipts/7e9f238f900e44b0b336eae506c62bfb.json",
+          "reports/forge/technique-receipts/91059be8ce2f483e91a6e56922ee9349.json",
+          "reports/forge/technique-receipts/e6103b237025451bbd9ae7536f88a1cc.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "k3p"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "b51787a935f07f6f61c0dc777455a8b30ad2e16bc39e022bb2bae3004c30ce89",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.317800150020048
+      },
+      "evidence": {
+        "attempt_ids": [
+          "084265af97ca4c528ca984c972f108dd"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/084265af97ca4c528ca984c972f108dd.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "k3p-no-a2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "baa37cecccf77ff336795b0c8bafb952259a599410a5431b86776bf8a2118106",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.992257761012297
+      },
+      "evidence": {
+        "attempt_ids": [
+          "0c287a348eaa4b208b6fc7b067cfbc38",
+          "6b3e83a0ef854a7d922faa122a4b7f4a",
+          "8f079025dff949f499d62d8ecf520915",
+          "9a72f83355e44a00bcbc5ac41c0479da"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/0c287a348eaa4b208b6fc7b067cfbc38.json",
+          "reports/forge/technique-receipts/6b3e83a0ef854a7d922faa122a4b7f4a.json",
+          "reports/forge/technique-receipts/8f079025dff949f499d62d8ecf520915.json",
+          "reports/forge/technique-receipts/9a72f83355e44a00bcbc5ac41c0479da.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "bcap"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "b66c72f805f4deb3026709c05774414fb12a72f1b99311eb825ab0dc1241b22c",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.657143431017175
+      },
+      "evidence": {
+        "attempt_ids": [
+          "f9787bcce0c847fe9205397bb14a3d4d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/f9787bcce0c847fe9205397bb14a3d4d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "k3p-no-training-noise"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "k3p-r1r2-matched-v1",
+      "candidate_revision": "2be36d0cc3e8b3d08df9f07a7b5b26f92551080d594812a314c092bdc68d8db0",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.466192685998976
+      },
+      "evidence": {
+        "attempt_ids": [
+          "79a4c675114946a6bb7b7fef4e2edc0e"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/79a4c675114946a6bb7b7fef4e2edc0e.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "ka2",
+      "candidate_revision": "0cc7bb82003a688982938ea2d24f11af0ef8656823d35746b304903a07b3b319",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.439188288000878
+      },
+      "evidence": {
+        "attempt_ids": [
+          "66c1fe3ba02e43bba33c2b44c12bfd76"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/66c1fe3ba02e43bba33c2b44c12bfd76.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "ka2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "d5ebfc250aac0490ef7281aa1aa44d904beebcbc81ee507d9d857b58d917b3aa",
+      "conclusion": "Stopped at five_word_joint_acquisition (FAIL) after 4/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 5,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 222.7212175949826
+      },
+      "evidence": {
+        "attempt_ids": [
+          "76881975824f4dcbb09d50633a47911d",
+          "8e0a35381d6543bd8a3ecb6056351c06",
+          "a7f019e790ad49f283615caf4750ca9b",
+          "c73dcd61b8f64a99854a3f393789ebd3",
+          "e0ef67831283470fb777543ccd80da56"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/76881975824f4dcbb09d50633a47911d.json",
+          "reports/forge/technique-receipts/8e0a35381d6543bd8a3ecb6056351c06.json",
+          "reports/forge/technique-receipts/a7f019e790ad49f283615caf4750ca9b.json",
+          "reports/forge/technique-receipts/c73dcd61b8f64a99854a3f393789ebd3.json",
+          "reports/forge/technique-receipts/e0ef67831283470fb777543ccd80da56.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "five_word_joint_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "five_word_joint_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "FAIL",
+        "ring16_acquisition": "PASS",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 4,
+      "tier1_required": 5,
+      "trainer_family": "ka2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d",
+      "candidate_revision": "15408f8bc4205e4292f0e574bdd7fb1d0588b3b21fd367ef4f7082302feea515",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.845999051933177
+      },
+      "evidence": {
+        "attempt_ids": [
+          "25fbc596af2444dcb8aa41cef22f39a4",
+          "473a099e69254e80aa88f77d17ff865e",
+          "651099bc6a214a8aaac1c5b001e1fb81",
+          "6cbc57e61a334953a7e04b30ce6ca4d4"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/25fbc596af2444dcb8aa41cef22f39a4.json",
+          "reports/forge/technique-receipts/473a099e69254e80aa88f77d17ff865e.json",
+          "reports/forge/technique-receipts/651099bc6a214a8aaac1c5b001e1fb81.json",
+          "reports/forge/technique-receipts/6cbc57e61a334953a7e04b30ce6ca4d4.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "ka2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f",
+      "candidate_revision": "96e0a93bb82065d0f96e2c9a2bcdd1e8eb2ef0f582f7791bc2602352e4d70d17",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 30.300480818084907
+      },
+      "evidence": {
+        "attempt_ids": [
+          "65931fee267f4fac9b713f3b3659ad01",
+          "a8d6f46ec6484455bc42ee9a9eed80d7",
+          "c1eeca2d094a4193a6cded44edc0966f",
+          "d814ed4c8b404c109e5da60aaf730a01"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/65931fee267f4fac9b713f3b3659ad01.json",
+          "reports/forge/technique-receipts/a8d6f46ec6484455bc42ee9a9eed80d7.json",
+          "reports/forge/technique-receipts/c1eeca2d094a4193a6cded44edc0966f.json",
+          "reports/forge/technique-receipts/d814ed4c8b404c109e5da60aaf730a01.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "ka2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03",
+      "candidate_revision": "0fe8201bf3f8e15221af758cf82ebe1e0be1fb838335678c7e05f49447122764",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 30.33093211503001
+      },
+      "evidence": {
+        "attempt_ids": [
+          "22b418dbde494151900b4b11171caf70",
+          "495a3b2c3e154dbb965e0dced5d31492",
+          "68d72fdac9f94cb79105efb09637c9c0",
+          "f60b810558c5403eb3bc07a814aeb4ab"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/22b418dbde494151900b4b11171caf70.json",
+          "reports/forge/technique-receipts/495a3b2c3e154dbb965e0dced5d31492.json",
+          "reports/forge/technique-receipts/68d72fdac9f94cb79105efb09637c9c0.json",
+          "reports/forge/technique-receipts/f60b810558c5403eb3bc07a814aeb4ab.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "ka2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "candidate_revision": "1725b352208136f4c40506babe9f595ad985608d59d95efad33b18d21a108bad",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.6520832179812714
+      },
+      "evidence": {
+        "attempt_ids": [
+          "680f8994454141bdacaea92e6ec0d674"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/680f8994454141bdacaea92e6ec0d674.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "candidate_revision": "eb9b3479ac8852797223159fad746a1092fe97e9d817d7b711dc1245f1d0c4e0",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.7982047839905135
+      },
+      "evidence": {
+        "attempt_ids": [
+          "07faa517c18d40ce8b2ddf126fcee05d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/07faa517c18d40ce8b2ddf126fcee05d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "candidate_revision": "0c1dfc79f4f204782015aaa8108621c55ae1a4b04f3ad94f0619f92fe5c3635f",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.476314758998342
+      },
+      "evidence": {
+        "attempt_ids": [
+          "399dde876ff544099c6e29da6c3fb499"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/399dde876ff544099c6e29da6c3fb499.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "2727e20c5a10a9391f5298cbb6a73da1c8b80add1d29303ffcab3f26b0d2d26d",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.627088042965624
+      },
+      "evidence": {
+        "attempt_ids": [
+          "25dcf2ac7f914817bd8c93626d2b2d53",
+          "34e638df0d64450e916da676d9c649ae",
+          "4339338ebe274b82834b9c0e14e953f1",
+          "948ce8d90e44472091d3f6ee130a03a8"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/25dcf2ac7f914817bd8c93626d2b2d53.json",
+          "reports/forge/technique-receipts/34e638df0d64450e916da676d9c649ae.json",
+          "reports/forge/technique-receipts/4339338ebe274b82834b9c0e14e953f1.json",
+          "reports/forge/technique-receipts/948ce8d90e44472091d3f6ee130a03a8.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "candidate_revision": "2110cd0e7bd1ed2aa7fa0f938708ebd6ed1a2172fef79536bde1c7b2961eb9a8",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.768562177894637
+      },
+      "evidence": {
+        "attempt_ids": [
+          "6e2ef8c8a7484f99a73fbae9d9c86e57",
+          "954bd66b82874a399c052679ebee6ce5",
+          "cb2cca9624844beeb05c454d3324b0c9",
+          "f5e2d735384b4259a682c88e8ae433f8"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/6e2ef8c8a7484f99a73fbae9d9c86e57.json",
+          "reports/forge/technique-receipts/954bd66b82874a399c052679ebee6ce5.json",
+          "reports/forge/technique-receipts/cb2cca9624844beeb05c454d3324b0c9.json",
+          "reports/forge/technique-receipts/f5e2d735384b4259a682c88e8ae433f8.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595",
+      "candidate_revision": "d3cc3776cbff26bce6a2ec34e234990f7d1d804d39b70f2476650d0934258f82",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.403593191993423
+      },
+      "evidence": {
+        "attempt_ids": [
+          "52ca45a54b23495cb75212e0902f0059"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/52ca45a54b23495cb75212e0902f0059.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "candidate_revision": "938d8908e315336aae25b7d6d71a53760292706864e4b30666fcab008b1b4951",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.929116189072374
+      },
+      "evidence": {
+        "attempt_ids": [
+          "2f6c623268be4e9e90957f45bbee890a",
+          "40d1eecf5bb64599859a58934aff273e",
+          "94157912914c4ab5bc3f3b6a1075c3f9",
+          "ef20b48cc24840158a840308af009076"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/2f6c623268be4e9e90957f45bbee890a.json",
+          "reports/forge/technique-receipts/40d1eecf5bb64599859a58934aff273e.json",
+          "reports/forge/technique-receipts/94157912914c4ab5bc3f3b6a1075c3f9.json",
+          "reports/forge/technique-receipts/ef20b48cc24840158a840308af009076.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd",
+      "candidate_revision": "3db2077771297550ea392e74272231f015406c4d34d844f001f9ab82d679adf7",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.220944673987105
+      },
+      "evidence": {
+        "attempt_ids": [
+          "1e9e6004e6da4b609a24d3892b56662f",
+          "3ce1ec95e679400eba25ef1b45cad507",
+          "88dc6cb508cf46619fa98c9ace7dc007",
+          "92e6605d867b4c82bac47dc60243c976"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/1e9e6004e6da4b609a24d3892b56662f.json",
+          "reports/forge/technique-receipts/3ce1ec95e679400eba25ef1b45cad507.json",
+          "reports/forge/technique-receipts/88dc6cb508cf46619fa98c9ace7dc007.json",
+          "reports/forge/technique-receipts/92e6605d867b4c82bac47dc60243c976.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff",
+      "candidate_revision": "5e9f119e5a1d77ace5a3b2d305ac10cdcfd986e34a9285a73c73d5b2a7d8da67",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.605131065996829
+      },
+      "evidence": {
+        "attempt_ids": [
+          "e7e3d1356c1f4ea4979ac61dbbe82085"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/e7e3d1356c1f4ea4979ac61dbbe82085.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "candidate_revision": "d1d45b77eaf7128cff440bdc508011e3de6300454ffcb271ae2a8ba1ae13715e",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.623428082035389
+      },
+      "evidence": {
+        "attempt_ids": [
+          "5bd9c2000bcd42d89b51746f73980f8d"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/5bd9c2000bcd42d89b51746f73980f8d.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "candidate_revision": "da0d697213b018daf952e3272ea913f666a33788af1c859923d596a6150af108",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.200947728939354
+      },
+      "evidence": {
+        "attempt_ids": [
+          "5a7a8988c2424a7d8be2e5f8dc8a6229",
+          "7f4f6a13b35a46a3831a472dd23fcc51",
+          "81e439a6f2c648138b53cff784508467",
+          "ed52bfa0c7974c25806564fa77b752b8"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/5a7a8988c2424a7d8be2e5f8dc8a6229.json",
+          "reports/forge/technique-receipts/7f4f6a13b35a46a3831a472dd23fcc51.json",
+          "reports/forge/technique-receipts/81e439a6f2c648138b53cff784508467.json",
+          "reports/forge/technique-receipts/ed52bfa0c7974c25806564fa77b752b8.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a",
+      "candidate_revision": "9de572db18f751d0aa80105073631c386514a34fb8f0b3fbd340b5372ef78d54",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.521139539021533
+      },
+      "evidence": {
+        "attempt_ids": [
+          "6042038a1a7f4ad39df195427211da24"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/6042038a1a7f4ad39df195427211da24.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "r3gan-stacked-training-toy-v1",
+      "candidate_revision": "b2cdff32b14f9bbc3d26c65025c1898f26e29f8eb510945c927105e9914bd333",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.269077415985521
+      },
+      "evidence": {
+        "attempt_ids": [
+          "c7f9ba918bc742dfa19e07def8dfe2b7"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/c7f9ba918bc742dfa19e07def8dfe2b7.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "r1r2"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-cloud-v1",
+      "candidate_revision": "95e403581ebf0d72da9e36b0bcc668ec4512daa4e1aafe06013b465b7a8b06da",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification; two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-cloud"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "47630167ae31039bb209a2245097e4b9d5b2379ae0c526d4d3aa57e6204b0f33",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 28.757482298999093
+      },
+      "evidence": {
+        "attempt_ids": [
+          "046d0735b04d4f299f3cbb92b765fa87",
+          "7cb6a3d82e7d4bf2b44253f76e6f3f39",
+          "c83eea7e71ce4193ad9755cb9ce9c125",
+          "da27d343916c4c99be2d372a27dbdb17"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/046d0735b04d4f299f3cbb92b765fa87.json",
+          "reports/forge/technique-receipts/7cb6a3d82e7d4bf2b44253f76e6f3f39.json",
+          "reports/forge/technique-receipts/c83eea7e71ce4193ad9755cb9ce9c125.json",
+          "reports/forge/technique-receipts/da27d343916c4c99be2d372a27dbdb17.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f",
+      "candidate_revision": "674a82d7bd093e07b0e357aa47abae278f61b10a01f4c17e220208fcdc38c8bf",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 27.241401793959085
+      },
+      "evidence": {
+        "attempt_ids": [
+          "2546849ba465491f88aac3007737667e",
+          "28d4b2f21eb246108d144b58ea400002",
+          "50f849692603422c8779b75f038979f4",
+          "52de05b11b7b4ac899ef46d9191a2100"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/2546849ba465491f88aac3007737667e.json",
+          "reports/forge/technique-receipts/28d4b2f21eb246108d144b58ea400002.json",
+          "reports/forge/technique-receipts/50f849692603422c8779b75f038979f4.json",
+          "reports/forge/technique-receipts/52de05b11b7b4ac899ef46d9191a2100.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e",
+      "candidate_revision": "ddca0274d6776dc4990980c30424b0559ae1bbfd3549800dd26ecc084040c1b1",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 28.524234142969362
+      },
+      "evidence": {
+        "attempt_ids": [
+          "01af9c2fb20b48efa2b25535e9cad473",
+          "32835d898601479883dc15e1db64f013",
+          "50a42e77990f43df8008e9360d2eb33b",
+          "8ae6083e675f4a889182e8a9b061ad4c"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/01af9c2fb20b48efa2b25535e9cad473.json",
+          "reports/forge/technique-receipts/32835d898601479883dc15e1db64f013.json",
+          "reports/forge/technique-receipts/50a42e77990f43df8008e9360d2eb33b.json",
+          "reports/forge/technique-receipts/8ae6083e675f4a889182e8a9b061ad4c.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26",
+      "candidate_revision": "0939a8bc6653cecdf4fa02d5b7884e69dd052d1e65504a8cfe0f2816750d5bc7",
+      "conclusion": "Stopped at ring16_acquisition (FAIL) after 3/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.29721805494046
+      },
+      "evidence": {
+        "attempt_ids": [
+          "1cd03b2150ce40e990a93037acb3419c",
+          "45db8aa7ba124c9aafafa73e7cf27233",
+          "6711c1ff820440bf946b4fe983f238e7",
+          "bb7430d6568c4a0fa2d1a648aaf93da0"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/1cd03b2150ce40e990a93037acb3419c.json",
+          "reports/forge/technique-receipts/45db8aa7ba124c9aafafa73e7cf27233.json",
+          "reports/forge/technique-receipts/6711c1ff820440bf946b4fe983f238e7.json",
+          "reports/forge/technique-receipts/bb7430d6568c4a0fa2d1a648aaf93da0.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "ring16_acquisition",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "PASS",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "FAIL",
+        "two_pole": "PASS",
+        "unused_token_hold": "PASS"
+      },
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-mog-v1",
+      "candidate_revision": "d8ec84dfaad0ef645617535021e3d6b6dadd14a07818299563478599d1eae63a",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification; two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "release07-gan-v3-task-adapted-v1",
+      "candidate_revision": "cb26bc6bde603eb27fc2ab70989c5bcc9e714576d8056a756f0e775cc2e0d655",
+      "conclusion": "Stopped at two_pole (FAIL) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.395131180994213
+      },
+      "evidence": {
+        "attempt_ids": [
+          "9c586026ffbb4d1a81b1545bf216ea4a"
+        ],
+        "compact_receipts": [
+          "reports/forge/technique-receipts/9c586026ffbb4d1a81b1545bf216ea4a.json"
+        ],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": "two_pole",
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      },
+      "next_action": "Stop this exact revision; inspect the linked numerical failures before any substantive new hypothesis.",
+      "status": "FAIL",
+      "stopping_reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "tasks": {
+        "ae_gan_hold": "UNKNOWN",
+        "five_word_joint_acquisition": "UNKNOWN",
+        "ring16_acquisition": "UNKNOWN",
+        "two_pole": "FAIL",
+        "unused_token_hold": "UNKNOWN"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "release07-gan-v3-mog"
+    }
+  ],
+  "default_adoption": false,
+  "input_digest": "bbda587b24c173593272d71dc0982d17613f60ffcc74b7df4d276d13942dabfd",
+  "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+  "provenance": {
+    "input_sha256": {
+      "configs/forge/campaigns/tier1-existing-configs-v1.json": "3c863490deaba83baa45f87a1f3be5ea110d0d32e15620e26a928531b9b370c4",
+      "configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json": "d195513a90344155c4a65e5a69c96eab709efedb30c9143a09c944c531bdcf96",
+      "configs/forge/configurations/bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5.json": "4e9c76d39d91641255aec942ad69ba9c8f40bfcc1b64cca4c7c9dcaffd4efba8",
+      "configs/forge/configurations/bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604.json": "b143617283eada975156693e74c7a21e74347ad6b801effead5a7eb4e2aac920",
+      "configs/forge/configurations/bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3.json": "eb1ff5f7a33aeca31074c320ede14567938d332f7ad4fcded470ad36410f9ae6",
+      "configs/forge/configurations/bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0.json": "d577876d08b983d1735b63981f7ccb6a3ab07eede013ec2d734c3760e29c4a83",
+      "configs/forge/configurations/bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc.json": "51877d98c3285967b3896877c69e869decd05ded093e6159029f61259b07f987",
+      "configs/forge/configurations/bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e.json": "3be7bf615faeb1f45679e0de7f95b6366f1bf28be091b695c122b76f92a08e73",
+      "configs/forge/configurations/bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383.json": "c5b1e1137f15972c254e34c67f02f3553f44d051bf33f3c4f0dec624ac3e70df",
+      "configs/forge/configurations/k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b.json": "4db928ac759699eec726ec7aeedaabe26f012eb0d3a45fd616bf3d51c3c8a01c",
+      "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "configs/forge/configurations/k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a.json": "55b665878d63a81638d13d0971e15e5d41021f169b17338349b15c4a6b8eef68",
+      "configs/forge/configurations/k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f.json": "8313d2668af153e9193bba9713e7c7cff8bd48791a43a63a75442d34501a658c",
+      "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+      "configs/forge/configurations/ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d.json": "e8ce4bcd66d8d0550f41049cf56dfadf8e5dc962de66e65876bf7fdb165d528d",
+      "configs/forge/configurations/ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f.json": "7ffca5f5e11e6d26905a88818796f99a7d80710182db2e9a26cdc7a3031e448e",
+      "configs/forge/configurations/ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03.json": "f65553e1d2d705cbb8627239339e56bd43d1d5e3ff87139c74bca72b7777895a",
+      "configs/forge/configurations/r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b.json": "9d09fa07898c90e381d47595b65c90e8fa7ff093ee5946b87c80b081ff9eb42c",
+      "configs/forge/configurations/r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6.json": "63a5f75e4c0a50fed64c215b282319a02b23f745ceacd652b1678beb963cce9c",
+      "configs/forge/configurations/r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46.json": "f52588fed4c9e558410bbf0eae16da12aeae82574ec35164b1d47eef03b5fa23",
+      "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+      "configs/forge/configurations/r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27.json": "c8315268e1601f8be698a32e339064ebbb10055dbed341510b2fe2dfcdcca254",
+      "configs/forge/configurations/r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595.json": "45a6c1085c07e8add868cc18ddd3b99bb8f577f7c9b45bf8600c04ce1cc7607f",
+      "configs/forge/configurations/r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d.json": "fd4cd3a659345e5f52ffba9ee8bb35dda58e3d1322230ee7bc740085d38d3374",
+      "configs/forge/configurations/r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd.json": "06bab5b89b7c5d49146854e618727133ebd7b2fc1325b3b1eeb158ff31ecb48c",
+      "configs/forge/configurations/r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff.json": "0e1517d412b9b57366fe3ae25c73dca7bf4bc26ea84c44b017abe630df1bda0f",
+      "configs/forge/configurations/r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743.json": "3e945fcfdbba6bdccd1cd4e18e18a4b464ce7710e32b623139ce909878fae273",
+      "configs/forge/configurations/r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe.json": "bb9ab3f6147f0b207f92fa120e20de7d0d68b4ead243aa8ead7d0fc9e4f1ba29",
+      "configs/forge/configurations/r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a.json": "a1c18d0c0ef53d54c6360a49e85fae0449d678758345a33183e263969683adfe",
+      "configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json": "16e248f5e004b906c1455ba022063173f122406dfad12ee4372b204d931a4ef9",
+      "configs/forge/configurations/release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f.json": "379d11801e7b7beff1b3fd00347a4ad99ee2695481a52b10d345f3c693267e30",
+      "configs/forge/configurations/release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e.json": "3e21a2ede70fed9046068dbdc7178133267351bb45a2feb940e34101b08ea5dd",
+      "configs/forge/configurations/release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26.json": "7761dd9c39a22a668f639799f5000a0522a82e1a83cde608bc8e9c8a8f2f1597",
+      "configs/forge/legacy-ideas-v1.json": "d5216c6e773add036defad0a0dd6df220812e2799abe9d89eb497b3e861c228f",
+      "configs/forge/rounds/tier1-existing-configs-v1.json": "aea7193e563f282df7f96b54b75605fe4a10a9744fa4c565127e8aa6f98f9fd1",
+      "configs/forge/searches/bcap-tier1-refresh-v1.json": "7b42fd0d6194e04eaee0df365bdbf8c630649bb7f273f2a7c6a00655fb578205",
+      "configs/forge/searches/k3p-tier1-refresh-v1.json": "b6282e43e3955318e6da0fafa43a2db22c54369ce44414df3ef58e263c89c34a",
+      "configs/forge/searches/ka2-tier1-refresh-v1.json": "0fa27a24ba9b4096e65d0373937081f36d1783f124480c77f8b9bbdf5f445581",
+      "configs/forge/searches/r1r2-tier1-refresh-v1.json": "177e7c95896a242b31a706e46f1b91c4a97e76919993ae27caa4a6a17db75165",
+      "configs/forge/searches/release07-gan-v3-mog-tier1-refresh-v1.json": "b7950456743046e7a4531182f33fc9b2733a811cf1c28324af1ceca95662dc25",
+      "configs/forge/views/discriminator_stability.json": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b",
+      "reports/forge/configuration-search/bcap-tier1-refresh-v1.json": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+      "reports/forge/configuration-search/k3p-tier1-refresh-v1.json": "40d6b2114936dd8e01035e1663bbbc22827d2d6fb8a400d4494b93cc93d5f298",
+      "reports/forge/configuration-search/ka2-tier1-refresh-v1.json": "aed283f58c4ee2199c107ecafaa8b885bea46c281cb386e44e3c391aa058cd35",
+      "reports/forge/configuration-search/r1r2-tier1-refresh-v1.json": "f00b6adf71ff7d70c8d768bf4112945e6476de463c5cf684e6ff31f442f6a601",
+      "reports/forge/configuration-search/release07-gan-v3-mog-tier1-refresh-v1.json": "f84eb540cf1cee88919c57d5b2b5ea057b39364f97babc9608582578787bcfb7",
+      "reports/forge/technique-evidence/494153533dcedb578c944134a3b16f6d368d1439685dd7689934eabf858887e3.json": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b",
+      "reports/forge/technique-evidence/manifest.json": "440be7dcaa99bb362f6a947bab0b192f898e522dff057b7f6b867c64dacab64c",
+      "reports/forge/technique-inventory.json": "01513191552cb57846582acd609a89571e130576b30ea509ce73ab213e4296bd"
+    },
+    "publication_input_digest": "b3aeb0c33b2218507fe10a9006c37876f56bf8c2ce29475d495c8b5a0180b67d"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "required_denominator_by_tier": [
+    5,
+    19,
+    2
+  ],
+  "round": "tier1-existing-configs-v1",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "scope": "compact concluded readout of the exact 47 existing declarations",
+  "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+  "status_counts": {
+    "BLOCKED": 4,
+    "FAIL": 43
+  },
+  "stop_task_counts": {
+    "five_word_joint_acquisition": 2,
+    "ring16_acquisition": 20,
+    "two_pole": 25
+  },
+  "through_tier": 1,
+  "view": "discriminator_stability",
+  "view_revision": 3
+}

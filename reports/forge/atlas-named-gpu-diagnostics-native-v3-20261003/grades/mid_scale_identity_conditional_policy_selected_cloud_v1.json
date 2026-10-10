@@ -1,0 +1,121 @@
+{
+  "grades": {
+    "mid_scale_identity_conditional_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.4175,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 334,
+          "first_pass_step": 200,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 19,
+          "passing_suffix": 19,
+          "stable_from_seconds": null,
+          "stable_from_step": 200
+        },
+        "metrics": [
+          {
+            "margin": 0.1488592863082886,
+            "metric": "concept_cos_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9988592863082886
+          },
+          {
+            "margin": 0.14993240833282473,
+            "metric": "concept_cos_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999324083328247
+          },
+          {
+            "margin": 0.31447160243988037,
+            "metric": "concept_mag_plus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.75,
+            "value": 1.0644716024398804
+          },
+          {
+            "margin": 0.18552839756011963,
+            "metric": "concept_mag_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0644716024398804
+          },
+          {
+            "margin": 0.3244500160217285,
+            "metric": "concept_mag_minus",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.75,
+            "value": 1.0744500160217285
+          },
+          {
+            "margin": 0.17554998397827148,
+            "metric": "concept_mag_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.25,
+            "value": 1.0744500160217285
+          },
+          {
+            "margin": 0.11854858090302689,
+            "metric": "identity_at_0",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9685485809030269
+          },
+          {
+            "margin": 0.13765490321031304,
+            "metric": "identity_at_mid",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.987654903210313
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.9999324083328247,
+        "concept_cos_plus": 0.9988592863082886,
+        "concept_mag_minus": 1.0744500160217285,
+        "concept_mag_plus": 1.0644716024398804,
+        "identity_at_0": 0.9685485809030269,
+        "identity_at_mid": 0.987654903210313,
+        "leak_frac": -0.998988687992096,
+        "same_dir": 0.022456442905485277,
+        "step": 800
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "1adbc35e8d51f2661037260abbcecff2db5662e5ebc7ea0339724481acafcfa5",
+  "schema_version": 1,
+  "source_digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87",
+  "telemetry": {
+    "independent_grading_seconds": 0.8434493250679225,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664707072
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

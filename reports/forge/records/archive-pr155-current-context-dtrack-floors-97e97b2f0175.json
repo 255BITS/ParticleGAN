@@ -1,0 +1,79 @@
+{
+  "candidate_id": "context:pr155-current:dtrack-floors",
+  "candidate_revision": "55c07d30aba1b915fbd185cf87d8e65cb6abe77e82e9b7fbb32b0d636500b392",
+  "claim_contract": {
+    "clock_free_eligibility": "unverified",
+    "clock_free_eligible": null,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "mixed_historical",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative16-gate matrix; no variant clears all three natives. Image failures and remote evidence gaps preserved. No raw scientific task grades inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Historical discriminator-rate floors and complete five-candidate comparison.",
+  "mechanism_class": "historical_diagnostic_context",
+  "next_action": "Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "Exact original prior/config retained in raw evidence; context provides no current learned-MoG credit.",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "bundle_manifest": {
+      "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+    },
+    "config": null,
+    "context": {
+      "aggregate_cost_seconds": null,
+      "bundle_manifest": {
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+        "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+        "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+      },
+      "cost_note": "No aggregation of overlapping receipts, ledgers, retries or diagnostics.",
+      "family": "dtrack-floors",
+      "narrative_sources": [
+        {
+          "git_blob": "e169043a3da068b6532a89d2a2b5e4b97d253186",
+          "original_path": "reports/toy100/lrfree-search/dtrack-floors/README.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/dtrack-floors/README.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "3983e7283aa2f5c5e414f0186c050ee0a5690cc18ea6070aac91f47d5f79ef1b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack-floors/README.md"
+        }
+      ],
+      "normalization_scope": "Family context only, empty task_results; native-arm cards are the only normalized trials.",
+      "raw_context_paths": [],
+      "structured_sources_imported": [],
+      "summary_excerpt": "Narrative16-gate matrix; no variant clears all three natives. Image failures and remote evidence gaps preserved. No raw scientific task grades inferred."
+    },
+    "importer_version": "forge-supplemental-pr155-current-archive-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-context-dtrack-floors-97e97b2f0175",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "e169043a3da068b6532a89d2a2b5e4b97d253186",
+    "original_path": "reports/toy100/lrfree-search/dtrack-floors/README.md",
+    "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/dtrack-floors/README.md",
+    "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "sha256": "3983e7283aa2f5c5e414f0186c050ee0a5690cc18ea6070aac91f47d5f79ef1b",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack-floors/README.md"
+  },
+  "task_results": []
+}

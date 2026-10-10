@@ -1,0 +1,51 @@
+{
+  "adapter_corrections_sha256": "7302f6b12cde2151af82c8ae9c9f26cdfe9ea5d40951ed31c220b20bd0cac545",
+  "archive_append_scope": "Late JSON/JSONL/log and adapter source/protocols absent by path from the original inventory; retain failures and unlaunched preparation; exclude checkpoints, datasets, clouds and images",
+  "closed_utc": "2026-10-01T00:11:17.153657+00:00",
+  "command": [
+    "python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/finalize_evidence_v2.py",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v2-attempt1"
+  ],
+  "cuda_operations": 0,
+  "file_sha256": {
+    "FINALIZER-PREPARATION.json": "13bd71f6404663e4b939d35ef4079ddf5cdfbd386386315046ce6c7d047d5530",
+    "FINALIZER-PROTOCOL.md": "0ce9aba30a9aeefca7423a457459eef65f7421d43debea9f3c22b655bb35477d",
+    "FINALIZER-V2-PROTOCOL.md": "ca6554f3d1eb1a443dea8549bbca6a4c321c3dcdde46dc50e39a4186567533b8",
+    "FROZEN.json": "456ea94ba6b57dfcb5123ceddfe06cea597513c32f344db93aea7af3b15addc2",
+    "INVENTORY.json": "484bb263f164473054c05d15ac5f428d5b47cda635700b17ed352f0f97087177",
+    "finalize_evidence.py": "577ea14877b80def725b61bec77cf2ff1067d80d477a0017cf7894b9eae83cd1",
+    "finalize_evidence_v2.py": "9b3e52d3caf82795d6c296c41d98b6ce381972b952a0cb98e130be437dc4d684"
+  },
+  "final_19_gates": "PENDING_ROOT_INVOCATION_AFTER_COMPLETION",
+  "final_ra14_full_suite": "PENDING_ACTUAL_COMPLETION",
+  "frozen_lane_mutations": 0,
+  "helper_invocations": 0,
+  "model_calls": 0,
+  "original_inventory_files": 510,
+  "repository_mutations": 0,
+  "scope_routing": {
+    "final_full_suite": "validation-ra14/FULL-TESTS.json and full-pytest.log",
+    "moving3": "validation-ra14-r2/scoreboard-moving.json",
+    "native3": "validation-ra14-r2/scoreboard-native.json",
+    "portability13": "validation-ra14 closed portability results in retained scoreboard-all ERROR"
+  },
+  "scoring_calls": 0,
+  "source_checks": {
+    "exact_freeze_preparation_receipt_binding": "PASS",
+    "exact_moving_diagnostic_owner_transformation": "PASS",
+    "exact_native_harness_import_path_transformation": "PASS",
+    "original_preparation_seals_unchanged": true,
+    "unchanged_external_package_config_host_scorer_inputs": 93
+  },
+  "source_freeze_sha256": {
+    "validation-ra14": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+    "validation-ra14-moving-r2": "1ef7f4e91457f3bac63d6132bae6a61fb38f2f2b64e62cfc8c0eeca4712b76a9",
+    "validation-ra14-r2": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f"
+  },
+  "status": "FROZEN_V2_SOURCE_ONLY_FINALIZER_NOT_INVOKED",
+  "syntax": "PASS_STDLIB_AST_AND_COMPILE",
+  "tensor_reads": 0
+}

@@ -1,0 +1,1962 @@
+{
+  "version": "source-cuda-observation-v1-publication",
+  "cohort": "CUDA: one visible GPU, sequential original-source attempts",
+  "historical_cpu_and_catalog_receipts_unchanged": true,
+  "records": [
+    {
+      "catalog_id": "source-family-02",
+      "label": "Analytic denoising grid, one class",
+      "name": "Analytic denoising grid, one class",
+      "family": "denoising",
+      "historical_catalog_receipt_unchanged": true,
+      "original_cpu_blocker_preserved": true,
+      "fresh_execution_status": "BLOCKED",
+      "original_scientific_status": "NO_FROZEN_GATE",
+      "added_gate_status": {
+        "live": "BLOCKED",
+        "ema": "BLOCKED"
+      },
+      "added_scope": {
+        "version": "conditional-source-distribution-v1",
+        "thresholds": {
+          "hq_min": 0.95,
+          "conditional_quality_mass_tv_max": 0.1,
+          "exact_inactive_zero_fraction": 1.0,
+          "symbol_tv_max": 0.1,
+          "mean_error_sigma_max": 0.1,
+          "covariance_eigenvalues": [
+            0.85,
+            1.15
+          ],
+          "radial_ks_max": 0.075,
+          "max_projection_ks_max": 0.06,
+          "full_original_update_budget": true,
+          "terminal_observations": 5
+        },
+        "scope": "class0/xt0/t2 clean posterior only"
+      },
+      "original_update_budget": 28000,
+      "completed_updates": 0,
+      "completed_count_definition": "Completed original update pairs at the following loop boundary; interrupted iteration may contain a partial update.",
+      "full_original_endpoint_complete": false,
+      "full_source_attempts": 0,
+      "source_acquisition_attempts": 1,
+      "scientific_measurement_status": "NOT_MEASURED; software prerequisite BLOCKED",
+      "config_path": "configs/denoising/diagnostics/ddgan_class_free_28k_s24002.yaml",
+      "resolved_config": {
+        "batch_size": 256,
+        "z_dim": 4,
+        "num_particles": 20000,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "beta1": 0.0,
+        "model": "ddgan",
+        "d_mode": "concat",
+        "beta2": 0.999,
+        "classes": 1,
+        "ucd_target": "class",
+        "ucd_lambda": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "steps": 28000,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_kappa": 1.0,
+        "ema": 0.995,
+        "prior": "learned",
+        "sigma_rel": 0.025,
+        "standardize": true,
+        "prior_betas": null,
+        "noise": "gaussian",
+        "seed": 24002,
+        "std": 0.03,
+        "noise_particles": 1024,
+        "hidden": 128,
+        "generator_hidden": null,
+        "depth": 3,
+        "fourier": 2,
+        "noise_lr_mult": 1.0,
+        "noise_reg": 0.0,
+        "reg_sync_stats": true,
+        "fused_adam": false,
+        "drop_xt": false,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "probe_samples": 256,
+        "save_checkpoint": true,
+        "out_dir": "results/denoising/diagnostics/ddgan_class_free_28k_s24002"
+      },
+      "resolved_recipe": {
+        "name": "ka2",
+        "model": "ddgan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": 1,
+        "conditioning": "conditional",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 28000,
+        "continuous_policy": null,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 1.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "actual_source_contract": {
+        "recipe": {
+          "name": "ka2",
+          "model": "ddgan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": 1,
+          "conditioning": "conditional",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 28000,
+          "continuous_policy": null,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.5,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.2,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0,
+          "amsgrad": false,
+          "critic_r1_real": true,
+          "critic_payoff_damping": true,
+          "output_noise_mode": "fixed",
+          "lr_control": "mobility",
+          "particle_birth_death": false,
+          "row_evidence_gate": false,
+          "table_release_rule": "any",
+          "row_evidence_hot": true,
+          "row_evidence_exclude": true,
+          "row_evidence_hold": true,
+          "birth_death_space": "data",
+          "serve_average": 0.0,
+          "reopen_signal": "data",
+          "reopen_anchor": "hold",
+          "row_evidence_null": "theory",
+          "birth_death_isolation": false,
+          "birth_death_feature_scale": "none",
+          "row_policy": "independent"
+        },
+        "actual_prior": {
+          "class_name": "DrawSource",
+          "kind": "learned",
+          "parameter_shapes": {
+            "table": [
+              20000,
+              4
+            ]
+          },
+          "buffers": {}
+        },
+        "optimizers": {
+          "opt_g": {
+            "class_name": "K3PGeneratorAdam",
+            "groups": [
+              {
+                "lr": 0.0006,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              },
+              {
+                "lr": 0.005999999999999999,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              }
+            ]
+          },
+          "opt_d": {
+            "class_name": "KA2CriticAdam",
+            "groups": [
+              {
+                "lr": 0.0009,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              }
+            ]
+          }
+        },
+        "actual_model_parameters": {
+          "g": 34818,
+          "d": 35457
+        },
+        "named_training_streams": {
+          "data": "cuda:0",
+          "time": "cuda:0",
+          "corruption": "cuda:0",
+          "latent": "cuda:0",
+          "noise": "cuda:0",
+          "penalty": "cuda:0"
+        }
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "cuda": "12.6",
+        "device": "cuda:0",
+        "visible_devices": "0",
+        "visible_gpu_count": 1,
+        "gpu_name": "NVIDIA RTX A6000",
+        "total_memory_bytes": 50896764928,
+        "cpu_threads": 1
+      },
+      "source_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_manifest_sha256": "456523beec86dc2943f84b50a503cfb0f6b31c38f982be9ad5d178b0c2371361",
+      "critical_source_sha256": {
+        "experiments/train_denoising.py": "dd4c1ac585eae3357080b4e41e8c3dfa68f419b79ad7dc387f3054a41bba5a21",
+        "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+        "configs/denoising/diagnostics/ddgan_class_free_28k_s24002.yaml": "b902542a152a03d945aa7cffc42eae99c709229764a079c151eaa1c6c2c8bba9"
+      },
+      "observer_source_sha256": {
+        "benchmarks/toy_audit/source_cuda_observation.py": "19b49d3d984eaf083ffba6c7fd1ccd94c852bbc823d70eae1ef668d72096d1bd",
+        "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43"
+      },
+      "prefix_parity": {
+        "passed": false,
+        "compared_boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 1,
+        "matched_boundaries": [
+          0
+        ],
+        "software_updates": 6,
+        "requested_software_updates": 6,
+        "all_visible_cuda_global_and_named_rngs_included": true
+      },
+      "prefix_diagnosis": {
+        "role": "SOFTWARE_PREFIX; not a scientific quality campaign",
+        "baseline_completed_updates": 3,
+        "observed_completed_updates": 3,
+        "software_updates": 6,
+        "observation_count": 1,
+        "actual_observed_steps": [
+          1
+        ],
+        "archived_metric_stream": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-observed/raw/observations.jsonl",
+          "sha256": "2a816915005f4995d442e3a7c8c2c5fb250bd844883381610699d937fa90ab55"
+        },
+        "root_mechanism": "UNRESOLVED",
+        "root_mechanism_confidence": "not established",
+        "observed_failure_class": "EXACT_SOURCE_PREFIX_DIVERGENCE_BEFORE_FIRST_OBSERVER",
+        "observed_failure_confidence": "high; archived before/after hashes and saved owner tensors agree",
+        "initial_tracked_owners_match": true,
+        "initial_owner_sha256": "ba573083214d918bc93e79cf412ab2c9528ba113152a8618ec745ca3f43e1dd8",
+        "first_divergent_completed_update": 1,
+        "baseline_owner_sha256": "8f262c0f1cb2b9c0906fc3ab5e4ddd6dfc7a66eb98df8e5f2b609496d65e996e",
+        "observed_before_read_owner_sha256": "7b68c7d8a26ed9ea185a18e3ae5dd4f81457c05f7a1235f0720a2cae2a04b571",
+        "observed_after_read_owner_sha256": "7b68c7d8a26ed9ea185a18e3ae5dd4f81457c05f7a1235f0720a2cae2a04b571",
+        "independently_recomputed_checkpoint_owner_sha256": "7b68c7d8a26ed9ea185a18e3ae5dd4f81457c05f7a1235f0720a2cae2a04b571",
+        "first_read_preserved_tracked_owners_and_rngs": true,
+        "divergence_predates_first_read": true,
+        "checkpoint": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-observed/raw/state-000.pt",
+          "sha256": "2bd4dc807ff18d0da4e58bf28025e377fffd1ed12f99b5fbc1b2a87f2c5c3c3f"
+        },
+        "cloud": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-observed/raw/cloud-000.npz",
+          "sha256": "b84b8af8d997c5bff9f9a05a8fc8e1f684591d3716409b1d65f76c82dc39983d"
+        },
+        "final_generator_batch_prior_id_multiplicity": {
+          "rows": 256,
+          "unique_rows": 255,
+          "repeated_rows": 1,
+          "maximum_multiplicity": 2
+        },
+        "proven_cause_of_acquisition_stop": "The frozen prerequisite requires four exact state matches; only initialization matches. The full source campaign is therefore prohibited by that protocol.",
+        "causal_limit": "The first measurement cannot explain a difference already present before that measurement. This does not identify the differing owner or prove a particular CUDA kernel, source optimizer defect or omitted runtime state.",
+        "kernel_hypothesis": "Learned particle tables use indexed differentiable reads. A CUDA numerical reduction mechanism is a hypothesis, not a demonstrated cause; generator prior IDs are unique in both trajectory prefixes.",
+        "missing_artifacts": [
+          {
+            "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-baseline/raw/state-000.pt",
+            "status": "NOT_RECORDED",
+            "purpose": "Baseline first-update owner tensors or per-owner hashes are needed to locate the difference; only the aggregate baseline hash exists."
+          },
+          {
+            "status": "NOT_RECORDED",
+            "artifact": "Per-control CUDA deterministic-algorithm, backend and stream settings",
+            "purpose": "Separate numerical execution behavior from a missed non-RNG runtime setting."
+          }
+        ],
+        "bounded_next_diagnostic": "A separate bounded per-owner software control would need baseline and observed initialization/update1 tensors or subhashes plus CUDA backend/determinism/stream settings. Compare RNGs, gradients, parameters and optimizer tensors before considering an isolated kernel control. Such a control would confer no scientific qualification; these receipts do not warrant a full quality retry, changed config, new seed or weakened parity gate."
+      },
+      "software_updates": 6,
+      "imported_scientific_source_count": 24,
+      "imported_scientific_source_manifest_sha256": "ebba853c3490791d3a5ef8892d3aca24787873cfa51ec92a2ed96ac33dfbba07",
+      "observation_count": 0,
+      "final_observed_step": null,
+      "final_observed_metrics": null,
+      "terminal_suffix": {
+        "live": {
+          "passing_suffix": 0,
+          "minimum_required": 5,
+          "passed": false
+        },
+        "ema": {
+          "passing_suffix": 0,
+          "minimum_required": 5,
+          "passed": false
+        }
+      },
+      "all_captured_observer_reads_pure": null,
+      "media": null,
+      "media_receipt": null,
+      "error": "Exact source prefix owner hashes differ",
+      "last_source_error_frame": null,
+      "blocked_phase": "observer parity prerequisite",
+      "wall_cap_seconds": 120,
+      "subprocess_wall_seconds": 6.3058668749872595,
+      "hard_killed": false,
+      "worker_wall_seconds": 4.543550826841965,
+      "wall_cap_scope": "Worker subprocess including startup and software controls; source export preparation is outside this clock.",
+      "allocator_peak_bytes": {
+        "allocated": 60844032,
+        "reserved": 71303168
+      },
+      "artifacts": {
+        "source-receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/source-receipt.json",
+          "sha256": "827bc550d6d80123b4134c448e1ac108408b1e8bdb00a5d1a6741269ca4ce431"
+        },
+        "source.tar": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/source.tar",
+          "sha256": "8d49c0cd7d9c0d3be4d82e9d784d76efb10ce70fe216a939cd8f4a5332600813"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/protocol.json",
+          "sha256": "b2c72e423f81f5e0faf6b50e70d9117ef3f8ceedbd475ee3733a50c5cea06be6"
+        },
+        "execution.log": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/execution.log",
+          "sha256": "cbebc295358ec246cda4b51e7785dd2c287925f0be42df81bae260a9c263aced"
+        },
+        "execution-summary.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/execution-summary.json",
+          "sha256": "16521bd7d41e56efba29b3254d03f0ebfb8bd3889a446abdb644d43f27c732c1"
+        },
+        "launcher.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/launcher.json",
+          "sha256": "7383e789a95360274297c60f2ef6bd145b65716c56a6c57595614a013ff7594b"
+        },
+        "prefix-baseline/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-baseline/receipt.json",
+          "sha256": "467385266564e827d58f57e213b9b5acd2da65267987dcda9eca74363bdee5ed"
+        },
+        "prefix-observed/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-observed/receipt.json",
+          "sha256": "9aae2a55e489bba8f1fc3a93664361754e5357e7c45a5fc1678754df446e01a4"
+        },
+        "prefix-observed/raw/effective.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-02/prefix-observed/raw/effective.json",
+          "sha256": "e7ad020b88bc053dd4b17fd77fb4c23d8948b2672d725f7350ad2997c97f8509"
+        }
+      },
+      "original_absolute_gate": "NONE",
+      "qualification_credit": "none",
+      "scientific_retries": 0,
+      "configuration_repairs": 0
+    },
+    {
+      "catalog_id": "source-family-03",
+      "label": "Analytic denoising grid, four classes",
+      "name": "Analytic denoising grid, four classes",
+      "family": "denoising",
+      "historical_catalog_receipt_unchanged": true,
+      "original_cpu_blocker_preserved": true,
+      "fresh_execution_status": "BLOCKED",
+      "original_scientific_status": "NO_FROZEN_GATE",
+      "added_gate_status": {
+        "live": "BLOCKED",
+        "ema": "BLOCKED"
+      },
+      "added_scope": {
+        "version": "conditional-source-distribution-v1",
+        "thresholds": {
+          "hq_min": 0.95,
+          "conditional_quality_mass_tv_max": 0.1,
+          "exact_inactive_zero_fraction": 1.0,
+          "symbol_tv_max": 0.1,
+          "mean_error_sigma_max": 0.1,
+          "covariance_eigenvalues": [
+            0.85,
+            1.15
+          ],
+          "radial_ks_max": 0.075,
+          "max_projection_ks_max": 0.06,
+          "full_original_update_budget": true,
+          "terminal_observations": 5
+        },
+        "scope": "class0/xt0/t2 clean posterior only"
+      },
+      "original_update_budget": 7000,
+      "completed_updates": 0,
+      "completed_count_definition": "Completed original update pairs at the following loop boundary; interrupted iteration may contain a partial update.",
+      "full_original_endpoint_complete": false,
+      "full_source_attempts": 0,
+      "source_acquisition_attempts": 1,
+      "scientific_measurement_status": "NOT_MEASURED; software prerequisite BLOCKED",
+      "config_path": "configs/denoising/default.toml",
+      "resolved_config": {
+        "batch_size": 2048,
+        "z_dim": 2,
+        "num_particles": 20000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "beta1": 0.0,
+        "model": "ddgan",
+        "d_mode": "ucd",
+        "beta2": 0.999,
+        "classes": 4,
+        "ucd_target": "class",
+        "ucd_lambda": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "steps": 7000,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reg_kappa": 1.0,
+        "ema": 0.995,
+        "prior": "learned",
+        "sigma_rel": 0.025,
+        "standardize": true,
+        "prior_betas": null,
+        "noise": "gaussian",
+        "seed": 24002,
+        "std": 0.03,
+        "noise_particles": 1024,
+        "hidden": 128,
+        "generator_hidden": null,
+        "depth": 3,
+        "fourier": 2,
+        "noise_lr_mult": 1.0,
+        "noise_reg": 0.0,
+        "reg_sync_stats": true,
+        "fused_adam": false,
+        "drop_xt": false,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "probe_samples": 256,
+        "save_checkpoint": true,
+        "out_dir": "results/denoising/ddgan_ucd"
+      },
+      "resolved_recipe": {
+        "name": "ka2",
+        "model": "ddgan",
+        "z_dim": 2,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": 4,
+        "conditioning": "ucd",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 2048,
+        "total_steps": 7000,
+        "continuous_policy": null,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "actual_source_contract": {
+        "recipe": {
+          "name": "ka2",
+          "model": "ddgan",
+          "z_dim": 2,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": 4,
+          "conditioning": "ucd",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 2048,
+          "total_steps": 7000,
+          "continuous_policy": null,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "prior_reg": 0.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.5,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.2,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0,
+          "amsgrad": false,
+          "critic_r1_real": true,
+          "critic_payoff_damping": true,
+          "output_noise_mode": "fixed",
+          "lr_control": "mobility",
+          "particle_birth_death": false,
+          "row_evidence_gate": false,
+          "table_release_rule": "any",
+          "row_evidence_hot": true,
+          "row_evidence_exclude": true,
+          "row_evidence_hold": true,
+          "birth_death_space": "data",
+          "serve_average": 0.0,
+          "reopen_signal": "data",
+          "reopen_anchor": "hold",
+          "row_evidence_null": "theory",
+          "birth_death_isolation": false,
+          "birth_death_feature_scale": "none",
+          "row_policy": "independent"
+        },
+        "actual_prior": {
+          "class_name": "DrawSource",
+          "kind": "learned",
+          "parameter_shapes": {
+            "table": [
+              20000,
+              2
+            ]
+          },
+          "buffers": {}
+        },
+        "optimizers": {
+          "opt_g": {
+            "class_name": "K3PGeneratorAdam",
+            "groups": [
+              {
+                "lr": 0.00425,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              },
+              {
+                "lr": 0.0085,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              }
+            ]
+          },
+          "opt_d": {
+            "class_name": "KA2CriticAdam",
+            "groups": [
+              {
+                "lr": 0.00425,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": false,
+                "decoupled_weight_decay": false
+              }
+            ]
+          }
+        },
+        "actual_model_parameters": {
+          "g": 34946,
+          "d": 35716
+        },
+        "named_training_streams": {
+          "data": "cuda:0",
+          "time": "cuda:0",
+          "corruption": "cuda:0",
+          "latent": "cuda:0",
+          "noise": "cuda:0",
+          "penalty": "cuda:0"
+        }
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "cuda": "12.6",
+        "device": "cuda:0",
+        "visible_devices": "0",
+        "visible_gpu_count": 1,
+        "gpu_name": "NVIDIA RTX A6000",
+        "total_memory_bytes": 50896764928,
+        "cpu_threads": 1
+      },
+      "source_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_manifest_sha256": "456523beec86dc2943f84b50a503cfb0f6b31c38f982be9ad5d178b0c2371361",
+      "critical_source_sha256": {
+        "experiments/train_denoising.py": "dd4c1ac585eae3357080b4e41e8c3dfa68f419b79ad7dc387f3054a41bba5a21",
+        "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+        "configs/denoising/default.toml": "c8a707e206a51e7d6da1db29a9b6d023fd343c4371128a6b10f0bd2b49569545"
+      },
+      "observer_source_sha256": {
+        "benchmarks/toy_audit/source_cuda_observation.py": "19b49d3d984eaf083ffba6c7fd1ccd94c852bbc823d70eae1ef668d72096d1bd",
+        "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43"
+      },
+      "prefix_parity": {
+        "passed": false,
+        "compared_boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 1,
+        "matched_boundaries": [
+          0
+        ],
+        "software_updates": 6,
+        "requested_software_updates": 6,
+        "all_visible_cuda_global_and_named_rngs_included": true
+      },
+      "prefix_diagnosis": {
+        "role": "SOFTWARE_PREFIX; not a scientific quality campaign",
+        "baseline_completed_updates": 3,
+        "observed_completed_updates": 3,
+        "software_updates": 6,
+        "observation_count": 1,
+        "actual_observed_steps": [
+          1
+        ],
+        "archived_metric_stream": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-observed/raw/observations.jsonl",
+          "sha256": "912f3ed46f999d40c083fde9ab4480846348cae615e35b0e519d0e80bd8c4acf"
+        },
+        "root_mechanism": "UNRESOLVED",
+        "root_mechanism_confidence": "not established",
+        "observed_failure_class": "EXACT_SOURCE_PREFIX_DIVERGENCE_BEFORE_FIRST_OBSERVER",
+        "observed_failure_confidence": "high; archived before/after hashes and saved owner tensors agree",
+        "initial_tracked_owners_match": true,
+        "initial_owner_sha256": "5db4c260ae3bc216d6d20ad49e3a3060a02bbc19b573bd299ec64efae42711e2",
+        "first_divergent_completed_update": 1,
+        "baseline_owner_sha256": "1b77b43abaab6d439f850dca755999f158f44388046264ece6ae33f0db42c11b",
+        "observed_before_read_owner_sha256": "9e8a918cfb3ec00d7d70d8aa5624038ac29b77d0b6ee26a9f21e9e56fba524f0",
+        "observed_after_read_owner_sha256": "9e8a918cfb3ec00d7d70d8aa5624038ac29b77d0b6ee26a9f21e9e56fba524f0",
+        "independently_recomputed_checkpoint_owner_sha256": "9e8a918cfb3ec00d7d70d8aa5624038ac29b77d0b6ee26a9f21e9e56fba524f0",
+        "first_read_preserved_tracked_owners_and_rngs": true,
+        "divergence_predates_first_read": true,
+        "checkpoint": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-observed/raw/state-000.pt",
+          "sha256": "43e240e1d4beb03844a1ef213d8ceb5e62f1d4ea0917b1f736e49763c09cb9d1"
+        },
+        "cloud": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-observed/raw/cloud-000.npz",
+          "sha256": "990c33bf29638eca573cd6a5d700680ba0557d7fafbbcddd9a8ede4f00c11bec"
+        },
+        "final_generator_batch_prior_id_multiplicity": {
+          "rows": 2048,
+          "unique_rows": 1943,
+          "repeated_rows": 99,
+          "maximum_multiplicity": 3
+        },
+        "proven_cause_of_acquisition_stop": "The frozen prerequisite requires four exact state matches; only initialization matches. The full source campaign is therefore prohibited by that protocol.",
+        "causal_limit": "The first measurement cannot explain a difference already present before that measurement. This does not identify the differing owner or prove a particular CUDA kernel, source optimizer defect or omitted runtime state.",
+        "kernel_hypothesis": "Learned particle tables use indexed differentiable reads. A CUDA numerical reduction mechanism is a hypothesis, not a demonstrated cause; generator prior IDs are unique in both trajectory prefixes.",
+        "missing_artifacts": [
+          {
+            "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-baseline/raw/state-000.pt",
+            "status": "NOT_RECORDED",
+            "purpose": "Baseline first-update owner tensors or per-owner hashes are needed to locate the difference; only the aggregate baseline hash exists."
+          },
+          {
+            "status": "NOT_RECORDED",
+            "artifact": "Per-control CUDA deterministic-algorithm, backend and stream settings",
+            "purpose": "Separate numerical execution behavior from a missed non-RNG runtime setting."
+          }
+        ],
+        "bounded_next_diagnostic": "A separate bounded per-owner software control would need baseline and observed initialization/update1 tensors or subhashes plus CUDA backend/determinism/stream settings. Compare RNGs, gradients, parameters and optimizer tensors before considering an isolated kernel control. Such a control would confer no scientific qualification; these receipts do not warrant a full quality retry, changed config, new seed or weakened parity gate."
+      },
+      "software_updates": 6,
+      "imported_scientific_source_count": 24,
+      "imported_scientific_source_manifest_sha256": "ebba853c3490791d3a5ef8892d3aca24787873cfa51ec92a2ed96ac33dfbba07",
+      "observation_count": 0,
+      "final_observed_step": null,
+      "final_observed_metrics": null,
+      "terminal_suffix": {
+        "live": {
+          "passing_suffix": 0,
+          "minimum_required": 5,
+          "passed": false
+        },
+        "ema": {
+          "passing_suffix": 0,
+          "minimum_required": 5,
+          "passed": false
+        }
+      },
+      "all_captured_observer_reads_pure": null,
+      "media": null,
+      "media_receipt": null,
+      "error": "Exact source prefix owner hashes differ",
+      "last_source_error_frame": null,
+      "blocked_phase": "observer parity prerequisite",
+      "wall_cap_seconds": 120,
+      "subprocess_wall_seconds": 5.1048453859984875,
+      "hard_killed": false,
+      "worker_wall_seconds": 3.4604775980114937,
+      "wall_cap_scope": "Worker subprocess including startup and software controls; source export preparation is outside this clock.",
+      "allocator_peak_bytes": {
+        "allocated": 60122112,
+        "reserved": 100663296
+      },
+      "artifacts": {
+        "source-receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/source-receipt.json",
+          "sha256": "827bc550d6d80123b4134c448e1ac108408b1e8bdb00a5d1a6741269ca4ce431"
+        },
+        "source.tar": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/source.tar",
+          "sha256": "8d49c0cd7d9c0d3be4d82e9d784d76efb10ce70fe216a939cd8f4a5332600813"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/protocol.json",
+          "sha256": "025a1b9dba9ddd076934f273f56ccf630f467e7947fbe8a707a82bb39c46a5dd"
+        },
+        "execution.log": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/execution.log",
+          "sha256": "a19f7d60d152b1a85c4deec44d53f700501c099f8f7cf66792c9dea69c5afe99"
+        },
+        "execution-summary.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/execution-summary.json",
+          "sha256": "c43091f59102282f910f4cc89857edd20b57b6c2e1ba9fa85f7b12b3e47015f3"
+        },
+        "launcher.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/launcher.json",
+          "sha256": "cadc417dd7f123630eb46928b3fd157a151ae89d2403a08a598f85cf8607f21d"
+        },
+        "prefix-baseline/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-baseline/receipt.json",
+          "sha256": "f7a3f0de076c699ef327885d431fc9797a98a6269c4360b012031d44d7fb15b7"
+        },
+        "prefix-observed/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-observed/receipt.json",
+          "sha256": "058584630b156088cb3644f1f33173284e685e8a2dbfad80da7fe67eb45a2769"
+        },
+        "prefix-observed/raw/effective.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-03/prefix-observed/raw/effective.json",
+          "sha256": "2c7c4117aa9ebb1fc828725fd44ecb88ee206a9721b72654897cc676eac791d0"
+        }
+      },
+      "original_absolute_gate": "NONE",
+      "qualification_credit": "none",
+      "scientific_retries": 0,
+      "configuration_repairs": 0
+    },
+    {
+      "catalog_id": "source-family-04",
+      "label": "Conditional two-route trajectories, discrete geometry",
+      "name": "Conditional two-route trajectories, discrete geometry",
+      "family": "trajectory",
+      "historical_catalog_receipt_unchanged": true,
+      "original_cpu_blocker_preserved": true,
+      "fresh_execution_status": "BLOCKED",
+      "original_scientific_status": "NO_FROZEN_GATE",
+      "added_gate_status": "NO_FROZEN_GATE; full-budget quality observation BLOCKED",
+      "added_scope": "NO_FROZEN_GATE; source train/test metrics observed without invented binary acceptance",
+      "original_update_budget": 10000,
+      "completed_updates": 0,
+      "completed_count_definition": "Completed original update pairs at the following loop boundary; interrupted iteration may contain a partial update.",
+      "full_original_endpoint_complete": false,
+      "full_source_attempts": 0,
+      "source_acquisition_attempts": 1,
+      "scientific_measurement_status": "NOT_MEASURED; software prerequisite BLOCKED",
+      "config_path": "configs/trajectory/default.yaml",
+      "resolved_config": {
+        "model": "ddgan",
+        "d_mode": "ucd",
+        "prior": "learned",
+        "noise": "gaussian",
+        "geometry_mode": "discrete",
+        "d_architecture": "mlp",
+        "d_temporal_width": 64,
+        "seed": 24002,
+        "length": 64,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "z_dim": 32,
+        "num_particles": 20000,
+        "noise_particles": 1024,
+        "width": 32,
+        "d_width": 256,
+        "steps": 10000,
+        "batch_size": 128,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "noise_lr_mult": 1.0,
+        "beta1": 0.0,
+        "prior_reg": 1.0,
+        "ucd_lambda": 0.02,
+        "ema": 0.995,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 4,
+        "log_interval": 250,
+        "eval_per_context": 512,
+        "save_checkpoint": true,
+        "out_dir": "results/trajectory/default"
+      },
+      "resolved_recipe": {
+        "name": "ka2",
+        "model": "ddgan",
+        "z_dim": 32,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": 2,
+        "conditioning": "ucd",
+        "ucd_target": "time_class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "total_steps": 10000,
+        "continuous_policy": null,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 4,
+        "prior_reg": 1.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "actual_source_contract": {
+        "recipe": {
+          "name": "ka2",
+          "model": "ddgan",
+          "z_dim": 32,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": 2,
+          "conditioning": "ucd",
+          "ucd_target": "time_class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 128,
+          "total_steps": 10000,
+          "continuous_policy": null,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 4,
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.5,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.2,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0,
+          "amsgrad": false,
+          "critic_r1_real": true,
+          "critic_payoff_damping": true,
+          "output_noise_mode": "fixed",
+          "lr_control": "mobility",
+          "particle_birth_death": false,
+          "row_evidence_gate": false,
+          "table_release_rule": "any",
+          "row_evidence_hot": true,
+          "row_evidence_exclude": true,
+          "row_evidence_hold": true,
+          "birth_death_space": "data",
+          "serve_average": 0.0,
+          "reopen_signal": "data",
+          "reopen_anchor": "hold",
+          "row_evidence_null": "theory",
+          "birth_death_isolation": false,
+          "birth_death_feature_scale": "none",
+          "row_policy": "independent"
+        },
+        "actual_prior": {
+          "class_name": "DrawSource",
+          "kind": "learned",
+          "parameter_shapes": {
+            "table": [
+              20000,
+              32
+            ]
+          },
+          "buffers": {}
+        },
+        "optimizers": {
+          "opt_g": {
+            "class_name": "K3PGeneratorAdam",
+            "groups": [
+              {
+                "lr": 0.0006,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              },
+              {
+                "lr": 0.005999999999999999,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              }
+            ]
+          },
+          "opt_d": {
+            "class_name": "KA2CriticAdam",
+            "groups": [
+              {
+                "lr": 0.0009,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              }
+            ]
+          }
+        },
+        "actual_model_parameters": {
+          "g": 102402,
+          "d": 204040
+        },
+        "named_training_streams": [
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0"
+        ]
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "cuda": "12.6",
+        "device": "cuda:0",
+        "visible_devices": "0",
+        "visible_gpu_count": 1,
+        "gpu_name": "NVIDIA RTX A6000",
+        "total_memory_bytes": 50896764928,
+        "cpu_threads": 1
+      },
+      "source_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_manifest_sha256": "456523beec86dc2943f84b50a503cfb0f6b31c38f982be9ad5d178b0c2371361",
+      "critical_source_sha256": {
+        "experiments/train_trajectory.py": "3104306e308c19fa0f89941eac21b533e5663fb84c4a63e4ba35c27ce522a296",
+        "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+        "configs/trajectory/default.yaml": "6044aa4cbb97ba8a1c35c033f651f65e411676f17dbc1f8f48a0cf8332acc78c"
+      },
+      "observer_source_sha256": {
+        "benchmarks/toy_audit/source_cuda_observation.py": "19b49d3d984eaf083ffba6c7fd1ccd94c852bbc823d70eae1ef668d72096d1bd",
+        "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43"
+      },
+      "prefix_parity": {
+        "passed": false,
+        "compared_boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 1,
+        "matched_boundaries": [
+          0
+        ],
+        "software_updates": 6,
+        "requested_software_updates": 6,
+        "all_visible_cuda_global_and_named_rngs_included": true
+      },
+      "prefix_diagnosis": {
+        "role": "SOFTWARE_PREFIX; not a scientific quality campaign",
+        "baseline_completed_updates": 3,
+        "observed_completed_updates": 3,
+        "software_updates": 6,
+        "observation_count": 1,
+        "actual_observed_steps": [
+          1
+        ],
+        "archived_metric_stream": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-observed/raw/observations.jsonl",
+          "sha256": "fe76ae173f1c012a163b8fa26591ce76688c8f462e1afddf1e5380e8a818456d"
+        },
+        "root_mechanism": "UNRESOLVED",
+        "root_mechanism_confidence": "not established",
+        "observed_failure_class": "EXACT_SOURCE_PREFIX_DIVERGENCE_BEFORE_FIRST_OBSERVER",
+        "observed_failure_confidence": "high; archived before/after hashes and saved owner tensors agree",
+        "initial_tracked_owners_match": true,
+        "initial_owner_sha256": "0c8d53e67e0946155fbddf7b0d3cd647222dd6e24c17a5dc9a98ed0bcaf46ec0",
+        "first_divergent_completed_update": 1,
+        "baseline_owner_sha256": "39d44f78ea409f1b4e1235fb6b184653ea37478dd7a05e3e14fdeebb347e0fcd",
+        "observed_before_read_owner_sha256": "c264c57bcb68fccf15769aea307420abeff96e8a3448bcb998f2e1966713c7eb",
+        "observed_after_read_owner_sha256": "c264c57bcb68fccf15769aea307420abeff96e8a3448bcb998f2e1966713c7eb",
+        "independently_recomputed_checkpoint_owner_sha256": "c264c57bcb68fccf15769aea307420abeff96e8a3448bcb998f2e1966713c7eb",
+        "first_read_preserved_tracked_owners_and_rngs": true,
+        "divergence_predates_first_read": true,
+        "checkpoint": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-observed/raw/state-000.pt",
+          "sha256": "413143054f2b11953d2ea0e0649733b464c78b96d45c2f199186c60123afbd36"
+        },
+        "cloud": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-observed/raw/cloud-000.npz",
+          "sha256": "db015acf7c8b77c2ddb004ae769a02aa55754b870af9c0ed07c52cae21af3cae"
+        },
+        "final_generator_batch_prior_id_multiplicity": {
+          "rows": 128,
+          "unique_rows": 128,
+          "repeated_rows": 0,
+          "maximum_multiplicity": 1
+        },
+        "proven_cause_of_acquisition_stop": "The frozen prerequisite requires four exact state matches; only initialization matches. The full source campaign is therefore prohibited by that protocol.",
+        "causal_limit": "The first measurement cannot explain a difference already present before that measurement. This does not identify the differing owner or prove a particular CUDA kernel, source optimizer defect or omitted runtime state.",
+        "kernel_hypothesis": "Learned particle tables use indexed differentiable reads. A CUDA numerical reduction mechanism is a hypothesis, not a demonstrated cause; generator prior IDs are unique in both trajectory prefixes.",
+        "missing_artifacts": [
+          {
+            "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-baseline/raw/state-000.pt",
+            "status": "NOT_RECORDED",
+            "purpose": "Baseline first-update owner tensors or per-owner hashes are needed to locate the difference; only the aggregate baseline hash exists."
+          },
+          {
+            "status": "NOT_RECORDED",
+            "artifact": "Per-control CUDA deterministic-algorithm, backend and stream settings",
+            "purpose": "Separate numerical execution behavior from a missed non-RNG runtime setting."
+          }
+        ],
+        "bounded_next_diagnostic": "A separate bounded per-owner software control would need baseline and observed initialization/update1 tensors or subhashes plus CUDA backend/determinism/stream settings. Compare RNGs, gradients, parameters and optimizer tensors before considering an isolated kernel control. Such a control would confer no scientific qualification; these receipts do not warrant a full quality retry, changed config, new seed or weakened parity gate."
+      },
+      "software_updates": 6,
+      "imported_scientific_source_count": 25,
+      "imported_scientific_source_manifest_sha256": "b747bc24839eb18afcf7d7a157028a7621f795827ebeecf33b7bee1275d974be",
+      "observation_count": 0,
+      "final_observed_step": null,
+      "final_observed_metrics": null,
+      "terminal_suffix": null,
+      "all_captured_observer_reads_pure": null,
+      "media": null,
+      "media_receipt": null,
+      "error": "Exact source prefix owner hashes differ",
+      "last_source_error_frame": null,
+      "blocked_phase": "observer parity prerequisite",
+      "wall_cap_seconds": 120,
+      "subprocess_wall_seconds": 9.60918571590446,
+      "hard_killed": false,
+      "worker_wall_seconds": 7.567832829896361,
+      "wall_cap_scope": "Worker subprocess including startup and software controls; source export preparation is outside this clock.",
+      "allocator_peak_bytes": {
+        "allocated": 77601280,
+        "reserved": 115343360
+      },
+      "artifacts": {
+        "source-receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/source-receipt.json",
+          "sha256": "827bc550d6d80123b4134c448e1ac108408b1e8bdb00a5d1a6741269ca4ce431"
+        },
+        "source.tar": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/source.tar",
+          "sha256": "8d49c0cd7d9c0d3be4d82e9d784d76efb10ce70fe216a939cd8f4a5332600813"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/protocol.json",
+          "sha256": "161e1865f53811f350532f92462ba2c853a82ad9923b6991725e73899ed39d87"
+        },
+        "execution.log": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/execution.log",
+          "sha256": "9379a4496bed80b73442efecc09a1e7d456e4e8449fae114544bbe661565b91c"
+        },
+        "execution-summary.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/execution-summary.json",
+          "sha256": "093a0200080091ba365a6fbf56c54adf3f6d4ba99f2ba410a30d431fabb13425"
+        },
+        "launcher.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/launcher.json",
+          "sha256": "df970a9e59bb1466a3269b3be46f6687128c92f760273ed8bbec1f5a07835f4e"
+        },
+        "prefix-baseline/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-baseline/receipt.json",
+          "sha256": "99489c14c2865bcbb1c224e342248f849b43e479980caac19d0f41378ab93112"
+        },
+        "prefix-observed/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-observed/receipt.json",
+          "sha256": "9aae671682becfac252179931eadbf1d17fea5161e0295ede7c9e7b3aa656b83"
+        },
+        "prefix-observed/raw/effective.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-04/prefix-observed/raw/effective.json",
+          "sha256": "55a56b4d34584c551b40d8cd225351572872a3ee8cca73224a8bc794c3d19166"
+        }
+      },
+      "original_absolute_gate": "NONE",
+      "qualification_credit": "none",
+      "scientific_retries": 0,
+      "configuration_repairs": 0
+    },
+    {
+      "catalog_id": "source-family-05",
+      "label": "Conditional two-route trajectories, continuous geometry",
+      "name": "Conditional two-route trajectories, continuous geometry",
+      "family": "trajectory",
+      "historical_catalog_receipt_unchanged": true,
+      "original_cpu_blocker_preserved": true,
+      "fresh_execution_status": "BLOCKED",
+      "original_scientific_status": "NO_FROZEN_GATE",
+      "added_gate_status": "NO_FROZEN_GATE; full-budget quality observation BLOCKED",
+      "added_scope": "NO_FROZEN_GATE; source train/test metrics observed without invented binary acceptance",
+      "original_update_budget": 10000,
+      "completed_updates": 0,
+      "completed_count_definition": "Completed original update pairs at the following loop boundary; interrupted iteration may contain a partial update.",
+      "full_original_endpoint_complete": false,
+      "full_source_attempts": 0,
+      "source_acquisition_attempts": 1,
+      "scientific_measurement_status": "NOT_MEASURED; software prerequisite BLOCKED",
+      "config_path": "configs/trajectory/diversity/confirm_10k/mlp_continuous.yaml",
+      "resolved_config": {
+        "model": "ddgan",
+        "d_mode": "ucd",
+        "prior": "learned",
+        "noise": "gaussian",
+        "geometry_mode": "continuous",
+        "d_architecture": "mlp",
+        "d_temporal_width": 64,
+        "seed": 24002,
+        "length": 64,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "z_dim": 32,
+        "num_particles": 20000,
+        "noise_particles": 1024,
+        "width": 32,
+        "d_width": 256,
+        "steps": 10000,
+        "batch_size": 128,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "noise_lr_mult": 1.0,
+        "beta1": 0.0,
+        "prior_reg": 1.0,
+        "ucd_lambda": 0.02,
+        "ema": 0.995,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 4,
+        "log_interval": 250,
+        "eval_per_context": 512,
+        "save_checkpoint": true,
+        "out_dir": "results/trajectory/diversity/confirm_10k/mlp_continuous"
+      },
+      "resolved_recipe": {
+        "name": "ka2",
+        "model": "ddgan",
+        "z_dim": 32,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": 2,
+        "conditioning": "ucd",
+        "ucd_target": "time_class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "total_steps": 10000,
+        "continuous_policy": null,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 4,
+        "prior_reg": 1.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "actual_source_contract": {
+        "recipe": {
+          "name": "ka2",
+          "model": "ddgan",
+          "z_dim": 32,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": 2,
+          "conditioning": "ucd",
+          "ucd_target": "time_class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 128,
+          "total_steps": 10000,
+          "continuous_policy": null,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 4,
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.5,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.2,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0,
+          "amsgrad": false,
+          "critic_r1_real": true,
+          "critic_payoff_damping": true,
+          "output_noise_mode": "fixed",
+          "lr_control": "mobility",
+          "particle_birth_death": false,
+          "row_evidence_gate": false,
+          "table_release_rule": "any",
+          "row_evidence_hot": true,
+          "row_evidence_exclude": true,
+          "row_evidence_hold": true,
+          "birth_death_space": "data",
+          "serve_average": 0.0,
+          "reopen_signal": "data",
+          "reopen_anchor": "hold",
+          "row_evidence_null": "theory",
+          "birth_death_isolation": false,
+          "birth_death_feature_scale": "none",
+          "row_policy": "independent"
+        },
+        "actual_prior": {
+          "class_name": "DrawSource",
+          "kind": "learned",
+          "parameter_shapes": {
+            "table": [
+              20000,
+              32
+            ]
+          },
+          "buffers": {}
+        },
+        "optimizers": {
+          "opt_g": {
+            "class_name": "K3PGeneratorAdam",
+            "groups": [
+              {
+                "lr": 0.0006,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              },
+              {
+                "lr": 0.005999999999999999,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              }
+            ]
+          },
+          "opt_d": {
+            "class_name": "KA2CriticAdam",
+            "groups": [
+              {
+                "lr": 0.0009,
+                "betas": [
+                  0.0,
+                  0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0,
+                "amsgrad": false,
+                "maximize": false,
+                "foreach": null,
+                "capturable": false,
+                "differentiable": false,
+                "fused": true,
+                "decoupled_weight_decay": false
+              }
+            ]
+          }
+        },
+        "actual_model_parameters": {
+          "g": 102402,
+          "d": 204040
+        },
+        "named_training_streams": [
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0",
+          "cuda:0"
+        ]
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "cuda": "12.6",
+        "device": "cuda:0",
+        "visible_devices": "0",
+        "visible_gpu_count": 1,
+        "gpu_name": "NVIDIA RTX A6000",
+        "total_memory_bytes": 50896764928,
+        "cpu_threads": 1
+      },
+      "source_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_manifest_sha256": "456523beec86dc2943f84b50a503cfb0f6b31c38f982be9ad5d178b0c2371361",
+      "critical_source_sha256": {
+        "experiments/train_trajectory.py": "3104306e308c19fa0f89941eac21b533e5663fb84c4a63e4ba35c27ce522a296",
+        "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+        "configs/trajectory/diversity/confirm_10k/mlp_continuous.yaml": "9e5b0d46e4e3d143aefa96ed60cc605269fae6badd9c6c4722fa457bd536cbc8"
+      },
+      "observer_source_sha256": {
+        "benchmarks/toy_audit/source_cuda_observation.py": "19b49d3d984eaf083ffba6c7fd1ccd94c852bbc823d70eae1ef668d72096d1bd",
+        "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43"
+      },
+      "prefix_parity": {
+        "passed": false,
+        "compared_boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 1,
+        "matched_boundaries": [
+          0
+        ],
+        "software_updates": 6,
+        "requested_software_updates": 6,
+        "all_visible_cuda_global_and_named_rngs_included": true
+      },
+      "prefix_diagnosis": {
+        "role": "SOFTWARE_PREFIX; not a scientific quality campaign",
+        "baseline_completed_updates": 3,
+        "observed_completed_updates": 3,
+        "software_updates": 6,
+        "observation_count": 1,
+        "actual_observed_steps": [
+          1
+        ],
+        "archived_metric_stream": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-observed/raw/observations.jsonl",
+          "sha256": "e789af88430b4d0de2c8fe68e966da607ad3912f537a8eb96a1b8f4a14697fef"
+        },
+        "root_mechanism": "UNRESOLVED",
+        "root_mechanism_confidence": "not established",
+        "observed_failure_class": "EXACT_SOURCE_PREFIX_DIVERGENCE_BEFORE_FIRST_OBSERVER",
+        "observed_failure_confidence": "high; archived before/after hashes and saved owner tensors agree",
+        "initial_tracked_owners_match": true,
+        "initial_owner_sha256": "ababb88c98e83bce58c32495a86cc5cc5782ad16c1e9fecb644bba2b0b07f586",
+        "first_divergent_completed_update": 1,
+        "baseline_owner_sha256": "12d297943ba9871b65e05a98b18b1b4b8916e893c86c0b5b6d5f6dc4fcd7759c",
+        "observed_before_read_owner_sha256": "ceefcca33fce7ebbb64bc36bfa50c9e0ef0ea941499af2c9ab468c6f9b877afe",
+        "observed_after_read_owner_sha256": "ceefcca33fce7ebbb64bc36bfa50c9e0ef0ea941499af2c9ab468c6f9b877afe",
+        "independently_recomputed_checkpoint_owner_sha256": "ceefcca33fce7ebbb64bc36bfa50c9e0ef0ea941499af2c9ab468c6f9b877afe",
+        "first_read_preserved_tracked_owners_and_rngs": true,
+        "divergence_predates_first_read": true,
+        "checkpoint": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-observed/raw/state-000.pt",
+          "sha256": "2e520836c76627c826ed564ba039c735d6c7ecd85bfa4e1539cb6b1c87f3f341"
+        },
+        "cloud": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-observed/raw/cloud-000.npz",
+          "sha256": "ec8302f86502465c771db3e325fcc4202561a0eb81ea3573a383c39ffe070371"
+        },
+        "final_generator_batch_prior_id_multiplicity": {
+          "rows": 128,
+          "unique_rows": 128,
+          "repeated_rows": 0,
+          "maximum_multiplicity": 1
+        },
+        "proven_cause_of_acquisition_stop": "The frozen prerequisite requires four exact state matches; only initialization matches. The full source campaign is therefore prohibited by that protocol.",
+        "causal_limit": "The first measurement cannot explain a difference already present before that measurement. This does not identify the differing owner or prove a particular CUDA kernel, source optimizer defect or omitted runtime state.",
+        "kernel_hypothesis": "Learned particle tables use indexed differentiable reads. A CUDA numerical reduction mechanism is a hypothesis, not a demonstrated cause; generator prior IDs are unique in both trajectory prefixes.",
+        "missing_artifacts": [
+          {
+            "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-baseline/raw/state-000.pt",
+            "status": "NOT_RECORDED",
+            "purpose": "Baseline first-update owner tensors or per-owner hashes are needed to locate the difference; only the aggregate baseline hash exists."
+          },
+          {
+            "status": "NOT_RECORDED",
+            "artifact": "Per-control CUDA deterministic-algorithm, backend and stream settings",
+            "purpose": "Separate numerical execution behavior from a missed non-RNG runtime setting."
+          }
+        ],
+        "bounded_next_diagnostic": "A separate bounded per-owner software control would need baseline and observed initialization/update1 tensors or subhashes plus CUDA backend/determinism/stream settings. Compare RNGs, gradients, parameters and optimizer tensors before considering an isolated kernel control. Such a control would confer no scientific qualification; these receipts do not warrant a full quality retry, changed config, new seed or weakened parity gate."
+      },
+      "software_updates": 6,
+      "imported_scientific_source_count": 25,
+      "imported_scientific_source_manifest_sha256": "b747bc24839eb18afcf7d7a157028a7621f795827ebeecf33b7bee1275d974be",
+      "observation_count": 0,
+      "final_observed_step": null,
+      "final_observed_metrics": null,
+      "terminal_suffix": null,
+      "all_captured_observer_reads_pure": null,
+      "media": null,
+      "media_receipt": null,
+      "error": "Exact source prefix owner hashes differ",
+      "last_source_error_frame": null,
+      "blocked_phase": "observer parity prerequisite",
+      "wall_cap_seconds": 120,
+      "subprocess_wall_seconds": 6.906119258143008,
+      "hard_killed": false,
+      "worker_wall_seconds": 5.223627761006355,
+      "wall_cap_scope": "Worker subprocess including startup and software controls; source export preparation is outside this clock.",
+      "allocator_peak_bytes": {
+        "allocated": 77601280,
+        "reserved": 115343360
+      },
+      "artifacts": {
+        "source-receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/source-receipt.json",
+          "sha256": "827bc550d6d80123b4134c448e1ac108408b1e8bdb00a5d1a6741269ca4ce431"
+        },
+        "source.tar": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/source.tar",
+          "sha256": "8d49c0cd7d9c0d3be4d82e9d784d76efb10ce70fe216a939cd8f4a5332600813"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/protocol.json",
+          "sha256": "9821ab74a91a4f4a10026c4475346aece25d24ee1a72b205a32b12e3b68b5055"
+        },
+        "execution.log": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/execution.log",
+          "sha256": "a45a2601dac9ffefd69461737a5e2084d260aa3f4dbcdcd5c186dc7b4cf21e67"
+        },
+        "execution-summary.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/execution-summary.json",
+          "sha256": "3bbc478d3feae84a62cfb1e7bef75e1c98a375526f2bfd0db16c5b36cb8bae50"
+        },
+        "launcher.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/launcher.json",
+          "sha256": "0860e801fca4f27485919ffbe751063849f90ceb21968ed83da4aa7f8e09b763"
+        },
+        "prefix-baseline/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-baseline/receipt.json",
+          "sha256": "059792cd2cfa10ea724b122357dc0b9eaea33007c5490c0c0cd66ee818cdfc1c"
+        },
+        "prefix-observed/receipt.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-observed/receipt.json",
+          "sha256": "783e5e0a537b74a488e9603efcb758ccbb6927e358cbd99fdb96ea0796d93916"
+        },
+        "prefix-observed/raw/effective.json": {
+          "path": "/ml2/hypergan/toy-source-cuda-observation-20261001/source-family-05/prefix-observed/raw/effective.json",
+          "sha256": "55a56b4d34584c551b40d8cd225351572872a3ee8cca73224a8bc794c3d19166"
+        }
+      },
+      "original_absolute_gate": "NONE",
+      "qualification_credit": "none",
+      "scientific_retries": 0,
+      "configuration_repairs": 0
+    }
+  ],
+  "full_metric_streams_in_git": false,
+  "coverage_catalog_ids": [
+    "source-family-02",
+    "source-family-03",
+    "source-family-04",
+    "source-family-05"
+  ],
+  "scientific_quality_media_count": 0,
+  "total_software_updates": 24,
+  "total_full_source_attempts": 0,
+  "software_controls": {
+    "status": "PASS",
+    "passed": 9,
+    "elapsed_seconds": 1.78,
+    "artifact": {
+      "path": "/ml2/hypergan/toy-audit-source-cuda-observer-software-tests-final.log",
+      "sha256": "b4bd26bd563933d9a7e0776a0a61000efc07c337d34965cfd807ce1d437df049"
+    },
+    "scope": "RNG/mode/gradient/owner/import controls and a small separate prefix fixture; this supplies no source convergence result."
+  },
+  "qualification_credit": "none",
+  "report_generator_sha256": "5c20f6ac86fe06c81f3d0f3c70961461df28e772052d911525e426b8db44c3aa",
+  "total_subprocess_wall_seconds": 27.926017235033214,
+  "total_worker_wall_seconds": 20.795489015756175,
+  "limitation": "Scientific quality PASS is distinct from completed execution. Original source endpoints have no frozen aggregate acceptance gate. Added denoising gate covers only the declared single clean posterior, and requires the full original endpoint plus five terminal checks."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "gaussian-smoke-tier-split-v1",
+  "qualification_input": false,
+  "base_commit": "d91c8d867b06435e79c25f65cf46754e8eabbe69",
+  "implementation_commit": "402b49e10f4d7cd73fbb32c07071828b57719ff9",
+  "executed_diagnostic_commit": "7b55d06bb2a8671220e20945598713ae456e84cd",
+  "protocol_sha256": "d32faa4da89855a4d0b6929f919bdc9bcbafecad7ff51599b95441becbb5c07a",
+  "results_sha256": "8412763d4b3a626d264eae1498f44084c29a4a1b8ced7d62cfc2eae3f03335de",
+  "archive": {
+    "path": "artifacts/gaussian-smoke-tier-split-v1.tar.gz",
+    "sha256": "29f4886e32aa150bd88a688a3c5cf859b1e127818b39acb8a459f189c197ff96",
+    "bytes": 224325
+  },
+  "budget": {
+    "new_training_updates": 0,
+    "new_confirmation_draws": 1,
+    "max_gpu_seconds": 120,
+    "retries": 0
+  },
+  "validation": {
+    "gaussian_contract_checks": 22,
+    "neural_contract_execution": "CUDA",
+    "focused_forge_regression_checks": 93,
+    "scorer_control_checks": 1,
+    "exact_saved_training_state": true
+  },
+  "qualification": "No ordinary qualification; original acquisition FAIL unchanged.",
+  "numerical_loop_seconds": null,
+  "loop_duration_gap": "Receipt serialization error after the saved draw; no speed comparison.",
+  "source_recall_compilation": "Parent integration owns final catalog/memory/current-inventory refresh."
+}

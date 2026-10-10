@@ -98,7 +98,7 @@ tested formulations. P1's historical staggered100 seed 1235 remains a failure;
   files in each frozen runtime. Candidate and harness source hashes are in the
   manifest. Checkpoints/logs and the referenced runtimes/fixtures remain local;
   these report files do not package a portable Python/CUDA environment.
-- [`progress.jsonl`](progress.jsonl): completed launch/verdict timeline, GPU
+- [`progress.jsonl`](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/gap-fill-20260925/progress.jsonl): completed launch/verdict timeline, GPU
   assignments and PIDs. The runner reached 12 simultaneous jobs. The batch
   completed in about nine minutes; concurrent runtime is not a model metric.
 - [`audit.json`](audit.json): all 53 exit codes and result snapshots checked,

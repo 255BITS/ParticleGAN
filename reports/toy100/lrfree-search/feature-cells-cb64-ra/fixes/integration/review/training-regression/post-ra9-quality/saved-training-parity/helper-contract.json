@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "unchanged_original_comparator_AST_functions": [
+    "sha",
+    "tensor_bytes",
+    "digest",
+    "describe",
+    "differences"
+  ],
+  "focused_allowlist_controls": 3,
+  "original_comparator_sha256": "39f9793474f98703e0d556ecbee7b2dae9d3e7c1d11932f476ee951c3b71e97c",
+  "RA9_numerical_checkpoints_read": 0,
+  "CPU_only": true,
+  "cuda_initialized": false,
+  "new_training_steps": 0,
+  "new_emissions": 0,
+  "numerical_replay": false,
+  "quality_verdict": null,
+  "completed_utc": "2026-09-30T09:18:40.056397+00:00"
+}

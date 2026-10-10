@@ -1,0 +1,11 @@
+{
+  "status": "READY",
+  "lane_source_sha256": {
+    "candidate-options.json": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+    "collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "lane.py": "a2c3b374a2757aca6f27be0237202fb414b7532c707c0f2fa4f58b64fd343bf5",
+    "run_screen.py": "884a30d988ee345642c07f0c97e7a114fbd1e28e6012077a73c07d518af88193",
+    "source-freeze.json": "329e61941685a35007ab514f59b779f5cf5870fdc2d73cf475dc85eab5e3c681"
+  },
+  "source_freeze_sha256": "329e61941685a35007ab514f59b779f5cf5870fdc2d73cf475dc85eab5e3c681"
+}

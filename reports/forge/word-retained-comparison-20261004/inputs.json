@@ -1,0 +1,27 @@
+{
+  "new_publication_index": {
+    "bytes": 915617,
+    "path": "/ml2/hypergan/pg-word-half-base-current-gpu-20261004-v1/publication-v1/input-index.json",
+    "sha256": "f2a2a26eafbc2c9eaeaf57850ae80f15c13cf090506a21b46abd05f1588046de"
+  },
+  "new_publication_results": {
+    "bytes": 12453,
+    "path": "/ml2/hypergan/pg-word-half-base-current-gpu-20261004-v1/publication-v1/results.json",
+    "sha256": "d2bc198d65c935ca31160505510b8efc7aa2cf9e5f62ac6429f758173e7ca8b7"
+  },
+  "new_terminal_card": {
+    "bytes": 4051,
+    "path": "/ml2/hypergan/pg-word-half-base-current-gpu-20261004-v1/terminal-publication-card.json",
+    "sha256": "bebd5cc7e5580df7decceea6f5f7e7ca8e0d449a96732d0f26020bdc8be7b814"
+  },
+  "old_goal_analysis": {
+    "bytes": 107003,
+    "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-word-goal-diagnosis-20261004/analysis.json",
+    "sha256": "bbb53358b3288dd44c1591aab4c7d449ccac934e3c0ff8b451468926f2744c9f"
+  },
+  "old_law_review": {
+    "bytes": 43160,
+    "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-word-joint-law-review-20261004/review.json",
+    "sha256": "d82ce66dcb84b4bbf262e744dc16de0b7442760aba0a1bbe28d1a35b8ebf2624"
+  }
+}

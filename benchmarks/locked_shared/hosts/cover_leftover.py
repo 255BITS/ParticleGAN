@@ -14,6 +14,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -128,7 +129,9 @@ class _FourierCritic(nn.Module):
     def __init__(self, dim: int, *, n_rand: int, hidden: int, seed: int) -> None:
         super().__init__()
         gen = torch.Generator().manual_seed(int(seed) + 17)
-        bank = 2.0 * torch.randn(int(n_rand), int(dim), generator=gen)
+        # The fixed feature fixture keeps its historical CPU-generated values;
+        # model evaluation and optimization follow the requested host device.
+        bank = (2.0 * torch.randn(int(n_rand), int(dim), generator=gen, device="cpu")).to(torch.get_default_device())
         self.register_buffer("bank", bank)
         feat = 4 * int(dim) + 2 * int(n_rand)
         self.net = nn.Sequential(
@@ -378,7 +381,7 @@ def _log(handle, message: str) -> None:
 
 
 def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None,
-                       noise_policy=None) -> dict:
+                       noise_policy=None, components=None) -> dict:
     """Train one arm. Returns the EMA residual score plus recipe pins."""
     field = field or LeftoverField()
     torch.manual_seed(recipe.seed)
@@ -423,6 +426,9 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
     opt_d = torch.optim.Adam(critic.parameters(), lr=lr, betas=betas)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, penalty = components.bind(
+            generator=residual, critic=critic, priors=[prior_p, prior_m], opt_g=opt_g, opt_d=opt_d)
     ema = _EMA(generator_params, decay=float(recipe.knob("ema")))
     poles_p, poles_m, neu = teacher_poles(field, recipe.knob("teacher"))
     half = max(1, int(recipe.knob("batch")) // 2)
@@ -489,6 +495,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         if noise_policy is not None:
             fake = noise_policy.output(fake, generator_step=True)
         g_loss = gan.g_loss(critic(fake), critic(real.detach()))
+        protected_adversarial = g_loss
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
         g_loss = g_loss + spread(parts)
         if particle_l2 > 0.0:
@@ -497,12 +504,35 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
             cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
             cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
             g_loss = g_loss + cover_w * cover
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, fake, real)
+        def protected_evaluator():
+            current_p = neu + residual.delta(1.0) + prior_p.z[rows_p] + jitter_p
+            current_m = neu + residual.delta(-1.0) + prior_m.z[rows_m] + jitter_m
+            adversarial = gan.g_loss(critic(torch.cat([current_p, current_m])), critic(real.detach()))
+            paired = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
+            paired = paired + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
+            return (adversarial, paired) if cover_w > 0.0 else (adversarial,)
+        if components is not None and components.recipe.constraint_geometry_mode == "strict_progress":
+            # Reuse the exact consumed row indices and jitter, while allowing
+            # both learned tables to move during a finite replay.
+            rows_p = components.sampled_prior_rows[prior_p.z]
+            rows_m = components.sampled_prior_rows[prior_m.z]
+            jitter_p = (fake_p - neu - residual.delta(1.0) - prior_p.z[rows_p]).detach()
+            jitter_m = (fake_m - neu - residual.delta(-1.0) - prior_m.z[rows_m]).detach()
         opt_g.zero_grad()
-        g_loss.backward()
+        protected = (protected_adversarial, cover) if cover_w > 0.0 else (protected_adversarial,)
+        constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         ema.update(generator_params)
-        checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
+        def observe_geometry():
+            metrics = score_geometry(residual, field, poles_p, poles_m, neu)
+            if components is not None:
+                components.constraint_geometry_capture(step + 1, torch.stack([poles_p, poles_m]),
+                    torch.stack([neu + residual.delta(1.0), neu + residual.delta(-1.0)]), metrics, kind="line")
+            return metrics
+        checkpoint(step + 1, observe_geometry)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:
             live = score_geometry(residual, field, poles_p, poles_m, neu)

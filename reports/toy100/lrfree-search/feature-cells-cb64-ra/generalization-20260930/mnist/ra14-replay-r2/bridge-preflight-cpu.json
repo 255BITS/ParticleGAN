@@ -1,0 +1,26 @@
+{
+  "status": "PASS_ZERO_UPDATE_SOURCE_CHECKPOINT_BRIDGE",
+  "fixtures": {
+    "toy": {
+      "checkpoint_sha256": "4388d45f7e157cca89a3b1b035757c6b1264ae11e86e217208b6b62a9a1db884",
+      "completed_steps": 1000,
+      "real_stream_cursor": 256000,
+      "source_recipe_matches_candidate": true,
+      "original_table_displacement_alias_preserved_on_cpu_read": true
+    },
+    "mnist": {
+      "checkpoint_sha256": "e19d6b656d18c62d73b19d5454ef059054ce3f086cd90cb9bb983488b3069491",
+      "completed_steps": 1000,
+      "real_stream_cursor": 256000,
+      "source_recipe_matches_candidate": true,
+      "original_table_displacement_alias_preserved_on_cpu_read": true
+    }
+  },
+  "training_updates": 0,
+  "begin_step_calls": 0,
+  "model_forwards": 0,
+  "sampling_calls": 0,
+  "global_rng_unchanged": true,
+  "cuda_context_initialized": false,
+  "restoration_bridge_sha256": "3e62f776b3be351d067915315951db640fec73e002f62c99bf6b73284707964e"
+}

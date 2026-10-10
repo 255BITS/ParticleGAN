@@ -1,0 +1,37 @@
+{
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "study_id": "bcap-convolution-images-v1",
+  "tasks": [
+    {
+      "gif": "img_stripes2.gif",
+      "gif_sha256": "94e92257c02b46dff0b0d7d87ccfb40692894d409ee806d4a55215c5e93a4748",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "img_stripes2.json",
+      "task_id": "img_stripes2"
+    },
+    {
+      "gif": "img_bars4.gif",
+      "gif_sha256": "d8bb8ff53259d33489c1937393e6548c5a6f18636524f575b71591c14aa81fb7",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "img_bars4.json",
+      "task_id": "img_bars4"
+    },
+    {
+      "gif": "img_blobs4.gif",
+      "gif_sha256": "4f87f986289905ac02e7e60fa16d9775f9e229b690fd5ad53c648b3474b1e251",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "img_blobs4.json",
+      "task_id": "img_blobs4"
+    },
+    {
+      "gif": "img_intensity2.gif",
+      "gif_sha256": "ae376e62f64e4275f697a954c721138458ab1d550465f0178b95a2f0a3112166",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "img_intensity2.json",
+      "task_id": "img_intensity2"
+    }
+  ]
+}

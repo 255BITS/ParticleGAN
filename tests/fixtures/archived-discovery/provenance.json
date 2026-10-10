@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "scope": "Original discovery bytes for archived coordinator software tests; no training or qualification credit",
+  "files": {
+    "configs/forge/tasks/ring16_acquisition.json": {
+      "fixture": "ring16_acquisition.json",
+      "sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+      "git_blob": "a7cd07f131a10420539ac2d653f73639eb73e35a",
+      "source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+      "also_bound_source_commit": "488b792e2fb875894f017cf7043420f2bb66190f"
+    }
+  }
+}

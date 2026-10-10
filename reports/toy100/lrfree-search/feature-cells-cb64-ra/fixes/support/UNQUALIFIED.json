@@ -1,0 +1,22 @@
+{
+  "status": "UNQUALIFIED_RESEARCH",
+  "source_merged": false,
+  "gpu_execution_authorized_to_this_lane": false,
+  "gpu_executions": 0,
+  "ready_for_integration": false,
+  "private_pkg_scope": "rejected prediction-only diagnostic experiment",
+  "rejected_patch": "SUPPORT-SCORE.diff",
+  "final_actual_anchor_posterior_detector_passed": 14,
+  "final_actual_anchor_posterior_detector_total": 18,
+  "remaining_failures": [
+    "trained geometry N2048: supported rare row1745 falsely flagged",
+    "frozen geometry N4096:11 bulk false positives exceed unchanged FPR gate",
+    "cost nominal N1024: zero recall",
+    "cost highdim N1024: zero recall"
+  ],
+  "additional_observation": "cost rare_hole N2048 falsely flags two supported rare rows even though its original cost detector gate passes",
+  "report": "REPORT.md",
+  "leaderboard": "LEADERBOARD.md",
+  "results": "results.json",
+  "artifact_manifest": "manifest.json"
+}

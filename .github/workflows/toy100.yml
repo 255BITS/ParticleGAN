@@ -1,8 +1,8 @@
-name: Shared-recipe 22-toy trained gate
+name: Legacy BCap served-sample 22-toy gate
 
 on:
   push:
-    branches: [master, main, develop]
+    branches: [master]
     paths:
       - "benchmarks/toy100/**"
       - "benchmarks/toy_suite.py"
@@ -24,13 +24,13 @@ permissions:
 
 jobs:
   trained-gate:
-    name: CPU / Python 3.11 / one recipe across all 22 toys
-    # Train only merged primary-branch code, including manual dispatches.
+    name: CPU / Python 3.11 / BCap with original output-noise sampling
+    # Train only master code, including manual dispatches.
     if: >-
       github.event_name != 'pull_request' &&
-      contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref)
+      github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     env:
       CUDA_VISIBLE_DEVICES: ""
       OMP_NUM_THREADS: "1"
@@ -42,6 +42,9 @@ jobs:
       ONEDNN_MAX_CPU_ISA: AVX2
       DNNL_MAX_CPU_ISA: AVX2
       MKL_ENABLE_INSTRUCTIONS: AVX2
+      # ISA caps alone do not select identical BLAS arithmetic across Intel
+      # and AMD hosts. This is the explicit portable CPU profile, revision 2.
+      MKL_CBWR: COMPATIBLE
       MPLBACKEND: Agg
       PYTHONUNBUFFERED: "1"
     steps:
@@ -60,11 +63,22 @@ jobs:
       - name: Record the CPU dispatch profile
         run: |
           python - <<'PY'
-          import os
+          import json, os, platform
+          from pathlib import Path
           import torch
           keys = ("ATEN_CPU_CAPABILITY", "ONEDNN_MAX_CPU_ISA",
-                  "DNNL_MAX_CPU_ISA", "MKL_ENABLE_INSTRUCTIONS")
-          print({key: os.environ[key] for key in keys})
+                  "DNNL_MAX_CPU_ISA", "MKL_ENABLE_INSTRUCTIONS", "MKL_CBWR")
+          cpu = {}
+          for line in Path("/proc/cpuinfo").read_text().splitlines():
+              if ":" in line:
+                  key, value = [item.strip() for item in line.split(":", 1)]
+                  if key in ("vendor_id", "model name", "cpu family", "model", "stepping"):
+                      cpu.setdefault(key, value)
+          profile = {"id": "portable-cpu-blas-v2", "dispatch": {key: os.environ[key] for key in keys},
+                     "cpu": cpu, "platform": platform.platform(), "torch": str(torch.__version__),
+                     "python": platform.python_version(), "torch_build": torch.__config__.show()}
+          Path("cpu-runtime-profile.json").write_text(json.dumps(profile, indent=2) + "\n")
+          print(profile)
           print(torch.__config__.show())
           assert torch.backends.cpu.get_cpu_capability() == "AVX2"
           PY
@@ -74,7 +88,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python -u -m benchmarks.toy_suite run --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
+          python -u -m benchmarks.toy_suite run --config configs/toy100/constraints_simple_regularization.json --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
       - name: Upload gate evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -82,5 +96,6 @@ jobs:
           name: common22-trained-gate
           path: |
             toy-suite-ci.log
+            cpu-runtime-profile.json
             artifacts/toy-suite-ci/
           if-no-files-found: warn

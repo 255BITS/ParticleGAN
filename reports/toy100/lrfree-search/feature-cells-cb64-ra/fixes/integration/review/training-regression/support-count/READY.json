@@ -1,0 +1,113 @@
+{
+  "status": "FROZEN_CPU_PARTITION_NULL_AND_ACTION_PASS_GPU_QUALITY_PENDING",
+  "created_at": "2026-09-30T01:28:08.516715+00:00",
+  "base_package": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/pkg-count-recovery",
+  "base_ready_sha256": "4fa88ff24eed095892c6ecb65c612eca1fb8b4c7041aac73c2850adb6e015788",
+  "changed_package_files": [
+    "particlegan/feature_cells.py"
+  ],
+  "package_source_sha256": {
+    "particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "particlegan/feature_cells.py": "a2be31d6dd4457dc9e35b9d19dacefe579faaf1601d50329699079e1f9de1dd9",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "particlegan/training.py": "28f6cc3f01308829531d4fab655db4cfd1870354d9c81f9374175a8b324088d9",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "local_source_sha256": {
+    "PROTOCOL.md": "3b2da0af038d59fc0435296f07330f3fd9850cfb17872701c5d64afe12c9260d",
+    "REPORT.md": "7c1eeee1b419d2020c2470805bd61f644ec3902815a5590a782e67c677a88695",
+    "SUPPORT-COUNT.patch": "8ecbc1ec14e46acee1f0f897b5d0b870f266a0d3ba9ef45637ca5b916a8e8a9e",
+    "cpu_check.py": "61fe1ccc59e2d1238a48d75b1a7a33e83e95b3fbb64f1f18c4648234d2213227"
+  },
+  "evidence_sha256": {
+    "cpu-check.json": "1139929956059b73aa19476214f3a8cc3d1c254e525b1a1baf4fcb9b6b50f888",
+    "cpu-check.log": "a5eadac35ae866369bd7b473d2cb902c58cebdfd2674c5ba79fbecb94fba25ca",
+    "cpu-check-attempt1.json": "69af161d4a28717b614e11762f25f500b4a621134c3726199eca56ee9946aa1e",
+    "cpu-check-attempt1.log": "45f5128be04dd14e9201edce3c092eec664eea725953a185f320644d9566d66a"
+  },
+  "external_evidence_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-1000.pt": "6c6dac149ce7b77b835366c1a5944848d3754dd1b8adde583aa6ac29e276b62a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-2000.pt": "62933fd05bdd7168370b9f2b5d28a9437f906cc54249c99de8acf20132294911",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/count-review.json": "939e69b12f6daca86ee402e3fc41408b8b30b9157d041a6f4a4d6bd5a4359ef8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_counts.py": "7c6f2eec9923f3b4c65348109d6134503b625cc13f359bd6726fd0409d5251d8"
+  },
+  "mass_policy": "even_fit_support_categories_unique_parents_v1",
+  "partition_rule": "2*nearest_cell + (unchanged_score > even_fit_empirical_1-Q_order_statistic)",
+  "boundary_fitting_rows": "even real only, before consuming odd calibration",
+  "multiplicity": "all2K categories, including empty",
+  "cutoff": "Q/(2K)",
+  "count_family": "replaces originalK family",
+  "q": 0.05,
+  "unchanged_functions": [
+    "conditional_count_pvalues",
+    "support",
+    "_scores_metric",
+    "_mass_targets",
+    "_mass_topology",
+    "_pool",
+    "_integer_allocate",
+    "population_policy",
+    "refresh_rows",
+    "cache_queries"
+  ],
+  "original_support_law_unchanged": true,
+  "ordinary_donors": "flagged outside only with outside excess certificate",
+  "ordinary_parents": "inside unflagged p>Q with inside deficit certificate",
+  "ordinary_budget": "floor(Q*N)",
+  "combined_budget": "<=floor(Q*N) because ordinary deaths are flagged; passing isolation guard retains original flagged subset",
+  "quality_gates_unchanged": true,
+  "seed_experiments": false,
+  "cpu_only": true,
+  "cpu_tests": 7,
+  "independent_audit_status": "PASS",
+  "saved_snapshot_response": [
+    {
+      "step": 1000,
+      "v4_moves": 4,
+      "proposal_moves": 25,
+      "discoveries": 27,
+      "supported_deaths": 0,
+      "unique_parents": 25
+    },
+    {
+      "step": 2000,
+      "v4_moves": 4,
+      "proposal_moves": 32,
+      "discoveries": 19,
+      "supported_deaths": 0,
+      "unique_parents": 32
+    }
+  ],
+  "scope": "Fixed partition conditional-null and action-accounting CPU qualification; no learned-quality conclusion",
+  "integration_status": "Private separate proposal; exclude from conservativeRA3",
+  "known_remaining": [
+    "root-only CUDA/fixed-input qualification",
+    "canonical matched toy/MNIST/replay quality",
+    "even in-sample boundary is not odd conformal eligibility",
+    "adaptive learned head/FIFO has no cumulative null guarantee",
+    "pure supported categorical imbalance has no ordinary donor in this replacement law",
+    "existing rare support-score false positives remain"
+  ]
+}

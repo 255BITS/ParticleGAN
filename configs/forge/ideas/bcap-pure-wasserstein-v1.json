@@ -1,0 +1,97 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Native Adam and fixed BCAP only",
+    "Constant rates and moments; zero additive training noise",
+    "Adversarial loss: wasserstein"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "decision_contract": {
+    "candidate_binding_sha256": "TODO",
+    "competing_explanation": "TODO: state the alternative explanation this observation distinguishes",
+    "control": {
+      "binding_sha256": "TODO",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "TODO",
+      "op": "<",
+      "phase": "final",
+      "task_id": "TODO",
+      "threshold": 0.0
+    },
+    "prediction": {
+      "metric": "TODO",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "TODO",
+      "threshold": 0.0
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "record_id": "TODO"
+        },
+        "path": "TODO: source-bound JSON",
+        "selector": [],
+        "sha256": "TODO",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 900,
+      "candidate_budget_seconds": 900,
+      "execution_backend": "cuda",
+      "jobs_sha256": "TODO",
+      "max_rounds": 1,
+      "protocol_sha256": "TODO",
+      "runtime_cohort_sha256": "TODO",
+      "source_digest": "TODO",
+      "task_ids": [],
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    "status": "draft",
+    "substantive_delta": [],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Pure BCAP with wasserstein loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+  "id": "bcap-pure-wasserstein-v1",
+  "lifecycle": "proposed",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+  "parent": "k3p-bcap-matched-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "k3p-bcap-matched-v1"
+  ],
+  "recipe_overrides": {
+    "loss": "wasserstein"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 2
+}

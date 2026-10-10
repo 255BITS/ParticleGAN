@@ -1,0 +1,344 @@
+"""Resolve small idea declarations to frozen scientific requests, without running."""
+from __future__ import annotations
+
+from copy import deepcopy
+from dataclasses import asdict
+from pathlib import Path
+
+from .contracts import atomic_json, identifier, read_json, stable_hash, validate_idea
+from .sampling import candidate_blockers
+from .execution_policy import DEFAULT as DEFAULT_EXECUTION_POLICY, group_blockers, policy
+from .preflight import task_preflight
+from .priors import task_prior
+from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
+from .views import (load_tasks, load_view, task_evaluation_fingerprint,
+                    task_execution_fingerprint, validate_view, view_fingerprint)
+
+FORMULATION_FIELDS = ("recipe_preset", "recipe_overrides", "prior", "extensions", "requires_capabilities",
+                      "api_changes", "implementation", "initializer", "claim_contract")
+
+
+
+def candidate_revision_for(source_digest: str, candidate: dict) -> str:
+    """Identity of an already resolved formulation, independent of its label.
+
+    Keep the field selection in one place for planning and frozen-request
+    validation. Callers at execution boundaries must first reconstruct and
+    validate resolved_recipe from the actual public formulation declaration.
+    """
+    formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
+    # Preserve identities of existing declarations with no adaptation contract.
+    if candidate.get("host_adaptation") is not None:
+        formulation["host_adaptation"] = candidate["host_adaptation"]
+    formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
+                       api_version=candidate.get("api_version", "forge-api-v1"))
+    return stable_hash({"source": source_digest, "formulation": formulation})
+
+
+def rekey_jobs(jobs):
+    """Rebind complete prerequisite identities after a protocol or lane change."""
+    by_task = {member: job for job in jobs for member in job.get("task_ids", [job["task_id"]])}
+    bound, visiting = set(), set()
+    def bind(job):
+        group = job.get("execution_group", job["task_id"])
+        if group in bound:
+            return job["compatibility_key"]
+        if group in visiting:
+            raise ValueError("cyclic execution-group prerequisites")
+        visiting.add(group)
+        parents = job["science"].get("prerequisites", {})
+        if parents:
+            job["science"]["prerequisites"] = {name: bind(by_task[name]) for name in sorted(parents)}
+        job["compatibility_key"] = stable_hash(job["science"])
+        visiting.remove(group)
+        bound.add(group)
+        return job["compatibility_key"]
+    for job in jobs:
+        bind(job)
+    return jobs
+
+
+def declaration_paths(root: Path) -> list[Path]:
+    """Ordinary ideas and immutable configurations share the same planner."""
+    paths = sorted(path for directory in ("ideas", "configurations")
+                   for path in (Path(root) / "configs/forge" / directory).glob("*.json"))
+    if len({path.stem for path in paths}) != len(paths):
+        raise ValueError("candidate ids must be unique across ideas and configurations")
+    return paths
+
+
+def discover_candidate_ids(root: Path) -> list[str]:
+    return sorted(path.stem for path in declaration_paths(root))
+
+
+def load_idea(root: Path, idea_id: str) -> dict:
+    identifier(idea_id, "idea")
+    matches = [path for path in declaration_paths(root) if path.stem == idea_id]
+    if not matches:
+        raise FileNotFoundError(f"no declared candidate: {idea_id}")
+    path = matches[0]
+    idea = read_json(path)
+    validate_idea(idea)
+    if idea["id"] != idea_id:
+        raise ValueError("idea filename must match id")
+    if path.parent.name == "configurations":
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(idea, root=root)
+    return idea
+
+
+def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stability", hypothesis=None,
+             study_id=None) -> Path:
+    identifier(idea_id, "idea")
+    path = Path(root) / "configs/forge/ideas" / f"{idea_id}.json"
+    if path.exists():
+        raise ValueError(f"idea already exists: {path}")
+    inherited = load_idea(root, parent)
+    idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
+    if "host_adaptation" in inherited:
+        idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
+    idea.pop("prior", None)  # Priors are task conditions, not reusable recipes.
+    from .boundaries import TASK_RECIPE_FIELDS
+    idea["recipe_overrides"] = {key: value for key, value in idea.get("recipe_overrides", {}).items()
+                                if key not in TASK_RECIPE_FIELDS}
+    if "host_adaptation" in idea:
+        fields = [key for key in idea["host_adaptation"]["recipe_fields"] if key not in TASK_RECIPE_FIELDS]
+        if fields:
+            idea["host_adaptation"]["recipe_fields"] = fields
+        else:
+            idea.pop("host_adaptation")
+    from .studies import scaffold, study_path
+    study = scaffold(study_id or f"{idea_id}-study", idea_id, parent, goal, hypothesis=hypothesis)
+    if study_path(root, study["id"]).exists():
+        raise ValueError("study already exists")
+    idea.update(schema_version=3, id=idea_id, parent=parent,
+                changed_factors=["TODO: describe the substantive change before enqueue"],
+                mechanism_class=inherited.get("mechanism_class", "structural"),
+                mechanism_rationale="TODO: explain structural, constant/floor or sampling-only change",
+                api_version="forge-api-v1", execution_path="public_trainer",
+                prior_art=[parent], guide="EXPERIMENTATION.md")
+    validate_idea(idea)
+    atomic_json(path, idea)
+    atomic_json(study_path(root, study["id"]), study)
+    return path
+
+
+def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
+                 through_tier: int | None = None, queue_root: Path | None = None,
+                 freeze_source: bool = False, execution_backend: str | None = None,
+                 cuda_model: str | None = None, declaration: dict | None = None,
+                 study=None) -> dict:
+    """Tier placement never enters candidate/task compatibility keys."""
+    root = Path(root).resolve()
+    idea = load_idea(root, idea_id) if declaration is None else deepcopy(declaration)
+    validate_idea(idea)
+    if idea["id"] != idea_id:
+        raise ValueError("declaration id must match requested candidate")
+    if declaration is not None and "configuration_id" in idea:
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(idea, root=root)
+    if study is not None:
+        from .studies import load_study
+        study = load_study(root, study)
+        if study["candidate"] != idea_id:
+            raise ValueError("study selects a different candidate")
+        if "decision_contract" in idea:
+            raise ValueError("legacy embedded decision_contract cannot be replaced by a study; declare a v3 successor")
+        for supplied, expected in ((view_id, study["scope"]["view"]),
+                                   (through_tier, study["scope"]["through_tier"]),
+                                   (execution_backend, study["scope"]["execution_backend"]),
+                                   (cuda_model, study["scope"].get("cuda_model"))):
+            if supplied is not None and supplied != expected:
+                raise ValueError("requested view/tier/backend/model differs from study scope")
+        view_id, through_tier, execution_backend = (study["scope"][key] for key in
+                                                   ("view", "through_tier", "execution_backend"))
+        cuda_model = study["scope"].get("cuda_model")
+    through_tier = 1 if through_tier is None else through_tier
+    execution_backend = execution_backend or "cuda"
+    if through_tier not in (1, 2, 3):
+        raise ValueError("through-tier must be 1, 2, or 3")
+    defaults = read_json(root / "configs/forge/defaults.json")
+    view = load_view(root, view_id or idea.get("goal", "discriminator_stability"))
+    all_tasks = load_tasks(root)
+    validate_view(view, all_tasks)
+    tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
+    protocol_id = defaults["protocol"]
+    protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
+    prior = {**defaults["prior"], **idea.get("prior", {})}
+    blockers = []
+    if "TODO" in idea.get("hypothesis", "") or any("TODO" in x for x in idea["changed_factors"]):
+        blockers.append("finish the scaffold's hypothesis and changed_factors before enqueue")
+    if idea.get("extensions") and not idea.get("api_changes"):
+        blockers.append("extensions require api_changes describing variables, provider, affected hosts and migration")
+    if idea.get("implementation"):
+        blockers.append("custom implementation loaders are unsupported; implement reusable changes in the public package and declare their Recipe/API bindings")
+    from .api import CapabilityError, FormulationContext
+    from .initialization import task_initializer
+    try:
+        context = FormulationContext(recipe_preset=idea.get("recipe_preset"),
+            recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
+            seed=protocol["seed"], requires_capabilities=idea.get("requires_capabilities", []),
+            extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
+            execution_path=idea.get("execution_path", "public_trainer"))
+        recipe = asdict(context.recipe)
+        if "configuration_id" in idea:
+            from .configuration_search import recipe_identity_fields
+            if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
+                raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; declare a new configuration")
+        capabilities = [name for name, enabled in context.capabilities().items() if enabled]
+        rng = context.streams.manifest()
+    except CapabilityError as exc:
+        recipe, capabilities, rng = idea.get("recipe_overrides", {}), [], protocol["rng"]
+        blockers.extend(exc.blockers)
+    candidate = {**idea, "resolved_recipe": recipe, "prior": prior, "capabilities": capabilities,
+                 "claim_contract": idea.get("claim_contract", {"schedule": "scheduled", "scoring_weights": "live"})}
+    blockers.extend(candidate_blockers(candidate))
+    for name, value in view.get("eligibility", {}).get("claim_contract", {}).items():
+        if candidate["claim_contract"].get(name) != value:
+            blockers.append(f"view requires claim_contract.{name}={value!r}")
+    for name in view.get("eligibility", {}).get("requires_capabilities", []):
+        if name not in capabilities:
+            blockers.append(f"view requires capability {name}")
+    # Referenced evaluator source outside normal code roots must travel with a job.
+    extra_sources = set(idea.get("source_files", []))
+    # A view selects evidence, not a different candidate implementation. Capture
+    # the same catalog evaluator support set for every view so quality/stability
+    # requests can share their identical task receipts.
+    for task in all_tasks.values():
+        extra_sources.update(relative for relative in task["evaluation"].get("sources", {})
+                             if (root / relative).is_file())
+        # Published architecture declarations can live outside the code roots.
+        # Capture the catalog's support set regardless of selected view. The
+        # selected task's preflight validates every hash and reports missing or
+        # malformed declarations as BLOCKED, before any worker is allocated.
+        from .hostprofiles import profile_source_paths
+        try:
+            profile_sources = profile_source_paths(task)
+        except (KeyError, TypeError, ValueError):
+            profile_sources = {}
+        extra_sources.update(relative for relative in profile_sources
+                             if (root / relative).is_file())
+    for task in tasks.values():
+        for relative in task["evaluation"].get("sources", {}):
+            if (root / relative).is_file():
+                extra_sources.add(relative)
+        # The task owns its sampling law. Candidate priors describe the reference
+        # formulation and cannot replace even a task's MoG width or code path.
+        task["preflight_blockers"] = task_preflight(task, candidate, protocol, root=root, tasks=tasks)
+    source = inspect_source(root, sorted(extra_sources))
+    candidate_revision = candidate_revision_for(source["digest"], candidate)
+    runtime = runtime_manifest()
+    groups = {}
+    for task_id, task in tasks.items():
+        group = task["execution"].get("execution_group", task_id)
+        groups.setdefault(group, []).append(task_id)
+    jobs = []
+    compute_profiles = {}
+    for group, members in groups.items():
+        # Stable member order must not depend on view order/retiering. The
+        # execution producer precedes its checkpoint-derived evaluation tasks.
+        member_set = set(members)
+        members.sort(key=lambda x: (sum(d["task"] in member_set for d in tasks[x].get("dependencies", [])), x))
+        task = tasks[members[0]]
+        backend = "cpu" if task["resources"].get("gpus") == 0 else execution_backend
+        if backend not in compute_profiles:
+            compute_profiles[backend] = compute_profile(backend, cuda_model)
+        science = {"candidate_revision": candidate_revision,
+                   "execution": {m: task_execution_fingerprint(tasks[m]) for m in members},
+                   "evaluation": {m: task_evaluation_fingerprint(tasks[m]) for m in members},
+                   "protocol": protocol, "seed": protocol["seed"], "rng": rng,
+                   "initializer": idea.get("initializer", "deterministic_orthogonal"), "runtime": runtime,
+                   "task_initializers": {m: task_initializer(tasks[m]) for m in members},
+                   "compute": {**compute_profiles[backend], "threads": task["resources"]["cpu_threads"]}}
+        if view.get("evidence_scope") == "research_diagnostic":
+            # Diagnostic measurements cannot alias an ordinary qualification job.
+            science["evidence_use"] = "research_diagnostic"
+        prerequisites = set()
+        def collect_dependencies(name):
+            for dependency in tasks[name].get("dependencies", []):
+                required = dependency["task"] if isinstance(dependency, dict) else dependency
+                if required not in member_set and required not in prerequisites:
+                    prerequisites.add(required)
+                    collect_dependencies(required)
+        for member in members:
+            collect_dependencies(member)
+        if prerequisites:
+            science["prerequisites"] = {name: {
+                "execution": task_execution_fingerprint(tasks[name]),
+                "evaluation": task_evaluation_fingerprint(tasks[name]),
+            } for name in sorted(prerequisites)}
+        resources = task["resources"]
+        jobs.append({"task_id": members[0], "task_ids": members,
+                     "execution_group": group, "compatibility_key": stable_hash(science),
+                     "science": science, "budget_seconds": max(tasks[m]["resources"]["timeout_seconds"] for m in members),
+                     "resources": {"memory_mb": resources["gpu_memory_mb"], "gpus": resources["gpus"],
+                                   **({"host_memory_mb": resources["host_memory_mb"]} if "host_memory_mb" in resources else {}),
+                                   "cpu_threads": resources["cpu_threads"], "allow_cpu": backend == "cpu",
+                                   "backend": backend, "gpu_model": compute_profiles[backend].get("model") if backend == "cuda" else None}})
+    rekey_jobs(jobs)
+    request = {"schema_version": 1, "candidate": candidate, "candidate_revision": candidate_revision,
+               "execution_policy": deepcopy(DEFAULT_EXECUTION_POLICY),
+               "requires_independent_grading": True,
+               "source": source, "runtime": runtime, "protocol": protocol, "rng": rng,
+               "execution_backend": execution_backend, "compute_profiles": compute_profiles,
+               "view": view, "policy_fingerprint": view_fingerprint(view), "tasks": tasks,
+               "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
+    if study is not None:
+        from .studies import inspect_study
+        request["study"] = study
+        review = inspect_study(root, request)
+        request["study_review"] = review
+        request["study_admission"] = review["receipt"]
+        blockers.extend(review["blockers"])
+    elif "decision_contract" in candidate:
+        from .decision_contracts import inspect_contract
+        review = inspect_contract(root, request)
+        request["decision_review"] = review
+        request["decision_admission"] = review["receipt"]
+        blockers.extend(review["blockers"])
+    elif candidate.get("schema_version") == 3 and "configuration_id" not in candidate:
+        blockers.append("v3 candidate requires an explicit study or registered configuration search before enqueue")
+    elif "configuration_id" not in candidate and (root / "configs/forge/legacy-ideas-v1.json").is_file():
+        from .decision_contracts import validate_legacy_admission
+        try:
+            validate_legacy_admission(request, root=root)
+        except ValueError as error:
+            blockers.append(str(error))
+    if freeze_source:
+        if blockers:
+            raise ValueError("submission blocked: " + "; ".join(blockers))
+        if queue_root is None:
+            raise ValueError("queue_root is required to freeze source")
+        source["snapshot_path"] = str(snapshot_source(root, queue_root, source))
+    return request
+
+
+def plan_summary(request: dict, queue_state: dict | None = None, *, include_ownership=False) -> dict:
+    existing = (queue_state or {}).get("jobs", {})
+    by_task = {m: job for job in request["jobs"] for m in job.get("task_ids", [job["task_id"]])}
+    tasks = []
+    seen_groups = set()
+    total = 0
+    for assignment in sorted(request["view"]["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"])):
+        task_id = assignment["task"]
+        job = by_task[task_id]
+        saved = existing.get(job["compatibility_key"])
+        reusable = bool(saved and saved.get("status") == "terminal")
+        allowed = assignment["qualification_tier"] <= request["through_tier"]
+        if allowed and not reusable and job["compatibility_key"] not in seen_groups:
+            total += job["budget_seconds"]
+            seen_groups.add(job["compatibility_key"])
+        tasks.append({**assignment, "reusable": reusable, "shared_pending": bool(saved and not reusable),
+                      "permitted_by_tier_cap": allowed, "budget_seconds": job["budget_seconds"],
+                      "execution_group": job["execution_group"],
+                      "blockers": request["tasks"][task_id].get("preflight_blockers", []),
+                      "execution_group_blockers": group_blockers(request, job),
+                      **({"field_ownership": request["tasks"][task_id].get("field_ownership")}
+                         if include_ownership else {})})
+    return {"candidate": request["candidate"]["id"], "candidate_revision": request["candidate_revision"],
+            "view": request["view"]["id"], "policy_fingerprint": request["policy_fingerprint"],
+            "through_tier": request["through_tier"], "tasks": tasks, "worst_case_seconds": total,
+            "execution_policy": policy(request),
+            **({"study": request["study"], "study_binding": request["study_review"]} if "study" in request else {}),
+            **({"decision_contract": request["decision_review"]} if "decision_review" in request else {}),
+            "preflight_blockers": request["preflight_blockers"], "guide": "EXPERIMENTATION.md"}

@@ -1,0 +1,276 @@
+{
+  "omitted_archive_dependencies": "Complete copied source snapshot, closed raw cost scopes, admitted request, supervisor records, full state and observation arrays remain in the retained private archive.",
+  "private_receipt_byte_pins": {
+    "admitted-request.json": {
+      "bytes": 174435,
+      "sha256": "6b149e059c6a2a4e6032880f66b19f0a515e6938ef701098dc26b0b8b2e30330"
+    },
+    "ae-state.json": {
+      "bytes": 20693,
+      "sha256": "6e9e5fa6a0b046f7ec7a15b1a053ecd0c32131b120518373aa64f0e4ee8ba195"
+    },
+    "initializer-probe.json": {
+      "bytes": 1379,
+      "sha256": "5a12ac26f1c8a682aef1bf47f7573c16a9ba37c9e73d8470e3c54ada1df2131c"
+    },
+    "prepare-receipt.json": {
+      "bytes": 4860,
+      "sha256": "320beef8200fa767bb6755b1aa6fe042dacd21b32e7a6bc51ce722e096843fbf"
+    },
+    "prepared.json": {
+      "bytes": 364698,
+      "sha256": "fc476c896de6470d4e41a99f27a9f0a787de41cff719b88005aa3aa184892813"
+    },
+    "study.json": {
+      "bytes": 381154,
+      "sha256": "a773ecd2775a04e72bfc1391847643bfed507e3ca5892f2d7ddaf988c3a601e2"
+    },
+    "supervisor-terminal.json": {
+      "bytes": 151,
+      "sha256": "0c43abc40893228fd0fd36b581403faf3826a63d14ed69ff0be35089ff98b498"
+    }
+  },
+  "required_selected_member_pins": {
+    "benchmarks/__init__.py": {
+      "bytes": 71,
+      "sha256": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830"
+    },
+    "benchmarks/gan_v3.py": {
+      "bytes": 2573,
+      "sha256": "00ca856749c82ce3d4e554ced924dda4399311d2e31ca8dbea8b8d5829141538"
+    },
+    "benchmarks/legacy/__init__.py": {
+      "bytes": 393,
+      "sha256": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04"
+    },
+    "benchmarks/legacy/grad_regularizers.py": {
+      "bytes": 27997,
+      "sha256": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d"
+    },
+    "benchmarks/legacy/recipe.py": {
+      "bytes": 9954,
+      "sha256": "b31cdb23913b3c71432ecbdee40a0c0293c067bbcd1f2e5cdfb192426a43c543"
+    },
+    "benchmarks/locked_shared/__init__.py": {
+      "bytes": 79,
+      "sha256": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f"
+    },
+    "benchmarks/locked_shared/baseline.py": {
+      "bytes": 30125,
+      "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+    },
+    "benchmarks/locked_shared/hosts/__init__.py": {
+      "bytes": 78,
+      "sha256": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb"
+    },
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": {
+      "bytes": 8676,
+      "sha256": "c25ea8f8b998a137719df7fc18e5b047b456cdb5a65969430a652db0524509a9"
+    },
+    "benchmarks/locked_shared/observation.py": {
+      "bytes": 4351,
+      "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+    },
+    "benchmarks/toy100/device.py": {
+      "bytes": 10288,
+      "sha256": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911"
+    },
+    "benchmarks/transfer_suite/protocol.py": {
+      "bytes": 9964,
+      "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "configs/100gaussians/atlas.json": {
+      "bytes": 1798,
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "configs/forge/protocols/screening.json": {
+      "bytes": 972,
+      "sha256": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803"
+    },
+    "configs/forge/tasks/ae_gan_hold.json": {
+      "bytes": 2897,
+      "sha256": "53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79"
+    },
+    "experiments/forge/ae633_initializer_probe.py": {
+      "bytes": 6582,
+      "sha256": "3b9929913250303b4bc367bd8f39bd7880b7558a21d0747c0544d243610b4210"
+    },
+    "experiments/forge/ae633_repair_case.py": {
+      "bytes": 4429,
+      "sha256": "70ef4368dadf71955e1ad49a5e4d155451d89d6ee1690512694bff8ff582b13f"
+    },
+    "experiments/forge/ae633_repair_repeat.py": {
+      "bytes": 5407,
+      "sha256": "37ee9813d2b1aa8873bd788b723ff452b6c78ad0b2165091746bd086e5f940ab"
+    },
+    "experiments/forge/canonical_ae_adapter.py": {
+      "bytes": 51111,
+      "sha256": "a15d3d78c32d89e852bea1e70b441348450fb73569d4eae8f19ee695c6dec085"
+    },
+    "experiments/forge/canonical_full_atlas_case.py": {
+      "bytes": 84004,
+      "sha256": "86c41c6e527b8a0722539d9b413e9714244127bd65fd1d2984217d1d9b50516d"
+    },
+    "experiments/forge/canonical_full_atlas_repeat.py": {
+      "bytes": 39325,
+      "sha256": "3cd555f011a959b1c470af81c166ae8bb7111125be7cb8eccff149128578b1f9"
+    },
+    "experiments/forge/contracts.py": {
+      "bytes": 6315,
+      "sha256": "0b197620cfe44144d1b9a4a7eaf0320f31c207488fd5e4ba0002727e26af3dfc"
+    },
+    "experiments/forge/mechanisms.py": {
+      "bytes": 11826,
+      "sha256": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f"
+    },
+    "experiments/forge/policy_adapters.py": {
+      "bytes": 17992,
+      "sha256": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa"
+    },
+    "experiments/forge/policy_execution.py": {
+      "bytes": 24677,
+      "sha256": "a6384590fe04ba34ec776496ced03574d57ecb7c51b8708daa7ea21afd3388fa"
+    },
+    "experiments/forge/rng.py": {
+      "bytes": 6893,
+      "sha256": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293"
+    },
+    "experiments/forge/sources.py": {
+      "bytes": 6628,
+      "sha256": "d96cff109fb509c32e9830f4c5ea3acefa2c2df65509908f6ba920ad1fd27ebb"
+    },
+    "experiments/forge/views.py": {
+      "bytes": 40045,
+      "sha256": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77"
+    },
+    "particlegan/__init__.py": {
+      "bytes": 1811,
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c"
+    },
+    "particlegan/_qr.py": {
+      "bytes": 1951,
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    "particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "particlegan/birth_death.py": {
+      "bytes": 45396,
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    "particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    "particlegan/capabilities.py": {
+      "bytes": 2285,
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177"
+    },
+    "particlegan/conditioning.py": {
+      "bytes": 4878,
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "particlegan/diffusion.py": {
+      "bytes": 5100,
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    "particlegan/discriminators.py": {
+      "bytes": 5833,
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    "particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    "particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "particlegan/grad_regularizers.py": {
+      "bytes": 14853,
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan/init.py": {
+      "bytes": 24559,
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    "particlegan/k3p.py": {
+      "bytes": 33012,
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "particlegan/ka2.py": {
+      "bytes": 16551,
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    "particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    "particlegan/output_moments.py": {
+      "bytes": 8387,
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    "particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81022,
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+    },
+    "particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    "particlegan/recipe_schedules.py": {
+      "bytes": 6044,
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 53612,
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    "particlegan/routing.py": {
+      "bytes": 64904,
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    "particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    "particlegan/training.py": {
+      "bytes": 39880,
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "schema": "pg_ae633_sourceguard_public_source_index_v1",
+  "source": {
+    "complete_manifest_member_count": 1206,
+    "complete_manifest_public": false,
+    "digest": "2f71661f3407a3af3b166493fa0cb1f6730e8ac4689c2b37a8c8a9e424c5c233",
+    "origin_commit": "36718f9ecbffe6a217914de7a9c22cff1349079e"
+  },
+  "standalone_develop_reproducer": false,
+  "supplies_scientific_credit": false
+}

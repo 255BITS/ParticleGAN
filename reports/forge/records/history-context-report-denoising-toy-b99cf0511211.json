@@ -1,0 +1,188 @@
+{
+  "candidate_id": "context:report/denoising-toy",
+  "candidate_revision": "50bfc2f41e796c0d1284523dfccc96e287d9d5e4d6a6ce31ccf9bd85d5162362",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Benchmark: conditional denoising on 100 Gaussians",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/denoising-toy",
+      "narrative_sources": [
+        {
+          "git_blob": "530e155b584765356fc9775a9391d9c31ba0c3c2",
+          "path": "reports/denoising-toy/BCAP_AUDIT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ba034aae36aadae991936859703812a6765bfa2df6f492ad03469344514c9da5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/BCAP_AUDIT.md"
+        },
+        {
+          "git_blob": "c94a4d925840a8e8a212c7353cc417da7d66a73d",
+          "path": "reports/denoising-toy/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d064d2cd79fb3de04af7b406c78dbdadfea4c0eccc4293e73815ed2067208bd3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/README.md"
+        },
+        {
+          "git_blob": "95b867b50a2255f8a5035e699a2dd8049c73f357",
+          "path": "reports/denoising-toy/RUNBOOK.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8c77d2e3731d0e0315d8f1225a005d85d1a34a2d9e96b2efa2a11c49386538bb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/RUNBOOK.md"
+        },
+        {
+          "git_blob": "14eb2367c47d50b2ae4d33318d389f3f49950e2e",
+          "path": "reports/denoising-toy/budget56k/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "46fc07eaa29ab16af71ad0fefa19f5bf23487cf8e47ee0653dbf30b7ffcab7f2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/budget56k/READOUT.md"
+        },
+        {
+          "git_blob": "9c04b7db4dde0843d29553d74cd1f5f581394de5",
+          "path": "reports/denoising-toy/budget56k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b4eb5697efae0802f313978c4ab915e598dcdbefa1b3074e7a7ac09eac400da1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/budget56k/TABLE.md"
+        },
+        {
+          "git_blob": "15235f2a81e92faced1d3cfe2f0089978e62e6bc",
+          "path": "reports/denoising-toy/confirm28k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "911b3093699e96126fda482108a3b08dca726feeafa6e198716c0a96791d270d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/confirm28k/TABLE.md"
+        },
+        {
+          "git_blob": "1540c144b68c7e2314a9ad668f052fc1f922fb06",
+          "path": "reports/denoising-toy/diagnostics/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c19ecb2cdca768b405538b53984e6bbffb89adc717de05dabaf4c5f9efd10edb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/diagnostics/READOUT.md"
+        },
+        {
+          "git_blob": "5f2f2956b10540c6cb65d8ee09fbb3ca57e41e94",
+          "path": "reports/denoising-toy/diagnostics/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "37d13daabf789af1aaecd8aa4bd60d0466f60aef4f52378bffcda0e6ab837d7b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/diagnostics/TABLE.md"
+        },
+        {
+          "git_blob": "0a7efeda5e231b210466c057110e55f8b8e6c180",
+          "path": "reports/denoising-toy/joint_ucd/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1ec7dde797400d016bb2d442251485cbc992367997264369b9ef98088b4ae13d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/joint_ucd/READOUT.md"
+        },
+        {
+          "git_blob": "5baf3c53c5db27b81c90315a9f5131752d137f91",
+          "path": "reports/denoising-toy/joint_ucd/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "73ccd526a79e08ca9972323e08ee862023169df4d1ddbbfec4e5553433ac1491",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/joint_ucd/TABLE.md"
+        },
+        {
+          "git_blob": "15cec5b069e69f600e40cb7ef12191458af8437f",
+          "path": "reports/denoising-toy/mog_capacity/NOISE_PROBE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9d5fc4bf56aa941e5822f4961eccbf1a1b24d5dbf537ac06ef2cc8cdc28ebe15",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity/NOISE_PROBE.md"
+        },
+        {
+          "git_blob": "32b56f5674216eb47196ffec15ef964315d4f947",
+          "path": "reports/denoising-toy/mog_capacity/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5c095174de028356924ac977c90f01becd6e9a50905b13eb715c7cd69fb40b4c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity/READOUT.md"
+        },
+        {
+          "git_blob": "dbda4438fe8b096634966022183b0b19c5fa7a89",
+          "path": "reports/denoising-toy/mog_capacity/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e85dcbdc30e5c46d4066a1cf9e351f17d9c20f5bd9e74e9c76a328363455dc56",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity/TABLE.md"
+        },
+        {
+          "git_blob": "cfbbac63856e1a7691a6b3bb8a05b28d8d4b4274",
+          "path": "reports/denoising-toy/mog_capacity_100k/NOISE_PROBE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6ded2fde66ef7a50b443121dab3b13a6f8fb49047c4a5f6aea15c52235e1d141",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity_100k/NOISE_PROBE.md"
+        },
+        {
+          "git_blob": "09f622b42b686a4683b824f729c8780e8d8cbead",
+          "path": "reports/denoising-toy/mog_capacity_100k/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "545baecd44aecca11a0db601e87d81b43f98ee8618867fa4a085b0848c300c99",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity_100k/READOUT.md"
+        },
+        {
+          "git_blob": "eb208a83306e5afb3aed1811c3a17a527d33db8d",
+          "path": "reports/denoising-toy/mog_capacity_100k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5159c61e8fe8dafef628c559c6e3ef0db4a027240a9c19433c715c1c80ea739c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/mog_capacity_100k/TABLE.md"
+        },
+        {
+          "git_blob": "2a15726ed3fe8cbc7f9ca9d8e369f76c12725776",
+          "path": "reports/denoising-toy/screen/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6c7fd789b10f38dd88c5fc049a0c177b3408411faab1aa2b87336c43bcc94e20",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/screen/TABLE.md"
+        },
+        {
+          "git_blob": "a39464a4c0b1c598136adcf93e05c7f4ed362504",
+          "path": "reports/denoising-toy/screen_20k/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f9b5fb692decb74ec3e889004af3ba66ed698b6d168c25c91343ee61f85c7ae2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/screen_20k/READOUT.md"
+        },
+        {
+          "git_blob": "8c58928490b45803eaa15679a30c23b8be2e3214",
+          "path": "reports/denoising-toy/screen_20k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1e79751cd23227af1d6b90d5a480bbcb585006009e5adfef79dfaf652168607a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/screen_20k/TABLE.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Benchmark: conditional denoising on 100 Gaussians\n\nStatus: two rounds complete, **89 successful training runs on both GPUs**.\nThe latest 17 runs show that longer training rescues DDGAN: 77.8 \u00b1 1.6% HQ at\n28k updates across three seeds, and up to 93.4% in the single-seed 56k screen.\nThe one-shot GAN remains sharper; DDGAN has better mode proportions. Learned\nstep-noise particles mostly preserve their inference benefit when replaced by\na Gaussian with matching covariance. The user selected DDGAN + UCD with Gaussian\nstep noise as the working default; performance still has tradeoffs.\n\nStart with the [latest readout](budget56k/READOUT.md),\n[samples](budget56k/samples.png), [full table](budget56k/TABLE.md), and\n[three-seed check](confirm28k/TABLE.md). The [first screen](screen_20k/READOUT.md)\nand [bcap audit](BCAP_AUDIT.md) remain available. Training source code and the\naudited recipe were unchanged during both rounds. See [RUNBOOK.md](RUNBOOK.md)\nfor the current state and repeatable commands. No experiments are running.\n\n## Run the selected default\n\n**100 Gaussians DDGAN + UCD**, with 20,000 learned latent particles and Gaussian\nreverse-step noise, uses the tested 56k-update settings and established bcap recipe.\n\n```bash\n.venv/bin/python experiments/train_denoising.py\n```\n\nReview/edit [the full default config](../../configs/denoising/default.toml).\nThe script loads it automaticall"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-denoising-toy-b99cf0511211",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "c94a4d925840a8e8a212c7353cc417da7d66a73d",
+    "path": "reports/denoising-toy/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "d064d2cd79fb3de04af7b406c78dbdadfea4c0eccc4293e73815ed2067208bd3",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/denoising-toy/README.md"
+  },
+  "task_results": []
+}

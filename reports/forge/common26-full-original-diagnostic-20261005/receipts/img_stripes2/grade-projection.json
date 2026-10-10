@@ -1,0 +1,185 @@
+{
+  "execution_group": null,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 0.25,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 150,
+        "first_pass_step": 50,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 23,
+        "stable_from_seconds": null,
+        "stable_from_step": 50
+      },
+      "metrics": [
+        {
+          "margin": 0,
+          "metric": "modes",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 2,
+          "value": 2
+        },
+        {
+          "margin": 0.09999999999999998,
+          "metric": "hq",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 1.0
+        }
+      ],
+      "passed": true,
+      "shortfall": 0.0,
+      "status": "PASS"
+    },
+    "gate_status": "PASS",
+    "metrics": {
+      "distribution_tv": 0.03125,
+      "hq": 1.0,
+      "mean_rmse": 0.0035043074749410152,
+      "mode_fractions": [
+        0.46875,
+        0.53125
+      ],
+      "modes": 2,
+      "quality_mode_fractions": [
+        0.46875,
+        0.53125
+      ],
+      "step": 600
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "PASS"
+  },
+  "raw_task_grades": {
+    "img_stripes2": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.25,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 150,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 50
+        },
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.0035043074749410152,
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "schema": "pg_common26_full_atlas_grade_projection_v1",
+  "task_grades": {
+    "img_stripes2": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.25,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 150,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 50
+        },
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.0035043074749410152,
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  }
+}

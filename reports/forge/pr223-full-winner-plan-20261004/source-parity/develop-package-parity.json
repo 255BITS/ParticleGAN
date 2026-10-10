@@ -1,0 +1,141 @@
+{
+  "config": {
+    "bytes": 1798,
+    "path": "configs/100gaussians/atlas.json",
+    "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+  },
+  "current_develop_source": "d4cb48d36477b5622148251892b9dc761f55573f",
+  "files": {
+    "particlegan/__init__.py": {
+      "bytes": 1811,
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c"
+    },
+    "particlegan/_qr.py": {
+      "bytes": 1951,
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    "particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "particlegan/birth_death.py": {
+      "bytes": 45396,
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    "particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    "particlegan/capabilities.py": {
+      "bytes": 2285,
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177"
+    },
+    "particlegan/conditioning.py": {
+      "bytes": 4878,
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "particlegan/diffusion.py": {
+      "bytes": 5100,
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    "particlegan/discriminators.py": {
+      "bytes": 5833,
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    "particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    "particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "particlegan/grad_regularizers.py": {
+      "bytes": 14853,
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "particlegan/init.py": {
+      "bytes": 24559,
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    "particlegan/k3p.py": {
+      "bytes": 33012,
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "particlegan/ka2.py": {
+      "bytes": 16551,
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    "particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    "particlegan/output_moments.py": {
+      "bytes": 8387,
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    "particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "particlegan/policy.py": {
+      "bytes": 81022,
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+    },
+    "particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    "particlegan/recipe_schedules.py": {
+      "bytes": 6044,
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 53612,
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    "particlegan/routing.py": {
+      "bytes": 64904,
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    "particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    "particlegan/training.py": {
+      "bytes": 39880,
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "historical_source": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+  "model_forward_draw_restore_score_gpu_queue_calls": 0,
+  "new_scientific_credit": false,
+  "schema": "pg_pr223_develop_package_parity_v1",
+  "scope_correction": "Frozen original design inspected ParticleGAN-atlas-forge-unblock feature worktree; its policy.py/recipes.py deltas are not develop. Frozen design unchanged.",
+  "status": "SOURCE_ONLY_EXACT_BYTES",
+  "whole_package_changed_paths": [],
+  "whole_package_git_tree": {
+    "a0d6d89fb470f551b3f790016a237c40a377e1e8": "d85210289a35967493fc3345441b043a8d07860b",
+    "d4cb48d36477b5622148251892b9dc761f55573f": "d85210289a35967493fc3345441b043a8d07860b"
+  }
+}

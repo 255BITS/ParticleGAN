@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:lrfree/harness",
+  "candidate_revision": "34ba4a239ad791436612df895ca9a4cb2c8c6555cc05bdb39915951f17d2e427",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "lrfree screening harness + GPU pool (2026-09-26)",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/harness",
+      "narrative_sources": [
+        {
+          "git_blob": "33dd0a121a0dcc88c72e8587b42ff1ba09927155",
+          "path": "reports/toy100/lrfree-search/harness/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "d601df4247e374619afebfb84589d54f126b731c67b4ab066d5315043e782c3c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# lrfree screening harness + GPU pool (2026-09-26)\n\nGoal: find public-`GANTrainer` configs that need **no learn-rate adjustment** (no horizon/clock-driven\nLR or noise schedule, one setting for every task, runs indefinitely). This directory holds a fast,\nreusable multi-task screen that reproduces the PR155 new-init (`batch_feature_zero`) API screens\n**bitwise**, plus a job pool that keeps both A6000s busy.\n\nPython: `/tmp/pr38-default-env/bin/python` (torch 2.13.0+cu126). Abbreviated below as `$PY`.\n\n## Layout\n\n| path | what |\n|---|---|\n| `harness/screen.py` | one candidate x one task -> `result.json`, `metrics.jsonl`, `rates.jsonl`, `job-header.json` |\n| `harness/hosts/` | verbatim copies of the frozen hosts: `mode_hold_host.py` (+ 1200-row batch-receipt fixture), `image_host.py`, `vector_host.py`, `frozen_shared_critic.py`, `ring_host.py` |\n| `harness/tasks/` | frozen task cards: `mode_hold_protocol.json`, `image_task_specs.json`, `vector_task_specs.json`, `ring_reference_declaration_dv2.json` |\n| `harness/pool.py` | daemon: claims `queue/*.json`, runs screen.py with N slots per GPU, appends `ledger.jsonl`, rebuilds `LEADERBOARD.md` after every job |\n| `harness/submit.py` | candidate + tasks -> job files (refuses exact duplicates) |\n| `harness/wait.py` | blocks until a candidate's jobs finish, prints a compact matrix |\n| `harness/compare.py` | exact comparison of a run against "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-harness-1b5b6bc1e623",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "33dd0a121a0dcc88c72e8587b42ff1ba09927155",
+    "path": "reports/toy100/lrfree-search/harness/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "d601df4247e374619afebfb84589d54f126b731c67b4ab066d5315043e782c3c",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/README.md"
+  },
+  "task_results": []
+}

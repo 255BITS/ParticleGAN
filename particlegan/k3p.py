@@ -1,29 +1,18 @@
-"""K3P: the critic/generator regularization ParticleGAN trains with.
+"""Historical K3P critic kernels and shared optimizer/EMA helpers.
 
-Users do not instantiate these classes. The recipe builds them behind
-formulation-agnostic factories and a plain PyTorch loop::
+Public recipe factories now select ``particlegan.ka2`` for the critic.
+KA2 reuses this module's spike guard, robust EMA and conditional-critic
+adapter, together with the unchanged ``K3PGeneratorAdam``, A2 sparse latent
+damping and direct-particle response. The original ``K3PCriticAdam`` and
+``CriticPenalty`` remain available for archived research and parity tests.
 
-    opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-    penalty = recipe.make_critic_penalty(opt_d)
-    d_loss = adv_d + penalty(D, real, fake)
-    opt_d.zero_grad(); d_loss.backward(); opt_d.step()
-    opt_g.zero_grad(); g_loss.backward(); opt_g.step()
-
-The optimizers' ``step()`` does all step-time work and their ``state_dict()``
-holds all state. The classes stay importable here for tests and research.
-Nothing registers optimizer hooks or keeps module-level state.
-
-* ``CriticAnchor``      -- parameter EMA Dbar of one critic (K3P's prox anchor);
-  ``RobustCriticAnchor`` also averages buffers with side-effect-free forwards.
-* ``CriticSpikeGuard``  -- per-tensor gradient-spike clip before a critic Adam step.
-* ``LatentRowDamping``  -- A2: bounded coherence damping of sparse latent-table rows.
-* ``DirectParticleResponse`` -- LR gain for direct sample-particle groups.
-* ``K3PCriticAdam`` / ``K3PGeneratorAdam`` -- the Adam subclasses the recipe's
-  optimizer factories return; ``CriticPenalty`` -- the penalty paired with a
-  ``K3PCriticAdam`` (``recipe.make_critic_penalty``).
+Users construct active components through the recipe's ``make_*`` factories.
+Optimizer ``step()`` performs step-time work and ``state_dict()`` holds its
+state. Nothing registers optimizer hooks or keeps module-level state.
 """
 from contextlib import contextmanager
 from copy import copy, deepcopy
+from types import MethodType
 from typing import Any, Dict, Optional, Sequence, Tuple
 
 import torch
@@ -99,6 +88,12 @@ class CriticSpikeGuard:
     everything else is multiplied by exactly 1.0. Tensors without Adam state
     yet are skipped. Returns the number of clipped tensors this step (a
     tensor, no host sync).
+
+    The threshold bounds the *applied* step in LR units, so it uses the
+    denominator Adam will divide by: with ``amsgrad`` that is the running max
+    ``max_exp_avg_sq`` (a gradient that is large only against the decayed
+    ``exp_avg_sq`` already takes a small AMSGrad step and is not clipped).
+    Plain Adam groups read ``exp_avg_sq`` exactly as before.
     """
 
     def __init__(self, ratio: float = 5.0, min_steps: int = 200) -> None:
@@ -119,7 +114,9 @@ class CriticSpikeGuard:
                 if p.grad is None or not st or "exp_avg_sq" not in st:
                     continue
                 t = st["step"]
-                vhat = st["exp_avg_sq"].mean() / (1.0 - beta2 ** t)
+                second = (st["max_exp_avg_sq"] if group.get("amsgrad", False) and "max_exp_avg_sq" in st
+                          else st["exp_avg_sq"])
+                vhat = second.mean() / (1.0 - beta2 ** t)
                 ratio = p.grad.square().mean().sqrt() / vhat.clamp_min(1e-30).sqrt()
                 clip = (t >= self.min_steps) & (ratio > self.ratio)
                 p.grad.mul_(torch.where(clip, self.ratio / ratio, torch.ones_like(ratio)))
@@ -152,7 +149,10 @@ class LatentRowDamping:
     steps where some row got no gradient AND the cumulative row-observation
     rate is below ``max_rate``; otherwise the parent Adam step is untouched.
     The table must be alone in an Adam group with beta1 == 0; v stays the
-    parent's (raw g).
+    parent's (raw g). Only the first moment is rewritten: the denominator is
+    whatever the parent Adam step applies (the AMSGrad running max
+    ``max_exp_avg_sq`` when the group has ``amsgrad``), so the response is
+    ``rho_i * g_i / (sqrt(max v_hat) + eps)`` there with no extra code.
 
     ``history`` is caller-allocated (same shape/dtype/device as ``table``) and
     checkpointed by the caller alongside ``state_dict()``. Wrap the generator
@@ -247,7 +247,9 @@ class DirectParticleResponse:
     the previous step's centered gradient kept in the caller-allocated flat
     ``history`` (numel = total numel of ``params``). ``params`` must be exactly
     one optimizer param group. ``gain=False`` keeps the LR unchanged (the
-    betas still apply). Wrap the step: ``with resp.around(opt): opt.step()``
+    betas still apply). Only LR and betas change; the parent Adam step applies
+    its own denominator (AMSGrad's running max when the group has ``amsgrad``).
+    Wrap the step: ``with resp.around(opt): opt.step()``
     (``K3PGeneratorAdam.step`` does this).
     """
 
@@ -361,7 +363,10 @@ class RobustCriticAnchor(CriticAnchor):
         super().update_()
         for e, b in self._buffer_pairs:
             if e.is_floating_point():
-                e.mul_(self.decay).add_(b, alpha=1.0 - self.decay)
+                # Preserve equal buffers exactly: multiplying and adding an
+                # unchanged Fourier frequency can otherwise round it away
+                # from the live value as KA2 changes the decay each step.
+                e.lerp_(b, 1.0 - self.decay)
             else:
                 e.copy_(b)
 
@@ -408,7 +413,31 @@ def _closure_loss(closure):
         return closure()
 
 
-class K3PCriticAdam(Adam):
+class _DeviceScopedAdam(Adam):
+    """Run accelerator graph checks only for accelerator-owned parameters."""
+
+    def _accelerator_graph_capture_health_check(self):
+        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
+            return Adam._accelerator_graph_capture_health_check(self)
+
+    def _cuda_graph_capture_health_check(self):
+        # Older PyTorch versions call this name from Adam.step().
+        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
+            return Adam._cuda_graph_capture_health_check(self)
+
+
+def _scope_reference_adam_graph_checks(optimizer):
+    """Keep registered CPU Adam instances from opening accelerator contexts."""
+    if type(optimizer) not in (Adam, torch.optim.AdamW):
+        return
+    if any(p.device.type != "cpu" for group in optimizer.param_groups for p in group["params"]):
+        return
+    for name in ("_accelerator_graph_capture_health_check", "_cuda_graph_capture_health_check"):
+        if hasattr(Adam, name) and name not in optimizer.__dict__:
+            setattr(optimizer, name, MethodType(getattr(_DeviceScopedAdam, name), optimizer))
+
+
+class K3PCriticAdam(_DeviceScopedAdam):
     """Adam for one critic whose ``step()`` also does K3P's critic-side work.
 
     Built by ``recipe.make_critic_optimizer(critic, ema_critic=...)`` (and by
@@ -480,7 +509,7 @@ class K3PCriticAdam(Adam):
             self.ema_critic.load_state_dict(extra["ema"])
 
 
-class K3PGeneratorAdam(Adam):
+class K3PGeneratorAdam(_DeviceScopedAdam):
     """Adam for the generator side whose ``step()`` applies K3P's update modifications.
 
     Built by ``recipe.make_generator_optimizer(params, latent_table=...,
@@ -601,14 +630,21 @@ class CriticPenalty:
     """
 
     def __init__(self, recipe, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
-        if not isinstance(optimizer, K3PCriticAdam):
+        from .optim.dualnorm import NormalizedOptimizer
+        from .tensorflow_adam import TensorFlowV1Adam
+        if not (isinstance(optimizer, K3PCriticAdam) or (
+                type(optimizer) in (torch.optim.Adam, TensorFlowV1Adam)
+                and getattr(optimizer, "recipe_optimizer_family", None) == "adam")
+                or (isinstance(optimizer, NormalizedOptimizer) and hasattr(optimizer, "record")
+                    and recipe.reg_arm in ("a_r1r2", "b_cap"))):
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
-        self.optimizer, self.critic = optimizer, optimizer.critic
+        self.recipe, self.optimizer, self.critic = recipe, optimizer, optimizer.critic
         options = recipe._penalty_options(**penalty_overrides)
-        if optimizer.anchor is None and options["anchor_weight"] != 0:
+        if options["arm"] == "k3p" and optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         self.regularizer = GradientPenalty(record=optimizer.record, **options)
+        self.initial_coeff = self.regularizer.coeff
         self.output = _first_output if output is None else output
         self.collect_stats = bool(collect_stats)
         self.last_stats = {}
@@ -621,23 +657,34 @@ class CriticPenalty:
 
     def _ema_view(self, critic):
         """``m -> module`` mapping the EMA root to the EMA counterpart of ``critic``."""
-        if isinstance(critic, nn.Module):
-            name = self._names.get(id(critic))
+        def mapping(module):
+            if not isinstance(module, nn.Module):
+                return None
+            name = self._names.get(id(module))
             if name is not None:
-                return lambda m: m.get_submodule(name)
-            for key, child in critic._modules.items():
-                inner = None if child is None else self._names.get(id(child))
-                if inner is not None:
-                    def view(m, key=key, inner=inner):
-                        clone = copy(critic)
-                        clone._modules = dict(critic._modules)
-                        clone._modules[key] = m.get_submodule(inner)
-                        return clone
-                    return view
+                return lambda root: root.get_submodule(name)
+            children = {key: view for key, child in module._modules.items()
+                        if (view := mapping(child)) is not None}
+            if children:
+                def view(root):
+                    clone = copy(module)
+                    clone._modules = dict(module._modules)
+                    for key, child_view in children.items():
+                        clone._modules[key] = child_view(root)
+                    return clone
+                return view
+            return None
+
+        view = mapping(critic)
+        if view is not None:
+            return view
         raise TypeError("pass the critic paired with this penalty's optimizer, one of its submodules, "
                         "or a module wrapping one of those")
 
     def __call__(self, critic, x_real, x_fake, *condition, **condition_kwargs):
+        from .recipe_schedules import apply_penalty_schedule
+        if getattr(self, "recipe", None) is not None:
+            apply_penalty_schedule(self.optimizer.record.observed_steps, self.recipe, self)
         output = self.output
 
         def live(x):
@@ -653,11 +700,19 @@ class CriticPenalty:
         step = self.optimizer.record.observed_steps + 1
         penalty, stats = self.regularizer.penalty(live, x_real, x_fake, step, self.collect_stats, **options)
         self.last_stats = stats
+        if getattr(getattr(self, 'recipe', None), 'critic_step_mode', 'none') == "finite_cap":
+            # Freeze caller-owned actual training panels, including conditioning.
+            real, fake = x_real.detach().clone(), x_fake.detach().clone()
+            def finite_cap():
+                return torch.maximum(self.regularizer._grad_norm(live, real).max(),
+                                     self.regularizer._grad_norm(live, fake).max())
+            self.optimizer.bind_cap_panel(finite_cap, self.regularizer.kappa)
         return penalty
 
     def diagnostics(self):
         """Host-side scalars for logging (blend weight; guard clip count)."""
-        out = {"blend_weight": float(self.regularizer.blend_weight())}
+        out = ({"blend_weight": float(self.regularizer.blend_weight())}
+               if self.regularizer.arm == "k3p" else {})
         if self.optimizer.guard is not None:
             out["clipped_tensors"] = self.optimizer.guard.clipped_tensors
         return out

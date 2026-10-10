@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py",
+    "--worker",
+    "control",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/control",
+    "--lock-fd",
+    "3"
+  ],
+  "numerical_started": 1790816247.2125065,
+  "resources": {
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "memory_fraction": 0.2,
+    "physical_gpu": 0,
+    "total_gpu_bytes": 50896764928
+  },
+  "script_sha256": "dd4555c281c7b8445d9e9f381e40d5ba560b2c466ee95c95ddda1458695dee38",
+  "source_integrity_before": {
+    "files": 163,
+    "package_sha256": {
+      "candidate": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+      "control": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15"
+    },
+    "source_freeze_sha256": "e8f0cdbac7a1a9241d39e5e779a4203baee112499029101ccce00dec512629f4",
+    "status": "VALID"
+  },
+  "status": "RUNNING",
+  "variant": "control"
+}

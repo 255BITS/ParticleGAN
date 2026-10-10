@@ -1,0 +1,22 @@
+{
+  "case_definitions_hash_verified": 19,
+  "consumed_pins_verified": 88,
+  "historical_raw_result_hash_verified": 19,
+  "moving_recipe_basis": "bound executed wrapper source; no checkpoint loading",
+  "new_models_forwards_draws_restore_scorers_updates_gpu_admissions": 0,
+  "no_write_handoff": true,
+  "per_case_inclusive_reservation_seconds": 9810,
+  "primary_pr_config_blobs_verified": 3,
+  "proposed_campaign_ceiling_seconds": 10800,
+  "proposed_initial_reservation_seconds": 9990,
+  "recorded_nonmoving_recipe_resource_only_parity": 16,
+  "repeated_derivation_byte_equal": [
+    "design.json",
+    "input-index.json"
+  ],
+  "schema": "pg_pr223_retest_design_verification_v1",
+  "shared_bounded_metadata_publication_seconds": 180,
+  "source_scope": "inspection evidence only; new runtime source freeze/closure still root-owned",
+  "status": "SOURCE_METADATA_DESIGN_VERIFIED_NOT_EXECUTED",
+  "total_original_updates": 48800
+}

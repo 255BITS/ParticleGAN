@@ -1,0 +1,30 @@
+{
+  "reference_package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/pkg-joint-count",
+  "proposal_package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN-WARM",
+  "base_source_sha256": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+  "proposal_source_sha256": "d6bae3ef73002f1f033457a95b77422d738cdedb0a160863e09af0dcb07e0505",
+  "helper_source_sha256": "6a6a6b042f4290d8997b7252e2e16ef08476428f01d202d426af11882c9f4b88",
+  "ast_splices": [
+    {
+      "kind": "function",
+      "name": "_group_integer_allocate",
+      "base_ast_sha256": null,
+      "proposal_ast_sha256": "1283e6b0a61295ef813ed70df3f540fb73065410113b74bcb8fe86fde19303cd"
+    },
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_ordinary_mass_transport",
+      "base_ast_sha256": "b798de8c3cda670d06db4a59139b17d1521fd6d4cd1d383e4d56a431f26c07ec",
+      "proposal_ast_sha256": "1f89611cb53bacc0d85da4349e99952dd808933a001e7eeddaa9527911fe77f1"
+    },
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_ordinary_support_transport",
+      "base_ast_sha256": "4897b49d16e2cb58867e69af3f067e127ac04de4b284cf75848e9d3bdb270eb1",
+      "proposal_ast_sha256": "829498177df2d92377fb5e47b8542b6f072c83e9fc89743fe2448d0dd26c9c75"
+    }
+  ],
+  "script_sha256": "9a3a838f1116816bb16e06fb2a9a3b058f6fdad24324f8f35ce86412740427ce"
+}

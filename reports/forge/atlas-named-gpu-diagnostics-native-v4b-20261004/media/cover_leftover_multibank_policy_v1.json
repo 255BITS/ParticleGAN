@@ -1,0 +1,74 @@
+{
+  "actual_steps": [
+    34,
+    134,
+    234,
+    334,
+    434,
+    500,
+    600,
+    700,
+    800
+  ],
+  "draws": 0,
+  "family": "atlas_multibank",
+  "gif": {
+    "bytes": 310330,
+    "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/cover_leftover_multibank_policy_v1-goal.gif",
+    "sha256": "4af89bb0f0cd18af2a4f852685b854b4c3691d5fa8350972d2456c10b55dbeb7"
+  },
+  "inputs": [
+    {
+      "bytes": 1630,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000034.npz",
+      "sha256": "55752ab1a5d8a207db4b3f13ab38507e5d94645677bb0d6701655a16a833761c"
+    },
+    {
+      "bytes": 1632,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000134.npz",
+      "sha256": "817fcae95d4700e2f756f9da4629d385685e1e03f2dd0f92f6385e9ad8801788"
+    },
+    {
+      "bytes": 1636,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000234.npz",
+      "sha256": "faf353a256c032b513fb2bcc5779e48a41afe27894ec7ff9537b06032c0d6f3b"
+    },
+    {
+      "bytes": 1630,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000334.npz",
+      "sha256": "334dbd6e7cfa8e9198803ad9c29d2a09c23637d62f1b0691b39ccd0d699e3509"
+    },
+    {
+      "bytes": 1628,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000434.npz",
+      "sha256": "6543f4a5da2be7880b6f4b8cac0e1cab11e3982682f121318f0fb99aae414cec"
+    },
+    {
+      "bytes": 1632,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000500.npz",
+      "sha256": "d44654cc235e49fccb5b6d12b9e37d849b27eb5d3172ef3fda637924e487b9c6"
+    },
+    {
+      "bytes": 1642,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000600.npz",
+      "sha256": "f25d412bf07630a8f4ee8e23db1b1b62a3257785b9aac642e2b2663263334edb"
+    },
+    {
+      "bytes": 1640,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000700.npz",
+      "sha256": "8b61fcb5de23ba6f1800d51d6ae38556a41c8d46a92446421aa06ff6ec4afec0"
+    },
+    {
+      "bytes": 1641,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_multibank/attempts/cover_leftover_multibank_policy_v1/multibank-policy/observations/step_000800.npz",
+      "sha256": "2fb680c03e6fbdc32b22e3faebf90c96107faf8267864b3826182ba3d2651718"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "PASS",
+  "qualification_input": false,
+  "renderer_sha256": "f61f4e3a7e03fc7ca35775dd5d08b63afd950df30583847ddbd6de4c15e29d08",
+  "schema": "particlegan_atlas_named_gpu_diagnostics_v1_media",
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "task": "cover_leftover_multibank_policy_v1"
+}

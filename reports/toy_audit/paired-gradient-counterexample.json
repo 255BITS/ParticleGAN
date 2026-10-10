@@ -1,0 +1,32 @@
+{
+  "conclusion": "Coincident fake coordinates do not imply coincident gradients under the original paired RpGAN loss.",
+  "fixture": "original HostCritic before any optimizer update",
+  "format": "paired_gradient_counterexample_v1",
+  "limitation": "This does not prove the unchanged host can meet any new density gate within its budget.",
+  "result": {
+    "caller_global_rng_preserved": true,
+    "constant_real_gradient_range": 0.0,
+    "fake_logits_all_equal": true,
+    "paired_gradient_max": 0.006777123548090458,
+    "paired_gradient_min": 0.0058119287714362144,
+    "paired_gradient_range": 0.0009651947766542435,
+    "paired_gradients_all_equal": false,
+    "particles": 12,
+    "real_logits_max": 0.2167474627494812,
+    "real_logits_min": -0.09290122985839844,
+    "reversed_pair_gradient_max_error": 0.0
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "software_updates": 0,
+  "source_sha256": {
+    "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+    "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+    "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+    "benchmarks/toy_audit/check_paired_gradient.py": "259341eae8f3ce96986afe774508a5590427403ed50886aafd13ab058fd50450"
+  },
+  "training_campaigns": 0
+}

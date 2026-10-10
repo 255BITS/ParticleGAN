@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "bcap-family-defaults-round1-v1",
+  "trainer_family": "bcap",
+  "base_candidate": "k3p-bcap-matched-v1",
+  "grid": {
+    "reg_coeff": [0.5, 1.0],
+    "prior_lr_mult": [1.0, 4.0],
+    "d_lr_mult": [0.5, 2.0]
+  },
+  "tuning_through_tier": 3,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "campaign": {
+    "id": "bcap-family-defaults-round1-v1",
+    "budget_seconds": 352800,
+    "candidate_budget_seconds": 44100,
+    "accept_shared_cost_transfer": false
+  },
+  "hypothesis": "A bounded shared-defaults grid of critic rate, prior rate and fixed BCap strength may retain the canonical smoke behavior while improving the observed clean mode-hold coverage failure.",
+  "rationale": "The last ordinary matched BCap run passed all three smoke and five quality tasks, then retained only five of eight ring modes despite HQ 0.999755859375. Compare conservative/aggressive public critic and prior rate multipliers with the known coefficient1 and weaker coefficient0.5; this is a configuration search, not isolated causal attribution. All eight configurations differ from the failed canonical critic1/prior2 settings. Keep cap1, penalty cadence1, global LR0.00425, optimizer family, A2, schedules, noise, task priors, hosts, initialization, protocol seed, sampling and gates fixed. Every ordinary survivor advances through the same full required tasks; each required non-pass stops that configuration. Stagewise representation support is recorded separately before spending. Ceilings are complete timeout reservations, not expected runtime. A passing screen cannot confer accepted calibration, independent robustness or default adoption.",
+  "guide": "EXPERIMENTATION.md"
+}

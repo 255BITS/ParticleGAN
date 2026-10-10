@@ -14,9 +14,9 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - K3P gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
-    reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
-    plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
+  - KA2 gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
+    reals + a fake cap, then an even blend with a real/fake cap plus EMA-critic
+    gradient proximity gated by the critic's Adam statistics; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
     the 100gaussians recipe's penalty on grad_x D(x).
   - recipe.make_optimizers(G, D, prior, encoder=E, ...): Adam beta1=0 (the
@@ -56,7 +56,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import get_recipe, scale_learning_rates  # noqa: E402
+from particlegan import get_recipe, init, scale_learning_rates  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -213,10 +213,19 @@ def train(
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
         # This example anneals G/D over the whole run (not the 1,600-update
-        # toy horizon); K3P's blend follows the critic LR either way.
+        # toy horizon); KA2's blend does not depend on the LR.
         network_lr_horizon_cap=None,
     )
     prior = recipe.make_prior().to(device)
+    # Deterministic init replaces the Xavier init above; the table gets R2 points.
+    for seed, network in enumerate((G, D, E)):
+        init.deterministic_orthogonal_(network, seed=seed)
+    init.deterministic_orthogonal_(prior)
+
+    # Optimizers: [E+G, particle table] groups (the table at the recipe's
+    # prior LR multiplier) and the critic. Their step() does the recipe's
+    # step-time work; the critic's also updates the EMA critic we allocate here.
+    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
 
     # EMA copies of E / G / prior. Every dashboard frame is read off these:
     # the live weights orbit the equilibrium, the averaged ones sit on it.
@@ -229,14 +238,9 @@ def train(
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
 
-    # Optimizers: [E+G, particle table] groups (the table at the recipe's
-    # prior LR multiplier) and the critic. Their step() does the recipe's
-    # step-time work; the critic's also updates the EMA critic we allocate here.
-    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
-
     optimizers = (opt_GE, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
-    # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
+    # KA2 gradient penalty (the default), paired with opt_D (EMA critic, controller).
     penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)
@@ -256,7 +260,7 @@ def train(
 
     for step in range(total_steps + 1):
         # Full LR until lr_anneal_start, then cosine down: G/E/D to the
-        # network floor (K3P's blend floor), particles to lr_floor.
+        # network floor, particles to lr_floor.
         scale_learning_rates(step, recipe, optimizers, base_lrs, prior)
 
         # --- TRAIN D ---
@@ -275,7 +279,7 @@ def train(
 
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
-        # K3P gradient penalty on the joint (text, latent) pairs.
+        # KA2 gradient penalty on the joint (text, latent) pairs.
         # D_joint wraps D, so the penalty evaluates the EMA critic the same way.
         loss_d = loss_d + penalty(D_joint, join_pair(x_real, z_enc), join_pair(x_gen_soft, z_prior))
         loss_d.backward()

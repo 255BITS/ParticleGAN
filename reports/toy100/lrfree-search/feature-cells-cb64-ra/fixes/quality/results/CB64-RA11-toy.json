@@ -1,0 +1,24 @@
+{
+  "status": "VALID_TOY_PASS_GRID_PENDING",
+  "utc": "2026-09-30T16:33:48.051785+00:00",
+  "variant": "CB64-RA11",
+  "toy_gate": "PASS",
+  "toy_artifact_validity": "VALID",
+  "grid_gate": "PENDING",
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/result.json": "c6579ef8d596a6fc780c0244ecedd7e3ea11ac334466458019f6d90cdffa9963",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/owned-slot-through-1.json": "2d6a811dc95ba31b7f54a05833af607d94b366f72f0d666f4c7d557ed6c63a41",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/accepted-attempt1/receipt.json": "d5b0986b2ceba69e24cf5d62430526afd8043f30fb3ccc24b27abe3108ccac17",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/accepted-attempt1/FINAL-FROZEN.json": "b3171d14d3558ae4cbb590f59d783ce1c65cbd460d70188b0498b3e882308473",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/READY.json": "f7a357d0a40d353fd72bc1377240d7f89f47b34758086d284d628e35989fa5b9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/source-freeze.json": "d973828e057a63131e6498fc3188f82b8fff3a3f58ab1ace12615566fe9837fe"
+  },
+  "toy_final": {
+    "precision": 0.96533203125,
+    "coverage": 25,
+    "mass_tv": 0.05211425781250001,
+    "min_supported_mass": 0.03271484375
+  },
+  "both_quality_gates_pass": false,
+  "replay_portability_status": "NOT_RUN_PENDING_GRID"
+}

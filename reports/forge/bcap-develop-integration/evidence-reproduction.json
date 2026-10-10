@@ -1,0 +1,47 @@
+{
+  "accounting_path_difference": "Reproduction reads exact archived queue metadata rather than original active queue paths; charges and all other accounting fields are identical.",
+  "identical_actual_training_gif_bytes": 55,
+  "optimizer_updates_added": 0,
+  "original_metrics_statuses_and_paid_costs_equal": true,
+  "original_reproduction_receipt": {
+    "certificate_manifest_sha256": "f8789425fdf31965f1e83dad0f4c3cbc0dc83f847a46763ec756098090a5001a",
+    "certified_attempts": 56,
+    "optimizer_updates_added": 0,
+    "output_sha256": {
+      "audit.json": "b9918c2e9837aadd8f4be9d7784daf1fe2fc7413601245898744c0495300d4b1",
+      "results.json": "5e2e5baaffa813ce7415dfae0a026b7fdc9286ee6cb2c9f7f3242ac7e62cc065"
+    },
+    "qualification_input": false,
+    "sampling_draws_added": 0,
+    "schema_version": 1,
+    "scientific_files_verified": 1205,
+    "scientific_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+    "scores_recomputed": 0,
+    "source_checkout": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/evidence-verification-source-v2",
+    "source_compatible_commit": "e1c7fcc22086c290868ea47b989a998a86e913e4",
+    "tooling_commit": "a85eeca15d3514c8cdb175d9c33bf0b987746d1b",
+    "tooling_sha256": {
+      "audit.py": "5189003c2edd35dd1e5735330d019112eb72bb21afbb792f13060477d30cd803",
+      "publish.py": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148"
+    }
+  },
+  "qualification_input": false,
+  "raw_reproduction_receipt": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/evidence-verification-output-v2/reproduction.json",
+    "sha256": "21e144f98edb7306dcaca9f8419f8772e32b351a840d03fbffb9343393ac3f3a"
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scores_recomputed": 0,
+  "verified_export_tooling_blobs": {
+    "reports/forge/bcap-develop-integration/audit.py": {
+      "git_blob": "5800f16cf7c481320de0e40294c6d9db21756cec",
+      "sha256": "5189003c2edd35dd1e5735330d019112eb72bb21afbb792f13060477d30cd803"
+    },
+    "reports/forge/bcap-develop-integration/publish.py": {
+      "git_blob": "18c497888bbcd4ba58645b3b15c4806841eeed8c",
+      "sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148"
+    }
+  },
+  "verified_export_tooling_commit": "25f979e9bd556df4f9f1b5116aa2d72947074274"
+}

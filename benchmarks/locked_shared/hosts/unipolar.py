@@ -14,6 +14,7 @@ from dataclasses import dataclass
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -250,6 +251,7 @@ def _fit_rpgan(
     steps: int,
     recipe: UnipolarRecipe,
     noise_policy=None,
+    components=None,
 ) -> tuple[list[dict], GradientPenalty]:
     """One D update then one G update, averaged over scales ``{0, +1}``."""
     gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
@@ -270,6 +272,9 @@ def _fit_rpgan(
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, reg = components.bind(
+            generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     real = {
@@ -290,6 +295,7 @@ def _fit_rpgan(
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
+                components.conditioned_score(critic, scale) if components is not None else
                 lambda z, scale=scale: critic.score(z, scale),
                 real[scale] / critic.input_scale,
                 fake / critic.input_scale,
@@ -306,17 +312,38 @@ def _fit_rpgan(
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
             real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
+        transport_panel = []
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
             g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
-        g_loss.backward()
+            transport_panel.append(fake[0])
+        protected_adversarial = g_loss
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, torch.stack(transport_panel),
+                torch.stack([real[scale][0] for scale in SCALES]),
+                conditioning=real[0.0].new_tensor(SCALES).unsqueeze(1))
+        def protected_evaluator():
+            adversarial = student.odd.new_zeros(())
+            for scale in SCALES:
+                current = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
+                adversarial = adversarial + 0.5 * gan.g_loss(critic(current, scale), real_scores[scale])
+            return (adversarial,)
+        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
+                                     protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_residual(student))
+        def observe_student():
+            metrics = score_residual(student)
+            if components is not None:
+                components.constraint_geometry_capture(step + 1,
+                    torch.stack([real[scale][0] for scale in SCALES]),
+                    torch.stack([student.delta(scale) for scale in SCALES]), metrics, kind="line")
+            return metrics
+        checkpoint(step + 1, observe_student)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
             row = score_residual(student)
@@ -346,6 +373,7 @@ def run_arm(
     reg_kappa: float = 1.0,
     reg_norm: str = "l2",
     noise_policy=None,
+    components=None,
 ) -> dict:
     """Fit one arm and score the unipolar gates. Prints a tailable line per checkpoint."""
     if arm not in ("locked_rpgan", "mse_only", "polarity_flipped"):
@@ -381,7 +409,7 @@ def run_arm(
         if noise_policy is not None:
             critic.noise_policy = noise_policy
         history, reg_used = _fit_rpgan(student, critic, target, steps=recipe.steps,
-                                      recipe=recipe, noise_policy=noise_policy)
+                                      recipe=recipe, noise_policy=noise_policy, components=components)
     row = score_residual(student)
     row.update(
         arm=arm,

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "onboarding-pilot",
+  "budget_seconds": 900,
+  "candidate_budget_seconds": 900,
+  "accept_shared_cost_transfer": false,
+  "purpose": "One fixed-seed CPU-only tier-1 public-mechanism ablation to verify the onboarding workflow; no GPU use or promotion."
+}

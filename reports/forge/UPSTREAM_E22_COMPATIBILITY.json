@@ -1,0 +1,152 @@
+{
+  "audit_scope": "Read-only E22/KA2 API and scientific compatibility; no tests, training, mutations or queue actions",
+  "current_develop": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+  "current_develop_defect": {
+    "conclusion": "E22 is an incoming API capability; its absence from current develop is not a reproduced current Forge defect.",
+    "demonstrated": false
+  },
+  "current_mog_positive_import": {
+    "allowed_use": "Pinned historical evidence with exact receipts, retaining original attribution and limitations",
+    "eligible": false,
+    "reasons": [
+      "E22 particle-table law differs from fixed-width learned MoG",
+      "Noisy state-selected served sampling differs from clean live evaluation",
+      "Native seed1234 and critic seed1 redraw differ from Forge named initialization/RNG",
+      "Package/source/recipe/checkpoint identities differ",
+      "E19a stress and 13-gate portability are not the full exact current Forge reference denominator"
+    ],
+    "scope": "Inspected E22/KA2 evidence only; archive inventory is a separate audit"
+  },
+  "forge_checkpoint_at_inspection": "077f9b20e310d6ac1f7f03c251cf2a6a965fd728",
+  "future_integration_requirements": [
+    {
+      "id": "public_api",
+      "paths": [
+        "particlegan/training.py",
+        "particlegan/recipes.py",
+        "particlegan/init.py",
+        "particlegan/__init__.py",
+        "experiments/forge/api.py"
+      ],
+      "requirement": "Reconcile MoG/A2 capability support, named generators, atomic named initialization, enumeration and independent execution allowance with public UpdatePolicy.",
+      "status": "REBASE_REQUIRED"
+    },
+    {
+      "id": "row_applicability",
+      "paths": [
+        "particlegan/recipes.py",
+        "particlegan/policy.py",
+        "particlegan/birth_death.py",
+        "experiments/forge/behavior_adapters.py"
+      ],
+      "requirement": "Independent E22 requires particle-table semantics; routed/conditional/encoder hosts need explicit separate supported policy contracts. Never disable row controls silently.",
+      "status": "BLOCK_UNSUPPORTED"
+    },
+    {
+      "id": "sampling",
+      "paths": [
+        "experiments/forge/sampling.py",
+        "experiments/forge/views.py"
+      ],
+      "requirement": "Declare fast versus EMA versus state-selected served weights, DV12 perturbation and learned output noise explicitly; never treat incoming ema=False as guaranteed fast/live weights.",
+      "status": "NEW_PROTOCOL_REQUIRED"
+    },
+    {
+      "id": "rng",
+      "paths": [
+        "experiments/forge/rng.py",
+        "particlegan/policy.py",
+        "particlegan/birth_death.py"
+      ],
+      "requirement": "Bind policy and private birth/death/routing streams and serialized backward mode; preserve all restart state without implicit training/eval stream aliasing.",
+      "status": "NEW_MANIFEST_REQUIRED"
+    },
+    {
+      "id": "continuous_budget",
+      "paths": [
+        "experiments/forge/adapters.py",
+        "experiments/forge/behavior_adapters.py",
+        "experiments/forge/clockfree.py",
+        "experiments/forge/continuation.py"
+      ],
+      "requirement": "Keep E22 total_steps=None, enforce external finite task budgets, audit the fixed KA2 call800 transition and guard delays, retain original own-state prefix identity.",
+      "status": "REBASE_REQUIRED"
+    },
+    {
+      "id": "mechanisms_state",
+      "paths": [
+        "experiments/forge/mechanisms.py",
+        "experiments/forge/state.py"
+      ],
+      "requirement": "Instrument actual KA2/E22 hooks and validate schema4/policy controllers, averages, reservoirs, learned noise, callback and RNG states atomically; retain old schema snapshots.",
+      "status": "REBASE_REQUIRED"
+    },
+    {
+      "id": "candidate_identity",
+      "paths": [
+        "configs/forge/ideas/k3p.json",
+        "experiments/forge/planning.py"
+      ],
+      "requirement": "Do not label the post-merge default KA2 as K3P. Resolve named E22 preset explicitly; pin every new source/formulation/scoring identity and keep old cohorts.",
+      "status": "NEW_CANDIDATES_REQUIRED"
+    }
+  ],
+  "incoming_ref": "b924ed4d3a2fbfee31796b53a32ea831d235750e",
+  "recipe_delta": {
+    "added_fields": [
+      "amsgrad",
+      "birth_death_feature_scale",
+      "birth_death_isolation",
+      "birth_death_space",
+      "continuous_policy",
+      "critic_payoff_damping",
+      "critic_r1_real",
+      "lr_control",
+      "output_noise_mode",
+      "particle_birth_death",
+      "reg_anchor_min_decay",
+      "reopen_signal",
+      "row_evidence_exclude",
+      "row_evidence_gate",
+      "row_evidence_hold",
+      "row_evidence_hot",
+      "row_evidence_null",
+      "row_policy",
+      "serve_average",
+      "table_release_rule"
+    ],
+    "changed_defaults": {
+      "name": {
+        "forge": "'k3p'",
+        "incoming": "'ka2'"
+      }
+    },
+    "removed_fields": [
+      "reg_anchor_decay"
+    ]
+  },
+  "report": "reports/forge/UPSTREAM_E22_COMPATIBILITY.md",
+  "schema_version": 1,
+  "scientific_limitations": [
+    "No full-current-MoG positive established by these incoming E22 claims",
+    "No Phase D acceptance or default promotion",
+    "No authority to merge PR155 or change existing registrations"
+  ],
+  "source_sha256": {
+    "configs/100gaussians/e22-noout.json": "5dc40c0d9b1a09c4b707a97f74103627a7786e1b6af4a5c657b816e071007823",
+    "docs/e22.md": "eac31890e72fed0b55f7eda700faff3741f6a94dab882b1b066222e15b9c6376",
+    "docs/e22_migration.md": "15a1bbdc30907526cc9b6bb579ab33270678af114b5f5608bf1981ee5afed4a9",
+    "docs/ka2.md": "d5aa824916f8a995bf520d12946a722b7650ca412a88c4eaf5a59bbccab5b4b1",
+    "particlegan/__init__.py": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/init.py": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/policy.py": "803272dc136b7fb024fcf51692e70e7f49323c88f84f8f7bc9aa31292bc780ba",
+    "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6",
+    "particlegan/training.py": "a39c162467860372857aa0bbe1e91937a36ca36381451a937f874502e40f1676",
+    "reports/e22-animation/record_e22.py": "82ee88a751578b348eff4cc306fad5bf72c3f1cfb30b65e08507c291a9581383",
+    "tests/fixtures/e22_native.json": "1d0b62580aead573f7cc2ccbbb3f291bba67698259d1d782acd92eacea17074e",
+    "tests/test_e22_policy.py": "389b1d535999a043717a42a8f47f63d69555246e56760f42f4356aa482ccb750",
+    "tests/test_e22_recipe.py": "e5ff72f3b1d4a9e00f3b4139ce0a2b97305dd8d690254b9ba593420ad441e5ff"
+  }
+}

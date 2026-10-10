@@ -1,0 +1,11 @@
+{
+  "independent_review_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-math-review/receipt.json": "15a3c960da0622a432287da615e79217d1a94a9ff54fd28783a213a1d9bb5184",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-prototype-review/accepted-attempt1/receipt.json": "b7e4ffcaaaba083908f85e46422a39b108a94c0d9da9d8cf8f57f61a3fb0f4d7"
+  },
+  "root_verified_unique_raw_files": 214,
+  "scope": "Exactly one presealed CPU invocation; no CUDA or quality qualification.",
+  "source_freeze_sha256": "7497913b6b0fdec2da849d46386b9a2c64dabab754c01a9c9fa7b8abe0f36d05",
+  "status": "GO_ONE_FIXED_CPU_GRID_TOY_REACTION",
+  "utc": "2026-09-30T15:14:38.366098+00:00"
+}

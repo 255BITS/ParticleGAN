@@ -1,0 +1,33 @@
+{
+  "campaign": {
+    "budget_seconds": 10080,
+    "candidate_budget_seconds": 2520,
+    "id": "halloween-transfer-space-v1"
+  },
+  "candidates": [
+    {
+      "base_candidate": "bcap-pure-least-squares-joint-v2",
+      "trainer_family": "bcap-pure"
+    },
+    {
+      "base_candidate": "halloween-optimizer-loss-v1",
+      "trainer_family": "halloween"
+    }
+  ],
+  "execution_backend": "cpu",
+  "hypothesis": "A bounded matched-task comparison can represent the historical optimizer/loss bundle alongside the existing least-squares baseline. This example declares a finite study but grants no trained qualification.",
+  "id": "halloween-transfer-space-v1",
+  "parameters": {
+    "lr": {
+      "count": 8,
+      "high": 0.008020980209802098,
+      "kind": "logspace",
+      "low": 0.002125
+    }
+  },
+  "protocol": "screening",
+  "samples": 4,
+  "schema": "forge_search_space_v1",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

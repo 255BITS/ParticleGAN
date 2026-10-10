@@ -1,0 +1,70 @@
+{
+  "calibration_status": "provisional",
+  "campaign": "bcap-dualnorm-pacing-v2",
+  "control_candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+  "control_required_passes": 3,
+  "default_adoption": false,
+  "independent_confirmation": "not_performed",
+  "input_digest": "cd366174da2d4c3b5ad7251da64911d93e405c903fd62b52f58596985edbe50c",
+  "new_selection": {
+    "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "candidate_revision": "6430011183321a16041366052d5b572f377c402230cd76804ca14634296b81db",
+    "cohort": "379559f2c6894ee7dba43bfd13b755a3f963dd4be2f479b538a5e2ad2da2f0be",
+    "execution_backend": "cuda",
+    "measurement_views": [
+      "discriminator_stability"
+    ],
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "Completed optimizer-only BCAP pacing comparison: select one whole recipe by required Tier 1 PASS count descending, then configuration hash ascending, across all 25 complete current-source recipes. The selected recipe passes 4/6 versus the matched starter's 3/6. This pins a provisional current measurement; calibration, confirmation and default adoption remain separate.",
+    "recipe_sha256": "454c07bbd5bf8d8fd277904d16ac9488041a337bf9817a2fe807ec286efb5d03",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+    "scientific_row_sha256": "6a757cc2668880c61efcfbeb9a99b5b1894b955dbdf8c1fef6f48ebec613587b",
+    "selection_kind": "current_measurement",
+    "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+    "task_keys_sha256": "7e46e7a9af2da1201c852f682045d81fbab1a03566091ca01b05f777338c817a",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+  "preserved_historical_selections_sha256": "ead86f00684992aaaa400a913cca165894217c1e66d4213ddbbcf9c5cb900a8b",
+  "preserved_other_selections_sha256": "58c6d6042f7775df5139b0523bd76e08f4331a0e536028ae543b9c878fdf44ed",
+  "previous_selection": {
+    "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+    "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+    "cohort": "2d8cee20b23e8d7ed96d20d442df358846fc46d4681d0799cc8ba5081638c975",
+    "execution_backend": "cuda",
+    "measurement_views": [
+      "discriminator_stability"
+    ],
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. Original frozen PASS/hash search selections remain unchanged. This selects a measured starting point, with no calibrated default adoption or qualification claim.",
+    "recipe_sha256": "1d15d3ab991724ee353548cb6c3638ff4be4a108b71266ede80b7c62b5375272",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+    "scientific_row_sha256": "c666dc1059462623cdb8c60ce0448ef86845fd200a3346434b8f528912a653dc",
+    "selection_kind": "current_measurement",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+    "task_keys_sha256": "55cf9efb1cf6160a9d450dcb5ef5462d6dda4c397bf7abd10eaef33f0159307f",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "qualification_input": false,
+  "qualified": false,
+  "required_passes": 4,
+  "required_total": 6,
+  "results_sha256": "f646362f8b5ac50914e90cdefc3cbc1d7c21b25b78e284d6cfea6fea79cec8f9",
+  "schema_version": 1,
+  "search_report_sha256": {
+    "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-a.json": "270b3271b4448f70a82c1f3d2ece28de79d2e5c4b63444d2464da5b6bc1e7663",
+    "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-b-006d03f6c1648102.json": "4386ff08960adb837c7fcbab1ccfe4dd02ba13c22780333cc8fd8ea1f59904d3",
+    "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json": "9618361150d379d3488d7d3d73929f05a39d282319f7c35500107db55ad6eab1"
+  },
+  "selected_candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "selected_configuration_id": "7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "selection_kind": "current_measurement",
+  "source_commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be",
+  "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+  "source_snapshot": "reports/forge/technique-evidence/e09c650155820e13454549d67238e1ea27df10061265a297c3311087afbcf921.json",
+  "source_snapshot_input_digest": "e09c650155820e13454549d67238e1ea27df10061265a297c3311087afbcf921",
+  "source_snapshot_sha256": "539fdf0b580d66d867d810b7f9a0b70f3cd813d348b3b50a7c576b0c9d6eab8a",
+  "updated_family_only": "bcap-dualnorm"
+}

@@ -1,0 +1,42 @@
+{
+  "configuration_changed": false,
+  "corrected_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+  "host_changed": false,
+  "model_or_optimizer_arithmetic_changed": false,
+  "moving": {
+    "baseline": {
+      "hq": 0.9464,
+      "modes": 100
+    },
+    "completed_updates": 500,
+    "new_expression": "surprise=None if trainer.policy.surprise is None else trainer.policy.surprise.diagnostics()",
+    "old_expression": "surprise=None if trainer.surprise is None else trainer.surprise.diagnostics()",
+    "retained_error": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/moving-grid100.log"
+  },
+  "native": {
+    "completed_updates": 0,
+    "original_error": "ModuleNotFoundError: native100_diagnostics",
+    "path_preparation": "prepend frozen HARNESS before runpy; screen prepends candidate package before model imports",
+    "retained_error": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-grid100.log"
+  },
+  "original_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+  "package_changed": false,
+  "schedule_changed": false,
+  "scorer_changed": false,
+  "source_changes": {
+    "freeze.py": {
+      "after": "caaf3acd3de6459053720d33dca43274a65324fdc317dd36a87c6c2f622cb44d",
+      "before": "bbbcf376e254e6347bffd0b9953802f2871a7f499d565cc012098f8a37f2b6d7"
+    },
+    "run_moving.py": {
+      "after": "c2f8d399416b328886ba2452e86a1398f511c7357c915eb6437617f54cf69df9",
+      "before": "bc3e8eda5d838c942999eada6b1d51cf4cef04009432609f580639bf6559a3a4"
+    },
+    "run_screen.py": {
+      "after": "9e432c55647df3ccd50eca753965f54bfca5a1aa20bd603eca48a537c19eba8b",
+      "before": "7161705fabe419616d5ec93021014011f9a24d1833e925751c73b985b12da5ac"
+    }
+  },
+  "status": "OBSERVATION_AND_IMPORT_PATH_CORRECTED_BEFORE_TRAINING",
+  "thresholds_changed": false
+}

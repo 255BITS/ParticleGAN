@@ -1,0 +1,299 @@
+{
+  "accepted_native3_status": "PENDING_PUBLICATION_COST_FINALIZATION",
+  "accepted_original_gate_counts": {
+    "FAIL": "integer",
+    "PASS": "integer",
+    "UNAVAILABLE": "3 minus accepted cases"
+  },
+  "all_required_case_evidence_complete": "all3 accepted + original GIFs",
+  "card_schema": "pg_pr223_native3_terminal_publication_card_v2",
+  "card_trust": "explicit root cardSHA/exact neworigin+digest+separate supplied rootanchor path/SHA301b; copied anchor must match external rootpin",
+  "claims": {
+    "clean_or_forced_ema_primary_credit": false,
+    "current26_qualification": false,
+    "default_adoption": false,
+    "full_new_source_original19_credit": false,
+    "named10500_cost_pooling": false,
+    "old_grades_are_current_credit": false,
+    "scope": "three fresh native geometry cases under the original full-winner noisy selected law",
+    "speed_ranking": false
+  },
+  "completed": "accepted full-evidence case count",
+  "cost_snapshot_before_publication": {
+    "aggregate_cap_seconds": 10800,
+    "aggregate_overrun_seconds": "max(0, inclusive charge minus10800); separate diagnostic, never additive charge",
+    "case_caps_sum_seconds": 4290,
+    "charged_seconds": "original19case + pretraininginvalid + currentpaid + currentreserve + SAME cumulative metadata ONCE",
+    "combined_prior_case_charged_seconds": 3167.891497056,
+    "current_case_charged_seconds": "new paid + reserve",
+    "current_case_paid_wall_seconds": "measured new paid",
+    "current_case_reserved_seconds": "residual interruption reserve",
+    "export_grace_seconds": 0,
+    "halt_required": "boolean",
+    "metadata": "SAME cumulative180 ledger cost object",
+    "metadata_cap_seconds": 180,
+    "overrun_seconds": "current case overruns plus cumulative metadata overrun, already in measured paid, never additive charge",
+    "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
+    "prior_case_charged_seconds": 3165.841891122982,
+    "remaining_seconds": "10800 minus charge",
+    "retries": 0
+  },
+  "counts": "recorded execution counts; exactly three active cells",
+  "family": "atlas",
+  "final_cost": {
+    "authoritative_final_metadata_ledger": {
+      "bytes": "same closed bytes length",
+      "path": "unchanged canonical180 path bound to parent FINAL_COST",
+      "sha256": "same closed bytes SHA"
+    },
+    "consumed_closed_metadata_ledger": {
+      "bytes": "integer",
+      "path": "actual root-SHA-bound CLOSED input path",
+      "sha256": "root trusted final ledger SHA"
+    },
+    "costs": "same cost_snapshot_before_publication shape; originalcase3165.841891/startup2.049606/currentpaid+reserve/final cumulative metadata once",
+    "cumulative_metadata_once": true,
+    "first_invalid_anchor_sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb",
+    "full_new_source_original19_credit": false,
+    "ledger_input_is_copy": true,
+    "metadata_phase_count": "at least22 plus publication tail",
+    "metadata_phase_history": "exact final closed list preserving entire22 predecessor phases",
+    "old_case_debit_once": true,
+    "old_grades_are_current_credit": false,
+    "original_case_verdicts_unchanged": true,
+    "original_terminal_cut_results_sha256": "results file SHA",
+    "predecessor_closed_metadata_sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2",
+    "predecessor_cost": {
+      "accepted_original_gate_counts": {
+        "FAIL": 0,
+        "PASS": 0,
+        "UNAVAILABLE": 3
+      },
+      "canonical_metadata_ledger": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+      "combined_prior_case_charged_seconds": 3167.891497056,
+      "execution_counts": {
+        "INVALID": 1,
+        "NOT_RUN": 2
+      },
+      "files": {
+        "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json": {
+          "bytes": 4644,
+          "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
+        },
+        "reports/forge/pr223-native3-continuation-20261004/fixtures/first-invalid-debit-anchor.json": {
+          "bytes": 1948,
+          "sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb"
+        }
+      },
+      "numerical_credit": false,
+      "old_grades_are_current_credit": false,
+      "original19_case_charged_seconds": 3165.841891122982,
+      "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
+      "required_closed_prefix_phases": 22,
+      "schema": "pg_pr223_native3_predecessor_cost_v1",
+      "source": {
+        "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+        "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+      },
+      "training_started": false
+    },
+    "preserved_metadata_prefix_phases": 22,
+    "pretraining_invalid_debit_once": true,
+    "raw_native3_protocol_gate": "retained raw full3 status",
+    "schema": "pg_pr223_native3_final_publication_cost_v2",
+    "status": "PASS/FAIL only all3 accepted and within cap; else INCOMPLETE",
+    "trusted_terminal_card_sha256": "root card SHA"
+  },
+  "final_cost_input": "explicit trusted CLOSED ledger COPY + inert exact canonical sameLIVE identity; never consume LIVE path",
+  "latest_selection": "V2 and V1 are separate source/evidence cuts; use V2 numerical cells only for V2 source. Carry V1 firststartup cost only via fixed301b summary; do not sum whole cumulative report cuts or borrow old16/new3.",
+  "metadata_phase_count_before_publication": "integer; at least22; later legitimate same-ledger closed phases retained includingERROR",
+  "metadata_phase_history_before_publication": "exact entire closed phase list retaining immutable CLOSED22 prefix1cb2, whose initial12 equalce949",
+  "ordered_ids": [
+    "pr223-native3-continuation-v1-native-grid100",
+    "pr223-native3-continuation-v1-native-rotated100",
+    "pr223-native3-continuation-v1-native-staggered100"
+  ],
+  "original_required": 19,
+  "parent_metadata_anchor": {
+    "bytes": 2675,
+    "phases": 12,
+    "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369",
+    "snapshot_relative": "reports/forge/pr223-native3-continuation-20261004/inputs/closed-parent-metadata.json"
+  },
+  "predecessor_contract_sha256": "58a16973e8fcb270ec7f121538e25b288340ca788f69236cac3ffba27772be5e",
+  "predecessor_cost": {
+    "accepted_original_gate_counts": {
+      "FAIL": 0,
+      "PASS": 0,
+      "UNAVAILABLE": 3
+    },
+    "canonical_metadata_ledger": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+    "combined_prior_case_charged_seconds": 3167.891497056,
+    "execution_counts": {
+      "INVALID": 1,
+      "NOT_RUN": 2
+    },
+    "files": {
+      "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json": {
+        "bytes": 4644,
+        "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
+      },
+      "reports/forge/pr223-native3-continuation-20261004/fixtures/first-invalid-debit-anchor.json": {
+        "bytes": 1948,
+        "sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb"
+      }
+    },
+    "numerical_credit": false,
+    "old_grades_are_current_credit": false,
+    "original19_case_charged_seconds": 3165.841891122982,
+    "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
+    "required_closed_prefix_phases": 22,
+    "schema": "pg_pr223_native3_predecessor_cost_v1",
+    "source": {
+      "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+      "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+    },
+    "training_started": false
+  },
+  "predecessor_metadata_anchor": {
+    "bytes": 4644,
+    "first_invalid_anchor_bytes": 1948,
+    "first_invalid_anchor_sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb",
+    "historical_numerical_credit": false,
+    "phases": 22,
+    "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2",
+    "snapshot_relative": "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json"
+  },
+  "prior_reference": {
+    "accepted_original_gate_counts": {
+      "FAIL": 0,
+      "PASS": 16,
+      "UNAVAILABLE": 3
+    },
+    "case_charged_seconds": 3165.841891122982,
+    "execution_counts": {
+      "INVALID": 1,
+      "NOT_RUN": 2,
+      "PASS": 16
+    },
+    "files_sha256": {
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+    },
+    "old_grades_are_current_credit": false,
+    "original_evidence_unchanged": true,
+    "required": 19,
+    "source": {
+      "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+      "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+    }
+  },
+  "producer": {
+    "draws": 0,
+    "models": 0,
+    "regrades": 0,
+    "rendered_frames": 0,
+    "scorer_calls": 0,
+    "sha256": "frozen passive helper SHA"
+  },
+  "publication_scope": "native3_repaired",
+  "raw_native3_protocol_gate": "PASS/FAIL only if all3 recorded completed; otherwise UNAVAILABLE",
+  "required": 3,
+  "rows": {
+    "acceptance_status": "ACCEPTED/UNAVAILABLE/UNAVAILABLE_BUDGET_EXCEEDED",
+    "accepted_original_gate": "PASS/FAIL/null",
+    "complete_recipe": "all source-bound Recipe fields",
+    "completed_steps": 7000,
+    "cost": "durable paid/reserve/charged/overrun with completed-only measured cost",
+    "execution_status": "saved execution status",
+    "full_protocol_complete": "accepted full evidence boolean",
+    "group": "native",
+    "id": "exact fresh ID",
+    "independent_holdout_samples": 100000,
+    "media": {
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        3750,
+        4750,
+        5750,
+        7000
+      ],
+      "bytes": "integer",
+      "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+      "capture_metadata": "nine saved metadata records",
+      "file": "gifs/native-<task>.gif",
+      "frames": 9,
+      "original_gate": "accepted joint gate",
+      "sha256": "exact original SHA"
+    },
+    "metric_observations": 34,
+    "native_gates": {
+      "clean": {
+        "accuracy": "PASS/FAIL",
+        "coverage": "PASS/FAIL"
+      },
+      "noisy": {
+        "accuracy": "PASS/FAIL",
+        "coverage": "PASS/FAIL"
+      }
+    },
+    "observation_steps": "all34 original clocks",
+    "observer": "original metadata incl20k/final5/100k/seed basis",
+    "original_requirements": "all13 exact original bounds",
+    "parent_full19_retest_id": "pr223-faithful19-retest-v1-native-<task>",
+    "parent_original_id": "atlas-original19-native-<task>",
+    "raw_reported_status": "accuracy-only raw status, can differ from accepted gate",
+    "recorded_full_protocol_complete": "boolean",
+    "required_host": "unchanged original host object",
+    "task": "grid100/rotated100/staggered100",
+    "terminal_reads": [
+      6000,
+      6250,
+      6500,
+      6750,
+      7000
+    ]
+  },
+  "schema": "pg_pr223_native3_passive_publication_v2",
+  "source": {
+    "digest": "root must provide exact new 64hex",
+    "origin_commit": "root must provide exact new 40hex"
+  },
+  "source_interface_sha256": "e8050beb00dae6b86013af50b3e652ed155b0cd88740f45f2a832a9ac6663e39",
+  "status": "PROSPECTIVE_SCHEMA_ONLY_NOT_RESULTS",
+  "verification": {
+    "accepted_original_gate_counts": "current three only",
+    "accepted_original_gifs": "integer",
+    "bulk_state_arrays_logs_copied": false,
+    "consumed_inputs": "integer",
+    "counts": "execution counts",
+    "draws": 0,
+    "final_cost_pending": true,
+    "first_invalid_anchor_sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb",
+    "grader_calls": 0,
+    "models": 0,
+    "original_required": 19,
+    "predecessor_closed_metadata_sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2",
+    "predecessor_cost_only_verified": true,
+    "preserved_metadata_prefix_phases": 22,
+    "private_nonce_values_copied": false,
+    "producer_sha256": "frozen helper SHA",
+    "rendered_frames": 0,
+    "request_boundary_control_verified": true,
+    "required": 3,
+    "results_sha256": "actual compact result SHA",
+    "schema": "pg_pr223_native3_passive_verification_v2",
+    "scorer_calls": 0,
+    "source": {
+      "digest": "root must provide exact new 64hex",
+      "origin_commit": "root must provide exact new 40hex"
+    },
+    "status": "VERIFIED_PRE_PUBLICATION_COST_CUT",
+    "trusted_card_sha256": "root card SHA"
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "attested_monotonic": 2066868.910174658,
+  "completed_updates": 1600,
+  "deadline_monotonic": 2068614.15426571,
+  "files": {
+    "INITIALIZATION.json": {
+      "bytes": 14323,
+      "sha256": "44109b22c27740e5523941998234e7d77f0fd05b3b34fc2cfa325bc44f644290"
+    },
+    "MODEL_STARTED.json": {
+      "bytes": 402,
+      "sha256": "4b4c5c1472399ad0714d4edf24b118985745509d1d2b8bce795f954713a8f1e2"
+    },
+    "goal-final.png": {
+      "bytes": 84925,
+      "sha256": "cb443207bcbe19003c5597e1e47a1488dc7ef51453b0c40e4361122cf77f49ec"
+    },
+    "goal-states.json": {
+      "bytes": 5394330,
+      "sha256": "708c7e8aa0e43c5e7102b2caf19a06c3bb6836389cff00968636ee2cb068f1dc"
+    },
+    "goal.gif": {
+      "bytes": 301542,
+      "sha256": "0cac6da685e959b0ab07a0998307dedf67d7f71e0876b4c5e718842492cbab6f"
+    },
+    "grade-projection.json": {
+      "bytes": 5188,
+      "sha256": "c4106294c60a69b60152ce852ab27efd93b689f285d80a08f4363745db2c139c"
+    },
+    "grade.json": {
+      "bytes": 1468,
+      "sha256": "d76b5dc75ffd1731ced306ffaf0094dbd3b2894151ac6d22931c57c8d6adaa13"
+    },
+    "raw-result.json": {
+      "bytes": 134974,
+      "sha256": "03b9e3cbd9e305fbbd7baa24d0423a597fd583e05a180cb6c4f145620b0096e3"
+    },
+    "state.pt": {
+      "bytes": 459119,
+      "sha256": "f2c18a06c54d8cbba1c846fcbc7b3380c6bbfe52cf5e311ddc2512ace9154ede"
+    }
+  },
+  "frozen_request_digest": "4b0b361ec0c5b76df1ce60f0a74e1f7148d02488bfd9b60fd104a4d8a38bcd15",
+  "goal_state_steps": [
+    67,
+    200,
+    400,
+    600,
+    800,
+    1000,
+    1200,
+    1400,
+    1600
+  ],
+  "gpu_peak_reserved_mb": 44.0,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 0.20875,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 334,
+        "first_pass_step": 67,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 24,
+        "passing_suffix": 24,
+        "stable_from_seconds": null,
+        "stable_from_step": 67
+      },
+      "metrics": [
+        {
+          "margin": 0.15223366425643867,
+          "metric": "sw1_normalized",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.027766335743561323
+        },
+        {
+          "margin": 0.12473475337028503,
+          "metric": "mean_error",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.025265246629714966
+        },
+        {
+          "margin": 0.4300772722810507,
+          "metric": "covariance_error",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.45,
+          "value": 0.019922727718949318
+        }
+      ],
+      "passed": true,
+      "shortfall": 0.0,
+      "status": "PASS"
+    },
+    "gate_status": "PASS",
+    "metrics": {
+      "covariance_error": 0.019922727718949318,
+      "mean_error": 0.025265246629714966,
+      "sample_count": 4096,
+      "step": 1600,
+      "sw1_normalized": 0.027766335743561323,
+      "target_scale": 1.224178433418274
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "PASS"
+  },
+  "grade_projection": {
+    "execution_group": null,
+    "grade": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.20875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 334,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 24,
+          "passing_suffix": 24,
+          "stable_from_seconds": null,
+          "stable_from_step": 67
+        },
+        "metrics": [
+          {
+            "margin": 0.15223366425643867,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.027766335743561323
+          },
+          {
+            "margin": 0.12473475337028503,
+            "metric": "mean_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.025265246629714966
+          },
+          {
+            "margin": 0.4300772722810507,
+            "metric": "covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.45,
+            "value": 0.019922727718949318
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "covariance_error": 0.019922727718949318,
+        "mean_error": 0.025265246629714966,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.027766335743561323,
+        "target_scale": 1.224178433418274
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    },
+    "raw_task_grades": {
+      "vector_spiral": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 0.20875,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 334,
+            "first_pass_step": 67,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 24,
+            "passing_suffix": 24,
+            "stable_from_seconds": null,
+            "stable_from_step": 67
+          },
+          "metrics": [
+            {
+              "margin": 0.15223366425643867,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.027766335743561323
+            },
+            {
+              "margin": 0.12473475337028503,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.025265246629714966
+            },
+            {
+              "margin": 0.4300772722810507,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.019922727718949318
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "covariance_error": 0.019922727718949318,
+          "mean_error": 0.025265246629714966,
+          "sample_count": 4096,
+          "step": 1600,
+          "sw1_normalized": 0.027766335743561323,
+          "target_scale": 1.224178433418274
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "PASS"
+      }
+    },
+    "schema": "pg_common26_full_atlas_grade_projection_v1",
+    "task_grades": {
+      "vector_spiral": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 0.20875,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 334,
+            "first_pass_step": 67,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 24,
+            "passing_suffix": 24,
+            "stable_from_seconds": null,
+            "stable_from_step": 67
+          },
+          "metrics": [
+            {
+              "margin": 0.15223366425643867,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.027766335743561323
+            },
+            {
+              "margin": 0.12473475337028503,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.025265246629714966
+            },
+            {
+              "margin": 0.4300772722810507,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.019922727718949318
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "covariance_error": 0.019922727718949318,
+          "mean_error": 0.025265246629714966,
+          "sample_count": 4096,
+          "step": 1600,
+          "sw1_normalized": 0.027766335743561323,
+          "target_scale": 1.224178433418274
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "PASS"
+      }
+    }
+  },
+  "observation_steps": [
+    67,
+    134,
+    200,
+    267,
+    334,
+    400,
+    467,
+    534,
+    600,
+    667,
+    734,
+    800,
+    867,
+    934,
+    1000,
+    1067,
+    1134,
+    1200,
+    1267,
+    1334,
+    1400,
+    1467,
+    1534,
+    1600
+  ],
+  "repeat": {
+    "accepted_numeric_credit": false,
+    "authority_sequence": 561,
+    "binding_digest": "e47a44f085859174bd20d7535f24d520d2f14c7f319038604d7dc282d96d2bc5",
+    "candidate_digest": "3b91a9c51944409236f633fbaf09349c9dd41fa4c2dc03f59560789fd734ed29",
+    "case_id": "canonical-common26-full-atlas-vector_spiral-ember561-v1",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "effective_recipe_digest": "10d2e8df9667cecde1a863dd098d50adaa77946a8e424366d96460822aaa83da",
+    "execution_updates": 1600,
+    "initialization": "new_owner_factory",
+    "observation_contract_sha256": "3825c0f865fa4aa66edaec53e96ce5a0980e5f12b7d0a7826b2e1e4cbbb71553",
+    "protocol_digest": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "recipe_schedule_horizon": null,
+    "repeat_id": "canonical-common26-full-atlas-vector_spiral-ember561-fresh-init-seed0-v1",
+    "rng_version": "forge-rng-v1",
+    "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+    "schema": "forge_canonical_full_atlas_fresh_repeat_v1",
+    "seed": 0,
+    "source_contract_sha256": "bda36341dece41cf2e3f39fed92d171031efa43a3cf80260c33e55f96ec3ed0d",
+    "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+    "source_manifest_digest": "7a2048111bc97f66710ffb624a93140e55340a5c24a4948ec93647281ee4e1d4",
+    "source_origin_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db",
+    "task_digest": "8bf5d41cd5f8b149161178370f3df32249e7d39dc6aa0839100da37f34e6b628",
+    "task_id": "vector_spiral"
+  },
+  "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+  "schema": "pg_common26_full_atlas_child_attestation_v1",
+  "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+  "started_monotonic": 2066814.15426571,
+  "token_sha256": "956febb7c6c2c4f881a4be63331d6d0eed99dad36dfc1571a9fcc72631c5d68f"
+}

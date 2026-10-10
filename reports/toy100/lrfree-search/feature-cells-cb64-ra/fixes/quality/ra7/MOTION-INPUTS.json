@@ -1,0 +1,15 @@
+{
+  "status": "FIXED_INPUT_DIAGNOSTIC_PASS",
+  "recorded_utc": "2026-09-30T06:04:14.160197+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/FROZEN.json": "7226fd4a4493a1564d505d3f02703f403f48545481b15b6e9c7001137c55b067",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/result.json": "7b1483a006eff60cf1d4cceddda20911a5c6586a5502e84e5198aa138d57671b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/probe.py": "cfb0df57764cab501d48d46ab75dbd77fa1702c980db905acf08efe3420c0bda",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/PROTOCOL.md": "6051c370369d44709db8caa39bdd779466923ad2b8045c81822e902b4ef139eb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/REPORT.md": "c7e855872bb12386101d5c1453b4d34c200eddddc9ce9b33f1380a65afc0a28f"
+  },
+  "scope": "Recorded-gradient G-only motion diagnostic supports prospective G+sigma rate test; not next gradients, historical replay or quality acceptance.",
+  "level_ratio": 0.25,
+  "new_seeds": 0,
+  "quality_verdict": null
+}

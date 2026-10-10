@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 96000,
+    "candidate_budget_seconds": 48000,
+    "id": "bcap-default-baseline-v1"
+  },
+  "candidate": "bcap-default-baseline-direction-v1",
+  "competing_explanation": "Earlier diagnostic repairs may not transfer to original full-view consumers, own-prefix continuity or the new common preset source; no historical grade substitutes for these ordinary results.",
+  "control": {
+    "candidate_id": "bcap-default-baseline-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "identity_mse",
+    "op": ">",
+    "phase": "final",
+    "task_id": "trajectory",
+    "threshold": 0.02
+  },
+  "hypothesis": "One common-source ordinary direction-only recipe preserves6/6 Tier1, all control Tier2 passes, and adds a complete Tier2 pass across the full21-task tier.",
+  "id": "bcap-default-baseline-direction-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "identity_mse",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "trajectory",
+    "threshold": 0.02
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "phase3_paired_research_diagnostic",
+        "source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5"
+      },
+      "path": "reports/forge/bcap-projection-baseline-review/phase3-results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 3,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

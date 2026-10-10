@@ -5,7 +5,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from lib.image_ddgan import ImageGenerator, ImageDiscriminator
-from particlegan import ucd_scores
+from particlegan import init, ucd_scores
 
 
 class FlatBlock(nn.Module):
@@ -40,6 +40,10 @@ class FlatBlock(nn.Module):
         return x
 
 
+# Residual gains are set by depth on purpose.
+init.register(FlatBlock, {'gains': init.KEEP})
+
+
 class FlatParticleGenerator(nn.Module):
     """256 constant-width tokens, no pooling/merging/compressed image latent."""
     def __init__(self, cfg):
@@ -66,6 +70,10 @@ class FlatParticleGenerator(nn.Module):
             h = block(h, e)
         h = self.norm(h).transpose(1, 2).reshape(len(z), -1, 16, 16)
         return F.pixel_shuffle(self.output(h), 2).tanh()
+
+
+# The small random position table keeps its constructor draw.
+init.register(FlatParticleGenerator, {'position': init.KEEP})
 
 
 class PretrainedFeatureDiscriminator(nn.Module):

@@ -1,0 +1,10 @@
+{
+  "status": "FROZEN_RA8_INPUT_BINDING_BEFORE_MEASUREMENT",
+  "utc": "2026-09-30T08:15:04.325524+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/grid-saved-diagnostic/PREPARATION.json": "4943c0c1dbdaf079534f7af36cdb02fa1a4461cabea3bf3d5967d34d7f8a7bee",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/grid-saved-diagnostic/bind_ra8.py": "5ec8ec4b4f815e5630af9d010ae7b90742a2040da3c9f568947307e75ce0bf0c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/grid-saved-diagnostic/PROTOCOL.md": "0b56f1ae78554d1761937dc0e8d58b2ab46c8cefb22dc1fc2771bf6fc21a92be"
+  },
+  "source_inputs": 57
+}

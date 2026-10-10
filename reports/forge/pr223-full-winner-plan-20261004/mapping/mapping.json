@@ -1,0 +1,5663 @@
+{
+  "API_default8": [
+    {
+      "differences": "transpose12 vs residual16;1024 replacement draws vs indexed32; output-noise off vs original learned-noise primary. Residual16 API arm is not a full-protocol alias.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "initial_check": true,
+      "original_question": "portability/img_intensity2",
+      "post_update_checks": 24,
+      "samples": 1024,
+      "seed": 24002,
+      "steps": 600,
+      "terminal_checks": 5,
+      "tier": 1
+    },
+    {
+      "differences": "Current factory/critic/Recipe/streams/output-noise-off differ; additional sample_count>=4096 and projection_ks<=.06. Default ID does not select original research critic.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-vector-two-broad",
+      "initial_check": true,
+      "original_question": "portability/vector_two_broad",
+      "post_update_checks": 24,
+      "samples": 4096,
+      "seed": 24002,
+      "steps": 1200,
+      "terminal_checks": 5,
+      "tier": 1
+    },
+    {
+      "differences": "Affine/Fourier3 dimensions shared but initialization/streams/seed differ;24 checks plus initial, not original34 and independent100k.20k noisy API gate has no borrowed100k credit.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-grid100",
+      "initial_check": true,
+      "original_question": "native/grid100",
+      "post_update_checks": 24,
+      "samples": 20000,
+      "seed": 24002,
+      "steps": 7000,
+      "terminal_checks": 5,
+      "tier": 2
+    },
+    {
+      "differences": "Affine/Fourier3 dimensions shared but initialization/streams/seed differ;24 checks plus initial, not original34 and independent100k.20k noisy API gate has no borrowed100k credit.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-rotated100",
+      "initial_check": true,
+      "original_question": "native/rotated100",
+      "post_update_checks": 24,
+      "samples": 20000,
+      "seed": 24002,
+      "steps": 7000,
+      "terminal_checks": 5,
+      "tier": 2
+    },
+    {
+      "differences": "Affine/Fourier3 dimensions shared but initialization/streams/seed differ;24 checks plus initial, not original34 and independent100k.20k noisy API gate has no borrowed100k credit.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-staggered100",
+      "initial_check": true,
+      "original_question": "native/staggered100",
+      "post_update_checks": 24,
+      "samples": 20000,
+      "seed": 24002,
+      "steps": 7000,
+      "terminal_checks": 5,
+      "tier": 2
+    },
+    {
+      "differences": "Current factory/critic/Recipe/streams/output-noise-off differ; additional sample_count>=4096 and projection_ks<=.06. Default ID does not select original research critic.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-vector-unequal-mass",
+      "initial_check": true,
+      "original_question": "portability/vector_unequal_mass",
+      "post_update_checks": 24,
+      "samples": 4096,
+      "seed": 24002,
+      "steps": 1200,
+      "terminal_checks": 5,
+      "tier": 2
+    },
+    {
+      "differences": "Current factory/critic/Recipe/streams/output-noise-off differ; additional sample_count>=4096 and projection_ks<=.06. Default ID does not select original research critic.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "api-vector-anisotropic",
+      "initial_check": true,
+      "original_question": "portability/vector_anisotropic",
+      "post_update_checks": 24,
+      "samples": 4096,
+      "seed": 24002,
+      "steps": 1200,
+      "terminal_checks": 5,
+      "tier": 2
+    },
+    {
+      "differences": "transpose12 vs residual16;1024 replacement draws vs indexed32; output-noise off vs original learned-noise primary. Residual16 API arm is not a full-protocol alias.",
+      "evaluation_seed": 34002,
+      "exact_original19_alias": false,
+      "id": "image-develop-img_bars4-source-transpose12",
+      "initial_check": true,
+      "original_question": "portability/img_bars4",
+      "post_update_checks": 24,
+      "samples": 1024,
+      "seed": 24002,
+      "steps": 600,
+      "terminal_checks": 5,
+      "tier": 2
+    }
+  ],
+  "additional_API_questions": [
+    {
+      "difference": "Full100-mode density/accuracy in current target frame at24 cadence; original moving95-mode/relativeHQ periodic gate is different.",
+      "id": "api-rotated100-moving"
+    },
+    {
+      "difference": "Added1000-update/4096 full-Gaussian and checkpoint-continuation question, no original19 alias.",
+      "id": "api-gaussian2d"
+    }
+  ],
+  "budgets": {
+    "compute": {
+      "CPU_and_BLAS_threads": 1,
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+      "backward": "original serialized deterministic settings",
+      "dtype": "originalfloat32/noautocast",
+      "free_gpu_mib_min": 12288,
+      "host_memory_mb": 2048,
+      "memory_fraction": 0.2,
+      "physical_GPU": "root admitted serialGPU1 using existing sharedqueue",
+      "temperature_c_max": 82
+    },
+    "current26_definition_only": {
+      "added_question_allowance_sum": 11100.0,
+      "added_questions": 10,
+      "full_job_allowance_sum": 45300.0,
+      "individual_task_allowance_sum": 48900.0,
+      "job_count": 25,
+      "not_a_launch_plan": true,
+      "one_uninterrupted_ring_group_saving": 3600.0,
+      "ordinary44100_draft_unchanged": true,
+      "related_allowance_sum_after_ring_group": 34200.0,
+      "related_slots": 16,
+      "slots": 26,
+      "tiers": [
+        5,
+        19,
+        2
+      ],
+      "unique_related_original_questions": 15
+    },
+    "new_root_B_proposal_unexecuted": {
+      "all19_full_allowance_seconds": 9810,
+      "bounded_shared_metadata_and_final_publication_seconds": 180,
+      "currency": "new separately supervised wall seconds; all construction/training/observation/score/export/attestation included",
+      "export_grace_seconds": 0,
+      "initial_full_reservation_seconds": 9990,
+      "interrupt": "non-completed/error/cancelled/missing terminal charges max(full case allowance,measured), reserve=max(0,allowance-paid); completed numericFAIL charges measured only",
+      "named10500_ledger_scope": "unchanged separate ledger; no reset or pooling",
+      "old_baseline_reference_paid_seconds": 5210.63884702418,
+      "old_cost_recharged_as_new": false,
+      "overrun": "record actual paid overrun, halt; no zero-fill or cap clipping",
+      "per_case_formula": "ceil((1.5 * prior paid seconds +90)/30)*30",
+      "proposed_campaign_ceiling_seconds": 10800,
+      "retries": 0,
+      "unallocated_margin_seconds": 810
+    },
+    "original19_reference_protocol": {
+      "completion_not_guaranteed": true,
+      "full_allowance_sum": 37140.0,
+      "historical_paid_reference_only": 5210.63884702418,
+      "native_acquisition_cap": 2400.0,
+      "old_export_grace": 60.0,
+      "paid_cap": 10800.0,
+      "portability_moving_acquisition_cap": 1800.0,
+      "updates": 48800
+    }
+  },
+  "checks": {
+    "added_questions": 10,
+    "all_consumed_inputs_unchanged": true,
+    "all_vector_target_fields_equal": true,
+    "current26": 26,
+    "equal_16_nonresource_applied_recipes": true,
+    "original19": 19,
+    "privacy_fields_allowlisted": true,
+    "related_current_slots": 16,
+    "tiers": [
+      5,
+      19,
+      2
+    ],
+    "whole_protocol_aliases_asserted": 0
+  },
+  "cross_cohort_pooling": false,
+  "current26": [
+    {
+      "current_prior": {
+        "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "learned_particles_and_critic_gradient",
+      "dependencies": [],
+      "evaluation_fingerprint": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "New80-step movement/critic-gradient question; existing prospective adapter introduces identity G plus12/z1/b12, so preserve explicit owners/measurement/resources rather than claim original19 equivalence.",
+      "requirements": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ],
+      "steps": 80,
+      "task": "two_pole",
+      "task_input": "current_task/two_pole",
+      "tier": 1,
+      "timeout_seconds": 300,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "learned_parameter_measurement",
+      "dependencies": [],
+      "evaluation_fingerprint": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_routed; actual2x2 slot bank/b8 and protected complete function transport,200 updates.",
+      "requirements": [
+        [
+          "unused_hold",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_move",
+          ">=",
+          0.85
+        ]
+      ],
+      "steps": 200,
+      "task": "unused_token_hold",
+      "task_input": "current_task/unused_token_hold",
+      "tier": 1,
+      "timeout_seconds": 300,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_ae_routed: original fixed positive-width.025 MoG/encoder/objectives/250-step recon+hold gates. Explicit routed-MoG support; independent Atlas+MoG remains refused.",
+      "requirements": [
+        [
+          "recon_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "hold",
+          "<=",
+          0.35
+        ]
+      ],
+      "steps": 250,
+      "task": "ae_gan_hold",
+      "task_input": "current_task/ae_gan_hold",
+      "tier": 1,
+      "timeout_seconds": 300,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "New400-step16-mode full-component acquisition. Nominal matchingLR/P/D does not prove full winning Recipe/initialization/public noisy sampling; declare all fields/owners.",
+      "requirements": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "steps": 400,
+      "task": "ring16_acquisition",
+      "task_input": "current_task/ring16_acquisition",
+      "tier": 1,
+      "timeout_seconds": 300,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_word_joint_min11: originalN5 andN6..10 remain ineligible; N11/freeE/same-effective joint-code is explicit resource/law reform preserving five target words/20001/24/six bounds. No originalN5/fullwinner credit.",
+      "requirements": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ],
+      "steps": 20001,
+      "task": "five_word_joint_acquisition",
+      "task_input": "current_task/five_word_joint_acquisition",
+      "tier": 1,
+      "timeout_seconds": 900,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "The conditional host enumerates prior.z in its identity objective; a stochastic latent read changes the frozen host law.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "68b964b7a7e0cc0e8c0c1d8786df18096541c1369435b0f318c395198a4e14dc",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "8fd44a5ba4c28d8fca9372d847a38734de33c42bf648b9e3d78dc8c3eeb0afa7",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_conditional/routed_paired; complete keys/table/model callback, conditional arcs objective,400 updates.",
+      "requirements": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ]
+      ],
+      "steps": 400,
+      "task": "trajectory",
+      "task_input": "current_task/trajectory",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "The conditional residual objective directly enumerates prior.z; stochastic latent sampling needs a separately calibrated task.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "0e9caebc7e3518cca797d8b879db50e7d4b332a1386bf9ed045a51d5b36037c6",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "e1c9ad78ad53a8f0fa634cbe00a002b0d41541a74db5466f7a7e19d73c218443",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_conditional/routed_paired; conditional residual/identity+success+wrong-pad gates,400 updates.",
+      "requirements": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ],
+        [
+          "success_rate",
+          ">=",
+          1.0
+        ],
+        [
+          "wrong_pad_rate",
+          "<=",
+          0.0
+        ]
+      ],
+      "steps": 400,
+      "task": "residual_student",
+      "task_input": "current_task/residual_student",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "learned_parameter_measurement",
+      "dependencies": [],
+      "evaluation_fingerprint": "77034fcfe01b1c1601d48241d9ccf6afc0c94761eef5b44fdd744794f8e82b16",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "bc1df14a2bbf785a6ac7c17f759f87a300dfd33844bbba08e608fd678e44d106",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_conditional/routed_paired; original student residual cover/neutral/off-caption gates,400 updates.",
+      "requirements": [
+        [
+          "cover",
+          ">=",
+          0.85
+        ],
+        [
+          "off_caption",
+          "<=",
+          0.05
+        ],
+        [
+          "neu_hold",
+          ">=",
+          0.85
+        ]
+      ],
+      "steps": 400,
+      "task": "unipolar",
+      "task_input": "current_task/unipolar",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "This host uses two explicit learned clouds and separately declared host jitter; no implicit MoG kernel may replace that law.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "learned_parameter_measurement",
+      "dependencies": [],
+      "evaluation_fingerprint": "d6a0b646e55e9c8e523f90485b3ec47844a18e18b12fd6046c1646487c9a1807",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "e79d755f2a61242af2d2fd043dd2c6d5b639dd331d705b6c48c6d6190aa798cc",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_multibank; both banks/owners and full function transport, original800 updates/probes.",
+      "requirements": [
+        [
+          "u_kept",
+          ">=",
+          0.85
+        ],
+        [
+          "content_kept",
+          ">=",
+          0.75
+        ],
+        [
+          "leak_ratio",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_plus",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_minus",
+          "<=",
+          0.2
+        ],
+        [
+          "same_dir",
+          "<=",
+          0.25
+        ]
+      ],
+      "steps": 800,
+      "task": "cover_leftover",
+      "task_input": "current_task/cover_leftover",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "learned_parameter_measurement",
+      "dependencies": [],
+      "evaluation_fingerprint": "1964fdfcbec31f97a2eda1b828a76611625ae05b1268fc85154cb6e2992f8900",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "c65edba96e4e4b51ca62e54ad2405111a5c3552854deb5b5b1217537b9235b7d",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [],
+      "relationship": "added_question",
+      "remaining_work": "Named atlas_conditional/routed_paired; original scale/identity/concept gates,800 updates.",
+      "requirements": [
+        [
+          "concept_cos_plus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_cos_minus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_mag_plus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_plus",
+          "<=",
+          1.25
+        ],
+        [
+          "concept_mag_minus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_minus",
+          "<=",
+          1.25
+        ],
+        [
+          "identity_at_0",
+          ">=",
+          0.85
+        ],
+        [
+          "identity_at_mid",
+          ">=",
+          0.85
+        ]
+      ],
+      "steps": 800,
+      "task": "mid_scale_identity",
+      "task_input": "current_task/mid_scale_identity",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {},
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "7d66fc1f094499445cdf8c5a608a757980c1622f9620dc87ea541bd480b78bac",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/mode_hold"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same1200 narrow8-mode ring/N12/z4/b128/bounds. Original RA11/shared CUDA data-latent cursor/raw particles/noisy public serving differs from ordinary named construction/MoG/clean-live.",
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "task": "mode_hold",
+      "task_input": "current_task/mode_hold",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "3b132eedc3306811609231c7751ff6395b89b8695b6b5f3a688de3509a3737a1",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_two_broad"
+      ],
+      "original_critic_card": null,
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Simple architecture is shared, full execution law is not.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "target_fields_equal": {
+        "covariances": true,
+        "kind": true,
+        "masses": true,
+        "means": true
+      },
+      "task": "vector_two_broad",
+      "task_input": "current_task/vector_two_broad",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "ae3ebee9a498a6cbaa4397bfd36f80fbda49e35831ad563a24e982687617a432",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_unequal_mass"
+      ],
+      "original_critic_card": {
+        "batch_dependence": true,
+        "batch_statistics": "current discriminator input only",
+        "eps": 1e-05,
+        "feature": "distance",
+        "fourier": 0,
+        "implementation": "shared_batch_feature_v1",
+        "kernel_scales": [
+          0.1,
+          0.25,
+          0.5,
+          1.0
+        ],
+        "layers": 3,
+        "name": "batchfeat_center6_distance_head",
+        "placement": "head",
+        "softplus_beta": 6.0,
+        "trunk_normalization": "center",
+        "width": 96
+      },
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Preserve original research critic batchfeat_center6_distance_head; published profile binds architecture only.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "target_fields_equal": {
+        "covariances": true,
+        "kind": true,
+        "masses": true,
+        "means": true
+      },
+      "task": "vector_unequal_mass",
+      "task_input": "current_task/vector_unequal_mass",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "58ff8fb230c73346cdba79289903881b5ef6a996c4474bff157d280921bcc26b",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_unequal_width"
+      ],
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 8.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "raw",
+        "fourier": 0,
+        "frequency_scale": 1.0,
+        "hidden": 128,
+        "implementation": "shared_critic_v1",
+        "layers": 3,
+        "name": "width_last_softplus8_128_l3",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": false,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Preserve original research critic width_last_softplus8_128_l3; published profile binds architecture only.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "target_fields_equal": {
+        "covariances": true,
+        "kind": true,
+        "masses": true,
+        "means": true
+      },
+      "task": "vector_unequal_width",
+      "task_input": "current_task/vector_unequal_width",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "1860798b210fdb571dbfd3e1ec9fa729a7276a2a4352fb3be5aa164960f17a87",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_anisotropic"
+      ],
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "additive",
+        "fourier": 2,
+        "frequency_scale": 1.0,
+        "hidden": 64,
+        "implementation": "shared_critic_v1",
+        "layers": 2,
+        "name": "additive_raw_fourier64_l2",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": true,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Preserve original research critic additive_raw_fourier64_l2; published profile binds architecture only.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "target_fields_equal": {
+        "covariances": true,
+        "kind": true,
+        "masses": true,
+        "means": true
+      },
+      "task": "vector_anisotropic",
+      "task_input": "current_task/vector_anisotropic",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "6423bf5387f4f88adee6b173db5eb707cab2077dae060e28f3af229b1cc0eb16",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_overlap"
+      ],
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "raw",
+        "fourier": 0,
+        "frequency_scale": 1.0,
+        "hidden": 96,
+        "implementation": "shared_critic_v1",
+        "layers": 3,
+        "name": "raw_softplus96_l3",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": false,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Preserve original research critic raw_softplus96_l3; published profile binds architecture only.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1200,
+      "target_fields_equal": {
+        "covariances": true,
+        "kind": true,
+        "masses": true,
+        "means": true
+      },
+      "task": "vector_overlap",
+      "task_input": "current_task/vector_overlap",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "prior_reg": 0.05
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "9db2b6aa062181f4259de07ae0e32e86ad0ce58f70cc8016144bdd90df1fb949",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/vector_spiral"
+      ],
+      "original_critic_card": null,
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same target/horizon/N256/z4/b128/bounds; original raw particles/noisy selected serving/RA11-QMC cursors vs ordinary MoG.025/clean-live/named initialization. Simple architecture is shared, full execution law is not.",
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 1600,
+      "target_fields_equal": {
+        "kind": true,
+        "noise": true,
+        "radius_max": true,
+        "radius_min": true,
+        "turns": true
+      },
+      "task": "vector_spiral",
+      "task_input": "current_task/vector_spiral",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "enumerated_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "ac7731acb0fe9e102f7dcf3a3b21793c598e1f9ade4d4b35c20c3b0358901a80",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/img_stripes2"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same templates/600/N32/z8/b32/mode-HQ bounds; original residual16/noisy indexed32 rows vs ordinary transpose12/clean-live. residual16 profile binds architecture only, not original initialization/Recipe/streams/observer.",
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          2
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 600,
+      "task": "img_stripes2",
+      "task_input": "current_task/img_stripes2",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "enumerated_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "978344c617984ac1e73c4a15d81c81b0d56de6b27533f4f3c30b7c91b35e8a24",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/img_bars4"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same templates/600/N32/z8/b32/mode-HQ bounds; original residual16/noisy indexed32 rows vs ordinary transpose12/clean-live. residual16 profile binds architecture only, not original initialization/Recipe/streams/observer.",
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 600,
+      "task": "img_bars4",
+      "task_input": "current_task/img_bars4",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "enumerated_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "cd3f12cac7d815ba92920c02f53208c6668df0fbd3039365525538fdb55912d0",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/img_blobs4"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same templates/600/N32/z8/b32/mode-HQ bounds; original residual16/noisy indexed32 rows vs ordinary transpose12/clean-live. residual16 profile binds architecture only, not original initialization/Recipe/streams/observer.",
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 600,
+      "task": "img_blobs4",
+      "task_input": "current_task/img_blobs4",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "current_sampling_law": "enumerated_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+      "evaluator_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "3284efc2336d75627f5f960804059fcd422dddb36954b5961591d393368d2d53",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/img_intensity2"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same templates/600/N32/z8/b32/mode-HQ bounds; original residual16/noisy indexed32 rows vs ordinary transpose12/clean-live. residual16 profile binds architecture only, not original initialization/Recipe/streams/observer.",
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          2
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "scalar_requirements_equal": true,
+      "steps": 600,
+      "task": "img_intensity2",
+      "task_input": "current_task/img_intensity2",
+      "tier": 2,
+      "timeout_seconds": 1800,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+      "evaluator_sources_sha256": {
+        "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+        "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+        "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "79e350c7dab4df726d3e361d537ff5ba240baeb5aec257651ea13c26d8d2873d",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "native/grid100"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same34/final-five20k/independent100k bounds. Original affineG/Fourier3D/raw20k/seed1234/noisy observer vs ordinary MLP128x3G/Fourier2D/MoG/clean-live. Affine profile alone is not fullwinner parity. Fresh exactwinner source/Recipe/seed/selector/RNG/observer may serve an explicit matching winner-law gate, not the ordinary parent.",
+      "requirements": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "scalar_requirements_equal": false,
+      "steps": 7000,
+      "task": "grid100",
+      "task_input": "current_task/grid100",
+      "tier": 2,
+      "timeout_seconds": 3600,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+      "evaluator_sources_sha256": {
+        "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+        "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+        "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "d2c895af7760feec369da9150e185f34ce7483adf3313bf5ba8a9186f91ad8ef",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "native/rotated100"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same34/final-five20k/independent100k bounds. Original affineG/Fourier3D/raw20k/seed1234/noisy observer vs ordinary MLP128x3G/Fourier2D/MoG/clean-live. Affine profile alone is not fullwinner parity. Fresh exactwinner source/Recipe/seed/selector/RNG/observer may serve an explicit matching winner-law gate, not the ordinary parent.",
+      "requirements": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "scalar_requirements_equal": false,
+      "steps": 7000,
+      "task": "rotated100",
+      "task_input": "current_task/rotated100",
+      "tier": 2,
+      "timeout_seconds": 3600,
+      "weight_selector": "live"
+    },
+    {
+      "C6_variant": {
+        "cohort": "policy_selected_cloud_v1",
+        "output_noise": false,
+        "task_recipe_overrides": {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "prior_reg": 0.0
+        },
+        "winner_equivalent": false
+      },
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [],
+      "evaluation_fingerprint": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+      "evaluator_sources_sha256": {
+        "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+        "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+        "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "c3b80a0cf984acefcf812af8386031e4a6fa0aba3ca844633165a9975fa06e08",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "native/staggered100"
+      ],
+      "relationship": "shared_question_changed_host_or_law",
+      "remaining_work": "Same34/final-five20k/independent100k bounds. Original affineG/Fourier3D/raw20k/seed1234/noisy observer vs ordinary MLP128x3G/Fourier2D/MoG/clean-live. Affine profile alone is not fullwinner parity. Fresh exactwinner source/Recipe/seed/selector/RNG/observer may serve an explicit matching winner-law gate, not the ordinary parent.",
+      "requirements": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "scalar_requirements_equal": false,
+      "steps": 7000,
+      "task": "staggered100",
+      "task_input": "current_task/staggered100",
+      "tier": 2,
+      "timeout_seconds": 3600,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [
+        {
+          "kind": "gate",
+          "task": "mode_hold"
+        }
+      ],
+      "evaluation_fingerprint": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+      "evaluator_sources_sha256": {
+        "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "a2d5161b2e6f37cac4191be5a926a508b3d86b5e247388595f6b3187aa5e4596",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/stationary"
+      ],
+      "relationship": "related_target_added_retention_protocol",
+      "remaining_work": "One uninterrupted group: dense checks from1201; first200 consecutive successes,1200 later hold steps,300 extension. Original7500/every10 terminal-five curve lacks this chronology. Share only a preregistered pure observer on exact fresh host/Recipe/RNG/state, or use a separate bounded cohort.",
+      "requirements": [
+        [
+          "modes",
+          "==",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ],
+        [
+          "hq",
+          "<=",
+          1.0
+        ]
+      ],
+      "steps": 7500,
+      "task": "ring_hold",
+      "task_input": "current_task/ring_hold",
+      "tier": 3,
+      "timeout_seconds": 3600,
+      "weight_selector": "live"
+    },
+    {
+      "current_prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "current_sampling_law": "public_prior_without_output_noise",
+      "dependencies": [
+        {
+          "kind": "checkpoint",
+          "task": "ring_hold"
+        }
+      ],
+      "evaluation_fingerprint": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+      "evaluator_sources_sha256": {
+        "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+      },
+      "exact_protocol_alias": false,
+      "execution_fingerprint": "60903a4db34729e96bb894ee2ff64b3aad9244722d5375859f57a99b9a866b35",
+      "fresh_execution_by_review": false,
+      "historical_reuse": false,
+      "importance": "required",
+      "original19_questions": [
+        "portability/stationary"
+      ],
+      "relationship": "related_target_added_retention_protocol",
+      "remaining_work": "One uninterrupted group: dense checks from1201; first200 consecutive successes,1200 later hold steps,300 extension. Original7500/every10 terminal-five curve lacks this chronology. Share only a preregistered pure observer on exact fresh host/Recipe/RNG/state, or use a separate bounded cohort.",
+      "requirements": [
+        [
+          "modes",
+          "==",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ],
+        [
+          "hq",
+          "<=",
+          1.0
+        ]
+      ],
+      "steps": 7500,
+      "task": "ring_extension",
+      "task_input": "current_task/ring_extension",
+      "tier": 3,
+      "timeout_seconds": 3600,
+      "weight_selector": "live"
+    }
+  ],
+  "default_adoption": false,
+  "finite_next_scope_after19": [
+    "Verify freshfull19 actual source/Recipes/serving-law/gate/artifacts before extra work; historical19PASS remains reference, no fresh credit.",
+    "Proposed next added learning question: one explicitly declared400-update ring16 acquisition,N256/z4/b128/six original bounds/fullwinning independent Recipe/noisy state-selected observation,original300s task allowance. OrdinaryMoG clean/live parent remains unchanged; new source/task identity and real structural preflight/full allowance required.",
+    "Dense ring chronology or extra vectorprojectionKS may share only prospectively declared pure observations/exported matching draws on exact fresh host/state/RNG. Oldsparse curves or unexported clouds cannot supply these afterthefact. If not already captured, declare a separate bounded experiment rather than replaying learning invisibly.",
+    "Ten addedquestions11100s is coverage accounting, not a blind queue. The eight named adaptations require explicitly distinct routed/MoG/resource/auxiliary-owner laws and readyfullwinner-compatible contracts.",
+    "No NLL/rate search,new objective,seed sweep,shipping/default/speed or pooled26winner follows this map."
+  ],
+  "fresh_full19_retest_authorized_and_required": true,
+  "historical_runtime": {
+    "cuda": "12.6",
+    "cuda_device_model": "NVIDIA RTX A6000",
+    "device": "cuda:0",
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "historical_source": {
+    "commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+    "execution_digest": "e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985",
+    "manifest_sha256": "b972ed69da6aae40e2807f074105c21c90733d5fd0f06ede519195f6ab2df6ad",
+    "snapshot_file_count": 3825
+  },
+  "historical_status": "19/19 PASS",
+  "inputs": {
+    "C6_variant/grid100": {
+      "bytes": 8450,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/grid100_policy_selected_cloud_v1.json",
+      "sha256": "e9dd9eafe8fc9b88ae0ed2f48c241e6c03ea8249e74d41d87bf268a42f699d17"
+    },
+    "C6_variant/img_bars4": {
+      "bytes": 8719,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/img_bars4_policy_selected_cloud_v1.json",
+      "sha256": "424504f1b95133ef47d0c3366c5debe4b5735f2c8a674dae381397dfaa555222"
+    },
+    "C6_variant/img_blobs4": {
+      "bytes": 8723,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/img_blobs4_policy_selected_cloud_v1.json",
+      "sha256": "23a78cbc7f7f806988f4116a6f188dc2eb6104aa49e9b06bdc39dd13152a9610"
+    },
+    "C6_variant/img_intensity2": {
+      "bytes": 8739,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/img_intensity2_policy_selected_cloud_v1.json",
+      "sha256": "1ce3321e8fea4064d883b22157d36cbda062042aae127153e58888addbb610e3"
+    },
+    "C6_variant/img_stripes2": {
+      "bytes": 8730,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/img_stripes2_policy_selected_cloud_v1.json",
+      "sha256": "d3651273a608eed321819abce9b8cf9fd927a0007265d42507f4860fc14645b1"
+    },
+    "C6_variant/mode_hold": {
+      "bytes": 7596,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/mode_hold_policy_selected_cloud_v1.json",
+      "sha256": "408e7a221cf30b5dbc3e4e943bed3114a5db15854ac50ca667b14515ab096b60"
+    },
+    "C6_variant/rotated100": {
+      "bytes": 8459,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1.json",
+      "sha256": "ca42b5ba869c781dc47b12d699d2bd9934246e4c2dc7fb38626a6f97bd9535b5"
+    },
+    "C6_variant/staggered100": {
+      "bytes": 8465,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1.json",
+      "sha256": "d39f81ca14bbd9fab3bf07910e4201f00cec582a0e88c716dd9befa90e257db9"
+    },
+    "C6_variant/vector_anisotropic": {
+      "bytes": 9977,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_anisotropic_policy_selected_cloud_v1.json",
+      "sha256": "01a31fe45af6ade10a6ac1aa5f52ba82620e2138a42f2a68b763d61b6f5e3363"
+    },
+    "C6_variant/vector_overlap": {
+      "bytes": 9618,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_overlap_policy_selected_cloud_v1.json",
+      "sha256": "38fa6a55cdea7219eea60b3c02c73e1438185f056c38a9843a6037dd54b46802"
+    },
+    "C6_variant/vector_spiral": {
+      "bytes": 9126,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_spiral_policy_selected_cloud_v1.json",
+      "sha256": "3698f00da9648cd75eb110a512a8c943bb50126c632716836fc1a026f242dfc9"
+    },
+    "C6_variant/vector_two_broad": {
+      "bytes": 9719,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_two_broad_policy_selected_cloud_v1.json",
+      "sha256": "3d12f3cb9c5b4640731d2da84515c69b450982f3199a0c1873e5152b0634f53c"
+    },
+    "C6_variant/vector_unequal_mass": {
+      "bytes": 10211,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_mass_policy_selected_cloud_v1.json",
+      "sha256": "e8550f354327b67dd1623419ac22c9000a0a7578f66fddb5484995ab5adc4309"
+    },
+    "C6_variant/vector_unequal_width": {
+      "bytes": 10196,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_width_policy_selected_cloud_v1.json",
+      "sha256": "63bc03c39506140fc473f4d40ead90e3ff82f0c5b376e1f8fbadc29021333c5a"
+    },
+    "baseline_results": {
+      "bytes": 574945,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/results.json",
+      "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    },
+    "current_checkout/AGENTS.md": {
+      "bytes": 1861,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/AGENTS.md",
+      "sha256": "66f37b7aa960ec7066d603f539c1e8ce88e3dd63e5bee3ad3b58a1a6ca6bc5f2"
+    },
+    "current_checkout/EXPERIMENTATION.md": {
+      "bytes": 42351,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/EXPERIMENTATION.md",
+      "sha256": "5b31d52daf7a444037444cc974fc1e3b5239a45535e231178e2b1d773682567c"
+    },
+    "current_checkout/benchmarks/toy_audit/api_contract.py": {
+      "bytes": 10394,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28"
+    },
+    "current_checkout/benchmarks/toy_audit/api_family_search.py": {
+      "bytes": 50532,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_family_search.py",
+      "sha256": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f"
+    },
+    "current_checkout/benchmarks/toy_audit/api_images.py": {
+      "bytes": 86556,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_images.py",
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    "current_checkout/benchmarks/toy_audit/api_run.py": {
+      "bytes": 37380,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_run.py",
+      "sha256": "c3d54398256eb0aba6dd20bb77e6e9a9a71bb29cc5bd4df8b8f9bce1ef5687b9"
+    },
+    "current_checkout/benchmarks/toy_audit/api_vectors.py": {
+      "bytes": 50536,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "current_checkout/experiments/forge/ae_routed_policy_contracts.py": {
+      "bytes": 13504,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/ae_routed_policy_contracts.py",
+      "sha256": "96a224b34aeef19b321c79fff5c789cb990465e93edd4c01e328a1b3f3e527d2"
+    },
+    "current_checkout/experiments/forge/boundaries.py": {
+      "bytes": 22066,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/boundaries.py",
+      "sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621"
+    },
+    "current_checkout/experiments/forge/conditional_policy_contracts.py": {
+      "bytes": 16575,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/conditional_policy_contracts.py",
+      "sha256": "b31e3398495179a88be8025b3b1d4ca172ba7c26dcba5d3825ba02d9c54fff25"
+    },
+    "current_checkout/experiments/forge/imageprofiles.py": {
+      "bytes": 7410,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/imageprofiles.py",
+      "sha256": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a"
+    },
+    "current_checkout/experiments/forge/multibank_policy_contracts.py": {
+      "bytes": 8429,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/multibank_policy_contracts.py",
+      "sha256": "2244946f9651ac2dfbe12b7a073538eb506b4b10d1cc0dbafc2a9f28d7b1d1e6"
+    },
+    "current_checkout/experiments/forge/nativeprofiles.py": {
+      "bytes": 17207,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/nativeprofiles.py",
+      "sha256": "18947c346bda0b14e9cddb25dbb0c1b5ba0556e0edd77df24c195988db9a1025"
+    },
+    "current_checkout/experiments/forge/policy_contracts.py": {
+      "bytes": 24359,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/policy_contracts.py",
+      "sha256": "bcf522b69040906cceddaa79f8c51d2935fe90fd74eb31944408b30cf6ab06e2"
+    },
+    "current_checkout/experiments/forge/routed_policy_contracts.py": {
+      "bytes": 13128,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/routed_policy_contracts.py",
+      "sha256": "6f2f6d9ce984d7cf1a7ce8f8b41203a4a7c7cc42635a319b240caf8fe96d2a3c"
+    },
+    "current_checkout/experiments/forge/vectorprofiles.py": {
+      "bytes": 9508,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/vectorprofiles.py",
+      "sha256": "aee1141add8e80a806037f378870e006777c1f5f48b64ed9d9ebf3bb9b0709df"
+    },
+    "current_checkout/experiments/forge/views.py": {
+      "bytes": 74523,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/views.py",
+      "sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3"
+    },
+    "current_checkout/experiments/forge/word_joint_policy_contracts.py": {
+      "bytes": 11445,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/word_joint_policy_contracts.py",
+      "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+    },
+    "current_checkout/reports/develop-gates-20261001/PROTOCOL.md": {
+      "bytes": 7557,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/develop-gates-20261001/PROTOCOL.md",
+      "sha256": "6397833d58725c4df663fe0eda6c84f5ee0587377eaf1ee6ac34c34db1e35771"
+    },
+    "current_checkout/reports/forge/EXPERIMENT_MEMORY.md": {
+      "bytes": 277835,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/EXPERIMENT_MEMORY.md",
+      "sha256": "484c42328b057271a10d4b21df28c9f72e2901643d36c817c662a99ad0d76fb3"
+    },
+    "current_task/ae_gan_hold": {
+      "bytes": 2897,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/ae_gan_hold.json",
+      "sha256": "53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79"
+    },
+    "current_task/cover_leftover": {
+      "bytes": 3092,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/cover_leftover.json",
+      "sha256": "f40f960d80090f1b46cc326424cab7d781c36cc9ea3222aea7375c2834028e4e"
+    },
+    "current_task/five_word_joint_acquisition": {
+      "bytes": 4904,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/five_word_joint_acquisition.json",
+      "sha256": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048"
+    },
+    "current_task/grid100": {
+      "bytes": 2639,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/grid100.json",
+      "sha256": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5"
+    },
+    "current_task/img_bars4": {
+      "bytes": 3108,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/img_bars4.json",
+      "sha256": "562c05c07de33e5a5e088cff097af9cf9f6f8b37bb436aed37bf502fb7aff86f"
+    },
+    "current_task/img_blobs4": {
+      "bytes": 3111,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/img_blobs4.json",
+      "sha256": "15c7ec3cfe80539b14d24824afc1a6fffae99e27b5a38e75c991823b5aceb336"
+    },
+    "current_task/img_intensity2": {
+      "bytes": 3123,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/img_intensity2.json",
+      "sha256": "6a69162bee7dd1c50c9f596f29ed339a5e475c296156c4324e5092099cddf90d"
+    },
+    "current_task/img_stripes2": {
+      "bytes": 3116,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/img_stripes2.json",
+      "sha256": "010a96d3829b639d13f1150f30a5ff44119bcc10a23822f4191773bab177eb70"
+    },
+    "current_task/mid_scale_identity": {
+      "bytes": 3265,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/mid_scale_identity.json",
+      "sha256": "f84f25e04f159bc3926af48c9243bc999832e166854fba63e90d6e7c62c0bc7f"
+    },
+    "current_task/mode_hold": {
+      "bytes": 2478,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/mode_hold.json",
+      "sha256": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5"
+    },
+    "current_task/residual_student": {
+      "bytes": 2918,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/residual_student.json",
+      "sha256": "dfebe28e3bafb0aea298678894524ea7b182481980f4854351bbd4252facd285"
+    },
+    "current_task/ring16_acquisition": {
+      "bytes": 7835,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/ring16_acquisition.json",
+      "sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+    },
+    "current_task/ring_extension": {
+      "bytes": 1746,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/ring_extension.json",
+      "sha256": "19361e1a0817f90a7fe13c1c4b35fff644745258063e87371099936df7461f50"
+    },
+    "current_task/ring_hold": {
+      "bytes": 1666,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/ring_hold.json",
+      "sha256": "7d3e33f19db943f6f55016b9cbf2fe93221cc3e202c4c86190d5ff981b1fdfc9"
+    },
+    "current_task/rotated100": {
+      "bytes": 2645,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/rotated100.json",
+      "sha256": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d"
+    },
+    "current_task/staggered100": {
+      "bytes": 2649,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/staggered100.json",
+      "sha256": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1"
+    },
+    "current_task/trajectory": {
+      "bytes": 2764,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/trajectory.json",
+      "sha256": "ac86a16636f04bd7868e64a4df52fc08f3033acb1cff3b1caf25fd9ef046f578"
+    },
+    "current_task/two_pole": {
+      "bytes": 3099,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/two_pole.json",
+      "sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5"
+    },
+    "current_task/unipolar": {
+      "bytes": 2861,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/unipolar.json",
+      "sha256": "a2df5eb0fdb119e0cf0d744002ac4cc6460037a4960a51119947af396cc71d39"
+    },
+    "current_task/unused_token_hold": {
+      "bytes": 3032,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/unused_token_hold.json",
+      "sha256": "ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8"
+    },
+    "current_task/vector_anisotropic": {
+      "bytes": 4186,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_anisotropic.json",
+      "sha256": "e98512a93ba2d3a10a5fe6640cf74c5d22f88f917e9a5cf313302cc4aed1a24b"
+    },
+    "current_task/vector_overlap": {
+      "bytes": 3831,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_overlap.json",
+      "sha256": "72bde8ab5f9a5222b095ee17849c27823156bd28675f443138d56542c9e69c35"
+    },
+    "current_task/vector_spiral": {
+      "bytes": 3340,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_spiral.json",
+      "sha256": "d47cf689d77375873c25b5d6aa3610e9d6250ee5a9d2f2592538d49da943ff9f"
+    },
+    "current_task/vector_two_broad": {
+      "bytes": 3930,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_two_broad.json",
+      "sha256": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab"
+    },
+    "current_task/vector_unequal_mass": {
+      "bytes": 4419,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_unequal_mass.json",
+      "sha256": "ea1b35df2bd0ab55b50d47ade00a758775d29130641fc1e76db28c03009164ff"
+    },
+    "current_task/vector_unequal_width": {
+      "bytes": 4403,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/tasks/vector_unequal_width.json",
+      "sha256": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f"
+    },
+    "frozen_full19_design": {
+      "bytes": 247039,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/design.json",
+      "sha256": "9b1e42243d325272e746f6090a3f945c78530861bc717036d92910a7141fe50a"
+    },
+    "ordinary_view": {
+      "bytes": 4104,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/forge/views/discriminator_stability.json",
+      "sha256": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b"
+    },
+    "original19_preparation": {
+      "bytes": 840303,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.baseline-atlas19.atlas19-preparation.json",
+      "sha256": "e1f72c610c74d584de2053008463001c944bd47c0f1b3b6a9c6e7008c970df9b"
+    },
+    "original19_reference": {
+      "bytes": 52406,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/develop-gates-20261001/atlas19-replay.json",
+      "sha256": "1e1b536bfd66e20a240436b417d429059d22ea55c2b6ecfff31e796b96c470fa"
+    },
+    "original_image_specs": {
+      "bytes": 4527,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/image_task_specs.json",
+      "sha256": "60aff41072a8f88d3ca7fa63252af65aeec18e94f57600c7b3413f84139280b4"
+    },
+    "original_native_fixture": {
+      "bytes": 2297,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_fixture.json",
+      "sha256": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d"
+    },
+    "original_native_source/benchmarks/toy100/accuracy.py": {
+      "bytes": 11658,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy.py",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    "original_native_source/benchmarks/toy100/accuracy_evidence.py": {
+      "bytes": 3052,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_evidence.py",
+      "sha256": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac"
+    },
+    "original_native_source/benchmarks/toy100/accuracy_gate.py": {
+      "bytes": 8383,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_gate.py",
+      "sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe"
+    },
+    "original_native_source/benchmarks/toy100/config.py": {
+      "bytes": 3673,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/config.py",
+      "sha256": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983"
+    },
+    "original_native_source/benchmarks/toy100/device.py": {
+      "bytes": 7065,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/device.py",
+      "sha256": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67"
+    },
+    "original_native_source/benchmarks/toy100/gate.py": {
+      "bytes": 22299,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/gate.py",
+      "sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+    },
+    "original_native_source/benchmarks/toy100/metrics.py": {
+      "bytes": 8442,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/metrics.py",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    },
+    "original_native_source/benchmarks/toy100/models.py": {
+      "bytes": 9411,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/models.py",
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
+    },
+    "original_native_source/benchmarks/toy100/problems.py": {
+      "bytes": 2428,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    "original_native_source/benchmarks/toy100/train.py": {
+      "bytes": 51936,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/train.py",
+      "sha256": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472"
+    },
+    "original_native_source/configs/toy100/constraints_simple_regularization.json": {
+      "bytes": 1507,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/configs/toy100/constraints_simple_regularization.json",
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    "original_native_source/lib/toy_models.py": {
+      "bytes": 5231,
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/lib/toy_models.py",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+    },
+    "original_result/moving/grid100": {
+      "bytes": 506,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/grid100/frames.npz.verdict.json",
+      "sha256": "bbc1b65e6a3befc43998651a6716d9894f956cbaccdd376ecddd68a9d8de6785"
+    },
+    "original_result/moving/rotated100": {
+      "bytes": 518,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/rotated100/frames.npz.verdict.json",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5"
+    },
+    "original_result/moving/staggered100": {
+      "bytes": 526,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/staggered100/frames.npz.verdict.json",
+      "sha256": "e6d329eef1dc1958b6bd3bfb1a0130432c52173b7c5eb05fa3f712b162b9842d"
+    },
+    "original_result/native/grid100": {
+      "bytes": 12935,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/grid100/result.json",
+      "sha256": "5132616d19ddad1d5ab8255a5d554a75ac5fdf3c7f8d49395a165048bbf2167e"
+    },
+    "original_result/native/rotated100": {
+      "bytes": 12942,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/rotated100/result.json",
+      "sha256": "24f4da57341fde6fa471e8d7146da4850347f3148fbe5201eab085358d7132da"
+    },
+    "original_result/native/staggered100": {
+      "bytes": 12908,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/staggered100/result.json",
+      "sha256": "79ee39188450f0c73c7b795f3eccedd44cc0d2720df614458b6eba49f5433e17"
+    },
+    "original_result/portability/img_bars4": {
+      "bytes": 6845,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_bars4/result.json",
+      "sha256": "54c61030b0dc5737e8d3dfa57e0f3c08f934201f6d84d8719c02a652deb165f5"
+    },
+    "original_result/portability/img_blobs4": {
+      "bytes": 6859,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_blobs4/result.json",
+      "sha256": "f787513c636c056bd87792d485511abf29c57f9054acc906baba5447cc53fd8d"
+    },
+    "original_result/portability/img_intensity2": {
+      "bytes": 6756,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2/result.json",
+      "sha256": "83a013849ef2656855a1963a4b62aa3b7ac0115805bbed8869beff503cdeeedf"
+    },
+    "original_result/portability/img_stripes2": {
+      "bytes": 6686,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_stripes2/result.json",
+      "sha256": "13ad6fbe5b59c9a67eadafc030b93bde2984b82a663d05c3e0379035d7ae9207"
+    },
+    "original_result/portability/mode_hold": {
+      "bytes": 6879,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/mode_hold/result.json",
+      "sha256": "d16ee3d91d07daa343fae083124ae9acaac91f979aba6346c6e6e5aa19ba48a9"
+    },
+    "original_result/portability/ring_shift": {
+      "bytes": 75892,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/ring_shift/result.json",
+      "sha256": "a95e0b60699490b87d229eaa773057e0f2964b399b352a08f405829c4adb0c9e"
+    },
+    "original_result/portability/stationary": {
+      "bytes": 29197,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/stationary/result.json",
+      "sha256": "2448ee78674c2d2a4a8043392f7c2b0c9f51da03ab8c140e8e3daf7650e9f58d"
+    },
+    "original_result/portability/vector_anisotropic": {
+      "bytes": 9356,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_anisotropic/result.json",
+      "sha256": "155d03f4411502595ad9c51c5715ba53b49c38890fa783130b76ed2357be8c33"
+    },
+    "original_result/portability/vector_overlap": {
+      "bytes": 7279,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_overlap/result.json",
+      "sha256": "621d02601496c5e2476074d040b06e4c1c0a74f525680d41d924de6fb38864a9"
+    },
+    "original_result/portability/vector_spiral": {
+      "bytes": 7276,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_spiral/result.json",
+      "sha256": "0c9f8f5adc020608ce355de5ade1d1c9964b6a18450c9dad0975fdf6d0f5ef5e"
+    },
+    "original_result/portability/vector_two_broad": {
+      "bytes": 8981,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_two_broad/result.json",
+      "sha256": "dc6e7440e9b00c550eb861faca1267707d9c6ca8bf2a9b3543399af556ffed01"
+    },
+    "original_result/portability/vector_unequal_mass": {
+      "bytes": 9739,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_mass/result.json",
+      "sha256": "43ac5796a4cc8276bc52e2ddc1140b3e6ef0e433bdd6557389c8bc2476710d4f"
+    },
+    "original_result/portability/vector_unequal_width": {
+      "bytes": 9364,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_width/result.json",
+      "sha256": "7be9e4627ebc18346437e5d80cebf51298ad00ac5f375c81cb78a0cf307e2501"
+    },
+    "original_rotate": {
+      "bytes": 8686,
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py",
+      "sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1"
+    },
+    "original_snapshot/particlegan/policy.py": {
+      "bytes": 81022,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+    },
+    "original_snapshot/particlegan/recipes.py": {
+      "bytes": 53612,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    "original_snapshot/particlegan/training.py": {
+      "bytes": 39880,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/particlegan/training.py",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "original_snapshot/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py": {
+      "bytes": 40284,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "sha256": "8dd658294dbbb2027e69a0e46097e2d2c0f5382078d407ade25e06c6c22ff1c1"
+    },
+    "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py": {
+      "bytes": 1885,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+    },
+    "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py": {
+      "bytes": 66175,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_vector_specs": {
+      "bytes": 14323,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/vector_task_specs.json",
+      "sha256": "c751c10571ba32403b1e048d167991da1b6a79c5786db7bf99f4e2675feb9cbd"
+    },
+    "winner_config": {
+      "bytes": 1798,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/100gaussians/atlas.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    }
+  },
+  "models_restores_forwards_draws_scorers_runs_updates_GPU_queue_Git_network": 0,
+  "original19": [
+    {
+      "applied_recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+      "case_sha256": "328d7d579c3ff9f3c12d51f932111608bb731cb7aabbd6de4ef8a8451087558c",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-img_intensity2",
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          2
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "z_dim": 8
+      },
+      "result_input": "original_result/portability/img_intensity2",
+      "seed": 0,
+      "steps": 600,
+      "task": "img_intensity2",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "4f38f00b1defb408ee093feed6a0c8174c6c238af2fca52b0b691ec292f9bb46",
+      "case_sha256": "05a7a8de0dfd2f15a2b1dd724cfa476345678f2a3d77ed76377c86f91e7243f3",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-mode_hold",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 12,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/mode_hold",
+      "seed": 0,
+      "steps": 1200,
+      "task": "mode_hold",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+      "case_sha256": "11e425e0b0d286035f5d9509c8b37508b6692f7be195734dc76ed1749b84c85c",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-img_blobs4",
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "z_dim": 8
+      },
+      "result_input": "original_result/portability/img_blobs4",
+      "seed": 0,
+      "steps": 600,
+      "task": "img_blobs4",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+      "case_sha256": "93abc4319bf1d4a06efb6a08f0d189da9f888fb021cb8c9af205fc1284b5ef90",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-img_bars4",
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "z_dim": 8
+      },
+      "result_input": "original_result/portability/img_bars4",
+      "seed": 0,
+      "steps": 600,
+      "task": "img_bars4",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+      "case_sha256": "61361dc10fe3d9f266a58de1227e43368e47896c7f1f1411b39eebec440b36b9",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-img_stripes2",
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          2
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "z_dim": 8
+      },
+      "result_input": "original_result/portability/img_stripes2",
+      "seed": 0,
+      "steps": 600,
+      "task": "img_stripes2",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "790b013b771cc780d886d7770b46ab4ec8175c5f8f338b2f144ebd208ada964c",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_two_broad",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": null,
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_two_broad",
+      "seed": 0,
+      "steps": 1200,
+      "task": "vector_two_broad",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "172b338f3edcc4fd29b4442ece1526866cd0c4a1a0ae0f2b1b5daaf21dfb7e54",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_unequal_mass",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": {
+        "batch_dependence": true,
+        "batch_statistics": "current discriminator input only",
+        "eps": 1e-05,
+        "feature": "distance",
+        "fourier": 0,
+        "implementation": "shared_batch_feature_v1",
+        "kernel_scales": [
+          0.1,
+          0.25,
+          0.5,
+          1.0
+        ],
+        "layers": 3,
+        "name": "batchfeat_center6_distance_head",
+        "placement": "head",
+        "softplus_beta": 6.0,
+        "trunk_normalization": "center",
+        "width": 96
+      },
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_unequal_mass",
+      "seed": 0,
+      "steps": 1200,
+      "task": "vector_unequal_mass",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "a2afb8c80ff361e4447c0888a887dbff8d5e70d1e02045d11d79fee7aab80f44",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_unequal_width",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 8.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "raw",
+        "fourier": 0,
+        "frequency_scale": 1.0,
+        "hidden": 128,
+        "implementation": "shared_critic_v1",
+        "layers": 3,
+        "name": "width_last_softplus8_128_l3",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": false,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_unequal_width",
+      "seed": 0,
+      "steps": 1200,
+      "task": "vector_unequal_width",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "1b5aa7af3f8799f14159e3d90d7e35bbd182edcb5ba928328b14431c2247500b",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_anisotropic",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "additive",
+        "fourier": 2,
+        "frequency_scale": 1.0,
+        "hidden": 64,
+        "implementation": "shared_critic_v1",
+        "layers": 2,
+        "name": "additive_raw_fourier64_l2",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": true,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_anisotropic",
+      "seed": 0,
+      "steps": 1200,
+      "task": "vector_anisotropic",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "c53fe1325a37b00d3083886ede494b59cc14a7c71945adf0dfde40bae6e02e95",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_overlap",
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "branch_hidden": 32,
+        "branch_scale": 0.25,
+        "features": "raw",
+        "fourier": 0,
+        "frequency_scale": 1.0,
+        "hidden": 96,
+        "implementation": "shared_critic_v1",
+        "layers": 3,
+        "name": "raw_softplus96_l3",
+        "normalization": "none",
+        "output_scale": 1.0,
+        "quadratic_scale": 0.25,
+        "raw_linear_skip": false,
+        "residual": false,
+        "residual_scale": 0.7071067811865476
+      },
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_overlap",
+      "seed": 0,
+      "steps": 1200,
+      "task": "vector_overlap",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+      "case_sha256": "a4ac7e9639a28a7efd7505eee018b15b7e980c5afb0a9d36351a4cf3920b8412",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-vector_spiral",
+      "observation_steps": [
+        67,
+        134,
+        200,
+        267,
+        334,
+        400,
+        467,
+        534,
+        600,
+        667,
+        734,
+        800,
+        867,
+        934,
+        1000,
+        1067,
+        1134,
+        1200,
+        1267,
+        1334,
+        1400,
+        1467,
+        1534,
+        1600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "original_critic_card": null,
+      "requirements": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "resources": {
+        "batch_size": 128,
+        "num_particles": 256,
+        "z_dim": 4
+      },
+      "result_input": "original_result/portability/vector_spiral",
+      "seed": 0,
+      "steps": 1600,
+      "task": "vector_spiral",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+      "case_sha256": "4ae3885eb8fc060c3ffa46b3a59a0e5f52d4ecb94e990d68bb952a8a3fe83f79",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-stationary",
+      "observation_steps": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        170,
+        180,
+        190,
+        200,
+        210,
+        220,
+        230,
+        240,
+        250,
+        260,
+        270,
+        280,
+        290,
+        300,
+        310,
+        320,
+        330,
+        340,
+        350,
+        360,
+        370,
+        380,
+        390,
+        400,
+        410,
+        420,
+        430,
+        440,
+        450,
+        460,
+        470,
+        480,
+        490,
+        500,
+        510,
+        520,
+        530,
+        540,
+        550,
+        560,
+        570,
+        580,
+        590,
+        600,
+        610,
+        620,
+        630,
+        640,
+        650,
+        660,
+        670,
+        680,
+        690,
+        700,
+        710,
+        720,
+        730,
+        740,
+        750,
+        760,
+        770,
+        780,
+        790,
+        800,
+        810,
+        820,
+        830,
+        840,
+        850,
+        860,
+        870,
+        880,
+        890,
+        900,
+        910,
+        920,
+        930,
+        940,
+        950,
+        960,
+        970,
+        980,
+        990,
+        1000,
+        1010,
+        1020,
+        1030,
+        1040,
+        1050,
+        1060,
+        1070,
+        1080,
+        1090,
+        1100,
+        1110,
+        1120,
+        1130,
+        1140,
+        1150,
+        1160,
+        1170,
+        1180,
+        1190,
+        1200,
+        1210,
+        1220,
+        1230,
+        1240,
+        1250,
+        1260,
+        1270,
+        1280,
+        1290,
+        1300,
+        1310,
+        1320,
+        1330,
+        1340,
+        1350,
+        1360,
+        1370,
+        1380,
+        1390,
+        1400,
+        1410,
+        1420,
+        1430,
+        1440,
+        1450,
+        1460,
+        1470,
+        1480,
+        1490,
+        1500,
+        1510,
+        1520,
+        1530,
+        1540,
+        1550,
+        1560,
+        1570,
+        1580,
+        1590,
+        1600,
+        1610,
+        1620,
+        1630,
+        1640,
+        1650,
+        1660,
+        1670,
+        1680,
+        1690,
+        1700,
+        1710,
+        1720,
+        1730,
+        1740,
+        1750,
+        1760,
+        1770,
+        1780,
+        1790,
+        1800,
+        1810,
+        1820,
+        1830,
+        1840,
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020,
+        2030,
+        2040,
+        2050,
+        2060,
+        2070,
+        2080,
+        2090,
+        2100,
+        2110,
+        2120,
+        2130,
+        2140,
+        2150,
+        2160,
+        2170,
+        2180,
+        2190,
+        2200,
+        2210,
+        2220,
+        2230,
+        2240,
+        2250,
+        2260,
+        2270,
+        2280,
+        2290,
+        2300,
+        2310,
+        2320,
+        2330,
+        2340,
+        2350,
+        2360,
+        2370,
+        2380,
+        2390,
+        2400,
+        2410,
+        2420,
+        2430,
+        2440,
+        2450,
+        2460,
+        2470,
+        2480,
+        2490,
+        2500,
+        2510,
+        2520,
+        2530,
+        2540,
+        2550,
+        2560,
+        2570,
+        2580,
+        2590,
+        2600,
+        2610,
+        2620,
+        2630,
+        2640,
+        2650,
+        2660,
+        2670,
+        2680,
+        2690,
+        2700,
+        2710,
+        2720,
+        2730,
+        2740,
+        2750,
+        2760,
+        2770,
+        2780,
+        2790,
+        2800,
+        2810,
+        2820,
+        2830,
+        2840,
+        2850,
+        2860,
+        2870,
+        2880,
+        2890,
+        2900,
+        2910,
+        2920,
+        2930,
+        2940,
+        2950,
+        2960,
+        2970,
+        2980,
+        2990,
+        3000,
+        3010,
+        3020,
+        3030,
+        3040,
+        3050,
+        3060,
+        3070,
+        3080,
+        3090,
+        3100,
+        3110,
+        3120,
+        3130,
+        3140,
+        3150,
+        3160,
+        3170,
+        3180,
+        3190,
+        3200,
+        3210,
+        3220,
+        3230,
+        3240,
+        3250,
+        3260,
+        3270,
+        3280,
+        3290,
+        3300,
+        3310,
+        3320,
+        3330,
+        3340,
+        3350,
+        3360,
+        3370,
+        3380,
+        3390,
+        3400,
+        3410,
+        3420,
+        3430,
+        3440,
+        3450,
+        3460,
+        3470,
+        3480,
+        3490,
+        3500,
+        3510,
+        3520,
+        3530,
+        3540,
+        3550,
+        3560,
+        3570,
+        3580,
+        3590,
+        3600,
+        3610,
+        3620,
+        3630,
+        3640,
+        3650,
+        3660,
+        3670,
+        3680,
+        3690,
+        3700,
+        3710,
+        3720,
+        3730,
+        3740,
+        3750,
+        3760,
+        3770,
+        3780,
+        3790,
+        3800,
+        3810,
+        3820,
+        3830,
+        3840,
+        3850,
+        3860,
+        3870,
+        3880,
+        3890,
+        3900,
+        3910,
+        3920,
+        3930,
+        3940,
+        3950,
+        3960,
+        3970,
+        3980,
+        3990,
+        4000,
+        4010,
+        4020,
+        4030,
+        4040,
+        4050,
+        4060,
+        4070,
+        4080,
+        4090,
+        4100,
+        4110,
+        4120,
+        4130,
+        4140,
+        4150,
+        4160,
+        4170,
+        4180,
+        4190,
+        4200,
+        4210,
+        4220,
+        4230,
+        4240,
+        4250,
+        4260,
+        4270,
+        4280,
+        4290,
+        4300,
+        4310,
+        4320,
+        4330,
+        4340,
+        4350,
+        4360,
+        4370,
+        4380,
+        4390,
+        4400,
+        4410,
+        4420,
+        4430,
+        4440,
+        4450,
+        4460,
+        4470,
+        4480,
+        4490,
+        4500,
+        4510,
+        4520,
+        4530,
+        4540,
+        4550,
+        4560,
+        4570,
+        4580,
+        4590,
+        4600,
+        4610,
+        4620,
+        4630,
+        4640,
+        4650,
+        4660,
+        4670,
+        4680,
+        4690,
+        4700,
+        4710,
+        4720,
+        4730,
+        4740,
+        4750,
+        4760,
+        4770,
+        4780,
+        4790,
+        4800,
+        4810,
+        4820,
+        4830,
+        4840,
+        4850,
+        4860,
+        4870,
+        4880,
+        4890,
+        4900,
+        4910,
+        4920,
+        4930,
+        4940,
+        4950,
+        4960,
+        4970,
+        4980,
+        4990,
+        5000,
+        5010,
+        5020,
+        5030,
+        5040,
+        5050,
+        5060,
+        5070,
+        5080,
+        5090,
+        5100,
+        5110,
+        5120,
+        5130,
+        5140,
+        5150,
+        5160,
+        5170,
+        5180,
+        5190,
+        5200,
+        5210,
+        5220,
+        5230,
+        5240,
+        5250,
+        5260,
+        5270,
+        5280,
+        5290,
+        5300,
+        5310,
+        5320,
+        5330,
+        5340,
+        5350,
+        5360,
+        5370,
+        5380,
+        5390,
+        5400,
+        5410,
+        5420,
+        5430,
+        5440,
+        5450,
+        5460,
+        5470,
+        5480,
+        5490,
+        5500,
+        5510,
+        5520,
+        5530,
+        5540,
+        5550,
+        5560,
+        5570,
+        5580,
+        5590,
+        5600,
+        5610,
+        5620,
+        5630,
+        5640,
+        5650,
+        5660,
+        5670,
+        5680,
+        5690,
+        5700,
+        5710,
+        5720,
+        5730,
+        5740,
+        5750,
+        5760,
+        5770,
+        5780,
+        5790,
+        5800,
+        5810,
+        5820,
+        5830,
+        5840,
+        5850,
+        5860,
+        5870,
+        5880,
+        5890,
+        5900,
+        5910,
+        5920,
+        5930,
+        5940,
+        5950,
+        5960,
+        5970,
+        5980,
+        5990,
+        6000,
+        6010,
+        6020,
+        6030,
+        6040,
+        6050,
+        6060,
+        6070,
+        6080,
+        6090,
+        6100,
+        6110,
+        6120,
+        6130,
+        6140,
+        6150,
+        6160,
+        6170,
+        6180,
+        6190,
+        6200,
+        6210,
+        6220,
+        6230,
+        6240,
+        6250,
+        6260,
+        6270,
+        6280,
+        6290,
+        6300,
+        6310,
+        6320,
+        6330,
+        6340,
+        6350,
+        6360,
+        6370,
+        6380,
+        6390,
+        6400,
+        6410,
+        6420,
+        6430,
+        6440,
+        6450,
+        6460,
+        6470,
+        6480,
+        6490,
+        6500,
+        6510,
+        6520,
+        6530,
+        6540,
+        6550,
+        6560,
+        6570,
+        6580,
+        6590,
+        6600,
+        6610,
+        6620,
+        6630,
+        6640,
+        6650,
+        6660,
+        6670,
+        6680,
+        6690,
+        6700,
+        6710,
+        6720,
+        6730,
+        6740,
+        6750,
+        6760,
+        6770,
+        6780,
+        6790,
+        6800,
+        6810,
+        6820,
+        6830,
+        6840,
+        6850,
+        6860,
+        6870,
+        6880,
+        6890,
+        6900,
+        6910,
+        6920,
+        6930,
+        6940,
+        6950,
+        6960,
+        6970,
+        6980,
+        6990,
+        7000,
+        7010,
+        7020,
+        7030,
+        7040,
+        7050,
+        7060,
+        7070,
+        7080,
+        7090,
+        7100,
+        7110,
+        7120,
+        7130,
+        7140,
+        7150,
+        7160,
+        7170,
+        7180,
+        7190,
+        7200,
+        7210,
+        7220,
+        7230,
+        7240,
+        7250,
+        7260,
+        7270,
+        7280,
+        7290,
+        7300,
+        7310,
+        7320,
+        7330,
+        7340,
+        7350,
+        7360,
+        7370,
+        7380,
+        7390,
+        7400,
+        7410,
+        7420,
+        7430,
+        7440,
+        7450,
+        7460,
+        7470,
+        7480,
+        7490,
+        7500
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          "==",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/portability/stationary",
+      "seed": 0,
+      "steps": 7500,
+      "task": "stationary",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+      "case_sha256": "19901cd85055a87b7977e0226739a38898618aa34b88aec1270ce4dd8c21e7b0",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "portability",
+      "historical_status": "PASS",
+      "id": "atlas-original19-portability-ring_shift",
+      "observation_steps": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        170,
+        180,
+        190,
+        200,
+        210,
+        220,
+        230,
+        240,
+        250,
+        260,
+        270,
+        280,
+        290,
+        300,
+        310,
+        320,
+        330,
+        340,
+        350,
+        360,
+        370,
+        380,
+        390,
+        400,
+        410,
+        420,
+        430,
+        440,
+        450,
+        460,
+        470,
+        480,
+        490,
+        500,
+        510,
+        520,
+        530,
+        540,
+        550,
+        560,
+        570,
+        580,
+        590,
+        600,
+        610,
+        620,
+        630,
+        640,
+        650,
+        660,
+        670,
+        680,
+        690,
+        700,
+        710,
+        720,
+        730,
+        740,
+        750,
+        760,
+        770,
+        780,
+        790,
+        800,
+        810,
+        820,
+        830,
+        840,
+        850,
+        860,
+        870,
+        880,
+        890,
+        900,
+        910,
+        920,
+        930,
+        940,
+        950,
+        960,
+        970,
+        980,
+        990,
+        1000,
+        1010,
+        1020,
+        1030,
+        1040,
+        1050,
+        1060,
+        1070,
+        1080,
+        1090,
+        1100,
+        1110,
+        1120,
+        1130,
+        1140,
+        1150,
+        1160,
+        1170,
+        1180,
+        1190,
+        1200,
+        1210,
+        1220,
+        1230,
+        1240,
+        1250,
+        1260,
+        1270,
+        1280,
+        1290,
+        1300,
+        1310,
+        1320,
+        1330,
+        1340,
+        1350,
+        1360,
+        1370,
+        1380,
+        1390,
+        1400,
+        1410,
+        1420,
+        1430,
+        1440,
+        1450,
+        1460,
+        1470,
+        1480,
+        1490,
+        1500,
+        1510,
+        1520,
+        1530,
+        1540,
+        1550,
+        1560,
+        1570,
+        1580,
+        1590,
+        1600,
+        1610,
+        1620,
+        1630,
+        1640,
+        1650,
+        1660,
+        1670,
+        1680,
+        1690,
+        1700,
+        1710,
+        1720,
+        1730,
+        1740,
+        1750,
+        1760,
+        1770,
+        1780,
+        1790,
+        1800,
+        1810,
+        1820,
+        1830,
+        1840,
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020,
+        2030,
+        2040,
+        2050,
+        2060,
+        2070,
+        2080,
+        2090,
+        2100,
+        2110,
+        2120,
+        2130,
+        2140,
+        2150,
+        2160,
+        2170,
+        2180,
+        2190,
+        2200,
+        2210,
+        2220,
+        2230,
+        2240,
+        2250,
+        2260,
+        2270,
+        2280,
+        2290,
+        2300,
+        2310,
+        2320,
+        2330,
+        2340,
+        2350,
+        2360,
+        2370,
+        2380,
+        2390,
+        2400,
+        2410,
+        2420,
+        2430,
+        2440,
+        2450,
+        2460,
+        2470,
+        2480,
+        2490,
+        2500,
+        2510,
+        2520,
+        2530,
+        2540,
+        2550,
+        2560,
+        2570,
+        2580,
+        2590,
+        2600,
+        2610,
+        2620,
+        2630,
+        2640,
+        2650,
+        2660,
+        2670,
+        2680,
+        2690,
+        2700,
+        2710,
+        2720,
+        2730,
+        2740,
+        2750,
+        2760,
+        2770,
+        2780,
+        2790,
+        2800,
+        2810,
+        2820,
+        2830,
+        2840,
+        2850,
+        2860,
+        2870,
+        2880,
+        2890,
+        2900,
+        2910,
+        2920,
+        2930,
+        2940,
+        2950,
+        2960,
+        2970,
+        2980,
+        2990,
+        3000,
+        3010,
+        3020,
+        3030,
+        3040,
+        3050,
+        3060,
+        3070,
+        3080,
+        3090,
+        3100,
+        3110,
+        3120,
+        3130,
+        3140,
+        3150,
+        3160,
+        3170,
+        3180,
+        3190,
+        3200,
+        3210,
+        3220,
+        3230,
+        3240,
+        3250,
+        3260,
+        3270,
+        3280,
+        3290,
+        3300,
+        3310,
+        3320,
+        3330,
+        3340,
+        3350,
+        3360,
+        3370,
+        3380,
+        3390,
+        3400,
+        3410,
+        3420,
+        3430,
+        3440,
+        3450,
+        3460,
+        3470,
+        3480,
+        3490,
+        3500,
+        3510,
+        3520,
+        3530,
+        3540,
+        3550,
+        3560,
+        3570,
+        3580,
+        3590,
+        3600,
+        3610,
+        3620,
+        3630,
+        3640,
+        3650,
+        3660,
+        3670,
+        3680,
+        3690,
+        3700,
+        3710,
+        3720,
+        3730,
+        3740,
+        3750,
+        3760,
+        3770,
+        3780,
+        3790,
+        3800,
+        3810,
+        3820,
+        3830,
+        3840,
+        3850,
+        3860,
+        3870,
+        3880,
+        3890,
+        3900,
+        3910,
+        3920,
+        3930,
+        3940,
+        3950,
+        3960,
+        3970,
+        3980,
+        3990,
+        4000,
+        4010,
+        4020,
+        4030,
+        4040,
+        4050,
+        4060,
+        4070,
+        4080,
+        4090,
+        4100,
+        4110,
+        4120,
+        4130,
+        4140,
+        4150,
+        4160,
+        4170,
+        4180,
+        4190,
+        4200,
+        4210,
+        4220,
+        4230,
+        4240,
+        4250,
+        4260,
+        4270,
+        4280,
+        4290,
+        4300,
+        4310,
+        4320,
+        4330,
+        4340,
+        4350,
+        4360,
+        4370,
+        4380,
+        4390,
+        4400,
+        4410,
+        4420,
+        4430,
+        4440,
+        4450,
+        4460,
+        4470,
+        4480,
+        4490,
+        4500,
+        4510,
+        4520,
+        4530,
+        4540,
+        4550,
+        4560,
+        4570,
+        4580,
+        4590,
+        4600
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          "==",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/portability/ring_shift",
+      "seed": 0,
+      "steps": 4600,
+      "task": "ring_shift",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_scope": "original config/source, no checkpoint deserialized",
+      "applied_recipe_sha256": null,
+      "case_sha256": "fbec81edc171d353387a47341d8226ac843dabeb6885436799cc481f5af4a55b",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "gate_scope": "three20k period observations; two30degree turns; HQ>=.9*observed_pre_turn_HQ and modes>=95; source-preserved served G/prior",
+      "group": "moving",
+      "historical_status": "PASS",
+      "id": "atlas-original19-moving-grid100",
+      "observation_steps": [
+        500,
+        1000,
+        1500
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          95
+        ],
+        [
+          "hq",
+          ">=",
+          "0.9 * observed pre_turn_hq"
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/moving/grid100",
+      "seed": 1234,
+      "steps": 1500,
+      "task": "grid100",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_scope": "original config/source, no checkpoint deserialized",
+      "applied_recipe_sha256": null,
+      "case_sha256": "9c453671750d05a3390a95ebdf257dee26eb22032ae751ac4e116e0cc75f0201",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "gate_scope": "three20k period observations; two30degree turns; HQ>=.9*observed_pre_turn_HQ and modes>=95; source-preserved served G/prior",
+      "group": "moving",
+      "historical_status": "PASS",
+      "id": "atlas-original19-moving-rotated100",
+      "observation_steps": [
+        500,
+        1000,
+        1500
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          95
+        ],
+        [
+          "hq",
+          ">=",
+          "0.9 * observed pre_turn_hq"
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/moving/rotated100",
+      "seed": 1234,
+      "steps": 1500,
+      "task": "rotated100",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_scope": "original config/source, no checkpoint deserialized",
+      "applied_recipe_sha256": null,
+      "case_sha256": "fad450ef6ba847c23056b763bfdaa419fc72c146c3fc695fc21fa4feb2457c0e",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "gate_scope": "three20k period observations; two30degree turns; HQ>=.9*observed_pre_turn_HQ and modes>=95; source-preserved served G/prior",
+      "group": "moving",
+      "historical_status": "PASS",
+      "id": "atlas-original19-moving-staggered100",
+      "observation_steps": [
+        500,
+        1000,
+        1500
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          95
+        ],
+        [
+          "hq",
+          ">=",
+          "0.9 * observed pre_turn_hq"
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/moving/staggered100",
+      "seed": 1234,
+      "steps": 1500,
+      "task": "staggered100",
+      "timeout_seconds": 1800
+    },
+    {
+      "applied_recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+      "case_sha256": "831e0b2a973cbc982939fd04a3af700bd8ac4517599c48da2b8592b686e320b8",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "native",
+      "historical_status": "PASS",
+      "id": "atlas-original19-native-grid100",
+      "independent_holdout_samples": 100000,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/native/grid100",
+      "seed": 1234,
+      "steps": 7000,
+      "task": "grid100",
+      "terminal_steps": [
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "timeout_seconds": 2400
+    },
+    {
+      "applied_recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+      "case_sha256": "04485d810c787af117431a2e16733328d8f894101646187920fac0e4a606d04b",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "native",
+      "historical_status": "PASS",
+      "id": "atlas-original19-native-rotated100",
+      "independent_holdout_samples": 100000,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/native/rotated100",
+      "seed": 1234,
+      "steps": 7000,
+      "task": "rotated100",
+      "terminal_steps": [
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "timeout_seconds": 2400
+    },
+    {
+      "applied_recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+      "case_sha256": "636e2bfd5e5046e1eb292cb336ce387cdc2fd705bc71e80c9e6391ec908276d2",
+      "fresh_retest_status": "UNEXECUTED_BY_REVIEW",
+      "group": "native",
+      "historical_status": "PASS",
+      "id": "atlas-original19-native-staggered100",
+      "independent_holdout_samples": 100000,
+      "observation_steps": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "old_export_grace_seconds": 60,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "indexed",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      },
+      "requirements": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "resources": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "result_input": "original_result/native/staggered100",
+      "seed": 1234,
+      "steps": 7000,
+      "task": "staggered100",
+      "terminal_steps": [
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ],
+      "timeout_seconds": 2400
+    }
+  ],
+  "qualification_input": false,
+  "required_guards": [
+    "Complete original config and actualhost Recipes, models, optimizer ownership, initialization/construction order, named+globalRNG, original sampler and learnedkernel/averaging selection.",
+    "Clean copied-source metadata/CLI/discovery/context/checkpoint preflight before shareddevice admission; no CPU convergence substitute.",
+    "Whole sourceclosure including original config/task/scorer/externalJSONs; ringtask lookup cannot silently disappear.",
+    "Each task reserves complete frozen allowance; remainingbudget shortfallINCOMPLETE/NOT_RUN. NumericFAIL staysactual; source/contract/runtime/checkpoint errorhalts. Interrupted costs conservative, paid vsreserve separate, noautomaticretry.",
+    "CurrentC6 vectorD1.5/beta.99/priorreg.05 must not override fullwinnerD1/beta.999/priorreg0. Architectureprofiles alone do not restore original RNG/init/law.",
+    "PlainAPI atlas preset or three-fieldtuple not sufficient. APIoptimizer tunables permit beta/priorreg but reject arbitrarymechanism/serving/architecture overrides; use a supported boundfullwinner factory/observer and explicitseed/API protocol.",
+    "Full required19 and26/8 denominators retained separately; no oldpositives/zero-updatecapacity/GIF suppliedasnewqualification."
+  ],
+  "schema": "pg_pr223_additional_gates_mapping_v1",
+  "serving": {
+    "DV12_or_feature_perturbation_retained": true,
+    "Recipe_standardize_true_preserved_actual_ParticlePrior_raw": true,
+    "ema_decay": 0.995,
+    "force_EMA_at_all_checks": false,
+    "image_prior_perturb_false_disables_only_extra_prior_perturb": true,
+    "learned_kernel_initial_std": 0.029,
+    "native_and_moving_case_count": 6,
+    "native_and_moving_seed": 1234,
+    "native_offsets": {
+      "evaluation": {
+        "latent": 403,
+        "noise": 402,
+        "target": 401
+      },
+      "holdout": {
+        "latent": 1603,
+        "noise": 1602,
+        "target": 1601
+      }
+    },
+    "portability_seed": 0,
+    "portability_seed_case_count": 13,
+    "serve_average": 4.0,
+    "sigma_zero_disables_only_output_noise": true,
+    "use_actual_saved_or_current_sigma": true
+  },
+  "source_citations": {
+    "API_default8": {
+      "input": "current_checkout/benchmarks/toy_audit/api_family_search.py",
+      "lines": [
+        37,
+        45
+      ],
+      "path": "benchmarks/toy_audit/api_family_search.py",
+      "sha256": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f"
+    },
+    "API_extra_KS": {
+      "input": "current_checkout/benchmarks/toy_audit/api_vectors.py",
+      "lines": [
+        29,
+        29
+      ],
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "API_hold": {
+      "input": "current_checkout/benchmarks/toy_audit/api_family_search.py",
+      "lines": [
+        256,
+        281
+      ],
+      "path": "benchmarks/toy_audit/api_family_search.py",
+      "sha256": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f"
+    },
+    "API_image_profiles": {
+      "input": "current_checkout/benchmarks/toy_audit/api_images.py",
+      "lines": [
+        300,
+        307
+      ],
+      "path": "benchmarks/toy_audit/api_images.py",
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    "API_loop": {
+      "input": "current_checkout/benchmarks/toy_audit/api_run.py",
+      "lines": [
+        418,
+        532
+      ],
+      "path": "benchmarks/toy_audit/api_run.py",
+      "sha256": "c3d54398256eb0aba6dd20bb77e6e9a9a71bb29cc5bd4df8b8f9bce1ef5687b9"
+    },
+    "API_observer": {
+      "input": "current_checkout/benchmarks/toy_audit/api_vectors.py",
+      "lines": [
+        649,
+        675
+      ],
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "API_overrides": {
+      "input": "current_checkout/benchmarks/toy_audit/api_contract.py",
+      "lines": [
+        103,
+        126
+      ],
+      "path": "benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28"
+    },
+    "API_recipe": {
+      "input": "current_checkout/benchmarks/toy_audit/api_vectors.py",
+      "lines": [
+        534,
+        598
+      ],
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "API_registry": {
+      "input": "current_checkout/benchmarks/toy_audit/api_vectors.py",
+      "lines": [
+        274,
+        332
+      ],
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "C6_policy": {
+      "input": "current_checkout/experiments/forge/policy_contracts.py",
+      "lines": [
+        200,
+        213
+      ],
+      "path": "experiments/forge/policy_contracts.py",
+      "sha256": "bcf522b69040906cceddaa79f8c51d2935fe90fd74eb31944408b30cf6ab06e2"
+    },
+    "current_fingerprints": {
+      "input": "current_checkout/experiments/forge/views.py",
+      "lines": [
+        33,
+        54
+      ],
+      "path": "experiments/forge/views.py",
+      "sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3"
+    },
+    "current_native": {
+      "input": "current_checkout/experiments/forge/views.py",
+      "lines": [
+        856,
+        885
+      ],
+      "path": "experiments/forge/views.py",
+      "sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3"
+    },
+    "current_ring": {
+      "input": "current_checkout/experiments/forge/views.py",
+      "lines": [
+        899,
+        935
+      ],
+      "path": "experiments/forge/views.py",
+      "sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3"
+    },
+    "factory": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py",
+      "lines": [
+        1,
+        59
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+    },
+    "full19": {
+      "input": "original_snapshot/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "lines": [
+        35,
+        192
+      ],
+      "path": "reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "sha256": "8dd658294dbbb2027e69a0e46097e2d2c0f5382078d407ade25e06c6c22ff1c1"
+    },
+    "image_profiles": {
+      "input": "current_checkout/experiments/forge/imageprofiles.py",
+      "lines": [
+        1,
+        6
+      ],
+      "path": "experiments/forge/imageprofiles.py",
+      "sha256": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a"
+    },
+    "moving_relocation": {
+      "input": "original_snapshot/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "lines": [
+        288,
+        299
+      ],
+      "path": "reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "sha256": "8dd658294dbbb2027e69a0e46097e2d2c0f5382078d407ade25e06c6c22ff1c1"
+    },
+    "native_profiles": {
+      "input": "current_checkout/experiments/forge/nativeprofiles.py",
+      "lines": [
+        1,
+        6
+      ],
+      "path": "experiments/forge/nativeprofiles.py",
+      "sha256": "18947c346bda0b14e9cddb25dbb0c1b5ba0556e0edd77df24c195988db9a1025"
+    },
+    "original_image": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        400,
+        479
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_mode": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        302,
+        398
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_native": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        660,
+        965
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_ring": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        568,
+        658
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_selector": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        217,
+        222
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "original_vector": {
+      "input": "original_snapshot/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "lines": [
+        481,
+        567
+      ],
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "public_DV12_output_noise": {
+      "input": "original_snapshot/particlegan/policy.py",
+      "lines": [
+        963,
+        990
+      ],
+      "path": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+    },
+    "public_generate": {
+      "input": "original_snapshot/particlegan/training.py",
+      "lines": [
+        239,
+        248
+      ],
+      "path": "particlegan/training.py",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "raw_particle_prior": {
+      "input": "original_snapshot/particlegan/recipes.py",
+      "lines": [
+        437,
+        444
+      ],
+      "path": "particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    "tunable_fields": {
+      "input": "current_checkout/experiments/forge/boundaries.py",
+      "lines": [
+        23,
+        28
+      ],
+      "path": "experiments/forge/boundaries.py",
+      "sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621"
+    },
+    "vector_profiles": {
+      "input": "current_checkout/experiments/forge/vectorprofiles.py",
+      "lines": [
+        1,
+        8
+      ],
+      "path": "experiments/forge/vectorprofiles.py",
+      "sha256": "aee1141add8e80a806037f378870e006777c1f5f48b64ed9d9ebf3bb9b0709df"
+    }
+  },
+  "speed_ranking": false,
+  "status": "FROZEN_READ_ONLY_MAPPING",
+  "winner_config": {
+    "applied_common_recipe_excluding_resources": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ka2",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02
+    },
+    "full_json": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 12,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_gate": true,
+      "row_evidence_null": "scaled",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    "input": "winner_config",
+    "verified_applied_recipe_count": 16
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "r3gan-stacked-training-toy-v1",
+  "budget_seconds": 44100,
+  "candidate_budget_seconds": 44100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "One substantive Modern GAN Stacked MNIST training-recipe adaptation through ordinary discriminator_stability tiers 1-3. Ceiling: 900s smoke + 39600s quality + 3600s grouped endurance. Frozen original toy gates, host budgets, named streams and seed0; required failures stop all remaining work. No unchanged technique reruns, seed repeats, post-failure diagnostics or default adoption."
+}

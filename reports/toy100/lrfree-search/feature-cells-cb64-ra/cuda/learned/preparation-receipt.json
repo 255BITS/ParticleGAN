@@ -1,0 +1,160 @@
+{
+  "status": "PREPARED_NO_NUMERICAL_EXECUTION",
+  "prepared_at": "2026-09-29T22:58:33.416633+00:00",
+  "syntax_checks": {
+    "common.py": "PASS",
+    "run_training.py": "PASS",
+    "replay.py": "PASS",
+    "prepare.py": "PASS",
+    "summarize.py": "PASS"
+  },
+  "unchanged_metric_helpers": {
+    "frechet": true,
+    "embedding_score": true,
+    "diagnostics": true,
+    "ImageEvaluation.score": true,
+    "ImageEvaluation.evaluate": true
+  },
+  "all_frozen_input_bytes_verified": true,
+  "initial_hashes_recorded_but_runtime_initialization_not_executed": {
+    "toy": {
+      "initial_generator_sha256": "ce13940f85f08ec43a7da04fab97a7a216e45493f06b7033d599165faa5dbb0d",
+      "initial_critic_sha256": "4f122f3eb2483ce917016e8a6664d3e8e826e761adadc2711a1315336bbf25e5",
+      "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    },
+    "mnist": {
+      "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    }
+  },
+  "source_freeze_sha256": "3b7e9726021596afc39400325ef38a54ae83282fed4ba1d7a4f289077c238653",
+  "inputs_sha256": "121e6c9957242ba33a3a7af030a8e91bcdaf44ab2027d4df7a83ac4bc0a2c437",
+  "local_source_sha256": {
+    "common.py": "6484c3191e326e63930603e905e53e9f32e3609e6296a54d9807a67e0e6b0000",
+    "run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "prepare.py": "6ac5460972da4e4caa3dab6c587b249f0823c2aab0cc386b5c7444dc9387fabc",
+    "summarize.py": "f7d1e7d42fba29407cda8e889d6bcedbf7e60043478660f765b18b227d436982",
+    "PROTOCOL.md": "22292c5c59c369d2344a8afaa3e101b5ad3a3d3cc9586d230b416f21f74714a9",
+    "COMMANDS.md": "088c54b58c8ba9135de7d464ccaad75b250eae691036180538f73956a9467103",
+    "INPUTS.json": "121e6c9957242ba33a3a7af030a8e91bcdaf44ab2027d4df7a83ac4bc0a2c437"
+  },
+  "read_only_file_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/candidate-freeze.json": "852f6f439350b3f77d60785961d3db165611a95d1ef36ac77d88b69700281116",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/implementation/READY.json": "0d8f674fa2fac7b736b592e472310ca892037d4acf9e1de6d9f6a03e55710ac2",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/run_training.py": "de995630b74a9084e8b7a27e5ecfda0d4cb0c99d0f5976392640a854b405bb10",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/replay.py": "d3a9eb2cf3fe7ec95364c61ede923f9f95eac3e01a5c297bdaeb1a05dbd13ad3",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/PROTOCOL.md": "92d346f9349eb2ef1055706719d4c24ac44e1491faf099bf2b6bc177286c6c7c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py": "ae4113c9c7523e0ac17df05cb2c93731b96740c5594daa7085e4bf39ad9c7e47",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data-receipt.json": "8888d5a4d5ae5dec0e8edc78b933f1ca8111e19e81e4834695ab956b695398f3",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/evaluator.pt": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/toy-stream.pt": "d7d1fbf0bd8ef52d87ad8644cb3959926a604bc9647063064561679c8ba3964c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/image-stream.pt": "c035df45f2b4e2e189279a43cf4369b4a3b3714650ee284efe2cd15ac31c98c1",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte.gz": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte.gz": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/toy/E22/config.json": "f1db860262d8ff9bf80153d62adf54b35e8cfb143ce26c023bc05ef35c62fe38",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/mnist/E22/config.json": "00dce3b332689e848985365ef9d7a11ee5ae788bbcf1ba784366432919a1c2ac"
+  },
+  "candidate_implementation_ready": {
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/implementation/READY.json",
+    "sha256": "0d8f674fa2fac7b736b592e472310ca892037d4acf9e1de6d9f6a03e55710ac2",
+    "source_byte_map_verified": true
+  },
+  "hardware_inventory_read_only": [
+    {
+      "physical_index": 0,
+      "uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "pci_bus_id": "00000000:24:00.0",
+      "name": "NVIDIA RTX A6000",
+      "memory_total": "49140 MiB"
+    },
+    {
+      "physical_index": 1,
+      "uuid": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+      "pci_bus_id": "00000000:2F:00.0",
+      "name": "NVIDIA RTX A6000",
+      "memory_total": "49140 MiB"
+    }
+  ],
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "package_versions": {
+    "torch": "2.13.0+cu126",
+    "torchvision": "0.28.0+cu126",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1"
+  },
+  "numerical_execution_owner": "root coordinator only",
+  "numerical_execution_started": false,
+  "preparation_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/prepare.py"
+  ],
+  "planned_serial_commands": [
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "toy",
+      "--variant",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "toy",
+      "--variant",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "mnist",
+      "--variant",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "mnist",
+      "--variant",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay.py",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay.py",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/summarize.py"
+    ]
+  ]
+}

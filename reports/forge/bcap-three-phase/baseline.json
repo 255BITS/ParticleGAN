@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "measured_tier1_baseline",
+  "candidate_id": "bcap-three-phase-incumbent-v1",
+  "baseline_pr": "https://github.com/255BITS/ParticleGAN/pull/377",
+  "publication_branch": "integration/bcap-direction-transport",
+  "measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+  "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "recipe_preset": "bcap",
+  "global_recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "required_tier1_outcome": {
+    "PASS": 6
+  },
+  "selection_rule": "Both repairs fail6/6 eligibility; select freshly measured incumbent. No pooled task winners.",
+  "phase2_results_sha256": "95497132cb1daff9e807285768b0286e6ca5ff699c65540a9b6b4abcf99dd9f6",
+  "limitations": [
+    "No new Tier2 training inPhase2.",
+    "Combined projection/transport repair is not6/6 qualified.",
+    "Publication fork commit is supplied by root; its scientific digest matches measured source.",
+    "No merge, default adoption or accepted calibration claim."
+  ]
+}

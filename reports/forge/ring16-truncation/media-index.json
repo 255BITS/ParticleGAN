@@ -1,0 +1,41 @@
+{
+  "entries": [
+    {
+      "arm": "boundary_only",
+      "frame_steps": [
+        17,
+        217,
+        417,
+        617,
+        817,
+        1000,
+        1200,
+        1400,
+        1600
+      ],
+      "gif_sha256": "9468f14f911fefe8b61bfb97af55be4c9ae6ca7ac4ffa95523bbaa226255595a",
+      "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+      "source_sha256": "75c3cb54b3a01b57687200250959e2f65b28298ba01caf58ff23868eb7ea9810"
+    },
+    {
+      "arm": "every_step",
+      "frame_steps": [
+        17,
+        217,
+        417,
+        617,
+        817,
+        1000,
+        1200,
+        1400,
+        1600
+      ],
+      "gif_sha256": "a4a9018a56ab73786a5c7d62aa7426e90779516cf52d97bdd78bd94f8e85d85a",
+      "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+      "source_sha256": "ae7232971fb54583561f515a7329624050d5e59cd106686c6524a90e50e42793"
+    }
+  ],
+  "model_forwards": 0,
+  "sampling_draws": 0,
+  "training_updates": 0
+}

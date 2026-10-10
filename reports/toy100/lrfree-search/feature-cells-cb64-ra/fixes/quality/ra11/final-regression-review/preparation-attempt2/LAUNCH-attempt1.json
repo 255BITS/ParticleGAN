@@ -1,0 +1,23 @@
+{
+  "CUDA_VISIBLE_DEVICES": "",
+  "PT_loads_planned": 14,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/audit_final.py",
+    "--input-freeze",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/completed-inputs/INPUTS-FROZEN.json",
+    "--root-go",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/ROOT-GO.json",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/accepted-attempt1"
+  ],
+  "helper_sha256": "4f6ab96bad5701a2c4a9fca975a32c4fb1f89e18f6dae7258b940c8d5b100cf5",
+  "input_freeze_sha256": "3b0ccaabaec0f473ec4c931ed08653a391be415a4dab2ab633ce237333b17a77",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/attempt1.log",
+  "pid": 1524343,
+  "root_GO_sha256": "d21ac4945c7a3c9bc788dbc46dc101c5aa928a41068727c0f1e3d3355a8c81cd",
+  "startticks": "169469917",
+  "status": "ONE_CPU_ARTIFACT_AUDIT_STARTED",
+  "utc": "2026-09-30T18:27:59.018711+00:00"
+}

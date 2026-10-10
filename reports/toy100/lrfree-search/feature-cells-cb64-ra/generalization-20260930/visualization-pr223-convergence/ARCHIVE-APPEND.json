@@ -1,0 +1,1015 @@
+{
+  "closure_controls_outside_file_table": [
+    "visualization-pr223-convergence/ARCHIVE-APPEND.json",
+    "visualization-pr223-convergence/archive-v1/FROZEN.json"
+  ],
+  "config_sha256": {
+    "Atlas": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "E22": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c"
+  },
+  "copy_policy": "Add absent relative paths; accept existing byte-identical targets; reject all conflicts.",
+  "created_utc": "2026-10-01T03:49:09.232730+00:00",
+  "data_receipt_sha256": "774cc0dea3ae3eadc18cce31748521c35470b5b30debaa2a3a96c6e54a9c0f05",
+  "excludes": [
+    "raw checkpoints and runtime states (.pt)",
+    "raw sample clouds (.npz)",
+    "media and individual rendered frames (separate renderer append)",
+    "layout drafts",
+    "bytecode caches",
+    "lockfiles"
+  ],
+  "file_count": 138,
+  "files": [
+    {
+      "bytes": 5957,
+      "path": "visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "2c34fe4f5f8950c16f1f551a9ede4e3082e64af1d19e69655b254b25677225e4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 994,
+      "path": "visualization-pr223-convergence/CPU-CHECK-Atlas.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "474b75e5b89cc7121993038bd0de7c36fc134521c595ed60a38d531ecc6d9785",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/CPU-CHECK-Atlas.json"
+    },
+    {
+      "bytes": 993,
+      "path": "visualization-pr223-convergence/CPU-CHECK-E22.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "09b382ae7d76782ba57753c7976d3f6ee8116ab0026cc6826a718ca0e97cf6fa",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/CPU-CHECK-E22.json"
+    },
+    {
+      "bytes": 2330,
+      "path": "visualization-pr223-convergence/E22-RECIPE-IDENTITY.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "e3f50f74a696b8fb781b5e95f7fd5813e8a8ba017eed0d912490163bb3d5d018",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/E22-RECIPE-IDENTITY.json"
+    },
+    {
+      "bytes": 709,
+      "path": "visualization-pr223-convergence/HOST-ADAPTER-CHECK.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "d49d81aff86c2d8f069a1c4d5c675c6d765ff2e1704e3ff948a3e3e0a59b92f4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/HOST-ADAPTER-CHECK.json"
+    },
+    {
+      "bytes": 4918,
+      "path": "visualization-pr223-convergence/PROTOCOL.md",
+      "role": "observer_source_or_preflight",
+      "sha256": "4e1361ebe6ac0533d12e7301ae5e252af788b57bfaca106d73af5ffa3278212d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/PROTOCOL.md"
+    },
+    {
+      "bytes": 20266,
+      "path": "visualization-pr223-convergence/SOURCE-FREEZE.json",
+      "role": "observer_source_or_preflight",
+      "sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 48334,
+      "path": "visualization-pr223-convergence/archive-v1/CLOSURE-INPUTS.json",
+      "role": "archive_control",
+      "sha256": "5a66e832358db6b856f0c8d7c6b1a7a3e0d72486cd29f83d4e2f657e6e213ad8",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/archive-v1/CLOSURE-INPUTS.json"
+    },
+    {
+      "bytes": 9978,
+      "path": "visualization-pr223-convergence/archive-v1/LOCAL-REFERENCES.json",
+      "role": "archive_control",
+      "sha256": "09ea8b4ac993df70a1bcd05ba6c614884d36a65941327a3eb9bc70816aa03f26",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/archive-v1/LOCAL-REFERENCES.json"
+    },
+    {
+      "bytes": 5901,
+      "path": "visualization-pr223-convergence/archive-v1/PREPARATION-RECEIPT.json",
+      "role": "archive_control",
+      "sha256": "1345dccfc57013df7bddcabe0d315d319c5747d7133ae11f07ec8595c5e87d70",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/archive-v1/PREPARATION-RECEIPT.json"
+    },
+    {
+      "bytes": 3285,
+      "path": "visualization-pr223-convergence/archive-v1/README.md",
+      "role": "archive_control",
+      "sha256": "cd283c8324ba37161074ad30fa205062ddfe45d5e95fb912b390feb6e4821eca",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/archive-v1/README.md"
+    },
+    {
+      "bytes": 15614,
+      "path": "visualization-pr223-convergence/archive-v1/prepare_archive.py",
+      "role": "archive_control",
+      "sha256": "fbb2ab7e90997119c547319cfee81591d6c2e0978a0baac1f114e2475ce8afd9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/archive-v1/prepare_archive.py"
+    },
+    {
+      "bytes": 9538,
+      "path": "visualization-pr223-convergence/atlas_runner.py",
+      "role": "observer_source_or_preflight",
+      "sha256": "82ff34a8c5b73ce218293c093c6c1ef8eda61c362e8ac79c0ba2d618df635f0b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/atlas_runner.py"
+    },
+    {
+      "bytes": 5405,
+      "path": "visualization-pr223-convergence/check_source.py",
+      "role": "observer_source_or_preflight",
+      "sha256": "06d850d1a0b791cc01da382d0514de041f783b6a712826baa096c08e43ab0451",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/check_source.py"
+    },
+    {
+      "bytes": 11560,
+      "path": "visualization-pr223-convergence/closure-v1/DATA-RECEIPT.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "774cc0dea3ae3eadc18cce31748521c35470b5b30debaa2a3a96c6e54a9c0f05",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/DATA-RECEIPT.json"
+    },
+    {
+      "bytes": 488,
+      "path": "visualization-pr223-convergence/closure-v1/EVIDENCE-FREEZE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "13b346a52a99e7bedb20a375f4974f90d251dc908e23bea94f59be8d41f7047d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/EVIDENCE-FREEZE.json"
+    },
+    {
+      "bytes": 359,
+      "path": "visualization-pr223-convergence/closure-v1/close_capture.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "af184be47eb71309d1140ea5985ec831d98e8192f85cbb25f71cae901b73602e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/close_capture.log"
+    },
+    {
+      "bytes": 5698,
+      "path": "visualization-pr223-convergence/closure-v1/close_capture.py",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "ffa6c4cb3415fc0759ad053ed5c991c6a010ab31eb315df4b53c0f641f6a7371",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/close_capture.py"
+    },
+    {
+      "bytes": 1798,
+      "path": "visualization-pr223-convergence/configs/particle-gan-atlas.json",
+      "role": "baseline_source_or_config",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/particle-gan-atlas.json"
+    },
+    {
+      "bytes": 1524,
+      "path": "visualization-pr223-convergence/configs/pr155-e22.json",
+      "role": "baseline_source_or_config",
+      "sha256": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/pr155-e22.json"
+    },
+    {
+      "bytes": 1501,
+      "path": "visualization-pr223-convergence/cpu-check-atlas.log",
+      "role": "observer_source_or_preflight",
+      "sha256": "0a5b089aed29c2aae084ce50439c2ef1ac5b19f4b30c46ef4fa5a22975c90c0a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-check-atlas.log"
+    },
+    {
+      "bytes": 734,
+      "path": "visualization-pr223-convergence/cpu-check-e22-attempt-1.log",
+      "role": "observer_source_or_preflight",
+      "sha256": "0e25104274164b4a27e73a9c4816962874df3e5e127c09788e644b6fa814cf78",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-check-e22-attempt-1.log"
+    },
+    {
+      "bytes": 1498,
+      "path": "visualization-pr223-convergence/cpu-check-e22.log",
+      "role": "observer_source_or_preflight",
+      "sha256": "fd8dc0a658f9adc6e14d8a68272e642eef2ffcde5b66e9a98e7360c27d0a0667",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-check-e22.log"
+    },
+    {
+      "bytes": 547,
+      "path": "visualization-pr223-convergence/cpu-observer-atlas/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "110a577eb70073af74619fe972aae293897592fc5759c5bd62efc091fd039401",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-observer-atlas/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 545,
+      "path": "visualization-pr223-convergence/cpu-observer-e22/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "bac3986e01cb56522fbd916b0a8b6bc661296c5bfc8a836b6847103dc2d4f786",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-observer-e22/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 9538,
+      "path": "visualization-pr223-convergence/e22_runner.py",
+      "role": "observer_source_or_preflight",
+      "sha256": "18618fc95a39ed0e19225635bb8b21efa0fd5bb0bced94ae9aa266e473635c11",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/e22_runner.py"
+    },
+    {
+      "bytes": 3587,
+      "path": "visualization-pr223-convergence/full-attempt-1/COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/COMPLETION.json"
+    },
+    {
+      "bytes": 822,
+      "path": "visualization-pr223-convergence/full-attempt-1/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "35b88cb7363227b8f76655f3d5d125acfcd220664ae0e82b35a92d2fa33e3c52",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/LAUNCH.json"
+    },
+    {
+      "bytes": 1271,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/CAPTURE-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "f9164eb9334a168b29b4d7f4a126f81ead348aa1aa3fbb9521f72467a9ad9ca6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/CAPTURE-COMPLETION.json"
+    },
+    {
+      "bytes": 1375,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "3aa58f8c2ac48acce8de97534b78502df5d58d83602945f9295a503d0da6d258",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/LAUNCH.json"
+    },
+    {
+      "bytes": 461,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "4f1e716710dc531d8aebe090bc594df050f26a503c7b1ebdcd94b3fb3902f773",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 518,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json"
+    },
+    {
+      "bytes": 44543,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "b68b52db695474611b450c920157075dd05889e82b2668a4c22322fb713e9f42",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/run.log"
+    },
+    {
+      "bytes": 152874,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "e54525d955af8b032aeac10591ffcdd197e064b267cf68dc249c553c3f842806",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/training-trace.jsonl"
+    },
+    {
+      "bytes": 41800,
+      "path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "1cf44bd407a463efe3432f609a3cdc5953738ab9e3090b515dbcd2d8ce844ea1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 1268,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/CAPTURE-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "0ff3734530e01d6299b0da3b0ce76c8d7781ad372405d11ba21e5ab08d2fb66e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/CAPTURE-COMPLETION.json"
+    },
+    {
+      "bytes": 1370,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "b8b490b8e256cc446b238cff360392c456123fd0487800db942d7d6eeee50bd6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/LAUNCH.json"
+    },
+    {
+      "bytes": 462,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "350463571a97285c5a834a986bdceda3d6cbb87244bbcb6311e904d85e1826d3",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 517,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "3be57be0e15ffccc40eb8b1b3a8dbb2dc065d65893f0d7bda9c9931058251881",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json"
+    },
+    {
+      "bytes": 44254,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "abc649c63d620db359bbe34d1eda3c906696b9f4ff7ab7aae711441cf67736e0",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/run.log"
+    },
+    {
+      "bytes": 36396,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "fb5f80f2c811edc5f29f90add9cd42046550f4d30940af2c9651a896ef257871",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/training-trace.jsonl"
+    },
+    {
+      "bytes": 41517,
+      "path": "visualization-pr223-convergence/full-attempt-1/e22/capture/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "8bc23ea1feb878288e2d2509c745c3e436f7618b57c3004d2e55fc6f7fed0580",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 14421,
+      "path": "visualization-pr223-convergence/instrumentation.py",
+      "role": "observer_source_or_preflight",
+      "sha256": "60e7c8cede7809cdd833cde6eabc668b70225b2bf184b647d629f8558b12a499",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/instrumentation.py"
+    },
+    {
+      "bytes": 659,
+      "path": "visualization-pr223-convergence/parity-attempt-1/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "59d73ef5424f1a6a82bfb8041eea18c36dc7f80df5f2c4fc990b5df9e0325026",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/LAUNCH.json"
+    },
+    {
+      "bytes": 3186,
+      "path": "visualization-pr223-convergence/parity-attempt-1/PARITY-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "97fe13f2d930c466c9f0d0be414ce6f7d0fd3624419b72b8ae4953c120887667",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/PARITY-COMPLETION.json"
+    },
+    {
+      "bytes": 1143,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/PARITY.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "824fda298a01f8c19097bd66ba5d94347d512677c08da0e5a005b53e92d6985d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/PARITY.json"
+    },
+    {
+      "bytes": 1365,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "ede1e7c7095c1540538bcee5edc9bede1b4e047d16489859d8aeb19d568a17fc",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/LAUNCH.json"
+    },
+    {
+      "bytes": 2171,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/LOSSES.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "21ae4f353092ef720b3a1320862a99a6bf05cc48bf67d97cc0fc828a7a2c9714",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/LOSSES.json"
+    },
+    {
+      "bytes": 357,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/RESTORE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "a53a2e490e9d041ea062095d64065cfae8f570327accf05db848e45e10dd786e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/RESTORE.json"
+    },
+    {
+      "bytes": 462,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "d1bc2dbff32252c962e12fdfd670ac7ce2d3e9cd2f996347da3c86ade1ab3193",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 420,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/WINDOW-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "3f704a1ac815d06b2bb604f8155d25eaa29f6019a3ab7fd8e06bbbba4313aadb",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/WINDOW-COMPLETION.json"
+    },
+    {
+      "bytes": 0,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/run.log"
+    },
+    {
+      "bytes": 10337,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/control/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "0c8113b0d2d08e771784e1a2d7531b8cb07c259335f03445c10787e83d28a708",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/training-trace.jsonl"
+    },
+    {
+      "bytes": 1383,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "3a237bf76d225cd9dbc920265f35eb0f70f7908865175b895dd4b1e1101d696a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/LAUNCH.json"
+    },
+    {
+      "bytes": 2171,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/LOSSES.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "21ae4f353092ef720b3a1320862a99a6bf05cc48bf67d97cc0fc828a7a2c9714",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/LOSSES.json"
+    },
+    {
+      "bytes": 357,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/RESTORE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "a53a2e490e9d041ea062095d64065cfae8f570327accf05db848e45e10dd786e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/RESTORE.json"
+    },
+    {
+      "bytes": 462,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "d1bc2dbff32252c962e12fdfd670ac7ce2d3e9cd2f996347da3c86ade1ab3193",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 420,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/WINDOW-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "489e8f20f6b8b956c9e1e56ed50273cdc6ef7a7a1290342ed877871edd15d46c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/WINDOW-COMPLETION.json"
+    },
+    {
+      "bytes": 3379,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "5aa0d88b5224d1b6425c5322e236f31f126a2978b69a7265b02a594fc2668f9f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/run.log"
+    },
+    {
+      "bytes": 10337,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "0c8113b0d2d08e771784e1a2d7531b8cb07c259335f03445c10787e83d28a708",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/training-trace.jsonl"
+    },
+    {
+      "bytes": 3283,
+      "path": "visualization-pr223-convergence/parity-attempt-1/atlas/observed/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "318f1f0bee4f113749b89bcc8751957bdefd99c2d3d7828a36ab7242db8a9c7d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 1127,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/PARITY.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "78bc7c1e4c129a74d2d3b31694f256c046b62e95964ee2648856c50ac86236d4",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/PARITY.json"
+    },
+    {
+      "bytes": 1357,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "0076e4b0ee2a674b7e9a5e8f0d22ed769fd20f7ddfbf5b85f130235864d670e6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/LAUNCH.json"
+    },
+    {
+      "bytes": 4288,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/LOSSES.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "76e6360eed0a521feee15db2b90d022c48ad7c4fb7a682b577b47a1d20bed30c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/LOSSES.json"
+    },
+    {
+      "bytes": 462,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "138fa63529d1453dd73355489ffef75522a88eb23a09c2ccd2a664b573946ca1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 412,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/WINDOW-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "adfa80bdc63e78edf41b94d5cee3863099a6e938fdafbef2497ee110c3671a35",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/WINDOW-COMPLETION.json"
+    },
+    {
+      "bytes": 150,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "b61cf14bddb0ca2266b7fb5db80be75a8283eae2fd45587f7e8dd1fe6ac7f545",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/run.log"
+    },
+    {
+      "bytes": 4757,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/control/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "6d78060dda1e14fcdff353127e44db81f9a927df0a3c5dd941dca740e735e43b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/training-trace.jsonl"
+    },
+    {
+      "bytes": 1375,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/LAUNCH.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "835008fa8a697c1406d739e0eb3efb2a348d07631b9e93f33b58e84c31747a4b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/LAUNCH.json"
+    },
+    {
+      "bytes": 4288,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/LOSSES.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "76e6360eed0a521feee15db2b90d022c48ad7c4fb7a682b577b47a1d20bed30c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/LOSSES.json"
+    },
+    {
+      "bytes": 462,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/SOURCE-CLOSE.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "138fa63529d1453dd73355489ffef75522a88eb23a09c2ccd2a664b573946ca1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/SOURCE-CLOSE.json"
+    },
+    {
+      "bytes": 412,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/WINDOW-COMPLETION.json",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "95373abbc54e5685e370b7a81e4341eed6f56038b7a7cfbb596c8eb5e9291ad9",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/WINDOW-COMPLETION.json"
+    },
+    {
+      "bytes": 5942,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/run.log",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "7d85f2e26ca250aeec51fc6ee6d4a59a43e2850b9856a430c210431db1d1a126",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/run.log"
+    },
+    {
+      "bytes": 4757,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/training-trace.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "6d78060dda1e14fcdff353127e44db81f9a927df0a3c5dd941dca740e735e43b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/training-trace.jsonl"
+    },
+    {
+      "bytes": 5624,
+      "path": "visualization-pr223-convergence/parity-attempt-1/e22/observed/visualization-metrics.jsonl",
+      "role": "closed_parity_full_or_data_evidence",
+      "sha256": "4c47738e5fdfa1592be28e92a1099d8c185d296632443de35ad0d92ea2554788",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/visualization-metrics.jsonl"
+    },
+    {
+      "bytes": 1702,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/__init__.py",
+      "role": "atlas_source",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/_qr.py",
+      "role": "atlas_source",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6401,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/anchor_birth.py",
+      "role": "atlas_source",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/anchor_birth.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/autoencoder.py",
+      "role": "atlas_source",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_death.py",
+      "role": "atlas_source",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 21144,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_phase.py",
+      "role": "atlas_source",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/birth_phase.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/conditioning.py",
+      "role": "atlas_source",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 60875,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/continuous.py",
+      "role": "atlas_source",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/diffusion.py",
+      "role": "atlas_source",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/discriminators.py",
+      "role": "atlas_source",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 125325,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_cells.py",
+      "role": "atlas_source",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_cells.py"
+    },
+    {
+      "bytes": 14650,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_policy.py",
+      "role": "atlas_source",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_policy.py"
+    },
+    {
+      "bytes": 32368,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_reference.py",
+      "role": "atlas_source",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_reference.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/gan_loss.py",
+      "role": "atlas_source",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/grad_regularizers.py",
+      "role": "atlas_source",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/init.py",
+      "role": "atlas_source",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/init.py"
+    },
+    {
+      "bytes": 32329,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/k3p.py",
+      "role": "atlas_source",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/ka2.py",
+      "role": "atlas_source",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/ka2.py"
+    },
+    {
+      "bytes": 39633,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/mean_transport.py",
+      "role": "atlas_source",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/mean_transport.py"
+    },
+    {
+      "bytes": 8387,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/output_moments.py",
+      "role": "atlas_source",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/output_moments.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/particle_prior.py",
+      "role": "atlas_source",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 79533,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/policy.py",
+      "role": "atlas_source",
+      "sha256": "c169697148d884e7b1b6634c54380a94f4c3144893cf7b1bd1c288ea6e241499",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/policy.py"
+    },
+    {
+      "bytes": 20329,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/population_continuity.py",
+      "role": "atlas_source",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/population_continuity.py"
+    },
+    {
+      "bytes": 45757,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/recipes.py",
+      "role": "atlas_source",
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/recipes.py"
+    },
+    {
+      "bytes": 64904,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/routing.py",
+      "role": "atlas_source",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/row_evidence.py",
+      "role": "atlas_source",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 32475,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/training.py",
+      "role": "atlas_source",
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/vicreg_loss.py",
+      "role": "atlas_source",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 1702,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py",
+      "role": "baseline_source_or_config",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py"
+    },
+    {
+      "bytes": 1951,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py",
+      "role": "baseline_source_or_config",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py"
+    },
+    {
+      "bytes": 6194,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py",
+      "role": "baseline_source_or_config",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py"
+    },
+    {
+      "bytes": 45396,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py",
+      "role": "baseline_source_or_config",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py"
+    },
+    {
+      "bytes": 4878,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py",
+      "role": "baseline_source_or_config",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py"
+    },
+    {
+      "bytes": 56001,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py",
+      "role": "baseline_source_or_config",
+      "sha256": "365a1e7b2f8e4eb4bc63bd04d05d645da8c2154159d596cb1564bec29f9eacc5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py"
+    },
+    {
+      "bytes": 5100,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py",
+      "role": "baseline_source_or_config",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py"
+    },
+    {
+      "bytes": 5833,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py",
+      "role": "baseline_source_or_config",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py"
+    },
+    {
+      "bytes": 1016,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py",
+      "role": "baseline_source_or_config",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py"
+    },
+    {
+      "bytes": 13033,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py",
+      "role": "baseline_source_or_config",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py"
+    },
+    {
+      "bytes": 12150,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py",
+      "role": "baseline_source_or_config",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py"
+    },
+    {
+      "bytes": 31092,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py",
+      "role": "baseline_source_or_config",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py"
+    },
+    {
+      "bytes": 16551,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py",
+      "role": "baseline_source_or_config",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py"
+    },
+    {
+      "bytes": 17676,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py",
+      "role": "baseline_source_or_config",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py"
+    },
+    {
+      "bytes": 73605,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py",
+      "role": "baseline_source_or_config",
+      "sha256": "0a5dd9112a8796eb88f3fadaa55604620c5950d56dc44b48d8c52e27ace77530",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py"
+    },
+    {
+      "bytes": 43237,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py",
+      "role": "baseline_source_or_config",
+      "sha256": "640b934f0b4697cd8fb6c49bf9bfaf40d4e9d9646a99e7bac133072514695abd",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py"
+    },
+    {
+      "bytes": 64904,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py",
+      "role": "baseline_source_or_config",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py"
+    },
+    {
+      "bytes": 9397,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py",
+      "role": "baseline_source_or_config",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py"
+    },
+    {
+      "bytes": 30164,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py",
+      "role": "baseline_source_or_config",
+      "sha256": "dcfba088e0e3cd2dbe312578545a29f6e110340276e07ae5299d10ba58d11959",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py"
+    },
+    {
+      "bytes": 2297,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py",
+      "role": "baseline_source_or_config",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py"
+    },
+    {
+      "bytes": 19265,
+      "path": "visualization-pr223-convergence/run_capture.py",
+      "role": "observer_source_or_preflight",
+      "sha256": "31da51910b0724dd47e4863d953e03cee715b5a039cb46b04e204a749e2d800d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/run_capture.py"
+    },
+    {
+      "bytes": 9805,
+      "path": "visualization-pr223-convergence/source-reference/README.md",
+      "role": "baseline_source_or_config",
+      "sha256": "5425e7597b55f83edfce6d6e4cbf9ace47a12723e999255363cfd2f2e394ea75",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/README.md"
+    },
+    {
+      "bytes": 17837,
+      "path": "visualization-pr223-convergence/source-reference/docs/e22.md",
+      "role": "baseline_source_or_config",
+      "sha256": "d08fab46e24d1cb095697ce90bfc2ee4b639e333a050044905e4d88ad70ecc49",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/docs/e22.md"
+    },
+    {
+      "bytes": 2458,
+      "path": "visualization-pr223-convergence/source-reference/historical-atlas/COMPLETION.json",
+      "role": "historical_semantic_parity_receipt",
+      "sha256": "aada2905da7bcc7860fc17a615c5b9ccd8b2ea2e6d3c2a36f7404279b4aacfad",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/COMPLETION.json"
+    },
+    {
+      "bytes": 1307,
+      "path": "visualization-pr223-convergence/source-reference/historical-atlas/LAUNCH.json",
+      "role": "historical_semantic_parity_receipt",
+      "sha256": "a3d62ff4f1aacb281c75bf9b28ae9d997b0b0e6d299d3224e7aea0483d35e9a1",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/LAUNCH.json"
+    },
+    {
+      "bytes": 518,
+      "path": "visualization-pr223-convergence/source-reference/historical-atlas/frames.npz.verdict.json",
+      "role": "historical_semantic_parity_receipt",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/frames.npz.verdict.json"
+    },
+    {
+      "bytes": 0,
+      "path": "visualization-pr223-convergence/source-reference/hosts/native100/__init__.py",
+      "role": "original_host_and_scorer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/__init__.py"
+    },
+    {
+      "bytes": 11658,
+      "path": "visualization-pr223-convergence/source-reference/hosts/native100/accuracy.py",
+      "role": "original_host_and_scorer",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "source": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/accuracy.py"
+    },
+    {
+      "bytes": 8442,
+      "path": "visualization-pr223-convergence/source-reference/hosts/native100/metrics.py",
+      "role": "original_host_and_scorer",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "source": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/metrics.py"
+    },
+    {
+      "bytes": 2428,
+      "path": "visualization-pr223-convergence/source-reference/hosts/native100/problems.py",
+      "role": "original_host_and_scorer",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "source": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/problems.py"
+    },
+    {
+      "bytes": 5231,
+      "path": "visualization-pr223-convergence/source-reference/hosts/native100/toy_models.py",
+      "role": "original_host_and_scorer",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "source": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/toy_models.py"
+    },
+    {
+      "bytes": 9328,
+      "path": "visualization-pr223-convergence/source-reference/original-ra15-adapted-runner.py",
+      "role": "original_atlas_adapter",
+      "sha256": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/adapted_runner.py"
+    },
+    {
+      "bytes": 8686,
+      "path": "visualization-pr223-convergence/source-reference/original-rotate-gate.py",
+      "role": "original_runner",
+      "sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1",
+      "source": "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py"
+    },
+    {
+      "bytes": 24929,
+      "path": "visualization-pr223-convergence/source-reference/study-guards/portability/ra17-current-pr155/SOURCE-FREEZE.json",
+      "role": "prior_source_guard",
+      "sha256": "4fd0ff0ea5ffa0c9f60a98f44f1ad8737e8a6a1d957f216db5142aff750c507d",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/ra17-current-pr155/SOURCE-FREEZE.json"
+    },
+    {
+      "bytes": 92783,
+      "path": "visualization-pr223-convergence/source-reference/study-guards/validation-ra17/SOURCE-FREEZE.json",
+      "role": "prior_source_guard",
+      "sha256": "d25156134ed3805f81ee75c16dbd8154589a5879b0af9032f558c957e60d280c",
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/SOURCE-FREEZE.json"
+    }
+  ],
+  "full_completion_sha256": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+  "media_append": "Separate renderer manifest and review; this append makes no media approval claim.",
+  "package_raw_sha256": {
+    "Atlas": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+    "E22": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316"
+  },
+  "parity_completion_sha256": "97fe13f2d930c466c9f0d0be414ce6f7d0fd3624419b72b8ae4953c120887667",
+  "report_root": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930",
+  "role_counts": {
+    "archive_control": 5,
+    "atlas_source": 28,
+    "baseline_source_or_config": 24,
+    "closed_parity_full_or_data_evidence": 54,
+    "historical_semantic_parity_receipt": 3,
+    "observer_source_or_preflight": 15,
+    "original_atlas_adapter": 1,
+    "original_host_and_scorer": 5,
+    "original_runner": 1,
+    "prior_source_guard": 2
+  },
+  "root": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930",
+  "schema_version": 1,
+  "source_freeze_sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+  "status": "SEALED_ADDITIVE_DENSE_CURRENT_E22_ATLAS_COMPARISON",
+  "total_bytes": 2018909
+}

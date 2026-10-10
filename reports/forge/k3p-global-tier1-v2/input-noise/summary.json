@@ -1,0 +1,472 @@
+{
+  "campaign_ceiling_seconds": 16800,
+  "candidate_ceiling_seconds": 2100,
+  "candidates": [
+    {
+      "candidate_id": "k3p--15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1",
+      "candidate_revision": "a02d1d32f155c75277979f00adc0267be355ba917b0f0d065508cdeedb3e9453",
+      "charged_wall_seconds": 5.393994751968421,
+      "configuration_id": "15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1.json",
+      "settings": {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.14117647058823526,
+        "reg_coeff": 30.0
+      }
+    },
+    {
+      "candidate_id": "k3p--1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0",
+      "candidate_revision": "8cdc1a149237f58b29bfdad4fa7c076e23c3c598091cc28cf84791774101de69",
+      "charged_wall_seconds": 5.432772112020757,
+      "configuration_id": "1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0.json",
+      "settings": {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.14117647058823526,
+        "reg_coeff": 10.0
+      }
+    },
+    {
+      "candidate_id": "k3p--239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176",
+      "candidate_revision": "6a28a2e81579120e7a587ad20ad66facac90ccd1f45112421dd720ad7c31b8b7",
+      "charged_wall_seconds": 5.559645842993632,
+      "configuration_id": "239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176.json",
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 30.0
+      }
+    },
+    {
+      "candidate_id": "k3p--74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503",
+      "candidate_revision": "8fc1aed270e6a168eb03945c10477778cd7e53dc6243682ecea03f5ae2837986",
+      "charged_wall_seconds": 5.524924297991674,
+      "configuration_id": "74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503.json",
+      "settings": {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.14117647058823526,
+        "reg_coeff": 170.0
+      }
+    },
+    {
+      "candidate_id": "k3p--8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f",
+      "candidate_revision": "fb50c4f8a4cbdeb99b0b8926f15df0a2fcd092f19628f937c2d80afc3439e7e5",
+      "charged_wall_seconds": 28.40327733400045,
+      "configuration_id": "8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f",
+      "falsifier_triggered": false,
+      "prediction_supported": true,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f.json",
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 1.0
+      }
+    },
+    {
+      "candidate_id": "k3p--8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4",
+      "candidate_revision": "f12c14d6204049b179e67f50a4ba6cb883a07cf6ed97ca6b1ebc48d7b2e8121d",
+      "charged_wall_seconds": 6.325833834009245,
+      "configuration_id": "8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4.json",
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 170.0
+      }
+    },
+    {
+      "candidate_id": "k3p--a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc",
+      "candidate_revision": "f47aff633ed80313d287c8ef0cdec004ffac2e45237f3bc16e11606fe91f96b7",
+      "charged_wall_seconds": 28.555188003985677,
+      "configuration_id": "a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc",
+      "falsifier_triggered": false,
+      "prediction_supported": true,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc.json",
+      "settings": {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.14117647058823526,
+        "reg_coeff": 1.0
+      }
+    },
+    {
+      "candidate_id": "k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
+      "candidate_revision": "9d3b3e89bbf2c2ff3c9ec25336d05f8971cd53515b948f7b15d743c05928b280",
+      "charged_wall_seconds": 5.642942006990779,
+      "configuration_id": "b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
+      "falsifier_triggered": true,
+      "prediction_supported": false,
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "receipt": "reports/forge/k3p-global-tier1-v2/input-noise/receipts/b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2.json",
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 10.0
+      }
+    }
+  ],
+  "charged_wall_seconds": 90.83857818396064,
+  "configuration_count": 8,
+  "configured_standard_eligibility": "All five required ordinary Tier 1 tasks PASS for one complete global recipe. Higher tiers remain UNKNOWN; this provisional screen never adopts public defaults.",
+  "default_adoption": false,
+  "full_view_required_count": 26,
+  "historical_word_qualification_reuse": false,
+  "measured_fail": 8,
+  "measured_pass": 6,
+  "measured_task_count": 14,
+  "publication_optimizer_updates": 0,
+  "publication_sampling_draws": 0,
+  "required_tier1_count": 5,
+  "research_readout": "reports/forge/k3p-global-tier1-v2/README.md",
+  "schema_version": 1,
+  "scope": "bounded_global_existing_input_noise_activation",
+  "search_report": {
+    "bytes": 411404,
+    "path": "reports/forge/configuration-search/k3p-global-input-noise-tier1-v1.json",
+    "sha256": "f9b1ddee868d34c46e97f0140e962b1f31990f65fcdbc44a9a6bb6c88f1bd36a"
+  },
+  "single_current_leaderboard": "reports/forge/technique-inventory.md",
+  "source_commits": [
+    "846190389b0e423054fc9912ab1a69d06bd5348c"
+  ],
+  "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+  "study": "k3p-global-input-noise-tier1-v1",
+  "task_cells": 208,
+  "through_tier": 1,
+  "tier1_qualified_candidate_ids": [],
+  "unknown_count": 194
+}

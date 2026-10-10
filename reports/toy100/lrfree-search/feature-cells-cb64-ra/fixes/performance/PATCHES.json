@@ -1,0 +1,16 @@
+{
+  "COUNT-ONLY.diff": {
+    "sha256": "3fca6295393ffee675e009c1d66b18e74abbd179936b33ccfc7f023864535066",
+    "methods": [
+      "conditional_count_pvalues"
+    ]
+  },
+  "PERFORMANCE-CORE.diff": {
+    "sha256": "c5eaef39b2672dd633ad3334ba1e965081d8e4de0a4cb4a95008dd931a31237f",
+    "methods": [
+      "conditional_count_pvalues",
+      "FeatureCellSnapshot.fit",
+      "FeatureCellSnapshot._pool"
+    ]
+  }
+}

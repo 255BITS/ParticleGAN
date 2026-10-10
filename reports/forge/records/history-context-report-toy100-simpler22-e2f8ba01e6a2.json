@@ -1,0 +1,90 @@
+{
+  "candidate_id": "context:report/toy100/simpler22",
+  "candidate_revision": "8da434df22444c6ce6d810e9b2c0fc444c467380e1b7a682452e7106a8891414",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Simpler shared recipe: 22/22",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/simpler22",
+      "narrative_sources": [
+        {
+          "git_blob": "a24b757a4a10b9a64b1cf2f2f14acb798e037016",
+          "path": "reports/toy100/simpler22/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "46bae43c9b7df6e1f497ae6b634e00f515c4c2d00dd18a4c32c1320b70391140",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/README.md"
+        },
+        {
+          "git_blob": "da57f4acb1e8d23af6f2702bff0ed12bab7e40d1",
+          "path": "reports/toy100/simpler22/compatibility.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "45de4940e1107b498b668c55c1de0c11c1d999c5f673b228190886d5ee40e111",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/compatibility.md"
+        },
+        {
+          "git_blob": "1353bcf891b7685ae0b7aabdf44e973f2292b9b2",
+          "path": "reports/toy100/simpler22/toy100/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5fde758019a24a2bc276298c1b77ffca030cea2b5663c4f89f008b965dfcee45",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/toy100/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "93de896807ef3eca56852588f1aacee8e2d472c2",
+          "path": "reports/toy100/simpler22/toy100/accuracy-leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "be63e7d51cf91d587476e2b38226b800da0f5fe77b9d8ca9fa3349adb7d0d97b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/toy100/accuracy-leaderboard.md"
+        },
+        {
+          "git_blob": "75f726d15fb964f29a8c28ff6d1192dbb0dee5d0",
+          "path": "reports/toy100/simpler22/toy100/leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "944815f9579bc5aa8e05866af52911499152cc7f8316b5acabdc64273c3cb876",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/toy100/leaderboard.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Simpler shared recipe: 22/22\n\nThe exact [`constraints_simple_regularization.json`](../../../configs/toy100/constraints_simple_regularization.json) passes all 22 frozen toys in one fresh production-runner replay. It replaces the previous discriminator cap 1.176 and coefficient 6 with **1 and 1**, and removes the particle VICReg penalty (`prior_reg=0`). Every other optimizer, noise, schedule, model, resource, seed, and accuracy-gate setting is unchanged. This simplifies regularization; it does not eliminate every hyperparameter.\n\n![Simpler shared recipe: recorded live convergence](toy100/toy100-progress.gif)\n\n| Setting | Exact recipe |\n| --- | --- |\n| Optimizer / objective | Ordinary Adam; logistic relativistic pairing |\n| Learning rates | G .00425; D .00425; particles .0085 |\n| Adam moments | \u03b2\u2081=0, \u03b2\u2082=.999 for all players |\n| Discriminator regularizer | `b_cap`, \u03ba=1, coefficient 1; exact autograd every update |\n| Particle regularizer | Disabled (`prior_reg=0`) |\n| Network schedule | Cosine starts at 60% of `min(host_budget,1600)`; floor .01 |\n| Particle schedule | Cosine starts at 60% of host budget; floor .05 |\n| Input noise | \u03c3=.5 decreases linearly to zero during the first 10% |\n| Output noise | \u03c3 rises to .029 during the first 20%, then stays .029 |\n| Native initialization | Identity 2D affine G; 20,000 learned particles uniform on [\u22125,5]\u00b2 |\n| Native critic / resources | W"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-simpler22-e2f8ba01e6a2",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a24b757a4a10b9a64b1cf2f2f14acb798e037016",
+    "path": "reports/toy100/simpler22/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "46bae43c9b7df6e1f497ae6b634e00f515c4c2d00dd18a4c32c1320b70391140",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22/README.md"
+  },
+  "task_results": []
+}

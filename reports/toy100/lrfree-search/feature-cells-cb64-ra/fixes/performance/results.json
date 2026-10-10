@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-09-29T23:41:13.157472+00:00",
+  "status": "GPU_VERIFIED_CORE_READY",
+  "scope": "performance microdiagnostics and semantics-preserving core; no full GAN training throughput claim",
+  "integration_patch": "PERFORMANCE-CORE.diff",
+  "integration_patch_sha256": "c5eaef39b2672dd633ad3334ba1e965081d8e4de0a4cb4a95008dd931a31237f",
+  "integration_methods": [
+    "conditional_count_pvalues",
+    "FeatureCellSnapshot.fit",
+    "FeatureCellSnapshot._pool"
+  ],
+  "deferred_to_stability": [
+    "ordinary_transport",
+    "_integer_allocate",
+    "select_parents",
+    "backend_factory"
+  ],
+  "count_gpu": {
+    "status": "PASS",
+    "speed_ratio": 27.27716218195233,
+    "max_abs_error": 1.1102230246251565e-16,
+    "tiny_tables": 196,
+    "all_decisions_identical": true,
+    "benchmarks": {
+      "reference": {
+        "milliseconds_per_call": 29.669448197819293,
+        "events": {
+          "aten::_local_scalar_dense": 132,
+          "aten::item": 132,
+          "aten::nonzero": 64,
+          "cudaMemcpyAsync": 260,
+          "cudaStreamSynchronize": 196
+        }
+      },
+      "batched": {
+        "milliseconds_per_call": 1.087702892255038,
+        "events": {
+          "aten::_local_scalar_dense": 1,
+          "aten::item": 1,
+          "aten::nonzero": 0,
+          "cudaMemcpyAsync": 3,
+          "cudaStreamSynchronize": 2
+        }
+      }
+    }
+  },
+  "snapshot_gpu": {
+    "status": "PASS",
+    "snapshot_cases": 6,
+    "pool_cases": 10,
+    "transport_cases": 3,
+    "max_abs_error": 0.0,
+    "all_float_fields_bit_exact": true,
+    "benchmarks": {
+      "reference": {
+        "milliseconds_per_fit": 56.90525402314961,
+        "scalar_reads": 201,
+        "nonzero_calls": 385
+      },
+      "batched": {
+        "milliseconds_per_fit": 33.8235879316926,
+        "scalar_reads": 12,
+        "nonzero_calls": 1
+      }
+    }
+  },
+  "private_feature_cells_sha256": "53f86ed38337c8875c374ebbf1e4abf4eb0e561e71d77b5d3c9c87cc03eb3615",
+  "source_receipts": [
+    "GPU-READY.json",
+    "SNAPSHOT-GPU-READY.json",
+    "BASELINE.json"
+  ],
+  "gpu_execution_owner": "root in serialized slots",
+  "policy_changes": "none in selected performance core",
+  "quality_gates_changed": false,
+  "seed_sweeps": false
+}

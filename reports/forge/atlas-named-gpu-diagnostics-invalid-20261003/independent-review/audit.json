@@ -1,0 +1,994 @@
+{
+  "accounting": {
+    "actual_observations": 0,
+    "actual_scientific_updates": 0,
+    "adapted_numerical_failures": 0,
+    "adapted_numerical_passes": 0,
+    "attempted_implementation_jobs": 2,
+    "declared_adapted_questions": 8,
+    "default_adoption": false,
+    "original_N5_word_status": "BLOCKED",
+    "paid_engineering_seconds": 25.32295504095964,
+    "qualified_tier": 0,
+    "remaining_adapted_jobs": "NOT_RUN",
+    "unmeasured_interrupt_reserved_seconds": 0.0
+  },
+  "consumed_inputs": [
+    {
+      "bytes": 3803642,
+      "path": "/ml2/hypergan/.forge-atlas-named-gpu-diagnostics-20261003-native-v1.atlas-named-gpu-diagnostics.json",
+      "sha256": "2201cb0ea4d16bedd8099a77d9696ee62114688a9166e74aba83329f1fd55416"
+    },
+    {
+      "bytes": 10814,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/conditional_policy_selected_cloud_v1/trajectory_conditional_policy_selected_cloud_v1.json",
+      "sha256": "3949449fe5513fd03269ee4a5de9df5a962a22409b02a579b76bce8ba1c65d57"
+    },
+    {
+      "bytes": 11156,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1.json",
+      "sha256": "996b72939599bf729fb07ea9835dd0d2b555547ba82f40aa77fa208e91a31bb9"
+    },
+    {
+      "bytes": 11194,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/conditional_policy_selected_cloud_v1/unipolar_conditional_policy_selected_cloud_v1.json",
+      "sha256": "febb036392dbfadb6d7ed74c02a3c383b68632d796613eaa5c93950fb07cbf67"
+    },
+    {
+      "bytes": 11693,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/conditional_policy_selected_cloud_v1/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
+      "sha256": "d544e9cfd8e0bef6214df45fb2c67c36dbbc472b32ce747e60755b351f15a8b0"
+    },
+    {
+      "bytes": 12030,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/ae_routed_policy_v1/ae_gan_hold_ae_routed_policy_v1.json",
+      "sha256": "672512ac29f928b05471f9ab14a7908349b8e7e9e244687a38ecf272f72a5e96"
+    },
+    {
+      "bytes": 10843,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "sha256": "4fb84d1dcc6be4a0b1b80a26fd7fea825253ee9dbb2b2071d5db9b1d47f724fe"
+    },
+    {
+      "bytes": 11167,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json",
+      "sha256": "c1a2ecbe78c9023b72fb88ae355e2622caa0101a2c3af9dfa376559fdac69ae0"
+    },
+    {
+      "bytes": 15010,
+      "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json",
+      "sha256": "8f7f124b8ee2000cda037ecbf5a210ab10fa0a7f297705804c41e8df2a40b905"
+    },
+    {
+      "bytes": 4493314,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/study.json",
+      "sha256": "afb22c8fecbcdc5a8c3e7d9f4b15a1fca6c471d104b981654d33aec7ef8e30c8"
+    },
+    {
+      "bytes": 1661,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "2a11ba577f1465e63a8a9a785291eb3aa3667bdd90614fcc2cbd8914f0f53887"
+    },
+    {
+      "bytes": 5335359,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/resolved.json",
+      "sha256": "2153f945fbed301b83b730d0af80269df32a4e51519c9cdb1cc468210ee76374"
+    },
+    {
+      "bytes": 3277,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/run.log",
+      "sha256": "c433a8d7cdbee25a5e3e0b71f6196fffeed17bdd8603737bee6528753c379d13"
+    },
+    {
+      "bytes": 151,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9a997cef3257b682601a27ef6754a26becd8357c3fac6b59de03848f819c08bf/supervisor-terminal.json",
+      "sha256": "85b58b868c1a4e7db171a5f267bfb94f57bec720c866e3b2f2a7512762d13a4b"
+    },
+    {
+      "bytes": 4381318,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/study.json",
+      "sha256": "547d608eca3f15a99a0b63c5a89dcaa0641aeb745c94284bc68452e513efc96d"
+    },
+    {
+      "bytes": 1652,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "6897d2c495ce9d9f9e382144e9964175107505eab3d87e7ba7c2a762a5f222aa"
+    },
+    {
+      "bytes": 5104368,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/resolved.json",
+      "sha256": "ec060c7bf952ab6f4478e76ec8fc812db94a4773f0f1d4a57b01ecb77cef3d75"
+    },
+    {
+      "bytes": 3209,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/run.log",
+      "sha256": "cfbd6186d41d3628fddc1ded030a895e61f50312abe2caf62f75d9df866839c5"
+    },
+    {
+      "bytes": 151,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/adad38e926837b78ad4f58015f7a6a6a1af333a818b2f60471c09e0455a19a56/supervisor-terminal.json",
+      "sha256": "32e366bcecccd18aed5c4a6cab472f37c3c9008663cbfbeb13651faadd6dce2a"
+    }
+  ],
+  "declared_cases": [
+    {
+      "cohort": "conditional_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/trajectory_conditional_policy_selected_cloud_v1.json",
+      "definition_sha256": "3949449fe5513fd03269ee4a5de9df5a962a22409b02a579b76bce8ba1c65d57",
+      "evaluation_sha256": "87a00f8508a724fd7cbbcd8e3153b587a0b423bd49932885c89e1b95d465bccc",
+      "execution_sha256": "e29624a415234dda602e72261ba9104a0f27f7648f91f7b964516731315dcb8f",
+      "family": "atlas_conditional",
+      "id": "trajectory_conditional_policy_selected_cloud_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "68b964b7a7e0cc0e8c0c1d8786df18096541c1369435b0f318c395198a4e14dc",
+        "execution_fingerprint": "8fd44a5ba4c28d8fca9372d847a38734de33c42bf648b9e3d78dc8c3eeb0afa7",
+        "id": "trajectory",
+        "task_sha256": "ac86a16636f04bd7868e64a4df52fc08f3033acb1cff3b1caf25fd9ef046f578"
+      },
+      "planned_observations": 24,
+      "planned_updates": 400,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ]
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "conditional_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1.json",
+      "definition_sha256": "996b72939599bf729fb07ea9835dd0d2b555547ba82f40aa77fa208e91a31bb9",
+      "evaluation_sha256": "cbdfcec0df851d94293019831de9d2a1193508a613d1cb7864415aeef16dc0f3",
+      "execution_sha256": "fec143a4ef38315291ac936242fc4316ac27981c019728b8ef1690a1965392fd",
+      "family": "atlas_conditional",
+      "id": "residual_student_conditional_policy_selected_cloud_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "0e9caebc7e3518cca797d8b879db50e7d4b332a1386bf9ed045a51d5b36037c6",
+        "execution_fingerprint": "e1c9ad78ad53a8f0fa634cbe00a002b0d41541a74db5466f7a7e19d73c218443",
+        "id": "residual_student",
+        "task_sha256": "dfebe28e3bafb0aea298678894524ea7b182481980f4854351bbd4252facd285"
+      },
+      "planned_observations": 24,
+      "planned_updates": 400,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ],
+        [
+          "success_rate",
+          ">=",
+          1.0
+        ],
+        [
+          "wrong_pad_rate",
+          "<=",
+          0.0
+        ]
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "conditional_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/unipolar_conditional_policy_selected_cloud_v1.json",
+      "definition_sha256": "febb036392dbfadb6d7ed74c02a3c383b68632d796613eaa5c93950fb07cbf67",
+      "evaluation_sha256": "05dcf936ffda03bf130fa23a4423df078b9683b4b627117fbb19eaf5b4c4d521",
+      "execution_sha256": "3e18f34fdaa4dc7bb2d1c1506991d1e9861989c287b1fddc87d37d110ea01823",
+      "family": "atlas_conditional",
+      "id": "unipolar_conditional_policy_selected_cloud_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "77034fcfe01b1c1601d48241d9ccf6afc0c94761eef5b44fdd744794f8e82b16",
+        "execution_fingerprint": "bc1df14a2bbf785a6ac7c17f759f87a300dfd33844bbba08e608fd678e44d106",
+        "id": "unipolar",
+        "task_sha256": "a2df5eb0fdb119e0cf0d744002ac4cc6460037a4960a51119947af396cc71d39"
+      },
+      "planned_observations": 24,
+      "planned_updates": 400,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "cover",
+          ">=",
+          0.85
+        ],
+        [
+          "off_caption",
+          "<=",
+          0.05
+        ],
+        [
+          "neu_hold",
+          ">=",
+          0.85
+        ]
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "conditional_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
+      "definition_sha256": "d544e9cfd8e0bef6214df45fb2c67c36dbbc472b32ce747e60755b351f15a8b0",
+      "evaluation_sha256": "9e91ed41331e65fd85321f356d9c0fff53365f54ea5d6290204d20a786dffde6",
+      "execution_sha256": "57c58dc37b561866b38e3fd0036b64a642d0a0a1b691fdd70ffc2771cb053c1c",
+      "family": "atlas_conditional",
+      "id": "mid_scale_identity_conditional_policy_selected_cloud_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "1964fdfcbec31f97a2eda1b828a76611625ae05b1268fc85154cb6e2992f8900",
+        "execution_fingerprint": "c65edba96e4e4b51ca62e54ad2405111a5c3552854deb5b5b1217537b9235b7d",
+        "id": "mid_scale_identity",
+        "task_sha256": "f84f25e04f159bc3926af48c9243bc999832e166854fba63e90d6e7c62c0bc7f"
+      },
+      "planned_observations": 24,
+      "planned_updates": 800,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "concept_cos_plus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_cos_minus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_mag_plus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_plus",
+          "<=",
+          1.25
+        ],
+        [
+          "concept_mag_minus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_minus",
+          "<=",
+          1.25
+        ],
+        [
+          "identity_at_0",
+          ">=",
+          0.85
+        ],
+        [
+          "identity_at_mid",
+          ">=",
+          0.85
+        ]
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "ae_routed_policy_v1",
+      "definition": "configs/forge/task-variants/ae_routed_policy_v1/ae_gan_hold_ae_routed_policy_v1.json",
+      "definition_sha256": "672512ac29f928b05471f9ab14a7908349b8e7e9e244687a38ecf272f72a5e96",
+      "evaluation_sha256": "eb3104d17beb0919337b0cc8a4261a28edbd0c0faba5736b035c8b5f6840b6cb",
+      "execution_sha256": "3fefad16fd3d2c9f8314077e87193dda6a8c032a58dc386c755b4a58e3435bad",
+      "family": "atlas_ae_routed",
+      "id": "ae_gan_hold_ae_routed_policy_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+        "execution_fingerprint": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7",
+        "id": "ae_gan_hold",
+        "task_sha256": "53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79"
+      },
+      "planned_observations": 24,
+      "planned_updates": 250,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "recon_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "hold",
+          "<=",
+          0.35
+        ]
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "cohort": "routed_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "definition_sha256": "4fb84d1dcc6be4a0b1b80a26fd7fea825253ee9dbb2b2071d5db9b1d47f724fe",
+      "evaluation_sha256": "676542443392b8a3918991a31ee28c325c859874d9914d674780bf5555b0baac",
+      "execution_sha256": "6940ec411c7103ef3912b2518b4304519402bdaa804015259864d8a69ad17b9f",
+      "family": "atlas_routed",
+      "id": "unused_token_hold_routed_policy_selected_cloud_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+        "execution_fingerprint": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7",
+        "id": "unused_token_hold",
+        "task_sha256": "ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8"
+      },
+      "planned_observations": 24,
+      "planned_updates": 200,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "unused_hold",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_move",
+          ">=",
+          0.85
+        ]
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "cohort": "multibank_policy_v1",
+      "definition": "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json",
+      "definition_sha256": "c1a2ecbe78c9023b72fb88ae355e2622caa0101a2c3af9dfa376559fdac69ae0",
+      "evaluation_sha256": "dcda190c097644428f82ed4ac2cbe6a2603f57a0dcbeace09a6776a2dd371ece",
+      "execution_sha256": "21843a2cbaa4a0b53aa91770aee4c750c9353584d442b62c5872eb5f577dbe06",
+      "family": "atlas_multibank",
+      "id": "cover_leftover_multibank_policy_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "d6a0b646e55e9c8e523f90485b3ec47844a18e18b12fd6046c1646487c9a1807",
+        "execution_fingerprint": "e79d755f2a61242af2d2fd043dd2c6d5b639dd331d705b6c48c6d6190aa798cc",
+        "id": "cover_leftover",
+        "task_sha256": "f40f960d80090f1b46cc326424cab7d781c36cc9ea3222aea7375c2834028e4e"
+      },
+      "planned_observations": 24,
+      "planned_updates": 800,
+      "required_terminal_checks": 5,
+      "row_semantics": "conditional",
+      "thresholds": [
+        [
+          "u_kept",
+          ">=",
+          0.85
+        ],
+        [
+          "content_kept",
+          ">=",
+          0.75
+        ],
+        [
+          "leak_ratio",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_plus",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_minus",
+          "<=",
+          0.2
+        ],
+        [
+          "same_dir",
+          "<=",
+          0.25
+        ]
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "word_joint_policy_min11_v1",
+      "definition": "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json",
+      "definition_sha256": "8f7f124b8ee2000cda037ecbf5a210ab10fa0a7f297705804c41e8df2a40b905",
+      "evaluation_sha256": "cf37c8e31ccc7333b5d5524945515fa94bb9c8f50ab16dba923ec17273b96481",
+      "execution_sha256": "d8aa3adb87da121fb26990abed1a107097ae31a66af5991a1acb1a4778d0d4a6",
+      "family": "atlas_word_joint_min11",
+      "id": "five_word_joint_acquisition_word_joint_policy_min11_v1",
+      "owner": "particlegan.UpdatePolicy",
+      "parent": {
+        "evaluation_fingerprint": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+        "execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
+        "id": "five_word_joint_acquisition",
+        "task_sha256": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048"
+      },
+      "planned_observations": 24,
+      "planned_updates": 20001,
+      "required_terminal_checks": 5,
+      "row_semantics": "independent",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ],
+      "timeout_seconds": 900
+    }
+  ],
+  "diagnosis": {
+    "limits": "Metadata acceptance after normalization proves neither model capacity nor learned performance; an unexecuted source fix confers no scientific credit.",
+    "minimal_fix": "Normalize only typed field_ownership/preflight_blockers via existing policy_task_declaration, then retain full canonical declaration/source validation.",
+    "proven_cause": "Producer constructors bypass the already available typed compiler-annotation normalization used by registry validation."
+  },
+  "failed_attempts": [
+    {
+      "actual_observations": 0,
+      "actual_role_ownership": "NOT_ESTABLISHED",
+      "actual_scientific_updates": 0,
+      "attempt_key": "9a997cef3257b682601a27ef6754a26becd8357c3fac6b59de03848f819c08bf",
+      "candidate_revision": "e2abfc2bec3d2f9735f041c8bfa06caaa405255054beb14dbb1a3d8792b67f98",
+      "constructor_after_existing_helper": {
+        "status": "PASS"
+      },
+      "constructor_direct_validation": {
+        "error": "conditional task changed its original objective, host, initializer, gates or resources",
+        "status": "REJECTED"
+      },
+      "declared_context_recipe_owner_map_sha256": "fbd05ebbeb94f3cbbcabc5ded7659c55767e70565fccab1f11253c265ef45133",
+      "declared_context_recipe_values": {
+        "alpha_bar": null,
+        "amsgrad": true,
+        "batch_size": 12,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": null,
+        "continuous_policy": "dv12",
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": null,
+        "ema_decay": 0.995,
+        "encoder_mode": null,
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": null,
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": null,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": null,
+        "reconstruction_weight": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 3.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": null,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "routed_paired",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": null,
+        "ucd_weight": null,
+        "z_dim": 4
+      },
+      "differing_paths": [
+        "$.field_ownership",
+        "$.preflight_blockers"
+      ],
+      "durable_terminal": {
+        "bytes": 151,
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9a997cef3257b682601a27ef6754a26becd8357c3fac6b59de03848f819c08bf/supervisor-terminal.json",
+        "sha256": "85b58b868c1a4e7db171a5f267bfb94f57bec720c866e3b2f2a7512762d13a4b"
+      },
+      "error_path_note": "runtime.py supplies the generic candidate public_trainer fallback after an exception; it is not an executed GANTrainer ownership receipt.",
+      "error_receipt_execution_path": "public_trainer",
+      "family": "atlas_conditional",
+      "gpu_allocator_peaks": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 0,
+        "cuda_peak_reserved_bytes": 0,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 664801280
+      },
+      "intended_execution_path": "public_components",
+      "normalized_complete_object_equal": true,
+      "paid_seconds": 12.873334385920316,
+      "physical_gpu": "0",
+      "planned_observations": 24,
+      "planned_resources": {
+        "batch_size": 12,
+        "num_particles": 12,
+        "z_dim": 4
+      },
+      "planned_updates": 400,
+      "qualification_input": false,
+      "raw_result": {
+        "bytes": 1661,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "2a11ba577f1465e63a8a9a785291eb3aa3667bdd90614fcc2cbd8914f0f53887"
+      },
+      "registry_compiled_validation": {
+        "status": "PASS"
+      },
+      "reserve_seconds": 0.0,
+      "resolved": {
+        "bytes": 5335359,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/resolved.json",
+        "sha256": "2153f945fbed301b83b730d0af80269df32a4e51519c9cdb1cc468210ee76374"
+      },
+      "run_log": {
+        "bytes": 3277,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/attempts/trajectory_conditional_policy_selected_cloud_v1/run.log",
+        "sha256": "c433a8d7cdbee25a5e3e0b71f6196fffeed17bdd8603737bee6528753c379d13"
+      },
+      "runtime": {
+        "compute": {
+          "backend": "cuda",
+          "compute_capability": "8.6",
+          "deterministic": true,
+          "driver": "580.173.02",
+          "model": "NVIDIA RTX A6000",
+          "tf32": false,
+          "threads": 1
+        },
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.13.0+cu126"
+        },
+        "physical_gpu": "0",
+        "python": "3.12.13",
+        "system": "Linux",
+        "torch_threads": 1
+      },
+      "scientific_fields_equal": true,
+      "scientific_status": "NOT_TESTED",
+      "source_digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280",
+      "status": "INVALID",
+      "task_id": "trajectory_conditional_policy_selected_cloud_v1",
+      "zero_update_evidence": "Trace stops at the first constructor contract validation, before any model/optimizer/policy construction or step; no observation/checkpoint/GIF files exist."
+    },
+    {
+      "actual_observations": 0,
+      "actual_role_ownership": "NOT_ESTABLISHED",
+      "actual_scientific_updates": 0,
+      "attempt_key": "adad38e926837b78ad4f58015f7a6a6a1af333a818b2f60471c09e0455a19a56",
+      "candidate_revision": "5ec57e311c51ca53d91014d6d7b1d0707babf382d79829978e2712d47686b064",
+      "constructor_after_existing_helper": {
+        "status": "PASS"
+      },
+      "constructor_direct_validation": {
+        "error": "routed task changed its original objective, host, initialization or gates",
+        "status": "REJECTED"
+      },
+      "declared_context_recipe_owner_map_sha256": "686475546cfa35c6b43fb4908763cbc431291c9e77d2741679394d8375713846",
+      "declared_context_recipe_values": {
+        "alpha_bar": null,
+        "amsgrad": true,
+        "batch_size": 8,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": null,
+        "continuous_policy": "dv12",
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": null,
+        "ema_decay": 0.995,
+        "encoder_mode": null,
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": null,
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 2,
+        "observation_sigma": null,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": null,
+        "reconstruction_weight": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 3.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": null,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "routed_paired",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": null,
+        "ucd_weight": null,
+        "z_dim": 2
+      },
+      "differing_paths": [
+        "$.field_ownership",
+        "$.preflight_blockers"
+      ],
+      "durable_terminal": {
+        "bytes": 151,
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/adad38e926837b78ad4f58015f7a6a6a1af333a818b2f60471c09e0455a19a56/supervisor-terminal.json",
+        "sha256": "32e366bcecccd18aed5c4a6cab472f37c3c9008663cbfbeb13651faadd6dce2a"
+      },
+      "error_path_note": "runtime.py supplies the generic candidate public_trainer fallback after an exception; it is not an executed GANTrainer ownership receipt.",
+      "error_receipt_execution_path": "public_trainer",
+      "family": "atlas_routed",
+      "gpu_allocator_peaks": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 0,
+        "cuda_peak_reserved_bytes": 0,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 664170496
+      },
+      "intended_execution_path": "public_components",
+      "normalized_complete_object_equal": true,
+      "paid_seconds": 12.449620655039325,
+      "physical_gpu": "1",
+      "planned_observations": 24,
+      "planned_resources": {
+        "batch_size": 8,
+        "num_particles": 2,
+        "z_dim": 2
+      },
+      "planned_updates": 200,
+      "qualification_input": false,
+      "raw_result": {
+        "bytes": 1652,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "6897d2c495ce9d9f9e382144e9964175107505eab3d87e7ba7c2a762a5f222aa"
+      },
+      "registry_compiled_validation": {
+        "status": "PASS"
+      },
+      "reserve_seconds": 0.0,
+      "resolved": {
+        "bytes": 5104368,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/resolved.json",
+        "sha256": "ec060c7bf952ab6f4478e76ec8fc812db94a4773f0f1d4a57b01ecb77cef3d75"
+      },
+      "run_log": {
+        "bytes": 3209,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/run.log",
+        "sha256": "cfbd6186d41d3628fddc1ded030a895e61f50312abe2caf62f75d9df866839c5"
+      },
+      "runtime": {
+        "compute": {
+          "backend": "cuda",
+          "compute_capability": "8.6",
+          "deterministic": true,
+          "driver": "580.173.02",
+          "model": "NVIDIA RTX A6000",
+          "tf32": false,
+          "threads": 1
+        },
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.13.0+cu126"
+        },
+        "physical_gpu": "1",
+        "python": "3.12.13",
+        "system": "Linux",
+        "torch_threads": 1
+      },
+      "scientific_fields_equal": true,
+      "scientific_status": "NOT_TESTED",
+      "source_digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280",
+      "status": "INVALID",
+      "task_id": "unused_token_hold_routed_policy_selected_cloud_v1",
+      "zero_update_evidence": "Trace stops at the first constructor contract validation, before any model/optimizer/policy construction or step; no observation/checkpoint/GIF files exist."
+    }
+  ],
+  "family_ledgers": [
+    {
+      "budget_seconds": 300,
+      "cohort_fingerprint": "c2eb1d2064a70b50b6e502b2be6cc8747c6173904b390c836203825f554e0e25",
+      "counts": {
+        "NOT_RUN": 26
+      },
+      "default_adoption": false,
+      "denominator": 26,
+      "family": "atlas_ae_routed",
+      "ordinary_qualified_tier": 0,
+      "paid_seconds": 0.0,
+      "parent_view_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "qualification_input": false,
+      "reserve_seconds": 0.0,
+      "status": "NOT_RUN",
+      "tier_counts": {
+        "1": 5,
+        "2": 19,
+        "3": 2
+      },
+      "view_revision": 4
+    },
+    {
+      "budget_seconds": 7200,
+      "cohort_fingerprint": "6e5fa04a76ae6ffc93e5debfc84abdc95d5ac3897ed9ce94fdce91f827ad29eb",
+      "counts": {
+        "INVALID": 1,
+        "NOT_RUN": 25
+      },
+      "default_adoption": false,
+      "denominator": 26,
+      "family": "atlas_conditional",
+      "historical_original_word": {
+        "claim": "Original N5 cannot enable all public row owners; min11 is a distinct declared resource/joint-code law.",
+        "execution_credit": false,
+        "prior_rows": 5,
+        "status": "BLOCKED"
+      },
+      "ordinary_qualified_tier": 0,
+      "paid_seconds": 12.873334385920316,
+      "parent_view_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "qualification_input": false,
+      "reserve_seconds": 0.0,
+      "status": "INVALID",
+      "study": {
+        "bytes": 4493314,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_conditional/study.json",
+        "sha256": "afb22c8fecbcdc5a8c3e7d9f4b15a1fca6c471d104b981654d33aec7ef8e30c8"
+      },
+      "tier_counts": {
+        "1": 5,
+        "2": 19,
+        "3": 2
+      },
+      "view_revision": 4
+    },
+    {
+      "budget_seconds": 1800,
+      "cohort_fingerprint": "829328c501a796fd6dd6b21cc156dbe24c33658500cf56328ff353a103124a05",
+      "counts": {
+        "NOT_RUN": 26
+      },
+      "default_adoption": false,
+      "denominator": 26,
+      "family": "atlas_multibank",
+      "ordinary_qualified_tier": 0,
+      "paid_seconds": 0.0,
+      "parent_view_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "qualification_input": false,
+      "reserve_seconds": 0.0,
+      "status": "NOT_RUN",
+      "tier_counts": {
+        "1": 5,
+        "2": 19,
+        "3": 2
+      },
+      "view_revision": 4
+    },
+    {
+      "budget_seconds": 300,
+      "cohort_fingerprint": "a60358b376efaa3e05fdbc0847dcf58a9787e79d16968abbd8b5ab2902214195",
+      "counts": {
+        "INVALID": 1,
+        "NOT_RUN": 25
+      },
+      "default_adoption": false,
+      "denominator": 26,
+      "family": "atlas_routed",
+      "historical_original_word": {
+        "claim": "Original N5 cannot enable all public row owners; min11 is a distinct declared resource/joint-code law.",
+        "execution_credit": false,
+        "prior_rows": 5,
+        "status": "BLOCKED"
+      },
+      "ordinary_qualified_tier": 0,
+      "paid_seconds": 12.449620655039325,
+      "parent_view_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "qualification_input": false,
+      "reserve_seconds": 0.0,
+      "status": "INVALID",
+      "study": {
+        "bytes": 4381318,
+        "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v1/atlas_routed/study.json",
+        "sha256": "547d608eca3f15a99a0b63c5a89dcaa0641aeb745c94284bc68452e513efc96d"
+      },
+      "tier_counts": {
+        "1": 5,
+        "2": 19,
+        "3": 2
+      },
+      "view_revision": 4
+    },
+    {
+      "budget_seconds": 900,
+      "cohort_fingerprint": "79a0bd2f25db6c617c3ff2e25b2623c3404f04bb30c41b2cefaf9f2cae2695ee",
+      "counts": {
+        "NOT_RUN": 26
+      },
+      "default_adoption": false,
+      "denominator": 26,
+      "family": "atlas_word_joint_min11",
+      "ordinary_qualified_tier": 0,
+      "paid_seconds": 0.0,
+      "parent_view_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "qualification_input": false,
+      "reserve_seconds": 0.0,
+      "status": "NOT_RUN",
+      "tier_counts": {
+        "1": 5,
+        "2": 19,
+        "3": 2
+      },
+      "view_revision": 4
+    }
+  ],
+  "input_bytes_unchanged": true,
+  "metadata_helper": {
+    "bytes": 10121,
+    "path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280/experiments/forge/policy_cohorts.py",
+    "sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+  },
+  "prepared_sidecar": {
+    "bytes": 3803642,
+    "path": "/ml2/hypergan/.forge-atlas-named-gpu-diagnostics-20261003-native-v1.atlas-named-gpu-diagnostics.json",
+    "sha256": "2201cb0ea4d16bedd8099a77d9696ee62114688a9166e74aba83329f1fd55416"
+  },
+  "reproducer": {
+    "bytes": 14946,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v1-implementation-audit-20261003/audit.py",
+    "sha256": "d381171b613a4e1bbd5726cad0c22c2b273b53f30e8ca786cdc0c2b5ed51a617"
+  },
+  "reviewer_execution": {
+    "GPU_calls": 0,
+    "checkpoint_loads": 0,
+    "draws": 0,
+    "models": 0,
+    "optimizer_updates": 0,
+    "scorer_calls": 0,
+    "tensors": 0
+  },
+  "schema": "particlegan_named_native_v1_implementation_audit_v1",
+  "scope": "Immutable first two implementation failures only; no scientific or family-capacity conclusions.",
+  "source": {
+    "digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280",
+    "origin_commit": "aee59bea7f1a629d71052fbb010d930650a4ed26",
+    "schema_version": 1,
+    "snapshot_path": "/ml2/hypergan/named-diagnostic-source/snapshots/73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280"
+  },
+  "source_files_verified_pre_post": 1387,
+  "status": "AUDITED"
+}

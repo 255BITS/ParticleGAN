@@ -1,0 +1,9 @@
+{
+  "pid": 384331,
+  "start_ticks": "163720702",
+  "prior_state": "S",
+  "reason": "Review declared indexed API versus legacy collector metadata expectation; current numerical child allowed to finish",
+  "active_children": [
+    393850
+  ]
+}

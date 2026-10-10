@@ -1,0 +1,26 @@
+{
+  "base_candidate": "bcap-ada-nsgda-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Complete fixed-roster CUDA rerun after correcting the existing scalar execution-budget omission. Preserve v1 zero-spend admission and v2 partial/error evidence; no retuning or outcome-driven scientific retries.",
+    "id": "gaussian-smoke-inventory-v3",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.016
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact previously selected global recipe under the new Gaussian acquisition smoke and CUDA behavior cohort, then execute all eligible Tier2 tasks. No hyperparameter selection or retuning.",
+  "id": "gaussian-smoke-inventory-bcap-ada-nsgda-v3",
+  "protocol": "screening",
+  "schema_version": 2,
+  "trainer_family": "bcap-ada-nsgda",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

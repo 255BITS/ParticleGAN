@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/readme-100gaussians",
+  "candidate_revision": "4a159041e19609cf526c51b6cd2c1478d0611cc7ba9e1aa3bbc9c7657df5e9e8",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "README 100-Gaussian visualization",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/readme-100gaussians",
+      "narrative_sources": [
+        {
+          "git_blob": "40ddafafc654dcdbcc430d04a7421ee0347f1666",
+          "path": "reports/readme-100gaussians/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d161eaf2a4315eaf1b3df55f882c7b2318f016c2dc6b9e7968db2cddef2fa35d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/readme-100gaussians/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# README 100-Gaussian visualization\n\nAn earlier root `100gaussians.gif` showed one run of\n`get_recipe(\"gan\", total_steps=20000)` through the explicitly imported\n`GANTrainer`, using the existing `examples/100gaussians.py` generator and\nFourier-feature discriminator. Only the training budget changes; all other\ncurrent GAN defaults and seed 1234 are retained. There is no seed comparison. Target:\n100 equally weighted Gaussian modes on a 10\u00d710 grid, each with \u03c3 = 0.03.\n\nThis run starts from the same initialization as the prior 7,000-update run;\nit is not a continuation of that run's final checkpoint. Increasing the\nbudget also moves the delayed cosine anneal from step 4,200 to step 12,000.\nBoth schedules hold the initial learning rates for 60% of their budgets,\nthen decay to a 5% floor. The comparison therefore changes both duration\nand absolute anneal timing; the library's default budget remains 7,000.\n\nThe animation displays 4,096 fixed target samples and outputs from the same\n4,096 particle indices at each snapshot. Numeric metrics use 20,000 random\nprior draws from the EMA generator and EMA prior, resetting a separate\nevaluation RNG at each checkpoint for a consistent comparison. A covered mode has at least\n10 generated samples within Euclidean distance 3\u03c3 of its center.\n\nThere are 200 frames, captured every 100 updates from step 100 through\n20,000. Playback is 25 frames per sec"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-readme-100gaussians-146d5f77c735",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "40ddafafc654dcdbcc430d04a7421ee0347f1666",
+    "path": "reports/readme-100gaussians/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "d161eaf2a4315eaf1b3df55f882c7b2318f016c2dc6b9e7968db2cddef2fa35d",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/readme-100gaussians/README.md"
+  },
+  "task_results": []
+}

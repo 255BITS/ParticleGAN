@@ -1,0 +1,122 @@
+{
+  "arms": {
+    "combined": [
+      "direction_blend",
+      1.0,
+      1.0
+    ],
+    "incumbent": [
+      "none",
+      0.0,
+      0.0
+    ],
+    "projection": [
+      "direction_blend",
+      0.0,
+      0.0
+    ],
+    "projection-global": [
+      "direction_blend",
+      1.0,
+      0.0
+    ],
+    "projection-local": [
+      "direction_blend",
+      0.0,
+      1.0
+    ],
+    "transport": [
+      "none",
+      1.0,
+      1.0
+    ]
+  },
+  "causal_falsifiers": [
+    "Any paired state/curve discrepancy despite zero conflicts falsifies projection inactivity.",
+    "Neither separated transport signal reproducing the combined excursion supports interaction rather than a single-factor explanation."
+  ],
+  "causal_predictions": [
+    "Projection-only equals incumbent actual models/particles and all metrics when conflict count is zero.",
+    "Transport-only equals combined actual models/particles and all metrics when conflict count is zero.",
+    "Global-only versus local-only isolates which finite signal creates persistent critic-cap excursions."
+  ],
+  "evidence_scope": "research_diagnostic",
+  "exact_task": "two_pole",
+  "full_reservation_seconds": 1800,
+  "gates": [
+    [
+      "mean_abs",
+      ">=",
+      0.3
+    ],
+    [
+      "grad_med",
+      "<=",
+      1.0
+    ]
+  ],
+  "matched_conditions": [
+    "stored critic and zero-particle fixture",
+    "architecture",
+    "actual fixed target panel",
+    "prior",
+    "sampling",
+    "constructor/data/noise/evaluation named streams",
+    "schedule horizon",
+    "updates",
+    "cadence",
+    "all original gates"
+  ],
+  "minimum_stable_checks": 5,
+  "observations": 24,
+  "plans": {
+    "combined": {
+      "admission": "READY",
+      "candidate_revision": "715fc88525a7a37a94ff8f5e5c402ea8b242e80957cf240e416e2cdc82e35e3e",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "a3aad8023d92d448e5c363c4cd7fbcfd85d86b0a8d19d09992fbed5847a219ef"
+    },
+    "incumbent": {
+      "admission": "READY",
+      "candidate_revision": "4f0d316d4e514096b297db9fb5336033127569b2c1f4048f345bafe897d518c2",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "1e22d2ee2e4e0f9f4c1bc23ca8f9a529a56cf04763749f1f848b43e8d9bb7723"
+    },
+    "projection": {
+      "admission": "READY",
+      "candidate_revision": "4904c3fe381db88f169982d45b8243ec90351ba9515cf6bfb06fbceb50d195b7",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "04dce7565f1cc2376ce4a42060e9e55b38b10e0620dad5e48b69b899e75dc319"
+    },
+    "projection-global": {
+      "admission": "READY",
+      "candidate_revision": "a0821d734800f89cd7e8563ea62bc08ae45c2e6615a5923bfefd2e1f8f1f028e",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "235b8766f1f38fa9d5216f5b621638c7947fccef91ac45019c2b24d42497324f"
+    },
+    "projection-local": {
+      "admission": "READY",
+      "candidate_revision": "e7df87194b5fb505d4129246237e9e9e83c3b3e8322dc4490d9c31881f00adb2",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "9bfc3014adaf551c54028520a5d21789c868a9c3e43e8a11a93cf374e86dd194"
+    },
+    "transport": {
+      "admission": "READY",
+      "candidate_revision": "6735e4b99529a20776be3138407b45821e77d00476ca801f38a55ccb3e4d826c",
+      "source_digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "task_hash": "8285059658b3a05e6916747dfa0ef56fd749dc33d7142c84f33c763586f26669"
+    }
+  },
+  "qualification_input": false,
+  "repair_screens": {
+    "maximum_arms": 2,
+    "status": "not_admitted",
+    "total_reservation_seconds": 600
+  },
+  "schema_version": 1,
+  "seed": 0,
+  "source_base": "79f7ddb512f0bc1e1457257e85c97adbe6d11bd1",
+  "steps": 80,
+  "stopping_rule": "Complete six original-gate arms once. Analyze before declaring at most two global repairs; distinguish structural from constant changes. No seeds, full suite, Tier2, default adoption, or merge.",
+  "timeout_seconds": 300
+}

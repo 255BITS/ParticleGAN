@@ -1,0 +1,387 @@
+{
+  "attested_monotonic": 2066928.945824717,
+  "completed_updates": 600,
+  "deadline_monotonic": 2068692.733125795,
+  "files": {
+    "INITIALIZATION.json": {
+      "bytes": 7209,
+      "sha256": "62d50b869aa75bbe188242306838e5aabcb788c1a49111426daf2bb5cd0002f1"
+    },
+    "MODEL_STARTED.json": {
+      "bytes": 401,
+      "sha256": "cd6eead916942bc5fbc0115aef22844b300434e76e3edf61f52b18b62def3b1d"
+    },
+    "goal-final.png": {
+      "bytes": 38186,
+      "sha256": "d538836549b390e1cffcdeebacbad29935af262a2c5dbe3020f16a1b1e8f1032"
+    },
+    "goal-states.json": {
+      "bytes": 2124746,
+      "sha256": "2685f312a5cc7c9f189aab1d711a7671b776b893827e96ee3ed216c787348000"
+    },
+    "goal.gif": {
+      "bytes": 402641,
+      "sha256": "33ca68f1fd08610d3bda8ee9f3d0d910bf4be76c27726e191a6ee16a1ed0cdbc"
+    },
+    "grade-projection.json": {
+      "bytes": 4655,
+      "sha256": "696e57a8eb36c312da42820f7dc7e86e546e2615cef7d9d4403321e10a95f05b"
+    },
+    "grade.json": {
+      "bytes": 1283,
+      "sha256": "bab47b0603b74b3633013e0e596816c7a91ee1d190693c375b0f014f1e59efb4"
+    },
+    "raw-result.json": {
+      "bytes": 73422,
+      "sha256": "8303dec6ca5925a17fe53edd98e35a4c22ce647b0e5ba2a70b5f65e523474d8f"
+    },
+    "state.pt": {
+      "bytes": 748763,
+      "sha256": "b0d88804fa80265d05d742adeb8e350b3f5ff6fed559cda94f26db492175fbf1"
+    }
+  },
+  "frozen_request_digest": "1ce8c69c2603220d709b3d243b4cb771a44da8eafb4656c9a8a7d3666e0a1f2f",
+  "goal_state_steps": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600
+  ],
+  "gpu_peak_reserved_mb": 22.0,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -3,
+          "metric": "modes",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 4,
+          "value": 1
+        },
+        {
+          "margin": -0.18125000000000002,
+          "metric": "hq",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.9,
+          "value": 0.71875
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.4756944444444444,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "distribution_tv": 0.5,
+      "hq": 0.71875,
+      "mean_rmse": 0.03848831355571747,
+      "mode_fractions": [
+        0.71875,
+        0.28125,
+        0.0,
+        0.0
+      ],
+      "modes": 1,
+      "quality_mode_fractions": [
+        0.71875,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "step": 600
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "grade_projection": {
+    "execution_group": null,
+    "grade": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -3,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 1
+          },
+          {
+            "margin": -0.18125000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.71875
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4756944444444444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.5,
+        "hq": 0.71875,
+        "mean_rmse": 0.03848831355571747,
+        "mode_fractions": [
+          0.71875,
+          0.28125,
+          0.0,
+          0.0
+        ],
+        "modes": 1,
+        "quality_mode_fractions": [
+          0.71875,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    },
+    "raw_task_grades": {
+      "img_bars4": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -3,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 4,
+              "value": 1
+            },
+            {
+              "margin": -0.18125000000000002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.9,
+              "value": 0.71875
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.4756944444444444,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "distribution_tv": 0.5,
+          "hq": 0.71875,
+          "mean_rmse": 0.03848831355571747,
+          "mode_fractions": [
+            0.71875,
+            0.28125,
+            0.0,
+            0.0
+          ],
+          "modes": 1,
+          "quality_mode_fractions": [
+            0.71875,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "step": 600
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      }
+    },
+    "schema": "pg_common26_full_atlas_grade_projection_v1",
+    "task_grades": {
+      "img_bars4": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -3,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 4,
+              "value": 1
+            },
+            {
+              "margin": -0.18125000000000002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.9,
+              "value": 0.71875
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.4756944444444444,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "distribution_tv": 0.5,
+          "hq": 0.71875,
+          "mean_rmse": 0.03848831355571747,
+          "mode_fractions": [
+            0.71875,
+            0.28125,
+            0.0,
+            0.0
+          ],
+          "modes": 1,
+          "quality_mode_fractions": [
+            0.71875,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "step": 600
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      }
+    }
+  },
+  "observation_steps": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600
+  ],
+  "repeat": {
+    "accepted_numeric_credit": false,
+    "authority_sequence": 561,
+    "binding_digest": "55278a7663b5b30c6eb0db7c39d044f0c226003609f5b7658569ddcc8d450905",
+    "candidate_digest": "3b91a9c51944409236f633fbaf09349c9dd41fa4c2dc03f59560789fd734ed29",
+    "case_id": "canonical-common26-full-atlas-img_bars4-ember561-v1",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "effective_recipe_digest": "c64791736011b9eda199a66e89bf26e454184720e8df23393cc1d3dc39806eff",
+    "execution_updates": 600,
+    "initialization": "new_owner_factory",
+    "observation_contract_sha256": "79f762cdd8af020def7597ecb8c512a0336dafde395203210495ce8259762d05",
+    "protocol_digest": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "recipe_schedule_horizon": null,
+    "repeat_id": "canonical-common26-full-atlas-img_bars4-ember561-fresh-init-seed0-v1",
+    "rng_version": "forge-rng-v1",
+    "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+    "schema": "forge_canonical_full_atlas_fresh_repeat_v1",
+    "seed": 0,
+    "source_contract_sha256": "3156c9e6a5f855144bf613d98589133047c103f1266d3d1b8494adaa369d601f",
+    "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+    "source_manifest_digest": "7a2048111bc97f66710ffb624a93140e55340a5c24a4948ec93647281ee4e1d4",
+    "source_origin_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db",
+    "task_digest": "51e7d0412264e2b564b2dc9c884b8b094cbe86884dca2795032da25efe98d656",
+    "task_id": "img_bars4"
+  },
+  "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+  "schema": "pg_common26_full_atlas_child_attestation_v1",
+  "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+  "started_monotonic": 2066892.733125795,
+  "token_sha256": "7106e481c6961e81b1ab14fa5af889c9a896c01fa6783d6d2dae792106add756"
+}

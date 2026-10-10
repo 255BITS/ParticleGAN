@@ -1,0 +1,103 @@
+{
+  "baseline_commit": "53f2d423d662fb2ae52312215fda11826219174c",
+  "exact_exclusions_within_roots": {
+    "reports/forge/technique-evidence/manifest.json": "Additive evidence registration.",
+    "reports/forge/word-root-cause/README.md": "Current routing narrative; historical receipts and reproduction sources stay exact."
+  },
+  "failures": [],
+  "files": 889,
+  "generated_outputs_outside_preservation_roots": [
+    "reports/forge/EXPERIMENT_MEMORY.md",
+    "reports/forge/compilation.json",
+    "reports/forge/technique-inventory.json",
+    "reports/forge/technique-inventory.md"
+  ],
+  "groups": {
+    "compact_receipts": {
+      "baseline_file_identities_sha256": "97e6dfc3eaf941c4950a28f0d77ad090b57db8c70ff3ac74d41bbb41edeaa629",
+      "files": 292,
+      "preserved": 292,
+      "root": "reports/forge/technique-receipts/"
+    },
+    "configuration_cards": {
+      "baseline_file_identities_sha256": "b3a1fbcc6166a4c85511b57e442319be787f52ca789c19daf98389263be83614",
+      "files": 32,
+      "preserved": 32,
+      "root": "configs/forge/configurations/"
+    },
+    "goal_leaderboards": {
+      "baseline_file_identities_sha256": "8251851d3d55ad4f79aaed1f07eb35d9cb0381422266ca7625b157bc061652e7",
+      "files": 5,
+      "preserved": 5,
+      "root": "reports/forge/leaderboards/"
+    },
+    "historical_word_evidence": {
+      "baseline_file_identities_sha256": "5ea24197cb23371115357b0b00f6742d002b3346f36d4006b17098fc77ec56a1",
+      "files": 52,
+      "preserved": 52,
+      "root": "reports/forge/word-root-cause/"
+    },
+    "idea_cards": {
+      "baseline_file_identities_sha256": "e292b09af19378c5182b62587f8a7612ed49c1c2f465307601533c54ee269778",
+      "files": 15,
+      "preserved": 15,
+      "root": "configs/forge/ideas/"
+    },
+    "ordinary_receipts": {
+      "baseline_file_identities_sha256": "0f365f357fb0ecec21f9975584525b57f376f55874df165a0e330ad07a81adcd",
+      "files": 135,
+      "preserved": 135,
+      "root": "reports/forge/attempts/"
+    },
+    "original_word_example": {
+      "baseline_file_identities_sha256": "e1addb9f79aa6855dc8cbc002f4655854612eb857f4dd07e455b9d914254e32e",
+      "files": 3,
+      "preserved": 3,
+      "root": "reports/forge/five-word-joint/"
+    },
+    "scientific_snapshots": {
+      "baseline_file_identities_sha256": "608e71531e7f2a921e9906a515ed97c62e5a15465d5ac27d150604724c2ae4a9",
+      "files": 6,
+      "preserved": 6,
+      "root": "reports/forge/technique-evidence/"
+    },
+    "search_receipts": {
+      "baseline_file_identities_sha256": "cc7509d807a6459a417791cd2adf89437b827c6df5dbbcabcbca166020ce02a5",
+      "files": 11,
+      "preserved": 11,
+      "root": "reports/forge/configuration-search/"
+    },
+    "search_specs": {
+      "baseline_file_identities_sha256": "e964cf22948be76d847643e26155e67141d7d142debc84b370afa125f3a7bc5c",
+      "files": 11,
+      "preserved": 11,
+      "root": "configs/forge/searches/"
+    },
+    "selection_exports": {
+      "baseline_file_identities_sha256": "877e2a585aafe7f9db65b1d38d964d801e22b40499e055261f966f98245e04e6",
+      "files": 2,
+      "preserved": 2,
+      "root": "configs/forge/selections/"
+    },
+    "source_history_records": {
+      "baseline_file_identities_sha256": "26b36006c1bcbed8bcb16f8c1dea04624dacbb20695964eed8cfd39ce1e84098",
+      "files": 276,
+      "preserved": 276,
+      "root": "reports/forge/records/"
+    },
+    "task_cards": {
+      "baseline_file_identities_sha256": "48ebec03400a97276f343b7e86b6139c1fce7193cb51b3296f7a53e4a104e57e",
+      "files": 49,
+      "preserved": 49,
+      "root": "configs/forge/tasks/"
+    }
+  },
+  "note": "Only files existing at the baseline are checked; additions do not rewrite history. No training, grading or qualification changes are performed.",
+  "preserved": 889,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "source_history_byte_preservation",
+  "status": "PASS",
+  "worktree": "/home/martyn/dev/ParticleGAN-family-wide"
+}

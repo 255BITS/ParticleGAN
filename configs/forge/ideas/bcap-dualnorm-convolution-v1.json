@@ -1,0 +1,43 @@
+{
+  "api_changes": [
+    "Recipe.optimizer_convolution=per_offset enables module-aware kernel groups; disabled default preserves old recipes and packets",
+    "NormalizedOptimizer records and validates group/channel/layout/kernel-area/version metadata before checkpoint restore"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.optimizer_convolution=per_offset; module-owned Conv2d/ConvTranspose2d weight metadata",
+    "Every kernel group and offset uses exact smoothed polar feedback scaled by sqrt(out_channels/in_channels)/(kernel_height*kernel_width)",
+    "Dense, vector and sampled-prior rules, seed0, rates, smoothing, task architectures/laws/budgets/cadence remain fixed"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-dualnorm-convolution-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Published Conv2D atomic duality rule with a conservative zero-insertion extension for transposed convolution; opt-in source-bound adaptation, not full modular network composition or a GAN convergence guarantee.",
+  "parent": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+  "prior_art": [
+    "https://arxiv.org/html/2410.21265#S4",
+    "https://arxiv.org/html/2608.01911v1",
+    "reports/forge/bcap-tier2/readout.json"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "lr": 0.012,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 1e-05,
+    "prior_lr_mult": 2.5
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PREPARED",
+  "cases": [
+    "saved_toy_1000",
+    "saved_toy_2000",
+    "nominal",
+    "rare_hole",
+    "supported_mass_imbalance",
+    "supported_mass_small_holes",
+    "supported_balanced_control"
+  ],
+  "sources_unchanged": true,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/prepare_inputs.py": "39af190fead86b7a770bed957dba766805ffb56dab5b633bf4ca69a7613d33c0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/PROTOCOL.md": "22c665479e83f46d49a425ca8482e00f8ca075aa090820dfc3b03f4dc41cb983",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/pkg-joint-count/particlegan/feature_cells.py": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/stability/mass-gpu-inputs.pt": "959453b0c0b88508780c5389fecd0ddb6b341660e5f24aacd3805291be829859",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/shared_toy.py": "7e3684539744c74474e575ed2ecc54e4c24cc8ab825abf1f1e1d8f4c712eae2a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-1000.pt": "6c6dac149ce7b77b835366c1a5944848d3754dd1b8adde583aa6ac29e276b62a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-2000.pt": "62933fd05bdd7168370b9f2b5d28a9437f906cc54249c99de8acf20132294911"
+  },
+  "input_sha256": "d8cb4123942985797be0c491650894163c00d76c05f4dbdd81322919039da5cd",
+  "cuda_initialized": false,
+  "new_seeds": 0,
+  "optimizer_updates": 0
+}

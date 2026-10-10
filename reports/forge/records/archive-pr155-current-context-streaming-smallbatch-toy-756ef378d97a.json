@@ -1,0 +1,123 @@
+{
+  "candidate_id": "context:pr155-current:streaming-smallbatch-toy",
+  "candidate_revision": "33b34f69ab052077167ed3c4b3186a06a7f59a191bb27936cb52038afc976ecc",
+  "claim_contract": {
+    "clock_free_eligibility": "unverified",
+    "clock_free_eligible": null,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "diagnostic_only",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Negative controller readout across six fixed toy cases; optimistic_go=false. Oracle arms remain evaluator-only. No native performance or qualification inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Small-batch moving-critic memory, flow, mass and optimism diagnostics.",
+  "mechanism_class": "historical_diagnostic_context",
+  "next_action": "Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "Exact original prior/config retained in raw evidence; context provides no current learned-MoG credit.",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "bundle_manifest": {
+      "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+    },
+    "config": null,
+    "context": {
+      "aggregate_cost_seconds": null,
+      "bundle_manifest": {
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+        "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+        "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+      },
+      "cost_note": "No aggregation of overlapping receipts, ledgers, retries or diagnostics.",
+      "family": "streaming-smallbatch-toy",
+      "fixture": {
+        "N": 32,
+        "batch_size": 2,
+        "optimistic_go": false,
+        "seed": 20260929,
+        "steps": 1600
+      },
+      "narrative_sources": [
+        {
+          "git_blob": "93c0349afd56d5b3ae66118d1bd4577a17c06cd7",
+          "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/FLOW_SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/FLOW_SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "842287942b4a3ae4f47f27efa83367eb9cad29a2bb17669becd64bd4b5f0208e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/FLOW_SPEC.md"
+        },
+        {
+          "git_blob": "e7bd4a447f6d44efb4e5e6842650b90ba3cd2873",
+          "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/MASS_SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/MASS_SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "784f7d1ab38edd308c75f22d2e86eeaa095a4faa0c3e9b82bd91f4329b2596f1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/MASS_SPEC.md"
+        },
+        {
+          "git_blob": "1ebe35855e4b19be3cdda1b42685996e9538412f",
+          "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/OPTIMISM_SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/OPTIMISM_SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "e28a3ec1f6504cbf3b5a3f268dbb5b613b62027c4d55fe966e50a30bc74cdd18",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/OPTIMISM_SPEC.md"
+        },
+        {
+          "git_blob": "f501d6a4d9fb9281350859249901598eebebcc2f",
+          "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "e74ae8ec796697396aaa542866401d9174c0185de28449e9a1e01892918ee921",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md"
+        },
+        {
+          "git_blob": "a7d9cf0ad6d5eda31daa3be4b284b8e71069d5e3",
+          "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "126277180546a53567f213bb9fb50b08cea75149032ba5d91a0c6ba1ae615a49",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/SPEC.md"
+        }
+      ],
+      "normalization_scope": "Family context only, empty task_results; native-arm cards are the only normalized trials.",
+      "raw_context_paths": [
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/flow_results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/lag_results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/mass_results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/results.json"
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "Negative controller readout across six fixed toy cases; optimistic_go=false. Oracle arms remain evaluator-only. No native performance or qualification inferred."
+    },
+    "importer_version": "forge-supplemental-pr155-current-archive-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-context-streaming-smallbatch-toy-756ef378d97a",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "f501d6a4d9fb9281350859249901598eebebcc2f",
+    "original_path": "reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md",
+    "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md",
+    "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "sha256": "e74ae8ec796697396aaa542866401d9174c0185de28449e9a1e01892918ee921",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md"
+  },
+  "task_results": []
+}

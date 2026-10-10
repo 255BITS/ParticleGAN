@@ -1,0 +1,36 @@
+{
+  "batch_size": 2048,
+  "checkpoint_sha256": "e850172959bf7607ed69c890632563768e352936a7a916bb4063fc74f45a3966",
+  "completed_steps": 1000,
+  "exact_saved_state_restored": true,
+  "external_batches_advanced": 2000,
+  "external_cursor_sha256": "7fb7411c7f107a82c6b5fc0a1bfc81831630d36476cd28bbd1d5546a68fbae27",
+  "external_seed": 1234,
+  "fresh_training_updates_before_resume": 0,
+  "global_cpu_rng_sha256": "2605724fe6fb06b169108b3ff02bc2c62ed0ba329c87124c08268485b4c0f5eb",
+  "global_cuda_rng_sha256": "5ae471354d47f72b9593839a6c236bcf5f2403d996a329aea6548ccb32daba3c",
+  "inherited_gate_periods": [
+    {
+      "hq": 0.9609,
+      "modes": 100,
+      "period_end": 500,
+      "target_deg": 0,
+      "task": "rotated100"
+    },
+    {
+      "hq": 0.9548,
+      "modes": 100,
+      "period_end": 1000,
+      "target_deg": 30,
+      "task": "rotated100"
+    }
+  ],
+  "private_rng_sha256": {
+    "eval_generator": "6b047b4e9f1fcbc5ec06299572c5bce5b25290652212477187423393ab934d0e",
+    "latent_generator": "07cea4b4dc86ff4055c8395297dae979fc2bfd570c394d2dbae280d23e417c59",
+    "noise_generator": "79050091413ffb7c447365c45de00cd5dd42e91a008f68d1fe630566b7505054",
+    "penalty_generator": "8480e26d32f82c48a6ef8886d14b173502092a9f3cca72b58a2dbd2ee49b0fbc"
+  },
+  "status": "PASS",
+  "target_degrees_during_window": 60
+}

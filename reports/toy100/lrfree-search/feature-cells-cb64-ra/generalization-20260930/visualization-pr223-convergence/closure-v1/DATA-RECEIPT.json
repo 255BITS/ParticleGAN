@@ -1,0 +1,232 @@
+{
+  "Atlas_original_gate_metrics_exact": true,
+  "actual_source_labels": [
+    "current PR155 E22 at cabe2084",
+    "ParticleGAN Atlas RA17"
+  ],
+  "all_observation_state_guards_pass": 302,
+  "common_steps_angles_events_centers_exact": true,
+  "comparison_scope": "Actual fresh native rotated100 initial learning and two original30-degree turns only.",
+  "cuda_initialized": false,
+  "current_Atlas_original_RA15_checkpoint_semantic_parity": [
+    {
+      "actual_current_checkpoint_sha256": "7fd73c4a72ad784c4939c200a5e8549df1d32d7d128f8c1a3b3ca469f3fd2b37",
+      "exact_semantic_state": true,
+      "exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "historical_checkpoint_sha256": "d757f78f7417148feb7532670ab348d04c9b665128266a22ab53e73eca5bd378",
+      "step": 500
+    },
+    {
+      "actual_current_checkpoint_sha256": "6df8d3c5a7401db302de5c556e3ec049e44f616279738e41e0bfe49c2a439779",
+      "exact_semantic_state": true,
+      "exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "historical_checkpoint_sha256": "100616faab0cd20aa37cc8a80433b1ca7471cd5a65d975606ceac68918ae06dc",
+      "step": 1000
+    },
+    {
+      "actual_current_checkpoint_sha256": "8c07ba3f9df84e4e3fe97483a3c726a3ba6b39adc176422ea615f2e56b21eea1",
+      "exact_semantic_state": true,
+      "exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "historical_checkpoint_sha256": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132",
+      "step": 1500
+    }
+  ],
+  "final_Atlas_minus_E22_HQ_percentage_points": -2.14,
+  "initial_observed_cloud_exact": true,
+  "inputs_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-000500.pt": "d757f78f7417148feb7532670ab348d04c9b665128266a22ab53e73eca5bd378",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001000.pt": "100616faab0cd20aa37cc8a80433b1ca7471cd5a65d975606ceac68918ae06dc",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001500.pt": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/frames.npz.verdict.json": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json": "2c34fe4f5f8950c16f1f551a9ede4e3082e64af1d19e69655b254b25677225e4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/SOURCE-FREEZE.json": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/close_capture.py": "ffa6c4cb3415fc0759ad053ed5c991c6a010ab31eb315df4b53c0f641f6a7371",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/COMPLETION.json": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/CAPTURE-COMPLETION.json": "f9164eb9334a168b29b4d7f4a126f81ead348aa1aa3fbb9521f72467a9ad9ca6",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/LAUNCH.json": "3aa58f8c2ac48acce8de97534b78502df5d58d83602945f9295a503d0da6d258",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/SOURCE-CLOSE.json": "4f1e716710dc531d8aebe090bc594df050f26a503c7b1ebdcd94b3fb3902f773",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-000500.pt": "7fd73c4a72ad784c4939c200a5e8549df1d32d7d128f8c1a3b3ca469f3fd2b37",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001000.pt": "6df8d3c5a7401db302de5c556e3ec049e44f616279738e41e0bfe49c2a439779",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001500.pt": "8c07ba3f9df84e4e3fe97483a3c726a3ba6b39adc176422ea615f2e56b21eea1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/dense-frames.npz": "6d466cbe42f8b71cf3b29eb6534a3430dd80cc8b9d1cf7ce2638e871ba79e619",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/training-trace.jsonl": "e54525d955af8b032aeac10591ffcdd197e064b267cf68dc249c553c3f842806",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/visualization-metrics.jsonl": "1cf44bd407a463efe3432f609a3cdc5953738ab9e3090b515dbcd2d8ce844ea1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/CAPTURE-COMPLETION.json": "0ff3734530e01d6299b0da3b0ce76c8d7781ad372405d11ba21e5ab08d2fb66e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/LAUNCH.json": "b8b490b8e256cc446b238cff360392c456123fd0487800db942d7d6eeee50bd6",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/SOURCE-CLOSE.json": "350463571a97285c5a834a986bdceda3d6cbb87244bbcb6311e904d85e1826d3",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/dense-frames.npz": "3beec1243aa59a582d27c5c1b665b1de8b85c199499d109692399e8aa5e705a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json": "3be57be0e15ffccc40eb8b1b3a8dbb2dc065d65893f0d7bda9c9931058251881",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/training-trace.jsonl": "fb5f80f2c811edc5f29f90add9cd42046550f4d30940af2c9651a896ef257871",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/visualization-metrics.jsonl": "8bc23ea1feb878288e2d2509c745c3e436f7618b57c3004d2e55fc6f7fed0580",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/PARITY-COMPLETION.json": "97fe13f2d930c466c9f0d0be414ce6f7d0fd3624419b72b8ae4953c120887667"
+  },
+  "interpretation": "Atlas reaches90%visual HQ earlier in initial learning and first-turn recovery. Both pass both original gates; E22 has higher final original HQ and100versus98modes.",
+  "no_interpolation": true,
+  "no_seed_experiments": true,
+  "no_training_or_GPU_operations_in_closure": true,
+  "original_complete_updates_per_variant": 1500,
+  "original_gate_metrics": {
+    "Atlas": {
+      "passed_periods": 2,
+      "periods": [
+        {
+          "hq": 0.9609,
+          "modes": 100,
+          "period_end": 500,
+          "target_deg": 0,
+          "task": "rotated100"
+        },
+        {
+          "hq": 0.9609,
+          "modes": 100,
+          "period_end": 1000,
+          "target_deg": 30,
+          "task": "rotated100"
+        },
+        {
+          "hq": 0.9259,
+          "modes": 98,
+          "period_end": 1500,
+          "target_deg": 60,
+          "task": "rotated100"
+        }
+      ],
+      "pre_turn_hq": 0.9609,
+      "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+      "status": "PASS",
+      "task": "rotated100",
+      "turns": 2
+    },
+    "E22": {
+      "passed_periods": 2,
+      "periods": [
+        {
+          "hq": 0.881,
+          "modes": 100,
+          "period_end": 500,
+          "target_deg": 0,
+          "task": "rotated100"
+        },
+        {
+          "hq": 0.8399,
+          "modes": 100,
+          "period_end": 1000,
+          "target_deg": 30,
+          "task": "rotated100"
+        },
+        {
+          "hq": 0.9473,
+          "modes": 100,
+          "period_end": 1500,
+          "target_deg": 60,
+          "task": "rotated100"
+        }
+      ],
+      "pre_turn_hq": 0.881,
+      "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+      "status": "PASS",
+      "task": "rotated100",
+      "turns": 2
+    }
+  },
+  "original_seed": 1234,
+  "separate_visualization_diagnostics": {
+    "Atlas": {
+      "are_original_acceptance_metrics": false,
+      "frames": 153,
+      "mode_min_HQ_count": 10,
+      "observed_clouds": 151,
+      "phase_metrics": [
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": 220,
+          "uniform_per10frame_HQ_mean": 0.7352197265625,
+          "updates": [
+            0,
+            500
+          ]
+        },
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": 290,
+          "uniform_per10frame_HQ_mean": 0.6060107421875,
+          "updates": [
+            500,
+            1000
+          ]
+        },
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": 330,
+          "uniform_per10frame_HQ_mean": 0.652734375,
+          "updates": [
+            1000,
+            1500
+          ]
+        }
+      ],
+      "point_dtype": "float32",
+      "point_extents": [
+        -7.166807174682617,
+        7.174436569213867
+      ],
+      "sample_count": 4096,
+      "target_event_clouds_exact": true,
+      "target_shift_events": 2
+    },
+    "E22": {
+      "are_original_acceptance_metrics": false,
+      "frames": 153,
+      "mode_min_HQ_count": 10,
+      "observed_clouds": 151,
+      "phase_metrics": [
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": null,
+          "uniform_per10frame_HQ_mean": 0.6049609375,
+          "updates": [
+            0,
+            500
+          ]
+        },
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": null,
+          "uniform_per10frame_HQ_mean": 0.46720703125,
+          "updates": [
+            500,
+            1000
+          ]
+        },
+        {
+          "first_recorded_updates_to_visual_HQ_90_percent": 330,
+          "uniform_per10frame_HQ_mean": 0.636865234375,
+          "updates": [
+            1000,
+            1500
+          ]
+        }
+      ],
+      "point_dtype": "float32",
+      "point_extents": [
+        -8.074987411499023,
+        7.680002212524414
+      ],
+      "sample_count": 4096,
+      "target_event_clouds_exact": true,
+      "target_shift_events": 2
+    }
+  },
+  "source_integrity": {
+    "files": 104,
+    "packages": {
+      "Atlas": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+      "E22": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316"
+    },
+    "source_freeze_sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+    "status": "VALID"
+  },
+  "status": "CLOSED_VALID_BOTH_ORIGINAL_QUALITY_GATES_PASS"
+}

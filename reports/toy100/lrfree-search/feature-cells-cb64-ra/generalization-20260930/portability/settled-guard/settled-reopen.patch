@@ -1,0 +1,337 @@
+--- a/particlegan/continuous.py
++++ b/particlegan/continuous.py
+@@ -966,7 +966,7 @@
+         if q is not None:
+             self.pending[key] = q
+ 
+-    def decide(self, step=None):
++    def decide(self, step=None, *, guard=None, network=None):
+         """Fold this update's observations in; return True when a re-open fires."""
+         if not self.pending:
+             return False
+@@ -990,16 +990,17 @@
+         self.last_ratio = ratio
+         self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
+         calm = ratio < self.CALM
++        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network)
+         self.since_calm = 0 if calm else self.since_calm + 1
+         if self.since_fire is not None:
+             self.since_fire += 1
+-        if calm or not self.armed:
++        if calm or not self.armed or not permitted:
+             for key, value in zip(keys, values):
+                 self.slow[key] += (value - self.slow[key]) / (8 * self.K)
+         fire = False
+         if self.armed:
+             abrupt = self.streak > 0 or self.since_calm <= 2 * self.K
+-            self.streak = self.streak + 1 if ratio > self.RISE and abrupt else 0
++            self.streak = self.streak + 1 if permitted and ratio > self.RISE and abrupt else 0
+             if self.streak >= self.K:
+                 fire = True
+                 self.fires += 1
+@@ -1011,6 +1012,8 @@
+                 for key, value in zip(keys, logs):
+                     self.slow[key] = self.fast[key] + max(0., value)
+                 self.log = (self.log + [[step, round(ratio, 3)]])[-8:]
++                if guard is not None:
++                    guard.after_fire()
+         elif calm and self.since_fire >= 8 * self.K:
+             self.armed = True
+         return fire
+@@ -1027,3 +1030,94 @@
+         if not isinstance(state, dict) or set(state) != set(self.__dict__):
+             raise ValueError("incompatible optimizer-surprise state")
+         self.__dict__.update(deepcopy(state))
++
++
++class SettledReopenGuard:
++    """Opt-in R1 acquisition witness; detector ratios and thresholds stay R1's.
++
++    A contracted explicit network ladder at the last calm observation or
++    excursion onset qualifies that excursion. The witness survives an ordinary
++    ladder release while R1 accumulates its sustained-jump evidence. Full-rate
++    excursions follow the existing slow reference without any re-open action.
++    """
++
++    NETWORK_ROLES = frozenset(("generator", "encoder", "router", "critic"))
++
++    def __init__(self):
++        self.ka2_anchor_started = None
++        self.calm_network = {}
++        self.excursion = None
++        self.epoch_rebases = 0
++
++    def observe(self, ratio, calm_level, step, network):
++        network = {} if network is None else network
++        if ratio < calm_level:
++            self.calm_network = deepcopy(network)
++            self.excursion = None
++            return True
++        if self.excursion is None:
++            witness = {**self.calm_network, **network}
++            self.excursion = {"step": step, "network": deepcopy(witness)}
++        return bool(self.excursion["network"])
++
++    def after_fire(self):
++        # A re-open restores every ladder to its ceiling. It supplies no
++        # contraction witness for the next event.
++        self.calm_network = {}
++        self.excursion = None
++
++    def observe_epoch(self, anchor_started, detector):
++        if anchor_started is not None and type(anchor_started) is not bool:
++            raise ValueError("KA2 loss epoch must be a boolean or None")
++        changed = self.ka2_anchor_started is False and anchor_started is True
++        if changed:
++            detector.fast, detector.slow, detector.pending = {}, {}, {}
++            detector.streak, detector.since_calm = 0, 0
++            detector.last_ratio, detector.last_ratios = None, {}
++            # A known objective change has no optimizer action. Preserve real
++            # fires, their refractory clock, and any existing anchor latch.
++            self.calm_network, self.excursion = {}, None
++            self.epoch_rebases += 1
++        self.ka2_anchor_started = anchor_started
++        return changed
++
++    def state_dict(self):
++        return {"schema": 1, **deepcopy(self.__dict__)}
++
++    def check_state(self, state, *, roles, completed_steps, anchor_started):
++        expected = self.state_dict()
++        if (not isinstance(state, dict) or state.keys() != expected.keys()
++                or type(state["schema"]) is not int or state["schema"] != 1):
++            raise ValueError("invalid settled re-open guard schema")
++        epoch = state["ka2_anchor_started"]
++        if ((epoch is not None and type(epoch) is not bool) or epoch != anchor_started):
++            raise ValueError("settled re-open guard loss epoch does not match critic state")
++        if type(state["epoch_rebases"]) is not int or state["epoch_rebases"] < 0:
++            raise ValueError("invalid settled re-open guard epoch counter")
++        topology = {f"{i}.{j}": role for i, row in enumerate(roles) for j, role in enumerate(row)}
++
++        def check_network(network):
++            if not isinstance(network, dict):
++                raise ValueError("invalid settled re-open network witness")
++            for key, witness in network.items():
++                if (type(key) is not str or key not in topology or not isinstance(witness, dict)
++                        or witness.keys() != {"role", "scale"}
++                        or witness["role"] != topology[key] or witness["role"] not in self.NETWORK_ROLES):
++                    raise ValueError("settled re-open witness does not match network ownership")
++                scale = witness["scale"]
++                if type(scale) not in (float, int) or not math.isfinite(scale) or not 0 < scale < 1:
++                    raise ValueError("settled re-open witness needs a contracted network scale")
++
++        check_network(state["calm_network"])
++        excursion = state["excursion"]
++        if excursion is not None:
++            if (not isinstance(excursion, dict) or excursion.keys() != {"step", "network"}
++                    or type(excursion["step"]) is not int
++                    or not 0 <= excursion["step"] <= completed_steps):
++                raise ValueError("invalid settled re-open excursion clock")
++            check_network(excursion["network"])
++
++    def load_state_dict(self, state, *, roles, completed_steps, anchor_started):
++        self.check_state(state, roles=roles, completed_steps=completed_steps,
++                         anchor_started=anchor_started)
++        self.__dict__.update(deepcopy({key: value for key, value in state.items() if key != "schema"}))
+--- a/particlegan/policy.py
++++ b/particlegan/policy.py
+@@ -21,7 +21,7 @@
+ import torch
+ from torch import nn
+ 
+-from .continuous import DataDriftController, OptimizerSurprise, StationarityLR
++from .continuous import DataDriftController, OptimizerSurprise, SettledReopenGuard, StationarityLR
+ from .recipes import Recipe, learning_rate_scales
+ 
+ 
+@@ -372,6 +372,9 @@
+         self.routed_control = None
+         self.surprise = (OptimizerSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
+                          else None)
++        self.reopen_guard = None if recipe.reopen_guard is None else SettledReopenGuard()
++        if self.reopen_guard is not None:
++            self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
+         self.birth_death = None
+         self.row_evidence = None
+         if self.row_policy == "routed_paired":
+@@ -602,7 +605,11 @@
+                 reopen = self.controller.data_score > 3.
+             elif recipe.reopen_signal == "optimizer":
+                 self.controller.observe_blind()
+-                reopen = self.surprise.decide(self.completed_steps)
++                if self.reopen_guard is None:
++                    reopen = self.surprise.decide(self.completed_steps)
++                else:
++                    reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
++                                                  network=self._contracted_network())
+                 if reopen:
+                     self._reopen_moments()
+                 if recipe.reopen_anchor == "release":
+@@ -668,6 +675,10 @@
+         """Observe applied critic displacement after its optimizer's step."""
+         if self._phase != "critic":
+             raise RuntimeError("after_critic_step must follow the critic optimizer step")
++        if self.reopen_guard is not None:
++            # The completed penalty call owns the epoch, including lazy calls
++            # and multiple caller roles. Rebase before changed-loss q is queued.
++            self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
+         if self.lr_settle is not None:
+             self._settle_observe(1)
+         self._phase = "generator"
+@@ -823,6 +834,21 @@
+                 if self.surprise is not None:
+                     self.surprise.observe(f"{index}.{j}", self.optimizers[index], group)
+ 
++    def _contracted_network(self):
++        return {f"{i}.{j}": {"role": role, "scale": tester.s}
++                for i, (testers, roles) in enumerate(zip(self.lr_settle.testers, self.roles))
++                for j, (tester, role) in enumerate(zip(testers, roles))
++                if (tester is not None and role in SettledReopenGuard.NETWORK_ROLES and tester.s < 1.)}
++
++    def _loss_epoch(self, optimizer_state=None):
++        from .ka2 import KA2StepRecord
++        record = getattr(self.opt_d, "record", None)
++        if not isinstance(record, KA2StepRecord):
++            return None
++        if optimizer_state is None:
++            return record.anchor_started
++        return optimizer_state["regularizer"]["record"]["anchor_started"]
++
+     def _anchor_release(self, reopen):
+         """reopen_anchor="release": a re-open is evidence that the game moved, so the KA2 anchor may follow KA2's own
+         release rules instead of being forced on. Latched from the fire (only once KA2's blended anchor exists) until
+@@ -1136,6 +1162,7 @@
+                                  else self.row_evidence.state_dict()),
+                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
+                 **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
++                **({} if self.reopen_guard is None else {"reopen_guard": self.reopen_guard.state_dict()}),
+                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
+                 "cpu_rng": torch.get_rng_state(),
+                 "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
+@@ -1155,7 +1182,7 @@
+                 raise ValueError(f"incompatible policy {label} tensor {key}")
+ 
+     def _check_state(self, state):
+-        if self._feature_selection is None:
++        if self._feature_selection is None and self.reopen_guard is None:
+             expected = self.state_dict()
+         else:
+             # Inspect shapes/topology without touching compatibility swaps.
+@@ -1248,6 +1275,10 @@
+             self.routed_control.check_state(routing)
+         if self.surprise is not None:
+             deepcopy(self.surprise).load_state_dict(state["surprise"])
++        if self.reopen_guard is not None:
++            self.reopen_guard.check_state(state["reopen_guard"], roles=self.roles,
++                                          completed_steps=state["completed_steps"],
++                                          anchor_started=self._loss_epoch(state["optimizers"][1]))
+         table_state = state["lr_settle"]
+         settled = False
+         if table_state is not None:
+@@ -1293,6 +1324,10 @@
+             self.routed_control.load_state_dict(state["routing"])
+         if self.surprise is not None:
+             self.surprise.load_state_dict(state["surprise"])
++        if self.reopen_guard is not None:
++            self.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.roles,
++                                              completed_steps=state["completed_steps"],
++                                              anchor_started=self._loss_epoch(state["optimizers"][1]))
+         self.initial_lrs, self.completed_steps = deepcopy(state["initial_lrs"]), state["completed_steps"]
+         self.last_output_sigma = state["last_output_sigma"]
+         for name, value in state["streams"].items():
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -127,6 +127,10 @@
+     # "release" = the re-open counts as drift evidence for KA2 (evidence = 1) from the fire until KA2's own surprise ratio has
+     # risen above REL_HI and fallen back below REL_LO: KA2's native release / EMA tracking / reseed rules then apply. Event-gated.
+     reopen_anchor: str = "hold"
++    # Optional acquisition guard for optimizer re-opens. None retains R1's
++    # exact legacy law; "settled" requires a contracted network ladder at
++    # the start of the surprise excursion and rebases known KA2 loss epochs.
++    reopen_guard: str | None = None
+     # Null law of the row-evidence gate: "theory" = the exact-law p-value of the statistic as is; "scaled" = the same law applied to t2 / c, where
+     # c >= 1 is the smallest scale that makes the median p-value over the tested rows .5 (the typical row is the null: a slowly varying force
+     # shared by neighbouring rows, correlated gradients or a different noise level scale every row's statistic alike; only rows that are extreme
+@@ -253,6 +257,11 @@
+             raise ValueError("reopen_anchor must be hold or release")
+         if self.reopen_anchor != "hold" and self.reopen_signal != "optimizer":
+             raise ValueError("reopen_anchor release requires reopen_signal optimizer")
++        if self.reopen_guard not in (None, "settled"):
++            raise ValueError("reopen_guard must be None or settled")
++        if self.reopen_guard is not None and (
++                self.reopen_signal != "optimizer" or self.lr_control != "stationarity"):
++            raise ValueError("reopen_guard settled requires optimizer re-open and stationarity control")
+         if self.row_evidence_null not in ("theory", "scaled"):
+             raise ValueError("row_evidence_null must be theory or scaled")
+         if self.birth_death_space not in ("data", "critic"):
+@@ -329,6 +338,8 @@
+ 
+     def to_dict(self):
+         result = asdict(self)
++        if self.reopen_guard is None:
++            result.pop("reopen_guard")
+         if self.birth_death_backend == "knn":
+             # Keep current reference Recipe/config/checkpoint dictionaries.
+             for key in ("birth_death_backend", "birth_death_cells", "birth_death_metric_rank",
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -390,6 +390,8 @@
+             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
+             **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
+             **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
++            **({"reopen_guard": self.policy.reopen_guard.state_dict()}
++               if self.policy.reopen_guard is not None else {}),
+         })
+ 
+     def load_state_dict(self, state):
+@@ -410,14 +412,15 @@
+         mutation of the live trainer. Earlier formulations cannot be resumed
+         under KA2; use the release that wrote those checkpoints.
+         """
+-        if self.policy._feature_selection is None:
++        if self.policy._feature_selection is None and self.policy.reopen_guard is None:
+             self._serve_release()
+         if isinstance(state, dict) and state.get("schema") in (1, 2, 3):
+             raise ValueError(
+                 f"schema-{state['schema']} GANTrainer checkpoints come from an older formulation "
+                 "and cannot resume under KA2; pin the release that wrote the checkpoint "
+                 "(0.8.0 for K3P), or start a new run")
+-        expected = (self.state_dict() if self.policy._feature_selection is None else self._state_dict())
++        expected = (self.state_dict() if self.policy._feature_selection is None and self.policy.reopen_guard is None
++                    else self._state_dict())
+         if isinstance(state, dict) and (
+                 type(state.get("serial_backward", False)) is not bool
+                 or state.get("serial_backward", False) != self.serial_backward):
+@@ -486,6 +489,10 @@
+             self.row_evidence.check_state(state["row_evidence"])
+         if self.policy.surprise is not None:
+             deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
++        if self.policy.reopen_guard is not None:
++            self.policy.reopen_guard.check_state(state["reopen_guard"], roles=self.policy.roles,
++                                                 completed_steps=state["completed_steps"],
++                                                 anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
+         metadata = state.get("policy")
+         if "policy" in state:
+             if (not isinstance(metadata, dict) or metadata.keys() != expected["policy"].keys()
+@@ -505,8 +512,9 @@
+                     source = feature_source
+             if metadata["served_source"] != source:
+                 raise ValueError("inconsistent checkpoint policy served source")
++        if prepared is not None or self.policy.reopen_guard is not None:
++            self._serve_release()
+         if prepared is not None:
+-            self._serve_release()
+             self.policy._feature_selection.commit_restore(prepared)
+         for name, values in state["models"].items():
+             getattr(self, name).load_state_dict(values)
+@@ -526,6 +534,10 @@
+             self.row_evidence.load_state_dict(state["row_evidence"])
+         if self.policy.surprise is not None:
+             self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
++        if self.policy.reopen_guard is not None:
++            self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
++                                                     completed_steps=state["completed_steps"],
++                                                     anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
+         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
+         for name, value in state["streams"].items():

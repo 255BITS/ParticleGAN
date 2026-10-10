@@ -1,0 +1,413 @@
+{
+  "execution_group": null,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": 0.10748633480275022,
+          "metric": "sw1_normalized",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.07251366519724978
+        },
+        {
+          "margin": 0.098974609375,
+          "metric": "mass_tv",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.051025390625
+        },
+        {
+          "margin": 0.12070312500000002,
+          "metric": "hq",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.970703125
+        },
+        {
+          "margin": -2.903787536174059,
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 3.753787536174059
+        },
+        {
+          "margin": 0.2760333776473999,
+          "metric": "component_min_eigen_ratio",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.4260333776473999
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.4,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "component_core_covariance_error": 0.3068993240594864,
+      "component_core_covariance_errors": [
+        0.6705253720283508,
+        0.2218153476715088,
+        0.23361577093601227,
+        0.10164080560207367
+      ],
+      "component_core_eigen_ratios": [
+        0.24132266640663147,
+        0.686475396156311,
+        0.6961089968681335,
+        0.8785077929496765
+      ],
+      "component_core_min_eigen_ratio": 0.24132266640663147,
+      "component_counts": [
+        816,
+        1023,
+        1144,
+        1113
+      ],
+      "component_covariance_error": 3.753787536174059,
+      "component_covariance_errors": [
+        13.606439590454102,
+        0.30617383122444153,
+        0.21059392392635345,
+        0.8919427990913391
+      ],
+      "component_mass": [
+        0.19921875,
+        0.249755859375,
+        0.279296875,
+        0.271728515625
+      ],
+      "component_min_eigen_ratio": 0.4260333776473999,
+      "component_resolved": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "component_spill": [
+        0.02450980432331562,
+        0.034213099628686905,
+        0.0279720276594162,
+        0.02964959479868412
+      ],
+      "covariance_error": 0.0394243448972702,
+      "hq": 0.970703125,
+      "mass_tv": 0.051025390625,
+      "max_component_spill": 0.034213099628686905,
+      "mean_error": 0.0976807102560997,
+      "min_mass_ratio": 0.796875,
+      "resolved_core_covariance_error": 0.3068993240594864,
+      "resolved_core_min_eigen_ratio": 0.24132266640663147,
+      "resolved_max_component_spill": 0.034213099628686905,
+      "sample_count": 4096,
+      "step": 1200,
+      "sw1_normalized": 0.07251366519724978,
+      "target_mass": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "target_scale": 2.1343955993652344
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "raw_task_grades": {
+    "vector_unequal_width": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": 0.10748633480275022,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.07251366519724978
+          },
+          {
+            "margin": 0.098974609375,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.051025390625
+          },
+          {
+            "margin": 0.12070312500000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.970703125
+          },
+          {
+            "margin": -2.903787536174059,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 3.753787536174059
+          },
+          {
+            "margin": 0.2760333776473999,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.4260333776473999
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.3068993240594864,
+        "component_core_covariance_errors": [
+          0.6705253720283508,
+          0.2218153476715088,
+          0.23361577093601227,
+          0.10164080560207367
+        ],
+        "component_core_eigen_ratios": [
+          0.24132266640663147,
+          0.686475396156311,
+          0.6961089968681335,
+          0.8785077929496765
+        ],
+        "component_core_min_eigen_ratio": 0.24132266640663147,
+        "component_counts": [
+          816,
+          1023,
+          1144,
+          1113
+        ],
+        "component_covariance_error": 3.753787536174059,
+        "component_covariance_errors": [
+          13.606439590454102,
+          0.30617383122444153,
+          0.21059392392635345,
+          0.8919427990913391
+        ],
+        "component_mass": [
+          0.19921875,
+          0.249755859375,
+          0.279296875,
+          0.271728515625
+        ],
+        "component_min_eigen_ratio": 0.4260333776473999,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.02450980432331562,
+          0.034213099628686905,
+          0.0279720276594162,
+          0.02964959479868412
+        ],
+        "covariance_error": 0.0394243448972702,
+        "hq": 0.970703125,
+        "mass_tv": 0.051025390625,
+        "max_component_spill": 0.034213099628686905,
+        "mean_error": 0.0976807102560997,
+        "min_mass_ratio": 0.796875,
+        "resolved_core_covariance_error": 0.3068993240594864,
+        "resolved_core_min_eigen_ratio": 0.24132266640663147,
+        "resolved_max_component_spill": 0.034213099628686905,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.07251366519724978,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "schema": "pg_common26_full_atlas_grade_projection_v1",
+  "task_grades": {
+    "vector_unequal_width": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": 0.10748633480275022,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.07251366519724978
+          },
+          {
+            "margin": 0.098974609375,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.051025390625
+          },
+          {
+            "margin": 0.12070312500000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.970703125
+          },
+          {
+            "margin": -2.903787536174059,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 3.753787536174059
+          },
+          {
+            "margin": 0.2760333776473999,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.4260333776473999
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.3068993240594864,
+        "component_core_covariance_errors": [
+          0.6705253720283508,
+          0.2218153476715088,
+          0.23361577093601227,
+          0.10164080560207367
+        ],
+        "component_core_eigen_ratios": [
+          0.24132266640663147,
+          0.686475396156311,
+          0.6961089968681335,
+          0.8785077929496765
+        ],
+        "component_core_min_eigen_ratio": 0.24132266640663147,
+        "component_counts": [
+          816,
+          1023,
+          1144,
+          1113
+        ],
+        "component_covariance_error": 3.753787536174059,
+        "component_covariance_errors": [
+          13.606439590454102,
+          0.30617383122444153,
+          0.21059392392635345,
+          0.8919427990913391
+        ],
+        "component_mass": [
+          0.19921875,
+          0.249755859375,
+          0.279296875,
+          0.271728515625
+        ],
+        "component_min_eigen_ratio": 0.4260333776473999,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.02450980432331562,
+          0.034213099628686905,
+          0.0279720276594162,
+          0.02964959479868412
+        ],
+        "covariance_error": 0.0394243448972702,
+        "hq": 0.970703125,
+        "mass_tv": 0.051025390625,
+        "max_component_spill": 0.034213099628686905,
+        "mean_error": 0.0976807102560997,
+        "min_mass_ratio": 0.796875,
+        "resolved_core_covariance_error": 0.3068993240594864,
+        "resolved_core_min_eigen_ratio": 0.24132266640663147,
+        "resolved_max_component_spill": 0.034213099628686905,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.07251366519724978,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  }
+}

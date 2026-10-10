@@ -1,0 +1,11 @@
+{
+  "status": "FROZEN_SAVED_ENDPOINT_CPU_PARSE_PARITY",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500.json": "3242b3bc1ab40e99e098d9f769d10ee384b52d9cd7971adcdbfc00d22bc32fa2"
+  },
+  "helper_frozen_sha256": "749ad784d98c4892d1a574238dd305f579962662aeb30bfbe7676f0dc066d0ed",
+  "checkpoint_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/checkpoint-0500.pt": "42bbb884dd408800570296db04eaf34685a8d13b71e6ca93e99452af14199dff",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0500.pt": "1b25a3d53b89c54862869bbc3fe5891ca67101d2da99ea08e75b4c9fbe717e95"
+  }
+}

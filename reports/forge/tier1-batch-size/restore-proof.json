@@ -1,0 +1,60 @@
+{
+  "proof": [
+    {
+      "batch": 128,
+      "constant_effective_rates": [
+        0.012,
+        0.018,
+        0.03
+      ],
+      "model_sampling_draws": 0,
+      "restored_exactly": true,
+      "restored_state_sha256": "239ba00f9c2fba627a643b233ccac13d28edd0a926a3df130c33cdb4458d8301",
+      "state_file_sha256": "2f820f7f3f9775016a1679ef3072397ba550b997ee1e3ae64f7cef5b49797642",
+      "task": "gaussian1d_acquisition",
+      "training_updates": 0
+    },
+    {
+      "batch": 128,
+      "constant_effective_rates": [
+        0.012,
+        0.018,
+        0.03
+      ],
+      "model_sampling_draws": 0,
+      "restored_exactly": true,
+      "restored_state_sha256": "d6b6a5c79fa6f40b37484400de130e83b6821ae8c9640447a2fc3f068c59f2b9",
+      "state_file_sha256": "32e3b132759d5c25bbcb48cf4be74c21045fa617f768d31cb246bb382449f045",
+      "task": "ring16_acquisition",
+      "training_updates": 0
+    },
+    {
+      "batch": 512,
+      "constant_effective_rates": [
+        0.012,
+        0.018,
+        0.03
+      ],
+      "model_sampling_draws": 0,
+      "restored_exactly": true,
+      "restored_state_sha256": "bf19f109521f715cc5a4fac22402ffa856f7ec49270a3d7a923f5c50595f2385",
+      "state_file_sha256": "d5a3917e66d9e68debe0e8ef419929883eda8eb4157f57e8be998de80367cdb3",
+      "task": "gaussian1d_acquisition",
+      "training_updates": 0
+    },
+    {
+      "batch": 512,
+      "constant_effective_rates": [
+        0.012,
+        0.018,
+        0.03
+      ],
+      "model_sampling_draws": 0,
+      "restored_exactly": true,
+      "restored_state_sha256": "792dc50550153c6e4e4f4b2d1afb9fff5df890d0630b89f055c325abbdcefdfd",
+      "state_file_sha256": "5a3e8ea1c0967bcc4b272d0b39049c53c6d2c99d321231acdebbce8935423777",
+      "task": "ring16_acquisition",
+      "training_updates": 0
+    }
+  ]
+}

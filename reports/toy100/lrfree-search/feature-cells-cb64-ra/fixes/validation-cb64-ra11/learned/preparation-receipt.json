@@ -1,0 +1,8 @@
+{
+  "status": "PREPARED_NO_NUMERICAL_EXECUTION",
+  "unchanged_metric_helpers": true,
+  "baseline": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929",
+  "package_sha256": "1b54cb00461df0ad89fcad59bba1e3012bf94a71ac887ecf708aafdfadc18a93",
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "source_freeze_sha256": "c43ef77d5790c396d3cc7813f4231e658d76e6e19a20a4d965b33a4b164ccdff"
+}

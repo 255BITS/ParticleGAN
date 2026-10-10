@@ -1,0 +1,23 @@
+{
+  "catalog_delta": "Add only the two current diagnostic source entries and dependent counts/coverage. Suggested tiers are suitability metadata, not qualification.",
+  "history_check": {
+    "command": "python -m experiments.forge history --check",
+    "coverage": {
+      "declared_count": 11776,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11776,
+      "unclassified": [],
+      "valid": true
+    },
+    "exit_code": 0,
+    "raw_local_log": "runs/api/ring16-truncation-logs/history-coverage-publication.json",
+    "raw_sha256": "289c59e168f3d78199fe1831acdcc796f955633185fe762a8f2a84f5a143a4b2"
+  },
+  "pinned_sources_unchanged": true,
+  "qualification_input": false,
+  "sampling_draws": 0,
+  "saved_metric_note": "Truncation every-step has four failures after confirmed first acquisition:717,734,750,817; all fail only component covariance. No new scoring or training.",
+  "scope": "report_and_current_source_metadata_audit",
+  "training_updates": 0
+}

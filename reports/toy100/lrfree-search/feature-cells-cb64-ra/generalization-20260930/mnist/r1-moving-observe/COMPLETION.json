@@ -1,0 +1,21 @@
+{
+  "status": "COMPLETE",
+  "started_utc": "2026-09-30T21:29:07.858490+00:00",
+  "completed_utc": "2026-09-30T21:29:24.494272+00:00",
+  "returncode": 0,
+  "wall_seconds": 16.63581456290558,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/run_observe.py"
+  ],
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/result.json",
+  "result_sha256": "8ada56fd775c3a9f9eb9be71ed42525fd6f32d728612c3a15a7366e749bbca75",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/observe.log",
+  "log_sha256": "066d406e0468daa08b8bcda6b3ebd887991480d90a70c3b4c93afc7b0deea4c0",
+  "source_freeze_sha256": "35ea2c173c42e795de4f61c9d37e3c520a2a0e9c7d83902e50f1bfe33bbbe743",
+  "inputs_sha256": "29dcf35a0a679adb223c55ca539fe0843ba8e80ef0fef2b6e9e953a1a80c3542",
+  "original_supervisor_still_parked": true,
+  "signaled_processes": []
+}

@@ -1,0 +1,519 @@
+{
+  "schema": "routed_caption_correlated_context_results_v1",
+  "task": "routed_caption_correlated_context_v1",
+  "complete": true,
+  "scientific_status": "PASS",
+  "outcome": "Untied particles pass the fixed relative/source/code/live gate; correlation alone does not reproduce the remaining actual-caption failure in this generated fixture.",
+  "parent_dependency": {
+    "PR": "https://github.com/255BITS/ParticleGAN/pull/241",
+    "commit": "5ab86005b4da3b88e5640eb7c6c3b7475dc93b28",
+    "transitive_helpers": "PR240/PR239"
+  },
+  "geometry": {
+    "width": 576,
+    "text": 768,
+    "rank": 16,
+    "tokens": 256,
+    "length": 128,
+    "heads": 9,
+    "output": 16,
+    "frequency": 256
+  },
+  "quality_updates": 1536,
+  "updates_per_arm": 512,
+  "accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.006570665372968516,
+      "by_source": {
+        "0": 0.006498631544292676,
+        "1": 0.006549274565951865,
+        "2": 0.00659002767817955,
+        "3": 0.006668196138752865,
+        "4": 0.006568477137865604,
+        "5": 0.0065481642402852765
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_BF16": {
+      "rmse": 0.006565844349908527,
+      "by_source": {
+        "0": 0.006484468277175049,
+        "1": 0.006527905268831045,
+        "2": 0.006564522098196702,
+        "3": 0.006636381305241213,
+        "4": 0.0065954242584148805,
+        "5": 0.006585276590400539
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_untied_BF16": {
+      "rmse": 0.006402591281475869,
+      "by_source": {
+        "0": 0.006381144487972105,
+        "1": 0.006418366579989173,
+        "2": 0.006342589907967399,
+        "3": 0.006520498565456048,
+        "4": 0.006377965989436983,
+        "5": 0.006373446299225167
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "zero_code": {
+      "rmse": 0.00714062885434793,
+      "by_source": {
+        "0": 0.00740760087844646,
+        "1": 0.006968225101745575,
+        "2": 0.006625775444477497,
+        "3": 0.0071526312583652385,
+        "4": 0.007260353746590025,
+        "5": 0.007397905114686941
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    }
+  },
+  "accuracy_bounds": {
+    "ordinary_BF16": {
+      "aggregate_gain_gte_point1_percent": true,
+      "each_source_harm_lte_1e6": true,
+      "relative_gain": 0.02557946295425395
+    },
+    "particle_BF16": {
+      "aggregate_gain_gte_point1_percent": true,
+      "each_source_harm_lte_1e6": true,
+      "relative_gain": 0.024863986980582786
+    }
+  },
+  "code_benefit": {
+    "aggregate_gain_gte_point1_percent": true,
+    "each_source_strictly_benefits": true,
+    "relative_gain": 0.11527169866478415
+  },
+  "gate": {
+    "pass": true,
+    "versus_ordinary": {
+      "pass": true,
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "aggregate_code_benefit": true,
+      "code_beneficial_each_source": true,
+      "bank_live": true,
+      "query_live": true,
+      "C_live_all_six_sites": true,
+      "relative_accuracy_improvement": 0.02557946295425395,
+      "relative_code_benefit": 0.11527169866478415,
+      "relative_margin": 0.001,
+      "per_source_harm_tolerance": 1e-06,
+      "live_fraction_threshold": 0.9,
+      "live_denominator": 511
+    },
+    "versus_shared": {
+      "pass": true,
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "aggregate_code_benefit": true,
+      "code_beneficial_each_source": true,
+      "bank_live": true,
+      "query_live": true,
+      "C_live_all_six_sites": true,
+      "relative_accuracy_improvement": 0.024863986980582786,
+      "relative_code_benefit": 0.11527169866478415,
+      "relative_margin": 0.001,
+      "per_source_harm_tolerance": 1e-06,
+      "live_fraction_threshold": 0.9,
+      "live_denominator": 511
+    },
+    "particle_Up_live_all_six_sites": true
+  },
+  "trace_reductions": {
+    "ordinary_BF16": {
+      "bank_live_after_first": 0,
+      "query_live_after_first": 0,
+      "proposal_events_including_skips": 0,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "f1f0da90897e168742b62750a8fb982833527c093911c28361a365e7a2efd9e4"
+    },
+    "particle_BF16": {
+      "bank_live_after_first": 511,
+      "query_live_after_first": 511,
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "562764c4aaae77addc32514a0e80e5a0d646e7554ed8fdcc9ffd91ee278bef9c"
+    },
+    "particle_untied_BF16": {
+      "bank_live_after_first": 511,
+      "query_live_after_first": 511,
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "562764c4aaae77addc32514a0e80e5a0d646e7554ed8fdcc9ffd91ee278bef9c"
+    }
+  },
+  "source_counts_scope": "TEST48, exactly eight contexts per each of six sources",
+  "flow": {
+    "law": {
+      "anchor_time": 0.1,
+      "reference_cosine": 0.992,
+      "reference_time_delta": 0.1,
+      "angular_rate": 1.2657558596272396,
+      "formula": "z(t)=cos(omega*(t-.1))*a+sin(omega*(t-.1))*b",
+      "anchor_stream": "CPU102, original iid row addressing; first two time rows per pool/source/occurrence",
+      "independent_trajectories": {
+        "fit": 12,
+        "guard": 6,
+        "test": 12
+      },
+      "same_time_marginal": "N(0,I); independent a,b with no normalization or orthogonalization",
+      "expected_grid_adjacent_cosine": 0.9503495796694267
+    },
+    "latent_stats": {
+      "fit": {
+        "contexts": 48,
+        "trajectories": 12,
+        "latent_rms": 1.001679307888281,
+        "realized_adjacent_cosine_mean": 0.9510210034749679,
+        "realized_adjacent_cosine_range": [
+          0.9480663088059971,
+          0.9553111563715772
+        ],
+        "expected_adjacent_cosines": [
+          0.9503495796694267,
+          0.9503495796694267,
+          0.9503495796694267
+        ]
+      },
+      "guard": {
+        "contexts": 12,
+        "trajectories": 6,
+        "latent_rms": 1.0074032441746852,
+        "realized_adjacent_cosine_mean": 0.8078423700614014,
+        "realized_adjacent_cosine_range": [
+          0.8029648592088926,
+          0.8112353492896727
+        ],
+        "expected_adjacent_cosines": [
+          0.8063286471557118
+        ]
+      },
+      "test": {
+        "contexts": 48,
+        "trajectories": 12,
+        "latent_rms": 1.0019946758238418,
+        "realized_adjacent_cosine_mean": 0.9507907962528397,
+        "realized_adjacent_cosine_range": [
+          0.9463580996162484,
+          0.953775076658863
+        ],
+        "expected_adjacent_cosines": [
+          0.9503495796694267,
+          0.9503495796694267,
+          0.9503495796694267
+        ]
+      }
+    },
+    "context_rows_exactly_reconstructed": 108,
+    "independent_trajectories": {
+      "fit": 12,
+      "guard": 6,
+      "test": 12
+    },
+    "original_addressed_anchor_tensors_exactly_reconstructed": 60
+  },
+  "normalization": {
+    "rule": {
+      "statistic": "untrained FIT residual coordinate std, correction=1, flattened contexts and tokens",
+      "epsilon": 1e-08,
+      "reject_std_lte_epsilon": true,
+      "previous_floor": 0.04,
+      "shared_across_all_arms_and_D_EMA_features": true
+    },
+    "raw_FIT_std_range": [
+      0.007456689607352018,
+      0.014404760673642159
+    ],
+    "epsilon_floor_fraction": 0,
+    "previous_floor_fraction": 1.0,
+    "initial_mean_center_power": {
+      "raw_initial_fit": {
+        "power": 0.0002137605933889727,
+        "rms": 0.014620553798983563,
+        "token_mean_power": 0.00017583042424588287,
+        "token_centered_power": 3.7930169143089865e-05,
+        "token_mean_power_fraction": 0.8225577102788556,
+        "global_coordinate_mean_power": 0.00011407086654016793
+      },
+      "normalized_initial_fit": {
+        "power": 1.9639272232523197,
+        "rms": 1.4014018778538582,
+        "token_mean_power": 1.5502894654066806,
+        "token_centered_power": 0.41363775784563894,
+        "token_mean_power_fraction": 0.7893823391476579,
+        "global_coordinate_mean_power": 0.9640086263370587
+      },
+      "previous_floor_normalized_initial_fit": {
+        "power": 0.13360037086810791,
+        "rms": 0.36551384497458905,
+        "token_mean_power": 0.10989401515367676,
+        "token_centered_power": 0.023706355714431165,
+        "token_mean_power_fraction": 0.8225577102788556,
+        "global_coordinate_mean_power": 0.07129429158760495
+      }
+    }
+  },
+  "endpoint_mean_center_power": {
+    "ordinary_BF16": {
+      "power": 4.317364344352749e-05,
+      "rms": 0.006570665372968516,
+      "token_mean_power": 1.991762797649373e-06,
+      "token_centered_power": 4.118188064587811e-05,
+      "token_mean_power_fraction": 0.0461337667796016,
+      "global_coordinate_mean_power": 5.715592968641685e-07
+    },
+    "particle_BF16": {
+      "power": 4.311031202722573e-05,
+      "rms": 0.006565844349908527,
+      "token_mean_power": 2.054786951910654e-06,
+      "token_centered_power": 4.105552507531508e-05,
+      "token_mean_power_fraction": 0.04766346739993395,
+      "global_coordinate_mean_power": 9.222823233361753e-07
+    },
+    "particle_untied_BF16": {
+      "power": 4.099317511763081e-05,
+      "rms": 0.006402591281475869,
+      "token_mean_power": 1.5971740585384583e-06,
+      "token_centered_power": 3.939600105909235e-05,
+      "token_mean_power_fraction": 0.0389619504699339,
+      "global_coordinate_mean_power": 5.384476746881987e-07
+    },
+    "zero_code": {
+      "power": 5.0988580435546226e-05,
+      "rms": 0.00714062885434793,
+      "token_mean_power": 1.1675429771960516e-05,
+      "token_centered_power": 3.9313150663585714e-05,
+      "token_mean_power_fraction": 0.2289812674176961,
+      "global_coordinate_mean_power": 6.629036364903772e-06
+    }
+  },
+  "media_raw_camera_reduction": {
+    "ordinary_BF16": {
+      "raw_camera_RMSE_by_step": {
+        "0": 0.014774066722301244,
+        "64": 0.010388836238320582,
+        "128": 0.008561411043446512,
+        "256": 0.006986017690664068,
+        "384": 0.006752624591996745,
+        "512": 0.006561692764054447
+      },
+      "terminal_selected_endpoint_exact": true,
+      "terminal_selected_endpoint_max_absolute_difference": 0.0
+    },
+    "particle_BF16": {
+      "raw_camera_RMSE_by_step": {
+        "0": 0.014774066722301244,
+        "64": 0.010362439369458586,
+        "128": 0.00844651979442908,
+        "256": 0.006914182888016834,
+        "384": 0.006656916763587708,
+        "512": 0.006548308285453551
+      },
+      "terminal_selected_endpoint_exact": true,
+      "terminal_selected_endpoint_max_absolute_difference": 0.0
+    },
+    "particle_untied_BF16": {
+      "raw_camera_RMSE_by_step": {
+        "0": 0.014774066722301244,
+        "64": 0.010390244874935353,
+        "128": 0.008259794912264267,
+        "256": 0.006785981374233619,
+        "384": 0.006540355368707672,
+        "512": 0.006372090038625956
+      },
+      "terminal_selected_endpoint_exact": true,
+      "terminal_selected_endpoint_max_absolute_difference": 0.0
+    }
+  },
+  "producer_head_witness": {
+    "C_live_all_six_sites": true,
+    "particle_Up_live_all_six_sites": true,
+    "scope": "Producer-reported learned-state norms; no checkpoint/model loading by this review."
+  },
+  "parameter_counts": {
+    "ordinary_DownUp": 141312,
+    "particle_bridge": 2016,
+    "router": 14616,
+    "table": 512,
+    "particle_total": 158456,
+    "total_ratio": 1.1213201992753623,
+    "untied_extra_Up": 82944,
+    "untied_particle_total": 241400,
+    "untied_vs_ordinary_parameter_ratio": 1.7082767210144927
+  },
+  "producer_initial_prerequisite": {
+    "pass": true,
+    "native_updates": 0,
+    "common_initial_owners_predictions_exact": true,
+    "fresh_public_restore_exact": true,
+    "scope": "zero-update full-geometry prerequisite",
+    "counts": {
+      "ordinary_DownUp": 141312,
+      "particle_bridge": 2016,
+      "router": 14616,
+      "table": 512,
+      "particle_total": 158456,
+      "total_ratio": 1.1213201992753623,
+      "untied_extra_Up": 82944,
+      "untied_particle_total": 241400,
+      "untied_vs_ordinary_parameter_ratio": 1.7082767210144927
+    },
+    "initial_tangent": {
+      "main_Up_gradient_matches_ordinary_exact": true,
+      "particle_Up_gradients_finite_positive_all_six_sites": true,
+      "particle_Up_gradient_norms": {
+        "ctx_proj": 0.01264991938174616,
+        "block.self_attn.qkv": 0.003934923111069948,
+        "block.self_attn.proj": 0.0020763267160253465,
+        "block.cross_attn.q": 6.120142122438966e-05,
+        "block.cross_attn.kv": 0.010824469994747515,
+        "block.cross_attn.proj": 0.009655200247206692
+      },
+      "fit_indices": [
+        0,
+        8,
+        16,
+        24
+      ],
+      "private_Gaussian_seed": 72,
+      "native_DV12_perturbation": true,
+      "native_updates": 0,
+      "scope": "Initial point only; no total-variance or adaptive-update theorem."
+    }
+  },
+  "training": "Public native RpGAN/KA2 and D+G DV12; raw output errors used only in fixed offline metrics, never optimization, row guards, stopping or checkpoint selection.",
+  "independent_review": {
+    "path": "docs/e22_routed_caption_flow_independent_review.json",
+    "sha256": "318c1c90e41a38126805b3b2498cf6c4ec61969cdae0f219d05bae3ed381a9ba",
+    "checks_passed": 77,
+    "seconds": 1.1020745211280882,
+    "process_seconds": 1.306516943,
+    "limit_seconds": 60,
+    "source_sha256": "3397f20ed3db41289f17fadf1dbb25c8c1776abd73058c38d61af551e839cc2f",
+    "command": "CUDA_VISIBLE_DEVICES='' timeout --signal=INT --kill-after=5 60 /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/review_caption_flow_v1.py",
+    "counts": {
+      "host_or_model_forwards": 0,
+      "native_updates": 0,
+      "native_policy_calls": 0,
+      "CUDA_initialized": false
+    },
+    "metric_tolerance_abs": 2e-15
+  },
+  "software_preparation": {
+    "path": "docs/e22_routed_caption_flow_preparation.json",
+    "sha256": "10c53b259f395667001df62fbd40431b531affe0cf5dc84c37195c795c5fec4c",
+    "cases": 12,
+    "pytest_seconds": 1.93,
+    "total_process_seconds": 4.870761065976694,
+    "limit_seconds": 60,
+    "tiny_native_updates": 4,
+    "full_host_forwards": 0,
+    "CUDA_initialized": false
+  },
+  "quality_budget": {
+    "GPU": 0,
+    "limit_seconds": 300,
+    "actual_external_seconds": 162.18285404494964,
+    "producer_seconds": 161.4326809910126,
+    "attempts": 1,
+    "external_exit_code": 0,
+    "timeout": false
+  },
+  "media": {
+    "published_files": {
+      "docs/e22_routed_caption_flow/goal.gif": "dadf9dffd91068c625d185a84ef0c866249282d761cb3e193306989467e7f200",
+      "docs/e22_routed_caption_flow/goal-final.png": "e056a5d5e2ad64da471a7926767af22bbdca44d1c479ba7e80d19530d73e265c",
+      "docs/e22_routed_caption_flow/media-completion.json": "8d5c6dce20fa6836f228f65a34595a061184d5d574232635341481af0bde1e4b"
+    },
+    "actual_render_seconds": 1.407995552988723,
+    "limit_seconds": 60,
+    "host_forwards": 0,
+    "native_updates": 0,
+    "fixed_steps": [
+      0,
+      64,
+      128,
+      256,
+      384,
+      512
+    ],
+    "fixed_initial_only_color_limit": 0.028145914943812286,
+    "producer_observed_media_sha256": "4fe073dcac3e5bd0b022fa9b61e5613de987d42ee0f832ee697a4e27ef08ca02",
+    "byte_exact_copy": true
+  },
+  "source_identity": {
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "protocol_sha256": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843",
+  "imported_native": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "source_and_native_within_run_unchanged": true,
+  "raw_artifact_identities": {
+    "runs/caption-flow-v1/report.json": "c09c6ced80ac3cb4703448ff4ae31af20a0e74ac6b1695f58878c0a5c5040e34",
+    "runs/caption-flow-v1/completion.json": "f3bfcebd7474d8ef62539959ce045911391f50934d6f8d6e023a2e77230c82a3",
+    "runs/caption-flow-v1/flow-inputs.pt": "7a4dd1ad9ee911ea1593e6a988bf8bb4d095ed193365b75b963ba45a93135dd4",
+    "runs/caption-flow-v1/endpoint-residuals.pt": "d1c7a30bb1484b8790db68929f03b01f4358f63e16ca618bb15af9a668ffa1c7",
+    "runs/caption-flow-v1/observed-media.pt": "4fe073dcac3e5bd0b022fa9b61e5613de987d42ee0f832ee697a4e27ef08ca02",
+    "runs/caption-flow-v1/ordinary_BF16.jsonl": "7386ae08515132fe91d5be9c125700653cb3ff4a1cb2b9f419ae42b0956872f8",
+    "runs/caption-flow-v1/particle_BF16.jsonl": "aa26bfa4699570c3bbe589097385c3990806b5d11f2d705077c3d43a696af0ae",
+    "runs/caption-flow-v1/particle_untied_BF16.jsonl": "47bee298739f9b53b2fa3f3c830bda96cdcff51f4decc5aa5308dc908a64ad18",
+    "runs/caption-flow-v1.external.json": "0001cc41bf23a6b6a1d651a836ab5e79767757be9e15489e8a777dbb6ae01a55",
+    "docs/e22_routed_caption_flow_v1.json": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843",
+    "docs/e22_routed_caption_flow_preparation.json": "10c53b259f395667001df62fbd40431b531affe0cf5dc84c37195c795c5fec4c",
+    "/tmp/routed-caption-flow-v1-launch-pins.json": "f0fde9172f89430efa2c646a0ead9808a9b1bc5f3f539838c73eafda9cfc7fa2",
+    "/tmp/bounded-particle-api-campaign-launcher-v1.py": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f"
+  },
+  "scope_limits": [
+    "A single fixed generated fixture; no seed, horizon or coefficient scan.",
+    "The changed input correlation also reduces independent trajectory count and recomputes FIT-derived scale.",
+    "Real latent amplitude, pretrained frozen-host/teacher geometry and caption token directions remain unmatched.",
+    "No exact LoRA reachability or unique mediating mechanism is established.",
+    "Raw F64 metrics, context/anchor reconstruction and streams are independently reduced; learned-state finiteness/restores/head norms remain producer/source-bound.",
+    "No per-update adaptive output-noise or learning-rate trajectories were recorded.",
+    "The actual-caption strict gate still fails; this result neither beats original full-Supra nor enables promotion."
+  ]
+}

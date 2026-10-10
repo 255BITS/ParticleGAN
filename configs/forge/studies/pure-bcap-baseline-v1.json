@@ -1,0 +1,53 @@
+{
+  "campaign": {
+    "budget_seconds": 900,
+    "candidate_budget_seconds": 900,
+    "id": "pure-bcap-baseline-v1"
+  },
+  "candidate": "bcap-pure-adam-example-v3",
+  "competing_explanation": "Removing several interventions together defines a baseline but cannot attribute a pass or failure to one removed mechanism. A different adversarial loss must be a separately implemented and declared formulation.",
+  "control": {
+    "candidate_id": "k3p-bcap-matched-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "TODO",
+    "op": "<",
+    "phase": "final",
+    "task_id": "TODO",
+    "threshold": 0.0
+  },
+  "hypothesis": "A plain-Adam relativistic-logistic GAN with only the fixed real/fake BCAP penalty may acquire the declared Tier 1 distributions without optimizer interventions.",
+  "id": "pure-bcap-baseline-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "TODO",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "TODO",
+    "threshold": 0.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "TODO"
+      },
+      "path": "TODO: compact original JSON",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "draft",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

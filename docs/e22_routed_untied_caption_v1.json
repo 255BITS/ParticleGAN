@@ -1,0 +1,544 @@
+{
+  "id": "caption_untied_Up_accuracy_v1",
+  "steps": 6400,
+  "endpoints": [
+    5120,
+    6400
+  ],
+  "seconds": 1750,
+  "judges": [
+    "ordinary_native_game@800",
+    "ordinary_native_game@6400",
+    "particle_native_game@800",
+    "particle_native_game@6400"
+  ],
+  "hypothesis": "Untie the ordinary and particle output heads while preserving sharedDown, sampledC, particles and the native game. Test whether this architecture gains actual paired-caption endpoint accuracy against ordinary and shared-head BF16 controls.",
+  "changed": "U_h[h+tanh(Hh+b)] + U_p[h*tanh(Cz)], sharedDown; fresh H/b/bothUp0 and sampledC, public initialize_ on canonical common owners and newhead beforeopt/EMA. Both Down/Up matmuls BF16, bridge/query/mergeFP32. Extra82944params/separateBF16rounding; no unique tying-causality claim.",
+  "public_api": [
+    "init.initialize_",
+    "get_recipe",
+    "RoutedRows",
+    "E22Policy",
+    "begin_step",
+    "routed_generate",
+    "policy lifecycle hooks",
+    "state_dict/load_state_dict"
+  ],
+  "teacher": "Actual unchanged depth1 pretrained host; live B4\u2192B8 target-caption teacher; source/time condition only; CFG3; same240FIT64GUARD240TEST/32x32/rank16/128x4bank/sixsites/full128texttokens.",
+  "control_status": "Older provisional cached ordinary+actual tiedBF16 controls. NEWpublic6400fullTEST240 cleanreplays required beforequality. Cite priorunchanged source/native800802 witness; doNOTrepeatneutralreplay. Newpointchecksnotwholehistoryqualification.",
+  "retained_input_policy": "All torch loads map_locationCPU, including noncapturable scalar Adam step tensors; public native owners copy model/moment tensors to their declaredCUDA0 device. No metadata/RNG rewrite.",
+  "parent_report": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/report.json",
+    "sha256": "e6ec5b485ddb3ad9f1851bef12cd29dc76595513e2383c1204fa9afe9f81b223"
+  },
+  "data": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/data.pt",
+    "sha256": "fc18f90e1422a4a03287e368071cd71cab0d38c4e6cba1337c001b2d82598afc"
+  },
+  "panels": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/panels.pt",
+    "sha256": "acf9e4849f3950a08b2e435d5dd7e2f5521786332fac6c64e74a01ff6453eb87"
+  },
+  "fixture_factory": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/examples/e22_routed_caption_transfer.py",
+    "sha256": "84f3e2a91a010f6585b59ff0068473ce13c74bd58038b68d30481628b230aedb"
+  },
+  "host_sources": {
+    "adapter": {
+      "path": "/ml2/hypergan/supra-e22-neutral-init/supra/particle_adapter.py",
+      "sha256": "1a9814217dfaca2b37552b01b0441a6820330212031ccd931a02f712fdaac7dd"
+    },
+    "backend": {
+      "path": "/ml2/hypergan/supra-e22-neutral-init/vendor/particle-sliders/conceptmod/textsliders/supra_model.py",
+      "sha256": "640851f4570d0f9eacccac70022f06668ddf92dcf8629e978a76443db60acdc4"
+    },
+    "game": {
+      "path": "/ml2/hypergan/supra-e22-neutral-init/supra/particle_game.py",
+      "sha256": "6a10cc15ea44651953fd46fefa3f097a832f594cca98084f17a67f3c4a94f35d"
+    },
+    "pairing": {
+      "path": "/ml2/hypergan/supra-e22-neutral-init/supra/particle_training_data.py",
+      "sha256": "4a0787d187de02e2619e8956c1b2b6a74fe268db00ee16a89601e5d6b229a78c"
+    }
+  },
+  "critic_states": {
+    "ordinary_native_game@800": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/judge-ordinary_native_game-800.pt",
+      "sha256": "2c4dfcff0cbfa526f7309579d3527e1fc6f3863a325519390f7ce36a8cae1e95"
+    },
+    "ordinary_native_game@6400": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/judge-ordinary_native_game-6400.pt",
+      "sha256": "3404866298d8fcb45a135e746b8ee22c3b0529b3c7c33b8dd334c5d5ff8227b4"
+    },
+    "particle_native_game@800": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/judge-particle_native_game-800.pt",
+      "sha256": "4add57101809b7fc4a103c60ecd0d4a641ff358ad3b73e4f0ba3fb49211f9ce4"
+    },
+    "particle_native_game@6400": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/judge-particle_native_game-6400.pt",
+      "sha256": "84de932c042664808b963d215b93d724e209fd33510b992659e1c33301223f5e"
+    }
+  },
+  "control6400_states": {
+    "ordinary_native_game": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/step-6400.pt",
+      "sha256": "a7a2da68814e38208e143b2b101cd7eea8fbd8ca1e61cc22c395569970335ebb"
+    },
+    "tied_particle_BF16": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/step-6400.pt",
+      "sha256": "586c232f22b73de2a2b01e7c6d44d4ab61c6a9fd96bd42b8c263b51cdd9fe813"
+    }
+  },
+  "neutral_initial_state": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/particle_hb_neutral_native_game/step-0.pt",
+    "sha256": "82ed38722f19a209eba27e17db171df6f6451a9a395464b3d86dae8ea23498bf"
+  },
+  "control_residuals": {
+    "ordinary_native_game": {
+      "5120": {
+        "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-5120.pt",
+        "sha256": "5b293d0fe433c7783b7356ed9d6622cde191f5bb81e6b9570ef7d7e7dc6b8bc0"
+      },
+      "6400": {
+        "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-6400.pt",
+        "sha256": "0b7b878476381ed30e3f1decfef8a399a8840ccf52677151f6c04064c5683cd5"
+      }
+    },
+    "tied_particle_BF16": {
+      "5120": {
+        "path": "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/endpoint-5120.pt",
+        "sha256": "b7b5e00f4148e2d06552b5db42af388d538ba606a932bcc47de5137d9f4948ea"
+      },
+      "6400": {
+        "path": "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/endpoint-6400.pt",
+        "sha256": "525105dea35a683cc649c76c5f4459df4e84be4aeec9b0ec8a9f709c6557df6f"
+      }
+    }
+  },
+  "sources": {
+    "examples/e22_routed_untied_caption.py": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/e22_routed_untied_caption.py",
+      "sha256": "b2db3275ae9b3ce2dd11bac32e8be861ea2018e795fabb8aa8c86f62e7e27bf2"
+    },
+    "examples/run_e22_routed_untied_caption.py": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/run_e22_routed_untied_caption.py",
+      "sha256": "30e122585d787f64fb52393f4213979d3d3fd42a4e8be7583f1df284b4b1e84e"
+    },
+    "tests/test_e22_routed_untied_caption.py": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/tests/test_e22_routed_untied_caption.py",
+      "sha256": "53628b2cd514b5c450084260a0bcb70ca960bc2a1401c8927b6171567c5afd9d"
+    },
+    "examples/render_e22_routed_untied_caption.py": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/render_e22_routed_untied_caption.py",
+      "sha256": "f8ffce9a3cc02796099a1ffb46df3d1d1f34ebea7672cbfee3bd43b8d6d83faa"
+    },
+    "tests/test_e22_routed_untied_caption_renderer.py": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/tests/test_e22_routed_untied_caption_renderer.py",
+      "sha256": "4d8ec065f28803254fb0d2dc223aef32b80e62408a202d7d8092725c539426b5"
+    }
+  },
+  "budget_scope": "One6400candidate +2 own800802 replay nativeupdates, cachedordinary+tiedBF166400 publicTEST240 replays, source/input/commonfreshowner+publicclass proofs, pairedobservations5120/6400 andactualmedia0/5120/6400, cleanup/finalwrites inside1750startup allowance. No oldneutral800802 rerun; cite unchanged source/native priorreport witness. CPUsoftware<=4 tinyupdates separately, CPUrenderer60 separate.",
+  "resource_basis": "PrioractualBF16candidate673.683s andsamegeometry. Untied adds82944parameters/BF16product at6sites, one1750s allowance; no speed claim/extension.",
+  "limits": [
+    "Cached ordinary and tied BF16 histories remain provisional; newpointforwardreplays do not qualify wholehistories.",
+    "New untiedhead architecture adds82944parameters andseparateBF16rounding; not uniquelyhead-interference/nativebug/variancecausality.",
+    "No outputobjective/guard/stop/seed/rate/coeffscan or checkpointselection.",
+    "Depth1sixsiteactualcaption task is not full14block71site Supra; original28k top scoreremainsunbeaten.",
+    "Prior BF16scienceFAIL/test/card/sources remainunchanged; currenttest is aNEW architecturevariant.",
+    "Local frozen assets required; portable publicAPItoy is the separateuntiedvariant.",
+    "Older cachedcontrols did not bind allbackendflags; currentprecisionflags recorded+unchanged, no uniquelyrounding/tyingcausalityclaim."
+  ],
+  "native_change_scope": "Native public updates use same D/G DV12/RpGAN/KA2/control law. Prior BF16 report binds already exercised oldneutral800802 parity; do not rerun for bookkeeping. Candidate owns its own checkpoints/recovery, never loads an old untied-incompatible fullstate.",
+  "initial_state_gate": "Fresh public canonical G/D/router common initialmodels/EMA/recipe/table/roles/lrs/data7/paired43 streams equal originalneutral0 ignoring only6NEWparticle_up weights. UpP public initialized+zero beforeopt/EMA. Actualstartup builds OWNfreshpublicstate, replacesONLY cpu_rng/cuda_rng withoriginalneutral0 fields then ownload, verifiesALLotherfieldsunchanged. Neverloadoldnativeowners intountied.",
+  "status": "NEW preparation only; no quality authorized for agents; root launches one bounded campaign after source/software/preflight review",
+  "accuracy_thresholds": {
+    "ordinary_absolute_gain_gt": 0.0005,
+    "relative_gain_gte_vs_both": 0.001,
+    "per_source_harm_lte_vs_both": 1e-06,
+    "code_absolute_gain_gt": 0.0001,
+    "code_relative_gain_gte": 0.001,
+    "each_source_code_benefit_gt": 0.0,
+    "live_fraction_gte": 0.9
+  },
+  "quality_gate": "Onlyterminal6400 TEST240 F64 rawphysicalRMSE: ordinary-candidate>.0005 ANDcandidate<=.999 BOTHordinary+tiedBF16; no-source harm>1e-6 both; zeroCode-candidate>.0001 AND>=.1%codegain+strictall6; bank/router>=90%6399; all6U_p/Cfinitepositive.5120mandatorydiagnostic; game/accuracyneveroptimizer/guard/selection.",
+  "output_accuracy_used_in_optimizer_guard_stop_or_selection": false,
+  "imported_package_policy": "Hash the actually imported particlegan.__file__ Python tree and record path/git provenance at entry; require unchanged within run. No permanent version allowlist. Future cached-control incompatibility is incomplete and requires retrained controls.",
+  "forward_class_restore": "Registered UntiedProjection/BF16Linearowners constructed beforeopt/EMA. Candidate-owned800/final native restore retains subclass/UpP and FAST/EMA disjoint forward witnesses; neverinitialize_ after restore. Tied baseline uses exactoldBF16 class prior tooldnative state load.",
+  "output": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1",
+  "reused_sources": {
+    "public_helper": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-g-clean-caption-develop/examples/e22_routed_g_clean_caption.py",
+      "sha256": "750d738e6065e199d1ab0dcf1a40771bb91a8c54d440b75598067cc502bfc46e"
+    },
+    "fixture_ops": {
+      "path": "/ml2/hypergan/ParticleGAN-supra-g-clean-caption-develop/examples/run_e22_routed_g_clean_caption.py",
+      "sha256": "cea24a1e90992e1a76368a26ea164a834781835034f6f2dcfbe7e0c0c05c9149"
+    }
+  },
+  "test_source_ids": [
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    18,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15
+  ],
+  "test_context_digest": "f31187cb2cd4ae866dfd2be2863764ead7c2d666cb2b89800cfa70c21a076c88",
+  "test_target_digest": "12789936a18f5a58ed95c2cac3fe77d623698efe187b0664dbcf18f1e6e69882",
+  "evaluation_shape": [
+    240,
+    256,
+    16
+  ],
+  "source_contexts_each": 40,
+  "ordinary6400_accuracy": {
+    "rmse": 0.05039700311972803,
+    "by_source": {
+      "4": 0.04983227780106905,
+      "5": 0.05036281196561894,
+      "15": 0.050793626447399085,
+      "16": 0.0510109552540659,
+      "17": 0.050427135591412126,
+      "18": 0.04994469694779572
+    },
+    "contexts": 240,
+    "coordinates_per_context": 4096,
+    "source_counts": {
+      "4": 40,
+      "5": 40,
+      "15": 40,
+      "16": 40,
+      "17": 40,
+      "18": 40
+    }
+  },
+  "commands": {
+    "CPU_preflight": "CUDA_VISIBLE_DEVICES= PYTHONPATH=. python -m examples.run_e22_routed_untied_caption --plan docs/e22_routed_untied_caption_v1.json --preflight",
+    "science": "CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python -u -m examples.run_e22_routed_untied_caption --plan docs/e22_routed_untied_caption_v1.json --out runs/caption-untied-Up-accuracy-v1",
+    "software": "CUDA_VISIBLE_DEVICES= PYTHONPATH=. python -m pytest tests/test_e22_routed_untied_caption.py -q",
+    "media": "CUDA_VISIBLE_DEVICES= python -m examples.render_e22_routed_untied_caption --report runs/caption-untied-Up-accuracy-v1/report.json --completion runs/caption-untied-Up-accuracy-v1/completion.json --media runs/caption-untied-Up-accuracy-v1/observed-media.pt --out runs/caption-untied-Up-accuracy-v1-media"
+  },
+  "exit_conventions": {
+    "0": "Scientific PASS (or software-only preflight PASS)",
+    "1": "Complete scientific FAIL",
+    "2": "Incomplete/error; completion.complete=false"
+  },
+  "preparation_observed_native_identity": {
+    "imported_file": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/particlegan/__init__.py",
+    "package_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "git_HEAD": "fc19f89e8d37b9b7e823ac718f3025161c41bbf0"
+  },
+  "preparation_observed_backend_flags": {
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true,
+    "allow_bf16_reduced_precision_reduction": true,
+    "allow_fp16_reduced_precision_reduction": true
+  },
+  "preparation_observed_identity_is_a_CLI_allowlist": false,
+  "immutable_helper_reuse_scope": "Only read-only fixture construction, finite learned-tensor checks, full-model clean capture, frozen score and checkpoint/restore serialization operations are reused. The old factory-cloned train loop and old helper update/G-clean law/gates are NOT invoked; the NEW explicit public update owns all actual native updates.",
+  "prior_BF16_helper": {
+    "path": "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/examples/e22_routed_bf16_caption.py",
+    "sha256": "f5357b4797289a144244f83b7db6bd57b40c028a91181dcead76d3fc7088991f"
+  },
+  "prior_BF16_report": {
+    "path": "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/report.json",
+    "sha256": "183158eeb9a07e86a63984d7dd40b4af23bf8a6384783c5e83a556b09019d7d3"
+  },
+  "ordinary_initial_residual": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-0.pt",
+    "sha256": "3ac506587f603a5cb2bcf4840933af4e1c36f967cc2afb798ab6262730c24f0e"
+  },
+  "tied6400_accuracy": {
+    "rmse": 0.050601121474222424,
+    "by_source": {
+      "4": 0.05034198923687823,
+      "5": 0.05008877429047513,
+      "15": 0.050744140254869154,
+      "16": 0.05123127840646671,
+      "17": 0.05061958497749429,
+      "18": 0.05057356756039124
+    },
+    "contexts": 240,
+    "coordinates_per_context": 4096,
+    "source_counts": {
+      "4": 40,
+      "5": 40,
+      "15": 40,
+      "16": 40,
+      "17": 40,
+      "18": 40
+    }
+  },
+  "media": {
+    "steps": [
+      0,
+      5120,
+      6400
+    ],
+    "indices": [
+      0,
+      40,
+      80,
+      120,
+      160,
+      200,
+      1,
+      41
+    ],
+    "display_first": 6,
+    "last2_preserve_actualB4": true,
+    "target": "Actual fixedzero paired residual target; modelrowsactual source-student minus live positive-captionteacher.",
+    "initial_controls": "Candidateactualinitial8prediction equals retainedordinaryinitial8 ANDNEWactualfresh tiedBF16initial8capture; publicclean state/RNG identitychecked.",
+    "renderer_seconds": 60,
+    "fixed_initial_only_color_scale": true,
+    "no_score_selection": true,
+    "optional_dependencies": [
+      "numpy",
+      "Pillow>=10.1"
+    ]
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0,
+    "num_particles": 128,
+    "z_dim": 4,
+    "exception": "Explicit shared densebank routedcaption task; no MoG/defaultForgequalification."
+  },
+  "scorer_controls": "Beforequality: public physicalF64 zero/unitoracle, knownpositive bothcontrolgate, sourceharm/missingtiedwin/nonfinite destructivecontrols; no outputoptimization.",
+  "runtime_logging": "Every200updates: nativeG/D/penalty/G-EMA, publicoutput_sigma, G/DgroupLRs, bank/query and BOTHhead norms/gradnorms; train.jsonl eachstep. No evaluationfeedback."
+}
