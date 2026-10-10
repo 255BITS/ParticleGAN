@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 788. Inventory coverage: complete. Unresolved import items: 7.
+Records: 793. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4582,6 +4582,86 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-failure-saved-diagnosis-v1
+
+**Scope:** saved_output_and_checkpoint_diagnosis; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Explain why the adopted 1600-update Ring16 conditions retain an archived continuation PASS but fail current uninterrupted training before proposing another solution.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+The archived restored 1600-update PASS and current uninterrupted 1600-update FAIL share recipe, prior, initializer, 91 scientific files and all 14 final named RNG states. All 24 prefix observations through 400 match exactly; the first differing saved observation is 417. All 96 v3/v4 samples and metrics match. Current covariance error 2.22027 fails with zero full passes: 21 of 4096 outputs exceed 20 target sigmas, all assigned to component 11, which contributes 82.3% of the summed covariance errors. The other 15 components average 0.41875. The current roster records 22 numerical FAIL and one API BLOCKED. The exact first differing optimizer update and causal mechanism remain unresolved; original grades are preserved.
+
+**Next:** Declare a bounded CUDA diagnostic comparing continuation of a shared live prefix with restoration of its checkpoint before tuning. Then attribute far outputs to sampled prior rows and local generator mappings. A pass-once rule cannot repair zero full passing observations. This report adds no training, qualification or policy change.
+
+[Evidence](../../reports/forge/ring16-failure/results.json) · [Record](records/ring16-failure-saved-diagnosis-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-restart-diagnostic-v1
+
+**Scope:** cuda_checkpoint_boundary_reproduction; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Reproduce what actually changes when restoring Ring16 at400 versus continuing the live objects, with seed0, public initialization, recipe and draws fixed.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `numerical_sensitivity_diagnostic`.
+
+
+
+Restoring the fresh 400-update state and the original archived state each reproduces all 96 historical passing sample tensors exactly (covariance .514315, six terminal passes). Live continuation reproduces all 96 current failing covariance/HQ observations (final covariance 2.220268), but retains its postexecution metadata-error INCOMPLETE receipt and no qualification. At update 401, weights, real/latent inputs and the first six forwards agree; critic weight gradients differ by 1e-9 to 1e-8. A 1.03e-7 relative hidden-gradient change becomes a .252 relative polar-direction change because near-null singular directions receive unit weight. Named and ambient RNG states, batches and sampled indices match all 16 traced updates; four controls match the restored path exactly. Restoring live gradient buffers and module flags does not alter that result. No seed variation, scheduled randomization or subbatch repeats were tested.
+
+**Next:** Investigate damping or truncating almost-null singular directions under a separately declared global trainer delta, constant rates and unchanged full gates. Exact backward accumulation mechanism remains unresolved. Do not promote periodic reloads from this one fixed-state reproduction.
+
+[Evidence](../../reports/forge/ring16-failure/reproduction-results.json) · [Record](records/ring16-restart-diagnostic-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-runtime-and-interventions-v1
+
+**Scope:** cuda_runtime_and_weak_direction_diagnostics; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Isolate runtime rounding after Ring16 reload and test fixed weak-direction interventions under the same public initialization, prior, batches, constant rates and full distribution bounds.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `numerical_sensitivity_diagnostic`.
+
+
+
+Four CUDA controls exactly reproduce historical ordinary critic gradients. Serializing autograd only during update401 makes complete live/restored contexts identical but chooses a third trajectory; actual engine execution order and serialized1600 quality remain unmeasured. Identical topology but 1054/7503 changed sequence relations, versus zero for serialized controls, supports thread-local autograd counter history and accumulation ordering. No lossy checkpoint dtype conversion found. Continuous truncation confirms acquisition at684 (47terminal passes), continuous tiny-gradient noise at817 (45), and one-time sign flips at1300 (19). Truncation fails covariance at717/734/750/817 and noise at850 after acquisition, so never-leaves-goal retention is not established. Damping/noise at401 pass terminal quality but fail their one first-pass confirmation; continuous damping/sign flips have zero full passes. All original receipt statuses and gates are preserved.
+
+**Next:** Prioritize deterministic continuous truncation and retain weak-gradient noise as a second supported candidate for a separately frozen whole-configuration Tier1 comparison. Exact reload attribution needs scoped graph-construction/scheduling controls or executed-node order capture. Run Tier2 retention only after required ordinary gates pass. Stop completed every-step damping/sign-flip negatives; no seed study, automatic continuation, default adoption or qualification follows.
+
+[Evidence](../../reports/forge/ring16-followup/results.json) · [Record](records/ring16-runtime-and-interventions-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-live-v1
+
+**Scope:** cuda_uninterrupted_serialized_autograd_quality; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Does always-serialized fresh live Ring16 reach the target without restart, and does the previously measured serialization-only401 third trajectory acquire it?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `autograd_execution_order_diagnostic`.
+
+
+
+Both CUDA arms complete1600 uninterrupted updates. Always-serialized first passes1400 but fails its one independent confirmation (covariance .894789); then fails1417 and passes final11 checks1434..1600, final covariance .385800. Serializing only401 matches original400 and third-trajectory401 contexts exactly; confirms acquisition867 and passes all45 checks867..1600, final covariance .424426. Identical initial tensors, recipe, prior, target batches, gates and cadence verified against prior continuous truncation/noise; every public numerical package file is unchanged. Truncation/noise acquire earlier and retain their original post-acquisition failures. No indefinite retention, ordinary qualification or default adoption follows.
+
+**Next:** Prioritize deterministic continuous truncation for a separately frozen whole-configuration Tier1 comparison; keep weak-gradient noise second. Serialization reaches late quality and preserves execution mode in checkpoints, but failed first-state confirmation prevents this continuous arm claiming smoke. Do not adopt scheduled401 interventions/restarts or spend automatically on Tier2.
+
+[Evidence](../../reports/forge/ring16-followup/serialized-live-results.json) · [Record](records/ring16-serialized-live-v1.json)
+
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-truncation-v1
+
+**Scope:** cuda_uninterrupted_serialized_truncation_quality; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
+
+Do continuous serialized autograd and the fixed measured spectral truncation rule together acquire Ring16 and retain full scheduled quality through1600 without restart?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `spectral_truncation_and_autograd_execution_order`.
+
+
+
+One fresh live CUDA run completes1600 updates, confirms acquisition1050 (independent covariance .817187), and passes every scheduled check1050..1600:34 full passes, zero post-acquisition failures. Final covariance .470678, HQ .956055, massTV .078613 and min eigen ratio .387340 pass all original bounds. Matched initialization/recipe/prior/all1600 target batches/cadence/gates and unchanged public numerical package verified against source-bound continuous truncation and serialization; no controls rerun. Truncation acquires earlier684 and settles834; the combination settles1050 with lower final covariance. Compatibility is demonstrated in this fixed cohort; universal superiority, combined restart parity, indefinite retention and ordinary qualification are not established.
+
+**Next:** Retain continuous truncation and the combination for a separately frozen whole-configuration Tier1 comparison. Preserve failed individual-arm confirmations; no scheduled interventions/restarts, empirical speed ranking, default adoption or automatic Tier2 spend.
+
+[Evidence](../../reports/forge/ring16-followup/serialized-truncation-results.json) · [Record](records/ring16-serialized-truncation-v1.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-batch-size-v1-readout
 
 **Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
@@ -5086,4 +5166,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `01f285c4585e897effd5a7d4e7621d19b5b2b1e65ca3263eb25cc60afd131652`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `2577b77352880aead9f20ba21cc167d9bb9e6b2639c9e65517c76eedfddea6fa`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

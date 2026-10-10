@@ -1,0 +1,39 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50",
+  "changed_factors": [
+    "live continuation versus exact checkpoint restoration; bounded runtime controls"
+  ],
+  "conclusion": "Restoring the fresh 400-update state and the original archived state each reproduces all 96 historical passing sample tensors exactly (covariance .514315, six terminal passes). Live continuation reproduces all 96 current failing covariance/HQ observations (final covariance 2.220268), but retains its postexecution metadata-error INCOMPLETE receipt and no qualification. At update 401, weights, real/latent inputs and the first six forwards agree; critic weight gradients differ by 1e-9 to 1e-8. A 1.03e-7 relative hidden-gradient change becomes a .252 relative polar-direction change because near-null singular directions receive unit weight. Named and ambient RNG states, batches and sampled indices match all 16 traced updates; four controls match the restored path exactly. Restoring live gradient buffers and module flags does not alter that result. No seed variation, scheduled randomization or subbatch repeats were tested.",
+  "evidence_scope": "cuda_checkpoint_boundary_reproduction",
+  "goal": "discriminator_stability",
+  "hypothesis": "Reproduce what actually changes when restoring Ring16 at400 versus continuing the live objects, with seed0, public initialization, recipe and draws fixed.",
+  "lifecycle": "concluded",
+  "mechanism_class": "numerical_sensitivity_diagnostic",
+  "next_action": "Investigate damping or truncating almost-null singular directions under a separately declared global trainer delta, constant rates and unchanged full gates. Exact backward accumulation mechanism remains unresolved. Do not promote periodic reloads from this one fixed-state reproduction.",
+  "provenance": {
+    "charged_seconds": 337.0478278490482,
+    "cost_limit_seconds": 1020,
+    "interrupted_live_receipt": "reports/forge/ring16-failure/restart-interruption.json",
+    "protocol_seed": 0,
+    "qualification_changes": 0,
+    "report": "reports/forge/ring16-failure/REPRODUCTION.md",
+    "scientific_retries": 0,
+    "source_commits": [
+      "1de465e25252c10622965362cd593a899ce74f74",
+      "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+    ],
+    "training_updates_added": 4064
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "ring16-restart-diagnostic-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-failure/reproduction-results.json",
+    "sha256": "b8d12262e32b6e82cfb7b532a71854d0f127ea047b7be33016a839457033350d"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

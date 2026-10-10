@@ -1,0 +1,54 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50",
+  "changed_factors": [
+    "Compose public checkpointed serial_backward=True with the unchanged PR332 weak singular direction truncation rule on every G/D matrix update"
+  ],
+  "conclusion": "One fresh live CUDA run completes1600 updates, confirms acquisition1050 (independent covariance .817187), and passes every scheduled check1050..1600:34 full passes, zero post-acquisition failures. Final covariance .470678, HQ .956055, massTV .078613 and min eigen ratio .387340 pass all original bounds. Matched initialization/recipe/prior/all1600 target batches/cadence/gates and unchanged public numerical package verified against source-bound continuous truncation and serialization; no controls rerun. Truncation acquires earlier684 and settles834; the combination settles1050 with lower final covariance. Compatibility is demonstrated in this fixed cohort; universal superiority, combined restart parity, indefinite retention and ordinary qualification are not established.",
+  "evidence_scope": "cuda_uninterrupted_serialized_truncation_quality",
+  "goal": "discriminator_stability",
+  "hypothesis": "Do continuous serialized autograd and the fixed measured spectral truncation rule together acquire Ring16 and retain full scheduled quality through1600 without restart?",
+  "lifecycle": "concluded",
+  "mechanism_class": "spectral_truncation_and_autograd_execution_order",
+  "next_action": "Retain continuous truncation and the combination for a separately frozen whole-configuration Tier1 comparison. Preserve failed individual-arm confirmations; no scheduled interventions/restarts, empirical speed ranking, default adoption or automatic Tier2 spend.",
+  "provenance": {
+    "archive_sha256": "04bf1bdf7d4c883e0934535e11da6835f1bea48fdea4897ac6d18332d7b61653",
+    "charged_seconds": 25.55133263405878,
+    "comparison_source_commits": [
+      "b060fb4623cc831cb47dd592acea49b6704641be",
+      "ca69cabc2801744a7f99b8c601af98ba68a9e639"
+    ],
+    "cost_limit_seconds": 300,
+    "cost_scope": "one fresh combined GPU arm; exact original individual comparisons and unchanged API software evidence reused without training",
+    "parent_prs": [
+      "https://github.com/255BITS/ParticleGAN/pull/332",
+      "https://github.com/255BITS/ParticleGAN/pull/337"
+    ],
+    "protocol_seed": 0,
+    "prs": [
+      "https://github.com/255BITS/ParticleGAN/pull/338"
+    ],
+    "publication_commit": "8ae542c7ab74c0035b046f7e323b7aded90f9452",
+    "qualification_changes": 0,
+    "report": "https://github.com/255BITS/ParticleGAN/pull/338",
+    "scientific_retries": 0,
+    "scoring_draws": 97,
+    "software_updates_added": 0,
+    "source_commits": [
+      "5e1d33f37b312a1b4a760e8417d76542570f0768"
+    ],
+    "source_digest": "51d30259ceee202a24a39a6a5fea3756bf46f56fc1b7a7e85fc735c6fb4734f8",
+    "training_updates_added": 1600
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "ring16-serialized-truncation-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-followup/serialized-truncation-results.json",
+    "sha256": "379e443f25aa819aea01dccb4f8d5815e02185d5ec44ce5b9c59f2ae56db667d"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}
