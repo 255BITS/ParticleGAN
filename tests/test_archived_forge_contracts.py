@@ -47,3 +47,30 @@ def test_unchanged_archive_input_drift_cannot_rebind_its_byte_pins(tmp_path, mon
     monkeypatch.setattr(archived, "ROOT", tmp_path)
     with pytest.raises(AssertionError):
         archived.archived_contract_bytes("tier1_completion", relative)
+
+
+def test_published_view_replay_keeps_exact_original_roster_and_later_views_private(tmp_path):
+    root = tmp_path / "published-checkout"
+    directory = root / "configs/forge/views"
+    directory.mkdir(parents=True)
+    later = directory / "later-diagnostic.json"
+    later.write_text('{"id":"later-diagnostic","revision":1}')
+    archived.restore_published_view_roster(root)
+    packet = json.loads(archived.FIXTURE.read_text())
+    records = packet["published_develop_views"]["files"]
+    assert len(records) == 9
+    assert {path.relative_to(root).as_posix() for path in directory.glob("*.json")} == set(records)
+    publication = json.loads((archived.ROOT / "reports/forge/technique-inventory.json").read_text())
+    for relative, record in records.items():
+        assert record["sha256"] == publication["family_progress"]["input_hashes"][relative]
+        assert (root / relative).read_bytes() == archived.archived_contract_bytes("published_develop_views", relative)
+    # A later diagnostic remains a current declaration and never enters the
+    # original publication's roster, hash inputs or qualification evidence.
+    current = archived.ROOT / "configs/forge/views/bcap-develop-integration-deeper-diagnostic-v1.json"
+    assert current.is_file()
+    assert current.relative_to(archived.ROOT).as_posix() not in records
+
+
+def test_published_view_replay_refuses_live_repository():
+    with pytest.raises(AssertionError):
+        archived.restore_published_view_roster(archived.ROOT)

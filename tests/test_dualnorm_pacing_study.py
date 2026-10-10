@@ -200,6 +200,9 @@ def test_campaign_cleanup_waits_for_real_supervisor_and_descendants(study, tmp_p
 def test_expired_clock_before_first_admission_is_an_unmeasured_stop(study, declarations, tmp_path, monkeypatch):
     from experiments.forge.contracts import atomic_json
 
+    # The existing driver opts this process into diagnostics. Restore that
+    # environment mutation after the software control, including expired runs.
+    monkeypatch.setenv("PARTICLEGAN_FORGE_OPTIMIZER_DIAGNOSTICS", "0")
     contract, entries = declarations
     frozen = {"input_digest": "frozen", "control_candidate_id": "control",
               "source": {"origin_commit": "source-commit", "digest": "source-digest"}}

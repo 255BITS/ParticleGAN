@@ -59,6 +59,56 @@
     },
     "source_commit": "5737ade47dca89b04d338ada20667781d1f2b5df"
   },
+  "published_develop_views": {
+    "files": {
+      "configs/forge/views/adaptation.json": {
+        "git_blob": "299aa7c1b71a665ed28cb3ec75a15499579a7c7b",
+        "repository_bytes": true,
+        "sha256": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d"
+      },
+      "configs/forge/views/bcap_convolution_images.json": {
+        "git_blob": "2e67111443ca9915ddd43fcf756052fc246dc31e",
+        "repository_bytes": true,
+        "sha256": "ae8329bd6e82c1e3adb6641a1bf3d404f4ec52509e776a805263eab9880c7b0a"
+      },
+      "configs/forge/views/clockfree_continuous.json": {
+        "git_blob": "5375b0797caade64aed8c39a00af7affdaddef27",
+        "repository_bytes": true,
+        "sha256": "30d62d0f1a11181bc50dd041985cc4be52587ce7abe901114c8e0f2f27fd3d6f"
+      },
+      "configs/forge/views/discriminator_stability.json": {
+        "git_blob": "95de915294d53bed6d974166bf3bfdff665a3c1f",
+        "repository_bytes": true,
+        "sha256": "91d767ba798e067f02c00efacec3c63487550b46a47cc07fd1576b90739bf9c0"
+      },
+      "configs/forge/views/formulation_comparison.json": {
+        "git_blob": "89e3eb0f88d3a791864ca43b6b84aa52d185c7e9",
+        "repository_bytes": true,
+        "sha256": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25"
+      },
+      "configs/forge/views/host_profile_transfer.json": {
+        "git_blob": "f57e32e1316bbb60e89b6998706ea5d893ed8110",
+        "repository_bytes": true,
+        "sha256": "41b16932d4d186e4e2e0504d2ff696faad4ec02b493ac5874abd1d7f8be6b993"
+      },
+      "configs/forge/views/k3p_two_pole_horizon.json": {
+        "git_blob": "2f74075191d202633ab4f7570f01d3c4a2579e24",
+        "repository_bytes": true,
+        "sha256": "9355ce6ef0db6e9321641056c1eecf1dd90b057cf6a72315d9755fdbfff99e23"
+      },
+      "configs/forge/views/quality_coverage.json": {
+        "git_blob": "2fec0d03f8c74ba0a8e6bfd0be822fc2c3989ca9",
+        "repository_bytes": true,
+        "sha256": "b8739e334dc1f993a453ae72da2b0b90316a3cd794a0cec0e448438650d3d3c5"
+      },
+      "configs/forge/views/tier1_policy_coverage.json": {
+        "git_blob": "9d74d38fcb6dd5a496a6da4c107e02c61d193074",
+        "repository_bytes": true,
+        "sha256": "f6c669aede722bac3d957327b55d1db7625f108ada197323b8827c1883efc7f2"
+      }
+    },
+    "source_commit": "5737ade47dca89b04d338ada20667781d1f2b5df"
+  },
   "qualification_input": false,
   "schema": "forge_archived_software_contract_fixtures_v1",
   "shallow_gaussian": {
