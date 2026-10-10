@@ -45,8 +45,12 @@ def validate_word_task(task, *, root=None):
           or execution.get("produces_state") is not False):
         raise ValueError("word task requires 20,001 updates / 20,000-update schedule; no continuation claim")
     prior = execution.get("prior", {})
+    from .priors import recipe_owned_prior
+    expected_prior = {"kind": "particle_cloud", "sigma": 0., "standardize": False}
+    if not recipe_owned_prior(task):
+        expected_prior["learnable"] = True
     if any(prior.get(key) != value for key, value in
-           {"kind": "particle_cloud", "sigma": 0., "standardize": False, "learnable": True}.items()):
+           expected_prior.items()):
         raise ValueError("joint word task requires its explicit five-row learned particle-cloud exception")
     if not isinstance(prior.get("exception_reason"), str) or not prior["exception_reason"].strip():
         raise ValueError("finite-word particle-cloud exception needs its reason")
@@ -174,6 +178,9 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
                  "adapter_loop_seconds": time.monotonic() - started, "phase_timing": timing.snapshot()},
         "scope": "ordinary_full_task" if steps == task["execution"]["steps"] else "integration_demo_only",
         "declared_task_updates": task["execution"]["steps"], "execution_limit": steps}
+    if recipe_owned_prior(task):
+        from .priors import prior_policy_receipt
+        receipt["evidence"]["prior_policy"] = prior_policy_receipt(context.recipe, fixture.prior)
     if fixture.transport is not None:
         receipt["evidence"]["component_transport"] = fixture.transport.state_dict()
     if optimizer_diagnostics is not None:

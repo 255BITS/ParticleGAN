@@ -48,7 +48,7 @@ def technique_signature(value):
                                     if recipe.optimizer_family == "formulation" else None),
         "terminal_second_moment": beta2_end > 0 if adam_networks or adam_prior else None,
         "amsgrad": recipe.amsgrad if adam_networks or adam_prior else None,
-        "prior_regularization": recipe.prior_reg > 0,
+        "prior_regularization": recipe.prior_update == "learned" and recipe.prior_reg > 0,
         "critic_anchor": recipe.reg_anchor_weight > 0,
         "critic_guard": recipe.d_guard_ratio > 0,
         "latent_damping": recipe.latent_damping_max_rate > 0,
@@ -70,6 +70,8 @@ def technique_signature(value):
     }
     if recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}:
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
+    if recipe.prior_update == "learned" and recipe.prior_l2 > 0:
+        mechanisms["prior_l2"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -107,8 +109,15 @@ def recipe_field_active(name, value, *, task=None):
 
     recipe = _recipe(value)
     execution = {} if task is None else task.get("execution", {})
+    from .priors import recipe_owned_prior
+    learned = (recipe.prior_update == "learned" if task is None or recipe_owned_prior(task)
+               else execution.get("prior", {}).get("learnable", True))
     prior_active = ((task is None or prior_control_binding(task)["latent_table_controls"])
-                    and execution.get("prior", {}).get("learnable", True))
+                    and learned)
+    if name in {"prior_update", "prior_regularizer"} and task is not None and not prior_control_binding(task)["latent_table_controls"]:
+        return False
+    if name == "prior_regularizer" and not learned:
+        return False
     if name == "optimizer_momentum":
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
     if name == "optimizer_smoothing":
@@ -150,7 +159,10 @@ def recipe_field_active(name, value, *, task=None):
         return False
     if name == "lr_floor" and task is not None and not prior_active and recipe.network_lr_floor is not None:
         return False
-    if task is not None and name in {"prior_lr_mult", "prior_betas", "prior_eps", "prior_reg"}:
+    if name in {"prior_lr_mult", "prior_betas", "prior_eps", "prior_reg", "prior_l2",
+                "prior_reg_target_std", "prior_reg_eps"}:
         if not prior_active:
             return False
+    if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_reg == 0:
+        return False
     return True

@@ -660,7 +660,8 @@ class VectorFixture:
             try:
                 self.opt_g.zero_grad(set_to_none=True)
                 fake = self.generator(self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)[0])
-                value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.regularizer(self.prior.z)
+                value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.recipe.prior_regularization(
+                    self.prior.z, regularizer=self.regularizer)
                 value.backward(); self.opt_g.step(); self.update_counts["g"] += 1
             finally:
                 self.critic.requires_grad_(True)

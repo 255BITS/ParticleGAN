@@ -118,7 +118,7 @@ class MechanismAudit:
                                           enabled=critic_optimizer.anchor is not None and anchor_requested)
         self.rows["critic_guard"].update(requested=recipe.d_guard_ratio > 0,
                                          enabled=critic_optimizer.guard is not None)
-        self.rows["a2"]["requested"] = recipe.latent_damping_max_rate > 0
+        self.rows["a2"]["requested"] = recipe.latent_damping_max_rate > 0 and recipe.prior_update == "learned"
         self.rows["direct_particle_gain"]["requested"] = recipe.direct_particle_gain
         guard = critic_optimizer.guard
         if guard is not None:

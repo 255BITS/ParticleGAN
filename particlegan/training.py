@@ -147,6 +147,7 @@ class GANTrainer:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
+        recipe.apply_prior_policy(self.prior)
         if not any(p.requires_grad for p in discriminator.parameters()):
             raise ValueError("discriminator must have trainable parameters")
         seen = set()
@@ -392,10 +393,12 @@ class GANTrainer:
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad:
+            if self.prior.z.requires_grad and recipe.prior_reg > 0:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if self.prior.z.requires_grad and recipe.prior_l2 > 0:
+                loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
             if recipe.kinetic_transport_weight:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
@@ -560,6 +563,11 @@ class GANTrainer:
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if (isinstance(saved_recipe, dict) and "prior_update" not in saved_recipe
+                and state.get("requires_grad", {}).get("prior") == {}):
+            # Historical frozen tables were buffers; their saved parameter map
+            # is an actual policy witness, never a candidate default inference.
+            saved_recipe = {**saved_recipe, "prior_update": "frozen"}
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):

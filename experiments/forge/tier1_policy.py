@@ -42,6 +42,9 @@ def _variant(parent, pin, sources):
     execution['policy_parent_definition'] = deepcopy(parent)
     execution['prior'].update(kind='particle_cloud', sigma=0., standardize=False, learnable=True,
         exception_reason='Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.')
+    from .priors import recipe_owned_prior
+    if recipe_owned_prior(parent):
+        execution['prior'].pop('learnable')
     execution['policy_contract'] = {
         'schema_version': 1, 'cohort': COHORT, 'owner': 'particlegan.UpdatePolicy',
         'lifecycle': 'ordered_public_update', 'row_semantics': 'independent',

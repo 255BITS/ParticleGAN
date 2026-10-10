@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 8,
+  "revision": 9,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -188,12 +188,12 @@
   "eligibility": {},
   "calibration": {
     "status": "provisional",
-    "adoption_blocker": "Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities."
+    "adoption_blocker": "Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities."
   },
   "ranking": {
     "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "User-requested five-word acquisition/hold split: new independently confirmed can-it-pass Tier1 smoke, and exact own-state 4,000-update retention in Tier2. Original five_word_joint_acquisition sustained task and all historical receipts are unchanged and unassigned."
+  "policy_change_reason": "Recipe-owned prior policy and regularization: tasks preserve initial prior law/capacity/sampling, architecture/data, initialization, budgets and numerical gates. New execution.prior_contract recipe_owned_v1 binds learning/freezing and all latent-prior penalties to one global recipe. Archived revisions retain their original semantics."
 }

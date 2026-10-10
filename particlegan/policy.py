@@ -296,6 +296,8 @@ class UpdatePolicy:
             raise ValueError("table must have shape (recipe.num_particles, recipe.z_dim)")
         if prior is not None and getattr(prior, "z", None) is not table:
             raise ValueError("prior.z and table must be the same tensor")
+        if prior is not None and table.requires_grad != (recipe.prior_update == "learned"):
+            raise ValueError("prior learning state contradicts Recipe.prior_update")
         self.table, self.device, self.dtype = table, table.device, table.dtype
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")

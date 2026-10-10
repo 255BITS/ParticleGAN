@@ -407,7 +407,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         lazy_k=1,
         target_anneal="none",
     )
-    spread = ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight"))
+    spread = (None if components is not None and components.uses_recipe_prior
+              else ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight")))
     lr = float(recipe.knob("lr"))
     betas = (float(recipe.knob("beta1")), float(recipe.knob("beta2")))
     if noise_policy is not None:
@@ -497,9 +498,12 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         g_loss = gan.g_loss(critic(fake), critic(real.detach()))
         protected_adversarial = g_loss
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
-        g_loss = g_loss + spread(parts)
-        if particle_l2 > 0.0:
-            g_loss = g_loss + particle_l2 * parts.pow(2).mean()
+        if components is not None and components.uses_recipe_prior:
+            g_loss = components.add_prior_regularization(g_loss, prior_p, prior_m)
+        else:
+            g_loss = g_loss + spread(parts)
+            if particle_l2 > 0.0:
+                g_loss = g_loss + particle_l2 * parts.pow(2).mean()
         if cover_w > 0.0:
             cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
             cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()

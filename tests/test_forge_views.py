@@ -75,7 +75,7 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 8
+    assert stability["revision"] == 9
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "clockfree_audit_measurement_v1"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
@@ -92,7 +92,11 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
             assert prior["kind"] == "particle_cloud" and prior["sigma"] == 0
             assert prior["exception_reason"]
         else:
-            assert prior["kind"] == "mog" and prior["sigma"] > 0 and prior["learnable"]
+            assert prior["kind"] == "mog" and prior["sigma"] > 0
+            if task["execution"].get("prior_contract") == "recipe_owned_v1":
+                assert "learnable" not in prior
+            else:
+                assert prior["learnable"]
     assert tasks["ae_gan_hold"]["execution"]["prior"]["kind"] == "mog"
 
 
@@ -199,6 +203,9 @@ def test_forge_retains_rare_component_shape_failure_despite_upstream_finite_atom
     task = load_tasks(ROOT)["vector_unequal_mass"]
     upstream = next(s for s in TASKS if s["name"] == task["id"])
     assert component_resolved(upstream) == [True, True, True, False]
+    # Explicit legacy numerical fixture; this does not attest a trained recipe.
+    task["execution"].pop("prior_contract", None)
+    task["execution"]["prior"]["learnable"] = True
     # Synthetic evaluator fixture, not a training receipt: the rare component
     # has correct mass but zero variance; all resolved components have good shape.
     metrics = dict(sw1_normalized=.1, mass_tv=0., hq=1., min_mass_ratio=1.,
@@ -467,6 +474,9 @@ def ring_evidence(*,bad_step=None,truncate=0,run_id="one"):
 
 def test_ring_first_convergence_and_immediate_extension_are_separate_verdicts():
     tasks=load_tasks(ROOT)
+    for name in ("ring_hold", "ring_extension"):
+        tasks[name]["execution"].pop("prior_contract", None)  # Legacy numerical reducer fixture.
+        tasks[name]["execution"]["prior"]["learnable"] = True
     raw=dict(evidence=ring_evidence(bad_step=2700))
     assert grade_result(tasks["ring_hold"],raw)["status"] == "PASS"
     assert grade_result(tasks["ring_extension"],raw)["status"] == "FAIL"
@@ -476,7 +486,11 @@ def test_ring_first_convergence_and_immediate_extension_are_separate_verdicts():
 
 
 def test_ring_missing_dense_check_and_restarted_state_are_rejected():
-    tasks=load_tasks(ROOT); raw=dict(evidence=ring_evidence())
+    tasks=load_tasks(ROOT)
+    for name in ("ring_hold", "ring_extension"):
+        tasks[name]["execution"].pop("prior_contract", None)  # Legacy numerical reducer fixture.
+        tasks[name]["execution"]["prior"]["learnable"] = True
+    raw=dict(evidence=ring_evidence())
     raw["evidence"]["dense"].pop(10)
     assert grade_result(tasks["ring_hold"],raw)["status"] == "INVALID"
     raw=dict(evidence=ring_evidence()); raw["evidence"].pop("continuity")
@@ -504,6 +518,8 @@ def test_checkpoint_continuation_requires_same_parent_state():
 
 def test_native_gate_requires_artifacts_and_rejects_wrong_budget(tmp_path):
     task=load_tasks(ROOT)["grid100"]
+    task["execution"].pop("prior_contract", None)  # Isolate the artifact/budget reducer.
+    task["execution"]["prior"]["learnable"] = True
     assert grade_result(task,dict(gate_status="PASS",evidence=dict(coverage="PASS",accuracy="PASS")))["status"] == "INCOMPLETE"
     (tmp_path/"grid100").mkdir()
     (tmp_path/"grid100/config.json").write_text(json.dumps(dict(steps=1000)))

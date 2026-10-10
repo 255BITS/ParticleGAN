@@ -16,7 +16,6 @@
       "kind": "particle_cloud",
       "sigma": 0.0,
       "standardize": false,
-      "learnable": true,
       "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol."
     },
     "protocol": "screening",
@@ -69,7 +68,8 @@
       "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
       "protected_objectives": "original joint adversarial loss for G, encoder and prior",
       "inactive": "original losses, updates, clocks and RNG; no hook requirement"
-    }
+    },
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -127,16 +127,16 @@
     "sources": {
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
-      "benchmarks/toy_audit/api_images.py": "b4e76f9f143464611f2a1abfd2018e9df7170cdc2653cc3d1123da446533fa8c",
+      "benchmarks/toy_audit/api_images.py": "a79aafb643182d707796b25b2b3abec3dd3c7e452c615a7cf68274f157a778ea",
       "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "experiments/forge/word_adapter.py": "16bed6dbc88b98bc6f310d484a71d147e7b75a3dac473c80c835af917b153566",
-      "experiments/forge/word_tasks.py": "aad16baeabbfcacdbc53675ca0ffece5f1e1010c510a4e7ac1dd9565047760a5",
-      "particlegan/policy.py": "873919c57ef34021c1f6e4b8b246c4cc81a6679cf13585ca264c2af2f5dd6b6d",
+      "experiments/forge/word_adapter.py": "dd6c337d437637981b000f9e3f310c1c6f38010bf142ddc133f5deaccb45668e",
+      "experiments/forge/word_tasks.py": "f090d5300fdf12178d5c54556c40c98f593b2796e2bb8ab91c7e81450f89ba05",
+      "particlegan/policy.py": "d6065aa9d479342ead94212802b12bdf4e3c855f2c9a104684b59981a4b7e61c",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0"
+      "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
     },
     "evaluator_revision": {
       "id": "opt-in-component-objective-hooks-v1",
@@ -205,7 +205,6 @@
     "checkpoint",
     "named_rng",
     "live_sampling",
-    "learned_locations",
     "particle_cloud"
   ],
   "dependencies": [
