@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "2e8a4cadacf4e59cf91e98b9b5c901060d1b3243d71f74e4f645aa5835a6dd35",
+  "input_digest": "a39f363cc08d76b01336ec1bae97b89d61aed35f7e1e6395cc8ec7f8ab38892c",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -595,6 +595,7 @@
     "configs/forge/ideas/bcap-nsgda-global-v1.json": "7d9e93670cf5a9231b93c80c4a26f862f8b4c92246d85a3adf52037597dc557f",
     "configs/forge/ideas/bcap-nsgda-layer-v1.json": "6a6f8fd1114dd2b948bc74e170534ec0639a63fe7e2c3b6d3ae14297e7e048f3",
     "configs/forge/ideas/bcap-particle-rownorm-only-v1.json": "c7e837726646af8fb781dacb4d0353cef2e0c075337615e2e1dfbe3dfe02f6f1",
+    "configs/forge/ideas/bcap-prior-proximal-v1.json": "a11e33a06c8614c78a46fdd1c3e51a3b835637f57c061269c4036824c24792a6",
     "configs/forge/ideas/bcap-projection-baseline-review-baseline-v1.json": "a736913736e17512c4350b8438dac0a07d55f356f8d5b1859b16dc97f9707197",
     "configs/forge/ideas/bcap-projection-baseline-review-direction-v1.json": "80d868eda025859643c70cefe5bbd33f83f5a6f5b69686c3ea9e71e1b0bfad28",
     "configs/forge/ideas/bcap-pure-adam-example-v3.json": "ddbad0ba62627831f94cc2e0c77c635a48eaf5a7566b7b2a239fe3e011c10092",
@@ -3813,15 +3814,17 @@
   },
   "inventory_coverage": {
     "declared_count": 11781,
-    "missing": [],
+    "missing": [
+      "benchmarks/toy_audit/prior_proximal_smoke.py"
+    ],
     "stale": [],
-    "tracked_count": 11781,
+    "tracked_count": 11782,
     "unclassified": [],
-    "valid": true
+    "valid": false
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "7e01130b50faa8f26e8c2fd598228ee21af5e8e4bc9d7cc44a6b535062053f69",
+    "reports/forge/EXPERIMENT_MEMORY.md": "4d4eb2c86431c2616c5c0f7a798727980fc42fc391f6d51eee17c3241758d21d",
     "reports/forge/publication-records.json": "1f6664212046adc861ccd05a62ca815cd7b0cf21b5274c015cbb36ac5129205d"
   },
   "pending_readout": [

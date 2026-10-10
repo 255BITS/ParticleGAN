@@ -18,12 +18,15 @@ def recipe_owned_prior(task):
 
 def prior_policy_receipt(recipe, *priors):
     """Record policy and the actual location-table freezing, without draws."""
-    return {"contract": RECIPE_PRIOR_CONTRACT, "update": recipe.prior_update,
+    result = {"contract": RECIPE_PRIOR_CONTRACT, "update": recipe.prior_update,
             "regularizer": recipe.prior_regularizer, "weight": recipe.prior_reg,
             "target_std": recipe.prior_reg_target_std, "eps": recipe.prior_reg_eps,
             "l2": recipe.prior_l2,
             "applicability": "latent_prior" if priors else "not_sampled",
             "trainable_locations": any(prior.z.requires_grad for prior in priors)}
+    if recipe.prior_proximal_strength:
+        result["proximal_strength"] = recipe.prior_proximal_strength
+    return result
 
 
 def expected_prior_updates(task, evidence, completed_steps):
@@ -60,6 +63,8 @@ def validate_prior_policy(task, evidence, recipe=None):
                 or any(proof.get(key) != recipe.get(field, default)
                        for key, (field, default) in bindings.items())):
             return {"status": "INVALID", "reason": "prior policy proof contradicts the actual recipe"}
+        if proof.get("proximal_strength", 0.) != recipe.get("prior_proximal_strength", 0.):
+            return {"status": "INVALID", "reason": "prior proximal proof contradicts the actual recipe"}
     return None
 
 
