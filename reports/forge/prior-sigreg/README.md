@@ -120,9 +120,12 @@ under its original bounds, with every Tier 1 prerequisite preserved. Merely
 reducing this latent statistic, improving native nearest-cell occupancy, or
 passing an endpoint without its terminal suffix does not meet that goal. Stop
 the bounded bracket if none converts a failure or every candidate loses a
-required Tier 1 gate; publish failures and all metric/target pairs. No paid
-research has run in this feature PR. The separately
-[prepared ordinary search](../bcap-prior-search/sigreg/spec.json) freezes its
+required Tier 1 gate; publish failures and all metric/target pairs. The completed
+[ordinary search](../bcap-prior-search/sigreg/INTERPRETATION.md) found Tier 1
+scores 4/6, 5/6 and 4/6 for weights .0001, .001 and .01: ring acquisition failed
+at every weight, and Tier 2 remained blocked/unmeasured. No default is adopted.
+The [search declaration](../bcap-prior-search/sigreg/spec.json) freezes its
 three strengths, exact matched control, revision-9 view, full-tier gate policy,
-45,000-second per-candidate and 180,000-second combined ceilings. Preparation
-does not submit a job; root execution will use the committed source.
+45,000-second per-candidate and 180,000-second combined ceilings. Executed
+source remains `a2a9183f042586968fe93daad1db5984c4621ddf`; subsequent report
+commits preserve its original certifications and sampling cohorts.
