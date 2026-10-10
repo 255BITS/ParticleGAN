@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "eb47ab12b64b52861a16bf412e74ce1b5545567518a40132fec076e5267f768d",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "4415d09eebcfc35b878ad1ff7b020d87e15bfbe495c119ed3c6aca6b81de4e64",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/config.json": "495fb6957ba12dcd8198d813663abb7468e8cae9c081a6fbe460fc7f57b4d03e",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/events.jsonl": "524d4bbb7b1228f82e1c16d0aa1339daccb5b7832b1e812a5dd38ce99390f8fb",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_000050.npz": "c2503b76c2726834db2eccbb7df113c993939aa888848a8f7bff3c6e78325c35",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_000750.npz": "ce30c19631b0d2ce341e9524f98af84cb52ef1ffd415cab1bcb6836a9ca09899",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_001750.npz": "904800a7643b2123aa1106ca9b8d6e202b4a845dfb53287f628510e929ce7840",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_002750.npz": "cd5ff9bc87565db2a039dd59097e1c16c4b345d217548bb2ed394d2ff309f3d8",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_004000.npz": "ea71161f5fecfe5a24ea967394b29149fa8357f60d9ddc147ea9225fa5a785b4",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_005000.npz": "924df2f5604272d49694e4de516c7d4c4fe493de7219a6a9f963d1b39cbc7d7c",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_006000.npz": "1a8b729c13418253be459755efd2cad5c7b6d2df6f6b97d344ccea790d2c7a8a",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/snapshots/step_007000.npz": "1d3d71bc489fb3e59b35b3afa7912b0fd0957f87bea34d015b9fbd6de2e002f1",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/native100/grid100/summary.json": "b6e9f666efafad2e96d2c54bc7bf42e5c3dfbb4bca56e5115d714997bd1134e0"
+  },
+  "task_id": "grid100"
+}

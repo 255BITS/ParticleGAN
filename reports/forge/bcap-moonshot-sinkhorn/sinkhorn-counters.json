@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "scope": "certified_saved_sinkhorn_counters",
+  "qualification_input": false,
+  "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+  "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+  "publication_sha256": "27a3b22941bd7a87f4c261e119a567ed780f6c515b2eed7cf14237d872337f1e",
+  "producer_holds_include_their_restored_prefix": true,
+  "duplicate_copies_counted_once": true,
+  "rows": [
+    {
+      "task_id": "gaussian1d_smoke",
+      "gate_status": "PASS",
+      "attempt_id": "bb607cec2df04d87aba02f5b7125495e",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "74d92c9cbad32be64c981ac0816039c3006bcb824006b4557fb6fa98286b7352",
+        "bytes": 65471,
+        "state_sha256": "c6d28f6670af97ca31f91f72219df4b6cec8ec854678a37be9f028e965056666",
+        "completed_steps": 1000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/bb607cec2df04d87aba02f5b7125495e/provenance",
+        "artifact_manifest_sha256": "bc479458d5046f9d26c413264fe4c575b144ffb0f0ccb37c4c99f401bab79a81",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 1000,
+        "input_rows": 128000,
+        "auxiliary_rows": 128000,
+        "iterations": 72000,
+        "maximum_relative_marginal_residual": 2.2117223739624023,
+        "loss_sum": 147.21314449608326,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.14721314449608325
+    },
+    {
+      "task_id": "five_word_joint_hold",
+      "gate_status": "PASS",
+      "attempt_id": "e5ff0950ce104c18a7be9b29a7af9c19",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "3f3c21f4661883fab2b106a73631854487a52a8778aa147c4eac4bd8e9a9cd35",
+        "bytes": 842165,
+        "state_sha256": "84a38d95591bf6b4b8d6179fb3373db516524c7b86c5deaf71c5ab189296c7c1",
+        "completed_steps": 6501,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e5ff0950ce104c18a7be9b29a7af9c19/provenance",
+        "artifact_manifest_sha256": "b2694a0f62ee7d50f62f305198f0e6efccf0d66921560f625b02a53fd216c979",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.fixture.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 6501,
+        "input_rows": 1664256,
+        "auxiliary_rows": 832128,
+        "iterations": 468072,
+        "maximum_relative_marginal_residual": 0.7150813341140747,
+        "loss_sum": 449.8654038012028,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.06919941605925285
+    },
+    {
+      "task_id": "vector_unequal_mass",
+      "gate_status": "FAIL",
+      "attempt_id": "c5b157b5c76b43d8ba5e4c01c20e279a",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "a32fbfdc7a3db44d00ac8a1b376e636d21dfd8a10df750a81454f342fa3b5179",
+        "bytes": 110393,
+        "state_sha256": "1814193fd35088215402dbf0d401a830e738ea44a99a0bef40e64d8128753d35",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/c5b157b5c76b43d8ba5e4c01c20e279a/provenance",
+        "artifact_manifest_sha256": "38cbcbe4e683e6fc01e54837e3d9dbd0bbd8f8fd054d99d22926006bffd94674",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 1200,
+        "input_rows": 153600,
+        "auxiliary_rows": 153600,
+        "iterations": 86400,
+        "maximum_relative_marginal_residual": 1.193286657333374,
+        "loss_sum": 53.05721690878272,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.0442143474239856
+    },
+    {
+      "task_id": "grid100",
+      "gate_status": "FAIL",
+      "attempt_id": "1fa20b9bee6147e59f7efccf38590cdb",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "229c4b8d50d27264fa8770ecc798b8292fcb6cdd44bf5eb2bdc4eb23fa41f13e",
+        "bytes": 770461,
+        "state_sha256": "9e2415ca045d4a3fe36489d06a37b682a14e25d42a593d25ae89d8475e4062a7",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/1fa20b9bee6147e59f7efccf38590cdb/provenance",
+        "artifact_manifest_sha256": "7a38071d1abeaf23a75d2be45b8b9e148cae37fee917ccd9f080d1ae470ca185",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 7000,
+        "input_rows": 14336000,
+        "auxiliary_rows": 896000,
+        "iterations": 504000,
+        "maximum_relative_marginal_residual": 0.24579572677612305,
+        "loss_sum": 171.921469271183,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.024560209895883287
+    },
+    {
+      "task_id": "staggered100",
+      "gate_status": "FAIL",
+      "attempt_id": "ea7213fb452d4001a826fcd22227d988",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "6d96c1d4881855dae1ecba14cdff4eddb2ebcd6b14dfd05ba4e545eb4b768207",
+        "bytes": 770461,
+        "state_sha256": "1e477d64f6337b0110782ac8b7a29c10093257cbe3df051a493873ffc805f53c",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/ea7213fb452d4001a826fcd22227d988/provenance",
+        "artifact_manifest_sha256": "8c80fc37419631a005f1b3213c2969842db4872c9c45c11da2547108e6e51602",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 7000,
+        "input_rows": 14336000,
+        "auxiliary_rows": 896000,
+        "iterations": 504000,
+        "maximum_relative_marginal_residual": 0.22175884246826172,
+        "loss_sum": 163.55077601969242,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.023364396574241775
+    },
+    {
+      "task_id": "two_pole",
+      "gate_status": "FAIL",
+      "attempt_id": "a306c4066da54bafb907fe0812af82b5",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "5e2525f88fa02d6c21d23c1392077aa5f88a23ed849c6814e5a8d9241c8d26b3",
+        "bytes": 49647,
+        "state_sha256": "67fe7506d55f5cb3fdfcd80a9446bf068970c9fbe3e2333faee0027e1dafd399",
+        "completed_steps": 80,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/a306c4066da54bafb907fe0812af82b5/provenance",
+        "artifact_manifest_sha256": "02e38a5b0c0de6282c8b50719ecb492b4cc32cd3a09aa55488ec8ce21a2fa6d8",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.component_transport",
+        "state.applied.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 80,
+        "input_rows": 960,
+        "auxiliary_rows": 960,
+        "iterations": 5760,
+        "maximum_relative_marginal_residual": 0.2530484199523926,
+        "loss_sum": 36.09069749712944,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.451133718714118
+    },
+    {
+      "task_id": "gaussian1d_stability",
+      "gate_status": "FAIL",
+      "attempt_id": "49e8a84942a8454ebfe1415c5c4de55e",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "7dbb3cf2fb739086f895407f59318298fdd3b769ed52f293c634c12b74aee637",
+        "bytes": 65855,
+        "state_sha256": "94b15eacd633b70b873efb08770980925af2307ead8fa2903e03c6a4cc9ba46e",
+        "completed_steps": 6000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/49e8a84942a8454ebfe1415c5c4de55e/provenance",
+        "artifact_manifest_sha256": "cadfa2af1a2d6ef87648002472f33704e2adc57aa5f553309decc310afd04f9f",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 6000,
+        "input_rows": 768000,
+        "auxiliary_rows": 768000,
+        "iterations": 432000,
+        "maximum_relative_marginal_residual": 2.2117223739624023,
+        "loss_sum": 285.96468929201365,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.04766078154866894
+    },
+    {
+      "task_id": "trajectory",
+      "gate_status": "FAIL",
+      "attempt_id": "388a2fe0fba44232ab80e44916e0b22c",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "a20b55c40b493de522cd15d9502c77136685ff4897e2178daa7c62343e48f5f5",
+        "bytes": 165345,
+        "state_sha256": "edf39e062c18695f8959d2de52216246e1e0ac87ee4c4ed7d3ca5e6accc6ec82",
+        "completed_steps": 400,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/388a2fe0fba44232ab80e44916e0b22c/provenance",
+        "artifact_manifest_sha256": "5b0414039f445c1688674fd31ab084de25bcc5ce7bd4b4351afc4e677b481af6",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.component_transport",
+        "state.applied.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 400,
+        "input_rows": 4800,
+        "auxiliary_rows": 4800,
+        "iterations": 28800,
+        "maximum_relative_marginal_residual": 0.0591961145401001,
+        "loss_sum": 14.485745958983898,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.036214364897459744
+    },
+    {
+      "task_id": "vector_unequal_width",
+      "gate_status": "FAIL",
+      "attempt_id": "8fbf10c0f473435da4d24da741e97cbd",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "49e2c4a86fed442ec45886939394cc0ab16ea516d22862cd2df4b7a5903d87b5",
+        "bytes": 110393,
+        "state_sha256": "8d01c527b9b691e8a06f52b6a7522766ce448b86fddb6bbea5c0dcbfa49fe379",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/8fbf10c0f473435da4d24da741e97cbd/provenance",
+        "artifact_manifest_sha256": "81f97a5fe1bdf9d553ae5164bdfcc074b2ca9429d989f70561afae685f65d577",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 1200,
+        "input_rows": 153600,
+        "auxiliary_rows": 153600,
+        "iterations": 86400,
+        "maximum_relative_marginal_residual": 0.5805891752243042,
+        "loss_sum": 62.13610914349556,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.051780090952912965
+    },
+    {
+      "task_id": "unused_token_hold",
+      "gate_status": "FAIL",
+      "attempt_id": "863c64852ad64b7ab3e2baddb2b0cf2d",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "3ef7439ad6fbf88d8bad0d848ee42ba7e934074693cc948cdb6a452b16e14b92",
+        "bytes": 53511,
+        "state_sha256": "c248cfe8624fa979996fd14917733d6de4e7a7eb31a9e8dbd94f0f6def3f75db",
+        "completed_steps": 200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/863c64852ad64b7ab3e2baddb2b0cf2d/provenance",
+        "artifact_manifest_sha256": "7f6d454544927c14959b111316bafa5539452f45fd62f96b7f0ee32527fa2ddb",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.component_transport",
+        "state.applied.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 200,
+        "input_rows": 1600,
+        "auxiliary_rows": 1600,
+        "iterations": 14400,
+        "maximum_relative_marginal_residual": 0.0,
+        "loss_sum": 30237111.853775024,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 151185.55926887513
+    },
+    {
+      "task_id": "ring16_acquisition",
+      "gate_status": "PASS",
+      "attempt_id": "e3ab07ac01e34af3b0e21742114da722",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "2ee4c3756dfd069b550cdadd91707900e4fdbc4f848f600c40ca1cf2527efa13",
+        "bytes": 110457,
+        "state_sha256": "fd4c09f760bc4e5844d76e708c713ae15aa3eb47186d4550b39466d689a4211f",
+        "completed_steps": 1600,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e3ab07ac01e34af3b0e21742114da722/provenance",
+        "artifact_manifest_sha256": "c8460c8427b19f89f74e5d4b73445b2305af05eb04fb2f631df36365c98bece2",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 1600,
+        "input_rows": 204800,
+        "auxiliary_rows": 204800,
+        "iterations": 115200,
+        "maximum_relative_marginal_residual": 0.220939040184021,
+        "loss_sum": 46.75624218583107,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.02922265136614442
+    },
+    {
+      "task_id": "vector_anisotropic",
+      "gate_status": "PASS",
+      "attempt_id": "e45afe0b000c4926969cd3d32b0dd0c8",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "7b47a91aa74eac39ba32d5d53556cd1b6de0815dc2fa1419dd7b817a2fb3f69b",
+        "bytes": 110393,
+        "state_sha256": "c454967e6224623eb7623d66d983e9285580c634f3cc18638c7492a9f5e827b7",
+        "completed_steps": 1200,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e45afe0b000c4926969cd3d32b0dd0c8/provenance",
+        "artifact_manifest_sha256": "85b0c63ddbfa4b7260e929b22d7d479ae2e89c81023dbee8a37c07d315cffc93",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 1200,
+        "input_rows": 153600,
+        "auxiliary_rows": 153600,
+        "iterations": 86400,
+        "maximum_relative_marginal_residual": 0.4484504461288452,
+        "loss_sum": 43.99816135689616,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.03666513446408014
+    },
+    {
+      "task_id": "five_word_joint_smoke",
+      "gate_status": "PASS",
+      "attempt_id": "fac18fa910d64227ad4b8344d703fbb6",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "0437d216b6fb215cf526a79e0f977318af317415e7286ac2e4d294eacd7728cb",
+        "bytes": 841205,
+        "state_sha256": "a912920658137a24a07ffacd2e2b16d1f15ef6498426fd6da5f182ff48c7c437",
+        "completed_steps": 20001,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/fac18fa910d64227ad4b8344d703fbb6/provenance",
+        "artifact_manifest_sha256": "0ac4467d1c416a7765ec70545541a7c038c92c4bfd5ddae21bba7fdb338e6821",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.fixture.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 20001,
+        "input_rows": 5120256,
+        "auxiliary_rows": 2560128,
+        "iterations": 1440072,
+        "maximum_relative_marginal_residual": 0.7411844730377197,
+        "loss_sum": 962.159072265029,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.04810554833583466
+    },
+    {
+      "task_id": "ae_gan_hold",
+      "gate_status": "PASS",
+      "attempt_id": "d369d1f54f154383a9e711136b2dae6b",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "db5378a3b244793c0b8bd4f630212d67e8368fc8e7b7f1db665fe04e922d235a",
+        "bytes": 67705,
+        "state_sha256": "d2f52c61a19d7c2da77730ed1eec3647bbe8d1030fe9dc6830f77be6fc5d2ba0",
+        "completed_steps": 250,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/d369d1f54f154383a9e711136b2dae6b/provenance",
+        "artifact_manifest_sha256": "09e4ab81e09dc90e456db70a3f48314f59e121783fc7b781894681ef2b4b5347",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.component_transport",
+        "state.applied.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 250,
+        "input_rows": 16000,
+        "auxiliary_rows": 16000,
+        "iterations": 18000,
+        "maximum_relative_marginal_residual": 0.3333324193954468,
+        "loss_sum": 9.978353086858988,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.03991341234743595
+    },
+    {
+      "task_id": "residual_student",
+      "gate_status": "FAIL",
+      "attempt_id": "9796a68885d045ec9d4f771a95462dce",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "cc00fd7903ec1d1fcfb94183260cd8944b313c8f1b6e5c0d62920d5a98ab08f9",
+        "bytes": 165537,
+        "state_sha256": "3ed7746dc9db944d5bf230550fce3845254d2a3f44aeb8dee7fc319b0694a417",
+        "completed_steps": 400,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/9796a68885d045ec9d4f771a95462dce/provenance",
+        "artifact_manifest_sha256": "ff3ecff67f19a2c7e0f28ecca4f33ba1b910e013a13071e2f7af1c12ea0b8249",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.component_transport",
+        "state.applied.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 400,
+        "input_rows": 4800,
+        "auxiliary_rows": 4800,
+        "iterations": 28800,
+        "maximum_relative_marginal_residual": 0.11811947822570801,
+        "loss_sum": 8.006553575396538,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.020016383938491346
+    },
+    {
+      "task_id": "rotated100",
+      "gate_status": "FAIL",
+      "attempt_id": "f41d2a9fdd9b4ac99c7845c923ebceff",
+      "checkpoint": {
+        "path": "provenance-state.pt",
+        "sha256": "e52abb486687cadd2c77bedd765c3eb927ba3c8e44ad5e2d9b3eab7fd1e653d9",
+        "bytes": 770461,
+        "state_sha256": "3ca83b2cdbc0ee2d443b8dbcd0805fc4dc81a9e9158d92a8e2459381a7886271",
+        "completed_steps": 7000,
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/f41d2a9fdd9b4ac99c7845c923ebceff/provenance",
+        "artifact_manifest_sha256": "5235417519b2dbdecd60d70c2bcddb3a0873b711620591e66d70cab722c5b6af",
+        "purpose": "provenance_only",
+        "prerequisite_eligible": false
+      },
+      "duplicate_counter_paths": [
+        "state.trainer.component_transport"
+      ],
+      "counters": {
+        "consumer": "sinkhorn_finite_dual_v1",
+        "schema_version": 1,
+        "calls": 7000,
+        "input_rows": 14336000,
+        "auxiliary_rows": 896000,
+        "iterations": 504000,
+        "maximum_relative_marginal_residual": 0.2295628786087036,
+        "loss_sum": 162.07744035869837,
+        "negative_loss_calls": 0
+      },
+      "mean_finite_dual_loss": 0.023153920051242623
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0
+}

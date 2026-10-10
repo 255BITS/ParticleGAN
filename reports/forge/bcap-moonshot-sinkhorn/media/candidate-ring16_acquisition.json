@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "083626cbefc4bc9fed3bdf0222bdbff18c17dbc08e0626be4e424618df47d705",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "21804ef8f1fc2d89f8dfbc8c4726304e919fd4092658c9602d78b8bd9788947d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e3ab07ac01e34af3b0e21742114da722/observed-samples.pt": "50222d7cd4593c17c07396cf08d8848503107cd61724a2c159ce26e5d5115705"
+  },
+  "task_id": "ring16_acquisition"
+}

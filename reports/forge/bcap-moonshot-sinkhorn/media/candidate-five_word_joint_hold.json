@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "ab51f6c2d574c8c73dced15d550263bcd04b070276c5e2fb4eb95df9ab255f38",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 25,
+  "observations_sha256": "44af071c77b7d69910b383fe98b16a741ea5759ade59712cc247ddbe629d493b",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/e5ff0950ce104c18a7be9b29a7af9c19/observed-records.pt": "5b1ca755d67f59ce9a798420c889434cc5038ec292605efa2a1d0e4829534c93"
+  },
+  "task_id": "five_word_joint_hold"
+}

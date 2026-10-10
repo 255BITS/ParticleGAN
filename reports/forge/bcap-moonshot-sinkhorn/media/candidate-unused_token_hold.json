@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "d2492ed3daa9b8604cc61a39afd33ba05dcc96d8595419b885695d971d90bea4",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "117becefb81ca90291094c6d7063e2014f58aebe01d621784ad4bff2cffbf323",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/863c64852ad64b7ab3e2baddb2b0cf2d/constraint_geometry-scored-outputs.pt": "58808678a0dc538391f9d676a9d845601d1f57ce294b2148feccec89ba4c3299"
+  },
+  "task_id": "unused_token_hold"
+}

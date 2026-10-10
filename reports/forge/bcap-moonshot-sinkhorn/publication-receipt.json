@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "scope": "completed_sinkhorn_saved_publication",
+  "qualification_input": false,
+  "status": "complete",
+  "scientific_source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+  "scientific_source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+  "baseline_publication_fork": "9005ed73a09a740174f590fbfd543440935040eb",
+  "worktree": "/home/martyn/dev/ParticleGAN-bcap-moonshot-sinkhorn",
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn",
+  "canonical_report_path": "reports/forge/bcap-moonshot-sinkhorn/README.md",
+  "draft_pr": "https://github.com/255BITS/ParticleGAN/pull/379",
+  "files": {
+    "README.md": {
+      "sha256": "691c0e19f035def45e2ab4ff5e0b39dd3e324678001573057bd85e04c8909762",
+      "bytes": 15292
+    },
+    "phase3-results.json": {
+      "sha256": "27a3b22941bd7a87f4c261e119a567ed780f6c515b2eed7cf14237d872337f1e",
+      "bytes": 414528
+    },
+    "phase3-audit.json": {
+      "sha256": "5428d40679de58b512e4df9b32b8ae7692c31b04c390de00ab5a46e792d13339",
+      "bytes": 37635
+    },
+    "media/index.json": {
+      "sha256": "cec72a048bb817a2feee76201079b0cb590f921a6a554a423bcd3d8ecf2dbe1f",
+      "bytes": 59790
+    },
+    "sinkhorn-counters.json": {
+      "sha256": "23e1a25f405362153011a41340aaa1b4484ebcf64f7862cc1de50d77c151bf96",
+      "bytes": 21499
+    },
+    "normalization-analysis.json": {
+      "sha256": "1e22ae5bd211595d435e14c538edd1bb2493db7f7f5b43c3dfa8bba41c463b5d",
+      "bytes": 2932
+    },
+    "analyze_saved.py": {
+      "sha256": "8dc1b56bd73c96375390c01fca510c319cfa51fdf4d9bb9774e95142fd2eda29",
+      "bytes": 3126
+    },
+    "registration.json": {
+      "sha256": "28fb6dffa02ac3e520228a720dfc5fd0f93876d2f458e0fc6a1f5b6f9dec3c4c",
+      "bytes": 21933
+    },
+    "spec.json": {
+      "sha256": "0cffeca29cc9438e97dfd8b84101779cd77e064d5090a55ca078370563f75382",
+      "bytes": 5197
+    },
+    "theory.md": {
+      "sha256": "cda8608cfbafc8aa703771de86e42d2aad5fc83880303d3566587fd3ca9975d8",
+      "bytes": 4160
+    }
+  },
+  "actual_training_gifs": 32,
+  "all_committed_gif_bytes_equal_saved_exports": true,
+  "original_task_outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "FAIL": 10,
+      "PASS": 6
+    }
+  },
+  "tier1_outcomes": {
+    "baseline": {
+      "PASS": 6,
+      "FAIL": 0
+    },
+    "candidate": {
+      "PASS": 4,
+      "FAIL": 2
+    }
+  },
+  "repaired_tasks": [
+    "vector_anisotropic"
+  ],
+  "regressed_tasks": [
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "final_unknown_tasks": [],
+  "candidate_prediction": {
+    "outcome": "falsified",
+    "metric": "component_covariance_error",
+    "task_id": "vector_unequal_width",
+    "threshold": 0.85,
+    "value": 21.078472182154655
+  },
+  "baseline_recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "candidate_recipe_delta": {
+    "kinetic_transport_weight": 1.0,
+    "kinetic_transport_mode": "sinkhorn",
+    "sinkhorn_epsilon": 0.1,
+    "sinkhorn_iterations": 24,
+    "sinkhorn_max_samples": 128,
+    "optimizer_svd_backend": "cpu"
+  },
+  "candidate_global_recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "kinetic_transport_weight": 1.0,
+    "kinetic_transport_mode": "sinkhorn",
+    "sinkhorn_epsilon": 0.1,
+    "sinkhorn_iterations": 24,
+    "sinkhorn_max_samples": 128,
+    "optimizer_svd_backend": "cpu"
+  },
+  "source_and_saved_state_audit": {
+    "status": "PASS",
+    "scientific_files_verified": 1207,
+    "paired_tasks": 16,
+    "complete_consumed_stream_batch_pairs": 15,
+    "unmatched_task": "five_word_joint_hold",
+    "unmatched_cumulative_steps": {
+      "baseline": 4834,
+      "candidate": 6501
+    },
+    "exact_own_producer_restores": 4
+  },
+  "cost": {
+    "paid_seconds": 11763.451632810375,
+    "paid_seconds_per_arm": {
+      "baseline": 9514.13474305224,
+      "candidate": 2249.3168897581363
+    },
+    "paid_attempts": 35,
+    "execution_retries": 3,
+    "initial_paired_full_reservation_seconds": 45840,
+    "executed_cumulative_full_allowances_seconds": 53940,
+    "paid_ceiling_seconds": 48000,
+    "candidate_paid_ceiling_seconds": 24000,
+    "outstanding_reservation_seconds": 0
+  },
+  "authorized_infrastructure_repair": {
+    "authority": "use subagents and restart anything you need to to reach our goal",
+    "authorized_at": "2026-10-10T03:21:31.386284+00:00",
+    "original_authorization_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/authorized-retries.json",
+    "original_authorization_sha256": "476afbbdefdc024978e0165581b623183b37307618bc239c79466037a21eedd0",
+    "retry_chains": [
+      {
+        "track": "sinkhorn",
+        "task_id": "grid100",
+        "compatibility_key": "689856cab045b35e184c412347aeaedcf7fb7d96b8e6c5ee59fc761cb543933c",
+        "predecessor_attempt_id": "35131b71037848818236a1cb3e86dc66",
+        "predecessor_result_hash": "0d9e3ae4d79c4dab457796cb0df68a41185781635619ada26368a0dfb33dbca0",
+        "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+        "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+        "final_attempt_id": "984d92a018fb44c39eebdfb577a862e9",
+        "final_gate_status": "FAIL",
+        "cumulative_job_charge_seconds": 3663.5609450587326
+      },
+      {
+        "track": "sinkhorn",
+        "task_id": "rotated100",
+        "compatibility_key": "c2e239b57391e9c14ff15e9dbc8975f7f95634d8404e2616d7129baecf23ac53",
+        "predecessor_attempt_id": "3d777395319c4583aae36c3458ad4987",
+        "predecessor_result_hash": "9d163ec9a7c6e62d199381ae75914837298e9cc32c74f1d8e3369c39edc75460",
+        "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+        "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+        "final_attempt_id": "566bbd52b7294ace86c986f03c964a73",
+        "final_gate_status": "FAIL",
+        "cumulative_job_charge_seconds": 3506.339202815574
+      },
+      {
+        "track": "sinkhorn",
+        "task_id": "five_word_joint_smoke",
+        "compatibility_key": "ca119493a29fa60627e60186bf3dc9f243b049b58efc9a2a5c34d5be5b90730d",
+        "predecessor_attempt_id": "48c6c0a8293d4b8ebbe74b271e0c80d6",
+        "predecessor_result_hash": "26d5516527a02a7f710747d7def290a6a4a608b353650092fc9a37173bd95479",
+        "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+        "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+        "final_attempt_id": "9fdaef65696c4c51a6bc2630ffad1bc0",
+        "final_gate_status": "PASS",
+        "cumulative_job_charge_seconds": 1641.0796618889262
+      }
+    ],
+    "predecessor_projection_receipts": [
+      {
+        "attempt_id": "35131b71037848818236a1cb3e86dc66",
+        "attempt_status": "error",
+        "campaign_id": "bcap-moonshot-sinkhorn-v1",
+        "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+        "candidate_revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282",
+        "certificate_validated": true,
+        "cost_owner": {
+          "campaign": "bcap-moonshot-sinkhorn-v1",
+          "request": "cf260d937c84b8aa46098152",
+          "revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282"
+        },
+        "evidence_scope": "published_summary",
+        "final_selected": false,
+        "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+        "provenance": {
+          "canonical_result_hash": "0d9e3ae4d79c4dab457796cb0df68a41185781635619ada26368a0dfb33dbca0",
+          "original_files": {
+            "evidence": {
+              "path": "reports/forge/attempts/35131b71037848818236a1cb3e86dc66/evidence.json",
+              "sha256": "ca545f3fe320117ae991a420b46a2c6f5f0ae93999cbc949617c30076a14aa1f"
+            },
+            "request": {
+              "path": "reports/forge/attempts/35131b71037848818236a1cb3e86dc66/request.json",
+              "sha256": "ed23befa55d06486b29e17146cd154ba492d6968f60b2fea595548725d95c831"
+            },
+            "result": {
+              "path": "reports/forge/attempts/35131b71037848818236a1cb3e86dc66/result.json",
+              "sha256": "836857298013025c1fe9af7b0e20c0009e8749e8b639105f4e334f9bc85f1156"
+            }
+          },
+          "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+          "source_origin_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec"
+        },
+        "qualification_input": false,
+        "qualification_reuse": false,
+        "request_id": "cf260d937c84b8aa46098152",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        },
+        "schema_version": 1,
+        "summary_version": "forge-technique-receipt-summary-v1",
+        "task_results": [
+          {
+            "compatibility_key": "689856cab045b35e184c412347aeaedcf7fb7d96b8e6c5ee59fc761cb543933c",
+            "cost": {
+              "charged_task": "grid100",
+              "device": "1",
+              "execution_seconds": 3453.8705615997314,
+              "flops": {
+                "kind": "unavailable",
+                "value": null
+              },
+              "wall_seconds": 3453.8705615997314
+            },
+            "evaluator_summary": {},
+            "gate_status": "INCOMPLETE",
+            "raw_status": "error",
+            "reason": "worker stopped without terminal receipt; explicit retry required",
+            "reasons": [],
+            "sampling": {},
+            "task_id": "grid100"
+          }
+        ]
+      },
+      {
+        "attempt_id": "3d777395319c4583aae36c3458ad4987",
+        "attempt_status": "error",
+        "campaign_id": "bcap-moonshot-sinkhorn-v1",
+        "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+        "candidate_revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282",
+        "certificate_validated": true,
+        "cost_owner": {
+          "campaign": "bcap-moonshot-sinkhorn-v1",
+          "request": "cf260d937c84b8aa46098152",
+          "revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282"
+        },
+        "evidence_scope": "published_summary",
+        "final_selected": false,
+        "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+        "provenance": {
+          "canonical_result_hash": "9d163ec9a7c6e62d199381ae75914837298e9cc32c74f1d8e3369c39edc75460",
+          "original_files": {
+            "evidence": {
+              "path": "reports/forge/attempts/3d777395319c4583aae36c3458ad4987/evidence.json",
+              "sha256": "3cddc4fb9aa4d3a81dfc9b14bd9b41ed4b03850a218b778f1a486e8a0d0e8a70"
+            },
+            "request": {
+              "path": "reports/forge/attempts/3d777395319c4583aae36c3458ad4987/request.json",
+              "sha256": "65372e3675e33dc677c8bab3869718277dd70aeda5b82f31386b288ba881a1f5"
+            },
+            "result": {
+              "path": "reports/forge/attempts/3d777395319c4583aae36c3458ad4987/result.json",
+              "sha256": "df80880931f4158129d7b19dcf6fb04579bfd567148cadbc60019983de436ddd"
+            }
+          },
+          "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+          "source_origin_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec"
+        },
+        "qualification_input": false,
+        "qualification_reuse": false,
+        "request_id": "cf260d937c84b8aa46098152",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        },
+        "schema_version": 1,
+        "summary_version": "forge-technique-receipt-summary-v1",
+        "task_results": [
+          {
+            "compatibility_key": "c2e239b57391e9c14ff15e9dbc8975f7f95634d8404e2616d7129baecf23ac53",
+            "cost": {
+              "charged_task": "rotated100",
+              "device": "0",
+              "execution_seconds": 3309.460136413574,
+              "flops": {
+                "kind": "unavailable",
+                "value": null
+              },
+              "wall_seconds": 3309.460136413574
+            },
+            "evaluator_summary": {},
+            "gate_status": "INCOMPLETE",
+            "raw_status": "error",
+            "reason": "worker stopped without terminal receipt; explicit retry required",
+            "reasons": [],
+            "sampling": {},
+            "task_id": "rotated100"
+          }
+        ]
+      },
+      {
+        "attempt_id": "48c6c0a8293d4b8ebbe74b271e0c80d6",
+        "attempt_status": "timeout",
+        "campaign_id": "bcap-moonshot-sinkhorn-v1",
+        "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+        "candidate_revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282",
+        "certificate_validated": true,
+        "cost_owner": {
+          "campaign": "bcap-moonshot-sinkhorn-v1",
+          "request": "cf260d937c84b8aa46098152",
+          "revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282"
+        },
+        "evidence_scope": "published_summary",
+        "final_selected": false,
+        "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+        "provenance": {
+          "canonical_result_hash": "26d5516527a02a7f710747d7def290a6a4a608b353650092fc9a37173bd95479",
+          "original_files": {
+            "evidence": {
+              "path": "reports/forge/attempts/48c6c0a8293d4b8ebbe74b271e0c80d6/evidence.json",
+              "sha256": "a7c82ee4f272d0a47df61cabe779096b0930163218a81effba3b0f51da32d143"
+            },
+            "request": {
+              "path": "reports/forge/attempts/48c6c0a8293d4b8ebbe74b271e0c80d6/request.json",
+              "sha256": "43c9c5d4909b16b989512c3a094b760817ced0a39a3de0e0305458a86e16bb7e"
+            },
+            "result": {
+              "path": "reports/forge/attempts/48c6c0a8293d4b8ebbe74b271e0c80d6/result.json",
+              "sha256": "3ddfcaa0c182d8699029f7c8175a2f771cb3c0269e3f0b0cee4434f2a838ea96"
+            }
+          },
+          "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+          "source_origin_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec"
+        },
+        "qualification_input": false,
+        "qualification_reuse": false,
+        "request_id": "cf260d937c84b8aa46098152",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        },
+        "schema_version": 1,
+        "summary_version": "forge-technique-receipt-summary-v1",
+        "task_results": [
+          {
+            "compatibility_key": "ca119493a29fa60627e60186bf3dc9f243b049b58efc9a2a5c34d5be5b90730d",
+            "cost": {
+              "charged_task": "five_word_joint_smoke",
+              "device": "0",
+              "execution_seconds": 900.7708788529271,
+              "flops": {
+                "kind": "unavailable",
+                "value": null
+              },
+              "wall_seconds": 900.7708788529271
+            },
+            "evaluator_summary": {},
+            "gate_status": "INCOMPLETE",
+            "raw_status": "timeout",
+            "reason": "task wall-time budget exhausted",
+            "reasons": [],
+            "sampling": {},
+            "task_id": "five_word_joint_smoke"
+          }
+        ]
+      }
+    ]
+  },
+  "targeted_software_checks": {
+    "passed": 56,
+    "elapsed_seconds": 14.83,
+    "allowance_seconds": 300,
+    "raw_stdout": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/logs/software.log",
+    "raw_stdout_sha256": "fd82efd2215787641f1d1cfc1e9d49a53f4f2cd7746e26dbe21117fcd0806f1d",
+    "junit": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/software.xml",
+    "junit_sha256": "e9b7a7b05fca6b2d26ee5056369b681900aab6c5c29d61ddae02cd2c516bb743",
+    "additional_tests_after_source_freeze": 0
+  },
+  "publication_adapter": {
+    "commit": "f90591b85383052e803903088b775f4e9e95d8e1",
+    "path": "/home/martyn/dev/ParticleGAN-bcap-develop-integration/reports/forge/bcap-three-phase/publication_adapter.py",
+    "sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5"
+  },
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "causal_limits": [
+    "The differentiated finite dual is approximate; residual 0 does not certify exact OT, identity, useful loss scale or a measured parameter force.",
+    "CPU full-SVD rounding is part of the compound candidate delta.",
+    "Word holds restore distinct own passing prefixes; complete consumed histories are unmatched for that pair.",
+    "Only sixteen original questions and protocol seed 0; no ordinary qualification or default adoption."
+  ],
+  "recommendation": "stop_exact_global_revision"
+}

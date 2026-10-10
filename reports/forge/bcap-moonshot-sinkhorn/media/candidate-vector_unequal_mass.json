@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "037c6ad6ca3207d266d7244b380f9db0fdec072071caf1085e5acf4277fc8a6d",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "d63c3e21e9c7fac55a3b3271294a0b6b5b94e0a714b7594d89e9be48eab2628c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/sinkhorn/phase3-queue/bcap-moonshot-sinkhorn-v1/c5b157b5c76b43d8ba5e4c01c20e279a/observed-samples.pt": "569ceb7037a9b31b12809f9e25a4f629f202c3d868b3d173a801e34e1f00e855"
+  },
+  "task_id": "vector_unequal_mass"
+}
