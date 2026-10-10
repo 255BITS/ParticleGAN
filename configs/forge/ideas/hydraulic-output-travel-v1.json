@@ -1,0 +1,51 @@
+{
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm",
+  "id": "hydraulic-output-travel-v1",
+  "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "mechanism_class": "structural",
+  "extensions": {
+    "hydraulic_travel": 1.0
+  },
+  "api_changes": [
+    "GANTrainer.hydraulic_travel_fraction: opt-in joint output travel limit, checkpointed counters, deterministic replay"
+  ],
+  "changed_factors": [
+    "GANTrainer.hydraulic_travel_fraction=1.0; jointly scales G/prior proposal to training-batch nearest-neighbor median spacing"
+  ],
+  "mechanism_rationale": "Whole-network/prior function-space travel detects coherent layer leverage without modifying gradient direction or consulting evaluation targets.",
+  "prior_art": [
+    "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+    "https://jmlr.org/papers/v21/17-678.html",
+    "https://arxiv.org/abs/2602.13498",
+    "https://github.com/255BITS/ParticleGAN/pull/321"
+  ],
+  "guide": "reports/forge/bcap-physics/hydraulic/README.md"
+}

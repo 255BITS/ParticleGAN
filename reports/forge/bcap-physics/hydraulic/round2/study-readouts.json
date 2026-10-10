@@ -1,0 +1,170 @@
+{
+  "items": [
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "927604292f2e421a8f67e037f7a3aa2a",
+            "fa8e7d8841b741f085a80b50826c55e8",
+            "faa168c7fc9f46af9584294cd8433c21",
+            "ffadaeed6d8e44288e043de0ea1b5125"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "31ad9b7aba173f7d613630ee71cbf3bc860c7cb6507f4f550c1878627ff5c153",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "request_missing_evidence",
+          "observed": {
+            "falsifier": {
+              "satisfied": false,
+              "value": 0.50133
+            },
+            "prediction": {
+              "satisfied": false,
+              "value": 0.50133
+            }
+          },
+          "outcome": "incomplete",
+          "provenance": [
+            {
+              "attempt_id": "927604292f2e421a8f67e037f7a3aa2a",
+              "producer_request_id": "924a53edb67811f7ba0d29d1",
+              "producer_study_id": "hydraulic-deformation-candidate-round2-v1",
+              "result_hash": "fc138b0c2417b651acd2a315be9ca9157b5a9eb42813b773c6b52f01ed116665",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "fa8e7d8841b741f085a80b50826c55e8",
+              "producer_request_id": "924a53edb67811f7ba0d29d1",
+              "producer_study_id": "hydraulic-deformation-candidate-round2-v1",
+              "result_hash": "769f589975b674dd1354f8961d697aa9838f1c652dc2862b5645811120334069",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "faa168c7fc9f46af9584294cd8433c21",
+              "producer_request_id": "924a53edb67811f7ba0d29d1",
+              "producer_study_id": "hydraulic-deformation-candidate-round2-v1",
+              "result_hash": "be0395b4eb184e5fb59c21b8c5b2d9295472298ac61f94690dd78ce37adc4556",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "ffadaeed6d8e44288e043de0ea1b5125",
+              "producer_request_id": "924a53edb67811f7ba0d29d1",
+              "producer_study_id": "hydraulic-deformation-candidate-round2-v1",
+              "result_hash": "7e034a4d661371774862419495caa9d8f1a2aba73b63c66f503b183705846588",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "fe9149b49720b51227a5e195ababb84009d23cf833eacd1da1904fec38d024bb",
+            "contract_sha256": "31ad9b7aba173f7d613630ee71cbf3bc860c7cb6507f4f550c1878627ff5c153",
+            "control_binding_sha256": "bb1ba45e550162124163f3b252340b9dd60c1f941378b0ff43d3fb0235421ed7",
+            "policy_fingerprint": "bf9382aef2fe7c2e5658bcf2f63717e4f5dcc2352f967756c7e57dbe7df2ec83",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "92c32df250c29347c4a6ffc476f3ed27e92c60ec6c25170a15f2398cdc5436ac"
+          },
+          "study_id": "hydraulic-deformation-candidate-round2-v1",
+          "study_sha256": "92c32df250c29347c4a6ffc476f3ed27e92c60ec6c25170a15f2398cdc5436ac"
+        }
+      ],
+      "label": "candidate",
+      "lifecycle": "concluded",
+      "record_id": "readout-9f6ac354828f6069c1e83b87",
+      "study_id": "hydraulic-deformation-candidate-round2-v1"
+    },
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "03edce6bd630456ea92f35eb7e8671ff",
+            "0617d2b8a1de42b3ab66897f93354540",
+            "7dcf4901b7dc4659876c6deaa8bc16bd",
+            "abdc1966fa8d4567adbd9b9c9a445bd2",
+            "f102eed1442f4a3dbe83df712b688060"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "c1875b5a5d90560244f609651666e1d22fe8c402983954fbd183683a63bd2566",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "stop_revision",
+          "observed": {
+            "falsifier": {
+              "satisfied": true,
+              "value": 0.24072
+            },
+            "prediction": {
+              "satisfied": false,
+              "value": 0.24072
+            }
+          },
+          "outcome": "falsified",
+          "provenance": [
+            {
+              "attempt_id": "03edce6bd630456ea92f35eb7e8671ff",
+              "producer_request_id": "76967ee468dc4797a66821a7",
+              "producer_study_id": "hydraulic-deformation-control-round2-v1",
+              "result_hash": "c9f7e996ad09242077b04274c402db3f6287ae55c1a2dfc968b61d900440a591",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "0617d2b8a1de42b3ab66897f93354540",
+              "producer_request_id": "76967ee468dc4797a66821a7",
+              "producer_study_id": "hydraulic-deformation-control-round2-v1",
+              "result_hash": "8397e6c481dab05401fbae90f9a6b8bc7dd360b64c83c8ae2eaa3935f6c834aa",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "7dcf4901b7dc4659876c6deaa8bc16bd",
+              "producer_request_id": "76967ee468dc4797a66821a7",
+              "producer_study_id": "hydraulic-deformation-control-round2-v1",
+              "result_hash": "42f7836a3d60480b54337dcb92b196b7e759187eb4abd92e4000ea421c44c0f9",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "abdc1966fa8d4567adbd9b9c9a445bd2",
+              "producer_request_id": "76967ee468dc4797a66821a7",
+              "producer_study_id": "hydraulic-deformation-control-round2-v1",
+              "result_hash": "95c3c260d3c24f113b3252a188191cf9d73d219908d2fcaa6852a29e42d5aaff",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "f102eed1442f4a3dbe83df712b688060",
+              "producer_request_id": "76967ee468dc4797a66821a7",
+              "producer_study_id": "hydraulic-deformation-control-round2-v1",
+              "result_hash": "439126e7f13ceb44ca362d613faa5365444bb581d1b6520acd1aec3f82980720",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "bb1ba45e550162124163f3b252340b9dd60c1f941378b0ff43d3fb0235421ed7",
+            "contract_sha256": "c1875b5a5d90560244f609651666e1d22fe8c402983954fbd183683a63bd2566",
+            "control_binding_sha256": "c5ae2d123f578dcec49703517a58edc1f7f442d51bcfdaf2e6c8e22985fb2372",
+            "policy_fingerprint": "bf9382aef2fe7c2e5658bcf2f63717e4f5dcc2352f967756c7e57dbe7df2ec83",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "b6b1d3f17ed162f34af0b39db76a41526a245217f44624a63759597344a3ace4"
+          },
+          "study_id": "hydraulic-deformation-control-round2-v1",
+          "study_sha256": "b6b1d3f17ed162f34af0b39db76a41526a245217f44624a63759597344a3ace4"
+        }
+      ],
+      "label": "control",
+      "lifecycle": "concluded",
+      "record_id": "readout-783482660df5696a6ed50f75",
+      "study_id": "hydraulic-deformation-control-round2-v1"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "random_sampling_draws_added": 0,
+  "schema_version": 1
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "max_rounds": 1,
+  "hypothesis": "Execute the exact saved BCAP winner in the same new source/runtime as hydraulic-output-travel-v1; its parent recipe is an admission reference only and is not trained.",
+  "competing_explanation": "Spacing can slow acquisition excessively; batch-local motion need not stabilize density, critic dynamics or global mass allocation. The native Jacobian may remain too broad even after motion is limited.",
+  "scope": {
+    "view": "hydraulic_motion_diagnostic",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "hydraulic-motion-round-v1",
+    "budget_seconds": 14400,
+    "candidate_budget_seconds": 6420
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+      "selector": [],
+      "use": "motivation_only",
+      "identity": {
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36"
+      }
+    }
+  ],
+  "prediction": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": ">=",
+    "threshold": 0.48
+  },
+  "falsifier": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": "<",
+    "threshold": 0.48
+  },
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  },
+  "id": "hydraulic-motion-control-v1",
+  "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "control": {
+    "candidate_id": "bcap-dualnorm-conv-non-saturating-v1",
+    "task_map": {
+      "gaussian1d_smoke": "gaussian1d_smoke",
+      "gaussian1d_stability": "gaussian1d_stability",
+      "grid100": "grid100",
+      "vector_two_broad": "vector_two_broad",
+      "two_pole": "two_pole"
+    }
+  }
+}

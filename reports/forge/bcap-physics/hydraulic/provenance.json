@@ -1,0 +1,695 @@
+{
+  "publication_sampling_draws_added": 0,
+  "publication_updates_added": 0,
+  "receipts": [
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/68fbc87a80d045e0b3222927ef4a6183/evaluator",
+      "attempt_id": "68fbc87a80d045e0b3222927ef4a6183",
+      "candidate_id": "hydraulic-output-travel-v1",
+      "candidate_revision": "45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da",
+      "certificate_files": {
+        "evidence.json": "c3cfce6d11b77392e295848596d82b4162d46ace4272070afe7bf4f8f3342d07",
+        "request.json": "46368380aadbb3d9753d9b57ab30ed8c6a7c8c403cbd010e5d4c596759aeb78b",
+        "result.json": "35721fcafa4400cb5dc0cc2a8c4635321119c5593230df83539be640d27e3b6d"
+      },
+      "compatibility_key": "67b2b040ebb6719dde34cfabc48241f3557cd42bdc88a5150a214de0f6c2d106",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/68fbc87a80d045e0b3222927ef4a6183",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "f098a2fa8f4f11c0fc9b4cd2e22017698257b3c483445bf2187a262cc2a7d343",
+              "size": 65471
+            }
+          },
+          "schema_version": 1,
+          "sha256": "a8a6ff0ae18f8ab313ec9c3d43f470a3af522e90cbb8f12f28a75f74ca8e5719",
+          "total_bytes": 65471
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/68fbc87a80d045e0b3222927ef4a6183/provenance",
+        "bytes": 65471,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "f098a2fa8f4f11c0fc9b4cd2e22017698257b3c483445bf2187a262cc2a7d343",
+        "state_sha256": "889c6487e18cf48319847bc404f87bfe29ff17036e41b676ba2a1a64ec70e232"
+      },
+      "result_sha256": "13c3b11cf4d1c53fd134f4b4ce8291a47572ef87ecb317eae062a31c0959dd9e",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/373eb78c6297437ea5b287015925a1af/evaluator",
+      "attempt_id": "373eb78c6297437ea5b287015925a1af",
+      "candidate_id": "hydraulic-output-travel-v1",
+      "candidate_revision": "45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da",
+      "certificate_files": {
+        "evidence.json": "e8585ce64cb962785909d5d3ac9a556ab1263fc19296655afbe109b6a84c30df",
+        "request.json": "4dcef809fe1400afcd19dc9e7e40c2d22e42111c190bb4018caed1eb19868df6",
+        "result.json": "f3631a692d694a2cdbecb2b4b81e9a23ddb97494f5e090d20424337949ad3bf8"
+      },
+      "compatibility_key": "455662130097ece01fc4fc5e3ab2ce4b4085a34b51fd8635980a65afaeb86914",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/373eb78c6297437ea5b287015925a1af",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "cb510bf1fbf1ec70cb41350d7ad75f6c8a200a1dadcc7d8e2b654f91942b4b25",
+              "size": 65727
+            }
+          },
+          "schema_version": 1,
+          "sha256": "960c711025a063badfb0c0097af39f56d62fd51f3b49802ff3682fbceb5964b9",
+          "total_bytes": 65727
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/373eb78c6297437ea5b287015925a1af/provenance",
+        "bytes": 65727,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "cb510bf1fbf1ec70cb41350d7ad75f6c8a200a1dadcc7d8e2b654f91942b4b25",
+        "state_sha256": "d1d443783fd3b6355e55a020b90c9c356d4b558847fd2aa34c21923ba81bcf17"
+      },
+      "result_sha256": "d3b0adabf0683abc141490778718f5a2d37026ecdbef5cafdaecf83255b3ca41",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/fd72f1620ca84e978ec36ba5df5229d4/native100",
+      "attempt_id": "fd72f1620ca84e978ec36ba5df5229d4",
+      "candidate_id": "hydraulic-output-travel-v1",
+      "candidate_revision": "45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da",
+      "certificate_files": {
+        "evidence.json": "f4f75365bd3c7cea5ee9faa1ae732a1f881ce52bb7c78be23f5fece8ec71beae",
+        "request.json": "d78fda5b91ebddf162e0bfd81caea2151bd46c74f7ba6229e6a50c343210e316",
+        "result.json": "dbb4467716a13bd1691d16307ce88c8c8aeb54cb65949951f65c4c9d4c90a8df"
+      },
+      "compatibility_key": "d0f85a5a8517daa102b9cfbad17844c1652f211ed4d33810f9d86d7b330c4ad4",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/fd72f1620ca84e978ec36ba5df5229d4",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "375389cd70110a83ff7789339c8c48c461aa8c3aab345fa63ced9404c5407692",
+              "size": 770461
+            }
+          },
+          "schema_version": 1,
+          "sha256": "5a8efe13fae20e50034b71e7dd96e1058da1fe1c218c580d83208dbef7386c1e",
+          "total_bytes": 770461
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/fd72f1620ca84e978ec36ba5df5229d4/provenance",
+        "bytes": 770461,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "375389cd70110a83ff7789339c8c48c461aa8c3aab345fa63ced9404c5407692",
+        "state_sha256": "c5def9944ff8d4a921a668b58f4d1ba389eb3672ce08241bc2477984acddbe94"
+      },
+      "result_sha256": "8bc0f7e831362ed89c22b0adc0e3992090729ffe485a61404a359676995b2514",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "grid100"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "269a87b079ef4bd19ef36954427f347f",
+      "candidate_id": "hydraulic-output-travel-v1",
+      "candidate_revision": "45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da",
+      "certificate_files": {
+        "evidence.json": "ce502cc1e0be5d6933a26762e9d986e0cd9e02e7fb1c0b83d7f3e5e6c6b6f578",
+        "request.json": "bbf96c2829659223ec4a85797c7ae17f852b55c3594192b69cd76d68e7dadb77",
+        "result.json": "6fe895a25fbffd9314895b96e813e8f4effc781261d0491ee2792ed92c24ee62"
+      },
+      "compatibility_key": "6ed2f56163ad989bb0badbab4dbd9c8c7266022242aa4955accc0b3e0a0a8759",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/269a87b079ef4bd19ef36954427f347f",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "d7e8b7dc720f7ddd45dbe0768d5e79db18e16683d676738a79b490766a1c9463",
+              "size": 110393
+            }
+          },
+          "schema_version": 1,
+          "sha256": "13a5695581b174aa9ae8f536a1d73a54d8b149924a1ae27278ba4f6030815fd5",
+          "total_bytes": 110393
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/269a87b079ef4bd19ef36954427f347f/provenance",
+        "bytes": 110393,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "d7e8b7dc720f7ddd45dbe0768d5e79db18e16683d676738a79b490766a1c9463",
+        "state_sha256": "108d775c27eb1dedef151ec31fd48beb98561c429fcab5f754c22b28f0765487"
+      },
+      "result_sha256": "51cc5e988ec1d2b225461f6524254d3274cf9cdcb7dd8743c1ff20fd6bc43171",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "3a7bf28d42b545e9bb43b3ad5e8e47ba",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+      "certificate_files": {
+        "evidence.json": "c627078888e63701bb80687d5515284bd195a1fa6876b024e719a3a14dfc3aee",
+        "request.json": "ffd4c084623a28aa7ed51d9abc8311d1b7110c1353540ee7362c69cf58f6663e",
+        "result.json": "31d6a684e84d85445e76fecb4bbadab573b14142a89eadaab2c833c7682fcf28"
+      },
+      "compatibility_key": "c126dba74c72aeee5c62c2fc10a044cc532b08ecac816a14e6c9495dfc29a371",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/3a7bf28d42b545e9bb43b3ad5e8e47ba",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "a81a05820145cbc82e0bec1c9e6be5c8b799af3a5078262898599287c3b9094f",
+              "size": 46447
+            }
+          },
+          "schema_version": 1,
+          "sha256": "ebd0bcbc42face69446071bc9157e5d676fef868a8aff7553ddb266bb820388e",
+          "total_bytes": 46447
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/3a7bf28d42b545e9bb43b3ad5e8e47ba/provenance",
+        "bytes": 46447,
+        "completed_steps": 80,
+        "named_stream_keys": [
+          "[\"data\",\"host\",\"batches\",\"cuda:0\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"eval\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"eval\",\"host\",\"global\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+          "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+          "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "a81a05820145cbc82e0bec1c9e6be5c8b799af3a5078262898599287c3b9094f",
+        "state_sha256": "0f8f584c0a65a530886917299e782a6f5ccad9b7a049915b21817a57b1618e87"
+      },
+      "result_sha256": "62dd1e6296fa3a76fffb65dbd4c03663c8319c20b9d8af5410383ef545aba31f",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "two_pole"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/8faee78d80854752b3981e1aa44c98e4/evaluator",
+      "attempt_id": "8faee78d80854752b3981e1aa44c98e4",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+      "certificate_files": {
+        "evidence.json": "3794dfa8e9a6d484900d600a63250fae12a2a1f4ff66d21eb2ebc972a721f8cc",
+        "request.json": "9423e1215840fe072524fa8bf3ac653a264fce19ea45b644236929983d3cda91",
+        "result.json": "19577d419f0404a3f81599cb6fdcd7b470973dd9448a2dd82e5f3d0a07d83a4f"
+      },
+      "compatibility_key": "f433b772bd01e5f63ed254c114d0736f78f1f16a2f4383bf2be94ba0a4df44a5",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/8faee78d80854752b3981e1aa44c98e4",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "43617bc3c0a8b6edc4558fd4593afb8d3912b1f107bffb1a8a27a7b08f4172da",
+              "size": 64959
+            }
+          },
+          "schema_version": 1,
+          "sha256": "ec428f21653374ead35e8e1a4d9b306575c23df06d92da92fc48ffdeb79d5e88",
+          "total_bytes": 64959
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/8faee78d80854752b3981e1aa44c98e4/provenance",
+        "bytes": 64959,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "43617bc3c0a8b6edc4558fd4593afb8d3912b1f107bffb1a8a27a7b08f4172da",
+        "state_sha256": "7a9a50bda5e6724bb9b9a24027bd6845210fdb70218f469b3e4b8b2601eebb0c"
+      },
+      "result_sha256": "e1d84e8dabf3bb32f24334feb1c058d60d3c47941e579011c6767cb8db611982",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/0c1cce6e78ba4084b9c094a373603427/evaluator",
+      "attempt_id": "0c1cce6e78ba4084b9c094a373603427",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+      "certificate_files": {
+        "evidence.json": "8890c71c1514d9362e72f92b07105f0f4396c5ee2a7ec6b3e50d32160b39ed09",
+        "request.json": "bd051e8657cde347c34581edafffd2be53c26a00260cd319633776d325471d44",
+        "result.json": "964d8f1d666db538411b12c62fb364ad9cfeb6e7d9a03d3fb563a6a9612e1168"
+      },
+      "compatibility_key": "0108d0217d39f79bcd31000fe767788cdc418d98459c9759a7fda4ee97362fb1",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/0c1cce6e78ba4084b9c094a373603427",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "31de530b16c39b30df100b9629349510d2065cdcd105ec11ec11bad7e730a1aa",
+              "size": 65215
+            }
+          },
+          "schema_version": 1,
+          "sha256": "eca9d55d5dd954f9e177f100f5382bb3bf218c7d4d8ed33155fa0683d3d37b48",
+          "total_bytes": 65215
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/0c1cce6e78ba4084b9c094a373603427/provenance",
+        "bytes": 65215,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "31de530b16c39b30df100b9629349510d2065cdcd105ec11ec11bad7e730a1aa",
+        "state_sha256": "3bb32f7d17f83c49fc03eb69145427672ff40dd08eebb86a833f3dface4a35bd"
+      },
+      "result_sha256": "2f186a2691dbdc3a9325254f0ca3a980bd6dd71e6dde673071b5c36caddb0204",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/7e5af598083640eba79d312deaa6a531/native100",
+      "attempt_id": "7e5af598083640eba79d312deaa6a531",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+      "certificate_files": {
+        "evidence.json": "b594091818f7d65906c883c1ea6fc408e58df198014c961e7998e509201a1caf",
+        "request.json": "dcb4916f1a4cb83d6eccdfad284e56a9b0f321df6f7f9b70f0e205bcc8b196b2",
+        "result.json": "c35278558f743cb9d3fda8f8b12ea6dfe31c8616b5f438f432ae328231d01fcd"
+      },
+      "compatibility_key": "1995f4251fd59309d0c8bcc1c7030ceeca8483f06cbd0ebe7cc4a116ef08e387",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/7e5af598083640eba79d312deaa6a531",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "8ed6c1f9967385539bdac034871b2497854dfc039bb964c70ef87bdb341cbe81",
+              "size": 770013
+            }
+          },
+          "schema_version": 1,
+          "sha256": "69161f1d41764801de6553535be2ca9239d10d0be29e32b4885f84d35dc57fef",
+          "total_bytes": 770013
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/7e5af598083640eba79d312deaa6a531/provenance",
+        "bytes": 770013,
+        "completed_steps": 7000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "6f6b0084fa0b0e8de78f282e0570952e99c0f80d4defb68f4c9bcb462cf0cc8f",
+          "[\"eval\",\"ema\",\"samples\",\"cuda:0\"]": "d47b07eea9b367b10c27d6dd425b35b0887c124d29fd9b47a17d7163ff48b8e7",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "b24e7622a63d3deed0b9cdbb446e98b989052a9946b94bb4ea2b008b74d3e0f0",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "d6538518c0f63d30d7b0320c19bd27b89841d2ee79ade37b4d1db03a4613a03d",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "c182b1f84ab2b301e42fbc89450e589a98ec26f1f9c8b42a74d6252622919ca4",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "6e6dc7587577f9448f8fbc6f75d00ab7c8eecead1d77cd915b302979b6381702",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "238f7e13e199cd1c68980b934f7383da49ea0ca670f7b732408a006580edc5dc",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "826b7485f709fa1b4d3226d348037d838bed099d8d694a2eb3642fbe58b531f7"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "8ed6c1f9967385539bdac034871b2497854dfc039bb964c70ef87bdb341cbe81",
+        "state_sha256": "ce38f6c4ac286b5e826177a3bd86a22d0782705268e4552d8db2b46450d38c7f"
+      },
+      "result_sha256": "3bb3470fcb8ef58a20288bf5d757653a782f243f82dd339224c4af0e70721d80",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "grid100"
+    },
+    {
+      "artifact_root": null,
+      "attempt_id": "dae67d2953e64a19b106f9e16ea2024d",
+      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+      "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+      "certificate_files": {
+        "evidence.json": "5fb998a11bf1ed9fcd7613daad2e134bcd6fb730d5b8726d7f1e0eeaa65034b2",
+        "request.json": "366227c6e3d2f19cfda027408931454094f6d68d5fd229519b0203b5ed9f1ea8",
+        "result.json": "d418871e40c52c4b2398b06b3ba252642fd1ebf8a773304fba06527542cc9e38"
+      },
+      "compatibility_key": "1d92196e25539d145bd0fefb81b2ad4dfcdb8de352dd2f7d8a29f5000fa1cd56",
+      "local_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/dae67d2953e64a19b106f9e16ea2024d",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "e48f7ad68fbfbc46ebb69045cbf3e1b8122915ae933327cd70c3f49e372f22d0",
+              "size": 109881
+            }
+          },
+          "schema_version": 1,
+          "sha256": "edc0ddc88b4eb2505d0a3fe4c205b50014b4de8602a8aa6f30189044a3ba9590",
+          "total_bytes": 109881
+        },
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue/hydraulic-motion-round-v1/dae67d2953e64a19b106f9e16ea2024d/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "e3d88c74d2a45b2a2dc89ff1d4907b619a73bbdd39f2d7aaa74a0ada271b2dca",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "4bdb79173bafeedeeb90175b343218558992caccfb1e7f774fb6c1752a458d49",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a0b49226e07f592fe36932dd116fdb33ee7bc58957e1fde22edbe653adf40a38"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "e48f7ad68fbfbc46ebb69045cbf3e1b8122915ae933327cd70c3f49e372f22d0",
+        "state_sha256": "287ba8009ea53713bad55b7abe9a59bce0d9e1525d899200e756077797dd26bb"
+      },
+      "result_sha256": "622a8ec987a0e41660fe440e999796bad488cf333e55777130bb94ea5928ca0e",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "task_id": "vector_two_broad"
+    }
+  ],
+  "schema_version": 1,
+  "software_checks": "154 focused checks; no scientific qualification"
+}

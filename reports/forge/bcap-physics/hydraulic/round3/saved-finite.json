@@ -1,0 +1,108 @@
+{
+  "analysis_seconds": 1.5693291029892862,
+  "diagnostic_gaussian_scalar_draws": 40000,
+  "diagnostic_seed": 0,
+  "endpoint_compensation": {
+    "joint": {
+      "centered": 31.32294223083451,
+      "shared": 0.17750359481104913,
+      "total": 31.500445825645553
+    },
+    "network": {
+      "centered": 33.605034291704115,
+      "shared": 0.16182078982543596,
+      "total": 33.766855081529556
+    },
+    "normalized_rowwise_dot": -0.3137829720692639,
+    "prior": {
+      "centered": 0.6307711727422715,
+      "shared": 0.00069496027794122,
+      "total": 0.6314661330202127
+    },
+    "rowwise_dot": -1.4489376944521044
+  },
+  "finite_responses": {
+    "secant_v2": {
+      "finite_even_center_shift_energy": {
+        "mean": 4.924359507494857e-06,
+        "median": 2.119455015121875e-07,
+        "p90": 1.0392772529831682e-05
+      },
+      "finite_odd_energy": {
+        "mean": 0.009229686103387993,
+        "median": 0.00527061520127539,
+        "p90": 0.022626195737869028
+      },
+      "fraction_odd_energy_over_local_capacity": 0.76995,
+      "full_one_sided_response_energy": {
+        "mean": 0.009234218901308424,
+        "median": 0.005266926766772564,
+        "p90": 0.022702018101778722
+      },
+      "local_real_capacity": {
+        "mean": 0.0017508737282574138,
+        "median": 0.0017205313433799794,
+        "p90": 0.0022794276984975845
+      }
+    },
+    "winner": {
+      "finite_even_center_shift_energy": {
+        "mean": 1.6514566397465365e-05,
+        "median": 1.2285372030196906e-07,
+        "p90": 1.7092745896556527e-05
+      },
+      "finite_odd_energy": {
+        "mean": 0.005824909648355436,
+        "median": 0.003332515067239609,
+        "p90": 0.013966097586910172
+      },
+      "fraction_odd_energy_over_local_capacity": 0.69695,
+      "full_one_sided_response_energy": {
+        "mean": 0.005857849435966925,
+        "median": 0.003306239164518717,
+        "p90": 0.014104942023815003
+      },
+      "local_real_capacity": {
+        "mean": 0.0016547715193728082,
+        "median": 0.001653302519285409,
+        "p90": 0.0022794276984975845
+      }
+    }
+  },
+  "limitations": "New matched diagnostic jitter probes at saved full prior tables, not original training draws or served-law grades. Real targets are retained observer samples. Graph components infer neighborhoods without labels; they are not ground-truth mixture components. Endpoint swaps are not causal per-update ablations.",
+  "optimizer_updates_added": 0,
+  "original_bindings": {
+    "secant_v2": {
+      "attempt_id": "fa8e7d8841b741f085a80b50826c55e8",
+      "checkpoint_sha256": "f0431a19d23705396f866167570b85e94602a1bc565d7fb2c23f4e48e282342a",
+      "source_digest": "2ebd7377a68b5db8783006c3cb59ff84b7a625027974bf3387db722a940f8357"
+    },
+    "winner": {
+      "attempt_id": "abdc1966fa8d4567adbd9b9c9a445bd2",
+      "checkpoint_sha256": "4ec8ca08abaaeb5e5b4521f2c73c77a2c2392ad4305c33af6b3aedbe293bd61c",
+      "source_digest": "2ebd7377a68b5db8783006c3cb59ff84b7a625027974bf3387db722a940f8357"
+    }
+  },
+  "qualification_input": false,
+  "random_scope": "independent CPU diagnostic generator; original consumed streams untouched",
+  "real_graph": {
+    "component_count": 133,
+    "component_counts": {
+      "mean": 15.398496240601503,
+      "median": 18.0,
+      "p90": 25.0
+    },
+    "component_variance_capacity": {
+      "mean": 0.0013771490339582015,
+      "median": 0.001526776148120659,
+      "p90": 0.002236358516328571
+    },
+    "link_distance_multiplier": 4,
+    "nearest_distinct_median": 0.012114479628053596
+  },
+  "saved_target_count": 2048,
+  "saved_target_file": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/hydraulic/queue/hydraulic-deformation-round2-v1/fa8e7d8841b741f085a80b50826c55e8/native100/grid100/snapshots/step_007000.npz",
+  "saved_target_sha256": "7018b48c0fcf2af87bfbb4b89918f6b628c3b5eed6093385af95df814879ce1f",
+  "schema_version": 1,
+  "torch_global_rng_unchanged": true
+}

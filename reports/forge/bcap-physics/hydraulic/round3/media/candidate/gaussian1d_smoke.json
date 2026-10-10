@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "bfb759009b4d185819caf2267f4035bd9eaf04c40844e33754fe28b733a54c9c",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "046c0fa2ebce76dd142e521b3ea661f9073339c6b01f85a45d4b0de6a8a83d7f",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/5c80afef527c45ceb05bfe678c69c807/evaluator/observed-samples.pt": "37fc967b2be924622dc915ad1a7ebc2f4712b3fb0cef9683075a1df5dd684a9d"
+  },
+  "task_id": "gaussian1d_smoke"
+}

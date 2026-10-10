@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 794. Inventory coverage: complete. Unresolved import items: 7.
+Records: 800. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3958,6 +3958,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-3269bf08a67b0ba31bea7bf8
+
+**Scope:** research_diagnostic; scientific; revision `9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186`.
+
+Execute the exact saved BCAP winner in the same new source/runtime as hydraulic-output-travel-v1; its parent recipe is an admission reference only and is not trained.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 741.503; mechanism `floor_constant`.
+
+grid100: precision=0.24072, center_rms_sigma=1.5203, mass_tv=0.14718, radial_ks=0.49088
+
+Exact winning BCAP control completed all five frozen diagnostic tasks: three PASS, Gaussian stability and grid100 FAIL. This measures the hydraulic comparison control; it is not a new repair or qualification.
+
+**Next:** Conclude this frozen control study and retain its exact receipts for the hydraulic comparison. Preserve original winner/default selection and archived qualifications. No parent training, scientific retry, tuning or new evidence is authorized.
+
+[Evidence](../../reports/forge/attempts/0c1cce6e78ba4084b9c094a373603427/result.json) · [Record](records/readout-3269bf08a67b0ba31bea7bf8.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -4150,6 +4166,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
 
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-783482660df5696a6ed50f75
+
+**Scope:** research_diagnostic; scientific; revision `607425144b6578b5887c26af2ced7a8637087d929584613f268dcf64b7b5edb8`.
+
+Measure the exact BCAP winner primary control in the revised scientific source/runtime; its original parent is an untrained admission reference only.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 318.256; mechanism `floor_constant`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+The exact winner diagnostic control completes all five frozen tasks: three PASS and two FAIL. It reproduces original Gaussian/native endpoints; this is no new repair, qualification or parent comparison.
+
+**Next:** Close this exact matched-control study and retain its receipts. Preserve archived winner selection and qualifications; no parent training or further control rerun follows.
+
+[Evidence](../../reports/forge/attempts/03edce6bd630456ea92f35eb7e8671ff/result.json) · [Record](records/readout-783482660df5696a6ed50f75.json)
+
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
 **Scope:** current; scientific; revision `f415e58283e06eaf2679a31dbf0317b69bda8fd3e1a880e62209ac9318f1eaf8`.
@@ -4262,6 +4294,22 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 
 [Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
 
+### hydraulic-local-shape-v3 · readout-9ceeb0c30717382df4b3fb6f
+
+**Scope:** research_diagnostic; scientific; revision `2518dbf757244d5762cecf1f1bad8321c551eb4b044cadaf6bdff28d098d2c0a`.
+
+Training-local finite shape progress controls excess expansion and increases native precision to at least.60 while retaining broad-vector PASS; exact Gaussian/native full gates remain decisive.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 558.64; mechanism `structural`.
+
+vector_two_broad: hq=0.99487, mass_tv=0.061523; grid100: precision=0.03876, mass_tv=0.94548
+
+Completed all admitted full-budget runnable tasks. Exact outcomes {'BLOCKED': 2, 'FAIL': 2, 'PASS': 1}; native precision 0.03876 against frozen prediction.60/falsifier.48. Finite sampled shape/travel bounds and rounded mean projection are checked in controller-diagnostics.json; complete task gates remain decisive. Own smoke-dependent stability is retained under its actual dependency status.
+
+**Next:** Stop this exact local graph-capacity/mean-separation revision; no sweep, seed repeat, extra arm, continuation or adoption. Retain the winner/default and original qualification. Inspect neighborhood resolution and useful mean/mass transport using saved evidence before any separately frozen substantive successor.
+
+[Evidence](../../reports/forge/attempts/02cb16db5117474fa3d0dc83e947d0ce/result.json) · [Record](records/readout-9ceeb0c30717382df4b3fb6f.json)
+
 ### r1r2-global-repair-v1 · readout-9e297f3a07ea06f0abc19272
 
 **Scope:** current; scientific; revision `5a20a41ac1b78983611d3cfd765d572c436f93fa5b00ace5dba9934c288e4107`.
@@ -4277,6 +4325,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+
+### hydraulic-secant-deformation-v2 · readout-9f6ac354828f6069c1e83b87
+
+**Scope:** research_diagnostic; scientific; revision `fa836befe1a9b010280a21f7a487a096cf5206686ca49f91078890499410269e`.
+
+Combined hydraulic travel plus network-only local contraction reduces native served width error and improves precision relative to the exact BCAP winner, while preserving Gaussian retention and broad-vector PASS.
+
+**Observed:** {'FAIL': 2, 'PASS': 2}; wall seconds 641.515; mechanism `structural`.
+
+grid100: precision=0.50133, center_rms_sigma=0.36362, mass_tv=0.069, radial_ks=0.33394
+
+Combined travel and secant deformation candidate retains broad-vector PASS but strict Gaussian and native FAIL; native precision.50133 misses.55 prediction, covariance bias.90183 misses.70 explanatory forecast, and local variance ratio4.45623 exceeds the matched winner. Two-pole remains unsupported/unmeasured.
+
+**Next:** Stop this exact combined revision as a global repair; retain winner/default and all original qualifications. Before a separately frozen substantive idea, distinguish local training density from global variance normalization and measure deformation gradient work. No coefficient sweep, seed repeats, transfer or extra training follows.
+
+[Evidence](../../reports/forge/attempts/927604292f2e421a8f67e037f7a3aa2a/result.json) · [Record](records/readout-9f6ac354828f6069c1e83b87.json)
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -4406,6 +4470,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### hydraulic-output-travel-v1 · readout-bd78af3e5a0d3194f1692b77
+
+**Scope:** research_diagnostic; scientific; revision `45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da`.
+
+Bounding realized joint G/prior batch output travel by observed training-data spacing reduces native overshoot and improves retention without losing the broad-vector guardrail.
+
+**Observed:** {'FAIL': 2, 'PASS': 2}; wall seconds 920.272; mechanism `structural`.
+
+vector_two_broad: hq=0.98779, mass_tv=0.074463
+
+The exact positive-spacing travel rule misses full Gaussian/native gates despite71/72 stationary and23/24 shifted hold checks and observed native precision prediction0.49586>=0.48; broad-vector remains PASS.
+
+**Next:** Stop this exact global-repair revision. Keep the winner/default; investigate shared translation separately from local Jacobian spread using the saved diagnostics before another frozen bounded study. No further training, seeds, radius tuning or transfer qualification.
+
+[Evidence](../../reports/forge/attempts/269a87b079ef4bd19ef36954427f347f/result.json) · [Record](records/readout-bd78af3e5a0d3194f1692b77.json)
+
 ### k3p · readout-c3df7159c90725fdef1cb700
 
 **Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
@@ -4517,6 +4597,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+
+### bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36 · readout-e3ad733b6fd7e95358ea8214
+
+**Scope:** research_diagnostic; scientific; revision `5baa90d5f2f923663ca75d61e3c8f4224e3d7fb8e87336ce1192fb105e4a9218`.
+
+Measure the exact winner in the same revised scientific source; its named parent is an untrained admission reference only.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 316.903; mechanism `floor_constant`.
+
+vector_two_broad: hq=0.98877, mass_tv=0.062988
+
+Completed all admitted full-budget runnable tasks. Exact outcomes {'FAIL': 2, 'PASS': 3}; native precision 0.24072 against frozen prediction.60/falsifier.48. This is the matched exact-winner diagnostic measurement, not a repair or comparison against its untrained parent.
+
+**Next:** Close the matched control subscription and retain exact receipts. Preserve original selection and qualification; no unchanged rerun follows.
+
+[Evidence](../../reports/forge/attempts/00d7187a8a794ff087480c22c6a0fbdc/result.json) · [Record](records/readout-e3ad733b6fd7e95358ea8214.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5182,4 +5278,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `2b6d180877a78478a3557abb890a2e3a1df47e736140fc26ee0a41fea7684faa`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8743cd0b2518a73c1c395c00e191e964f569e54fa387df24e8aebf51594c1610`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

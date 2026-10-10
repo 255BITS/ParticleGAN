@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "max_rounds": 1,
+  "hypothesis": "Combined hydraulic travel plus network-only local contraction reduces native served width error and improves precision relative to the exact BCAP winner, while preserving Gaussian retention and broad-vector PASS.",
+  "competing_explanation": "Global real-batch variance can underweight local native density, contraction can destroy useful generator expansion, prior relocation can compensate, and nonlinear jitter can differ from secants. The previous strict Gaussian misses may persist.",
+  "scope": {
+    "view": "hydraulic_motion_diagnostic",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "hydraulic-deformation-round2-v1",
+    "budget_seconds": 14400,
+    "candidate_budget_seconds": 6420
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-physics/hydraulic/native-width.json",
+      "selector": [],
+      "use": "motivation_only",
+      "identity": {
+        "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f"
+      }
+    }
+  ],
+  "prediction": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": ">=",
+    "threshold": 0.55
+  },
+  "falsifier": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": "<",
+    "threshold": 0.48
+  },
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  },
+  "id": "hydraulic-deformation-candidate-round2-v1",
+  "candidate": "hydraulic-secant-deformation-v2",
+  "control": {
+    "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "task_map": {
+      "two_pole": "two_pole",
+      "gaussian1d_smoke": "gaussian1d_smoke",
+      "gaussian1d_stability": "gaussian1d_stability",
+      "grid100": "grid100",
+      "vector_two_broad": "vector_two_broad"
+    }
+  }
+}

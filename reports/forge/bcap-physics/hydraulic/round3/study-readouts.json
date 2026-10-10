@@ -1,0 +1,162 @@
+{
+  "items": [
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "02cb16db5117474fa3d0dc83e947d0ce",
+            "481dba04c0ae418996fe0de23af730da",
+            "5c80afef527c45ceb05bfe678c69c807"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "f3c6ab94bd0736eb90fc0efc22306520812c6e66f6098ce54600b8e1a0f2a5a6",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "request_missing_evidence",
+          "observed": {
+            "falsifier": {
+              "satisfied": true,
+              "value": 0.03876
+            },
+            "prediction": {
+              "satisfied": false,
+              "value": 0.03876
+            }
+          },
+          "outcome": "incomplete",
+          "provenance": [
+            {
+              "attempt_id": "02cb16db5117474fa3d0dc83e947d0ce",
+              "producer_request_id": "b8bd43ba155bcee4cd451886",
+              "producer_study_id": "hydraulic-local-shape-candidate-round3-v1",
+              "result_hash": "7f957a1a18c66ab4d6d6dc14ebe2d77ea85d1d48036844772d6e0c3aa27b328b",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "481dba04c0ae418996fe0de23af730da",
+              "producer_request_id": "b8bd43ba155bcee4cd451886",
+              "producer_study_id": "hydraulic-local-shape-candidate-round3-v1",
+              "result_hash": "a4a31e25d7b7879c42db82d5a249f4fe0a5911d96ccd6476910380999e00e612",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "5c80afef527c45ceb05bfe678c69c807",
+              "producer_request_id": "b8bd43ba155bcee4cd451886",
+              "producer_study_id": "hydraulic-local-shape-candidate-round3-v1",
+              "result_hash": "42d401f9fa4ef8a6adea4f9591ca9d59ac9aac6593ebd7af8e6bdeddff81a411",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "bb4387c88448f2ee5243eaf0737a1773e5c0ad30615183c6ac7a0cf7f8cd65d4",
+            "contract_sha256": "f3c6ab94bd0736eb90fc0efc22306520812c6e66f6098ce54600b8e1a0f2a5a6",
+            "control_binding_sha256": "bb1ba45e550162124163f3b252340b9dd60c1f941378b0ff43d3fb0235421ed7",
+            "policy_fingerprint": "bf9382aef2fe7c2e5658bcf2f63717e4f5dcc2352f967756c7e57dbe7df2ec83",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "df8a936e0c56d9bbe8615648bde112f49153e0a51400a3f237a75852854a4d2b"
+          },
+          "study_id": "hydraulic-local-shape-candidate-round3-v1",
+          "study_sha256": "df8a936e0c56d9bbe8615648bde112f49153e0a51400a3f237a75852854a4d2b"
+        }
+      ],
+      "label": "candidate",
+      "lifecycle": "concluded",
+      "record_id": "readout-9ceeb0c30717382df4b3fb6f",
+      "study_id": "hydraulic-local-shape-candidate-round3-v1"
+    },
+    {
+      "decision_outcomes": [
+        {
+          "attempt_ids": [
+            "00d7187a8a794ff087480c22c6a0fbdc",
+            "555fa6bd8947486bb539f5f87d6d1d1c",
+            "6c6cb50e9fd54988bae9bcd740a62526",
+            "b75ab1c1c9d54339b1a5200ed3a256cd",
+            "f3e3871354764601afe23b3eb9963a7c"
+          ],
+          "binding_errors": [],
+          "causal_judgment": "requires_review",
+          "contract_sha256": "8b26c96468421370a8564d65c917ff714f3095dca168521ec939d7e6ff92f25a",
+          "duplicate_task_ids": [],
+          "execution_authorized": false,
+          "max_rounds": 1,
+          "next_action": "stop_revision",
+          "observed": {
+            "falsifier": {
+              "satisfied": true,
+              "value": 0.24072
+            },
+            "prediction": {
+              "satisfied": false,
+              "value": 0.24072
+            }
+          },
+          "outcome": "falsified",
+          "provenance": [
+            {
+              "attempt_id": "00d7187a8a794ff087480c22c6a0fbdc",
+              "producer_request_id": "290c660a7cf8fc13e616ceff",
+              "producer_study_id": "hydraulic-local-shape-control-round3-v1",
+              "result_hash": "387679d2c438a9832cd958952bb7f8d77891300acc6ad61d7dd5db2a4f8c53dc",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "555fa6bd8947486bb539f5f87d6d1d1c",
+              "producer_request_id": "290c660a7cf8fc13e616ceff",
+              "producer_study_id": "hydraulic-local-shape-control-round3-v1",
+              "result_hash": "2454bb19ec1040e115551f2456c320b92e10667e0bae3b2d65aa426c474f4dda",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "6c6cb50e9fd54988bae9bcd740a62526",
+              "producer_request_id": "290c660a7cf8fc13e616ceff",
+              "producer_study_id": "hydraulic-local-shape-control-round3-v1",
+              "result_hash": "a3d013bab9e1e87e4ba98adede88aaac9ad62969f0d478d10498354e88ddc30b",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "b75ab1c1c9d54339b1a5200ed3a256cd",
+              "producer_request_id": "290c660a7cf8fc13e616ceff",
+              "producer_study_id": "hydraulic-local-shape-control-round3-v1",
+              "result_hash": "2a4a17229726f94985e10880f166636e341b1034fa4106835b3b327b48b8565b",
+              "valid_receipt": true
+            },
+            {
+              "attempt_id": "f3e3871354764601afe23b3eb9963a7c",
+              "producer_request_id": "290c660a7cf8fc13e616ceff",
+              "producer_study_id": "hydraulic-local-shape-control-round3-v1",
+              "result_hash": "0a4a1047a7d25a3783635dbac2ba6317a63f32ac91bc3fe784c44ac1a64fc6f7",
+              "valid_receipt": true
+            }
+          ],
+          "qualification_input": false,
+          "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+          "schema_version": 1,
+          "study_binding": {
+            "binding_sha256": "bb1ba45e550162124163f3b252340b9dd60c1f941378b0ff43d3fb0235421ed7",
+            "contract_sha256": "8b26c96468421370a8564d65c917ff714f3095dca168521ec939d7e6ff92f25a",
+            "control_binding_sha256": "c5ae2d123f578dcec49703517a58edc1f7f442d51bcfdaf2e6c8e22985fb2372",
+            "policy_fingerprint": "bf9382aef2fe7c2e5658bcf2f63717e4f5dcc2352f967756c7e57dbe7df2ec83",
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "study_sha256": "e5952809c63544ae87e692c5d25808fbbc2deda04602090b246f8859a60423bc"
+          },
+          "study_id": "hydraulic-local-shape-control-round3-v1",
+          "study_sha256": "e5952809c63544ae87e692c5d25808fbbc2deda04602090b246f8859a60423bc"
+        }
+      ],
+      "label": "control",
+      "lifecycle": "concluded",
+      "record_id": "readout-e3ad733b6fd7e95358ea8214",
+      "study_id": "hydraulic-local-shape-control-round3-v1"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "random_sampling_draws_added": 0,
+  "schema_version": 1
+}
