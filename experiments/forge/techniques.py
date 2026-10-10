@@ -163,6 +163,7 @@ def recipe_field_active(name, value, *, task=None):
                 "prior_reg_target_std", "prior_reg_eps"}:
         if not prior_active:
             return False
-    if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_reg == 0:
+    if name in {"prior_reg_target_std", "prior_reg_eps"} and (
+            recipe.prior_reg == 0 or recipe.prior_regularizer != "vicreg"):
         return False
     return True

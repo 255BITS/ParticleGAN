@@ -5,7 +5,7 @@ recipe defines whether locations learn and how they are regularized:
 
 ```python
 prior_update = "learned"       # or "frozen"
-prior_regularizer = "vicreg"   # or "none" (requires prior_reg=0)
+prior_regularizer = "vicreg"   # "initial_mmd", or "none" (requires prior_reg=0)
 prior_reg = 0                 # existing coefficient; presets unchanged
 prior_reg_target_std = 1
 prior_reg_eps = 1e-4
@@ -20,6 +20,15 @@ paired invariance term. Weights apply once. Frozen priors receive no penalty or
 optimizer group. Initializing identical locations before freezing preserves
 initial tensors and RNG consumption. Direct generator coordinates remain
 generator parameters; they are not a sampled latent prior.
+
+`initial_mmd` compares bounded current-location and fixed initial-location
+panels with a multiscale IMQ kernel. It preserves distribution geometry without
+anchoring particle identity. `GANTrainer` binds it automatically; caller-owned
+loops call `make_prior_regularizer(prior=prior)` after public initialization and
+checkpoint that prior. Weight zero captures no reference. Its exact estimator,
+finite-panel approximation, reference buffers, disabled parity and software
+training demonstration are documented in the
+[feature readout](../reports/forge/prior-mmd/README.md).
 
 `GANTrainer` keeps its historical unweighted `prior_regularization` diagnostic
 for learned VICReg-like priors, including at weight zero. It contributes to the

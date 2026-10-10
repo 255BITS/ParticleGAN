@@ -19,6 +19,7 @@ from .contracts import atomic_json, file_hash
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
 from .state import state_digest
 from .telemetry import PhaseTimer
+from .priors import recipe_owned_prior
 
 
 RESOURCES = {"num_particles": 5, "z_dim": 2, "batch_size": 256}

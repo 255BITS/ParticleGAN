@@ -234,8 +234,8 @@ class Recipe:
     def __post_init__(self):
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
-        if self.prior_regularizer not in ("vicreg", "none"):
-            raise ValueError("prior_regularizer must be vicreg or none")
+        if self.prior_regularizer not in ("vicreg", "none", "initial_mmd"):
+            raise ValueError("prior_regularizer must be vicreg, none or initial_mmd")
         for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
@@ -829,12 +829,19 @@ class Recipe:
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
-    def make_prior_regularizer(self, **overrides):
+    def make_prior_regularizer(self, *, prior=None, **overrides):
         from .vicreg_loss import ParticleRegularizer
         options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
                    "eps": self.prior_reg_eps, **overrides}
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
             options["weight"] = 0.
+        if self.prior_regularizer == "initial_mmd" and options["weight"] > 0:
+            from .initial_mmd import InitialMMDRegularizer
+            if prior is None:
+                raise ValueError("initial_mmd requires prior= after public initialization")
+            if set(overrides) - {"weight"}:
+                raise ValueError("initial_mmd has fixed panel/kernel scales; only weight can be overridden")
+            return InitialMMDRegularizer.from_priors(prior, weight=options["weight"])
         return ParticleRegularizer(**options)
 
     def prior_regularization(self, rows, *, regularizer=None):
