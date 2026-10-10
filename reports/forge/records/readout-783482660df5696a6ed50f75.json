@@ -1,0 +1,721 @@
+{
+  "attempt_ids": [
+    "03edce6bd630456ea92f35eb7e8671ff",
+    "0617d2b8a1de42b3ab66897f93354540",
+    "7dcf4901b7dc4659876c6deaa8bc16bd",
+    "abdc1966fa8d4567adbd9b9c9a445bd2",
+    "f102eed1442f4a3dbe83df712b688060"
+  ],
+  "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "candidate_revision": "607425144b6578b5887c26af2ced7a8637087d929584613f268dcf64b7b5edb8",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Four matched executed tasks yield2PASS2FAIL in each arm. Combined successor versus exact winner: Gaussian retention69/72 versus2/72 and shifted hold23/24 versus0/24; native precision.50133 versus.24072, covariance trace bias.901832611 versus.371384942 and median local variance ratio4.456226400 versus2.976158908. No comparison with the archived hydraulic-v1 source can isolate the added penalty effect. The control study parent is an untrained admission reference with no comparable measured evidence or qualification credit.",
+  "conclusion": "The exact winner diagnostic control completes all five frozen tasks: three PASS and two FAIL. It reproduces original Gaussian/native endpoints; this is no new repair, qualification or parent comparison.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "03edce6bd630456ea92f35eb7e8671ff",
+        "0617d2b8a1de42b3ab66897f93354540",
+        "7dcf4901b7dc4659876c6deaa8bc16bd",
+        "abdc1966fa8d4567adbd9b9c9a445bd2",
+        "f102eed1442f4a3dbe83df712b688060"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "c1875b5a5d90560244f609651666e1d22fe8c402983954fbd183683a63bd2566",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.24072
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.24072
+        }
+      },
+      "outcome": "falsified",
+      "provenance": [
+        {
+          "attempt_id": "03edce6bd630456ea92f35eb7e8671ff",
+          "producer_request_id": "76967ee468dc4797a66821a7",
+          "producer_study_id": "hydraulic-deformation-control-round2-v1",
+          "result_hash": "c9f7e996ad09242077b04274c402db3f6287ae55c1a2dfc968b61d900440a591",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "0617d2b8a1de42b3ab66897f93354540",
+          "producer_request_id": "76967ee468dc4797a66821a7",
+          "producer_study_id": "hydraulic-deformation-control-round2-v1",
+          "result_hash": "8397e6c481dab05401fbae90f9a6b8bc7dd360b64c83c8ae2eaa3935f6c834aa",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "7dcf4901b7dc4659876c6deaa8bc16bd",
+          "producer_request_id": "76967ee468dc4797a66821a7",
+          "producer_study_id": "hydraulic-deformation-control-round2-v1",
+          "result_hash": "42f7836a3d60480b54337dcb92b196b7e759187eb4abd92e4000ea421c44c0f9",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "abdc1966fa8d4567adbd9b9c9a445bd2",
+          "producer_request_id": "76967ee468dc4797a66821a7",
+          "producer_study_id": "hydraulic-deformation-control-round2-v1",
+          "result_hash": "95c3c260d3c24f113b3252a188191cf9d73d219908d2fcaa6852a29e42d5aaff",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f102eed1442f4a3dbe83df712b688060",
+          "producer_request_id": "76967ee468dc4797a66821a7",
+          "producer_study_id": "hydraulic-deformation-control-round2-v1",
+          "result_hash": "439126e7f13ceb44ca362d613faa5365444bb581d1b6520acd1aec3f82980720",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "bb1ba45e550162124163f3b252340b9dd60c1f941378b0ff43d3fb0235421ed7",
+        "contract_sha256": "c1875b5a5d90560244f609651666e1d22fe8c402983954fbd183683a63bd2566",
+        "control_binding_sha256": "c5ae2d123f578dcec49703517a58edc1f7f442d51bcfdaf2e6c8e22985fb2372",
+        "policy_fingerprint": "bf9382aef2fe7c2e5658bcf2f63717e4f5dcc2352f967756c7e57dbe7df2ec83",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "b6b1d3f17ed162f34af0b39db76a41526a245217f44624a63759597344a3ace4"
+      },
+      "study_id": "hydraulic-deformation-control-round2-v1",
+      "study_sha256": "b6b1d3f17ed162f34af0b39db76a41526a245217f44624a63759597344a3ace4"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "hydraulic_motion_diagnostic",
+  "hypothesis": "Measure the exact BCAP winner primary control in the revised scientific source/runtime; its original parent is an untrained admission reference only.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Close this exact matched-control study and retain its receipts. Preserve archived winner selection and qualifications; no parent training or further control rerun follows.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "03edce6bd630456ea92f35eb7e8671ff",
+        "result_hash": "c9f7e996ad09242077b04274c402db3f6287ae55c1a2dfc968b61d900440a591",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "0617d2b8a1de42b3ab66897f93354540",
+        "result_hash": "8397e6c481dab05401fbae90f9a6b8bc7dd360b64c83c8ae2eaa3935f6c834aa",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "7dcf4901b7dc4659876c6deaa8bc16bd",
+        "result_hash": "42f7836a3d60480b54337dcb92b196b7e759187eb4abd92e4000ea421c44c0f9",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "abdc1966fa8d4567adbd9b9c9a445bd2",
+        "result_hash": "95c3c260d3c24f113b3252a188191cf9d73d219908d2fcaa6852a29e42d5aaff",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f102eed1442f4a3dbe83df712b688060",
+        "result_hash": "439126e7f13ceb44ca362d613faa5365444bb581d1b6520acd1aec3f82980720",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-783482660df5696a6ed50f75",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/03edce6bd630456ea92f35eb7e8671ff/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 14400,
+      "candidate_budget_seconds": 6420,
+      "id": "hydraulic-deformation-round2-v1"
+    },
+    "candidate": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "competing_explanation": "Global real-batch variance can underweight local native density, contraction can destroy useful generator expansion, prior relocation can compensate, and nonlinear jitter can differ from secants. The previous strict Gaussian misses may persist.",
+    "control": {
+      "candidate_id": "bcap-dualnorm-conv-non-saturating-v1",
+      "task_map": {
+        "gaussian1d_smoke": "gaussian1d_smoke",
+        "gaussian1d_stability": "gaussian1d_stability",
+        "grid100": "grid100",
+        "two_pole": "two_pole",
+        "vector_two_broad": "vector_two_broad"
+      }
+    },
+    "falsifier": {
+      "metric": "precision",
+      "op": "<",
+      "phase": "final",
+      "task_id": "grid100",
+      "threshold": 0.48
+    },
+    "hypothesis": "Measure the exact BCAP winner primary control in the revised scientific source/runtime; its original parent is an untrained admission reference only.",
+    "id": "hydraulic-deformation-control-round2-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "precision",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "grid100",
+      "threshold": 0.55
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f"
+        },
+        "path": "reports/forge/bcap-physics/hydraulic/native-width.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "hydraulic_motion_diagnostic"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "hydraulic-deformation-control-round2-v1",
+  "study_sha256": "b6b1d3f17ed162f34af0b39db76a41526a245217f44624a63759597344a3ace4",
+  "task_results": [
+    {
+      "compatibility_key": "fdc2918915f17b345708ec1b985ad56e17887190430a9b8b9332dcce424946d0",
+      "cost": {
+        "adapter_loop_seconds": 17.027998003992252,
+        "adapter_seconds": 17.31327785400208,
+        "charged_task": "vector_two_broad",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 22.940683858003467,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 16.49725468456745,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3567233798094094
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007125242846086621
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 16.133406061911955
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 18.571809665998444,
+        "wall_seconds": 22.940683858003467
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2916666666666667,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 350,
+          "first_pass_step": 150,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 150
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.4644192516803741,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.38558074831962585
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.250066465139389,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.40006646513938904
+          },
+          "hq": {
+            "margin": 0.13876953125000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.98876953125
+          },
+          "mass_tv": {
+            "margin": 0.08701171875,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.06298828125
+          },
+          "sw1_normalized": {
+            "margin": 0.04541049482719112,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.13458950517280888
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.38558074831962585,
+        "component_core_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_core_eigen_ratios": [
+          0.40006646513938904,
+          0.5530211329460144
+        ],
+        "component_core_min_eigen_ratio": 0.40006646513938904,
+        "component_counts": [
+          2306,
+          1790
+        ],
+        "component_covariance_error": 0.38558074831962585,
+        "component_covariance_errors": [
+          0.45504456758499146,
+          0.31611692905426025
+        ],
+        "component_mass": [
+          0.56298828125,
+          0.43701171875
+        ],
+        "component_min_eigen_ratio": 0.40006646513938904,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.005637467373162508,
+          0.018435753881931305
+        ],
+        "covariance_error": 0.11147095263004303,
+        "hq": 0.98876953125,
+        "mass_tv": 0.06298828125,
+        "max_component_spill": 0.018435753881931305,
+        "mean_error": 0.1914638876914978,
+        "min_mass_ratio": 0.8740234375,
+        "resolved_core_covariance_error": 0.38558074831962585,
+        "resolved_core_min_eigen_ratio": 0.40006646513938904,
+        "resolved_max_component_spill": 0.018435753881931305,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.13458950517280888,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "25ebf3a3d7734cc1bd428b2c9e15b72cb516b56ca4c5235961552a8ea76fefa2",
+      "cost": {
+        "adapter_loop_seconds": 10.457863462041132,
+        "adapter_seconds": 10.783935217070393,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 16.540033465018496,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 10.05903736059554,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.45015329273883253
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.11019242368638515
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 9.498691644170322
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 12.066666980041191,
+        "wall_seconds": 16.540033465018496
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 375,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "f2522c575e276ddf6fc74266e48db70f8e497322f58fa139b5de4aa1674e87a3",
+      "cost": {
+        "adapter_loop_seconds": 49.52901507401839,
+        "adapter_seconds": 49.8925576179754,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 55.55576536001172,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 47.62959211273119,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.4851335529237986
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1313454866176471
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 46.01311307318974
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 51.16757362999488,
+        "wall_seconds": 55.55576536001172
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 2
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.3206228939608994,
+        "finite_fraction": 1.0,
+        "mean": 3.1276191812357865,
+        "mean_error_sigma": 0.25523836247157305,
+        "sample_count": 4096,
+        "std": 0.33116516834734117,
+        "std_ratio": 0.6623303366946823,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "217a36595ae3a917ad6d5359599739f54e7cf63c80944732b3c0deccf997b91b",
+      "cost": {
+        "adapter_loop_seconds": 208.7117536480073,
+        "adapter_seconds": 208.95237578696106,
+        "charged_task": "grid100",
+        "completed_steps": 7000,
+        "device": "0",
+        "execution_seconds": 216.5389505700441,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 7000,
+          "generator": 7000,
+          "prior": 7000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 205.1835664550308,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 35,
+              "seconds": 5.027173614711501
+            },
+            "sampling": {
+              "calls": 70,
+              "seconds": 0.11299037653952837
+            },
+            "training_updates": {
+              "calls": 7000,
+              "seconds": 200.04340246377978
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 210.20496347197331,
+        "wall_seconds": 216.5389505700441
+      },
+      "evaluator_summary": {
+        "coverage_status": "FAIL",
+        "final_metrics": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.148,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.2444,
+          "precision_gap": 0.7444910034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 4888
+        },
+        "holdout_ema_metrics": {
+          "abs_cov_trace_bias": 0.3713849420827151,
+          "accuracy_pass": false,
+          "accuracy_score": 6.510124117988179,
+          "all_finite": true,
+          "center_max_sigma": 2.4968593612372434,
+          "center_rms_sigma": 1.5203146254152577,
+          "cov_frob_rms": 0.6628660086721742,
+          "cov_trace_bias": 0.3713849420827151,
+          "frozen_pass": false,
+          "mass_tv": 0.14717999999999998,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.24072,
+          "precision_gap": 0.7481710034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.49088295696197104,
+          "valid_n": 100000,
+          "within_radius_n": 24072
+        },
+        "holdout_metrics": {
+          "abs_cov_trace_bias": 0.3713849420827151,
+          "accuracy_pass": false,
+          "accuracy_score": 6.510124117988179,
+          "all_finite": true,
+          "center_max_sigma": 2.4968593612372434,
+          "center_rms_sigma": 1.5203146254152577,
+          "cov_frob_rms": 0.6628660086721742,
+          "cov_trace_bias": 0.3713849420827151,
+          "frozen_pass": false,
+          "mass_tv": 0.14717999999999998,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.24072,
+          "precision_gap": 0.7481710034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.49088295696197104,
+          "valid_n": 100000,
+          "within_radius_n": 24072
+        },
+        "oracle_metrics": {
+          "abs_cov_trace_bias": 0.0002794449587595338,
+          "accuracy_pass": true,
+          "accuracy_score": 0.11341721050570538,
+          "all_finite": true,
+          "center_max_sigma": 0.10090990917529204,
+          "center_rms_sigma": 0.041737606908836516,
+          "cov_frob_rms": 0.05610274287219167,
+          "cov_trace_bias": 0.0002794449587595338,
+          "frozen_pass": true,
+          "mass_tv": 0.012260000000000004,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98914,
+          "precision_gap": 0.0002489965382422854,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.001514120982308409,
+          "valid_n": 100000,
+          "within_radius_n": 98914
+        },
+        "passed": false,
+        "problem": "grid100",
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "status": "FAIL",
+        "terminal_summary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "status_counts": {
+            "FAIL": 5
+          }
+        }
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "abs_cov_trace_bias": 0.3713849420827151,
+        "accuracy_pass": false,
+        "accuracy_score": 6.510124117988179,
+        "all_finite": true,
+        "center_max_sigma": 2.4968593612372434,
+        "center_rms_sigma": 1.5203146254152577,
+        "cov_frob_rms": 0.6628660086721742,
+        "cov_trace_bias": 0.3713849420827151,
+        "frozen_pass": false,
+        "mass_tv": 0.14717999999999998,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.24072,
+        "precision_gap": 0.7481710034617577,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.49088295696197104,
+        "valid_n": 100000,
+        "within_radius_n": 24072
+      },
+      "raw_status": "completed",
+      "reason": "coverage, sustained live accuracy, or independent holdout failed",
+      "task_id": "grid100"
+    },
+    {
+      "compatibility_key": "9653992058848ef956e084812967fe2bf1570c20f475249609220535a64cca2d",
+      "cost": {
+        "adapter_seconds": 0.9328382570529357,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.680756613030098,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.1994036929681897,
+        "wall_seconds": 6.680756613030098
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 64000,
+    "candidate_budget_seconds": 31620,
+    "id": "bcap-hydraulic-winner-v1"
+  },
+  "candidate": "bcap-hydraulic-winner-gap-v1",
+  "competing_explanation": "A batch-spacing speed limit slows every transport, so retention may improve only by slowing the dynamics, while acquisition deadlines, density shape and native covariance regress; the remaining Gaussian KS misses may be shape/mean drift that no scalar travel bound removes.",
+  "control": {
+    "candidate_id": "bcap-default-baseline-direction-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "cdf_ks",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "hypothesis": "A gap-adaptive radius keeps the v1 stationary bound but removes its travel-limited acquisition cost: Gaussian smoke confirms by update 500, stationary/shift retention stays >=70/72 and >=22/24, and grid100 precision stays >=.40.",
+  "id": "bcap-hydraulic-winner-gap-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "cdf_ks",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75"
+      },
+      "path": "reports/forge/bcap-default-baseline/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-hydraulic-winner-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

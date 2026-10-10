@@ -1,0 +1,85 @@
+{
+  "analysis_seconds": 5.25902632100042,
+  "endpoint_network_prior_decomposition": {
+    "joint": {
+      "centered": 31.022540326017157,
+      "shared": 0.17956915148307798,
+      "total": 31.202109477500233
+    },
+    "network": {
+      "centered": 33.29040064949942,
+      "shared": 0.16883090328808792,
+      "total": 33.4592315527875
+    },
+    "normalized_rowwise_dot": -0.31798809285474966,
+    "prior": {
+      "centered": 0.6050989419237263,
+      "shared": 0.00044024280739400086,
+      "total": 0.6055391847311205
+    },
+    "rowwise_dot": -1.4313306300091944
+  },
+  "limitations": "Cross-endpoint row correspondence and swapped tables are sensitivity diagnostics, not causal ablations or per-update compensation. Initial state is reconstructed through the public deterministic initialization API. Linearized widths omit activation crossings. No target labels or centers are consumed.",
+  "optimizer_updates_added": 0,
+  "original_bindings": {
+    "hydraulic": {
+      "attempt_id": "fd72f1620ca84e978ec36ba5df5229d4",
+      "checkpoint_sha256": "375389cd70110a83ff7789339c8c48c461aa8c3aab345fa63ced9404c5407692",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f"
+    },
+    "winner": {
+      "attempt_id": "7e5af598083640eba79d312deaa6a531",
+      "checkpoint_sha256": "8ed6c1f9967385539bdac034871b2497854dfc039bb964c70ef87bdb341cbe81",
+      "source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f"
+    }
+  },
+  "qualification_input": false,
+  "row_count": 20000,
+  "schema_version": 1,
+  "torch_global_rng_unchanged": true,
+  "training_or_evaluation_sampling_draws_added": 0,
+  "width_total_variance": {
+    "hydraulic": {
+      "hydraulic": {
+        "mean": 0.008854703492855758,
+        "median": 0.008313045929603505
+      },
+      "initial": {
+        "mean": 0.009980937516116214,
+        "median": 0.009296385394047136
+      },
+      "winner": {
+        "mean": 0.00882225190919602,
+        "median": 0.008404032978364288
+      }
+    },
+    "initial": {
+      "hydraulic": {
+        "mean": 3.875245574902713e-06,
+        "median": 3.5603479113432163e-06
+      },
+      "initial": {
+        "mean": 3.905808774421073e-06,
+        "median": 3.4903688011445918e-06
+      },
+      "winner": {
+        "mean": 3.927204151214502e-06,
+        "median": 3.3852710310825998e-06
+      }
+    },
+    "winner": {
+      "hydraulic": {
+        "mean": 0.008830609789495196,
+        "median": 0.008290200640963974
+      },
+      "initial": {
+        "mean": 0.00896316103404339,
+        "median": 0.008339397294373307
+      },
+      "winner": {
+        "mean": 0.005531999604975306,
+        "median": 0.005357085874144082
+      }
+    }
+  }
+}

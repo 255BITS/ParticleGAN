@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "max_rounds": 1,
+  "hypothesis": "Training-local finite shape progress controls excess expansion and increases native precision to at least.60 while retaining broad-vector PASS; exact Gaussian/native full gates remain decisive.",
+  "competing_explanation": "Estimated epsilon components can split real modes, finite excess correction can stall useful adversarial motion, cached assignments can misanchor centers, and global first-order mean protection does not protect every mode or finite mean.",
+  "scope": {
+    "view": "hydraulic_motion_diagnostic",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "hydraulic-local-shape-round3-v1",
+    "budget_seconds": 14400,
+    "candidate_budget_seconds": 6420
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-physics/hydraulic/round3/saved-finite.json",
+      "selector": [
+        "original_bindings",
+        "secant_v2"
+      ],
+      "use": "motivation_only",
+      "identity": {
+        "source_digest": "2ebd7377a68b5db8783006c3cb59ff84b7a625027974bf3387db722a940f8357"
+      }
+    }
+  ],
+  "prediction": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": ">=",
+    "threshold": 0.6
+  },
+  "falsifier": {
+    "task_id": "grid100",
+    "phase": "final",
+    "metric": "precision",
+    "op": "<",
+    "threshold": 0.48
+  },
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  },
+  "id": "hydraulic-local-shape-candidate-round3-v1",
+  "candidate": "hydraulic-local-shape-v3",
+  "control": {
+    "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "task_map": {
+      "two_pole": "two_pole",
+      "gaussian1d_smoke": "gaussian1d_smoke",
+      "gaussian1d_stability": "gaussian1d_stability",
+      "grid100": "grid100",
+      "vector_two_broad": "vector_two_broad"
+    }
+  }
+}

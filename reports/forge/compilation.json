@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "2b6d180877a78478a3557abb890a2e3a1df47e736140fc26ee0a41fea7684faa",
+  "input_digest": "8743cd0b2518a73c1c395c00e191e964f569e54fa387df24e8aebf51594c1610",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -592,6 +592,8 @@
     "configs/forge/ideas/bcap-dualnorm-momentum-v1.json": "bf7537439345e32c5326cc002d3764a095da6027d41f3c9879095076816ceefb",
     "configs/forge/ideas/bcap-dualnorm-smoothed-v1.json": "8aab8eaa3a06ca8e43014688d4b74916125d0aa2d63121131d2f2ed3651a62ae",
     "configs/forge/ideas/bcap-dualnorm-zero-v1.json": "2d12c398edbbeeb5e2a131fa00f4ed2eb1c32f1b35301d329278f0bb44253426",
+    "configs/forge/ideas/bcap-hydraulic-winner-gap-v1.json": "b8c72f947d358784ed18b10b4e700e030f6c4a2b219b2355b4cb30584f9cfe53",
+    "configs/forge/ideas/bcap-hydraulic-winner-travel-v1.json": "6aa4973d4d29f66a052ac9161e219f52ca4634bb32731e50e02a2b1ec51f4974",
     "configs/forge/ideas/bcap-nsgda-global-v1.json": "7d9e93670cf5a9231b93c80c4a26f862f8b4c92246d85a3adf52037597dc557f",
     "configs/forge/ideas/bcap-nsgda-layer-v1.json": "6a6f8fd1114dd2b948bc74e170534ec0639a63fe7e2c3b6d3ae14297e7e048f3",
     "configs/forge/ideas/bcap-particle-rownorm-only-v1.json": "c7e837726646af8fb781dacb4d0353cef2e0c075337615e2e1dfbe3dfe02f6f1",
@@ -625,6 +627,9 @@
     "configs/forge/ideas/forge-no-critic-penalty.json": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "b4b8b0ef96aaca94bdd29ef9b5edfe0f2bb17166571f7bd35c8b7b9aaf7249ac",
     "configs/forge/ideas/halloween-optimizer-loss-v1.json": "201760742c6bed39b2262eae42f28031deaccf5ea490047e126b356e220337ca",
+    "configs/forge/ideas/hydraulic-local-shape-v3.json": "b5c65a89b5ae10d87c5921f1813470f6f69e35e511d01fe573bbc2e9050c2eb2",
+    "configs/forge/ideas/hydraulic-output-travel-v1.json": "011fff431b70760d31d133b0edbdf5b9b0ed4614d485bc27c25aba50bead2edf",
+    "configs/forge/ideas/hydraulic-secant-deformation-v2.json": "58a770d5228d92ba9808505d2e41e71ab24d8dbf5d79c6afcd9a7ef590932a4f",
     "configs/forge/ideas/k3p-a2-off-native-diagnostic.json": "66e366ea1fced5d6575a5b4acd322e39564ce582ac591449cd5a79b5831907be",
     "configs/forge/ideas/k3p-bcap-matched-v1.json": "7eed5eb795a0cedf1200e3333ea225736e06a3db67d6b48720115a144fda71a8",
     "configs/forge/ideas/k3p-global-input-noise-v1.json": "e8cd2312d5ce4ca16afff0100d0995a80928f64a235d97a206f20ce496d31837",
@@ -795,6 +800,8 @@
     "configs/forge/studies/bcap-develop-integration-combined-deeper-study-v1.json": "0412d4f7419dbeb456216234efd86621a0296a27a31e3395aadea342bdc9618c",
     "configs/forge/studies/bcap-develop-integration-combined-study-v1.json": "b99628fa8b0597c3e97ca541b89531b4940c6b1174826d19588f00b20d239a78",
     "configs/forge/studies/bcap-develop-integration-winner-study-v1.json": "876c11d3b793740bd988e42faa08c618e889f9d560c4fc674d87279de2868357",
+    "configs/forge/studies/bcap-hydraulic-winner-gap-v1-study.json": "01b03023384f72e4381bbad10fced337b78b28f3edbc52ffc6f55c0fff5a601c",
+    "configs/forge/studies/bcap-hydraulic-winner-travel-v1-study.json": "cd1d9adf35c9749e70765d4f07e0fb579f23b0f8dfc2ed63b6e48894f0a46585",
     "configs/forge/studies/bcap-projection-baseline-review-baseline-v1-study.json": "0e6c30cdb97ec53cfc4e58433723c558392ef9e7c6192e10b54ec4a32a22cec5",
     "configs/forge/studies/bcap-projection-baseline-review-direction-v1-study.json": "29ccd2330cf5b1e93c21cd865a7641e3c7afd21dfd89e5d04231e96df01c8128",
     "configs/forge/studies/bcap-three-phase-cap-margin-v1-study.json": "ed92e2b6fb1def77263d9ae3001d51e61506aef0029e75b5631339a1e080e349",
@@ -809,6 +816,12 @@
     "configs/forge/studies/bcap-tier1-stability-repairs-finite-cap-study-v1.json": "5f43ec7435dd00881bd0f116fb69078e430aa2c4b28e05452aa37b7d6d2cd82e",
     "configs/forge/studies/bcap-tier1-stability-transport-study-v1.json": "3c0ae8724acce5a7ee9f137e14e8dc00961f612a79abdf7e5c73c3a5f874e4e1",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
+    "configs/forge/studies/hydraulic-deformation-candidate-round2-v1.json": "8a7cb99b5f0a86659d11702bcbdeb66d41fd998f4642445588d82b8e3a57cdd2",
+    "configs/forge/studies/hydraulic-deformation-control-round2-v1.json": "f2a4a5c8e561283216c653ef9b9ee11e37e03065f568aa94d69c16c9c7e60c5d",
+    "configs/forge/studies/hydraulic-local-shape-candidate-round3-v1.json": "f89911849ce92d8ecec9fe87ba87908a3aa98556aee839ed3c66e316af993125",
+    "configs/forge/studies/hydraulic-local-shape-control-round3-v1.json": "128f7ddd2c5b3d2d2e916cd72b5a4838b417631e3f7548722564cc1cbffcd98e",
+    "configs/forge/studies/hydraulic-motion-candidate-v1.json": "d79a1fc382355ae8c073bfd4f8137bdf5b19b159e2dec3825a0e278ef91b84a5",
+    "configs/forge/studies/hydraulic-motion-control-v1.json": "ae368168d5241073130b875490f0fd7ab771961bd65f65be91a98fd25fee6bea",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "41af583480fc0ddce517b227668beb1f3aa2e3de8a41257db4f614cf8d8f3fdf",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json": "7bc42b8af8ce3a3d47f1182bccf6826080a25dafd499cd4e4825804874e18656",
@@ -883,6 +896,7 @@
     "configs/forge/view-history/discriminator_stability-v7.json": "5dee961803741452be1a2af5476a4e29159d43eef05a1cf991af2988e6dcff0e",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/views/bcap-develop-integration-deeper-diagnostic-v1.json": "a01fb889a38052a45d2f997be2ccc4681274b635568dcc91aaf9261c0550e074",
+    "configs/forge/views/bcap-hydraulic-winner-diagnostic-v1.json": "7ceda764c0a73fadc75ce546919f4803f3a107514d37401a6ee4fa3f5d531b31",
     "configs/forge/views/bcap-projection-baseline-repair-diagnostic-v1.json": "2316c80b54e83891af0c4fab9415acfdca3898a3147c0d3f2efacb1ef4687c99",
     "configs/forge/views/bcap-tier1-stability-diagnostic-v1.json": "004ed4629a08d2887976f8efea051f18daaade8722dbc143a2179e24e8fcec3c",
     "configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json": "553fc656444317300ae6e52880dd5143ac00f2e5e8311fca4b368bead0741615",
@@ -891,6 +905,7 @@
     "configs/forge/views/discriminator_stability.json": "91d767ba798e067f02c00efacec3c63487550b46a47cc07fd1576b90739bf9c0",
     "configs/forge/views/formulation_comparison.json": "c3000889fa9e3ce4dfb30cda0aa1ab57ae7343f590aa485f8854dbab3aab8a25",
     "configs/forge/views/host_profile_transfer.json": "41b16932d4d186e4e2e0504d2ff696faad4ec02b493ac5874abd1d7f8be6b993",
+    "configs/forge/views/hydraulic_motion_diagnostic.json": "d73b7a5a97caa616b072c9440e9efc2c55683f65e8114fa42c0ace801abe2891",
     "configs/forge/views/k3p_two_pole_horizon.json": "9355ce6ef0db6e9321641056c1eecf1dd90b057cf6a72315d9755fdbfff99e23",
     "configs/forge/views/quality_coverage.json": "b8739e334dc1f993a453ae72da2b0b90316a3cd794a0cec0e448438650d3d3c5",
     "configs/forge/views/tier1_policy_coverage.json": "f6c669aede722bac3d957327b55d1db7625f108ada197323b8827c1883efc7f2",
@@ -1372,6 +1387,7 @@
     "reports/forge/records/readout-28f0c9140b4cfeef57f23dd2.json": "19c42309dab2b29860f329ff1ffd030ee414db205c1adb724c44cd3d5baceb56",
     "reports/forge/records/readout-2c2eb24207b627b2ad26ea18.json": "ea33499749feda0f3c739f23dd95ec7ea604a23ffbf3d24bf942163d3b5b08ba",
     "reports/forge/records/readout-2c30cecb0a3f37d001ce3b28.json": "0c4c6f6ac9397029799ce48198146fe95818bd3aa33a6dcff2d1a03907a7bc31",
+    "reports/forge/records/readout-3269bf08a67b0ba31bea7bf8.json": "46b24838fe4a20102f7086f63d7282657970a0a23beac6320f1618400aafa0d9",
     "reports/forge/records/readout-457f93f65c1e6782fba74306.json": "8feea7701b49752fe29bbd7852b94adac6afe255cf5dd613b19f9ae18eb09fde",
     "reports/forge/records/readout-4bd94051f203bbbb28a3e7a6.json": "defa338ee519c5fe8ada4635909abb41cb8a325249dbddf24e76e2bb7236a5ff",
     "reports/forge/records/readout-4e04059eb9f631a2e406447e.json": "af3decb42a53d103ac179fc6eb5308296ca9e75e3a146f86fd26280a08e4b643",
@@ -1384,6 +1400,7 @@
     "reports/forge/records/readout-6c0c2c5c6610ecfe73fe315d.json": "09808ccb928dc8f73a288e7509c52734ee79d757a4b0377015f1353ac293ab9c",
     "reports/forge/records/readout-75d5cdc5a88167d59ceff1b2.json": "aa98d62e2ee73527a430b8be11e063988a5bbd4e414726f832e1cd4fc23b72ea",
     "reports/forge/records/readout-7650981f9a48a164aebbd631.json": "8de65757f721f3b5365d531c9078d3a471fda007c20d1b590317d45aac5be3a8",
+    "reports/forge/records/readout-783482660df5696a6ed50f75.json": "66e46358b198a94e7dc6adcb7a88265af9ce9e18c263b94b5bf33574585912c5",
     "reports/forge/records/readout-813a2ad71ca3580b4a8d46c1.json": "eac2b794c3e9dfd16272125f684497d6c440b2e4689d8a0626d00ae42562bf07",
     "reports/forge/records/readout-8aacfe961f0e62b062e621fa.json": "64ad75edcb2418ad8521bd2ae5a7f7995e2aa89a3aead45d0e0e0da6c5c23aa8",
     "reports/forge/records/readout-8b207a728977752808cf002c.json": "f2a21cbfb0f6357c92dd1e5cc65bdfe0b39243886de588c7bdddc35ffebe867e",
@@ -1391,7 +1408,9 @@
     "reports/forge/records/readout-95e0cdfdc2f043a0046285c1.json": "ba3d28fc8ac3c97ef304efe74386fc00d0e1e2d44749cca1e61fcf54149c4fbd",
     "reports/forge/records/readout-9c29229a2baba56de3b40845.json": "42c3cda9502d8057ffb47ccaf0d5be24e7ace32aa21d0875b361197b64eca990",
     "reports/forge/records/readout-9c48b366ebe60b61721c269d.json": "73b4f63b734029a6ef8b7268a7bd276e21b41ae12ce44bbb77b1adbf01985c6b",
+    "reports/forge/records/readout-9ceeb0c30717382df4b3fb6f.json": "c29992b15298cf1f88f5ca7aca4b549ba5a461a04ef0d5f9587367b6259f337f",
     "reports/forge/records/readout-9e297f3a07ea06f0abc19272.json": "3c66539d3e6961218729a7c89a7331fbb60723c958e54ce555bf464fd17e2e0e",
+    "reports/forge/records/readout-9f6ac354828f6069c1e83b87.json": "38354a6603b80e019ce1372baff41b844dada7b6a71329c684bbb6a63b8c1629",
     "reports/forge/records/readout-a91dbccf086504f9accaee6b.json": "a9911efcddec0b1667d982cb94c405288a79c36322db11f60d52eadf799f689a",
     "reports/forge/records/readout-a9c44ece3a8e2265db452db4.json": "cd3a04eb5e2d35c31bf85b9f15fa646c9868e26fee354c5abc08dfc03d17d02d",
     "reports/forge/records/readout-abd06840fa1f42a4f64c13ab.json": "2be40326cc2e73e61ee2b658f1d4777cde11ceef722746d1de2d8b787ba20362",
@@ -1400,6 +1419,7 @@
     "reports/forge/records/readout-b214c23e088f39337c3d8784.json": "834d479bc5f2ed2c143e7cdcbdc8c0b9b6871ff04395bb234792303b6f312532",
     "reports/forge/records/readout-b42a8f277178ec58808d6b5c.json": "ff5124026553b4815ba636be295c32b93e46b6ce53aeecf44722ccd15d29f2b9",
     "reports/forge/records/readout-bc440d0469187c9299bd524c.json": "6b83eacb974f1325a4e6780f40d87f89e0e2bb9820c536046b827148549c3bfd",
+    "reports/forge/records/readout-bd78af3e5a0d3194f1692b77.json": "59ccfea0afdec2fbc51c4b6408e714632d60e17beb21d32c8a7b5d686ba0c531",
     "reports/forge/records/readout-c3df7159c90725fdef1cb700.json": "1c24655914e7975d0fbd0e3917a97aac126faa0eb260038f8407bb9e84e4345f",
     "reports/forge/records/readout-c723a88e5122f97011aabad9.json": "7afb9affa02f648be505384905ad339592a54b996df16d6e3bd1bcfa3b0d0745",
     "reports/forge/records/readout-d5a99d9470252f695a717dfc.json": "9ac98449bb850a20f476d9bbccdfbe51c079828c562abfec57a1b45047ea1ac4",
@@ -1407,6 +1427,7 @@
     "reports/forge/records/readout-dc31730b85dde3cf85253359.json": "8562263e81c06d703d8d8c10f42a7f7d772cc33a5a4ee29e7efa609063c8261d",
     "reports/forge/records/readout-dd6ff59094d1d766c5b0fe2b.json": "63cd32d46895e1cd2118d7984f8a6dad785885eaecdeea68a6aa645383282751",
     "reports/forge/records/readout-e3ab30a3f7ae4a6debe66e5d.json": "8c225e48b211bf995a6761bb1acc53b451476aa22d31c178e249f3f4ef52c3ec",
+    "reports/forge/records/readout-e3ad733b6fd7e95358ea8214.json": "d991d3d193f5e523738d1cd7602d2e553fbe9d955dbb1558188e18fb700365ad",
     "reports/forge/records/readout-eeec25002d17191c315f126b.json": "237d2cf45a68a80b43a6943efc40c490f0d2b0efb09043ca4ceb7142839b723f",
     "reports/forge/records/readout-f0dadd320f7db48cbf5d7b20.json": "fa14822b427c8374da40e250b7b0b61a260565ac41d604ef4a3c7fb106fdd459",
     "reports/forge/records/readout-f61373e09376e33fc4c501c8.json": "61ef3f3d28d157fb8f5222f6b42db9c0f2f39171283280908e1113e7de01a35e",
@@ -3713,7 +3734,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "30f99027182f84945946214709493df3ac87ae9e26073445845ac8ab10b57fb9",
+    "reports/forge/EXPERIMENT_MEMORY.md": "55d3b1aa0417b46128b689e34b4fa8633f981a52d77b9ed3d72496b1af2d69a7",
     "reports/forge/publication-records.json": "1f6664212046adc861ccd05a62ca815cd7b0cf21b5274c015cbb36ac5129205d"
   },
   "pending_readout": [
@@ -3727,7 +3748,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 794,
+  "record_count": 800,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
@@ -3739,5 +3760,5 @@
   "scientific_source_digests": [
     "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
-  "view_count": 13
+  "view_count": 15
 }

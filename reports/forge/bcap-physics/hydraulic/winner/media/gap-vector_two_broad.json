@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "1b2a64ff739a2b394712f6d2b6ebf00d9d036d0c9f253532111d8a23ebcf2649",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "e0c0b5311cdf2f1777280c6bdd01734663276a60a58c4934d5d92f19ee62480e",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/61143b1f02a641c5b6e16aca8c7f6774/observed-samples.pt": "bd64f7563a633ed9a93ec1a3bb37abb552042ade78c46e7de9419e89a0504304"
+  },
+  "task_id": "vector_two_broad"
+}

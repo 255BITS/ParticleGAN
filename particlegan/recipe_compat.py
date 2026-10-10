@@ -3,6 +3,8 @@
 SEARCH_RECIPE_DEFAULTS = {
     "critic_step_mode": "none",
     "constraint_geometry_mode": "none",
+    "hydraulic_travel_fraction": 0.0,
+    "hydraulic_travel_radius": "real_spacing",
     "kinetic_transport_weight": 0.0,
     "kinetic_transport_local_weight": 0.0,
     "kinetic_transport_projections": 32,

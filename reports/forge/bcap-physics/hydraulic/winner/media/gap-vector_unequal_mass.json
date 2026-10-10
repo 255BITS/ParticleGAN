@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "524fffcc79dec595ef66a49cbfc4c330c16fa213973f911ba002351cc612140b",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "fe2774b34823996363fdfb7004972449b6e67eb473bd3e8801d207463c3e2d79",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/f00f6c9534cb49de926b5bcd7a33027a/observed-samples.pt": "0526337822a6d258f58d60227c440d23943ffcee5424a749746aee74ce4c8d01"
+  },
+  "task_id": "vector_unequal_mass"
+}

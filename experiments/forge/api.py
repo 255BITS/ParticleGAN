@@ -201,6 +201,11 @@ def task_policy_blockers(task, candidate):
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
+    if recipe.hydraulic_travel_fraction and (
+            task.get("adapter") in ("transfer_behavior", "word_joint")
+            and task.get("execution", {}).get("host") != "mode_hold"):
+        return [f"{task.get('id', '<task>')}: caller-owned host does not consume the public "
+                "GANTrainer hydraulic travel bound; mechanism is unsupported"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)

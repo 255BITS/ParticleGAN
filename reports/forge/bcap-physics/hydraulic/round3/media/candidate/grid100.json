@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "1963db203957463a6ec361fcc7f23b546ef51a3eba19e2387a9ef1cfc5f7d0ca",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "b255dfc15c3e37c19dd3b0201da6f80967b9d0ec81a0080fd1f3c8374b9608e6",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/config.json": "26f12f80504a9e56e3442ef336c71bceabb3378fe74ef0349d0048979812ea04",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/events.jsonl": "30c163d8b4502d25615d78f32a7c5fb6bc5f2649ee391d42cb10f1ec97fbb4c5",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_000050.npz": "78803438d2b27598031892269c8561d8b233dfc3f0e527651ebe402fb6bc255d",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_000750.npz": "9c593d66db7e4af5bf36690b4e3d65db6e924e5a118d69dc0127cae12698515b",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_001750.npz": "3c32577b2b0f4e2d1014cef261b11da5d996732bb5ec6399ec019951c51cf456",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_002750.npz": "be829c503dc21414511c0940f9ce8436f98ac007a622433518bf698f4484e7a3",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_004000.npz": "576d9d4ca14abb16208d9f7908deb8d9b02ddf9603de2320a51e33b3c354b27a",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_005000.npz": "652f33c0adf5204c34d0d9bc92f34474b859124f335223a288677ddcb9d7c62b",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_006000.npz": "1a62d5f65170cae247af551c96fe7fb1e51b4058bb4d4efc5b2a73b155f508d8",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/snapshots/step_007000.npz": "07355b7708c1f49835a6ec249ceaecad45b73cdb43d246fdf868f875545d53d3",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round3-20261009/hydraulic/queue/hydraulic-local-shape-round3-v1/481dba04c0ae418996fe0de23af730da/native100/grid100/summary.json": "0c5d33704db3c12a97c785cbb28e3eb4dbd16448b4383bdf93ef16060f4e9159"
+  },
+  "task_id": "grid100"
+}

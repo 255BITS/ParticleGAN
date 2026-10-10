@@ -1,0 +1,122 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "vector_two_broad"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 7,
+      "qualification_tier": 1,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 8,
+      "qualification_tier": 1,
+      "task": "vector_overlap"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 9,
+      "qualification_tier": 1,
+      "task": "vector_spiral"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 10,
+      "qualification_tier": 1,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 11,
+      "qualification_tier": 1,
+      "task": "img_bars4"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 12,
+      "qualification_tier": 1,
+      "task": "img_blobs4"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 13,
+      "qualification_tier": 1,
+      "task": "img_intensity2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 14,
+      "qualification_tier": 1,
+      "task": "grid100"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 15,
+      "qualification_tier": 1,
+      "task": "rotated100"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 16,
+      "qualification_tier": 1,
+      "task": "staggered100"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bcap-hydraulic-winner-diagnostic-v1",
+  "policy_change_reason": "Hydraulic v1 on the selected direction-blend winner: every revision-8 task executed by the public GANTrainer, original gates and own checkpoint dependencies, no tier veto and no qualification credit. Caller-owned hosts do not consume the bound.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

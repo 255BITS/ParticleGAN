@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "hydraulic_motion_diagnostic",
+  "goal": "discriminator_stability",
+  "revision": 1,
+  "evidence_scope": "research_diagnostic",
+  "eligibility": {},
+  "assignments": [
+    {
+      "task": "two_pole",
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1
+    },
+    {
+      "task": "gaussian1d_stability",
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1
+    },
+    {
+      "task": "grid100",
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1
+    },
+    {
+      "task": "vector_two_broad",
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1
+    }
+  ],
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Scoped motion diagnostic preserves full gates but supplies no ordinary-tier qualification."
+  },
+  "policy_change_reason": "Explicit mechanism scope: shared anchors, own-smoke Gaussian continuation, native overshoot and passing vector guardrail. Original tasks, budgets and checkpoint requirements unchanged.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "raw_metrics_only"
+  }
+}
