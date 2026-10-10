@@ -1,0 +1,42 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Enable local auxiliary weight1 and anisotropic_knn_v1 real-covariance Gaussian feature frame; global transport0, projectionnone, finite-capnone and native SVD inherited.",
+    "Deterministic evenly indexed subset256 real references/64 anchors,16 other neighbors, trace ridge0.1, identity coordinates through8 dimensions otherwise fixed8-column DCT; all batch rows contribute feature means.",
+    "Checkpoint cumulative geometry telemetry; it never controls training. Original optional output-marginal consumers retain conditioning exclusion, generated-branch gradient ownership and original protected objectives."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-three-phase/README.md",
+  "id": "bcap-moonshot-anisotropic-v1-candidate",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Local density error can reflect geometry mismatch: real-only neighborhood covariance shapes fixed batch features so narrow directions receive stronger gradients than wide directions. L=mean_anchor,m[((E_fake phi-E_real phi)/E_real phi)^2], phi=exp(-(z-a)^T H^-1(z-a)/(2m^2)), m=1,2,4; H=Cov16Neighbors+max(0.1trace(Cov)/d,eps*globalRealVariance)I. Detached geometry consumes existing real batches only; no fitting to evaluator or target metadata.",
+  "parent": "bcap-three-phase-incumbent-v1",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "kinetic_transport_local_geometry": "anisotropic_knn_v1",
+    "kinetic_transport_local_weight": 1.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

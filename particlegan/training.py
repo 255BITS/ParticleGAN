@@ -122,6 +122,10 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        self.anisotropic_geometry_stats = None
+        if recipe.kinetic_transport_local_geometry == 'anisotropic_knn_v1':
+            from .anisotropic_transport import new_geometry_stats
+            self.anisotropic_geometry_stats = new_geometry_stats()
         if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
             raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
         if recipe.constraint_geometry_mode == "strict_progress" and any(
@@ -389,7 +393,7 @@ class GANTrainer:
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             transport = (recipe.kinetic_transport_loss(fake_g, real_g)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
-            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g, diagnostics=self.anisotropic_geometry_stats)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
@@ -493,6 +497,7 @@ class GANTrainer:
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
             "serial_backward": True,
+            **({'anisotropic_geometry': self.anisotropic_geometry_stats} if self.anisotropic_geometry_stats is not None else {}),
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
@@ -562,6 +567,11 @@ class GANTrainer:
         saved_recipe = state["recipe"]
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
+        if self.anisotropic_geometry_stats is not None:
+            from .anisotropic_transport import validate_geometry_stats
+            validate_geometry_stats(state['anisotropic_geometry'])
+            if state['anisotropic_geometry']['calls'] != state['completed_steps']:
+                raise ValueError('anisotropic geometry calls do not match completed updates')
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
@@ -690,6 +700,8 @@ class GANTrainer:
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        if self.anisotropic_geometry_stats is not None:
+            self.anisotropic_geometry_stats = dict(state['anisotropic_geometry'])
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

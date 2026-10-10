@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-moonshot-anisotropic-v1"
+  },
+  "candidate": "bcap-moonshot-anisotropic-v1-candidate",
+  "competing_explanation": "Pure local moments can miss wrong component mass, lose long-range force when fake outputs lie outside kernels, and fit noisy minibatch covariance. Shared G/FullDualNorm can distort forces; 8-D DCT discards high-dimensional differences. Duplicate atom neighborhoods yield zero covariance and epsilon-scale kernels, explicitly retaining a vanishing-force limitation. Local-only transport previously broke two-pole sustained critic slope; improved covariance cannot substitute for mass/precision/temporal gates. Runtime contention/native SVD can exhaust the unchanged900s word allowance. This differs from isotropic fourth-neighbor local-v2, balanced assignment, prior-only routing and CG4 output-force filtering; none is added after results.",
+  "control": {
+    "candidate_id": "bcap-moonshot-anisotropic-v1-baseline",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_anisotropic",
+    "threshold": 0.85
+  },
+  "hypothesis": "One global anisotropic local feature loss repairs sustained anisotropic and unequal-width density shape while retaining all six incumbent Tier1 gates. Primary success requires original complete sustained gates. Machine-readable diagnostic predicts final vector_anisotropic component_covariance_error<=0.85; an endpoint pass alone does not establish repair.",
+  "id": "bcap-moonshot-anisotropic-v1-candidate-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_anisotropic",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+        "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      },
+      "path": "reports/forge/bcap-three-phase/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-moonshot-anisotropic-v1-diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

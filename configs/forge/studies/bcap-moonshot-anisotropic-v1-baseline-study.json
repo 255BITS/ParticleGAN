@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-moonshot-anisotropic-v1"
+  },
+  "candidate": "bcap-moonshot-anisotropic-v1-baseline",
+  "competing_explanation": "Source regression or contention-induced incomplete runtime could invalidate the fresh control without identifying a new scientific mechanism.",
+  "control": {
+    "candidate_id": "bcap-moonshot-anisotropic-v1-candidate",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "The unchanged incumbent retains6/6 original Tier1 gates; original fixed two-pole final grad_med <=1 is the machine-readable control prediction.",
+  "id": "bcap-moonshot-anisotropic-v1-baseline-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "measured_source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+        "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      },
+      "path": "reports/forge/bcap-three-phase/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-moonshot-anisotropic-v1-diagnostic"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

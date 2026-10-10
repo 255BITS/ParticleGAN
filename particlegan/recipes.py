@@ -84,6 +84,7 @@ class Recipe:
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
+    kinetic_transport_local_geometry: str = "isotropic"
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -392,6 +393,10 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
+        if self.kinetic_transport_local_geometry not in ("isotropic", "anisotropic_knn_v1"):
+            raise ValueError("kinetic_transport_local_geometry must be isotropic or anisotropic_knn_v1")
+        if self.kinetic_transport_local_geometry != "isotropic" and not self.kinetic_transport_local_weight:
+            raise ValueError("anisotropic local geometry requires positive kinetic_transport_local_weight")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -603,12 +608,15 @@ class Recipe:
         return self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)
 
-    def kinetic_transport_local_loss(self, fake, real):
-        """Weighted local-v2 residual on the same caller-owned output batches.
+    def kinetic_transport_local_loss(self, fake, real, *, diagnostics=None):
+        """Weighted selected local residual on caller-owned output batches.
 
         Anchors, bandwidths and normalizers come from detached real targets.
         This auxiliary term does not become a protected projection objective.
         """
+        if self.kinetic_transport_local_geometry == "anisotropic_knn_v1":
+            from .anisotropic_transport import anisotropic_transport_local_loss
+            return self.kinetic_transport_local_weight * anisotropic_transport_local_loss(fake, real, diagnostics=diagnostics)
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
 

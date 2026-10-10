@@ -31,6 +31,7 @@ TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"
 TECHNIQUE_RECIPE_FIELDS = frozenset({
     "optimizer_svd_backend",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
+    "kinetic_transport_local_geometry",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",

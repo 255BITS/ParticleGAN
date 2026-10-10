@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "software_only": true,
+  "qualification_input": false,
+  "allowance_seconds": 300,
+  "focused_tests": {
+    "passed": 128,
+    "reported_seconds": 9.93
+  },
+  "archived_develop_compatibility": {
+    "passed": 63,
+    "reported_seconds": 16.43,
+    "baseline_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+    "strict_actual_state_pairs": 42,
+    "metadata_adapter": [
+      "critic_step_mode=none",
+      "optimizer_svd_backend=native",
+      "kinetic_transport_local_geometry=isotropic"
+    ],
+    "source_ancestry": "Traverse preserved nested evaluator revision ancestry to original develop source; original task laws/gates remain strict"
+  },
+  "earlier_software_attempts": [
+    {
+      "outcome": "no tests: stale field-boundary test filename",
+      "reported_seconds": 0.0
+    },
+    {
+      "passed": 104,
+      "reported_seconds": 8.48
+    },
+    {
+      "passed": 126,
+      "reported_seconds": 7.96
+    },
+    {
+      "passed": 127,
+      "failed": 1,
+      "cause": "CUDA software fixture networks initially on CPU; fixed fixture device placement",
+      "reported_seconds": 9.44
+    },
+    {
+      "passed": 38,
+      "failed": 25,
+      "cause": "unadapted archive comparison checked three new inactive metadata fields and expected direct rather than nested source ancestry",
+      "reported_seconds": 16.62
+    }
+  ],
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic",
+  "artifacts": {
+    "software.xml": "d0acdc922007ad029ad90256550e1d89de515d9e176d5de82df03d857ce1fd4c",
+    "compatibility-adapted.xml": "e9ffae92c2108f6289274e64828d7aa0b386f2b88e1c10f5fdf22156e4386f5f",
+    "logs/software.log": "a17c1f926dcd4b6532dbaf23511eadc94dd22060cbfb7b3183220291afd7bf15",
+    "logs/compatibility-adapted.log": "fbbad9f9e9552b24f66e06151084d45a3d59bd7ba9d598c291ee13e9186aa539",
+    "compatibility/test_bcap_integration_compatibility_adapted.py": "cc267b63ebda98378e151761fb5b58c93a523d9509fc214df3549304ced5c6a7"
+  }
+}

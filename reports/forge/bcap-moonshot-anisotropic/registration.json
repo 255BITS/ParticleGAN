@@ -1,0 +1,653 @@
+{
+  "arms": {
+    "baseline": {
+      "active_tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "admission": "READY",
+      "candidate_id": "bcap-moonshot-anisotropic-v1-baseline",
+      "candidate_revision": "2a263210f0b31bb739bcb4bb840e46220355fd0e336bdc57c92602c732afd43b",
+      "full_reservation_seconds": 22920,
+      "source_digest": "883c2cde79f5565b8449cc3571004e50f73bfc565f2bb86d6c032c234f7917a1",
+      "study_admission": {
+        "binding_sha256": "7e305a020753a439ceb581f4055b098c29887e0edee6525f3d64bff8fe7b2a8f",
+        "contract_sha256": "9f27de53960639851936db64851809cc25a0791c7beaf18f81d91671a19fc8bc",
+        "control_binding_sha256": "a8cea8c85fbd670b52935985e2dc89d94b48a6611936d5d7865acb80b7921d70",
+        "policy_fingerprint": "644a7ff5d523fa16d038132f89646955f81c68da586acca54800a78ba8e530c4",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "819b8e7d8d6880e9e473be3cf60aaf78627234278b0dbab628bea1ac53da3f84"
+      },
+      "study_id": "bcap-moonshot-anisotropic-v1-baseline-study"
+    },
+    "candidate": {
+      "active_tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "admission": "READY",
+      "candidate_id": "bcap-moonshot-anisotropic-v1-candidate",
+      "candidate_revision": "9f7b33b37644bdc1722b760c7b584b079db1d0ac6c96f5b91a7ae9f9df0895a2",
+      "full_reservation_seconds": 22920,
+      "source_digest": "883c2cde79f5565b8449cc3571004e50f73bfc565f2bb86d6c032c234f7917a1",
+      "study_admission": {
+        "binding_sha256": "a8cea8c85fbd670b52935985e2dc89d94b48a6611936d5d7865acb80b7921d70",
+        "contract_sha256": "4421ab2e9a39c86552384e8de8b3d3465627e5e5c9dbaaaffd76cbaee150c9c5",
+        "control_binding_sha256": "7e305a020753a439ceb581f4055b098c29887e0edee6525f3d64bff8fe7b2a8f",
+        "policy_fingerprint": "644a7ff5d523fa16d038132f89646955f81c68da586acca54800a78ba8e530c4",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "55e0e690a1d374aaab29c14f6ecdd4cbb38c4a080f311c9db5430581a59f2ba2"
+      },
+      "study_id": "bcap-moonshot-anisotropic-v1-candidate-study"
+    }
+  },
+  "campaign_ceiling_seconds": 48000,
+  "campaign_id": "bcap-moonshot-anisotropic-v1",
+  "candidate_ceiling_seconds": 24000,
+  "full_reservation_seconds": 45840,
+  "original_requirements": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 2,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 2,
+      "task": "five_word_joint_hold"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 2,
+      "task": "trajectory"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 2,
+      "task": "residual_student"
+    },
+    {
+      "importance": "required",
+      "order": 9,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "required",
+      "order": 10,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "required",
+      "order": 11,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "required",
+      "order": 18,
+      "qualification_tier": 2,
+      "task": "grid100"
+    },
+    {
+      "importance": "required",
+      "order": 19,
+      "qualification_tier": 2,
+      "task": "rotated100"
+    },
+    {
+      "importance": "required",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "staggered100"
+    }
+  ],
+  "per_arm_full_reservation_seconds": 22920,
+  "prepared_commit": "9005ed73a09a740174f590fbfd543440935040eb",
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "registration_path": "reports/forge/bcap-moonshot-anisotropic/registration.json",
+  "schema_version": 1,
+  "scope": "phase3_paired_research_diagnostic",
+  "software_allowance_seconds": 300,
+  "source_digest": "883c2cde79f5565b8449cc3571004e50f73bfc565f2bb86d6c032c234f7917a1",
+  "source_rebindings": {
+    "ae_gan_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "five_word_joint_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "five_word_joint_smoke": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "residual_student": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "trajectory": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "two_pole": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    },
+    "unused_token_hold": {
+      "particlegan/conditional_transport.py": {
+        "after": "c60f930398cf7b4dde9579f0fd106dffa6869599f9d111bacca85ed1913cdacb",
+        "before": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      }
+    }
+  },
+  "spec_path": "reports/forge/bcap-moonshot-anisotropic/spec.json",
+  "spec_sha256": "0bcc84622d06047f664ac15c1523dd03e0c9235cf628ec8d6d656dd41cf71f34",
+  "stop": "One baseline and one global substantive candidate; full original questions, no seed experiments, scientific retry/tuning, ordinary qualification or automatic promotion.",
+  "task_contracts": {
+    "ae_gan_hold": "1551e874d59b736a5b0d7cea135a47f62d75391e5564bdc978f4d93194cb4a79",
+    "five_word_joint_hold": "dcb9e44e63373d1b5eeab20d10cb06e2998489745e699ca317ca30b8dfd7952f",
+    "five_word_joint_smoke": "6d50f46e46f76d0630ac41cad2ca3e60456cebc2662c20e375d94a6402d099ed",
+    "gaussian1d_smoke": "4460635c069d10da44c5f7199d940fdd1531b604eddf64675120510e0f3fb7d1",
+    "gaussian1d_stability": "65d760ce7a45ee3ec062e76f57026ff09b29463711ea749bcd7079acbc0038d7",
+    "grid100": "e1b414bd92140a95338f0bc62d6c5328efa919e2913457a258ac2de33daeac3f",
+    "residual_student": "ebdf9ac3f8b9380ecdaa54794b3955fd463483ea9907b36d2791b64ffe9ee46a",
+    "ring16_acquisition": "21a9156304afc6f6612faf834532612415b631a5cfa1664b68a353119cc712ab",
+    "rotated100": "282ecf1465be0d861b1d500249fb1aadc0303310f74e9b8ec9b7240684e274ed",
+    "staggered100": "278129827827015bd53d13f1b7136f37eaafc9cbf34f46fcbf531bfb7eb5ba72",
+    "trajectory": "e6e41adf43177c540a2c6185ab7ed1aeeb729d1c77ad78633d0799ac0163f980",
+    "two_pole": "877f535e9bdcbdf7d8365aa52e40690b92e37c48bc4ca836e08a7faf13b132f9",
+    "unused_token_hold": "bc111d87332fcb991b66dda97ba7449a40158fbae4fb1fd161e913527d2b90d7",
+    "vector_anisotropic": "ce96f89823835509b1869ae6aff565270b06cf5e2cd018c6cf946e587352d0f5",
+    "vector_unequal_mass": "b0f07e1064fa9c13271f630bc93f4979625c5c96ba79930349c8c8a76b1ebe46",
+    "vector_unequal_width": "7cc03a981745e52719fead313c50cd4e9f048dfa7e8cff55ca30a9d22889ca15"
+  },
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "through_tier": 1,
+  "view": "bcap-moonshot-anisotropic-v1-diagnostic",
+  "view_revision": 1
+}

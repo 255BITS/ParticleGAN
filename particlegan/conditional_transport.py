@@ -15,6 +15,10 @@ class OutputMarginalTransport:
         self.active_calls = 0
         self.loss_sum = 0.0
         self.maximum_loss = 0.0
+        self.geometry_stats = None
+        if recipe.kinetic_transport_local_geometry == 'anisotropic_knn_v1':
+            from .anisotropic_transport import new_geometry_stats
+            self.geometry_stats = new_geometry_stats()
 
     def add(self, total, fake, real, *, conditioning=None):
         if not (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
@@ -30,7 +34,7 @@ class OutputMarginalTransport:
         if self.recipe.kinetic_transport_weight:
             term = term + self.recipe.kinetic_transport_loss(fake, real)
         if self.recipe.kinetic_transport_local_weight:
-            term = term + self.recipe.kinetic_transport_local_loss(fake, real)
+            term = term + self.recipe.kinetic_transport_local_loss(fake, real, diagnostics=self.geometry_stats)
         value = float(term.detach())
         self.active_calls += 1
         self.loss_sum += value
@@ -41,7 +45,8 @@ class OutputMarginalTransport:
         return dict(schema_version=1, consumer='output_marginal_v1',
                     conditioning_used_in_distance=False, calls=self.calls,
                     active_calls=self.active_calls, loss_sum=self.loss_sum,
-                    maximum_loss=self.maximum_loss)
+                    maximum_loss=self.maximum_loss,
+                    **({'anisotropic_geometry': dict(self.geometry_stats)} if self.geometry_stats is not None else {}))
 
     def load_state_dict(self, state):
         expected = self.state_dict()
@@ -53,5 +58,12 @@ class OutputMarginalTransport:
                 or any(type(state[key]) not in (int, float) or not math.isfinite(state[key])
                        or state[key] < 0 for key in ('loss_sum', 'maximum_loss'))):
             raise ValueError('invalid output marginal transport checkpoint')
+        if self.geometry_stats is not None:
+            from .anisotropic_transport import validate_geometry_stats
+            validate_geometry_stats(state['anisotropic_geometry'])
+            if state['anisotropic_geometry']['calls'] != state['active_calls']:
+                raise ValueError('anisotropic geometry calls do not match active transport calls')
         for key in ('calls', 'active_calls', 'loss_sum', 'maximum_loss'):
             setattr(self, key, state[key])
+        if self.geometry_stats is not None:
+            self.geometry_stats = dict(state['anisotropic_geometry'])
