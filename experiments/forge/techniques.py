@@ -70,6 +70,8 @@ def technique_signature(value):
     }
     if recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}:
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
+    if recipe.optimizer_secant_mode != "none":
+        mechanisms["secant_proposal_length"] = recipe.optimizer_secant_mode
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -111,6 +113,8 @@ def recipe_field_active(name, value, *, task=None):
                     and execution.get("prior", {}).get("learnable", True))
     if name == "optimizer_momentum":
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
+    if name == "optimizer_secant_mode":
+        return recipe.optimizer_family == "dualnorm"
     if name == "optimizer_smoothing":
         return recipe.optimizer_family == "dualnorm"
     if name == "optimizer_convolution":

@@ -553,6 +553,9 @@ class NormalizedOptimizer(Optimizer):
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
     optimizer_class = NormalizedOptimizer
+    if recipe.optimizer_secant_mode == "bounded":
+        from .secant import SecantOptimizer
+        optimizer_class = SecantOptimizer
     if critic is not None and recipe.critic_step_mode == "finite_cap":
         from .critic_cap import CriticCapOptimizer
         optimizer_class = CriticCapOptimizer

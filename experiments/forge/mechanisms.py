@@ -107,6 +107,7 @@ class MechanismAudit:
     def __init__(self, recipe, critic_optimizer, generator_optimizers):
         self.recipe = recipe
         self.critic_optimizer = critic_optimizer
+        self.generator_optimizers = list(generator_optimizers)
         self.rows = {name: dict(requested=False, enabled=False, calls=0, eligible=0, applied=0)
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
@@ -134,7 +135,7 @@ class MechanismAudit:
                 row["applied"] += int(_count(result) > 0)
                 return result
             guard.apply_ = apply
-        for optimizer in generator_optimizers:
+        for optimizer in self.generator_optimizers:
             for name, mechanism in (("a2", optimizer.latent_damping),
                                      ("direct_particle_gain", optimizer.direct_response)):
                 if mechanism is None:
@@ -188,6 +189,15 @@ class MechanismAudit:
                 calls=steps, eligible=steps, applied=steps,
                 reason='Actual original-training-panel finite cap checked on every critic update',
                 stats=deepcopy(stats))
+        if self.recipe.optimizer_secant_mode != 'none':
+            optimizers = [self.critic_optimizer, *self.generator_optimizers]
+            stats = [dict(roles=sorted({g['role'] for g in optimizer.param_groups}),
+                          counters=deepcopy(getattr(optimizer, 'secant_stats', {})),
+                          by_role=deepcopy(getattr(optimizer, 'secant_role_stats', {}))) for optimizer in optimizers]
+            calls = sum(item['counters'].get('steps', 0) for item in stats)
+            rows['secant_proposal_length'] = dict(requested=True, enabled=all(bool(item['counters']) for item in stats),
+                calls=calls, eligible=calls, applied=calls,
+                reason='Actual normalized proposal length controlled without additional forwards or draws', stats=stats)
         return {"schema_version": 1, "mechanisms": rows}
 
 
@@ -196,7 +206,7 @@ def mechanism_blockers(audit):
     if not isinstance(audit, dict) or not isinstance(audit.get("mechanisms"), dict):
         return ["missing per-mechanism activation evidence"]
     rows = audit["mechanisms"]
-    if set(rows) not in (set(NAMES), set(NAMES)|{'critic_step_damping'}):
+    if not set(NAMES) <= set(rows) or not set(rows) <= set(NAMES) | {'critic_step_damping', 'secant_proposal_length'}:
         return ["incomplete per-mechanism activation evidence"]
     blockers = []
     for name, row in rows.items():

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "campaign_id": "bcap-moonshot-secant-v1",
+  "view_id": "bcap-moonshot-secant-diagnostic-v1",
+  "paid_ceiling_seconds": 48000,
+  "candidate_budget_seconds": 24000,
+  "software_allowance_seconds": 300,
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "arms": [
+    {
+      "role": "baseline",
+      "candidate_id": "bcap-moonshot-secant-baseline-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-secant-candidate-v1",
+      "recipe_overrides": {},
+      "changed_factors": [
+        "Unchanged chosen baseline on this track's common frozen source"
+      ],
+      "mechanism_rationale": "Exact zero-override inheritance of the selected Phase2 incumbent, freshly measured6/6 on its original common source.",
+      "hypothesis": "The unchanged incumbent retains the original two-pole final critic slope at or below1 on the fresh secant source, and supplies all16 source-matched diagnostic outcomes.",
+      "competing_explanation": "A control regression can reflect source compatibility or original native-word timeout under shared GPU contention; incomplete producers cannot certify holds.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/phase2-results.json",
+          "selector": [],
+          "identity": {
+            "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1,
+        "phase": "final"
+      }
+    },
+    {
+      "role": "candidate",
+      "candidate_id": "bcap-moonshot-secant-candidate-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-secant-baseline-v1",
+      "recipe_overrides": {
+        "optimizer_secant_mode": "bounded"
+      },
+      "changed_factors": [
+        "Enable only optimizer_secant_mode=bounded on every G/E/D parameter and owned prior row; retain native SVD, inactive projection/transport and all incumbent fields"
+      ],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Preserve actual rounded DualNorm proposal direction; length fraction is clamp[1/16,1](min(1,||s||||g||/(2||y||||proposal||),sqrt(1+theta)*previous_effective_rate/current_rate)). Per-parameter or owned-prior-row history checkpoints previous parameter/gradient/effective rate, theta, validity and visit clock. No new forwards, data or RNG. The floor bounds stochastic collapse but relaxes the curvature inequality. See preregistered theory.md.",
+      "hypothesis": "Bounded local secant length control suppresses finite normalized overshoot enough to repair unequal-width sustained component covariance (final error<=.85 and required terminal suffix>=5) while preserving all incumbent Tier1 passes. Prediction is final covariance<=.85; the unchanged full task gate remains authoritative. Gaussian retention and rare/native quality are separately reported outcomes.",
+      "competing_explanation": "Gradient differences also include stochastic batch changes and the moving opposing player, so this can damp useful response rather than estimate curvature. Shared normalized directions, rare allocation and width geometry may dominate; a low endpoint covariance without sustained gates is insufficient. Floor hits may indicate confounded curvature and gains cannot prove the convex paper guarantee.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/phase2-results.json",
+          "selector": [],
+          "identity": {
+            "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "vector_unequal_width",
+        "metric": "component_covariance_error",
+        "op": "<=",
+        "threshold": 0.85,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "vector_unequal_width",
+        "metric": "component_covariance_error",
+        "op": ">",
+        "threshold": 0.85,
+        "phase": "final"
+      }
+    }
+  ]
+}

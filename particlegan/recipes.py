@@ -186,6 +186,8 @@ class Recipe:
     # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
     # Native retains the original computation and archived checkpoint identity.
     optimizer_svd_backend: str = "native"
+    # Bounded secant length control; default preserves old optimizer packets.
+    optimizer_secant_mode: str = "none"
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
@@ -242,6 +244,12 @@ class Recipe:
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if self.optimizer_secant_mode not in ("none", "bounded"):
+            raise ValueError("optimizer_secant_mode must be none or bounded")
+        if self.optimizer_secant_mode != "none" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode != "none" or self.critic_step_mode != "none"):
+            raise ValueError("secant requires zero-momentum full DualNorm without projection/finite-cap composition")
         if self.optimizer_svd_backend not in ("native", "cpu"):
             raise ValueError("optimizer_svd_backend must be native or cpu")
         if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":

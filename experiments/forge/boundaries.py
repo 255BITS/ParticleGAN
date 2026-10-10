@@ -29,7 +29,7 @@ TUNABLE_FIELDS = frozenset({
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
-    "optimizer_svd_backend",
+    "optimizer_svd_backend", "optimizer_secant_mode",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
