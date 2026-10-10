@@ -253,6 +253,58 @@ def publisher(root):
     return module
 
 
+def audit_saved_comparison(root, collection, roles):
+    """Verify existing receipts for arbitrary arms; never construct a model."""
+    path = root / "reports/forge/bcap-develop-integration/audit.py"
+    spec = importlib.util.spec_from_file_location("phase2_saved_state_audit", path)
+    audit = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(audit)
+    sources, requests = audit.source_bindings(collection, root)
+    grouped, unavailable = {}, []
+    for entry in collection["final"]:
+        if entry["row"]["gate_status"] not in {"PASS", "FAIL"}:
+            unavailable.append(dict(role=entry["item"]["role"], task_id=entry["row"]["task_id"],
+                reason="Incomplete/invalid evidence cannot establish complete consumed-state matching"))
+            continue
+        for variant, saved in audit.saved_variants(entry):
+            grouped.setdefault((entry["row"]["task_id"], variant), []).append(saved)
+    proofs = []
+    for (task_id, variant), entries in sorted(grouped.items()):
+        require(len({entry["item"]["role"] for entry in entries}) == len(entries), "Ambiguous selected arm evidence")
+        first = entries[0]
+        initial = audit.metadata(first)
+        first_bindings, first_states = audit.non_eval(first["saved"])
+        steps = {entry["item"]["role"]: entry["item"]["provenance_checkpoint"]["completed_steps"] for entry in entries}
+        equal_steps = len(set(steps.values())) == 1
+        for entry in entries:
+            require(audit.equal(initial, audit.metadata(entry)), f"{task_id}: actual initial models/priors differ")
+            bindings, states = audit.non_eval(entry["saved"])
+            require(audit.equal(first_bindings, bindings), f"{task_id}: named consumed-stream bindings differ")
+            guards = entry["row"]["evidence"].get("guards", {})
+            require(guards.get("unintended_rng_deviations", 0) == 0, f"{task_id}: unintended RNG consumption")
+            require(all(point.get("unintended_rng_deviations", 0) == 0
+                        for point in entry["row"]["evidence"].get("rng_audits", [])), f"{task_id}: RNG audit deviation")
+            if equal_steps:
+                require(audit.equal(first_states, states), f"{task_id}: actual consumed training RNG states differ")
+                require(first["row"]["evidence"].get("data_sha256") == entry["row"]["evidence"].get("data_sha256"),
+                        f"{task_id}: actual target-batch sequence differs")
+            if "applied" in entry["saved"]:
+                applied = entry["row"].get("applied", entry["row"]["evidence"].get("applied"))
+                require(applied is not None and stable_hash(applied) == stable_hash(entry["saved"]["applied"]),
+                        f"{task_id}: consumed component receipt differs from certified row")
+        proofs.append(dict(task_id=task_id, saved_variant=variant, completed_roles=list(steps), completed_steps=steps,
+            initial_state_proof_sha256=audit.state_digest(initial),
+            saved_state_references={entry["item"]["role"]: entry["item"]["provenance_checkpoint"] for entry in entries},
+            initialization_and_prior_equal=len(entries) >= 2, named_training_bindings_equal=len(entries) >= 2,
+            all_declared_arms_present=set(steps) == set(roles),
+            consumed_non_eval_streams_and_batches_equal=len(entries) >= 2 and equal_steps,
+            consumption_comparison="Exact complete consumed states" if len(entries) >= 2 and equal_steps else
+                "Only available complete states; missing arms/different completed budgets remain unverified"))
+    return dict(status="PASS", scope="phase2_saved_evidence_audit", frozen_source_checks=sources,
+        requests=requests, original_six_questions_preserved=True, saved_state_comparisons=proofs,
+        unavailable_complete_states=unavailable, optimizer_updates_added=0, sampling_draws_added=0)
+
+
 def publish(options):
     root, artifacts, output = options.repository.resolve(), options.artifacts.resolve(), options.output.resolve()
     registration = read_json(options.registration)
@@ -275,6 +327,7 @@ def publish(options):
             request = submission["request"]
             require(request_summary(request) == registration["arms"][role], f"{role}: certified admission differs")
             require(request["source"]["digest"] == registration["source_digest"], "Certified source differs")
+    audit = audit_saved_comparison(root, collection, requests)
     renderer = module._saved_renderer(root)
     media = []
     from PIL import Image
@@ -306,6 +359,7 @@ def publish(options):
         actual_training_gifs=len(media), optimizer_updates_added=0, sampling_draws_added=0,
         interpretation="Each arm requires all six original Tier 1 gates; the optional clock audit does not enter quality qualification. No Tier 2 or default adoption claim.")
     atomic_json(output / "phase2-results.json", result)
+    atomic_json(output / "phase2-audit.json", audit)
     atomic_json(output / "media/index.json", dict(schema_version=1, media=media, optimizer_updates_added=0, sampling_draws_added=0))
     print(json.dumps(dict(event="phase2_published", outcomes=outcomes, gifs=len(media))), flush=True)
 

@@ -111,3 +111,30 @@ def test_publisher_requires_complete_registered_campaign(tmp_path):
     with pytest.raises(ValueError, match="complete registered campaign"):
         module.publish(argparse.Namespace(repository=ROOT, artifacts=tmp_path, output=tmp_path / "report",
                                            registration=registration))
+
+
+def test_saved_comparison_accepts_three_arms_and_rejects_stream_tampering(monkeypatch):
+    """Use explicit software states to test comparison, never qualification."""
+    from experiments.forge.rng import NamedStreams
+    from experiments.forge.state import state_digest
+    module = helper()
+    streams = NamedStreams(0, device="cpu")
+    streams.generator("data", component="target", purpose="real")
+    def entry(role):
+        saved = dict(initializer="deterministic_orthogonal", initialization={"seed": 0}, prior={"kind": "mog"},
+                     streams=deepcopy(streams.state_dict()))
+        return dict(saved=saved, row=dict(task_id="two_pole", gate_status="PASS", evidence=dict(data_sha256="fixture")),
+            item=dict(role=role, importance="required", mechanism_stats={},
+                provenance_checkpoint=dict(completed_steps=2, state_sha256=state_digest(saved))),
+            task=dict(adapter="transfer_behavior"))
+    data = dict(final=[entry(role) for role in ("incumbent", "repair1", "repair2")], scopes=[])
+    result = module.audit_saved_comparison(ROOT, data, ("incumbent", "repair1", "repair2"))
+    assert result["status"] == "PASS"
+    assert result["saved_state_comparisons"][0]["all_declared_arms_present"]
+    assert result["saved_state_comparisons"][0]["consumed_non_eval_streams_and_batches_equal"]
+    # Byte-valid RNG state from the same named stream after a real draw.
+    import torch
+    torch.rand(1, generator=streams.generator("data", component="target", purpose="real"))
+    data["final"][-1]["saved"]["streams"] = streams.state_dict()
+    with pytest.raises(ValueError, match="actual consumed training RNG states differ"):
+        module.audit_saved_comparison(ROOT, data, ("incumbent", "repair1", "repair2"))
