@@ -1,0 +1,26 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Revision8 acquisition/hold separation is provisional and requires bounded calibration before default adoption. Historical task declarations and gates retain their original identities.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bcap-tier1-stability-repairs-diagnostic-v1",
+  "policy_change_reason": "Six fixed trainer ablations on the original two-pole question; no ordinary qualification.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

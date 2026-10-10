@@ -2,6 +2,8 @@
 
 Scientific image quality gates and actual-training GIFs belong to the registered
 four-host Forge study, rather than additional toy acquisition experiments.
+Primitive fixtures retain develop 5737ade's nonprojection law explicitly;
+current named-preset continuation is checked in test_bcap_default_baseline.py.
 """
 from copy import deepcopy
 import math
@@ -26,7 +28,8 @@ def cuda_contract():
 
 
 def recipe(**overrides):
-    return get_recipe("bcap", **{"optimizer_convolution": "per_offset", "optimizer_smoothing": 0., **overrides})
+    return get_recipe("bcap", **{"constraint_geometry_mode": "none",
+                                "optimizer_convolution": "per_offset", "optimizer_smoothing": 0., **overrides})
 
 
 def gradient_like(weight, offset=0.):
@@ -243,7 +246,7 @@ def test_checkpoint_kernel_contract_rejected_before_mutating_state(field, value)
 
 
 def test_disabled_convolution_packets_and_opt_in_dense_updates_are_identical():
-    base = get_recipe("bcap", optimizer_convolution="none")
+    base = get_recipe("bcap", constraint_geometry_mode="none", optimizer_convolution="none")
     enabled = base.replace(optimizer_convolution="per_offset")
     assert "optimizer_convolution" not in base.to_dict()
     assert enabled.to_dict()["optimizer_convolution"] == "per_offset"

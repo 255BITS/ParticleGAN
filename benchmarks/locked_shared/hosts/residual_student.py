@@ -16,6 +16,8 @@ from typing import Callable
 
 from ..observation import checkpoint, schedule_optimizer
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 
 
@@ -257,7 +259,10 @@ def train(*, pairing: str = "shared", echo: bool = False,
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = head(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+            fake_scores = critic(slow, fake)
+            protected_real_scores = critic(slow, paired).detach()
+            g_loss = gan.g_loss(fake_scores, protected_real_scores)
+            protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
             # retarget identity. The residual term does, and only on both-land
             # rows. fm_weight is 0: no feature-matching term is added.
@@ -269,7 +274,14 @@ def train(*, pairing: str = "shared", echo: bool = False,
             else:
                 residual = fake.new_zeros(())
             g_loss = g_loss + RESIDUAL_WEIGHT * residual
-            g_loss.backward()
+            if components is not None:
+                g_loss = components.add_transport_loss(g_loss, fake, fast, conditioning=slow)
+            protected = (protected_adversarial, residual) if both else (protected_adversarial,)
+            def protected_evaluator():
+                current = head(slow, prior.z)
+                adversarial = gan.g_loss(critic(slow, current), protected_real_scores)
+                return (adversarial, (current[mask] - fast[mask]).pow(2).mean()) if both else (adversarial,)
+            constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:
@@ -279,7 +291,10 @@ def train(*, pairing: str = "shared", echo: bool = False,
             context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
             with torch.no_grad(), context:
                 pred = head(slow, prior.z)
-                return {"identity_mse": identity_mse(pred, fast), **landing_stats(pred, fast)}
+                metrics = {"identity_mse": identity_mse(pred, fast), **landing_stats(pred, fast)}
+                if components is not None:
+                    components.constraint_geometry_capture(step, fast.reshape(12, 8, 2), pred.reshape(12, 8, 2), metrics, kind="line")
+                return metrics
         checkpoint(step, observe_student)
 
         if step == 1 or step % LOG_EVERY == 0 or step == steps:

@@ -29,6 +29,8 @@ TUNABLE_FIELDS = frozenset({
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
+    "optimizer_svd_backend",
+    "kinetic_transport_weight", "kinetic_transport_local_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",
@@ -36,9 +38,11 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "row_evidence_exclude", "row_evidence_hold", "birth_death_space", "reopen_signal",
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
-    "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
+    "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
+    "critic_step_mode",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
     "reg_anchor_min_decay", "reg_anchor_weight", "d_guard_ratio", "d_guard_min_steps",
     "latent_damping_max_rate", "direct_particle_betas", "input_noise_std",

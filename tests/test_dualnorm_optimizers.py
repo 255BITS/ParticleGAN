@@ -2,6 +2,8 @@
 
 The tiny API updates below verify execution and continuation. Scientific toy
 acquisition gates and actual-training media belong to the registered Forge study.
+Primitive fixtures retain develop 5737ade's nonprojection law explicitly;
+the promoted named preset is exercised in test_bcap_default_baseline.py.
 """
 from copy import deepcopy
 import math
@@ -33,6 +35,7 @@ def cuda_optimizer_contract():
 @pytest.mark.parametrize("family", FAMILIES)
 def test_standardized_role_hyperparameters_reach_normalized_and_native_hybrid_groups(family):
     recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
+                        constraint_geometry_mode="none",
                         optimizer_family=family, lr=.01, d_lr_mult=1.5,
                         prior_lr_mult=3., betas=(0., .9), d_betas=(0., .8),
                         prior_betas=(0., .7), eps=.03, d_eps=.02, prior_eps=.01,
@@ -61,6 +64,7 @@ def test_standardized_role_hyperparameters_reach_normalized_and_native_hybrid_gr
 def test_graft_rejects_nonzero_critic_first_moment_from_standardized_role_override():
     with pytest.raises(ValueError, match="beta1=0"):
         get_recipe("bcap", optimizer_smoothing=0., optimizer_convolution="none",
+                   constraint_geometry_mode="none",
                    optimizer_family="ada_nsgda", d_betas=(.5, .9))
 
 
@@ -68,6 +72,7 @@ def test_graft_rejects_nonzero_critic_first_moment_from_standardized_role_overri
 @pytest.mark.parametrize("schedule,expected", [("constant", 1.), ("exponential", .25)])
 def test_explicit_schedule_multiplies_all_normalized_and_native_hybrid_rates(family, schedule, expected):
     recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
+                        constraint_geometry_mode="none",
                         optimizer_family=family, lr=.01, d_lr_mult=1.5,
                         prior_lr_mult=3., num_particles=8, z_dim=2, standardize=False,
                         lr_schedule=schedule, lr_decay_rate=.5, lr_decay_steps=10,
@@ -84,7 +89,8 @@ def test_explicit_schedule_multiplies_all_normalized_and_native_hybrid_rates(fam
 
 def test_inactive_critic_betas_do_not_invent_adam_mechanism_in_dualnorm_search():
     from experiments.forge.techniques import recipe_field_active, technique_signature, validate_same_technique
-    recipe = get_recipe("bcap", optimizer_smoothing=0., optimizer_convolution="none", optimizer_family="dualnorm")
+    recipe = get_recipe("bcap", optimizer_smoothing=0., optimizer_convolution="none",
+                        optimizer_family="dualnorm", constraint_geometry_mode="none")
     alternative = recipe.replace(d_betas=(.5, .9))
     assert not recipe_field_active("d_betas", alternative)
     assert "critic_moments" not in technique_signature(recipe)["mechanisms"]
@@ -284,6 +290,7 @@ def test_standalone_checkpoint_preserves_pending_sample_ownership():
 @pytest.mark.parametrize("family", ["dualnorm_D_only", "particle_rownorm_only"])
 def test_isolation_arms_preserve_native_adam_updates_for_baseline_players(family):
     recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
+                        constraint_geometry_mode="none",
                         optimizer_family=family, lr=.03,
                         optimizer_adam_lr=.0006, d_lr_mult=1.5, prior_lr_mult=3.,
                         z_dim=2, num_particles=8, standardize=False)
@@ -322,6 +329,7 @@ def test_isolation_arms_preserve_native_adam_updates_for_baseline_players(family
 @pytest.mark.parametrize("family", FAMILIES)
 def test_existing_cosine_multiplier_scales_new_units_and_hybrid_baseline_rates(family):
     recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
+                        constraint_geometry_mode="none",
                         optimizer_family=family, lr=.03,
                         optimizer_adam_lr=.0006 if family in ("dualnorm_D_only", "particle_rownorm_only") else None,
                         d_lr_mult=1.5, prior_lr_mult=3., z_dim=2, num_particles=8,
@@ -343,6 +351,7 @@ def make_trainer(family):
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(0)
         recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
+                            constraint_geometry_mode="none",
                             optimizer_family=family,
                             optimizer_momentum=.5 if family in ("dualnorm", "dualnorm_D_only") else 0.,
                             optimizer_adam_lr=.0006 if family in ("dualnorm_D_only", "particle_rownorm_only") else None,

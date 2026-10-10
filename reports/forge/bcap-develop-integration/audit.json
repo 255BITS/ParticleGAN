@@ -1,0 +1,2854 @@
+{
+  "certified_attempts": 56,
+  "frozen_source_checks": [
+    {
+      "frozen_snapshot": null,
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1205,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17/forge-source.json",
+          "sha256": "8665758e5d3642efc516fc6bfd20cbfbad7d74780c5aa6f0c8eef9315dbd6580"
+        },
+        {
+          "origin_commit": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17/forge-source.json",
+          "sha256": "c35c6bb2daf86385a7041f3074c5ccbb8fcec92e3596ac05b887a579321dc458"
+        }
+      ],
+      "source_commit": null,
+      "source_commits": [
+        "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      ],
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+    }
+  ],
+  "interpretation": "Audit PASS validates retained evidence, not scientific quality or ordinary qualification.",
+  "matched_completed_arm_checks": [
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 250,
+        "winner": 250
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 13,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "9af2dbfa035b38a5a3253156a2a1ca5e187fb33d362efb1d2a8e3460ad2ab82e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a36d02135d534cffa43cf49687398dc4/provenance",
+          "bytes": 65849,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "adb4c8f58036902b322655463f77fe2baf2e7f183b2383cd468e27a5557e4e26",
+          "state_sha256": "8314fda93d79b3aad75b204cca44916969efb998b26907179134f0279b8a908e"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "a253868f43c1a7fe6345cc71d13d800391515328903140fc3caba9d38c7f82d4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/5489869165d9489891aeba33dab520e9/provenance",
+          "bytes": 65145,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8b195579277b9340aa8680a1a3e943a935bc82b1f57134157c63a774a3f52301",
+          "state_sha256": "220632599a2e9543ff482cb9aebc56431251d8dd18bec906da81355bd90b44fb"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 8,
+        "winner": 8
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "066bb616036c0b6416e78ade0d0c682e394f9fd7389051582d231bbcb074a848"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "a162573be8a05e507c7c0f2e48f0febb2951784736bda5b2cc20c89adb0e7cc3"
+        }
+      },
+      "saved_variant": "evaluation_cadence",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 8,
+        "winner": 8
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "cf50869505d41c7261b30505ebd8965711663a049782931a7d6a70e4c9de64d4"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "16061513ad58b96fa75548afd069a7e7c31a786c96c16429a7db13c011bc8c70"
+        }
+      },
+      "saved_variant": "horizon",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 8,
+        "winner": 8
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "38ac2b513b1f5b90a779305c18acfa7e7952e9a5eaee6b6bb09d0bc58872b9da"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "13be40330e67410691c4b7d5431c6eecadad0f19e0be0c63597bd86ef871926f"
+        }
+      },
+      "saved_variant": "reference",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 8,
+        "winner": 8
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "38ac2b513b1f5b90a779305c18acfa7e7952e9a5eaee6b6bb09d0bc58872b9da"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "13be40330e67410691c4b7d5431c6eecadad0f19e0be0c63597bd86ef871926f"
+        }
+      },
+      "saved_variant": "restart",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 8,
+        "winner": 8
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "005eeea5cfdc6383cecc323772ce9c79f1c1d53d36bd268a9801164a182db61d"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "ab9ae91a2de9040843358a91d8427c184a300b98be9141d8ce0947227da588ca"
+        }
+      },
+      "saved_variant": "step_label",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 4,
+        "winner": 4
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "optional_clock_saved_branch",
+      "saved_state_references": {
+        "combined": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e86f45f52273492d9528443c3736323e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b3a17e43f097af8461eb129f7928414551a3b3acb6bf16b255eaf596ec39e7e1",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "38b26b3df33a466ce35535d7b2b7bc72679c44dfe6d5b4d321c77f215805e532"
+        },
+        "winner": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/a7eb259598e84559bab4dd3bb03bfcb2/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "ebe5b3562d10d4a119657745364c7d503e8e49e64703651ce592fd53575e9b6b",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "d96fdaffbb6476a4ed38144757f03755015bdf2b35879fd4b4e34adbaad91499"
+        }
+      },
+      "saved_variant": "warmup",
+      "scope": "ordinary",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 800
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "59681846f482eb5b91e987e2ae412aabe01c1a081403c2a7658ffb0ca72880d7",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 13,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "7c1cac2626c1b3af282d9faea711f070e56fd785984b32012d2c94f1b107f031",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/4d8c4520700c4700a41860510b327916/provenance",
+          "bytes": 123675,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ec52e17c5663bfc92338621c33c4ae27df5c5db3e11b23f16bc4c9e10e1d20e9",
+          "state_sha256": "ea68966fc6d1058989cb418e5f5f7663aff198d8893fbaf5c1a6f75edd132c6b"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "cover_leftover"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 4834
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "d11ed8b935669a9a6d39be0cf30c565b142a965dd92dd24b481177e3be613bc1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9092565e4c054991b5fe7abc81522a3c/provenance",
+          "bytes": 841461,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8b8794044a35b778306dae26b1ab4d2a1b5cd456ec1fe107d50ff8bd939eca2c",
+          "state_sha256": "88a31d6f1b98eb34fede805a9dfd9b7000076e0745f77de1ce852761a7b163e6"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 20001
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "c0d1edf035d80f1a4315a16877b5a070c4efc232f446e39dfac109c5fcc01658",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9bdb92991911468a803182aef58e953e/provenance",
+          "bytes": 840501,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c45dbb4615378082376219bbd7dd7c2d4efcd3b4ae2590cc195d22c05afc6796",
+          "state_sha256": "c24d371d65ce05832a505a7fef93299f0cfd996bee7db14b3477e78d1032cd8d"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1000,
+        "winner": 1000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "c8acc4daff6d17dc299e1c798765815b40e49bf25d3fd2f5a1e96fd5cf72cdc6",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/b3e14d879ad74656ae5247fe2ee55396/provenance",
+          "bytes": 65599,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "bf557df193aa9e600c10d8ba6b5a74b762062859b0411d6b6830fd98bb708981",
+          "state_sha256": "41454c3c039728b105f91f901fec51451f22edbce77845ed4b2c8bc1f5617a9c"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "e06b9462fbdf4d81de0ad13be30db934e44f8c0ac621b005e238f69c6b157753",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9dc5d157abae48e1bf1c604426d772b7/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2094ef50380b14d58ea9ddecc594aa137b37dbaf77f3e94335b0282c3e838d74",
+          "state_sha256": "6af852241440e4e90f0d66488d46fe468690084b3b3227a524ea999ad7e52cb1"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 6000
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "6d2cf81169692725bb8acb18715563cc41a7230ce62788211dfe838a1e62937c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/b5b5af91965d45179fd8d3f383d56ea7/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5089ce9922cd8a091e31399464e0c83d46f4e5313185dfe75627df077da5af0d",
+          "state_sha256": "8cd1748742a51193c6f27912832e0eb04f1a368844ed088ed1288c6582095226"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "ce1c62f73a3684e0c82d9b11996a89fbdd8e8574c4547f6118833b87aa994862",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/76b17993d780479c967822aa2667c5a4/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e3a3de770bea86f20f906b10e97592fd5be646cb3ec73457b28eaa4a3ccabc33",
+          "state_sha256": "fe2dd7908dd37569ada1f8407e13955865210009cb92f7db9666eaf6070bea82"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "grid100"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "b7e26a75b9506e8ffe419308b89b0ba948014412042260c07c13c45d1988b930",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/b877fb01643043b3b4af5601b9a34f01/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "353183263dc7268a0d98471c1c94cc2d412c3aabb0f26a639e3838c3f8d5c24a",
+          "state_sha256": "67aa777fd6a81c4760bd558cc9c6905b19bfcbbe9ccadc795242a905bf4a68e3"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "img_bars4"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "ad294c6995b93bf395cdcb7ea9963637d8c8e94735878cb0f5407f1fd60bc5c0",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/dbbffba8cc9b4f128af7db21d8c2a297/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e756561992174ddad53bab854a13b341e2043aa3cb663efb7e091227843c6c43",
+          "state_sha256": "abc0553919d88ce39c77567970f5d551e17ad7c07f3c92224500aafa46783eee"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "img_blobs4"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "e6ca21c919600c3fc5d886311d52c529b303d58e0f9120e7f8bed6ec9946b44b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/153a869e9b164a948f1316a3575962b8/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1989dbe371cc66f9b695b247691c06096bfa198127c9b08cca6839d79ca08a93",
+          "state_sha256": "a85683e10d59b2788551b93f1354955ee26fead101f6fdfe944d946b02860d2f"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "img_intensity2"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "3358632b33160bbeaf6464bab6832213093ee9dcfe420bb3acdad4e3e277b927",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/5168f2e4f037431bbe4860133d6d36fe/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "bfdcdc734b1d114ef1c2a1fc7a14fbbdb8c6c0006f5163ff9574841aba423cb3",
+          "state_sha256": "60f32df8935c51a985fd7f01f3bae52c6b58e8fa939a0c95a06defed6f8dadf6"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "img_stripes2"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 800
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "cb79d523592e581883e40515da208941c0d9c2db5e7c5861f72e220c8b77eb72",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "648ad399d774b30ecf644de71de026abf0379480a9cf01d64b51f8403d6447c6",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/462f8a58051c4c0ebe0729ca5481131a/provenance",
+          "bytes": 95607,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c70b82f33980e56a2d98ee61e4968bc57801638d9d10ecba8edf2d4e6ef6b7bf",
+          "state_sha256": "f8e3d492165014b5cc39457d242ef50b532ee33bfb3a8f12afe73e176858edac"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "2e23f3833175f0f17aa414e2b04f09b1ca0bfc268d2ede087a4904d69df87e91",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "9d2596d72135ff042be1cf28631681068c7273a1d0020e3944761dbd557b4297",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/c3899814a508470fb2a5766e608b82e3/provenance",
+          "bytes": 282845,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7fbbb1f490c7efd8b85ab588304b15664ebe2ae666e2c81bd7ccfe915a474ede",
+          "state_sha256": "585c035b5ecb0ac19cb5369e33ca1f5adb10065d19058d6cc0fdae5550ecc9a7"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "mode_hold"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "8c0eab0908b50eea8ae4f03d4be3203c36f548ad77a18889214ea741a584642e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/d1aa70c921f94768bf15d626b28c0adc/provenance",
+          "bytes": 163681,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "66c2202f6a721f9c3abd4e970e0d3f6714aa9e5329edbf8f639aec8068738faf",
+          "state_sha256": "3ad8feda9c3c2a449a5f4b4659c58407bc7099930bc605accb310b1c1f310d5b"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "residual_student"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1600,
+        "winner": 1600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "a346acf6641b3876c1ac04184ecb446dd00e0bcb5d514cb7267353d7745479d8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/8e7081a3b4594d02bde929f08b9c0edc/provenance",
+          "bytes": 110585,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8349072aabb0b2595a5e69e8a7d273508b41c549dc248ca4d97e42dd2657ab74",
+          "state_sha256": "bbbfb1b8830c2f0be41d2b0a4724d4871daeabac00abab66ea74e78f123c7810"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "85e11a3096797cc17a96080c6840638e918655218bf282a040475548b532d70c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/ce264e099f6e495eb78f646cfd8b2cb4/provenance",
+          "bytes": 109945,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a16b366b146f760ae2023899df8226fd2cf8fd459c341ea1387a6239efa1e413",
+          "state_sha256": "b6bcca6d09cad6be9ccc03b908f27500348505554b67dcc9d8a54e55e65b585e"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "328ea99b584bed4fe8bc92f3357f7779407159885b952cc48d7e8313e51c296e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/5807d46316764553a468941594b6f58c/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2b6447ed9f2db259f98bc432faf2ed794684cbcb449acf40dbaafe1cacf82097",
+          "state_sha256": "e4011d9a113ff94307f27bf8f2bf78061c7df5e84217469c89f5dd6a33c2eaed"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "rotated100"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "adef5a4797700904963758852122fda554c175e24f2caebf7e28b3634e5acb2e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/450f84378b7f4b619e193d98b1482c1f/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "559c2dcd597b72489f198003b02de05a11fdd67dc325f5b372301d8656fbee18",
+          "state_sha256": "3cfac7a598562738761bd9a396cc4ef30f4eec03789b0c25c9fb84f509e67156"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "staggered100"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "d6ff1ec50500c58669aaa0f12e4f1b63347122920dc0c3060681988b31e3318c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/2bc6eb695a5248c89b9c1ffd87525fb3/provenance",
+          "bytes": 163425,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "775390ccdb6002f713d2865af0a467146a27ab1501516b9b206295fa8c1ae893",
+          "state_sha256": "783215f1e412c0fcbef4218c6589ca8232c0dea6ee84879dfcc218527f2c6af8"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "trajectory"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 80,
+        "winner": 80
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "a3523ed3d2611ec7a2d27ce79d79700caf24a0006973df3adb3c6ae2a288bb87",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/aa76d8f268014f84a7a553e0b47482b0/provenance",
+          "bytes": 48751,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a4e8e801a6faeeed63b07faa8bd5031d48e2b35e7d63352fba1f9a02561200e3",
+          "state_sha256": "7e5dad133d1fb8304b663f612bab1b576488b988b078eaf8270fb5840c8f204f"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "cad5665f8abd0816d1e7d1f0c4717c54302078e66297ff60ff65ee52cac02065",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/f80ae62046f14be8b0ad459cfbd1c9ee/provenance",
+          "bytes": 47791,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d5c849531eaf787c01f772cb6d9d8faa59a2a6d75f7f2308e2317667a28b29bc",
+          "state_sha256": "53f3599fc9c541e0bc4babd9cddf9760d1c09c9311772933ffdb7efc32051f3e"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "two_pole"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "61d578e54a6ac6c57db1540ad63c4f83630e849357867d7c27c54e4fc7e037d5",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "5e36bc8d178fed916baa389561dd8d32c3b7dcda79f1465d08fefed4e838f3bd",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/592cbb952382408c9eccb3ca77d6b460/provenance",
+          "bytes": 90859,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "270ba4032dea990e6d78d5b9a3deeb2e7e2fe764f220e2768226b963327a1c58",
+          "state_sha256": "397c7eb27c1247f1c14a19f53daee18e64b88a202852ec2d2994a4b4fb2c95e5"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "unipolar"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 200,
+        "winner": 200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "ordinary",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "d42a7f2b2faf129b3389bfa7f9238170cfa780257350a15a78be0501904624a1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/da3c8fa60ee24d4e80abc38ebf1c3f87/provenance",
+          "bytes": 52999,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "958b482d0e903fdf7cb2cbdd9724a69b37cde2bf340bb30337b766622b22cb7c",
+          "state_sha256": "5b81f924a0b8d105f0f50d464ff8bad9e3d412da1a07343476cf2c76f095e41d"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "e252fb918223a0a19f25649bbcc69898ae8ede6a7d622b16aa3437d805089c99",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/d4bf834c17074126a4bb26945160e7f0/provenance",
+          "bytes": 51655,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "0c5c3720de3aae773b158849d76b351b8a0b0c906e4d897bdcae50786fb38cc5",
+          "state_sha256": "6148947ca5edece7f8213e1a5c2bfe8618b0e9678b47b2621c0e50a5808f7d11"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "079cd4f686508ecaf66fdd436da1ae04be19bfbb3727bb4ca935f9745471b80a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9dd114372d5a4f7c8b36c1b0c7d93522/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4f67f8a78d39d23f66bab7006e41ed7f0ff6d8de04191a375c71747b4437f46c",
+          "state_sha256": "d88278d895f5025f788f819522f9cb73f8f5d9b70b954f850bbc01ef203caadc"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "df3390453038abac28349c17cc6c9fc00cfc33a502b0622f46f06d25b172ee3d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/7876aa2e27314924b6c59be2339c7680/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "489b548681ca7815ac1347833634a1b7018a1035ce1f5cfa2d64d1c6d665837f",
+          "state_sha256": "bdd4f4e146186a2eabc6c3fb4f1cea34cf02615f165baf0f13f3cb023b48cc3f"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_overlap"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1600
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "a787386b0584e6cc92c71950b68df90afd819101336226a2e9a6ba198c8effa1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/350657076f3a4623b72e8974253f26ef/provenance",
+          "bytes": 109881,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "70e436c99d7ef28905d97a8d76d338e0ad54384e3dadc334f0ccbcc269d251ce",
+          "state_sha256": "af658d4264b8a67b084693c50e31ae6c8b90d9bb6daec1de1d0f4af82816c520"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_spiral"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "e187461b2a2c76769e3d7b3cb6a3ae9fe6056509b9aeeb073c7ac0be534ee46b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/65cf555fa52744008c0220c4911bc1b5/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a9ca2bce340af0de884fbd6c187d69783da27c3ced54581946b0d488cb753721",
+          "state_sha256": "76f4431a58ca6ba30f12dbba24de1a9c4d50a980eeffa6ce5c139ec7b035c9b6"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "43f49594dd313af8600b6eaab74748054d4364bc8733df76bcde678b4009a426",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e7957e4da9994c75b518b11e0b4be9f7/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "39c580ad237545dfa1e19e53160e56cfe2e9edf46b7d72d358deac014f0c609b",
+          "state_sha256": "de0e35f6fae03629e4da16727dad777a8fa1a87f04b193e0b6e2c290f3f43c9c"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_completed_arms_present": false,
+      "completed_roles": [
+        "winner"
+      ],
+      "completed_steps": {
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": false,
+      "consumption_comparison": "Not comparable: missing complete arm or different own confirmed-prefix update counts",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "winner": {
+          "artifact_manifest_sha256": "9bc78614f82d41dfb9961e9c0b5e66a44c2230bff2ae8fee506927e29f3315f4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/0a59a621ce724f2582eeda76c043a3b9/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "93c358bf6af6beca39e1ddf156734e2475ed8f19b054a5553be99923ecbe2d56",
+          "state_sha256": "928771c9de1ed05f7f06f0177b40ffeda0bc4467835a32dcf64ed5d82c97aa93"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "ordinary",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 800,
+        "winner": 800
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "59681846f482eb5b91e987e2ae412aabe01c1a081403c2a7658ffb0ca72880d7",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 13,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "770cee081d0ca266dc264a4c3cb5b1734006bccb04209954c9deb6dc1fab5648",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/e0f6fcd28025411091b8a43eed2c0e6d/provenance",
+          "bytes": 124315,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "28a9a6b18e3cce980814eb7647971ba1ac1b45e939d6577417d20cd2509fb701",
+          "state_sha256": "8b84205b113ec4ed88a79989a72e95d0a3f2c9518687deb400d6326c60e41245"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "7c1cac2626c1b3af282d9faea711f070e56fd785984b32012d2c94f1b107f031",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/4d8c4520700c4700a41860510b327916/provenance",
+          "bytes": 123675,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ec52e17c5663bfc92338621c33c4ae27df5c5db3e11b23f16bc4c9e10e1d20e9",
+          "state_sha256": "ea68966fc6d1058989cb418e5f5f7663aff198d8893fbaf5c1a6f75edd132c6b"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "cover_leftover"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1000,
+        "winner": 1000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "086630dc9795acc87a4e527ae409f17914f852ca345b722964da24cabeccad08",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/faadc79e7ce944e58d76353806601d75/provenance",
+          "bytes": 65599,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f967275b762a78a87745a325c018a806c8c8b1a5834d3e3e7c872f9d6bea2a14",
+          "state_sha256": "3f0656f8dc3954389ca8d69c406cf878844e83183badb89a40141735c2d8bfdb"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "e06b9462fbdf4d81de0ad13be30db934e44f8c0ac621b005e238f69c6b157753",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9dc5d157abae48e1bf1c604426d772b7/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2094ef50380b14d58ea9ddecc594aa137b37dbaf77f3e94335b0282c3e838d74",
+          "state_sha256": "6af852241440e4e90f0d66488d46fe468690084b3b3227a524ea999ad7e52cb1"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 6000,
+        "winner": 6000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "d97e9e3695cdc9724cbc7ced03bde2c055074f85586063f828474e375c0ab6f4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/1349c341693448d586b1ca54ee9adb9f/provenance",
+          "bytes": 65855,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5d26e4c19be3ae704ad336306dc8cd9f63f6026a5cc8ee7341bc423de00244fa",
+          "state_sha256": "cd7c8dd4b8b98755060a34bd4ed2109a32ae82c263f6fe0dddc5a622773fb84a"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "6d2cf81169692725bb8acb18715563cc41a7230ce62788211dfe838a1e62937c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/b5b5af91965d45179fd8d3f383d56ea7/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5089ce9922cd8a091e31399464e0c83d46f4e5313185dfe75627df077da5af0d",
+          "state_sha256": "8cd1748742a51193c6f27912832e0eb04f1a368844ed088ed1288c6582095226"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 7000,
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "07957487fb062bb1c54ca02b20c05b94501cd3000d70fb2ab0deb8b6622071ea",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/1c6f20f081a147f6a107fb8297dc609f/provenance",
+          "bytes": 770589,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a6bbe09ffc8b4842e79f5fba203c854f14c7fe43a46c4c3d77e34456a621bc5e",
+          "state_sha256": "54c6559bd615ae9ed1bf6a322b4e15523f6e79b16d15c0ce58f8b31f2d8ecee0"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "ce1c62f73a3684e0c82d9b11996a89fbdd8e8574c4547f6118833b87aa994862",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/76b17993d780479c967822aa2667c5a4/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e3a3de770bea86f20f906b10e97592fd5be646cb3ec73457b28eaa4a3ccabc33",
+          "state_sha256": "fe2dd7908dd37569ada1f8407e13955865210009cb92f7db9666eaf6070bea82"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "grid100"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 600,
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "7d97495ce4bfa628b718347e362560fd6f1ea7abe1a84b4078ac1ac7515b402c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/d1dffdce68da46d3ae9459fbdacd8a4d/provenance",
+          "bytes": 96423,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "cd8f80d51568f2dee663f8c416dd70109a1a47f41ba17dad9247d3663a195104",
+          "state_sha256": "ba9b1f4f669207010cb8bcfadd6ac0cdb8113488fdeee43bdbd524578c672895"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "b7e26a75b9506e8ffe419308b89b0ba948014412042260c07c13c45d1988b930",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/b877fb01643043b3b4af5601b9a34f01/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "353183263dc7268a0d98471c1c94cc2d412c3aabb0f26a639e3838c3f8d5c24a",
+          "state_sha256": "67aa777fd6a81c4760bd558cc9c6905b19bfcbbe9ccadc795242a905bf4a68e3"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "img_bars4"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 600,
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "4af973a28bb664c282fa499d99fb4b236ea83368f37df93712cb9161b03c1eab",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/bdbfb98ca7ba44519ba5ced60a3e8feb/provenance",
+          "bytes": 96423,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6778c367b153e71cc3d24c5104989dc62128c965f157029503fd69b525ac2364",
+          "state_sha256": "3a93207a8a7c19edcf31c4198121878f59e464e795c30c5918972ffdbbf26d91"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "ad294c6995b93bf395cdcb7ea9963637d8c8e94735878cb0f5407f1fd60bc5c0",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/dbbffba8cc9b4f128af7db21d8c2a297/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e756561992174ddad53bab854a13b341e2043aa3cb663efb7e091227843c6c43",
+          "state_sha256": "abc0553919d88ce39c77567970f5d551e17ad7c07f3c92224500aafa46783eee"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "img_blobs4"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 600,
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "b6c848acdc311123d7cbec67bb1bb5c1ad0d67b9dc92101e2aa764045221bf82",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/827d2eca8d2e4c01a23ff3a2aeaf3e28/provenance",
+          "bytes": 96423,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8baf362f53d3a916820cf97380d11d521eabbe12b1f669a68a43ffcd6ff87ed9",
+          "state_sha256": "8ea92959749f483df0ea7872ca206d1bf7135611c81489a33fab58d23bea68e7"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "e6ca21c919600c3fc5d886311d52c529b303d58e0f9120e7f8bed6ec9946b44b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/153a869e9b164a948f1316a3575962b8/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1989dbe371cc66f9b695b247691c06096bfa198127c9b08cca6839d79ca08a93",
+          "state_sha256": "a85683e10d59b2788551b93f1354955ee26fead101f6fdfe944d946b02860d2f"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "img_intensity2"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 600,
+        "winner": 600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "d6308a970bb2540ac32677dcd75be55fa03ffcc6bcfa27509df9e17f29dc42d9",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/c3c4f71fbc264121ad25434062a2c349/provenance",
+          "bytes": 96423,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "cbdf7c31cd68098188403cda94d9b6a16da2622f21929fbb0461a7fb380886e4",
+          "state_sha256": "5cca67d010a73ff34d2b81d72309f8d48a9295e8a90dd3316d5bbab3dbf24628"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "3358632b33160bbeaf6464bab6832213093ee9dcfe420bb3acdad4e3e277b927",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/5168f2e4f037431bbe4860133d6d36fe/provenance",
+          "bytes": 95783,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "bfdcdc734b1d114ef1c2a1fc7a14fbbdb8c6c0006f5163ff9574841aba423cb3",
+          "state_sha256": "60f32df8935c51a985fd7f01f3bae52c6b58e8fa939a0c95a06defed6f8dadf6"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "img_stripes2"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 800,
+        "winner": 800
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "cb79d523592e581883e40515da208941c0d9c2db5e7c5861f72e220c8b77eb72",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "e35a6887b0150613b8533a49b0cc934d2155e40336491ff227ae69263797915f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/74128b6fec964bed8389d28cb64f6378/provenance",
+          "bytes": 96503,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e64d34b11d27d4a6e9060352005fa082720b2ea4b31165a415640bcf5148fb3f",
+          "state_sha256": "529f04dfb3072b886cf6a9ae14e8810b2b848fe7595da1f4b485a15db3bd7272"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "648ad399d774b30ecf644de71de026abf0379480a9cf01d64b51f8403d6447c6",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/462f8a58051c4c0ebe0729ca5481131a/provenance",
+          "bytes": 95607,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c70b82f33980e56a2d98ee61e4968bc57801638d9d10ecba8edf2d4e6ef6b7bf",
+          "state_sha256": "f8e3d492165014b5cc39457d242ef50b532ee33bfb3a8f12afe73e176858edac"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "2e23f3833175f0f17aa414e2b04f09b1ca0bfc268d2ede087a4904d69df87e91",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "f69f41e55890ab412893ceb9d557b710477f84521ecd780f0cfb331d08b6c933",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/0c13f1472aac4e1cb94264c30ea7e7ff/provenance",
+          "bytes": 283485,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e61b242e3247c8f14793ee06de0a15dd56ce9240eca95b22a845de2012b1307a",
+          "state_sha256": "43c1b5c29268e9eac6ee990a5563b467808189c06a040b61ccd8425b10da014c"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "9d2596d72135ff042be1cf28631681068c7273a1d0020e3944761dbd557b4297",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/c3899814a508470fb2a5766e608b82e3/provenance",
+          "bytes": 282845,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7fbbb1f490c7efd8b85ab588304b15664ebe2ae666e2c81bd7ccfe915a474ede",
+          "state_sha256": "585c035b5ecb0ac19cb5369e33ca1f5adb10065d19058d6cc0fdae5550ecc9a7"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "mode_hold"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 400,
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "69662322d96743ac78ad7593c368851a4079e82b12420bc70512296c0c106003",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/f44cf716bff84eb392881493cc98384a/provenance",
+          "bytes": 164449,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7b2c94941859dd405773d2874c4761327579672685350ba205d14b4cab6e33da",
+          "state_sha256": "d75b9e7c4192a88dd239229e3f1fa97d077c609675c893a7abbef0a71119bb9d"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "8c0eab0908b50eea8ae4f03d4be3203c36f548ad77a18889214ea741a584642e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/d1aa70c921f94768bf15d626b28c0adc/provenance",
+          "bytes": 163681,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "66c2202f6a721f9c3abd4e970e0d3f6714aa9e5329edbf8f639aec8068738faf",
+          "state_sha256": "3ad8feda9c3c2a449a5f4b4659c58407bc7099930bc605accb310b1c1f310d5b"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "residual_student"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 7000,
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "981069fcb47b22f5618ada84fd4265c9fe8155a6a02f6e72e41bd754bb66bf6a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/7f5476f82f854f2f947ce20badee6588/provenance",
+          "bytes": 770589,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "952a549ed8cd615ad93d9c4983c17eee9dc90f20fb4a459d5e8f82da26231f00",
+          "state_sha256": "ca6729ddfbd7d735a17257815c2505428ddc67b22549db453bd6c2068c49bab2"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "328ea99b584bed4fe8bc92f3357f7779407159885b952cc48d7e8313e51c296e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/5807d46316764553a468941594b6f58c/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2b6447ed9f2db259f98bc432faf2ed794684cbcb449acf40dbaafe1cacf82097",
+          "state_sha256": "e4011d9a113ff94307f27bf8f2bf78061c7df5e84217469c89f5dd6a33c2eaed"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "rotated100"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 7000,
+        "winner": 7000
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 10,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "325dbbb903997248cffd88cb84d0aff18b114b6eae8ffed83cf86d9505cf0938",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/b8744cd2d1834574b355fb4d69abca8f/provenance",
+          "bytes": 770589,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d70bdb40be53337ee1eab61bd7a051b4ac3c560bdf7743329587eebc9f262c74",
+          "state_sha256": "fee89dd59c76ee3f4582b3be54a15e15fc617cb9da0d1821d8ad829ce07aadc4"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "adef5a4797700904963758852122fda554c175e24f2caebf7e28b3634e5acb2e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/450f84378b7f4b619e193d98b1482c1f/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "559c2dcd597b72489f198003b02de05a11fdd67dc325f5b372301d8656fbee18",
+          "state_sha256": "3cfac7a598562738761bd9a396cc4ef30f4eec03789b0c25c9fb84f509e67156"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "staggered100"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 400,
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "535cb11389b89609baaf410b4c0f6723f228587df9a3440322693e642a65f056",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/aac071bfc7b54e7c83a0eb75e6fe7234/provenance",
+          "bytes": 164193,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "73a11fb05ed3e00cec6dea2bf5a80e5776ce6d771e4d1e5d7c5efdfedba471a7",
+          "state_sha256": "0e99f0f9bb31e7e6611bb5c6e62fffc6b804b2c4bbcdd59e234db99d0f5613c1"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "d6ff1ec50500c58669aaa0f12e4f1b63347122920dc0c3060681988b31e3318c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/2bc6eb695a5248c89b9c1ffd87525fb3/provenance",
+          "bytes": 163425,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "775390ccdb6002f713d2865af0a467146a27ab1501516b9b206295fa8c1ae893",
+          "state_sha256": "783215f1e412c0fcbef4218c6589ca8232c0dea6ee84879dfcc218527f2c6af8"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "trajectory"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 400,
+        "winner": 400
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "61d578e54a6ac6c57db1540ad63c4f83630e849357867d7c27c54e4fc7e037d5",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "33e98ef7f0f9a6d9c2d8dbb11d657d2ef82dfb648a4a4b5ce7265e3008781ad7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/7a9c20dd4a50459da401af0bdd2ab0e9/provenance",
+          "bytes": 91755,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "788b594d20ae9f3792c12f478a7fe6c78ffb32dcb9c6c5e565959d3fb2279082",
+          "state_sha256": "8f343aad1dfc89731254061f4d3c765db0b4f9170a524d71557e2751d53d1ff3"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "5e36bc8d178fed916baa389561dd8d32c3b7dcda79f1465d08fefed4e838f3bd",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/592cbb952382408c9eccb3ca77d6b460/provenance",
+          "bytes": 90859,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "270ba4032dea990e6d78d5b9a3deeb2e7e2fe764f220e2768226b963327a1c58",
+          "state_sha256": "397c7eb27c1247f1c14a19f53daee18e64b88a202852ec2d2994a4b4fb2c95e5"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "unipolar"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "0be96d7b6b5d13a382d045b4e0bb751e7a567d1fa2a17cd92f7e97dffb0df646",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/ca213d156b7f42cdb538f1f8fe511c80/provenance",
+          "bytes": 110521,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "69f06f7b02416f3a20c5594502ac8bc1124f25b7ba4c5b4800386dbfd4f4d3cb",
+          "state_sha256": "fa497b087fd37a94805cf9375cefd3205a0808ccbb4279629e6a0fb9d6ddef94"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "079cd4f686508ecaf66fdd436da1ae04be19bfbb3727bb4ca935f9745471b80a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/9dd114372d5a4f7c8b36c1b0c7d93522/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4f67f8a78d39d23f66bab7006e41ed7f0ff6d8de04191a375c71747b4437f46c",
+          "state_sha256": "d88278d895f5025f788f819522f9cb73f8f5d9b70b954f850bbc01ef203caadc"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "9d4d0349ea900fa1e92bd235429e93bcc0ed591e130951aa3f082614ec4f16b9",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/a4c337bb2d0141c693349d13b9772f94/provenance",
+          "bytes": 110521,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "158a4ccac3cbd49ea489a475e6ff516ec7051f878f779e9d0cba251f16b8ee8a",
+          "state_sha256": "2e2794ad2fa48cf98217301feb022118907e30fe8260a41df87da2cd5781b035"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "df3390453038abac28349c17cc6c9fc00cfc33a502b0622f46f06d25b172ee3d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/7876aa2e27314924b6c59be2339c7680/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "489b548681ca7815ac1347833634a1b7018a1035ce1f5cfa2d64d1c6d665837f",
+          "state_sha256": "bdd4f4e146186a2eabc6c3fb4f1cea34cf02615f165baf0f13f3cb023b48cc3f"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_overlap"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1600,
+        "winner": 1600
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "506a970b5f52527c17b7394fbd1c695bd91c1d48af300bf8716feba9f1f54700",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/e80e0574f092425ebb1ec502fe9cb04b/provenance",
+          "bytes": 110521,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "988cb8183517acb09069eb58926e00da8dd853e49ca5216bb21e53da1785ef99",
+          "state_sha256": "c92881553fd435a61d47ede1d88fed8812573088b98d418c77fcbfc1bf728cd2"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "a787386b0584e6cc92c71950b68df90afd819101336226a2e9a6ba198c8effa1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/350657076f3a4623b72e8974253f26ef/provenance",
+          "bytes": 109881,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "70e436c99d7ef28905d97a8d76d338e0ad54384e3dadc334f0ccbcc269d251ce",
+          "state_sha256": "af658d4264b8a67b084693c50e31ae6c8b90d9bb6daec1de1d0f4af82816c520"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_spiral"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "f2cc8ba165f8eeca9e0adcdeea3b982507fdfae4a401763201555e4f4e25d2c7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/e267efb4f4ab49769caf909edf1e0277/provenance",
+          "bytes": 110521,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6642017dad8bad6c2455e5544a9494fff4b17d3aa0eb9ced89ce76a7f0764f7e",
+          "state_sha256": "cc86c4219409a49bf485fa0415d6803bdfffee69cf87ced0ba5d10c8f1aca017"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "e187461b2a2c76769e3d7b3cb6a3ae9fe6056509b9aeeb073c7ac0be534ee46b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/65cf555fa52744008c0220c4911bc1b5/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a9ca2bce340af0de884fbd6c187d69783da27c3ced54581946b0d488cb753721",
+          "state_sha256": "76f4431a58ca6ba30f12dbba24de1a9c4d50a980eeffa6ce5c139ec7b035c9b6"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "2628fe3bd468af878dff9a17f1df0c42a6690fc258efd0de672fb8d614495c76",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/82e863d1c6984c95bcf4ddcf1acd9d6d/provenance",
+          "bytes": 110521,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "75c69419873c8ce09b2f64a558b91a35df2229a6ff103f7cdbc9f1d9f53a7bac",
+          "state_sha256": "4d78d8f67d05440081166c9b36df2c1cf499a205473cb9aad701ad144b9d8c6e"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "43f49594dd313af8600b6eaab74748054d4364bc8733df76bcde678b4009a426",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/e7957e4da9994c75b518b11e0b4be9f7/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "39c580ad237545dfa1e19e53160e56cfe2e9edf46b7d72d358deac014f0c609b",
+          "state_sha256": "de0e35f6fae03629e4da16727dad777a8fa1a87f04b193e0b6e2c290f3f43c9c"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_completed_arms_present": true,
+      "completed_roles": [
+        "combined",
+        "winner"
+      ],
+      "completed_steps": {
+        "combined": 1200,
+        "winner": 1200
+      },
+      "consumed_non_eval_stream_tensors_equal": true,
+      "consumption_comparison": "Verified every consumed non-eval stream tensor",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "non_eval_streams": 11,
+      "original_arm_scopes": {
+        "combined": "research_diagnostic",
+        "winner": "ordinary"
+      },
+      "original_arm_source_commits": {
+        "combined": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+        "winner": "beb7b1df56a51b1119053d6b4a03b6acb119e394"
+      },
+      "original_arm_source_digests": {
+        "combined": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+        "winner": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "proof_kind": "training_checkpoint",
+      "saved_state_references": {
+        "combined": {
+          "artifact_manifest_sha256": "9a65a946822f12073aa8167f9033257a387cbfdcb6d123734ce210e8bda848dc",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/70797006744f400485b775a5f794edb2/provenance",
+          "bytes": 110521,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8fcc4bb9c1fb55d0f9a2c16690ec58316b5d2dbac85304fb38f133ef21114ec7",
+          "state_sha256": "c7e5c4317c00e006ce37ece12e90a9a5933fcdc1ee60ee3ad704251df3c113ed"
+        },
+        "winner": {
+          "artifact_manifest_sha256": "9bc78614f82d41dfb9961e9c0b5e66a44c2230bff2ae8fee506927e29f3315f4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/bcap-develop-integration-v1/0a59a621ce724f2582eeda76c043a3b9/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "93c358bf6af6beca39e1ddf156734e2475ed8f19b054a5553be99923ecbe2d56",
+          "state_sha256": "928771c9de1ed05f7f06f0177b40ffeda0bc4467835a32dcf64ed5d82c97aa93"
+        }
+      },
+      "saved_variant": "final",
+      "scope": "research_diagnostic",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_question_contracts": {
+    "contract_archive_sha256": "df4e2aa4b5f06c7022842ceb3daa0da7257b5e103c337c03d69dad19099e18e5",
+    "numerical_conditions_preserved": true,
+    "original_git_cards_verified": 27,
+    "original_task_sha256": {
+      "ae_gan_hold": "b0eab360bd7ebcfa1fad5dad47abe4a29b8d91ac1eedbcefa6b592116e0d267d",
+      "cover_leftover": "f7aa16e8bfee4f9bea932078faa1610eb2feb03b3c0218e40583dfa3ededa266",
+      "five_word_joint_hold": "c9173401d4b7f3c7533d8211f40d14ec19f12aafe5f7c86da24315ff830aff56",
+      "five_word_joint_smoke": "e6004ce28f08b5619fa72fd405c58e60be19d842e4b57daa3e09168af2f0bb0a",
+      "gaussian1d_smoke": "4460635c069d10da44c5f7199d940fdd1531b604eddf64675120510e0f3fb7d1",
+      "gaussian1d_stability": "65d760ce7a45ee3ec062e76f57026ff09b29463711ea749bcd7079acbc0038d7",
+      "grid100": "e1b414bd92140a95338f0bc62d6c5328efa919e2913457a258ac2de33daeac3f",
+      "img_bars4": "51e7d0412264e2b564b2dc9c884b8b094cbe86884dca2795032da25efe98d656",
+      "img_blobs4": "153361882e740907f408eb42796cf970160bd5d2a565aad62a468e2b52b913d1",
+      "img_intensity2": "694752fc66c0a17d73afe9081fec8409f18c178ba252b2152431569427da6003",
+      "img_stripes2": "1cc1016fabd7d6b1d3bd2948bf58c7df8c3c947fa58a18e2469f211c41b480b6",
+      "mid_scale_identity": "d2c147762fb91bb76f5fb0ded9b76bc973e689ed7493ff34f1a01552040d029a",
+      "mode_hold": "284ee9b992caec120bac36eef2dc82b3b94409633e2ba9ed1f6cee1cec23d464",
+      "residual_student": "bdbc7f22d91b6dffa2bf46bcb743d227093783f728b2a73bf7fb8e78463ee204",
+      "ring16_acquisition": "21a9156304afc6f6612faf834532612415b631a5cfa1664b68a353119cc712ab",
+      "rotated100": "282ecf1465be0d861b1d500249fb1aadc0303310f74e9b8ec9b7240684e274ed",
+      "staggered100": "278129827827015bd53d13f1b7136f37eaafc9cbf34f46fcbf531bfb7eb5ba72",
+      "trajectory": "54ad90050bcb897c99c1fabf8b69935452fb6420b5ff2eaef717d60ad295a57e",
+      "two_pole": "a7e9b5cbd2f06f5a0f3da765f78afa5ef574eed9f14e937a9cd3aa28804ed6d1",
+      "unipolar": "6e93ba6f470558ab3b3c9acbc47db643bc3b5dbc5256f91545ea7bd69501aabe",
+      "unused_token_hold": "a8912efb2507e5c7900c1df837c2ad7d9b37cba55f65a9de53cd5c2bf066b98d",
+      "vector_anisotropic": "ce96f89823835509b1869ae6aff565270b06cf5e2cd018c6cf946e587352d0f5",
+      "vector_overlap": "72c2d16e1e1081365728af778955991bb622811ede0ed782466d03ca3eefe717",
+      "vector_spiral": "8bf5d41cd5f8b149161178370f3df32249e7d39dc6aa0839100da37f34e6b628",
+      "vector_two_broad": "dad52dad9d43f75a73ecbf07c78c75cd90e5c8de39102c459126cdcfe23cd20c",
+      "vector_unequal_mass": "b0f07e1064fa9c13271f630bc93f4979625c5c96ba79930349c8c8a76b1ebe46",
+      "vector_unequal_width": "7cc03a981745e52719fead313c50cd4e9f048dfa7e8cff55ca30a9d22889ca15"
+    },
+    "source_commit": "5737ade47dca89b04d338ada20667781d1f2b5df"
+  },
+  "own_checkpoint_dependencies": [
+    {
+      "history_reset": false,
+      "parent_attempt_id": "9dc5d157abae48e1bf1c604426d772b7",
+      "parent_checkpoint_sha256": "060b293232bf536dbc56c778d61b89bc845112ad2397c56eb178a5a63e6cdb8a",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "parent_state_sha256": "6af852241440e4e90f0d66488d46fe468690084b3b3227a524ea999ad7e52cb1",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "winner",
+      "scope": "ordinary",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "9bdb92991911468a803182aef58e953e",
+      "parent_checkpoint_sha256": "4a3fcc8c9dd7d78b1a51b992a9d54325e433a8cd1e126d3e96fafe0d26f88b97",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "parent_state_sha256": "dd333aff2755760325f78a83f1eafe3293d540a8fac101a7414e5b828ca6ff6a",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "winner",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "faadc79e7ce944e58d76353806601d75",
+      "parent_checkpoint_sha256": "d219cc66e5ac771ed4dec5ae17debfe58be56481fe82b6db2e92d972547b3d0a",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+      "parent_state_sha256": "3f0656f8dc3954389ca8d69c406cf878844e83183badb89a40141735c2d8bfdb",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "combined",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "partial": false,
+  "qualification_input": false,
+  "qualification_preservation": {
+    "checked": true,
+    "files_verified": 8,
+    "reason": null,
+    "reference": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/qualification-before.json"
+  },
+  "requests": [
+    {
+      "candidate_revision": "cd0bc55327a413a597a55fe9b662e9e03c77d3fd90460ddc35c2045e873abe86",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+      "request_id": "9579aae4bd9bdbae01e7919d",
+      "role": "combined",
+      "scope": "ordinary",
+      "source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+    },
+    {
+      "candidate_revision": "98dd9963cff76127f0efa20eaec0163518e468627ee91be7e2f0c84cb45b4503",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+      "request_id": "d74564c8ef93fcd4eec4e66f",
+      "role": "winner",
+      "scope": "ordinary",
+      "source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+    },
+    {
+      "candidate_revision": "cd0bc55327a413a597a55fe9b662e9e03c77d3fd90460ddc35c2045e873abe86",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/snapshots/c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+      "request_id": "28603072fa02e3380654a950",
+      "role": "combined",
+      "scope": "research_diagnostic",
+      "source_commit": "1e99c67faee3f1ec40d9683fc932e29c5fe11b8e",
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "status": "PASS",
+  "uncomparable_final_attempts": [
+    {
+      "gate_status": "INCOMPLETE",
+      "reason": "Certified incomplete/invalid/blocked attempt cannot establish matched complete consumption",
+      "role": "combined",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_smoke"
+    }
+  ]
+}

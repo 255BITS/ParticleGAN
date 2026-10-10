@@ -1,0 +1,43 @@
+{
+  "configuration_notes": [
+    "This editorial family ID equals the existing candidate ID; original scientific rows, receipts and selection pins remain unchanged.",
+    "The reporting_family=bcap-pure link places this card on its own configuration-alternative page. It does not replace the explicit bcap-dualnorm standard or pool passing cells.",
+    "Historical ordinary and research-diagnostic receipts keep their original source, scope, required denominator and qualification status. No diagnostic PASS is promoted to an ordinary current result.",
+    "Read the original study and saved actual-training media in reports/forge/bcap-three-phase/README.md. The effective recipe and original numerical gates are authoritative; this page creates no new experiment.",
+    "Calibration remains provisional and robustness is unmeasured. This configuration description supplies no public scientific-default adoption claim."
+  ],
+  "overview": "Historical BCAP DualNorm configuration bcap-three-phase-finite-cap-v1, retained from reports/forge/bcap-three-phase/README.md. This page documents the existing declared card and its source-bound research scope. Its results are configuration alternatives, not additional family benchmark scores. The original resolved recipe, task definitions, initialization, prior, sampling law and consumed streams determine each receipt; today's bcap preset must never reinterpret an omitted historical field.",
+  "pseudocode": [
+    "Read the exact source-bound resolved recipe and original task contract from the saved receipt.",
+    "For each original task update, construct the original critic objective and BCAP penalty.",
+    "Apply its saved DualNorm critic proposal; use a finite-cap guard only if explicitly enabled in that cohort.",
+    "Construct the original generator/encoder/prior objective and existing auxiliary objectives.",
+    "Use output-marginal global/local transport only when the saved recipe enables the corresponding weights.",
+    "Use direction_blend only when the saved recipe enables it and the original consumer supplies protected losses.",
+    "Apply the saved player clocks, rates and sampled-row ownership; score at the original cadence under the original law.",
+    "Retain the original PASS/FAIL/INCOMPLETE/BLOCKED evidence and source. No new training, retrospective gate or default claim follows."
+  ],
+  "references": [],
+  "sources": [
+    "configs/forge/ideas/bcap-three-phase-finite-cap-v1.json",
+    "reports/forge/bcap-three-phase/README.md",
+    "particlegan/recipes.py",
+    "particlegan/optim/dualnorm.py",
+    "particlegan/optim/direction_blend.py",
+    "particlegan/optim/constraint_geometry.py",
+    "particlegan/conditional_transport.py",
+    "particlegan/kinetic_transport.py",
+    "particlegan/optim/critic_cap.py"
+  ],
+  "symbols": "G is the generator, E an encoder when present, D the critic and P the task-owned prior. L is the original task loss, h_i an existing protected objective, d the optimizer proposal and eta the declared player rate. A named configuration applies one shared recipe across its declared tasks; some studies measured only an explicitly scoped subset.",
+  "training_details": {
+    "averaging": "Serving and scoring remain exactly as declared and certified in the original cohort; no EMA, saved-point substitution or clean/noisy result transfer is introduced.",
+    "critic_penalty": "The card declares BCAP coefficient 1.0, cap 1.0 and interval 1; this input-gradient loss penalty is not a global Lipschitz certificate.",
+    "damping_and_guards": "Protected geometry mode: 'direction_blend'. Global transport weight: 1.0; local transport weight: 1.0. Critic-step mode: 'finite_cap'. Direction protection is first-order; a finite critic cap, if present, binds only the original training panel and accepted rounded step.",
+    "gradient_clipping": "No new parameter-gradient clipping is added by this editorial registration. Normalization and optional direction correction retain their original saved implementation.",
+    "learning_rates": "The card fixes G/E LR 0.012, D multiplier 1.5, prior multiplier 2.5, network floor 1.0 and prior floor 1.0. The saved recipe controls its exact clocks and rate schedule.",
+    "loss": "The card explicitly declares loss=non_saturating. Original host-owned GAN and auxiliary objectives remain bound to their saved task/source contracts.",
+    "noise": "Keep the original task-owned priors and isolated constructor/data/train/evaluation streams. This documentation adds no noise, draws or new data.",
+    "optimizer": "The card declares DualNorm, smoothing 0.001 and per-offset convolution. The SVD backend is 'cpu'; omitted settings are read from the original resolved recipe, never today's preset."
+  }
+}

@@ -23,6 +23,14 @@ def worker_request(tmp_path, program, *, budget=3):
     module_root = Path(__file__).resolve().parents[1] / "experiments/forge"
     for name in ("__init__.py", "contracts.py", "sources.py", "execution_policy.py", "queue.py", "worker.py", "telemetry.py"):
         shutil.copyfile(module_root / name, target / name)
+    # The real Forge initializer enforces serial autograd through this public
+    # dependency. Keep the process fixture source-complete without importing
+    # the unrelated training package or replacing the execution policy.
+    execution_package = checkout / "particlegan"
+    execution_package.mkdir(exist_ok=True)
+    (execution_package / "__init__.py").write_text("")
+    shutil.copyfile(module_root.parents[1] / "particlegan/execution.py",
+                    execution_package / "execution.py")
     (target / "runtime.py").write_text(program)
     source = inspect_source(checkout)
     source["snapshot_path"] = str(snapshot_source(checkout, tmp_path / "queue", source))
@@ -77,14 +85,17 @@ time.sleep(20)
 
 
 def test_timeout_terminates_descendants_and_retains_attempt(tmp_path):
-    req = worker_request(tmp_path, SLEEP_PROGRAM, budget=.6)
+    # Importing Torch for the real Forge execution policy precedes this
+    # fixture's descendant launch. Leave startup room, then time out the
+    # 20-second workload and still verify the actual descendant is terminated.
+    req = worker_request(tmp_path, SLEEP_PROGRAM, budget=5)
     q = Queue(tmp_path / "queue", grader=grade)
     q.submit(req, campaign())
     claim = q.claim(SLOTS)
     process = q.launch(claim)
     directory = Path(claim["worker"]["directory"])
-    grandchild = await_file(directory / "grandchild.json")
-    assert process.wait(timeout=5) == 1
+    grandchild = await_file(directory / "grandchild.json", timeout=10)
+    assert process.wait(timeout=10) == 1
     q.collect()
     assert process_identity(grandchild["pid"]) is None
     result = q.inspect()["jobs"][claim["job"]["compatibility_key"]]["result"]

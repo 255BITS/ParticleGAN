@@ -695,19 +695,19 @@
       "trainer_family": "bcap-ada-nsgda"
     },
     {
-      "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
-      "candidate_revision": "dfe88a2ee15fb9d83ffdc5c8a25d698686b73d4e7c63b6b0e35efb0d64e94359",
-      "cohort": "37d98f2bc216aad8dc5e5f7fd135855382d72fad908807b4a68d310b0539893d",
+      "candidate_id": "bcap-default-baseline-direction-v1",
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "cohort": "ae08b5cf403bb3bfc15244f49d735536bc7dff884bf998203c0583f7e4ffffbd",
       "execution_backend": "cuda",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "The completed 96-configuration BCAP search selected this one global constant-rate DualNorm/non-saturating recipe by the frozen PASS-count/content-hash objective. It passes 6/6 Tier1 and 7/21 Tier2, tying two alternatives and missing the 10/21 target. This is the measured research reference; no Tier2 qualification, independent confirmation or public-default adoption.",
-      "recipe_sha256": "d4fac9f86e9e15a3d7a3e5fa55810201a6033cb203f63db6945bbd3bfeda7efa",
+      "reason": "Completed seed-0 ordinary matched pair: both global recipes pass 6/6 Tier1; direction_blend preserves all matched-control Tier2 passes and adds passes. Select this whole measured research baseline, retaining Tier2 failures and ordinary Tier3 veto. Calibration remains provisional; no qualified public-default claim.",
+      "recipe_sha256": "ccbfe546f0f93c0fc119553724cdab3e29196e7bbeec49722d278dd1d814d96b",
       "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
       "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
-      "scientific_row_sha256": "fcd0ca835b84cc152c14fcf9cd89868115395faca19da1db7bcb4054d78bbedc",
+      "scientific_row_sha256": "1b53979f8a5f2e1d1cba2305628eeb6b798603e549c7e5e511e232396131e32c",
       "selection_kind": "configured_standard",
-      "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed",
-      "task_keys_sha256": "5214b2b8673892eb17c33161db918b6c5901d1b6af9586a87d913218ecc1dfd1",
+      "source_digest": "6a225fcdd6922cdad37c9c947e163fb6f164f6ad4390293a3d3091b8f741ce44",
+      "task_keys_sha256": "a267f4bf821e6f31a3c2fcbd4b043334815d56bfa7abe6d462c1e01161c4668f",
       "trainer_family": "bcap-dualnorm"
     },
     {

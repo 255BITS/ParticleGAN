@@ -1,0 +1,667 @@
+{
+  "frozen_source_checks": [
+    {
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1206,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f/forge-source.json",
+          "sha256": "65969535439946d2cd4db4eb21ee3e15fe8d85cfe9fce6cfb330b84a2d89b8c0"
+        }
+      ],
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_commits": [
+        "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf"
+      ],
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_six_questions_preserved": true,
+  "requests": [
+    {
+      "candidate_revision": "894b308735927067b0bd85c4c1e51c0f823f05e950239f47192a986c9ab527f2",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "request_id": "5b97fb077aeb01fdbc340576",
+      "role": "cap-margin",
+      "scope": "ordinary",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+    },
+    {
+      "candidate_revision": "eeebf5e4e1b5deed2628a3b9db24991f7b8367f87c608b8a77558c85e2961d23",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "request_id": "82ee0e4d2f97fb888b54e4b9",
+      "role": "finite-cap",
+      "scope": "ordinary",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+    },
+    {
+      "candidate_revision": "209e00269e2bf265f4f8b761721000a653572dc712ef8bea8c9dd5808c464a47",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "request_id": "c218f8948bc463a8f7343923",
+      "role": "incumbent",
+      "scope": "ordinary",
+      "source_commit": "0f9787fa3f164f6d2034144714f8e7ba7ab75bbf",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "saved_state_comparisons": [
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 250,
+        "finite-cap": 250,
+        "incumbent": 250
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "d418dc4a9d41bc9c2b1f5b5f9044d99f39574b50c61d5a1f837cff21f4e8d8f7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/ee78cb97cd5c4cd99be3803b6096d3e8/provenance",
+          "bytes": 66873,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "14a93e3fc8f41f9924f50f3157476d8b18f69e17dcf0bac27e2d4d84fe5d5070",
+          "state_sha256": "c060d000f72fb4617fcfcf4f2860829bcae0c6222a139371fc928e08109910b8"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "859536987536c8060ddffda454b98c7c2480a0f4f2a105aa395af69dc5b2594f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/5aca8344567242eabf6710ea7634b8f4/provenance",
+          "bytes": 67257,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7367d5f053db1e05b447e58b148ea1a8e90bc7064da05770a07dd2122226dd10",
+          "state_sha256": "850a8484af6f243fe2f7ee8ed73285e0ab808645c01abc5c1dc2ca4618322842"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "77635b0d80a00479bb7ab741f5c3da39e909c10da769cfc1e81acd9c2dedf244",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/398302ac580347dd885b8ce7d1cf1101/provenance",
+          "bytes": 66105,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8b4666e9bfb04fb041938cd19617bcedfea2140f63f0ecc766ff8c7719844a05",
+          "state_sha256": "94daaf4082ff3e90dcb7133384b3ee163f214d8dce6337d75c50d8844e289961"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 8,
+        "finite-cap": 8,
+        "incumbent": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "37eaa44901258c0ea6ac1063138caa15c020afbdb0ab32479002b1a358a99718"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "83716fff0b03086e71315adb2f8b052de520d2065574cd3d3c5aba8e9d36abf6"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "699abd2ef2f55384094775e7f92ed2a404c849c1263476e3233a23675c9734c6"
+        }
+      },
+      "saved_variant": "evaluation_cadence",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 8,
+        "finite-cap": 8,
+        "incumbent": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "d6ee8af14b294904cfba0df28f452ba3672032f4ede74747783447a792c6addd"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "4c3ffc346f1f3fc0f4acd8c5876915a7132947d3bd700ba114082bdb2c706779"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "8d9cd9799aad36b83f2702491bef64d9fe334c1b619220a39e8e43f0dba65aa5"
+        }
+      },
+      "saved_variant": "horizon",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 8,
+        "finite-cap": 8,
+        "incumbent": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "382fbaadf7afd5a5851fac1339d24e620cb8315638c3b6163b8e6610489c31f4"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "850ba7e770f8e682e258d37e8313986f467a35cc1410ffe32fccc97b1170312e"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "b0cf63fe917e072063db14751988885e2938edfc3369a67095c2ba060b7e4f00"
+        }
+      },
+      "saved_variant": "reference",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 8,
+        "finite-cap": 8,
+        "incumbent": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "382fbaadf7afd5a5851fac1339d24e620cb8315638c3b6163b8e6610489c31f4"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "850ba7e770f8e682e258d37e8313986f467a35cc1410ffe32fccc97b1170312e"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "b0cf63fe917e072063db14751988885e2938edfc3369a67095c2ba060b7e4f00"
+        }
+      },
+      "saved_variant": "restart",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 8,
+        "finite-cap": 8,
+        "incumbent": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "b9c013c9c5ee88cbc71b3100aa4e22cba1a955b1865eae384dafe51cd9c46a59"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "40ccabdb3506a2808e613bd023d553be2674bc292514ed544c7724f9ba55bbf9"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "ba92fe24f515b094a086a5858fec6a20801798b66eebf745fdf2a9c3910f1eec"
+        }
+      },
+      "saved_variant": "step_label",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 4,
+        "finite-cap": 4,
+        "incumbent": 4
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/512625e6c4d54e72bb6414e3310c1e09/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "910c6027f6aa546440cd6bd0e336450a576e4deb6be2d65dc604c7b2f55a8385",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "9f65400c4995c62dd7b273c86a84a6ae758769a94b6195d2f6b6566f42167766"
+        },
+        "finite-cap": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/b3b5dd85b3f0493f9fc7cf3c6808fe29/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "17bc23750f3f90b98a15b1460579da6c6c7a1aeafc6e75bb772662ee590541dc",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "082e0b57209cb673387f7cad0014872542be89dfdea993591e58b93274328d04"
+        },
+        "incumbent": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8bc59332934440b3a2f2cfd412162249/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "b1545ddc51c4e74b3006185611f403eee454598eb725b09f19f44e99dcce3bdf",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "2b86bf3dd61aa11a302677d0031c1de79367a501b003d3ba94332d8a982831e5"
+        }
+      },
+      "saved_variant": "warmup",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 20001,
+        "finite-cap": 20001,
+        "incumbent": 20001
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "b9706624b976d79a9ef2168ded448051b7e6a1d984e92071ba9642f275a06d6f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/0fa6c0be19994e5d90e6de3b577597c6/provenance",
+          "bytes": 841461,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9632162882dd89bab4a88d3431698abd41ef308b77e1199eed0e71f3859bdb99",
+          "state_sha256": "789d312643fb95c25c0cefadb32c2a810ceb1b8edb843e00b486ec8bef49aa03"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "bbce7b4c549510c87b92490a83c5b2a885cbfd68aeec29487910841b7a742b0b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/7b965a24fc974e37bdd2365fd6543f9b/provenance",
+          "bytes": 841845,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1ac456b6e993ca2cb8d1cdfe36f5207a04919992381e3870c87ff7a11739acd7",
+          "state_sha256": "9db8f4721e4ed7254acb1421fa26eed91f845ed7e9a912d968a617d5a22415b8"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "c9b99a1e43adb8ebe69f5f2b2dd88432725aa57961f8478eaa5d53ce24c4cd4c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/21330016aa5a40f9a5a1328cfbf7948b/provenance",
+          "bytes": 840501,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b7ec0a5de171e6c20f0a74a21c448f2b9ab08329e278ccf8ab34d8983aa7ea92",
+          "state_sha256": "c6a2ffa4ab3905a535b4e65eefa497138fa5806e13cf3e9d2699d10a21a49289"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 1000,
+        "finite-cap": 1000,
+        "incumbent": 1000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "f0c2cc11d230fb3ae467ea06a07c551092b9f3a8a19e031aefa02f88f4477442",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/3c8ef8cbe4654857806d042b42e4dc46/provenance",
+          "bytes": 65663,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ca868c96869bf0fde6ed8f67584c2ca2124355494007fded5f8552d1e0e0bae1",
+          "state_sha256": "197059f11eda493d35de9243a7b252ff8a7b7adf5672f13c32ecda2d3be1969f"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "a4a81e07c21eced40bb1ddfbf5274929ec06dd63e3474990d420e79ccd3e63f4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/ca04d428879742cd865240926ce4a70b/provenance",
+          "bytes": 66047,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "db9dd1da30cf6708dea4a9a1e228c36e1df63e43dca17c80c2b71589a7043190",
+          "state_sha256": "094a80826f67cd1dc61673a6821c3b9711a18d486f846c7f2db1ce8a04501e52"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "727e05920c56dfd46d0fae0fc37ff9b7644ab468ca63a3af78f8b24a109dc592",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/7a8381009b9a4e63b96e8fa1573f4779/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4c5bbd0e78abe1475d36677523d369629b4ffab23fa2d2c02574daf2b1a6cd0d",
+          "state_sha256": "cb29807dc401812bb21d812e4876a1507083adc9fcea29c246b00e49cba2a153"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 1600,
+        "finite-cap": 1600,
+        "incumbent": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "0855333c16911ef0c332d40b210a61af3fdc7afe7510c2278403f6cf97691748",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/0f4b764640574edfb487b3dc2820e412/provenance",
+          "bytes": 110649,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b0999d66b44c521f5ac2473de4a4612d712feea556b2ecafd9badba8c63d7f9b",
+          "state_sha256": "7fcb0e184d161f72a6c7e35e239198ec4f7cdbc773df055a2e82c54aa49f8bf7"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "9c737975ab952fbfd00cd6fae37785a47daa5764aee37ef7a9aaa40941e29e7a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/e30252cacfef4d8f9c635065ad962805/provenance",
+          "bytes": 111033,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "cffb429b8b6aeff548260ae489e0da4066d2ad3da371c73b7a7d4a06b859b345",
+          "state_sha256": "2206357b755ed8357e62c0e0beba515078924825ac3824b9041584498ac331d5"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "c2bd0a6e721578d01683da3acd7e12dda7786e957361d7bd5adc9f6d40e6fb0d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/cb981a741b1145c2aeae74acd7f6eacf/provenance",
+          "bytes": 109945,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6a71147bcdc76eb97c0b76d5dca944564686838db2106e3e66143b7d93b903c4",
+          "state_sha256": "5227c90b55460b521ea43e6f69f59b153d54a59014741632b8f15e2a23ca443d"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 80,
+        "finite-cap": 80,
+        "incumbent": 80
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "45bfc2e606c55143fc0852e8169303cb69b3ebe5bb6d86b5dc1362cdc28ced48",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/5135d03e9eeb44b4852939fb5c0e45e7/provenance",
+          "bytes": 49007,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "59bc0efdcc548fecdc159d1b87e611b7b395df95c293f002fea4db339705d37b",
+          "state_sha256": "17e733957c6699b0b065b50e8aea7dc1dcab4beb4b89490329795535da619638"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "7754045e3a991cd9489f754a5477db45a87914637b33b9a67f790b4e48f43723",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/d3ddcb39e17c49e3aa6d1c99e7b26b3e/provenance",
+          "bytes": 49391,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a359e0681b9818515aac8e26997748c6c0f63f9f63bcae3a0cb75e83a2c12e1a",
+          "state_sha256": "682f604bc117be1358aa6560cbff527981ad2cd5d0d92de366793afb39840f76"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "824dab87999174c2fa0af13c96f52ee6e1197a8f8da985aa896937080dee6198",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/0bdb32f8422143739fa8d000acbd85a2/provenance",
+          "bytes": 48047,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "56967c7312b6433b1b1e932e63f5972285977d64ba8418e010819ffa961acacc",
+          "state_sha256": "2b4a1ee034f102f33166dc1c64cdfc0eebf68a8f4ce3010e8ca32073a90f2344"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "two_pole"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "cap-margin",
+        "finite-cap",
+        "incumbent"
+      ],
+      "completed_steps": {
+        "cap-margin": 200,
+        "finite-cap": 200,
+        "incumbent": 200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "cap-margin": {
+          "artifact_manifest_sha256": "7b009d1a369d23affb3b9412118f34e50cfb37f3a38ab2b20df673912fd6ef09",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/8a20c1ee894745cba520b081527fd963/provenance",
+          "bytes": 53255,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "89d045e8978171c8908e7b6f0b66de2ce9bcde4968974da055cc7a2b6d9b6d48",
+          "state_sha256": "0471865d74d567a27c4da8c74e173280de1aa56274b5fcf2b8eb953395c4a44a"
+        },
+        "finite-cap": {
+          "artifact_manifest_sha256": "3be081adeec1b290439773de16edb3ef402dc76d349d810b859ec28acf0a59f5",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/43974d7fa92449fa9e3a5b8f6c108380/provenance",
+          "bytes": 53767,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2dbee2275d773c4debd35bd96f68dbff7de8e5b79a4f50d40a6708d8ee724f98",
+          "state_sha256": "05a78eacf52e424bd0cec124db44226213890d6036ab4f69ad2b580c95d98970"
+        },
+        "incumbent": {
+          "artifact_manifest_sha256": "58494603e6b807f51aeb42c3775d82bc89345dc9d136ba0752784f5ccf77a13f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase2-queue/bcap-three-phase-tier1-v1/23601c735c0846d5b1edafcca6acde16/provenance",
+          "bytes": 51911,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "854a4dd4098b1bb4590103434492c010b22152a5047ebe7922ea4ab7e8744ce7",
+          "state_sha256": "78fd0a218aa15cbf86e6eeca73f7a958dd11cf16a071a12ea7b7ccfa61c215c5"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "scope": "phase2_saved_evidence_audit",
+  "status": "PASS",
+  "unavailable_complete_states": []
+}

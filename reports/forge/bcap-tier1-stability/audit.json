@@ -1,0 +1,141 @@
+{
+  "all_consumed_non_eval_states_and_bindings_equal": true,
+  "completed_attempts": 8,
+  "final_actual_particle_panels": [
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": -0.9585022330284119,
+      "minimum": -0.958505392074585,
+      "negative": 12,
+      "population_std": 8.849165737956355e-07,
+      "positive": 0,
+      "role": "incumbent",
+      "state_sha256": "fff1107ebbf7f0ede7ac67e052edc14b005c69ab0b571f51617fa1ae31f43181"
+    },
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": -0.9585022330284119,
+      "minimum": -0.958505392074585,
+      "negative": 12,
+      "population_std": 8.849165737956355e-07,
+      "positive": 0,
+      "role": "projection",
+      "state_sha256": "fff1107ebbf7f0ede7ac67e052edc14b005c69ab0b571f51617fa1ae31f43181"
+    },
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": 1.008338451385498,
+      "minimum": -1.008508563041687,
+      "negative": 6,
+      "population_std": 0.9324182868003845,
+      "positive": 6,
+      "role": "transport",
+      "state_sha256": "2a415f083c6f9959da253365b00b9ae2ea9f13daae1476c682174fc248005a09"
+    },
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": 0.9977191090583801,
+      "minimum": -0.997173011302948,
+      "negative": 6,
+      "population_std": 0.9598390460014343,
+      "positive": 6,
+      "role": "projection-global",
+      "state_sha256": "badb455a1ce36dee373a2a7b9fd75e98139f72cba7534a0f21f0650a5f3e92ca"
+    },
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": -0.9171510338783264,
+      "minimum": -0.9238477349281311,
+      "negative": 12,
+      "population_std": 0.0018508704379200935,
+      "positive": 0,
+      "role": "projection-local",
+      "state_sha256": "4476a86620f55ac51a5a119c1a61816be3666bfff05d085f52e4ac1221e8adfa"
+    },
+    {
+      "cohort": "ablations",
+      "count": 12,
+      "maximum": 1.008338451385498,
+      "minimum": -1.008508563041687,
+      "negative": 6,
+      "population_std": 0.9324182868003845,
+      "positive": 6,
+      "role": "combined",
+      "state_sha256": "2a415f083c6f9959da253365b00b9ae2ea9f13daae1476c682174fc248005a09"
+    },
+    {
+      "cohort": "repairs",
+      "count": 12,
+      "maximum": 1.0080125331878662,
+      "minimum": -1.0080610513687134,
+      "negative": 6,
+      "population_std": 0.9312331080436707,
+      "positive": 6,
+      "role": "cap-margin",
+      "state_sha256": "57f2273a3cbbca9a4af35962c17270f0169e8aa845f363c244d5cb4cb4f7803e"
+    },
+    {
+      "cohort": "repairs",
+      "count": 12,
+      "maximum": 1.0067411661148071,
+      "minimum": -1.0077329874038696,
+      "negative": 6,
+      "population_std": 0.9246662855148315,
+      "positive": 6,
+      "role": "finite-cap",
+      "state_sha256": "7d4883534f0d42f08681eb2eb3a58ae60a066a92ee610e8d1df457386426ddc4"
+    }
+  ],
+  "initialization_evidence": "Exact declared stored-host-critic/zero-particle fixture bound to frozen construction source; no separate initial tensor dump is retained.",
+  "non_eval_named_streams": 11,
+  "non_eval_stream_proof_sha256": "6cfb6218b736924c4992f58713b3e3f921bb8072bd3d0976736c22bddc69ff4d",
+  "projection_inactivity_pairs": [
+    {
+      "actual_final_models_equal": true,
+      "actual_final_role_parameters_equal": true,
+      "all_24_observations_equal": true,
+      "model_state_sha256": "1626b1d5de3cacd374b27272c05c4fc98d320f1712e1886a915256d5e264b620",
+      "role_state_sha256": "6bef84eaf69e8b0fa1d1b81c3ddaff1b17d2c46670dc9dd987c15d2b3a6b1a25",
+      "roles": [
+        "incumbent",
+        "projection"
+      ]
+    },
+    {
+      "actual_final_models_equal": true,
+      "actual_final_role_parameters_equal": true,
+      "all_24_observations_equal": true,
+      "model_state_sha256": "33ab472a7ad767ed193bdedf1f36f48602cc11a08fcd1e17b14efc5cc5e120c9",
+      "role_state_sha256": "73b69db4b8295b27c344c95c9076ab83c989f0dec91956ee6cecd893c743339b",
+      "roles": [
+        "transport",
+        "combined"
+      ]
+    }
+  ],
+  "qualification_input": false,
+  "schema_version": 1,
+  "sources": {
+    "4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d": {
+      "origin_commits": [
+        "dea70adebf458a64827be0b4447abf1e167cb19a"
+      ],
+      "snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/repairs/queue/snapshots/4e7f0c8653a0439ae325fa82f4b8050fcd9343d564b0c4e261b3e700484b6d2d",
+      "verified_files": 1206
+    },
+    "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4": {
+      "origin_commits": [
+        "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      ],
+      "snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/stability/queue/snapshots/f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+      "verified_files": 1205
+    }
+  },
+  "status": "PASS",
+  "task_contract_sha256": "65c18e13e8cf70b793d5dcc6f55766a9e09040b7270a0fd800e060f551efa149"
+}

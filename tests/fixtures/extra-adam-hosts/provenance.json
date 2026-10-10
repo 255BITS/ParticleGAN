@@ -1,0 +1,17 @@
+{
+  "evidence": "reports/toy100/extra-adam-screen.json",
+  "files": {
+    "mode_hold": {
+      "git_blob": "0ab7ee7a70d44e9ecf3b344ad6ff3d5054934b93",
+      "path": "benchmarks/locked_shared/mode_hold.py",
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "trajectory": {
+      "git_blob": "dc0718cca299c7c4fc9b373d550b404a4fb33469",
+      "path": "benchmarks/locked_shared/trajectory.py",
+      "sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+    }
+  },
+  "scope": "Exact archived host bytes for software AST transformation and tamper rejection; no training is executed.",
+  "source_commit": "4b00335f72acf7ed0ce5d9ec11dee27fa9b267ab"
+}

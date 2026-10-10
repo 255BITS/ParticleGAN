@@ -171,11 +171,18 @@ def test_cli_defaults_to_canonical_list_and_exposes_retained_named_case(inventor
     assert exit_info.value.code == 2
 
 
-def test_standalone_listing_does_not_import_training_stack():
-    script = ("import sys; from benchmarks.toy_audit import canonical_selection as s; "
-              "s.main(['cases','--id','pr58','--json']); assert 'torch' not in sys.modules")
+def test_direct_script_metadata_cli_listing_does_not_import_training_stack():
+    # Benchmark package initialization imports Torch for serial scheduling.
+    # Execute the metadata script directly to isolate its actual CLI contract.
+    script = ("import runpy, sys; "
+              "s = runpy.run_path('benchmarks/toy_audit/canonical_selection.py'); "
+              "s['main'](['cases','--id','pr58','--json']); assert 'torch' not in sys.modules")
     completed = subprocess.run([sys.executable, "-c", script], cwd=selection.ROOT, capture_output=True, text=True)
     assert completed.returncode == 0, completed.stderr
+    case, = json.loads(completed.stdout)
+    assert case['catalog_id'] == 'pr58'
+    assert case['canonical_id'] == 'develop-img_intensity2'
+    assert case['original_status'] == 'FAIL / PASS'
 
 
 def test_source_drift_blocks_selection_even_with_unchanged_catalog(inventory, tmp_path):

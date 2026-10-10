@@ -1,0 +1,26 @@
+{
+  "scope": "reporting_and_execution_recovery_only",
+  "scientific_source_changed": false,
+  "training_added_by_publication": 0,
+  "original_paid_ceilings_retained": true,
+  "reporting_tests": {
+    "passed": 5,
+    "log_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/logs/post-reboot-reporting-tests.log",
+    "junit_sha256": "e174d0df673881a09e9c6496097a2841bfe69e35355be804d0f341669af615e4"
+  },
+  "execution_adapters": {
+    "drain_adapter.py": {
+      "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/drain_adapter.py",
+      "sha256": "00f50db438b6b3b1d4965ab0caa36399575808f1c2ac62efe7164f0b64c5b957"
+    },
+    "run_repaired_studies.py": {
+      "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/run_repaired_studies.py",
+      "sha256": "0d25234f234f47f756a9838db2aca1011da7b2296327edb1c2b3e9640566fdf8"
+    },
+    "retry_frozen_queue.py": {
+      "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/retry_frozen_queue.py",
+      "sha256": "9c234492abbfc49acbcf2a11824a7a19df8fd6be5d1628913c391c4f491cf6df"
+    }
+  },
+  "scheduling": "Two concurrent GPU slots; each frozen coordinator uses one GPU plus its original CPU slot, queue polling2s. Only scheduling and reporting change."
+}
