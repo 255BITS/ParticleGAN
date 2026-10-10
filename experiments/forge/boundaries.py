@@ -45,6 +45,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "critic_step_mode",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
     "reg_anchor_min_decay", "reg_anchor_weight", "d_guard_ratio", "d_guard_min_steps",
@@ -245,7 +246,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         prior_fields = {"prior_lr_mult", "prior_betas", "prior_eps"}
         if recipe_owned_prior(task):
             prior_fields |= {"prior_update", "prior_regularizer", "prior_reg", "prior_l2",
-                             "prior_reg_target_std", "prior_reg_eps"}
+                             "prior_reg_target_std", "prior_reg_eps", "prior_sigreg_projections", "prior_sigreg_knots"}
         optimizer_inactive = (name in prior_fields - {"prior_update"}
                               and resolved_recipe["prior_update"] == "frozen" and recipe_owned_prior(task))
         if (name in prior_fields and not prior_binding["latent_table_controls"]) or optimizer_inactive:

@@ -1,0 +1,18 @@
+{
+  "scope": "Four-update CPU software fixture; no tier qualification",
+  "baseline_source_commit": "0337bbbc2300fd351e77e9a222b92401137fd421",
+  "protocol_seed": 0,
+  "caller_rng_seed": 777,
+  "steps": 4,
+  "metric": "complete trainer and named stream SHA256 equality",
+  "target": true,
+  "passed": true,
+  "baseline": {
+    "trainer_state_sha256": "49f8753038a55d5d5f5b93079b78db267bdf1d9a8e040012f5362e29249aa89c",
+    "named_streams_sha256": "2540fe988dc4cd8b261acf83fda3840e47cdb3a4abd107e5d4bca8d4eb8ebb43"
+  },
+  "feature_disabled": {
+    "trainer_state_sha256": "49f8753038a55d5d5f5b93079b78db267bdf1d9a8e040012f5362e29249aa89c",
+    "named_streams_sha256": "2540fe988dc4cd8b261acf83fda3840e47cdb3a4abd107e5d4bca8d4eb8ebb43"
+  }
+}

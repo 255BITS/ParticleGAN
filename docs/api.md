@@ -1233,7 +1233,9 @@ caller.
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
-| `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
+| `recipe.make_prior_regularizer(**kwargs)` | Selected `ParticleRegularizer` or `SIGReg`, with `weight=recipe.prior_reg` already applied |
+| `recipe.prior_regularizer_checkpoint(module)` | Optional state for an active stochastic prior regularizer |
+| `recipe.restore_prior_regularizer(module, state)` | Validate/restore regularizer state for exact caller-owned continuation |
 
 ### Regularization factories
 

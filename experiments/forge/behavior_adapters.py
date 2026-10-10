@@ -548,6 +548,7 @@ class BehaviorComponents:
                        for index, parameter in enumerate(parameters)]
                  for role, parameters in self.role_parameters.items()}
         return dict(models={name: model.state_dict() for name, model in self.models.items()},
+                    **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
                     role_parameters=roles,
                     optimizers={name: optimizer.state_dict() for name, optimizer in self.optimizers.items()},
                     streams=self.context.streams.state_dict(), applied=self.receipt(),

@@ -17,6 +17,7 @@ from .api import CapabilityError, task_formulation_context
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json, file_hash
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
+from .priors import recipe_owned_prior
 from .state import state_digest
 from .telemetry import PhaseTimer
 

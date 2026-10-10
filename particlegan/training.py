@@ -399,6 +399,11 @@ class GANTrainer:
                 # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
+            elif self.prior.z.requires_grad and recipe.prior_reg > 0:
+                # Stateful alternatives draw only when their weighted objective
+                # is active, retaining the host's existing row-selection law.
+                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             if self.prior.z.requires_grad and recipe.prior_l2 > 0:
                 loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
@@ -501,6 +506,7 @@ class GANTrainer:
             "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
+            **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict() for name in names},
@@ -573,6 +579,7 @@ class GANTrainer:
             saved_recipe = {**saved_recipe, "prior_update": "frozen"}
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
+        self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"), validate_only=True)
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
@@ -680,6 +687,7 @@ class GANTrainer:
             self.policy._feature_selection.commit_restore(prepared)
         for name, values in state["models"].items():
             getattr(self, name).load_state_dict(values)
+        self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"))
         if self.log_output_sigma is not None:
             with torch.no_grad():
                 self.log_output_sigma.copy_(state["output_noise"]["log_sigma"])

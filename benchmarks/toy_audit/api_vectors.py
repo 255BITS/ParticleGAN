@@ -747,6 +747,7 @@ class VectorFixture:
                      phase_receipts=deepcopy(self.phase_receipts))
         if self.metadata.get("caller_owned"):
             state["caller"] = deepcopy(dict(generator=self.generator.state_dict(), critic=self.critic.state_dict(), prior=self.prior.state_dict(),
+                                              **self.recipe.prior_regularizer_checkpoint(self.regularizer),
                                               ema_critic=self.ema_critic.state_dict(), opt_g=self.opt_g.state_dict(), opt_d=self.opt_d.state_dict(),
                                               latent_rng=self.latent_rng.get_state(), update_counts=self.update_counts))
         else:
@@ -773,8 +774,10 @@ class VectorFixture:
         elif state["trainer"]["completed_steps"] != steps:
             raise ValueError("checkpoint trainer differs from its phase clock")
         if self.metadata.get("caller_owned"):
+            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"), validate_only=True)
             for key in ("generator", "critic", "prior", "ema_critic", "opt_g", "opt_d"):
                 getattr(self, key).load_state_dict(state["caller"][key])
+            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"))
             self.latent_rng.set_state(state["caller"]["latent_rng"])
             self.update_counts = deepcopy(state["caller"]["update_counts"])
         else:

@@ -3,6 +3,7 @@
 SEARCH_RECIPE_DEFAULTS = {
     "prior_update": "learned", "prior_regularizer": "vicreg",
     "prior_reg_target_std": 1.0, "prior_reg_eps": 1e-4, "prior_l2": 0.0,
+    "prior_sigreg_projections": 32, "prior_sigreg_knots": 17,
     "critic_step_mode": "none",
     "constraint_geometry_mode": "none",
     "kinetic_transport_weight": 0.0,
