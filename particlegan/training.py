@@ -174,7 +174,9 @@ class GANTrainer:
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
-        self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
+        self.prior_regularizer = recipe.make_prior_regularizer(
+            weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
+            prior=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
@@ -394,7 +396,8 @@ class GANTrainer:
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad and recipe.prior_regularizer == "vicreg":
+            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg"
+                    or (recipe.prior_regularizer == "coulomb" and recipe.prior_reg > 0)):
                 # Keep the historical unweighted diagnostic, even at weight 0.
                 # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
@@ -604,6 +607,14 @@ class GANTrainer:
                         raise ValueError(f"checkpoint model {name} has incompatible tensors")
                 elif saved != value:
                     raise ValueError(f"checkpoint model {name} has incompatible state")
+        if self.recipe.prior_regularizer == "coulomb" and self.recipe.prior_reg > 0 and self.recipe.prior_update == "learned":
+            from .coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
+            for name in ("prior", "ema_prior"):
+                reference = state["models"][name]
+                if (not torch.isfinite(reference[CENTER_BUFFER]).all()
+                        or not torch.isfinite(reference[RADIUS_BUFFER])
+                        or reference[RADIUS_BUFFER] < 0):
+                    raise ValueError("invalid checkpoint Coulomb initial reference")
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")
         try:

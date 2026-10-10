@@ -104,3 +104,6 @@ dist/
 /runs/caption-late-phase-*
 /runs/archives/
 /runs/software/
+
+# Local prior feature software checks and execution artifacts.
+runs/prior-coulomb/

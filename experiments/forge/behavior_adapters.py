@@ -257,7 +257,10 @@ class BehaviorComponents:
         """One recipe objective over this host's actual latent tables."""
         if not self.uses_recipe_prior:
             raise ValueError("legacy hosts retain their original prior objective")
-        rows = [prior.z for prior in priors if prior.z.requires_grad]
+        priors = tuple(prior for prior in priors if prior.z.requires_grad)
+        rows = [prior.z for prior in priors]
+        if self.recipe.prior_regularizer == "coulomb" and self.recipe.prior_reg > 0:
+            self.prior_regularizer = self.recipe.make_prior_regularizer(prior=priors)
         if rows and (self.recipe.prior_reg > 0 or self.recipe.prior_l2 > 0):
             loss = loss + self.recipe.prior_regularization(
                 rows[0] if len(rows) == 1 else torch.cat(rows), regularizer=self.prior_regularizer)
