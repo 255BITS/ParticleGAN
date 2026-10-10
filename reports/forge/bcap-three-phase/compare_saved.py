@@ -22,7 +22,11 @@ def compare(root):
                                   'no regression of a baseline Tier2 pass, and no unresolved comparisons.',
                    tracks={}, eligible_research_baselines=[])
     for track in TRACKS:
-        publication = Path(str(root) + '-bcap-moonshot-' + track) / 'reports/forge' / ('bcap-moonshot-' + track)
+        report = Path(str(root) + '-bcap-moonshot-' + track) / 'reports/forge' / ('bcap-moonshot-' + track)
+        publications = [path for path in (report, report / 'publication')
+                        if (path / 'phase3-results.json').exists()]
+        assert len(publications) == 1, f'{track} needs one unambiguous final publication'
+        publication = publications[0]
         path = publication / 'phase3-results.json'
         result = read(path)
         assert result['scope'] == 'phase3_paired_research_diagnostic'
@@ -54,7 +58,7 @@ def compare(root):
                     and not regressed and not changes['unresolved'])
         paid = sum(item['selected_paid_seconds'] for item in result['accounting'])
         assert paid <= result['paid_ceiling_seconds'] == 48000
-        summary['tracks'][track] = dict(source_commit=result['source_commit'],
+        summary['tracks'][track] = dict(publication_path=str(publication), source_commit=result['source_commit'],
             source_digest=result['source_digest'], results_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
             outcomes=counts, paired_changes=changes, tier2_repairs=repaired, tier2_regressions=regressed,
             eligible_research_baseline=eligible, paid_seconds_including_predecessors=paid,

@@ -76,7 +76,10 @@ def main():
                    cwd=root, check=True)
     requests = module.resolved(root, registration)
     chosen = load_idea(root, "bcap-three-phase-incumbent-v1")
-    baseline = requests["baseline"]["candidate"]
+    # Planning materializes the protocol's default prior in a resolved request.
+    # Compare declarations at the same stage; actual task priors are checked in
+    # the frozen contracts and saved-state audit below.
+    baseline = load_idea(root, requests["baseline"]["candidate"]["id"])
     require(all(baseline.get(field) == chosen.get(field) for field in FORMULATION_FIELDS),
             "Control formulation must exactly inherit the chosen phase-two incumbent")
 
