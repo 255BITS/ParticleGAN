@@ -1,0 +1,39 @@
+{
+  "worktree": "/home/martyn/dev/ParticleGAN-bcap-moonshot-secant",
+  "frozen_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+  "source_digest": "f9f8aba19a0ba70c6f78735e2c5b7964c5570cc36ef5c0452885593c9176ebe3",
+  "registration": "/home/martyn/dev/ParticleGAN-bcap-moonshot-secant/reports/forge/bcap-moonshot-secant/registration.json",
+  "pr": "https://github.com/255BITS/ParticleGAN/pull/381",
+  "root_scheduler_session": 66472,
+  "do_not_launch_duplicate_drain": true,
+  "publisher_commit": "f90591b85383052e803903088b775f4e9e95d8e1",
+  "publisher_sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5",
+  "publish_command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "/home/martyn/dev/ParticleGAN-bcap-develop-integration/reports/forge/bcap-three-phase/publication_adapter.py",
+    "--publish",
+    "--repository",
+    "/home/martyn/dev/ParticleGAN-bcap-moonshot-secant",
+    "--registration",
+    "/home/martyn/dev/ParticleGAN-bcap-moonshot-secant/reports/forge/bcap-moonshot-secant/registration.json",
+    "--artifacts",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant",
+    "--source-commit",
+    "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+    "--output",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/publication"
+  ],
+  "counter_audit_source": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/saved_counter_audit.py",
+  "restart_receipt": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/restart-receipt.json",
+  "authorization_receipt": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/authorized-retries-receipt.json",
+  "paid_predecessors_seconds": 6242.754212221247,
+  "software_checks": 61,
+  "software_seconds": 82.046,
+  "next_steps": [
+    "Root scheduler finishes same admitted queue and linked authorized infrastructure repairs",
+    "Run exact saved publication command before changing child HEAD",
+    "Run saved_counter_audit.py with --publication archive/publication and --output archive/publication/secant-counters.json",
+    "Commit compact final report/results/audit/counters/recovery receipts/reproduction script and saved media receipts",
+    "Push branch and update draft PR381 body; send root final matrix and accounting"
+  ]
+}

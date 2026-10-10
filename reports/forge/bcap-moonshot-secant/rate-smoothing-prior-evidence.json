@@ -1,0 +1,352 @@
+{
+  "scope": "motivation_only_archived_cohorts_not_current_cells",
+  "frozen_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+  "evidence": [
+    {
+      "path": "reports/forge/dualnorm-tier1/README.md",
+      "sha256": "3f28de1b926637241e4c3efc6b61ad73bf874498a340ba89a25d260172558b57"
+    },
+    {
+      "path": "reports/forge/dualnorm-pacing-v2/README.md",
+      "sha256": "bf66ff34b2e8852cad1433f91f65dad83791419e21ee578aef131956735bc2b8"
+    },
+    {
+      "path": "reports/forge/bcap-tier2-search/README.md",
+      "sha256": "ebb2dbccaacd99a9788ded17b33177f5ec0290f80d08a56e20b8628c8faea7ec"
+    },
+    {
+      "path": "docs/dualnorm-smoothing.md",
+      "sha256": "a2a6c0a591c66d6e673db1c9eef21a95110879e3cb184560cd4bf67c2e3e14c7"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json",
+      "sha256": "7af00be693e902199ebe65702c24afb6cf9151eb7cbf89af59581bc62c2d1594",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "grid": {
+        "player_rates": [
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.003,
+            "prior_lr_mult": 10.0
+          },
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.01,
+            "prior_lr_mult": 3.0
+          },
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.03,
+            "prior_lr_mult": 1.0
+          },
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.1,
+            "prior_lr_mult": 0.3
+          }
+        ]
+      },
+      "selected_required_pass_count": 3,
+      "selected_required_total": 6,
+      "scope": "declared tuning tasks only; provisional Forge gates",
+      "trials": [
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.03,
+            "prior_lr_mult": 1.0
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+          "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.01,
+            "prior_lr_mult": 3.0
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "PASS"
+          },
+          "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+          "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.003,
+            "prior_lr_mult": 10.0
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL",
+            "ae_gan_hold": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "PASS"
+          },
+          "candidate_revision": "faef6785d37578c322e09978ec51cbb1b987b71d0cf6601849d1112fa0abb040",
+          "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.1,
+            "prior_lr_mult": 0.3
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "FAIL",
+            "ae_gan_hold": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "7941d9dba1ee6c10b608856d90aab5efaaf4d4a06a53a605a8fac6cd1022819e",
+          "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+        }
+      ]
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-a.json",
+      "sha256": "270b3271b4448f70a82c1f3d2ece28de79d2e5c4b63444d2464da5b6bc1e7663",
+      "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+      "grid": {
+        "d_lr_mult": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0
+        ],
+        "lr": [
+          0.01
+        ],
+        "prior_lr_mult": [
+          0.3,
+          1.0,
+          3.0,
+          10.0
+        ]
+      },
+      "selected_required_pass_count": 3,
+      "selected_required_total": 6,
+      "scope": "declared tuning tasks only; provisional Forge gates",
+      "trials": []
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-b-006d03f6c1648102.json",
+      "sha256": "4386ff08960adb837c7fcbab1ccfe4dd02ba13c22780333cc8fd8ea1f59904d3",
+      "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+      "grid": {
+        "player_rates": [
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.012,
+            "prior_lr_mult": 2.5
+          },
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.016,
+            "prior_lr_mult": 1.875
+          },
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.022,
+            "prior_lr_mult": 1.3636363636363638
+          }
+        ]
+      },
+      "selected_required_pass_count": 4,
+      "selected_required_total": 6,
+      "scope": "declared tuning tasks only; provisional Forge gates",
+      "trials": [
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.016,
+            "prior_lr_mult": 1.875
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "855860cb7149352601611a4f8d6d7f8dde5b44bb8c7048b4782918dd7773331f",
+          "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.012,
+            "prior_lr_mult": 2.5
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "PASS"
+          },
+          "candidate_revision": "6430011183321a16041366052d5b572f377c402230cd76804ca14634296b81db",
+          "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.022,
+            "prior_lr_mult": 1.3636363636363638
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "02abc1d48060469ad9ba8c71b2bfe882b73ad398223ce8855f620675de95206b",
+          "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        }
+      ]
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json",
+      "sha256": "9618361150d379d3488d7d3d73929f05a39d282319f7c35500107db55ad6eab1",
+      "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+      "grid": {
+        "optimizer_momentum": [
+          0.5,
+          0.9
+        ],
+        "player_rates": [
+          {
+            "d_lr_mult": 1.5,
+            "lr": 0.012,
+            "prior_lr_mult": 2.5
+          }
+        ]
+      },
+      "selected_required_pass_count": 2,
+      "selected_required_total": 6,
+      "scope": "declared tuning tasks only; provisional Forge gates",
+      "trials": [
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.012,
+            "optimizer_momentum": 0.5,
+            "prior_lr_mult": 2.5
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "336582fcac63b2b4efefe0ea3f4e42814c4506e71dff8d3d4977243778ca00b6",
+          "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        },
+        {
+          "settings": {
+            "d_lr_mult": 1.5,
+            "lr": 0.012,
+            "optimizer_momentum": 0.9,
+            "prior_lr_mult": 2.5
+          },
+          "required_outcomes": {
+            "gaussian1d_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "FAIL",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "FAIL",
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "candidate_revision": "8f0076e839104077b8d041b9741362ca55abd38fc14f2c5a4ecabbd235725781",
+          "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226"
+        }
+      ]
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-six-smoothing-v1.json",
+      "sha256": "291b9490a5edfeaeb683704a1fe91eb93a18ba3c4025e0eca2543ec99b5a7642",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "grid": {
+        "optimizer_smoothing": [
+          1e-05,
+          0.0001,
+          0.001
+        ]
+      },
+      "selected_required_pass_count": 6,
+      "selected_required_total": 6,
+      "scope": "declared tuning tasks only; provisional Forge gates",
+      "trials": [
+        {
+          "settings": {
+            "optimizer_smoothing": 1e-05
+          },
+          "required_outcomes": {
+            "gaussian1d_smoke": "PASS",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "PASS",
+            "five_word_joint_smoke": "PASS"
+          },
+          "candidate_revision": "72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8",
+          "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a"
+        },
+        {
+          "settings": {
+            "optimizer_smoothing": 0.0001
+          },
+          "required_outcomes": {
+            "gaussian1d_smoke": "PASS",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "PASS",
+            "five_word_joint_smoke": "PASS"
+          },
+          "candidate_revision": "e2329400ff3b7b6ab1fc76866b102c01c04c78a78e65ce706b9c16a085f964df",
+          "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a"
+        },
+        {
+          "settings": {
+            "optimizer_smoothing": 0.001
+          },
+          "required_outcomes": {
+            "gaussian1d_smoke": "PASS",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS",
+            "ae_gan_hold": "PASS",
+            "ring16_acquisition": "PASS",
+            "five_word_joint_smoke": "PASS"
+          },
+          "candidate_revision": "5b373b48e1e6061dfa3b7985a243dbe0e25dd415d5f3dcd022e193136f5ab501",
+          "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a"
+        }
+      ]
+    }
+  ]
+}

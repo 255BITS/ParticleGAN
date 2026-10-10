@@ -1,0 +1,137 @@
+{
+  "certified_proofs": {
+    "candidate_counter_checkpoints": 14,
+    "own_checkpoint_producers": 3,
+    "saved_state_comparisons": 16,
+    "source_files_verified": 1207
+  },
+  "completed_at": "2026-10-10T05:23:11.167+00:00",
+  "full_original_reservation_seconds": 45840,
+  "linked_execution_repairs": 7,
+  "original_per_arm_reservation_seconds": 22920,
+  "outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "BLOCKED": 1,
+      "FAIL": 10,
+      "INCOMPLETE": 1,
+      "PASS": 4
+    }
+  },
+  "paid_ceiling_seconds": 48000,
+  "per_arm_paid_ceiling_seconds": 24000,
+  "publication_file_sha256": {
+    "media/index.json": "ae02deb362e45e9bb3f699bf7f92ce7440ebf7bcf3fd9c68452f4a5a1db3b059",
+    "phase3-audit.json": "807bcf4941f1dae27bf70e4cc4143129abf18f505c68e83b81fe6c3d1b3d985e",
+    "phase3-results.json": "6623fe7ca198880660645ab32e1d50f2562e252ae89eaf8430b359dc62cad612",
+    "saved_counter_audit.py": "aa749a8f8e2237fd027cce0f201b921ae65d78e78f1f3f70e8d62011667544e1",
+    "secant-counters.json": "e0c8e5f82b89d809da4c8487f5800f997c4e3dbcc0af3968c620f9fd3b2bace4",
+    "word-execution-observations.json": "747e215c8381333192c042d29c3b1dd22c636f48e3cfe4cef0e759cc7a201d6f"
+  },
+  "qualification_input": false,
+  "replacement_eligible": false,
+  "roles": {
+    "baseline": {
+      "infrastructure_predecessor_seconds": 5156.789890702348,
+      "paid_attempts": 22,
+      "paid_seconds": 7256.5976243794175,
+      "predecessor_attempts": [
+        {
+          "attempt_id": "45bca8c300fa44ecac715213e618c807",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 120.39486541599035
+        },
+        {
+          "attempt_id": "385a9d3b5e9a4c189e1c0c1c71f4458a",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 302.02916462300345
+        },
+        {
+          "attempt_id": "04d40a363c8b4e70be4372a2e70b5ca3",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 306.0167006700067
+        },
+        {
+          "attempt_id": "356cdb4e16104947b7ad3294b9e90e98",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 901.7251135780243
+        },
+        {
+          "attempt_id": "b3415718e75a481995c6a1902ca56945",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 1965.6727729740087
+        },
+        {
+          "attempt_id": "d81dffeab9c14c00b8eade4e010c028d",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "478e7a4abb221e8d864c8e75",
+            "revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2"
+          },
+          "seconds": 1560.9512734413147
+        }
+      ],
+      "selected_attempt_seconds": 2099.80773367707
+    },
+    "candidate": {
+      "infrastructure_predecessor_seconds": 705.8670415878296,
+      "paid_attempts": 16,
+      "paid_seconds": 2871.3545657858303,
+      "predecessor_attempts": [
+        {
+          "attempt_id": "203b6a2bbfab45bf8c260d73d8122b75",
+          "owner": {
+            "campaign": "bcap-moonshot-secant-v1",
+            "request": "320a1b6095ebdb3f0b3cafd3",
+            "revision": "9e2f90eba8f22ba000392f3395f5ab70f9ab2bbdcc4f13738141af5fcf4671ad"
+          },
+          "seconds": 705.8670415878296
+        }
+      ],
+      "selected_attempt_seconds": 2165.4875241980008
+    }
+  },
+  "saved_only_publication": {
+    "actual_training_gifs": 30,
+    "adapter_commit": "f90591b85383052e803903088b775f4e9e95d8e1",
+    "adapter_sha256": "70302ffba5fbaf673375d3e4877363edf8ac80026b67cd9f872beb5ebe9c88e5",
+    "gif_bytes": 8102491,
+    "optimizer_updates_added": 0,
+    "sampling_draws_added": 0
+  },
+  "scalar_falsifier_observed": true,
+  "scalar_observed": 84.66421318054199,
+  "scalar_prediction_metric": "vector_unequal_width.component_covariance_error",
+  "scalar_prediction_threshold": 0.85,
+  "schema_version": 1,
+  "scientific_failure_retries": 0,
+  "software_allowance_seconds": 300,
+  "software_final_checks": 61,
+  "software_seconds": 82.046,
+  "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+  "source_digest": "f9f8aba19a0ba70c6f78735e2c5b7964c5570cc36ef5c0452885593c9176ebe3",
+  "total_paid_seconds": 10127.952190165248
+}

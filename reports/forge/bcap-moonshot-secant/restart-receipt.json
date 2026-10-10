@@ -1,0 +1,32 @@
+{
+  "source_report": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/restart-20261010/after.json",
+  "source_report_sha256": "71bdaef70f85158072a294900bd93a8e98e55792e4d6b553c12adc7714f5be36",
+  "observed_at": "2026-10-10T03:18:18.071536+00:00",
+  "scientific_retries": 0,
+  "source_or_task_changes": 0,
+  "charges_include_downtime": true,
+  "collected_attempts": 2,
+  "before_state_sha256": "49a1e80c677a79c9d63f8150b16eb78d2389229a503caf304462b9c184f22471",
+  "after_state_sha256": "fe2d4415153cf117496959457ff9a4e013906b017baeba1d9100365a998b7e89",
+  "interrupted_attempts": [
+    {
+      "attempt_id": "d81dffeab9c14c00b8eade4e010c028d",
+      "task_id": "residual_student",
+      "gate_status": "INCOMPLETE",
+      "reason": "worker stopped without terminal receipt; explicit retry required",
+      "charged_wall_seconds": 1560.9512734413147,
+      "terminal_sha256": "6ceb6e5e6a8cac4b144dbcb21ceb7e444ed6e05b67794ec8010028095fe6b37d",
+      "result_sha256": "3701c7146d75a5f1b0e99bb33a6f4a9a06f9debef93ce34fc1927e36b53e93ec"
+    },
+    {
+      "attempt_id": "203b6a2bbfab45bf8c260d73d8122b75",
+      "task_id": "two_pole",
+      "gate_status": "INCOMPLETE",
+      "reason": "worker stopped without terminal receipt; explicit retry required",
+      "charged_wall_seconds": 705.8670415878296,
+      "terminal_sha256": "fc08c33001fbff0b676ead93584dce94a5681901504a62ae8666efd2adcef00e",
+      "result_sha256": "523eedb65fb301b8f966cb54606bd4a1f1584a2289f12b34d7f6626195669cb2"
+    }
+  ],
+  "remaining_running": 0
+}

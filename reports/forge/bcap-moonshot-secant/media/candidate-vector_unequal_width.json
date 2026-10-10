@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "5d71891b2886298fe107be32e6ddaef3f0c4ddbba80efacbe67d928a396ac3e8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "60ea208f903817e6f3cb18e857452c994c75d9a30d05b10b3f13bea889044ba6",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/phase3-queue/bcap-moonshot-secant-v1/d77b82d0b269444794cc669fffa06d7d/observed-samples.pt": "92e91bac4b6975e1632aff9898447ef040d2012f4d8b8ffe199f7d1f193127e4"
+  },
+  "task_id": "vector_unequal_width"
+}
