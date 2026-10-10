@@ -305,7 +305,8 @@ def test_publication_exports_diagnostic_importance_and_preserves_missing_holds(p
         path.parent.mkdir(parents=True, exist_ok=True)
         first, second = Image.new("RGB", (3, 3), "black"), Image.new("RGB", (3, 3), "white")
         first.save(path, save_all=True, append_images=[second], duration=10)
-        return dict(qualification_input=False, optimizer_updates_added=0, sampling_draws_added=0)
+        return dict(task_id=entry["item"]["task_id"], qualification_input=False,
+                    optimizer_updates_added=0, sampling_draws_added=0)
     saved_publisher = argparse.Namespace(collect=lambda _: collection,
         _saved_renderer=lambda _: renderer, render_saved=render_saved)
     monkeypatch.setattr(module, "resolved", lambda *args: requests)

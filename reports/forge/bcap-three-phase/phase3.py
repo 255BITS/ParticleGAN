@@ -324,8 +324,11 @@ def publish(options):
         with Image.open(gif) as image:
             require(image.n_frames >= 2, "Actual-training GIF needs multiple certified saved states")
             frames = image.n_frames
-        media.append(dict(role=item["role"], task_id=item["task_id"], attempt_id=item["attempt_id"],
-                          gif=str(gif.relative_to(output)), frames=frames, **receipt))
+        require(receipt.get("task_id", item["task_id"]) == item["task_id"],
+                "Saved renderer receipt belongs to another task")
+        media.append({**receipt, "role": item["role"], "task_id": item["task_id"],
+                      "attempt_id": item["attempt_id"], "gif": str(gif.relative_to(output)),
+                      "frames": frames})
         print(json.dumps(dict(event="phase3_saved_media", role=item["role"], task=item["task_id"])), flush=True)
     from experiments.forge.decision_contracts import evaluate
     decisions = {role: evaluate(request, [e["row"] for e in collection["final"] if e["item"]["role"] == role])

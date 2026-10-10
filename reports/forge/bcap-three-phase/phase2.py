@@ -333,7 +333,7 @@ def publish(options):
     from PIL import Image
     for entry in collection["final"]:
         item = entry["item"]
-        if item["importance"] != "required" or item["gate_status"] not in {"PASS", "FAIL"}:
+        if item["gate_status"] not in {"PASS", "FAIL"}:
             continue
         gif = output / "media" / f'{item["role"]}-{item["task_id"]}.gif'
         with renderer.forbid_live_execution():
@@ -341,8 +341,9 @@ def publish(options):
         with Image.open(gif) as image:
             require(image.n_frames >= 2, "Actual-training GIF requires multiple certified saved states")
             frames = image.n_frames
-        media.append(dict(role=item["role"], task_id=item["task_id"], attempt_id=item["attempt_id"],
-                          gif=str(gif.relative_to(output)), frames=frames, **receipt))
+        media.append({**receipt, "role": item["role"], "task_id": item["task_id"],
+                      "importance": item["importance"], "attempt_id": item["attempt_id"],
+                      "gif": str(gif.relative_to(output)), "frames": frames})
         print(json.dumps(dict(event="phase2_saved_media", role=item["role"], task=item["task_id"])), flush=True)
     required = [entry["item"] for entry in collection["final"] if entry["item"]["importance"] == "required"]
     optional = [entry["item"] for entry in collection["final"] if entry["item"]["importance"] != "required"]
