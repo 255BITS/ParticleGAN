@@ -21,6 +21,13 @@ optimizer group. Initializing identical locations before freezing preserves
 initial tensors and RNG consumption. Direct generator coordinates remain
 generator parameters; they are not a sampled latent prior.
 
+`GANTrainer` keeps its historical unweighted `prior_regularization` diagnostic
+for learned VICReg-like priors, including at weight zero. It contributes to the
+loss only through `prior_reg`. Disabled weighted factories do no variance or
+covariance work; frozen priors receive neither the diagnostic nor a penalty.
+Frozen locations must have storage independent of network and optimizer state;
+shared parameters and tensor views are rejected before freezing.
+
 New tasks declare `execution.prior_contract: "recipe_owned_v1"` and omit
 `execution.prior.learnable`. This replaces hidden behavioral prior penalties:
 

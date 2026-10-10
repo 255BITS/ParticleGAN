@@ -8,7 +8,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GaussianPrior, Recipe, get_recipe
+from particlegan import GANTrainer, GaussianPrior, Recipe, UpdatePolicy, get_recipe
 from particlegan.vicreg_loss import ParticleRegularizer
 from experiments.forge.api import FormulationContext, task_formulation_context
 from experiments.forge.behavior_adapters import BehaviorComponents, run_behavior
@@ -131,7 +131,104 @@ def test_disabled_or_frozen_regularizer_does_no_auxiliary_work(settings, monkeyp
 
 
 def test_zero_factory_short_circuits_nonfinite_rows():
-    assert ParticleRegularizer(weight=0)(torch.full((2, 2), float("nan"))).item() == 0
+    rows = torch.full((2, 2), float("nan"), requires_grad=True)
+    for loss in (ParticleRegularizer(weight=0)(rows), Recipe().prior_regularization(rows)):
+        assert loss.item() == 0
+        assert torch.equal(torch.autograd.grad(loss, rows)[0], torch.zeros_like(rows))
+
+
+@pytest.mark.parametrize("boundary", ["trainer", "component_factory"])
+@pytest.mark.parametrize("alias", ["parameter", "view", "already_frozen"])
+def test_frozen_storage_aliases_are_rejected_before_mutating_prior(boundary, alias):
+    learned = get_recipe("bcap_adam", num_particles=2, z_dim=2, total_steps=2)
+    recipe = learned.replace(prior_update="frozen")
+    prior = learned.make_prior(generator=torch.Generator().manual_seed(0))
+    if alias == "already_frozen":
+        recipe.apply_prior_policy(prior)
+    generator, critic = nn.Linear(2, 2), nn.Linear(2, 1)
+    generator.weight = (prior.z if alias == "parameter" else nn.Parameter(prior.z.T))
+    original, before = prior.z, prior.z.detach().clone()
+    parameters = list(prior.parameters())
+    with pytest.raises(ValueError, match="share"):
+        if boundary == "trainer":
+            GANTrainer(recipe, generator, critic, prior=prior)
+        else:
+            recipe.make_optimizers(generator, critic, prior)
+    assert prior.z is original
+    assert list(prior.parameters()) == parameters
+    assert torch.equal(prior.z, before)
+
+
+@pytest.mark.parametrize("alias", [False, True])
+def test_frozen_raw_optimizer_checks_groups_without_consuming_iterators_twice(alias):
+    recipe = get_recipe("bcap_adam", prior_update="frozen", num_particles=2, z_dim=2)
+    table = recipe.make_prior().z
+    parameter = nn.Parameter(table.T if alias else torch.ones(2, 2))
+    other = nn.Parameter(torch.ones(2))
+    consumed = []
+
+    def groups():
+        for index, value in enumerate((parameter, other)):
+            consumed.append(index)
+            yield {"params": iter([value])}
+
+    before = table.clone()
+    if alias:
+        with pytest.raises(ValueError, match="share storage"):
+            recipe.make_generator_optimizer(groups(), latent_table=table)
+    else:
+        optimizer = recipe.make_generator_optimizer(groups(), latent_table=table)
+        assert optimizer.param_groups[0]["params"][0] is parameter
+        assert optimizer.param_groups[1]["params"][0] is other
+        (parameter.square().sum() + other.square().sum()).backward()
+        optimizer.step()
+    assert consumed == [0, 1]
+    assert torch.equal(table, before)
+
+
+@pytest.mark.parametrize("owner", ["network", "optimizer_table"])
+def test_caller_owned_policy_rejects_frozen_storage_owners(owner):
+    recipe = get_recipe("bcap_adam", prior_update="frozen", num_particles=2, z_dim=2)
+    prior = recipe.make_prior()
+    generator, critic = nn.Linear(2, 2), nn.Linear(2, 1)
+    if owner == "network":
+        generator.weight = nn.Parameter(prior.z.T)
+    groups = [{"params": list(generator.parameters())}]
+    if owner == "optimizer_table":
+        groups.append({"params": [prior.z]})
+    opt_g, opt_d = torch.optim.Adam(groups), torch.optim.Adam(critic.parameters())
+    with pytest.raises(ValueError, match="share storage"):
+        UpdatePolicy(recipe, generator, critic, prior=prior,
+                     generator_optimizer=opt_g, critic_optimizer=opt_d)
+
+
+def test_zero_weight_preserves_raw_diagnostic_without_changing_updates():
+    diagnostic = trainer(context())
+    disabled = trainer(context(prior_regularizer="none"))
+    real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
+    raw = ParticleRegularizer()(diagnostic.prior.z).detach()
+    actual, baseline = diagnostic.step(real), disabled.step(real)
+    assert torch.equal(actual["prior_regularization"], raw)
+    assert baseline["prior_regularization"].item() == 0
+    for name in ("G", "D", "prior", "opt_g", "opt_d"):
+        equal(getattr(diagnostic, name).state_dict(), getattr(disabled, name).state_dict())
+
+
+def test_toy100_factory_preserves_initialization_and_frozen_locations():
+    from benchmarks.toy100.train import make_trainer, resolve_config
+    config, recipe = resolve_config(dict(steps=2, device="cpu", num_particles=8,
+        batch_size=4, z_dim=2, g_hidden=4, d_hidden=4, n_hidden=1,
+        output_noise_std=0., input_noise_std=0.))
+    rng = torch.get_rng_state().clone()
+    learned = make_trainer(config, recipe)
+    frozen = make_trainer(config, recipe.replace(prior_update="frozen"))
+    assert torch.equal(rng, torch.get_rng_state())
+    for name in ("G", "D", "prior"):
+        equal(getattr(learned, name).state_dict(), getattr(frozen, name).state_dict())
+    before = frozen.prior.z.clone()
+    frozen.step(torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4)
+    assert torch.equal(frozen.prior.z, before)
+    assert not list(frozen.prior.parameters())
 
 
 def test_gaussian_prior_has_no_location_policy_or_optimizer_group():

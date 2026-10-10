@@ -3,6 +3,19 @@ import math
 from dataclasses import asdict, dataclass, replace
 
 
+def _reject_table_storage_owners(table, tensors):
+    """A frozen sampled table needs storage independent of mutable owners."""
+    import torch
+    if not table.numel() or table.layout != torch.strided:
+        return
+    address = table.untyped_storage().data_ptr()
+    for tensor in tensors:
+        if (isinstance(tensor, torch.Tensor) and tensor.numel()
+                and tensor.layout == torch.strided and tensor.device == table.device
+                and tensor.untyped_storage().data_ptr() == address):
+            raise ValueError("frozen prior must not share storage with networks or optimizer parameters")
+
+
 @dataclass(frozen=True)
 class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
@@ -749,11 +762,25 @@ class Recipe:
         from torch import nn
         if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
             raise ValueError("trainable latent_table contradicts Recipe.prior_update='frozen'")
-        if self.prior_update == "frozen":
-            latent_table = None
         module = params if isinstance(params, nn.Module) else None
         if module is not None:
             params = [p for p in module.parameters() if p.requires_grad]
+        if latent_table is not None and self.prior_update == "frozen":
+            # Materialize each iterator once; optimizer construction must retain
+            # every supplied parameter/group after ownership validation.
+            params = list(params)
+            owners = []
+            for index, value in enumerate(params):
+                if isinstance(value, dict):
+                    group = {**value, "params": list(value["params"])}
+                    params[index] = group
+                    owners.extend(group["params"])
+                else:
+                    owners.append(value)
+            if module is not None:
+                owners.extend(module.buffers())
+            _reject_table_storage_owners(latent_table, owners)
+            latent_table = None
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
@@ -817,14 +844,27 @@ class Recipe:
         disabled coefficients do no variance/covariance work or optimizer work.
         The factory is the extension point for future regularizer families.
         """
-        result = rows.new_zeros(())
         if self.prior_update == "frozen" or not rows.requires_grad:
-            return result
+            return rows.new_zeros(())
+        # Empty rows preserve a zero gradient without reading nonfinite values
+        # or doing any variance/covariance work for disabled penalties.
+        result = rows[:0].sum()
         if self.prior_reg > 0:
             result = (self.make_prior_regularizer() if regularizer is None else regularizer)(rows)
         if self.prior_l2 > 0:
             result = result + self.prior_l2 * rows.square().mean()
         return result
+
+    def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
+        """Reject aliases before freezing, including already-frozen buffers."""
+        if self.prior_update != "frozen" or not hasattr(prior, "z"):
+            return
+        for module in modules:
+            if module is not None:
+                _reject_table_storage_owners(prior.z, (*module.parameters(), *module.buffers()))
+        for optimizer in optimizers:
+            _reject_table_storage_owners(prior.z,
+                (p for group in optimizer.param_groups for p in group["params"]))
 
     def apply_prior_policy(self, prior):
         """Bind the prior policy after initialization, before making optimizers.
@@ -878,6 +918,7 @@ class Recipe:
         """
         from .capabilities import prior_mechanisms
         if prior is not None:
+            self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
             self.apply_prior_policy(prior)
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}

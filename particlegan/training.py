@@ -147,7 +147,6 @@ class GANTrainer:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
-        recipe.apply_prior_policy(self.prior)
         if not any(p.requires_grad for p in discriminator.parameters()):
             raise ValueError("discriminator must have trainable parameters")
         seen = set()
@@ -160,6 +159,8 @@ class GANTrainer:
                 if id(parameter) in seen:
                     raise ValueError("generator, discriminator and prior must not share parameters")
                 seen.add(id(parameter))
+        recipe._validate_frozen_prior_ownership(self.prior, self.G, self.D)
+        recipe.apply_prior_policy(self.prior)
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
         if require_latent_damping is None:
@@ -393,7 +394,9 @@ class GANTrainer:
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad and recipe.prior_reg > 0:
+            if self.prior.z.requires_grad and recipe.prior_regularizer == "vicreg":
+                # Keep the historical unweighted diagnostic, even at weight 0.
+                # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg

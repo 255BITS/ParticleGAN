@@ -250,12 +250,13 @@ def train(cfg: Dict, device: torch.device) -> Dict:
 
     recipe = get_recipe(
         z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
+        prior_update="learned" if learnable else "frozen",
         lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
         betas=(float(cfg["beta1"]), 0.999),
         reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
         lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
     # A learnable table starts on R2 points; a frozen Gaussian one is left as drawn.
-    prior = init.deterministic_orthogonal_(recipe.make_prior(learnable=learnable)).to(device)
+    prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
     G = SparseCondGenerator(
         z_dim=int(cfg["z_dim"]), n_classes=C, d=d, n_symbols=K, k=toy.k, hidden=int(cfg["hidden"]),
         n_hidden=int(cfg["n_hidden"]), emb_dim=int(cfg["emb_dim"]), real_head=str(cfg["real_head"]),

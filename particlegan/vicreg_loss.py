@@ -60,5 +60,5 @@ class ParticleRegularizer(VICRegLikeLoss):
 
     def forward(self, z):
         if self.weight == 0:
-            return z.new_zeros(())
+            return z[:0].sum()
         return self.weight * super().forward(z)

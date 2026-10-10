@@ -339,6 +339,8 @@ class UpdatePolicy:
             raise ValueError("critic and generator/table optimizers must be distinct")
         self._validate_modules()
         self.roles = self._parameter_roles(roles)
+        recipe._validate_frozen_prior_ownership(prior, self.G, self.D, encoder, router,
+                                               optimizers=self.optimizers)
         # Adding noise last reproduces GANTrainer's optimizer group ordering.
         self.log_output_sigma = None
         self.last_output_sigma = None
