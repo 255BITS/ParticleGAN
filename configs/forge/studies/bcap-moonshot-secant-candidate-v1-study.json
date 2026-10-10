@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 48000,
+    "candidate_budget_seconds": 24000,
+    "id": "bcap-moonshot-secant-v1"
+  },
+  "candidate": "bcap-moonshot-secant-candidate-v1",
+  "competing_explanation": "Gradient differences also include stochastic batch changes and the moving opposing player, so this can damp useful response rather than estimate curvature. Shared normalized directions, rare allocation and width geometry may dominate; a low endpoint covariance without sustained gates is insufficient. Floor hits may indicate confounded curvature and gains cannot prove the convex paper guarantee.",
+  "control": {
+    "candidate_id": "bcap-moonshot-secant-baseline-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 0.85
+  },
+  "hypothesis": "Bounded local secant length control suppresses finite normalized overshoot enough to repair unequal-width sustained component covariance (final error<=.85 and required terminal suffix>=5) while preserving all incumbent Tier1 passes. Prediction is final covariance<=.85; the unchanged full task gate remains authoritative. Gaussian retention and rare/native quality are separately reported outcomes.",
+  "id": "bcap-moonshot-secant-candidate-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_width",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      },
+      "path": "reports/forge/bcap-three-phase/phase2-results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-moonshot-secant-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

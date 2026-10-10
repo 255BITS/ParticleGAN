@@ -1,0 +1,35 @@
+{
+  "scope": "targeted_software_no_qualification",
+  "allowance_seconds": 300,
+  "final_checks": 61,
+  "final_status": "PASS",
+  "reported_suite_seconds": 82.046,
+  "prior_algebra_check_seconds": 9.4,
+  "initial_two_failures": "Expected algebra used unit directions while incumbent smoothing=.001; tests now isolate unsmoothed math explicitly. Candidate configuration never changed.",
+  "suites": [
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/logs/software.xml",
+      "sha256": "cc353c7ae08ec7f4ed39986e45467580b29cb897c17f01f26ee8c2d1df292d2e",
+      "tests": "53",
+      "failures": "2",
+      "errors": "0",
+      "time": "21.902"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/logs/software-final.xml",
+      "sha256": "8a7568fefff07d3867bdcd3d4ccb3083800620847efa7c040622e925128ac59a",
+      "tests": "60",
+      "failures": "0",
+      "errors": "0",
+      "time": "29.024"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/secant/logs/software-release.xml",
+      "sha256": "9c9945edde8857abc66130bee294fd1b0e5f27889483f104c89a5150b3edf617",
+      "tests": "61",
+      "failures": "0",
+      "errors": "0",
+      "time": "21.720"
+    }
+  ]
+}

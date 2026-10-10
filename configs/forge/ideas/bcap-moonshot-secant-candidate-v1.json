@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Enable only optimizer_secant_mode=bounded on every G/E/D parameter and owned prior row; retain native SVD, inactive projection/transport and all incumbent fields"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-three-phase/README.md",
+  "id": "bcap-moonshot-secant-candidate-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Preserve actual rounded DualNorm proposal direction; length fraction is clamp[1/16,1](min(1,||s||||g||/(2||y||||proposal||),sqrt(1+theta)*previous_effective_rate/current_rate)). Per-parameter or owned-prior-row history checkpoints previous parameter/gradient/effective rate, theta, validity and visit clock. No new forwards, data or RNG. The floor bounds stochastic collapse but relaxes the curvature inequality. See preregistered theory.md.",
+  "parent": "bcap-three-phase-incumbent-v1",
+  "recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_secant_mode": "bounded",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}
