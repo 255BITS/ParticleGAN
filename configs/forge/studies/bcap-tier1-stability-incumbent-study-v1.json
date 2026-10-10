@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 1800,
+    "candidate_budget_seconds": 300,
+    "id": "bcap-tier1-stability-ablations-v1"
+  },
+  "candidate": "bcap-tier1-stability-incumbent-v1",
+  "competing_explanation": "Projection could affect a proposed displacement without a recorded conflict, or local transport rather than global transport could drive critic excursions; the combined comparison alone cannot distinguish these.",
+  "control": {
+    "candidate_id": "bcap-tier1-stability-combined-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "hypothesis": "Isolate projection, global quantile matching, and local kernel matching as causes of the observed critic-cap terminal-suffix regression, preserving movement and the original full sustained gate.",
+  "id": "bcap-tier1-stability-incumbent-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "combined_attempt": "aa76d8f268014f84a7a553e0b47482b0",
+        "incumbent_attempt": "f80ae62046f14be8b0ad459cfbd1c9ee",
+        "scientific_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "path": "reports/forge/bcap-tier1-stability/existing-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-tier1-stability-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
