@@ -1,0 +1,417 @@
+{
+  "artifact_archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/compatibility/committed-overlay-replay",
+  "baseline_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+  "candidate_subset_overlay": {
+    "api_changes": [],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "constraint_geometry_mode=direction_blend; kinetic_transport_weight=1; kinetic_transport_local_weight=1; kinetic_transport_projections=32"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "execution_path": "public_trainer",
+    "guide": "reports/forge/bcap-develop-integration/README.md",
+    "id": "bcap-develop-integration-combined-v1",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "Reuse PR373 measured direction-only common descent and exact local-v2 on explicit opt-in hosts; no task-specific tuning.",
+    "parent": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+    "prior_art": [
+      "bcap-dualnorm-convolution-v1",
+      "reports/forge/bcap-search-options/README.md"
+    ],
+    "recipe_overrides": {
+      "constraint_geometry_mode": "direction_blend",
+      "d_lr_mult": 1.5,
+      "kinetic_transport_local_weight": 1.0,
+      "kinetic_transport_projections": 32,
+      "kinetic_transport_weight": 1.0,
+      "loss": "non_saturating",
+      "lr": 0.012,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 1.0,
+      "network_lr_floor": 1.0,
+      "optimizer_convolution": "per_offset",
+      "optimizer_family": "dualnorm",
+      "optimizer_smoothing": 0.001,
+      "prior_lr_mult": 2.5,
+      "reg_coeff": 1.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0
+    },
+    "recipe_preset": "bcap",
+    "requires_capabilities": [
+      "learned_locations",
+      "named_rng"
+    ],
+    "schema_version": 3
+  },
+  "disabled_evidence": {
+    "mode": "reused_exact_source_and_tests",
+    "original_checks": 64,
+    "original_measured_commit": "62428b007f18272ad8250bfe792423e61dbeb00f",
+    "original_receipt": "reports/forge/bcap-develop-integration/compatibility-post-execution.json",
+    "original_receipt_sha256": "8cce2b2cf432f30114211161b3c527957c766ac8f40a2a88eae9c5c8d57f045c"
+  },
+  "helper_audit_commit": "329b94cd185352d5d83a029633f760ea04835aaf",
+  "helper_audit_scope": "Four orchestration tests measured the committed public scientific source with test/helper changes identified by exact hashes; no paid worker or quality experiment. Earlier14 replay/source proof remains bound to its own measured helper commit.",
+  "helper_files_sha256": {
+    "reports/forge/bcap-three-phase/phase2.py": "1eeb757e5c49a23492326deaae9970c83a0c88dd0f95850154ee329f96e25718",
+    "reports/forge/bcap-three-phase/prepare.py": "2c585d20ef9bd521c8116a50abc74635a3b29b11f3e7be6a429710c559ad34be",
+    "reports/forge/bcap-three-phase/publish.py": "439aca6405db4eb575d9735181630167bbe403ed5a8aed1c0269259907c5bf7d",
+    "reports/forge/bcap-three-phase/run.py": "8b42b4ed43f281f263ec34c5ca2a38c5ca00d41b9fe7e93a25a7017c73f5f47a",
+    "reports/forge/bcap-three-phase/verify_compatibility.py": "0b699475f3ffbaa1b961672198da36483cc2cf7fc17597b0071906f5b7912bd3"
+  },
+  "host_acceptance": {
+    "atlas": {
+      "blocked": 27,
+      "exact_baseline_blockers_retained": true,
+      "ready": 0
+    },
+    "bcap_adam": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    },
+    "bcap_winner": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    },
+    "e22": {
+      "blocked": 27,
+      "exact_baseline_blockers_retained": true,
+      "ready": 0
+    },
+    "k3p": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    },
+    "ka2": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    },
+    "r1r2": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    },
+    "released_gan": {
+      "blocked": 0,
+      "exact_baseline_blockers_retained": true,
+      "ready": 27
+    }
+  },
+  "iteration_history": {
+    "final_narrow_passed": 14,
+    "final_orchestration_passed": 4,
+    "initial_fixture_failure": {
+      "failed": 6,
+      "passed": 8,
+      "raw_junit": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/compatibility/initial.xml",
+      "raw_log": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/compatibility/initial.log",
+      "reason": "Restored software scalar fixture omitted externally named RNG generators; strict existing checkpoint schema correctly rejected it. Reconstruct identical named generators before loading. Production unchanged."
+    }
+  },
+  "limitations": [
+    "CPU software parity does not establish GPU parity or full-budget distribution-quality performance",
+    "Original custom behavioral hosts still declare provenance checkpoints without a continuation API; no new continuation support claimed",
+    "Two-update behavioral and four-update word cohorts are explicit software checks, not original task qualification",
+    "E22 and Atlas original clean/live cohorts remain BLOCKED before spend; their separate policy cohorts were not executed"
+  ],
+  "new_checks": {
+    "bounded_software_outer_updates": 48,
+    "declaration_contract_checks": 2,
+    "failed": 0,
+    "passed": 14,
+    "skipped": 0,
+    "subset_trainer_replays": 6,
+    "subset_word_joint_replays": 6,
+    "wall_seconds": 3.993451496004127
+  },
+  "orchestration_checks": {
+    "duration_seconds": 3.051,
+    "failed": 0,
+    "junit": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/compatibility/saved-audit.xml",
+    "junit_sha256": "949851c5e66c0877fb1e1bdff6de92346331084c2e3d5a77c83b5d25126cf928",
+    "passed": 4,
+    "skipped": 0,
+    "test_source_sha256": "c4cb8ecb60ec9198fbbfe181f7e141d2ca1db46f82c513d7c43c4fef54d48b8c",
+    "verified": [
+      "Real Forge READY studies for two fresh schema-v3 arms without queue/worker/training",
+      "Six unchanged numerical questions/timeouts/cadence/fixtures plus separately reserved clock audit",
+      "Reject numerical gate tampering, duplicate declarations, wrong execution source, uncommitted declarations and active-campaign publication",
+      "Read-only three-arm saved-state matching; reject actual consumed RNG-state differences"
+    ]
+  },
+  "public_source_delta": [],
+  "qualification_input": false,
+  "raw_artifacts": {
+    "pytest.log": {
+      "bytes": 99,
+      "sha256": "c3a8f4ef8fe1be3ac29a24144854a9835f656a64a603d0b2b11b92d8e64611e6"
+    },
+    "pytest.xml": {
+      "bytes": 2619,
+      "sha256": "7f14c3a2cd9b02e8a48d618b91f22f5a153c32633071fc436bfdc542705c953a"
+    }
+  },
+  "reproduction": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "/home/martyn/dev/ParticleGAN-bcap-tier1-compatibility/reports/forge/bcap-three-phase/verify_compatibility.py",
+    "--repository",
+    "/home/martyn/dev/ParticleGAN-bcap-tier1-compatibility",
+    "--artifacts",
+    "<fresh outside-Git path>",
+    "--receipt",
+    "<fresh compact receipt>",
+    "--candidate",
+    "bcap-develop-integration-combined-v1"
+  ],
+  "runtime": {
+    "device": "cpu",
+    "python": "3.12.13",
+    "torch": "2.14.0+cu130"
+  },
+  "schema_version": 1,
+  "scientific_training_reruns": 0,
+  "scope": "phase1_bounded_software_compatibility",
+  "source_files_sha256": {
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "2cd9e2ed2cb80cd449a9fe73b7c3c9089e9193def3e364aa75443ef2b9e81b59",
+    "benchmarks/locked_shared/hosts/cover_leftover.py": "e2a780856d58bd59853f6cf0cac1eb4d205b658fa8329d5060f9638c20d329ce",
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": "48f4d4842ef73ebf92bedbfad83a915d4010cd1b8eed408a913ddcbfb366a06e",
+    "benchmarks/locked_shared/hosts/residual_student.py": "7b4de4b1840c10d62cf608e6e395083fa275f7fd238c1f4c57fbb739cb1a22c6",
+    "benchmarks/locked_shared/hosts/unipolar.py": "88f2970af9a19777a80e974b6301a049acc4a1f38ddb31387058eeca005e948e",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "090abe6d153ab10cf0e0102e6d2fdcf7f40b9dd63f3b9191e640d7f6a7e2446c",
+    "benchmarks/locked_shared/trajectory.py": "99d8ea4f3bc16d8dd70452a7a368e8128e5e967abd2197949d7c2ea433e3c7aa",
+    "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+    "benchmarks/toy_audit/api_images.py": "b4e76f9f143464611f2a1abfd2018e9df7170cdc2653cc3d1123da446533fa8c",
+    "configs/forge/tasks/ae_gan_hold.json": "ffd85ff2c96303f6c9669d90dc1c86454f12a3050ce9e367a21c3e99ac259e0a",
+    "configs/forge/tasks/cover_leftover.json": "82a811e375b8c68f82fd6295b922719986c7207ca26076c3331124ba99ee67f5",
+    "configs/forge/tasks/five_word_joint_acquisition.json": "48500da5a15e8700d2a6142a1481c70ce4994c7edb78c40b5826aea3ef0cc6aa",
+    "configs/forge/tasks/five_word_joint_hold.json": "b312dcfab664e44a56e7d847c02aeb61644daabf37992ece549bb2ddc17a7db3",
+    "configs/forge/tasks/five_word_joint_smoke.json": "f72b442ecab7bbee4395cbf967557f9d6901c2030fdb9629c32d777d2940df59",
+    "configs/forge/tasks/gaussian1d_smoke.json": "4cf5029189743f168f01cdbc64e2a7c653cbb642c1fd5ef86f0d9e52a7cdbb11",
+    "configs/forge/tasks/gaussian1d_stability.json": "bfa5e2e562da18894abef64c890a48734d4faa96ffa6f453eb4ed6128c9d05b8",
+    "configs/forge/tasks/grid100.json": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
+    "configs/forge/tasks/img_bars4.json": "562c05c07de33e5a5e088cff097af9cf9f6f8b37bb436aed37bf502fb7aff86f",
+    "configs/forge/tasks/img_blobs4.json": "15c7ec3cfe80539b14d24824afc1a6fffae99e27b5a38e75c991823b5aceb336",
+    "configs/forge/tasks/img_intensity2.json": "6a69162bee7dd1c50c9f596f29ed339a5e475c296156c4324e5092099cddf90d",
+    "configs/forge/tasks/img_stripes2.json": "010a96d3829b639d13f1150f30a5ff44119bcc10a23822f4191773bab177eb70",
+    "configs/forge/tasks/mid_scale_identity.json": "f43fdca142fc1e1e8e932d5a14f1c60772eefc8b80a54d84904a9a59deff1a69",
+    "configs/forge/tasks/mode_hold.json": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5",
+    "configs/forge/tasks/residual_student.json": "b1d4f9c0ace89a1d7d45bd5cc3a9e0c2caba551781d70a3e15f4a3ab37e8bbbf",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "configs/forge/tasks/rotated100.json": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d",
+    "configs/forge/tasks/staggered100.json": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1",
+    "configs/forge/tasks/trajectory.json": "9604bfe5e0ede5ee841b79c3b022327bfe6c692bab2cee3d22cca1128652f273",
+    "configs/forge/tasks/two_pole.json": "229dd3b29482f609c098336e1d5fa6d1e92b11a76a4398ce63a001d82645b3d2",
+    "configs/forge/tasks/unipolar.json": "3f61abbc3eca47c32c1280311bd4c7df36da67ef84701d058e0dfc699ffce501",
+    "configs/forge/tasks/unused_token_hold.json": "85646ff945e5a395c6254a635ddac627bccb550951ba66be5be913565d726f77",
+    "configs/forge/tasks/vector_anisotropic.json": "e98512a93ba2d3a10a5fe6640cf74c5d22f88f917e9a5cf313302cc4aed1a24b",
+    "configs/forge/tasks/vector_overlap.json": "72bde8ab5f9a5222b095ee17849c27823156bd28675f443138d56542c9e69c35",
+    "configs/forge/tasks/vector_spiral.json": "d47cf689d77375873c25b5d6aa3610e9d6250ee5a9d2f2592538d49da943ff9f",
+    "configs/forge/tasks/vector_two_broad.json": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab",
+    "configs/forge/tasks/vector_unequal_mass.json": "ea1b35df2bd0ab55b50d47ade00a758775d29130641fc1e76db28c03009164ff",
+    "configs/forge/tasks/vector_unequal_width.json": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
+    "experiments/forge/api.py": "0725057ffd1656c1fbb60d72c305900f6ed4b0d35088e1d0bb7388edf2457883",
+    "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0",
+    "experiments/forge/boundaries.py": "5ff3580bf8e0f5213197795668b27195d492e129ff4f40b1c2ebe6918a92bd91",
+    "experiments/forge/studies.py": "7673638f157fbe95fc61f3e526d3b3f60ef2f8e3c336f1eddf9141939293ebe1",
+    "experiments/forge/word_adapter.py": "16bed6dbc88b98bc6f310d484a71d147e7b75a3dac473c80c835af917b153566",
+    "experiments/forge/word_tasks.py": "aad16baeabbfcacdbc53675ca0ffece5f1e1010c510a4e7ac1dd9565047760a5",
+    "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+    "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+    "particlegan/optim/constraint_geometry.py": "b78f2d6dec2d345c1357b3812a7f9adac8c4da0f86c8536ebfe0092c18269c5e",
+    "particlegan/optim/direction_blend.py": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72",
+    "particlegan/optim/dualnorm.py": "9ff1d4cd40effe478cb2afa74fbb418bef80c5b144609a84d4f5e568f787c969",
+    "particlegan/optim/strict_progress.py": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577",
+    "particlegan/recipe_compat.py": "2ab0c555e0420f54a9d26b24f9463f4c2b85114fd9dd53a387e364ff959c8d8e",
+    "particlegan/recipes.py": "e5b522d7e88af83e4f70fada37b9ad81650832417d7f19cc64fb3fea5f8371bf",
+    "particlegan/training.py": "87c263849ad4ee19aec654f95b63a8bbc90cc39132162a74d77dd2fb4d066b43"
+  },
+  "state_identities": {
+    "bcap_adam/mog": {
+      "candidate_sha256": "b4fed689883df70cc42ca4f9eb7c3b385dcb87cbd4057d4b9e71935a32e5b7f6",
+      "reference_sha256": "b4fed689883df70cc42ca4f9eb7c3b385dcb87cbd4057d4b9e71935a32e5b7f6"
+    },
+    "bcap_adam/particle_cloud": {
+      "candidate_sha256": "7845e5d19e3dfcf2d71963d3e0562433b83ca1eb6ba750c8afe96d7610e87556",
+      "reference_sha256": "7845e5d19e3dfcf2d71963d3e0562433b83ca1eb6ba750c8afe96d7610e87556"
+    },
+    "bcap_winner/mog": {
+      "candidate_sha256": "4814fd4197430fde0bc4721a4701878a6e23b9bf376d955e323d1d97d9e7c9ad",
+      "reference_sha256": "4814fd4197430fde0bc4721a4701878a6e23b9bf376d955e323d1d97d9e7c9ad"
+    },
+    "bcap_winner/particle_cloud": {
+      "candidate_sha256": "d5110cac1ae2178f7e7c4b561c11ca8223e974e2fb988ec8bdbdf3ba828918cb",
+      "reference_sha256": "d5110cac1ae2178f7e7c4b561c11ca8223e974e2fb988ec8bdbdf3ba828918cb"
+    },
+    "component/bcap_adam/ae_gan_hold": {
+      "candidate_sha256": "2afd2bff0eca59d82846a1589fc4b7574cb34a076023f205f024897a6ead043c",
+      "reference_sha256": "2afd2bff0eca59d82846a1589fc4b7574cb34a076023f205f024897a6ead043c"
+    },
+    "component/bcap_adam/trajectory": {
+      "candidate_sha256": "46bd2cca020a109b03c6f9c893f01a91ab0ed6322eee7678114994175e5bf415",
+      "reference_sha256": "46bd2cca020a109b03c6f9c893f01a91ab0ed6322eee7678114994175e5bf415"
+    },
+    "component/bcap_winner/ae_gan_hold": {
+      "candidate_sha256": "ec97c5768eec914b144eb11e3f1341ae5838afd85ca283e29e4141ea72cc41bf",
+      "reference_sha256": "ec97c5768eec914b144eb11e3f1341ae5838afd85ca283e29e4141ea72cc41bf"
+    },
+    "component/bcap_winner/cover_leftover": {
+      "candidate_sha256": "d3148095808401c01a3efb7eedc59f1198677ab2d758f53c64162f368256f330",
+      "reference_sha256": "d3148095808401c01a3efb7eedc59f1198677ab2d758f53c64162f368256f330"
+    },
+    "component/bcap_winner/mid_scale_identity": {
+      "candidate_sha256": "80a32359a159230271a30244d00f563cc3f6a3fe03fc9734be2794c32dbdf192",
+      "reference_sha256": "80a32359a159230271a30244d00f563cc3f6a3fe03fc9734be2794c32dbdf192"
+    },
+    "component/bcap_winner/residual_student": {
+      "candidate_sha256": "101b779d43b1548e7d2f9f50569221329a84dbee79794331349ffb68f3fbffd8",
+      "reference_sha256": "101b779d43b1548e7d2f9f50569221329a84dbee79794331349ffb68f3fbffd8"
+    },
+    "component/bcap_winner/trajectory": {
+      "candidate_sha256": "9ea34cffede112e0026e7e8c4f74da388238687278680efdb1ef4b970eab3188",
+      "reference_sha256": "9ea34cffede112e0026e7e8c4f74da388238687278680efdb1ef4b970eab3188"
+    },
+    "component/bcap_winner/two_pole": {
+      "candidate_sha256": "74357786fd4164bc0dd3de5f15a53b36ef93b4408c77af3ee23a5dad23f800b1",
+      "reference_sha256": "74357786fd4164bc0dd3de5f15a53b36ef93b4408c77af3ee23a5dad23f800b1"
+    },
+    "component/bcap_winner/unipolar": {
+      "candidate_sha256": "10eb5a476aa6a493a17ee9625afc99aabbea97885bf83bd5aa1303657386aa09",
+      "reference_sha256": "10eb5a476aa6a493a17ee9625afc99aabbea97885bf83bd5aa1303657386aa09"
+    },
+    "component/bcap_winner/unused_token_hold": {
+      "candidate_sha256": "9a425511a60afc56339062e90b373fa054eb38be4404b2f25c61b7fd39fce80b",
+      "reference_sha256": "9a425511a60afc56339062e90b373fa054eb38be4404b2f25c61b7fd39fce80b"
+    },
+    "component/k3p/ae_gan_hold": {
+      "candidate_sha256": "164106b445f5778b040b7aea32afb196df8a5f42306a4115b9bb91beb64a94af",
+      "reference_sha256": "164106b445f5778b040b7aea32afb196df8a5f42306a4115b9bb91beb64a94af"
+    },
+    "component/k3p/trajectory": {
+      "candidate_sha256": "09f20370180b770645006c70b080a5018c97bdb9e68e5dcd9ddd0672a06f7ef4",
+      "reference_sha256": "09f20370180b770645006c70b080a5018c97bdb9e68e5dcd9ddd0672a06f7ef4"
+    },
+    "component/ka2/ae_gan_hold": {
+      "candidate_sha256": "f00921d963848c636fc7fe01b4f1725bfd398a45a701966f40553524fc38d7aa",
+      "reference_sha256": "f00921d963848c636fc7fe01b4f1725bfd398a45a701966f40553524fc38d7aa"
+    },
+    "component/ka2/cover_leftover": {
+      "candidate_sha256": "d2365d2ee7745fa5926e3177518d9ad49a41b25d362b10d3b345f3946e93b349",
+      "reference_sha256": "d2365d2ee7745fa5926e3177518d9ad49a41b25d362b10d3b345f3946e93b349"
+    },
+    "component/ka2/mid_scale_identity": {
+      "candidate_sha256": "e5cad781ff061029dc0c87b17ef0d0e00813b7d422d54e82bc194c06bc9b30a3",
+      "reference_sha256": "e5cad781ff061029dc0c87b17ef0d0e00813b7d422d54e82bc194c06bc9b30a3"
+    },
+    "component/ka2/residual_student": {
+      "candidate_sha256": "8c14474b41e230da15babbf13885cff8c59e659f4bf9fd4366e89f308845971d",
+      "reference_sha256": "8c14474b41e230da15babbf13885cff8c59e659f4bf9fd4366e89f308845971d"
+    },
+    "component/ka2/trajectory": {
+      "candidate_sha256": "8adef55fa70df5d68be716186da275209d5bdc5d04b5d980685b470a61e3db21",
+      "reference_sha256": "8adef55fa70df5d68be716186da275209d5bdc5d04b5d980685b470a61e3db21"
+    },
+    "component/ka2/two_pole": {
+      "candidate_sha256": "54017d320d1e3538522fd49874a8af56b88d04303fc680c0e714070e4cb78220",
+      "reference_sha256": "54017d320d1e3538522fd49874a8af56b88d04303fc680c0e714070e4cb78220"
+    },
+    "component/ka2/unipolar": {
+      "candidate_sha256": "7cd5a1f3ae012f4f18b3bf1f72e0921acaf45870a45e71f92dc2deab8cad9acb",
+      "reference_sha256": "7cd5a1f3ae012f4f18b3bf1f72e0921acaf45870a45e71f92dc2deab8cad9acb"
+    },
+    "component/ka2/unused_token_hold": {
+      "candidate_sha256": "e3104763f654224dc79bc616369acc9f51b364026254795f6228ad9b431df19c",
+      "reference_sha256": "e3104763f654224dc79bc616369acc9f51b364026254795f6228ad9b431df19c"
+    },
+    "component/r1r2/ae_gan_hold": {
+      "candidate_sha256": "0cdc30bd5ed6eecd78b34d913743fa013c24179ecb256b2fc3aa56a6939d8c27",
+      "reference_sha256": "0cdc30bd5ed6eecd78b34d913743fa013c24179ecb256b2fc3aa56a6939d8c27"
+    },
+    "component/r1r2/trajectory": {
+      "candidate_sha256": "3d58d1c0b98ef70708ae8a057c208cee60d242474eae07ad55efd89d6cc8913c",
+      "reference_sha256": "3d58d1c0b98ef70708ae8a057c208cee60d242474eae07ad55efd89d6cc8913c"
+    },
+    "component/released_gan/ae_gan_hold": {
+      "candidate_sha256": "a18ac4eb0dcdd0e31eb322dde0e6cd8ab5ecd29ade26050fcc3e7d4583ea4d0f",
+      "reference_sha256": "a18ac4eb0dcdd0e31eb322dde0e6cd8ab5ecd29ade26050fcc3e7d4583ea4d0f"
+    },
+    "component/released_gan/trajectory": {
+      "candidate_sha256": "187f20897f0aa2275a5969a9818bf4998dceedb5ca4575be0481be1cd17e8423",
+      "reference_sha256": "187f20897f0aa2275a5969a9818bf4998dceedb5ca4575be0481be1cd17e8423"
+    },
+    "k3p/mog": {
+      "candidate_sha256": "9b71ecbe4fa1ea9c3294d6da524adc287cc329abb3146afc0b7415fdfbc9c01e",
+      "reference_sha256": "9b71ecbe4fa1ea9c3294d6da524adc287cc329abb3146afc0b7415fdfbc9c01e"
+    },
+    "k3p/particle_cloud": {
+      "candidate_sha256": "a9c6376347c59721ffaae288eaa3a56294daa5c3d179b477fa0cc60261b58310",
+      "reference_sha256": "a9c6376347c59721ffaae288eaa3a56294daa5c3d179b477fa0cc60261b58310"
+    },
+    "ka2/mog": {
+      "candidate_sha256": "007aa76d662bf3f8c5bea53845066ca59d3794e13e5dc6d77016992f1ea75dc9",
+      "reference_sha256": "007aa76d662bf3f8c5bea53845066ca59d3794e13e5dc6d77016992f1ea75dc9"
+    },
+    "ka2/particle_cloud": {
+      "candidate_sha256": "fcb950ba96c3a9b936a56def669b9899904f4ee0e49c6e77a743bd56be5fb8bc",
+      "reference_sha256": "fcb950ba96c3a9b936a56def669b9899904f4ee0e49c6e77a743bd56be5fb8bc"
+    },
+    "r1r2/mog": {
+      "candidate_sha256": "feccf9c839d5c0f77719d2cd7b8ad4c086f360e8041c83f96ba862d57a286071",
+      "reference_sha256": "feccf9c839d5c0f77719d2cd7b8ad4c086f360e8041c83f96ba862d57a286071"
+    },
+    "r1r2/particle_cloud": {
+      "candidate_sha256": "af97ff111f7e02c032e19e8fff57dd0e09678abcad23ac70fb9dd1df692750c3",
+      "reference_sha256": "af97ff111f7e02c032e19e8fff57dd0e09678abcad23ac70fb9dd1df692750c3"
+    },
+    "released_gan/mog": {
+      "candidate_sha256": "3fe8bfdecafe143542fa36a1e56c276983db5c6e96ef815e03f84232050a33b2",
+      "reference_sha256": "3fe8bfdecafe143542fa36a1e56c276983db5c6e96ef815e03f84232050a33b2"
+    },
+    "released_gan/particle_cloud": {
+      "candidate_sha256": "0a28c02268c8ce8876a37c952a423b8875ef3a98ee5ebb16ba957f18b64f0840",
+      "reference_sha256": "0a28c02268c8ce8876a37c952a423b8875ef3a98ee5ebb16ba957f18b64f0840"
+    },
+    "word/bcap_adam": {
+      "candidate_sha256": "36bac6c5b8e8c2d99f12a7d4d8769acc74869b0ba2c1453e1468bd6a6cc32081",
+      "reference_sha256": "36bac6c5b8e8c2d99f12a7d4d8769acc74869b0ba2c1453e1468bd6a6cc32081"
+    },
+    "word/bcap_winner": {
+      "candidate_sha256": "da7f1fcba336b1b14bcdb94e1c63ffb92e15fc85594241e00ac647d5232de815",
+      "reference_sha256": "da7f1fcba336b1b14bcdb94e1c63ffb92e15fc85594241e00ac647d5232de815"
+    },
+    "word/k3p": {
+      "candidate_sha256": "b618153e874d7200ac7f65d144e0b84fee1a0fc0c80c898189fe75f8e280ddb5",
+      "reference_sha256": "b618153e874d7200ac7f65d144e0b84fee1a0fc0c80c898189fe75f8e280ddb5"
+    },
+    "word/ka2": {
+      "candidate_sha256": "ba5b21b6efe76da638d18246d5bcc81f1aa7d9164091597f22f9f72300cb95b5",
+      "reference_sha256": "ba5b21b6efe76da638d18246d5bcc81f1aa7d9164091597f22f9f72300cb95b5"
+    },
+    "word/r1r2": {
+      "candidate_sha256": "3bb8eb46629c2cbaaf37d99bd5fcd73a7f9c0a29ef74988aec648961fc2c30eb",
+      "reference_sha256": "3bb8eb46629c2cbaaf37d99bd5fcd73a7f9c0a29ef74988aec648961fc2c30eb"
+    },
+    "word/released_gan": {
+      "candidate_sha256": "e0710a19810f4356a9bb6aa4f725b50a74d8d1f6a51f66b807b727ab5d9bd58f",
+      "reference_sha256": "e0710a19810f4356a9bb6aa4f725b50a74d8d1f6a51f66b807b727ab5d9bd58f"
+    }
+  },
+  "test_source_sha256": {
+    "reports/forge/bcap-three-phase/phase2.py": "5bd7e70654610994fc1ecc443411e5f852a6310d420b7c6210c02a8329028f52",
+    "tests/test_bcap_integration_compatibility.py": "0ef9c1a1cc30abe3ac02e999d989ef6fbb7374d3ca4b6e85bc87aa9ff7ad2211",
+    "tests/test_bcap_integration_core.py": "36b32f7818d7e5a9f57ffa0ce364b22bfebe2e951f034443ca1a052455674116",
+    "tests/test_bcap_phase1_compatibility.py": "b80481b96d0a229c8173cd5d0cb73fcc293908888a2bf6a0ad08ec6a245f793e",
+    "tests/test_host_integration_bcap.py": "b8b43245a1eec54072a1ede5127f99e974b94210d374dfd5262be255aa0d9e21"
+  },
+  "tested_candidate_commit": "d438cd3f27e253b44b90cc90f93b7806a62e7fed",
+  "tested_source_snapshot_sha256": "48c918ea5771727af000b728f7bb00bc3474ecb28586021b44b75650d946131f",
+  "verdict": "PASS"
+}
