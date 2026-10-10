@@ -27,6 +27,7 @@ from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
 from .api import CapabilityError, task_formulation_context, task_policy_blockers
+from .contracts import file_hash
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json
 from .initialization import task_initializer
@@ -103,6 +104,18 @@ class _OptimizerBundle:
                         # of sampling. Ownership is exactly every table row.
                         setter(table, torch.arange(table.shape[0], device=table.device))
             optimizer.step(*args, **kwargs)
+
+    def bind_protected_losses(self, losses, *, protected_evaluator=None):
+        enabled = [optimizer for optimizer in self.optimizers
+                   if hasattr(optimizer, "bind_protected_losses")]
+        if not enabled:
+            return
+        if len(enabled) != 1 or len(self.optimizers) != 1:
+            raise CapabilityError(["constraint_geometry requires a single joint generator/prior optimizer"])
+        optimizer = enabled[0]
+        for table in self.enumerated_tables:
+            optimizer.set_sampled_rows(table, torch.arange(len(table), device=table.device))
+        optimizer.bind_protected_losses(losses, protected_evaluator=protected_evaluator)
 
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
@@ -323,6 +336,13 @@ class BehaviorComponents:
                 direct_particles=list(direct_particles)))
         if not parts:
             raise CapabilityError(["host exposes no trainable generator-side component"])
+        if self.recipe.constraint_geometry_mode != "none" and len(parts) > 1:
+            # Zero-momentum full DualNorm has independent per-group histories.
+            # Joining their groups changes no base direction, rate or ownership;
+            # it permits one projection of the actual combined displacement.
+            groups = [{key: value for key, value in group.items() if key != "algorithm"}
+                      for optimizer in parts for group in optimizer.param_groups]
+            parts = [self.recipe.make_generator_optimizer(groups)]
         full_table = self.task["execution"].get("host", self.task["id"]) in {"trajectory", "residual_student"}
         public_g = _OptimizerBundle(parts, enumerated_tables=[prior.z for prior in priors] if full_table else ())
         public_d = self.recipe.make_critic_optimizer(critic, ema_critic=self.critic_copy(critic))
@@ -371,6 +391,23 @@ class BehaviorComponents:
             self.diagnostic_observations.append({**values, "step": step})
         print(json.dumps(dict(event="observation" if step in expected else "diagnostic_observation", task=self.task["id"], step=step,
                               budget=budget, metrics=values), allow_nan=False), flush=True)
+
+    def constraint_geometry_capture(self, step, target, prediction, metrics, *, kind="image"):
+        """Save the already scored deterministic panel; no additional sampling."""
+        records = getattr(self, "constraint_geometry_outputs", [])
+        self.constraint_geometry_outputs = records
+        thresholds = self.task["evaluation"]["thresholds"]
+        passed = all((metrics[name] <= value if op == "<=" else
+                      metrics[name] >= value if op == ">=" else metrics[name] == value)
+                     for name, op, value in thresholds)
+        failures = [] if passed else [name for name, op, value in thresholds
+                                       if not (metrics[name] <= value if op == "<=" else
+                                               metrics[name] >= value if op == ">=" else metrics[name] == value)]
+        records.append(dict(step=step, metrics=dict(metrics), passed=passed, failed_bounds=failures,
+                            views=[dict(kind=kind, title="Declared paired target and actual trained prediction",
+                                        target=target.detach().cpu(), samples=prediction.detach().cpu(),
+                                        caption="Same scored state and pairing; fixed target, no replay training.",
+                                        vmin=-1.5, vmax=1.5)]))
 
     def guards(self):
         steps = {}
@@ -559,6 +596,12 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
                       scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device=str(device), applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
+        outputs = getattr(components, "constraint_geometry_outputs", None)
+        if outputs:
+            path = output_dir / "constraint_geometry-scored-outputs.pt"
+            torch.save(outputs, path)
+            result["evidence"]["saved_observer_outputs"] = dict(path=path.name, bytes=path.stat().st_size,
+                                                                  sha256=file_hash(path))
         result["evidence"]["provenance_checkpoint"] = save_provenance_checkpoint(
             output_dir, checkpoint,
             completed_steps=min(count for role, count in result["evidence"]["guards"]["optimizer_updates"].items()

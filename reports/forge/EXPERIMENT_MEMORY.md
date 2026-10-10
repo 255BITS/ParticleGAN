@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 787. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3830,6 +3830,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### constraint_geometry-nonascent-v1 · readout-35c64b46eedef0831b3a6aac
+
+**Scope:** research_diagnostic; scientific; revision `a1c79573bfc2c13b0517409f609db17062f64384ce427e10ee9a337afbb40f56`.
+
+Post-normalization protection of existing adversarial and active paired losses resolves coverage interference while retaining conditional guardrails; unchanged BCAP winner is matched in the same source/runtime.
+
+**Observed:** {'FAIL': 3, 'PASS': 2}; wall seconds 140.788; mechanism `structural`.
+
+
+
+Measured frozen implementation:2PASS,3FAIL,1own-smoke-prerequisite BLOCKED. Trajectory/residual repair falsified;0projection Gaussian smoke regression exposes inactive-path float32 recomposition confound across attribution. Corrected software will be separately labelled UNMEASURED with no scientific rerun.
+
+**Next:** Stop exact trained revision. Preserve receipts; correct inactive-path arithmetic with bitwise software parity tests only, label corrected source UNMEASURED, and require a new independently authorized source-bound study before scientific attribution.
+
+[Evidence](../../reports/forge/attempts/51c559b016d248388056dcab751a8012/result.json) · [Record](records/readout-35c64b46eedef0831b3a6aac.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -3925,6 +3941,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.049
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/0142b29ed9154d9fbf065c2934545c0c.json) · [Record](records/readout-56577544c52c17aa60639d19.json)
+
+### constraint_geometry-round3-strict-progress-v1 · readout-568ca0dd3d3cdf1221ae4605
+
+**Scope:** research_diagnostic; scientific; revision `251cd9f05b6fc2b7502a060893726c85b31bd3f814d0a1c2403ec393670f9f45`.
+
+Strict common descent realized by bounded same-batch Armijo acceptance repairs residual identity beyond schema2 boundary nonascent while retaining passing guardrails.
+
+**Observed:** {'FAIL': 1, 'PASS': 5}; wall seconds 157.421; mechanism `structural`.
+
+
+
+Strict common descent with same-batch Armijo realization adds sustained trajectory and residual PASS against corrected schema2, preserving passing guardrails and inactive numerical parity; Gaussian continuous stability remains FAIL.
+
+**Next:** Retain as scoped opt-in conditional repair, with no default adoption or ordinary Tier2 qualification. Stop this finite study after publication; future transfer/noisy support or component ablation requires new explicit authorization. Do not combine untested repairs.
+
+[Evidence](../../reports/forge/attempts/071a3ce3c55f4ddfa50078894ac3e3ad/result.json) · [Record](records/readout-568ca0dd3d3cdf1221ae4605.json)
 
 ### k3p-a2-off-native-diagnostic · readout-5830d399b6741ce7b3a2b992
 
@@ -4102,6 +4134,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
 
+### constraint_geometry-round2-nonascent-v1 · readout-99157305f41ca0b884ae5c08
+
+**Scope:** research_diagnostic; scientific; revision `118421df70cf5acb4d28c10994400067112be3825cefa42049bb20d93263a139`.
+
+Corrected inactive-step parity eliminates the schema1 confound; projection of actual DualNorm steps protects existing objective derivatives and repairs conditional identity without losing the passing mid-scale guardrail.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 150.525; mechanism `structural`.
+
+
+
+Corrected schema2 is measured without the inactive recomposition confound; trajectory forecast falsified, no new sustained pass, and residual identity worsens.
+
+**Next:** Stop unchanged nonascent research revision; retain winner, no adoption or Tier2 qualification. Any future mechanism must distinguish useful strict progress and identity information using existing objectives and a separately authorized study.
+
+[Evidence](../../reports/forge/attempts/13b3583fd2bd4e24b609060af760115e/result.json) · [Record](records/readout-99157305f41ca0b884ae5c08.json)
+
 ### k3p · readout-9c29229a2baba56de3b40845
 
 **Scope:** calibration_diagnostic; scientific; revision `989a12b2dd014078e0e5dcf7c674be243b5a73bee19289c9500964a941369c69`.
@@ -4198,6 +4246,22 @@ One preregistered full 7000-update clean learned-MoG grid diagnostic FAIL for 93
 
 [Evidence](../../reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/result.json) · [Record](records/readout-abd06840fa1f42a4f64c13ab.json)
 
+### constraint_geometry-control-v1 · readout-ac82943db25e6134866495ce
+
+**Scope:** research_diagnostic; scientific; revision `53ab9888fa7d32645260b911a85c46003b4b272b4551d2b3682ec8e09eb4c825`.
+
+Post-normalization protection of existing adversarial and active paired losses resolves coverage interference while retaining conditional guardrails; unchanged BCAP winner is matched in the same source/runtime.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 290.783; mechanism `structural`.
+
+
+
+Matched winner control completes6declared tasks:3PASS and3FAIL,0incomplete. Trajectory/residual remain failing, mid-scale/two-pole/smoke pass, continuous Gaussian fails full retention and shifted reacquisition.
+
+**Next:** Retain original winner evidence and exact source-bound matched control. Stop the measured projection revision; software parity correction remains scientifically UNMEASURED. No extra training, seed or gate changes.
+
+[Evidence](../../reports/forge/attempts/0849b0fe1246477e89e5f45219310c72/result.json) · [Record](records/readout-ac82943db25e6134866495ce.json)
+
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
 **Scope:** calibration_diagnostic; scientific; revision `229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b`.
@@ -4277,6 +4341,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 **Next:** Stop this exact failed revision. Preserve full denominators and the separate recorded cohorts; no seed repeats,unchanged reruns or downstream gate filling. Before a substantive further test, establish an independently justified and bounded convergence/reference protocol; calibrate the provisional screen before adoption.
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
+
+### constraint_geometry-round3-control-v1 · readout-c31ec37dd154ae5d9b9bbf74
+
+**Scope:** research_diagnostic; scientific; revision `d7b7781095e80fa5a2c703353b1c7a389b5f68d7966bc7c08e753db181fffbe4`.
+
+Corrected schema2 nonascent remains the primary control for finite useful progress; residual identity remains above the full original gate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 148.059; mechanism `structural`.
+
+
+
+Completed matched corrected schema2 nonascent predecessor control:3PASS3FAIL, retaining identity failures under new source. No archived result or qualification rewritten.
+
+**Next:** Retain as primary source-bound control for this successor package; winner evidence remains contextual under original source. No unchanged rerun or qualification credit.
+
+[Evidence](../../reports/forge/attempts/4e9f69967ff54edca6f2b3bbec839fea/result.json) · [Record](records/readout-c31ec37dd154ae5d9b9bbf74.json)
 
 ### k3p · readout-c3df7159c90725fdef1cb700
 
@@ -4437,6 +4517,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
+
+### constraint_geometry-round2-control-v1 · readout-f9ca0b7a952b308fb000ed29
+
+**Scope:** research_diagnostic; scientific; revision `b4957b01e002fcc51b3b52b1e327894d6d44b7cef03b4a2e4f59aa30e3101b64`.
+
+Exact saved BCAP winner recipe is the primary matched baseline for the source-corrected schema2 comparison; conditional identity remains above its complete gate.
+
+**Observed:** {'FAIL': 3, 'PASS': 3}; wall seconds 204.66; mechanism `structural`.
+
+
+
+Completed exact saved winner matched control for source-corrected schema2 diagnostic; 3 PASS and 3 FAIL with no qualification change.
+
+**Next:** Retain as primary control and historical winner; preserve broader original7/21 under its original source. No rerun for publication, no default change.
+
+[Evidence](../../reports/forge/attempts/08bc23af4da94ae4a0a903421a1abb94/result.json) · [Record](records/readout-f9ca0b7a952b308fb000ed29.json)
 
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
@@ -4974,4 +5070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f924c11e011d85765ab2eb3d30808016a3d49eb5179e51c48bf1c4afc0551923`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ee4a8010648c6da2e6bb428bdbb61d9636e742f8222f5067b0ea0f980e6237da`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -2,6 +2,8 @@
 from copy import deepcopy
 import math
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 
@@ -120,6 +122,12 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
+            raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
+        if recipe.constraint_geometry_mode == "strict_progress" and any(
+                isinstance(module, (torch.nn.modules.batchnorm._BatchNorm, torch.nn.modules.dropout._DropoutNd))
+                for module in self.G.modules()):
+            raise ValueError("strict_progress requires generator forwards without stochastic layers or running buffers")
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -384,7 +392,18 @@ class GANTrainer:
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             self.opt_g.zero_grad()
-            loss_g.backward()
+            protected_evaluator = None
+            if recipe.constraint_geometry_mode == "strict_progress":
+                # Same sampled indices and fixed within-component perturbation;
+                # probes never call a sampler or draw training/output noise.
+                locations = self.prior.z.detach().clone()
+                sampled_latent = latent.detach().clone()
+                def protected_evaluator():
+                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    return (self.loss.g_loss(logits, real_logits),)
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                         protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()

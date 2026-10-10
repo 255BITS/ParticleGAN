@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "constraint_geometry-candidate-study-v1",
+  "status": "ready",
+  "candidate": "constraint_geometry-nonascent-v1",
+  "control": {
+    "candidate_id": "constraint_geometry-control-v1",
+    "task_map": {}
+  },
+  "hypothesis": "Post-normalization protection of existing adversarial and active paired losses resolves coverage interference while retaining conditional guardrails; unchanged BCAP winner is matched in the same source/runtime.",
+  "scope": {
+    "view": "constraint_geometry-diagnostic-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "constraint_geometry-round-v1",
+    "candidate_budget_seconds": 6420,
+    "budget_seconds": 12840
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+      "selector": [],
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "seed": 0,
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "trajectory",
+    "metric": "identity_mse",
+    "op": "<=",
+    "threshold": 0.02,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "trajectory",
+    "metric": "identity_mse",
+    "op": ">",
+    "threshold": 0.02,
+    "phase": "final"
+  },
+  "competing_explanation": "Local first-order non-ascent of critic/paired losses may preserve wrong identity equilibria, lose finite-step descent, or conflict with useful coverage. It does not address unconditional stochastic oscillation or learned-prior allocation.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}

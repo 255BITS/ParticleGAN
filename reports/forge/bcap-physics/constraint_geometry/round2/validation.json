@@ -1,0 +1,161 @@
+{
+  "actual_training_gifs": {
+    "media/candidate-gaussian1d_smoke.gif": 9,
+    "media/candidate-gaussian1d_stability.gif": 9,
+    "media/candidate-mid_scale_identity.gif": 9,
+    "media/candidate-residual_student.gif": 9,
+    "media/candidate-trajectory.gif": 9,
+    "media/candidate-two_pole.gif": 9,
+    "media/control-gaussian1d_smoke.gif": 9,
+    "media/control-gaussian1d_stability.gif": 9,
+    "media/control-mid_scale_identity.gif": 9,
+    "media/control-residual_student.gif": 9,
+    "media/control-trajectory.gif": 9,
+    "media/control-two_pole.gif": 9
+  },
+  "forge_validation": {
+    "candidates": 515,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "bcap-convolution-images-v1",
+      "bcap-tier2-smoothing-v1",
+      "constraint_geometry-candidate-study-v1",
+      "constraint_geometry-control-study-v1",
+      "constraint_geometry-round2-candidate-study-v1",
+      "constraint_geometry-round2-control-study-v1",
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 66,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "bcap_convolution_images",
+      "clockfree_continuous",
+      "constraint_geometry-diagnostic-v1",
+      "constraint_geometry-round2-diagnostic-v1",
+      "discriminator_stability",
+      "formulation_comparison",
+      "host_profile_transfer",
+      "k3p_two_pole_horizon",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "inactive_trained_parity": {
+    "checks": [
+      {
+        "ambient_global_rng": null,
+        "bitwise_equal": true,
+        "candidate_attempt_id": "13b3583fd2bd4e24b609060af760115e",
+        "candidate_constraint_stats": [
+          {
+            "max_derivative_after": 0.0,
+            "max_derivative_before": 0.0,
+            "projected_steps": 0,
+            "steps": 80
+          }
+        ],
+        "control_attempt_id": "c38c77e99e3a4f69858912503e708afa",
+        "observation_mismatches": [],
+        "scored_output_mismatches": [],
+        "state_mismatches": [],
+        "task_id": "two_pole"
+      },
+      {
+        "ambient_global_rng": {
+          "candidate_unchanged_within_run": true,
+          "control_unchanged_within_run": true,
+          "cross_arm_mismatches": [
+            "$.cpu_rng",
+            "$.cuda_rng"
+          ],
+          "reason": "Per-worker ambient global states; public trainer uses isolated named model RNG inside fork_rng, then restores ambient state."
+        },
+        "bitwise_equal": true,
+        "candidate_attempt_id": "951ebdbb4a3542c5bb3654e197ba763d",
+        "candidate_constraint_stats": [
+          {
+            "max_derivative_after": 0.0,
+            "max_derivative_before": 0.0,
+            "projected_steps": 0,
+            "steps": 1000
+          }
+        ],
+        "control_attempt_id": "2fd712c80b4641a2a2ff560189a9e4db",
+        "observation_mismatches": [],
+        "scored_output_mismatches": [],
+        "state_mismatches": [],
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "ambient_global_rng": {
+          "candidate_unchanged_within_run": true,
+          "control_unchanged_within_run": true,
+          "cross_arm_mismatches": [
+            "$.cpu_rng",
+            "$.cuda_rng"
+          ],
+          "reason": "Per-worker ambient global states; public trainer uses isolated named model RNG inside fork_rng, then restores ambient state."
+        },
+        "bitwise_equal": true,
+        "candidate_attempt_id": "3453d2f15a3b471ba9666a2a6f7c3f65",
+        "candidate_constraint_stats": [
+          {
+            "max_derivative_after": 0.0,
+            "max_derivative_before": 0.0,
+            "projected_steps": 0,
+            "steps": 6000
+          }
+        ],
+        "control_attempt_id": "79a61dc2f0f14ac4a8e6438c07b307a5",
+        "observation_mismatches": [],
+        "scored_output_mismatches": [],
+        "state_mismatches": [],
+        "task_id": "gaussian1d_stability"
+      }
+    ],
+    "excluded_cross_arm_full_checkpoint_hashes": [
+      "training_state_sha256",
+      "primary_state_sha256",
+      "confirmed_state_sha256"
+    ],
+    "excluded_declared_delta": [
+      "constraint_geometry",
+      "constraint_geometry_mode"
+    ],
+    "note": "Original checkpoint bytes and same-state confirmation hashes remain intact; every consumed named stream and numeric output is compared.",
+    "optimizer_updates_added": 0,
+    "qualification_input": false,
+    "sampling_draws_added": 0,
+    "schema_version": 1,
+    "separated_unused_ambient_state": [
+      "trainer.cpu_rng",
+      "trainer.cuda_rng"
+    ]
+  },
+  "measured_source_commit": "57aad8ea35fbd6989265db53af9ff39dff70b821",
+  "measured_source_digest": "b87904dcae3e2df70006c04b51d3fd65d89979a72c7f5f1e841ae684517f7685",
+  "memory_refresh": "summaries_only",
+  "optimizer_schema": 2,
+  "publication_optimizer_updates": 0,
+  "publication_sampling_draws": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_attempts": 12,
+  "scientific_retries": 0,
+  "scientific_source_matches_current_files": true,
+  "software_checks": {
+    "full_numpy_state_followup": {
+      "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/constraint_geometry/logs/final-parity-checks.log",
+      "note": "Audit assertion includes NumPy position and cached-Gaussian fields; optimizer/scientific execution sources unchanged.",
+      "passed": 9
+    },
+    "log": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-round2-20261009/constraint_geometry/logs/software-checks.log",
+    "passed": 205
+  },
+  "training_updates": 15360
+}

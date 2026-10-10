@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "measured_source_commit": "f909ec56e",
+  "measured_source_tests": 200,
+  "published_corrected_source_tests": 201,
+  "published_optimizer_schema": 2,
+  "corrected_scientific_status": "UNMEASURED",
+  "forge_validation": {
+    "candidates": 513,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "bcap-convolution-images-v1",
+      "bcap-tier2-smoothing-v1",
+      "constraint_geometry-candidate-study-v1",
+      "constraint_geometry-control-study-v1",
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 66,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "bcap_convolution_images",
+      "clockfree_continuous",
+      "constraint_geometry-diagnostic-v1",
+      "discriminator_stability",
+      "formulation_comparison",
+      "host_profile_transfer",
+      "k3p_two_pole_horizon",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "memory_refresh": "summaries_only",
+  "scientific_retries": 0
+}

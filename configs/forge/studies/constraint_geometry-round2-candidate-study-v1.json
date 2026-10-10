@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 12840,
+    "candidate_budget_seconds": 6420,
+    "id": "constraint_geometry-round2-v1"
+  },
+  "candidate": "constraint_geometry-round2-nonascent-v1",
+  "competing_explanation": "Inactive projection must be bitwise neutral; active projection may remove useful motion, protect an identity-ambiguous adversarial objective, or satisfy first-order feasibility without finite-step improvement. No new identity objective is added.",
+  "control": {
+    "candidate_id": "constraint_geometry-round2-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "identity_mse",
+    "op": ">",
+    "phase": "final",
+    "task_id": "trajectory",
+    "threshold": 0.02
+  },
+  "hypothesis": "Corrected inactive-step parity eliminates the schema1 confound; projection of actual DualNorm steps protects existing objective derivatives and repairs conditional identity without losing the passing mid-scale guardrail.",
+  "id": "constraint_geometry-round2-candidate-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "identity_mse",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "trajectory",
+    "threshold": 0.02
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "seed": 0,
+        "source_digest": "2e1d0e2704f3e8cff0845f46fe66e8fb641c32fd32b7d1929f05a680b4c3bbed"
+      },
+      "path": "reports/forge/bcap-tier2-search/failure-state-analysis.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "constraint_geometry-round2-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

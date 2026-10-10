@@ -177,6 +177,7 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    constraint_geometry_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -215,6 +216,10 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress"):
+            raise ValueError("constraint_geometry_mode must be none, nonascent or strict_progress")
+        if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
+            raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
         if self.optimizer_convolution not in ("none", "per_offset"):
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":

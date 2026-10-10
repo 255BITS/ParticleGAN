@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "constraint_geometry-diagnostic-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "trajectory"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "residual_student"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "mid_scale_identity"
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Explicit mechanism diagnostic only; unchanged task gates, no ordinary-tier qualification."
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "User-authorized finite physics/constraint mechanism diagnostic with matched controls; specialist denominator is not ordinary qualification.",
+  "evidence_scope": "research_diagnostic"
+}
