@@ -1,0 +1,135 @@
+{
+  "adapter": "transfer_behavior",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+      "id": "opt-in-component-objective-hooks-v1",
+      "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+      "original_task_path": "configs/forge/tasks/mid_scale_identity.json",
+      "previous_revision": {
+        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+        "id": "explicit-equality-and-word-prior-betas-v3",
+        "previous_revision": null,
+        "previous_source_sha256": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        }
+      },
+      "previous_source_sha256": {}
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0",
+      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+    },
+    "thresholds": [
+      [
+        "concept_cos_plus",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_cos_minus",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_mag_plus",
+        ">=",
+        0.75
+      ],
+      [
+        "concept_mag_plus",
+        "<=",
+        1.25
+      ],
+      [
+        "concept_mag_minus",
+        ">=",
+        0.75
+      ],
+      [
+        "concept_mag_minus",
+        "<=",
+        1.25
+      ],
+      [
+        "identity_at_0",
+        ">=",
+        0.85
+      ],
+      [
+        "identity_at_mid",
+        ">=",
+        0.85
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "mid_scale_identity",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 800
+    },
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "initializer": "deterministic_orthogonal",
+    "prior": {
+      "exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "prior_applicability": "not_sampled",
+    "produces_state": false,
+    "protocol": "screening",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon",
+    "steps": 800,
+    "transport_consumer": "output_marginal_v1",
+    "transport_contract": {
+      "conditioning_in_distance": false,
+      "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+      "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+      "new_forward_passes": false,
+      "new_paired_supervision": false,
+      "new_random_draws": false,
+      "protected_objectives": "original adversarial; existing paired cover",
+      "sample_space": "original generated output panel at four training scales",
+      "target_law": "original four target panels; scales excluded",
+      "version": 1
+    }
+  },
+  "id": "recipe-prior-refactor-legacy-mid_scale_identity",
+  "requires_capabilities": [
+    "named_rng",
+    "live_sampling",
+    "particle_cloud"
+  ],
+  "resources": {
+    "allow_cpu": false,
+    "cpu_threads": 1,
+    "gpu_memory_mb": 512,
+    "gpus": 1,
+    "timeout_seconds": 1800
+  },
+  "schema_version": 1,
+  "task_cohort": "component_output_transport_v1"
+}

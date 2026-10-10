@@ -1,0 +1,72 @@
+{
+  "adapter": "clockfree_audit",
+  "dependencies": [],
+  "description": "Measure the original four clock/state parity conditions and zero-dependency condition for an explicitly scheduled recipe; diagnostic FAIL grants no clock-free claim or qualification.",
+  "evaluation": {
+    "conditions": [
+      "step_label",
+      "horizon",
+      "evaluation_cadence",
+      "restart"
+    ],
+    "eval_output_noise": "clean",
+    "evaluator": "experiments.forge.views:_clockfree",
+    "kind": "clockfree_parity",
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live",
+    "sources": {
+      "configs/forge/tasks/clockfree_audit.json": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258"
+    },
+    "training_feedback": false
+  },
+  "execution": {
+    "clock_audit_parent": {
+      "evaluation_fingerprint": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+      "execution_fingerprint": "046bcb9371d7fe72f12bb6daa46cf7e90e99737385e1c1be08717625ceaf7477",
+      "id": "clockfree_audit",
+      "task_sha256": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258"
+    },
+    "clock_audit_scope": "measure_known_dependencies",
+    "evaluation_samples": 16,
+    "initializer": "deterministic_orthogonal",
+    "model": {
+      "fourier": 2,
+      "hidden": 16,
+      "layers": 2
+    },
+    "original_schedule_horizon": 128,
+    "perturbed_horizon": 4096,
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "probe_steps": 4,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 8,
+      "num_particles": 16,
+      "z_dim": 2
+    },
+    "step_label_offset": 8192,
+    "steps": 24,
+    "warmup_steps": 4
+  },
+  "id": "recipe-prior-refactor-legacy-clockfree_audit_measurement_v1",
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1
+}

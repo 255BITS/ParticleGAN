@@ -1,0 +1,84 @@
+{
+  "campaign": {
+    "budget_seconds": 308280,
+    "candidate_budget_seconds": 44040,
+    "id": "recipe-prior-refactor-selected-leaders-v1"
+  },
+  "candidate": "recipe-prior-refactor-k3p-v1",
+  "competing_explanation": "Hidden host prior penalties or trainability previously altered the selected recipe. The refactor can change outcomes even when prior_reg is unchanged; source-bound fresh results are required.",
+  "control": {
+    "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+    "task_map": {
+      "ae_gan_hold": "recipe-prior-refactor-legacy-ae_gan_hold",
+      "clockfree_audit_measurement_v1": "recipe-prior-refactor-legacy-clockfree_audit_measurement_v1",
+      "cover_leftover": "recipe-prior-refactor-legacy-cover_leftover",
+      "five_word_joint_hold": "recipe-prior-refactor-legacy-five_word_joint_hold",
+      "five_word_joint_smoke": "recipe-prior-refactor-legacy-five_word_joint_smoke",
+      "gaussian1d_smoke": "recipe-prior-refactor-legacy-gaussian1d_smoke",
+      "gaussian1d_stability": "recipe-prior-refactor-legacy-gaussian1d_stability",
+      "grid100": "recipe-prior-refactor-legacy-grid100",
+      "img_bars4": "recipe-prior-refactor-legacy-img_bars4",
+      "img_blobs4": "recipe-prior-refactor-legacy-img_blobs4",
+      "img_intensity2": "recipe-prior-refactor-legacy-img_intensity2",
+      "img_stripes2": "recipe-prior-refactor-legacy-img_stripes2",
+      "mid_scale_identity": "recipe-prior-refactor-legacy-mid_scale_identity",
+      "mode_hold": "recipe-prior-refactor-legacy-mode_hold",
+      "residual_student": "recipe-prior-refactor-legacy-residual_student",
+      "ring16_acquisition": "recipe-prior-refactor-legacy-ring16_acquisition",
+      "rotated100": "recipe-prior-refactor-legacy-rotated100",
+      "staggered100": "recipe-prior-refactor-legacy-staggered100",
+      "trajectory": "recipe-prior-refactor-legacy-trajectory",
+      "two_pole": "recipe-prior-refactor-legacy-two_pole",
+      "unipolar": "recipe-prior-refactor-legacy-unipolar",
+      "unused_token_hold": "recipe-prior-refactor-legacy-unused_token_hold",
+      "vector_anisotropic": "recipe-prior-refactor-legacy-vector_anisotropic",
+      "vector_overlap": "recipe-prior-refactor-legacy-vector_overlap",
+      "vector_spiral": "recipe-prior-refactor-legacy-vector_spiral",
+      "vector_two_broad": "recipe-prior-refactor-legacy-vector_two_broad",
+      "vector_unequal_mass": "recipe-prior-refactor-legacy-vector_unequal_mass",
+      "vector_unequal_width": "recipe-prior-refactor-legacy-vector_unequal_width"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "The selected global recipe remains runnable and reaches the original numerical acquisition/hold gates under recipe-owned learned priors. Diagnose unreached questions separately; archived outcomes supply lineage only.",
+  "id": "recipe-prior-refactor-k3p-v1-ordinary-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "exact_pre_refactor_selected_leader_settings",
+        "source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792"
+      },
+      "path": "reports/forge/recipe-prior-refactor/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

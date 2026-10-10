@@ -1,0 +1,245 @@
+{
+  "actual_task_binding_proof": {
+    "pairs": 140,
+    "raw_binding_hashes": {
+      "current": "cc4284efd604f046bc9ef72db03d4e11e29901993aa5123530104c264ed53bb3",
+      "original": "5c890c35b3187f95e79ff40525a29cf562559ebdc8b18937fadedbdba7cec94a"
+    },
+    "receipt_sha256": "f540f21c942c74152e333eb7bee3fcb770306973327e732d057c3973f98e3c40",
+    "scope": "All actual task-bound nonprior Recipe fields and initial prior laws exactly match actual develop. Prior authority/penalties change explicitly; no training/numeric quality parity claim.",
+    "status": "PASS"
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010",
+  "baseline_sha256": "6bffbf589ae8523c804ce6401a873a03b1ed4cb548bc1b7cd4b0c632ca790013",
+  "campaign_cap_seconds": 308280,
+  "candidate_cap_seconds": 44040,
+  "helper_sources": {
+    "test_workflow.py": "7bdf95ae4d2ba306acddf95ff9a9bcd7de36213bfd20cb03dab9acf541bc5834",
+    "verify_bindings.py": "8fd03b57970a0aa7db14e5cf22e754f617e10d68deef52d9109374f7ffa00662",
+    "workflow.py": "c6c03dc782451e3746d48d355afeec6182e51ecf275e040f55f0f2352947fab5"
+  },
+  "maximum_duplicate_pass_prefix_seconds": 1020,
+  "optional_clock_seconds": 300,
+  "ordinary_full_allowance_per_leader_seconds": 43020,
+  "original_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792",
+  "prepared_commit": "9a0b16887798e6006d25b4d98e77f5754a49c09b",
+  "prior_contract_delta": "Global selectedweights preserved; newrecipelearn/freeze and VICReg/L2 authority. Releasebehavior olddelegatedprior_reg0 becomes selectedglobal.05; otherhosts hiddenVICReg/L2 removed. Bindingproof doesnotclaim numericaltrainingparity.",
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "registration_sha256": "3d549527685ec5828728aceecd9db7f2300196c8b586aec5ecca340b50feb86b",
+  "required_tasks_per_leader": {
+    "tier1": 6,
+    "tier2": 21
+  },
+  "roster": [
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 28,
+      "blocker_reasons": [
+        "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "family": "atlas",
+      "fresh_candidate": "atlas",
+      "fresh_study": "recipe-prior-refactor-atlas-v1-ordinary-study",
+      "original_candidate": "atlas",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 0
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 0,
+      "blocker_reasons": [],
+      "family": "bcap-pure",
+      "fresh_candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "fresh_study": "recipe-prior-refactor-bcap-pure-v1-ordinary-study",
+      "original_candidate": "bcap-default-baseline-direction-v1",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 28
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 28,
+      "blocker_reasons": [
+        "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation",
+        "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "family": "e22",
+      "fresh_candidate": "e22",
+      "fresh_study": "recipe-prior-refactor-e22-v1-ordinary-study",
+      "original_candidate": "e22",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 0
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 0,
+      "blocker_reasons": [],
+      "family": "k3p",
+      "fresh_candidate": "recipe-prior-refactor-k3p-v1",
+      "fresh_study": "recipe-prior-refactor-k3p-v1-ordinary-study",
+      "original_candidate": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 28
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 0,
+      "blocker_reasons": [],
+      "family": "ka2",
+      "fresh_candidate": "recipe-prior-refactor-ka2-v1",
+      "fresh_study": "recipe-prior-refactor-ka2-v1-ordinary-study",
+      "original_candidate": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 28
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 0,
+      "blocker_reasons": [],
+      "family": "r1r2",
+      "fresh_candidate": "recipe-prior-refactor-r1r2-v1",
+      "fresh_study": "recipe-prior-refactor-r1r2-v1-ordinary-study",
+      "original_candidate": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.0,
+      "ready_task_contracts": 28
+    },
+    {
+      "admission": "READY",
+      "blocked_task_contracts": 0,
+      "blocker_reasons": [],
+      "family": "release07-gan-v3",
+      "fresh_candidate": "recipe-prior-refactor-release07-gan-v3-v1",
+      "fresh_study": "recipe-prior-refactor-release07-gan-v3-v1-ordinary-study",
+      "original_candidate": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "prior_policy": {
+        "prior_l2": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "prior_reg": 0.05,
+      "ready_task_contracts": 28
+    }
+  ],
+  "schema_version": 1,
+  "scientific_source_manifest_sha256": "a0226482205ee80611f1b8949198e6efee63fb4f5437bb4ded8d3483d99a0cae",
+  "software": {
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "749b757a76b5d893672a34a38e01bb34b433b125f025e1574d3bb1fe8abcf94d",
+    "log_sha256": "a488a6ea4d2293f6241cffd3d18daea6270a9741ca95d0278703e1ece247c844",
+    "seconds": 1.378,
+    "tests": 39
+  },
+  "source_digest": "df252e3034476c2d541d4d9253dea59405df800cf66b96edc44bd70e5044474a",
+  "source_files": 1206,
+  "status": "PREPARED_NO_TRAINING",
+  "supported_maximum_paid_allowance_seconds": 220200,
+  "unchanged_lineage_files": {
+    "configs/forge/selections/family-current-v1.json": {
+      "current": "1549db2b3b66fd1c50f44058ea92d770c559f0f1f7632ecd6d5c367e222ba64c",
+      "original": "1549db2b3b66fd1c50f44058ea92d770c559f0f1f7632ecd6d5c367e222ba64c"
+    },
+    "configs/forge/trainer-families.json": {
+      "current": "f8834d658931b660a646179b1d424d3e3dcedb89bd62f8fa827d78bdef7d82a9",
+      "original": "f8834d658931b660a646179b1d424d3e3dcedb89bd62f8fa827d78bdef7d82a9"
+    }
+  },
+  "view_revision": 9
+}
