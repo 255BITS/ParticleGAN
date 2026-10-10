@@ -506,8 +506,9 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
 
 
 def test_committed_pages_and_every_drilldown_link_match_the_generator(tmp_path):
-    from tests.archived_forge_contracts import published_develop_checkout
-    root = published_develop_checkout(tmp_path)
+    # This is the current generated-artifact guard. Archived clock/selection
+    # questions below deliberately use their original published task cards.
+    root = ROOT
     publication = read_json(root / "reports/forge/technique-inventory.json")
     assert publication["family_progress"] == build_progress(root, publication)
     pages = generated_pages(root, publication)
