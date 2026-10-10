@@ -259,22 +259,32 @@ def sections(row, card):
     evaluator, evaluation = row.get("evaluator_result", {}), card["evaluation"]
     result = [dict(name="Recorded endpoint", rows=metric_rows(row.get("metrics", {}), evaluation.get("thresholds", [])))]
     temporal = []
-    convergence = evaluator.get("convergence")
-    if convergence:
-        temporal = [measurement("terminal passing suffix", convergence["passing_suffix"], [(">=", convergence["minimum_stable_checks"])]),
-                    measurement("passing scheduled observations", convergence["passing_observations"]),
-                    measurement("complete declared execution", convergence["complete"], [("==", True)])]
-    elif card["id"] == "gaussian1d_stability" and evaluator:
-        temporal = [measurement("stationary passing checks", evaluator["stationary_passes"], [("==", evaluation["stationary_checks"])]),
-                    measurement("deadline reacquisition", evaluator["reacquisition_status"] == "PASS", [("==", True)]),
-                    measurement("shifted hold passing checks", evaluator["shift_hold_passes"], [("==", evaluation["shift_hold_checks"])])]
-    elif card["id"] == "five_word_joint_hold" and evaluator:
+    convergence = evaluator.get("convergence", {})
+    if evaluation["kind"] == "transfer_sustained":
+        temporal = [measurement("terminal passing suffix", convergence.get("passing_suffix"), [(">=", evaluation["minimum_stable_checks"])]),
+                    measurement("passing scheduled observations", convergence.get("passing_observations")),
+                    measurement("complete declared execution", convergence.get("complete"), [("==", True)])]
+    elif evaluation["kind"] in ("gaussian_smoke", "word_smoke"):
+        confirmed = evaluator.get("confirmed_steps")
+        temporal = [measurement("independently confirmed scheduled states", len(confirmed) if confirmed is not None else None, [(">=", 1)])]
+    elif card["id"] == "gaussian1d_stability":
+        reacquisition = evaluator.get("reacquisition_status")
+        temporal = [measurement("stationary passing checks", evaluator.get("stationary_passes"), [("==", evaluation["stationary_checks"])]),
+                    measurement("deadline reacquisition", reacquisition == "PASS" if reacquisition is not None else None, [("==", True)]),
+                    measurement("shifted hold passing checks", evaluator.get("shift_hold_passes"), [("==", evaluation["shift_hold_checks"])])]
+    elif card["id"] == "five_word_joint_hold":
         count = evaluation["observations"] + 1
-        temporal = [measurement("passing primary checks", evaluator["passing_observations"], [("==", count)]),
-                    measurement("confirmed checks", evaluator["confirmed_checks"], [("==", count)])]
-    elif card["adapter"] == "native100" and evaluator:
-        temporal = [measurement("coverage decision", evaluator["coverage_status"] == "PASS", [("==", True)]),
-                    measurement("terminal live accuracy passing checks", evaluator["terminal_summary"]["passing_checks"], [("==", evaluation["minimum_stable_checks"])])]
+        temporal = [measurement("passing primary checks", evaluator.get("passing_observations"), [("==", count)]),
+                    measurement("confirmed checks", evaluator.get("confirmed_checks"), [("==", count)])]
+    elif card["adapter"] == "native100":
+        coverage_status = evaluator.get("coverage_status")
+        temporal = [measurement("coverage decision", coverage_status == "PASS" if coverage_status is not None else None, [("==", True)]),
+                    measurement("terminal live accuracy passing checks", evaluator.get("terminal_summary", {}).get("passing_checks"), [("==", evaluation["minimum_stable_checks"])])]
+        result = [dict(name="Live endpoint coverage, 20000 saved draws", rows=metric_rows({}, native_thresholds(card, 20000))),
+                  dict(name="Live endpoint accuracy, 20000 saved draws", rows=metric_rows({}, native_thresholds(card, 20000, accuracy=True))),
+                  dict(name="Independent live holdout accuracy, 100000 saved draws", rows=metric_rows({}, native_thresholds(card, 100000, accuracy=True))),
+                  dict(name="Independent holdout coverage from the same saved draws", rows=metric_rows({}, native_thresholds(card, 100000)))]
+    if card["adapter"] == "native100" and evaluator:
         artifact_root = Path(row["_artifact_root"])
         manifest = row["_artifact_manifest"]["files"]
         summary_file = artifact_root / card["id"] / "summary.json"
