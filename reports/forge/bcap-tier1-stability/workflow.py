@@ -151,7 +151,7 @@ def publish():
                     stats[path+'.critic_cap']=value['critic_cap']['stats']
                 for key, child in value.items():
                     if key not in {'models','streams','initialization','role_parameters'}:
-                        cap_stats(child,path+'.'+key)
+                        cap_stats(child,f'{path}.{key}')
             elif isinstance(value,(list,tuple)):
                 for index, child in enumerate(value):
                     cap_stats(child,f'{path}[{index}]')
