@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 783. Inventory coverage: complete. Unresolved import items: 7.
+Records: 788. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3718,6 +3718,86 @@ Administrative abandoned: Registered native comparison failed the unchanged full
 
 [Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
 
+### bcap-pure-budget10x-v1 · pr311-bcap-pure-budget10x-context-v1
+
+**Scope:** historical; family_context; revision `beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30`.
+
+Does 10x longer training with the same constant-step BCAP-pure recipe fix the Gaussian and Ring16 sustained Tier 1 failures?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `training_budget_extension`.
+
+
+
+No: 0/2 sustained passes. Gaussian keeps oscillating and fails distribution accuracy; Ring16 removes most tail error but repeatedly loses component spread and fails the five-terminal-observation hold. Closed unmerged in PR triage 2026-10-10; superseded by develop's 22/22 Tier 1 pass.
+
+**Next:** Do not use longer budgets as a fix for BCAP oscillation or ring hold; change the dynamics instead.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30/reports/forge/bcap-pure-budget10x-v1/README.md) · [Record](records/pr311-bcap-pure-budget10x-context-v1.json)
+
+### bcap-gaussian-frozen-prior · pr318-gaussian-frozen-prior-context-v1
+
+**Scope:** historical; family_context; revision `dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e`.
+
+Does freezing the initial MoG prior let G/D acquire and retain the 1D Gaussian at the selected constant BCAP rates?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `fixed_prior_control`.
+
+
+
+No: a frozen prior does not rescue Gaussian retention under alternating, simultaneous or past-extrapolation timing; extrapolation reaches a passing final shifted snapshot but cannot retain full quality, and all three fixed-prior ring arms fail. Explicit fixed-prior control cohort. Closed unmerged in PR triage 2026-10-10.
+
+**Next:** Prior motion is not the cause of Gaussian retention failure; look at G/D dynamics.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e/reports/forge/gaussian-frozen-prior/README.md) · [Record](records/pr318-gaussian-frozen-prior-context-v1.json)
+
+### ring16-tiny-weak-subspace-noise · pr335-ring16-tiny-noise-context-v1
+
+**Scope:** historical; family_context; revision `a570d722949b4bf26f3641b8d020a7a1cf67ec3b`.
+
+Does continuous tiny noise on weak gradient subspaces fix Ring16 acquisition and hold?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `weak_subspace_gradient_noise`.
+
+
+
+Yes: every-update tiny weak-subspace noise passes confirmed Ring16 smoke (acquires at 817) and ends with 45 consecutive full passes; noise at update 401 only fails confirmation on covariance. Slower than merged rank truncation (acquires 684, develop default via PR332). Closed unmerged in PR triage 2026-10-10; absorbed into PR331 Ring16 report.
+
+**Next:** Fallback candidate if truncation is removed or regresses; not needed while truncation is default.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/a570d722949b4bf26f3641b8d020a7a1cf67ec3b/reports/forge/ring16-noise/README.md) · [Record](records/pr335-ring16-tiny-noise-context-v1.json)
+
+### bcap-runtime-margin-pr342-pr343 · pr342-343-bcap-gate-margin-context-v1
+
+**Scope:** historical; family_context; revision `ba593aab5c0e150da1c36005aece17816f074c7b`.
+
+Did serial autograd scheduling and/or numerical rank truncation cause the BCAP Gaussian-smoke and five-word-hold regressions?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `runtime_scheduling_and_rank_truncation_sensitivity`.
+
+
+
+BCAP gate margins are thin. On Gaussian smoke (PR342), disabling autograd multithreading (serial scheduling) flips PASS to FAIL for both polar rules (KS .0692/.0646 vs limit .05); truncation alone does not. On five-word hold (PR343), serial scheduling alone and rank truncation alone each flip the historical PASS to FAIL; together they reproduce V6 FAIL. All word arms still acquire; the regression is retention. Closed unmerged in PR triage 2026-10-10; superseded by develop's smoothing=1e-5 + direction_blend 22/22 Tier 1 pass.
+
+**Next:** Treat runtime scheduling and polar truncation as confounders when attributing BCAP gate changes; compare under matched runtime before crediting a formulation change.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/ba593aab5c0e150da1c36005aece17816f074c7b/reports/forge/bcap-gaussian-regression/README.md) · [Record](records/pr342-343-bcap-gate-margin-context-v1.json)
+
+### bcap-smooth-polar-1e-4 · pr344-smoothed-dualnorm-1e-4-context-v1
+
+**Scope:** historical; family_context; revision `6d3d5b21144d85061fce6349b706e9c2800b0f96`.
+
+Does a fixed smoothed DualNorm scale of 1e-4 repair both serial Gaussian acquisition and word stability across the four truncation/threading combinations?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `smoothed_polar_dualnorm_scale`.
+
+
+
+Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four combinations, but words fail the original terminal stability gate in all four runs. 1e-5 was selected instead (merged PR345). Closed unmerged in PR triage 2026-10-10.
+
+**Next:** Keep smoothing at the selected 1e-5; do not raise it to 1e-4 without a word-stability falsifier.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5006,4 +5086,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `d45185030fe5ff473a5d0a19a30445b14e60dfc4e3f0556f016815d447ae988a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `01f285c4585e897effd5a7d4e7621d19b5b2b1e65ca3263eb25cc60afd131652`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
