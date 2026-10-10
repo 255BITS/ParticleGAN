@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "4a8c25e0854ef93793de0a70f62dea8aae14febaef94c710950262ad7561ee67",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "1eaebf7411a31df2b6517886d27cf1a2048ebbf67c398c4f30890bb0183276fc",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/feb41cc46c6c4524952f45af235cae1c/constraint_geometry-scored-outputs.pt": "0bc019d84aafabb31cbf8a2e74851f8da93f6aead141b2e6d0782e85ed84cef0"
+  },
+  "task_id": "two_pole"
+}

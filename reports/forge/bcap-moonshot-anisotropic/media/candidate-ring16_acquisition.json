@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "1f851b4918fed41c902172de63d765156620d12bfed4a5e8518c937e31c14a55",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "b3e39b233db2e7ff752175678730e78ef7b5c642dea390b9b4a83687423f33df",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/d8b69668fa8041f18efb1ec71441db8c/observed-samples.pt": "280f466bb45e41111278656470964ed65150f0a9eb5c3541687ed0c097f44f9d"
+  },
+  "task_id": "ring16_acquisition"
+}

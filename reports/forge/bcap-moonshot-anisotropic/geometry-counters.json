@@ -1,0 +1,1049 @@
+{
+  "checkpoint_counters": [
+    {
+      "attempt_id": "95eaa668218845c58976a088f92db43f",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b539e2d4932f50e65ae02ccc443a1f52080867fa61c6876f1468d0fb860f5376",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/95eaa668218845c58976a088f92db43f/provenance",
+        "bytes": 66617,
+        "completed_steps": 250,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "3e2229778d4c4801bc52ff32eb061e842e97899e7d20b5770614360d4cd13c02",
+        "state_sha256": "839da374080d959a3b1eefd9c7c54c24861982ab9a49482bf094d26a31d4ea86"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "ae_gan_hold",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "9c4ef618e944412eb0ec2d6e345cb36a",
+      "checkpoint": {
+        "artifact_manifest_sha256": "f2daba107eb497d67af61de65043b37919bddfb2eddeded908683cb5b9855a40",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/9c4ef618e944412eb0ec2d6e345cb36a/provenance",
+        "bytes": 841461,
+        "completed_steps": 4834,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "689c147493a176c30da6b25d24079b6e71e92565971b3e3665e50156054148a8",
+        "state_sha256": "dcd3eba41dd4e5b0605b3bb3ffcc1895cdc78655964f6a8cc25d5b163f146d2a"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "five_word_joint_hold",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "abb395cdb484428881a972bc4553ac99",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b8f6282ecd2550d386f56e7020df7c5bbc3905a9b8ed5c64a916f3966dbecdf9",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/abb395cdb484428881a972bc4553ac99/provenance",
+        "bytes": 840501,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b3a237921629900a153c1c1a5e9654d540337cc8733892abdf1421a0e78fb7fa",
+        "state_sha256": "915af735964d62288a35b9af2e6d6ba11ba048d25f279aacf54d34914ab0ec04"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "five_word_joint_smoke",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "f13f7d82dabe49839b4c7f76cf9f0d83",
+      "checkpoint": {
+        "artifact_manifest_sha256": "192b2be98b54b0c84158273f075897ad211a333749fb0d05404f3c80754ced8a",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/f13f7d82dabe49839b4c7f76cf9f0d83/provenance",
+        "bytes": 64959,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "147cf0e9ea5aabc9c32f48c2c76f0464b65aaf471cab2d7955b4735831c89fc5",
+        "state_sha256": "b29e6cea4089868481bb8b732b83f5eb590c6756fd512b98a1e6bf168f6db85d"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "gaussian1d_smoke",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "8e87a7165bc14bebb70c43182c7ac072",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b8f30d0307799bd00dde35c708bb9568ffad982d9193b9107acb83de29295b78",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/8e87a7165bc14bebb70c43182c7ac072/provenance",
+        "bytes": 65215,
+        "completed_steps": 6000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "7abeb0825e524ed4113259c2ec26a6232af20d2e5fac4b69fbb07b2d63bca134",
+        "state_sha256": "c63b62c90565706f0e194f44eedb0bed515c868e38de3fb5de91d963bd817dec"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "gaussian1d_stability",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "b51240b4c0d641b5ad46575b365be5c4",
+      "checkpoint": {
+        "artifact_manifest_sha256": "5ab323785ce4a6d16cd6082d97c26423df90b51b4d70a3222f0a3443e61df070",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/b51240b4c0d641b5ad46575b365be5c4/provenance",
+        "bytes": 770013,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "f0ab8964f5a5c7e17f28d7ecfed7bbb688f7bf26cd8df75ef1f2857fcabdc783",
+        "state_sha256": "4a29543c15cff2cacf3e39b528b7d22f3fce9786678af91be081cbc2fce923c3"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "grid100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "28b12d2c227f43a48b2dbe55b34c4801",
+      "checkpoint": {
+        "artifact_manifest_sha256": "fc2b94208bfb15b555935ff765d6f7c037b084a393088a1deda97b1c2fae8fa8",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/28b12d2c227f43a48b2dbe55b34c4801/provenance",
+        "bytes": 164449,
+        "completed_steps": 400,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "6d859f78b99061bc1df5d6626be20e0e0c410478c65cd1178812e9eb078cb8ad",
+        "state_sha256": "beeaa6500ab9f890363c755d0427738ab47a39e16ba0bedf10e780bc2c83f3a1"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "residual_student",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "ace38d7fb57446faad84eb06cb844563",
+      "checkpoint": {
+        "artifact_manifest_sha256": "7413ad25116b025a1442628b7328cc6762bdb780327ad0e35cc035769755f2f8",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/ace38d7fb57446faad84eb06cb844563/provenance",
+        "bytes": 109945,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "60b00024d089904abed427b2a56bce759a7664516956a55a74422d60cdbaac0c",
+        "state_sha256": "15f7a98b8073ad8a7c88d1387ac69c7af0522c61b0aedd3acd5d5be8d8bc9d62"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "ring16_acquisition",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "89452b3ae1a049d4893d10bdf0f81321",
+      "checkpoint": {
+        "artifact_manifest_sha256": "1d2f0ff4eeb8883b615a834dea47b4644eaf2df09121d40558c072f5991c6432",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/89452b3ae1a049d4893d10bdf0f81321/provenance",
+        "bytes": 770013,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "a7aa5ce0e6877438e1c3222d0578c442e38eecfc250f220d236bf2896022c452",
+        "state_sha256": "9212af32e2dd8f93818eaace5f2632053fcce7c6c4a3eb0c1414987433017bed"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "rotated100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "645b6e116a7241d287025346a36c2353",
+      "checkpoint": {
+        "artifact_manifest_sha256": "5f877b49f8d85bba76e40998a3510bb878ef5ffeda9cee7979f7fe9a137a1005",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/645b6e116a7241d287025346a36c2353/provenance",
+        "bytes": 770013,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b0029344d2285970c3e4b747e32f54a04a422bddf7758d143d2e52e9703028c4",
+        "state_sha256": "b9742a9c56127121524044c114b8f89feb68ddd493923a4bfc51e3dcb167d71b"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "staggered100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "2ea64344a6c34405b762ee21bc8e21e7",
+      "checkpoint": {
+        "artifact_manifest_sha256": "289e199f914a31145e568a5ac95b7d1b100e55df3c7972a0b27152ac74839cc0",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/2ea64344a6c34405b762ee21bc8e21e7/provenance",
+        "bytes": 164193,
+        "completed_steps": 400,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "00cc6fc295d7af7ac3f89ba1a9a39dda91fa6e41d73870f08ab9819690b79e18",
+        "state_sha256": "5b1e569d3d035e66cd33e174f2cfa706f4b1e349addd241ea375417b28445f87"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "trajectory",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "db14248eddce480fb8ed98bcafb70b1d",
+      "checkpoint": {
+        "artifact_manifest_sha256": "60c0ff245c97c1a6af287c090f7c248f6e8000246b11fd3406d6edf516860cae",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/db14248eddce480fb8ed98bcafb70b1d/provenance",
+        "bytes": 48559,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "81ed818d4f449b450f7ac47f7a3f5843dee687b7f6b37a56edd68300a03986b6",
+        "state_sha256": "ceb96ed4a4d3478d5d9524fd6047405a09bd0fddab9633b5543b9abacf147fed"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "two_pole",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "ec68e5d197e847c1bd3ee985645d8378",
+      "checkpoint": {
+        "artifact_manifest_sha256": "8ea9953170a821921af2010b57449c4b5f57f373891a7e5f048637e089c92164",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/ec68e5d197e847c1bd3ee985645d8378/provenance",
+        "bytes": 52423,
+        "completed_steps": 200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "56892dfd5827bbc459ac179e8117d8f0b4799188d334664e928777c725d4eb42",
+        "state_sha256": "61e41c9bfe94cf8db87d71a3198239e6b8d03306380e9bd2eab58619d623309a"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "unused_token_hold",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "47c3a4b3a6464766aa1c6a3b924554c9",
+      "checkpoint": {
+        "artifact_manifest_sha256": "da0301d8493b59acb4717cca1c1fddb277a8c4a6019a02d26919ae83021c041e",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/47c3a4b3a6464766aa1c6a3b924554c9/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "fb0ba4ecaff15531bcb7c8c40ce0b1c2378ee8b77eabd3e304274dbadd71c4de",
+        "state_sha256": "cf38aac216ba2f0429097cc9afa34c979b1216652230d1a7518b92cf0dca9036"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "vector_anisotropic",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "d1fec24785be4734b04ba78f866e0b41",
+      "checkpoint": {
+        "artifact_manifest_sha256": "cea0bd5e79385e169b1f81a10fc046a234bc0def235c67f93324b07fd6f2079b",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/d1fec24785be4734b04ba78f866e0b41/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "c2e51544faa5daa7dbfaeea04a890de1b118788c20d846796596c5e9a4e2507b",
+        "state_sha256": "4d50d2ac1fd46e56276aff7a1ed7fbb797806e9ac3f626b2573896e6a382dc43"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "vector_unequal_mass",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "fffbec210ff149649747e83c77254b50",
+      "checkpoint": {
+        "artifact_manifest_sha256": "f642570b2bd2c535d39781fc30ab9d0f894f1d40bb610f2d9125a73514b7a36d",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/fffbec210ff149649747e83c77254b50/provenance",
+        "bytes": 109881,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "aaecd973aef68a533db7026feb9aa94c5c00cfeb3cf695abc69948c68e5e1d0f",
+        "state_sha256": "7cc1542b9d5e073b95d9a0a1e9953add3fd8c691d602889244647d0e2a184a9c"
+      },
+      "geometry": {},
+      "role": "baseline",
+      "task": "vector_unequal_width",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "7ee067fd14db42a686e7314c6c3c5dda",
+      "checkpoint": {
+        "artifact_manifest_sha256": "fbe877bd813c40e8f3e4360aed74c5f2919b91bb00eefd2166d9a7e2c3e8a789",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/7ee067fd14db42a686e7314c6c3c5dda/provenance",
+        "bytes": 67321,
+        "completed_steps": 250,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "18f1d5fb0b64fb80cce456effc8df83e5f95debbc1349c267cefd965275d4eb4",
+        "state_sha256": "5c28e7955dc5c898af2471492b922865a556a7f1c8e4cb54c47e206aab297994"
+      },
+      "geometry": {
+        "state.applied.component_transport.anisotropic_geometry": {
+          "anchors": 16000,
+          "calls": 250,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.0003040047886315733,
+          "minimum_ridge": 2.1012116121710278e-05,
+          "references": 16000,
+          "zero_covariance_anchors": 0
+        },
+        "state.component_transport.anisotropic_geometry": {
+          "anchors": 16000,
+          "calls": 250,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.0003040047886315733,
+          "minimum_ridge": 2.1012116121710278e-05,
+          "references": 16000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "ae_gan_hold",
+      "transport_diagnostics": {
+        "state.applied.component_transport": {
+          "active_calls": 250,
+          "anisotropic_geometry": {
+            "anchors": 16000,
+            "calls": 250,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 21.0,
+            "maximum_ridge": 0.0003040047886315733,
+            "minimum_ridge": 2.1012116121710278e-05,
+            "references": 16000,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 250,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 97.81144617497921,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 250,
+          "anisotropic_geometry": {
+            "anchors": 16000,
+            "calls": 250,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 21.0,
+            "maximum_ridge": 0.0003040047886315733,
+            "minimum_ridge": 2.1012116121710278e-05,
+            "references": 16000,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 250,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 97.81144617497921,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "e05e48f6f86c4909960f66ad828a6f0d",
+      "checkpoint": {
+        "artifact_manifest_sha256": "6842cfef520a840f665da665fe12b7895928604cf7bebe851176e49bc5974e5e",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/e05e48f6f86c4909960f66ad828a6f0d/provenance",
+        "bytes": 842101,
+        "completed_steps": 5667,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "1ba9f5b24186a60db9ef1cd9d2f4212d418ff6a40c25b781c32d6779194a3e78",
+        "state_sha256": "041c903bba3812253edfaa6bc20f3b1ab5d190e6ea5012e35af742f1e1809efd"
+      },
+      "geometry": {
+        "state.fixture.component_transport.anisotropic_geometry": {
+          "anchors": 362688,
+          "calls": 5667,
+          "compressed_calls": 5667,
+          "maximum_condition_bound": 1.0,
+          "maximum_ridge": 2.6617814619100955e-09,
+          "minimum_ridge": 2.224942008410835e-09,
+          "references": 1450752,
+          "zero_covariance_anchors": 362688
+        }
+      },
+      "role": "candidate",
+      "task": "five_word_joint_hold",
+      "transport_diagnostics": {
+        "state.fixture.component_transport": {
+          "active_calls": 5667,
+          "anisotropic_geometry": {
+            "anchors": 362688,
+            "calls": 5667,
+            "compressed_calls": 5667,
+            "maximum_condition_bound": 1.0,
+            "maximum_ridge": 2.6617814619100955e-09,
+            "minimum_ridge": 2.224942008410835e-09,
+            "references": 1450752,
+            "zero_covariance_anchors": 362688
+          },
+          "calls": 5667,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 708.8008839676622,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "5d7fba935723475098761c9cccab0a52",
+      "checkpoint": {
+        "artifact_manifest_sha256": "238ab667d559ce44c78c42d55096244ed32a12d92189ad118c814586d721cad6",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/5d7fba935723475098761c9cccab0a52/provenance",
+        "bytes": 841141,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "59aa522d21abc54126ecba2c58473e76efbe94ebbb054c56b6814dfafc4228f4",
+        "state_sha256": "8e989bb8a69984b864769956b9bf98ce8712b210e6afac3bb5fd12a7c3cd129d"
+      },
+      "geometry": {
+        "state.fixture.component_transport.anisotropic_geometry": {
+          "anchors": 1280064,
+          "calls": 20001,
+          "compressed_calls": 20001,
+          "maximum_condition_bound": 1.0,
+          "maximum_ridge": 2.711896929241675e-09,
+          "minimum_ridge": 2.127915621485954e-09,
+          "references": 5120256,
+          "zero_covariance_anchors": 1280064
+        }
+      },
+      "role": "candidate",
+      "task": "five_word_joint_smoke",
+      "transport_diagnostics": {
+        "state.fixture.component_transport": {
+          "active_calls": 20001,
+          "anisotropic_geometry": {
+            "anchors": 1280064,
+            "calls": 20001,
+            "compressed_calls": 20001,
+            "maximum_condition_bound": 1.0,
+            "maximum_ridge": 2.711896929241675e-09,
+            "minimum_ridge": 2.127915621485954e-09,
+            "references": 5120256,
+            "zero_covariance_anchors": 1280064
+          },
+          "calls": 20001,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 1211.5202366174635,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "ddea40d2b66c474ea9afb7cb8ec36376",
+      "checkpoint": {
+        "artifact_manifest_sha256": "e89d58b1878607e96520b45534b241b74f410e7e876701d5a25cb09a3a3c560f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/ddea40d2b66c474ea9afb7cb8ec36376/provenance",
+        "bytes": 65343,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "55f145124a204b4e0ab1aac4e221d2079184af62f8a31857616aedc04ceaa9d6",
+        "state_sha256": "3d9c523198fa2adcae0179a9589ba11dfc9c0592de9959d4885002544ee2ae64"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 64000,
+          "calls": 1000,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 11.0,
+          "maximum_ridge": 0.015546430833637714,
+          "minimum_ridge": 2.548815064074006e-05,
+          "references": 128000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "gaussian1d_smoke",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "7cf68bc6255b4fdbbb606c9cee5929b6",
+      "checkpoint": {
+        "artifact_manifest_sha256": "647ff6a0771cbaca1d79e2a9867a145869f31e0c83f3644e5ec1995406c894b3",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/7cf68bc6255b4fdbbb606c9cee5929b6/provenance",
+        "bytes": 65599,
+        "completed_steps": 6000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "fed60214e73e9ebf28c92c6a64b850015a0df413acd5d735e9401ad157aabacc",
+        "state_sha256": "09efc09d7efabf2683e69c99567fb4bdd8432a6a993cbb3d2a8bde9731b107ea"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 384000,
+          "calls": 6000,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 11.0,
+          "maximum_ridge": 0.023145290091633797,
+          "minimum_ridge": 1.4289234059106093e-05,
+          "references": 768000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "gaussian1d_stability",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "28009912a5e44a0e8dd7e078111b3fc2",
+      "checkpoint": {
+        "artifact_manifest_sha256": "26f6d33f13b163a09da648eb4434ad3a2e3bce4f5ef08c73c42bd36e47e0ff9f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/28009912a5e44a0e8dd7e078111b3fc2/provenance",
+        "bytes": 770397,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "4e59fdf92eba55c6952a916949d90c132ce51b4ed53ccfdc95f2a20ebaf5a885",
+        "state_sha256": "fabdb7761b1df5dfbc43c66ffddb1ff8c9ad2ad5019d76d8d075e381a3dc5388"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 448000,
+          "calls": 7000,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.16614282131195068,
+          "minimum_ridge": 0.0071114650927484035,
+          "references": 1792000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "grid100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "d66f1d786fe14ffbb27363a8bfb39aed",
+      "checkpoint": {
+        "artifact_manifest_sha256": "2bbb251a710914721d7aedb2475c017fd4e2d489aeef4e17466c61105fd7c9eb",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/d66f1d786fe14ffbb27363a8bfb39aed/provenance",
+        "bytes": 165153,
+        "completed_steps": 400,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "bb0f8646e5a84a2f6279b442bed7e29b7646aafdb51e1efac4dfeeb644900dde",
+        "state_sha256": "8db5335cffc56e9efd0360ede4fa6bfd540a3723f231e46fdbcad08a73698b1d"
+      },
+      "geometry": {
+        "state.applied.component_transport.anisotropic_geometry": {
+          "anchors": 4800,
+          "calls": 400,
+          "compressed_calls": 400,
+          "maximum_condition_bound": 81.0,
+          "maximum_ridge": 0.025150304660201073,
+          "minimum_ridge": 0.020559750497341156,
+          "references": 4800,
+          "zero_covariance_anchors": 0
+        },
+        "state.component_transport.anisotropic_geometry": {
+          "anchors": 4800,
+          "calls": 400,
+          "compressed_calls": 400,
+          "maximum_condition_bound": 81.0,
+          "maximum_ridge": 0.025150304660201073,
+          "minimum_ridge": 0.020559750497341156,
+          "references": 4800,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "residual_student",
+      "transport_diagnostics": {
+        "state.applied.component_transport": {
+          "active_calls": 400,
+          "anisotropic_geometry": {
+            "anchors": 4800,
+            "calls": 400,
+            "compressed_calls": 400,
+            "maximum_condition_bound": 81.0,
+            "maximum_ridge": 0.025150304660201073,
+            "minimum_ridge": 0.020559750497341156,
+            "references": 4800,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 400,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 3.795506002687034,
+          "maximum_loss": 0.3518602252006531,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 400,
+          "anisotropic_geometry": {
+            "anchors": 4800,
+            "calls": 400,
+            "compressed_calls": 400,
+            "maximum_condition_bound": 81.0,
+            "maximum_ridge": 0.025150304660201073,
+            "minimum_ridge": 0.020559750497341156,
+            "references": 4800,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 400,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 3.795506002687034,
+          "maximum_loss": 0.3518602252006531,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "d8b69668fa8041f18efb1ec71441db8c",
+      "checkpoint": {
+        "artifact_manifest_sha256": "321d44d32a7649ea641441566d88bee95d3ececaa6af256fb0f01562ece9a98d",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/d8b69668fa8041f18efb1ec71441db8c/provenance",
+        "bytes": 110329,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "35a1069f21d901e778c236304f2bcd7e95e850cadf5086156dcf288e62530b72",
+        "state_sha256": "343570e186af1f3a7802e0d08885c734eb62efaa37f731c23654ccfe08b08473"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 102400,
+          "calls": 1600,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.15564708411693573,
+          "minimum_ridge": 0.0003525371721480042,
+          "references": 204800,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "ring16_acquisition",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "b6684ead873547c88d68f0f9fad7f850",
+      "checkpoint": {
+        "artifact_manifest_sha256": "5421e864127226abafaef659e6a79035db4481c730fe70d62192a612fdf69ed0",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/b6684ead873547c88d68f0f9fad7f850/provenance",
+        "bytes": 770397,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "244f3aa6c468229fc87725acbb550f257c1964ec72ef1f139159dba0d60fa865",
+        "state_sha256": "026de15ef6a73d52fe13bee74592c8cd5fc2088a40135ebe2bea6ac3417e501d"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 448000,
+          "calls": 7000,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.1669245958328247,
+          "minimum_ridge": 0.007009308785200119,
+          "references": 1792000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "rotated100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "e0c7e0b05e774ba8b27b1b94976488c9",
+      "checkpoint": {
+        "artifact_manifest_sha256": "dac1975fddf5b595c815a3d5504bc5aa73ea2dbb3610ca5cbb35aebfcb02de07",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/e0c7e0b05e774ba8b27b1b94976488c9/provenance",
+        "bytes": 770397,
+        "completed_steps": 7000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "32572dc59dd71d635a55f5dc07eb9ed5d1a744cee10db781f6b1fb51e1dd8365",
+        "state_sha256": "6a07db661df52344f001282c02bf3c4893888781cf91a51b6d4978862692d9e0"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 448000,
+          "calls": 7000,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.14752362668514252,
+          "minimum_ridge": 0.007801930885761976,
+          "references": 1792000,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "staggered100",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "482d65ccad72416fafcac34846d9fc90",
+      "checkpoint": {
+        "artifact_manifest_sha256": "515777ebe3781c2d8bd9dd251fa8fbbd28f3e9d78e6c44f4049e3766889c8d5f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/482d65ccad72416fafcac34846d9fc90/provenance",
+        "bytes": 164897,
+        "completed_steps": 400,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "1ea79ef0461346ce67c22ffc651bd256ee38ff9f258c429ce420188fd3282bf3",
+        "state_sha256": "ccce045d8652095ecd79632a5607f4b384e1a44576719a4ed35acb183b7f9656"
+      },
+      "geometry": {
+        "state.applied.component_transport.anisotropic_geometry": {
+          "anchors": 4800,
+          "calls": 400,
+          "compressed_calls": 400,
+          "maximum_condition_bound": 81.0,
+          "maximum_ridge": 0.025150304660201073,
+          "minimum_ridge": 0.020559750497341156,
+          "references": 4800,
+          "zero_covariance_anchors": 0
+        },
+        "state.component_transport.anisotropic_geometry": {
+          "anchors": 4800,
+          "calls": 400,
+          "compressed_calls": 400,
+          "maximum_condition_bound": 81.0,
+          "maximum_ridge": 0.025150304660201073,
+          "minimum_ridge": 0.020559750497341156,
+          "references": 4800,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "trajectory",
+      "transport_diagnostics": {
+        "state.applied.component_transport": {
+          "active_calls": 400,
+          "anisotropic_geometry": {
+            "anchors": 4800,
+            "calls": 400,
+            "compressed_calls": 400,
+            "maximum_condition_bound": 81.0,
+            "maximum_ridge": 0.025150304660201073,
+            "minimum_ridge": 0.020559750497341156,
+            "references": 4800,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 400,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 2.2602638300159015,
+          "maximum_loss": 0.10045678913593292,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 400,
+          "anisotropic_geometry": {
+            "anchors": 4800,
+            "calls": 400,
+            "compressed_calls": 400,
+            "maximum_condition_bound": 81.0,
+            "maximum_ridge": 0.025150304660201073,
+            "minimum_ridge": 0.020559750497341156,
+            "references": 4800,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 400,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 2.2602638300159015,
+          "maximum_loss": 0.10045678913593292,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "feb41cc46c6c4524952f45af235cae1c",
+      "checkpoint": {
+        "artifact_manifest_sha256": "40b4ede058268ab92f551710c0c09cad56eafc3b0076b6244b0a9365f251014d",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/feb41cc46c6c4524952f45af235cae1c/provenance",
+        "bytes": 49263,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "203e725e5d1dad3605b06c5b049c74f1107c4535f3a47adf2c2a86a18f2ab554",
+        "state_sha256": "19928eb100ea8fdeeb4909241860399c64a891c993b3a45dcfbd021a4b138d21"
+      },
+      "geometry": {
+        "state.applied.component_transport.anisotropic_geometry": {
+          "anchors": 960,
+          "calls": 80,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 11.0,
+          "maximum_ridge": 0.10026778280735016,
+          "minimum_ridge": 0.0982842966914177,
+          "references": 960,
+          "zero_covariance_anchors": 0
+        },
+        "state.component_transport.anisotropic_geometry": {
+          "anchors": 960,
+          "calls": 80,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 11.0,
+          "maximum_ridge": 0.10026778280735016,
+          "minimum_ridge": 0.0982842966914177,
+          "references": 960,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "two_pole",
+      "transport_diagnostics": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "anisotropic_geometry": {
+            "anchors": 960,
+            "calls": 80,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 11.0,
+            "maximum_ridge": 0.10026778280735016,
+            "minimum_ridge": 0.0982842966914177,
+            "references": 960,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 1.560072879306972,
+          "maximum_loss": 0.06772221624851227,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "anisotropic_geometry": {
+            "anchors": 960,
+            "calls": 80,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 11.0,
+            "maximum_ridge": 0.10026778280735016,
+            "minimum_ridge": 0.0982842966914177,
+            "references": 960,
+            "zero_covariance_anchors": 0
+          },
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 1.560072879306972,
+          "maximum_loss": 0.06772221624851227,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "213b06fd36244a5a9097c8ec81621269",
+      "checkpoint": {
+        "artifact_manifest_sha256": "dc4aedcc064c3773d85a2d7d187220abd1e83c799cabff93cb6335ae1df8e4b0",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/213b06fd36244a5a9097c8ec81621269/provenance",
+        "bytes": 53127,
+        "completed_steps": 200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "4dbec7e7e7c7c83a9616b85c33b7c8994c352d4ef1f9b610816472eebc480bba",
+        "state_sha256": "b15489d0811e479f6949bab05dda90359d77f3377273817638204f0d16a46ad0"
+      },
+      "geometry": {
+        "state.applied.component_transport.anisotropic_geometry": {
+          "anchors": 1600,
+          "calls": 200,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 1.0,
+          "maximum_ridge": 1.4210854715202004e-14,
+          "minimum_ridge": 1.4210854715202004e-14,
+          "references": 1600,
+          "zero_covariance_anchors": 1600
+        },
+        "state.component_transport.anisotropic_geometry": {
+          "anchors": 1600,
+          "calls": 200,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 1.0,
+          "maximum_ridge": 1.4210854715202004e-14,
+          "minimum_ridge": 1.4210854715202004e-14,
+          "references": 1600,
+          "zero_covariance_anchors": 1600
+        }
+      },
+      "role": "candidate",
+      "task": "unused_token_hold",
+      "transport_diagnostics": {
+        "state.applied.component_transport": {
+          "active_calls": 200,
+          "anisotropic_geometry": {
+            "anchors": 1600,
+            "calls": 200,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 1.0,
+            "maximum_ridge": 1.4210854715202004e-14,
+            "minimum_ridge": 1.4210854715202004e-14,
+            "references": 1600,
+            "zero_covariance_anchors": 1600
+          },
+          "calls": 200,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 200.0,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 200,
+          "anisotropic_geometry": {
+            "anchors": 1600,
+            "calls": 200,
+            "compressed_calls": 0,
+            "maximum_condition_bound": 1.0,
+            "maximum_ridge": 1.4210854715202004e-14,
+            "minimum_ridge": 1.4210854715202004e-14,
+            "references": 1600,
+            "zero_covariance_anchors": 1600
+          },
+          "calls": 200,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 200.0,
+          "maximum_loss": 1.0,
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "attempt_id": "e9e5c9c5b1f7451d8281dde16843645f",
+      "checkpoint": {
+        "artifact_manifest_sha256": "579db3d11a485cdf6ed87b62b561799346d1f7ef027b9293d94f566e3b195034",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/e9e5c9c5b1f7451d8281dde16843645f/provenance",
+        "bytes": 110329,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "8fa781e561be1963ee1a869b620f850f5cc58910bb07681012ba89215513dac4",
+        "state_sha256": "cceeda76b2c78246e4ae32215d8d5755d9f6662fe235660dcb00477fc11b72ad"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 76800,
+          "calls": 1200,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.004713924136012793,
+          "minimum_ridge": 0.0001309965009568259,
+          "references": 153600,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "vector_anisotropic",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "f4520ddfb8c348249c1b5a29c212e102",
+      "checkpoint": {
+        "artifact_manifest_sha256": "6063b370e19a9c5b58ca0eca28d6ec9808bdfcb8310997fbc7e4462647cded63",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/f4520ddfb8c348249c1b5a29c212e102/provenance",
+        "bytes": 110329,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "62d7bd1c73d70f7795c2f21fc404d1500f7f8895c8fc9938c0ac6c8ce6e11a55",
+        "state_sha256": "c7dab3efe327d992d53a5cab6f99845687ed314c966a236ad273706406c8a36c"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 76800,
+          "calls": 1200,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.2244243174791336,
+          "minimum_ridge": 0.00011970545165240765,
+          "references": 153600,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "vector_unequal_mass",
+      "transport_diagnostics": {}
+    },
+    {
+      "attempt_id": "804852d30c5f40ed80103ded7af144f1",
+      "checkpoint": {
+        "artifact_manifest_sha256": "d5d9acafb396434fbadeef6b9bbb3588d6d431ee03f19a95a045469bc0d6a171",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/804852d30c5f40ed80103ded7af144f1/provenance",
+        "bytes": 110329,
+        "completed_steps": 1200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "37a635dcce17cb1343bf3f8dccebe38e0f3080ca00b0f9f91ae330229f263643",
+        "state_sha256": "674c84757d29115718462e25c0659d54627c9caf690800ca475f4389158c6bb6"
+      },
+      "geometry": {
+        "state.trainer.anisotropic_geometry": {
+          "anchors": 76800,
+          "calls": 1200,
+          "compressed_calls": 0,
+          "maximum_condition_bound": 21.0,
+          "maximum_ridge": 0.07669172435998917,
+          "minimum_ridge": 5.329351552063599e-05,
+          "references": 153600,
+          "zero_covariance_anchors": 0
+        }
+      },
+      "role": "candidate",
+      "task": "vector_unequal_width",
+      "transport_diagnostics": {}
+    }
+  ],
+  "interpretation": "Analytic condition bounds and cumulative ridge/anchor counters are read from exact certified checkpoint bytes, never used to drive training. Mirrored applied/consumer paths represent the same cumulative state and must not be summed as independent calls.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+  "source_digest": "883c2cde79f5565b8449cc3571004e50f73bfc565f2bb86d6c032c234f7917a1",
+  "source_results_sha256": "5486cc407a2069cacf195a5fe6e4db436e51b9f457f715bd31fd6ecc56dac476"
+}

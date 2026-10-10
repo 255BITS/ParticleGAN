@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "f747483fd42f1baeef857f1cfd6f9da79dd80cb81c188d8bf7eff190c522b06a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "76dd9842a29ef8555985286f0fd81afd3de2edaf8a30ffd183bba748372a5ffd",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/anisotropic/phase3-queue/bcap-moonshot-anisotropic-v1/482d65ccad72416fafcac34846d9fc90/constraint_geometry-scored-outputs.pt": "30c8012a4d1ff12940b100f0e1233be076847404fcb8d30e30922fe81b285792"
+  },
+  "task_id": "trajectory"
+}
