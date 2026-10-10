@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "campaign_id": "bcap-moonshot-sinkhorn-v1",
+  "view_id": "bcap-moonshot-sinkhorn-diagnostic-v1",
+  "paid_ceiling_seconds": 48000,
+  "candidate_budget_seconds": 24000,
+  "software_allowance_seconds": 300,
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "arms": [
+    {
+      "role": "baseline",
+      "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-sinkhorn-candidate-v1",
+      "recipe_overrides": {},
+      "changed_factors": [
+        "Unchanged chosen baseline on this track's common frozen source"
+      ],
+      "mechanism_rationale": "Unchanged phase2 selected incumbent recipe, freshly measured on this common source. No projection, transport or CPU backend overrides.",
+      "hypothesis": "The selected incumbent retains its original six Tier1 sustained passes, including terminal two-pole critic slope no greater than1.",
+      "competing_explanation": "Inactive feature or source compatibility errors, or shared-GPU contention, may invalidate the new control; source identity remains distinct from phase2.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/baseline.json",
+          "selector": [],
+          "identity": {
+            "candidate_id": "bcap-three-phase-incumbent-v1",
+            "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": "<=",
+        "threshold": 1,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "two_pole",
+        "metric": "grad_med",
+        "op": ">",
+        "threshold": 1,
+        "phase": "final"
+      }
+    },
+    {
+      "role": "candidate",
+      "candidate_id": "bcap-moonshot-sinkhorn-candidate-v1",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "control": "bcap-moonshot-sinkhorn-baseline-v1",
+      "recipe_overrides": {
+        "kinetic_transport_weight": 1.0,
+        "kinetic_transport_mode": "sinkhorn",
+        "sinkhorn_epsilon": 0.1,
+        "sinkhorn_iterations": 24,
+        "sinkhorn_max_samples": 128,
+        "optimizer_svd_backend": "cpu"
+      },
+      "changed_factors": [
+        "Global weight1 finite debiased entropic free-energy objective replaces inactive transport: F\u03b5(x,y)-.5F\u03b5(x,x)-.5F\u03b5(y,y), \u03b5=.1, 24 damped log-domain iterations fully differentiated, deterministic at most128 original rows; real-normalized squared Euclidean cost.",
+        "Explicit CPU full-SVD backend numerical trainer delta; no local/sliced transport, projection or finite critic guard."
+      ],
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Feydy etal arXiv1810.08278 Eq3 removes entropic self-attraction using both self terms. Unlike detached block128 bijections, finite smooth many-to-many free energy supplies differentiable self-repulsion; it may preserve component width under the original full-batch adversarial objective. See preregistered theory.md for finite approximation and normalization contract.",
+      "hypothesis": "Under one global recipe the candidate reduces entropic contraction and reaches vector_unequal_width final component_covariance_error<=.85 with all original terminal checks retained. Finite dual potentials update simultaneously with half damping for24 rounds; full finite dual objective and both fake arguments of its self term are differentiated. Predict original sustained width PASS and no loss of baseline Tier1 gates; only full task gates decide outcomes.",
+      "competing_explanation": "128-row auxiliary panels may miss native cells; finite solver residual, global scale and shared-network pullback may still distort narrow/rare density. CPU full-SVD rounding also changes the path. Lower final covariance alone cannot establish sustained or native density repair; the compound comparison cannot isolate Sinkhorn from the backend.",
+      "prior_evidence": [
+        {
+          "path": "reports/forge/bcap-three-phase/baseline.json",
+          "selector": [],
+          "identity": {
+            "candidate_id": "bcap-three-phase-incumbent-v1",
+            "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "use": "motivation_only"
+        }
+      ],
+      "prediction": {
+        "task_id": "vector_unequal_width",
+        "metric": "component_covariance_error",
+        "op": "<=",
+        "threshold": 0.85,
+        "phase": "final"
+      },
+      "falsifier": {
+        "task_id": "vector_unequal_width",
+        "metric": "component_covariance_error",
+        "op": ">",
+        "threshold": 0.85,
+        "phase": "final"
+      }
+    }
+  ]
+}

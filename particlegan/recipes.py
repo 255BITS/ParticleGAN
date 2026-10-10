@@ -84,6 +84,10 @@ class Recipe:
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
+    kinetic_transport_mode: str = "sliced"
+    sinkhorn_epsilon: float = 0.1
+    sinkhorn_iterations: int = 24
+    sinkhorn_max_samples: int = 128
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -392,6 +396,15 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
+        if self.kinetic_transport_mode not in ("sliced", "sinkhorn"):
+            raise ValueError("kinetic_transport_mode must be sliced or sinkhorn")
+        if (type(self.sinkhorn_epsilon) not in (int, float)
+                or not math.isfinite(self.sinkhorn_epsilon) or self.sinkhorn_epsilon <= 0):
+            raise ValueError("sinkhorn_epsilon must be finite and positive")
+        if type(self.sinkhorn_iterations) is not int or self.sinkhorn_iterations < 1:
+            raise ValueError("sinkhorn_iterations must be a positive integer")
+        if type(self.sinkhorn_max_samples) is not int or self.sinkhorn_max_samples < 2:
+            raise ValueError("sinkhorn_max_samples must be at least two")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -592,13 +605,18 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
-    def kinetic_transport_loss(self, fake, real):
+    def kinetic_transport_loss(self, fake, real, *, stats=None):
         """Weighted empirical transport on caller-owned G-phase output batches.
 
         Enabling this objective requires a host consumer. It draws no samples,
         detaches real targets and retains gradients through fake outputs. Hosts
         with zero weight retain their original objective without calling it.
         """
+        if self.kinetic_transport_mode == "sinkhorn":
+            from .sinkhorn_transport import sinkhorn_transport_loss
+            return self.kinetic_transport_weight * sinkhorn_transport_loss(
+                fake, real, epsilon=self.sinkhorn_epsilon,
+                iterations=self.sinkhorn_iterations, max_samples=self.sinkhorn_max_samples, stats=stats)
         from .kinetic_transport import kinetic_transport_loss
         return self.kinetic_transport_weight * kinetic_transport_loss(
             fake, real, projections=self.kinetic_transport_projections)

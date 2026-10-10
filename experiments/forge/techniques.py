@@ -111,6 +111,8 @@ def recipe_field_active(name, value, *, task=None):
                     and execution.get("prior", {}).get("learnable", True))
     if name == "optimizer_momentum":
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
+    if name.startswith("sinkhorn_"):
+        return bool(recipe.kinetic_transport_weight and recipe.kinetic_transport_mode == "sinkhorn")
     if name == "optimizer_smoothing":
         return recipe.optimizer_family == "dualnorm"
     if name == "optimizer_convolution":

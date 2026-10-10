@@ -174,6 +174,10 @@ class GANTrainer:
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        self.sinkhorn_audit = None
+        if recipe.kinetic_transport_weight and recipe.kinetic_transport_mode == 'sinkhorn':
+            from .sinkhorn_transport import SinkhornAudit
+            self.sinkhorn_audit = SinkhornAudit()
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
@@ -387,8 +391,11 @@ class GANTrainer:
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
-            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+            sinkhorn_stats = {} if self.sinkhorn_audit is not None else None
+            transport = (recipe.kinetic_transport_loss(fake_g, real_g, stats=sinkhorn_stats)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+            if self.sinkhorn_audit is not None:
+                self.sinkhorn_audit.observe(sinkhorn_stats)
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
@@ -495,6 +502,8 @@ class GANTrainer:
             "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
+            **({'component_transport': self.sinkhorn_audit.state_dict()}
+               if self.sinkhorn_audit is not None else {}),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict() for name in names},
@@ -562,6 +571,8 @@ class GANTrainer:
         saved_recipe = state["recipe"]
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
+        if self.sinkhorn_audit is not None:
+            deepcopy(self.sinkhorn_audit).load_state_dict(state['component_transport'])
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
@@ -690,6 +701,8 @@ class GANTrainer:
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        if self.sinkhorn_audit is not None:
+            self.sinkhorn_audit.load_state_dict(state['component_transport'])
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

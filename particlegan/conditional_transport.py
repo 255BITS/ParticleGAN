@@ -15,6 +15,10 @@ class OutputMarginalTransport:
         self.active_calls = 0
         self.loss_sum = 0.0
         self.maximum_loss = 0.0
+        self.sinkhorn = None
+        if recipe.kinetic_transport_weight and recipe.kinetic_transport_mode == 'sinkhorn':
+            from .sinkhorn_transport import SinkhornAudit
+            self.sinkhorn = SinkhornAudit()
 
     def add(self, total, fake, real, *, conditioning=None):
         if not (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
@@ -28,7 +32,10 @@ class OutputMarginalTransport:
         self.calls += 1
         term = fake.new_zeros(())
         if self.recipe.kinetic_transport_weight:
-            term = term + self.recipe.kinetic_transport_loss(fake, real)
+            stats = {} if self.sinkhorn is not None else None
+            term = term + self.recipe.kinetic_transport_loss(fake, real, stats=stats)
+            if self.sinkhorn is not None:
+                self.sinkhorn.observe(stats)
         if self.recipe.kinetic_transport_local_weight:
             term = term + self.recipe.kinetic_transport_local_loss(fake, real)
         value = float(term.detach())
@@ -41,7 +48,8 @@ class OutputMarginalTransport:
         return dict(schema_version=1, consumer='output_marginal_v1',
                     conditioning_used_in_distance=False, calls=self.calls,
                     active_calls=self.active_calls, loss_sum=self.loss_sum,
-                    maximum_loss=self.maximum_loss)
+                    maximum_loss=self.maximum_loss,
+                    **({'sinkhorn': self.sinkhorn.state_dict()} if self.sinkhorn is not None else {}))
 
     def load_state_dict(self, state):
         expected = self.state_dict()
@@ -51,7 +59,10 @@ class OutputMarginalTransport:
                 or any(type(state[key]) is not int or state[key] < 0 for key in ('calls', 'active_calls'))
                 or state['active_calls'] > state['calls']
                 or any(type(state[key]) not in (int, float) or not math.isfinite(state[key])
-                       or state[key] < 0 for key in ('loss_sum', 'maximum_loss'))):
+                       or (state[key] < 0 and (key != 'loss_sum' or self.sinkhorn is None))
+                       for key in ('loss_sum', 'maximum_loss'))):
             raise ValueError('invalid output marginal transport checkpoint')
+        if self.sinkhorn is not None:
+            self.sinkhorn.load_state_dict(state['sinkhorn'])
         for key in ('calls', 'active_calls', 'loss_sum', 'maximum_loss'):
             setattr(self, key, state[key])
