@@ -18,6 +18,7 @@ from collections import Counter
 from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
+import importlib.util
 import inspect
 import json
 import math
@@ -265,7 +266,6 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
     """Standalone adapter also embedded in the isolated frozen reader."""
     from experiments.forge import planning
     from experiments.forge.contracts import stable_hash
-    from experiments.forge.technique_inventory import _signature
     matched = [record for record in records
                if record["request"]["candidate"]["id"] == idea_id
                and record["request"]["view"]["id"] == view_id
@@ -276,6 +276,7 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
         tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
         return planning.resolve_idea(root, idea_id, view_id=view_id, through_tier=tier,
                                     freeze_source=False, execution_backend=execution_backend, cuda_model=cuda_model)
+    from experiments.forge.technique_inventory import _signature
     if len(matched) != 1:
         raise ValueError("ambiguous original study execution binding for this source/view/cohort")
     record, original = matched[0], matched[0]["request"]
@@ -857,8 +858,20 @@ def _archived_reports(root, manifest):
     return reports
 
 
-def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports):
+def _ownership_migration_helper():
+    path = Path(__file__).resolve().parent / "recipe-prior-refactor/publication_migration.py"
+    spec = importlib.util.spec_from_file_location("forge_prior_ownership_publication", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports, *, ownership_migration=None):
     """Stage exact new pins for the existing choices; never rank new recipes."""
+    if ownership_migration is not None:
+        return _ownership_migration_helper().advance_selection(
+            root, manifest, report, registered_rows, prior_reports, ownership_migration,
+            validate_row=_validate_published_row)
     from experiments.forge.trainer_families import (CURRENT_SELECTION, family_for_candidate,
                                                    family_row_pin, load_current_selection)
     from experiments.forge.planning import declaration_paths
@@ -1649,7 +1662,7 @@ def _common26_current_markdown(result, root, path):
 
 def _stale_measurement_labels(markdown, result, root, path):
     """Expose recorded-only scope on the main family rows, preserving scores."""
-    stale = {row["trainer_family"] for row in result["rows"]
+    stale = {row["trainer_family"] for row in result.get("rows", [])
              if row.get("selection", {}).get("freshness") == "stale"}
     lines = markdown.splitlines()
     for family in result.get("family_progress", {}).get("families", []):
@@ -2380,7 +2393,8 @@ def _retain_recorded_measurements(root, reports):
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
-                    execution_backend=None, recorded_policy=None, advance_policy=False):
+                    execution_backend=None, recorded_policy=None, advance_policy=False,
+                    ownership_migration=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -2392,6 +2406,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         raise ValueError("recorded policy publication cannot register new source evidence")
     if advance_policy and (source_commit is None or recorded_policy is not None):
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
+    if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
+        raise ValueError("ownership migration requires explicit frozen-source policy advance")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -2518,7 +2534,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             _validate_published_row(root, report, row)
         if advancing:
             pending_selection, selection_archive = _advanced_family_selection(
-                root, prior_manifest, report, selected, prior_reports)
+                root, prior_manifest, report, selected, prior_reports, ownership_migration=ownership_migration)
             if selection_archive:
                 relative_selection, _, digest = selection_archive
                 manifest["archived_policies"][-1]["family_selection"] = {
@@ -2666,13 +2682,20 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("conflicting scientific contract identities")
                 combined[digest] = deepcopy(contract)
         result[catalog] = dict(sorted(combined.items()))
-    with _retain_recorded_measurements(root, prior_reports) as retained_measurements:
+    presentation_card = pending_selection
+    if presentation_card is None and (root / CURRENT_SELECTION).is_file():
+        presentation_card = read_json(root / CURRENT_SELECTION)
+    with _retain_recorded_measurements(root, prior_reports) as retained_measurements, \
+            _ownership_migration_helper().archived_presentation(root, presentation_card):
         family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                            policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
                                            view_policy=recorded_view, execution_backend=execution_backend,
                                            selection_card=pending_selection,
                                            historical_rows=[*declaration_history.values(), *[{**row, "publication_key": entry["json_sha256"]}
                                                for _, entry, _, rows in archived_reports for row in rows.values()]])
+    if presentation_card and presentation_card.get("ownership_migration"):
+        _ownership_migration_helper().label_archived_declarations(family_result, presentation_card)
+        result["ownership_migration"] = deepcopy(presentation_card["ownership_migration"])
     result.update(family_result)
     if retained_measurements:
         result["retained_recorded_measurements"] = {"qualification_input": False, "qualification_reuse": False,
@@ -2798,6 +2821,8 @@ def main(argv=None):
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     parser.add_argument("--advance-policy", action="store_true",
                         help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
+    parser.add_argument("--ownership-migration", type=Path,
+                        help="explicit source-bound selected-leader ownership migration; requires --advance-policy and --source-commit")
     parser.add_argument("--refresh-publication", action="store_true",
                         help="refresh displayed evidence and view coverage, preserving registered scores and selections")
     args = parser.parse_args(argv)
@@ -2812,14 +2837,14 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.advance_policy or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.advance_policy or args.ownership_migration or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
     print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
-                                advance_policy=args.advance_policy)), end="")
+                                advance_policy=args.advance_policy, ownership_migration=args.ownership_migration)), end="")
 
 
 if __name__ == "__main__":

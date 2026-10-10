@@ -56,6 +56,15 @@ two possible duplicate prefixes add at most 1,020 seconds per leader, giving a
 finite campaign ceiling of 44,040 per leader / 308,280 for seven leaders. There
 is no Tier 3 spend and no automatic selection or publication refresh.
 
+The [explicit ownership migration](ownership-migration.json) binds the exact
+[ordinary registration](ordinary-registration.json), original selected card,
+seven declarations, and [140 actual task-bound comparisons](binding-compatibility.json).
+Publication retains the seven declared lineages without ranking outcomes.
+All 20 original pins and their historical selections remain in their exact
+original-policy archive; thirteen optimizer alternatives receive archived-only
+presentation. Only fresh ordinary receipts can support current measurements.
+Diagnostic receipts cannot fill ordinary qualification cells.
+
 The primary archive is
 `/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010`. Admission requires
 20 GiB free; an 18 GiB archive cap and 5 GiB remaining-filesystem floor pause new
@@ -81,18 +90,18 @@ $PY reports/forge/recipe-prior-refactor/verify_bindings.py --registration "$A/or
 
 # After source/declaration review and commit, supply its exact Git SHA.
 $PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --source-commit FROZEN_SHA --submit
-$PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --source-commit FROZEN_SHA --drain --gpus 0,1,2,3
+$PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --source-commit FROZEN_SHA --drain --gpus 0,1 --workers-per-gpu 2
 
 # After ordinary completion, stage and review only unreached diagnostic questions.
 $PY reports/forge/recipe-prior-refactor/workflow.py prepare-diagnostic --artifacts "$A"
 $PY reports/forge/recipe-prior-refactor/workflow.py prepare-diagnostic --install --artifacts "$A"
 # Commit new diagnostic declarations; scientific source digest must be unchanged.
 $PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --registration "$A/diagnostic-registration.json" --source-commit DIAGNOSTIC_DECLARATION_SHA --submit
-$PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --registration "$A/diagnostic-registration.json" --source-commit DIAGNOSTIC_DECLARATION_SHA --drain --gpus 0,1,2,3
+$PY reports/forge/recipe-prior-refactor/workflow.py run --artifacts "$A" --registration "$A/diagnostic-registration.json" --source-commit DIAGNOSTIC_DECLARATION_SHA --drain --gpus 0,1 --workers-per-gpu 2
 
 # Project certificates and exact saved scored views; no sampling, scoring or updates.
 $PY reports/forge/recipe-prior-refactor/workflow.py collect --artifacts "$A" --output "$A/publication" --media
-tail -f "$A/queue/events.jsonl"
+$PY -m experiments.forge --root . --queue-root "$A/queue" logs --follow --campaign recipe-prior-refactor-selected-leaders-v1
 ```
 
 The eventual compact report will link every certified task result, independent

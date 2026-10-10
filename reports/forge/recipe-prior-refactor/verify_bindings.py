@@ -65,6 +65,9 @@ def main():
     workflow.require(workflow.head(old_root) == workflow.baseline()["source_commit"], "Original source commit differs")
     workflow.require(subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=old_root).returncode == 0,
                      "Original checkout has modified tracked bytes")
+    registration = workflow.read_json(options.registration)
+    requests = workflow.resolve_plans(root, registration)
+    current_source_digest = next(iter(requests.values()))["source"]["digest"]
     options.output.mkdir(parents=True, exist_ok=True)
     for label, checkout, registration in (("original", old_root, None), ("current", root, options.registration)):
         command = [sys.executable, str(Path(__file__).resolve()), "--probe", "--repository", str(checkout),
@@ -93,6 +96,7 @@ def main():
     workflow.require(len(pairs) == 140, "Require every supported family's 28 task bindings")
     receipt = dict(schema_version=1, status="PASS", scope="actual_source_task_binding_compatibility",
         qualification_input=False, original_source_commit=old["source_commit"], current_source_commit=current["source_commit"],
+        current_source_digest=current_source_digest,
         pairs=pairs, pairs_checked=len(pairs), baseline_sha256=workflow.file_hash(options.baseline),
         registration_sha256=workflow.file_hash(options.registration),
         raw_binding_hashes={label: workflow.file_hash(options.output / f"{label}-task-bindings.json") for label in ("original", "current")},

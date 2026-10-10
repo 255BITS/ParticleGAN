@@ -526,9 +526,10 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator(tmp_path):
                 assert f'<a name="{fragment}"></a>' in pages.get(linked, linked.read_text()), (page, target)
 
 
-def test_current_clock_measurement_retains_original_evidence_alongside_policy_advance():
+def test_current_clock_measurement_retains_original_evidence_alongside_policy_advance(tmp_path):
     from experiments.forge.trainer_families import scientific_row_hash
-    root = Path(__file__).resolve().parents[1]
+    from tests.archived_forge_contracts import published_develop_checkout
+    root = published_develop_checkout(tmp_path)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     recorded = deepcopy(publication["rows"])
     progress = build_progress(root, publication)
@@ -619,7 +620,7 @@ def test_current_measurement_families_complete_only_their_declared_view_scope(tm
     for row in rows:
         if row["trainer_family"] in unmeasured:
             assert not row["attempt_ids"] and row["qualified_tier"] == 0
-            assert row["selection"]["qualified"] is False and row["selection"]["default_adoption"] is False
+            assert row["selection"]["qualified"] is False and row["selection"].get("default_adoption", False) is False
             assert all(task["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
                        for task in row["tasks"] + row.get("nonrequired_tasks", []))
     for name, pin in pins.items():

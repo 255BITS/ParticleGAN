@@ -1,0 +1,5511 @@
+{
+  "baseline_sha256": "6bffbf589ae8523c804ce6401a873a03b1ed4cb548bc1b7cd4b0c632ca790013",
+  "current_source_commit": "85404a97dea6a987637b2ce9488e5ea2be081f44",
+  "current_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "interpretation": "All actual task-bound nonprior Recipe fields and initial prior laws exactly match actual develop. Prior authority/penalties change explicitly; no training/numeric quality parity claim.",
+  "original_source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792",
+  "pairs": [
+    {
+      "current_nonprior_sha256": "79151fcfbc3b61e95bf10caa91ccf8ec4a4362e15f2cd69b715aaaa18f264cc9",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "79151fcfbc3b61e95bf10caa91ccf8ec4a4362e15f2cd69b715aaaa18f264cc9",
+      "task": "ae_gan_hold"
+    },
+    {
+      "current_nonprior_sha256": "a27b9b0a07fffdfaad54db760d1719911d0df93597a9241651981bd20ac9a00d",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "a27b9b0a07fffdfaad54db760d1719911d0df93597a9241651981bd20ac9a00d",
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "current_nonprior_sha256": "99bf620c24c2684c5ae324d6234bd7bfd9e696c3c2d6d49f8c8d643ca2c8abf7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "7055b5de8cc6f2aca91e48576419bf85ee4674122ae0093c7d6737419418e4dd",
+      "original_nonprior_sha256": "99bf620c24c2684c5ae324d6234bd7bfd9e696c3c2d6d49f8c8d643ca2c8abf7",
+      "task": "cover_leftover"
+    },
+    {
+      "current_nonprior_sha256": "e8cbc67b1fc5a0316f94c50523e2cd91396f1b2f7b729aa4c7d180a164263579",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "e8cbc67b1fc5a0316f94c50523e2cd91396f1b2f7b729aa4c7d180a164263579",
+      "task": "five_word_joint_hold"
+    },
+    {
+      "current_nonprior_sha256": "e8cbc67b1fc5a0316f94c50523e2cd91396f1b2f7b729aa4c7d180a164263579",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "e8cbc67b1fc5a0316f94c50523e2cd91396f1b2f7b729aa4c7d180a164263579",
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "current_nonprior_sha256": "893a8ed0249448efc4e725729d4db08bfe9a9bcb6ba9f1b71b00ec2d89b3c46b",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "893a8ed0249448efc4e725729d4db08bfe9a9bcb6ba9f1b71b00ec2d89b3c46b",
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "current_nonprior_sha256": "893a8ed0249448efc4e725729d4db08bfe9a9bcb6ba9f1b71b00ec2d89b3c46b",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "893a8ed0249448efc4e725729d4db08bfe9a9bcb6ba9f1b71b00ec2d89b3c46b",
+      "task": "gaussian1d_stability"
+    },
+    {
+      "current_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "task": "grid100"
+    },
+    {
+      "current_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "task": "img_bars4"
+    },
+    {
+      "current_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "task": "img_blobs4"
+    },
+    {
+      "current_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "task": "img_intensity2"
+    },
+    {
+      "current_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "f334703100462cae41a9728514df2b26ca8a55f6189d37f2ed2f8126ab66cc26",
+      "task": "img_stripes2"
+    },
+    {
+      "current_nonprior_sha256": "99bf620c24c2684c5ae324d6234bd7bfd9e696c3c2d6d49f8c8d643ca2c8abf7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "35e8ab8a4cd0f9ce926810dbb2b01fd4eb367f9d148c123d377b1ebaff128d88",
+      "original_nonprior_sha256": "99bf620c24c2684c5ae324d6234bd7bfd9e696c3c2d6d49f8c8d643ca2c8abf7",
+      "task": "mid_scale_identity"
+    },
+    {
+      "current_nonprior_sha256": "e136c91dd53269f9cdffc0ba7532d5b197b47c4048577d5ef03755d2290415b0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e136c91dd53269f9cdffc0ba7532d5b197b47c4048577d5ef03755d2290415b0",
+      "task": "mode_hold"
+    },
+    {
+      "current_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "8e8b15afaf2305e85aad7932d037c104b11ffa503c82424291bbfda641c52ede",
+      "original_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "task": "residual_student"
+    },
+    {
+      "current_nonprior_sha256": "ae70a0f59bafbab08d53bec0fe56ac288a73550578fddaaf3033e85fad62daf9",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "ae70a0f59bafbab08d53bec0fe56ac288a73550578fddaaf3033e85fad62daf9",
+      "task": "ring16_acquisition"
+    },
+    {
+      "current_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "task": "rotated100"
+    },
+    {
+      "current_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e638fce7e5f287e4cda6b7e9b1bae370c8c1476d788036facb221aac6a093c18",
+      "task": "staggered100"
+    },
+    {
+      "current_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "38c16b8812b1cb26d268303976f02d22a20d1ec52d317d6ec68eba0a886abf37",
+      "original_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "task": "trajectory"
+    },
+    {
+      "current_nonprior_sha256": "a5b336de550fd31d4c7f9072ea98c81bd187f0cfbdc6b5eaeac6587930c6f7f3",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+      "original_nonprior_sha256": "a5b336de550fd31d4c7f9072ea98c81bd187f0cfbdc6b5eaeac6587930c6f7f3",
+      "task": "two_pole"
+    },
+    {
+      "current_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "c4f725794e2310b8b50a0eec8b0d0a393c3b7f3fa6ad6bccfb88c0068c5bfa8a",
+      "original_nonprior_sha256": "e5c5df223c2fb4d5d2f59e893cfe3fe7c2fb1d676d2f510f7d7faf626bc38a84",
+      "task": "unipolar"
+    },
+    {
+      "current_nonprior_sha256": "a1c022bf9ce12e75c235ef306e6e15cf0d1fc1881cc6f1cee2acd59c627986b4",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+      "original_nonprior_sha256": "a1c022bf9ce12e75c235ef306e6e15cf0d1fc1881cc6f1cee2acd59c627986b4",
+      "task": "unused_token_hold"
+    },
+    {
+      "current_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "task": "vector_overlap"
+    },
+    {
+      "current_nonprior_sha256": "791083176332b5611981d9f0078e068430336e6bff78f06539ee904e24639d3c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "791083176332b5611981d9f0078e068430336e6bff78f06539ee904e24639d3c",
+      "task": "vector_spiral"
+    },
+    {
+      "current_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "bcap-pure",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a3c4663770f624129b53bad1d75a234b563d1aad879b741a01778918f4a4120",
+      "task": "vector_unequal_width"
+    },
+    {
+      "current_nonprior_sha256": "d7393abbd868cf0c50dac6377001d41a41f159a9ee88928e27c06e6f833fe490",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d7393abbd868cf0c50dac6377001d41a41f159a9ee88928e27c06e6f833fe490",
+      "task": "ae_gan_hold"
+    },
+    {
+      "current_nonprior_sha256": "8c2ae67d5aa0096f28228aa06ffa6b1df33495ac91d1601e3ace2c520cb23b43",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "8c2ae67d5aa0096f28228aa06ffa6b1df33495ac91d1601e3ace2c520cb23b43",
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "current_nonprior_sha256": "f30eb5fda9a21a82e4691f66b160867fb0c95f9fce67341e58aeed5d0cd30d2c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "7055b5de8cc6f2aca91e48576419bf85ee4674122ae0093c7d6737419418e4dd",
+      "original_nonprior_sha256": "f30eb5fda9a21a82e4691f66b160867fb0c95f9fce67341e58aeed5d0cd30d2c",
+      "task": "cover_leftover"
+    },
+    {
+      "current_nonprior_sha256": "d8118f2b16259ee01b795ce8b0f5e370c39da416958cd24f27e7bb93aadc8517",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "d8118f2b16259ee01b795ce8b0f5e370c39da416958cd24f27e7bb93aadc8517",
+      "task": "five_word_joint_hold"
+    },
+    {
+      "current_nonprior_sha256": "d8118f2b16259ee01b795ce8b0f5e370c39da416958cd24f27e7bb93aadc8517",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "d8118f2b16259ee01b795ce8b0f5e370c39da416958cd24f27e7bb93aadc8517",
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "current_nonprior_sha256": "15cec1d7a8fa9a6d91ecc7a0a4f84700ac67ea0bd9310f8f767c9c7de615424f",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "15cec1d7a8fa9a6d91ecc7a0a4f84700ac67ea0bd9310f8f767c9c7de615424f",
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "current_nonprior_sha256": "15cec1d7a8fa9a6d91ecc7a0a4f84700ac67ea0bd9310f8f767c9c7de615424f",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "15cec1d7a8fa9a6d91ecc7a0a4f84700ac67ea0bd9310f8f767c9c7de615424f",
+      "task": "gaussian1d_stability"
+    },
+    {
+      "current_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "task": "grid100"
+    },
+    {
+      "current_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "task": "img_bars4"
+    },
+    {
+      "current_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "task": "img_blobs4"
+    },
+    {
+      "current_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "task": "img_intensity2"
+    },
+    {
+      "current_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "bc3b002450db040e94985361ec5e2c063beb46e184b162dc1b7696bc2d9029e5",
+      "task": "img_stripes2"
+    },
+    {
+      "current_nonprior_sha256": "f30eb5fda9a21a82e4691f66b160867fb0c95f9fce67341e58aeed5d0cd30d2c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "35e8ab8a4cd0f9ce926810dbb2b01fd4eb367f9d148c123d377b1ebaff128d88",
+      "original_nonprior_sha256": "f30eb5fda9a21a82e4691f66b160867fb0c95f9fce67341e58aeed5d0cd30d2c",
+      "task": "mid_scale_identity"
+    },
+    {
+      "current_nonprior_sha256": "7999d693264580fc88140e7e425f8a027166c2a2af7a8e238bacfb99bdfe3741",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "7999d693264580fc88140e7e425f8a027166c2a2af7a8e238bacfb99bdfe3741",
+      "task": "mode_hold"
+    },
+    {
+      "current_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "8e8b15afaf2305e85aad7932d037c104b11ffa503c82424291bbfda641c52ede",
+      "original_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "task": "residual_student"
+    },
+    {
+      "current_nonprior_sha256": "c7dd17e857378ddf419d111838ba7c38fefca3fe8e17b1651ec480d890c84caa",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "c7dd17e857378ddf419d111838ba7c38fefca3fe8e17b1651ec480d890c84caa",
+      "task": "ring16_acquisition"
+    },
+    {
+      "current_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "task": "rotated100"
+    },
+    {
+      "current_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "b0ee45cc0448d238a960fe81202f36312f4df0bb035967584dcb7f952bc47337",
+      "task": "staggered100"
+    },
+    {
+      "current_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "38c16b8812b1cb26d268303976f02d22a20d1ec52d317d6ec68eba0a886abf37",
+      "original_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "task": "trajectory"
+    },
+    {
+      "current_nonprior_sha256": "3269fc492a0d94f79daa911bdb98a3d4a21f12235b3c89a6b3eb752d72b85580",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+      "original_nonprior_sha256": "3269fc492a0d94f79daa911bdb98a3d4a21f12235b3c89a6b3eb752d72b85580",
+      "task": "two_pole"
+    },
+    {
+      "current_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "c4f725794e2310b8b50a0eec8b0d0a393c3b7f3fa6ad6bccfb88c0068c5bfa8a",
+      "original_nonprior_sha256": "06d093d90e1adb39cfec0c2bbe80e866f98a5016cf9537da5a4b35f722462fe2",
+      "task": "unipolar"
+    },
+    {
+      "current_nonprior_sha256": "288a24e43f72281f87de34a0a86dead6ec60f6d3b121bc6cf49e7dc242567861",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+      "original_nonprior_sha256": "288a24e43f72281f87de34a0a86dead6ec60f6d3b121bc6cf49e7dc242567861",
+      "task": "unused_token_hold"
+    },
+    {
+      "current_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "task": "vector_overlap"
+    },
+    {
+      "current_nonprior_sha256": "e1477ab1ad4bdf326c538b4587bbd6373f0fa8f4a77954f9f1262934a4d3abe3",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e1477ab1ad4bdf326c538b4587bbd6373f0fa8f4a77954f9f1262934a4d3abe3",
+      "task": "vector_spiral"
+    },
+    {
+      "current_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "k3p",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d9c7c0746e5b9080bf6a46b8be471f6e4719673610840baf47a6623d7f327478",
+      "task": "vector_unequal_width"
+    },
+    {
+      "current_nonprior_sha256": "b5847f651007bc1db6633639cc81ab8e2017e79a496722a6cb77d7c1ec8e3f7d",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "b5847f651007bc1db6633639cc81ab8e2017e79a496722a6cb77d7c1ec8e3f7d",
+      "task": "ae_gan_hold"
+    },
+    {
+      "current_nonprior_sha256": "8030085039bceb1b38be4a3afd18cd743e7292128fd296a3803d6efe0f02433c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "8030085039bceb1b38be4a3afd18cd743e7292128fd296a3803d6efe0f02433c",
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "current_nonprior_sha256": "3fc59d3f3ae5ed9a4938dd5390df757921f7c92f0c0f6658f244b643a9cdd388",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "7055b5de8cc6f2aca91e48576419bf85ee4674122ae0093c7d6737419418e4dd",
+      "original_nonprior_sha256": "3fc59d3f3ae5ed9a4938dd5390df757921f7c92f0c0f6658f244b643a9cdd388",
+      "task": "cover_leftover"
+    },
+    {
+      "current_nonprior_sha256": "d5bc4c9bfc7c60b750d157c7de9c524229f5d119abb76e9bc42674bf04d16925",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "d5bc4c9bfc7c60b750d157c7de9c524229f5d119abb76e9bc42674bf04d16925",
+      "task": "five_word_joint_hold"
+    },
+    {
+      "current_nonprior_sha256": "d5bc4c9bfc7c60b750d157c7de9c524229f5d119abb76e9bc42674bf04d16925",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "d5bc4c9bfc7c60b750d157c7de9c524229f5d119abb76e9bc42674bf04d16925",
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "current_nonprior_sha256": "f82d5e5369c5128f47e04e8d7a8065a58db272acf2181895768962fa0ebf1a62",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "f82d5e5369c5128f47e04e8d7a8065a58db272acf2181895768962fa0ebf1a62",
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "current_nonprior_sha256": "f82d5e5369c5128f47e04e8d7a8065a58db272acf2181895768962fa0ebf1a62",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "f82d5e5369c5128f47e04e8d7a8065a58db272acf2181895768962fa0ebf1a62",
+      "task": "gaussian1d_stability"
+    },
+    {
+      "current_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "task": "grid100"
+    },
+    {
+      "current_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "task": "img_bars4"
+    },
+    {
+      "current_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "task": "img_blobs4"
+    },
+    {
+      "current_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "task": "img_intensity2"
+    },
+    {
+      "current_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "82deea95a4889673329f60ae96ec6d00a17c2cfd89a7717765307c376ffb12f7",
+      "task": "img_stripes2"
+    },
+    {
+      "current_nonprior_sha256": "3fc59d3f3ae5ed9a4938dd5390df757921f7c92f0c0f6658f244b643a9cdd388",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "35e8ab8a4cd0f9ce926810dbb2b01fd4eb367f9d148c123d377b1ebaff128d88",
+      "original_nonprior_sha256": "3fc59d3f3ae5ed9a4938dd5390df757921f7c92f0c0f6658f244b643a9cdd388",
+      "task": "mid_scale_identity"
+    },
+    {
+      "current_nonprior_sha256": "17c5c751ab94356dfd0e64c74e3f16b4cbdb612039ca67ad8a5550de6d20fee7",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "17c5c751ab94356dfd0e64c74e3f16b4cbdb612039ca67ad8a5550de6d20fee7",
+      "task": "mode_hold"
+    },
+    {
+      "current_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "8e8b15afaf2305e85aad7932d037c104b11ffa503c82424291bbfda641c52ede",
+      "original_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "task": "residual_student"
+    },
+    {
+      "current_nonprior_sha256": "2bde9f1aa609a8262e4611a3e56aab07a2b8d1c28f08a1f1ef5fd5699863e550",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "2bde9f1aa609a8262e4611a3e56aab07a2b8d1c28f08a1f1ef5fd5699863e550",
+      "task": "ring16_acquisition"
+    },
+    {
+      "current_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "task": "rotated100"
+    },
+    {
+      "current_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "8810650ce3e30de2c0d91f5b72f698b236dba8641e50a72a05704fc719139a7a",
+      "task": "staggered100"
+    },
+    {
+      "current_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "38c16b8812b1cb26d268303976f02d22a20d1ec52d317d6ec68eba0a886abf37",
+      "original_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "task": "trajectory"
+    },
+    {
+      "current_nonprior_sha256": "1178d22c309c020bfa92627b948905e63a0c6f8a9b0104eee07367ab74edacf6",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+      "original_nonprior_sha256": "1178d22c309c020bfa92627b948905e63a0c6f8a9b0104eee07367ab74edacf6",
+      "task": "two_pole"
+    },
+    {
+      "current_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "c4f725794e2310b8b50a0eec8b0d0a393c3b7f3fa6ad6bccfb88c0068c5bfa8a",
+      "original_nonprior_sha256": "45d8363b6a511dd04ec45e98d552005e21fe33c336cb63b38c49aa96ad7c4b52",
+      "task": "unipolar"
+    },
+    {
+      "current_nonprior_sha256": "4117076b3491f57d9f714b7b68cb961a019f364974ee58192b2fdc6731241090",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+      "original_nonprior_sha256": "4117076b3491f57d9f714b7b68cb961a019f364974ee58192b2fdc6731241090",
+      "task": "unused_token_hold"
+    },
+    {
+      "current_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "task": "vector_overlap"
+    },
+    {
+      "current_nonprior_sha256": "f92868f9d6c7d6c1786b85b8b09c161d1243722ad6c3263bfa125e880d53ce6c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "f92868f9d6c7d6c1786b85b8b09c161d1243722ad6c3263bfa125e880d53ce6c",
+      "task": "vector_spiral"
+    },
+    {
+      "current_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "ka2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "318344716ba3c9abda65fcf0ab6c544aa82e6e41c89189a9af7cd473f46c78dd",
+      "task": "vector_unequal_width"
+    },
+    {
+      "current_nonprior_sha256": "63d09d325cc39266c9c20c2c82ff791880e6e0dbc0e9a4d5b6c31305edca3f19",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "63d09d325cc39266c9c20c2c82ff791880e6e0dbc0e9a4d5b6c31305edca3f19",
+      "task": "ae_gan_hold"
+    },
+    {
+      "current_nonprior_sha256": "3f4ddb45d49ab79fbf7420ba6aa6833615725c545e055a5c62ef9d050dc75ed0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3f4ddb45d49ab79fbf7420ba6aa6833615725c545e055a5c62ef9d050dc75ed0",
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "current_nonprior_sha256": "e3a0a752b327b55b0f464bc7008f139340a63ea88740e25bad68b58fbbc15161",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "7055b5de8cc6f2aca91e48576419bf85ee4674122ae0093c7d6737419418e4dd",
+      "original_nonprior_sha256": "e3a0a752b327b55b0f464bc7008f139340a63ea88740e25bad68b58fbbc15161",
+      "task": "cover_leftover"
+    },
+    {
+      "current_nonprior_sha256": "278e46141c57677bb6814960e47845c781ec450c2e9afb7cee7f389f6899a6de",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "278e46141c57677bb6814960e47845c781ec450c2e9afb7cee7f389f6899a6de",
+      "task": "five_word_joint_hold"
+    },
+    {
+      "current_nonprior_sha256": "278e46141c57677bb6814960e47845c781ec450c2e9afb7cee7f389f6899a6de",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "278e46141c57677bb6814960e47845c781ec450c2e9afb7cee7f389f6899a6de",
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "current_nonprior_sha256": "e6dc3621feee27bdd57bdca37af7148f0d4044984e4080db5932b544cb620dc6",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "e6dc3621feee27bdd57bdca37af7148f0d4044984e4080db5932b544cb620dc6",
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "current_nonprior_sha256": "e6dc3621feee27bdd57bdca37af7148f0d4044984e4080db5932b544cb620dc6",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "e6dc3621feee27bdd57bdca37af7148f0d4044984e4080db5932b544cb620dc6",
+      "task": "gaussian1d_stability"
+    },
+    {
+      "current_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "task": "grid100"
+    },
+    {
+      "current_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "task": "img_bars4"
+    },
+    {
+      "current_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "task": "img_blobs4"
+    },
+    {
+      "current_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "task": "img_intensity2"
+    },
+    {
+      "current_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "6786a33d3cb2507b9bff7b07eea02edebc30f063a66484a9508e9ee06aacceca",
+      "task": "img_stripes2"
+    },
+    {
+      "current_nonprior_sha256": "e3a0a752b327b55b0f464bc7008f139340a63ea88740e25bad68b58fbbc15161",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "35e8ab8a4cd0f9ce926810dbb2b01fd4eb367f9d148c123d377b1ebaff128d88",
+      "original_nonprior_sha256": "e3a0a752b327b55b0f464bc7008f139340a63ea88740e25bad68b58fbbc15161",
+      "task": "mid_scale_identity"
+    },
+    {
+      "current_nonprior_sha256": "e4a70c4815e6c5fa7706dc295feda8d69b28e4feb98d7558f40d6cef4269f373",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "e4a70c4815e6c5fa7706dc295feda8d69b28e4feb98d7558f40d6cef4269f373",
+      "task": "mode_hold"
+    },
+    {
+      "current_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "8e8b15afaf2305e85aad7932d037c104b11ffa503c82424291bbfda641c52ede",
+      "original_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "task": "residual_student"
+    },
+    {
+      "current_nonprior_sha256": "4426fdda2c1ecdfedad202ed7d9deac87e4c174b8c18c98a00f5f05166c35b59",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "4426fdda2c1ecdfedad202ed7d9deac87e4c174b8c18c98a00f5f05166c35b59",
+      "task": "ring16_acquisition"
+    },
+    {
+      "current_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "task": "rotated100"
+    },
+    {
+      "current_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "4844c1574da6e314248d933d8f9d396078515e94cd0be36cdbfa5564e0ac8479",
+      "task": "staggered100"
+    },
+    {
+      "current_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "38c16b8812b1cb26d268303976f02d22a20d1ec52d317d6ec68eba0a886abf37",
+      "original_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "task": "trajectory"
+    },
+    {
+      "current_nonprior_sha256": "8dd6146f7abffea16c1bf7c5416993f67d7e19ab35e27d75469d9374797034df",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+      "original_nonprior_sha256": "8dd6146f7abffea16c1bf7c5416993f67d7e19ab35e27d75469d9374797034df",
+      "task": "two_pole"
+    },
+    {
+      "current_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "c4f725794e2310b8b50a0eec8b0d0a393c3b7f3fa6ad6bccfb88c0068c5bfa8a",
+      "original_nonprior_sha256": "84a5775a779b50988521d3cfffcee5444bfda7a0eb3370cbab7f1d2ba016d110",
+      "task": "unipolar"
+    },
+    {
+      "current_nonprior_sha256": "e65703789930303e450b51a0528acce90c4e54a7cc5aacb3e0bf01bf19b860d9",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+      "original_nonprior_sha256": "e65703789930303e450b51a0528acce90c4e54a7cc5aacb3e0bf01bf19b860d9",
+      "task": "unused_token_hold"
+    },
+    {
+      "current_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "task": "vector_overlap"
+    },
+    {
+      "current_nonprior_sha256": "a8cdac8d20fc6f6f3b832b77698a54de4e0a733c3110c7af656b9c3e5ecf5bea",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "a8cdac8d20fc6f6f3b832b77698a54de4e0a733c3110c7af656b9c3e5ecf5bea",
+      "task": "vector_spiral"
+    },
+    {
+      "current_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "r1r2",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "3a12f4c3317c69862b13276452e6dc452ca860b7f5cdf23680b29e875f77c4d0",
+      "task": "vector_unequal_width"
+    },
+    {
+      "current_nonprior_sha256": "196cac6aa7ea39221c6841071caeb7b5600332144b3bd59e515237f4eb16d154",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "196cac6aa7ea39221c6841071caeb7b5600332144b3bd59e515237f4eb16d154",
+      "task": "ae_gan_hold"
+    },
+    {
+      "current_nonprior_sha256": "221ab4cc3a6c35c43fc979e7d2366f53648f641f1bf0be4c6faad8971fad7a0b",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "221ab4cc3a6c35c43fc979e7d2366f53648f641f1bf0be4c6faad8971fad7a0b",
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "current_nonprior_sha256": "f7cc31d0943b27740f86ca3a22fdb6333474f021059be43eaae19fb4df824973",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "7055b5de8cc6f2aca91e48576419bf85ee4674122ae0093c7d6737419418e4dd",
+      "original_nonprior_sha256": "f7cc31d0943b27740f86ca3a22fdb6333474f021059be43eaae19fb4df824973",
+      "task": "cover_leftover"
+    },
+    {
+      "current_nonprior_sha256": "92a126955f5bacaa9f5171bc638b9d15f937f501e441d19018903ed9f1825516",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "92a126955f5bacaa9f5171bc638b9d15f937f501e441d19018903ed9f1825516",
+      "task": "five_word_joint_hold"
+    },
+    {
+      "current_nonprior_sha256": "92a126955f5bacaa9f5171bc638b9d15f937f501e441d19018903ed9f1825516",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+      "original_nonprior_sha256": "92a126955f5bacaa9f5171bc638b9d15f937f501e441d19018903ed9f1825516",
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "current_nonprior_sha256": "7aeb6862277c2f81a0a4dde558669d5f3d40173c99f0627b049e7af3ecae8ced",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "7aeb6862277c2f81a0a4dde558669d5f3d40173c99f0627b049e7af3ecae8ced",
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "current_nonprior_sha256": "7aeb6862277c2f81a0a4dde558669d5f3d40173c99f0627b049e7af3ecae8ced",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "7aeb6862277c2f81a0a4dde558669d5f3d40173c99f0627b049e7af3ecae8ced",
+      "task": "gaussian1d_stability"
+    },
+    {
+      "current_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "task": "grid100"
+    },
+    {
+      "current_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "task": "img_bars4"
+    },
+    {
+      "current_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "task": "img_blobs4"
+    },
+    {
+      "current_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "task": "img_intensity2"
+    },
+    {
+      "current_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "8788aa0395e7b29bc980fcb67ffdff44a4482a216a3980fce87c8899619c1ea7",
+      "original_nonprior_sha256": "773e0a0152654ca9a6db47b2f1625b400ce35da66b9c736b5fd4778ea16be549",
+      "task": "img_stripes2"
+    },
+    {
+      "current_nonprior_sha256": "f7cc31d0943b27740f86ca3a22fdb6333474f021059be43eaae19fb4df824973",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "35e8ab8a4cd0f9ce926810dbb2b01fd4eb367f9d148c123d377b1ebaff128d88",
+      "original_nonprior_sha256": "f7cc31d0943b27740f86ca3a22fdb6333474f021059be43eaae19fb4df824973",
+      "task": "mid_scale_identity"
+    },
+    {
+      "current_nonprior_sha256": "d7ee99398a4ed75191813df7d2de2421d68c392f3d9e06c1c8e224cd8064c58c",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d7ee99398a4ed75191813df7d2de2421d68c392f3d9e06c1c8e224cd8064c58c",
+      "task": "mode_hold"
+    },
+    {
+      "current_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "8e8b15afaf2305e85aad7932d037c104b11ffa503c82424291bbfda641c52ede",
+      "original_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "task": "residual_student"
+    },
+    {
+      "current_nonprior_sha256": "95bcdc53d4d5970992480c795e2bdd92525cd29610b20eabd2f5901dde3de977",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "1eb6772b7c3075ecf3dbe667feda5a0541bc53329a57771c01cd894242b9932f",
+      "original_nonprior_sha256": "95bcdc53d4d5970992480c795e2bdd92525cd29610b20eabd2f5901dde3de977",
+      "task": "ring16_acquisition"
+    },
+    {
+      "current_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "task": "rotated100"
+    },
+    {
+      "current_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "d5c2ad221557131590d2136dda44b12f8d8f37f48f3efb93d0c2b53460b133d0",
+      "task": "staggered100"
+    },
+    {
+      "current_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "38c16b8812b1cb26d268303976f02d22a20d1ec52d317d6ec68eba0a886abf37",
+      "original_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "task": "trajectory"
+    },
+    {
+      "current_nonprior_sha256": "cedfa159571efdc41a6a354010f966ac4516318c5bdb77d82be45e9040206c19",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+      "original_nonprior_sha256": "cedfa159571efdc41a6a354010f966ac4516318c5bdb77d82be45e9040206c19",
+      "task": "two_pole"
+    },
+    {
+      "current_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "c4f725794e2310b8b50a0eec8b0d0a393c3b7f3fa6ad6bccfb88c0068c5bfa8a",
+      "original_nonprior_sha256": "4f28f7d0249fa0908cb279b39c7b0cacbfbcceaa6a53872b98d5d0aaf551395a",
+      "task": "unipolar"
+    },
+    {
+      "current_nonprior_sha256": "45f0c043f85502f4ccc18681d54e555b667941ee91959afb844ab5aa6a522376",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg": {
+          "after": 0.05,
+          "before": 0.0
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+      "original_nonprior_sha256": "45f0c043f85502f4ccc18681d54e555b667941ee91959afb844ab5aa6a522376",
+      "task": "unused_token_hold"
+    },
+    {
+      "current_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "task": "vector_overlap"
+    },
+    {
+      "current_nonprior_sha256": "5967da9aff3ee6ba86ffe10a3de202742888c671324e1581baf1ea3e588cf00a",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "5967da9aff3ee6ba86ffe10a3de202742888c671324e1581baf1ea3e588cf00a",
+      "task": "vector_spiral"
+    },
+    {
+      "current_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "declared_prior_delta": {
+        "prior_l2": {
+          "after": 0.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_eps": {
+          "after": 0.0001,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_reg_target_std": {
+          "after": 1.0,
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_regularizer": {
+          "after": "vicreg",
+          "before": {
+            "absent": true
+          }
+        },
+        "prior_update": {
+          "after": "learned",
+          "before": {
+            "absent": true
+          }
+        }
+      },
+      "family": "release07-gan-v3",
+      "initial_prior_sha256": "0526f8dd76e6c83ae057ff27a2f2e4ca871219d53ffc234d217466c39c9430e9",
+      "original_nonprior_sha256": "fe9d3e6d0443558d6f14a5c0e0b6458306a65755df5ab2d2e7947a43919fe391",
+      "task": "vector_unequal_width"
+    }
+  ],
+  "pairs_checked": 140,
+  "qualification_input": false,
+  "raw_binding_hashes": {
+    "current": "63d34d9e86e629c80bf3bd2fcfa5ce94a6b9b4b534af8d4d32e30189a4616618",
+    "original": "5c890c35b3187f95e79ff40525a29cf562559ebdc8b18937fadedbdba7cec94a"
+  },
+  "registration_sha256": "6dc4a66dafcf347719c31e70df038cffc158baf43979acf1fca22bc7787c4050",
+  "schema_version": 1,
+  "scope": "actual_source_task_binding_compatibility",
+  "status": "PASS"
+}

@@ -136,6 +136,7 @@ def candidate_for(leader):
         recipe_fields=sorted((ADAPTABLE_FIELDS - RESOURCE_FIELDS) & recipe.keys()))
     require(recipe["prior_reg"] == leader["prior_reg"], "Do not retune selected prior weights")
     result.update(schema_version=3, id=leader_id(leader["selection"]["family"]),
+        trainer_family=leader["selection"]["configuration_family"],
         parent=leader["selection"]["candidate_id"], api_version="forge-api-v1",
         recipe_preset=original.get("recipe_preset"), recipe_overrides=recipe,
         changed_factors=["Recipe owns prior learn/freeze and regularization under recipe_owned_v1; selected global settings and prior_reg weight retained."],
@@ -669,7 +670,7 @@ def main():
     parser.add_argument("--source-commit")
     parser.add_argument("--submit", action="store_true")
     parser.add_argument("--drain", action="store_true")
-    parser.add_argument("--gpus", default="0,1,2,3")
+    parser.add_argument("--gpus", default="0,1")
     parser.add_argument("--workers-per-gpu", type=int, default=1)
     parser.add_argument("--output", type=Path, default=OUT / "publication")
     parser.add_argument("--media", action="store_true", help="Export retained scored training views; no resampling/rescoring")
