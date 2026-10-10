@@ -1,0 +1,3226 @@
+{
+  "baseline_sha256": "6bffbf589ae8523c804ce6401a873a03b1ed4cb548bc1b7cd4b0c632ca790013",
+  "campaign_budget_seconds": 308280,
+  "campaign_id": "recipe-prior-refactor-selected-leaders-v1",
+  "candidate_budget_seconds": 44040,
+  "declarations": {
+    "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json": "600d3849da93abd10af44b27c7ab2347d6ec34d7e1e5364e10d4ac9feccba6a5",
+    "configs/forge/ideas/recipe-prior-refactor-k3p-v1.json": "b7ffada83bb1b3700125a161fcecd89a6d3252687ca757716c3da9ec73f2c878",
+    "configs/forge/ideas/recipe-prior-refactor-ka2-v1.json": "0100b364e3b7f4522c4827a6b8553fb7ab8c42e113ad198e732b14c06d2ea93b",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "906e5fd902702898eaa42587162e21d93e80258ac4d049ed6bbeba92470dcffb",
+    "configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json": "05a3c17148be55cb1ef5afb40888260c979a4af27f5b5963bd0b13125c8368d0",
+    "configs/forge/studies/recipe-prior-refactor-atlas-v1-ordinary-study.json": "139c99446b6f5f4f8421595ace176701ed24c39b1eac6342681644c4e29ed9d6",
+    "configs/forge/studies/recipe-prior-refactor-bcap-pure-v1-ordinary-study.json": "dcb233ec4443f8b7b4dddbaf4e32eb2302f90a9a882226f7844e048f433ee6ac",
+    "configs/forge/studies/recipe-prior-refactor-e22-v1-ordinary-study.json": "1951d8b207b7b752801255d1cb894efd1be4458b42b4e749a050e470ea8d1524",
+    "configs/forge/studies/recipe-prior-refactor-k3p-v1-ordinary-study.json": "b0322f1f1cf31ddfff1ee43da6671f305bbf7e3ce0ba8475f279313e87751adc",
+    "configs/forge/studies/recipe-prior-refactor-ka2-v1-ordinary-study.json": "043c8df6fa0df51deb3702bfc7190b404735bc9f19c4e46ecd7e2feed992149f",
+    "configs/forge/studies/recipe-prior-refactor-r1r2-v1-ordinary-study.json": "08aa35350fe6b6966f4555b86d266fa5bd84e2f8ac67466464797aad4b810a8b",
+    "configs/forge/studies/recipe-prior-refactor-release07-gan-v3-v1-ordinary-study.json": "8baf384b375602dc09f60d376ab33c25b2108b87d0d4ae7d1d8d1f0ea3af3ced",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-ae_gan_hold.json": "13ccd751bdc2c41af9ef8563dbe4a0c5219787018f4593b94d1a1f13c3407d0e",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-clockfree_audit_measurement_v1.json": "42922f6104eb69099fb640f2593abde31aae3b92487e4206be99883621dc9ea3",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-cover_leftover.json": "837db434712a5ebbb8a585a6cca84c36cfbf706f95b48b4ced06d7d227b30e8a",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-five_word_joint_hold.json": "b889f6c892cfb8eea2930761557d48c8b68f12387b088ed8629a8ecfd429320c",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-five_word_joint_smoke.json": "2f84ac16bf856e04486de1fc8502375fccc28ef10a41c98aeb34c52c2add4121",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-gaussian1d_smoke.json": "045efb2041a1ce14e0064159120b521b049624732a937ba4c9a9ea0911eb95fd",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-gaussian1d_stability.json": "022cf73a5e3e31dff98e98bda26c3f7ad030678ec0ddd9b8ad25da182d969eff",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json": "1701c58b6533f2cf4179ef2163618e43e30d2608a0a99f9ea22e71bd67d0a63b",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-img_bars4.json": "3d43015d8d63dd70ef3ab25bf0cae84ddc56cc05ffadedaf73821fa84ea8bf32",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-img_blobs4.json": "73fa622c4c68ad4dd7ce6d5484ec5ec712225ff077bc577b431d27763e09889b",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-img_intensity2.json": "f450daa36e69bbeda0c49577084950f73f2b46e31d4920022c8d2842403bfdbe",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-img_stripes2.json": "2ab119048487e3457e9824481b73404d08ed37a614449b1d4979bc59be632b10",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-mid_scale_identity.json": "ed04d2b310ec9f13dfa87296423df822fdf12b0d54050a78ac9fda40b4e78a42",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-mode_hold.json": "71a7c39bb02281fed35582f56358e595052384ddc4b63629cd843f704297c6df",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-residual_student.json": "dc1d185917a7e1c1697dda4583b516ec4751ea3b09e38da3ee00e0d8826edeed",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-ring16_acquisition.json": "b4e47a4a66242f5254f8a489a02ce0e63489e33e527e2efbb2bd61a231fb764b",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-ring_extension.json": "9b0f91acc90b73aac9b319f488d93193594d9bd5bca2d5dd24fc9ace095657c7",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-ring_hold.json": "305f8583c0c82983e13e8aec16822a419ef512cf1badf3db68908a877addd2dc",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json": "56dc104baaa0712e200519bd70eb9ac636efb0c85c51f83cc2672038268fd844",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json": "0a1d46d9f787dd107d318b0f48e63b063286a946f877d80dfedfd36052438037",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-trajectory.json": "d91ec166f53e95f8e5ed264055fc139b4afa9413c18fd7b815ceb1721dffd239",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-two_pole.json": "f644be4bdcc18b08f3b1f6f182d21fe1db4ea4a575d73c612d8918285d9a6092",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-unipolar.json": "1ffa1b62fe937f0304305a18a6c65ed8b2c88394520d3b37d074d5476a62cb9f",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-unused_token_hold.json": "aa698e2ea1d0191b4df69ca57aabdd72435cdd48fe1349d59117c37ba30118e7",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_anisotropic.json": "6b7b5f393df99f5aa2dfaced92ef0e153eb756dc9c6ff2f2597608029ab2ac93",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_overlap.json": "2d70981dc22972b251f35f436c968c76d3728c188a9518edd1d9aa216b286621",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_spiral.json": "7993850cc38e05fcb63a578c677a4590ada1c6e223bea0ead3b4837be1718a0f",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_two_broad.json": "976269112ca1604235045b26512d1bbe2997e2b8258ca677c2b1865d5be047df",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_unequal_mass.json": "fbd155e0e882d9144e25620a487220f9ef213e824e018b120d8eb242a6294095",
+    "configs/forge/tasks/recipe-prior-refactor-legacy-vector_unequal_width.json": "7443b8bb471205dc51a401a464d36cfca332e48470f19ffa4b1921b2e8eccd6b"
+  },
+  "diagnostic_policy": "Only supported unmeasured Tier2 tasks. Same-scope producers may duplicate ordinary PASS prefixes; failed/incomplete prefixes cannot be retried. Diagnostic outcomes never grant ordinary credit.",
+  "families": {
+    "atlas": {
+      "admission": "READY",
+      "candidate_id": "atlas",
+      "candidate_revision": "8ed57a6c3701fe104a9a9d002ae5ae307a22b3165afca46937a640d8e7e5a74f",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "9c53691ef2c1e03ffe316f9720c5968fcda254288075c07eac7649be257b30cf",
+        "contract_sha256": "aad3aa040c14a3c2a5ab0405c6c6e54c7156198c660c69e9d608a2cf68b48728",
+        "control_binding_sha256": "c4f9bb64581403054db65527157c908802167492629edafb8ada7629b83a3ae5",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "139c99446b6f5f4f8421595ace176701ed24c39b1eac6342681644c4e29ed9d6"
+      },
+      "study_id": "recipe-prior-refactor-atlas-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "3e9966196070cf168a230a5871289d45d848e39553f8fa72df771613b55220c6",
+        "clockfree_audit_measurement_v1": "5b6d756b43967c9be4e458eb4f5dc34395fc3b48f34f2f3af7fbffe772dbacb7",
+        "cover_leftover": "0d4da3ab560ea6fd9bfa6d1f30a31cdb9ebfaeef938e17abdfe47dcf796b053c",
+        "five_word_joint_hold": "7d2de9a1d910b2f985c8d8c5045255f215a692c47fcd6ed596d07305c992834c",
+        "five_word_joint_smoke": "ccad84ee5ba41f114ff08d52daa98ecf6ce05f10e1f12a553f4772e7b1f2814e",
+        "gaussian1d_smoke": "a29a098d18437c6981d1f9aab0ea4dba774ad92dfe251934bad6a2285dac0040",
+        "gaussian1d_stability": "37cec31c75903015dafcacb901cc057f2c30e459ce872c8762d64676ef107677",
+        "grid100": "f9398cd5de5e7832b8ccfd662fa06aa0c8e62d84cf94a178474a19701df04408",
+        "img_bars4": "6e05abd78f5b2bb903ac736a96141263f0caca642041ffaaae2801f17eda1c8d",
+        "img_blobs4": "a403dddb8ac7760468938d1063d15ca291fba618404d10f76a08ecffb53da100",
+        "img_intensity2": "82d84018af7f7e663cd89d346aebd1f28a3f19eabc291af4fcbbde1d43386efc",
+        "img_stripes2": "11b588ed0e5de160f76767d350c25158001b7928dea52cb5902a2ad356bac4d2",
+        "mid_scale_identity": "fcd49217c96891d1e7051e09a256c7dbf0ceb9ba806a1c3bde491191aae16b80",
+        "mode_hold": "2570efb756562e6901b9b106eb202fa6626a0880f5eef41f035fe5d1d587c054",
+        "residual_student": "5668cbe1847d93f4abc102b6195395deeb2e29d5cd9999e8dccbfc94deefa132",
+        "ring16_acquisition": "7c989368933ab820cdc0f1917a0d95c26a72c4e3579887b68ca23e088f249a51",
+        "rotated100": "f25cd4e2f41a7822027ff07e9de03d5095ecd2ef65dd6636df5d53d0cd80913c",
+        "staggered100": "99f337d4b7b705098e07a8ca3f14bfc382090439751f38241eed8909b65bc5bf",
+        "trajectory": "8176a1046de447098e66175e299d63710ce090a0f3f999762263e044b2864379",
+        "two_pole": "304f53569af644cf68ce3cfe437d19517905e5cb96a75cbc964c7f6cee93670f",
+        "unipolar": "e837196ffad14b669612daa55c28dc75561b6ada2ff2b26532e5704887bb7500",
+        "unused_token_hold": "1e4262f87eda59f4ca173c5d31450928482a694da0c07de6811d48393aa61d7f",
+        "vector_anisotropic": "7e57320794e856ae4ecb257e268cd09604707672bb0da00f53190fc7e61d6388",
+        "vector_overlap": "9fa847896fe389b52d66d7e662ad67e0ab43dfd974b60c8c4f3d9ec3a16181a1",
+        "vector_spiral": "f3e1fe3da2aee67cb353f86e5d7dd2d91706770f4a3b987ccaa9a1d5ebd2854a",
+        "vector_two_broad": "a6ac663808619bf87f374106fef0a6620d42041194746ad645f50971f967a881",
+        "vector_unequal_mass": "1e235ac2f67771b8af7f2d6ee7a0cb0f84fe6ad8fe8076e9b22b7e35e0848c7f",
+        "vector_unequal_width": "6d2bacea21283f81c1f6fc0f74e3fa830093641667b11d0744ebf2d813d907c8"
+      },
+      "tasks": [
+        {
+          "blockers": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [
+            "gaussian1d_smoke: gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [
+            "two_pole: two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [
+            "unused_token_hold: unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [
+            "ae_gan_hold: ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [
+            "ring16_acquisition: ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [
+            "five_word_joint_smoke: five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [
+            "clockfree_audit_measurement_v1: clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [
+            "gaussian1d_stability: gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [
+            "five_word_joint_hold: five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [
+            "trajectory: trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [
+            "residual_student: residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [
+            "unipolar: unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [
+            "cover_leftover: cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [
+            "mid_scale_identity: mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [
+            "mode_hold: mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [
+            "vector_two_broad: vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [
+            "vector_unequal_mass: vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [
+            "vector_unequal_width: vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [
+            "vector_anisotropic: vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [
+            "vector_overlap: vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [
+            "vector_spiral: vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [
+            "img_stripes2: img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [
+            "img_bars4: img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [
+            "img_blobs4: img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [
+            "img_intensity2: img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [
+            "grid100: grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [
+            "rotated100: rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [
+            "staggered100: staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "bcap-pure": {
+      "admission": "READY",
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "162a969ef800cde8606a44d217de65dbb14a45a1647c78bebfaf1f8f68005d22",
+        "contract_sha256": "d336857daf5de71cf6b686a860fc2f677d4b74b481c23b303fdc5cfad674d223",
+        "control_binding_sha256": "de0e1aee9a0f77748a57071ffdf8f53fc1a864cc6618b7fede27e8f8b5067ac6",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "dcb233ec4443f8b7b4dddbaf4e32eb2302f90a9a882226f7844e048f433ee6ac"
+      },
+      "study_id": "recipe-prior-refactor-bcap-pure-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "23fc5870255b89bc79655caea0c237cc8cf64cbb8af5ae01e65596f3f8669890",
+        "clockfree_audit_measurement_v1": "b34cd09648645483d307956f6b904b8d332d6176759cd3a531777d35b1712e86",
+        "cover_leftover": "80bcf80a37a2fc1c65ff3df1b9909805889683ec71bbd5d3a1ddb3bd88a20c94",
+        "five_word_joint_hold": "2d6af8369959ac0c606ae6ef229de3cdcc8d11b82c5ce6841fabbfb930fa1914",
+        "five_word_joint_smoke": "77337182a5e2465c83eeb600d1fd68877307dbc677e9966eebf9ba67963401c3",
+        "gaussian1d_smoke": "310d1ee7925cd2ca159cff1eac3e86fdc791b07830171b77f26a676cd0051882",
+        "gaussian1d_stability": "5fa74b6e950714dcbc0c245b0504b4a2b327fd285499293e444a4a468a0d4b58",
+        "grid100": "9f3d1d11b7a82a40162d72ab0baa5e7f715c8567c9ed48b383c02b7f0618c19c",
+        "img_bars4": "84696106d1fa4aef33189084504af4f5ffbc130c5044cd9d4d895b42993b2cbc",
+        "img_blobs4": "64d8cd1d337a2f26083fa512d4039aaa95472a9ad62ffd2f222685c3442077ee",
+        "img_intensity2": "3e4358d1a4d957be8323dc769f2b5ad6dbc671871c39cb879274205ccc27e340",
+        "img_stripes2": "6616ab0ee1ed5df84b383034860650b794748bc9de7f0fff232715314bb0e0cd",
+        "mid_scale_identity": "669c71b411d4cae858eca2bc41f12c64361bc94d52501b847dea4d8a10f3786a",
+        "mode_hold": "0968b3b30111a2c2414489f1ba6925e6aae7b85df0bb9daaf0fbb283d05c36f3",
+        "residual_student": "fc4d78b2be7764c7a898698bc4d8449fbc54ea9d301379bf3927c6d85f9f8cd1",
+        "ring16_acquisition": "4b7266bcde865d8942d43e5993f8404a335b0a06983d368b9652c239e1bd3b0f",
+        "rotated100": "56b790f23ba03b8ac7304a1dae9766b963b96ee9b3be7c72f34e32174e4cb72f",
+        "staggered100": "dfafc0f9ebf0ae08567ffd164fdf092addd8d56b0541eb1f13caf69519a47d60",
+        "trajectory": "ea6adb845933f6b978e169ac9781d428c57a1a940619e6b28239e03d2a9ea0e2",
+        "two_pole": "6498ecfa7557fd694111a118208901ec01efd6264ae3b97aa6b6a76751919baf",
+        "unipolar": "8b833f434972a5e09a713449231d660dcbfcf5db2635729e6e322b7d44c63320",
+        "unused_token_hold": "dedeb1345a928cbc8a740cd05e0632ae5d1fcce4979a97ffdcc7606aa1e2dcf3",
+        "vector_anisotropic": "3d31d6f63196c8c4a6f8c501696b2a13c70280061a42470f34b52c027ea35b1a",
+        "vector_overlap": "d27c4df8cc23bb031c22bf9d76e7c3d3ba12590226b0cd661cedf80d5d03e94c",
+        "vector_spiral": "48944f80cd915439b80b8db7e2242e5a2824d824fede4f60d49914ed2e46bd73",
+        "vector_two_broad": "3773522245d782a60f1103bd507079c1a6b2d419b1cc460f4b8dc2aa59ea736e",
+        "vector_unequal_mass": "86b9c4daa942bc040b0f7c369aef191d3bb82b18472c311ba897b7073f7905ce",
+        "vector_unequal_width": "3ec7dca2826afdc00f1d92e8e8a98d1d0bf06ab406470a1d6f55206079b9f5a8"
+      },
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "e22": {
+      "admission": "READY",
+      "candidate_id": "e22",
+      "candidate_revision": "26bc81696c14502e279a40afcf91ebfeed4c97777bc29579b1c1c9020876407c",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "9c53691ef2c1e03ffe316f9720c5968fcda254288075c07eac7649be257b30cf",
+        "contract_sha256": "a892b9e4ce1882a49de540b12350cbb10c2b08dd761e386d9f9ccbd516b5fd5d",
+        "control_binding_sha256": "c4f9bb64581403054db65527157c908802167492629edafb8ada7629b83a3ae5",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "1951d8b207b7b752801255d1cb894efd1be4458b42b4e749a050e470ea8d1524"
+      },
+      "study_id": "recipe-prior-refactor-e22-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "b214968b7a582b49d855b29bf9c7b047bbfc31e00b405f6133f990561661e7c7",
+        "clockfree_audit_measurement_v1": "3550e6cb2239bf8cdedb433d751e5613963ddb5ecffeaf551b48e8513920dee7",
+        "cover_leftover": "e9c571a92767510cdb4919ede0b0d65b7821336906b135b48a13a92a9b74ee08",
+        "five_word_joint_hold": "6623f706fa703e5207a26f1661e19c78841022627071545d916d1455c21e2244",
+        "five_word_joint_smoke": "aaefb13e65acf382d86a3781d628e71f4dd71e7b3cb8fbc91016bb06dc2dc4b2",
+        "gaussian1d_smoke": "0ef9d35d2102cc779a7b9178dcac9548a2a6abfd374d60a2b04c5a7089f6865c",
+        "gaussian1d_stability": "27dc4a8fb80f3b5f15b45697ff3a0c6c86f90a74837d8ba9f21475d243e9f0d9",
+        "grid100": "00d173b0290446090197a2f0a5446cda30a1c15d17342b036efdbd3eacca3fd7",
+        "img_bars4": "6a1b526a8a948dfdf7c219e9e61703ba8b8d10d66b83e83dccc5e9f60527f511",
+        "img_blobs4": "08feb64703d71d3ac80006e8fe1dd9c4db314a19fe48b3e8590a403932f4ef81",
+        "img_intensity2": "998832a9bd4b6b68f9820b72a7fb6ae111dbcfc9199e6b0e7ad00428993008f3",
+        "img_stripes2": "e2f7e75dc4091c41a5db9ad0923a27903ff835ea191158ea447e97878d3b0159",
+        "mid_scale_identity": "4e2f08ae53d410839899cd8a269f4f62d18d1179b1b8da02b3de21eca00794c8",
+        "mode_hold": "71198e2dacc0ebccc1d011ea3c2d1f7380aeb9ba2302b8566860bc01920ade7f",
+        "residual_student": "ba7ec67181b61d5e99ead778a981ad8a01ad8ee4e1891fdf19bdd00a0c5b2a98",
+        "ring16_acquisition": "2e1cb1609cb0d8a875750372d8bfbccdd3f8ee64815291d0385175f370fb906e",
+        "rotated100": "55d338ea92fbdfaab41fa29f07f63475d986ebbe105e71053f25594770ac7e93",
+        "staggered100": "09b5fd56609d2b4537dd0be0c433b5c161e3ff45b529af2ebae86cc598ab4cb5",
+        "trajectory": "69020717730b723923a3e65d1ef875a3f74b059f7ff0e1ef5947b66107e887bb",
+        "two_pole": "9c24e5468198242caa7e3ca988dc4b29e3729c26dfd1f41712cf9bacf3e6f2fc",
+        "unipolar": "7e67afc69c11dba84c1b12054b7172712926d24f62219997aabac2e92461d663",
+        "unused_token_hold": "c45d562a7dad6a2752693136a9ef6c5f73638ca84a729291dba94af733c592b2",
+        "vector_anisotropic": "a280fab78e29a47768f65d85be87892299d860cb2ae9889b0a88b58528558bed",
+        "vector_overlap": "9a3377631f5c234027350b8cb0259bdf8784569253eb260a7a4c039955a43828",
+        "vector_spiral": "de6e0263cae59e20e50fe366f0426609d7178d76ffbea8962466d1d096cf30be",
+        "vector_two_broad": "632f2d16c8d4e68562545a964bad62cbf0f7ed2a81d4d72a6c2763b0449d6c06",
+        "vector_unequal_mass": "d169e36ff7c81fa221eebf1dea8eca44ed60a29f1113a462403b16899f059882",
+        "vector_unequal_width": "6081d7241fc3128eaeb16c1618f3284502c4872ea3f5f81cd933b916e337295e"
+      },
+      "tasks": [
+        {
+          "blockers": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [
+            "gaussian1d_smoke: gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [
+            "two_pole: two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [
+            "unused_token_hold: unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [
+            "ae_gan_hold: ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [
+            "ring16_acquisition: ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [
+            "five_word_joint_smoke: five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [
+            "clockfree_audit_measurement_v1: clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [
+            "gaussian1d_stability: gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [
+            "five_word_joint_hold: five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [
+            "trajectory: trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [
+            "residual_student: residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [
+            "unipolar: unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [
+            "cover_leftover: cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [
+            "mid_scale_identity: mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [
+            "mode_hold: mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [
+            "vector_two_broad: vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [
+            "vector_unequal_mass: vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [
+            "vector_unequal_width: vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [
+            "vector_anisotropic: vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [
+            "vector_overlap: vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [
+            "vector_spiral: vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [
+            "img_stripes2: img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [
+            "img_bars4: img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [
+            "img_blobs4: img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [
+            "img_intensity2: img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [
+            "grid100: grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [
+            "rotated100: rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [
+            "staggered100: staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "k3p": {
+      "admission": "READY",
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "candidate_revision": "e36ba4acdb7f9424db9981ff248e93dfb6f0b256b8a7cf71af713b3a8d7f8e56",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "ede9568a6a6fcc211cb9e699308c17b3f89e16d4254a291f4516ada1f7c844a4",
+        "contract_sha256": "70396a335402895537f564093426ffaf8af0173ff6ec287e88964bf3bdbde768",
+        "control_binding_sha256": "3d5fcd5ca7303f921ea0591e26c83afe9db36e3933f6baa4dfa02257f4d72936",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "b0322f1f1cf31ddfff1ee43da6671f305bbf7e3ce0ba8475f279313e87751adc"
+      },
+      "study_id": "recipe-prior-refactor-k3p-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "173beecb6b99b5a8460a27ef9138dc04d768de0768975046e2efc36624b9b844",
+        "clockfree_audit_measurement_v1": "b77926996edf56858bdc2b6480f9b791d0dfcb1eb9f467d950cfcb621cff6b40",
+        "cover_leftover": "a7ed4bb8df131017ccbadf8da93449899208fc1adf6dd9bfec763721926dbebf",
+        "five_word_joint_hold": "45759c9d45ebd48bb845067dd9c967c4ecdffa6ba479b8ce8a2e3d637b13d2f9",
+        "five_word_joint_smoke": "61f1c336708655b216dbe7b71894420e6636578206bd88869eb008b027e83939",
+        "gaussian1d_smoke": "90e7589fe9c5b7717c06095de04e7ac780510ce13a3603b36099d22ef73abe2f",
+        "gaussian1d_stability": "8e10ce2f927cf3a5a8ddd3554800b99fe07516fce223a45a6cfba49a1ac57abc",
+        "grid100": "2ee5ec98a874ab3d4940ef8b03f69c81a4b037be14e41eef8aaab45d0ddee8d0",
+        "img_bars4": "6b8c3915f04d1e7d5c8e689e0e602359156d28bde7cde07fb8660453d5424b2b",
+        "img_blobs4": "1b6dc98d70fbaa44ac76fca15387a6907cc6fe1ab12c44e94da60e9136424e21",
+        "img_intensity2": "8874aa67673a5130b3fd1e272021276ff765e82394665de2bbe97deb1efffdfa",
+        "img_stripes2": "27822f8c90ed04bc553c093f17e7619f084f165624662205c33bd16903b3b3aa",
+        "mid_scale_identity": "09ed4197f5575ef06c5ffdaf2ee503c8ee7099b74639bf252223fa988bee0871",
+        "mode_hold": "0cf6fc39d1f8959932e63df329d228306e9e9052a9e9e37668c4973b53538e72",
+        "residual_student": "c3d7ea4d833e4afb2a9dc44cf14d1c30130bc88764afd372dd1b30274cb29f78",
+        "ring16_acquisition": "e0533ee9cb0b957c32cceea522311dfbf873e73f7f6127b343c5e025e462b391",
+        "rotated100": "7b14f96f4c332b5a781358a8af5b608c6b3d3419dc2cf667b6a6e088f641c1d2",
+        "staggered100": "02d49af8bca4e7369ff650ed0584b1a4eba3d81539d573233fc8f33bf521f927",
+        "trajectory": "c2a8e8c62974c2b15e850243637ee91819514bfdd7737045df9be3525c51c688",
+        "two_pole": "572ff4b5381966767332788d2976ccff83dfc07a34cdef2d7c4f59bc95bfd241",
+        "unipolar": "48a8eecc068812bc0870019d31364bef7f1e0449e66f4df42043bdfcd35a2e81",
+        "unused_token_hold": "bfa7b153a878dd92ca8de746108cc8d31cdcc441058ba129bf5a06fa0a464424",
+        "vector_anisotropic": "d065dab849382a002b5670f8fb184d10e969de55f750dae0a841812787cad08e",
+        "vector_overlap": "b3e82c87a1f24f67cff8e62f0b619ac3fa935517076aa6c42020d2b09077a3d1",
+        "vector_spiral": "82b09c5229830a312cac2e0d5856171d30470ebd320d3b7c2c38790f7eef347a",
+        "vector_two_broad": "0709582388ce1f7ec446bfb2618917f54f637007ce514d395f55edcdc239333b",
+        "vector_unequal_mass": "c19d4ae1b073264c3b684e812d1749ee48a7a6c91d1e54ae0e5eb754a31617e7",
+        "vector_unequal_width": "a6bb736faa7f1e6eb7ebb410314b55c7075aebf97536ce93a3038a8a1b464942"
+      },
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "ka2": {
+      "admission": "READY",
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "candidate_revision": "cc3bec6763cfcdc5236ac8eb61f6dd2d952e84790322fad0bc05622f4f0a5e98",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "39cc362d90482e053bf47e352271b1179126e752f5301ddead3f8a063291a614",
+        "contract_sha256": "44ef77f23439d3c14aebbbdd140145da0a06c3625c7852980f966ed4b14e9431",
+        "control_binding_sha256": "efa9eebdc02526c39ce91f8997f76b79005f73af21e5d180fa5fc709407b12bf",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "043c8df6fa0df51deb3702bfc7190b404735bc9f19c4e46ecd7e2feed992149f"
+      },
+      "study_id": "recipe-prior-refactor-ka2-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "9d2cc6525f5ecb555d72164f151b19cc32e930a94919d51238b9c0928e46f1d3",
+        "clockfree_audit_measurement_v1": "3d43c1779b98cf6f9f7636eca24db2229ac7ebb3dd28dc96f5837314ecc740da",
+        "cover_leftover": "3ddbdf8af216639976ad60b1814fd7b91918d57f52d2fafbdc3670b0f6ef84ca",
+        "five_word_joint_hold": "5eae080fa03a9775536d4c1c9a09bf971147995e2277490fc2b522a3e81b1998",
+        "five_word_joint_smoke": "5572a708dc150391995b23f50edda66594b4d52a488dffc55fd4625dc503e2fa",
+        "gaussian1d_smoke": "3a7ce14e98a44d387290b608af28b9bfea7f41b98444eba04f2d2147230af029",
+        "gaussian1d_stability": "4f333461824d7bc1c881462a8b347a682aecfcab269cb7732df2fc5beefb9ef5",
+        "grid100": "7ce83b6885187060fcf1119427731c2fc501c20b963ad861015a50b5c54d6f78",
+        "img_bars4": "cca800bd76c8485ae157e10c5fd514a533439f8edd71efe0682d9e019c87121b",
+        "img_blobs4": "5ea828cd8378424c8458d64d8e78e8da6a94c955f451b7b11329728b7e463dd7",
+        "img_intensity2": "d45b549308d3db664e2871d9a86de10d558d8eeeb10fd92f16ea5d1f801b4b9a",
+        "img_stripes2": "3e72cffb23512d14fb9a303f992b0e2e6af56f6b7862b5e531b3865699f468ac",
+        "mid_scale_identity": "17fd06eda7aca3575ed759a59186b7d0a32c8abc561854648909612969ee21ca",
+        "mode_hold": "b8765fb81ab585015adb71216eae15eba2f07a8f0c46ce38ae0b4ce9207da70a",
+        "residual_student": "4054c0260c3de17e84d1d67657d5888ceef73ce709a6ffcb74839611452e3a67",
+        "ring16_acquisition": "709703a31823a79999c03c30f4c09044f084afbba69dc68a0bc26d2e6f79c628",
+        "rotated100": "de27a42415e05dc21ddebbecec096ae45a581b9777d175b952b00041d599e5f8",
+        "staggered100": "689c2f5cfcacadcd4bc9ea71ad3c096730bca8f8ac9cd5712411048a845e62b7",
+        "trajectory": "ae7bfdfa2c66a5a0ea0caf1b460518563ef5c311f410e0165a10c0e5b7e69242",
+        "two_pole": "f09c91c4d73141824c3b38ce6abaa93f3c4a6184266b107fb957f1c4e709fd6f",
+        "unipolar": "fd7a0add53752669b5127e632aaf464d4acf83563fdc9865b4b5955aadde1365",
+        "unused_token_hold": "e35209f90b23c37ac5948b1a5cd77baa366df4eea6343b4a0474826e1c9dcf58",
+        "vector_anisotropic": "2462abfa0540a7c882d5165a9669cd28c8fec98edbc2881f1d9cdf83aa66b651",
+        "vector_overlap": "b56ca09b86fb6fb8c0a5a96fc86a4c1355134ed844bbd137c201852bb77a2b9c",
+        "vector_spiral": "fbeacf18d9050f904a19ffed407b37d3d4eb7b387b776bb8425775311293025f",
+        "vector_two_broad": "d21e17fc17f92f6b5664ccec37a678bcc5fdbd70dc65f91ace08bf4bec3b72bd",
+        "vector_unequal_mass": "89b1b095a5de660200723ec434f1545c27f916c9f2f027890c0390cbecc5234c",
+        "vector_unequal_width": "be5e21991291dd05784d8b29d7e99ffb67f0d2ce1efd0d2a2c387131d2ba049a"
+      },
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "r1r2": {
+      "admission": "READY",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "6039e6e84b1199c680925ccba04cd75df255a08b520913ef6c0eae7970fc7313",
+        "contract_sha256": "5cd83a6bef30c5929fb8d9ed2590e32489dab5ea4b7c1d13a41d9a2fb11dd9f1",
+        "control_binding_sha256": "c205815d3a341aaea60df1eeea10831db4b828dbdca715a8c4b7d9906fa59c38",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "08aa35350fe6b6966f4555b86d266fa5bd84e2f8ac67466464797aad4b810a8b"
+      },
+      "study_id": "recipe-prior-refactor-r1r2-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "e0197be8eba8ccfbe7a5c4441f2239e1858370e91c3a0c3b65283bfb60520366",
+        "clockfree_audit_measurement_v1": "3407b53582f2b10e5a8e8ddb3b182b4b5ed749fd6d5300792c04af92e67af4f8",
+        "cover_leftover": "10ff7e118599e90ec81035e72da6d49ed775e1101a135706474d7f1289138b41",
+        "five_word_joint_hold": "7a497d9d4877810e4c241c8aa1ea4ac5f71b20bb9f93ad218e6cf7041352920e",
+        "five_word_joint_smoke": "5385f70787361b8d17f1162af95a6ba8c2f24ca46ba5ae692f307e2bfbb15a41",
+        "gaussian1d_smoke": "417509f0929b37aa57be3ebdbd68628362550b8ed1161513207339e8240207ab",
+        "gaussian1d_stability": "a2de44d30aeb64a64e3cc9da111a17f3a1c1e5362b534df1f46f778a9c65c84a",
+        "grid100": "e2d5d96fd758e573865f2aba6f95a8e2c0441fdb7db39dd146d3ad45b4d895b9",
+        "img_bars4": "97c81c1756c630bcf6ffec9de5114e17339b6b1229b124b0252915258944da81",
+        "img_blobs4": "c78bdfb30d080e1be390fdfffeea9286a5ca7c3f8ecce639cc77f52315afa053",
+        "img_intensity2": "cd4c5696f8bdcf5559196e94634133eeba8114f8914d1d0a59595e668c654493",
+        "img_stripes2": "73ff4b1d4ef4513fb2b04638357542ac3bf8c72b1c3316471717a77f4c6c363c",
+        "mid_scale_identity": "7151aafc8fbc4d1b9b7db9d761cd63b1b5a0862151efc1690b40b627da29b301",
+        "mode_hold": "ffdf2d0ecee3231fc7adbf0eb87a3327369872ed608290699a2507ad1866364d",
+        "residual_student": "7d6b17807aac126e72227867ba97aef344b573048e016863a42847324ecb3c9f",
+        "ring16_acquisition": "c7c0ef4a864a694f37415fc5dacb75965da6312a5a026561036981b8e58df9a3",
+        "rotated100": "949b189c39912236184311f07e1421b74466b0dcd1e27dac66b7b4e574f035fb",
+        "staggered100": "249fbe2f3a9d5e4b469bdf3a2d0d15043b747ecf32cfaed5f9650b8f5433cc34",
+        "trajectory": "a08968063cba08669c84d633702b3308d415f8fabff547c82fff8c31ffb6a4a8",
+        "two_pole": "8ac9f3d3087a77c4ba39fac2b845ca036c390a4ae7e218fe5f7a7a1f5f35bc1f",
+        "unipolar": "6e72399b0a1c37c5091c12c159012f876694f134225349e10be5194256544d5a",
+        "unused_token_hold": "f8e39c088d89a90f1f60f121dd341dbd94805d07c428e20e59ee0f687615db15",
+        "vector_anisotropic": "a920d46daa1f4c99b5a6dcd663f94846813cb35d0b636cd889d95f2a0433dd4a",
+        "vector_overlap": "7671d79e2dcf419fc36ad8fcfd2b5495708fc5ce5d3d5c889107f37908cc9bc4",
+        "vector_spiral": "983efdf50f56d83e24f9d314e2e3f8f49d230b47e3e1f34d949297cbb7bc5971",
+        "vector_two_broad": "6142bc2f1bd3fc7ac0dd97a1e307f62445eafb7b99292b2dd795127ecd347d3d",
+        "vector_unequal_mass": "4fbb4f30426dc9cd36f1df65e6bac5abd9487b591774d9207ced21dd3ef4c2a2",
+        "vector_unequal_width": "636dc8eba69442afa1a12e9e6804d0f054b91729c27e8e1014ad05a9d6d8fc61"
+      },
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    },
+    "release07-gan-v3": {
+      "admission": "READY",
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "candidate_revision": "e3c2cae91adf0ccbedfcbc529cd1442eba3cd4dfc8399c37f63aa6d097b50770",
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "preflight_blockers": [],
+      "protocol_seed": 0,
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "study_admission": {
+        "binding_sha256": "e9945e7149df21c66c12a78a3b23cfaae5dd5fd5395afcee72483b887fd6cc01",
+        "contract_sha256": "ce93dad258e26f375e43c54b7673713c068806979964495c5441c6e0a553f02b",
+        "control_binding_sha256": "081a70888641c797c05858e920ea7a1d857d5cad0d3b92b0f68c0582fda3389a",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "8baf384b375602dc09f60d376ab33c25b2108b87d0d4ae7d1d8d1f0ea3af3ced"
+      },
+      "study_id": "recipe-prior-refactor-release07-gan-v3-v1-ordinary-study",
+      "task_keys": {
+        "ae_gan_hold": "757c95f96953c9063192710395d042a16725f6efb0febe956907a6da3173969e",
+        "clockfree_audit_measurement_v1": "8401f905e4e964a2a7c8aafe94d6a175d08134c441ef7e3f14ebb95f42f8fbf6",
+        "cover_leftover": "26234f16b2c1f680fa01928aa42a73959ede68099fc5a8821338b12e7fe3964e",
+        "five_word_joint_hold": "41d613a9cc5d32f80bd5b244e4b710ebfbf7523ae481d8f61f670947e0f58e39",
+        "five_word_joint_smoke": "9f849896f8835073e63389a3a93f9009f83856b12a66e961af439886eb4fc191",
+        "gaussian1d_smoke": "b24d5d85a45f7c7f9c7863d09893ac0dc5fc05818458c6a2fcda30e3890cb7d7",
+        "gaussian1d_stability": "c8bf15bb96417bb2bfa4beb321eba56ffd588615fa9c41490d6d23362b7814a4",
+        "grid100": "e6d36326fb6c4ec7e4b7547aea00e9c03893a1e285374a73264d06b42ec4c7a1",
+        "img_bars4": "df4ea812c01ad7be5c05af92340566c5ae02851b9828d5d0ca6f77db247243bc",
+        "img_blobs4": "f767cfbc642585bffdd05284d9d4209a319b3f61b14eef381955bde8e4afcd6e",
+        "img_intensity2": "5170de165dacc99bb8fc21024383729679697e602d4a244bcf8e48549e28985d",
+        "img_stripes2": "155e8e4102dd3b409a270db01e2e86e51940eea68ba9687e107181c41d75d02a",
+        "mid_scale_identity": "af1148c17f78f5fc59f1e9a056765fc10b3c4996d888cff73c28a23c51d45d8a",
+        "mode_hold": "aeb1761fd460e5a0b342c4d59a7bacb7f60857a9232d34e4311a04dbe28c31d3",
+        "residual_student": "733245c8412c279d30fcff33a1df19ee4a498a308783faa27712dbfa3153f942",
+        "ring16_acquisition": "c14e522aabd6df25a41952abe50b56e13880e5018f49abfec0340ea239ade4ca",
+        "rotated100": "ae4853a2a8347fd74fabed3f210d8a22eb7061eee507ec466ee8e53af665361a",
+        "staggered100": "685a0ea728d839c014fe907ba1b808bfc7c7d398ad5386af51b408217d59a98e",
+        "trajectory": "490a124929ae5277daf328a514e3314c3dd4f3177496d44b5f7f8ec2e19919f4",
+        "two_pole": "dc5148d02761933e5a70bb873a7aacf5e09c1619bd3850c9519aa670c039bb2c",
+        "unipolar": "945a6bc1ca5269aa354ab72366fd294b09a5f155edc6f5a51db24923a8dc22cf",
+        "unused_token_hold": "eb347ce25ebd7de717167335ca7d522f9534709e450be6562953e27b3e94224e",
+        "vector_anisotropic": "9c494bdcb02bfd403578ee51e062af1d061ef82ad644dc6ee7482f75260d5744",
+        "vector_overlap": "8e0b53caa591c72cfb1b54cb971750708e625f2413c818e800cc01a3613c9511",
+        "vector_spiral": "98b42b5d484c2a21c9c8389971cac25b9ff38b1614e1ed9b66f279b7d3482d0d",
+        "vector_two_broad": "2363b44c36ce2d18f5cddeeff1b4784be4dfc088290bb17ade95eaec7d91766a",
+        "vector_unequal_mass": "ccf627927f28c5b5f94783fca336701be18b33d04af302951ec6f11e24341028",
+        "vector_unequal_width": "cf6b76c523197bb1c5308d77a23405156d049c739d067402bf353e07ea7458f1"
+      },
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "execution_group": "five_word_joint_smoke",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "importance": "diagnostic",
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "execution_group": "five_word_joint_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "importance": "required",
+          "order": 20,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        }
+      ],
+      "worst_case_seconds": 43020
+    }
+  },
+  "interpretation": "Remeasure every selected leader at the new prior contract; no archived qualification is rewritten and no superiority or default selection follows automatically.",
+  "lineage_declarations": {
+    "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+    "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+    "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+    "configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json": "16e248f5e004b906c1455ba022063173f122406dfad12ee4372b204d931a4ef9",
+    "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
+    "configs/forge/ideas/bcap-default-baseline-direction-v1.json": "38f5b4d8a6b08562d331b1a41dda972c04961d45693fd50046bd2b384dc9df41",
+    "configs/forge/ideas/e22.json": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0"
+  },
+  "prepared_commit": "85404a97dea6a987637b2ce9488e5ea2be081f44",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "recipe_prior_refactor_ordinary_measurement",
+  "storage": {
+    "admission_min_free_bytes": 21474836480,
+    "estimated_bytes": 16106127360,
+    "max_archive_bytes": 19327352832,
+    "stop_min_free_bytes": 5368709120
+  },
+  "through_tier": 2,
+  "view": "discriminator_stability",
+  "view_revision": 9
+}

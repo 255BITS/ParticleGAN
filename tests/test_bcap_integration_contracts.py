@@ -14,13 +14,17 @@ def read(path):
     return json.loads((ROOT/path).read_text())
 
 
-def test_original_full_suite_conditions_preserved():
+def test_original_full_suite_conditions_preserved(tmp_path):
+    import shutil
+    from tests.archived_forge_contracts import restore_archived_contracts
     path = ROOT/'reports/forge/bcap-develop-integration/original-task-contracts.json'
     if not path.exists():
         pytest.skip('prepare study before verifying registered contracts')
     originals = json.loads(path.read_text())['tasks']
+    shutil.copytree(ROOT / 'configs', tmp_path / 'configs')
+    restore_archived_contracts(tmp_path, 'bcap_legacy_questions')
     for name, old in originals.items():
-        new = read(f'configs/forge/tasks/{name}.json')
+        new = json.loads((tmp_path/f'configs/forge/tasks/{name}.json').read_text())
         current_execution = deepcopy(new['execution'])
         for field in ('transport_consumer', 'transport_contract'):
             current_execution.pop(field, None)

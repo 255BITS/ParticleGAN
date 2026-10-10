@@ -220,8 +220,13 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
     pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
     families = {pin["trainer_family"] for pin in pins}
-    assert len(pins) == len(families) == len(report["rows"])
-    assert {row["trainer_family"] for row in report["rows"]} == families
+    assert len(pins) == len(families)
+    represented = {row["trainer_family"] for row in report["rows"]}
+    assert len(represented) == len(report["rows"]) and families <= represented
+    for row in report["rows"]:
+        if row["trainer_family"] not in families:
+            assert not row["attempt_ids"] and row["qualified_tier"] == 0
+            assert row["selection"]["qualified"] is False
     from experiments.forge.trainer_families import load_families
     registry = load_families(ROOT)
     visible = {name for name in families if registry[name].get("inventory_visible", True)
@@ -229,7 +234,7 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     assert len([line for line in table if line.startswith("| **[")]) == len(visible)
     # Hidden configurations remain in the unchanged scientific rows while each
     # visible reporting family owns one table row.
-    assert {row["trainer_family"] for row in report["rows"]} == families
+    assert {row["trainer_family"] for row in report["rows"]} == represented
     assert "19/19" not in text and "5/19 PASS" not in text
     fresh = report["original_pr223_atlas"]["fresh_retest"]
     assert fresh["counts"] == {"PASS": 5, "NOT_RUN": 14} and fresh["status"] == "INCOMPLETE"

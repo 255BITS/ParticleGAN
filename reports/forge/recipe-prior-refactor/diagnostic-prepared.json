@@ -1,0 +1,92 @@
+{
+  "approved_stage": "73430318b8f6450c",
+  "campaign_budget_seconds": 308280,
+  "candidate_budget_seconds": 44040,
+  "declarations": {
+    "configs/forge/studies/recipe-prior-refactor-k3p-v1-diagnostic-study.json": "04250468d6726662ffc3706eef7320b2bd4a40b2b75cbb9fdce3b61606705793",
+    "configs/forge/studies/recipe-prior-refactor-ka2-v1-diagnostic-study.json": "83fa5aad36727de8350933d7b0805a31a30f19de41d8ede08cbb547fcfaabb05",
+    "configs/forge/studies/recipe-prior-refactor-r1r2-v1-diagnostic-study.json": "8a28b6aaf06bb6bd15d68158caf9fed9f1361ded81fd1be1da4f3265ac7e27de",
+    "configs/forge/studies/recipe-prior-refactor-release07-gan-v3-v1-diagnostic-study.json": "bb49ab3fab7538eaff55024d11bb13fb2b8eb6ee14bdecc15889255e172f04ba",
+    "configs/forge/views/recipe-prior-refactor-k3p-diagnostic-v1.json": "19108bd5295598dc1a639383235850621f75a6e0f3aee0f49276f6cb18130591",
+    "configs/forge/views/recipe-prior-refactor-ka2-diagnostic-v1.json": "20775ce2658dc38bf6475f18fab67587788863f30163c5394547cda6683d7c56",
+    "configs/forge/views/recipe-prior-refactor-r1r2-diagnostic-v1.json": "c2c818cfae64af269b8914d3afe0ce2943200028813883c786ed5f07679cf6be",
+    "configs/forge/views/recipe-prior-refactor-release07-gan-v3-diagnostic-v1.json": "726d4f3b61112f3cd279a499c4dcfcd2eb5856be3d263371dfbc9e1b05c709c1"
+  },
+  "exact_source_files_verified": 1206,
+  "interpretation": "Separate unreached-task diagnostic measurements; prefixes are duplicate namespace dependencies, not replications. All ordinary failures and blocks remain unchanged.",
+  "ordinary_registration_sha256": "6dc4a66dafcf347719c31e70df038cffc158baf43979acf1fca22bc7787c4050",
+  "plans": {
+    "k3p": {
+      "admission": "READY",
+      "candidate_revision": "e36ba4acdb7f9424db9981ff248e93dfb6f0b256b8a7cf71af713b3a8d7f8e56",
+      "duplicate_producer_allowance_seconds": 1020,
+      "namespace_keys_disjoint": true,
+      "ordinary_request_id": "e4a71c585ef2fcdedc1feb69",
+      "ordinary_result_sha256": "e60d55aa907c8d5dfd7801f6e2568edf37c45a927583c8595b162fe68a607a8d",
+      "own_successful_prefixes": [
+        "five_word_joint_smoke",
+        "gaussian1d_smoke"
+      ],
+      "request_budget_seconds": 41520,
+      "study_id": "recipe-prior-refactor-k3p-v1-diagnostic-study",
+      "tasks": 23,
+      "unreached_tier2_tasks": 21
+    },
+    "ka2": {
+      "admission": "READY",
+      "candidate_revision": "cc3bec6763cfcdc5236ac8eb61f6dd2d952e84790322fad0bc05622f4f0a5e98",
+      "duplicate_producer_allowance_seconds": 1020,
+      "namespace_keys_disjoint": true,
+      "ordinary_request_id": "50d56475de5dd3435bb4e9ea",
+      "ordinary_result_sha256": "e9dd06102ad06827feafd8c48aa8cf78a9eca0887e3c1a890057a38ba09f7740",
+      "own_successful_prefixes": [
+        "five_word_joint_smoke",
+        "gaussian1d_smoke"
+      ],
+      "request_budget_seconds": 41520,
+      "study_id": "recipe-prior-refactor-ka2-v1-diagnostic-study",
+      "tasks": 23,
+      "unreached_tier2_tasks": 21
+    },
+    "r1r2": {
+      "admission": "READY",
+      "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+      "duplicate_producer_allowance_seconds": 1020,
+      "namespace_keys_disjoint": true,
+      "ordinary_request_id": "f718172c73d62a35bcdfdc42",
+      "ordinary_result_sha256": "eeb4b615cb5edcd38914c679fd3e26d23ca9ddda0bbddb8605c4cd10658bc4bc",
+      "own_successful_prefixes": [
+        "five_word_joint_smoke",
+        "gaussian1d_smoke"
+      ],
+      "request_budget_seconds": 41520,
+      "study_id": "recipe-prior-refactor-r1r2-v1-diagnostic-study",
+      "tasks": 23,
+      "unreached_tier2_tasks": 21
+    },
+    "release07-gan-v3": {
+      "admission": "READY",
+      "candidate_revision": "e3c2cae91adf0ccbedfcbc529cd1442eba3cd4dfc8399c37f63aa6d097b50770",
+      "duplicate_producer_allowance_seconds": 1020,
+      "namespace_keys_disjoint": true,
+      "ordinary_request_id": "45cbafd031d4b029ddf3dc25",
+      "ordinary_result_sha256": "b1d73b2bf3b6e38cb4e0ad2b05548c187d74a3fd318d1517fa0a558264c3cdcd",
+      "own_successful_prefixes": [
+        "five_word_joint_smoke",
+        "gaussian1d_smoke"
+      ],
+      "request_budget_seconds": 41520,
+      "study_id": "recipe-prior-refactor-release07-gan-v3-v1-diagnostic-study",
+      "tasks": 23,
+      "unreached_tier2_tasks": 21
+    }
+  },
+  "prepared_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+  "qualification_input": false,
+  "registration_sha256": "2a891c270be055db34d862f2d6d606c9d48e40cc32562442d3db7298e63912b6",
+  "schema_version": 1,
+  "scientific_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "scope": "recipe_prior_refactor_diagnostic_preparation",
+  "status": "PASS",
+  "zero_tier3_requested": true
+}

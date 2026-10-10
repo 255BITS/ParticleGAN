@@ -36,8 +36,8 @@ A family label never authorizes pooling source, runtime, prior or sampling ident
 
 | Owner | Binding |
 | --- | --- |
-| Task | Prior, architecture/data, initialization, update limit and scheduled horizon, particles, latent dimension, batch size, evaluation and sampling |
-| Technique | Optimizer/penalty family, loss and encoder modes where supported, update and serving policy, structural switches |
+| Task | Initial prior distribution/capacity and sampling, architecture/data, initialization, update limit and scheduled horizon, particles, latent dimension, batch size, evaluation and sampling |
+| Technique | Prior learning/freezing and regularizer family, optimizer/penalty family, loss and encoder modes where supported, update and serving policy, structural switches |
 | Hyperparameter | Learning rates, moments, coefficients and schedule settings within a fixed technique |
 | Protocol | Seed, named RNG derivation and streams, fixed comparison and robustness policy |
 | Study | Candidate/control selection, hypothesis, predictions/falsifiers, finite campaign caps, stopping rules and generated provenance bindings |
@@ -45,9 +45,17 @@ A family label never authorizes pooling source, runtime, prior or sampling ident
 The task owns external model architecture independently of `Recipe`. Recipe
 fields such as `model`, `conditioning` and `encoder_mode` describe technique
 controls on the scalar trainer path. Existing behavioral tasks instead own their
-original component topology and objectives. In particular, scalar trainer
-`prior_reg` is a numerical configuration setting, while behavioral hosts retain
-their own objective and particle regularization. AE routing settings remain
+original component topology and objectives. For `execution.prior_contract: "recipe_owned_v1"`, the recipe owns
+`prior_update` (`learned`/`frozen`), `prior_regularizer` (`vicreg`/`none`),
+`prior_reg`, `prior_reg_target_std`, `prior_reg_eps`, and `prior_l2`. Every host
+uses these values exactly once; host VICReg/L2 constants become inactive
+provenance. `vicreg` means a variance floor plus off-diagonal covariance penalty,
+without a paired invariance term. Frozen priors receive no penalty or optimizer
+group. Direct output coordinates on nonsampled hosts remain generator parameters.
+
+Legacy tasks without this contract retain task-owned `learnable` and original
+behavioral host penalties under their archived source identities.
+AE routing settings remain
 configuration fields where its public encoder consumes them. Other behavioral
 hosts own their original routing/objective definitions.
 
@@ -65,6 +73,11 @@ and cannot supply an effective task prior. New schema-v3 candidates omit prior
 conditions and task-owned resource overrides. An explicit candidate initializer
 is a capability/compatibility requirement; the task still owns initialization.
 See the [complete candidate/task/study example](forge-studies.md).
+
+New ordinary task cards omit `execution.prior.learnable`. The recipe controls
+updates after identical deterministic location initialization; freezing cannot
+change the initial draw or RNG consumption. Receipts retain the task initial
+prior separately from the effective recipe policy.
 
 Every resolved task can emit an ownership receipt with each recipe field's
 effective value, owner and source, plus its prior, initialization, architecture,

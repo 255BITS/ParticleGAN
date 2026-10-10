@@ -262,6 +262,9 @@ class _Run:
         counts = {"generator": updates(trainer.opt_g, trainer.G.parameters()),
                   "discriminator": updates(trainer.opt_d, trainer.D.parameters()),
                   "prior": updates(trainer.opt_g, trainer.prior.parameters())}
+        from .priors import recipe_owned_prior, prior_policy_receipt
+        if recipe_owned_prior(self.task):
+            evidence = {**evidence, "prior_policy": prior_policy_receipt(self.context.recipe, trainer.prior)}
         a2 = trainer.prior_mechanisms["a2"]
         mechanisms = self.mechanism_audit.receipt()
         hooks = trainer.opt_d.record.observed_steps == trainer.completed_steps and (

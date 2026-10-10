@@ -1,0 +1,441 @@
+{
+  "archived_only_selections": [
+    {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "99d6be9733df4b3bb92a2f684dee323fbc27d8029ea135387bf8462fce53abb4",
+      "cohort": "50095fa4a183a46a0642db688c25b9167d47e061c4c91845c9cb9c7cb1c065ce",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "dd4d54e2014cc1c2674a30e181dd24f669f06c75e7db726238627202e48f76e5",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "7b7e2a01f21f68a6db89b3e46df6a5a3bc3abdfc39a0c342a46a61f1528c4f1f",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "cf74cf0b65bc9a43da92cf946a005b2fa50b9bd4b45dc2309b9fc571fd789b87",
+      "trainer_family": "bcap"
+    },
+    {
+      "candidate_id": "bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+      "candidate_revision": "28dbd1d102e80864214e64d09483b5d228a115ff2a033059fac254ad8b750e10",
+      "cohort": "a2e4e076c2fa5c344214fee632e228197f6a1da9394d9728d35d80b95d6864a7",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "0788715704a63c02408ebcd95a0be205acb9c2ebb04e44279c69c608dfe312d9",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "e0adeb857569cc121da457824725a6049ed1d05e4847498862108dfe6e8b8659",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "13ed4ef33b06b964e508bb8dbbcbfed17afaa9df74743ee6eaa6c948be5cd4bf",
+      "trainer_family": "bcap-ada-nsgda"
+    },
+    {
+      "candidate_id": "bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+      "candidate_revision": "63a07407f8e979c0b8c732f2c1ff3e4eaacf98a1b8590e289aafe53e9664c328",
+      "cohort": "5ca9201d24a4903958b157199425569511c38a9fc2e0bb884024ce39bb2a4266",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "8f11b8fd8624dd6a14d4544d200b4ad2b87dc8b4699b777c179ce8771d55734e",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "3d3dad575088f55a19dc587eae43ca49a9254845646d419df4a0e7f20d49cff7",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "65f22eb1c3bbfbc468740698f856bdd38650c584ad0cd2f8883d97cf25ec1742",
+      "trainer_family": "bcap-dualnorm-d-only"
+    },
+    {
+      "candidate_id": "bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0",
+      "candidate_revision": "f0c906ee633a839ead1462d689ea3bae3b1f8d54a52963aa3a971ddf620d0d79",
+      "cohort": "e0d1ac78b84b142087552842e30b4c37581743e660253377e095d9327c6af6a6",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "beee83a6a40d81a8812f2b405b98c122cecb204dcf1095c892ddfa66c36ec4eb",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "182411d112c10c1377b12bd69267206a07e4ef0b2a680ea835cc640025f90dbd",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "175f220b96b8f9e885f43e627b24e707fa77f39946555073329e17239e7c142a",
+      "trainer_family": "bcap-nsgda-global"
+    },
+    {
+      "candidate_id": "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+      "candidate_revision": "8f7edd286069bcdae95a7cc074219e37d79abe7b1987a8126075a3f856dde8bf",
+      "cohort": "9f0030bcef8b2be41c6eb1888d7ddbff125751c1c65fdc2f3dd17279ca8ea989",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "9bcf4cb4c78ddb019e9c7d2a822cdc78e84ae54078d999d62e672138aa9f17ac",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "adaddee1f6b46d6ad2361f6ee83a37484d9e45993a5c987547980452c5b53799",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "811bfc16948fb9be4de07c9adeffe087e2ee1ef4aeda03b37bdf82055f57551c",
+      "trainer_family": "bcap-nsgda-layer"
+    },
+    {
+      "candidate_id": "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
+      "candidate_revision": "5d206772a376455f162eed462bfc22a9b780879dec02f4e6c373ed2f2c4175d6",
+      "cohort": "cff8135a94225b6be0a1e071069377aa78877ebb6de2dcfdf324ec35770e130a",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "a3f2664aeb0dbe0e26fcbe34db2bdcc716d566a8246324e32da7d1ffd5593c1e",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "1a2a9888e1a4210f9509c356c85c9c57aefb3a9d1c0f6864ea688f0dc7d43ff1",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "ff5806f15e7e30100422e2b9b223928e070dabb5e792fa6adfbae5cab1ab9b88",
+      "trainer_family": "bcap-particle-rownorm-only"
+    },
+    {
+      "candidate_id": "bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201",
+      "candidate_revision": "a3ac73c88944436947096efcc10182be70fca2085cba76c5f353f2db9a67acd9",
+      "cohort": "403fc0396f8a01260a4d036e2df365c477bf9f4ac17e262cd6088b0403e6cbc2",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "b4ad4d0532ef5a346991b5e5d82b97ba3e2f2acf1cd236688e6420e3150149f1",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "27bf506af3cefc056b0f1730561d91b15a19ae06467b4d2add5de8e4e1a3c173",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "a41d7c1ade362f61d024626177652c2261fa81f0f6f50a0ec8fa6deda5e24726",
+      "trainer_family": "bcap-sgda"
+    },
+    {
+      "candidate_id": "halloween-optimizer-loss-v1",
+      "candidate_revision": "5d3f770971ed640fe1ca57e37a5188a6815c8dcfde9eff6c099b43b52ce2b4d4",
+      "cohort": "34cdc04bee110e84099597eb17df05d1ad03705097e4c3920db4f30a3459234e",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "836c354f618219207ef1c9bfec262db3165f70e24ffeaf8ed63dc210584cb604",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "394c3fd87211f1fbeb9380477f0cbc41cae52f86ae1762799a39e2a4b45e1139",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "255ab86531fd2404c1574de1f23bb0bcb52be27f363366de697d29c8e8bd09ce",
+      "trainer_family": "halloween"
+    },
+    {
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "91a9e4b6983339c47ebeb3270caa2320d526005eb6f7647ae5adddbf2e33085e",
+      "cohort": "04f458311f4be4d7b55628dddff7ba445222ca9c75a8aa4ac45141e4e9ec8b2b",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "b5336a1b519266774c70d1ce850b663f3f413f414c9afa307842991ae77a5105",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "20beaaaf9c8a64c90134b0bb0a8cc5c5fcd6b54796ddebb15820e01fb8d80a70",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "d46c6dcfabdd7fdc76572d70ab9d292dadb7f6260468088f9e267a16ade10393",
+      "trainer_family": "k3p-no-a2"
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "c9555e78276bc281bd644436029a4f319b147facfea3ada15ac5060de05e1b9a",
+      "cohort": "4ac6c8c68ff75456b11ba41182504220f416a21ff482c98c38b4dba1254f553a",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "00852c190ca23aa1e5180d367352db1d79aa15fe4f490aae311d9ca2fc214ad4",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "059e2ffc1a621acc59a177c781829b0519b31c4218c8f012c0e5419242aa7319",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "057cbc3b4687b0535d9f73933d4e58a904e73f8a5bd4d497c286838e078d72f5",
+      "trainer_family": "k3p-no-anchor"
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "9cec81de1982624f65911afa194031f15cea6af9a895b03ed91fa84d426a2634",
+      "cohort": "f4dbcf69751c614b5f89c4bfa425f9e3c872598e3da8fd18682919cb69fbbcd4",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "d7bbd3f01ec129c1ba2656067834c361d360dc602ef1fb5dd85b5a16e61fd367",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "15a9d83cee8b86c48bf3d72759fe3584c1caf6fcfb1e4a4f4e077fe753ad1a58",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "c98e0e09e2e7c5a919832cea12632b567b0ca2143ff0b2504f9302392acc1a46",
+      "trainer_family": "k3p-no-penalty"
+    },
+    {
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "81454a9af94082f7b59b2a0354980d86454a4efd47264951163c77f428ff6dec",
+      "cohort": "f42e7ed12c9ac3a64049c3c37f1d1807f02af01c3809f83aac5629dc94327f72",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the previously selected configuration in its verified new-policy source cohort; no outcome-based recipe reselection, qualification transfer or default adoption.",
+      "recipe_sha256": "37c9ed4648989a38a415b7b0c6b2982078304b7c018c0434077f5de173489dba",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "242a616314a9e925ead6c44e3b01334103207b2b4f3627552528393152d6de88",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "7472bba2b8ef815238890be11abd67d85520c9e6e8ddcfef74dad69ec8904be5",
+      "trainer_family": "k3p-no-training-noise"
+    },
+    {
+      "candidate_id": "bcap-pure-adam-v2",
+      "candidate_revision": "806ae1707bf9ca246f21fc3a4a11eb8b536dc3002bf5c1febbbb166ad141dfcc",
+      "cohort": "d5b60bbfb8572dae1be7de3d1c951499ca7cec4e91824b8154dfcd5257d13510",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Preserve the exact existing unmeasured CUDA declaration when measured family selections use different sources. No attempt, measured gate, qualification or default-adoption credit.",
+      "recipe_sha256": "63e977967aa9931ac7ed5d0280e06de993f1a2052e230367b00bcc03cbbd6201",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "5d0477e340736e721ee80f7f1bd04e5a977242a62c9be99c8f77868ade51892b",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_keys_sha256": "b2aa8e38dceabc14d06ed5f022feb9ff9af0416c92f173afdab9129540e8efd5",
+      "trainer_family": "bcap-pure"
+    }
+  ],
+  "baseline": {
+    "path": "reports/forge/recipe-prior-refactor/baseline.json",
+    "sha256": "6bffbf589ae8523c804ce6401a873a03b1ed4cb548bc1b7cd4b0c632ca790013"
+  },
+  "binding_proof": {
+    "path": "reports/forge/recipe-prior-refactor/binding-compatibility.json",
+    "sha256": "a749231ab3add3359aeed5fd3e473070f791e7ee5bb2878d91cdfb33671a4ff6"
+  },
+  "leaders": [
+    {
+      "blocked_without_execution": true,
+      "candidate": {
+        "path": "configs/forge/ideas/atlas.json",
+        "sha256": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65"
+      },
+      "candidate_id": "atlas",
+      "candidate_revision": "8ed57a6c3701fe104a9a9d002ae5ae307a22b3165afca46937a640d8e7e5a74f",
+      "configuration_family": "atlas",
+      "family": "atlas",
+      "original_candidate_id": "atlas",
+      "original_declaration": {
+        "path": "configs/forge/ideas/atlas.json",
+        "sha256": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65"
+      },
+      "original_pin_sha256": "41f361737de3eab0638f8aebd8334eff9b70378d06ab7604910c9f66fc1fd256",
+      "recipe_sha256": "ff54dd60ae56176b5f99ab5ba41d4d60dda5649bdb721e5f23074cf92a0810e3",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-atlas-v1-ordinary-study.json",
+        "sha256": "bc815b459e8cd904ec95196f899145fa2d4d4dbfa4fa7341de8b36819b418894"
+      },
+      "study_admission_sha256": "d9efdc2a308109ee8c48e9c5a91126ba173b8076846a4931e36b50f3c189e9e1",
+      "study_id": "recipe-prior-refactor-atlas-v1-ordinary-study",
+      "study_sha256": "139c99446b6f5f4f8421595ace176701ed24c39b1eac6342681644c4e29ed9d6"
+    },
+    {
+      "blocked_without_execution": false,
+      "candidate": {
+        "path": "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json",
+        "sha256": "88e229a18bd66149d192a94f9fb39f7c36758c5b2cee7f8e5201c0163ed57c2e"
+      },
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540",
+      "configuration_family": "bcap-dualnorm",
+      "family": "bcap-pure",
+      "original_candidate_id": "bcap-default-baseline-direction-v1",
+      "original_declaration": {
+        "path": "configs/forge/ideas/bcap-default-baseline-direction-v1.json",
+        "sha256": "38f5b4d8a6b08562d331b1a41dda972c04961d45693fd50046bd2b384dc9df41"
+      },
+      "original_pin_sha256": "b0ab45c957ecc99ceffe3bdce50cc6fde426f662a9a475281412c0612bcc7e5e",
+      "recipe_sha256": "ce7b38ad56d78d20bc2b195b17f8e602b9d8e19c82f2ff4dce49c57b16f7ae47",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-bcap-pure-v1-ordinary-study.json",
+        "sha256": "46cd5543a66235ffc6ae7f318080eeb015b7e0a69315309f3ae062f5cca6a569"
+      },
+      "study_admission_sha256": "7df69a710bff5e8e37d2d9fba6d6a5b297117a99a25cbbf43bf0de42860681ac",
+      "study_id": "recipe-prior-refactor-bcap-pure-v1-ordinary-study",
+      "study_sha256": "dcb233ec4443f8b7b4dddbaf4e32eb2302f90a9a882226f7844e048f433ee6ac"
+    },
+    {
+      "blocked_without_execution": true,
+      "candidate": {
+        "path": "configs/forge/ideas/e22.json",
+        "sha256": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0"
+      },
+      "candidate_id": "e22",
+      "candidate_revision": "26bc81696c14502e279a40afcf91ebfeed4c97777bc29579b1c1c9020876407c",
+      "configuration_family": "e22",
+      "family": "e22",
+      "original_candidate_id": "e22",
+      "original_declaration": {
+        "path": "configs/forge/ideas/e22.json",
+        "sha256": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0"
+      },
+      "original_pin_sha256": "b7da7f5874057e680aa330a9c80f283863c9f9ddb3ef178b62c3c8b3204aeadb",
+      "recipe_sha256": "f90e05882a9a482be6c8b3dd9bce826c3e774c8577de3bbee2304eb2f421475a",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-e22-v1-ordinary-study.json",
+        "sha256": "d6b5c5b38f3547d9b0c6c22ff6e17207a8f08084736366385f734006f062ae1e"
+      },
+      "study_admission_sha256": "9267288311bd7fa4f1ec95d3c59368e0cfe1b911477f236a8e3c8570a6f1701e",
+      "study_id": "recipe-prior-refactor-e22-v1-ordinary-study",
+      "study_sha256": "1951d8b207b7b752801255d1cb894efd1be4458b42b4e749a050e470ea8d1524"
+    },
+    {
+      "blocked_without_execution": false,
+      "candidate": {
+        "path": "configs/forge/ideas/recipe-prior-refactor-k3p-v1.json",
+        "sha256": "debf168d57b695c7ea49762478a0714336ca7e41a305e88d77e423661a16a04d"
+      },
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "candidate_revision": "e36ba4acdb7f9424db9981ff248e93dfb6f0b256b8a7cf71af713b3a8d7f8e56",
+      "configuration_family": "k3p",
+      "family": "k3p",
+      "original_candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "original_declaration": {
+        "path": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+        "sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9"
+      },
+      "original_pin_sha256": "5a4b54e1b085e9c7dadaf4dab228c47f7e8f77ca2cf5acb61881c274259211b4",
+      "recipe_sha256": "62d56b3e0ecbb228ecd350d7738e10750f56d8f85926ecfda9e51bd118f9827e",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-k3p-v1-ordinary-study.json",
+        "sha256": "c80074f75aa83c7adfab1f465387c5985c5dc16dd37cd94fb272407bbaff7a97"
+      },
+      "study_admission_sha256": "e3d4e564abb32912811f28f23d299af7ac0f8af2a21fe3479de1915fa22bcafd",
+      "study_id": "recipe-prior-refactor-k3p-v1-ordinary-study",
+      "study_sha256": "b0322f1f1cf31ddfff1ee43da6671f305bbf7e3ce0ba8475f279313e87751adc"
+    },
+    {
+      "blocked_without_execution": false,
+      "candidate": {
+        "path": "configs/forge/ideas/recipe-prior-refactor-ka2-v1.json",
+        "sha256": "28b214b7bcf69f209a293788fcdc0cd5c68d82db040b64d178f2cad3ced555b8"
+      },
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "candidate_revision": "cc3bec6763cfcdc5236ac8eb61f6dd2d952e84790322fad0bc05622f4f0a5e98",
+      "configuration_family": "ka2",
+      "family": "ka2",
+      "original_candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "original_declaration": {
+        "path": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+        "sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7"
+      },
+      "original_pin_sha256": "dae76946fa676658693fdb21a94def8ebf9075c721d7509fde885945a0a17924",
+      "recipe_sha256": "b89be1ae0de6c1764a29aed2f9b99780396bf292bff866836bca6eb58acd99ec",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-ka2-v1-ordinary-study.json",
+        "sha256": "94526b1cb25303eab570c877906024b8f73f09a66d33e60b815c067eb186ab9f"
+      },
+      "study_admission_sha256": "103dae5104a5174a42a09a085c9800d85d6fa1e33267089fefa1ce430ccd480e",
+      "study_id": "recipe-prior-refactor-ka2-v1-ordinary-study",
+      "study_sha256": "043c8df6fa0df51deb3702bfc7190b404735bc9f19c4e46ecd7e2feed992149f"
+    },
+    {
+      "blocked_without_execution": false,
+      "candidate": {
+        "path": "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json",
+        "sha256": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67"
+      },
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+      "configuration_family": "r1r2",
+      "family": "r1r2",
+      "original_candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "original_declaration": {
+        "path": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+        "sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c"
+      },
+      "original_pin_sha256": "f16709b4b3db967fa26f683aaefe91eacde9f365ce32c987395415a0ea7163e0",
+      "recipe_sha256": "3560330c83f6948066b6b9a338feb2eb939e29b1a9c2bed1082ed952982036ba",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-r1r2-v1-ordinary-study.json",
+        "sha256": "0111ca16643002681a60f894024eac4d37ef0022fedad192685c2d4958cac527"
+      },
+      "study_admission_sha256": "2dbb1bca6b20976ac1ef5576eef72d19e0f0034029c635e52b160e4cef6d456a",
+      "study_id": "recipe-prior-refactor-r1r2-v1-ordinary-study",
+      "study_sha256": "08aa35350fe6b6966f4555b86d266fa5bd84e2f8ac67466464797aad4b810a8b"
+    },
+    {
+      "blocked_without_execution": false,
+      "candidate": {
+        "path": "configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json",
+        "sha256": "394f9dfbbcd350f5fc6dae7f21aa6b83ebb57e8a3a37391c192ebb15616d48b4"
+      },
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "candidate_revision": "e3c2cae91adf0ccbedfcbc529cd1442eba3cd4dfc8399c37f63aa6d097b50770",
+      "configuration_family": "release07-gan-v3",
+      "family": "release07-gan-v3",
+      "original_candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "original_declaration": {
+        "path": "configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json",
+        "sha256": "16e248f5e004b906c1455ba022063173f122406dfad12ee4372b204d931a4ef9"
+      },
+      "original_pin_sha256": "ef25e5b59a0deee62062da2aaecc441f812f82e8c3e75fb044e1ec1dae0dfeae",
+      "recipe_sha256": "cdbd6fff626452e4292a54ee0b0d2fbf682958678d0e284cb7ffd9eb8521a537",
+      "study": {
+        "path": "configs/forge/studies/recipe-prior-refactor-release07-gan-v3-v1-ordinary-study.json",
+        "sha256": "4a9abf29661ef1c601a6625f0eb276cdf7af8c3adb08bbff517741553c163d75"
+      },
+      "study_admission_sha256": "15c6dc4647bde99a8c9ec844e86c0986b60676519bb5b42dfd3f9ed4134b3ae6",
+      "study_id": "recipe-prior-refactor-release07-gan-v3-v1-ordinary-study",
+      "study_sha256": "8baf384b375602dc09f60d376ab33c25b2108b87d0d4ae7d1d8d1f0ea3af3ced"
+    }
+  ],
+  "new_policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+  "ordinary_task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "clockfree_audit_measurement_v1"
+  ],
+  "original_policy_fingerprint": "82fc1342c6238a38fcc41820c93f2388b5c8ca53577958c8f3ddca3da027b1dc",
+  "original_selection": {
+    "path": "configs/forge/selections/family-current-v1.json",
+    "sha256": "1549db2b3b66fd1c50f44058ea92d770c559f0f1f7632ecd6d5c367e222ba64c"
+  },
+  "qualification_transfer": false,
+  "registration": {
+    "path": "reports/forge/recipe-prior-refactor/ordinary-registration.json",
+    "sha256": "6dc4a66dafcf347719c31e70df038cffc158baf43979acf1fca22bc7787c4050"
+  },
+  "schema_version": 1,
+  "scope": "selected_leader_recipe_prior_ownership_v1",
+  "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14"
+}

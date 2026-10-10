@@ -40,6 +40,10 @@ def software_checkout(tmp_path_factory):
         destination = root / name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, destination)
+    from tests.archived_forge_contracts import restore_archived_contracts
+    # This newer original baseline already declares optional transport hooks;
+    # it is a separate immutable cohort from the older inactive comparator.
+    restore_archived_contracts(root, "bcap_prior_baseline_questions")
     subprocess.run(["git", "init", "-q", root], check=True)
     subprocess.run(["git", "add", "."], cwd=root, check=True)
     subprocess.run(["git", "-c", "user.name=Software fixture", "-c", "user.email=fixture@example.invalid",

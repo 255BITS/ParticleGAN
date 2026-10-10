@@ -1,0 +1,77 @@
+{
+  "adapter": "ring_endurance",
+  "dependencies": [
+    {
+      "kind": "checkpoint",
+      "task": "ring_hold"
+    }
+  ],
+  "evaluation": {
+    "confirmation_checks": 200,
+    "eval_output_noise": "clean",
+    "evaluator": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py:ConvergenceGate",
+    "extension_steps": 300,
+    "hold_budget": 1200,
+    "kind": "ring_extension",
+    "max_total_steps": 7500,
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live",
+    "settling_budget": 4800,
+    "sources": {
+      "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    "start_step": 1200,
+    "thresholds": [
+      [
+        "modes",
+        "==",
+        8
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ],
+      [
+        "hq",
+        "<=",
+        1.0
+      ]
+    ]
+  },
+  "execution": {
+    "continuation_of": "ring_hold",
+    "execution_group": "ring_endurance",
+    "extension_steps": 300,
+    "host": "mode_hold",
+    "initializer": "deterministic_orthogonal",
+    "max_total_steps": 7500,
+    "original_schedule_horizon": 1200,
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "produces_state": true,
+    "protocol": "screening",
+    "steps": 7500,
+    "uninterrupted": true
+  },
+  "id": "recipe-prior-refactor-legacy-ring_extension",
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 3600
+  },
+  "schema_version": 1
+}

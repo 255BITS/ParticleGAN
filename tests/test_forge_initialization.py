@@ -193,7 +193,7 @@ def test_frozen_plain_native_continuation_checks_both_jobs_and_cached_task_chang
 
 def test_frozen_behavior_boundary_rejects_cached_initializer_or_host_objective_override(tmp_path):
     from experiments.forge.hostprofiles import validate_request_host_profiles
-    from test_forge_hostprofiles import bind_candidate
+    from test_forge_hostprofiles import bind_candidate, rebind
 
     current = current_request(tmp_path, [task("two_pole")])
     validate_request_host_profiles(current)
@@ -204,5 +204,11 @@ def test_frozen_behavior_boundary_rejects_cached_initializer_or_host_objective_o
     del current["candidate"]["initializer"]
     current["candidate"]["recipe_overrides"]["prior_reg"] = .123
     bind_candidate(current)
+    rebind(current)
+    validate_request_host_profiles(current)
+    # The recipe owns prior penalties; the task still owns host objectives.
+    current["candidate"]["recipe_overrides"]["reconstruction_weight"] = .123
+    bind_candidate(current)
+    rebind(current)
     with pytest.raises(ValueError, match="owned by the frozen host"):
         validate_request_host_profiles(current)

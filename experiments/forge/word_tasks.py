@@ -88,6 +88,10 @@ def _validate_confirmation(row, step):
 def grade(task, evidence):
     """Require the whole budget; reconstruct acquisition/hold from actual curves."""
     validate_task(task)
+    from .priors import validate_prior_policy
+    prior_grade = validate_prior_policy(task, evidence)
+    if prior_grade is not None:
+        return _verdict(prior_grade["status"], prior_grade["reason"])
     kind = task["evaluation"]["kind"]
     total = SMOKE_STEPS if kind == SMOKE_KIND else HOLD_STEPS
     if evidence.get("executed_updates") != total:
@@ -100,7 +104,9 @@ def grade(task, evidence):
     if evidence.get("completed_steps") != prefix + total:
         return _verdict("INCOMPLETE", "word completed-step labels differ from executed updates")
     counts = evidence.get("guards", {}).get("optimizer_updates", {})
-    if any(type(counts.get(role)) is not int or counts[role] != prefix + total
+    from .priors import expected_prior_updates
+    if any(type(counts.get(role)) is not int or counts[role] != (
+            expected_prior_updates(task, evidence, prefix + total) if role == "prior" else prefix + total)
            for role in ("generator", "encoder", "prior", "discriminator")):
         return _verdict("INCOMPLETE", "all four actual optimizer histories must cover every cumulative update")
     rows, confirmations = evidence.get("observations"), evidence.get("confirmations")
@@ -334,6 +340,9 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         scoring_weights="live", completed_steps=fixture.completed_steps, executed_updates=updates,
         guards=guards, rng_audits=rng_audits, continuity=continuity,
         **executed_receipt(JOINT_WORDS_CLEAN, eval_output_noise="clean"))
+    from .priors import recipe_owned_prior, prior_policy_receipt
+    if recipe_owned_prior(task):
+        evidence["prior_policy"] = prior_policy_receipt(context.recipe, fixture.prior)
     if fixture.transport is not None:
         evidence["component_transport"] = fixture.transport.state_dict()
     if checkpoint is not None:

@@ -38,6 +38,8 @@ def software_checkout(tmp_path_factory):
             destination = root / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, destination)
+    from tests.archived_forge_contracts import restore_archived_contracts
+    restore_archived_contracts(root, "bcap_prior_baseline_questions")
     subprocess.run(["git", "init", "-q", root], check=True)
     commit(root)
     return root

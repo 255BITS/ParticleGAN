@@ -22,7 +22,11 @@ GOOD = dict(sample_count=4096, finite_fraction=1., mean_error_sigma=0., std_rati
 
 
 def task(name='gaussian1d_smoke'):
-    return json.loads((ROOT / 'configs/forge/tasks' / (name+'.json')).read_text())
+    value = json.loads((ROOT / 'configs/forge/tasks' / (name+'.json')).read_text())
+    # Synthetic numerical reducer fixture under the explicit legacy contract.
+    value["execution"].pop("prior_contract", None)
+    value["execution"]["prior"]["learnable"] = True
+    return value
 
 
 def evidence():

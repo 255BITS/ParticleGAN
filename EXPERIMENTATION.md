@@ -155,8 +155,9 @@ in `configs/forge/studies/critic-anchor-v2-study.json`. Follow the
 [candidate/task/study guide](docs/forge-studies.md) and its complete small example.
 Edit the candidate's training mechanism and `changed_factors`; put the hypothesis,
 control selection, original evidence identities, predictions/falsifiers, finite
-campaign budget and stopping rules in the study. Tasks own the problem, prior,
+campaign budget and stopping rules in the study. Tasks own the problem, initial prior distribution/capacity,
 architecture, initialization, training allowance, sampling and sustained gates.
+The recipe owns prior learning/freezing and prior regularization.
 Planning generates technical hashes and execution bindings from these declarations;
 users do not copy hashes or task/source bindings into a recipe. Mark the reviewed
 study ready. Drafts and missing studies block admission before spend. Saved v1/v2
@@ -188,13 +189,17 @@ declare its extension and required capabilities on the idea. Avoid copying
 another candidate's launcher or training loop. Missing host support must produce
 an explicit blocker rather than silently dropping the mechanism.
 
-New ordinary tasks use learned MoG priors: locations learn, while the declared
-width and uniform mixture weights remain fixed by default. Particle-cloud hosts
+New ordinary tasks declare the initial MoG distribution and capacity. Recipes
+default to `prior_update: "learned"`; learning or freezing locations is an
+explicit recipe decision. Width and uniform mixture weights remain fixed. Particle-cloud hosts
 must explicitly declare `kind: "particle_cloud"`, `sigma: 0`, and an exception
 reason. Historical sigma-zero receipts retain their original identity.
 
-Every task must define `execution.prior` with `kind`, `sigma`, `standardize`,
-and `learnable`; it cannot inherit a prior from the candidate, preset or API.
+New tasks declare `execution.prior_contract: "recipe_owned_v1"` and define
+`execution.prior` with `kind`, `sigma` and `standardize`; they omit `learnable`.
+The initial prior cannot come from the candidate, preset or API. Legacy tasks
+without this contract retain their explicit task-owned `learnable` policy and
+original host objectives. Their archived evidence is not regraded.
 `kind: "mog"` selects the public `MoGParticlePrior` code path, while
 `kind: "particle_cloud"` selects `ParticlePrior`. A zero-width MoG and a particle
 cloud can describe the same distribution but retain separate implementation

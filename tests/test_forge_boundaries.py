@@ -19,7 +19,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _task(name="vector_two_broad"):
-    return json.loads((ROOT / "configs/forge/tasks" / f"{name}.json").read_text())
+    value = json.loads((ROOT / "configs/forge/tasks" / f"{name}.json").read_text())
+    # Explicit legacy cohort: archived task-owned policy and host penalties.
+    value["execution"].pop("prior_contract", None)
+    value["execution"]["prior"]["learnable"] = True
+    return value
 
 
 def _recipe(task, **overrides):

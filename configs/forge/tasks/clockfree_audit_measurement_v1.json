@@ -16,7 +16,7 @@
     "sampling_law": "public_prior_without_output_noise",
     "scoring_weights": "live",
     "sources": {
-      "configs/forge/tasks/clockfree_audit.json": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258"
+      "configs/forge/tasks/clockfree_audit.json": "70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f"
     },
     "training_feedback": false
   },
@@ -39,7 +39,6 @@
     "perturbed_horizon": 4096,
     "prior": {
       "kind": "mog",
-      "learnable": true,
       "sigma": 0.025,
       "standardize": false
     },
@@ -52,14 +51,14 @@
     },
     "step_label_offset": 8192,
     "steps": 24,
-    "warmup_steps": 4
+    "warmup_steps": 4,
+    "prior_contract": "recipe_owned_v1"
   },
   "id": "clockfree_audit_measurement_v1",
   "requires_capabilities": [
     "checkpoint",
     "named_rng",
     "live_sampling",
-    "learned_locations",
     "mog_prior"
   ],
   "resources": {

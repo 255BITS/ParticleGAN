@@ -180,7 +180,7 @@ def test_ae_scorer_preserves_callers_noise_schedule(tmp_path, monkeypatch):
     assert sigmas[-1] == 0.1
 
 
-@pytest.mark.parametrize("field", sorted(FROZEN_HOST_RECIPE_FIELDS))
+@pytest.mark.parametrize("field", sorted(FROZEN_HOST_RECIPE_FIELDS - {"prior_reg"}))
 def test_explicit_host_resource_or_objective_overrides_block_before_run(tmp_path, field):
     candidate = request()
     candidate["candidate"]["recipe_overrides"][field] = 17

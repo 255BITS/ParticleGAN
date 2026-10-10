@@ -10,7 +10,6 @@
       "kind": "particle_cloud",
       "sigma": 0.0,
       "standardize": false,
-      "learnable": true,
       "exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior."
     },
     "protocol": "screening",
@@ -39,7 +38,8 @@
       "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
       "protected_objectives": "original adversarial",
       "inactive": "original losses, updates, clocks and RNG; no hook requirement"
-    }
+    },
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -73,7 +73,7 @@
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "e76b1f997a0cddd0435ef27b8a3400cf46d5f89baaf01ea82e9da44f19227af0"
+      "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
     },
     "evaluator_revision": {
       "id": "opt-in-component-objective-hooks-v1",

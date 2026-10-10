@@ -115,7 +115,8 @@ Candidate: [`configs/forge/ideas/bcap-pure-adam-example-v3.json`](../configs/for
 ```
 
 Task: [`configs/forge/tasks/gaussian1d_acquisition.json`](../configs/forge/tasks/gaussian1d_acquisition.json).
-This is the complete existing declaration, unchanged. Its sustained gate
+This example uses the current recipe-owned prior contract. Archived declarations
+retain their original task-owned prior policy. Its sustained gate
 requires five terminal passing checks out of 24 observations, including location,
 width and CDF shape; a good predicted final location alone cannot PASS it.
 
@@ -128,11 +129,11 @@ width and CDF shape; a good predicted final location alone cannot PASS it.
     "initializer": "deterministic_orthogonal",
     "host": "gaussian1d_acquisition",
     "steps": 1000,
+    "prior_contract": "recipe_owned_v1",
     "prior": {
       "kind": "mog",
       "sigma": 0.025,
-      "standardize": false,
-      "learnable": true
+      "standardize": false
     },
     "protocol": "screening",
     "produces_state": false,

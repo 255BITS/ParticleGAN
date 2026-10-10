@@ -71,8 +71,9 @@ priors, objectives and serving policies before reservation. Silent substitution
 of a supported mechanism changes the question.
 
 Bind the actual resolved recipe, architecture, initialization, random streams,
-prior and sampling law. Ordinary new tasks use a learned MoG with explicit
-positive width. A finite particle-cloud exception must declare its reason in
+prior and sampling law. Ordinary new tasks use an initial MoG with explicit
+positive width and `execution.prior_contract: "recipe_owned_v1"`. Omit task
+`learnable`; the recipe owns learning/freezing and all latent-prior penalties. A finite particle-cloud exception must declare its reason in
 the task, as the five-word task does. Recipe-owned fields and fixed host-owned
 objectives must have an explicit compatible adaptation; disclose those
 exceptions rather than tuning them separately for each toy.

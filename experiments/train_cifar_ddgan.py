@@ -126,6 +126,7 @@ def training_recipe(cfg):
     """
     return get_recipe(
         model='ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+        prior_update='learned' if cfg['prior'] == 'learned' else 'frozen',
         num_classes=cfg['classes'],
         conditioning='ucd' if cfg['d_mode'] == 'ucd' else 'conditional',
         ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],

@@ -5,6 +5,7 @@ mechanisms, priors, serving laws and gates cannot be removed by this contract.
 The complete reference recipe remains in the frozen candidate declaration.
 """
 from copy import deepcopy
+from .priors import recipe_owned_prior
 
 
 BEHAVIOR_HOST_FIELDS = frozenset({
@@ -44,6 +45,8 @@ def delegated_fields(candidate, task):
             owned = owned | {"routing_temperature", "distance_reduction"}
     else:
         owned = RESOURCE_FIELDS
+    if recipe_owned_prior(task):
+        owned = owned - {"prior_reg"}
     return {name: deepcopy(candidate["recipe_overrides"][name])
             for name in sorted(set(contract["recipe_fields"]) & owned)}
 
@@ -62,9 +65,12 @@ def bind_task_candidate(candidate, task):
 def adaptation_receipt(candidate, task):
     if candidate.get("host_adaptation") is None:
         return None
-    return {"schema_version": 1, "task_id": task["id"],
+    receipt = {"schema_version": 1, "task_id": task["id"],
             "contract": deepcopy(candidate["host_adaptation"]),
             "delegated_reference_values": delegated_fields(candidate, task),
             "owner": "frozen task resources and original host objectives",
             "host_definition": deepcopy(task["execution"].get("host_definition", {})),
             "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained."}
+    if recipe_owned_prior(task):
+        receipt["note"] = "Task adaptation never delegates prior policy or regularization under recipe_owned_v1."
+    return receipt
