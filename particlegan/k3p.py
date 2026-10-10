@@ -700,6 +700,13 @@ class CriticPenalty:
         step = self.optimizer.record.observed_steps + 1
         penalty, stats = self.regularizer.penalty(live, x_real, x_fake, step, self.collect_stats, **options)
         self.last_stats = stats
+        if getattr(getattr(self, 'recipe', None), 'critic_step_mode', 'none') == "finite_cap":
+            # Freeze caller-owned actual training panels, including conditioning.
+            real, fake = x_real.detach().clone(), x_fake.detach().clone()
+            def finite_cap():
+                return torch.maximum(self.regularizer._grad_norm(live, real).max(),
+                                     self.regularizer._grad_norm(live, fake).max())
+            self.optimizer.bind_cap_panel(finite_cap, self.regularizer.kappa)
         return penalty
 
     def diagnostics(self):

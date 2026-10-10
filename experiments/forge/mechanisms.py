@@ -106,6 +106,7 @@ class MechanismAudit:
     """Instance-local observation; wrapped methods return the original result."""
     def __init__(self, recipe, critic_optimizer, generator_optimizers):
         self.recipe = recipe
+        self.critic_optimizer = critic_optimizer
         self.rows = {name: dict(requested=False, enabled=False, calls=0, eligible=0, applied=0)
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
@@ -180,6 +181,13 @@ class MechanismAudit:
                 except (ValueError, RuntimeError, OverflowError, ZeroDivisionError) as error:
                     row["probe"] = {"status": "BLOCKED", "kind": "synthetic_public_component",
                                     "training_evidence": False, "error": str(error)}
+        if self.recipe.critic_step_mode == 'finite_cap':
+            stats = getattr(self.critic_optimizer, 'critic_cap_stats', {})
+            steps = stats.get('steps', 0)
+            rows['critic_step_damping'] = dict(requested=True, enabled=bool(stats),
+                calls=steps, eligible=steps, applied=steps,
+                reason='Actual original-training-panel finite cap checked on every critic update',
+                stats=deepcopy(stats))
         return {"schema_version": 1, "mechanisms": rows}
 
 
@@ -188,7 +196,7 @@ def mechanism_blockers(audit):
     if not isinstance(audit, dict) or not isinstance(audit.get("mechanisms"), dict):
         return ["missing per-mechanism activation evidence"]
     rows = audit["mechanisms"]
-    if set(rows) != set(NAMES):
+    if set(rows) not in (set(NAMES), set(NAMES)|{'critic_step_damping'}):
         return ["incomplete per-mechanism activation evidence"]
     blockers = []
     for name, row in rows.items():

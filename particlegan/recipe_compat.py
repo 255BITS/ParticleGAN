@@ -1,6 +1,7 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "critic_step_mode": "none",
     "constraint_geometry_mode": "none",
     "kinetic_transport_weight": 0.0,
     "kinetic_transport_local_weight": 0.0,

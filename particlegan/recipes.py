@@ -46,6 +46,8 @@ class Recipe:
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
+    # Optional finite same-training-panel critic step guard; none preserves history.
+    critic_step_mode: str = "none"
     prior_reg: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
@@ -226,6 +228,13 @@ class Recipe:
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
             raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if self.critic_step_mode not in ("none", "finite_cap"):
+            raise ValueError("critic_step_mode must be none or finite_cap")
+        if self.critic_step_mode == "finite_cap" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.effective_critic_formulation != "bcap" or self.reg_every != 1
+                or self.input_noise_std or self.output_noise_std):
+            raise ValueError("finite_cap requires zero-momentum full DualNorm, every-update BCAP, and zero input/output noise")
         if self.optimizer_convolution not in ("none", "per_offset"):
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
