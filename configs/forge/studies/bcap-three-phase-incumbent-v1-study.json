@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 7560,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-three-phase-tier1-v1"
+  },
+  "candidate": "bcap-three-phase-incumbent-v1",
+  "competing_explanation": "A disabled-feature or host regression could change training despite the original recipe.",
+  "control": {
+    "candidate_id": "bcap-develop-integration-combined-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "The original winner retains all six original Tier1 passes on the newly integrated source.",
+  "id": "bcap-three-phase-incumbent-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "evidence_scope": "research_diagnostic",
+        "paid_attempts": 6
+      },
+      "path": "reports/forge/bcap-tier1-stability/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
