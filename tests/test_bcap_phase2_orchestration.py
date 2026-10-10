@@ -98,6 +98,9 @@ def test_execution_requires_explicit_source_and_prior_admission(software_checkou
     with pytest.raises(ValueError, match="exact committed source"):
         module.run(argparse.Namespace(repository=software_checkout, artifacts=tmp_path / "bulk",
             source_commit="not-the-current-commit", registration=tmp_path / "absent.json"))
+    source = {"files": {"particlegan/__init__.py": "not-consumed-here"}}
+    with pytest.raises(ValueError, match="declarations"):
+        module.committed_source(software_checkout, source, ["configs/forge/ideas/uncommitted-declaration.json"])
 
 
 def test_publisher_requires_complete_registered_campaign(tmp_path):

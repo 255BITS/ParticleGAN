@@ -191,10 +191,11 @@ def resolved(root, registration):
     return requests
 
 
-def committed_source(root, source):
+def committed_source(root, source, declarations=()):
     tracked = set(subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0"))
-    require(set(source["files"]) <= tracked, "Commit all frozen public source inputs before admission")
-    result = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", *source["files"]], cwd=root)
+    files = set(source["files"]) | set(declarations)
+    require(files <= tracked, "Commit all frozen public source inputs and declarations before admission")
+    result = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", *sorted(files)], cwd=root)
     require(result.returncode == 0, "Commit all frozen public source inputs before admission")
 
 
@@ -204,7 +205,11 @@ def run(options):
     require(not artifacts.is_relative_to(root), "Bulk artifacts belong outside Git")
     registration = read_json(options.registration)
     requests = resolved(root, registration)
-    committed_source(root, next(iter(requests.values()))["source"])
+    declarations = {f'configs/forge/ideas/{request["candidate"]["id"]}.json' for request in requests.values()}
+    declarations.update(f'configs/forge/studies/{request["study"]["id"]}.json' for request in requests.values())
+    declarations.update(f"configs/forge/tasks/{name}.json" for name in next(iter(requests.values()))["tasks"])
+    declarations.add(f"configs/forge/views/{VIEW}.json")
+    committed_source(root, next(iter(requests.values()))["source"], declarations)
     progress_path = artifacts / "phase2-progress.json"
     if options.drain:
         require(progress_path.is_file(), "Drain requires explicit prior --submit admission")
