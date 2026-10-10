@@ -8,6 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "tests/fixtures/archived-forge-contracts.json"
@@ -17,6 +18,8 @@ COMMITS = {
     "tier1_completion": "928b485ffbe6e17d79b41d307ae8b6275489b37a",
     "shallow_gaussian": "1853cfdaf31c243c8a1e75a86f370ba143691d5a",
     "shallow_gaussian_cards": "5737ade47dca89b04d338ada20667781d1f2b5df",
+    "bcap_legacy_questions": "5737ade47dca89b04d338ada20667781d1f2b5df",
+    "bcap_prior_baseline_questions": "03466efa4de8271b9a2c964406dc6f4f0f260792",
 }
 
 
@@ -86,7 +89,68 @@ def published_develop_checkout(tmp_path):
     shutil.copytree(ROOT / "configs", root / "configs")
     shutil.copytree(ROOT / "reports", root / "reports")
     restore_archived_contracts(root, "published_develop")
+    restore_archived_contracts(root, "bcap_legacy_questions")
     return restore_published_view_roster(root)
+
+
+def bcap_legacy_software_checkout(directory):
+    """Current code with exact original BCAP questions, only for software replay.
+
+    The frozen comparator reads Git history but never writes it. Its private
+    checkout therefore has a read-only history pointer; no admission helper
+    may use this checkout. Current migrated questions are tested separately.
+    """
+    root = Path(directory).resolve()
+    assert root != ROOT.resolve()
+    root.mkdir(parents=True, exist_ok=True)
+    for name in ("particlegan", "experiments", "benchmarks", "lib", "configs"):
+        shutil.copytree(ROOT / name, root / name,
+                        ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    # Frozen evaluators may import report-owned Python. No bulk logs, tensor
+    # dumps, old metrics or qualification receipts enter this software replay.
+    report_sources = list((ROOT / "reports").rglob("*.py"))
+    report_sources.append(ROOT / "reports/transfer_suite/unadjusted/leading_profile.json")
+    for source in report_sources:
+        destination = root / source.relative_to(ROOT)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    restore_archived_contracts(root, "bcap_legacy_questions")
+    # Current code has explicit source guards. Rebind only their byte identity;
+    # preserve the original question and exact ancestry expected by the frozen
+    # comparator's unchanged source-revision assertions.
+    cohort = json.loads(FIXTURE.read_text())["bcap_legacy_questions"]
+    rebinding = {}
+    for relative in cohort["files"]:
+        if "/tasks/" not in relative:
+            continue
+        path = root / relative
+        card = json.loads(path.read_text())
+        sources = card["evaluation"].get("sources", {})
+        changed = {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
+                   for name, old in sources.items() if (root / name).is_file()
+                   and hashlib.sha256((root / name).read_bytes()).hexdigest() != old}
+        if changed:
+            previous = dict(sources)
+            sources.update(changed)
+            card["evaluation"]["evaluator_revision"] = {
+                "id": "bcap-legacy-prior-software-source-binding-v1",
+                "qualification_input": False,
+                "original_task_commit": cohort["source_commit"],
+                "original_task_path": relative,
+                "previous_revision": card["evaluation"].get("evaluator_revision"),
+                "previous_source_sha256": {name: previous[name] for name in changed},
+            }
+            path.write_text(json.dumps(card, indent=2) + "\n")
+            rebinding[relative] = {name: {"original_sha256": previous[name],
+                                        "current_sha256": digest}
+                                  for name, digest in changed.items()}
+    (root / "legacy-software-source-bindings.json").write_text(json.dumps({
+        "qualification_input": False, "original_task_source_commit": cohort["source_commit"],
+        "source_rebindings": rebinding}, indent=2) + "\n")
+    gitdir = subprocess.check_output(["git", "rev-parse", "--absolute-git-dir"],
+                                     cwd=ROOT, text=True).strip()
+    (root / ".git").write_text("gitdir: " + gitdir + "\n")
+    return root
 
 
 def current_policy_software_checkout(tmp_path):
