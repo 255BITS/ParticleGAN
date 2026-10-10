@@ -120,7 +120,8 @@ def main():
     spec = importlib.util.spec_from_file_location("bcap_compatibility_receipt_probe", root / TEST)
     probe = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(probe)
-    directories = sorted((artifacts / "pytest").glob("bcap-compatibility*"))
+    directories = sorted(path for path in (artifacts / "pytest").glob("bcap-compatibility*")
+                         if path.is_dir() and not path.is_symlink())
     if len(directories) != 1:
         raise ValueError("Expected one independently executed develop/candidate packet pair")
     directory = directories[0]
