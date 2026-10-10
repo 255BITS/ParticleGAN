@@ -1,0 +1,348 @@
+{
+  "archive": {
+    "all_member_hashes_verified": true,
+    "archive_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-serialized-live-v1-cuda-evidence.tar.gz",
+    "bytes": 7290351,
+    "member_count": 36,
+    "original_files": 35,
+    "sha256": "a14332d30079516082d062cc22a9c60a3ada6e23233a869c7184c3e71792f9d7"
+  },
+  "arms": [
+    {
+      "arm": "every_step",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "boundary_identity": null,
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [
+          "component_covariance_error <= 0.85"
+        ],
+        "full_pass": false,
+        "metrics": {
+          "component_covariance_error": 0.8947885781526566,
+          "component_min_eigen_ratio": 0.35368794202804565,
+          "hq": 0.941650390625,
+          "mass_tv": 0.074951171875,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "d718fd6a3d20a924625fa2ab41ad737da813810d0760349a3e6ce182e2aa6880",
+        "step": 1400
+      },
+      "confirmed_smoke": false,
+      "elapsed_seconds": 21.155680696945637,
+      "error": null,
+      "final_context_digest": "3bd6180149c31cc1bc84ec69fbf497e24e710adaf7991602c6b7517da3227169",
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.3857995104044676,
+        "component_min_eigen_ratio": 0.47684821486473083,
+        "hq": 0.948486328125,
+        "mass_tv": 0.073486328125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 1400,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 12,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 11,
+      "media": {
+        "arm": "every_step",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "6269e86c7b0df5659b596107dfe248e16b89f1a1a1f40298136ab9c36c6b1aef",
+        "source_commit": "b060fb4623cc831cb47dd592acea49b6704641be",
+        "source_sha256": "821dfc4213d8230134dcaee797e45efe7883904d3e9fa60221011b622995144c"
+      },
+      "post_first_pass": {
+        "failures": [
+          {
+            "covariance_error": 0.9724596068263054,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1417
+          }
+        ],
+        "passing_observations": 11,
+        "scheduled_observations": 12
+      },
+      "prefix_identity": {
+        "candidate_projected_state_digest": "470d73d89d2c5231785b3a4cd93c7ac8d9ecb76e9642aae8b7cedfd8b660b195",
+        "exact_except_new_stream_registration": false,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "receipt_sha256": "7b32a4e230629e6c24526de79451605eb9bebf18c048ae15ea561149fb10f1a0",
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "9e8daa89eee904aa8380b934adddd9465a81c9e8b1c445fcd41ba0ef21fe06de",
+        "origin_commit": "b060fb4623cc831cb47dd592acea49b6704641be"
+      },
+      "status": "COMPLETE",
+      "terminal_streak_start": 1434,
+      "terminal_suffix": 11
+    },
+    {
+      "arm": "boundary_only",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "boundary_identity": {
+        "exact_except_extra_stream_registration_and_execution_allowance": true,
+        "projected_state_digest": "40a84b3cafddc8d2a402a03f315da56bc97c74b91853c21e29f2f9ad6fd034f8",
+        "reference_state_digest": "40a84b3cafddc8d2a402a03f315da56bc97c74b91853c21e29f2f9ad6fd034f8"
+      },
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [],
+        "full_pass": true,
+        "metrics": {
+          "component_covariance_error": 0.7824815213680267,
+          "component_min_eigen_ratio": 0.2889096736907959,
+          "hq": 0.906494140625,
+          "mass_tv": 0.05908203125,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "297ec25d190d545c713a989b7327618c03b0811ba6550cc48cbae37a2713ffba",
+        "step": 867
+      },
+      "confirmed_smoke": true,
+      "elapsed_seconds": 21.823945821030065,
+      "error": null,
+      "final_context_digest": "6ee26a5407820611d1e4202b3c3fce667f113da25f1eeaefd5906e46daa36546",
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.42442624270915985,
+        "component_min_eigen_ratio": 0.28211709856987,
+        "hq": 0.96826171875,
+        "mass_tv": 0.05126953125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 867,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 45,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 45,
+      "media": {
+        "arm": "boundary_only",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "fa5cd95776179fef1b357cae52a7d6f7de4479dd763f126af500e4efd72e6115",
+        "source_commit": "b060fb4623cc831cb47dd592acea49b6704641be",
+        "source_sha256": "f04b2631ac95c624433e0cbda6f83ad11eae83ecc217e39ec3de4ebc13146a35"
+      },
+      "post_first_pass": {
+        "failures": [],
+        "passing_observations": 44,
+        "scheduled_observations": 44
+      },
+      "prefix_identity": {
+        "candidate_projected_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+        "exact_except_new_stream_registration": true,
+        "reference_checkpoint_sha256": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+        "reference_state_digest": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd"
+      },
+      "receipt_sha256": "ea2ace2dce84c6a1171e115c5b4578ce3b3c69b66381833ea49f29d00f95d37f",
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "9e8daa89eee904aa8380b934adddd9465a81c9e8b1c445fcd41ba0ef21fe06de",
+        "origin_commit": "b060fb4623cc831cb47dd592acea49b6704641be"
+      },
+      "status": "COMPLETE",
+      "terminal_streak_start": 867,
+      "terminal_suffix": 45
+    }
+  ],
+  "comparison_scope": "Matched initial tensors/recipe/prior/batches/cadence/gates and unchanged public numerical package; explicit trainer/runtime deltas and original source identities retained. No reruns or ordinary qualification.",
+  "cost": {
+    "attempts": 2,
+    "charged_seconds_with_full_software_reservation": 77.59739324101247,
+    "new_scored_draws": 194,
+    "new_training_updates": 3200,
+    "scientific_retries": 0,
+    "software_actual_seconds": 3.3190438519231975,
+    "software_updates": 3,
+    "total_reserved_seconds": 630,
+    "training_child_wall_seconds": 47.59739324101247
+  },
+  "existing_comparisons": [
+    {
+      "arm": "every_step",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [],
+        "full_pass": true,
+        "metrics": {
+          "component_covariance_error": 0.8353303028270602,
+          "component_min_eigen_ratio": 0.5696465373039246,
+          "hq": 0.910400390625,
+          "mass_tv": 0.082275390625,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "5bcbc783d62559d08419f5d89a1a0806388e91a72e8bd85da7905a353ee06581",
+        "step": 684
+      },
+      "confirmed_smoke": true,
+      "elapsed_seconds": 24.13885239197407,
+      "error": null,
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.5896781794726849,
+        "component_min_eigen_ratio": 0.35003533959388733,
+        "hq": 0.963623046875,
+        "mass_tv": 0.06591796875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 684,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 52,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 47,
+      "post_first_pass": {
+        "failures": [
+          {
+            "covariance_error": 0.9311062693595886,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 717
+          },
+          {
+            "covariance_error": 0.9738966058939695,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 734
+          },
+          {
+            "covariance_error": 0.8989842161536217,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 750
+          },
+          {
+            "covariance_error": 0.8930954243987799,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 817
+          }
+        ],
+        "passing_observations": 51,
+        "scheduled_observations": 55
+      },
+      "receipt_sha256": "f6eaf2ad1a2918eb59c73e3fc12726a32f906cf6a89744a4dd04db8963e713b2",
+      "repeated_training": false,
+      "scheduled_observations": 96,
+      "scope": "original source-bound diagnostic; no qualification transfer",
+      "scoring_draws": 97,
+      "source": {
+        "digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+        "origin_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "receipt_sha256": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22"
+      },
+      "source_pr": "https://github.com/255BITS/ParticleGAN/pull/332",
+      "status": "COMPLETE",
+      "technique": "continuous_truncation",
+      "terminal_streak_start": 834,
+      "terminal_suffix": 47
+    },
+    {
+      "arm": "every_step",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [],
+        "full_pass": true,
+        "metrics": {
+          "component_covariance_error": 0.754245332442224,
+          "component_min_eigen_ratio": 0.5019050240516663,
+          "hq": 0.922119140625,
+          "mass_tv": 0.087890625,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "709ec2cbe46feb98f708b5cb2ce7b83a80495d987f58a6d94aeba9e9e28e44af",
+        "step": 817
+      },
+      "confirmed_smoke": true,
+      "elapsed_seconds": 31.47371032589581,
+      "error": null,
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.5044049359858036,
+        "component_min_eigen_ratio": 0.33274251222610474,
+        "hq": 0.965576171875,
+        "mass_tv": 0.077392578125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 817,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 47,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 45,
+      "post_first_pass": {
+        "failures": [
+          {
+            "covariance_error": 0.8514369949698448,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 850
+          }
+        ],
+        "passing_observations": 46,
+        "scheduled_observations": 47
+      },
+      "receipt_sha256": "b3b7f5af7d36e468e6d3f94ef317e9e6111e1ec4de9f631ae94e9ecf41c4ed8a",
+      "repeated_training": false,
+      "scheduled_observations": 96,
+      "scope": "original source-bound diagnostic; no qualification transfer",
+      "scoring_draws": 97,
+      "source": {
+        "digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+        "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41",
+        "receipt_sha256": "3243354a6b6743c63ac33cdfa5f7ee394106565330ab701ba457de9fe0fd1f66"
+      },
+      "source_pr": "https://github.com/255BITS/ParticleGAN/pull/335",
+      "status": "COMPLETE",
+      "technique": "continuous_weak_gradient_noise",
+      "terminal_streak_start": 867,
+      "terminal_suffix": 45
+    }
+  ],
+  "physical_gpu": 0,
+  "protocol_id": "ring16-serialized-live-v1",
+  "protocol_sha256": "62a31986586ef49bdd943c8166dd3e1bf0fe75cc4072009e7c8ec7f214b3bfdd",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "completed_cuda_ring16_serialization_quality_diagnostic"
+}

@@ -1,0 +1,37 @@
+{
+  "candidate_id": "bcap-gaussian-frozen-prior",
+  "candidate_revision": "dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e",
+  "conclusion": "No: a frozen prior does not rescue Gaussian retention under alternating, simultaneous or past-extrapolation timing; extrapolation reaches a passing final shifted snapshot but cannot retain full quality, and all three fixed-prior ring arms fail. Explicit fixed-prior control cohort. Closed unmerged in PR triage 2026-10-10.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Does freezing the initial MoG prior let G/D acquire and retain the 1D Gaussian at the selected constant BCAP rates?",
+  "lifecycle": "concluded",
+  "mechanism_class": "fixed_prior_control",
+  "next_action": "Prior motion is not the cause of Gaussian retention failure; look at G/D dynamics.",
+  "provenance": {
+    "branch_retained": true,
+    "default_adoption": false,
+    "input_evidence_scope": "closed_pr_report",
+    "protocol_seed": 0,
+    "pull_requests": [
+      "https://github.com/255BITS/ParticleGAN/pull/318"
+    ],
+    "qualification_reuse": false,
+    "recorded_by": "PR triage 2026-10-10",
+    "source_commit": "dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "pr318-gaussian-frozen-prior-context-v1",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-frozen-prior/README.md",
+    "sha256": "0c6ad75d54ce3a49cd341d08b44dc5b9689804b3ef682e93acd6fe86fcdc289b",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/dcbcd3ed72b0b3d19bc2f4d52443574dc44d3d4e/reports/forge/gaussian-frozen-prior/README.md"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

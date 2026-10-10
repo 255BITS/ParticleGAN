@@ -1,0 +1,37 @@
+{
+  "candidate_id": "bcap-pure-budget10x-v1",
+  "candidate_revision": "beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30",
+  "conclusion": "No: 0/2 sustained passes. Gaussian keeps oscillating and fails distribution accuracy; Ring16 removes most tail error but repeatedly loses component spread and fails the five-terminal-observation hold. Closed unmerged in PR triage 2026-10-10; superseded by develop's 22/22 Tier 1 pass.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Does 10x longer training with the same constant-step BCAP-pure recipe fix the Gaussian and Ring16 sustained Tier 1 failures?",
+  "lifecycle": "concluded",
+  "mechanism_class": "training_budget_extension",
+  "next_action": "Do not use longer budgets as a fix for BCAP oscillation or ring hold; change the dynamics instead.",
+  "provenance": {
+    "branch_retained": true,
+    "default_adoption": false,
+    "input_evidence_scope": "closed_pr_report",
+    "protocol_seed": 0,
+    "pull_requests": [
+      "https://github.com/255BITS/ParticleGAN/pull/311"
+    ],
+    "qualification_reuse": false,
+    "recorded_by": "PR triage 2026-10-10",
+    "source_commit": "beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "pr311-bcap-pure-budget10x-context-v1",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-pure-budget10x-v1/README.md",
+    "sha256": "847120eae3fd8c25d557d52558eda27dbb8febfe52c5ae784d24f638250d8ed4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/beed204f8ee2cf15d4b8f1ddbc5ff41ffe5fcd30/reports/forge/bcap-pure-budget10x-v1/README.md"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

@@ -1,5 +1,9 @@
 # Research reports and local artifacts
 
+The [optimizer comparison report](forge/OPTIMIZER_TYPES.md) explains the public
+Adam, SGDA, normalized and DualNorm update rules with pseudocode tables,
+formulation-wrapper context and the recorded BCAP optimizer-screen results.
+
 The behavioral baseline, learned-LR, locked-shared, paired-2D, smart-descent,
 and transfer-suite studies keep their source, Markdown findings, and reproduction
 inputs in Git. Generated results, metric curves, run logs, episode archives,

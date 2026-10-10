@@ -1,0 +1,6799 @@
+{
+  "controls": {
+    "bilinear": {
+      "expected": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0
+        ]
+      ],
+      "max_absolute_error": 7.505107646466058e-14,
+      "passed": true
+    },
+    "quadratic": {
+      "expected": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_absolute_error": 7.505107646466058e-14,
+      "passed": true
+    }
+  },
+  "diagnostic_logical_updates": 384,
+  "endpoints": [
+    {
+      "arm": {
+        "autograd_multithreading": false,
+        "id": "truncated-serial",
+        "truncation": true
+      },
+      "cohort": "unsmoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.49897678903296194,
+          "nearest_rows": [
+            2,
+            0,
+            4,
+            3,
+            1
+          ],
+          "optimal_prior_rows": [
+            2,
+            0,
+            4,
+            3,
+            1
+          ],
+          "rms_distance": 0.16281829452373256,
+          "rms_over_minimum_prior_separation": 0.32630434541711106,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          1,
+          4,
+          0,
+          3,
+          2
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "expected_loss_control": {
+        "d": 0.0,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.05840757489204407,
+          "cosine_descent_to_raw": 0.4773288071155548,
+          "raw_gradient_norm": 0.009516531601548195,
+          "relative_parameter_step": 0.0036353588360399525,
+          "step_over_raw_norm": 6.137485518625509
+        },
+        "E": {
+          "actual_step_norm": 0.04647533968091011,
+          "cosine_descent_to_raw": 0.6149312853813171,
+          "raw_gradient_norm": 0.0032156717497855425,
+          "relative_parameter_step": 0.0047556863567959785,
+          "step_over_raw_norm": 14.452762376635492
+        },
+        "G": {
+          "actual_step_norm": 0.0,
+          "cosine_descent_to_raw": null,
+          "raw_gradient_norm": 7.532955994688724e-18,
+          "relative_parameter_step": 0.0,
+          "step_over_raw_norm": 0.0
+        },
+        "prior": {
+          "actual_step_norm": 0.06708044558763504,
+          "cosine_descent_to_raw": 0.9397885203361511,
+          "raw_gradient_norm": 0.0011345255188643932,
+          "relative_parameter_step": 0.044163790101439636,
+          "step_over_raw_norm": 59.12643168641937
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.4881178237541038,
+          "nearest_rows": [
+            2,
+            0,
+            4,
+            3,
+            1
+          ],
+          "optimal_prior_rows": [
+            2,
+            0,
+            4,
+            3,
+            1
+          ],
+          "rms_distance": 0.1362926612078125,
+          "rms_over_minimum_prior_separation": 0.2792208245123863,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          1,
+          4,
+          0,
+          3,
+          2
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "1b742968206d1bcdb139c4d0b052d55c8c4e28a1f28c93032328115675a38442"
+        },
+        "request.json": {
+          "bytes": 16816,
+          "sha256": "bfa13a5fe14469776977173bf5dcbc674debf758e77796fbadc817919d22bd46"
+        },
+        "source-manifest.json": {
+          "bytes": 142128,
+          "sha256": "00dc9924e5cbeca717f7286c46e277d6975acba5d65cb15016574ee5bed16763"
+        },
+        "state.pt": {
+          "bytes": 836735,
+          "sha256": "a143027723532b0ebe890c515e5366f48350176e65e1eb257ecd03cbd6a5ce58"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.6929486989974976,
+        "d_loss": 0.6929486989974976,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6935166120529175
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.1953125,
+        "mass_grape": 0.2109375,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+        "origin_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3"
+      },
+      "projected_raw_game_jacobian": {
+        "identified": false,
+        "reason": "Zero actual direction for G"
+      },
+      "raw_losses": {
+        "d_adversarial": 0.6931995153427124,
+        "d_loss": 0.6931995153427124,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6933866739273071
+      },
+      "recipe_sha256": "2d8d93002d7d56872891d4daa506efeef83e0742bec56170ac1d8292ab3ab53d",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 2.067503236721846,
+        "G": 0.2174851225978553,
+        "prior": 1.8189177612497724
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.16281829452373256,
+              "rms_over_minimum_prior_separation": 0.32630434541711106,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.16281829452373256,
+              "rms_over_minimum_prior_separation": 0.32630434541711106,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.31756026468715226,
+              "rms_over_minimum_prior_separation": 0.636422919195495,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9999936819076538,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.15032346602500113,
+              "rms_over_minimum_prior_separation": 0.3012634441700872,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.16281829452373256,
+              "rms_over_minimum_prior_separation": 0.32630434541711106,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.49897678903296194,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.16281829452373256,
+              "rms_over_minimum_prior_separation": 0.32630434541711106,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4726096162785644,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                4,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.5110860339235743,
+              "rms_over_minimum_prior_separation": 1.0814126846338463,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              -1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.19999999999999998,
+            "minimum_reconstruction_token_probability": 0.9999933242797852,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 0.8,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4940335005286355,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.14540724124724375,
+              "rms_over_minimum_prior_separation": 0.2943266824854027,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 8,
+          "passing_checks": 7
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4726077937184734,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.0848510875937681,
+              "rms_over_minimum_prior_separation": 0.17953806247281828,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4881178237541038,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.1362926612078125,
+              "rms_over_minimum_prior_separation": 0.2792208245123863,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.5065553916775353,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.19908143203206458,
+              "rms_over_minimum_prior_separation": 0.3930101925729704,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4940335005286355,
+              "nearest_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "optimal_prior_rows": [
+                2,
+                0,
+                4,
+                3,
+                1
+              ],
+              "rms_distance": 0.15163760019660782,
+              "rms_over_minimum_prior_separation": 0.306937889908983,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              4,
+              0,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        }
+      },
+      "smoothing_lambda": 0.0,
+      "wall_seconds": 2.032335647032596
+    },
+    {
+      "arm": {
+        "autograd_multithreading": false,
+        "id": "full-serial",
+        "truncation": false
+      },
+      "cohort": "unsmoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.22848547898060254,
+          "nearest_rows": [
+            2,
+            4,
+            1,
+            1,
+            0
+          ],
+          "optimal_prior_rows": [
+            2,
+            4,
+            1,
+            3,
+            0
+          ],
+          "rms_distance": 0.45004248700909655,
+          "rms_over_minimum_prior_separation": 1.969676537069138,
+          "unique_nearest_rows": 4
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv",
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          0,
+          3,
+          1
+        ],
+        "mass_tv": 0.2,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 4,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          3
+        ],
+        "reconstruction_exact": false
+      },
+      "expected_loss_control": {
+        "d": 1.1920928955078125e-07,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.35410255193710327,
+          "cosine_descent_to_raw": 0.08147162199020386,
+          "raw_gradient_norm": 0.495707631111145,
+          "relative_parameter_step": 0.006242396930120838,
+          "step_over_raw_norm": 0.7143375040310973
+        },
+        "E": {
+          "actual_step_norm": 0.16842804849147797,
+          "cosine_descent_to_raw": 0.1992785483598709,
+          "raw_gradient_norm": 0.04916885495185852,
+          "relative_parameter_step": 0.000698998720114325,
+          "step_over_raw_norm": 3.4255027630069224
+        },
+        "G": {
+          "actual_step_norm": 0.15554222464561462,
+          "cosine_descent_to_raw": 0.10515686124563217,
+          "raw_gradient_norm": 1.2475259048017051e-08,
+          "relative_parameter_step": 0.0031278506535702536,
+          "step_over_raw_norm": 12468055.697034856
+        },
+        "prior": {
+          "actual_step_norm": 0.06708190590143204,
+          "cosine_descent_to_raw": 0.9778960347175598,
+          "raw_gradient_norm": 0.01127703208476305,
+          "relative_parameter_step": 0.03614146562823598,
+          "step_over_raw_norm": 5.9485426127384775
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.22656041580475905,
+          "nearest_rows": [
+            2,
+            4,
+            1,
+            3,
+            0
+          ],
+          "optimal_prior_rows": [
+            2,
+            4,
+            1,
+            3,
+            0
+          ],
+          "rms_distance": 0.40680782405389343,
+          "rms_over_minimum_prior_separation": 1.7955820861684177,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv",
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          0,
+          3,
+          1
+        ],
+        "mass_tv": 0.2,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 4,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          3
+        ],
+        "reconstruction_exact": false
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "73ab5f74c8236ba61f83793e59c39aa08a20283ea504dccc6a949e8bc456e2a2"
+        },
+        "request.json": {
+          "bytes": 16812,
+          "sha256": "6bb6aee7bdd5906393e5696d0a67442b0d696709e63bd16ec3823b46ab4a725d"
+        },
+        "source-manifest.json": {
+          "bytes": 142128,
+          "sha256": "00dc9924e5cbeca717f7286c46e277d6975acba5d65cb15016574ee5bed16763"
+        },
+        "state.pt": {
+          "bytes": 836735,
+          "sha256": "a5a0cfe5d06676f6457140cf83114652259fa6046dfe238dc05c9f4280577fe9"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.5840123891830444,
+        "d_loss": 0.5849664211273193,
+        "d_penalty": 0.0009540141909383237,
+        "joint_loss": 1.0408257246017456
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.0,
+        "mass_grape": 0.2080078125,
+        "mass_lemon": 0.1953125,
+        "mass_melon": 0.4091796875,
+        "mass_tv": 0.2171875,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": false,
+        "reconstruction_nll": 3.684136148790473,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+        "origin_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": 0.018574958733160247
+          },
+          {
+            "imaginary": 0.0,
+            "real": 8.034720139599946e-09
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.00010187386696066705
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.0011812582994597477
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            8.122385779960433e-09,
+            -4.3773289867255006e-12,
+            -9.479393194601132e-08,
+            -3.894270867801302e-09
+          ],
+          [
+            -4.376707329889484e-12,
+            0.0010855815870836755,
+            5.794533453670064e-05,
+            0.001481152020932526
+          ],
+          [
+            -9.473636545381803e-08,
+            5.7945334162867734e-05,
+            9.331181591732546e-05,
+            0.0003274974995576621
+          ],
+          [
+            3.395780184822783e-09,
+            -0.0010048095244984123,
+            -0.0010617982718237606,
+            0.018679213721048415
+          ]
+        ],
+        "matrix_fine": [
+          [
+            8.122341681329433e-09,
+            -4.377289241834441e-12,
+            -9.474061452898383e-08,
+            -3.894270975092194e-09
+          ],
+          [
+            -4.3772855710481435e-12,
+            0.0010855815866320693,
+            5.7945334100995935e-05,
+            0.0014811520256379634
+          ],
+          [
+            -9.473550705481801e-08,
+            5.794533399113011e-05,
+            9.329730156551012e-05,
+            0.0003274974979255765
+          ],
+          [
+            3.3957674635172927e-09,
+            -0.0010048095243700428,
+            -0.0010617981634902796,
+            0.01867921192376156
+          ]
+        ],
+        "matrix_norm": 0.018829365062489063,
+        "offdiagonal_skew_norm": 0.002013721339088439,
+        "offdiagonal_skew_over_symmetric": 3.225506056503866,
+        "offdiagonal_symmetric_norm": 0.0006243117525784828,
+        "projected_circulation_dominates": false,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 7.767497832934714e-07,
+        "skew_norm": 0.002013721339088439,
+        "skew_over_symmetric": 0.10756267869761603,
+        "symmetric_norm": 0.018721375884933875
+      },
+      "raw_losses": {
+        "d_adversarial": 0.5975505113601685,
+        "d_loss": 0.5979865789413452,
+        "d_penalty": 0.000436059373896569,
+        "joint_loss": 1.0196055173873901
+      },
+      "recipe_sha256": "2d8d93002d7d56872891d4daa506efeef83e0742bec56170ac1d8292ab3ab53d",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.15619414433606618,
+        "G": 1.1875894744575781,
+        "prior": 0.1832951762708479
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                1,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.45004248700909655,
+              "rms_over_minimum_prior_separation": 1.969676537069138,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                1,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.45004248700909655,
+              "rms_over_minimum_prior_separation": 1.969676537069138,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.4745243121497452,
+              "rms_over_minimum_prior_separation": 2.0768248129677875,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              -1,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.4197145606901324,
+              "rms_over_minimum_prior_separation": 1.8369419473075768,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                1,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.45004248700909655,
+              "rms_over_minimum_prior_separation": 1.969676537069138,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22848547898060254,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                1,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.45004248700909655,
+              "rms_over_minimum_prior_separation": 1.969676537069138,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.33936403184403846,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.6129900168887639,
+              "rms_over_minimum_prior_separation": 1.8062904709078766,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 0.8,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              -1,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22726936365843578,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.411682618303207,
+              "rms_over_minimum_prior_separation": 1.8114303295270664,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3565748124307669,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.3485609214589773,
+              "rms_over_minimum_prior_separation": 0.9775253587959314,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22656041580475905,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.40680782405389343,
+              "rms_over_minimum_prior_separation": 1.7955820861684177,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.40316509494034336,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.39321593873584804,
+              "rms_over_minimum_prior_separation": 0.9753223770377059,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.22726936365843578,
+              "nearest_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                4,
+                1,
+                3,
+                0
+              ],
+              "rms_distance": 0.43880253786051265,
+              "rms_over_minimum_prior_separation": 1.9307597416429216,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              3,
+              1
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              3
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        }
+      },
+      "smoothing_lambda": 0.0,
+      "wall_seconds": 1.8749750189017504
+    },
+    {
+      "arm": {
+        "autograd_multithreading": true,
+        "id": "truncated-threaded",
+        "truncation": true
+      },
+      "cohort": "unsmoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.4115911647641152,
+          "nearest_rows": [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          "optimal_prior_rows": [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          "rms_distance": 0.19362826274490577,
+          "rms_over_minimum_prior_separation": 0.47043833619673303,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          1,
+          0,
+          2,
+          3,
+          4
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "expected_loss_control": {
+        "d": 0.0,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.058407146483659744,
+          "cosine_descent_to_raw": 0.5010908246040344,
+          "raw_gradient_norm": 0.01539176981896162,
+          "relative_parameter_step": 0.003261798205437529,
+          "step_over_raw_norm": 3.7946998409309685
+        },
+        "E": {
+          "actual_step_norm": 0.046475499868392944,
+          "cosine_descent_to_raw": 0.6256073117256165,
+          "raw_gradient_norm": 0.005397071596235037,
+          "relative_parameter_step": 0.004799435976506021,
+          "step_over_raw_norm": 8.611243901380512
+        },
+        "G": {
+          "actual_step_norm": 1.862645149230957e-09,
+          "cosine_descent_to_raw": 0.016247669234871864,
+          "raw_gradient_norm": 7.270594038931086e-14,
+          "relative_parameter_step": 4.522624782879277e-11,
+          "step_over_raw_norm": 25618.8853243249
+        },
+        "prior": {
+          "actual_step_norm": 0.06708117574453354,
+          "cosine_descent_to_raw": 0.9535359740257263,
+          "raw_gradient_norm": 0.0020492880139499903,
+          "relative_parameter_step": 0.03890206890005594,
+          "step_over_raw_norm": 32.73389357078948
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.4081551915512503,
+          "nearest_rows": [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          "optimal_prior_rows": [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          "rms_distance": 0.15631795873187984,
+          "rms_over_minimum_prior_separation": 0.3829865746354268,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          1,
+          0,
+          2,
+          3,
+          4
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "220b656aa08cc5de432ad83cc7bbe78340c06e8808f4fdbc37016ce1ef8e0273"
+        },
+        "request.json": {
+          "bytes": 16817,
+          "sha256": "123dab9cb2042a3a5de787e53f53bcd230d09037c1b776d83547e56085f6405d"
+        },
+        "source-manifest.json": {
+          "bytes": 142128,
+          "sha256": "00dc9924e5cbeca717f7286c46e277d6975acba5d65cb15016574ee5bed16763"
+        },
+        "state.pt": {
+          "bytes": 836735,
+          "sha256": "c58480450753156aa7a6dfae63d19972c675ae2b8069daed78313e4c06a7e3ac"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.6926185488700867,
+        "d_loss": 0.6926185488700867,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6937344670295715
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1953125,
+        "mass_berry": 0.2080078125,
+        "mass_grape": 0.2109375,
+        "mass_lemon": 0.1875,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+        "origin_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": -1.277701089461708e-14
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.00011943969045401221
+          },
+          {
+            "imaginary": 0.026953201976631695,
+            "real": 0.0025213633687238904
+          },
+          {
+            "imaginary": -0.026953201976631695,
+            "real": 0.0025213633687238904
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            -1.287969642676734e-14,
+            3.672651974575481e-18,
+            2.287166310883361e-13,
+            1.8059643117180323e-14
+          ],
+          [
+            0.0,
+            0.0005238161459280698,
+            2.442050656093972e-06,
+            -0.023826391925898215
+          ],
+          [
+            2.2833297752544723e-13,
+            2.442050672573845e-06,
+            1.942698869936317e-06,
+            -0.012943535013525197
+          ],
+          [
+            1.8214596497756474e-14,
+            0.02363460878030115,
+            0.0129692999708865,
+            0.004636407919965738
+          ]
+        ],
+        "matrix_fine": [
+          [
+            -1.2777011190463743e-14,
+            3.6726519561687265e-18,
+            2.287346475663268e-13,
+            1.8063292034332982e-14
+          ],
+          [
+            0.0,
+            0.0005238161453650799,
+            2.4420506567444933e-06,
+            -0.023826391940582073
+          ],
+          [
+            2.273210554977941e-13,
+            2.442050657467295e-06,
+            1.94269886129884e-06,
+            -0.012943535015411095
+          ],
+          [
+            -3.758567531283082e-14,
+            0.023634608249051628,
+            0.012969299971062574,
+            0.004636407583675425
+          ]
+        ],
+        "matrix_norm": 0.03852012687887152,
+        "offdiagonal_skew_norm": 0.03823624952866471,
+        "offdiagonal_skew_over_symmetric": 279.35479886042833,
+        "offdiagonal_symmetric_norm": 0.00013687343007759949,
+        "projected_circulation_dominates": true,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 1.6326974472546525e-08,
+        "skew_norm": 0.03823624952866471,
+        "skew_over_symmetric": 8.191297206190114,
+        "symmetric_norm": 0.0046679113901238745
+      },
+      "raw_losses": {
+        "d_adversarial": 0.6930610537528992,
+        "d_loss": 0.6930610537528992,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6933119297027588
+      },
+      "recipe_sha256": "2d8d93002d7d56872891d4daa506efeef83e0742bec56170ac1d8292ab3ab53d",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.8229863949937565,
+        "G": 0.2818569072872974,
+        "prior": 0.7153551072720568
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19362826274490577,
+              "rms_over_minimum_prior_separation": 0.47043833619673303,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19362826274490577,
+              "rms_over_minimum_prior_separation": 0.47043833619673303,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.33345989477798854,
+              "rms_over_minimum_prior_separation": 0.8101726259578383,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.5455782659978433e-15,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              -1,
+              1,
+              2,
+              2,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.18713595366295485,
+              "rms_over_minimum_prior_separation": 0.4546646519251776,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 6,
+          "passing_checks": 5
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19362826274490577,
+              "rms_over_minimum_prior_separation": 0.47043833619673303,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4115911647641152,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19362826274490577,
+              "rms_over_minimum_prior_separation": 0.47043833619673303,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3235319542491194,
+              "nearest_rows": [
+                0,
+                0,
+                4,
+                2,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.5425319479735987,
+              "rms_over_minimum_prior_separation": 1.6769037520041976,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.5757794374904321e-15,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              -1,
+              1,
+              2,
+              2,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4005344616404981,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19168763429580202,
+              "rms_over_minimum_prior_separation": 0.47857962960463635,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 6,
+          "passing_checks": 5
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.47625654032655584,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.09509629349159025,
+              "rms_over_minimum_prior_separation": 0.19967451455130752,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4081551915512503,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.15631795873187984,
+              "rms_over_minimum_prior_separation": 0.3829865746354268,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.32353194853755657,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.2899234319646479,
+              "rms_over_minimum_prior_separation": 0.8961199451095098,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.4005344616404981,
+              "nearest_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "optimal_prior_rows": [
+                1,
+                0,
+                2,
+                3,
+                4
+              ],
+              "rms_distance": 0.19238656232426668,
+              "rms_over_minimum_prior_separation": 0.4803246181022603,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        }
+      },
+      "smoothing_lambda": 0.0,
+      "wall_seconds": 1.624677108018659
+    },
+    {
+      "arm": {
+        "autograd_multithreading": true,
+        "id": "full-threaded",
+        "truncation": false
+      },
+      "cohort": "unsmoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.3161763979319018,
+          "nearest_rows": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "optimal_prior_rows": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "rms_distance": 0.11879952147566038,
+          "rms_over_minimum_prior_separation": 0.37573810775479666,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          0,
+          1,
+          4
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "expected_loss_control": {
+        "d": 5.960464477539063e-08,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.36063870787620544,
+          "cosine_descent_to_raw": 0.06264612078666687,
+          "raw_gradient_norm": 0.03794752061367035,
+          "relative_parameter_step": 0.006086818205450042,
+          "step_over_raw_norm": 9.503617154536512
+        },
+        "E": {
+          "actual_step_norm": 0.16842779517173767,
+          "cosine_descent_to_raw": 0.16760779917240143,
+          "raw_gradient_norm": 0.007956543937325478,
+          "relative_parameter_step": 0.0006851043013010303,
+          "step_over_raw_norm": 21.168461645968513
+        },
+        "G": {
+          "actual_step_norm": 6.620954451364014e-08,
+          "cosine_descent_to_raw": 0.03609146177768707,
+          "raw_gradient_norm": 1.2696910580214937e-12,
+          "relative_parameter_step": 1.5393255940599343e-09,
+          "step_over_raw_norm": 52146.184770972315
+        },
+        "prior": {
+          "actual_step_norm": 0.06708135455846786,
+          "cosine_descent_to_raw": 0.9412762522697449,
+          "raw_gradient_norm": 0.003124354174360633,
+          "relative_parameter_step": 0.04631932289500796,
+          "step_over_raw_norm": 21.47047063644613
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.3126842901753864,
+          "nearest_rows": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "optimal_prior_rows": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "rms_distance": 0.10795936614551926,
+          "rms_over_minimum_prior_separation": 0.3452663582329775,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          0,
+          1,
+          4
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "0d400628c3408ef5b6c91233684be4df9464bd27c74e6659e8e1f0253a33435d"
+        },
+        "request.json": {
+          "bytes": 16813,
+          "sha256": "fe75da48c604416aba9f53022a24245a08a89fb8221fbbc2eb3079463574823f"
+        },
+        "source-manifest.json": {
+          "bytes": 142128,
+          "sha256": "00dc9924e5cbeca717f7286c46e277d6975acba5d65cb15016574ee5bed16763"
+        },
+        "state.pt": {
+          "bytes": 836735,
+          "sha256": "65e689b29969f951e47cb5a7160fca0c897f49e447e0898194d7bc0745307caf"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.6930001974105835,
+        "d_loss": 0.6930001974105835,
+        "d_penalty": 0.0,
+        "joint_loss": 0.693835437297821
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.2080078125,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.1953125,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a421b5f83e77aa61e616697a8766b0bedc42639670db8be3ac286f34b36c2129",
+        "origin_commit": "2e9808ee4a8324d88b172a766f3b9f3ab86bb0f3"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": -1.631965231022781e-13
+          },
+          {
+            "imaginary": 0.006325037016145973,
+            "real": 0.000419653576994004
+          },
+          {
+            "imaginary": -0.006325037016145973,
+            "real": 0.000419653576994004
+          },
+          {
+            "imaginary": 0.0,
+            "real": -9.500475706702268e-05
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            -1.6633361824982198e-13,
+            -2.3999757035986533e-17,
+            1.5554652115942587e-12,
+            -3.8404131923951164e-13
+          ],
+          [
+            5.421010862427522e-17,
+            -0.00010615582512639096,
+            5.194565204412818e-07,
+            -0.002077744347658882
+          ],
+          [
+            1.5587574633824097e-12,
+            5.194565252659815e-07,
+            1.886541798321907e-06,
+            -0.005983489123376174
+          ],
+          [
+            3.857591329703425e-13,
+            0.0020583605084764645,
+            0.006002250035164192,
+            0.0008485716923407275
+          ]
+        ],
+        "matrix_fine": [
+          [
+            -1.6319654803340428e-13,
+            2.060630174957545e-16,
+            1.5600682912622033e-12,
+            -3.831620024101419e-13
+          ],
+          [
+            1.8070036208091741e-16,
+            -0.00010615582513651019,
+            5.194565202605815e-07,
+            -0.0020777443464610195
+          ],
+          [
+            1.6413013887809729e-12,
+            5.194565204412818e-07,
+            1.8865419388345087e-06,
+            -0.005983489124165022
+          ],
+          [
+            3.953723922330473e-13,
+            0.0020583605040491613,
+            0.0060022500351507475,
+            0.000848571680118661
+          ]
+        ],
+        "matrix_norm": 0.009006351324014013,
+        "offdiagonal_skew_norm": 0.008965637359651833,
+        "offdiagonal_skew_over_symmetric": 469.6741005218132,
+        "offdiagonal_symmetric_norm": 1.90890605841176e-05,
+        "projected_circulation_dominates": true,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 1.452213637470167e-09,
+        "skew_norm": 0.008965637359651833,
+        "skew_over_symmetric": 10.481209560429082,
+        "symmetric_norm": 0.0008554010210329956
+      },
+      "raw_losses": {
+        "d_adversarial": 0.6938042044639587,
+        "d_loss": 0.6938042044639587,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6933292150497437
+      },
+      "recipe_sha256": "2d8d93002d7d56872891d4daa506efeef83e0742bec56170ac1d8292ab3ab53d",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 1.2114626492143505,
+        "G": 1.3958397667127187,
+        "prior": 1.1965150729983105
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.11879952147566038,
+              "rms_over_minimum_prior_separation": 0.37573810775479666,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.11879952147566038,
+              "rms_over_minimum_prior_separation": 0.37573810775479666,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.45707919461626445,
+              "rms_over_minimum_prior_separation": 1.4456461570376622,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9999957084655762,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.1468702986114856,
+              "rms_over_minimum_prior_separation": 0.4645201209582968,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.11879952147566038,
+              "rms_over_minimum_prior_separation": 0.37573810775479666,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3161763979319018,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.11879952147566038,
+              "rms_over_minimum_prior_separation": 0.37573810775479666,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.26395234740619383,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.6400883993325631,
+              "rms_over_minimum_prior_separation": 2.4250149908594563,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              -1,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.19999999999999998,
+            "minimum_reconstruction_token_probability": 0.9999996423721313,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 0.8,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30661376806640117,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.16829376468398102,
+              "rms_over_minimum_prior_separation": 0.54887869434335,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 6,
+          "passing_checks": 5
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3016528844904877,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.09030357758868288,
+              "rms_over_minimum_prior_separation": 0.29936255289324276,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3126842901753864,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.10795936614551926,
+              "rms_over_minimum_prior_separation": 0.3452663582329775,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.26323516868611074,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.2833940028009126,
+              "rms_over_minimum_prior_separation": 1.0765810822901094,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 0.6,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30661376806640117,
+              "nearest_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                2,
+                3,
+                1,
+                0,
+                4
+              ],
+              "rms_distance": 0.13651602702918608,
+              "rms_over_minimum_prior_separation": 0.4452377591851054,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              0,
+              1,
+              4
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 7,
+          "passing_checks": 6
+        }
+      },
+      "smoothing_lambda": 0.0,
+      "wall_seconds": 1.581823689979501
+    },
+    {
+      "arm": {
+        "autograd_multithreading": false,
+        "id": "truncated-serial",
+        "truncation": true
+      },
+      "cohort": "smoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.30205631940522354,
+          "nearest_rows": [
+            0,
+            1,
+            4,
+            0,
+            2
+          ],
+          "optimal_prior_rows": [
+            0,
+            1,
+            4,
+            3,
+            2
+          ],
+          "rms_distance": 0.2816754816652738,
+          "rms_over_minimum_prior_separation": 0.9325263653477553,
+          "unique_nearest_rows": 4
+        },
+        "failed_bounds": [
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          0,
+          1,
+          4,
+          3,
+          2
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 0.0006752923945896327,
+        "modes": 5,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          0,
+          4
+        ],
+        "reconstruction_exact": false
+      },
+      "expected_loss_control": {
+        "d": 0.0,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.05666009336709976,
+          "cosine_descent_to_raw": 0.5457157492637634,
+          "raw_gradient_norm": 0.05905979871749878,
+          "relative_parameter_step": 0.0035839419420472204,
+          "step_over_raw_norm": 0.9593682098058351
+        },
+        "E": {
+          "actual_step_norm": 0.04562049359083176,
+          "cosine_descent_to_raw": 0.7171580195426941,
+          "raw_gradient_norm": 0.009381103329360485,
+          "relative_parameter_step": 0.0048846564878812174,
+          "step_over_raw_norm": 4.86302005096257
+        },
+        "G": {
+          "actual_step_norm": 4.6494997150148265e-06,
+          "cosine_descent_to_raw": 0.9890446066856384,
+          "raw_gradient_norm": 3.422775662897948e-08,
+          "relative_parameter_step": 1.5289746844539388e-07,
+          "step_over_raw_norm": 135.84003665254104
+        },
+        "prior": {
+          "actual_step_norm": 0.06682632118463516,
+          "cosine_descent_to_raw": 0.8638838529586792,
+          "raw_gradient_norm": 0.004011005628854036,
+          "relative_parameter_step": 0.05347787180360188,
+          "step_over_raw_norm": 16.660739816445425
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.30279450448824213,
+          "nearest_rows": [
+            0,
+            1,
+            4,
+            0,
+            2
+          ],
+          "optimal_prior_rows": [
+            0,
+            1,
+            4,
+            3,
+            2
+          ],
+          "rms_distance": 0.31550363268888465,
+          "rms_over_minimum_prior_separation": 1.0419727835619819,
+          "unique_nearest_rows": 4
+        },
+        "failed_bounds": [
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          0,
+          1,
+          4,
+          3,
+          2
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 2.696998535611783e-08,
+        "modes": 5,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          0,
+          4
+        ],
+        "reconstruction_exact": false
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "7b9f5f17828fde732347a2ae9414983400c9cf01f98422ad749d10bd1c0a22d9"
+        },
+        "request.json": {
+          "bytes": 29072,
+          "sha256": "7a8fecc48d4d3245aa8f13e00f79d0e5565f4a515e330fdd50bdf6e7d843cf2b"
+        },
+        "source-manifest.json": {
+          "bytes": 142262,
+          "sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+        },
+        "state.pt": {
+          "bytes": 836799,
+          "sha256": "a936a53d78dde2f7cfbda54673203e7171f9a76be03cf663e652d96a0031f249"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.6940172910690308,
+        "d_loss": 0.6940172910690308,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6931578516960144
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.2109375,
+        "mass_berry": 0.1875,
+        "mass_grape": 0.1953125,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.0006752923945896327,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": false,
+        "reconstruction_nll": 0.9667052128027319,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "origin_commit": "34db5abbf164229ee449d2862bba53e043da7f82"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": 0.17719644718796088
+          },
+          {
+            "imaginary": 0.0,
+            "real": 2.080531630168546e-06
+          },
+          {
+            "imaginary": 0.0,
+            "real": -0.00027187415544015946
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.0072168107467020255
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            2.0809972009266867e-06,
+            3.750792646421801e-10,
+            3.4116001845381477e-07,
+            -4.812568149849445e-09
+          ],
+          [
+            3.7522849410942527e-10,
+            -0.0016554636332304778,
+            3.715160692280284e-05,
+            0.035409020525737495
+          ],
+          [
+            3.4127777904027767e-07,
+            3.715160771687251e-05,
+            2.435988556096641e-05,
+            0.014660963193589664
+          ],
+          [
+            6.796140039622145e-09,
+            -0.037563686203636454,
+            -0.013752071034163482,
+            0.18577247218102416
+          ]
+        ],
+        "matrix_fine": [
+          [
+            2.080192031997468e-06,
+            3.750699303159403e-10,
+            3.411559913600364e-07,
+            -4.812572963603859e-09
+          ],
+          [
+            3.750905835930851e-10,
+            -0.0016554636584973036,
+            3.7151606921068114e-05,
+            0.03540902262456093
+          ],
+          [
+            3.411665105516419e-07,
+            3.715160699768507e-05,
+            2.4359884336829878e-05,
+            0.014660962742915156
+          ],
+          [
+            6.7955016613829855e-09,
+            -0.03756368580276846,
+            -0.013752071034225932,
+            0.18577248789298137
+          ]
+        ],
+        "matrix_norm": 0.1938634927904572,
+        "offdiagonal_skew_norm": 0.05537290250493072,
+        "offdiagonal_skew_over_symmetric": 33.46977478779961,
+        "offdiagonal_symmetric_norm": 0.001654415150863675,
+        "projected_circulation_dominates": false,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 8.19330221482596e-08,
+        "skew_norm": 0.05537290250493072,
+        "skew_over_symmetric": 0.2980447147217209,
+        "symmetric_norm": 0.18578723181396262
+      },
+      "raw_losses": {
+        "d_adversarial": 0.6955510377883911,
+        "d_loss": 0.6955510377883911,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6934905052185059
+      },
+      "recipe_sha256": "a4e7842a258a2dfdf19e73d840c62a8583e027cd26afdb58c9fc3390db2ad914",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.42243800045897223,
+        "G": 0.03349323315106021,
+        "prior": 0.3765657091297942
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.2816754816652738,
+              "rms_over_minimum_prior_separation": 0.9325263653477553,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.0006752923945896327,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.2816754816652738,
+              "rms_over_minimum_prior_separation": 0.9325263653477553,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.0006752923945896327,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.5347615079313738,
+              "rms_over_minimum_prior_separation": 1.7704033108274908,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.4169284499030058e-23,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.30453624149103037,
+              "rms_over_minimum_prior_separation": 1.008210131443997,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 6.452374634591251e-08,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.2816754816652738,
+              "rms_over_minimum_prior_separation": 0.9325263653477553,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.000675296236295253,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30205631940522354,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.2816754816652738,
+              "rms_over_minimum_prior_separation": 0.9325263653477553,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.0006752929766662419,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.34241588661276573,
+              "nearest_rows": [
+                1,
+                1,
+                2,
+                1,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.7442649278711391,
+              "rms_over_minimum_prior_separation": 2.173570085294611,
+              "unique_nearest_rows": 2
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.4231634487256917e-23,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3070857024966285,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.3209997649372877,
+              "rms_over_minimum_prior_separation": 1.0453100301561973,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 6.452386713817759e-08,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.37816342861317415,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.34725016059231406,
+              "rms_over_minimum_prior_separation": 0.9182542105294865,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9999996423721313,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.30279450448824213,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.31550363268888465,
+              "rms_over_minimum_prior_separation": 1.0419727835619819,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 2.696998535611783e-08,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 3
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.34241626198314346,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.4392341471305146,
+              "rms_over_minimum_prior_separation": 1.2827490861171114,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.0006752923945896327,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.3070857024966285,
+              "nearest_rows": [
+                0,
+                1,
+                4,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                0,
+                1,
+                4,
+                3,
+                2
+              ],
+              "rms_distance": 0.2954004923998653,
+              "rms_over_minimum_prior_separation": 0.9619480490242249,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              0,
+              1,
+              4,
+              3,
+              2
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.0006752923945896327,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        }
+      },
+      "smoothing_lambda": 0.0001,
+      "wall_seconds": 1.5244026189902797
+    },
+    {
+      "arm": {
+        "autograd_multithreading": false,
+        "id": "full-serial",
+        "truncation": false
+      },
+      "cohort": "smoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.02223436616667462,
+          "nearest_rows": [
+            1,
+            1,
+            4,
+            2,
+            0
+          ],
+          "optimal_prior_rows": [
+            3,
+            1,
+            4,
+            2,
+            0
+          ],
+          "rms_distance": 0.796975265517899,
+          "rms_over_minimum_prior_separation": 35.8442988454703,
+          "unique_nearest_rows": 4
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv",
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          4,
+          0,
+          3,
+          3,
+          3
+        ],
+        "mass_tv": 0.4,
+        "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+        "modes": 3,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          0,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": false
+      },
+      "expected_loss_control": {
+        "d": 5.960464477539063e-08,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.06618672609329224,
+          "cosine_descent_to_raw": 0.4557093381881714,
+          "raw_gradient_norm": 0.483085572719574,
+          "relative_parameter_step": 0.0029168751995842846,
+          "step_over_raw_norm": 0.13700828555216019
+        },
+        "E": {
+          "actual_step_norm": 0.046327803283929825,
+          "cosine_descent_to_raw": 0.6971762180328369,
+          "raw_gradient_norm": 0.03981756418943405,
+          "relative_parameter_step": 0.004666099246725903,
+          "step_over_raw_norm": 1.1635016914526208
+        },
+        "G": {
+          "actual_step_norm": 0.0008278803434222937,
+          "cosine_descent_to_raw": 0.9671304225921631,
+          "raw_gradient_norm": 5.418439741333714e-06,
+          "relative_parameter_step": 2.779496852996202e-05,
+          "step_over_raw_norm": 152.78943440247917
+        },
+        "prior": {
+          "actual_step_norm": 0.06702534854412079,
+          "cosine_descent_to_raw": 0.9394687414169312,
+          "raw_gradient_norm": 0.009473559446632862,
+          "relative_parameter_step": 0.01791439033908434,
+          "step_over_raw_norm": 7.074991076130657
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.02223436616667462,
+          "nearest_rows": [
+            1,
+            1,
+            4,
+            2,
+            0
+          ],
+          "optimal_prior_rows": [
+            3,
+            1,
+            4,
+            2,
+            0
+          ],
+          "rms_distance": 0.747551606374766,
+          "rms_over_minimum_prior_separation": 33.621448921499436,
+          "unique_nearest_rows": 4
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv",
+          "reconstruction_exact",
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          4,
+          0,
+          3,
+          3,
+          3
+        ],
+        "mass_tv": 0.4,
+        "minimum_reconstruction_token_probability": 6.75131921645023e-35,
+        "modes": 3,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          0,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": false
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972981,
+          "sha256": "d0c0b465cbbccbedf8db3729d8324205491b80c05959351158e1cc49ac661887"
+        },
+        "request.json": {
+          "bytes": 29068,
+          "sha256": "6746359ce2231aac6d26f60ea1149bacc0018aa7a34c0c2221b3243e7104a6ba"
+        },
+        "source-manifest.json": {
+          "bytes": 142262,
+          "sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+        },
+        "state.pt": {
+          "bytes": 836799,
+          "sha256": "05ad2a917025a650faaf2fc268708ebd72c3e4a18a098b4dfd211fafbf1f3178"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.46306419372558594,
+        "d_loss": 0.4630996882915497,
+        "d_penalty": 3.5496421332936734e-05,
+        "joint_loss": 1.2171076536178589
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1953125,
+        "mass_berry": 0.2109375,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.59375,
+        "mass_tv": 0.4046875,
+        "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+        "modes": 3,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": false,
+        "reconstruction_nll": 3.684136152764116,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "origin_commit": "34db5abbf164229ee449d2862bba53e043da7f82"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": 6.407415211169842
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.0002653713687859917
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.00012083217224172525
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.007017814139019496
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            0.0002404058669490934,
+            4.639790381767543e-08,
+            5.487974990895552e-05,
+            -2.4616572202731536e-06
+          ],
+          [
+            4.64151096030152e-08,
+            0.005418243373684142,
+            4.213876834795183e-05,
+            -0.1463955119929295
+          ],
+          [
+            5.4898162008074763e-05,
+            4.213876845550468e-05,
+            3.509306849541066e-05,
+            -0.04462625091868891
+          ],
+          [
+            -1.9737871198577395e-06,
+            0.06816324044846278,
+            0.021773929153173777,
+            6.4091136678926794
+          ]
+        ],
+        "matrix_fine": [
+          [
+            0.0002403230222770325,
+            4.639788771190863e-08,
+            5.487878210765577e-05,
+            -2.461658610230503e-06
+          ],
+          [
+            4.639944678475061e-08,
+            0.005418243346616096,
+            4.2138768151928074e-05,
+            -0.1463955677053798
+          ],
+          [
+            5.488043937120398e-05,
+            4.21387681620473e-05,
+            3.509282044498787e-05,
+            -0.04462626083136795
+          ],
+          [
+            -1.973141094957498e-06,
+            0.06816324008016943,
+            0.0217739291622406,
+            6.409125569660548
+          ]
+        ],
+        "matrix_norm": 6.411354263359502,
+        "offdiagonal_skew_norm": 0.15881509252867343,
+        "offdiagonal_skew_over_symmetric": 2.7557480374084493,
+        "offdiagonal_symmetric_norm": 0.05763048376441039,
+        "projected_circulation_dominates": false,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 1.8564258788161067e-06,
+        "skew_norm": 0.15881509252867343,
+        "skew_over_symmetric": 0.024778515233372562,
+        "symmetric_norm": 6.4093869641864485
+      },
+      "raw_losses": {
+        "d_adversarial": 0.45572683215141296,
+        "d_loss": 0.46504196524620056,
+        "d_penalty": 0.009315123781561852,
+        "joint_loss": 1.289736270904541
+      },
+      "recipe_sha256": "a4e7842a258a2dfdf19e73d840c62a8583e027cd26afdb58c9fc3390db2ad914",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.6367026934715071,
+        "G": 0.032713399038781496,
+        "prior": 0.6690510625231445
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.796975265517899,
+              "rms_over_minimum_prior_separation": 35.8442988454703,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.796975265517899,
+              "rms_over_minimum_prior_separation": 35.8442988454703,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.817892160407494,
+              "rms_over_minimum_prior_separation": 36.78504501888476,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.7768125064815183,
+              "rms_over_minimum_prior_separation": 34.937470250257135,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 1.7737951466575374e-35,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.796975265517899,
+              "rms_over_minimum_prior_separation": 35.8442988454703,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 6.389610306358226e-34,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.796975265517899,
+              "rms_over_minimum_prior_separation": 35.8442988454703,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 7.244631377190261e-34,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.03709822982434329,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.7595331588041917,
+              "rms_over_minimum_prior_separation": 20.473568749789717,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              2,
+              3,
+              2
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.7651173851752512,
+              "rms_over_minimum_prior_separation": 34.411477234823394,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 1.7377890314873185e-35,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.024034661777135036,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                1,
+                3,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.70957140918467,
+              "rms_over_minimum_prior_separation": 29.522837299075647,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              -1,
+              3,
+              -1
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 1.1518673376749996e-42,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 0.6,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.747551606374766,
+              "rms_over_minimum_prior_separation": 33.621448921499436,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 6.75131921645023e-35,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.038434358910097596,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.7230711402685344,
+              "rms_over_minimum_prior_separation": 18.81314430038709,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              2,
+              3,
+              2
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.02223436616667462,
+              "nearest_rows": [
+                1,
+                1,
+                4,
+                2,
+                0
+              ],
+              "optimal_prior_rows": [
+                3,
+                1,
+                4,
+                2,
+                0
+              ],
+              "rms_distance": 0.7847003342633758,
+              "rms_over_minimum_prior_separation": 35.292228632966506,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              4,
+              0,
+              3,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              0,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        }
+      },
+      "smoothing_lambda": 0.0001,
+      "wall_seconds": 1.6151396880159155
+    },
+    {
+      "arm": {
+        "autograd_multithreading": true,
+        "id": "truncated-threaded",
+        "truncation": true
+      },
+      "cohort": "smoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.8422547398015798,
+          "nearest_rows": [
+            4,
+            3,
+            1,
+            0,
+            2
+          ],
+          "optimal_prior_rows": [
+            4,
+            3,
+            1,
+            0,
+            2
+          ],
+          "rms_distance": 0.27806917220552085,
+          "rms_over_minimum_prior_separation": 0.3301485394680343,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          4,
+          1,
+          0
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 0.9994922876358032,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "expected_loss_control": {
+        "d": 5.960464477539063e-08,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.06195160374045372,
+          "cosine_descent_to_raw": 0.4388713538646698,
+          "raw_gradient_norm": 0.07430753856897354,
+          "relative_parameter_step": 0.0032986478508963244,
+          "step_over_raw_norm": 0.8337189595231872
+        },
+        "E": {
+          "actual_step_norm": 0.0462435707449913,
+          "cosine_descent_to_raw": 0.6629890203475952,
+          "raw_gradient_norm": 0.03311637043952942,
+          "relative_parameter_step": 0.004808531341892451,
+          "step_over_raw_norm": 1.3963961065549797
+        },
+        "G": {
+          "actual_step_norm": 0.0,
+          "cosine_descent_to_raw": null,
+          "raw_gradient_norm": 3.6693694957512513e-13,
+          "relative_parameter_step": 0.0,
+          "step_over_raw_norm": 0.0
+        },
+        "prior": {
+          "actual_step_norm": 0.06702406704425812,
+          "cosine_descent_to_raw": 0.9724923372268677,
+          "raw_gradient_norm": 0.005889549385756254,
+          "relative_parameter_step": 0.011808394738228268,
+          "step_over_raw_norm": 11.38016894914819
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.8366575972579591,
+          "nearest_rows": [
+            4,
+            3,
+            1,
+            0,
+            2
+          ],
+          "optimal_prior_rows": [
+            4,
+            3,
+            1,
+            0,
+            2
+          ],
+          "rms_distance": 0.2523231509541148,
+          "rms_over_minimum_prior_separation": 0.30158472448116463,
+          "unique_nearest_rows": 5
+        },
+        "failed_bounds": [
+          "minimum_reconstruction_token_probability"
+        ],
+        "generated_row_word_assignment": [
+          3,
+          2,
+          4,
+          1,
+          0
+        ],
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 0.7648525238037109,
+        "modes": 5,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "f40163f4fe00afb526009f267d0d10a7b019fafdbd0446246cf8b769444b35dc"
+        },
+        "request.json": {
+          "bytes": 29073,
+          "sha256": "0db98f726a27596888bea60ca8a176b285e6002775c990056bdab629a004b439"
+        },
+        "source-manifest.json": {
+          "bytes": 142262,
+          "sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+        },
+        "state.pt": {
+          "bytes": 836799,
+          "sha256": "42cf8076f748886d81d7e10fa28c2c4e13c0394ca946d1e25c875ecd5f954205"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.6923480033874512,
+        "d_loss": 0.6923480033874512,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6943907737731934
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.2080078125,
+        "mass_berry": 0.1875,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.1953125,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9994922876358032,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": 1.7555881466801267e-05,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "origin_commit": "34db5abbf164229ee449d2862bba53e043da7f82"
+      },
+      "projected_raw_game_jacobian": {
+        "identified": false,
+        "reason": "Zero actual direction for G"
+      },
+      "raw_losses": {
+        "d_adversarial": 0.6938104033470154,
+        "d_loss": 0.6938104033470154,
+        "d_penalty": 0.0,
+        "joint_loss": 0.6940920948982239
+      },
+      "recipe_sha256": "a4e7842a258a2dfdf19e73d840c62a8583e027cd26afdb58c9fc3390db2ad914",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.7007874671533063,
+        "G": 0.541372382632134,
+        "prior": 0.8623140523343369
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.27806917220552085,
+              "rms_over_minimum_prior_separation": 0.3301485394680343,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.27806917220552085,
+              "rms_over_minimum_prior_separation": 0.3301485394680343,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.7453259671270198,
+              "rms_over_minimum_prior_separation": 0.884917509995379,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 4.4572411870142065e-37,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              -1,
+              1,
+              4,
+              3,
+              0
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.29155964880597446,
+              "rms_over_minimum_prior_separation": 0.3461656373399106,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.03885195404291153,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              -1
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.27806917220552085,
+              "rms_over_minimum_prior_separation": 0.3301485394680343,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422547398015798,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.27806917220552085,
+              "rms_over_minimum_prior_separation": 0.3301485394680343,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8426947253386534,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.9645897755624502,
+              "rms_over_minimum_prior_separation": 1.1446491197329032,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 4.459384164729729e-37,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              -1,
+              1,
+              4,
+              3,
+              0
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422884610885444,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.3052407282001247,
+              "rms_over_minimum_prior_separation": 0.3623945266988962,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.03885195404291153,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              -1
+            ],
+            "reconstruction_exact": false
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.7457034526290655,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.1713609442294421,
+              "rms_over_minimum_prior_separation": 0.2297977079565461,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 1.0,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8366575972579591,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.2523231509541148,
+              "rms_over_minimum_prior_separation": 0.30158472448116463,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.7648525238037109,
+            "modes": 5,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 6
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8426952412461242,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                4
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.3974083202484144,
+              "rms_over_minimum_prior_separation": 0.4715919834325304,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.8422884610885444,
+              "nearest_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "optimal_prior_rows": [
+                4,
+                3,
+                1,
+                0,
+                2
+              ],
+              "rms_distance": 0.2848858084053317,
+              "rms_over_minimum_prior_separation": 0.33822831674217063,
+              "unique_nearest_rows": 5
+            },
+            "failed_bounds": [],
+            "generated_row_word_assignment": [
+              3,
+              2,
+              4,
+              1,
+              0
+            ],
+            "mass_tv": 0.0,
+            "minimum_reconstruction_token_probability": 0.9994922876358032,
+            "modes": 5,
+            "passed": true,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": null,
+          "passing_checks": 8
+        }
+      },
+      "smoothing_lambda": 0.0001,
+      "wall_seconds": 1.4483781419694424
+    },
+    {
+      "arm": {
+        "autograd_multithreading": true,
+        "id": "full-threaded",
+        "truncation": false
+      },
+      "cohort": "smoothed",
+      "endpoint_step": 20001,
+      "exact_uniform_endpoint": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.6625415330144327,
+          "nearest_rows": [
+            2,
+            2,
+            0,
+            4,
+            0
+          ],
+          "optimal_prior_rows": [
+            2,
+            1,
+            4,
+            3,
+            0
+          ],
+          "rms_distance": 0.6652741805566705,
+          "rms_over_minimum_prior_separation": 1.0041244924371833,
+          "unique_nearest_rows": 3
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv"
+        ],
+        "generated_row_word_assignment": [
+          2,
+          1,
+          0,
+          3,
+          3
+        ],
+        "mass_tv": 0.2,
+        "minimum_reconstruction_token_probability": 0.9999990463256836,
+        "modes": 4,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "expected_loss_control": {
+        "d": 0.0,
+        "g": 0.0
+      },
+      "expected_role_step": {
+        "D": {
+          "actual_step_norm": 0.062438249588012695,
+          "cosine_descent_to_raw": 0.643984854221344,
+          "raw_gradient_norm": 0.10051413625478745,
+          "relative_parameter_step": 0.0038016677546340036,
+          "step_over_raw_norm": 0.621188739360418
+        },
+        "E": {
+          "actual_step_norm": 0.046432506293058395,
+          "cosine_descent_to_raw": 0.6604956388473511,
+          "raw_gradient_norm": 0.049293696880340576,
+          "relative_parameter_step": 0.004919335041084541,
+          "step_over_raw_norm": 0.9419562587438377
+        },
+        "G": {
+          "actual_step_norm": 9.633381523599382e-06,
+          "cosine_descent_to_raw": 0.9976255297660828,
+          "raw_gradient_norm": 6.92045603045699e-08,
+          "relative_parameter_step": 3.433232193626745e-07,
+          "step_over_raw_norm": 139.2015422278934
+        },
+        "prior": {
+          "actual_step_norm": 0.06707511097192764,
+          "cosine_descent_to_raw": 0.964144229888916,
+          "raw_gradient_norm": 0.01977475732564926,
+          "relative_parameter_step": 0.028991279561050156,
+          "step_over_raw_norm": 3.3919562130315737
+        }
+      },
+      "first_full_step": {
+        "code_matching": {
+          "minimum_prior_pair_distance": 0.6625415258366066,
+          "nearest_rows": [
+            2,
+            2,
+            0,
+            4,
+            0
+          ],
+          "optimal_prior_rows": [
+            2,
+            1,
+            4,
+            3,
+            0
+          ],
+          "rms_distance": 0.6425186781103093,
+          "rms_over_minimum_prior_separation": 0.9697787279053731,
+          "unique_nearest_rows": 3
+        },
+        "failed_bounds": [
+          "modes",
+          "mass_tv"
+        ],
+        "generated_row_word_assignment": [
+          2,
+          1,
+          0,
+          3,
+          3
+        ],
+        "mass_tv": 0.2,
+        "minimum_reconstruction_token_probability": 0.9998615980148315,
+        "modes": 4,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstructed_word_assignment": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "reconstruction_exact": true
+      },
+      "input_files": {
+        "observed-records.pt": {
+          "bytes": 33972853,
+          "sha256": "5e0747cade00c0b49829c3209b22dcdd6045fb9355460a63e30706d57f576a04"
+        },
+        "request.json": {
+          "bytes": 29069,
+          "sha256": "179367e3d28b6e05f58ee3a9e7b1c97b6e2974e016a4475fa899a8381c2d52af"
+        },
+        "source-manifest.json": {
+          "bytes": 142262,
+          "sha256": "9062d6511067a25baa0c3c2930c3c35650138a6d33893fe5534bc8c571054057"
+        },
+        "state.pt": {
+          "bytes": 836799,
+          "sha256": "633e746eca681850b958b276d93f923605e9dae8a48dd85ccfa05aefa6782341"
+        }
+      },
+      "losses_after_critic": {
+        "d_adversarial": 0.5522143840789795,
+        "d_loss": 0.5528151392936707,
+        "d_penalty": 0.000600755971390754,
+        "joint_loss": 1.1196523904800415
+      },
+      "original_endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.0,
+        "mass_grape": 0.1953125,
+        "mass_lemon": 0.2109375,
+        "mass_melon": 0.40625,
+        "mass_tv": 0.2171875,
+        "minimum_reconstruction_token_probability": 0.9999990463256836,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": 1.033147474534859e-07,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "original_task_sha256": "829ce1e08d5e00c4b38ef88e400b3fe4758f517f7ac5d5461e6cbc69faea24b5",
+      "original_training_source": {
+        "digest": "a30e99d3be7da3c5550270138daca165a96911f3086c9eb1a5f8e22eeb2a354f",
+        "origin_commit": "34db5abbf164229ee449d2862bba53e043da7f82"
+      },
+      "projected_raw_game_jacobian": {
+        "basis": "Four disjoint unit parameter directions from first actual float32 sequential update",
+        "central_difference_scales": [
+          0.001,
+          0.0003
+        ],
+        "eigenvalues": [
+          {
+            "imaginary": 0.0,
+            "real": -2.2130907008497042e-06
+          },
+          {
+            "imaginary": 0.0,
+            "real": 0.00047450445035497314
+          },
+          {
+            "imaginary": 0.053255676095716284,
+            "real": 0.0927532081753748
+          },
+          {
+            "imaginary": -0.053255676095716284,
+            "real": 0.0927532081753748
+          }
+        ],
+        "identified": true,
+        "matrix_coarse": [
+          [
+            -2.2133314428238725e-06,
+            1.27015149114896e-09,
+            -2.7070770510137243e-07,
+            2.8885976338045135e-09
+          ],
+          [
+            1.2703779000977633e-09,
+            0.0020928755241431812,
+            0.00022047730649510378,
+            -0.1212257024313379
+          ],
+          [
+            -2.707557190603782e-07,
+            0.00022047731066277693,
+            0.00013316578695039133,
+            -0.07113257424122381
+          ],
+          [
+            -3.004421711416683e-08,
+            0.06598669517428324,
+            0.043844731228884215,
+            0.18375487848244776
+          ]
+        ],
+        "matrix_fine": [
+          [
+            -2.2129772039425353e-06,
+            1.270144013861945e-09,
+            -2.707070718434232e-07,
+            2.8885848155622785e-09
+          ],
+          [
+            1.270181876344978e-09,
+            0.002092875450426107,
+            0.00022047730651013805,
+            -0.12122570633151092
+          ],
+          [
+            -2.707112832511793e-07,
+            0.00022047730688599482,
+            0.00013316578704030785,
+            -0.0711325757388366
+          ],
+          [
+            -3.003985948879517e-08,
+            0.06598669383859705,
+            0.04384473122847251,
+            0.1837548794501413
+          ]
+        ],
+        "matrix_norm": 0.2445454359318629,
+        "offdiagonal_skew_norm": 0.15535163966773663,
+        "offdiagonal_skew_over_symmetric": 3.5658087566243872,
+        "offdiagonal_symmetric_norm": 0.04356701390088065,
+        "projected_circulation_dominates": false,
+        "raw_gradient_units": "loss gradient / parameter displacement",
+        "relative_scale_disagreement": 1.842764527311451e-08,
+        "skew_norm": 0.15535163966773663,
+        "skew_over_symmetric": 0.8225729104674603,
+        "symmetric_norm": 0.1888606319158405
+      },
+      "raw_losses": {
+        "d_adversarial": 0.5562257766723633,
+        "d_loss": 0.557645857334137,
+        "d_penalty": 0.00142007099930197,
+        "joint_loss": 1.100250244140625
+      },
+      "recipe_sha256": "a4e7842a258a2dfdf19e73d840c62a8583e027cd26afdb58c9fc3390db2ad914",
+      "relative_raw_gradient_change_from_critic_step": {
+        "E": 0.3845593736129502,
+        "G": 0.024426464175371112,
+        "prior": 0.44317409267377583
+      },
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      },
+      "rng_draws_added": 0,
+      "role_probes": {
+        "D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6652741805566705,
+              "rms_over_minimum_prior_separation": 1.0041244924371833,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6652741805566705,
+              "rms_over_minimum_prior_separation": 1.0041244924371833,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "E": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6484721856009839,
+              "rms_over_minimum_prior_separation": 0.978764580464207,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 3.57706073962627e-12,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              -1,
+              3,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6549011046280985,
+              "rms_over_minimum_prior_separation": 0.9884680008639279,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9998810291290283,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6652741805566705,
+              "rms_over_minimum_prior_separation": 1.0041244924371833,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415330144327,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6652741805566705,
+              "rms_over_minimum_prior_separation": 1.0041244924371833,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6146209588597993,
+              "nearest_rows": [
+                2,
+                2,
+                4,
+                3,
+                0
+              ],
+              "optimal_prior_rows": [
+                1,
+                2,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6848702440985697,
+              "rms_over_minimum_prior_separation": 1.114296924350077,
+              "unique_nearest_rows": 4
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv",
+              "reconstruction_exact",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              -1,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 5.122544749491809e-12,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 0.8,
+            "reconstructed_word_assignment": [
+              0,
+              -1,
+              3,
+              3,
+              4
+            ],
+            "reconstruction_exact": false
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6611680244340018,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6438185331304221,
+              "rms_over_minimum_prior_separation": 0.9737593309682031,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9998810291290283,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "G+E+prior+D": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6736592490223273,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.7048818926521759,
+              "rms_over_minimum_prior_separation": 1.046347828928589,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv",
+              "minimum_reconstruction_token_probability"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.5461879372596741,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6625415258366066,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6425186781103093,
+              "rms_over_minimum_prior_separation": 0.9697787279053731,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9998615980148315,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        },
+        "prior": {
+          "final": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6143270084482206,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6026733725101526,
+              "rms_over_minimum_prior_separation": 0.9810302399572096,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "quality_fraction",
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              -1,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 3,
+            "passed": false,
+            "quality_fraction": 0.8,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first": {
+            "code_matching": {
+              "minimum_prior_pair_distance": 0.6611680244340018,
+              "nearest_rows": [
+                2,
+                2,
+                0,
+                4,
+                0
+              ],
+              "optimal_prior_rows": [
+                2,
+                1,
+                4,
+                3,
+                0
+              ],
+              "rms_distance": 0.6527862905320853,
+              "rms_over_minimum_prior_separation": 0.9873228383827367,
+              "unique_nearest_rows": 3
+            },
+            "failed_bounds": [
+              "modes",
+              "mass_tv"
+            ],
+            "generated_row_word_assignment": [
+              2,
+              1,
+              0,
+              3,
+              3
+            ],
+            "mass_tv": 0.2,
+            "minimum_reconstruction_token_probability": 0.9999990463256836,
+            "modes": 4,
+            "passed": false,
+            "quality_fraction": 1.0,
+            "reconstructed_word_assignment": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "reconstruction_exact": true
+          },
+          "first_failure_step": 1,
+          "passing_checks": 0
+        }
+      },
+      "smoothing_lambda": 0.0001,
+      "wall_seconds": 1.633300333051011
+    }
+  ],
+  "execution": {
+    "cuda": "13.0",
+    "device": "NVIDIA RTX A6000",
+    "protocol_sha256": "2ecb68de48e8b404d472d72a860d6b4f403102f716110b2561f6778bbe652500",
+    "python": "3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]",
+    "runtime_commit": "34db5abbf164229ee449d2862bba53e043da7f82",
+    "script_commit": "31e23909786be1f578290d0ed98e003b1b62d8d0",
+    "script_sha256": "9151f4916fb9633f61079a11e5d7d9edec3293de8daf73cd5704ab37d0ec4738",
+    "source_files": {
+      "benchmarks/toy_audit/api_images.py": "c1573e6e34c05302db8608982ff03819447a38b4a310a91aaf1832508c3e4336",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "experiments/forge/api.py": "de01ee2c64a90baf6965c7339b37d69a14acb5c7296a3690ec6c38cc9ea5aecd",
+      "experiments/forge/word_adapter.py": "e5a4a4bd6fefa5ab7d51738b13e5145003564e7fea0b51846bd69253f81f6948",
+      "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/k3p.py": "63936d55a20b5c8f67606c402203e8fc7dbac7941ae949acaee236e931221808",
+      "particlegan/optim/dualnorm.py": "89d9fec995cff6ccabb9b73f039177f41e03aceca446c3837a3f1009658f831d",
+      "particlegan/policy.py": "c9816a0a86a63ad05f43245bc93246ca3d591983003f230d75531c9ca922e6e0",
+      "particlegan/recipes.py": "1f1d8485d8af94631107ee4e478decf07e723900ed48f1f7b22bb1182f10e375"
+    },
+    "torch": "2.14.0+cu130",
+    "visible_devices": "1"
+  },
+  "finite_difference_optimizer_updates": 0,
+  "historical_training_updates": 0,
+  "protocol_id": "fivewords-saved-endpoint-dynamics-v1",
+  "qualification_input": false,
+  "reduction": {
+    "correspondence_method": "CUDAfloat64 exact120-permutation minimum mean-square encoder/prior matching; RMS divided by minimum prior-row separation; retrospective saved-output reduction, no updates",
+    "exact_uniform_law": "Five finite rows, deterministic equal-mass weighting;1025 repeated representations are not independent samples or ordinary gate credit",
+    "probe_scope": "T(E[gradient]), not E[T(stochastic gradient)]; Cartesian batch25 versus historical sampled batch256",
+    "projected_jacobian_scope": "RAW loss-minimization field, four-dimensional local directional projection, not normalized-update Jacobian or full spectrum",
+    "source_sha256": "ce2e42cdf5c3f63bbfdb5848b13cc539ea5fa837fac05cd30faca723795805e0"
+  },
+  "sampling_draws": 0,
+  "wall_seconds": 13.56045984197408,
+  "zero_update_supplement": {
+    "forward_points": 48,
+    "model_updates": 0,
+    "readout_path": "supplement-readout.json",
+    "readout_sha256": "41e5c408430ec7535ae6442d66e34e11f619e316db56e7bf5262d72934c49130",
+    "sampling_draws": 0,
+    "wall_seconds": 0.8057546380441636
+  }
+}

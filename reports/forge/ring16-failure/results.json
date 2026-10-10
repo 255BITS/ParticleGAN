@@ -1,0 +1,1938 @@
+{
+  "analysis_device": "cpu",
+  "analysis_device_reason": "Saved tensors, scalar math and receipt hashing only; original neural execution CUDA.",
+  "attempt_id": "b2d55fb3d5434002aa2b443522a83b79",
+  "base_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "bindings": {
+    "ambient_global_rng_equal": {
+      "cpu_rng": false,
+      "cuda_rng": false
+    },
+    "changed_scientific_files": [],
+    "final_named_streams_equal": {
+      "[\"data\",\"target\",\"training\",\"cpu\"]": true,
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]": true,
+      "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": true,
+      "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": true,
+      "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": true,
+      "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": true,
+      "[\"init\",\"generator\",\"construction\",\"cpu\"]": true,
+      "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": true,
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": true,
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": true,
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": true,
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": true,
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": true
+    },
+    "initialization_equal": true,
+    "model_comparison": {
+      "D": {
+        "exact": false,
+        "maximum_absolute_difference": 0.5933445692062378,
+        "tensor_count": 7
+      },
+      "G": {
+        "exact": false,
+        "maximum_absolute_difference": 0.7545040249824524,
+        "tensor_count": 6
+      },
+      "prior": {
+        "exact": false,
+        "maximum_absolute_difference": 2.3295135498046875,
+        "tensor_count": 3
+      }
+    },
+    "prior_equal": true,
+    "recipe_equal": true,
+    "scientific_source_files_checked": 91
+  },
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "current_curve": {
+    "cuts": [
+      {
+        "component_covariance_error": 6.67240222916007,
+        "hq": 0.799072265625,
+        "mass_tv": 0.07666015625,
+        "modes": 16,
+        "step": 400
+      },
+      {
+        "component_covariance_error": 3.3818157501518726,
+        "hq": 0.892333984375,
+        "mass_tv": 0.071044921875,
+        "modes": 16,
+        "step": 800
+      },
+      {
+        "component_covariance_error": 3.0194743601605296,
+        "hq": 0.939697265625,
+        "mass_tv": 0.065673828125,
+        "modes": 16,
+        "step": 1200
+      },
+      {
+        "component_covariance_error": 2.2202680110931396,
+        "hq": 0.93603515625,
+        "mass_tv": 0.05712890625,
+        "modes": 16,
+        "step": 1600
+      }
+    ],
+    "full_gate": {
+      "longest_streak": 0,
+      "passing_checks": 0,
+      "terminal_suffix": 0
+    },
+    "minimum_covariance_error": 1.0584902877453715,
+    "minimum_covariance_error_step": 1400,
+    "without_covariance_bound_diagnostic_only": {
+      "longest_streak": 65,
+      "passing_checks": 65,
+      "terminal_suffix": 65
+    }
+  },
+  "endpoints": {
+    "current": {
+      "component_core_covariance_error": 0.387413015589118,
+      "component_core_covariance_errors": [
+        0.43233537673950195,
+        0.46360138058662415,
+        0.5212393403053284,
+        0.49019673466682434,
+        0.4056362211704254,
+        0.2879409193992615,
+        0.43236440420150757,
+        0.3892781734466553,
+        0.354329913854599,
+        0.3907517194747925,
+        0.5794011950492859,
+        0.40457847714424133,
+        0.13455520570278168,
+        0.2227671593427658,
+        0.3619413673877716,
+        0.32769066095352173
+      ],
+      "component_core_eigen_ratios": [
+        0.8098840713500977,
+        0.46878641843795776,
+        0.33815234899520874,
+        0.3498285412788391,
+        0.4436250925064087,
+        0.6208037734031677,
+        0.3926260769367218,
+        0.575354814529419,
+        0.5089186429977417,
+        0.4622524380683899,
+        0.4886881709098816,
+        0.6429383754730225,
+        0.8546113967895508,
+        0.7074147462844849,
+        0.5586723685264587,
+        0.5716090202331543
+      ],
+      "component_core_min_eigen_ratio": 0.33815234899520874,
+      "component_counts": [
+        272,
+        225,
+        212,
+        296,
+        299,
+        242,
+        291,
+        197,
+        315,
+        261,
+        246,
+        211,
+        285,
+        259,
+        225,
+        260
+      ],
+      "component_covariance_error": 2.2202680110931396,
+      "component_covariance_errors": [
+        0.47892558574676514,
+        0.6063920855522156,
+        0.5542877316474915,
+        0.5167871117591858,
+        0.41148558259010315,
+        0.2773124873638153,
+        0.42457690834999084,
+        0.4333955645561218,
+        0.354329913854599,
+        0.3907517194747925,
+        0.6678309440612793,
+        29.243106842041016,
+        0.22230836749076843,
+        0.2250869870185852,
+        0.378720760345459,
+        0.33898958563804626
+      ],
+      "component_mass": [
+        0.06640625,
+        0.054931640625,
+        0.0517578125,
+        0.072265625,
+        0.072998046875,
+        0.05908203125,
+        0.071044921875,
+        0.048095703125,
+        0.076904296875,
+        0.063720703125,
+        0.06005859375,
+        0.051513671875,
+        0.069580078125,
+        0.063232421875,
+        0.054931640625,
+        0.0634765625
+      ],
+      "component_min_eigen_ratio": 0.33765703439712524,
+      "component_resolved": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "component_spill": [
+        0.10661764442920685,
+        0.10222221910953522,
+        0.07075471431016922,
+        0.06081081181764603,
+        0.06020066887140274,
+        0.028925620019435883,
+        0.05154639109969139,
+        0.08121827244758606,
+        0.0063492064364254475,
+        0.0038314175326377153,
+        0.06504064798355103,
+        0.19431279599666595,
+        0.05964912101626396,
+        0.050193049013614655,
+        0.057777777314186096,
+        0.06923077255487442
+      ],
+      "covariance_error": 0.05103538557887077,
+      "hq": 0.93603515625,
+      "hq_component_counts": [
+        243,
+        202,
+        197,
+        278,
+        281,
+        235,
+        276,
+        181,
+        313,
+        260,
+        230,
+        170,
+        268,
+        246,
+        212,
+        242
+      ],
+      "mass_tv": 0.05712890625,
+      "max_component_spill": 0.19431279599666595,
+      "mean_error": 0.018049543723464012,
+      "min_hq_mass_ratio": 0.6640625,
+      "min_mass_ratio": 0.76953125,
+      "modes": 16,
+      "resolved_core_covariance_error": 0.0,
+      "resolved_core_min_eigen_ratio": 1.0,
+      "resolved_max_component_spill": 0.0,
+      "sample_count": 4096,
+      "step": 1600,
+      "sw1_normalized": 0.02889065691573846,
+      "target_mass": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "target_scale": 3.0029242038726807
+    },
+    "historical": {
+      "component_core_covariance_error": 0.3845146680250764,
+      "component_core_covariance_errors": [
+        0.41281434893608093,
+        0.5078852772712708,
+        0.6029186844825745,
+        0.14484156668186188,
+        0.18579693138599396,
+        0.4513606131076813,
+        0.41003069281578064,
+        0.4852328896522522,
+        0.29300040006637573,
+        0.38960957527160645,
+        0.4392405152320862,
+        0.5661599636077881,
+        0.1945260912179947,
+        0.2603445053100586,
+        0.4464932382106781,
+        0.3619793951511383
+      ],
+      "component_core_eigen_ratios": [
+        0.8504384756088257,
+        0.4723811149597168,
+        0.377738893032074,
+        0.8353437781333923,
+        0.7418806552886963,
+        0.4251623749732971,
+        0.4593452215194702,
+        0.7754775285720825,
+        0.5957474708557129,
+        0.49173712730407715,
+        0.6552304029464722,
+        0.6466435194015503,
+        0.7457477450370789,
+        0.6489471793174744,
+        0.502170741558075,
+        0.5571489334106445
+      ],
+      "component_core_min_eigen_ratio": 0.377738893032074,
+      "component_counts": [
+        285,
+        224,
+        212,
+        296,
+        299,
+        242,
+        271,
+        226,
+        306,
+        261,
+        267,
+        175,
+        300,
+        259,
+        225,
+        248
+      ],
+      "component_covariance_error": 0.5143145751208067,
+      "component_covariance_errors": [
+        0.7490407228469849,
+        0.6387248635292053,
+        0.6341667175292969,
+        0.13556630909442902,
+        0.18579693138599396,
+        0.4513606131076813,
+        0.3925766050815582,
+        0.4898861348628998,
+        0.29300040006637573,
+        0.38960957527160645,
+        0.4877016842365265,
+        1.8336342573165894,
+        0.3978695571422577,
+        0.2603445053100586,
+        0.4697806239128113,
+        0.4199737012386322
+      ],
+      "component_mass": [
+        0.069580078125,
+        0.0546875,
+        0.0517578125,
+        0.072265625,
+        0.072998046875,
+        0.05908203125,
+        0.066162109375,
+        0.05517578125,
+        0.07470703125,
+        0.063720703125,
+        0.065185546875,
+        0.042724609375,
+        0.0732421875,
+        0.063232421875,
+        0.054931640625,
+        0.060546875
+      ],
+      "component_min_eigen_ratio": 0.38369613885879517,
+      "component_resolved": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "component_spill": [
+        0.11578947305679321,
+        0.125,
+        0.12735849618911743,
+        0.030405405908823013,
+        0.02675585262477398,
+        0.00413223123177886,
+        0.025830257683992386,
+        0.05309734493494034,
+        0.009803921915590763,
+        0.007662835065275431,
+        0.048689138144254684,
+        0.18285714089870453,
+        0.09333333373069763,
+        0.057915057986974716,
+        0.08444444090127945,
+        0.07258064299821854
+      ],
+      "covariance_error": 0.033674757927656174,
+      "hq": 0.937744140625,
+      "hq_component_counts": [
+        252,
+        196,
+        185,
+        287,
+        291,
+        241,
+        264,
+        214,
+        303,
+        259,
+        254,
+        143,
+        272,
+        244,
+        206,
+        230
+      ],
+      "mass_tv": 0.05859375,
+      "max_component_spill": 0.18285714089870453,
+      "mean_error": 0.015396486036479473,
+      "min_hq_mass_ratio": 0.55859375,
+      "min_mass_ratio": 0.68359375,
+      "modes": 16,
+      "resolved_core_covariance_error": 0.0,
+      "resolved_core_min_eigen_ratio": 1.0,
+      "resolved_max_component_spill": 0.0,
+      "sample_count": 4096,
+      "sw1_normalized": 0.024722816519370867,
+      "target_mass": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "target_scale": 3.0029242038726807
+    }
+  },
+  "historical_resume": {
+    "new_cap": 1600,
+    "only_execution_cap_changed": true,
+    "original_cap": 400,
+    "parent_checkpoint_sha256": "23f5c0c286b3057bdf2146fa8a49d92eb706a7f5e89043099a803e4b19a76524",
+    "parent_state_sha256": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+    "restored_state_sha256": "208e2d7b241ffeac11915972dbb90979dd686ad5285768282e2182d7da5ad2cd",
+    "state_restored_exactly": true
+  },
+  "historical_source_commit": "b4d1f95a074ffa64ac8f64e12aa0a049f836c0af",
+  "inputs": {
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/reports/forge/attempts/2e6abacb6ffe4423be611480f4bb6496/evidence.json": {
+      "bytes": 145815,
+      "sha256": "be6371e8e0fa137c4b8764d6eb88eb797ece685dcd3694cc4484db135479350d"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/reports/forge/attempts/2e6abacb6ffe4423be611480f4bb6496/result.json": {
+      "bytes": 1200437,
+      "sha256": "b84813e5d80ccae3937337f501c56b59fd591fa1328c2d02f58d0463637dcd44"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/reports/forge/attempts/b2d55fb3d5434002aa2b443522a83b79/evidence.json": {
+      "bytes": 145815,
+      "sha256": "e6ee116c0e0bac4ea0fb6745e3cc19f5a7b3d9204d4870542abb8524e42aa73c"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/reports/forge/attempts/b2d55fb3d5434002aa2b443522a83b79/request.json": {
+      "bytes": 1316435,
+      "sha256": "e74d8865bef087ae0bb87c8215cf8c1ca869b4a85c8a06126e4d1aa82bb29abf"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/reports/forge/attempts/b2d55fb3d5434002aa2b443522a83b79/result.json": {
+      "bytes": 1208360,
+      "sha256": "6f1b5e48856b66bafea0b445cfe5c2806d0326ed4a51735f00a7a3c8bfbb7496"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/runs/forge/gaussian-smoke-inventory-v3/gaussian-smoke-inventory-v3/2e6abacb6ffe4423be611480f4bb6496/observed-samples.pt": {
+      "bytes": 3174233,
+      "sha256": "37f1bf63f530a2109487c5c6cbf313806d66eeba67b0b4fafef53e6a813d0cbd"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/runs/forge/gaussian-smoke-inventory-v4/gaussian-smoke-inventory-v4/b2d55fb3d5434002aa2b443522a83b79/observed-samples.pt": {
+      "bytes": 3174233,
+      "sha256": "37f1bf63f530a2109487c5c6cbf313806d66eeba67b0b4fafef53e6a813d0cbd"
+    },
+    "/home/martyn/dev/ParticleGAN-gaussian-smoke-inventory/runs/forge/gaussian-smoke-inventory-v4/gaussian-smoke-inventory-v4/b2d55fb3d5434002aa2b443522a83b79/provenance/provenance-state.pt": {
+      "bytes": 109689,
+      "sha256": "ed5c2c3071bbe7b8c8dbef6b3bddcd6b944caceeb180c1158a480ec7970bb131"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/curve.json": {
+      "bytes": 422897,
+      "sha256": "198085a3338a4e96f30a113175cbb2f362b7d4b0f457e702833993ac5c535608"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/observations.pt": {
+      "bytes": 3335171,
+      "sha256": "d772bf1b7a393082e2d796eddbb45802a7b74a16af23270218bf30dff9eb3706"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/receipt.json": {
+      "bytes": 31553,
+      "sha256": "8448bce5b2d0c2d21952789503d6ca5ce56ec05302d4979c4f90b82728c24d80"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/resume-proof.json": {
+      "bytes": 403,
+      "sha256": "8dff29a4da1d12e3f92f3a86991029b76356301f8205413b89f9ba130a4ec9e7"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/source.json": {
+      "bytes": 140393,
+      "sha256": "2b3d4bb30d355eb4c2b8ac78e84dfabd22945d1e8b2648cc9a5b8527e5ea5f69"
+    },
+    "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-duration-v1/mog100-n256-ring16_acquisition/state.pt": {
+      "bytes": 108455,
+      "sha256": "255bef96639557296fe4eef046dd23fcf3cb3f6cad4e0dacaf4792f6074a991e"
+    },
+    "/home/martyn/dev/ParticleGAN/benchmarks/toy_audit/failure_diagnosis.py": {
+      "bytes": 58900,
+      "sha256": "19600099296a5c638158c973001a00b0d6afe39242ad822536d0d209909e84d4"
+    },
+    "/home/martyn/dev/ParticleGAN/configs/forge/tasks/ring16_acquisition.json": {
+      "bytes": 8212,
+      "sha256": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084"
+    },
+    "/home/martyn/dev/ParticleGAN/reports/forge/gaussian-smoke-inventory/final-v4/readout.json": {
+      "bytes": 1238593,
+      "sha256": "d3f62ea8e01f8d8c4efe2c97e01c84b8af4da6776612b4519934944f8ff118c9"
+    },
+    "/home/martyn/dev/ParticleGAN/reports/forge/gaussian-smoke-inventory/ring-binding-audit.json": {
+      "bytes": 9222,
+      "sha256": "a2a27a396f9549f95f585a24d0786e852cec4aee69a1a3eac639d667859938ee"
+    },
+    "/home/martyn/dev/ParticleGAN/reports/forge/ring16-failure/analyze_saved.py": {
+      "bytes": 15597,
+      "sha256": "55dcfc132d98c9521456a00af12c7d91439a2ba7f08cc5e6b587e10a4407d7a5"
+    }
+  },
+  "limitations": [
+    "Matching final RNG cursors does not prove intermediate learned-state equality or restore causality.",
+    "Ambient global RNG states differ; this comparison alone does not establish their relevance.",
+    "No retained row IDs link the extreme outputs to particular learned prior locations.",
+    "Float64 decompositions explain saved outputs and do not replace original float32 grades.",
+    "No post-1600 current uninterrupted trajectory or new qualification was measured."
+  ],
+  "model_forwards_added": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "roster": [
+    {
+      "attempt_id": "4390f40cc6e242059d9dfaa704b553b9",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 6.367337614297867,
+        "component_min_eigen_ratio": 0.9656201004981995,
+        "hq": 0.8154296875,
+        "mass_tv": 0.073486328125,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "d38e68e48e204b62b0eb2beb32db729e",
+      "candidate_id": "bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 4.927841916680336,
+        "component_min_eigen_ratio": 1.0258535146713257,
+        "hq": 0.143798828125,
+        "mass_tv": 0.140869140625,
+        "modes": 4
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "b2d55fb3d5434002aa2b443522a83b79",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.2202680110931396,
+        "component_min_eigen_ratio": 0.33765703439712524,
+        "hq": 0.93603515625,
+        "mass_tv": 0.05712890625,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "7504ae7533fb4d63a46009e8ede83b7d",
+      "candidate_id": "bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 21.138348042964935,
+        "component_min_eigen_ratio": 2.9698903560638428,
+        "hq": 0.51611328125,
+        "mass_tv": 0.071533203125,
+        "modes": 15
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "3cdf381ece9b43629f30977fa8c7bb0c",
+      "candidate_id": "bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 4.201372295618057,
+        "component_min_eigen_ratio": 0.3460293710231781,
+        "hq": 0.6240234375,
+        "mass_tv": 0.05810546875,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "e53a81be021d40d4bc6cddaafcbbb138",
+      "candidate_id": "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 5.31639401614666,
+        "component_min_eigen_ratio": 0.6020652055740356,
+        "hq": 0.391357421875,
+        "mass_tv": 0.03662109375,
+        "modes": 11
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "e40166f040ee43838c5d765932b59026",
+      "candidate_id": "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.728386700153351,
+        "component_min_eigen_ratio": 0.11313027143478394,
+        "hq": 0.787841796875,
+        "mass_tv": 0.082275390625,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "db79e6f0dac240d19ba1f7dae88aa90e",
+      "candidate_id": "bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 6.4633864015340805,
+        "component_min_eigen_ratio": 1.3541688919067383,
+        "hq": 0.44287109375,
+        "mass_tv": 0.06689453125,
+        "modes": 12
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "2a0e22bfd4d24c03b9513820fcfdfa53",
+      "candidate_id": "five-word-joint-ka2-v1",
+      "gate_status": "BLOCKED",
+      "metrics": {},
+      "passing_observations": null,
+      "raw_status": "error"
+    },
+    {
+      "attempt_id": "a6816dfa5cad42db9f84d713d0a12e99",
+      "candidate_id": "forge-no-critic-penalty",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 77.67659044265747,
+        "component_min_eigen_ratio": 1.5696804523468018,
+        "hq": 0.3515625,
+        "mass_tv": 0.19970703125,
+        "modes": 8
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "6db368edd6ef404e8b4b1ea4deb011af",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.366263084113598,
+        "component_min_eigen_ratio": 0.49119433760643005,
+        "hq": 0.813720703125,
+        "mass_tv": 0.0546875,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "25215103f55b46a985927a7b4ae9582c",
+      "candidate_id": "k3p",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.433727115392685,
+        "component_min_eigen_ratio": 0.5807833671569824,
+        "hq": 0.8115234375,
+        "mass_tv": 0.053466796875,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "3684bb53a93448bfa436af7932ce366d",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.5968788415193558,
+        "component_min_eigen_ratio": 0.4360380172729492,
+        "hq": 0.783447265625,
+        "mass_tv": 0.044921875,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "69dc9db8c03e422e9294c3198b812ead",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.5235576555132866,
+        "component_min_eigen_ratio": 0.5776343941688538,
+        "hq": 0.83154296875,
+        "mass_tv": 0.084228515625,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "8cc9f3e4aa5d476982f93d500ea73c7b",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 3.83502334356308,
+        "component_min_eigen_ratio": 0.3258686661720276,
+        "hq": 0.80029296875,
+        "mass_tv": 0.0654296875,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "593c83cb0075430e8f85bfaf31423201",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 3.3059070259332657,
+        "component_min_eigen_ratio": 0.5388506650924683,
+        "hq": 0.794921875,
+        "mass_tv": 0.093994140625,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "b4cc28cfc1374db59fa55e982f63b0db",
+      "candidate_id": "k3p-r1r2-matched-v1",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.8911315724253654,
+        "component_min_eigen_ratio": 1.0234298706054688,
+        "hq": 0.767578125,
+        "mass_tv": 0.048583984375,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "fcc5f82d4b24421f9541bbd4d7baf4bf",
+      "candidate_id": "ka2",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.493757575750351,
+        "component_min_eigen_ratio": 0.6335712671279907,
+        "hq": 0.802978515625,
+        "mass_tv": 0.052490234375,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "36556d7b0dc24d72a378a8d2e2807446",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.7059570103883743,
+        "component_min_eigen_ratio": 0.4502599239349365,
+        "hq": 0.76806640625,
+        "mass_tv": 0.040771484375,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "86e8213bb1ef40de864e0900170cd9c8",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 1.8130171708762646,
+        "component_min_eigen_ratio": 0.20579737424850464,
+        "hq": 0.843994140625,
+        "mass_tv": 0.048095703125,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "e40603ba4e0a40a7bf229c38ff5559e9",
+      "candidate_id": "r3gan-stacked-training-toy-v1",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 78.65912818908691,
+        "component_min_eigen_ratio": 7.043603897094727,
+        "hq": 0.213134765625,
+        "mass_tv": 0.067138671875,
+        "modes": 5
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "5232ed6c0c3f411aa129c463f79f57dd",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 2.779554545879364,
+        "component_min_eigen_ratio": 0.20574694871902466,
+        "hq": 0.798828125,
+        "mass_tv": 0.064208984375,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    },
+    {
+      "attempt_id": "08198bad276c42649f665492eea5b3ac",
+      "candidate_id": "release07-gan-v3-task-adapted-v1",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_covariance_error": 10.779126018285751,
+        "component_min_eigen_ratio": 0.8567113876342773,
+        "hq": 0.697265625,
+        "mass_tv": 0.10791015625,
+        "modes": 16
+      },
+      "passing_observations": 0,
+      "raw_status": "completed"
+    }
+  ],
+  "roster_status_counts": {
+    "BLOCKED": 1,
+    "FAIL": 22
+  },
+  "sample_parity": {
+    "first_divergent_observation": 417,
+    "historical_exact_prefix_observations": 24,
+    "last_equal_step": 400,
+    "v3_v4_exact_observations": 96,
+    "v3_v4_metrics_equal": true
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_output_and_checkpoint_diagnosis",
+  "source_commit": "79fdf16d2ed880a9db1873245f150375e3be31b0",
+  "source_digest": "d276c5a7344fab6ec5de7b314d3982af5b0ef8027c8b89c01376ae366844a9cb",
+  "tail_decomposition": {
+    "current": {
+      "beyond_2_distance_centroid": [
+        -1.2000875189190818,
+        -5.036589963095529
+      ],
+      "beyond_2_distance_component_counts": {
+        "11": 21
+      },
+      "beyond_distance_counts": {
+        "0.3": 262,
+        "0.4": 55,
+        "1.0": 21,
+        "2.0": 21
+      },
+      "component_11_share_of_sum_covariance_errors": 0.8231862518384588,
+      "components": [
+        {
+          "below_v5_particle_floor": true,
+          "component": 0,
+          "core_sample_count_4sigma": 270,
+          "core_shape": {
+            "covariance_error": 0.4323350366607354,
+            "min_eigen_ratio": 0.8098843045987941,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 1.1167282376600696e-17,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 272,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.4789250679287052,
+            "min_eigen_ratio": 0.8046496720940408,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8933823529411765,
+          "mass": 0.06640625,
+          "mean_mahalanobis_distance": 1.9076886033032041,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0007922402172718849,
+            "core": 0.023734086453907583,
+            "spill": 5.358487794665196e-06
+          },
+          "sample_count": 272,
+          "spill_and_between_share_of_variance": 0.032513001039179486,
+          "spill_fraction_beyond_3sigma": 0.10661764705882353,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 1,
+          "core_sample_count_4sigma": 218,
+          "core_shape": {
+            "covariance_error": 0.46360135786488743,
+            "min_eigen_ratio": 0.4687863442303396,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 5.637851296924623e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 225,
+          "far_spill_count_beyond_4sigma": 7,
+          "full_shape": {
+            "covariance_error": 0.6063920268179764,
+            "min_eigen_ratio": 0.48687361256198497,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8977777777777778,
+          "mass": 0.054931640625,
+          "mean_mahalanobis_distance": 2.036320714132221,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.003602478858014417,
+            "core": 0.017954070350200715,
+            "spill": 0.00018331412399636825
+          },
+          "sample_count": 225,
+          "spill_and_between_share_of_variance": 0.17414060632117478,
+          "spill_fraction_beyond_3sigma": 0.10222222222222223,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 2,
+          "core_sample_count_4sigma": 210,
+          "core_shape": {
+            "covariance_error": 0.5212390440912237,
+            "min_eigen_ratio": 0.3381526429667291,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 3.3610267347050637e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 212,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.5542878134789694,
+            "min_eigen_ratio": 0.33765699592370435,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9292452830188679,
+          "mass": 0.0517578125,
+          "mean_mahalanobis_distance": 1.9556459062420195,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0010833324440959382,
+            "core": 0.016470253997388745,
+            "spill": 1.5497146755630246e-05
+          },
+          "sample_count": 212,
+          "spill_and_between_share_of_variance": 0.062543364048143,
+          "spill_fraction_beyond_3sigma": 0.07075471698113207,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 3,
+          "core_sample_count_4sigma": 291,
+          "core_shape": {
+            "covariance_error": 0.49019681021038986,
+            "min_eigen_ratio": 0.3498285171664579,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 1.3552527156068805e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 296,
+          "far_spill_count_beyond_4sigma": 5,
+          "full_shape": {
+            "covariance_error": 0.516787048644576,
+            "min_eigen_ratio": 0.3696574017829517,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9391891891891891,
+          "mass": 0.072265625,
+          "mean_mahalanobis_distance": 1.9046342203018398,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0016777866204421429,
+            "core": 0.015635110846260708,
+            "spill": 8.240492945513377e-05
+          },
+          "sample_count": 296,
+          "spill_and_between_share_of_variance": 0.10118775229144861,
+          "spill_fraction_beyond_3sigma": 0.060810810810810814,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 4,
+          "core_sample_count_4sigma": 297,
+          "core_shape": {
+            "covariance_error": 0.40563605106480005,
+            "min_eigen_ratio": 0.44362530329840466,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 8.538092108323347e-19,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 299,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.4114855622639276,
+            "min_eigen_ratio": 0.44837656601317655,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.939799331103679,
+          "mass": 0.072998046875,
+          "mean_mahalanobis_distance": 1.7347341587321239,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0005976375292142599,
+            "core": 0.0157277828666617,
+            "spill": 1.1783231383539115e-05
+          },
+          "sample_count": 299,
+          "spill_and_between_share_of_variance": 0.03730263602645853,
+          "spill_fraction_beyond_3sigma": 0.06020066889632107,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 5,
+          "core_sample_count_4sigma": 241,
+          "core_shape": {
+            "covariance_error": 0.2879406802903198,
+            "min_eigen_ratio": 0.6208041205566739,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 3.5236570605778894e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 242,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.277312683262196,
+            "min_eigen_ratio": 0.6204322536624456,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9710743801652892,
+          "mass": 0.05908203125,
+          "mean_mahalanobis_distance": 1.518356753237422,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0005548209300169557,
+            "core": 0.01466294321824987,
+            "spill": 0.0
+          },
+          "sample_count": 242,
+          "spill_and_between_share_of_variance": 0.036458767832864926,
+          "spill_fraction_beyond_3sigma": 0.028925619834710745,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 6,
+          "core_sample_count_4sigma": 290,
+          "core_shape": {
+            "covariance_error": 0.43236450538047716,
+            "min_eigen_ratio": 0.39262597120423487,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.0769247866675444e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 291,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.4245768789402153,
+            "min_eigen_ratio": 0.40141840897753805,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9484536082474226,
+          "mass": 0.071044921875,
+          "mean_mahalanobis_distance": 1.6618868702915588,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0003663397518110083,
+            "core": 0.013175495827831597,
+            "spill": 0.0
+          },
+          "sample_count": 291,
+          "spill_and_between_share_of_variance": 0.02705244423154314,
+          "spill_fraction_beyond_3sigma": 0.05154639175257732,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 7,
+          "core_sample_count_4sigma": 195,
+          "core_shape": {
+            "covariance_error": 0.38927811411330954,
+            "min_eigen_ratio": 0.5753548357537165,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.0708261494473135e-17,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 197,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.4333956304705238,
+            "min_eigen_ratio": 0.574521128768184,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9187817258883249,
+          "mass": 0.048095703125,
+          "mean_mahalanobis_distance": 1.9516788986840339,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0010656915544454343,
+            "core": 0.0190616337912411,
+            "spill": 2.9589412959635662e-05
+          },
+          "sample_count": 197,
+          "spill_and_between_share_of_variance": 0.054337728790327784,
+          "spill_fraction_beyond_3sigma": 0.08121827411167512,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 8,
+          "core_sample_count_4sigma": 315,
+          "core_shape": {
+            "covariance_error": 0.35432995080408664,
+            "min_eigen_ratio": 0.508918613810869,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 315,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.35432995080408664,
+            "min_eigen_ratio": 0.508918613810869,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9936507936507937,
+          "mass": 0.076904296875,
+          "mean_mahalanobis_distance": 1.244227168256068,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.014092265869871834,
+            "spill": 0.0
+          },
+          "sample_count": 315,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.006349206349206349,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 9,
+          "core_sample_count_4sigma": 261,
+          "core_shape": {
+            "covariance_error": 0.3907517991073298,
+            "min_eigen_ratio": 0.462252377242575,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 261,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.3907517991073298,
+            "min_eigen_ratio": 0.462252377242575,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9961685823754789,
+          "mass": 0.063720703125,
+          "mean_mahalanobis_distance": 1.245127683913758,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.013349675343508612,
+            "spill": 0.0
+          },
+          "sample_count": 261,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.0038314176245210726,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 10,
+          "core_sample_count_4sigma": 243,
+          "core_shape": {
+            "covariance_error": 0.5794010008479537,
+            "min_eigen_ratio": 0.4886883379652577,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 7.453889935837843e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 246,
+          "far_spill_count_beyond_4sigma": 3,
+          "full_shape": {
+            "covariance_error": 0.6678310288818714,
+            "min_eigen_ratio": 0.49327729499155526,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9349593495934959,
+          "mass": 0.06005859375,
+          "mean_mahalanobis_distance": 1.903056482303338,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.00010109633157203424,
+            "core": 0.02103015295289675,
+            "spill": 0.0017716470428090077
+          },
+          "sample_count": 246,
+          "spill_and_between_share_of_variance": 0.08176884476181152,
+          "spill_fraction_beyond_3sigma": 0.06504065040650407,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 11,
+          "core_sample_count_4sigma": 187,
+          "core_shape": {
+            "covariance_error": 0.4045784748358963,
+            "min_eigen_ratio": 0.6429384356596861,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 5.551115123125783e-17,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 211,
+          "far_spill_count_beyond_4sigma": 24,
+          "full_shape": {
+            "covariance_error": 29.243099335024617,
+            "min_eigen_ratio": 1.2830923791153594,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8056872037914692,
+          "mass": 0.051513671875,
+          "mean_mahalanobis_distance": 7.414919839284691,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.3599329999306036,
+            "core": 0.01852285270716805,
+            "spill": 0.05792525869307105
+          },
+          "sample_count": 211,
+          "spill_and_between_share_of_variance": 0.9575534957260672,
+          "spill_fraction_beyond_3sigma": 0.1943127962085308,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 12,
+          "core_sample_count_4sigma": 282,
+          "core_shape": {
+            "covariance_error": 0.13455511824028352,
+            "min_eigen_ratio": 0.8546115688455506,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 7.37257477290143e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 285,
+          "far_spill_count_beyond_4sigma": 3,
+          "full_shape": {
+            "covariance_error": 0.22230831126818987,
+            "min_eigen_ratio": 0.8638433324031359,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9403508771929825,
+          "mass": 0.069580078125,
+          "mean_mahalanobis_distance": 1.8879338627795925,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.001640567385495866,
+            "core": 0.019565665862674587,
+            "spill": 0.00026598433699910243
+          },
+          "sample_count": 285,
+          "spill_and_between_share_of_variance": 0.08879156123174657,
+          "spill_fraction_beyond_3sigma": 0.05964912280701754,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 13,
+          "core_sample_count_4sigma": 258,
+          "core_shape": {
+            "covariance_error": 0.22276712088211817,
+            "min_eigen_ratio": 0.7074149063691396,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.1955093992831465e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 259,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.22508698499530716,
+            "min_eigen_ratio": 0.7184106709875167,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9498069498069498,
+          "mass": 0.063232421875,
+          "mean_mahalanobis_distance": 1.7734791724692278,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0004967453558324961,
+            "core": 0.018171805742184396,
+            "spill": 0.0
+          },
+          "sample_count": 259,
+          "spill_and_between_share_of_variance": 0.026608672158026446,
+          "spill_fraction_beyond_3sigma": 0.05019305019305019,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 14,
+          "core_sample_count_4sigma": 224,
+          "core_shape": {
+            "covariance_error": 0.3619412995070257,
+            "min_eigen_ratio": 0.5586723739739041,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 4.607859233063394e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 225,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.3787209665071024,
+            "min_eigen_ratio": 0.5619098303843356,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9422222222222222,
+          "mass": 0.054931640625,
+          "mean_mahalanobis_distance": 1.6885302999027147,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0006014125308334871,
+            "core": 0.018098856722994078,
+            "spill": 0.0
+          },
+          "sample_count": 225,
+          "spill_and_between_share_of_variance": 0.032160634837404285,
+          "spill_fraction_beyond_3sigma": 0.057777777777777775,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 15,
+          "core_sample_count_4sigma": 259,
+          "core_shape": {
+            "covariance_error": 0.3276906929002231,
+            "min_eigen_ratio": 0.5716090124355094,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 4.065758146820642e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 260,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.3389894370804946,
+            "min_eigen_ratio": 0.5697629127095228,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9307692307692308,
+          "mass": 0.0634765625,
+          "mean_mahalanobis_distance": 1.739255200107223,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0003959980834681981,
+            "core": 0.017416429512136677,
+            "spill": 0.0
+          },
+          "sample_count": 260,
+          "spill_and_between_share_of_variance": 0.022231561719633797,
+          "spill_fraction_beyond_3sigma": 0.06923076923076923,
+          "target_mass": 0.0625
+        }
+      ],
+      "mean_covariance_error_excluding_component_11": 0.41874541269676474,
+      "nearest_center_distance_quantiles": {
+        "max": 2.3737430524214385,
+        "p50": 0.14527172533123867,
+        "p90": 0.2719020838666751,
+        "p95": 0.31569804414068126,
+        "p99": 0.4260051994363677
+      },
+      "recomputed_float64_mean_covariance_error": 2.2202675328422554
+    },
+    "historical": {
+      "beyond_2_distance_centroid": null,
+      "beyond_2_distance_component_counts": {},
+      "beyond_distance_counts": {
+        "0.3": 255,
+        "0.4": 50,
+        "1.0": 0,
+        "2.0": 0
+      },
+      "component_11_share_of_sum_covariance_errors": 0.22282496728365034,
+      "components": [
+        {
+          "below_v5_particle_floor": true,
+          "component": 0,
+          "core_sample_count_4sigma": 276,
+          "core_shape": {
+            "covariance_error": 0.4128143073662714,
+            "min_eigen_ratio": 0.8504381162170238,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.168404344971009e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 285,
+          "far_spill_count_beyond_4sigma": 9,
+          "full_shape": {
+            "covariance_error": 0.7490405455077781,
+            "min_eigen_ratio": 0.8423651569021409,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8842105263157894,
+          "mass": 0.069580078125,
+          "mean_mahalanobis_distance": 2.0151858859356158,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0019957188756246796,
+            "core": 0.02338507303316337,
+            "spill": 0.0035179478883615254
+          },
+          "sample_count": 285,
+          "spill_and_between_share_of_variance": 0.19079263672701896,
+          "spill_fraction_beyond_3sigma": 0.11578947368421053,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 1,
+          "core_sample_count_4sigma": 218,
+          "core_shape": {
+            "covariance_error": 0.5078853705617206,
+            "min_eigen_ratio": 0.4723811401616937,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 3.2526065174565133e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 224,
+          "far_spill_count_beyond_4sigma": 6,
+          "full_shape": {
+            "covariance_error": 0.6387248000170135,
+            "min_eigen_ratio": 0.4802626415576198,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.875,
+          "mass": 0.0546875,
+          "mean_mahalanobis_distance": 2.1501989467251517,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.002934145445473096,
+            "core": 0.019072417520502233,
+            "spill": 0.00018397126272959175
+          },
+          "sample_count": 224,
+          "spill_and_between_share_of_variance": 0.14051562148374047,
+          "spill_fraction_beyond_3sigma": 0.125,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 2,
+          "core_sample_count_4sigma": 210,
+          "core_shape": {
+            "covariance_error": 0.6029186444822255,
+            "min_eigen_ratio": 0.3777389558794877,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.6020852139652106e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 212,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.6341664269403714,
+            "min_eigen_ratio": 0.3836966017923885,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8726415094339622,
+          "mass": 0.0517578125,
+          "mean_mahalanobis_distance": 2.109293525423743,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0008313168336684536,
+            "core": 0.019421768299562308,
+            "spill": 9.92798400479351e-05
+          },
+          "sample_count": 212,
+          "spill_and_between_share_of_variance": 0.04572425243642204,
+          "spill_fraction_beyond_3sigma": 0.12735849056603774,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 3,
+          "core_sample_count_4sigma": 294,
+          "core_shape": {
+            "covariance_error": 0.14484163586699342,
+            "min_eigen_ratio": 0.8353439975625461,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.710505431213761e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 296,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.13556626816107079,
+            "min_eigen_ratio": 0.8744786449398845,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9695945945945946,
+          "mass": 0.072265625,
+          "mean_mahalanobis_distance": 1.728749694487309,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0007530221860940465,
+            "core": 0.01943966360778747,
+            "spill": 1.2664690152573299e-06
+          },
+          "sample_count": 296,
+          "spill_and_between_share_of_variance": 0.03735220551626198,
+          "spill_fraction_beyond_3sigma": 0.030405405405405407,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 4,
+          "core_sample_count_4sigma": 299,
+          "core_shape": {
+            "covariance_error": 0.18579709646235326,
+            "min_eigen_ratio": 0.7418804855764386,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 299,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.18579709646235326,
+            "min_eigen_ratio": 0.7418804855764386,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9732441471571907,
+          "mass": 0.072998046875,
+          "mean_mahalanobis_distance": 1.6248858740687517,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.017910275951702567,
+            "spill": 0.0
+          },
+          "sample_count": 299,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.026755852842809364,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 5,
+          "core_sample_count_4sigma": 242,
+          "core_shape": {
+            "covariance_error": 0.45136055411891046,
+            "min_eigen_ratio": 0.4251625021619091,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 242,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.45136055411891046,
+            "min_eigen_ratio": 0.4251625021619091,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9958677685950413,
+          "mass": 0.05908203125,
+          "mean_mahalanobis_distance": 1.30954575705697,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.011476475463337545,
+            "spill": 0.0
+          },
+          "sample_count": 242,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.004132231404958678,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 6,
+          "core_sample_count_4sigma": 269,
+          "core_shape": {
+            "covariance_error": 0.4100307968143567,
+            "min_eigen_ratio": 0.45934509795919015,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.168404344971009e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 271,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.39257671626433804,
+            "min_eigen_ratio": 0.45704980440869536,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.974169741697417,
+          "mass": 0.066162109375,
+          "mean_mahalanobis_distance": 1.4007349268449427,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0009947308150068477,
+            "core": 0.012404967282292675,
+            "spill": 1.1574282253325722e-05
+          },
+          "sample_count": 271,
+          "spill_and_between_share_of_variance": 0.07503427480858643,
+          "spill_fraction_beyond_3sigma": 0.025830258302583026,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 7,
+          "core_sample_count_4sigma": 225,
+          "core_shape": {
+            "covariance_error": 0.48523317015120376,
+            "min_eigen_ratio": 0.7754777379139235,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 1.0598076236045806e-17,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 226,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.48988605434859595,
+            "min_eigen_ratio": 0.8039995541840832,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9469026548672567,
+          "mass": 0.05517578125,
+          "mean_mahalanobis_distance": 1.8211095224159295,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0005529366915187557,
+            "core": 0.02413206086484724,
+            "spill": 0.0
+          },
+          "sample_count": 226,
+          "spill_and_between_share_of_variance": 0.022399706147678333,
+          "spill_fraction_beyond_3sigma": 0.05309734513274336,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 8,
+          "core_sample_count_4sigma": 306,
+          "core_shape": {
+            "covariance_error": 0.29300038414508583,
+            "min_eigen_ratio": 0.5957475084106812,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 306,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.29300038414508583,
+            "min_eigen_ratio": 0.5957475084106812,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9901960784313726,
+          "mass": 0.07470703125,
+          "mean_mahalanobis_distance": 1.3440044677177128,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.015047619421808475,
+            "spill": 0.0
+          },
+          "sample_count": 306,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.00980392156862745,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 9,
+          "core_sample_count_4sigma": 261,
+          "core_shape": {
+            "covariance_error": 0.3896095429607004,
+            "min_eigen_ratio": 0.4917371385478052,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 261,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.3896095429607004,
+            "min_eigen_ratio": 0.4917371385478052,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9923371647509579,
+          "mass": 0.063720703125,
+          "mean_mahalanobis_distance": 1.3247412147748356,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.012789930302850411,
+            "spill": 0.0
+          },
+          "sample_count": 261,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.007662835249042145,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 10,
+          "core_sample_count_4sigma": 265,
+          "core_shape": {
+            "covariance_error": 0.43924052019945126,
+            "min_eigen_ratio": 0.6552303053449574,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.0599841277224584e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 267,
+          "far_spill_count_beyond_4sigma": 2,
+          "full_shape": {
+            "covariance_error": 0.4877018213456837,
+            "min_eigen_ratio": 0.6600656301405439,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.951310861423221,
+          "mass": 0.065185546875,
+          "mean_mahalanobis_distance": 1.7916607549161077,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.000940204282568535,
+            "core": 0.02155679831862794,
+            "spill": 0.0001049098793438706
+          },
+          "sample_count": 267,
+          "spill_and_between_share_of_variance": 0.046240076489643143,
+          "spill_fraction_beyond_3sigma": 0.04868913857677903,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 11,
+          "core_sample_count_4sigma": 161,
+          "core_shape": {
+            "covariance_error": 0.5661603729468673,
+            "min_eigen_ratio": 0.6466435553362089,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 1.9949319973733282e-17,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 175,
+          "far_spill_count_beyond_4sigma": 14,
+          "full_shape": {
+            "covariance_error": 1.8336338697852292,
+            "min_eigen_ratio": 0.7303041119968281,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.8171428571428572,
+          "mass": 0.042724609375,
+          "mean_mahalanobis_distance": 2.3987744944404503,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.006525513633043466,
+            "core": 0.021759142140924885,
+            "spill": 0.014809256724922554
+          },
+          "sample_count": 175,
+          "spill_and_between_share_of_variance": 0.49507619802483976,
+          "spill_fraction_beyond_3sigma": 0.18285714285714286,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 12,
+          "core_sample_count_4sigma": 293,
+          "core_shape": {
+            "covariance_error": 0.19452604611475013,
+            "min_eigen_ratio": 0.7457478923711235,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 2.6020852139652106e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 300,
+          "far_spill_count_beyond_4sigma": 7,
+          "full_shape": {
+            "covariance_error": 0.3978694666709742,
+            "min_eigen_ratio": 0.7559256820823578,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9066666666666666,
+          "mass": 0.0732421875,
+          "mean_mahalanobis_distance": 1.9841060121945147,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.004151850706184194,
+            "core": 0.018076178540058947,
+            "spill": 0.0004010199998295108
+          },
+          "sample_count": 300,
+          "spill_and_between_share_of_variance": 0.20119584594584197,
+          "spill_fraction_beyond_3sigma": 0.09333333333333334,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 13,
+          "core_sample_count_4sigma": 259,
+          "core_shape": {
+            "covariance_error": 0.26034468052922094,
+            "min_eigen_ratio": 0.6489467920084089,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 0.0,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 259,
+          "far_spill_count_beyond_4sigma": 0,
+          "full_shape": {
+            "covariance_error": 0.26034468052922094,
+            "min_eigen_ratio": 0.6489467920084089,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9420849420849421,
+          "mass": 0.063232421875,
+          "mean_mahalanobis_distance": 1.7889521823028502,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0,
+            "core": 0.017599438663776775,
+            "spill": 0.0
+          },
+          "sample_count": 259,
+          "spill_and_between_share_of_variance": 0.0,
+          "spill_fraction_beyond_3sigma": 0.05791505791505792,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 14,
+          "core_sample_count_4sigma": 224,
+          "core_shape": {
+            "covariance_error": 0.4464930944752643,
+            "min_eigen_ratio": 0.5021708319574203,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 6.938893903907228e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 225,
+          "far_spill_count_beyond_4sigma": 1,
+          "full_shape": {
+            "covariance_error": 0.46978060685360923,
+            "min_eigen_ratio": 0.5001101422252305,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9155555555555556,
+          "mass": 0.054931640625,
+          "mean_mahalanobis_distance": 1.8846718358423782,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.0005551601927477193,
+            "core": 0.018821987015889947,
+            "spill": 0.0
+          },
+          "sample_count": 225,
+          "spill_and_between_share_of_variance": 0.02865025417674733,
+          "spill_fraction_beyond_3sigma": 0.08444444444444445,
+          "target_mass": 0.0625
+        },
+        {
+          "below_v5_particle_floor": true,
+          "component": 15,
+          "core_sample_count_4sigma": 244,
+          "core_shape": {
+            "covariance_error": 0.36197939811364915,
+            "min_eigen_ratio": 0.557148971066347,
+            "scorer_sentinel": false
+          },
+          "covariance_decomposition_max_error": 9.107298248878237e-18,
+          "declared_expected_particles": 16.0,
+          "distinct_sample_coordinates": 248,
+          "far_spill_count_beyond_4sigma": 4,
+          "full_shape": {
+            "covariance_error": 0.4199735411123564,
+            "min_eigen_ratio": 0.5591336322188954,
+            "scorer_sentinel": false
+          },
+          "hq_fraction_within_component": 0.9274193548387096,
+          "mass": 0.060546875,
+          "mean_mahalanobis_distance": 1.7868202378724674,
+          "population_variance_trace_parts": {
+            "between_core_and_spill": 0.001651294050321939,
+            "core": 0.01784681951021727,
+            "spill": 7.30769829548536e-05
+          },
+          "sample_count": 248,
+          "spill_and_between_share_of_variance": 0.08810762071140409,
+          "spill_fraction_beyond_3sigma": 0.07258064516129033,
+          "target_mass": 0.0625
+        }
+      ],
+      "mean_covariance_error_excluding_component_11": 0.42635990036253746,
+      "nearest_center_distance_quantiles": {
+        "max": 0.6051424918498962,
+        "p50": 0.14323608629023904,
+        "p90": 0.26803300862021545,
+        "p95": 0.3164566271711929,
+        "p99": 0.41454373488660357
+      },
+      "recomputed_float64_mean_covariance_error": 0.5143145234514557
+    }
+  },
+  "training_updates_added": 0
+}

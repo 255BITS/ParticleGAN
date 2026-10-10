@@ -1,0 +1,55 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50",
+  "changed_factors": [
+    "Opt-in typed Forge binding to public GANTrainer.serial_backward=True for all1600 live updates",
+    "Separate ordinary live prefix with serialization scoped only to whole update401"
+  ],
+  "conclusion": "Both CUDA arms complete1600 uninterrupted updates. Always-serialized first passes1400 but fails its one independent confirmation (covariance .894789); then fails1417 and passes final11 checks1434..1600, final covariance .385800. Serializing only401 matches original400 and third-trajectory401 contexts exactly; confirms acquisition867 and passes all45 checks867..1600, final covariance .424426. Identical initial tensors, recipe, prior, target batches, gates and cadence verified against prior continuous truncation/noise; every public numerical package file is unchanged. Truncation/noise acquire earlier and retain their original post-acquisition failures. No indefinite retention, ordinary qualification or default adoption follows.",
+  "evidence_scope": "cuda_uninterrupted_serialized_autograd_quality",
+  "goal": "discriminator_stability",
+  "hypothesis": "Does always-serialized fresh live Ring16 reach the target without restart, and does the previously measured serialization-only401 third trajectory acquire it?",
+  "lifecycle": "concluded",
+  "mechanism_class": "autograd_execution_order_diagnostic",
+  "next_action": "Prioritize deterministic continuous truncation for a separately frozen whole-configuration Tier1 comparison; keep weak-gradient noise second. Serialization reaches late quality and preserves execution mode in checkpoints, but failed first-state confirmation prevents this continuous arm claiming smoke. Do not adopt scheduled401 interventions/restarts or spend automatically on Tier2.",
+  "provenance": {
+    "archive_sha256": "a14332d30079516082d062cc22a9c60a3ada6e23233a869c7184c3e71792f9d7",
+    "charged_seconds": 77.59739324101247,
+    "comparison_source_commits": [
+      "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+      "1ca28014bf7102975376efadc691f3e103535f41"
+    ],
+    "cost_limit_seconds": 630,
+    "cost_scope": "new two-arm CUDA quality diagnostic plus full30s separate tiny-model GPU software reservation; prior comparisons reused unchanged",
+    "parent_prs": [
+      "https://github.com/255BITS/ParticleGAN/pull/331",
+      "https://github.com/255BITS/ParticleGAN/pull/334"
+    ],
+    "protocol_seed": 0,
+    "prs": [
+      "https://github.com/255BITS/ParticleGAN/pull/337"
+    ],
+    "publication_commit": "b082100d23c321151681bdf44f07d43cf7685db6",
+    "qualification_changes": 0,
+    "report": "https://github.com/255BITS/ParticleGAN/pull/337",
+    "scientific_retries": 0,
+    "scoring_draws": 194,
+    "software_updates_added": 3,
+    "source_commits": [
+      "b060fb4623cc831cb47dd592acea49b6704641be"
+    ],
+    "source_digest": "9e8daa89eee904aa8380b934adddd9465a81c9e8b1c445fcd41ba0ef21fe06de",
+    "training_updates_added": 3200
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "ring16-serialized-live-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-followup/serialized-live-results.json",
+    "sha256": "ba152f4b9cdccc8c46077b26182d5399b3eca4dd3fd247e1157ca95f7d9b4646"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

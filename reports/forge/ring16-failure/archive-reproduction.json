@@ -1,0 +1,41 @@
+{
+  "archive": "artifacts/ring16-restart-diagnostic-v1.tar.gz",
+  "byte_exact_verified": true,
+  "bytes": 29946668,
+  "campaign": "ring16-restart-diagnostic-v1",
+  "cost": {
+    "attempts": 7,
+    "conservative_charged_seconds": 337.0478278490482,
+    "new_host_updates": 4064,
+    "note": "Live1600 lost exact elapsed receipt after bookkeeping error; charge its full300-second reservation. Remaining six arms retain measured elapsed time. Saved-gradient SVD analysis has zero training updates.",
+    "reserved_ceiling_seconds": 1020,
+    "scientific_retries": 0
+  },
+  "interruption_receipt_sha256": "0817dc701a700df2db541bd8df667388e8f0d0510e23fd3524e38fec61fbbdb2",
+  "members_digest": "3e923f2e51c9ed22390486ff395611b9e9500f067175b2f31cd34ca82985fe01",
+  "original_file_bytes": 37946397,
+  "original_files": 88,
+  "preserved_log_hashes": {
+    "runs/reports/ring16-failure/restart-archive-replay.log": "1a932b9b96b7ac454c091ba90454fff443b10f420a377553456829c9487aab8b",
+    "runs/reports/ring16-failure/restart-freeze-check.log": "780d475780ccc0f648e80a23717b5be213209b74642da9ccbddd1d830c4b7ef5",
+    "runs/reports/ring16-failure/restart-freeze-memory.log": "0f5d42029ac159dcdf229cff0f127eaa3f6fe441fc872acd71352bb7d57ca699",
+    "runs/reports/ring16-failure/restart-render-final.log": "f05f132be6aea0bcab09b81a772c5abe93735d876f5ca0376d202c56436f0b0e",
+    "runs/reports/ring16-failure/restart-render.log": "f05f132be6aea0bcab09b81a772c5abe93735d876f5ca0376d202c56436f0b0e",
+    "runs/reports/ring16-failure/restart-restored.log": "7faa785ab3e7bdee46a6e9b7f3ce1814bafdcb22a5ca2fae04788797d5210423",
+    "runs/reports/ring16-failure/restart-run.log": "cd8391b9d5b6511a86dfb1af0b502c3f25819bcd21cb2e9a9e454a68b7a1f1d4",
+    "runs/reports/ring16-failure/restart-runtime.log": "da48615b1c2a569488da510a6a2a7d49259c97734ecd80d075d8643ddf6d90e7",
+    "runs/reports/ring16-failure/restart-stats.log": "64bbe9e794fbfb88c499830ee5bbf5c7230f0cad7cbbace9cca132cd771db036",
+    "runs/reports/ring16-failure/restart-summary.log": "906f6a5931784c6b12628eeed884bda25bceed1432bd9a28c038cd143f599fc6",
+    "runs/reports/ring16-failure/restart-svd-check.log": "5ef63a57cfc154401e9956c6a0523ae902b39f46132773e1c714007f6fdd0244",
+    "runs/reports/ring16-failure/restart-svd-helper-error.log": "c65c375ae611685e544a95448e984208bdf4697cbee4aaaa805fe181d884e0eb",
+    "runs/reports/ring16-failure/restart-twice.log": "e2ad9985a04d09f3f312cc5e73436c32e020b9c51cf3708baed56fa6b2718d07",
+    "runs/reports/ring16-failure/restart-untraced.log": "23eaaab8228415e4d52d564fa3aa9bc05401c54bf0989c863cb2eac2a93b888e"
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+  "source_commits": [
+    "1de465e25252c10622965362cd593a899ce74f74",
+    "74e5e1e5c0424d131066ed28bac911d3c32b6996"
+  ]
+}
