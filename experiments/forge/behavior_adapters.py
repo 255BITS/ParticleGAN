@@ -229,7 +229,7 @@ class BehaviorComponents:
             raise CapabilityError(extension_blockers)
         self.recipe = self.context.recipe
         self.uses_recipe_prior = recipe_owned_prior(task)
-        self.prior_regularizer = self.recipe.make_prior_regularizer()
+        self.prior_regularizer = None  # Active reference-based penalties bind after public initialization.
         if candidate.get("claim_contract", {}).get("learning") == "clockfree":
             raise CapabilityError(["these scheduled public components do not implement a clock-free optimizer"])
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
@@ -340,6 +340,7 @@ class BehaviorComponents:
             self.context.initialize(prior, component=name)
             self.recipe.apply_prior_policy(prior)
             self._sample_binding(prior, name)
+        self.prior_regularizer = self.recipe.make_prior_regularizer(reference=priors) if priors else None
         prior_parameters = [p for prior in priors for p in prior.parameters() if p.requires_grad] + list(direct_particles)
         if prior_parameters or priors:
             self.role_parameters["prior"] = prior_parameters
