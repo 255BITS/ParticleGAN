@@ -31,7 +31,14 @@ def test_variant_is_a_reproducible_explicit_materialization_without_mutating_bas
     raw = json.loads(original)
     before = deepcopy(raw)
     variant = task_from_profile(raw, name + "_residual16")
-    assert variant == read_task(name + "_residual16")
+    # Archived profile cards keep their original prior ownership contract.
+    archive = ROOT / "reports/forge/recipe-prior-refactor"
+    legacy_bytes = (archive / "legacy-task-cards" / f"{name}.json").read_bytes()
+    baseline = json.loads((archive / "baseline.json").read_text())
+    assert hashlib.sha256(legacy_bytes).hexdigest() == baseline["task_cards"][name]["sha256"]
+    assert task_from_profile(json.loads(legacy_bytes), name + "_residual16") == read_task(name + "_residual16")
+    assert variant["execution"]["prior_contract"] == "recipe_owned_v1"
+    assert "learnable" not in variant["execution"]["prior"]
     assert raw == before and path.read_bytes() == original
     assert "image_profile" not in raw["execution"]
     assert raw["execution"]["host_definition"]["architecture"] == "transpose"

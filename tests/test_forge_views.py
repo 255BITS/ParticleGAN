@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -150,6 +151,7 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
     assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
     assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"
             and "vector_profile" not in task["execution"]
+            and not name.startswith("recipe-prior-refactor-legacy-")
             and task["evaluation"].get("gate_policy", {}).get("id") == "forge-vector-full-component-v1"} == set(VECTOR_THRESHOLDS_V1)
     for task in tasks.values():
         if task["adapter"] == "transfer_vector" and "vector_profile" in task["execution"]:
@@ -170,6 +172,20 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             changed_upstream.add(name)
     assert changed_upstream == {"vector_anisotropic", "vector_unequal_width", "vector_unequal_mass"}
     for task in tasks.values():
+        if task["id"].startswith("recipe-prior-refactor-legacy-"):
+            # Inert binding controls retain exact original source identities.
+            archive = ROOT / "reports/forge/recipe-prior-refactor"
+            baseline = json.loads((archive / "baseline.json").read_text())
+            original_id = task["id"].removeprefix("recipe-prior-refactor-legacy-")
+            original_bytes = (archive / "legacy-task-cards" / f"{original_id}.json").read_bytes()
+            assert hashlib.sha256(original_bytes).hexdigest() == baseline["task_cards"][original_id]["sha256"]
+            original = json.loads(original_bytes)
+            original["id"] = task["id"]
+            assert task == original
+            for path, digest in task["evaluation"].get("sources", {}).items():
+                source = subprocess.check_output(["git", "show", baseline["source_commit"] + ":" + path], cwd=ROOT)
+                assert hashlib.sha256(source).hexdigest() == digest
+            continue
         historical_policy_sources = task["execution"].get("policy_contract", {}).get("sources", {})
         if historical_policy_sources:
             from experiments.forge.tier1_policy import validate
