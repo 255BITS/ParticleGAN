@@ -1,0 +1,117 @@
+{
+  "actual_certificates": {
+    "attempts": 148,
+    "manifest_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/certificates/manifest.json",
+    "sha256": "454a3dac6c4fb676fbdec40b2804786890aa978170765ff69af4b3f5a1a97f12"
+  },
+  "budget_limited": false,
+  "counts": {
+    "artifact_bytes_verified": 268241905,
+    "artifact_files_verified": 889,
+    "by_physical_cohort": {
+      "clock_diagnostic": 5,
+      "diagnostic": 92,
+      "ordinary": 51
+    },
+    "completed": 148,
+    "eligible_checkpoint_verifications": 38,
+    "frozen_recipe_runs": 0,
+    "independent_zero_prefix_initializer_tensor_recomputations": 9,
+    "source_origin_commits": {
+      "a0493ca3c213d559523eadc76e244ec9f9c1f81f": 56,
+      "f3631bf94f457e0325f6992aa1252d9ac3f3f582": 92
+    }
+  },
+  "detailed_receipt": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/audit/runtime-provenance-final/receipt.json",
+    "sha256": "8bddbd9be570f8348d5fc97cd0fd89e6e339c188b6ca979f1d50edd2ae98a710"
+  },
+  "gaussian_ordered_batch_proofs_across_physical_cohorts": [
+    {
+      "covered_training_updates": "1\u20131000",
+      "hashes": {
+        "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+      },
+      "ordered_training_minibatch_digests_equal": true,
+      "physical_attempts": 9,
+      "recipes": 5,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "covered_training_updates": "1001\u20134000 stationary and 4001\u20136000 shifted; each restored 1000-update prefix is outside these new-batch digests",
+      "hashes": {
+        "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+        "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+      },
+      "ordered_training_minibatch_digests_equal": true,
+      "physical_attempts": 5,
+      "recipes": 5,
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "issues": [],
+  "limitations": [
+    "Whole task hashes differ across leaders because each resolved task field_ownership records its recipe delta; task-question hashes excluding only that annotation and exact execution/evaluation/resource hashes are compared separately.",
+    "All listed physical completed attempts are covered unless budget_limited is true; ordinary, diagnostic, and clock cohorts are separate. Unsupported Atlas/E22 have no attempted execution to audit.",
+    "Selected scientific recipes are learned; no completed frozen-prior experiment is present, so this does not scientifically qualify frozen recipes.",
+    "Receipt initialization hashes are compared across recipes; independent initializer tensor recomputation is available only for saved initial-state.pt with completed_steps0. Gaussian continuation initial-state.pt is already restored from its qualified prefix; word holds can acquire different prefix lengths, so their final RNG states need not match across recipes.",
+    "Only Gaussian data_sha256 explicitly hashes the complete ordered real training minibatch bytes. Matching initial/final data RNG states elsewhere does not by itself prove batch sequence identity.",
+    "No training, fresh sampling, grading, restart experiment, numerical qualification change, or proof of arbitrary extensions was performed.",
+    "Provenance-only snapshots are not continuation prerequisites; eligible task-selected checkpoints are separately verified."
+  ],
+  "original_34_snapshot_byte_unchanged": true,
+  "original_34_snapshot_hashes": {
+    "audit_completed.py": "b024ef7a4b09aeb521973e8879203d69ffcc7a16e0d622e5a9d887cf69fb2257",
+    "receipt.json": "77471b2a76e33ddb28a357b77bbcbb1f678dfa6b32bcf1a8bd071a813433b0be",
+    "scope.json": "edb5a365a7ab4fb49a6dac6a7de7128ca48def30edf2004715173e0332b577c9",
+    "summary.json": "995ab0ef2ce8893103ad00a49850a5cad3de4d21c0e66fa678bbb6ab9dfb7da1"
+  },
+  "original_summary": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/audit/runtime-provenance-final/summary.json",
+    "sha256": "174ee94528d9a0c19d9afbecbfee2c18a2c81536d01e2b988ee017389092bd4b"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "reproduction": {
+    "charged_stage": "publication_acceptance_zero_training",
+    "command": [
+      "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+      "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/audit/runtime-provenance-final/audit_completed.py"
+    ],
+    "exit_code": 0,
+    "log_sha256": "7e5ca6287c073f3e3450fba97b3a32f94ce4716ddf7e4459fa1d25d3a1051146",
+    "script_sha256": "c57332a266c6cd481fd8b3d6b7d3755e4660a4af598fffae53482db106a7dd31",
+    "timeout_seconds": 15,
+    "wrapper_elapsed_seconds": 4.927965791997849
+  },
+  "schema_version": 1,
+  "scope": {
+    "captured_at": "2026-10-10T18:07:14.552537+00:00",
+    "progress_file_sha256": {
+      "diagnostic-progress.json": "bcdbc1cfade05978e1ebccc83145eccf07680ab7f6425f1669734ff759826cbb",
+      "ordinary-progress.json": "e4cd650ee3cb84c69cd6b7af9161e2c28e668e77200fca2fa09b488e74ddfe0c"
+    },
+    "progress_phases": {
+      "diagnostic": "diagnostic_complete",
+      "ordinary": "ordinary_complete"
+    },
+    "queue_state_file_sha256": "30132ae3a8737338d500bf0779fa78788951243702572bccd3a81b09a024139d",
+    "queue_status_counts": {
+      "pending": 89,
+      "terminal": 148
+    },
+    "scope": "All existing completed physical attempts after diagnostic_complete, separated by recorded request lane; reused evidence retains its physical execution lane. No trainers, graders, tests, model construction, RNG draws or scientific reruns."
+  },
+  "source": [
+    {
+      "digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "files_verified": 1206,
+      "mismatches": [],
+      "origin_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+      "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/snapshots/a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "source_manifest_file_sha256": "11b262c19d2129cebc102e5f2bfc1bcd354f3fd44e8310e3bb375f3a8050f5b5"
+    }
+  ],
+  "status": "PASS"
+}

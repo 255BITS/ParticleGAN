@@ -3,6 +3,7 @@ from copy import deepcopy
 import importlib.util
 from pathlib import Path
 import shutil
+import subprocess
 
 import pytest
 
@@ -30,7 +31,9 @@ def test_final_registration_and_actual_initial_laws_are_bound():
     baseline = migration._validate_bindings(ROOT, data)
     assert len(data["leaders"]) == 7 and len(data["ordinary_task_ids"]) == 28
     assert len(read_json(HERE / "binding-compatibility.json")["pairs"]) == 140
-    assert file_hash(ROOT / CURRENT_SELECTION) == baseline["family_current_sha256"]
+    original = subprocess.check_output(["git", "show", "a0493ca3c213d559523eadc76e244ec9f9c1f81f:" + CURRENT_SELECTION.as_posix()], cwd=ROOT)
+    import hashlib
+    assert hashlib.sha256(original).hexdigest() == baseline["family_current_sha256"]
 
 
 @pytest.mark.parametrize("tamper", ["registration_hash", "source", "roster", "initial_law"])
@@ -66,7 +69,18 @@ def test_changed_evidence_bytes_are_rejected(tmp_path):
 @pytest.fixture
 def ordinary_rows(tmp_path, monkeypatch):
     # Only metadata is copied. No models, checkpoints, training or scoring.
-    shutil.copytree(ROOT / "configs", tmp_path / "configs")
+    # These controls never write configurations. Link read-only catalogs and
+    # copy only the exact historical selection whose migration is exercised.
+    (tmp_path / "configs/forge").mkdir(parents=True)
+    for child in (ROOT / "configs").iterdir():
+        if child.name != "forge":
+            (tmp_path / "configs" / child.name).symlink_to(child, target_is_directory=child.is_dir())
+    for child in (ROOT / "configs/forge").iterdir():
+        if child.name != "selections":
+            (tmp_path / "configs/forge" / child.name).symlink_to(child, target_is_directory=child.is_dir())
+    (tmp_path / CURRENT_SELECTION).parent.mkdir(parents=True)
+    (tmp_path / CURRENT_SELECTION).write_bytes(subprocess.check_output(
+        ["git", "show", "a0493ca3c213d559523eadc76e244ec9f9c1f81f:" + CURRENT_SELECTION.as_posix()], cwd=ROOT))
     for name in ("baseline.json", "binding-compatibility.json", "ordinary-registration.json", "ownership-migration.json"):
         target = tmp_path / migration.REPORT / name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -77,7 +91,9 @@ def ordinary_rows(tmp_path, monkeypatch):
     # controls below isolate whole-row, receipt and contract validation.
     monkeypatch.setattr(migration, "_validate_bindings", lambda root, value: baseline)
     card = read_json(tmp_path / CURRENT_SELECTION)
-    old_rows = read_json(ROOT / "reports/forge/technique-inventory.json")["rows"]
+    import json
+    old_rows = json.loads(subprocess.check_output(["git", "show",
+        "a0493ca3c213d559523eadc76e244ec9f9c1f81f:reports/forge/technique-inventory.json"], cwd=ROOT))["rows"]
     prior = [(None, None, {str(i): row for i, row in enumerate(old_rows)})]
     view, tasks = load_view(tmp_path, "discriminator_stability"), load_tasks(tmp_path)
     requirements = {str(tier): [a["task"] for a in view["assignments"]
@@ -93,15 +109,18 @@ def ordinary_rows(tmp_path, monkeypatch):
     report = dict(view="discriminator_stability", view_revision=9,
                   policy_fingerprint=data["new_policy_fingerprint"], publication_scope="frozen_source",
                   frozen_source=dict(source_digests=[data["source_digest"]]),
-                  task_contracts=contracts, tier_requirements=requirements,
+                  task_contracts=contracts, tier_requirements=requirements, recipe_contracts={},
                   provenance=dict(qualified_receipts={}), registered_study_reconstruction=[])
     rows = {}
     for entry in data["leaders"]:
+        recipe = migration.publication_recipe(tmp_path, read_json(tmp_path / entry["candidate"]["path"]))
+        recipe_hash = stable_hash(recipe)
+        report["recipe_contracts"][recipe_hash] = recipe
         blocked = entry["blocked_without_execution"]
         attempt = "fixture-ordinary-" + entry["family"]
         row = dict(candidate_id=entry["candidate_id"], candidate_revision=entry["candidate_revision"],
                    cohort="explicit-metadata-control", runtime_cohort=dict(execution_backend="cuda"),
-                   bindings=dict(source_digest=data["source_digest"], recipe_sha256=entry["recipe_sha256"],
+                   bindings=dict(source_digest=data["source_digest"], recipe_sha256=recipe_hash,
                                  task_contracts=deepcopy(keys)),
                    status="BLOCKED" if blocked else "FAIL", qualified_tier=0,
                    attempt_ids=[] if blocked else [attempt],
@@ -146,7 +165,7 @@ def test_ordinary_whole_rows_preserve_original_card_and_history_without_ranking(
             measurement_views=pin.get("measurement_views"), measurement_tasks=pin.get("measurement_tasks"))
 
 
-@pytest.mark.parametrize("tamper", ["diagnostic", "mixed_study", "source", "certificate", "contract", "blocked_credit"])
+@pytest.mark.parametrize("tamper", ["diagnostic", "mixed_study", "source", "recipe", "certificate", "contract", "blocked_credit"])
 def test_invalid_publication_cannot_replace_any_pin(ordinary_rows, tamper):
     root, data, _, _, report, rows, _ = ordinary_rows
     before = (root / CURRENT_SELECTION).read_bytes()
@@ -157,6 +176,8 @@ def test_invalid_publication_cannot_replace_any_pin(ordinary_rows, tamper):
         proof["study_id" if tamper == "diagnostic" else "admission_sha256"] = "different-diagnostic-scope"
     elif tamper == "source":
         row["bindings"]["source_digest"] = "0" * 64
+    elif tamper == "recipe":
+        report["recipe_contracts"][row["bindings"]["recipe_sha256"]]["prior_reg"] = 42.0
     elif tamper == "certificate":
         report["provenance"]["qualified_receipts"][row["attempt_ids"][0]]["canonical_result_hash"] = "tampered"
     elif tamper == "contract":

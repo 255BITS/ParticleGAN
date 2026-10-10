@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "60a655c3d73ca3675e98c7844e44156638a69ea82139bea7364b6bed0f33988b",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "de05e99a6cee44708156d5518d9b9e167b49d59b020ebc51ad754ab746d96f63",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/config.json": "eccd96d1387c53c848878372d21d3005d977fb26da6df1e6b6d34b05bf848a1c",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/events.jsonl": "0de8aa27a74bc3bca7fd163e6a4060768268dc457a196524676f997a9315c1d7",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_000050.npz": "11c4e6aaa8b91ca2327f488118944a3d2249168544b1efbc979cad3821d6c01b",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_000750.npz": "83b5818d97e3009b1398498aaea924da86dc98952fa7c8b9a9c33e4255e24705",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_001750.npz": "f6c43c69e18f5c3c14c8d37e52bbb78ededef80e4e7b2218122cda14a901145c",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_002750.npz": "fa169932fef3eb5468626fdced67bcf6aed658c05e2581a4a26a401c15fb2d7c",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_004000.npz": "4c4062491d2e379399383245b53217b29774a7b241b20380d66ac48233c782f2",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_005000.npz": "40096747864bd282e6ac4693d02c435aa747038d18ad300ba7df871ad29c1d1b",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_006000.npz": "7c970e135bb700a7297512d75b6ba406fc3d99eb97789b4d544ebc3a69db1f23",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/snapshots/step_007000.npz": "5921f8c37de009847df3b073b833f83b4f6240e82b0c8525ddb2c2cc9614bf4d",
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/41397b45ef544d1a8266b08e09b9598c/native100/grid100/summary.json": "2b5b664b1f6155625fb88c1ecbcc7f52a0984d207c49c21915f6fdd844b0390b"
+  },
+  "task_id": "grid100"
+}

@@ -547,6 +547,52 @@ def load_publisher(root):
     return module
 
 
+def retained_media(entry, output, publisher, renderer):
+    """Validate an existing atomic export receipt against the certified inputs."""
+    from PIL import Image
+    from experiments.forge import tier1_media
+    from benchmarks.toy_audit import api_run
+    sidecar = output.with_suffix(".json")
+    if not output.exists() and not sidecar.exists():
+        return None
+    require(output.exists() and sidecar.exists(), f"{output}: incomplete saved export")
+    task, row, request = entry["task"], entry["row"], entry["request"]
+    receipt = read_json(sidecar)
+    for name, module in (("experiments/forge/tier1_media.py", tier1_media),
+                         ("benchmarks/toy_audit/api_run.py", api_run)):
+        require(request["source"]["files"][name] == file_hash(Path(module.__file__)),
+                f"{output}: executed visualization source changed")
+    if task["adapter"] == "native100":
+        events, indices, snapshots, inputs = renderer.native_inputs(task, row)
+        observations = [dict(step=e["step"], metrics=e["metrics"], accuracy=e["accuracy"]) for e in events]
+        kind, source = "actual_training_native_saved_observations_gif", renderer.__file__
+        selection = None
+    else:
+        samples, inputs, selection = publisher.saved_outputs(task, row["evidence"], entry["attempt"]["local"])
+        observations = row["evidence"]["observations"]
+        require(renderer.finite_tree(samples) and renderer.finite_tree(observations)
+                and row["evidence"].get("guards", {}).get("all_finite") is not False,
+                f"{output}: nonfinite saved evidence")
+        indices = tier1_media._indices(len(observations))
+        spiral = task["execution"].get("host_definition", {}).get("kind") == "spiral"
+        special = bool(samples) and (task["adapter"] == "transfer_image" or spiral)
+        kind = ("actual_training_saved_spiral_gif" if spiral else "actual_training_saved_images_gif") if special else "actual_training_saved_observations_gif"
+        source = publisher.__file__ if special else tier1_media.__file__
+    expected = dict(schema_version=1, task_id=task["id"], recorded_grade=row["gate_status"],
+        kind=kind, observation_count=len(observations), selected_observation_indices=indices,
+        source_inputs=inputs, observations_sha256=stable_hash(observations), gif_sha256=file_hash(output),
+        optimizer_updates_added=0, sampling_draws_added=0, qualification_input=False,
+        renderer_sha256=file_hash(Path(source)))
+    require(all(receipt.get(k) == v for k, v in expected.items()), f"{output}: saved export binding changed")
+    require(receipt.get("saved_record_selection") == selection, f"{output}: saved record selection changed")
+    with Image.open(output) as gif:
+        require(gif.format == "GIF" and gif.n_frames >= 2, f"{output}: incomplete training GIF")
+        for index in range(gif.n_frames):
+            gif.seek(index)
+            gif.load()
+    return receipt
+
+
 def collect(options):
     """Read only certified saved results. Optional media adds no science."""
     root, artifacts = options.repository.resolve(), options.artifacts.resolve()
@@ -606,11 +652,18 @@ def collect(options):
                         item["recorded_evidence_scope"] = scope
                         item["independent_grading"] = saved_grading(attempt)
                         rows.append(item)
-                        if options.media and row.get("evidence", {}).get("saved_observer_outputs"):
+                        if options.media and (row.get("evidence", {}).get("observations")
+                                              or request["tasks"][name]["adapter"] == "native100"):
                             output = options.output / "media" / f"{family}-{scope}-{name}.gif"
                             entry = dict(task=request["tasks"][name], row=row, attempt=attempt, request=request)
-                            receipt = publisher.render_saved(entry, output, renderer)
-                            media.append(dict(family=family, scope=scope, task_id=name, path=str(output), sha256=file_hash(output), receipt=receipt))
+                            receipt = retained_media(entry, output, publisher, renderer) if options.resume_media else None
+                            reused = receipt is not None
+                            if receipt is None:
+                                with renderer.forbid_live_execution():
+                                    receipt = publisher.render_saved(entry, output, renderer)
+                            media.append(dict(family=family, scope=scope, task_id=name, attempt_id=aid,
+                                path=str(output), sha256=file_hash(output), receipt_sha256=file_hash(output.with_suffix(".json")),
+                                reused_validated_export=reused, receipt=receipt))
     ordinary_lookup = {(r["family"], r["task_id"]): r for r in rows if r["scope"] == "ordinary"}
     diagnostic_lookup = {(r["family"], r["task_id"]): r for r in rows if r["scope"] == "research_diagnostic"}
     cells, standings = [], []
@@ -635,7 +688,8 @@ def collect(options):
         group = [c for c in cells if c["family"] == family and c["importance"] == "required"]
         standings.append(dict(family=family, tier1=dict(Counter(c["ordinary_status"] for c in group if c["original_tier"] == 1)),
             tier2=dict(Counter(c["ordinary_status"] for c in group if c["original_tier"] == 2)),
-            diagnostic_tier2=dict(Counter(c["diagnostic_status"] for c in group if c["diagnostic_status"] is not None)),
+            diagnostic_tier2=dict(Counter(c["diagnostic_status"] for c in group
+                if c["original_tier"] == 2 and c["diagnostic_status"] is not None)),
             paid_seconds=sum(v["seconds"] for v in cost.values() if v["family"] == family)))
     certificate_hashes = {aid: {n: file_hash(root / f"reports/forge/attempts/{aid}/{n}.json")
                                 for n in ("request", "result", "evidence")} for aid in attempts}
@@ -674,12 +728,15 @@ def main():
     parser.add_argument("--workers-per-gpu", type=int, default=1)
     parser.add_argument("--output", type=Path, default=OUT / "publication")
     parser.add_argument("--media", action="store_true", help="Export retained scored training views; no resampling/rescoring")
+    parser.add_argument("--resume-media", action="store_true", help="Validate exact saved GIF/receipt pairs and export only missing media")
     options = parser.parse_args()
     if options.registration is None:
         options.registration = options.artifacts / ("diagnostic-registration.json" if options.action == "prepare-diagnostic" else "ordinary-registration.json")
     if options.action == "run":
         require(options.source_commit and (options.submit or options.drain), "Run requires --source-commit and explicit --submit/--drain")
         require(options.workers_per_gpu > 0, "workers-per-gpu must be positive")
+    require(not options.resume_media or (options.action == "collect" and options.media),
+            "--resume-media requires collect --media")
     dict(prepare=prepare, run=run, collect=collect, **{"prepare-diagnostic": prepare_diagnostic})[options.action](options)
 
 

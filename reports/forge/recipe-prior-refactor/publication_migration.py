@@ -41,6 +41,25 @@ def descriptor(root, path):
     return dict(path=path.relative_to(root).as_posix(), sha256=file_hash(path))
 
 
+def publication_recipe(root, candidate):
+    """Resolve the same explicit initial-prior reference as Forge planning."""
+    from experiments.forge.api import FormulationContext, resolve_public_recipe
+    prior = {**read_json(root / "configs/forge/defaults.json")["prior"], **candidate.get("prior", {})}
+    if "prior_update" in candidate.get("recipe_overrides", {}):
+        prior["learnable"] = candidate["recipe_overrides"]["prior_update"] == "learned"
+    protocol = read_json(root / "configs/forge/protocols" /
+                         (read_json(root / "configs/forge/defaults.json")["protocol"] + ".json"))
+    actual = asdict(FormulationContext(recipe_preset=candidate.get("recipe_preset"),
+        recipe_overrides=candidate.get("recipe_overrides", {}), prior=prior, seed=protocol["seed"],
+        requires_capabilities=candidate.get("requires_capabilities", []), extensions=candidate.get("extensions", {}),
+        initializer=candidate.get("initializer", "deterministic_orthogonal"),
+        execution_path=candidate.get("execution_path", "public_trainer")).recipe)
+    public = asdict(resolve_public_recipe(candidate))
+    require(all(stable_hash(value) == stable_hash(actual[key]) for key, value in public.items()
+                if key not in {"prior_kind", "standardize"}), "undeclared publication Recipe normalization")
+    return actual
+
+
 def _load_map(root, path):
     path = Path(path)
     if not path.is_absolute():
@@ -205,6 +224,7 @@ def advance_selection(root, manifest, report, rows, prior_reports, path, *, vali
             "visible selected roster changed")
     for family, pin in pins.items():
         matches = [{**row, "trainer_family": family} for _, _, old_rows in prior_reports for row in old_rows.values()
+                   if row.get("candidate_id") == pin["candidate_id"]
                    if family_row_pin({**row, "trainer_family": family}, selection_kind=pin["selection_kind"],
                        reason=pin["reason"], measurement_views=pin.get("measurement_views"),
                        measurement_tasks=pin.get("measurement_tasks")) == pin]
@@ -224,9 +244,13 @@ def advance_selection(root, manifest, report, rows, prior_reports, path, *, vali
                 and row.get("runtime_cohort", {}).get("execution_backend") == old["execution_backend"] == "cuda",
                 "missing or mismatched successor whole runtime row")
         row = {**deepcopy(row), "trainer_family": family}
-        require(row.get("bindings", {}).get("source_digest") == data["source_digest"]
-                and row["bindings"].get("recipe_sha256") == entry["recipe_sha256"], "successor source/Recipe differs")
         candidate = bound_file(root, entry["candidate"])
+        resolved = publication_recipe(root, candidate)
+        recipe_hash = stable_hash(resolved)
+        require(row.get("bindings", {}).get("source_digest") == data["source_digest"]
+                and row["bindings"].get("recipe_sha256") == recipe_hash
+                and stable_hash(report.get("recipe_contracts", {}).get(recipe_hash)) == recipe_hash,
+                "successor source/normalized public Recipe differs")
         require(family_for_candidate(root, entry["candidate_id"], candidate, current_presentation=True)["id"] == family,
                 "successor belongs to another configuration family")
         validate_row(root, report, row)
@@ -314,6 +338,51 @@ def label_archived_declarations(family_result, card):
             row["selection"] = dict(selection_kind="archived_policy_declaration", qualified=False, default_adoption=False,
                 qualification_input=False, qualification_reuse=False,
                 reason="Current unmeasured declaration only; selected optimizer evidence remains in its exact original-policy archive.")
+
+
+def restore_archived_solution_rows(root, family_result, card, reports, *, validate_row):
+    """Keep exact declaration-only solution bases as nonqualifying structure."""
+    from experiments.forge.trainer_families import load_families, _declaration_only_row
+    receipt = card["ownership_migration"]
+    data = bound_file(root, receipt["declaration"])
+    require(receipt["archived_only_selections"] == data["archived_only_selections"],
+            "archived solution pins changed")
+    definitions = load_families(root)
+    # The unchanged progress renderer groups active row families before their
+    # historical cohorts. An archived base is structural navigation only;
+    # the seven selected leaders and frozen scientific roster remain separate.
+    present = {row["trainer_family"] for row in family_result["rows"]}
+    targets = {definitions[row["trainer_family"]].get("reporting_family", row["trainer_family"])
+               for row in family_result["rows"]}
+    pins = {pin["trainer_family"]: pin for pin in receipt["archived_only_selections"]}
+    restored = []
+    for target in sorted(targets - present):
+        require(target in pins, "missing solution base is not an original archived selection")
+        pin, matches = pins[target], {}
+        for _, entry, report, rows in reports:
+            for original in rows.values():
+                if original.get("candidate_id") != pin["candidate_id"]:
+                    continue
+                row = {**deepcopy(original), "trainer_family": target}
+                if family_row_pin(row, selection_kind=pin["selection_kind"], reason=pin["reason"]) != pin:
+                    continue
+                require(_declaration_only_row(row), "archival solution base must remain declaration-only")
+                validate_row(root, report, original)
+                row["publication_key"] = entry["json_sha256"]
+                matches[entry["json_sha256"], scientific_row_hash(row)] = row
+        require(len(matches) == 1, "solution base needs one exact verified original archived row")
+        row = next(iter(matches.values()))
+        row["technique"] = definitions[target]["label"]
+        row["selection"] = dict(selection_kind="archived_base_presentation_only", qualified=False,
+            default_adoption=False, qualification_input=False, qualification_reuse=False,
+            reason="Exact original declaration-only solution base for navigation; the selected scientific leader remains separately pinned.")
+        index = len(family_result["rows"])
+        family_result["rows"].append(row)
+        restored.append(dict(trainer_family=target, candidate_id=row["candidate_id"],
+            row_index=index,
+            scientific_row_sha256=scientific_row_hash(row), publication_key=row["publication_key"],
+            original_pin_sha256=stable_hash(pin), qualification_input=False, qualification_reuse=False))
+    return restored
 
 
 def main():

@@ -87,9 +87,36 @@ def published_develop_checkout(tmp_path):
             else:
                 destination.symlink_to(path, target_is_directory=path.is_dir())
     shutil.copytree(ROOT / "configs", root / "configs")
-    shutil.copytree(ROOT / "reports", root / "reports")
+    # The publication's recorded input manifest is sufficient for these
+    # read-only controls. Do not copy unrelated research logs or checkpoints.
+    commit = COMMITS["published_develop"]
+    report_path = "reports/forge/technique-inventory.json"
+    report_bytes = subprocess.check_output(["git", "show", f"{commit}:{report_path}"], cwd=ROOT)
+    publication = json.loads(report_bytes)
+    for relative, digest in publication["family_progress"]["input_hashes"].items():
+        if not relative.startswith("reports/"):
+            continue
+        source, destination = ROOT / relative, root / relative
+        data = source.read_bytes() if source.is_file() else None
+        if data is None or hashlib.sha256(data).hexdigest() != digest:
+            data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
+        assert hashlib.sha256(data).hexdigest() == digest
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(data)
     restore_archived_contracts(root, "published_develop")
     restore_archived_contracts(root, "bcap_legacy_questions")
+    # Current publication refreshes must not enter these historical controls.
+    # Restore their original compact report and whole-selection inputs from
+    # the exact immutable publication commit, without hydrating raw artifacts.
+    for relative in ("reports/forge/technique-inventory.json",
+                     "configs/forge/selections/family-current-v1.json",
+                     "configs/forge/trainer-families.json"):
+        data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
+        blob = subprocess.check_output(["git", "rev-parse", f"{commit}:{relative}"], cwd=ROOT,
+                                       text=True).strip()
+        assert hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == blob
+        (root / relative).parent.mkdir(parents=True, exist_ok=True)
+        (root / relative).write_bytes(data)
     return restore_published_view_roster(root)
 
 
