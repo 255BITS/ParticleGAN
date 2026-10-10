@@ -110,7 +110,7 @@ def _convolution_matrices(tensor, metadata):
                 yield matrix.T if transposed else matrix
 
 
-def polar_factor(matrix, *, smoothing=0.):
+def polar_factor(matrix, *, smoothing=0., backend="native"):
     """Return the polar direction with optional fixed-scale spectral smoothing.
 
     tau = max(rows, columns) * eps * s_max uses the SVD computation dtype.
@@ -119,11 +119,18 @@ def polar_factor(matrix, *, smoothing=0.):
     Float16/bfloat16 inputs retain the existing float32 computation policy;
     float32/float64 inputs are not cast. Exact SVD at every size makes the
     cutoff independent of an iterative polar approximation. No RNG is used.
+    The opt-in CPU backend computes the entire polar operation on CPU, then
+    returns to the input device/dtype. Accelerator rounding can differ; this
+    is a declared numerical trainer change rather than a parity optimization.
     """
     if type(smoothing) not in (int, float) or not math.isfinite(smoothing) or smoothing < 0:
         raise ValueError("polar smoothing must be finite and nonnegative")
     if matrix.ndim != 2 or not matrix.is_floating_point():
         raise ValueError("polar_factor requires a floating-point matrix")
+    if backend not in ("native", "cpu"):
+        raise ValueError("polar backend must be native or cpu")
+    if backend == "cpu" and matrix.device.type != "cpu":
+        return polar_factor(matrix.cpu(), smoothing=smoothing).to(matrix)
     original_dtype = matrix.dtype
     value = matrix if original_dtype in (torch.float32, torch.float64) else matrix.float()
     if 0 in value.shape:
@@ -151,7 +158,8 @@ class NormalizedOptimizer(Optimizer):
     """
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
-                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none", **options):
+                 eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
+                 svd_backend="native", **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -166,6 +174,10 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
+        if svd_backend not in ("native", "cpu"):
+            raise ValueError("optimizer SVD backend must be native or cpu")
+        if svd_backend != "native" and family != "dualnorm":
+            raise ValueError("optimizer SVD backend requires the dualnorm family")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -181,6 +193,7 @@ class NormalizedOptimizer(Optimizer):
         self.family, self.momentum = family, float(momentum)
         self.smoothing = float(smoothing)
         self.convolution = convolution
+        self.svd_backend = svd_backend
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -371,14 +384,21 @@ class NormalizedOptimizer(Optimizer):
                             # current slice does not move on stale momentum.
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
-                            update = polar_factor(direction_matrix, smoothing=self.smoothing)
+                            update = (polar_factor(direction_matrix, smoothing=self.smoothing)
+                                      if self.svd_backend == "native" else
+                                      polar_factor(direction_matrix, smoothing=self.smoothing,
+                                                   backend=self.svd_backend))
                             weight_matrix.add_(update, alpha=-rate * factor)
                     elif parameter.ndim == 2:
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        update = (polar_factor(direction, smoothing=self.smoothing)
-                                  if self.smoothing else polar_factor(direction))
+                        if self.svd_backend == "native":
+                            update = (polar_factor(direction, smoothing=self.smoothing)
+                                      if self.smoothing else polar_factor(direction))
+                        else:
+                            update = polar_factor(direction, smoothing=self.smoothing,
+                                                  backend=self.svd_backend)
                         parameter.add_(update, alpha=-rate * factor)
                     else:
                         norm = direction.norm()
@@ -404,6 +424,8 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["smoothing"] = self.smoothing
         if self.convolution != "none":
             result["dualnorm"]["convolution"] = self.convolution
+        if self.svd_backend != "native":
+            result["dualnorm"]["svd_backend"] = self.svd_backend
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -422,6 +444,8 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("smoothing")
         if self.convolution != "none":
             expected_meta.add("convolution")
+        if self.svd_backend != "native":
+            expected_meta.add("svd_backend")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -429,6 +453,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint optimizer smoothing differs")
         if meta.get("convolution", "none") != self.convolution:
             raise ValueError("checkpoint optimizer convolution differs")
+        if meta.get("svd_backend", "native") != self.svd_backend:
+            raise ValueError("checkpoint optimizer SVD backend differs")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -542,7 +568,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
-                                    convolution=recipe.optimizer_convolution, **options)
+                                    convolution=recipe.optimizer_convolution,
+                                    svd_backend=recipe.optimizer_svd_backend, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
