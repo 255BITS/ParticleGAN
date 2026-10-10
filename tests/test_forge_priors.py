@@ -21,7 +21,11 @@ PARTICLES = dict(kind="particle_cloud", sigma=0., standardize=False, learnable=T
 
 
 def task():
-    return json.loads((ROOT / "configs/forge/tasks/vector_two_broad.json").read_text())
+    value = json.loads((ROOT / "configs/forge/tasks/vector_two_broad.json").read_text())
+    # Explicit legacy cohort: archived task-owned policy and host penalties.
+    value["execution"].pop("prior_contract", None)
+    value["execution"]["prior"]["learnable"] = True
+    return value
 
 
 @pytest.mark.parametrize("field", [None, "kind", "sigma", "standardize", "learnable"])
@@ -109,7 +113,7 @@ def test_released_gan_v3_task_adaptation_uses_the_experiment_prior(prior, expect
 
 def test_frozen_behavior_host_cannot_claim_a_different_prior_code_path():
     value = json.loads((ROOT / "configs/forge/tasks/trajectory.json").read_text())
-    value["execution"]["prior"] = deepcopy(MOG)
+    value["execution"]["prior"] = {k: v for k, v in MOG.items() if k != "learnable"}
     value["requires_capabilities"] = ["mog_prior"]
     assert any("requires prior kind particle_cloud" in reason for reason in behavior_preflight(value, {}))
 

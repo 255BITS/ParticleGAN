@@ -40,6 +40,7 @@ def training_recipe(cfg):
     """The recipe default (critic penalty, optimizers, LR schedule) at this study's rates."""
     return get_recipe(
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+        prior_update="learned" if cfg["prior"] == "learned" else "frozen",
         conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",
         ucd_target="time_class" if cfg["model"] == "ddgan" and cfg["d_mode"] == "ucd" else "class",
         ucd_weight=cfg["ucd_lambda"], alpha_bar=cfg["alpha_bar"],

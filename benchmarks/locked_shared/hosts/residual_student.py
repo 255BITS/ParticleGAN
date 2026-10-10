@@ -202,7 +202,8 @@ def train(*, pairing: str = "shared", echo: bool = False,
         norm=PROTOCOL["reg_norm"], lazy_k=PROTOCOL["reg_lazy"],
         target_anneal=PROTOCOL["target_anneal"],
     )
-    spread = ParticleRegularizer(weight=PROTOCOL["vicreg_weight"])
+    spread = (None if components is not None and components.uses_recipe_prior
+              else ParticleRegularizer(weight=PROTOCOL["vicreg_weight"]))
     opt_g = torch.optim.Adam(
         list(head.parameters()) + list(prior.parameters()),
         lr=PROTOCOL["lr"], betas=(PROTOCOL["beta1"], PROTOCOL["beta2"]),
@@ -267,8 +268,11 @@ def train(*, pairing: str = "shared", echo: bool = False,
             # retarget identity. The residual term does, and only on both-land
             # rows. fm_weight is 0: no feature-matching term is added.
             g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
-            g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
-            g_loss = g_loss + spread(prior.z)
+            if components is not None and components.uses_recipe_prior:
+                g_loss = components.add_prior_regularization(g_loss, prior)
+            else:
+                g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
+                g_loss = g_loss + spread(prior.z)
             if both:
                 residual = (fake[mask] - fast[mask]).pow(2).mean()
             else:

@@ -243,7 +243,11 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
         opt_g.zero_grad(set_to_none=True)
         for param in critic.parameters():
             param.requires_grad_(False)
-        loss = cfg.reconstruction_weight * recon + cfg.particle_l2 * prior.z.square().mean()
+        loss = cfg.reconstruction_weight * recon
+        if components is not None and components.uses_recipe_prior:
+            loss = components.add_prior_regularization(loss, prior)
+        else:
+            loss = loss + cfg.particle_l2 * prior.z.square().mean()
         protected = [recon] if cfg.reconstruction_weight > 0 else []
         if cfg.adversarial_weight > 0:
             real_logits = critic(data).squeeze(-1).detach()

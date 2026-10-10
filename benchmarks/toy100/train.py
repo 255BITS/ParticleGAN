@@ -373,7 +373,9 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         torch.manual_seed(seed)
         if device.type == "cuda":
             torch.cuda.manual_seed_all(seed)
-        prior = recipe.make_prior(learnable=True).to(device)
+        # Retain the benchmark's learned-table initialization/RNG order;
+        # GANTrainer binds the actual recipe policy after initialization.
+        prior = recipe.replace(prior_update="learned").make_prior().to(device)
         model_policy = config.get("toy100_model")
         if model_policy in AFFINE_MODEL_POLICIES:
             # Preserve the scratch probe's RNG order: construct the ordinary

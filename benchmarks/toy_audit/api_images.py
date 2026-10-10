@@ -790,7 +790,7 @@ class ImageFixture:
                 self.opt_g, self.opt_d = self.recipe.make_optimizers(self.G, self.D, self.prior,
                                                                    ema_critic=deepcopy(self.D))
                 self.loss = self.recipe.make_loss()
-                self.spread = self.recipe.make_prior_regularizer(weight=1.)
+                self.spread = self.recipe.make_prior_regularizer()
                 self.penalty = self.recipe.make_critic_penalty(self.opt_d)
                 self._context = None
                 self.policy = UpdatePolicy(self.recipe, self.G, self.D, prior=self.prior,
@@ -854,8 +854,8 @@ class ImageFixture:
             latent, rows = self.prior.sample(len(real), generator=self.policy.latent_generator)
             generated = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
             loss_gan = self.loss.g_loss(self.noisy_critic(generated, context), self.noisy_critic(real, context))
-            prior_reg = self.spread(self.prior.z)
-            loss_g = loss_gan + self.recipe.prior_reg * prior_reg
+            prior_reg = self.recipe.prior_regularization(self.prior.z, regularizer=self.spread)
+            loss_g = loss_gan + prior_reg
             self.opt_g.zero_grad(set_to_none=True)
             self.policy.before_generator_backward()
             loss_g.backward()
@@ -1091,15 +1091,17 @@ class WordFixture:
                 self.prior = components.build_prior()
             # Homogeneous roles are required by the public policy. This splits
             # the old G/E group without changing its optimizer settings.
-            self.opt_g = self.recipe.make_generator_optimizer([
+            groups = [
                 dict(params=list(self.G.parameters()), lr=self.recipe.lr),
-                dict(params=list(self.E.parameters()), lr=self.recipe.lr),
-                dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
-                     betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas)],
-                latent_table=self.prior.z)
+                dict(params=list(self.E.parameters()), lr=self.recipe.lr)]
+            if self.prior.z.requires_grad:
+                groups.append(dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
+                    betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas))
+            self.opt_g = self.recipe.make_generator_optimizer(groups,
+                latent_table=self.prior.z if self.prior.z.requires_grad else None)
             self.opt_d = self.recipe.make_critic_optimizer(self.D, ema_critic=deepcopy(self.D))
             self.loss = self.recipe.make_loss()
-            self.spread = self.recipe.make_prior_regularizer(weight=1.)
+            self.spread = self.recipe.make_prior_regularizer()
             self.penalty = self.recipe.make_critic_penalty(self.opt_d, collect_stats=components is not None)
             policy_streams = None if components is None else {
                 "latent_generator": components.streams.generator("prior", component="latent", purpose="indices"),
@@ -1156,7 +1158,7 @@ class WordFixture:
             fake_words = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
             loss_gan = self.loss.joint_g_loss(self.noisy_critic(_join_words(fake_words, latent)),
                                               self.noisy_critic(_join_words(real_words, encoded)))
-            loss_g = loss_gan + self.recipe.prior_reg * self.spread(self.prior.z)
+            loss_g = loss_gan + self.recipe.prior_regularization(self.prior.z, regularizer=self.spread)
             if self.transport is not None:
                 # Categorical probability coordinates only. The joint latent
                 # coordinates and inverse encoder retain their original loss.

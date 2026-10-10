@@ -159,6 +159,8 @@ class GANTrainer:
                 if id(parameter) in seen:
                     raise ValueError("generator, discriminator and prior must not share parameters")
                 seen.add(id(parameter))
+        recipe._validate_frozen_prior_ownership(self.prior, self.G, self.D)
+        recipe.apply_prior_policy(self.prior)
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
         if require_latent_damping is None:
@@ -392,10 +394,14 @@ class GANTrainer:
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad:
+            if self.prior.z.requires_grad and recipe.prior_regularizer == "vicreg":
+                # Keep the historical unweighted diagnostic, even at weight 0.
+                # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if self.prior.z.requires_grad and recipe.prior_l2 > 0:
+                loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
             if recipe.kinetic_transport_weight:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
@@ -560,6 +566,11 @@ class GANTrainer:
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if (isinstance(saved_recipe, dict) and "prior_update" not in saved_recipe
+                and state.get("requires_grad", {}).get("prior") == {}):
+            # Historical frozen tables were buffers; their saved parameter map
+            # is an actual policy witness, never a candidate default inference.
+            saved_recipe = {**saved_recipe, "prior_update": "frozen"}
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):

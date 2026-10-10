@@ -196,7 +196,7 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     assert all(p is not generator.bias for g in opt_g.param_groups for p in g["params"])
     assert opt_g.param_groups[1]["params"] == [prior.z]
     for frozen in (GaussianPrior(2), ParticlePrior(8, 2, learnable=False)):
-        assert len(recipe.make_optimizers(generator, discriminator, frozen)[0].param_groups) == 1
+        assert len(recipe.replace(prior_update="frozen").make_optimizers(generator, discriminator, frozen)[0].param_groups) == 1
     assert recipe.replace(lr=.002).lr == .002 and recipe.lr == .001
     with pytest.raises(TypeError):
         get_recipe(typo=True)

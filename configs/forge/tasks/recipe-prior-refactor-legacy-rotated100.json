@@ -1,0 +1,93 @@
+{
+  "adapter": "native100",
+  "dependencies": [],
+  "evaluation": {
+    "accuracy_limits": {
+      "abs_cov_trace_bias": 0.1,
+      "center_rms_sigma": 0.2,
+      "mass_tv": 0.06,
+      "radial_ks": 0.04
+    },
+    "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+    "coverage_thresholds": {
+      "all_finite": true,
+      "max_cov_eig_ratio": 1.7,
+      "max_mass_tv": 0.1,
+      "max_mode_mass": 0.02,
+      "max_radial_median_ratio": 1.4,
+      "min_cov_eig_ratio": 0.4,
+      "min_hq_mode_mass": 0.005,
+      "min_modes": 100,
+      "min_precision": 0.97,
+      "min_radial_median_ratio": 0.65,
+      "min_samples": 20000
+    },
+    "early_eval_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100
+    ],
+    "eval_interval": 250,
+    "eval_output_noise": "clean",
+    "eval_samples": 20000,
+    "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+    "evaluator_revision": {
+      "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+      "id": "native100-manifest-sampling-v2",
+      "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+    },
+    "holdout_samples": 100000,
+    "kind": "native_accuracy",
+    "minimum_stable_checks": 5,
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    }
+  },
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "model": {
+      "fourier": 2,
+      "hidden": 128,
+      "layers": 3
+    },
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "problem": "rotated100",
+    "produces_state": true,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 2048,
+      "num_particles": 20000,
+      "z_dim": 2
+    },
+    "steps": 7000
+  },
+  "id": "recipe-prior-refactor-legacy-rotated100",
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 3600
+  },
+  "schema_version": 1
+}

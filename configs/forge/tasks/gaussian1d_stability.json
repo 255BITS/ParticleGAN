@@ -9,8 +9,7 @@
     "prior": {
       "kind": "mog",
       "sigma": 0.1,
-      "standardize": false,
-      "learnable": true
+      "standardize": false
     },
     "protocol": "screening",
     "produces_state": true,
@@ -59,7 +58,8 @@
     },
     "original_schedule_horizon": 1000,
     "preserve_prefix_steps": 1000,
-    "continuation_of": "gaussian1d_smoke"
+    "continuation_of": "gaussian1d_smoke",
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -107,7 +107,7 @@
     "observations": 24,
     "scoring_weights": "live",
     "sources": {
-      "experiments/forge/gaussian_tasks.py": "34643085795a107dec17cf09c5f31f76c0321cf68716dbe0cff0532a37536b7f",
+      "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619",
       "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b"
     },
     "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
@@ -141,7 +141,6 @@
     "checkpoint",
     "named_rng",
     "live_sampling",
-    "learned_locations",
     "mog_prior"
   ],
   "dependencies": [

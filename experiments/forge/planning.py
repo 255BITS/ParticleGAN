@@ -165,6 +165,10 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     protocol_id = defaults["protocol"]
     protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
     prior = {**defaults["prior"], **idea.get("prior", {})}
+    # Candidate reference construction cannot let a historical convenience
+    # prior choose a new explicit recipe learning policy.
+    if "prior_update" in idea.get("recipe_overrides", {}):
+        prior["learnable"] = idea["recipe_overrides"]["prior_update"] == "learned"
     blockers = []
     if "TODO" in idea.get("hypothesis", "") or any("TODO" in x for x in idea["changed_factors"]):
         blockers.append("finish the scaffold's hypothesis and changed_factors before enqueue")

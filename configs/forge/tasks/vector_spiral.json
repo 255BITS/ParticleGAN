@@ -9,8 +9,7 @@
     "prior": {
       "kind": "mog",
       "sigma": 0.025,
-      "standardize": false,
-      "learnable": true
+      "standardize": false
     },
     "protocol": "screening",
     "produces_state": false,
@@ -44,7 +43,8 @@
       "radius_min": 0.3,
       "radius_max": 2.0,
       "noise": 0.08
-    }
+    },
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -103,7 +103,6 @@
     "checkpoint",
     "named_rng",
     "live_sampling",
-    "learned_locations",
     "mog_prior"
   ],
   "dependencies": []

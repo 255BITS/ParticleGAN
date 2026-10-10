@@ -72,8 +72,9 @@ def _validate_profile_measurement(task, spec, published):
     if execution.get("steps") != spec["steps"]:
         raise ValueError("image execution budget differs from its published host")
     prior = execution.get("prior", {})
+    from .priors import recipe_owned_prior
     if (prior.get("kind") != "particle_cloud" or prior.get("sigma") != 0
-            or prior.get("standardize") is not False or prior.get("learnable") is not True
+            or prior.get("standardize") is not False or (not recipe_owned_prior(task) and prior.get("learnable") is not True)
             or not isinstance(prior.get("exception_reason"), str) or not prior["exception_reason"].strip()):
         raise ValueError("published finite image host requires its explicit learned sigma-zero cloud exception")
     thresholds = published["thresholds"]

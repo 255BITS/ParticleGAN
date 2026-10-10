@@ -23,6 +23,11 @@ def _archived_inactive_comparison_scope(module, directory):
         "pytest_bcap_inactive_adapter", root / "reports/forge/bcap-three-phase/verify_compatibility.py")
     helper = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(helper)
+    # These additions are explicit defaults, not a general recipe normalizer.
+    # The original comparator still checks every numerical/statistic assertion.
+    helper.INACTIVE_DEFAULTS = {**helper.INACTIVE_DEFAULTS,
+        "prior_update": "learned", "prior_regularizer": "vicreg",
+        "prior_reg_target_std": 1.0, "prior_reg_eps": 1e-4, "prior_l2": 0.0}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
     from particlegan import Recipe
@@ -39,13 +44,20 @@ def _archived_inactive_comparison_scope(module, directory):
         "adapted_sha256": hashlib.sha256(adapted).hexdigest(),
         "checked_inactive_defaults": helper.INACTIVE_DEFAULTS,
         "assertions_unchanged": True,
+        "task_question_source_commit": module.DEVELOP,
+        "qualification_input": False,
     }, indent=2) + "\n")
+    from tests.archived_forge_contracts import bcap_legacy_software_checkout
+    legacy = bcap_legacy_software_checkout(directory / "legacy-question-source")
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(module, "NEW_INACTIVE_FIELDS", {
             **module.NEW_INACTIVE_FIELDS, **helper.INACTIVE_DEFAULTS})
         # The original fixture uses __file__ as the subprocess program path;
         # its explicit source-tree arguments and original ROOT stay unchanged.
         patch.setattr(module, "__file__", str(path))
+        # Source migration created new questions. Backward compatibility uses
+        # this comparator's original task/view bytes, never the live baseline.
+        patch.setattr(module, "ROOT", legacy)
         yield
 
 

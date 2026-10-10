@@ -190,7 +190,7 @@ def test_current_checkpoint_without_unused_arm_selector_still_resumes(formulatio
 
 @pytest.mark.parametrize("particles", [12, 1025])
 def test_prior_regularizes_full_small_table_or_unique_large_sample(particles):
-    trainer = make_trainer(particles=particles)
+    trainer = make_trainer(particles=particles, prior_reg=.1)
     seen = []
     handle = trainer.prior_regularizer.register_forward_pre_hook(lambda module, args: seen.append(len(args[0])))
     trainer.step(torch.randn(6, 2))

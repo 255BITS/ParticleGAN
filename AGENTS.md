@@ -3,6 +3,8 @@ Read the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) before
 proposing another idea. Use Forge's declared gates and budgets; the initial
 profile is provisional until its calibration criteria pass.
 
+Use the terms and ownership rules in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md).
+
 dont do seed experiments(same thing except different seed)
 be token efficient
 make it easy to tail the logs
@@ -12,9 +14,11 @@ only keep one generated leaderboard per goal, the current one
 
 For new comparisons, use protocol seed 0 and the repository's public
 deterministic initializer. Hold each task's architecture, target/data law,
-seen batch sequence, prior, sampling, update budget and evaluation cadence
-fixed across trainer candidates. Use one global trainer configuration across
-tasks; declare the trainer delta explicitly. Isolate constructor, data,
+seen batch sequence, initial prior distribution and capacity, sampling, update
+budget and evaluation cadence fixed across trainer candidates. Use one global
+trainer configuration across
+tasks; declare the trainer delta explicitly, including changes to the recipe's
+prior update policy or regularizer. Isolate constructor, data,
 training-noise and evaluation RNGs, and checkpoint every consumed stream.
 Fixed identity/zero fixtures and initialization diagnostics must be explicit
 separate cohorts, never silently substituted for the shared baseline. Preserve

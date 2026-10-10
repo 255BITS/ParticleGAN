@@ -10,7 +10,6 @@
       "kind": "particle_cloud",
       "sigma": 0.0,
       "standardize": false,
-      "learnable": true,
       "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
     },
     "protocol": "screening",
@@ -39,7 +38,8 @@
       "kappa": 1.25,
       "prior_weight": 0.05,
       "ema_decay": 0.99
-    }
+    },
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -95,7 +95,6 @@
     "checkpoint",
     "named_rng",
     "live_sampling",
-    "learned_locations",
     "particle_cloud"
   ],
   "dependencies": []

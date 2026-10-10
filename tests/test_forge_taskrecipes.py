@@ -23,7 +23,11 @@ def card():
 
 
 def task(name):
-    return json.loads((ROOT / f"configs/forge/tasks/{name}.json").read_text())
+    value = json.loads((ROOT / f"configs/forge/tasks/{name}.json").read_text())
+    # Explicit legacy cohort: archived task-owned policy and host penalties.
+    value["execution"].pop("prior_contract", None)
+    value["execution"]["prior"]["learnable"] = True
+    return value
 
 
 def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_blocked():

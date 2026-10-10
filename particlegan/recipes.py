@@ -3,6 +3,19 @@ import math
 from dataclasses import asdict, dataclass, replace
 
 
+def _reject_table_storage_owners(table, tensors):
+    """A frozen sampled table needs storage independent of mutable owners."""
+    import torch
+    if not table.numel() or table.layout != torch.strided:
+        return
+    address = table.untyped_storage().data_ptr()
+    for tensor in tensors:
+        if (isinstance(tensor, torch.Tensor) and tensor.numel()
+                and tensor.layout == torch.strided and tensor.device == table.device
+                and tensor.untyped_storage().data_ptr() == address):
+            raise ValueError("frozen prior must not share storage with networks or optimizer parameters")
+
+
 @dataclass(frozen=True)
 class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
@@ -49,6 +62,13 @@ class Recipe:
     # Optional finite same-training-panel critic step guard; none preserves history.
     critic_step_mode: str = "none"
     prior_reg: float = 0.0
+    # The recipe owns learning/freezing and every latent-prior penalty. Tasks
+    # supply the initial distribution, capacity and sampling law.
+    prior_update: str = "learned"
+    prior_regularizer: str = "vicreg"
+    prior_reg_target_std: float = 1.0
+    prior_reg_eps: float = 1e-4
+    prior_l2: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -212,6 +232,20 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if self.prior_update not in ("learned", "frozen"):
+            raise ValueError("prior_update must be learned or frozen")
+        if self.prior_regularizer not in ("vicreg", "none"):
+            raise ValueError("prior_regularizer must be vicreg or none")
+        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2"):
+            value = getattr(self, key)
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        if self.prior_reg_eps == 0:
+            raise ValueError("prior_reg_eps must be positive")
+        if self.prior_regularizer == "none" and self.prior_reg != 0:
+            raise ValueError("prior_regularizer='none' requires prior_reg=0")
+        if self.prior_update == "frozen" and (self.row_evidence_gate or self.particle_birth_death):
+            raise ValueError("frozen priors require row evidence and birth/death disabled")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -540,6 +574,9 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
+        ``prior_update`` owns learning/freezing. A conflicting ``learnable``
+        override is rejected; change the recipe explicitly instead.
+
         Learnable tables take the ordinary random draw; use
         ``particlegan.init.deterministic_orthogonal_(prior)`` for R2 points (it
         recalibrates MoG spacing). MoG recipes calibrate spacing on the
@@ -548,7 +585,10 @@ class Recipe:
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
-                   "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
+                   "sigma_rel": self.sigma_rel, "standardize": self.standardize,
+                   "learnable": self.prior_update == "learned", **overrides}
+        if options["learnable"] != (self.prior_update == "learned"):
+            raise ValueError("learnable override contradicts Recipe.prior_update")
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
@@ -720,9 +760,27 @@ class Recipe:
         original optimizer type and checkpoint format.
         """
         from torch import nn
+        if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
+            raise ValueError("trainable latent_table contradicts Recipe.prior_update='frozen'")
         module = params if isinstance(params, nn.Module) else None
         if module is not None:
             params = [p for p in module.parameters() if p.requires_grad]
+        if latent_table is not None and self.prior_update == "frozen":
+            # Materialize each iterator once; optimizer construction must retain
+            # every supplied parameter/group after ownership validation.
+            params = list(params)
+            owners = []
+            for index, value in enumerate(params):
+                if isinstance(value, dict):
+                    group = {**value, "params": list(value["params"])}
+                    params[index] = group
+                    owners.extend(group["params"])
+                else:
+                    owners.append(value)
+            if module is not None:
+                owners.extend(module.buffers())
+            _reject_table_storage_owners(latent_table, owners)
+            latent_table = None
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
@@ -773,7 +831,58 @@ class Recipe:
 
     def make_prior_regularizer(self, **overrides):
         from .vicreg_loss import ParticleRegularizer
-        return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
+        options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
+                   "eps": self.prior_reg_eps, **overrides}
+        if self.prior_regularizer == "none" or self.prior_update == "frozen":
+            options["weight"] = 0.
+        return ParticleRegularizer(**options)
+
+    def prior_regularization(self, rows, *, regularizer=None):
+        """Return the complete weighted latent-prior objective, once.
+
+        Callers select rows using their declared sampling law. Frozen rows and
+        disabled coefficients do no variance/covariance work or optimizer work.
+        The factory is the extension point for future regularizer families.
+        """
+        if self.prior_update == "frozen" or not rows.requires_grad:
+            return rows.new_zeros(())
+        # Empty rows preserve a zero gradient without reading nonfinite values
+        # or doing any variance/covariance work for disabled penalties.
+        result = rows[:0].sum()
+        if self.prior_reg > 0:
+            result = (self.make_prior_regularizer() if regularizer is None else regularizer)(rows)
+        if self.prior_l2 > 0:
+            result = result + self.prior_l2 * rows.square().mean()
+        return result
+
+    def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
+        """Reject aliases before freezing, including already-frozen buffers."""
+        if self.prior_update != "frozen" or not hasattr(prior, "z"):
+            return
+        for module in modules:
+            if module is not None:
+                _reject_table_storage_owners(prior.z, (*module.parameters(), *module.buffers()))
+        for optimizer in optimizers:
+            _reject_table_storage_owners(prior.z,
+                (p for group in optimizer.param_groups for p in group["params"]))
+
+    def apply_prior_policy(self, prior):
+        """Bind the prior policy after initialization, before making optimizers.
+
+        Initializing a trainable table first lets learned/frozen comparisons use
+        identical deterministic locations and consume identical init streams.
+        Freezing registers locations as a buffer, keeping sampling/state keys.
+        """
+        if not hasattr(prior, "z"):
+            return prior  # Gaussian priors have no trainable location table.
+        if self.prior_update == "learned":
+            if not prior.z.requires_grad:
+                raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
+        elif prior.z.requires_grad:
+            rows = prior.z.detach()
+            del prior.z
+            prior.register_buffer("z", rows)
+        return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
                         require_latent_damping=False, **adam_kwargs):
@@ -808,6 +917,9 @@ class Recipe:
         groups and ``lr`` for normalized groups (the same role multipliers).
         """
         from .capabilities import prior_mechanisms
+        if prior is not None:
+            self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
+            self.apply_prior_policy(prior)
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
@@ -837,7 +949,7 @@ class Recipe:
                            **({"role": "prior"} if normalized else {}),
                            **({"eps": self.prior_eps} if self.prior_eps is not None else {})})
         mechanisms = prior_mechanisms(prior,
-            latent_damping_max_rate=self.latent_damping_max_rate,
+            latent_damping_max_rate=self.latent_damping_max_rate if self.prior_update == "learned" else 0.,
             prior_beta1=(self.prior_betas or self.betas)[0])
         if require_latent_damping and not mechanisms["a2"]["enabled"]:
             raise ValueError("required A2 latent damping unavailable: " + mechanisms["a2"]["reason"])

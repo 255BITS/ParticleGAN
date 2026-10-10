@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "2ca4689fd3c3dd1ce0e56c157aabed18c518c8a77dbf9617c2c4a568ae1a1b25",
+  "kind": "actual_training_saved_images_gif",
+  "observation_count": 24,
+  "observations_sha256": "71063358cd4ceadb8e47babbc2c9101107cf6eaac23bcd19bd112907db2cc2b9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/37ef975210fa4e458e068287613f19c8/observed-images.pt": "6b948e79c22eb44024aebb611657af5df703eb6618c7dec04b64fea74e4be535"
+  },
+  "task_id": "img_stripes2"
+}

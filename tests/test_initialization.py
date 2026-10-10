@@ -56,7 +56,7 @@ def test_priors_take_r2_tables_and_mog_spacing_follows():
     fixed = MoGParticlePrior(16, 2, sigma=0.3)
     init.deterministic_orthogonal_(fixed)
     assert float(fixed.sigma) == pytest.approx(0.3)
-    frozen = get_recipe(num_particles=8).make_prior(learnable=False)
+    frozen = get_recipe(num_particles=8, prior_update="frozen").make_prior()
     saved = frozen.z.clone()
     init.deterministic_orthogonal_(frozen)
     assert torch.equal(saved, frozen.z)

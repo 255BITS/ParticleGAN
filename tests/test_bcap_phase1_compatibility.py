@@ -116,9 +116,16 @@ def phase2_module():
     return module
 
 
-def test_phase2_reserves_original_six_gates_and_optional_audit():
+def test_phase2_reserves_original_six_gates_and_optional_audit(tmp_path):
+    import shutil
+    from tests.archived_forge_contracts import restore_archived_contracts
     module = phase2_module()
-    _, tasks = module.ordinary_contract(ROOT)
+    shutil.copytree(ROOT / "configs", tmp_path / "configs")
+    original = tmp_path / module.ORIGINALS
+    original.parent.mkdir(parents=True)
+    shutil.copyfile(ROOT / module.ORIGINALS, original)
+    restore_archived_contracts(tmp_path, "bcap_legacy_questions")
+    _, tasks = module.ordinary_contract(tmp_path)
     assert len(tasks) == 7
     assert sum(task["resources"]["timeout_seconds"] for task in tasks.values()) == 2520
     assert sum(tasks[name]["resources"]["timeout_seconds"] for name in module.TIMEOUTS) == 2220

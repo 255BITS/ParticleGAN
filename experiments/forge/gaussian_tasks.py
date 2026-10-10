@@ -39,7 +39,11 @@ def validate_task(task):
     for name, value in expected.items():
         if evaluation.get(name) != value:
             raise ValueError(f"{task['id']}: Gaussian {name} is fixed by its evaluator")
-    if execution.get("prior") != dict(kind="mog", sigma=.1, standardize=False, learnable=True):
+    from .priors import recipe_owned_prior
+    expected_prior = dict(kind="mog", sigma=.1, standardize=False)
+    if not recipe_owned_prior(task):
+        expected_prior["learnable"] = True
+    if execution.get("prior") != expected_prior:
         raise ValueError("Gaussian smoke/stability requires learned256MoG sigma .1 without standardization")
     spec = execution["host_definition"]
     if (spec["means"] != [[2.]] or spec["covariances"] != [[[.25]]] or spec["masses"] != [1.]
@@ -98,6 +102,10 @@ def _rows(value, expected):
 def grade(task, evidence):
     """Recompute gates from the complete curve; never trust PASS stamps."""
     validate_task(task)
+    from .priors import validate_prior_policy
+    prior_grade = validate_prior_policy(task, evidence)
+    if prior_grade is not None:
+        return _verdict(prior_grade["status"], prior_grade["reason"])
     kind = task["evaluation"]["kind"]
     stop = 1000 if kind == SMOKE_KIND else 6000
     if evidence.get("completed_steps") != stop:
@@ -132,7 +140,9 @@ def grade(task, evidence):
             return _verdict("INCOMPLETE", "missing Gaussian optimizer count " + role)
         if type(value) is not int or value < 0:
             return _verdict("INVALID", "Gaussian optimizer counts must be nonnegative integers")
-        if value != stop:
+        from .priors import expected_prior_updates
+        expected_count = expected_prior_updates(task, evidence, stop) if role == "prior" else stop
+        if value != expected_count:
             return _verdict("INCOMPLETE", "Gaussian optimizer counts must complete every declared update")
     rows = evidence.get("observations")
     missing = _rows(rows, schedule(0, 1000) if kind == SMOKE_KIND else schedule(1000, 4000) + schedule(4000, 6000))

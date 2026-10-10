@@ -15,9 +15,10 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from copy import deepcopy
 import hashlib
+import importlib.util
 import inspect
 import json
 import math
@@ -53,6 +54,79 @@ def _prefer_recorded_and_canonical_declarations(root, recorded_candidates=()):
         yield
     finally:
         planning.declaration_paths = original
+
+
+@contextmanager
+def _missing_declaration_enumeration(root, requested):
+    """Read missing metadata only; keep the full catalog for exact lookup."""
+    from experiments.forge import planning
+    requested = set(requested)
+    original_paths, original_lookup = planning.declaration_paths, planning.load_idea
+    def missing(directory):
+        paths = original_paths(directory)
+        if Path(directory).resolve() != root:
+            return paths
+        paths = [p for p in paths if read_json(p).get("id", p.stem) in requested]
+        if {read_json(p).get("id", p.stem) for p in paths} != requested:
+            raise ValueError("current fallback declaration roster is incomplete")
+        return paths
+    def lookup(directory, idea_id):
+        previous = planning.declaration_paths
+        planning.declaration_paths = original_paths
+        try:
+            return original_lookup(directory, idea_id)
+        finally:
+            planning.declaration_paths = previous
+    planning.declaration_paths, planning.load_idea = missing, lookup
+    try:
+        yield
+    finally:
+        planning.declaration_paths, planning.load_idea = original_paths, original_lookup
+
+
+@contextmanager
+def _unchanged_fallback_source_inspection(root, manifests):
+    """Memoize source inspection during one read-only metadata reduction."""
+    if not manifests:
+        yield None
+        return
+    from experiments.forge import sources, planning
+    def verify():
+        for manifest in manifests.values():
+            if stable_hash(manifest["files"]) != manifest["digest"]:
+                raise ValueError("current fallback source manifest differs")
+            for relative, digest in manifest["files"].items():
+                if file_hash(root / relative) != digest:
+                    raise ValueError("current fallback scientific source changed: " + relative)
+    verify()
+    original = sources.inspect_source
+    aliases = [(sources, "inspect_source", original), (planning, "inspect_source", planning.inspect_source)]
+    policy = sys.modules.get("experiments.forge.policy_execution")
+    if policy is not None:
+        aliases.append((policy, "inspect_source", policy.inspect_source))
+    cache = {}
+    counts = dict(hits=0, misses=0, other_root_bypasses=0,
+                  verified_source_files=len(set().union(*(set(m["files"]) for m in manifests.values()))))
+    def inspection(directory, extra_paths=()):
+        directory, extras = Path(directory).resolve(), tuple(sorted(str(p) for p in extra_paths))
+        if directory != root:
+            counts["other_root_bypasses"] += 1
+            return original(directory, extras)
+        key = (str(directory), extras)
+        if key not in cache:
+            counts["misses"] += 1
+            cache[key] = original(directory, extras)
+        else:
+            counts["hits"] += 1
+        return deepcopy(cache[key])
+    for module, name, _ in aliases:
+        setattr(module, name, inspection)
+    try:
+        yield counts
+    finally:
+        for module, name, value in aliases:
+            setattr(module, name, value)
+        verify()
 
 
 def _scalars(value):
@@ -265,7 +339,6 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
     """Standalone adapter also embedded in the isolated frozen reader."""
     from experiments.forge import planning
     from experiments.forge.contracts import stable_hash
-    from experiments.forge.technique_inventory import _signature
     matched = [record for record in records
                if record["request"]["candidate"]["id"] == idea_id
                and record["request"]["view"]["id"] == view_id
@@ -276,6 +349,7 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
         tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
         return planning.resolve_idea(root, idea_id, view_id=view_id, through_tier=tier,
                                     freeze_source=False, execution_backend=execution_backend, cuda_model=cuda_model)
+    from experiments.forge.technique_inventory import _signature
     if len(matched) != 1:
         raise ValueError("ambiguous original study execution binding for this source/view/cohort")
     record, original = matched[0], matched[0]["request"]
@@ -290,7 +364,20 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
             or current.get("source", {}).get("digest") != original["source"]["digest"]
             or current.get("source", {}).get("files") != original["source"]["files"]
             or current.get("view") != original["view"] or _signature(current) != _signature(original)):
-        raise ValueError("reconstructed study/source/view/cohort differs from the original admitted request")
+        differences = [key for key in ("study", "study_admission", "study_review", "view")
+                       if current.get(key) != original.get(key)]
+        if current.get("study_review", {}).get("status") != "READY":
+            differences.append("study_review.status")
+        if current.get("preflight_blockers"):
+            differences.append("preflight_blockers")
+        for key in ("digest", "files"):
+            if current.get("source", {}).get(key) != original["source"][key]:
+                differences.append("source." + key)
+        if _signature(current) != _signature(original):
+            differences.append("scientific_signature")
+        raise ValueError("reconstructed study/source/view/cohort differs from the original admitted request: "
+                         + ", ".join(differences) + "; preflight=" + repr(current.get("preflight_blockers"))
+                         + "; study_blockers=" + repr(current.get("study_review", {}).get("blockers")))
     proof = {"candidate_id": idea_id, "study_id": original["study"]["id"],
              "study_sha256": stable_hash(original["study"]), "admission_sha256": stable_hash(original["study_admission"]),
              "request_signature": _signature(original), "source_digest": original["source"]["digest"],
@@ -405,16 +492,41 @@ def _bound_publication_rows(result, allowed_sources):
     return bound, unresolved
 
 
-def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary):
+def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
+                   declaration_registration=None):
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
     studies, support = _recorded_studies(root, manifests)
+    roster = None
+    if declaration_registration is not None:
+        registration_path = Path(declaration_registration)
+        if not registration_path.is_absolute():
+            registration_path = root / registration_path
+        relative = registration_path.resolve().relative_to(root.resolve()).as_posix()
+        recorded_bytes = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=root)
+        if registration_path.read_bytes() != recorded_bytes:
+            raise ValueError("declaration roster registration differs from the executed Git source")
+        registration = read_json(registration_path)
+        if (registration.get("scope") != "recipe_prior_refactor_ordinary_measurement"
+                or execution_backend != "cuda" or len(registration.get("families", {})) != 7):
+            raise ValueError("declaration roster requires the exact seven-leader ordinary CUDA registration")
+        ids = [plan["candidate_id"] for plan in registration["families"].values()]
+        measured = {record["request"]["candidate"]["id"] for record in studies}
+        if len(set(ids)) != 7 or not measured.issubset(ids):
+            raise ValueError("declaration roster omits an original measured candidate")
+        if any(plan["source_digest"] not in manifests for plan in registration["families"].values()):
+            raise ValueError("declaration roster scientific source differs from original receipts")
+        roster = {"registration_path": relative, "registration_sha256": file_hash(registration_path),
+                  "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
+                  "execution_backend": "cuda", "qualification_transfer": False}
     frozen_root = temporary / "source"
     _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
     atomic_text(contract, _json_text(manifests))
     study_contract = temporary / "recorded-studies.json"
     atomic_text(study_contract, _json_text(studies))
+    roster_contract = temporary / "declaration-roster.json"
+    atomic_text(roster_contract, _json_text(roster))
     prefix = temporary / "inventory"
     # A fresh process is essential: already imported live model/resolver
     # modules cannot grade a reconstructed older checkout faithfully.
@@ -425,21 +537,49 @@ torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
-root, contract, study_contract, prefix, goal, backend = sys.argv[1:]
+root, contract, study_contract, prefix, goal, backend, roster_contract = sys.argv[1:]
 root = Path(root)
 manifests = json.loads(Path(contract).read_text())
 recorded_studies = json.loads(Path(study_contract).read_text())
+declaration_roster = json.loads(Path(roster_contract).read_text())
 study_proofs = []
 for expected in manifests.values():
     actual = inspect_source(root, list(expected['files']))
     if actual['digest'] != expected['digest'] or actual['files'] != expected['files']:
         raise ValueError('reconstructed scientific source differs from original receipt manifest')
+# This checkout is immutable and its manifest was checked above without a
+# cache. Repeated declaration resolution reads the same source/support set.
+# Memoize only that original inspection, never requests, grades or reducers.
+from copy import deepcopy
+from experiments.forge import sources as source_module
+original_inspect_source = source_module.inspect_source
+source_inspection_cache = {}
+source_inspection_counts = {'hits': 0, 'misses': 0, 'other_root_bypasses': 0}
+def immutable_source_inspection(candidate_root, extra_paths=()):
+    candidate_root = Path(candidate_root).resolve()
+    if candidate_root != root.resolve():
+        source_inspection_counts['other_root_bypasses'] += 1
+        return original_inspect_source(candidate_root, extra_paths)
+    extras = tuple(sorted(str(path) for path in extra_paths))
+    key = (str(candidate_root), extras)
+    if key not in source_inspection_cache:
+        source_inspection_counts['misses'] += 1
+        source_inspection_cache[key] = original_inspect_source(candidate_root, extras)
+    else:
+        source_inspection_counts['hits'] += 1
+    return deepcopy(source_inspection_cache[key])
+source_module.inspect_source = immutable_source_inspection
 # A read-only board must reconstruct the declared question, not request a new
 # Tier 3 admission for a contract authorized only through Tier 1. The normal
 # frozen resolver still checks every binding and returns the full task view;
 # no scope, scientific source, original receipt or numerical gate is edited.
 if (root / 'experiments/forge/knowledge.py').is_file():
     from experiments.forge import knowledge, planning
+    # Planning imports the source reader by value. Bind its alias explicitly
+    # even if another frozen helper happened to import it before this point.
+    planning.inspect_source = immutable_source_inspection
+    if planning.inspect_source is not source_module.inspect_source:
+        raise ValueError('frozen planning source inspection cache alias mismatch')
     if hasattr(planning, 'declaration_paths'):
         # Scientific revisions exclude labels. The board emits the first
         # declaration for an equivalent cohort, so prefer the exact candidate
@@ -459,10 +599,28 @@ if (root / 'experiments/forge/knowledge.py').is_file():
             from experiments.forge.trainer_families import load_families
             canonical_candidates = {family['canonical_candidate'] for family in load_families(root).values()}
         def receipt_first_declarations(root):
-            return sorted(original_declaration_paths(root),
+            paths = original_declaration_paths(root)
+            if declaration_roster is not None:
+                selected = set(declaration_roster['candidate_ids'])
+                paths = [path for path in paths if json.loads(path.read_text()).get('id', path.stem) in selected]
+                if {json.loads(path.read_text()).get('id', path.stem) for path in paths} != selected:
+                    raise ValueError('frozen declaration roster is incomplete')
+            return sorted(paths,
                           key=lambda path: (path.stem not in recorded_candidates,
                                             path.stem not in canonical_candidates, path.stem))
         planning.declaration_paths = receipt_first_declarations
+        if declaration_roster is not None:
+            # The roster limits board enumeration. Exact study controls and
+            # parent declarations must still resolve from the full catalog.
+            original_load_idea = planning.load_idea
+            def full_catalog_load_idea(checkout, idea_id):
+                previous_paths = planning.declaration_paths
+                planning.declaration_paths = original_declaration_paths
+                try:
+                    return original_load_idea(checkout, idea_id)
+                finally:
+                    planning.declaration_paths = previous_paths
+            planning.load_idea = full_catalog_load_idea
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
         return _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
                                        recorded_studies, study_proofs)
@@ -474,6 +632,11 @@ result = write_report(root, goal, execution_backend=None if backend == 'all' els
 report_path = Path(result['json'])
 report = json.loads(report_path.read_text())
 report['registered_study_reconstruction'] = study_proofs
+if declaration_roster is not None:
+    report['declaration_roster'] = declaration_roster
+report['frozen_source_inspection_cache'] = {
+    'scope': 'Original inspect_source, exact immutable frozen root and sorted extra_paths only; original manifest validation precedes cache installation. Requests, receipts, gates and reducers are uncached.',
+    'counts': source_inspection_counts}
 report_path.write_text(json.dumps(report, sort_keys=True))
 print(json.dumps(result, sort_keys=True))
 """
@@ -481,13 +644,22 @@ print(json.dumps(result, sort_keys=True))
                    "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
-                                          str(contract), str(study_contract), str(prefix), view_id, execution_backend or "all"],
+                                          str(contract), str(study_contract), str(prefix), view_id, execution_backend or "all",
+                                          str(roster_contract)],
                                          cwd=frozen_root, env=environment, text=True, stderr=subprocess.PIPE)
     except subprocess.CalledProcessError as error:
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
     metadata = json.loads(output)
     result = read_json(metadata["json"])
     result["rows"], unresolved = _bound_publication_rows(result, set(manifests))
+    if roster is not None:
+        if {row["candidate_id"] for row in result["rows"] + unresolved} != set(roster["candidate_ids"]):
+            raise ValueError("frozen publication omits a registered leader")
+        measured = set(roster["measured_candidate_ids"])
+        actual = {row["candidate_id"] for row in result["rows"] if row.get("attempt_ids")}
+        proofs = {proof["candidate_id"] for proof in result.get("registered_study_reconstruction", [])}
+        if actual != measured or proofs != measured or unresolved:
+            raise ValueError("frozen registered leader measurement/study reconstruction is incomplete")
     if unresolved:
         result["unresolved_configuration_rows"] = unresolved
     if "configuration_rows" in result:
@@ -496,9 +668,12 @@ print(json.dumps(result, sort_keys=True))
 
 
 def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_stability", execution_backend="cuda",
-               output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None) -> dict:
+               output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None,
+               declaration_registration=None) -> dict:
     """Regrade original evidence and publish deterministic compact artifacts."""
     root = Path(root).resolve()
+    if declaration_registration is not None and source_commit is None:
+        raise ValueError("declaration roster requires exact frozen source reconstruction")
     prefix = Path(output_prefix)
     if not prefix.is_absolute():
         prefix = root / prefix
@@ -525,7 +700,8 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
             commit, frozen_digests = None, []
         else:
             metadata, result, commit, frozen_digests = _frozen_report(
-                root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary))
+                root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary),
+                declaration_registration=declaration_registration)
     attempt_ids = sorted({attempt for row in result["rows"] for attempt in row.get("attempt_ids", [])})
     if published_attempts - set(attempt_ids):
         if source_commit is None:
@@ -545,6 +721,9 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
         result.setdefault("reporting_adapters", {})["registered_study_reconstruction"] = {
             "path": "reports/forge/regenerate_technique_inventory.py", "sha256": file_hash(Path(__file__)),
             "scope": "Resolve only the exact original admitted study ID and Git-pinned motivation; require unchanged study/admission/source/view/full scientific cohort. No training or numerical gate changes."}
+        result.setdefault("reporting_adapters", {})["immutable_source_inspection_cache"] = {
+            "path": "reports/forge/regenerate_technique_inventory.py", "sha256": file_hash(Path(__file__)),
+            **result.get("frozen_source_inspection_cache", {})}
     _publication_provenance(result, summaries)
     repo_prefix = os.path.relpath(root, markdown_path.parent.resolve())
     markdown = render_markdown(result, json_link=json_path.name, repo_link_prefix=repo_prefix)
@@ -562,6 +741,8 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                (" --device " + execution_backend if execution_backend else " --device all") +
                " --output-prefix " + shlex.quote(prefix_argument) +
                (" --source-commit " + commit if commit else ""))
+    if declaration_registration is not None:
+        command += " --declaration-registration " + shlex.quote(str(declaration_registration))
     lines = markdown.splitlines()
     lines = [command if line.startswith("python -m experiments.forge techniques ") else line for line in lines]
     markdown = "\n".join(lines) + "\n\nPublished receipt summaries retain final metrics, gate outcomes and original file hashes. " \
@@ -857,8 +1038,20 @@ def _archived_reports(root, manifest):
     return reports
 
 
-def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports):
+def _ownership_migration_helper():
+    path = Path(__file__).resolve().parent / "recipe-prior-refactor/publication_migration.py"
+    spec = importlib.util.spec_from_file_location("forge_prior_ownership_publication", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _advanced_family_selection(root, manifest, report, registered_rows, prior_reports, *, ownership_migration=None):
     """Stage exact new pins for the existing choices; never rank new recipes."""
+    if ownership_migration is not None:
+        return _ownership_migration_helper().advance_selection(
+            root, manifest, report, registered_rows, prior_reports, ownership_migration,
+            validate_row=_validate_published_row)
     from experiments.forge.trainer_families import (CURRENT_SELECTION, family_for_candidate,
                                                    family_row_pin, load_current_selection)
     from experiments.forge.planning import declaration_paths
@@ -1649,7 +1842,7 @@ def _common26_current_markdown(result, root, path):
 
 def _stale_measurement_labels(markdown, result, root, path):
     """Expose recorded-only scope on the main family rows, preserving scores."""
-    stale = {row["trainer_family"] for row in result["rows"]
+    stale = {row["trainer_family"] for row in result.get("rows", [])
              if row.get("selection", {}).get("freshness") == "stale"}
     lines = markdown.splitlines()
     for family in result.get("family_progress", {}).get("families", []):
@@ -2116,14 +2309,30 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     for entry in manifest["cohorts"]:
         _, rows = _snapshot(root, entry, manifest)
         registered.update(scientific_row_hash(row) for row in rows.values())
+    archived_reports = _archived_reports(root, manifest)
+    archived_bases = set()
+    if result.get("archived_base_presentation_only"):
+        pointers = result["archived_base_presentation_only"]
+        indices = {pointer["row_index"] for pointer in pointers}
+        if len(indices) != len(pointers) or any(index < 7 or index >= len(result["rows"]) for index in indices):
+            raise ValueError("invalid archived solution presentation indices")
+        structure = {"rows": [deepcopy(row) for index, row in enumerate(result["rows"]) if index not in indices]}
+        if len(structure["rows"]) != 7:
+            raise ValueError("archived bases cannot replace seven selected leaders")
+        restored = _ownership_migration_helper().restore_archived_solution_rows(
+            root, structure, read_json(root / CURRENT_SELECTION), archived_reports, validate_row=_validate_published_row)
+        if restored != pointers or structure["rows"] != result["rows"]:
+            raise ValueError("archived solution base differs from exact original presentation")
+        archived_bases = {pointer["scientific_row_sha256"] for pointer in pointers}
     for key in ("rows", "evidence_rows"):
-        if any(scientific_row_hash(row) not in registered for row in result.get(key, [])):
+        permitted = registered | archived_bases if key == "rows" else registered
+        if any(scientific_row_hash(row) not in permitted for row in result.get(key, [])):
             raise ValueError("current publication contains an unregistered scientific row")
     for row in result.get("configuration_rows", []):
         if scientific_row_hash(row) not in registered and not _declaration_only_configuration(row):
             raise ValueError("current publication contains an unregistered measured configuration")
     archived = set()
-    for _, _, _, rows in _archived_reports(root, manifest):
+    for _, _, _, rows in archived_reports:
         archived.update(scientific_row_hash(row) for row in rows.values())
     for original in result.get("archived_evidence_rows", []):
         row = deepcopy(original)
@@ -2380,7 +2589,8 @@ def _retain_recorded_measurements(root, reports):
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
-                    execution_backend=None, recorded_policy=None, advance_policy=False):
+                    execution_backend=None, recorded_policy=None, advance_policy=False,
+                    ownership_migration=None, declaration_registration=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -2392,6 +2602,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         raise ValueError("recorded policy publication cannot register new source evidence")
     if advance_policy and (source_commit is None or recorded_policy is not None):
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
+    if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
+        raise ValueError("ownership migration requires explicit frozen-source policy advance")
+    if declaration_registration is not None and source_commit is None:
+        raise ValueError("declaration roster requires exact frozen source reconstruction")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -2433,8 +2647,11 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             execution_backend = backends.pop()
     if source_commit is not None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
+            roster_options = ({"declaration_registration": declaration_registration}
+                              if declaration_registration is not None else {})
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
-                                  source_commit=source_commit, output_prefix=Path(temporary) / "evidence")
+                                  source_commit=source_commit, output_prefix=Path(temporary) / "evidence",
+                                  **roster_options)
             report = read_json(metadata["json"])
         candidates = {}
         missing_worker_finished_at = {}
@@ -2518,7 +2735,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             _validate_published_row(root, report, row)
         if advancing:
             pending_selection, selection_archive = _advanced_family_selection(
-                root, prior_manifest, report, selected, prior_reports)
+                root, prior_manifest, report, selected, prior_reports, ownership_migration=ownership_migration)
             if selection_archive:
                 relative_selection, _, digest = selection_archive
                 manifest["archived_policies"][-1]["family_selection"] = {
@@ -2535,6 +2752,25 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                                     scientific_row_hash, select_family_rows)
     declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
     candidates = set(declarations)
+    roster_card = pending_selection
+    if roster_card is None and (root / CURRENT_SELECTION).is_file():
+        roster_card = read_json(root / CURRENT_SELECTION)
+    migrated_roster = bool(roster_card and roster_card.get("ownership_migration"))
+    if migrated_roster:
+        current_ids = {pin["candidate_id"] for pin in roster_card["selections"]}
+        if (roster_card["ownership_migration"].get("selection_scope") != "seven_visible_selected_leaders"
+                or len(current_ids) != 7 or not current_ids.issubset(candidates)):
+            raise ValueError("ownership selection requires exact seven current declarations")
+        candidates = current_ids
+    if declaration_registration is not None:
+        registration_path = Path(declaration_registration)
+        if not registration_path.is_absolute():
+            registration_path = root / registration_path
+        registered_candidates = {plan["candidate_id"] for plan in read_json(registration_path)["families"].values()}
+        if len(registered_candidates) != 7 or not registered_candidates.issubset(candidates):
+            raise ValueError("current selection roster lacks exact seven registered declarations")
+        candidates = registered_candidates
+    restricted_roster = declaration_registration is not None or migrated_roster
     current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"],
                                          selection_card=pending_selection)
                     if recorded_view is None else {})
@@ -2563,8 +2799,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     # never present an arbitrary unmeasured tuning trial as the family default.
     canonical_missing = set()
     for (name, backend), (_, entry, report, row) in list(selected.items()):
-        canonical = family_for_candidate(root, name, declarations.get(name),
-                                         current_presentation=recorded_view is None)["canonical_candidate"]
+        family = family_for_candidate(root, name, declarations.get(name), current_presentation=recorded_view is None)
+        if restricted_roster and current_pins.get(family["id"], {}).get("candidate_id") == name:
+            continue
+        canonical = family["canonical_candidate"]
         runtime_key = stable_hash(row.get("runtime_cohort"))
         if any(item[3]["candidate_id"] == canonical and item[3].get("runtime_cohort") == row.get("runtime_cohort")
                for item in selected.values()):
@@ -2579,12 +2817,25 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             canonical_missing.add((canonical, backend, runtime_key))
     missing = candidates - {key[0] for key in selected}
     live = None
+    fallback_reporting = None
     if (missing or canonical_missing) and recorded_view is None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-current-") as temporary:
             recorded = {name for _, _, rows in reports for name, row in rows.items() if row.get("attempt_ids")}
-            with _prefer_recorded_and_canonical_declarations(root, recorded):
+            fallback_ids = missing | {name for name, _, _ in canonical_missing}
+            if declaration_registration is not None and fallback_ids.intersection(recorded):
+                raise ValueError("current fallback cannot replay registered measured candidates")
+            source_manifests = (_receipt_manifests(root, source_commit)
+                                if source_commit is not None and declaration_registration is not None else {})
+            with _prefer_recorded_and_canonical_declarations(root, recorded), \
+                    (_missing_declaration_enumeration(root, fallback_ids)
+                     if declaration_registration is not None else nullcontext()), \
+                    _unchanged_fallback_source_inspection(root, source_manifests) as source_inspection:
                 metadata = write_report(root, view_id, execution_backend=execution_backend,
                                         output_prefix=Path(temporary) / "current")
+                if declaration_registration is not None:
+                    fallback_reporting = dict(candidate_ids=sorted(fallback_ids),
+                        registered_measured_ids_excluded=sorted(recorded),
+                        full_parent_control_lookup_preserved=True, source_inspection=source_inspection)
             live = read_json(metadata["json"])
         for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
             if live.get(key) != manifest[key]:
@@ -2666,13 +2917,24 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("conflicting scientific contract identities")
                 combined[digest] = deepcopy(contract)
         result[catalog] = dict(sorted(combined.items()))
-    with _retain_recorded_measurements(root, prior_reports) as retained_measurements:
+    presentation_card = pending_selection
+    if presentation_card is None and (root / CURRENT_SELECTION).is_file():
+        presentation_card = read_json(root / CURRENT_SELECTION)
+    with _retain_recorded_measurements(root, prior_reports) as retained_measurements, \
+            _ownership_migration_helper().archived_presentation(root, presentation_card):
         family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                            policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
                                            view_policy=recorded_view, execution_backend=execution_backend,
                                            selection_card=pending_selection,
                                            historical_rows=[*declaration_history.values(), *[{**row, "publication_key": entry["json_sha256"]}
                                                for _, entry, _, rows in archived_reports for row in rows.values()]])
+    if presentation_card and presentation_card.get("ownership_migration"):
+        _ownership_migration_helper().label_archived_declarations(family_result, presentation_card)
+        restored = _ownership_migration_helper().restore_archived_solution_rows(
+            root, family_result, presentation_card, archived_reports, validate_row=_validate_published_row)
+        if restored:
+            result["archived_base_presentation_only"] = restored
+        result["ownership_migration"] = deepcopy(presentation_card["ownership_migration"])
     result.update(family_result)
     if retained_measurements:
         result["retained_recorded_measurements"] = {"qualification_input": False, "qualification_reuse": False,
@@ -2760,6 +3022,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if not recorded_policy and view_id == "discriminator_stability":
         from experiments.forge.family_reports import build_progress
         result["family_progress"] = build_progress(root, result, selection_card=pending_selection)
+    if fallback_reporting is not None:
+        result["current_fallback_reporting_scope"] = fallback_reporting
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -2794,13 +3058,27 @@ def main(argv=None):
     parser.add_argument("--goal", default="discriminator_stability")
     parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="all")
     parser.add_argument("--source-commit", help="reconstruct and grade an exact recorded Git source cohort, independently of live HEAD")
+    parser.add_argument("--output-prefix", type=Path,
+                        help="write an independent source report; do not register or change current selections")
+    parser.add_argument("--declaration-registration", type=Path,
+                        help="enumerate the exact seven-leader ordinary CUDA registration recorded at --source-commit; keep full control lookup")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     parser.add_argument("--advance-policy", action="store_true",
                         help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
+    parser.add_argument("--ownership-migration", type=Path,
+                        help="explicit source-bound selected-leader ownership migration; requires --advance-policy and --source-commit")
     parser.add_argument("--refresh-publication", action="store_true",
                         help="refresh displayed evidence and view coverage, preserving registered scores and selections")
     args = parser.parse_args(argv)
+    if args.output_prefix is not None:
+        if args.recorded_policy or args.advance_policy or args.ownership_migration or args.refresh_publication:
+            parser.error("independent --output-prefix cannot register or refresh current evidence/selection")
+        print(_json_text(regenerate(args.root, view_id=args.goal,
+                                   execution_backend=None if args.device == "all" else args.device,
+                                   source_commit=args.source_commit, output_prefix=args.output_prefix,
+                                   declaration_registration=args.declaration_registration)), end="")
+        return
     # A later declared view can refresh navigation without advancing/regrading
     # the immutable recorded policy. Keep the default one-command workflow usable.
     if not (args.refresh_publication or args.source_commit or args.recorded_policy
@@ -2812,14 +3090,15 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.advance_policy or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
     print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
-                                advance_policy=args.advance_policy)), end="")
+                                advance_policy=args.advance_policy, ownership_migration=args.ownership_migration,
+                                declaration_registration=args.declaration_registration)), end="")
 
 
 if __name__ == "__main__":

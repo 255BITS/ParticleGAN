@@ -178,9 +178,10 @@ def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(mode
         ema.z.lerp_(prior.z, .1)
     torch.testing.assert_close(ema.means().mean(0), torch.zeros(2), atol=1e-6, rtol=0)
     assert not torch.equal(ema.means(), prior.means()) and torch.equal(sigma, ema.sigma)
-    frozen = recipe.make_prior(learnable=False)
+    frozen_recipe = recipe.replace(prior_update="frozen")
+    frozen = frozen_recipe.make_prior()
     assert not list(frozen.parameters())
-    assert len(recipe.make_optimizers(generator, critic, frozen)[0].param_groups) == 1
+    assert len(frozen_recipe.make_optimizers(generator, critic, frozen)[0].param_groups) == 1
 
 
 @pytest.mark.parametrize('sigma', [-1, float('nan'), float('inf'), -float('inf'),

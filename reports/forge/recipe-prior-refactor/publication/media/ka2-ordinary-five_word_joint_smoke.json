@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "43416e06f46660bde8392e6efb5b3b51f849213f464a5a8af1ec62a2eba3f574",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "c245b82a771266b7c8a12c87ca5c714fb3cb2b1b1d067a2924d84880d82644d9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/89265e4e89d24ae3b9cfb7346b6ea1d2/observed-records.pt": "702abc075485c0aaa8936922383b7de200943412f42876f9479add971d85f860"
+  },
+  "task_id": "five_word_joint_smoke"
+}

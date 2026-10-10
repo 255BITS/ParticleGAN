@@ -12,6 +12,7 @@ from dataclasses import fields
 from particlegan import Recipe
 
 from .taskrecipes import BEHAVIOR_HOST_FIELDS, RESOURCE_FIELDS, delegated_fields
+from .priors import recipe_owned_prior
 
 
 BOUNDARIES_VERSION = "forge-field-boundaries-v2"
@@ -25,11 +26,13 @@ TUNABLE_FIELDS = frozenset({
     "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
+    "prior_reg_target_std", "prior_reg_eps", "prior_l2",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
     "optimizer_svd_backend",
+    "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
@@ -113,6 +116,8 @@ def task_owned_recipe_fields(task):
         owned |= BEHAVIOR_HOST_FIELDS
         if host != "ae_gan_hold":
             owned |= {"routing_temperature", "distance_reduction"}
+    if recipe_owned_prior(task):
+        owned = owned - {"prior_reg"}
     return frozenset(owned)
 
 
@@ -237,7 +242,13 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             owner, status = "technique", "legacy_reference"
         elif owner == "task":
             source = "frozen task host/adapter resource binding"
-        if name in {"prior_lr_mult", "prior_betas", "prior_eps"} and not prior_binding["latent_table_controls"]:
+        prior_fields = {"prior_lr_mult", "prior_betas", "prior_eps"}
+        if recipe_owned_prior(task):
+            prior_fields |= {"prior_update", "prior_regularizer", "prior_reg", "prior_l2",
+                             "prior_reg_target_std", "prior_reg_eps"}
+        optimizer_inactive = (name in prior_fields - {"prior_update"}
+                              and resolved_recipe["prior_update"] == "frozen" and recipe_owned_prior(task))
+        if (name in prior_fields and not prior_binding["latent_table_controls"]) or optimizer_inactive:
             result[name] = _record(None, owner, "task prior-control applicability",
                                    status="not_applicable", reference_recipe_value=_json_value(value),
                                    representation=prior_binding["representation"])
@@ -271,6 +282,9 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if "initialization" in host_definition:
         initialization["component_policies"] = _json_value(host_definition["initialization"])
     prior_record = _record(prior, "task", "task.execution.prior")
+    if recipe_owned_prior(task):
+        prior_record["update_policy"] = _record(resolved_recipe["prior_update"], "technique", "Recipe.prior_update")
+        prior_record["contract"] = execution["prior_contract"]
     prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
     if not prior_binding["latent_table_controls"]:
         prior_record["declared_code_path"] = prior_record["code_path"]
@@ -295,6 +309,8 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         "delegated_reference_values": _json_value(delegated_fields(candidate, task)),
         "inactive_legacy_host_fields": inactive,
     }
+    if recipe_owned_prior(task):
+        receipt["version"] = "forge-field-boundaries-v3-recipe-priors"
     if protocol is not None:
         receipt["protocol"] = {name: _record(protocol[name], "protocol", f"protocol.{name}")
                                for name in ("id", "revision", "seed", "rng", "scoring", "robustness") if name in protocol}

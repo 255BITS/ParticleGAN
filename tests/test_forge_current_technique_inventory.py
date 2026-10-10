@@ -48,8 +48,18 @@ def _current_family_roster():
     registry = read_json(ROOT / "configs/forge/trainer-families.json")["families"]
     families = {family["id"] for family in registry}
     unmeasured = {family["id"] for family in registry if family.get("unmeasured_display_backend")}
-    assert families == pinned | unmeasured
-    return families
+    report = read_json(ROOT / "reports/forge/technique-inventory.json")
+    represented = {row["trainer_family"] for row in report["rows"]}
+    assert pinned <= represented <= families
+    assert len(represented) == len(report["rows"])
+    for row in report["rows"]:
+        if row["trainer_family"] not in pinned:
+            assert not row["attempt_ids"] and row["qualified_tier"] == 0
+            assert row["selection"]["qualified"] is False
+    # Editorial original-ID configuration alternatives need not manufacture
+    # another row when their scientific declaration aliases an existing one.
+    assert unmeasured <= represented
+    return represented
 
 
 def _register(root, manifest, name, source, *, finished=None, passed=0):
@@ -1941,6 +1951,13 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     policy_path.write_bytes(subprocess.check_output(
         ["git", "show", original["source_commit"] + ":configs/forge/views/discriminator_stability.json"], cwd=ROOT))
     assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
+    original_task_paths = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", original["source_commit"], "--", "configs/forge/tasks"],
+        cwd=ROOT, text=True).splitlines()
+    for relative in original_task_paths:
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(subprocess.check_output(["git", "show", original["source_commit"] + ":" + relative], cwd=ROOT))
     # Restore parent declarations from this publication's pinned source.
     # Current policy variants follow current task bindings and cannot supply
     # the original scorer contracts to a historical replay.

@@ -138,7 +138,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         critic = wrap_input(critic, noise_policy)
     gan = (gan_factory or (training_recipe.make_loss if training_recipe else make_gan_loss))()
     regularizer = (cap_factory or (training_recipe.make_gradient_penalty if training_recipe else make_b_cap))()
-    vicreg = ParticleRegularizer(weight=recipe.vicreg_weight)
+    vicreg = (ParticleRegularizer(weight=recipe.vicreg_weight) if training_recipe is None
+              else training_recipe.make_prior_regularizer())
     opt_g = torch.optim.Adam(
         list(generator.parameters()) + list(prior.parameters()),
         lr=LR,
@@ -225,8 +226,11 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
             real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
             g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
-        g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
-        g_loss = g_loss + vicreg(prior.z)
+        if training_recipe is not None:
+            g_loss = g_loss + training_recipe.prior_regularization(prior.z, regularizer=vicreg)
+        else:
+            g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
+            g_loss = g_loss + vicreg(prior.z)
         opt_g.zero_grad()
         g_loss.backward()
         schedule_optimizer(opt_g, step)

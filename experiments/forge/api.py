@@ -158,6 +158,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         host_initialization=native_host_initialization(task, root=root),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
         component_transport=task["execution"].get("transport_consumer"),
+        prior_contract=task["execution"].get("prior_contract"),
         policy_task=task if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
@@ -331,7 +332,14 @@ class FormulationContext:
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
-                 initializer_requirements=None, policy_task=None, component_transport=None):
+                 initializer_requirements=None, policy_task=None, component_transport=None,
+                 prior_contract=None):
+        from .priors import RECIPE_PRIOR_CONTRACT
+        if prior_contract not in (None, RECIPE_PRIOR_CONTRACT):
+            raise CapabilityError(["unsupported prior_contract"])
+        if prior_contract == RECIPE_PRIOR_CONTRACT and "learnable" in (prior or {}):
+            raise CapabilityError(["recipe-owned initial prior must omit learnable"])
+        self.prior_contract = prior_contract
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
@@ -355,6 +363,11 @@ class FormulationContext:
         if duplicates:
             raise CapabilityError([f"recipe/extension conflict: {sorted(duplicates)}"])
         overrides.update(self.bindings["recipe"])
+        if prior_contract is None and prior is not None and "learnable" in prior:
+            policy = "learned" if prior["learnable"] else "frozen"
+            if "prior_update" in overrides and overrides["prior_update"] != policy:
+                raise CapabilityError(["Recipe.prior_update conflicts with legacy task-owned learnable"])
+            overrides["prior_update"] = policy
         kind = "mog" if self.prior_config["kind"] == "mog" else "particles"
         prior_fields = {"prior_kind": kind, "sigma_rel": 0., "standardize": self.prior_config["standardize"]}
         for key, value in prior_fields.items():
@@ -363,6 +376,7 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        self.prior_config["learnable"] = self.recipe.prior_update == "learned"
         if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight) and component_transport is None:
             raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "
                                    "the current Forge host bindings do not support it"])
@@ -422,7 +436,7 @@ class FormulationContext:
     def _check_capabilities(self):
         available = self.capabilities()
         required = set(self.requires_capabilities) | {self.execution_path}
-        if self.recipe.latent_damping_max_rate > 0:
+        if self.prior_config["learnable"] and self.recipe.latent_damping_max_rate > 0:
             required.add("a2")
         blockers = [f"required capability unavailable: {name}" for name in sorted(required) if not available.get(name, False)]
         if blockers:
@@ -523,11 +537,12 @@ class FormulationContext:
         stream = self.streams.generator("init", component="prior", purpose="locations")
         if probe:
             stream = torch.Generator(device=stream.device).set_state(stream.get_state())
-        options = {"device": self.device, "dtype": dtype, "learnable": p["learnable"],
+        options = {"device": self.device, "dtype": dtype,
                    "generator": stream, "init_std": p.get("init_std", 1.)}
         if p["kind"] == "mog":
             options["sigma"] = p["sigma"]
-        return self.recipe.make_prior(**options)
+        # Initialize identical trainable locations, then bind recipe freezing.
+        return self.recipe.replace(prior_update="learned").make_prior(**options)
 
     def build_prior(self, *, dtype=torch.float32):
         if self.host_initialization and self._host_prior is not None:
@@ -536,6 +551,7 @@ class FormulationContext:
             return self._host_prior
         prior = self._construct_prior(dtype=dtype)
         self.initialize(prior, component="prior")
+        self.recipe.apply_prior_policy(prior)
         if self.host_initialization:
             self._host_prior = prior
         return prior
@@ -636,6 +652,9 @@ class FormulationContext:
                           "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
                           "checkpoint_path": "trainer.birth_death.stream"}]}
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
+                **({"prior_contract": self.prior_contract,
+                    "initial_prior": {key: value for key, value in self.prior_config.items() if key != "learnable"}}
+                   if self.prior_contract is not None else {}),
                 **ownership,
                 **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),
                 "recipe_preset": self.recipe_preset,
@@ -651,6 +670,7 @@ class FormulationContext:
         if self._trainer is None:
             raise ValueError("build a trainer before checkpointing")
         return {"schema": 1, "api_version": API_VERSION, "recipe": self.recipe.to_dict(),
+                **({"prior_contract": self.prior_contract} if self.prior_contract is not None else {}),
                 "prior": deepcopy(self.prior_config), "extensions": deepcopy(self.extension_values),
                 "initializer": self.initializer, "initialization": deepcopy(self.initialization),
                 "streams": self.streams.state_dict(), "trainer": self._trainer.state_dict()}
@@ -664,6 +684,8 @@ class FormulationContext:
         for key in ("schema", "api_version", "recipe", "prior", "extensions", "initializer", "initialization"):
             if state[key] != expected[key]:
                 raise ValueError(f"context checkpoint {key} mismatch")
+        if state.get("prior_contract") != expected.get("prior_contract"):
+            raise ValueError("context checkpoint prior_contract mismatch")
         self.streams.validate_state_dict(state["streams"])
         # A trainer and named registry refer to the same stream objects. Reject
         # conflicting duplicated states before either loader mutates anything.
