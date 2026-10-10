@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 781. Inventory coverage: complete. Unresolved import items: 7.
+Records: 782. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -629,6 +629,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 **Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
+
+### bcap-three-phase-concluded-research · bcap-three-phase-concluded-context-v1
+
+**Scope:** research_diagnostic; family_context; revision `unknown`.
+
+Repair BCAP globally while preserving all six Tier 1 gates and the original task budgets, priors, deterministic initializer, sampling laws, gates and own-checkpoint continuation.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `source_bound_global_trainer_research`.
+
+
+
+Direction-only projection (PR383, constraint_geometry_mode=direction_blend) is the measured research baseline: 6/6 Tier 1 and 3/10 selected Tier 2 versus control 6/6 and 1/10. Trajectory and residual student fully repair with identity MSE .000258480/.000249089 and terminal suffixes 19/21; own word hold remains PASS. All 16 complete consumed-state pairs match and 11 inactive model/prior tensor comparisons pass. Only 12/400 trajectory and 55/400 residual steps blend, with no stalls; the stored derivative maximum is floored at zero and does not prove finite-step descent. Seven studied Tier 2 gates remain FAIL, eleven original Tier 2 questions are unmeasured. Five moonshots have no eligible replacement: optimism 3/6 + 0/10, anisotropic geometry 4/6 + 1/10, entropic transport 4/6 + 2/10, bounded secant 4/6 + 0/10, confidence transport 4/6 + 2/10. Entropic/confidence each repair anisotropic density but regress pole and unused token. Aggregate moments, mass allocation and core shape can improve while full component density fails. Secant ring global covariance .098413 coexists with full component error 57.418460. Secant word is INCOMPLETE at its original 900-second limit; own hold BLOCKED. Anisotropic/entropic valid word holds use unequal own prefixes, so consumed-state pairing is unverified. Confidence alpha scales losses before the normalized optimizer, not displacement or calibrated confidence; it retains a software allowance violation (at least 2279.158 seconds against 300). The entropic constant-panel normalization amplifies squared error by 4194304; zero residual alone establishes no useful force. Five pairs charge 44305.65891298147 seconds including 18 user-authorized infrastructure predecessors; projection separately charges 3541.1636059249986 seconds with zero retries. Costs are not pooled speed comparisons. All six independent audits pass with 188 actual-training GIFs. These source-bound diagnostics grant no ordinary qualification, default adoption or automatic merge.
+
+**Next:** Base future BCAP research on the exact PR383 direction-only recipe; stop all five exact moonshot revisions and retain their negative evidence. Inspect saved equal-clock full/core density, mass allocation, spill and controller evidence before composition; keep unavailable gradient-force measurements explicit. Any next global trainer comparison should isolate one causal mechanism with a fixed backend and numerical falsifier, measure force scaling and actual displacement, and preserve all six Tier 1 gates, trajectory, residual and word hold. A common-clock word hold would be a separately declared new cohort; never regrade these original own-prefix results.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/README.md) · [Record](records/bcap-three-phase-concluded-context-v1.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -4974,4 +4990,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `8867fe716affe84218aeed06b8a10fbd3861cbb9bdbeae55f424166a3bcd04ea`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `b4a75183457d18844c4ff389479cfa672e19c48e1b7ef4ee0d79e156ca524e05`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
