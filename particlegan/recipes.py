@@ -186,6 +186,8 @@ class Recipe:
     # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
     # Native retains the original computation and archived checkpoint identity.
     optimizer_svd_backend: str = "native"
+    # Forecast raw gradients before normalization, using checkpointed own history.
+    optimizer_optimism: str = "none"
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
@@ -246,6 +248,12 @@ class Recipe:
             raise ValueError("optimizer_svd_backend must be native or cpu")
         if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_svd_backend requires optimizer_family='dualnorm'")
+        if self.optimizer_optimism not in ("none", "raw_gradient"):
+            raise ValueError("optimizer_optimism must be none or raw_gradient")
+        if self.optimizer_optimism != "none" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode != "none" or self.critic_step_mode != "none"):
+            raise ValueError("raw-gradient optimism requires zero-momentum full DualNorm without finite/protected step hooks")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):

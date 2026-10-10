@@ -159,7 +159,7 @@ class NormalizedOptimizer(Optimizer):
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
                  eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
-                 svd_backend="native", **options):
+                 svd_backend="native", optimism="none", **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -178,6 +178,9 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer SVD backend must be native or cpu")
         if svd_backend != "native" and family != "dualnorm":
             raise ValueError("optimizer SVD backend requires the dualnorm family")
+        if optimism not in ("none", "raw_gradient") or (
+                optimism != "none" and (family != "dualnorm" or momentum)):
+            raise ValueError("raw-gradient optimism requires zero-momentum full DualNorm")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -194,6 +197,10 @@ class NormalizedOptimizer(Optimizer):
         self.smoothing = float(smoothing)
         self.convolution = convolution
         self.svd_backend = svd_backend
+        self.optimism = optimism
+        if optimism != "none":
+            from .optimism import COUNTERS
+            self.optimism_stats = dict.fromkeys(COUNTERS, 0)
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -321,6 +328,10 @@ class NormalizedOptimizer(Optimizer):
                         and parameter not in self._sampled_rows):
                     raise ValueError("row-normalized prior updates require actual sampled rows")
         norms = {}
+        forecasts = {}
+        if self.optimism != "none":
+            from .optimism import anticipate
+            forecasts = anticipate(self)
         for group in self.param_groups:
             if group["algorithm"] == "nsgda_global":
                 player = self._player(group["role"])
@@ -332,7 +343,7 @@ class NormalizedOptimizer(Optimizer):
         for group in self.param_groups:
             algorithm, rate, eps = group["algorithm"], group["lr"], group["eps"]
             for parameter in group["params"]:
-                gradient = parameter.grad
+                gradient = forecasts.get(parameter, parameter.grad)
                 if gradient is None or algorithm == "adam":
                     continue
                 state = self.state[parameter]
@@ -426,6 +437,9 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["convolution"] = self.convolution
         if self.svd_backend != "native":
             result["dualnorm"]["svd_backend"] = self.svd_backend
+        if self.optimism != "none":
+            result["dualnorm"]["optimism"] = dict(schema=1, mode=self.optimism,
+                                                  stats=deepcopy(self.optimism_stats))
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -446,6 +460,8 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("convolution")
         if self.svd_backend != "native":
             expected_meta.add("svd_backend")
+        if self.optimism != "none":
+            expected_meta.add("optimism")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -455,6 +471,16 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint optimizer convolution differs")
         if meta.get("svd_backend", "native") != self.svd_backend:
             raise ValueError("checkpoint optimizer SVD backend differs")
+        if self.optimism != "none":
+            info = meta["optimism"]
+            if (not isinstance(info, dict) or set(info) != {"schema", "mode", "stats"}
+                    or info["schema"] != 1 or info["mode"] != self.optimism
+                    or not isinstance(info["stats"], dict)
+                    or set(info["stats"]) != set(self.optimism_stats)
+                    or any(type(v) is not int or v < 0 for v in info["stats"].values())
+                    or info["stats"]["extrapolated_applications"] > info["stats"]["parameter_applications"]
+                    or info["stats"]["extrapolated_row_applications"] > info["stats"]["sampled_row_applications"]):
+                raise ValueError("invalid optimism checkpoint counters")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -499,9 +525,17 @@ class NormalizedOptimizer(Optimizer):
                     required.add("momentum_buffer")
                 if algorithm in ("adam", "ada_nsgda") and actual["amsgrad"]:
                     required.add("max_exp_avg_sq")
+                if self.optimism != "none":
+                    from .optimism import PREVIOUS, SEEN, validate_history
+                    required.add(PREVIOUS)
+                    if algorithm == "rownorm":
+                        required.add(SEEN)
+                    validate_history(state, parameter, rownorm=algorithm == "rownorm")
                 if state.keys() != required:
                     raise ValueError("invalid normalized optimizer history fields")
                 for key in required - {"step"}:
+                    if self.optimism != "none" and key == "optimism_seen_rows":
+                        continue
                     tensor = state[key]
                     if (not isinstance(tensor, torch.Tensor) or tensor.shape != parameter.shape
                             or tensor.dtype != parameter.dtype or not bool(torch.isfinite(tensor).all())):
@@ -539,8 +573,19 @@ class NormalizedOptimizer(Optimizer):
         self.validate_state_dict(state)
         state = deepcopy(state)
         metadata = state.pop("dualnorm")
+        if self.optimism != "none":
+            self.optimism_stats = deepcopy(metadata["optimism"]["stats"])
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
+        if self.optimism != "none":
+            # Torch Optimizer casts arbitrary tensor history to parameter dtype.
+            # Restore ownership masks as bool after its normal device mapping.
+            from .optimism import SEEN
+            for actual, saved in zip(self.param_groups, state["param_groups"]):
+                for parameter, identifier in zip(actual["params"], saved["params"]):
+                    mask = state["state"].get(identifier, {}).get(SEEN)
+                    if mask is not None:
+                        self.state[parameter][SEEN] = mask.to(device=parameter.device, dtype=torch.bool).clone()
         self._refresh_adam()
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):
@@ -569,7 +614,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
                                     convolution=recipe.optimizer_convolution,
-                                    svd_backend=recipe.optimizer_svd_backend, **options)
+                                    svd_backend=recipe.optimizer_svd_backend,
+                                    optimism=recipe.optimizer_optimism, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
