@@ -1,0 +1,37 @@
+{
+  "candidate_id": "bcap-smooth-polar-1e-4",
+  "candidate_revision": "6d3d5b21144d85061fce6349b706e9c2800b0f96",
+  "conclusion": "Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four combinations, but words fail the original terminal stability gate in all four runs. 1e-5 was selected instead (merged PR345). Closed unmerged in PR triage 2026-10-10.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Does a fixed smoothed DualNorm scale of 1e-4 repair both serial Gaussian acquisition and word stability across the four truncation/threading combinations?",
+  "lifecycle": "concluded",
+  "mechanism_class": "smoothed_polar_dualnorm_scale",
+  "next_action": "Keep smoothing at the selected 1e-5; do not raise it to 1e-4 without a word-stability falsifier.",
+  "provenance": {
+    "branch_retained": true,
+    "default_adoption": false,
+    "input_evidence_scope": "closed_pr_report",
+    "protocol_seed": 0,
+    "pull_requests": [
+      "https://github.com/255BITS/ParticleGAN/pull/344"
+    ],
+    "qualification_reuse": false,
+    "recorded_by": "PR triage 2026-10-10",
+    "source_commit": "6d3d5b21144d85061fce6349b706e9c2800b0f96"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "pr344-smoothed-dualnorm-1e-4-context-v1",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/smooth-polar-factorial/README.md",
+    "sha256": "35b4a29b7a03831210f87a3980b9605fadf36d13a334889b2c4f2ace37be1852",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

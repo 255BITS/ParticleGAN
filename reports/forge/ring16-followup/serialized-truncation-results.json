@@ -1,0 +1,256 @@
+{
+  "archive": {
+    "all_member_hashes_verified": true,
+    "archive_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-serialized-truncation-v1-cuda-evidence.tar.gz",
+    "bytes": 3645960,
+    "member_count": 20,
+    "original_files": 19,
+    "sha256": "04bf1bdf7d4c883e0934535e11da6835f1bea48fdea4897ac6d18332d7b61653"
+  },
+  "arm": {
+    "arm": "every_step",
+    "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+    "completed_updates": 1600,
+    "confirmation": {
+      "failed_bounds": [],
+      "full_pass": true,
+      "metrics": {
+        "component_covariance_error": 0.8171867458149791,
+        "component_min_eigen_ratio": 0.32996731996536255,
+        "hq": 0.939453125,
+        "mass_tv": 0.085693359375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "state_digest_before_draw": "8690ce97fe07b5de0c3f2bb7834d247e522292a15f02b80d4261fbc583d245c3",
+      "step": 1050
+    },
+    "confirmed_smoke": true,
+    "elapsed_seconds": 23.171052371966653,
+    "error": null,
+    "final_context_digest": "0dd77d53e0f00f14e355029cf27483485e69b6a0c33cbed7f9bc523b1b6999b2",
+    "final_failed_bounds": [],
+    "final_metrics": {
+      "component_covariance_error": 0.47067808359861374,
+      "component_min_eigen_ratio": 0.38734039664268494,
+      "hq": 0.9560546875,
+      "mass_tv": 0.07861328125,
+      "modes": 16,
+      "sample_count": 4096
+    },
+    "first_full_pass": 1050,
+    "five_terminal_verdict": "PASS",
+    "full_passing_observations": 34,
+    "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+    "longest_full_passing_streak": 34,
+    "post_first_pass": {
+      "failures": [],
+      "passing_observations": 33,
+      "scheduled_observations": 33
+    },
+    "receipt_sha256": "f8b0a68f7cad9081996a663a4b357b75718e9f78b14f4ca3a82440d2bfa8b52b",
+    "scheduled_observations": 96,
+    "scoring_draws": 97,
+    "serial_scope_guard_calls": 9600,
+    "source": {
+      "digest": "51d30259ceee202a24a39a6a5fea3756bf46f56fc1b7a7e85fc735c6fb4734f8",
+      "origin_commit": "5e1d33f37b312a1b4a760e8417d76542570f0768",
+      "source_receipt_sha256": "2e4900af923811732162cc486760aab28caa109206c32931973e4626c36b5129"
+    },
+    "status": "COMPLETE",
+    "terminal_streak_start": 1050,
+    "terminal_suffix": 34
+  },
+  "cost": {
+    "attempts": 1,
+    "empirical_speed_comparison": false,
+    "new_scored_draws": 97,
+    "new_software_training_updates": 0,
+    "new_training_updates": 1600,
+    "reserved_seconds": 300,
+    "scientific_retries": 0,
+    "whole_training_subprocess_seconds": 25.55133263405878
+  },
+  "existing_comparisons": [
+    {
+      "arm": "every_step",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [
+          "component_covariance_error <= 0.85"
+        ],
+        "full_pass": false,
+        "metrics": {
+          "component_covariance_error": 0.8947885781526566,
+          "component_min_eigen_ratio": 0.35368794202804565,
+          "hq": 0.941650390625,
+          "mass_tv": 0.074951171875,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "d718fd6a3d20a924625fa2ab41ad737da813810d0760349a3e6ce182e2aa6880",
+        "step": 1400
+      },
+      "confirmed_smoke": false,
+      "elapsed_seconds": 21.155680696945637,
+      "error": null,
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.3857995104044676,
+        "component_min_eigen_ratio": 0.47684821486473083,
+        "hq": 0.948486328125,
+        "mass_tv": 0.073486328125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 1400,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 12,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 11,
+      "post_first_pass": {
+        "failures": [
+          {
+            "covariance_error": 0.9724596068263054,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 1417
+          }
+        ],
+        "passing_observations": 11,
+        "scheduled_observations": 12
+      },
+      "receipt_sha256": "7b32a4e230629e6c24526de79451605eb9bebf18c048ae15ea561149fb10f1a0",
+      "repeated_training": false,
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "9e8daa89eee904aa8380b934adddd9465a81c9e8b1c445fcd41ba0ef21fe06de",
+        "origin_commit": "b060fb4623cc831cb47dd592acea49b6704641be",
+        "source_receipt_sha256": "fe488cff18495c82a9503dc088a726cb9042dcfff7c99a62ed29015f32ae29ab"
+      },
+      "source_pr": "https://github.com/255BITS/ParticleGAN/pull/337",
+      "status": "COMPLETE",
+      "technique": "continuous_serialization",
+      "terminal_streak_start": 1434,
+      "terminal_suffix": 11
+    },
+    {
+      "arm": "every_step",
+      "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+      "completed_updates": 1600,
+      "confirmation": {
+        "failed_bounds": [],
+        "full_pass": true,
+        "metrics": {
+          "component_covariance_error": 0.8353303028270602,
+          "component_min_eigen_ratio": 0.5696465373039246,
+          "hq": 0.910400390625,
+          "mass_tv": 0.082275390625,
+          "modes": 16,
+          "sample_count": 4096
+        },
+        "state_digest_before_draw": "5bcbc783d62559d08419f5d89a1a0806388e91a72e8bd85da7905a353ee06581",
+        "step": 684
+      },
+      "confirmed_smoke": true,
+      "elapsed_seconds": 24.13885239197407,
+      "error": null,
+      "final_failed_bounds": [],
+      "final_metrics": {
+        "component_covariance_error": 0.5896781794726849,
+        "component_min_eigen_ratio": 0.35003533959388733,
+        "hq": 0.963623046875,
+        "mass_tv": 0.06591796875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "first_full_pass": 684,
+      "five_terminal_verdict": "PASS",
+      "full_passing_observations": 52,
+      "initial_models_digest": "928f4d3b5d03748dca06d78b5eb580a62c6d67f96e031975c32d368da185f878",
+      "longest_full_passing_streak": 47,
+      "post_first_pass": {
+        "failures": [
+          {
+            "covariance_error": 0.9311062693595886,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 717
+          },
+          {
+            "covariance_error": 0.9738966058939695,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 734
+          },
+          {
+            "covariance_error": 0.8989842161536217,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 750
+          },
+          {
+            "covariance_error": 0.8930954243987799,
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "step": 817
+          }
+        ],
+        "passing_observations": 51,
+        "scheduled_observations": 55
+      },
+      "receipt_sha256": "f6eaf2ad1a2918eb59c73e3fc12726a32f906cf6a89744a4dd04db8963e713b2",
+      "repeated_training": false,
+      "scheduled_observations": 96,
+      "scoring_draws": 97,
+      "source": {
+        "digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+        "origin_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "source_receipt_sha256": "ca0724c325e1cbc59520d450edbbb856e2df2228b6969833a1789d01fb647f22"
+      },
+      "source_pr": "https://github.com/255BITS/ParticleGAN/pull/332",
+      "status": "COMPLETE",
+      "technique": "continuous_truncation",
+      "terminal_streak_start": 834,
+      "terminal_suffix": 47
+    }
+  ],
+  "media": {
+    "entries": [
+      {
+        "arm": "every_step",
+        "frame_steps": [
+          17,
+          217,
+          417,
+          617,
+          817,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "gif_sha256": "93fa93092ec7a1034f114209b2a8b7e36c31a6fa7d0d92909732f684d7fe4aac",
+        "source_commit": "5e1d33f37b312a1b4a760e8417d76542570f0768",
+        "source_sha256": "b79fc40060265692c545892432a29ec5ab99e9556fe06cab03dd2bc4182e56aa"
+      }
+    ],
+    "model_forwards": 0,
+    "sampling_draws": 0,
+    "training_updates": 0
+  },
+  "physical_gpu": 0,
+  "protocol_id": "ring16-serialized-truncation-v1",
+  "protocol_sha256": "aab46e9ae5161cab10101df68d92c993208e332cec440e984248b143cfa9c75c",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "completed_cuda_ring16_serialized_truncation_diagnostic"
+}

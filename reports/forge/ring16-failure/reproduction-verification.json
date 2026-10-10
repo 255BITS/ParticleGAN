@@ -1,0 +1,63 @@
+{
+  "archive_original_files_verified": 88,
+  "archive_sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+  "cuda_saved_gradient_receipt_exact": true,
+  "helper_reconstruction_repair": "Initial standalone SVD helper used raw-byte hashes instead of state_digest and CUDA instead of original CPU reduction for the displayed pair norm. Original probe is unchanged. Correcting receipt reconstruction gives exact equality; the first helper error log is archived.",
+  "input_hashes_checked": 31,
+  "local_links_checked": 33,
+  "metadata_checks": {
+    "forge_validate": {
+      "log_sha256": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a",
+      "success": true
+    },
+    "history": {
+      "log_sha256": "14e129453be38d973f9434b1d77486eff685300afb525aa59686f106fe28bd62",
+      "success": true
+    },
+    "memory": {
+      "log_sha256": "8a86096be89fe7a2456eaaace8b6dc5f5bb364c504d4c021f1ce3e60627dae36",
+      "success": true
+    }
+  },
+  "previous_saved_only_verification": "verification.json retains the original pre-reproduction reporting phase identity.",
+  "protocol_bindings_checked": 3,
+  "published_qualification_and_inventory_unchanged": [
+    "particlegan",
+    "configs/forge/tasks",
+    "configs/forge/candidates",
+    "configs/forge/views",
+    "reports/forge/technique-inventory.md",
+    "reports/forge/leaderboards",
+    "reports/forge/automation.json"
+  ],
+  "report_and_reproduction_source_hashes": {
+    "reports/forge/ring16-failure/README.md": "5bce73b1300416bc90d4235b9a53776a29506e918e7da296b96d0a47d92de7ef",
+    "reports/forge/ring16-failure/REPRODUCTION.md": "cf18ba98acc1446ec80ddaa6d4ece963f9ab8ff8629cb02171c5cdace93e9e5a",
+    "reports/forge/ring16-failure/archive_restart.py": "d501293433bb893a4c95803ff99f3868d31b4d790da83ac3af4fca4014e80309",
+    "reports/forge/ring16-failure/render_restart.py": "5f06d3eaefe40afd844a0c03b388ecd462f4ed3c538882d207f29098f8605d45",
+    "reports/forge/ring16-failure/summarize_restart.py": "d6f58429b4950b2c2a18d005f6ee6a43fc0140773e342efeba968abff7793156",
+    "reports/forge/ring16-failure/svd_probe.py": "ddab96830eeb3a59805e92c2f7435919ee9a95987c0e6fe1eb045df8b95c65d7"
+  },
+  "result_sha256": "b8d12262e32b6e82cfb7b532a71854d0f127ea047b7be33016a839457033350d",
+  "sampling_draws_added_by_verification": 0,
+  "saved_training_gifs_checked": 3,
+  "schema_version": 1,
+  "scope": "restart_reproduction_publication_verification",
+  "sources": {
+    "live": {
+      "changes": [
+        "benchmarks/toy_audit/ring16_restart.py"
+      ],
+      "files_checked": 1188,
+      "source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+      "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d"
+    },
+    "restart": {
+      "changes": [],
+      "files_checked": 1188,
+      "source_commit": "1de465e25252c10622965362cd593a899ce74f74",
+      "source_digest": "21126fd50da3e58aaf0b1d68399abb8ba94d23609ef5844f73a0773e37acf1cd"
+    }
+  },
+  "training_updates_added_by_verification": 0
+}

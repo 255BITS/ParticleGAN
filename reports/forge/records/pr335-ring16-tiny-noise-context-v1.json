@@ -1,0 +1,37 @@
+{
+  "candidate_id": "ring16-tiny-weak-subspace-noise",
+  "candidate_revision": "a570d722949b4bf26f3641b8d020a7a1cf67ec3b",
+  "conclusion": "Yes: every-update tiny weak-subspace noise passes confirmed Ring16 smoke (acquires at 817) and ends with 45 consecutive full passes; noise at update 401 only fails confirmation on covariance. Slower than merged rank truncation (acquires 684, develop default via PR332). Closed unmerged in PR triage 2026-10-10; absorbed into PR331 Ring16 report.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Does continuous tiny noise on weak gradient subspaces fix Ring16 acquisition and hold?",
+  "lifecycle": "concluded",
+  "mechanism_class": "weak_subspace_gradient_noise",
+  "next_action": "Fallback candidate if truncation is removed or regresses; not needed while truncation is default.",
+  "provenance": {
+    "branch_retained": true,
+    "default_adoption": false,
+    "input_evidence_scope": "closed_pr_report",
+    "protocol_seed": 0,
+    "pull_requests": [
+      "https://github.com/255BITS/ParticleGAN/pull/335"
+    ],
+    "qualification_reuse": false,
+    "recorded_by": "PR triage 2026-10-10",
+    "source_commit": "a570d722949b4bf26f3641b8d020a7a1cf67ec3b"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "pr335-ring16-tiny-noise-context-v1",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-noise/README.md",
+    "sha256": "435a2779825fa57c710a60014c7646780da6231a2a3cd8465623efd28720685d",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/a570d722949b4bf26f3641b8d020a7a1cf67ec3b/reports/forge/ring16-noise/README.md"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}
