@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "66c0545a9db3d40875d381f15c702f31727afa97d551b1a65f56b8f57599aae7",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "fc3cd1282b93e380f4ea8547d733575f6f4b546b1ce608b25ed4c35208bc5bba",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/a1f32700a0264e4e9f5ed6c44d9734a6/observed-samples.pt": "26c545b0a209a829630343031a72c3419ff650b17a964162d3f77a2bd23cfb43"
+  },
+  "task_id": "ring16_acquisition"
+}

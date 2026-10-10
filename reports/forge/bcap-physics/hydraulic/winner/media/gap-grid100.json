@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "6b17232100e70f1dd99ee5b4de7d581def720babe66e7d2761e211eab58e3d22",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "41162aeb59b852d6969acf624b9832242fde577a072e888c1469d58348fad1fa",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/config.json": "82ca2b6c5294fc9384fd71540137380b4fc1454a01c6fe0b5db5d9abf2d6c30b",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/events.jsonl": "d32fb836f3f45b330578f900a26daa6595c1dd9661e83edbca6c039d86882105",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_000050.npz": "85655e94cd22a8f73c9f06bdff963dae6708cb86dd07bc8293c2a2a3628d37b0",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_000750.npz": "51f120fb79475293d030230bd875a57fe703c8dc9cf3c91cefe570c530f4b72a",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_001750.npz": "4af1bedc30e8b97737159402e8ecf895d89e79ee2477c5748054af64492d89e0",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_002750.npz": "3c90100078528ac17df7845e3648c42431c45feeacde1531f1bb98c8c333bfdd",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_004000.npz": "ba930e4588e5cdbb61720cc5731d48d4f54944e9bda32bf3590363c6672fe1f2",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_005000.npz": "941d984d5d91830ecfb70c978be1e1067f345d6aaaabef333bec6f047c3bffb9",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_006000.npz": "4880a61cbc562a476846216ad55a22da20249259931bcb40b184f239721dcf12",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/snapshots/step_007000.npz": "3c28545e3c59e1dc10718c5c70f0d31fe268256c5eb0c7d29cd471bff7b7aa2e",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/2dd143fc09554c7c8972151090fed038/native100/grid100/summary.json": "171ccdf63cf32fb810d043ddfdbcc5ca8fb0fe5640e888e7e1d87deb02903cfd"
+  },
+  "task_id": "grid100"
+}

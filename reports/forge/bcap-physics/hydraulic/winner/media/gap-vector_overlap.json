@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "92c84f5cbe4f403786b7810d00fbc3e190391227d1aa5336e972b7f2815f727b",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "8c2febbac851ad2d5b703b3b2d8c35b7173a93a2151860e348a5b9f0b348d407",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/e6ab8d63b9964c64aaac7d997067a9a7/observed-samples.pt": "7c96226daf8d4b96b8b4e34729e62af571c21e314bc99dd2cf80946177bc6408"
+  },
+  "task_id": "vector_overlap"
+}

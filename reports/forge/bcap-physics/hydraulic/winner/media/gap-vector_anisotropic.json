@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "9b13c06dcf06699af19a990279314aa548e52a2292d74642f566289dd5655d35",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "12093b5a965a3a538cc47eec2c9475e1ca9842d278734af12be3fd4c7b1ef63c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/e1a28a5c070741d0909390d7e0adfd0e/observed-samples.pt": "3a8473a6697f64a2226f78a195eaf124e9940d58a28c6d5725c61ee68db409d8"
+  },
+  "task_id": "vector_anisotropic"
+}

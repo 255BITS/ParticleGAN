@@ -96,8 +96,117 @@ it is a Gaussian stability final KS <=.05.
 
 ## Results
 
-_Pending execution._ Tail the central log:
+**Verdict: stop both exact revisions; neither is promoted.** Both arms repair no
+gate and each loses one winner pass in scope: A1 loses Tier 1 ring acquisition,
+and A2 loses vector_spiral. The bound reliably improves Gaussian retention and
+native placement, but the remaining Gaussian failure is a slow mean drift that
+a per-update speed limit does not remove.
+
+Compact leaderboard: [LEADERBOARD.md](LEADERBOARD.md). [results.json](results.json)
+holds all cells, hydraulic counters, attempt IDs and source digests.
+[media/](media/index.json) has 34 actual-training GIFs rendered from saved
+observations, with no added updates or samples.
+
+| Key metric | A0 winner | A1 travel (v1) | A2 gap-adaptive |
+| --- | --- | --- | --- |
+| Passes in the 17-cell scope | **5** | 4 | 4 |
+| Lost winner passes | - | ring16_acquisition (Tier 1) | vector_spiral |
+| Gaussian smoke first confirmation | 375 | 834 | **459** |
+| Gaussian stationary / shift hold / reacquisition | 2/72, 0/24, FAIL | **71/72, 23/24**, PASS | 68/72, 22/24, PASS |
+| Gaussian final KS / std ratio | .3206 / .662 | **.0152** / .984 | .0225 / .943 |
+| grid100 precision / centre RMS sigma / cov trace bias | .2407 / 1.520 / **+.371** | .4959 / .379 / +.895 | **.6343 / .183** / +.806 |
+| rotated100 / staggered100 precision | .2555 / .3017 | .4894 / .5276 | **.6251 / .6461** |
+| vector_two_broad component cov error (all PASS) | .3856 | **.2309** | .2476 |
+| unequal_mass min mass ratio / comp cov error | .2075 / 3.692 | **.9357 / .656** (still FAIL) | .7023 / 1.337 |
+| unequal_width comp cov error / mass TV | 6.288 / .2915 | **5.177 / .1091** | 8.868 / .2947 |
+| anisotropic mass TV | **.196** | .333 (one component empty) | .333 (one component empty) |
+| mode_hold modes / hq / suffix | **8 / .989 / 3** | 4 / .683 / 0 | 7 / .760 / 0 |
+| Paid seconds (17 cells) | archived | 2,419 | 2,741 |
+
+The ten caller-owned cells do not consume the bound. Their winner results are
+unchanged by construction: two-pole, unused token, AE hold, both word tasks,
+trajectory, residual and three identity hosts. This includes the conditional
+identity repairs (trajectory and residual) and word hold.
+
+**Predictions.**
+
+- **A1 reproduced archived v1 exactly.** Smoke confirmed at 834. Stationary was
+  71/72 and shift hold 23/24. grid100 precision was .49586, so the study
+  prediction (>=.48) was observed. Broad cov error was .230946. This confirms the
+  binding: direction blend is inactive on these hosts, so v1 evidence transfers.
+  The new cells show the cost of the speed limit. Ring acquisition misses its
+  terminal component-covariance gate: one of 16 components has error 9.12, and
+  the terminal suffix is 0. Mode hold collapses to 4 modes. Rotated/staggered
+  precision roughly doubles (.49/.53).
+- **A2.** Smoke confirmed at 459, inside the predicted 500. Shift hold was 22/24
+  (predicted >=22). Final KS was .0225, so the study prediction (<=.05) was
+  observed. grid100 precision was .634 (predicted >=.40), and ring passed.
+  Stationary was 68/72, missing the >=70 prediction. vector_spiral, predicted to
+  be kept, lost its terminal suffix (1/5).
+
+**Mechanism readout** (saved counters; no new measurements):
+
+- **The bound is a hard speed limit almost everywhere.** A1 limits 99-100% of
+  Gaussian, native, ring and vector updates. The mean accepted scale is .04-.06
+  on Gaussian and native and .27-.57 on vector. The radius is the real-batch
+  spacing (.0051 Gaussian, .0119 native). There are zero rejections, and the
+  maximum accepted/radius ratio is <=1.
+- **Images are essentially untouched.** Limited fractions are 0-.23 and the
+  mean scale is >=.90. bars4, blobs4 and stripes2 therefore end with numerically
+  identical metrics in all three arms. Only intensity2 under A1 (limited 23%)
+  changes, losing one mode.
+- **The A2 radius opens as designed.** It is wider than the spacing in 53-56% of
+  Gaussian updates and 100% of native updates (mean native radius .048 vs .012).
+  It roughly halves acquisition time and raises native precision to .63-.65,
+  comparable to #370 Armijo (.66). It does so while keeping 68/72 retention.
+- **The remaining Gaussian misses are mean drift, not jitter.** Every stationary
+  or shift-hold miss in both arms has width ratio 1.00-1.06 and mean error
+  .10-.16 target sigma, with KS .050-.068. The large-KS states at
+  4042-4459 are the post-shift reacquisition window, and A2 clears it faster. A
+  tighter bound slows the drift but cannot remove the location bias. Expanding
+  the bound (A2) adds three such misses.
+- **The density gates still fail.** Native covariance trace bias stays
+  +.8 to +.9, versus +.37 for the winner, and radial KS stays .26-.33 against a
+  .04 bound. Anisotropic loses a component in both arms. Bounded travel improves
+  placement, not within-component shape. This is the same tradeoff as #371 role
+  balance and #370 Armijo.
+
+**Recommendation.** Keep the winner. Retain the hydraulic flag as an opt-in
+research flag; it defaults to off and archived identities are unchanged. Do not
+run bound-scale sweeps or seed repeats. If this line continues, the next single
+mechanism should target the coherent mean-location bias that survives the bound,
+for example the shared-mean component of the G/prior update. It must keep the A2
+radius, measure shared versus differential displacement, and use the same
+17-cell scope plus explicit ring, spiral and mode-hold checks. Gaussian retention
+remains the open failure.
+
+## Provenance
+
+- Execution source: commit 2087cbf29, scientific digest
+  `3983c4fa7a97bc7b94029861cd11dca37e4d022ab5c03d3ec3e10104d6e04222`.
+  Both arms share the protocol (sha256 `7b975bab…`) and runtime (`640b9254…`).
+  Protocol seed 0, Python 3.12.13, Torch 2.14.0, two RTX A6000s, two workers
+  per GPU.
+- Requests: travel `2782783c5e834d00892c1a9b`, gap `7981e71ff235563021dc89d2`.
+  34 complete cells, zero retries, 5,159.6 paid seconds, against a 63,240-second
+  reservation within the 64,000-second ceiling.
+- Control: archived `bcap-default-baseline-direction-v1` results (source
+  d378734f, digest `6a225fcd…`), not rerun. There is no scientific source drift
+  from d378734f to the execution base. Develop at 0e9c7daf0 adds only
+  `benchmarks/toy_audit/ring16_restart.py`.
+- Software: `tests/test_hydraulic_travel.py` has 11 checks. They cover the
+  bound, gap radius, opt-in identity, checkpoint replay, probes consuming no RNG
+  stream, disabled-flag tensor parity and caller-owned preflight blockers.
+  217 related recipe/boundary/technique/trainer tests pass, and
+  `forge validate` passes.
+- Raw logs, JSONL, checkpoints and attempt receipts are kept outside Git under
+  `/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010`.
+
+Reproduce or inspect:
 
 ```sh
+python reports/forge/bcap-physics/hydraulic/winner/workflow.py prepare
+python reports/forge/bcap-physics/hydraulic/winner/workflow.py run --gpus 0,1 --workers-per-gpu 2
 tail -f /mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/logs/driver.log
+python reports/forge/bcap-physics/hydraulic/winner/publish.py --media   # saved-only
 ```

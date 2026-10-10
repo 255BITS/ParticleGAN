@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "f3cdb1ce5f0398873a1832ca8c652907c2c07fc3ebfeb273c70bc59e3f1abe35",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "b908c83eb214c1b0af484d8c8fc5f133ca44fc4f5ba7812c8bc4e79e57c03c03",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/bcap-hydraulic-winner-v1/682d3e5dfc1f4e868f1c0d66d0a3c03c/evaluator/observed-samples.pt": "f7b9a89acb8dfc9230899a4c6bc0d560ead859be8fb591a04dac9de4f0c7300e"
+  },
+  "task_id": "gaussian1d_stability"
+}
