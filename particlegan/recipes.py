@@ -869,8 +869,11 @@ def get_recipe(name="gan", **overrides):
     ``"k3p"`` explicitly selects the earlier critic formulation.
     ``"bcap"`` selects zero-momentum dualnorm with G/E step .012, D step
     .018 and sampled-prior row step .03, non-saturating loss, smoothing .001,
-    per-offset convolution updates, fixed real/fake input-gradient caps
-    and constant rates. ``"bcap_adam"`` retains the earlier native-Adam
+    per-offset convolution updates, fixed real/fake input-gradient caps,
+    direction blending for conflicting task-owned objectives and constant
+    rates. This is the selected research recipe, not a calibrated robustness
+    claim. Set ``constraint_geometry_mode="none"`` for the earlier DualNorm
+    recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
     No research configuration file is read at runtime.
@@ -918,6 +921,7 @@ def get_recipe(name="gan", **overrides):
         "optimizer_momentum": 0.,
         "loss": "non_saturating", "optimizer_smoothing": .001,
         "optimizer_convolution": "per_offset",
+        "constraint_geometry_mode": "direction_blend",
     }
     families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}

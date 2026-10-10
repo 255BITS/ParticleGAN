@@ -1,6 +1,10 @@
 """Check the transparent metadata-only adaptation without running training."""
+import ast
 import importlib.util
+import hashlib
+import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -31,3 +35,30 @@ def test_adapter_refuses_modified_original_assertions():
     old = (ROOT / module.INACTIVE).read_bytes().replace(b"assert torch.equal(left, right)", b"assert True")
     with pytest.raises(ValueError, match="immutable original comparator changed"):
         module.adapter_source(old)
+
+
+def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_path):
+    from conftest import _archived_inactive_comparison_scope
+    module = helper()
+    original_path = ROOT / module.INACTIVE
+    original = original_path.read_bytes()
+    fields = {"constraint_geometry_mode": "none"}
+    imported = SimpleNamespace(__file__=str(original_path), ROOT=ROOT, NEW_INACTIVE_FIELDS=fields)
+    with pytest.raises(RuntimeError, match="fixture teardown control"):
+        with _archived_inactive_comparison_scope(imported, tmp_path):
+            program = Path(imported.__file__)
+            assert program.parent == tmp_path
+            tree = ast.parse(program.read_text())
+            assignment = next(node for node in tree.body if isinstance(node, ast.Assign)
+                              and getattr(node.targets[0], "id", None) == "NEW_INACTIVE_FIELDS")
+            defaults = ast.literal_eval(assignment.value)
+            assert {name: defaults[name] for name in module.INACTIVE_DEFAULTS} == module.INACTIVE_DEFAULTS
+            assert imported.NEW_INACTIVE_FIELDS == {**fields, **module.INACTIVE_DEFAULTS}
+            assert imported.ROOT == ROOT
+            receipt = json.loads((tmp_path / "adapter-receipt.json").read_text())
+            assert receipt["original_sha256"] == hashlib.sha256(original).hexdigest()
+            assert receipt["adapted_sha256"] == hashlib.sha256(program.read_bytes()).hexdigest()
+            raise RuntimeError("fixture teardown control")
+    assert imported.__file__ == str(original_path)
+    assert imported.NEW_INACTIVE_FIELDS is fields
+    assert original_path.read_bytes() == original

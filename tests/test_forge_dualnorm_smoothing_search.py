@@ -31,7 +31,8 @@ def test_positive_scale_grid_is_active_owned_and_reusable(checkout, spec):
     assert plan["declared_worst_case_seconds"] == 30
     assert recipe_field_owner("optimizer_smoothing") == "hyperparameter"
     expected = technique_signature(get_recipe("bcap", loss="relativistic",
-                                              optimizer_smoothing=1e-4, optimizer_convolution="none"))
+                                              optimizer_smoothing=1e-4, optimizer_convolution="none",
+                                              constraint_geometry_mode="none"))
     task = read_json(checkout / "configs/forge/tasks/t1.json")
     for card, settings in search._declarations(checkout, spec):
         assert technique_signature(card["resolved_configuration_recipe"]) == expected

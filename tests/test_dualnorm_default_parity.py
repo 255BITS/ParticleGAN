@@ -67,6 +67,7 @@ def test_zero_smoothing_matches_legacy_public_updates_and_checkpoint_packets(mon
 
     def build():
         recipe = get_recipe("bcap", num_particles=8, z_dim=2, batch_size=4, total_steps=8,
+                            constraint_geometry_mode="none",
                             loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none",
                             prior_kind="mog", sigma_rel=.1, standardize=False)
         generator = nn.Sequential(nn.Linear(2, 4), nn.Tanh(), nn.Linear(4, 1))

@@ -531,7 +531,13 @@ def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identi
                 "k3p-no-anchor", "k3p-no-penalty", "k3p-no-a2", "k3p-no-training-noise"}
     optimizer_families = {"bcap-sgda", "bcap-nsgda-global", "bcap-nsgda-layer", "bcap-ada-nsgda",
                           "bcap-dualnorm", "bcap-dualnorm-d-only", "bcap-particle-rownorm-only"}
-    assert set(registry) == retained | {"bcap-pure", "halloween"} | optimizer_families
+    editorial_variants = {"bcap-develop-integration-" + name + "-v1" for name in ("combined", "winner")}
+    editorial_variants.update("bcap-projection-baseline-review-" + name + "-v1" for name in ("baseline", "direction"))
+    editorial_variants.update("bcap-three-phase-" + name + "-v1" for name in ("cap-margin", "finite-cap", "incumbent"))
+    editorial_variants.update("bcap-tier1-stability-" + name + "-v1" for name in
+                             ("combined", "incumbent", "projection-global", "projection-local", "projection",
+                              "repairs-cap-margin", "repairs-finite-cap", "transport"))
+    assert set(registry) == retained | {"bcap-pure", "halloween"} | optimizer_families | editorial_variants
     assert registry["halloween"]["canonical_candidate"] == "halloween-optimizer-loss-v1"
     assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
     assert set(registry["bcap-pure"]["candidates"]).isdisjoint(registry["bcap"]["candidates"])
