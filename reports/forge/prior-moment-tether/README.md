@@ -2,8 +2,11 @@
 
 `Recipe.prior_regularizer="moment_tether"` adds a two-sided penalty on latent
 mean and full covariance drift. This is an opt-in implementation with a
-registered bounded coefficient search against the exact BCAP direction-blend leader.
-No Tier 2 repair is claimed by this PR.
+completed bounded coefficient search against the exact BCAP direction-blend leader.
+At global strength 0.01, [the source-bound study](../bcap-prior-search/covariance/readout.md)
+repairs Tier 2 mode hold but regresses word hold, leaving 9/21 Tier 2 passes.
+Strengths 0.001 and 0.1 fail the Tier 1 ring prerequisite; all three 100-Gaussian
+tasks remain failed. Keep the feature opt-in; no global default is adopted.
 
 The BCAP leader passes 6/6 Tier 1 and 9/21 Tier 2 under the current
 [recipe-owned prior contract](../recipe-prior-refactor/publication/README.md).
@@ -48,9 +51,11 @@ Each host retains its existing regularization rows. In particular, scalar
 `GANTrainer` uses the whole table through 1024 rows and unique generator-sampled
 rows above that threshold. Comparing a subset to full initial moments creates
 sampling noise. The optimizer still updates only actual sampled prior rows;
-dense auxiliary gradients confer no extra ownership. BCAP normalizes the
-combined gradient, so the coefficient controls direction before normalization
-and does not bound actual displacement.
+dense auxiliary gradients confer no extra ownership. The leader's DualNorm
+scales each unique sampled row's combined gradient `g` by
+`1/sqrt(||g||² + 0.001²)`. The coefficient changes this gradient before nonlinear
+smoothed saturation and does not bound actual displacement. Unsampled rows stay
+fixed even when the full-table moment loss gives them dense gradients.
 
 Only current `recipe_owned_v1` task cards with edited host source bindings are
 refreshed. Their prior source hashes/revisions are retained, and their target,
@@ -87,27 +92,32 @@ qualification. [Compact receipt](software-receipt.json).
 
 ![Actual public-API training after the explicit initial perturbation](training.gif)
 
-## Starting-value search recommendation
+## Completed starting-value search
 
 The [prepared spec](../bcap-prior-search/covariance/spec.json) and
 [registration](../bcap-prior-search/covariance/registration.json) declare three
 positive global strengths **`prior_reg = [.001, .01, .1]`**, with a separate
 same-source unchanged leader control. Their source digest is
 `c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2`.
-All four arms preflight as ready; no scientific run has been submitted.
+All four arms preflighted and completed under executed commit
+`18e2aa1018f25de8c447a59287025df6f6aded3e` and the unchanged scientific digest.
 The full worst-case reservation is 172,080 seconds, with a 45,000-second control
-cap and a 135,000-second three-candidate search cap. No Tier 3, retries or extra
-seeds are authorized by this registration. At the toy's declared initial
+cap and a 135,000-second three-candidate search cap. No Tier 3, scientific retry
+or extra seed was run. The source-bound readout retains the separate
+infrastructure cancellation and execution repair. At the toy's declared initial
 perturbation, maximum weighted row-gradient norms are `6.41e-5`, `6.41e-4` and
 `6.41e-3`, respectively. This brackets the optimizer's .001 smoothing scale
 without claiming calibration on the research tasks. Initial exact full-table
 equilibrium has zero force, so comparison should measure post-drift forces.
 
-The falsifier is no sustained full-gate Tier 2 FAIL-to-PASS conversion at any
-global strength, or loss of existing Tier 1 prerequisites. Retain every old pass
-that becomes a fail; do not select a different weight per task. Ordinary search
-must finish the current tier and pass all six Tier 1 requirements before Tier 2.
-No new training beyond this declared software diagnostic has been launched.
+The minimum task-repair objective was achieved at 0.01 on mode hold. The
+stronger requirement to preserve existing control passes was not met: word
+hold regressed, and 0.001/0.1 lost the ring prerequisite. The ordinary search
+completed current-tier peers and required all six Tier 1 passes before Tier 2.
+No per-task weights were selected. Keep defaults unchanged and the new
+regularizer opt-in. The [final readout](../bcap-prior-search/covariance/readout.md)
+includes all 70 completed-task GIFs, 31 saved full-location moment diagnostics,
+actual recipe/initialization/RNG audits and original repair/regression witnesses.
 
 Reproduce from the repository root:
 

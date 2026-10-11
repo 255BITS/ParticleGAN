@@ -57,8 +57,11 @@ The regularizer consumes no RNG and retains each host's row selection. Large
 moments, so their penalty contains minibatch sampling noise even at initial
 equilibrium. It does not change MoG width, sampling, or optimizer row ownership.
 Weight zero and frozen policies create no reference buffers and do no moment
-work. With BCAP DualNorm, the penalty changes the combined prior direction
-before normalization; its coefficient is not a displacement bound.
+work. With the BCAP leader's DualNorm, the penalty changes the combined prior
+gradient `g` before each unique sampled row is scaled by
+`1/sqrt(||g||² + 0.001²)`. This nonlinear smoothed saturation means its
+coefficient is not a displacement bound. Unsampled rows stay fixed even when
+the full-table penalty produces dense gradients.
 
 New tasks declare `execution.prior_contract: "recipe_owned_v1"` and omit
 `execution.prior.learnable`. This replaces hidden behavioral prior penalties:
