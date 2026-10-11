@@ -65,7 +65,7 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 def training_recipe(cfg):
     """Resolve experiment fields into the public, caller-owned recipe."""
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
         prior_update="learned" if cfg["prior"] in ("learned", "mog") else "frozen",
         num_classes=cfg["classes"],

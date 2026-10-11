@@ -10,7 +10,7 @@ from particlegan import get_recipe, learning_rate_scale
 
 @pytest.fixture(autouse=True)
 def _short_ka2_warmup(monkeypatch):
-    # The default KA2 penalty blends after WARMUP_CALLS (800) critic calls; shorten it so these
+    # The retained KA2 penalty blends after WARMUP_CALLS (800) critic calls; shorten it so these
     # short runs reach the blended phase where the anchor term acts.
     import particlegan.ka2
     monkeypatch.setattr(particlegan.ka2, "WARMUP_CALLS", 4)
@@ -47,7 +47,7 @@ def _critic_run(recipe, steps=14, ema=True):
 
 
 def test_switch_defaults_are_the_shipped_formulation():
-    recipe = get_recipe()
+    recipe = get_recipe("ka2")
     assert recipe.reg_anchor_weight == 1.0 and recipe.direct_particle_gain is True
     explicit = recipe.replace(reg_anchor_weight=1.0, direct_particle_gain=True)
     assert explicit == recipe
@@ -60,7 +60,7 @@ def test_switch_defaults_are_the_shipped_formulation():
 
 
 def test_anchor_weight_zero_removes_the_anchor_term():
-    base = get_recipe()
+    base = get_recipe("ka2")
     rows, _ = _critic_run(base)
     off, _ = _critic_run(base.replace(reg_anchor_weight=0.0))
     late = [i for i, (_, stats) in enumerate(rows) if stats["phase"] in ("blend", "b")]
@@ -102,7 +102,7 @@ def _direct_run(recipe, steps=6):
 
 
 def test_direct_particle_gain_false_keeps_the_scheduled_lr():
-    recipe = get_recipe()
+    recipe = get_recipe("ka2")
     on, gains_on, lrs_on = _direct_run(recipe)
     again, _, _ = _direct_run(recipe.replace(direct_particle_gain=True))
     assert torch.equal(on, again)
@@ -126,4 +126,4 @@ def test_direct_particle_gain_false_keeps_the_scheduled_lr():
                                  dict(direct_particle_gain=1)])
 def test_switch_validation(bad):
     with pytest.raises(ValueError):
-        get_recipe(**bad)
+        get_recipe(trainer="ka2", **bad)

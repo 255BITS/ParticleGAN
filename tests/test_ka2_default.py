@@ -1,4 +1,4 @@
-"""The package default critic penalty (KA2) through GANTrainer, and the E22 configuration
+"""The explicit KA2 critic penalty through GANTrainer, and the E22 configuration
 (configs/100gaussians/e22-noout.json) end to end: phases, the R1 switch and exact resume."""
 import copy
 import json
@@ -50,16 +50,16 @@ def _assert_same_models(left, right):
 
 
 def test_default_critic_is_ka2():
-    recipe = get_recipe()
+    recipe = get_recipe("ka2")
     assert recipe == Recipe() and recipe.name == "ka2"
-    trainer = _trainer(get_recipe(num_particles=64, z_dim=2, batch_size=8))
+    trainer = _trainer(get_recipe(trainer="ka2", num_particles=64, z_dim=2, batch_size=8))
     assert isinstance(trainer.opt_d, KA2CriticAdam)
     assert isinstance(trainer.penalty.regularizer, KA2GradientPenalty)
     assert trainer.ema_D is not None and trainer.opt_d.guard is not None
 
 
 def test_default_trainer_reaches_blend_and_resumes_exactly_inside_it(short_warmup):
-    recipe = get_recipe(num_particles=64, z_dim=2, batch_size=8, total_steps=20, d_guard_min_steps=2)
+    recipe = get_recipe(trainer="ka2", num_particles=64, z_dim=2, batch_size=8, total_steps=20, d_guard_min_steps=2)
     reals = _reals(16)
     full = _trainer(recipe)
     full_out = _run(full, reals)
@@ -84,18 +84,18 @@ def test_r1_real_switch_removes_only_the_real_gradient_term():
     fake = torch.randn(32, 2, generator=rng, dtype=torch.float64) + 3.0
     penalties = {}
     for r1 in (True, False):
-        recipe = get_recipe(critic_r1_real=r1)
+        recipe = get_recipe(trainer="ka2", critic_r1_real=r1)
         opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D))
         penalties[r1] = recipe.make_critic_penalty(opt)(D, real, fake)
     x = real.clone().requires_grad_(True)
     grad = torch.autograd.grad(D(x).sum(), x)[0]
-    r1_term = get_recipe().reg_coeff / 2 * (grad.square().sum(1) / 2).mean()
+    r1_term = get_recipe("ka2").reg_coeff / 2 * (grad.square().sum(1) / 2).mean()
     torch.testing.assert_close(penalties[True] - penalties[False], r1_term, rtol=1e-10, atol=1e-14)
 
 
 def _e22_recipe():
     options = dict(E22, num_particles=512, z_dim=2, batch_size=64)  # the harness sets these from the host
-    return get_recipe(**options)
+    return get_recipe(trainer="ka2", **options)
 
 
 def test_e22_config_builds_and_resumes_bit_exactly():

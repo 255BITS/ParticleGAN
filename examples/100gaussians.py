@@ -14,8 +14,8 @@ This is deliberately nastier than the 25-Gaussian grid:
     KA2: RMS R1 plus a fake-side cap, then an even blend with one-sided caps and
     an EMA-critic anchor gated by the critic's Adam statistics).
 
-The recipe defaults (``particlegan.get_recipe()``) are the one supported
-configuration; this example only exposes sizes, rates and schedule fields:
+This historical runner pins ``particlegan.get_recipe("ka2")`` to preserve its
+recorded configuration; this example only exposes sizes, rates and schedule fields:
   - z_dim 2 (the data dimension; the particle prior and critic penalty
     supply the transport an overcomplete latent once did)
   - Fourier features on D's input so it can resolve the sigma=0.03 modes
@@ -64,7 +64,7 @@ from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
 )
 
-_RECIPE = get_recipe()
+_RECIPE = get_recipe("ka2")
 
 # =========================
 #  Visualization
@@ -200,7 +200,7 @@ def train(
     if use_training_api and (prior_kind != "particles" or particle_lr_multiplier != 1.0
                              or particle_beta1 is not None or mog_metrics):
         raise ValueError("use_training_api supports particles without separate prior optimizer overrides or mog_metrics")
-    recipe = get_recipe(
+    recipe = get_recipe(trainer="ka2",
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult, prior_lr_mult=prior_lr_mult,
         betas=(beta1, beta2),

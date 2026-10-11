@@ -3853,18 +3853,16 @@
     "reports/forge/technique-receipts/fff642e60a2d4bda8a6b6995c45b0c3e.json": "6c1662844d0edd44f8bcf56ac976326e8afde0c1cc256728f63c43427f968631"
   },
   "inventory_coverage": {
-    "declared_count": 11781,
-    "missing": [
-      "benchmarks/toy_audit/prior_proximal_smoke.py"
-    ],
+    "declared_count": 11782,
+    "missing": [],
     "stale": [],
     "tracked_count": 11782,
     "unclassified": [],
-    "valid": false
+    "valid": true
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "3bf9fb2ef4ae74acd3c3541a7ca66636445eab07bb05a2f08f5e407a26ab7403",
+    "reports/forge/EXPERIMENT_MEMORY.md": "fcc63a1b74d41028aa157b77bff35cda44328a953c0f9aa1ed892fc48685956c",
     "reports/forge/publication-records.json": "4153bf991b1203655f36753b051599807060f474feba3bba274d1244ae0ca1d7"
   },
   "pending_readout": [

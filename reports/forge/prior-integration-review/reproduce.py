@@ -35,6 +35,7 @@ HOSTS = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', type=Path, required=True)
+    parser.add_argument('--promoted-source', help='Also check a frozen later develop default-promotion commit')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[3]
     archive = args.archive.resolve()
@@ -49,7 +50,10 @@ def main():
         with path.open('w') as out:
             subprocess.run(command, cwd=root, env=env, stdout=out, stderr=subprocess.STDOUT, check=True)
 
-    for role, commit in SOURCES.items():
+    sources = dict(SOURCES)
+    if args.promoted_source:
+        sources['promoted-develop'] = args.promoted_source
+    for role, commit in sources.items():
         target = archive / 'software-sources' / role
         target.mkdir(parents=True)
         contents = subprocess.check_output(
@@ -57,8 +61,9 @@ def main():
         with tarfile.open(fileobj=io.BytesIO(contents)) as tree:
             tree.extractall(target, filter='data')
         run('probe-' + role, [sys.executable, str(root / 'reports/forge/prior-integration-review/probe.py'),
-            '--source', str(target), '--role', role, '--output', str(archive / 'fixtures' / (role + '.pt'))])
-    (archive / 'software-sources.json').write_text(json.dumps(SOURCES, indent=2) + '\n')
+            '--source', str(target), '--role', 'develop' if role == 'promoted-develop' else role,
+            '--output', str(archive / 'fixtures' / (role + '.pt'))])
+    (archive / 'software-sources.json').write_text(json.dumps(sources, indent=2) + '\n')
     for label, names in [('combined-existing', EXISTING), ('combined-hosts', HOSTS),
                          ('combined-integration', ['test_prior_feature_integration'])]:
         run(label, [sys.executable, '-m', 'pytest', '-q', *['tests/' + name + '.py' for name in names],

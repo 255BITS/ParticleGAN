@@ -128,3 +128,28 @@ same resolutions and checkpoint fixes before using the combined options, then
 rerun this compatibility suite on that exact result. This worktree is isolated;
 the user checkout and feature execution worktrees were not edited. Nothing was
 pushed or merged remotely by this review.
+
+## Merge follow-up against the promoted default
+
+After the initial review, `develop` advanced to
+`3f9846cb7cb276dfbd0802b6eb4c100a8b75ac41`, promoting the BCAP trainer through
+`DEFAULT_RECIPE`. The integration preserves that promotion and resolves the
+single export conflict by retaining both `DEFAULT_RECIPE` and the new prior
+exports. No additional prior option is enabled by default.
+
+**1,202 distinct software checks pass** across 42 affected/core/host test files,
+including all 50 combined cases. Historical fixtures now restore their saved
+resolved `Recipe` independently of the mutable public selector; historical
+model-family preset checks explicitly pin KA2. Three additional cases compare
+the promoted model presets, two updates, checkpoint continuation and consumed
+RNG exactly against the frozen new develop source. The original 939-test
+[receipt](receipt.json) remains bound to review commit
+`555a42c5a0bc37436a3885d75d20a503ff76995f`; it is not rewritten as new evidence.
+The separate [merge receipt](merge-receipt.json) records the follow-up sources,
+selected tests, archive identities and corrected fixture/environment attempt.
+
+For the updated source, add
+`--promoted-source 3f9846cb7cb276dfbd0802b6eb4c100a8b75ac41` to the reproduction
+command above. The merge receipt also lists the default-promotion test files
+included in the broader follow-up. Logs remain outside Git at
+`/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs`.

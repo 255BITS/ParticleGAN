@@ -192,7 +192,7 @@ def train(arm, cfg):
     d = SimpleMLPDiscriminator(hidden_dim=cfg.width).to(device)
     # The default recipe at this scout's small-batch learning rates. It builds
     # the 400-particle table; initializing it recalibrates its spacing.
-    recipe = get_recipe("ae_gan", batch_size=cfg.batch_size, total_steps=cfg.steps,
+    recipe = get_recipe("ae_gan", trainer="ka2", batch_size=cfg.batch_size, total_steps=cfg.steps,
                         lr=.0006, d_lr_mult=1.5, prior_lr_mult=10.)
     prior = init.deterministic_orthogonal_(
         recipe.make_prior(generator=draw_rng(device, cfg.seed + 1), device=device).to(device))

@@ -146,7 +146,7 @@ def test_two_pole_direct_particles_keep_prior_role_while_scalar_is_generator(
 ):
     monkeypatch.setattr(two_pole, "TOY_STEPS", 2)
     policy = NoisePolicy(0.029, 0.5, 0.5, 2, output_noise_learnable=True)
-    recipe = get_recipe()
+    recipe = get_recipe("ka2")
     applied = []
     with optimizer_defaults(recipe, applied):
         control = evaluate.FixedControl({"schedule": "cosine"}, 2)

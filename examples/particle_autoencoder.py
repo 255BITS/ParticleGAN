@@ -4,6 +4,7 @@ import copy
 import torch
 from torch import nn
 from particlegan import get_recipe, init
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 
 def main():
@@ -22,7 +23,9 @@ def main():
         # This tests the encoding and optimizer, not a diffusion or GAN loop.
         loss = encoded.reconstruction_loss(decoder(encoded.codes), x)
         opt_g.zero_grad()
-        loss.backward()
+        if hasattr(opt_g, "set_sampled_rows"):
+            opt_g.set_sampled_rows(prior.z, encoded.indices.flatten())
+        constraint_geometry_backward(loss, opt_g, (loss,))
         opt_g.step()
         assert torch.isfinite(loss)
         print(f'{name}: reconstruction step passed', flush=True)

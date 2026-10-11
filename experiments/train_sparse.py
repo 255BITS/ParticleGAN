@@ -248,7 +248,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         raise ValueError("num_particles must be a multiple of n_classes for prior_partition='class'")
     block = P // C
 
-    recipe = get_recipe(
+    recipe = get_recipe(trainer="ka2",
         z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
         prior_update="learned" if learnable else "frozen",
         lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),

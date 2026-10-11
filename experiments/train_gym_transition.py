@@ -45,7 +45,7 @@ def sha256(path):
 
 
 def training_recipe(cfg):
-    return get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+    return get_recipe(trainer="ka2", prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
                       total_steps=cfg["steps"], batch_size=cfg["batch_size"])
 
 

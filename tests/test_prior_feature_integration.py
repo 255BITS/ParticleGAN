@@ -30,11 +30,15 @@ def equal(a, b):
         assert a == b
 
 
-def build(preset='bcap', settings=None):
+def build(preset='bcap', settings=None, *, resolved=None):
     from json import loads
     leader = loads((ROOT / 'configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json').read_text())['recipe_overrides']
     values = {**(leader if preset == 'bcap' else {}), 'num_particles': 12,
               'z_dim': 2, 'batch_size': 4, 'total_steps': 4, **(settings or {})}
+    if resolved is not None:
+        # Restore through Recipe's saved-configuration contract, independent of
+        # the mutable model-family default and omitted restoration defaults.
+        preset, values = None, dict(resolved)
     ctx = FormulationContext(recipe_preset=preset, recipe_overrides=values,
         prior=dict(kind='mog', sigma=.025, standardize=False), prior_contract='recipe_owned_v1', seed=0)
     g = ctx.construct(lambda: nn.Sequential(nn.Linear(2, 4), nn.Tanh(), nn.Linear(4, 2)), component='generator')
@@ -55,7 +59,8 @@ def frozen():
 def test_frozen_develop_initial_update_checkpoint_and_consumed_stream_parity(frozen, name):
     old = frozen['develop'][name]
     torch.manual_seed(0)
-    ctx, trainer = build(old['preset'], old['settings'])
+    # Saved configurations retain their original trainer after a default promotion.
+    ctx, trainer = build(old['preset'], old['settings'], resolved=old['initial']['recipe'])
     equal(ctx.state_dict(), old['initial'])
     real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
     equal(trainer.step(real), old['first_metrics'])
@@ -68,7 +73,7 @@ def test_frozen_develop_initial_update_checkpoint_and_consumed_stream_parity(fro
 @pytest.mark.parametrize('name', ['bcap_zero', 'bcap_vicreg', 'bcap_frozen', 'bcap_none', 'ka2_zero', 'ka2_vicreg'])
 def test_frozen_develop_checkpoints_resume_in_combined_build(frozen, name):
     old = frozen['develop'][name]
-    ctx, trainer = build(old['preset'], old['settings'])
+    ctx, trainer = build(old['preset'], old['settings'], resolved=old['initial']['recipe'])
     ctx.load_state_dict(deepcopy(old['checkpoint']))
     real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
     equal(trainer.step(real), old['second_metrics'])
@@ -78,15 +83,48 @@ def test_frozen_develop_checkpoints_resume_in_combined_build(frozen, name):
 @pytest.mark.parametrize('role', ['proximal', 'coulomb', 'sigreg', 'moment_tether', 'initial_mmd'])
 def test_original_positive_feature_checkpoint_replays_exact_next_update(frozen, role):
     old = frozen[role][role + '_positive']
-    ctx, trainer = build(old['preset'], old['settings'])
+    ctx, trainer = build(old['preset'], old['settings'], resolved=old['initial']['recipe'])
     ctx.load_state_dict(deepcopy(old['checkpoint']))
     real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
     equal(trainer.step(real), old['second_metrics'])
     equal(ctx.state_dict(), old['final'])
 
 
-def test_all_existing_preset_fields_keep_frozen_develop_values(frozen):
+def test_historical_presets_keep_frozen_develop_values_when_trainer_is_pinned(frozen):
     for name, old in frozen['develop']['_presets'].items():
+        recipe = (get_recipe(name) if name == 'bcap' else
+                  get_recipe(name, trainer='ka2').replace(name=old['name']))
+        equal(recipe.to_dict(), old)
+
+
+@pytest.fixture(scope='module')
+def promoted_develop():
+    archive = os.environ.get('PARTICLEGAN_PRIOR_REVIEW_FIXTURES')
+    path = Path(archive) / 'promoted-develop.pt' if archive else None
+    if path is None or not path.is_file():
+        pytest.skip('Export probe.py from the default-promotion develop source first')
+    return torch.load(path, map_location='cpu', weights_only=False)
+
+
+@pytest.mark.parametrize('name', ['ka2_zero', 'ka2_vicreg'])
+def test_promoted_default_preserves_develop_updates_resume_and_consumed_rng(promoted_develop, name):
+    # probe.py retains historical packet labels; these two packets resolve gan
+    # through the promoted BCAP selector in source 3f9846cb, without pinning it.
+    old = promoted_develop[name]
+    torch.manual_seed(0)
+    ctx, trainer = build(old['preset'], old['settings'])
+    equal(ctx.state_dict(), old['initial'])
+    real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
+    equal(trainer.step(real), old['first_metrics'])
+    equal(ctx.state_dict(), old['checkpoint'])
+    ctx.load_state_dict(deepcopy(old['checkpoint']))
+    equal(trainer.step(real), old['second_metrics'])
+    equal(ctx.state_dict(), old['final'])
+    equal(torch.get_rng_state(), old['global_rng'])
+
+
+def test_promoted_default_model_presets_equal_develop(promoted_develop):
+    for name, old in promoted_develop['_presets'].items():
         equal(get_recipe(name).to_dict(), old)
 
 

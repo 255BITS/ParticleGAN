@@ -269,7 +269,7 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     val_values = _tensor_records(validation, device) if validation is not None else None
     # The policy family's rates live on the recipe; ema_decay=0 because this
     # trainer saves live weights, so checkpoint metadata cannot suggest averaging.
-    recipe = get_recipe(total_steps=steps, batch_size=batch_size, lr=3e-4, d_lr_mult=2 / 3,
+    recipe = get_recipe(trainer="ka2", total_steps=steps, batch_size=batch_size, lr=3e-4, d_lr_mult=2 / 3,
                         betas=(.5, .99), ema_decay=0.)
     # The optimizer factories below keep weights: initialize the fresh
     # networks here (a loaded initial policy keeps its trained weights).

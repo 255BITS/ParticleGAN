@@ -55,7 +55,7 @@ def test_existing_logits_selection_matches_wrapper_and_gradients(target, heads):
 
 
 def test_optimizer_factory_preserves_adam_updates_with_execution_options():
-    recipe = get_recipe(z_dim=2, num_particles=8, lr=.001, betas=(0., .9))
+    recipe = get_recipe("ka2", z_dim=2, num_particles=8, lr=.001, betas=(0., .9))
     g, d, prior = nn.Linear(2, 2), nn.Linear(2, 1), recipe.make_prior()
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, foreach=False, eps=1e-6)
     clones = [nn.Parameter(p.detach().clone()) for p in (*g.parameters(), prior.z)]

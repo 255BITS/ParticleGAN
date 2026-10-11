@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 814. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 814. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 

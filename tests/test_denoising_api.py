@@ -113,8 +113,8 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     torch.testing.assert_close(actual, expected, rtol=0, atol=0)
     torch.testing.assert_close(torch.autograd.grad(actual, rows)[0],
                                torch.autograd.grad(expected, rows)[0], rtol=0, atol=0)
-    # Every trainer follows the recipe's default penalty and LR schedule.
-    assert recipe.reg_anchor_weight == get_recipe().reg_anchor_weight
+    # Every trainer follows the study's pinned penalty and LR schedule.
+    assert recipe.reg_anchor_weight == get_recipe("ka2").reg_anchor_weight
     if trainer is train_trajectory:
         assert (recipe.lr_floor, recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (
-            get_recipe().lr_floor, get_recipe().network_lr_floor, get_recipe().network_lr_horizon_cap)
+            get_recipe("ka2").lr_floor, get_recipe("ka2").network_lr_floor, get_recipe("ka2").network_lr_horizon_cap)

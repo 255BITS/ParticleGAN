@@ -2,6 +2,9 @@
 import math
 from dataclasses import asdict, dataclass, replace
 
+# Promote a registered trainer preset here; model-family factories inherit it.
+DEFAULT_RECIPE = "bcap"
+
 
 def _reject_table_storage_owners(table, tensors):
     """A frozen sampled table needs storage independent of mutable owners."""
@@ -21,8 +24,9 @@ class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
 
     Fields are validated at construction; ``replace`` returns a modified copy.
-    Two fields exist only for ablations; their defaults are the shipped
-    formulation:
+    Use ``get_recipe()`` for the current default. Dataclass field defaults retain
+    the KA2 restoration contract for older saved configurations.
+    Two fields expose KA2 ablations; their defaults retain that formulation:
 
     * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
       which ties the critic's input gradient to its parameter EMA once the
@@ -1058,10 +1062,13 @@ class Recipe:
 
 
 
-def get_recipe(name="gan", **overrides):
+def get_recipe(name="gan", *, trainer=None, **overrides):
     """Select a model family or a policy preset with explicit overrides.
 
-    Model families share the default KA2 formulation. ``"e22"`` selects the
+    Model families share the trainer preset selected by ``DEFAULT_RECIPE``.
+    ``trainer="ka2"`` pins a model family to an explicit trainer preset.
+    Explicit trainer presets remain independent of that selector.
+    ``"e22"`` selects the
     schedule-free DV12/stationarity policy, row evidence, critic-feature
     birth/death, learned output noise and served averaging. Its default
     dimensions are the native 100-Gaussian task's 20,000 particles, latent
@@ -1072,7 +1079,7 @@ def get_recipe(name="gan", **overrides):
     binding, paired observations and separate guard contexts. Its evidence
     and restructuring law differ from the independent-row formulation.
     ``"atlas"`` adds automatic feature-cell selection (128 cells) and the
-    settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
+    settled optimizer-reopen guard to E22. ``"ka2"`` retains the KA2 recipe;
     ``"k3p"`` explicitly selects the earlier critic formulation.
     ``"bcap"`` selects zero-momentum dualnorm with G/E step .012, D step
     .018 and sampled-prior row step .03, non-saturating loss, smoothing .001,
@@ -1088,8 +1095,22 @@ def get_recipe(name="gan", **overrides):
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
     ``recipe.replace(name=...)`` for custom report labels.
     """
-    families = {
+    models = {
         "gan": {},
+        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
+        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
+                          prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
+                       num_particles=400, z_dim=2),
+        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
+                        num_particles=400, z_dim=2),
+        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
+                         sigma_rel=.025, num_particles=1024, z_dim=64,
+                         batch_size=64, routing_temperature=.125,
+                         distance_reduction="mean"),
+    }
+    presets = {
         "ka2": {},
         "k3p": dict(critic_formulation="k3p"),
         "bcap_adam": dict(critic_formulation="bcap", optimizer_family="adam", reg_arm="b_cap",
@@ -1109,32 +1130,20 @@ def get_recipe(name="gan", **overrides):
                     birth_death_isolation=True, row_evidence_null="scaled",
                     serve_average=4.0, reopen_signal="optimizer",
                     reopen_anchor="release"),
-        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
-        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
-        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
-                          prior_kind="mog", sigma_rel=.025, num_particles=400),
-        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
-                       num_particles=400, z_dim=2),
-        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
-                        num_particles=400, z_dim=2),
-        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
-                         sigma_rel=.025, num_particles=1024, z_dim=64,
-                         batch_size=64, routing_temperature=.125,
-                         distance_reduction="mean"),
     }
-    families["bcap"] = {
-        **families["bcap_adam"], "optimizer_family": "dualnorm",
+    presets["bcap"] = {
+        **presets["bcap_adam"], "optimizer_family": "dualnorm",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5,
         "optimizer_momentum": 0.,
         "loss": "non_saturating", "optimizer_smoothing": .001,
         "optimizer_convolution": "per_offset",
         "constraint_geometry_mode": "direction_blend",
     }
-    families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
+    presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
-    families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
-    families["halloween"] = {
-        **families["bcap_adam"], "reg_coeff": 0.0,
+    presets["e22_routed"] = {**presets["e22"], "row_policy": "routed_paired"}
+    presets["halloween"] = {
+        **presets["bcap_adam"], "reg_coeff": 0.0,
         "lr": 0.008020980209802098, "d_lr_mult": 0.4922016232592352,
         "betas": (0.6119661196611966, 0.5612256122561226),
         "d_betas": (0.1051710517105171, 0.7203172031720317),
@@ -1143,11 +1152,20 @@ def get_recipe(name="gan", **overrides):
         "adam_variant": "tensorflow_v1", "loss": "least_squares",
         "loss_labels": (-1.0, 1.0, 1.0), "lr_schedule": "constant",
     }
-    if name not in families:
-        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
-    options = families[name]
+    if name in models:
+        selected = DEFAULT_RECIPE if trainer is None else trainer
+        if selected not in presets:
+            owner = "DEFAULT_RECIPE" if trainer is None else "trainer"
+            raise ValueError(f"{owner} must name a trainer preset, got {selected!r}")
+        options = {"name": selected, **presets[selected], **models[name]}
+    elif name in presets:
+        if trainer is not None:
+            raise ValueError("trainer is only supported with a model-family name")
+        options = presets[name]
+    else:
+        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join((*models, *presets))}")
     if name != "gan":
-        options = {"name": name, **options}
+        options = {**options, "name": name}
     return Recipe(**{**options, **overrides})
 
 
