@@ -69,6 +69,9 @@ class Recipe:
     prior_reg_target_std: float = 1.0
     prior_reg_eps: float = 1e-4
     prior_l2: float = 0.0
+    # Post-optimizer proximal spring to the initial latent table; zero is exact
+    # baseline behavior. Unlike a gradient penalty, restoration retains size.
+    prior_proximal_strength: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -236,7 +239,7 @@ class Recipe:
             raise ValueError("prior_update must be learned or frozen")
         if self.prior_regularizer not in ("vicreg", "none"):
             raise ValueError("prior_regularizer must be vicreg or none")
-        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2"):
+        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
@@ -246,6 +249,13 @@ class Recipe:
             raise ValueError("prior_regularizer='none' requires prior_reg=0")
         if self.prior_update == "frozen" and (self.row_evidence_gate or self.particle_birth_death):
             raise ValueError("frozen priors require row evidence and birth/death disabled")
+        if self.prior_proximal_strength and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode not in ("none", "direction_blend")
+                or self.continuous_policy is not None or self.lr_control != "mobility"
+                or self.row_evidence_gate or self.particle_birth_death):
+            raise ValueError("prior_proximal_strength requires zero-momentum full DualNorm, "
+                             "geometry none/direction_blend and no adaptive prior policies")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -758,6 +768,12 @@ class Recipe:
         Protection must cover the joint generator/encoder/prior optimizer.
         The default mode requires no protected-loss hook and retains the
         original optimizer type and checkpoint format.
+
+        ``prior_proximal_strength > 0`` restores only update-owned latent rows
+        toward their positions at optimizer construction, after the complete
+        base update (including direction blend). Initialize tables first.
+        Checkpoints carry that independent reference and the spring settings.
+        Direct generated coordinates and frozen tables receive no spring.
         """
         from torch import nn
         if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:

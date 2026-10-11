@@ -565,6 +565,11 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     elif recipe.constraint_geometry_mode == "direction_blend" and critic is None:
         from .direction_blend import DirectionBlendOptimizer
         optimizer_class = DirectionBlendOptimizer
+    if recipe.prior_proximal_strength and recipe.prior_update == "learned" and critic is None:
+        from .prior_proximal import proximal_optimizer_class
+        if any(group.get("role", "generator") in ("prior", "table") for group in params):
+            optimizer_class = proximal_optimizer_class(optimizer_class)
+            options["prior_proximal_strength"] = recipe.prior_proximal_strength
     optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
