@@ -937,6 +937,20 @@ Transport weights remain zero, `critic_step_mode="none"`, and
 DualNorm recipe. `get_recipe()` and the model-family factories inherit this
 BCAP preset. Explicit trainer presets remain fixed. The dataclass `Recipe()`
 retains its KA2 field defaults for saved-configuration restoration.
+
+Two opt-in research settings keep the BCAP preset unchanged.
+`optimizer_prior_smoothing=None` inherits `optimizer_smoothing`; a nonnegative
+value changes only the denominator of sampled learned-prior row updates,
+`g / hypot(norm(g), smoothing)`, with zero using the existing epsilon rule.
+It requires full DualNorm. Enabled optimizer checkpoints bind the value and
+save cumulative gradient energy, ideal row motion and rounded base-optimizer
+motion; direction protection may subsequently change that motion.
+`reg_zero_coeff=0` adds no loss. A positive value on BCAP adds
+`reg_zero_coeff/2 * (mean(real_slope_squared) + mean(fake_slope_squared))`
+to its original cap penalty, under the same lazy interval. This explicit
+hybrid retains BCAP's cap and reports its two contributions separately when
+penalty statistics are enabled. Both settings are recorded in enabled recipes
+and retain historical packets when disabled.
 Each setting can be overridden explicitly.
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and

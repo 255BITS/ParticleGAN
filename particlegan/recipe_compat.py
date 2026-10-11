@@ -1,6 +1,7 @@
 """Default projections for Recipe additions; archived packets keep their identity."""
 
 SEARCH_RECIPE_DEFAULTS = {
+    "reg_zero_coeff": 0.0, "optimizer_prior_smoothing": None,
     "prior_update": "learned", "prior_regularizer": "vicreg",
     "prior_reg_target_std": 1.0, "prior_reg_eps": 1e-4, "prior_l2": 0.0,
     "critic_step_mode": "none",

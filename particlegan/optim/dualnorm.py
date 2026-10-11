@@ -159,7 +159,7 @@ class NormalizedOptimizer(Optimizer):
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
                  eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
-                 svd_backend="native", **options):
+                 svd_backend="native", prior_smoothing=None, **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -170,6 +170,12 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer smoothing must be finite and nonnegative")
         if smoothing and family != "dualnorm":
             raise ValueError("optimizer smoothing requires the dualnorm family")
+        if prior_smoothing is not None:
+            if (type(prior_smoothing) not in (int, float)
+                    or not math.isfinite(prior_smoothing) or prior_smoothing < 0):
+                raise ValueError("prior smoothing must be finite and nonnegative")
+            if family != "dualnorm":
+                raise ValueError("prior smoothing requires the dualnorm family")
         if convolution not in ("none", "per_offset"):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
@@ -192,6 +198,13 @@ class NormalizedOptimizer(Optimizer):
                 raise ValueError(f"normalized optimizers require disabled {key}")
         self.family, self.momentum = family, float(momentum)
         self.smoothing = float(smoothing)
+        self.prior_smoothing = None if prior_smoothing is None else float(prior_smoothing)
+        if self.prior_smoothing is not None:
+            # These observation-only sums cover this optimizer's rounded row
+            # update. A later direction blend can change the final motion.
+            self.prior_smoothing_stats = dict(steps=0, sampled_rows=0,
+                gradient_squared_sum=0., proposed_displacement_squared_sum=0.,
+                optimizer_displacement_squared_sum=0.)
         self.convolution = convolution
         self.svd_backend = svd_backend
         self.recipe_optimizer_family = family
@@ -329,6 +342,8 @@ class NormalizedOptimizer(Optimizer):
                         squared = parameter.grad.square().sum()
                         norms[player] = squared if player not in norms else norms[player] + squared
         norms = {player: value.sqrt() for player, value in norms.items()}
+        prior_step_stats = {} if self.prior_smoothing is not None else None
+        prior_step_rows = 0
         for group in self.param_groups:
             algorithm, rate, eps = group["algorithm"], group["lr"], group["eps"]
             for parameter in group["params"]:
@@ -361,10 +376,23 @@ class NormalizedOptimizer(Optimizer):
                             else torch.arange(len(parameter), device=parameter.device))
                     selected = gradient[rows]
                     norm = selected.norm(dim=1, keepdim=True)
-                    denominator = (torch.hypot(norm, torch.full_like(norm, self.smoothing))
-                                   if self.smoothing else norm + eps)
+                    smoothing = self.smoothing if self.prior_smoothing is None else self.prior_smoothing
+                    denominator = (torch.hypot(norm, torch.full_like(norm, smoothing))
+                                   if smoothing else norm + eps)
                     update = selected / denominator
+                    if prior_step_stats is not None:
+                        original_rows = parameter[rows]
                     parameter.index_add_(0, rows, update, alpha=-rate)
+                    if prior_step_stats is not None:
+                        # Aggregate on-device; transfer three scalars once per
+                        # device per step, never synchronize individual rows.
+                        energies = torch.stack((selected.double().square().sum(),
+                            update.double().square().sum() * rate ** 2,
+                            (parameter[rows].double() - original_rows.double()).square().sum()))
+                        device = parameter.device
+                        prior_step_stats[device] = (energies if device not in prior_step_stats
+                                                   else prior_step_stats[device] + energies)
+                        prior_step_rows += rows.numel()
                 elif algorithm == "dualnorm":
                     direction = gradient
                     if self.momentum:
@@ -405,6 +433,15 @@ class NormalizedOptimizer(Optimizer):
                         denominator = (torch.hypot(norm, norm.new_tensor(self.smoothing))
                                        if self.smoothing else norm + eps)
                         parameter.add_(direction / denominator, alpha=-rate)
+        if prior_step_stats:
+            stats = self.prior_smoothing_stats
+            stats["steps"] += 1
+            stats["sampled_rows"] += prior_step_rows
+            for energies in prior_step_stats.values():
+                gradient_energy, proposed_energy, rounded_energy = energies.cpu().tolist()
+                stats["gradient_squared_sum"] += gradient_energy
+                stats["proposed_displacement_squared_sum"] += proposed_energy
+                stats["optimizer_displacement_squared_sum"] += rounded_energy
         if self._adam is not None:
             self._adam.step()
         self.clear_sampled_rows()
@@ -422,6 +459,9 @@ class NormalizedOptimizer(Optimizer):
         }
         if self.smoothing:
             result["dualnorm"]["smoothing"] = self.smoothing
+        if self.prior_smoothing is not None:
+            result["dualnorm"]["prior_smoothing"] = self.prior_smoothing
+            result["dualnorm"]["prior_smoothing_stats"] = dict(self.prior_smoothing_stats)
         if self.convolution != "none":
             result["dualnorm"]["convolution"] = self.convolution
         if self.svd_backend != "native":
@@ -442,6 +482,8 @@ class NormalizedOptimizer(Optimizer):
         expected_meta = {"schema", "family", "momentum", "sampled_rows"}
         if self.smoothing:
             expected_meta.add("smoothing")
+        if self.prior_smoothing is not None:
+            expected_meta.update(("prior_smoothing", "prior_smoothing_stats"))
         if self.convolution != "none":
             expected_meta.add("convolution")
         if self.svd_backend != "native":
@@ -451,6 +493,21 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
         if meta.get("smoothing", 0.) != self.smoothing:
             raise ValueError("checkpoint optimizer smoothing differs")
+        saved_prior_smoothing = meta.get("prior_smoothing")
+        if ((self.prior_smoothing is not None
+             and type(saved_prior_smoothing) not in (int, float))
+                or saved_prior_smoothing != self.prior_smoothing):
+            raise ValueError("checkpoint prior smoothing differs")
+        if self.prior_smoothing is not None:
+            stats = meta["prior_smoothing_stats"]
+            if not isinstance(stats, dict) or stats.keys() != self.prior_smoothing_stats.keys():
+                raise ValueError("invalid prior smoothing statistics")
+            for key, value in stats.items():
+                if key in ("steps", "sampled_rows"):
+                    if type(value) is not int or value < 0:
+                        raise ValueError("invalid prior smoothing counter")
+                elif type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                    raise ValueError("invalid prior smoothing energy")
         if meta.get("convolution", "none") != self.convolution:
             raise ValueError("checkpoint optimizer convolution differs")
         if meta.get("svd_backend", "native") != self.svd_backend:
@@ -546,6 +603,8 @@ class NormalizedOptimizer(Optimizer):
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):
             if rows is not None:
                 self.set_sampled_rows(group["params"][0], rows)
+        if self.prior_smoothing is not None:
+            self.prior_smoothing_stats = metadata["prior_smoothing_stats"]
         if regularizer is not None:
             self.record.load_state_dict(regularizer["record"])
 
@@ -565,6 +624,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     elif recipe.constraint_geometry_mode == "direction_blend" and critic is None:
         from .direction_blend import DirectionBlendOptimizer
         optimizer_class = DirectionBlendOptimizer
+    if recipe.optimizer_prior_smoothing is not None:
+        options["prior_smoothing"] = recipe.optimizer_prior_smoothing
     optimizer = optimizer_class(params, family=recipe.optimizer_family,
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,

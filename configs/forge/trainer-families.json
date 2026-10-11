@@ -627,6 +627,20 @@
         "historical-cohort",
         "optimizer-interventions"
       ]
+    },
+    {
+      "id": "bcap-zero-damping",
+      "label": "BCAP + weak R1/R2",
+      "canonical_candidate": "bcap-tier2-round6-zero-damping-v1",
+      "candidates": [
+        "bcap-tier2-round6-zero-damping-v1"
+      ],
+      "rationale": "Explicit hybrid: original BCAP cap plus weak zero-centered real/fake squared-slope damping, with direction-blend DualNorm. Separate formulation; no transfer of pure BCAP qualification.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty"
+      ]
     }
   ],
   "historical_families": [
