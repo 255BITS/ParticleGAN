@@ -124,7 +124,7 @@ def training_recipe(cfg):
     LR schedule is recipe fields: G/D follow the full-budget cosine down to
     ``lr_floor`` (no 1,600-step network horizon at image scale).
     """
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model='ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
         prior_update='learned' if cfg['prior'] == 'learned' else 'frozen',
         num_classes=cfg['classes'],

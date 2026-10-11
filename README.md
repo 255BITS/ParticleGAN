@@ -18,16 +18,20 @@ A GAN usually draws its latent code from a fixed Gaussian and leaves all of
 the work of covering the data to the generator; when it cannot, modes go
 missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
-prior itself can move toward the data's modes. The package ships one training
-configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that starts as R1 and then blends in capped gradients plus an EMA-critic
-anchor gated by the critic's own Adam statistics, and the optimizer settings and
-schedules that go with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
-loop; the recipe builds the pieces.
+prior itself can move toward the data's modes. The default training recipe is
+the selected **BCAP** leader: non-saturating loss, a fixed cap penalty on critic
+input gradients, zero-momentum DualNorm, direction blending and constant rates.
+[Recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the
+configuration. You write an ordinary PyTorch GAN loop; the recipe builds the pieces.
 
-![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
+Future promotions change one line in [particlegan/recipes.py](particlegan/recipes.py):
+`DEFAULT_RECIPE = "bcap"`. All model-family factories inherit that trainer preset.
+Explicit presets such as `get_recipe("ka2")` remain available. This is the
+best-observed research default; Forge calibration remains provisional.
 
-Recorded with the 0.8.0 recipe and its original random initialization, live weights, seed 1234:
+![100 Gaussians: historical KA2 recipe converging with live weights](100gaussians.gif)
+
+Recorded with the historical 0.8.0 KA2 recipe and its original random initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
@@ -64,6 +68,7 @@ import copy
 import torch
 from torch import nn
 from particlegan import get_recipe, init, scale_learning_rates
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -82,21 +87,25 @@ base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d
 for step in range(recipe.total_steps):
     scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
     real = real_batch(recipe.batch_size)
-    z, _ = prior.sample(recipe.batch_size)
+    z, indices = prior.sample(recipe.batch_size)
     fake = G(z)
 
     d_loss = gan.d_loss(D(real), D(fake.detach())) + penalty(D, real, fake.detach())
     opt_d.zero_grad(); d_loss.backward(); opt_d.step()
 
     g_loss = gan.g_loss(D(fake), D(real))
-    opt_g.zero_grad(); g_loss.backward(); opt_g.step()
+    opt_g.zero_grad()
+    if hasattr(opt_g, "set_sampled_rows"):
+        opt_g.set_sampled_rows(prior.z, indices)
+    constraint_geometry_backward(g_loss, opt_g, (g_loss,))
+    opt_g.step()
 ```
 
-`opt_g` and `opt_d` are Adam optimizers whose `step()` also does the
-formulation's step-time work, and their `state_dict()` holds all of its state,
-so checkpoint them as usual. [`examples/pytorch_loop.py`](examples/pytorch_loop.py)
-adds the remaining pieces of the default update (critic input noise, generator
-output noise, EMA weights).
+The optimizers' `state_dict()` holds their update state, so checkpoint them
+as usual. The generator step records sampled prior rows and protects the
+adversarial objective during direction blending.
+[`examples/pytorch_loop.py`](examples/pytorch_loop.py) provides a complete
+caller-owned loop; `GANTrainer` handles these bindings automatically.
 
 Or let `GANTrainer` run exactly that default update:
 

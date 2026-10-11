@@ -144,7 +144,7 @@ def test_public_recipe_selects_objective_and_persists_alternatives(loss):
 
 def test_historical_default_packet_keeps_fixed_loss_implicit():
     for name in ("gan", "ka2", "k3p", "e22", "mog"):
-        recipe = get_recipe(name)
+        recipe = get_recipe(name, trainer="ka2" if name in ("gan", "mog") else None)
         assert recipe.loss == "relativistic"
         assert "loss" not in recipe.to_dict()
 

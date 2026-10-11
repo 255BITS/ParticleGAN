@@ -7,7 +7,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from particlegan import (
-    DDGAN, GANLoss, GaussianPrior, ParticlePrior,
+    DEFAULT_RECIPE, DDGAN, GANLoss, GaussianPrior, ParticlePrior,
     ParticleRegularizer, Recipe, UCD, get_recipe, learning_rate_scale,
     ucd_labels, ucd_loss,
 )
@@ -191,8 +191,8 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     generator, discriminator = nn.Linear(2, 2), nn.Linear(2, 1)
     generator.bias.requires_grad_(False)
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, prior)
-    assert [g["lr"] for g in opt_g.param_groups] == [.001, .002]
-    assert opt_d.param_groups[0]["lr"] == .001
+    assert [g["lr"] for g in opt_g.param_groups] == [.001, .001 * recipe.prior_lr_mult]
+    assert opt_d.param_groups[0]["lr"] == .001 * recipe.d_lr_mult
     assert all(p is not generator.bias for g in opt_g.param_groups for p in g["params"])
     assert opt_g.param_groups[1]["params"] == [prior.z]
     for frozen in (GaussianPrior(2), ParticlePrior(8, 2, learnable=False)):
@@ -208,7 +208,7 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
 
 def test_explicit_component_choices_preserve_shared_defaults():
     default = get_recipe()
-    assert default == Recipe()
+    assert default == get_recipe(DEFAULT_RECIPE)
     ddgan = get_recipe(model='ddgan', conditioning='ucd', num_classes=2)
     assert (ddgan.model, ddgan.conditioning, ddgan.num_classes) == ('ddgan', 'ucd', 2)
     assert ddgan.lr == default.lr and ddgan.reg_coeff == default.reg_coeff

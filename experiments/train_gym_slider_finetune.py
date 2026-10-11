@@ -108,7 +108,7 @@ def train(cfg):
         error_cap="recipe critic penalty (recipe.make_critic_penalty) on R noise coordinates only; not applied to transitions",
         minibatch="Generator draws use seed+11, the imitation fine-tune stream; critic draws use seed+21",
         control_input="Expert previous command in shuffled records; learner previous command at rollout")
-    recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
+    recipe = get_recipe(trainer="ka2", prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     fused = dict(fused=True) if device.type == "cuda" else {}
     opt_g = recipe.make_generator_optimizer(
