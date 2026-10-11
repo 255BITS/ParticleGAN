@@ -1,0 +1,77 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/mmd",
+  "axis": "prior_reg",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-prior-mmd-control-v1",
+  "control_study_id": "bcap-prior-mmd-control-study-v1",
+  "falsifier": "No strength passes all six ordinary Tier 1 prerequisites and converts a matched leader Tier 2 failure; or prior passing tasks regress, rejecting a global repair.",
+  "full_reservation_seconds": 172080,
+  "hypothesis": "A fixed initial-distribution MMD tether restrains learned-prior drift without anchoring particle identities and converts at least one BCAP leader Tier 2 failure to a full sustained pass.",
+  "maximum_reserved_paid_seconds": 180000,
+  "name": "mmd",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-prior-mmd-search-v1",
+  "source_digest": "4a4dd33ea938ea6a48f7c6c5faa83c1237e87f41b28d2848e51dbdf99847d04e",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "task_contracts": {
+    "ae_gan_hold": "cb99dee7e6be7b64399d480bf99450580724811f1bde09dc6c424c744ffeb34e",
+    "clockfree_audit_measurement_v1": "5a54457597266bb21bcc3a9b3a948f20ca5c998927b40ca598c26b739ec50657",
+    "cover_leftover": "8186c35c2795fdc8ee6f098c6396d4591ff3cf1eee6c502b3bf00c8620dde13d",
+    "five_word_joint_hold": "55674d8a233cab5778c66d661e3677eae564da789166540dfbe73850d089c50c",
+    "five_word_joint_smoke": "06c5f1ff5fcdfc27e3a608484e5f005b3805ec60dc3f6f53c5b07d7bb002f7a2",
+    "gaussian1d_smoke": "af8be198265a563f61913917d0e3cdc1829769e4730aa06b4862316580889aa7",
+    "gaussian1d_stability": "4e744c73c9936ef1f971b6af0a2670dcc42df085200adca27f42dc49adf89f7a",
+    "grid100": "0071c48e67be8a0a04a31e63a766db4aaf4125a0fe7c9224bd5c7e32c0e01e77",
+    "img_bars4": "1eff52c9d5d88cd994f920ba9e456cb39b116feac1112e73f567f6823f0421e8",
+    "img_blobs4": "638bed1d87b135012d44b0c8a4f3e9020912633215b0adc96a80181f955cafa1",
+    "img_intensity2": "9246020221d4e444fdbb3b4cdab041eee6e9a6c964c72f8b5c6f2fd4015b4403",
+    "img_stripes2": "f3b61c07bfcc1bf6492ce8bafaf754356c6b47b55ff17ef576526eae3c6de564",
+    "mid_scale_identity": "a896d57b09419b1e56d5d640d23015583a14446e20ed703a1b8f680f4b992d78",
+    "mode_hold": "1546c8c1ffd3e46de48eb55a9c80f53d46055efe2825629c0fa28097832dff9c",
+    "residual_student": "f097bec5b8f96b82af04f507ebd9827d495e3b89c83924d10a5a34cfced4c483",
+    "ring16_acquisition": "2c9811ce4aa5b03b4f9fcf75a0fc8231a73d91ea27f1148e12d5ad9a1ecc17b7",
+    "ring_extension": "4a0c803df257ec66e90ddfe2fd1b91dfc0b3c37998e21fed80d943f6b4aa5ba9",
+    "ring_hold": "1ac1f4eff5203bff27642d989227e6f8f71bd376b78a285db9cdfdb7017a47f5",
+    "rotated100": "46c08b723ab59f600bfb42147bc86ff2e26089ce7beb1104e1deae9528b3b582",
+    "staggered100": "b36ba27930440249ea399792a1ade0a528fc01b93328f2ad0f14b33758de9a91",
+    "trajectory": "c494b8b68be62e9b53cd44fa252cd4d9bb5af37ce5c11c34c4392b8d8a86b553",
+    "two_pole": "61f303bc41f79d06f48165c4877728bc6559fbfc927bc60b114784a008ddeead",
+    "unipolar": "ba211762692173a038693b71bee2788c8f9cedc0773eaf963a165eede9ab287c",
+    "unused_token_hold": "3042c32941d5bc9647bee6d3ef74f19f0ebe821daf581740ec81a4079c1986cd",
+    "vector_anisotropic": "dc6571cb12320de94f86d5d96b21a3711ffda860c434f5e469be6780bb6ad88a",
+    "vector_overlap": "3ad16fb9bc1d40fa216e0667dba11d3c45333bef0bcf8a5e900f8ed90de98511",
+    "vector_spiral": "ab9250672364108948f0d2bc332f8ede49fb804b4ff3608587691b163e1cc808",
+    "vector_two_broad": "ee14f5246581ff003e81c3c65a87b5179cdc12511387e2b677cf9c997c589c73",
+    "vector_unequal_mass": "00a57dc8cde538d47f6d6c4cf937f20df57a495c9bb2bcf8ba87b378ec297a0a",
+    "vector_unequal_width": "75a53103e8f37e3bb46a8a16687b35764388795fc924f85651977f4e6d91c0e4"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "prior_reg": {
+      "candidate": 0.1,
+      "control": 0.0
+    },
+    "prior_regularizer": {
+      "candidate": "initial_mmd",
+      "control": "vicreg"
+    }
+  },
+  "values": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "view_revision": 9
+}

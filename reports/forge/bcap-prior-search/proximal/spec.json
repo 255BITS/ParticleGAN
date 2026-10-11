@@ -1,0 +1,73 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/proximal",
+  "axis": "prior_proximal_strength",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-prior-proximal-control-v1",
+  "control_study_id": "bcap-prior-proximal-control-study-v1",
+  "falsifier": "If no setting preserves 6/6 required Tier 1 gates and converts a matched-control Tier 2 FAIL to complete PASS, the repair hypothesis is falsified for this bracket. In particular, mode_hold must retain modes >=8 and HQ >=0.9 for a terminal suffix >=5 (current leader suffix 3), or Gaussian stability must pass all 72 stationary checks, own-state deadline reacquisition and all 24 shifted hold checks; better endpoints or fewer failed checks alone do not count. Every regression remains visible, and a global repair must preserve all matched-control Tier 2 passes.",
+  "full_reservation_seconds": 172080,
+  "hypothesis": "A magnitude-sensitive spring to initialized prior locations applied after the BCAP leader update reduces latent code drift and converts at least one current sustained Tier 2 failure to PASS under one global positive strength without losing any required Tier 1 or previously passing Tier 2 gate.",
+  "maximum_reserved_paid_seconds": 180000,
+  "name": "proximal",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-prior-proximal-search-v1",
+  "source_digest": "652cc41cc17bd9c92fb79eee4e186f2e1e01036213ae1c7a02f10ce7b86b3a2a",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "task_contracts": {
+    "ae_gan_hold": "1f609dfc6c83fc5924d266032d624831d7fd526e3f951e708875939b976a16dc",
+    "clockfree_audit_measurement_v1": "f1512f533b907d22509ef5206daa5770988efb0c66b184d34241cdedbda1dacb",
+    "cover_leftover": "8d3109788d78a380bd889648f16f0f4155c7a4d1f43214f494c699cd336e564c",
+    "five_word_joint_hold": "f1fd07366d6ae0f35c8313c6b61f07773a00af69cd19984cf76dc5518a106a13",
+    "five_word_joint_smoke": "7970aceda8f6c29d0d6b651657961471743c17b76cb1ef5f771b459b0011b497",
+    "gaussian1d_smoke": "3c5cfd6053846479aa933ad5a93336a04aef13f233e7c796bc27c7b637105890",
+    "gaussian1d_stability": "2f53f64207e741c4a5ac5b852afdc94d2e1d6a8a0bb617311b19da7b2589a4d9",
+    "grid100": "b38b118e7138f6f3b95a5a4c73887fd1c3df654feb70a85acf4b133412325506",
+    "img_bars4": "a3874a1d50c4f010e60e1c2f83ca8f3e8ae61937aa159daebed2a7d344c94ea8",
+    "img_blobs4": "559d8377bdce2bf4f248fc2ae6b9077816a87ac778d57daeadcd3d40a6137fad",
+    "img_intensity2": "27cb6d1f78297e6c03fba5bfa425b4588db7dce9a09212129d35d3684bb78737",
+    "img_stripes2": "fe091dd88bd00d579468146563b1b143f86bb37e7ad9319176e35dc8347519c6",
+    "mid_scale_identity": "87fcf355a5d5542952c61a310a9ff014c883b905ec399de43fc5029cf023dc9d",
+    "mode_hold": "52327c3b64d8a6ee596b567f414fb998c06bfdb9dc12111ae68d34d86e458ee6",
+    "residual_student": "9a276d811e3fb43f604fb83a830fcc9be2b01c8fdbeb98f292c8b30d2c118f26",
+    "ring16_acquisition": "043309f7f9f5af6b7a4391f5ab93f59cff17af6b38ae022266cc4ecc9ca4e48c",
+    "ring_extension": "367344a767647d6ee992c257a55ff19da533811f142b0f735e5059f126bb107d",
+    "ring_hold": "9cdf479a489de8fb2963371783e0a7b47b974c190d8c86813e4c933e759236fe",
+    "rotated100": "2ebe2bd63a60c90af3d8fc5ebe705cf38eb0449f7fb9d0a783ffb9e25e20cfb7",
+    "staggered100": "1517d51241bf4b6d08c2e5f07acc98194766429311fde2516e0e3d6ab2565b59",
+    "trajectory": "5c21fc0cd706dd2f2d8a08ce28855cfd736ee3ec2d0e5c8567c38cf215926424",
+    "two_pole": "11ed688911a1810aaecb9396fb59f29f70735c2637a4d686206535eab9951413",
+    "unipolar": "1cd8ca35d6dcfe49553142ced4dfcdbdff895d5ef25d87d027bd7530a98834e0",
+    "unused_token_hold": "e5402f70c77a06302cbb6ef942f39a19debd58f8e5a0bb39bfdb5b81291255a6",
+    "vector_anisotropic": "311a3e9c43daa225b7a8c1cba674ba3137e44bf72230d5f5ed8a5c073122bc8d",
+    "vector_overlap": "4a7ccbd86a5485d2b5e739732f2cc4734c8fee59c7f81ca88848fdd1a684e4c3",
+    "vector_spiral": "4a2347d17b4312cbec7f9d9524935b67ab8cf09d6f68b9e5071c11a6c91b1e8d",
+    "vector_two_broad": "0e2bc1862b6e5df9b0161f5f0ad17b0243901f7644a92ec28220b0eb6adfc4b3",
+    "vector_unequal_mass": "40255fb25a902a95bb72e666fcb159786a10b3a0aa91251685c5a7ad60969ace",
+    "vector_unequal_width": "fb105b81a2c9d6a1fa3e4b718e443d27840eb818e11b1d829b6dc5ab149d001e"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "prior_proximal_strength": {
+      "candidate": 0.1,
+      "control": 0.0
+    }
+  },
+  "values": [
+    0.1,
+    1,
+    10
+  ],
+  "view_revision": 9
+}
