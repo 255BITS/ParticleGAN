@@ -1118,6 +1118,8 @@ class WordFixture:
             input_stream = self.policy.noise_generator if components is None else components.streams.generator(
                 "noise", component="critic", purpose="input")
             self.noisy_critic = InputNoise(self.D, generator=input_stream)
+            # The generator/encoder read of the joint critic (itself by default).
+            self.critic_read = self.recipe.make_generator_critic_read(self.noisy_critic, probe=self.D)
         self.words = word_bank(device=device)
         self.data_generator = (torch.Generator(device=device).manual_seed(seed + 101) if components is None
             else components.streams.generator("data", component="target", purpose="training"))
@@ -1155,12 +1157,15 @@ class WordFixture:
             loss_d.backward()
             self.opt_d.step()
             self.policy.after_critic_step()
+            read = self.critic_read
+            if read is not self.noisy_critic:
+                read.observe(joint_fake)
             self.D.requires_grad_(False)
             encoded = self.E(real_words)
             latent, rows = self.prior.sample(len(real_words), generator=self.policy.latent_generator)
             fake_words = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
-            loss_gan = self.loss.joint_g_loss(self.noisy_critic(_join_words(fake_words, latent)),
-                                              self.noisy_critic(_join_words(real_words, encoded)))
+            loss_gan = self.loss.joint_g_loss(read(_join_words(fake_words, latent)),
+                                              read(_join_words(real_words, encoded)))
             loss_g = loss_gan + self.recipe.prior_regularization(self.prior.z, regularizer=self.spread)
             if self.transport is not None:
                 # Categorical probability coordinates only. The joint latent
@@ -1172,8 +1177,8 @@ class WordFixture:
                 width_noise = (latent - self.prior.z[rows]).detach()
             def protected_evaluator():
                 current_latent = self.prior.z[rows] + width_noise
-                return (self.loss.joint_g_loss(self.noisy_critic(_join_words(self.G(current_latent), current_latent)),
-                    self.noisy_critic(_join_words(real_words, self.E(real_words)))),)
+                return (self.loss.joint_g_loss(read(_join_words(self.G(current_latent), current_latent)),
+                    read(_join_words(real_words, self.E(real_words)))),)
             from particlegan.optim.constraint_geometry import constraint_geometry_backward
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
@@ -1226,7 +1231,20 @@ class WordFixture:
                     max_steps=self.max_steps, data_generator=self.data_generator.get_state().clone(),
                     **self.recipe.prior_regularizer_checkpoint(self.spread),
                     api_components=self.api_components, api_state=self.policy.state_dict(),
-                    **({"component_transport": self.transport.state_dict()} if self.transport is not None else {}))
+                    **({"component_transport": self.transport.state_dict()} if self.transport is not None else {}),
+                    **({"critic_read": self.critic_read.state_dict()}
+                       if getattr(self, "critic_read", None) not in (None, getattr(self, "noisy_critic", None)) else {}))
+
+    def restore_critic_read(self, state):
+        """Restore an active generator-side critic read; the default read has no state."""
+        active = getattr(self, "critic_read", None) not in (None, getattr(self, "noisy_critic", None))
+        if not active:
+            if state is not None:
+                raise ValueError("default word critic read cannot restore research read state")
+        elif state is None:
+            raise ValueError("active word critic read is missing its checkpoint")
+        else:
+            self.critic_read.load_state_dict(state)
 
     def restore_component_transport(self, state):
         """Restore optional consumer counters alongside the existing policy.

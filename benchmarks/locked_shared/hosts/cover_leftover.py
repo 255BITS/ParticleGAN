@@ -430,6 +430,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
     if components is not None:
         opt_g, opt_d, gan, penalty = components.bind(
             generator=residual, critic=critic, priors=[prior_p, prior_m], opt_g=opt_g, opt_d=opt_d)
+    read = components.generator_critic_read(critic) if components is not None else critic
     ema = _EMA(generator_params, decay=float(recipe.knob("ema")))
     poles_p, poles_m, neu = teacher_poles(field, recipe.knob("teacher"))
     half = max(1, int(recipe.knob("batch")) // 2)
@@ -490,12 +491,14 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         d_loss.backward()
         schedule_optimizer(opt_d, step)
         opt_d.step()
+        if read is not critic:
+            read.observe(fake)
 
         fake_p, fake_m = fake_batch()
         fake = torch.cat([fake_p, fake_m], dim=0)
         if noise_policy is not None:
             fake = noise_policy.output(fake, generator_step=True)
-        g_loss = gan.g_loss(critic(fake), critic(real.detach()))
+        g_loss = gan.g_loss(read(fake), read(real.detach()))
         protected_adversarial = g_loss
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
         if components is not None and components.uses_recipe_prior:
@@ -513,7 +516,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         def protected_evaluator():
             current_p = neu + residual.delta(1.0) + prior_p.z[rows_p] + jitter_p
             current_m = neu + residual.delta(-1.0) + prior_m.z[rows_m] + jitter_m
-            adversarial = gan.g_loss(critic(torch.cat([current_p, current_m])), critic(real.detach()))
+            adversarial = gan.g_loss(read(torch.cat([current_p, current_m])), read(real.detach()))
             paired = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
             paired = paired + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
             return (adversarial, paired) if cover_w > 0.0 else (adversarial,)

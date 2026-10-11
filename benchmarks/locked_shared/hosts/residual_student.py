@@ -216,6 +216,9 @@ def train(*, pairing: str = "shared", echo: bool = False,
     if components is not None:
         opt_g, opt_d, gan, regularizer = components.bind(
             generator=head, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
+    # The generator reads the fast arc; the slow arc is repeated conditioning.
+    fast_first = lambda fast, slow: critic(slow, fast)  # noqa: E731
+    read = components.generator_critic_read(fast_first) if components is not None else fast_first
     _emit({
         "event": "config",
         "family": "residual_student",
@@ -254,14 +257,16 @@ def train(*, pairing: str = "shared", echo: bool = False,
         d_loss.backward()
         schedule_optimizer(opt_d, step - 1)
         opt_d.step()
+        if read is not fast_first:
+            read.observe(fake.detach(), slow)
 
         flags = [p.requires_grad for p in critic.parameters()]
         critic.requires_grad_(False)
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = head(slow, prior.z)
-            fake_scores = critic(slow, fake)
-            protected_real_scores = critic(slow, paired).detach()
+            fake_scores = read(fake, slow)
+            protected_real_scores = read(paired, slow).detach()
             g_loss = gan.g_loss(fake_scores, protected_real_scores)
             protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
@@ -283,7 +288,7 @@ def train(*, pairing: str = "shared", echo: bool = False,
             protected = (protected_adversarial, residual) if both else (protected_adversarial,)
             def protected_evaluator():
                 current = head(slow, prior.z)
-                adversarial = gan.g_loss(critic(slow, current), protected_real_scores)
+                adversarial = gan.g_loss(read(current, slow), protected_real_scores)
                 return (adversarial, (current[mask] - fast[mask]).pow(2).mean()) if both else (adversarial,)
             constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)

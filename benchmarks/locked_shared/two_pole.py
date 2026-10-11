@@ -125,6 +125,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         opt_p, opt_d, gan, regularizer = components.bind(
             generator=None, critic=base_critic, direct_particles=[particles],
             opt_g=opt_p, opt_d=opt_d)
+    read = components.generator_critic_read(critic) if components is not None else critic
     real = real_batch(LOCKED_SHARED.n_particles)
     stranger = torch.linspace(-3.0, 3.0, LOCKED_SHARED.n_particles).unsqueeze(1)
     for step in range(1, TOY_STEPS + 1):
@@ -138,13 +139,15 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         (d_loss + regularizer(critic, real, fake, step=step)).backward()
         schedule_optimizer(opt_d, step - 1)
         opt_d.step()
+        if read is not critic:
+            read.observe(fake)
 
         opt_p.zero_grad(set_to_none=True)
-        d_real = critic(real).detach()
+        d_real = read(real).detach()
         generated = particles if pairing == "live" else stranger
         if noise_policy is not None:
             generated = noise_policy.output(generated, generator_step=True)
-        paired = critic(generated)
+        paired = read(generated)
         g_loss = gan.g_loss(paired, d_real)
         protected_adversarial = g_loss
         g_loss = g_loss + particle_l2 * particles.square().mean()
@@ -152,7 +155,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
             g_loss = components.add_transport_loss(g_loss, generated, real)
         def protected_evaluator():
             current = particles if pairing == "live" else stranger
-            return (gan.g_loss(critic(current), d_real),)
+            return (gan.g_loss(read(current), d_real),)
         constraint_geometry_backward(g_loss, opt_p, (protected_adversarial,),
                                      protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_p, step - 1)

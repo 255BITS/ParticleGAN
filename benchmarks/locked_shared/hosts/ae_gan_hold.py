@@ -182,6 +182,7 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
     if components is not None:
         opt_g, opt_d, gan, regularizer = components.bind(
             generator=decoder, encoder=encoder, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
+    read = components.generator_critic_read(critic) if components is not None else critic
     # The source's removed regularizer audit reset the CPU RNG to seed 0 and
     # consumed three uniform values (Linear(2, 1) initialization), then two
     # 8x2 normal tensors. Preserve that training-data stream for EVERY candidate
@@ -233,6 +234,8 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
             (d_loss + penalty).backward()
             schedule_optimizer(opt_d, step - 1)
             opt_d.step()
+            if read is not critic:
+                read.observe(fake)
 
         query, offset = encoder(data).chunk(2, dim=1)
         encoded = recipe.encode(query, prior, offset=offset)
@@ -250,8 +253,8 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
             loss = loss + cfg.particle_l2 * prior.z.square().mean()
         protected = [recon] if cfg.reconstruction_weight > 0 else []
         if cfg.adversarial_weight > 0:
-            real_logits = critic(data).squeeze(-1).detach()
-            fake_logits = critic(generated).squeeze(-1)
+            real_logits = read(data).squeeze(-1).detach()
+            fake_logits = read(generated).squeeze(-1)
             adv = gan.g_loss(fake_logits, real_logits)
             anchors = _anchors()
             cover = torch.cdist(anchors, generated).min(dim=1).values.mean()
@@ -276,7 +279,7 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
                       if cfg.reconstruction_weight > 0 else [])
             if cfg.adversarial_weight > 0:
                 current = decoder(prior.z[rows] + width_noise)
-                adversarial = gan.g_loss(critic(current).squeeze(-1), real_logits)
+                adversarial = gan.g_loss(read(current).squeeze(-1), real_logits)
                 covered = torch.cdist(anchors, current).min(dim=1).values.mean()
                 result.append(cfg.adversarial_weight * adversarial + cfg.cover_weight * covered)
             return tuple(result)

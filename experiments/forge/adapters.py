@@ -272,6 +272,10 @@ class _Run:
         guards = {"all_finite": self.finite, "optimizer_updates": counts,
                   "hooks_exercised": hooks, "mechanism_audit": mechanisms,
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
+        if trainer.critic_read is not trainer._noisy_D:
+            read = trainer.critic_read.summary()
+            guards["generator_critic_read"] = read
+            guards["hooks_exercised"] = hooks and read["observes"] == trainer.completed_steps
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
         if self.optimizer_diagnostics is not None:

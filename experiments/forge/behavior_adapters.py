@@ -241,6 +241,7 @@ class BehaviorComponents:
         self.schedule_observations = {}
         self.noise = _NamedNoise(self)
         self.bound = False
+        self.critic_reads = []
 
     def encoder_recipe(self, cfg):
         self.recipe = self.recipe.replace(encoder_mode="ae", z_dim=2, num_particles=cfg.n_particles,
@@ -396,6 +397,17 @@ class BehaviorComponents:
             self.penalty.diagnostic = self.diagnostic
         return public_g, public_d, self.recipe.make_loss(), self.penalty
 
+    def generator_critic_read(self, critic):
+        """The recipe's generator-side read of ``critic``; the critic itself by default.
+
+        A research read is observed by the host after each critic step on the
+        detached critic-phase fakes; its activation is audited in ``guards``.
+        """
+        read = self.recipe.make_generator_critic_read(critic)
+        if read is not critic:
+            self.critic_reads.append(read)
+        return read
+
     def schedule_optimizer(self, optimizer, completed_updates):
         apply_optimizer_schedule(completed_updates, self.recipe, optimizer)
         network, prior = learning_rate_scales(completed_updates, self.recipe)
@@ -476,11 +488,16 @@ class BehaviorComponents:
         transport_requested = bool(self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight)
         transport_calls = self.transport_consumer.active_calls if hasattr(self, 'transport_consumer') else 0
         transport_exercised = not transport_requested or transport_calls == steps.get('generator', steps.get('prior', 0))
+        reads = [read.summary() for read in self.critic_reads]
+        read_requested = self.recipe.generator_critic_read != "none"
+        read_exercised = not read_requested or (bool(reads) and all(
+            row["observes"] == steps.get("discriminator", 0) for row in reads))
         return dict(all_finite=finite, optimizer_updates=steps,
-                    hooks_exercised=not mechanism_blockers(mechanisms) and transport_exercised,
+                    hooks_exercised=not mechanism_blockers(mechanisms) and transport_exercised and read_exercised,
                     mechanism_audit=mechanisms,
                     component_transport_requested=transport_requested,
                     component_transport_active_calls=transport_calls,
+                    **({"generator_critic_read": reads} if read_requested else {}),
                     unintended_rng_deviations=sum(a["unintended_rng_deviations"] for a in self.rng_audits))
 
     def optimizer_group_bindings(self):

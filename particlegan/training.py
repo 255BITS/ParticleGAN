@@ -67,7 +67,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_family": "formulation", "eps": 1e-8,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
-                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
+                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
+                        "generator_critic_read": "none"}
 
 
 class GANTrainer:
@@ -218,6 +219,9 @@ class GANTrainer:
                 for name in self._STREAMS if name not in ("eval_generator", "model_generator"))):
             raise ValueError("model stream must be separate from other training streams and global draws")
         self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator)
+        # The generator's read of the critic; the critic itself unless the
+        # recipe selects a research read. D's loss and penalty never use it.
+        self.critic_read = recipe.make_generator_critic_read(self._noisy_D, probe=self.D)
 
     @property
     def latent_damping(self):
@@ -374,6 +378,8 @@ class GANTrainer:
         loss_d.backward()
         self.opt_d.step()
         self.policy.after_critic_step()
+        read = self.critic_read
+        read_stats = read.observe(fake) if read is not critic else None
 
         self.D.eval()
         self.G.train()
@@ -382,14 +388,14 @@ class GANTrainer:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
             fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
-            fake_logits = critic(fake_g)
+            fake_logits = read(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
                 raise ValueError("generator_real must match the real sample shape")
             if len(real_g) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-            real_logits = critic(real_g)
+            real_logits = read(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             transport = (recipe.kinetic_transport_loss(fake_g, real_g)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
@@ -417,7 +423,7 @@ class GANTrainer:
                 sampled_latent = latent.detach().clone()
                 def protected_evaluator():
                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    logits = read(self._generate(self.G, replay, sigma_out, noise, rows=indices))
                     return (self.loss.g_loss(logits, real_logits),)
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
@@ -440,6 +446,8 @@ class GANTrainer:
             result["kinetic_transport_local"] = transport_local.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
+            if read_stats is not None:
+                result["critic_read_stats"] = dict(read_stats)
         return result
 
     def _table_tester(self):
@@ -531,6 +539,8 @@ class GANTrainer:
             **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
             **({"reopen_guard": self.policy.reopen_guard.state_dict()}
                if self.policy.reopen_guard is not None else {}),
+            **({"critic_read": self.critic_read.state_dict()}
+               if self.critic_read is not self._noisy_D else {}),
         })
 
     def load_state_dict(self, state):
@@ -663,6 +673,8 @@ class GANTrainer:
             self.row_evidence.check_state(state["row_evidence"])
         if self.policy.surprise is not None:
             deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.critic_read is not self._noisy_D:
+            self.critic_read.check_state(state["critic_read"])
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.check_state(state["reopen_guard"], roles=self.policy.roles,
                                                  completed_steps=state["completed_steps"],
@@ -709,6 +721,8 @@ class GANTrainer:
             self.row_evidence.load_state_dict(state["row_evidence"])
         if self.policy.surprise is not None:
             self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.critic_read is not self._noisy_D:
+            self.critic_read.load_state_dict(state["critic_read"])
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
                                                      completed_steps=state["completed_steps"],

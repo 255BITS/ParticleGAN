@@ -65,6 +65,9 @@ class Recipe:
     reg_every: int = 1
     # Optional finite same-training-panel critic step guard; none preserves history.
     critic_step_mode: str = "none"
+    # Generator-side critic read (``make_generator_critic_read``); "none" reads
+    # the critic directly. "stall_reach" is the closed-PR #107 research option.
+    generator_critic_read: str = "none"
     prior_reg: float = 0.0
     # The recipe owns learning/freezing and every latent-prior penalty. Tasks
     # supply the initial distribution, capacity and sampling law.
@@ -291,6 +294,11 @@ class Recipe:
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
             raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if self.generator_critic_read not in ("none", "stall_reach"):
+            raise ValueError("generator_critic_read must be none or stall_reach")
+        if self.generator_critic_read == "stall_reach" and not (
+                type(self.reg_kappa) in (int, float) and math.isfinite(self.reg_kappa) and self.reg_kappa > 0):
+            raise ValueError("generator_critic_read='stall_reach' requires a finite positive reg_kappa")
         if self.critic_step_mode not in ("none", "finite_cap"):
             raise ValueError("critic_step_mode must be none or finite_cap")
         if self.critic_step_mode == "finite_cap" and (
@@ -677,6 +685,20 @@ class Recipe:
         """
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+
+    def make_generator_critic_read(self, critic, *, probe=None):
+        """The critic as the generator reads it: ``critic`` itself by default.
+
+        With ``generator_critic_read="stall_reach"`` this returns a
+        ``StallReachRead``: call ``read.observe(fake.detach())`` after the
+        critic step, then ``gan.g_loss(read(fake), read(real))``. ``probe``
+        (default ``critic``) is the noise-free critic whose input slope sets
+        the width. The critic's loss and penalty never use the read.
+        """
+        if self.generator_critic_read == "none":
+            return critic
+        from .critic_read import StallReachRead
+        return StallReachRead(critic, kappa=self.reg_kappa, probe=probe)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

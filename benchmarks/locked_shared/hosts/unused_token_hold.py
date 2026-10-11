@@ -241,6 +241,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
     if components is not None:
         opt_g, opt_d, gan, reg = components.bind(
             generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
+    read = components.generator_critic_read(critic) if components is not None else critic
     real = _batch(CONCEPT_DIR)
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0
@@ -258,13 +259,15 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         d_loss.backward()
         schedule_optimizer(opt_d, step)
         opt_d.step()
+        if read is not critic:
+            read.observe(fake)
 
         critic.requires_grad_(False)
         opt_g.zero_grad(set_to_none=True)
         fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
         if noise_policy is not None:
             fake_g = noise_policy.output(fake_g, generator_step=True)
-        g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
+        g_loss = gan.g_loss(read(fake_g), read(real).detach())
         # Demo cover and the n=12 cloud are recorded on the card and are
         # not added here. The train pin is the unused-token hold.
         if float(recipe.fm_weight) != 0.0:
@@ -284,7 +287,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
             loss = components.add_transport_loss(loss, fake_g, real)
         def protected_evaluator():
             current = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
-            adversarial = gan.g_loss(critic(current), critic(real).detach())
+            adversarial = gan.g_loss(read(current), read(real).detach())
             if float(recipe.fm_weight) != 0.0:
                 adversarial = adversarial + float(recipe.fm_weight) * (
                     critic.features(real).detach().mean(0) - critic.features(current).mean(0)).pow(2).mean()

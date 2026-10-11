@@ -463,6 +463,10 @@ def _fit(
     if components is not None:
         opt_g, opt_d, gan, reg = components.bind(
             generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
+    # One generator-side read per conditioned scale; each observes its own fakes.
+    reads = {scale: components.generator_critic_read(critic) if components is not None else critic
+             for scale in EVAL_SCALES}
+    d_fakes = {}
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     reals = {scale: _batch(targets[scale]) for scale in EVAL_SCALES}
@@ -482,6 +486,7 @@ def _fit(
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=False)
+            d_fakes[scale] = fake
             cap, _stats = reg.penalty(
                 components.conditioned_score(critic, scale) if components is not None else
                 lambda z, scale=scale: critic.score(z, scale),
@@ -495,18 +500,21 @@ def _fit(
         d_loss.backward()
         schedule_optimizer(opt_d, step)
         opt_d.step()
+        for scale, read in reads.items():
+            if read is not critic:
+                read.observe(d_fakes[scale], scale)
 
         critic.requires_grad_(False)
         opt_g.zero_grad(set_to_none=True)
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
-            real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
+            real_scores = {scale: reads[scale](reals[scale], scale) for scale in EVAL_SCALES}
         transport_panel = []
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
-            g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
+            g_loss = g_loss + gan.g_loss(reads[scale](fake, scale), real_scores[scale]) / n_scales
             transport_panel.append(fake[0])
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
@@ -521,7 +529,7 @@ def _fit(
             paired_cover = student.odd.new_zeros(())
             for scale in EVAL_SCALES:
                 current = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
-                adversarial = adversarial + gan.g_loss(critic(current, scale), real_scores[scale]) / n_scales
+                adversarial = adversarial + gan.g_loss(reads[scale](current, scale), real_scores[scale]) / n_scales
                 paired_cover = paired_cover + F.mse_loss(student.state(scale), targets[scale])
             return adversarial, paired_cover
         constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover),

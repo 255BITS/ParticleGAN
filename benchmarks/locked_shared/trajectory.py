@@ -172,6 +172,9 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     if components is not None:
         opt_g, opt_d, gan, regularizer = components.bind(
             generator=generator, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
+    # The generator reads the fast arc; the slow arc is repeated conditioning.
+    fast_first = lambda fast, slow: critic(slow, fast)  # noqa: E731
+    read = components.generator_critic_read(fast_first) if components is not None else fast_first
     steps = PROTOCOL["steps"]
     for step in range(1, steps + 1):
         if noise_policy is not None:
@@ -186,14 +189,16 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
         d_loss.backward()
         schedule_optimizer(opt_d, step - 1)
         opt_d.step()
+        if read is not fast_first:
+            read.observe(fake.detach(), slow)
 
         flags = [p.requires_grad for p in critic.parameters()]
         critic.requires_grad_(False)
         try:
             opt_g.zero_grad(set_to_none=True)
             fake = generator(slow, prior.z)
-            fake_scores = critic(slow, fake)
-            protected_real_scores = critic(slow, paired).detach()
+            fake_scores = read(fake, slow)
+            protected_real_scores = read(paired, slow).detach()
             g_loss = gan.g_loss(fake_scores, protected_real_scores)
             protected_adversarial = g_loss
             # Cover matches the true fast cloud (set coverage). It does not
@@ -209,7 +214,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
                 g_loss = components.add_transport_loss(g_loss, fake, fast, conditioning=slow)
             # Reuse the original real logits; do not add a second real forward.
             def protected_evaluator():
-                return (gan.g_loss(critic(slow, generator(slow, prior.z)), protected_real_scores),)
+                return (gan.g_loss(read(generator(slow, prior.z), slow), protected_real_scores),)
             constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
                                          protected_evaluator=protected_evaluator)
             schedule_optimizer(opt_g, step - 1)

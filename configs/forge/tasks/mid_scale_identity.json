@@ -98,35 +98,44 @@
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
+      "experiments/forge/behavior_adapters.py": "fedb9601ff6503789244ae95f0da038d13bd3f727a3f7216c13350bcfd427a29"
     },
     "evaluator_revision": {
-      "id": "combined-opt-in-prior-source-v1",
-      "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+      "id": "generator-critic-read-hooks-v1",
+      "change": "Opt-in generator-side critic read (Recipe.generator_critic_read) hooks and current host source metadata only. All task conditions and numerical gates retained; the default read is the critic itself and preserves trained state bitwise. Archived task cards and receipts retain their original source.",
+      "original_task_commit": "37e3668b5d103e2df40c918863dbe7c27122348f",
+      "original_task_path": "configs/forge/tasks/mid_scale_identity.json",
       "previous_source_sha256": {
-        "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+        "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
       },
       "previous_revision": {
-        "id": "opt-in-coulomb-prior-reference-v1",
-        "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+        "id": "combined-opt-in-prior-source-v1",
+        "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
         "previous_source_sha256": {
-          "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+          "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
         },
         "previous_revision": {
-          "id": "opt-in-component-objective-hooks-v1",
-          "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
-          "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
-          "original_task_path": "configs/forge/tasks/mid_scale_identity.json",
-          "previous_source_sha256": {},
+          "id": "opt-in-coulomb-prior-reference-v1",
+          "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+          "previous_source_sha256": {
+            "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+          },
           "previous_revision": {
-            "id": "explicit-equality-and-word-prior-betas-v3",
-            "previous_source_sha256": {
-              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
-              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-              "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
-            },
-            "previous_revision": null,
-            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged."
+            "id": "opt-in-component-objective-hooks-v1",
+            "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+            "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+            "original_task_path": "configs/forge/tasks/mid_scale_identity.json",
+            "previous_source_sha256": {},
+            "previous_revision": {
+              "id": "explicit-equality-and-word-prior-betas-v3",
+              "previous_source_sha256": {
+                "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+                "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
+              },
+              "previous_revision": null,
+              "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged."
+            }
           }
         }
       }

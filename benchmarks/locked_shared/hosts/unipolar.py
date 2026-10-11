@@ -275,6 +275,10 @@ def _fit_rpgan(
     if components is not None:
         opt_g, opt_d, gan, reg = components.bind(
             generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
+    # One generator-side read per conditioned scale; each observes its own fakes.
+    reads = {scale: components.generator_critic_read(critic) if components is not None else critic
+             for scale in SCALES}
+    d_fakes = {}
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     real = {
@@ -294,6 +298,7 @@ def _fit_rpgan(
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=False)
+            d_fakes[scale] = fake
             cap, _stats = reg.penalty(
                 components.conditioned_score(critic, scale) if components is not None else
                 lambda z, scale=scale: critic.score(z, scale),
@@ -306,18 +311,21 @@ def _fit_rpgan(
         d_loss.backward()
         schedule_optimizer(opt_d, step)
         opt_d.step()
+        for scale, read in reads.items():
+            if read is not critic:
+                read.observe(d_fakes[scale], scale)
 
         critic.requires_grad_(False)
         opt_g.zero_grad(set_to_none=True)
         g_loss = student.odd.new_zeros(())
         with torch.no_grad():
-            real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
+            real_scores = {scale: reads[scale](real[scale], scale) for scale in SCALES}
         transport_panel = []
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=True)
-            g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
+            g_term = gan.g_loss(reads[scale](fake, scale), real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
             transport_panel.append(fake[0])
         protected_adversarial = g_loss
@@ -329,7 +337,7 @@ def _fit_rpgan(
             adversarial = student.odd.new_zeros(())
             for scale in SCALES:
                 current = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
-                adversarial = adversarial + 0.5 * gan.g_loss(critic(current, scale), real_scores[scale])
+                adversarial = adversarial + 0.5 * gan.g_loss(reads[scale](current, scale), real_scores[scale])
             return (adversarial,)
         constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
                                      protected_evaluator=protected_evaluator)

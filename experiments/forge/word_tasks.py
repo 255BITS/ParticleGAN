@@ -216,6 +216,7 @@ def restore_parent(request, task, prerequisites, fixture, context):
     fixture.policy.load_state_dict(saved["fixture"]["api_state"])
     fixture.recipe.restore_prior_regularizer(fixture.spread, saved["fixture"].get("prior_regularizer"))
     fixture.restore_component_transport(saved["fixture"].get("component_transport"))
+    fixture.restore_critic_read(saved["fixture"].get("critic_read"))
     fixture.data_generator.set_state(saved["fixture"]["data_generator"].cpu())
     fixture.max_steps = saved["fixture"]["max_steps"]
     if state_digest(fixture.state_dict()) != state_digest(saved["fixture"]):
@@ -338,6 +339,10 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
     guards = dict(all_finite=finite, optimizer_updates=counts,
         hooks_exercised=fixture.opt_d.record.observed_steps == fixture.completed_steps and not mechanism_blockers(mechanisms),
         mechanism_audit=mechanisms, unintended_rng_deviations=sum(r["unintended_rng_deviations"] for r in rng_audits))
+    if fixture.critic_read is not fixture.noisy_critic:
+        guards["generator_critic_read"] = fixture.critic_read.summary()
+        guards["hooks_exercised"] = guards["hooks_exercised"] and (
+            guards["generator_critic_read"]["observes"] == fixture.completed_steps)
     evidence = dict(observations=observations, confirmations=confirmations, live=observations[-1], host=host,
         scoring_weights="live", completed_steps=fixture.completed_steps, executed_updates=updates,
         guards=guards, rng_audits=rng_audits, continuity=continuity,

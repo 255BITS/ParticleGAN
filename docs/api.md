@@ -1264,9 +1264,29 @@ caller.
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
+| `recipe.make_generator_critic_read(D, *, probe=None)` | The critic as the generator reads it: `D` itself by default (see below) |
 | `recipe.make_prior_regularizer(prior=None, reference=None, **kwargs)` | Selected VICReg, Coulomb, SIGReg, moment tether or initial MMD penalty, with `weight=recipe.prior_reg` applied once. `prior` and `reference` are aliases for the same initialized prior or tuple of priors. |
 | `recipe.prior_regularizer_checkpoint(module)` | Optional state for an active stochastic prior regularizer |
 | `recipe.restore_prior_regularizer(module, state)` | Validate/restore regularizer state for exact caller-owned continuation |
+
+### Generator-side critic read (research option)
+
+`recipe.make_generator_critic_read(D)` returns `D` itself unless the recipe sets
+`generator_critic_read="stall_reach"` (closed PR #107; off by default, not in any
+preset). Then it returns a `particlegan.critic_read.StallReachRead`: the generator
+reads the mean critic over `x` and `x ± w·e_i` for every input coordinate, with a
+width set from D's measured input slope. D's own loss and penalty are unchanged,
+and the read draws no random numbers. In a familiar loop:
+
+```python
+read = recipe.make_generator_critic_read(D)
+# ... critic step: d_loss.backward(); opt_d.step()
+read.observe(fake.detach())                 # after opt_d.step(), on the critic-phase fakes
+g_loss = gan.g_loss(read(fake), read(real))
+```
+
+Save `read.state_dict()` with your checkpoint. `GANTrainer` does all of this
+itself and checkpoints the read.
 
 ### Regularization factories
 
