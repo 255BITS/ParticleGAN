@@ -2,6 +2,8 @@
 
 Direction blend passes **6/6 Tier 1 and 9/21 Tier 2**, versus the matched incumbent's **6/6 and 7/21**. It preserves all seven incumbent Tier 2 passes and repairs trajectory and residual student. All 21 Tier 2 questions were measured for each recipe. Twelve required Tier 2 failures remain; both required Tier 3 cells are **BLOCKED** by the ordinary prerequisite veto.
 
+The [Tier 2 measurement and prior investigation](../bcap-tier2-investigation/README.md) lists every task's endpoint score and target, complete temporal requirements, and saved prior diagnostics relevant to a VICReg follow-up. It preserves these trained results and adds no training.
+
 This is a best-observed research baseline comparison. The screening profile remains provisional: these results do not establish a calibrated scientific default, robustness across seeds, scale transfer or endurance. The frozen [selection rule](spec.json) also requires software acceptance and exact saved-state comparison before changing the named preset or family selection. The final API decision is recorded in [DEFAULT_SELECTION.md](DEFAULT_SELECTION.md).
 
 ## Comparison contract

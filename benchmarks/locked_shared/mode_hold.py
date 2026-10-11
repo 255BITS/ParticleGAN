@@ -138,8 +138,10 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         critic = wrap_input(critic, noise_policy)
     gan = (gan_factory or (training_recipe.make_loss if training_recipe else make_gan_loss))()
     regularizer = (cap_factory or (training_recipe.make_gradient_penalty if training_recipe else make_b_cap))()
+    if training_recipe is not None:
+        training_recipe.apply_prior_policy(prior)
     vicreg = (ParticleRegularizer(weight=recipe.vicreg_weight) if training_recipe is None
-              else training_recipe.make_prior_regularizer())
+              else training_recipe.make_prior_regularizer(prior=prior))
     opt_g = torch.optim.Adam(
         list(generator.parameters()) + list(prior.parameters()),
         lr=LR,

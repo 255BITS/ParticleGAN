@@ -33,7 +33,8 @@ def recipe_defaults(name):
     """
     from particlegan import get_recipe
 
-    recipe = get_recipe()
+    # Existing flat study schemas retain their KA2 training contract.
+    recipe = get_recipe("ka2")
     keys = ("batch_size", "z_dim", "num_particles", "lr", "d_lr_mult",
             "reg_coeff", "reg_every", "lr_anneal_start", "lr_floor")
     defaults = {key: getattr(recipe, key) for key in keys}

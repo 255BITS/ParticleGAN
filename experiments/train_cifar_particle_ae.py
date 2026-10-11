@@ -63,7 +63,7 @@ def training_recipe(cfg):
     The critic penalty is applied lazily every 4th step (coefficient x4) for
     image-scale cost; laziness changes only its frequency, not the technique.
     """
-    return get_recipe('ae_gan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+    return get_recipe('ae_gan', trainer="ka2", z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
                       sigma_rel=cfg['sigma_rel'], routing_temperature=cfg['temperature'],
                       batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
                       d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'],

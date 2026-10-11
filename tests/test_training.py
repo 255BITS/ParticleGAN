@@ -4,11 +4,11 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
+from particlegan import DEFAULT_RECIPE, GANTrainer, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
 
 
-def make_trainer(*, particles=12, steps=8, buffers=False, dropout=False, **overrides):
-    recipe = get_recipe(num_particles=particles, z_dim=3,
+def make_trainer(*, preset="gan", particles=12, steps=8, buffers=False, dropout=False, **overrides):
+    recipe = get_recipe(preset, num_particles=particles, z_dim=3,
                         batch_size=6, total_steps=steps, **overrides)
     generator = nn.Sequential(nn.Linear(3, 8), nn.BatchNorm1d(8) if buffers else nn.Identity(),
                               nn.LeakyReLU(.2), nn.Dropout(.25) if dropout else nn.Identity(),
@@ -40,12 +40,10 @@ def assert_checkpoint_equal(left, right):
 
 
 def test_winning_recipe_is_the_common_default():
-    assert get_recipe() == Recipe()
+    assert get_recipe() == get_recipe(DEFAULT_RECIPE)
     winner = get_recipe()
-    assert winner.name == 'ka2'  # the K3P hyperparameters with the KA2 critic penalty
-    assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
-    assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
-    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
+    assert winner.name == DEFAULT_RECIPE
+    assert Recipe(**winner.to_dict()) == winner
     assert isinstance(make_trainer(), GANTrainer)
 
 
@@ -149,7 +147,7 @@ def test_freeze_restored_when_generator_callback_raises():
 
 @pytest.mark.parametrize("schema", [2, 3, 4])
 def test_historical_k3p_alias_cannot_resume_as_ka2(schema):
-    trainer = make_trainer()
+    trainer = make_trainer(preset="ka2")
     trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()
     recipe = dict(checkpoint["recipe"])
@@ -167,7 +165,7 @@ def test_historical_k3p_alias_cannot_resume_as_ka2(schema):
         old["k3p"] = {"latent": generator["latent"],
                        "critic": {"penalty": critic["record"], "ema": critic["ema"],
                                   "guard": critic["guard"]}}
-    restored = make_trainer()
+    restored = make_trainer(preset="ka2")
     initial = restored.state_dict()
     with pytest.raises(ValueError, match="schema" if schema < 4 else "recipe"):
         restored.load_state_dict(old)
@@ -176,11 +174,11 @@ def test_historical_k3p_alias_cannot_resume_as_ka2(schema):
 
 @pytest.mark.parametrize("formulation", ["ka2", "k3p"])
 def test_current_checkpoint_without_unused_arm_selector_still_resumes(formulation):
-    trainer = make_trainer(critic_formulation=formulation)
+    trainer = make_trainer(preset=formulation)
     trainer.step(torch.arange(12, dtype=torch.float32).reshape(6, 2) / 8)
     checkpoint = trainer.state_dict()
     assert "reg_arm" not in checkpoint["recipe"]
-    restored = make_trainer(critic_formulation=formulation)
+    restored = make_trainer(preset=formulation)
     restored.load_state_dict(checkpoint)
     assert restored.completed_steps == 1 and restored.recipe.reg_arm is None
     assert restored.recipe.effective_critic_formulation == formulation

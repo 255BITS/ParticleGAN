@@ -18,12 +18,23 @@ def recipe_owned_prior(task):
 
 def prior_policy_receipt(recipe, *priors):
     """Record policy and the actual location-table freezing, without draws."""
-    return {"contract": RECIPE_PRIOR_CONTRACT, "update": recipe.prior_update,
+    result = {"contract": RECIPE_PRIOR_CONTRACT, "update": recipe.prior_update,
             "regularizer": recipe.prior_regularizer, "weight": recipe.prior_reg,
             "target_std": recipe.prior_reg_target_std, "eps": recipe.prior_reg_eps,
             "l2": recipe.prior_l2,
             "applicability": "latent_prior" if priors else "not_sampled",
             "trainable_locations": any(prior.z.requires_grad for prior in priors)}
+    if recipe.prior_proximal_strength:
+        result["proximal_strength"] = recipe.prior_proximal_strength
+    if recipe.prior_regularizer == "coulomb":
+        from particlegan.coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
+        result["coulomb"] = dict(softening=recipe.prior_coulomb_softening,
+            confinement=recipe.prior_coulomb_confinement, neighbors=recipe.prior_coulomb_neighbors,
+            pair_policy="deterministic_cyclic_offsets_v1",
+            references=[dict(rows=len(prior.z), center=getattr(prior, CENTER_BUFFER).tolist(),
+                             radius=float(getattr(prior, RADIUS_BUFFER)))
+                        for prior in priors if hasattr(prior, CENTER_BUFFER)])
+    return result
 
 
 def expected_prior_updates(task, evidence, completed_steps):
@@ -60,6 +71,20 @@ def validate_prior_policy(task, evidence, recipe=None):
                 or any(proof.get(key) != recipe.get(field, default)
                        for key, (field, default) in bindings.items())):
             return {"status": "INVALID", "reason": "prior policy proof contradicts the actual recipe"}
+        if proof.get("proximal_strength", 0.) != recipe.get("prior_proximal_strength", 0.):
+            return {"status": "INVALID", "reason": "prior proximal proof contradicts the actual recipe"}
+        if recipe.get("prior_regularizer") == "coulomb":
+            settings = {"softening": recipe.get("prior_coulomb_softening", .1),
+                        "confinement": recipe.get("prior_coulomb_confinement", .35),
+                        "neighbors": recipe.get("prior_coulomb_neighbors", 8),
+                        "pair_policy": "deterministic_cyclic_offsets_v1"}
+            coulomb = proof.get("coulomb", {})
+            if any(coulomb.get(key) != value for key, value in settings.items()):
+                return {"status": "INVALID", "reason": "Coulomb policy proof contradicts the actual recipe"}
+            if recipe.get("prior_update", "learned") == "learned" and recipe.get("prior_reg", 0.) > 0:
+                references = coulomb.get("references")
+                if not isinstance(references, list) or not references:
+                    return {"status": "INCOMPLETE", "reason": "missing fixed Coulomb initial reference"}
     return None
 
 

@@ -23,10 +23,10 @@ CLOUD = {"kind": "particle_cloud", "sigma": 0., "standardize": False,
 
 
 def test_formulations_are_explicit_and_default_checkpoint_recipe_stays_compatible():
-    assert get_recipe("ka2") == get_recipe()
-    assert "critic_formulation" not in get_recipe().to_dict()
+    assert get_recipe("ka2") == Recipe()
+    assert "critic_formulation" not in get_recipe("ka2").to_dict()
     critic = nn.Linear(2, 1)
-    assert type(get_recipe().make_critic_optimizer(critic)) is KA2CriticAdam
+    assert type(get_recipe("ka2").make_critic_optimizer(critic)) is KA2CriticAdam
     k3p = get_recipe("k3p")
     assert type(k3p.make_critic_optimizer(critic)) is K3PCriticAdam
     assert k3p.to_dict()["critic_formulation"] == "k3p"

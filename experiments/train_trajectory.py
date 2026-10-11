@@ -38,7 +38,7 @@ DEFAULTS = {
 
 def training_recipe(cfg):
     """The recipe default (critic penalty, optimizers, LR schedule) at this study's rates."""
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
         prior_update="learned" if cfg["prior"] == "learned" else "frozen",
         conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",

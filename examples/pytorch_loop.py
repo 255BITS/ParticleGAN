@@ -8,10 +8,9 @@ the same update GANTrainer performs, with the control flow in your hands:
 
 * role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
 * critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
-* ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``: Adam
-  optimizers whose ordinary ``step()`` does the recipe's step-time work
-  (currently KA2: spike guard, moment-surprise controller, EMA-critic update,
-  A2 latent damping),
+* ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``:
+  recipe-owned optimizers, currently BCAP DualNorm with direction blending,
+* sampled prior rows and protected generator loss bound before the G step,
 * ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
   critic loss like any other term.
 
@@ -32,6 +31,7 @@ import torch
 from torch import nn
 
 from particlegan import InputNoise, get_recipe, init, learning_rate_scales
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from particlegan.training import input_noise_std, output_noise_std
 
 
@@ -91,8 +91,7 @@ def main():
     init.deterministic_orthogonal_(prior)
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
-    # Adam optimizers ([generator, prior] groups, and the critic); the recipe's
-    # regularization runs inside their step(). The EMA critic is ours to allocate.
+    # Joint generator/prior optimizer and critic optimizer, selected by the recipe.
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, ema_critic=copy.deepcopy(critic))
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
@@ -138,7 +137,9 @@ def main():
             g_loss = gan.g_loss(noisy_critic(fake), noisy_critic(real).detach())
             prior_loss = spread(prior.z[particle_ids.unique()])
             total_g = g_loss + prior_loss  # spread already carries recipe.prior_reg
-            total_g.backward()
+            if hasattr(opt_g, "set_sampled_rows"):
+                opt_g.set_sampled_rows(prior.z, particle_ids)
+            constraint_geometry_backward(total_g, opt_g, (g_loss,))
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

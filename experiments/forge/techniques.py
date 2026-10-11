@@ -72,6 +72,8 @@ def technique_signature(value):
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
     if recipe.prior_update == "learned" and recipe.prior_l2 > 0:
         mechanisms["prior_l2"] = True
+    if recipe.prior_update == "learned" and recipe.prior_proximal_strength > 0:
+        mechanisms["prior_proximal"] = "initial_position_after_base_update_v1"
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -160,9 +162,17 @@ def recipe_field_active(name, value, *, task=None):
     if name == "lr_floor" and task is not None and not prior_active and recipe.network_lr_floor is not None:
         return False
     if name in {"prior_lr_mult", "prior_betas", "prior_eps", "prior_reg", "prior_l2",
-                "prior_reg_target_std", "prior_reg_eps"}:
+                "prior_reg_target_std", "prior_reg_eps", "prior_proximal_strength"}:
         if not prior_active:
             return False
+    if name.startswith("prior_coulomb_"):
+        return prior_active and recipe.prior_regularizer == "coulomb" and recipe.prior_reg > 0
     if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_reg == 0:
         return False
+    if name == "prior_reg_target_std" and recipe.prior_regularizer != "vicreg":
+        return False
+    if name == "prior_reg_eps" and recipe.prior_regularizer not in {"vicreg", "moment_tether"}:
+        return False
+    if name in {"prior_sigreg_projections", "prior_sigreg_knots"}:
+        return prior_active and recipe.prior_regularizer == "sigreg" and recipe.prior_reg > 0
     return True

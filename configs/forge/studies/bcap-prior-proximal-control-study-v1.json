@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 45000,
+    "candidate_budget_seconds": 45000,
+    "id": "bcap-prior-proximal-control-v1"
+  },
+  "candidate": "bcap-prior-proximal-control-v1",
+  "competing_explanation": "Source or host integration may change the control; historical 9/21 evidence cannot fill current cells.",
+  "control": {
+    "candidate_id": "bcap-prior-proximal-base-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "modes",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "hypothesis": "Reproduce the unchanged BCAP leader on this feature's frozen source before comparing prior changes.",
+  "id": "bcap-prior-proximal-control-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "modes",
+    "op": "==",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14"
+      },
+      "path": "reports/forge/recipe-prior-refactor/publication/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

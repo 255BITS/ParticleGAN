@@ -1,6 +1,6 @@
-# KA2: the default ParticleGAN formulation
+# KA2: the previous ParticleGAN default
 
-`get_recipe()` and `GANTrainer` train with **KA2**. It is a relativistic-paired
+`get_recipe("ka2")` and `GANTrainer` with that explicit recipe train with **KA2**. It is a relativistic-paired
 logistic GAN with a learned particle prior, and the same recipe as the earlier
 [K3P](k3p.md) formulation except for the critic: the critic penalty and its EMA
 critic are driven by the critic's own Adam statistics instead of by its
