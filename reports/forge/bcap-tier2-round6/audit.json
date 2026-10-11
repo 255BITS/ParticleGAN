@@ -1,0 +1,1903 @@
+{
+  "frozen_source_checks": [
+    {
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1207,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22/forge-source.json",
+          "sha256": "b2d6fb6e91307809d9c9b31588f19d150bf258c460ae5c7a07bd14bfc8e1c4eb"
+        }
+      ],
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_commits": [
+        "18b0487bf8761b89cd9ddf36d0a66b787512dd98"
+      ],
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_six_questions_preserved": true,
+  "own_checkpoint_producers": [
+    {
+      "history_reset": false,
+      "parent_attempt_id": "79830b7ba76b4b208ea60e24cd639d41",
+      "parent_checkpoint_sha256": "54906bc5b2f852ef98e6d148515649b41032c7c22ce68d498bf493c6121f91a2",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "parent_state_sha256": "4ae965014d1a7d17ba30210b433bb9058df1e2a8ea54052ad209f03cc2570ef6",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "control",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "d275d224e2b54812a55b58fc0f443101",
+      "parent_checkpoint_sha256": "d084d36417c54fd61242d0da3452d5751f0e9f78fe348435b662d91bee8280b2",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "parent_state_sha256": "632bddf52219902c486cedee35a938c850ff24ddc2abd76f249b1e29c0b4d4bb",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "control",
+      "scope": "ordinary",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "f0f2a7596c4d4cdbad9e26fdf48af123",
+      "parent_checkpoint_sha256": "ab57890e10111d346060165341d3e6a6db01091db30002cf1b9b80b6e7539582",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "parent_state_sha256": "a1333b5ce9c2156c82510b8d153c7b1e0e3ae6d7416f20d48b3eefcd22e46308",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "zero_damping",
+      "scope": "ordinary",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "c7508d7af21e411db3617d7007bbcadf",
+      "parent_checkpoint_sha256": "b0e5fec1739121747d3e4eba93e036455e046a4d9dfbb09b77dc3bab85fb38cf",
+      "parent_scope": "ordinary",
+      "parent_source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "parent_state_sha256": "c4255d703afc2a893760a84b4ec357c73ef6252eaf49cc2d0d296e4ee565e0a3",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 1667,
+      "restored_exactly": true,
+      "role": "zero_damping",
+      "scope": "ordinary",
+      "task_id": "five_word_joint_hold"
+    }
+  ],
+  "own_uninterrupted_groups": [],
+  "requests": [
+    {
+      "candidate_revision": "bd5a3bd25bb702a6d2602883df4c1644d3605ed373fee205e54ac15abd12f58b",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "request_id": "b753104f4c26be878788ceae",
+      "role": "control",
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    },
+    {
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    },
+    {
+      "candidate_revision": "1c462fc648ce2cbbdbe7711f2dbe7932e4c6e7cb52bf582bd58edbd00e820e24",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "request_id": "8e53b09acc90939c1f7b1e26",
+      "role": "late_anneal",
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    },
+    {
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    },
+    {
+      "candidate_revision": "9b869d8e95bc0ea145098ba5a3e6059fb135050b033cab71695ba625e51dccc0",
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/snapshots/63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "request_id": "18db7f924ff2bc1a9534defc",
+      "role": "zero_damping",
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    }
+  ],
+  "results_sha256": "f124858db6ab781e68861e508064f077ed4e873bcd4cce02735f48be38b08196",
+  "sampling_draws_added": 0,
+  "saved_state_comparisons": [
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 250,
+        "half_network": 250,
+        "late_anneal": 250,
+        "prior_smoothing": 250,
+        "zero_damping": 250
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "9dbed17579fcd62aa5c4f889a45bdb780547b45fdaa6f3db635502ea92d06ce7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6cbe082f020e4c9d96899be0cb5844e9/provenance",
+          "bytes": 70137,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "814bfa1c4c5ed5c72c53fc62672f1994c0a27815af46b499e0a317546f910111",
+          "state_sha256": "434bd4f8604b33a9b0965a6d0fcc59befd4b636cee209c21480d8e551fe78e87"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "9b7972e6d4d4efc5f4e92ea5a65de3508c2be2a4d72f94f7fc3656a0a266df4d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/48537eb0efbb40f0a14cb349c6fe3fdb/provenance",
+          "bytes": 70137,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8cc61ecae88fecf1e82e325cbbaa1171dce9b099db95f7366b183d7d65584b4d",
+          "state_sha256": "ca043e837cc0d12b13f197f5b2425a501f6d5340bfc06c7dda174b9c2dfb30bd"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "d56c23d013f62a9fcd1af0aa5f576ad557d4b3cfa787e951386f5f2cf4258eee",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7176f2d6b3584865b8cba41ad0ddcff4/provenance",
+          "bytes": 70137,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f833b4cc5d3e24feb3bab4c64d7e120f288882fc9f3fced2521aaa64ec171c09",
+          "state_sha256": "3012422d652ee3bc07fff7a76d6cd9f8dcf176f7d7fc1c49021f157fedab4d45"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "169bfe717c6a2d22bf0705f13eaa9465752584c417ff159f4d3299411f365aa3",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f3d4c01d90d24b3086a808728dfbb91f/provenance",
+          "bytes": 70137,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c9c002b75c03c966c91ec728f0859e45e36d0907684e9b5fd76be201b04b9713",
+          "state_sha256": "93ce86983d345426969a4b617e2ddf20f434388cc64f6c463b9b5f976e1be7e6"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "fe5e43056fc4cd291b230b5ef2079c2a21ee9f7e5398ff3a75e1823b813b92d0",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d60ade0394994dc3844b4256c85d1356/provenance",
+          "bytes": 70137,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "fe1802d5353b1fe8929788ef307d71b88f029d2a46fb252044efd9a1e9d430ca",
+          "state_sha256": "61a2a206e689c3c2eb23ac9a1a81396fd5499eea12b62336f5d88db63aedf00b"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 8,
+        "half_network": 8,
+        "late_anneal": 8,
+        "prior_smoothing": 8,
+        "zero_damping": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "445a7189944a6bd98764c025c03236338e7e9b1d541de995bf2359a0be8affc8"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "90f7e5207fe871816a40bcaf15abdf41c47d3512b2cbd6338259c2143102186a"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "b012f2c4f8ae70040217e4fe28570b47c866ef6c89ed010362d23f8875b5aa7b"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "ebca05843d6b70ce0d621faca35e100697871a226bc95563cb879c55ed08464d"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "evaluation_cadence",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "f46a2d5173cbd562598f27c7eeaa7b554f8b803030417ceade181c07d6510921"
+        }
+      },
+      "saved_variant": "evaluation_cadence",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 8,
+        "half_network": 8,
+        "late_anneal": 8,
+        "prior_smoothing": 8,
+        "zero_damping": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "71f681ba3d9485b01879ff32684ab86f2d533fb259f54abfa45c63a4719bf882"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "6e34af469eabf976baad4177cf52b71ec3b9cb2e79d55a3f194049013451b5e9"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "5e3643de8c13685d196e71b9338cc5677a4ff6391072ce189e66e6fd5a4b8494"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "3fb13361d5fd296ed81012fd20296b43af43b95630d6928902784bd3f0e42973"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "horizon",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "0252e56a073820aff412825363876b4471ab922ec4b8057635c91e4f45b9da44"
+        }
+      },
+      "saved_variant": "horizon",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 8,
+        "half_network": 8,
+        "late_anneal": 8,
+        "prior_smoothing": 8,
+        "zero_damping": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "1b1e92ffbbe5c98a256f5839abbf8d56716edd736a43d2fc533e535f63659da9"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "79fdb273fbf441398664a91cb36bdff6ffd40a14ff150f14d764b325fe2f1a7c"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "e61b1a23db7933a5612dadd70e8795cbe10e5c1fce1ca1fe78c41df4a0f982ce"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "d76668e78bc75409563a87c6cc5130d2ef7fc357347b62dc32b93c1f0b57ccda"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "reference",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "41b8d6844787f742568f243dba10c08b153f3c5c6c909caa982bde4a65548d7b"
+        }
+      },
+      "saved_variant": "reference",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 8,
+        "half_network": 8,
+        "late_anneal": 8,
+        "prior_smoothing": 8,
+        "zero_damping": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "1b1e92ffbbe5c98a256f5839abbf8d56716edd736a43d2fc533e535f63659da9"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "79fdb273fbf441398664a91cb36bdff6ffd40a14ff150f14d764b325fe2f1a7c"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "e61b1a23db7933a5612dadd70e8795cbe10e5c1fce1ca1fe78c41df4a0f982ce"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "d76668e78bc75409563a87c6cc5130d2ef7fc357347b62dc32b93c1f0b57ccda"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "restart",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "41b8d6844787f742568f243dba10c08b153f3c5c6c909caa982bde4a65548d7b"
+        }
+      },
+      "saved_variant": "restart",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 8,
+        "half_network": 8,
+        "late_anneal": 8,
+        "prior_smoothing": 8,
+        "zero_damping": 8
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "ecf0944a9ce0513fb26535049bcc39ede7964b6f3c87433affc6218752e0fae8"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "52bd55d5cdb1f64e93f499a18f6f4334e751e791f960c4582ce5c248788b6cf5"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "3e8fb4320919f8bfdae6b9527f01a6ce29ba6ba5bbb6fb12b399aeb790734d33"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "3b5a3fa72d09492a7d975e7d8b6f4501a136b3e356439dd31079d386e77ee70c"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "step_label",
+          "completed_steps": 8,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "b0ac24218e8592562688983450ea11b213270e7b405aef883533271fde8ef936"
+        }
+      },
+      "saved_variant": "step_label",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 4,
+        "half_network": 4,
+        "late_anneal": 4,
+        "prior_smoothing": 4,
+        "zero_damping": 4
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8c6ba486772c7cb59a1603414688cdd6ef9b25bf1eb63b03610ba72cd3fbb154",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "0cddf3a08d231925d8b835f11008709292aae494b8a552f3cf899a6d30d4e2f7"
+        },
+        "half_network": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "0b2802533ba37cd51406a513c7a5a74d2d42555a4205a1d9f288347295b72a58"
+        },
+        "late_anneal": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "c5e74103d3b061c80296d18482ef21acb24fd070bf562293a0d1298508e0268a"
+        },
+        "prior_smoothing": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "7fcbd8a64ea4ac38d8b6dab3d2daf96ef1a3e6d678c830a24a664f0d059ea7c3"
+        },
+        "zero_damping": {
+          "artifact_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt",
+          "artifact_sha256": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856",
+          "branch": "warmup",
+          "completed_steps": 4,
+          "proof_kind": "optional_clock_saved_branch",
+          "state_sha256": "363b72bb2ecf01af198b0c7a5d15ceda1f608479abbb987aea0f8f65aed1c61a"
+        }
+      },
+      "saved_variant": "warmup",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 800,
+        "zero_damping": 800
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "59681846f482eb5b91e987e2ae412aabe01c1a081403c2a7658ffb0ca72880d7",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "0e7bd00305899cf56e2d2da82d427a76b3b411246f7331e8eb27b488b13925b2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/fe106cd86a9047a7ba63ed3f2c1cf447/provenance",
+          "bytes": 127899,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7fcce150ecd773ee16772fd04a5fb8559cb557ec3a9a68c6d6d09652f5bbe47f",
+          "state_sha256": "0848ff74e5e7a3c3d10f301cdaa985eeed269d0627033ee73feb3b429ecb4243"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "b3fe1cbe13fb6713b6850b02ce826016d56c0c58017e5068b379621f02984712",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/65fca230122942adb13799a109265b28/provenance",
+          "bytes": 127899,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3d40324b89e8dbb86911853a4156296b7039e57126c3e78141793289fbc5eb58",
+          "state_sha256": "11352f9f14e813e296fb736458b71bc32c9ea7543ecde98a2f866d5b1c33d315"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "cover_leftover"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 4834,
+        "zero_damping": 5667
+      },
+      "consumed_non_eval_streams_and_batches_equal": false,
+      "consumption_comparison": "Only available complete states; missing arms/different completed budgets remain unverified",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "f00a9137f48424b87dee40c4fad95dcd80a3f341a5e8c14d36480a74deb97081",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/115487721ecf4269ba1c51c6b3b269a5/provenance",
+          "bytes": 842421,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5e6d43fc22212637321163fb9665f6d1b6cff4b1fcedea58d99a8e1f131d7963",
+          "state_sha256": "007f5c857e448c5e625d131e593a15850fa9dc1a33b1dee294cfc0af1d431307"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "3424e4eda87d8956cd3163113df9dad073d3dba111d8848380b4b2dab2c1a7a8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a13f9ff98cb64153823f07f6535198ab/provenance",
+          "bytes": 842485,
+          "completed_steps": 5667,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5c48892025cb075400c3133c4783436907f3178ddc23006e2c67f4c2bbc8cf97",
+          "state_sha256": "4204296ceb06400bb71292544fc38921991c73a3cbb66e61f8063dba5046f42b"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 20001,
+        "half_network": 20001,
+        "late_anneal": 20001,
+        "prior_smoothing": 20001,
+        "zero_damping": 20001
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "90ecd2b075480ac0530dc6013a3ee1add02b41b573daef990d6ffa2eeb86333b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/79830b7ba76b4b208ea60e24cd639d41/provenance",
+          "bytes": 841461,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "bea7c7040ddb71947fdf379174eabab397be108db2d7f7cc3106d03430fbda7a",
+          "state_sha256": "7b6454f7dcd465a8091ddc21e85dd70ba00478e044276a517a18c3643dd91a35"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "4084b3f2d1a9b329512cecc2b46b3e4d82afd49f03970abedadd733a27be4f18",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/ce7f17c7f6e04750b30f0d742fdf5944/provenance",
+          "bytes": 841461,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f7786497d24811379f70e53bd6485157a7d61eecf8c2eb71b551f243e61b72ea",
+          "state_sha256": "c5efb1e397b67e16c292cce70fe25e80662f4785c23ce74c0324574bb344c4e3"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "7a8c7d3b4d2a9dc2734e633aab384ce8b297e59f4fe500016886d37e6de0f5e8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e2055ee1d89b4fb3b51329e79cdd8df4/provenance",
+          "bytes": 841461,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "0f4f13c73dfd5c021738384014f7846b3bf6c7129b2bc5b1261cc3ca4f5e1274",
+          "state_sha256": "3cfddc7684bcce868a716b1bb7326f90d9ce402734682c9056adbe885d1c7e2e"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "157fec596ca62ad8c56e361a9a303949208267da7b3c82f8c39e883236314238",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0e386457921d483b90a36903359cece5/provenance",
+          "bytes": 841461,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2e705ff6124def358cd0bb22a28d6cfc019638f21648b6f6f7b68da80f66c626",
+          "state_sha256": "cf4b67d7f37bd21c91459b537d6e970a12eee157d6bdea5981a0c2157b2a6be0"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "908bd47fe391fb3fcecbb6257908a848024c16c4d7ccebdf8c506538c5ab7d4e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/c7508d7af21e411db3617d7007bbcadf/provenance",
+          "bytes": 841525,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "2a61483f5cfc50289b044a5ac610ed36f1735314c42cba34ceba1143f2a4c0c0",
+          "state_sha256": "1c4ac1a6203c68c9eaf3fe89cb0bcf0840579e4742b434b19becab7e2fe22ae0"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1000,
+        "half_network": 1000,
+        "late_anneal": 1000,
+        "prior_smoothing": 1000,
+        "zero_damping": 1000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "58d74ad1262024c4039a32ff44474db20fbd2336e6d4a9a9faefc35440d22a7c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d275d224e2b54812a55b58fc0f443101/provenance",
+          "bytes": 66111,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7ec56ffeead201c58778f8e450716480cf7e3363b6d9f9c8c8a902661af5fe69",
+          "state_sha256": "632bddf52219902c486cedee35a938c850ff24ddc2abd76f249b1e29c0b4d4bb"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "4da93311722bc589c52404af0a17f14840b85245cfca78f71289f8e530013fcf",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7b921455802944aa9020d1960bd2ea61/provenance",
+          "bytes": 66111,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f0f40e61f2ac41cd34ef20c90325748df330262df6b8c0b3cbfc44753947480a",
+          "state_sha256": "330a376c497d2510c47e80fda0c2dd8aa1472058689f974ad79fc8e861bf5628"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "be58822773f06fc69a80653ebc1e8496571f58e86af883f60d0b8eb17e3b20ff",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a3b2db5542554e908bdec43160b7d7fa/provenance",
+          "bytes": 66111,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "19f25a1becd885cda7b6e3c35cf994aea6e1d3807fd7ccdb557eeadb2141fa63",
+          "state_sha256": "b5029b4598f062c63b4f5b098d519711633819fe82c77eddbc3436646a31ec9a"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "25597cbe6c9d9516a175fca9595c8625d7b6ec16ea1d648dcbf9634af6d798b3",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6069108176db4632af970bfabf5e6ee4/provenance",
+          "bytes": 66111,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "928f9b7d0ccfe5301e93e6a0f6f6b18e2d0826aebc0d66c5f11cb1baca007c49",
+          "state_sha256": "2c44c23775230ad2a76a71944147ef8c9c3145497969763b0c22ab0ec7e63641"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "77f11188f9293611b133dae572e2cd74265a92361c9db05163e4c5bd36802172",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f0f2a7596c4d4cdbad9e26fdf48af123/provenance",
+          "bytes": 66175,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "df4587a7cd76da1ad2a4929595d185e006b0e76091ed0738df13cade6cd9b3c7",
+          "state_sha256": "a1333b5ce9c2156c82510b8d153c7b1e0e3ae6d7416f20d48b3eefcd22e46308"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 6000,
+        "zero_damping": 6000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "750c28a682b49080d354e53501a2e9eadbc43ae3cfac5174e8c37eab29c21216",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0466b9b84f6e4a30a36cf1d3e2357443/provenance",
+          "bytes": 66367,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "891ca2994471d8c1a796310f335aedabe6988fe0f04169958bb8f16503371c86",
+          "state_sha256": "b586a9a85ab5cf4ccfb4b461b4e7a1f709c2589627b210b49a599e589610c0c2"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "8f90aa2db2cdc539ff816c9d37cef3caef6cd3e140fa5b5abb654de011007379",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/30b3c8c200de40b38920ecc9a3fe98f1/provenance",
+          "bytes": 66495,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "15e3de47507a6cb735867724b03d26b2b4e9e15bd1c11647e614634e892b59c6",
+          "state_sha256": "2e119833cffcf0698963030d6669c1931072438361de14415ee53b99c9a877d2"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 7000,
+        "zero_damping": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "72201baf61abda7e5bb4f0db822a5bf8bcbad4376d6cb17b40b063a83a636be5",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/provenance",
+          "bytes": 770973,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e703e977043a4ce397919426bb2e1d22ea20f969055a2320178972d0c92dae3c",
+          "state_sha256": "f40d910627ff3570df50dca4eeb5e97ec18ef660416b1aae121a44da2217ffe6"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "26154a79b454b5a609845d1cc6255a3f495256ee18657ce18c42dec192411a8e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/provenance",
+          "bytes": 771229,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f35e814bb4f7d282341ff35bdeb0ce38c8ffe736f68aaa6834f29f53d8a11990",
+          "state_sha256": "f85a02159f925be9e0f5d7a483864452c03c1779909bb78c2f6a03051b542ce2"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "grid100"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 600,
+        "zero_damping": 600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "8b5d876f9898b24ba39346097c298fc4dd40723a5436c51b2edf68c16e65fca3",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d953893876524a4f966ef148e83118bd/provenance",
+          "bytes": 96807,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d54564964bab72a2f4a676c44117f919c7a1e73de85e8254ad7736bc9ee4bfb1",
+          "state_sha256": "f2274398b23bf0cc5550035bf3a7fd39d9447fef0f285f878fca5f23237af553"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "5f8622adf6f80d60190784e58068083af1e2b6fa989f3a9e5379afaa534cf8ca",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/54cc309d7e1f419c9e76ff2ee1699ad0/provenance",
+          "bytes": 96871,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3a3fe4e722d7ea7da3159f0c45c67b3a01fbda72b79bbff6d3a9aa2751140a25",
+          "state_sha256": "97c0647a0a1d338c4406bab036b50a8227177adda2248c1c99c8acdd921d3c36"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "img_bars4"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 600,
+        "zero_damping": 600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "3824036981d2b1dcc2a61d761fbab727de80ca100317cc0bd88bca8719ed9967",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/107a60b7168444b38b3b068a9a854176/provenance",
+          "bytes": 96807,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1046466c5f52bef36366de46411c0e576e6b7a895d91ac1697dd93cf724089a6",
+          "state_sha256": "52d11dbfcb0477291c1b7ed8932acd67c2c94a0e1d2e08a0e9c45901bbff3a34"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "78e85dc5cf49f2d7c84cb956bcf5a7eb5e021f2de230b2b82b989576028608c8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/cdd253025d03437e8b3c8f32ec15baa8/provenance",
+          "bytes": 96871,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e18256c89068ccbf4adb138b582b6f4e5524cb83f520059ee784bbe91064cfdb",
+          "state_sha256": "9d53b07a1dca5cec56029a6806b4f02bfd62d9dc70f2f8914068c2d542fde067"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "img_blobs4"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 600,
+        "zero_damping": 600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "cb5d09baadb55711c2d5b7527bd70facc5bb9271c028a2d199c87d5c8f8c05b5",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7f561abdc9bb4f5e988478c32c32ad18/provenance",
+          "bytes": 96807,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f7cc5506283f4cd807f21b9e281c5b2285f7cbd5f0479e86bca3ead759b4bc07",
+          "state_sha256": "9b8098ae51f4d38c2fd8e1b7509d82e30948d6541edab2e3065ebad34ecd185f"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "279455569b246402a0607dd093b210dbc371827b5e0a8f8372c2c4102c577420",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/5d9ef548748947d9bcbe7835ea50705d/provenance",
+          "bytes": 96871,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e78bdb618956c994096578bd1e2aeb93529d715e104ec01a8a277f2144c353b1",
+          "state_sha256": "d7064c16251a384f91b6851b0ce4bcddb3b3ad047621d1810f687cc944240577"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "img_intensity2"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 600,
+        "zero_damping": 600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "dd2523c8b70de2f94f394287fe46e10b74036fff6492996810fd8f5f186bc219",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "27103c40c822099b6c1b6e2012c8aa1de3ae73f704e47f86a48d73144d4ecabf",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/04bdce86bf5d450eba77e030b4d2c8cd/provenance",
+          "bytes": 96807,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "289adc9fb4b3e277de286fc6788baa3b10d62205698ca89a600b62e8e08f460d",
+          "state_sha256": "a06e18cfc8fc5ce850afc71820ae37c81dd33d00fb873e4fe491bbec0d31aa0b"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "56a3b0076ca69cb53b30db3a9941b32d2302c8bb0596582a51c24e6ecfad5d01",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/46ef9ca2646b4b4fa84eb510171bba7f/provenance",
+          "bytes": 96871,
+          "completed_steps": 600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "eab549437362eac7df2773db1626a3d4c0dccb4918b693518e989fe01a906ffe",
+          "state_sha256": "b3a73acfca87da5b84ff2f93bde5f0ff6062f1fdbb9e0237782d4d88b1120c29"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "img_stripes2"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 800,
+        "zero_damping": 800
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "cb79d523592e581883e40515da208941c0d9c2db5e7c5861f72e220c8b77eb72",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "004e1704205ac835afc2b6998ad412c35b878a0fc5073e2363cad2b6485560e2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/14e55ba8ae4c4ad89a11d76a2ae06852/provenance",
+          "bytes": 99831,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "dd027907b327f9a449a3aa5874480420dc4e64cd89fd188c0ba3ca155616bb99",
+          "state_sha256": "a5ec2aa08c6dbbd09b0c9b0377022a6450ed7e6ef0889cb6f1ade35f41ab6f9e"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "780b8674ce124fcaa628f5fcf2bdf03659f69c6d6e964638c9caec40d29a9510",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/5ca9596b366f4a2380a29c99444e43c2/provenance",
+          "bytes": 99831,
+          "completed_steps": 800,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "aa6ddd940c6362cdeab1de4a9765bfa1697543849510aa31e8a656306eaf0aa6",
+          "state_sha256": "041015ebe16d984c6ef8b1ea84283ed6f957f8ce1a94502dac3d4116d3472c5a"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "2e23f3833175f0f17aa414e2b04f09b1ca0bfc268d2ede087a4904d69df87e91",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "247f6ce09d5dc74d8bfc60a60f609495c86c5ed315a727b4c3338bf5205c9489",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/152ce7ced8e74275aa47a5f2f5e99611/provenance",
+          "bytes": 283869,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d36125fa34993055df6f38633dc77cf372078575a57ea87475e67e7fc840078b",
+          "state_sha256": "ed71dc4b4ac46094472d716cf2d140886cb0c1e75893be3d10f1997635efcf18"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "29356359f6cdd1456dff9092dfa3d822dc10ff41d8b3baf6f204748a8070cc08",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/fdf80041b38942e99cacd2e2874a8e0d/provenance",
+          "bytes": 283933,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "260f07a151cb792c1c1863553f310bde3f9787f2d3d0e5d985b9904d6821cbab",
+          "state_sha256": "1ebe74b7da113f927db5c23880e5fb9dce52e423218a53b7995fa17cc5c9c5d3"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "mode_hold"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 400,
+        "zero_damping": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "6a4bafd68a49269427b9c1c9a19eb6adb74e4da109b8bce388d5bbdda4aaeac5",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/790b9b08584543a3812a737baa6716e7/provenance",
+          "bytes": 167969,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c78bee7b167bea09f915076f63071d54f5311f1723c81095e9623f292520f177",
+          "state_sha256": "2e6601ccf3fbbc972c67b9440a17907d80ea93620d61626306e928ce410e311d"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "3cff1f6b53bed82539e9d5a9c29e208deeab0585e95d99d16e53066f92619bdb",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f04a263a1b84483e9aa240cb3cbdba1e/provenance",
+          "bytes": 168033,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "431fb0f2a1918778e72a9336bf52bbdf513ee514b9cb84235af1e00ed82cedfc",
+          "state_sha256": "87b1a97ca163d7886b7ba70b14e777500123db2436fd4650d4ea4ba67f3c5464"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "residual_student"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1600,
+        "half_network": 1600,
+        "late_anneal": 1600,
+        "prior_smoothing": 1600,
+        "zero_damping": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "a492a95314cdc5619721572b9e1d0633da6ed99ff0dbcea9d2e53cc3a3c4fe81",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/534748cbd1f24ee4a8208a9ab38e23a2/provenance",
+          "bytes": 110905,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c8711b69bead9a014e4b32cb9f30051fe39e5a9329d2a66b714827e67dbe0e5e",
+          "state_sha256": "3f7290d2bd1d1a2108939ef84240ac2e490cbde5b17ec0657caefa85e96ed843"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "cbacf3e0787c2aebdd4da27837a27ecda0cb0e2f16d688d8c638de625f49ac06",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/10ffa79853034264b944a0da626a99ff/provenance",
+          "bytes": 110905,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f318622016e9583810fe6978974186d00375d89f24c4974ebccc923394c03f89",
+          "state_sha256": "b86edf1342185e18c33c2c028c7bb542e0dc04a896b52f203aa1fa6df362fe83"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "eef43c9be7657569d78f9e55c2bb9795fff56d3245712f2fc83c2eacb23d350f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b13caad3fccc4a20b3b58ebeac4b66d9/provenance",
+          "bytes": 110905,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "24ba6a32945e03b57b8dc7a2691b4dd97ffb245d506f6d945697f8a786e1f222",
+          "state_sha256": "de76aa8670c3de0d47c1a5c5c8b33f23e08656f7d98b0dc3ca6c1476b54e3835"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "49dd9015156bdcf16f6be028c18c392db2eb33ca938592dc3456a2b077f9ee6c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/85c2e2a5433b40029c905d934c38b349/provenance",
+          "bytes": 110905,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b5e0b06959dfabe4cecd74d544f767791cabe61351ce86cbd037dd566716cce5",
+          "state_sha256": "311553bd7a20b39b2bdcfda9d33ed07f249a8b4b1d86c70e358c47d8c3475c8e"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "cb395973dc8ef415a37a1f88bbbd268113408257f3c0eabb51da2e270018c113",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/657f76ece11f4a93808cdf74122582b3/provenance",
+          "bytes": 110969,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9823dcbfb8a898dad6eb6c98aa8a5107a80407f6cb7243fe666a58772526d220",
+          "state_sha256": "b937a0a4f724452a20786d0fef41aa1ab558a95b331d00fb23857171a5060f3d"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 7000,
+        "zero_damping": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "a407a78b6bd1a0d6c18c61deddf6b599e314596426a111f58d6dda440c4d442c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/provenance",
+          "bytes": 770973,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "94018d5e2956c3b86bcf06e2778c0df83140e8662686d1d14f4dde9affb645e9",
+          "state_sha256": "19c1fb18a88d01c8f5961b9bd62cecb8649d65dc75853470a93e41d0110c9dd7"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "2814e7bd81e359426c867ab69cf572048f1dc9b866225a03a84a2728f01acd23",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/provenance",
+          "bytes": 771229,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b536e85d9d4ad5bb5fb80deed8128d3a9478ea34cfbdef96a5c9d7866811d36f",
+          "state_sha256": "5bbd7d4b3f9f7945b139eae37f1893021ff31034a3fb0351d9968318aa479521"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "rotated100"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 7000,
+        "zero_damping": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "224f2f7cec25061ef89a528fe79dcaca76d3f061623d28ff8a0f9d480467fec7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/provenance",
+          "bytes": 770973,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "eba233f631f66423ee1e16d78f26b4d9dfe53dfda9bd7a4d6bf931718660951e",
+          "state_sha256": "dc50f3044e832a04a0a147e9d438603ce0932363495c96147a01466ec83d6ecc"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "d4142578aa0810f85aa7db38dcfc7a18a338a4280c382dd5fae216bee77501d1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/provenance",
+          "bytes": 771229,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e0048c17ca386bb049cb8ade2754ac3f232e85fb945441ea13bd794bfea70e4c",
+          "state_sha256": "8446158ce652b46068ee177efe8d0b02a685debab588d7430fa779550f4d8f74"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "staggered100"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 400,
+        "zero_damping": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "b5de63b32d0550c69a634d978c798bd799a7d528cdc27c204df51f6d38614c3a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6e582d69d3304e1f8ff273bc4a0e58d8/provenance",
+          "bytes": 167777,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "45f27b7bc4986c34b3a5a77e3828b2024737cbb6e99ac3099923b506658facee",
+          "state_sha256": "a3c61fdf5a649c96f80a3d93f3e5e83598aa69853c4e91360bbab4208a295e48"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "f25def58c0382b2e764edf4c953016bb9aa51540f7af2a153674bf5d60e1c854",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/580095874fe24343bec83280b8a8adfa/provenance",
+          "bytes": 167777,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b486398848fc73534091c86d77f06fed3e129a7dd09597bef6980b73a5635116",
+          "state_sha256": "642955f9272bb99c637a3b1d039f17dc9b44853e651701e5104ad91a08943901"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "trajectory"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 80,
+        "half_network": 80,
+        "late_anneal": 80,
+        "prior_smoothing": 80,
+        "zero_damping": 80
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "edaffb72b029885db4abe1969e39c458fe0f7627b77d71c43215360ff5408b5d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d8804dfc19204afca81615bd73da90f3/provenance",
+          "bytes": 52079,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "61914c365583db3c11dda1c7b39da6e6c889e864cae7826db3630b00bf0d3691",
+          "state_sha256": "c14d775ebca53ac5e2fb01b40e9704621cfeca6540763212c188c33176bb88c2"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "4af3a99a70cfb79ed73e2396708e078614896aa97a1a02c3c7d2f537a37c2e4d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/3e32d034c6d74848945fc163f0365fae/provenance",
+          "bytes": 52079,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "842ac214e99b5d7e9be329f2dfd9ba4f4a7ab8d1531632d3656fb0947d36bc88",
+          "state_sha256": "482f6e7d6a996ce5ee8faad68c2b42f05f54db1d817c63709be40828925b6238"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "782ad1e690cbd70546ca35b4b889d4f54585c7ba5eb4018071836b34bf855e7b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/8724f8fa1fe34f909425518d7e9a45b2/provenance",
+          "bytes": 52079,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "61e627e4e261c093db135b70925ab4258b9bc03cc68bf36cd76eb7f4eb4364e0",
+          "state_sha256": "df20ad15765c9e8aebcb9b50ce5665d8027c50ba5d837eee4d6c2cf75b241ece"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "38e4ef81e2a7aa1bf3df8952e716aa446d972810e7b2a1659401704ae6a88a34",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a73d8a7b6b0f4a88ab5bb10b245e539d/provenance",
+          "bytes": 52079,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c2311610d502960d31fd623e610fb2bce4b50cc01ce46a37efdcb17148c24e16",
+          "state_sha256": "bb178d8a96bdac08010bd8312fc374d49611b20c27b3b1527e536c7739f04756"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "bacf1d5e7b91f96ad1c36af34120dbcff537faf51f109e7f40b0a97eb7ecd601",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/ecf90065f1584256a12020060e3074fb/provenance",
+          "bytes": 52079,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6af366940ce2610eb48933b9afb72e938004f50e803e10688901677c46f9434f",
+          "state_sha256": "75336fb3c956be3888b8e40788d110ac30953e5ea3aa462965d9fb4f551d1d00"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "two_pole"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 400,
+        "zero_damping": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "61d578e54a6ac6c57db1540ad63c4f83630e849357867d7c27c54e4fc7e037d5",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "3398dfbc52298d84c5ff59dc16bbad65e87bec553bf84344523a065772a1a95c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/13cabd9c88fa4df4af186e641c046a86/provenance",
+          "bytes": 95083,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9cc3d373cfb5f53305675c757236e371d55905ad1d07835864c2769a9dc04d1b",
+          "state_sha256": "980dc4a64ff230ede8915a520fa632af4020b6cc9bbed37da9482cecbc30fe9b"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "ace5afbf12eef4b683b50b79928ca7247a5ca718131518ef65a6333260ff57b2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0aa6e1e160f64e96bf6782cc38a14ce4/provenance",
+          "bytes": 95083,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "42d3e7bbc292441e03287dcade25048e5d8be59a63156e41f7e7acb6a9875b06",
+          "state_sha256": "424210979b791ca13c1af33fd1fe004b6a8dbe2a83230525817334a07dac8087"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unipolar"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "control",
+        "half_network",
+        "late_anneal",
+        "prior_smoothing",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 200,
+        "half_network": 200,
+        "late_anneal": 200,
+        "prior_smoothing": 200,
+        "zero_damping": 200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "0969ab66e4419a970db68c3f7d8f661fcddd04a3170dd3b64e7a3423142fb74f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e2308cfc7fa94052b16dcfe5bd3b9f6e/provenance",
+          "bytes": 56327,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "fd5f608be2321e73696e6ea399721889d3da73536c4fcf934d41824162536d48",
+          "state_sha256": "b2dd6c78097f8162b573bc656f085fa5ce17851f17bedc99528d84fbff406d5b"
+        },
+        "half_network": {
+          "artifact_manifest_sha256": "39589fe563833ca1000c4f4d4d73a21be9f676625a2bb93ce155810e80c473af",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f33ca58d224c4e3fbec1fba7ee4de4ea/provenance",
+          "bytes": 56327,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "29454d39cf4a28b6c6cc2b123ef47db73fc4100f5687f4a70039053ff796e9e0",
+          "state_sha256": "9360332c31e9624c5f1914f1b790ef80552dad55c9ce906c4047a5d332985a36"
+        },
+        "late_anneal": {
+          "artifact_manifest_sha256": "b2dfe4148a7383b626f06c65882dfb2231cf62cbb4a7b0bdeb26a75916c77175",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/37f490e1c22749b396bb341b45220378/provenance",
+          "bytes": 56327,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "7ac04d87d699496fec93a72eb81c6757f6fc0b4fb6289be6a02173c4ba5f1b96",
+          "state_sha256": "b6b156789b462f16f1535ded96d56649a4b6a17455c0aa60ccfdb1fd596a44d8"
+        },
+        "prior_smoothing": {
+          "artifact_manifest_sha256": "311635b7423ba420aaea86dcb7dc0b22bc328557b67bf17ac2b94604d074d5a6",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9111fe0d836c4a3f813478f9f4f306b8/provenance",
+          "bytes": 56327,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9828d63f0ed9164b26e9912572e162d833d9e15c83b675d2f1500c939e938a9d",
+          "state_sha256": "b702e31531d05c4e57880553b1d3c73933f4ae79c917c2fafb12a441eeb784a8"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "05b5b727628ac527760a19fffe36bd8957f881e7a5c66dcbad2189d94d335587",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f0f5faceee6c471d848c4b748a936318/provenance",
+          "bytes": 56327,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9e91a3a6f980c925e53b37014297bf7cd693a9ecf8e877746cb4ee9886c3f301",
+          "state_sha256": "596d0fa25b5d43d34c925925281d7a34dc84966b33b7a638be6f8ff25a1b9c56"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "85e8ee845a3d9d9bd0f096ac2f323c1bfe9c9dfefd0923d7b5ec21418ca738e9",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/16ffa34a053140d58da0562f7e4e4549/provenance",
+          "bytes": 110905,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6272f726349fb22d8faf792f40f050103a9d95a57c0c9d375fe9532209034e75",
+          "state_sha256": "47161f2a448b01d3470de8a6a78ac32b45a08d8a62af9409deb65ddb1351e2ab"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "152cd367868d7b410ee4a072e6931f1d17cf17370e1cb32cc29611c32f941044",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f3fb0738b3ac4dda9495dd9f76fce883/provenance",
+          "bytes": 110969,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ab7c2e16526b9fb11e304358cd0b9727082014e363f0ad4a988f4687bfed445c",
+          "state_sha256": "7f6021114aa053f55945c0dc11c83b6d5338852986aff4bc857fff6ca5e58be7"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "1b816ecd68c2f5bf84ff49bb5dec9eaafdfe2aa3ff0d18d55b5817e704a1a915",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9172df1376154c82881abf383128869e/provenance",
+          "bytes": 110905,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "293ea841646dffdc2d31249795c2a188d97984561c68d09518abf7a3e8e3d358",
+          "state_sha256": "ef553f9b3e44fa0d9b2c8765736e00a5333af540dd779df4807c4f4bafe745d6"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "4f5248ce22fdee77b94db15e3b2e8aa4f86e6ad5f3f664dd5eb34c947c7f8a19",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d4a0d6e34cbf493a81381bc19545bd1b/provenance",
+          "bytes": 110969,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ac70ef28a7a11aca0f624e737aa8f164ff196ff0401fde17730d21f0974ea148",
+          "state_sha256": "a2cdf85c5370688a3a2914362f13a828e72d4af6f4b36d5f6d4a9960dcd226ad"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_overlap"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1600,
+        "zero_damping": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "ce1292b87b4944a3659eadf0954d188f7cd5acdf57727502c65d008fc082cd25",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/73d292e48415468da02e005da548bff1/provenance",
+          "bytes": 110905,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c0e2d4f745711b5340b339d0bf4154c3f5371e93dd648bb5d0565cd61eaa2cd9",
+          "state_sha256": "7c05dbeec1d17fbbf50f79768f317c9982180296110ba5802737160a0ab37b30"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "c664cf1e32f0300052bb85590518a0f934e695852d90c9cf48903b51b923d50e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/4f9bd2fe69034904a3b9606ff8b3380a/provenance",
+          "bytes": 110969,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a9cdfae858bda9ba6b029654ef04a1d8d6ba8104454ed1aeea91d0570a0f78c5",
+          "state_sha256": "e7d13645fd41e38a432f4cc0a0b4eaba3fa9ceb84d42e1b5390af9fda8eca228"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_spiral"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "44707829c849a7713b7a5a136f5c48f85526a940bf16b1bd366bcf76a20f325f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e8ce58b245764b2ba335538ce6b8caed/provenance",
+          "bytes": 110905,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ee026a2b73a7ca0129783e9ffa03959563c4c3609368093e7060ba3e9a9393c4",
+          "state_sha256": "b600decd7e7260ff8fdcade1267da01872c8793c183dc7bb960094c2d7093085"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "80ba4290dc80e9a92e069046559413b8dd32b4150d097f3eaa104f18fcefb292",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/49101978fa1e4196858deeda931615b5/provenance",
+          "bytes": 110969,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "6f2929fbe84cd2c4d19d82119c6d092175d1b892c879c04c02c948e32ad391c8",
+          "state_sha256": "61eac3247371edcd23814ff1b652c7a261437c30083a771f7c0e3829a2a4a5e8"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "c0477c44d6110441e4907af2a1b8200ecf45c3b72eef607e269dd0405db188dc",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/695263469b104ddba700b66ea0843ec8/provenance",
+          "bytes": 110905,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4a422ffdcbd0ee993a388b4a059cdaf99e196c0e5bc7978aaaef68a921943464",
+          "state_sha256": "cc5e9bb26cc62d6a7bea3d97bd05e8ab35ad3aa74cd43bf162c9d06e5fdae613"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "1e909e668bac8411325237b42fbd91c8848a92315e15435439682630b1567629",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a659042827a4e2db5362bb72300f24c/provenance",
+          "bytes": 110969,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1c82a282eb688418bc6c25b05a672b967086e0feac364abe9b500827c6528114",
+          "state_sha256": "a1495e437fb99ccf803527d39f98f695bb6945b0b6a8f49235d9b876429c1443"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "control",
+        "zero_damping"
+      ],
+      "completed_steps": {
+        "control": 1200,
+        "zero_damping": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "control": {
+          "artifact_manifest_sha256": "6d88690474a801c8391801806d005ed171fe18dd762ec5e7a2a95194f6c21e13",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d62e9931a8b94bb88c54c9d02186ef33/provenance",
+          "bytes": 110905,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d0b8e927e05ac6392e1eb2a85cd23a36ba6ee28370c79b4e7086a8feca98b426",
+          "state_sha256": "a89bf1399f4a17afd3e1be90298dc2374ce903bc9cd45f15ba48da12a565d1fe"
+        },
+        "zero_damping": {
+          "artifact_manifest_sha256": "a20db3f0f0c5ed0e83a78df917bc73ffb202db227679765756ab621201f09062",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/83072537e6d04bf98127afbaf881f145/provenance",
+          "bytes": 110969,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "0556739870dfdc5bfa90cbdf0ee5127084078ae8257ae28704ea948df2cac996",
+          "state_sha256": "987df555ca6841bead98ebc7a8e19ebd0579988d94220fac0780488420815e5d"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "scope": "phase2_saved_evidence_audit",
+  "status": "PASS",
+  "unavailable_complete_states": []
+}

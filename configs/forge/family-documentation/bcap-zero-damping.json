@@ -7,7 +7,7 @@
   "overview": "Explicit hybrid: original BCAP cap plus weak zero-centered real/fake squared-slope damping, with direction-blend DualNorm. Separate formulation; no transfer of pure BCAP qualification. Fixed gamma .05 is tested in one ordinary seed-0 comparison through Tier2; scientific calibration remains provisional.",
   "pseudocode": [
     "For each unchanged task update:",
-    "  Compute the existing critic loss plus fixed BCAP penalty; backpropagate D.",
+    "  Compute the existing critic loss plus BCAP cap penalty and gamma/2 times real/fake squared input slopes; backpropagate D.",
     "  Apply the selected optimizer rule to D.",
     "  Compute the existing G/E/prior loss through the updated critic, retaining task auxiliary terms.",
     "  Record actual G-sampled prior rows when the selected optimizer consumes a row mask.",
@@ -36,7 +36,7 @@
     "damping_and_guards": "Existing BCAP disables A2, direct-particle gain and critic spike guard; no replacement intervention is introduced.",
     "gradient_clipping": "No added parameter-gradient clipping. Normalization defines the optimizer step; the existing BCAP term remains a loss penalty on critic input gradients.",
     "learning_rates": "Constant G/E .012, D .018, prior .030.",
-    "loss": "Current BCAP paired relativistic logistic; joint hosts retain their explicit two-stream generator/encoder objective and existing auxiliary terms.",
+    "loss": "Non-saturating logistic; joint hosts retain their explicit generator/encoder objectives and task auxiliary terms.",
     "noise": "Zero additive training input/output noise. Task-declared prior sampling, named streams and data batches remain unchanged.",
     "optimizer": "Zero-momentum DualNorm, network smoothing .001, explicit prior smoothing .001, per-offset convolution, native SVD, generator-side direction protection."
   }

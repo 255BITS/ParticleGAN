@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "ace5c313f4e04bf170c078ca3099e840182b8e2101b1005e22e5fda8edab619a",
+  "kind": "actual_training_saved_spiral_gif",
+  "observation_count": 24,
+  "observations_sha256": "d57e96ec18f14d286d24d01c560e0a77d9e93db8532ffbda77dd57e4e6156854",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/4f9bd2fe69034904a3b9606ff8b3380a/observed-samples.pt": "fbf89f00e0b58746e030c0e55a4b5c25306c20dafdaf75eee8527f81bd690db8"
+  },
+  "task_id": "vector_spiral"
+}

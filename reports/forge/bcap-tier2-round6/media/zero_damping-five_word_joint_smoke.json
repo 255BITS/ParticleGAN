@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "782dc81fc2decac5a1d3b1b729ccf24484e5d4a62fd9dc6455ddf564bbd38fbe",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "1f04444dea1c9dbd75e3471e0444459154c96da6e0fddcf267ae81835f273c9f",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/c7508d7af21e411db3617d7007bbcadf/observed-records.pt": "82d2594b91aef2547d89c33352edc1e37ae1a49aad8cdbc1838a8a1fea06a96b"
+  },
+  "task_id": "five_word_joint_smoke"
+}

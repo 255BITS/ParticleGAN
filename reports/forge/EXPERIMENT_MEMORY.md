@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 794. Inventory coverage: complete. Unresolved import items: 7.
+Records: 799. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4022,6 +4022,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
 
+### bcap-tier2-round6-zero-damping-v1 · readout-51bf65544a38ea1505c62ee2
+
+**Scope:** current; scientific; revision `9b869d8e95bc0ea145098ba5a3e6059fb135050b033cab71695ba625e51dccc0`.
+
+Retain BCAP and add .05/2 times real plus fake squared input slopes; tests damping in the unpenalized below-cap regime. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.
+
+**Observed:** {'FAIL': 13, 'PASS': 15}; wall seconds 2117.166; mechanism `structural`.
+
+grid100: precision=0.27337, mass_tv=0.12687
+
+6/6 required Tier1 passes; 8/21 Tier2 passes.
+
+**Next:** Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.
+
+[Evidence](../../reports/forge/attempts/0aa6e1e160f64e96bf6782cc38a14ce4/result.json) · [Record](records/readout-51bf65544a38ea1505c62ee2.json)
+
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
 **Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
@@ -4166,6 +4182,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/9007daae982e4bc3b8c9f4019d48bd26/result.json) · [Record](records/readout-813a2ad71ca3580b4a8d46c1.json)
 
+### bcap-tier2-round6-control-v1 · readout-89b6967587cab9a0c298f0e7
+
+**Scope:** current; scientific; revision `bd5a3bd25bb702a6d2602883df4c1644d3605ed373fee205e54ac15abd12f58b`.
+
+Fresh matched direction-blend reference under current recipe-owned priors; historical results are motivation only. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.
+
+**Observed:** {'FAIL': 12, 'PASS': 16}; wall seconds 2110.516; mechanism `structural`.
+
+
+
+6/6 required Tier1 passes; 9/21 Tier2 passes.
+
+**Next:** Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.
+
+[Evidence](../../reports/forge/bcap-tier2-round6/results.json) · [Record](records/readout-89b6967587cab9a0c298f0e7.json)
+
 ### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
 
 **Scope:** calibration_diagnostic; scientific; revision `b10c31a0de40294be8966579fbe56e84e06e24dea1e3576e65b35148f610d350`.
@@ -4277,6 +4309,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+
+### bcap-tier2-round6-prior-smoothing-v1 · readout-a0b8c7be1765d5862fd1adeb
+
+**Scope:** current; scientific; revision `72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7`.
+
+Keep network smoothing .001; prior row denominator .01 makes weak prior forces yield smaller actual travel while retaining learned locations and strong-force motion. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.
+
+**Observed:** {'FAIL': 1, 'PASS': 6}; wall seconds 840.752; mechanism `floor_constant`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945; ring16_acquisition: modes=16, hq=0.88989, mass_tv=0.072266
+
+5/6 required Tier1 passes; all21 Tier2 cells blocked and unmeasured.
+
+**Next:** Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.
+
+[Evidence](../../reports/forge/bcap-tier2-round6/results.json) · [Record](records/readout-a0b8c7be1765d5862fd1adeb.json)
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -4517,6 +4565,38 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+
+### bcap-tier2-round6-half-network-v1 · readout-eadf45a11139ed0c285366ae
+
+**Scope:** current; scientific; revision `3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4`.
+
+Halve G/E and direct generator motion while preserving absolute D .018 and prior .030 rates, testing saved overshoot evidence without weakening the critic. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.
+
+**Observed:** {'FAIL': 2, 'PASS': 5}; wall seconds 857.683; mechanism `floor_constant`.
+
+ring16_acquisition: modes=16, hq=0.96729, mass_tv=0.095215; five_word_joint_smoke: modes=5, mass_tv=0.018945; ae_gan_hold: recon_mse=0.0041247
+
+4/6 required Tier1 passes; all21 Tier2 cells blocked and unmeasured.
+
+**Next:** Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.
+
+[Evidence](../../reports/forge/bcap-tier2-round6/results.json) · [Record](records/readout-eadf45a11139ed0c285366ae.json)
+
+### bcap-tier2-round6-late-anneal-v1 · readout-ee1c2164f2e8ac67e22769df
+
+**Scope:** current; scientific; revision `1c462fc648ce2cbbdbe7711f2dbe7932e4c6e7cb52bf582bd58edbd00e820e24`.
+
+Hold rates through 60% of the original horizon, then decay networks to .2 and learned-prior motion to .1 to test acquired-fit retention with nonzero adaptation. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.
+
+**Observed:** {'FAIL': 2, 'PASS': 5}; wall seconds 847.17; mechanism `floor_constant`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945; ae_gan_hold: recon_mse=0.0033333; ring16_acquisition: modes=16, hq=0.89771, mass_tv=0.084473
+
+5/6 required Tier1 passes; all21 Tier2 cells blocked and unmeasured.
+
+**Next:** Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.
+
+[Evidence](../../reports/forge/bcap-tier2-round6/results.json) · [Record](records/readout-ee1c2164f2e8ac67e22769df.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -5182,4 +5262,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `2e8a4cadacf4e59cf91e98b9b5c901060d1b3243d71f74e4f645aa5835a6dd35`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `34fd33b7133efdd1abd3b7dbcb8a04d54833a094d8a090ee56f692acd97ded56`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

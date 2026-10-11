@@ -107,3 +107,26 @@ existing admitted work with `--drain` only. Raw logs, event streams, full receip
 checkpoints and saved tensors stay outside Git. Commit compact metrics, audit,
 provenance, reproduction sources and training GIFs. Update the single current
 [technique leaderboard](../technique-inventory.md); no second goal board is made.
+
+Completed execution used source `18b0487bf8761b89cd9ddf36d0a66b787512dd98`.
+Check out that immutable commit to replay `run.py publish` against restored
+original envelopes and the archived pre-readout terminal queue state. The
+completed [readout](README.md) distinguishes20 matched Tier2 tasks from the
+legacy acquired-prefix word-hold cohort; its own prefixes were834 and1667.
+Those hold gates remain original recipe-bound observations, without equal
+complete-stream or same-clock causal claims.
+
+Reporting helpers in the final PR never train or sample:
+
+```sh
+.venv/bin/python -u reports/forge/bcap-tier2-round6/monitor.py > /mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/replay-status.log
+.venv/bin/python reports/forge/bcap-tier2-round6/postprocess.py conclude
+.venv/bin/python reports/forge/bcap-tier2-round6/postprocess.py archive
+.venv/bin/python reports/forge/regenerate_technique_inventory.py --source-commit 18b0487bf8761b89cd9ddf36d0a66b787512dd98 --device cuda
+.venv/bin/python -m experiments.forge compile --summaries-only
+```
+
+The progress reader is read-only; retain existing archived logs when replaying
+reports. The current report source may include later software integration;
+qualified receipts still bind to the executed source above. No merged-source
+scientific result is inferred or remeasured.
