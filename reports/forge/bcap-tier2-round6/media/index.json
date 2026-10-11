@@ -1,0 +1,2823 @@
+{
+  "media": [
+    {
+      "frames": 9,
+      "gif": "media/control-vector_overlap.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "0887e41a2dc71454e6cef604b220184ad10ab965c8a762645ae274e1d987ed8c",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "2616c0ee9d950a22420caa39544887f80f05327b34bc439f0c4d238083233d74",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9172df1376154c82881abf383128869e/observed-samples.pt": "4dcdb39a216810fd286d558ab7b7a5388df0decd06581acc1eab7f7532c33907"
+        },
+        "task_id": "vector_overlap"
+      },
+      "role": "control",
+      "task_id": "vector_overlap"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-gaussian1d_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d275d224e2b54812a55b58fc0f443101/evaluator/observed-samples.pt": "d55f1d93620076b7e96075d2668287158cf66b6d033d0bdc59f1b1683faf0da0"
+        },
+        "task_id": "gaussian1d_smoke"
+      },
+      "role": "control",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-unipolar.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "72064237e3adb1f1ed3eb8b74ed3538e568b0142a32087e9ec5c77a42549a493",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "759a5524df50be8da22bce0edbcc946077d3353abca8c964b04d7632d94bb51d",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/13cabd9c88fa4df4af186e641c046a86/constraint_geometry-scored-outputs.pt": "6d0814fde5088f707191abca7f0cd66b2dcab98ce80a7a26b8f2019ce2445d3d"
+        },
+        "task_id": "unipolar"
+      },
+      "role": "control",
+      "task_id": "unipolar"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-vector_anisotropic.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "a19a4d64b72167e025065fc9229df5223248478a61d77eeeca7c647ebe4be3f2",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "77229abf94fe38990064bed75930c608790d27078ed51f1ad30261e892605a0e",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/16ffa34a053140d58da0562f7e4e4549/observed-samples.pt": "d998bea826413df2bf1522bfbc901b2518f86bedf5d5396b9bbfb341248deae1"
+        },
+        "task_id": "vector_anisotropic"
+      },
+      "role": "control",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "frames": 4,
+      "gif": "media/control-clockfree_audit_measurement_v1.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 4,
+        "observations_sha256": "9a6ae9a7415a0e314e2cecb153c82d66c64b7450926e5e6d5568f850e7b8356c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6b9cd00388eb4e6a8efd644d3683fd8a/clockfree-proof/comparisons.pt": "9eed3ccdc0f93ba7bac5d3b708d290b2a1d4eb9a413223e789e00ee6888af705"
+        },
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "role": "control",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-five_word_joint_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "9d2e399b9ca6af8afc82aa9a3d1d5d1666843e42a0009865f28263f3ff27555a",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 25,
+        "observations_sha256": "fb076576be43bebe4cb7027debce5b7be1686f7f44100385d58209be4524656c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/115487721ecf4269ba1c51c6b3b269a5/observed-records.pt": "98f07573cef9bc99d2836e6ecda49263d3e6bedc14eab5331443e5677175e2be"
+        },
+        "task_id": "five_word_joint_hold"
+      },
+      "role": "control",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-rotated100.gif",
+      "receipt": {
+        "gif_sha256": "694e9d7f3c47991988c53cac44f1c20d127032da225828e3a2568347680ca576",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "abfbf076a79e3550537c9d5c64827b806959a780b7e57f94cb7882706132264c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/config.json": "0bb977943e2f0108a61ffe6bfb2f49b188972f0130377d56f148d2c6120edce2",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/events.jsonl": "86158e624f7e01dc5fc4b632ee30f715ab40bda8ae7245019f3ce79207866607",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_000000.npz": "ea93a5d771dc17408dd914e931af85c7ea8cc387e4e0a33d2f72e51a5b1b3a50",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_000050.npz": "aa8c40eb77385bd3764748fd11ad5543b7a1a96cab5d2f8ab412ffe14063bcde",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_000750.npz": "34cac55765e6ad329acba8d82556699b8f6ec8402ddc6b1b7fddd46313d4d82b",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_001750.npz": "3ba08f75c65edfa13ac7eafe34b5ab314d5d3330d16cf2fe90e6c482b90761c1",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_002750.npz": "245bd717e548abb05f5205667cf1397c1f216063ddd41f6b66d8fd950bbe8c2b",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_004000.npz": "8a2e0113cbee51e8f4ed751d289daa695da547db40b88e7431f565d3bb5eaccc",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_005000.npz": "e11e9b40fd12ae5fc59d5d4ad35e906f1b768ee30f1a56c5297c2d9d79673915",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_006000.npz": "02a1b9f04ca865856d53d2fc91c51e35c192fd45dd76c7b28f7aa9037c1ff421",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/snapshots/step_007000.npz": "a4c45dd42c986035202711441f3dff22033ec401b045b2f3e686318e36c0a58e",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7adf20f3b4744284b2636fa3d864f2f0/native100/rotated100/summary.json": "b89d3fdef70483e1f361452998ef2dee93c00467ef6480ff57f665312500cafc"
+        },
+        "task_id": "rotated100"
+      },
+      "role": "control",
+      "task_id": "rotated100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-five_word_joint_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "7e7cee67a75a475e7bd9d5cc4a0f9bb8984746c0879552cedd988bb1a0d5b8b9",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "964dfaefa004953fdaaaee7c7c110684e1a8f7aa1e97f3c5c0c963e14a390e4c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/79830b7ba76b4b208ea60e24cd639d41/observed-records.pt": "5ec10bb9f1f04e69c6ddb7dd8873eac18e4e47daca2dba6832e0d16124b79fb4"
+        },
+        "task_id": "five_word_joint_smoke"
+      },
+      "role": "control",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-img_stripes2.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "ad2b6410dbf922fbba0db73ebd5889052201b4d960481b2ffd7d63bbc868050d",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "41b1d9f0056e2b235fb22057ae33d470cfbe92b2a26b6e6ae3efe294c8d972e5",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/04bdce86bf5d450eba77e030b4d2c8cd/observed-images.pt": "2e9fb2362147596f5eea259006405c48635372baa2e605fccae7f620e235088d"
+        },
+        "task_id": "img_stripes2"
+      },
+      "role": "control",
+      "task_id": "img_stripes2"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-cover_leftover.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "19019526a1388ad314d762bbcfee1fed11ac23cde741f2bb968b0ddc751dd553",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "f2499109047d014858c5a989c2db144b1498b464d8e6f4356b77c25b2706a139",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/fe106cd86a9047a7ba63ed3f2c1cf447/constraint_geometry-scored-outputs.pt": "98c701d2fc8e5377778913910418270d5c226074649789c9656d2a048a085f7d"
+        },
+        "task_id": "cover_leftover"
+      },
+      "role": "control",
+      "task_id": "cover_leftover"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-unused_token_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "ee833301e76d1c836d79f850d982051da7afa680b36b5bc6fa0501c674146977",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e2308cfc7fa94052b16dcfe5bd3b9f6e/constraint_geometry-scored-outputs.pt": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+        },
+        "task_id": "unused_token_hold"
+      },
+      "role": "control",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-mid_scale_identity.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "f900c2fde1fb92a0c0150017c672613fc17b8b241ad3a80d086226efe2d32571",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "bd9691328548d7aa5c4ce0e88bae3bd178dfc03a266d0a8049b06056276485da",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/14e55ba8ae4c4ad89a11d76a2ae06852/constraint_geometry-scored-outputs.pt": "5c04f2c500c1f42f02e49dbb7d513f7da59c3ee2bc0046087316169c7d17d9a3"
+        },
+        "task_id": "mid_scale_identity"
+      },
+      "role": "control",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-grid100.gif",
+      "receipt": {
+        "gif_sha256": "0f85d136f34d2dbdec2ed51c5d53fff05c87638aec57762ba7a91d77aa7a1ba8",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "447311999188f9406c1b22b038c2d3a4597a8aefb87acb0deb36d3c05ac840dc",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/config.json": "a8e1caaa5e6a4fe0e97a4eb981aacac9640245a4397584869c7549115158522f",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/events.jsonl": "7481503e44bd5d556d73e3d039f1d134d80b150011525c2538dd2b2ae688a8f5",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_000050.npz": "85655e94cd22a8f73c9f06bdff963dae6708cb86dd07bc8293c2a2a3628d37b0",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_000750.npz": "987a65eb0fd8e67ff48fa548a5b32ea174113faa2a69c3a8f244fcd8104ab933",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_001750.npz": "e516d46e2e84dfe8df86f23ef72855514b1e436f8e5330c5e310c7c4d28c46a7",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_002750.npz": "049d2d3467f7dd808565ec912e278521aaab48418da0f2d5fdbd17de315792ba",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_004000.npz": "0fe9452d59ebe33b3a06c18b7fe9d671652f292bf78b90e34eac6e7ee9c616f1",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_005000.npz": "2727ade3e24a47f987446778be9ff3bd3bbe04263c506e188b8aedba6e538828",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_006000.npz": "15359aeeb1a10dc4ff6283e32f5a4650a079ce8d38136795d6b1507391ca0725",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/snapshots/step_007000.npz": "1b53a3a85c1ee1622f4350cd566f334c47d069a415c70502df858b0a450bc4ba",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/748a747f7f984e89af34f775f29974cb/native100/grid100/summary.json": "8226eb599c2f351d3fcbf0d8919bbc27f4bc8112f34de9f8dfc61ef8d3d36e11"
+        },
+        "task_id": "grid100"
+      },
+      "role": "control",
+      "task_id": "grid100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-staggered100.gif",
+      "receipt": {
+        "gif_sha256": "9f6b6c5b5372e1d4f8c00ee5945b74e8f99cdcc37c75d8e6b3e6919a252b95e2",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "57eff12a2b228e51354dbd4f3e8eca316d3a9c34b2abecdb8d155b9be2b93e22",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/config.json": "90a798bbe496380d0bd4c008bd5625c1e7e63152e372ac56da90f0b2d0b8e762",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/events.jsonl": "6155ffaaa634b820eeaf1ab2ab6a9c95170eb4810a20e1c80c51d7213709db58",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_000000.npz": "4f2ee8a085f73e834db1ae8c0b33c5f964b4611eeb8163eb93c5d83a6d3fbb34",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_000050.npz": "e891fad302430c6519b90e7c4fc4a98af0552120a3d94d5bc3e471cd873930df",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_000750.npz": "5bdfe9ebe0e9fc0db1f594cae91b516fcf5a3e275d6a89232ca9b20264f692ac",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_001750.npz": "8315384ba92b41b2ae83dd26d7de6f6953aa5d90688af42c90ff6a557fed310d",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_002750.npz": "07b049e2336e7b0fa08a15507dc4178cd571aea586036a9cc4ac496fef4b40d7",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_004000.npz": "d6cfb8242cad532ce7884e26841caa9eff3d1d2416b20265c0b71ad6f329eb77",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_005000.npz": "420b8a4462c79c5de16030b0a4798b61a00d7604d599327919a8fa9c16eac097",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_006000.npz": "55f7e644d782a006dc1952387f655dd5ef517fef06b7ae2cb72f0d711efdea75",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/snapshots/step_007000.npz": "0b593384e146aaca0c7987d8311440dfa87eccfb59201a68ca75e5a1e1678273",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a11c54209454bc5ba5afe4aa7787423/native100/staggered100/summary.json": "c445454081ee00d235fb6ff1ee2ef44d27556d28ff007321ce7e4ce27b6447d1"
+        },
+        "task_id": "staggered100"
+      },
+      "role": "control",
+      "task_id": "staggered100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-ae_gan_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "93fa16643a5f35677d4178adb34897cd070f0f61bf147bb105a94c299e991945",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "58c69e9c80a17576642c2e3e65e673099cf7c15b0f4aec7d367756375a39b280",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "saved_record_selection": {
+          "added_observations": 0,
+          "kind": "exact_scored_subset_of_retained_views",
+          "retained_records": 31,
+          "source_record_indices": [
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6cbe082f020e4c9d96899be0cb5844e9/constraint_geometry-scored-outputs.pt": "f22de1258d0a3cc869a78901f4ef1c72ea4972a004c6ffe211a1f2b652c9ffcd"
+        },
+        "task_id": "ae_gan_hold"
+      },
+      "role": "control",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-residual_student.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "1c6c06ab67512d0561051e8ddd7b6eefd7fbdb87260968c8467e7e751221f1bf",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "732d76debe84c8033f010afd56c21d661cb64afca02de15d2032ca09761eabc2",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/790b9b08584543a3812a737baa6716e7/constraint_geometry-scored-outputs.pt": "7c4e78f4c7a1d9742873cc1098ef8c5766694634f59f004751a2cde767ffe02d"
+        },
+        "task_id": "residual_student"
+      },
+      "role": "control",
+      "task_id": "residual_student"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-gaussian1d_stability.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "737457548bc7cd39b99ec281d0e4d6fe68a2d56f802f56719d7f82d3ef5315aa",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 120,
+        "observations_sha256": "13dc345f3483d813e0c251902a5f24576b4b5562b1183c48f80d288b1e82b20c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          15,
+          30,
+          45,
+          60,
+          74,
+          89,
+          104,
+          119
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0466b9b84f6e4a30a36cf1d3e2357443/evaluator/observed-samples.pt": "24b948cb5dc10c2678566cb1c3f8e658b004e3481a2b32ba9227c658f8772916"
+        },
+        "task_id": "gaussian1d_stability"
+      },
+      "role": "control",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-img_blobs4.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "664827a9e24f533c2d4b78196c6eb1adc904c264d40b740fa2139ac367d38124",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "0e97f894ec1445c16ff34255a140c7c4f9fdfe74bad22e79da2c6a96dbdc2c08",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/107a60b7168444b38b3b068a9a854176/observed-images.pt": "7fdb2663b0e127c5dc6f7f177334048c2051a92e72f982d5c93147e4914a5003"
+        },
+        "task_id": "img_blobs4"
+      },
+      "role": "control",
+      "task_id": "img_blobs4"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-vector_two_broad.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "dd469601f5b80dafc3ffd624aad31f5a31ae5ce191651d09bdd70ffb21617a9e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "d1e52e0c641878a493c408de0a83b3f42dcbe4b4acef1facc1ffda31a0153fdf",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e8ce58b245764b2ba335538ce6b8caed/observed-samples.pt": "e11a61f45746d3b4bdb417fd241de9cfa23311ab21357ceab92fa95359ac82a4"
+        },
+        "task_id": "vector_two_broad"
+      },
+      "role": "control",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-two_pole.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d8804dfc19204afca81615bd73da90f3/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+        },
+        "task_id": "two_pole"
+      },
+      "role": "control",
+      "task_id": "two_pole"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-vector_unequal_mass.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "6b2a7e8fe10e721cad43fb108074cd401f926d0562ff7039c9a61c6efd54512f",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "a29b7e6a77be9a52394a1dfef5b799cd17f526c925dec7ae7b74f87e3f8486e4",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/695263469b104ddba700b66ea0843ec8/observed-samples.pt": "2ea6a5e0c033ede7a15b1ec4d6f6edebc9ad325a068909fbaf419b12623cb458"
+        },
+        "task_id": "vector_unequal_mass"
+      },
+      "role": "control",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-ring16_acquisition.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 96,
+        "observations_sha256": "744f278c444a0a9bc20ffe4a9b472e71a5a0e22c5fa7cd5d622a0f9af109e8ca",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          12,
+          24,
+          36,
+          48,
+          59,
+          71,
+          83,
+          95
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/534748cbd1f24ee4a8208a9ab38e23a2/observed-samples.pt": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+        },
+        "task_id": "ring16_acquisition"
+      },
+      "role": "control",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-trajectory.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "8dd39b49e761cd4934a1f367f7cb8d654672a16d87852a4e82800b4a3eae5a4e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "3fc8940dea2acc270bdcd7cedec98df980376b1bcec2ca0f64ea9778fa7d173e",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6e582d69d3304e1f8ff273bc4a0e58d8/constraint_geometry-scored-outputs.pt": "9c6d51b000ebc3823461f529c4915b8401fcfc02b64e571acca0109283461650"
+        },
+        "task_id": "trajectory"
+      },
+      "role": "control",
+      "task_id": "trajectory"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-vector_spiral.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "d2ed7499a3153bbeaa6c7e5d075124a99bad64d52acfb032a8746afc2397ae53",
+        "kind": "actual_training_saved_spiral_gif",
+        "observation_count": 24,
+        "observations_sha256": "de80b12ebe452e230fc9a263257891f65d5b911b18871da8d168f108420e16f6",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/73d292e48415468da02e005da548bff1/observed-samples.pt": "ea03b03840b6c217584c58ef1516dabb6686755eaca149131de46c711edbf309"
+        },
+        "task_id": "vector_spiral"
+      },
+      "role": "control",
+      "task_id": "vector_spiral"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-mode_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "f351c0d595a23d50c4fde37342423ab4cff51d20001d6e464c1e7960290d7989",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "8ac530fbd9be2dfb96fc7db280a02ef30e8523cd5a696d306d8b218653a3f260",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {},
+        "task_id": "mode_hold"
+      },
+      "role": "control",
+      "task_id": "mode_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-img_intensity2.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "f614d78521b195258900d412e74d3a28b7b4ccb4294369797e86a0841203c4d8",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "26c86be8f1644709d021879c26c93963957afd07c6947a13bc1601a05f78f357",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7f561abdc9bb4f5e988478c32c32ad18/observed-images.pt": "aba9af20f61c28447414ddc2346d4659617ce24cd3a3e4e4a01736e24d1ada7a"
+        },
+        "task_id": "img_intensity2"
+      },
+      "role": "control",
+      "task_id": "img_intensity2"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-img_bars4.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "bc9955c3ddf17dc010b7755c7dc0cb9dc79ef41f9d13e0fa72914e0b02a68214",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "f72646d0b8e583d3fc90b88ed17cf2c5e97498977c789fd1834bfe0440e60df9",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d953893876524a4f966ef148e83118bd/observed-images.pt": "fd215d4e81f342c7f5d6db64119aaca04188d47d1d875fe065ebf63a498a5b39"
+        },
+        "task_id": "img_bars4"
+      },
+      "role": "control",
+      "task_id": "img_bars4"
+    },
+    {
+      "frames": 9,
+      "gif": "media/control-vector_unequal_width.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "5a7d74f463bb61ae4ba2473303caa696f2644a65c43573ac492fd19bdd961299",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "7f053488ba4cea2574f021b6e0e2aae67be9fc65788efc6a9a83936139144d97",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d62e9931a8b94bb88c54c9d02186ef33/observed-samples.pt": "5012bd6a392e978905e669dfb184d0637ffd1c238b6c61b817f41384ce49c25e"
+        },
+        "task_id": "vector_unequal_width"
+      },
+      "role": "control",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-ring16_acquisition.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "c1e045e1ec5457d6b8fceb84a58fda29d22878f9d1d273b895b84ae471a4d350",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 96,
+        "observations_sha256": "063cfce910909ffaa3911f6c059a44bbc76415eaa03a7c5ad919c3a122c9a1a7",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          12,
+          24,
+          36,
+          48,
+          59,
+          71,
+          83,
+          95
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/10ffa79853034264b944a0da626a99ff/observed-samples.pt": "cf4e9ae24d6e1ac647f88875d0766b703b4ddb80f8fe2a09c1d5cca8ab0cbe54"
+        },
+        "task_id": "ring16_acquisition"
+      },
+      "role": "half_network",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-five_word_joint_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "d251cb416abbd8995036e639588b2699f7f86d802184e006467243a2f4c186d4",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "9769f7600143fd71297ab91cfe840979fc7750ab3bfb95f3261e9d2261439be6",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/ce7f17c7f6e04750b30f0d742fdf5944/observed-records.pt": "2bbbf5e6a01b0c29be966372c34fab94e5d6363d2238bfefeaf609c6abc87cff"
+        },
+        "task_id": "five_word_joint_smoke"
+      },
+      "role": "half_network",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-ae_gan_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "0818f91047267ce9a2d65194e6d3fc5a16bbcc4c8a7f57b6a812ee8ef80c419b",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "a41cd48811c4e2e53fa3091550513d79b0dfd5050af0421ee556267dd03185c1",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "saved_record_selection": {
+          "added_observations": 0,
+          "kind": "exact_scored_subset_of_retained_views",
+          "retained_records": 31,
+          "source_record_indices": [
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/48537eb0efbb40f0a14cb349c6fe3fdb/constraint_geometry-scored-outputs.pt": "82236b825bbee12d8f58fd7d6397b1ce3cc523b4928861b19f7beac86d6780fa"
+        },
+        "task_id": "ae_gan_hold"
+      },
+      "role": "half_network",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "frames": 4,
+      "gif": "media/half_network-clockfree_audit_measurement_v1.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "9b16ca5470c5e8ef10c380ff3b631d59cb254495b2c63795e1c7fde64a254ea5",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 4,
+        "observations_sha256": "b49578d75147e345ee2fb33e5dd473b4921ed120b29ab41020418172bce7a30c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/002dcdd1918a433786bc1b7253c492e6/clockfree-proof/comparisons.pt": "35fa82b9c2b0ec90763ba51c4ff7306433cc3c06a79163871133441d69bbafd2"
+        },
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "role": "half_network",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-two_pole.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "596ff4b258c8080fc9ff07daafacdaa6bb701ffcd9674f9b981c6970d972c652",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "415ffec0c8c30185b90ed60dd6000c02c8471659954e062de858070089fc35c5",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/3e32d034c6d74848945fc163f0365fae/constraint_geometry-scored-outputs.pt": "f2bf91bf7ab5acf6a2d219a7ad437e6f5e34596446eb183da61ac231ce49bff1"
+        },
+        "task_id": "two_pole"
+      },
+      "role": "half_network",
+      "task_id": "two_pole"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-unused_token_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "55061e297add43d964a0a8c3e25cce8d1409c8f6d53fac0f83298abfb7738bf5",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "84ff4c04700268b3c6918992777aac15b9ff4028bd2e17c8030cbc5085409433",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f33ca58d224c4e3fbec1fba7ee4de4ea/constraint_geometry-scored-outputs.pt": "5ac7034c12678ac274cc58df9155c99ef653f7f96d1695b3d1b96f6d237875b3"
+        },
+        "task_id": "unused_token_hold"
+      },
+      "role": "half_network",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/half_network-gaussian1d_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "89fc3a291e8c25ccd56af20af570275a635da55ee93b692ab6009c23cbccf1f1",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "49268cd477e6f7bab121ca65c04c3889176f14323b3d1693e2f2cb0524b5bb32",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7b921455802944aa9020d1960bd2ea61/evaluator/observed-samples.pt": "5b993b02b5c7a54be538442a66f60f43a8cdb2aeaa5d99dfb1636357e269ea0c"
+        },
+        "task_id": "gaussian1d_smoke"
+      },
+      "role": "half_network",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-five_word_joint_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "01df408539fa79496dbcda41b27a1b9e2e4b88bff7f79a0b464600b510e343e8",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "3a313054abf95e447c394539a6908bf07def0e172d5c7dcee40403a151685cbf",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/e2055ee1d89b4fb3b51329e79cdd8df4/observed-records.pt": "44abcc6b1554b6873fb77ca32bf8e96f885179a03be8631cbd664a7e1b03ee66"
+        },
+        "task_id": "five_word_joint_smoke"
+      },
+      "role": "late_anneal",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-ae_gan_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "e6feea7cf786ae02fcf6310a50f65b3a2f9e899150e3c6ca3d0285008b9613eb",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "45a6028f6e29c75b0a74d67870c232498b50f461c4c64e157c6328ac5c9b0f64",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "saved_record_selection": {
+          "added_observations": 0,
+          "kind": "exact_scored_subset_of_retained_views",
+          "retained_records": 31,
+          "source_record_indices": [
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7176f2d6b3584865b8cba41ad0ddcff4/constraint_geometry-scored-outputs.pt": "6a380543037deeac09698b5ffb3e111ad3b9dfb60c1bea5d4d6135dd5ef491bf"
+        },
+        "task_id": "ae_gan_hold"
+      },
+      "role": "late_anneal",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-ring16_acquisition.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "60e69db410323e118e4528b569998cbe39b68a90d139fc47a3adf3271d2a5755",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 96,
+        "observations_sha256": "164aef989171ea1dd0a09fc76d17034f2ac35ced87e2630f09541a9dcbec418c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          12,
+          24,
+          36,
+          48,
+          59,
+          71,
+          83,
+          95
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b13caad3fccc4a20b3b58ebeac4b66d9/observed-samples.pt": "f998c57aff406b0341f78e0ca5f6e8357fef5c88a704162783c02ccb2d44c258"
+        },
+        "task_id": "ring16_acquisition"
+      },
+      "role": "late_anneal",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-unused_token_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "83d655879114b1ab64dc69e2b39601813e656965f4eff06bc722717cb8fafbb8",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "0091d1ddd016a2af0a5b4faed13666e2a033c6a981e61b96065329e15dde51fd",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/37f490e1c22749b396bb341b45220378/constraint_geometry-scored-outputs.pt": "47f7f690faa5ab2ac9819b2f6e7c4e9fc091d03d4a64889218d5f6364b24a4bd"
+        },
+        "task_id": "unused_token_hold"
+      },
+      "role": "late_anneal",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-gaussian1d_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "eb4d30f97096498aa7fe512e2193980ae7153b34f2f8df5527f40e7be1bcb705",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "f4093c82559219f4971de822eb5a51a4420ed500b12f02e5b860d81c454c2c97",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a3b2db5542554e908bdec43160b7d7fa/evaluator/observed-samples.pt": "d87e02a880712a99f57e38f5acb60694a72ac971317ad586c11571298557e662"
+        },
+        "task_id": "gaussian1d_smoke"
+      },
+      "role": "late_anneal",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/late_anneal-two_pole.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "d30ffdfc94a69e17aff9537eefafaaab0a3ec5c2b6d6b91e24173673d0d85e49",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "297acbd253bf16103a8571b1446ffe1787e91a82d3dff179ce97dfd19e56d08f",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/8724f8fa1fe34f909425518d7e9a45b2/constraint_geometry-scored-outputs.pt": "31c3d11637a3f88e0616fd21c7b4c56029e72be10f87c25267a9444a498b0083"
+        },
+        "task_id": "two_pole"
+      },
+      "role": "late_anneal",
+      "task_id": "two_pole"
+    },
+    {
+      "frames": 4,
+      "gif": "media/late_anneal-clockfree_audit_measurement_v1.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "e15ae6232ee659f4c445564de605e5792cc107d8ce55f8bac197eafa290d78aa",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 4,
+        "observations_sha256": "f06ee046e15d3093b3dc6021ae462358d65d300cef0f658451e9c18c08328fd0",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a028529ce6604146b6f375212cd73429/clockfree-proof/comparisons.pt": "882a3036f5ea28933d5d1fdd9bbfb740b85c77b10ff16bf2a52cfaac1aabfdc9"
+        },
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "role": "late_anneal",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-five_word_joint_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "0ac56266ab6b46b398363a9dc9a139af83e9015395e8dd698385d719880ed7af",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "a2c888d091250b232463578f27f33e1f54123fb51587c33c6236cc71c4707053",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0e386457921d483b90a36903359cece5/observed-records.pt": "a4a556a93e589068f779e2e29d1e59a0ee7d8553ddb54c3d25a86711e5fdc268"
+        },
+        "task_id": "five_word_joint_smoke"
+      },
+      "role": "prior_smoothing",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-ring16_acquisition.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "99d01b71b161357472e0bebc08d3ddb5d712a2047c6217f8875ec70801b8fe39",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 96,
+        "observations_sha256": "a67e792abecaba6e9e19223e71debd3167a3f85fa7fabc81f915757148602de9",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          12,
+          24,
+          36,
+          48,
+          59,
+          71,
+          83,
+          95
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/85c2e2a5433b40029c905d934c38b349/observed-samples.pt": "1fcde28bc15306a412aa2aa733ec2dff22844d8ca525e3fb50e1316eadc43e97"
+        },
+        "task_id": "ring16_acquisition"
+      },
+      "role": "prior_smoothing",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-two_pole.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a73d8a7b6b0f4a88ab5bb10b245e539d/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+        },
+        "task_id": "two_pole"
+      },
+      "role": "prior_smoothing",
+      "task_id": "two_pole"
+    },
+    {
+      "frames": 4,
+      "gif": "media/prior_smoothing-clockfree_audit_measurement_v1.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "6b1462adc4c50898bdc80b8392dedfd752818e0fee65aecb11e1b0bc5b0d6789",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 4,
+        "observations_sha256": "30ee4fa8706d08d38436357a44d5ed14feed24c4a4d2de8310d48927adc8c41f",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4"
+        },
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "role": "prior_smoothing",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-gaussian1d_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "feed41c86dd9aaff5fd8a8964ba213011e7ac874b6d474ba3b8a78cfcbb85bbf",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "4c331445c508399a21daebb14ff014f4332e454599b8f8254c5d1bada2019a7d",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6069108176db4632af970bfabf5e6ee4/evaluator/observed-samples.pt": "cb7dc755e4ad02413d297e294b94f7d304bceaf79ea7c9076cafee429e229e8e"
+        },
+        "task_id": "gaussian1d_smoke"
+      },
+      "role": "prior_smoothing",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-ae_gan_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "19e6c0568bc82e89899097097e8585bdf916eb0eb666c098895c0d0726b5350e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "fee084c0ae4d32ad57ff22e021a76ea71ba20cb939ca399ff75bbf5d51911bed",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "saved_record_selection": {
+          "added_observations": 0,
+          "kind": "exact_scored_subset_of_retained_views",
+          "retained_records": 31,
+          "source_record_indices": [
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f3d4c01d90d24b3086a808728dfbb91f/constraint_geometry-scored-outputs.pt": "aae0e38b34af74a11069284f9d06ce2b59bcf346083fc1b3829b12ac40961149"
+        },
+        "task_id": "ae_gan_hold"
+      },
+      "role": "prior_smoothing",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/prior_smoothing-unused_token_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "ee833301e76d1c836d79f850d982051da7afa680b36b5bc6fa0501c674146977",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9111fe0d836c4a3f813478f9f4f306b8/constraint_geometry-scored-outputs.pt": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+        },
+        "task_id": "unused_token_hold"
+      },
+      "role": "prior_smoothing",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-mode_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "f40a8dac2d6b782b88a2b6e0644f4e5dbf27fe7e2221575a1f73031d1cd301d6",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "390eaedb24b89bf52cab85d1428ce8c17a1067d01ac2c9fde3a3aca30c691b0c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {},
+        "task_id": "mode_hold"
+      },
+      "role": "zero_damping",
+      "task_id": "mode_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-ring16_acquisition.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "ccac79559f48831f84caccae05636b6110cffc09468afd980d0806f67c85296e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 96,
+        "observations_sha256": "74e3bad3fd337c60175e9f9ad8afae0d92e39567d1f2a438b93e936edf2dcf87",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          12,
+          24,
+          36,
+          48,
+          59,
+          71,
+          83,
+          95
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/657f76ece11f4a93808cdf74122582b3/observed-samples.pt": "e497c318e759b2560cf15be98fcb630ad0fd7e4796d22695f9ffe2ca454fd1d4"
+        },
+        "task_id": "ring16_acquisition"
+      },
+      "role": "zero_damping",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-ae_gan_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "b2a906298b0b5e4e5c39139cfccfb428cd2ab17a241a2303eba12eccd0962d2e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "9a11c4ff87f576120a17b06c5a7d4504c4bd21627b077e4aff771ab0657536ed",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "saved_record_selection": {
+          "added_observations": 0,
+          "kind": "exact_scored_subset_of_retained_views",
+          "retained_records": 31,
+          "source_record_indices": [
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        },
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d60ade0394994dc3844b4256c85d1356/constraint_geometry-scored-outputs.pt": "43060a8cfa5bf688e3425b5a802a6b7646612316dbe09c16fb77b8ad086d0036"
+        },
+        "task_id": "ae_gan_hold"
+      },
+      "role": "zero_damping",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-img_blobs4.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "7a4245a4c95696b26777de69d6c87fc463d86df1e8eeb77f8a32003d24a6ff06",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "1e175adfb3b8f1752d7dfb2cce63e72392eb001b1ac511fd349770b9222d5ae7",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/cdd253025d03437e8b3c8f32ec15baa8/observed-images.pt": "b2caf3efd7bdc3f58516729caf3915c8779d94d68abcef676047e2f48677bca6"
+        },
+        "task_id": "img_blobs4"
+      },
+      "role": "zero_damping",
+      "task_id": "img_blobs4"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_overlap.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "9f10f974e8d057108e1bc692d7d9e2a334186f175c310c97946e1fd0c676e31e",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "12eec85b686849a9277466d651e1adde579d6c73f15e6223050374e0d171dad3",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/d4a0d6e34cbf493a81381bc19545bd1b/observed-samples.pt": "5ff04079fffd4d81b430e4a4f992cd7aa9d5fbf59fb8e0c69aa04a7ae2442758"
+        },
+        "task_id": "vector_overlap"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_overlap"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_anisotropic.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "c36caede2dfdcc7dccc8f79c0647f6afdec532abbc53a45e7423088d4027c49a",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "e4a1be41a287263c71fe02a15f456111942e494eeceac501ce2d5eb7b37c8906",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f3fb0738b3ac4dda9495dd9f76fce883/observed-samples.pt": "0c00439e1dc799c7ada83ff13302d3ab525e6f5f1498376388578ee4cdeb77be"
+        },
+        "task_id": "vector_anisotropic"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-unipolar.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "8e3b0a2291e172d1926c59edd362aef7998bfce73b6e4e4817eafb6dda74afdd",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "2d970e17191896f79574d7b2993ac56b2f969d93729520d84ea746f821a5e5bb",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0aa6e1e160f64e96bf6782cc38a14ce4/constraint_geometry-scored-outputs.pt": "c167e18c9fb5740f4b3d9452cf6454661dbdee3c5ab1a4b6d289f60e2f7150c4"
+        },
+        "task_id": "unipolar"
+      },
+      "role": "zero_damping",
+      "task_id": "unipolar"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-gaussian1d_stability.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "22e7a2986e222c937a557b799fc9e4c4f3a2d361279befb2381bd6ae77b9ceef",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 120,
+        "observations_sha256": "820d7c78d831ada4fa37c3b0a8a96880952e55c285e7ae8e32ecf1c53e9d85f4",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          15,
+          30,
+          45,
+          60,
+          74,
+          89,
+          104,
+          119
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/30b3c8c200de40b38920ecc9a3fe98f1/evaluator/observed-samples.pt": "40d525b1358b1ad06bb49bb0043f534f830f95e0ad9221636e059c30ddf8687e"
+        },
+        "task_id": "gaussian1d_stability"
+      },
+      "role": "zero_damping",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_two_broad.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "2cd47f4544f256fc36c99326bc116a5dca170ffe7060a20c5082e73dec993cfc",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "8dac4b535f01919fb64c960de0e82e154570f36481a86e38a490b47046233120",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/49101978fa1e4196858deeda931615b5/observed-samples.pt": "4c0b6dff26646d33a8728bf0fe8ebf1df06d2877b8b7a43347a9b4525b3417cb"
+        },
+        "task_id": "vector_two_broad"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "frames": 4,
+      "gif": "media/zero_damping-clockfree_audit_measurement_v1.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "fd2c6ee132acd9f397b699e8b46cd53116ef40bd407a48739031afe712cde1da",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 4,
+        "observations_sha256": "d46de8bfb5227eec8fe48250ba03cce05c5f822302d5c92f90f64c04d051dbc9",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/862fa10e540b45e48ee94d7c0640470e/clockfree-proof/comparisons.pt": "8359b6b943f1accac4e08fecdc6352f939393c4d945ee3d5a069f5ecfbf49856"
+        },
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "role": "zero_damping",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-rotated100.gif",
+      "receipt": {
+        "gif_sha256": "bdf029aa2681f478a228d876075ba9d9ed3ea6df284583ad7cf02e0da09418f7",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "94bc571f43eced93f610709d7a077e08db3b7c37f0960c425a284d557813f8e7",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/config.json": "fd1e3c0de5a89328bd4f0c1d8d4f4f1141ddaa5a12fa649c403368815553f096",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/events.jsonl": "637a8a938c9979042fc1f24392cfcb3cb840256d5bca90ce04ed9e6855fc05e7",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_000000.npz": "ea93a5d771dc17408dd914e931af85c7ea8cc387e4e0a33d2f72e51a5b1b3a50",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_000050.npz": "7861b1ee2be807212605d1632acec31acaefeb46d23299b24f282560068158ce",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_000750.npz": "efb52aa16b55ad04f4debee5f679bf5bdd90279eac0f31d6633553ab1c2411a0",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_001750.npz": "216512060cbedf29fdfd7823f940c1ecf07385ef5ab05bd1ab90ac4d52c07823",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_002750.npz": "cf45713adc877eff643b23689b170837482015c503237b9e2ba9e4754bddd458",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_004000.npz": "4e7b4dc68552311200301714aa01d65816c35c1864cb398a5ab9edb00907913d",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_005000.npz": "ef067421bdb88547579a909f4059c9ea6302f22e70589a43a74bdbc0d4297a24",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_006000.npz": "a80c88a095d99bd89f47721a28d4c5b9aa68533373cb0e0e742e9d83f7bfeba0",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/snapshots/step_007000.npz": "3b358bf470a063bf2a082ae9361fba508778b7c6ac150a59212b533a883c7399",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/beecdfb118ad414982a2a6ad618993df/native100/rotated100/summary.json": "f43d541326b0a46eec59026af0f169fbe623fb3dc2497efb30aa4ba52b04d049"
+        },
+        "task_id": "rotated100"
+      },
+      "role": "zero_damping",
+      "task_id": "rotated100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_spiral.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "ace5c313f4e04bf170c078ca3099e840182b8e2101b1005e22e5fda8edab619a",
+        "kind": "actual_training_saved_spiral_gif",
+        "observation_count": 24,
+        "observations_sha256": "d57e96ec18f14d286d24d01c560e0a77d9e93db8532ffbda77dd57e4e6156854",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/4f9bd2fe69034904a3b9606ff8b3380a/observed-samples.pt": "fbf89f00e0b58746e030c0e55a4b5c25306c20dafdaf75eee8527f81bd690db8"
+        },
+        "task_id": "vector_spiral"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_spiral"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-gaussian1d_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "86087878ddad8fc8822a2d598690f8d8e29306f1c778c1c15e13c2f609c6987a",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "bcb5f588c0fe95dcaa3f9f355eecc68927feb0639e68cb20ef42aa73382bba10",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f0f2a7596c4d4cdbad9e26fdf48af123/evaluator/observed-samples.pt": "cc15725de514b4148ac8fba1a26dea82a8f0f64957b91004a20ee8319205dcf8"
+        },
+        "task_id": "gaussian1d_smoke"
+      },
+      "role": "zero_damping",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-cover_leftover.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "06333aa0cbcd21e4131b1003b48c35265338fb6f719c462cf2a21a7264a38219",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "3b70eddde17cb101aad20c8347a4f0320a5390f6000abb500255f5c68d1388fc",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/65fca230122942adb13799a109265b28/constraint_geometry-scored-outputs.pt": "054db9c0d66fedb828a332fc939ab34a4e08ca5c1a398003a6e13080144eff5b"
+        },
+        "task_id": "cover_leftover"
+      },
+      "role": "zero_damping",
+      "task_id": "cover_leftover"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-trajectory.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "888d14e3d5122a2ea4bc68e5b668e127a5cf23351c14bb10ab748a7af2005fb9",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "7bcf265110e8b96bf800f3b51fb6e5378f61d777fb1f3f352358272046ea610b",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/580095874fe24343bec83280b8a8adfa/constraint_geometry-scored-outputs.pt": "658853812f1533c4d922db6c8230673da4a030647c21ce36d41904164c9be035"
+        },
+        "task_id": "trajectory"
+      },
+      "role": "zero_damping",
+      "task_id": "trajectory"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-img_intensity2.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "a3385d596d107a030a38a4bc986d9b90c15751da7e49549de556bb4c966b2503",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "d12655ba4e496086c00aa9bb4f3350515e5e8cd8c267818b3ac22eaf296264b8",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/5d9ef548748947d9bcbe7835ea50705d/observed-images.pt": "22a9b451f863fb5fbbfd16ae8f95a3bffcefa0e5eef5f2a36c6cc3bff7b049dd"
+        },
+        "task_id": "img_intensity2"
+      },
+      "role": "zero_damping",
+      "task_id": "img_intensity2"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_unequal_mass.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "250cb68a979a0f9c80b8decb1cd822573daf4e53159272acd481ebc6643c98d0",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "671ce31380feee9d0b2b56d55a116f6843dd1d719662020830a76daa69a1262b",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9a659042827a4e2db5362bb72300f24c/observed-samples.pt": "6a8b094a28e6ab65ee3a840d76ffe91b395730649a40f52b4a55cf9638fb7183"
+        },
+        "task_id": "vector_unequal_mass"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-five_word_joint_smoke.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "782dc81fc2decac5a1d3b1b729ccf24484e5d4a62fd9dc6455ddf564bbd38fbe",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "1f04444dea1c9dbd75e3471e0444459154c96da6e0fddcf267ae81835f273c9f",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/c7508d7af21e411db3617d7007bbcadf/observed-records.pt": "82d2594b91aef2547d89c33352edc1e37ae1a49aad8cdbc1838a8a1fea06a96b"
+        },
+        "task_id": "five_word_joint_smoke"
+      },
+      "role": "zero_damping",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-vector_unequal_width.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "0de2c864c49313ea62d3c59020b04117af4cb125951da6500dc7e775fddd5bdc",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "649ef376835315b62bc060b3e64debbfe515ccb8a6d07f1fad71b66c1cd22967",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/83072537e6d04bf98127afbaf881f145/observed-samples.pt": "118e4546d45cefa5464043b8fbcd708403d6378f0635ed3219c573e3b10e29d0"
+        },
+        "task_id": "vector_unequal_width"
+      },
+      "role": "zero_damping",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-two_pole.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "81f6e509a33d0cb2e50bc91379e5cebd4b018c833e8b7fc2a0a4ebd8c51a705b",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "975ba053332993af428993fb0af7e265946ca735f3926512b49d0985fe71e6a8",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/ecf90065f1584256a12020060e3074fb/constraint_geometry-scored-outputs.pt": "ed92b474a6b79d02e935da085ebdd1b7732e3b58cbfe6ec2007cb55487bb23f7"
+        },
+        "task_id": "two_pole"
+      },
+      "role": "zero_damping",
+      "task_id": "two_pole"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-unused_token_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "65a26d4b94414ad364bd3f76325278da9fde08c3f31296cfc047614744b4d1b7",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "bc8be9202bf10915ebf7004ff1ae4e38faeecff383936c6f200ea3fcdac2a51c",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f0f5faceee6c471d848c4b748a936318/constraint_geometry-scored-outputs.pt": "ea9039f39ed4296b95a69e42cf8def5e29f920d0bc8f44287be79afe1b5b352d"
+        },
+        "task_id": "unused_token_hold"
+      },
+      "role": "zero_damping",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-grid100.gif",
+      "receipt": {
+        "gif_sha256": "3ae0a43bce5947b66ae3484a7ccf29b7e00d220336b51bcc41b19d5c6bea829d",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "693fe241c94f71c1ef396a3c409afb2650f5e592a127237bac6d20e0b0e05d90",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/config.json": "57f3e2ee787ec391ec22ce976c859e81357caf186d04cf2d0273a1fdb057fd9c",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/events.jsonl": "6200822092ac92e0f93e39447b3fb560908aee2c9fb6b68c5254d9750ea68711",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_000050.npz": "0ccd41b8a13e858a00f99082e9814aed179c3441c9099c26f36d2be86c85ecbe",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_000750.npz": "37ff546fb3cb4a0c60a6c5d5132458f48e93a0ee5452dac47f9b3e7c9f15b03e",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_001750.npz": "7f91b959adb3c4a57a066d417f1617b4ccbbca808fdb1d45d6844e826f1e80ae",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_002750.npz": "af4986ad0c954a0ade41635df50ed10327f3ae1fce94b590f31113e1040046c6",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_004000.npz": "12747e7ed574f597af5490087d72d0afa49c730f00a17e684d06efcc0a03d550",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_005000.npz": "c6786f047d140bf9c8a013af952aeb583237e9366c6ea65f1888feab35218c89",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_006000.npz": "d775d1e5390edcdd8c4af772866afae9700a81690355e99245a663519df4893c",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/snapshots/step_007000.npz": "6cee80ca0b6ba7ea4c4c4e21a5aa29e97ac1d7c09dfa6d232f973e62f430ff5f",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/237f05a0cce7467b8e011e4d3f2bda10/native100/grid100/summary.json": "97e65cc0ac0ec1268a7a3ac3866a33a7917bce161fb7447c73a85641bf316288"
+        },
+        "task_id": "grid100"
+      },
+      "role": "zero_damping",
+      "task_id": "grid100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-img_bars4.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "3356d2c85ab3284a2e75f83988e758e2cb402e79dfc45293fbbc9546003672b6",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "1f0c04f72b2a3141e5044aa00290b70aeed0c8c4514cee713d9a706b18308b63",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/54cc309d7e1f419c9e76ff2ee1699ad0/observed-images.pt": "68723515950f9ced8bc5c5f5369939fcf8dbc35ab450ed8306cc108662bd2e70"
+        },
+        "task_id": "img_bars4"
+      },
+      "role": "zero_damping",
+      "task_id": "img_bars4"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-five_word_joint_hold.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "2c416f5f846c8914cb8892b6a70a4f22ad7c1438b41f84567cb1846785245e56",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 25,
+        "observations_sha256": "186e484e44d6f086db3dc3d9068b6466a1f741ca54f1673563b47ae8332e8c69",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a13f9ff98cb64153823f07f6535198ab/observed-records.pt": "10e3d8a7bcbf0b5e18417fd929f2c7b9c2d0e0801ed3edbb1bb4a0a89c7a2ecd"
+        },
+        "task_id": "five_word_joint_hold"
+      },
+      "role": "zero_damping",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-residual_student.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "2dd9f8784cb700ac36af15dce6c51e77ccb67327459125f1cbf0771d840575fe",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "70a1799c85adfa1aab799dcfe08c8bcf8a3b171a5fccf64ae63ff97eda39aa8e",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f04a263a1b84483e9aa240cb3cbdba1e/constraint_geometry-scored-outputs.pt": "f0ddb6a89bdcd236f135088839b42850f784df31a871b99b2f13511f11fa69c9"
+        },
+        "task_id": "residual_student"
+      },
+      "role": "zero_damping",
+      "task_id": "residual_student"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-mid_scale_identity.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "891bd3ae699e3f0d68085fe937599adc0781043d262af98ae4c5378e68cd0076",
+        "kind": "actual_training_saved_observations_gif",
+        "observation_count": 24,
+        "observations_sha256": "52f49ad08747a528e4c07460dc527cc65488239137528cb0452e883a5ae12bd6",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/5ca9596b366f4a2380a29c99444e43c2/constraint_geometry-scored-outputs.pt": "c3eb2b00172b6af2bbe38989f3b506e585ee19d721902f3b3b30a2f21fcdf77a"
+        },
+        "task_id": "mid_scale_identity"
+      },
+      "role": "zero_damping",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-staggered100.gif",
+      "receipt": {
+        "gif_sha256": "068d30f1f4dd296f9bc8ef2a98cc498c49aaa9f3cfe73708576c8095bd55c3db",
+        "kind": "actual_training_native_saved_observations_gif",
+        "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+        "observation_count": 34,
+        "observations_sha256": "eaf643696260d797bd5d3368dab31bd16bfbc93ee92f8eecd1f9bfbbc69c913a",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "FAIL",
+        "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+        "rescored_observations": 0,
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          21,
+          25,
+          29,
+          33
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/config.json": "b6fbbfe6c6dfec6e9d35b2be9d3d5f8c46ececeff62a51c521fe7f076fe23dd5",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/events.jsonl": "19e0cc1e363b92d1f4d4ccbcaf1ae2f4c1d8233c6e486809e24fee092225eb9f",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_000000.npz": "4f2ee8a085f73e834db1ae8c0b33c5f964b4611eeb8163eb93c5d83a6d3fbb34",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_000050.npz": "fee5270beb5aad7b531a4fd900902d11437395009bcca03e59a1f3640caaecbc",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_000750.npz": "a2d6e09e81288b36f883b17f5e17d97910df4eba6fab457592d50d6ea96b3a7b",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_001750.npz": "d1035b07755fa5d67ad58684fa4b9286a25decb3e91e21dbabc1567c5643a78b",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_002750.npz": "9637952b4c4335a3882e81c508017af11c44721495ea8e3fbf41a3faadb82900",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_004000.npz": "57ff2945e35e19d772144736012af50a8a65432064c8ebd52873d692e2e971f9",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_005000.npz": "5711a1b81c21cdca08f53811d382b0a9d77b4b23d8054313d2a381781c877f58",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_006000.npz": "2cbde218a491553c369c4823c0ba6362ebe888886c9a38bc45a401bf31861d15",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/snapshots/step_007000.npz": "5887f138207a482507ae6eebd7f106c0b5d8b5962bd982ed1036005008a7bfc1",
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/b96c7236866b4610a9b55e55785517c3/native100/staggered100/summary.json": "772588b0c991aceee6f40103d2450ed86c6943043c36f951313e4a70bb5553fd"
+        },
+        "task_id": "staggered100"
+      },
+      "role": "zero_damping",
+      "task_id": "staggered100"
+    },
+    {
+      "frames": 9,
+      "gif": "media/zero_damping-img_stripes2.gif",
+      "receipt": {
+        "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+        "gif_sha256": "a4a9fe4893caef045e01f88ef8950a0a8e96ca1a773a60bba7e22cc069a14d80",
+        "kind": "actual_training_saved_images_gif",
+        "observation_count": 24,
+        "observations_sha256": "3b78938f2dce2f60912ca7a22c154b88c147c62d7d159a10729c773f81780362",
+        "optimizer_updates_added": 0,
+        "qualification_input": false,
+        "recorded_grade": "PASS",
+        "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "selected_observation_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          14,
+          17,
+          20,
+          23
+        ],
+        "source_inputs": {
+          "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/46ef9ca2646b4b4fa84eb510171bba7f/observed-images.pt": "6d609d96e746e55d3c0b83e510716c4762e4ae99c81ab13b141ca58b63a4da06"
+        },
+        "task_id": "img_stripes2"
+      },
+      "role": "zero_damping",
+      "task_id": "img_stripes2"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

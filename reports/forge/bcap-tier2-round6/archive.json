@@ -1,0 +1,16 @@
+{
+  "bulk_in_git": false,
+  "executed_terminal_queue_state_sha256": "7fb01e50d4d452be8dc6752eb0c06865cf266992dbde80c63fb741a1fed7aa8d",
+  "original_file_manifest": {
+    "bytes": 1128396375,
+    "files": 2832,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/original-files.json",
+    "sha256": "ce1a43e0d68eb1c8696e9ee66842c212d4b82a2a2ab6336900ae526bd0b32612"
+  },
+  "paid_attempts": 77,
+  "restoration": "Verify original-files.json and its members; restore attempt-envelopes under reports/forge/attempts and external queue artifacts at their recorded absolute root. Use executed-terminal-queue-state.json as queue/queue/state.json for the pre-readout publication. Check out the executed source commit for run.py publish; no training rerun is required.",
+  "root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011",
+  "schema_version": 1,
+  "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+  "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+}

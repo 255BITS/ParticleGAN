@@ -1,0 +1,23 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "6b1462adc4c50898bdc80b8392dedfd752818e0fee65aecb11e1b0bc5b0d6789",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "30ee4fa8706d08d38436357a44d5ed14feed24c4a4d2de8310d48927adc8c41f",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/297a41250ca349adb369963316292162/clockfree-proof/comparisons.pt": "57b80aa53a00c5f809c49a35fe46fd2d59ac00adfc694c8a1f9da2a0ab81bab4"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

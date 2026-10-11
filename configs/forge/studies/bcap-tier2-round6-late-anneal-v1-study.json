@@ -1,0 +1,62 @@
+{
+  "campaign": {
+    "budget_seconds": 220000,
+    "candidate_budget_seconds": 44000,
+    "id": "bcap-tier2-round6-v1"
+  },
+  "candidate": "bcap-tier2-round6-late-anneal-v1",
+  "competing_explanation": "Smaller motion or critic damping may improve a final endpoint while impairing acquisition, rare mass, local density, conditional identity or shifted reacquisition; all original sustained gates remain binding.",
+  "control": {
+    "candidate_id": "bcap-tier2-round6-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "Hold rates through 60% of the original horizon, then decay networks to .2 and learned-prior motion to .1 to test acquired-fit retention with nonzero adaptation. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.",
+  "id": "bcap-tier2-round6-late-anneal-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "recipe_prior_refactor_selected_leader_measurement"
+      },
+      "path": "reports/forge/recipe-prior-refactor/publication/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75"
+      },
+      "path": "reports/forge/bcap-default-baseline/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -1,0 +1,1093 @@
+{
+  "attempt_ids": [
+    "002dcdd1918a433786bc1b7253c492e6",
+    "10ffa79853034264b944a0da626a99ff",
+    "3e32d034c6d74848945fc163f0365fae",
+    "48537eb0efbb40f0a14cb349c6fe3fdb",
+    "7b921455802944aa9020d1960bd2ea61",
+    "ce7f17c7f6e04750b30f0d742fdf5944",
+    "f33ca58d224c4e3fbec1fba7ee4de4ea"
+  ],
+  "candidate_id": "bcap-tier2-round6-half-network-v1",
+  "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Fails required Tier1; Tier2 is unmeasured, not a numerical regression. Fresh control passes6/6 and9/21.",
+  "conclusion": "4/6 required Tier1 passes; all21 Tier2 cells blocked and unmeasured.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "002dcdd1918a433786bc1b7253c492e6",
+        "10ffa79853034264b944a0da626a99ff",
+        "3e32d034c6d74848945fc163f0365fae",
+        "48537eb0efbb40f0a14cb349c6fe3fdb",
+        "7b921455802944aa9020d1960bd2ea61",
+        "ce7f17c7f6e04750b30f0d742fdf5944",
+        "f33ca58d224c4e3fbec1fba7ee4de4ea"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "b93d802b4a315077fdc8add5f296d307aa24c47160a7d5974ff167b740d48d4e",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "002dcdd1918a433786bc1b7253c492e6",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "5cc80a330a96473683c39b41738362bea331524cc3cc9b4581fdb66b548deeea",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "10ffa79853034264b944a0da626a99ff",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "ef8fbfa912044d9d3cff17b04b4936a7029c4c4ef071357c13c0a5ecba2768d2",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3e32d034c6d74848945fc163f0365fae",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "78d96cdc57ff5c3a1fff96a6881f098a940e70c6166515b22533131e81879fb7",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "48537eb0efbb40f0a14cb349c6fe3fdb",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "0fea3e3fcec43204cf16eebeb244815d18fac4b294d89b1d6985bdfcb1c0eb35",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "7b921455802944aa9020d1960bd2ea61",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "32d82135f4544b07520716d639d96733a06192761df6cd2c688028e1f4183fcb",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "ce7f17c7f6e04750b30f0d742fdf5944",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "5542051bafd475b9552322d2f07d18f424b37b5b560f8592366b1691509d29ce",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f33ca58d224c4e3fbec1fba7ee4de4ea",
+          "producer_request_id": "939944e2492bc891ccaf04ad",
+          "producer_study_id": "bcap-tier2-round6-half-network-v1-study",
+          "result_hash": "8b2eafab5ffa00532b9f7319f8348694f5eaebd37081aebab38950112fd6e333",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "6edbddf1d2e454458e5277c9784dfcfcae12f76eb9515c3e3147f9da6820c968",
+        "contract_sha256": "b93d802b4a315077fdc8add5f296d307aa24c47160a7d5974ff167b740d48d4e",
+        "control_binding_sha256": "2d6209d1ede5500095dc8551b8b14cb46cd018f262f8782936598155445f6efd",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "95e8415b58e4b151c84443b0a98b346748add9564db6edaa32c65334d3f2fc77"
+      },
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "study_sha256": "95e8415b58e4b151c84443b0a98b346748add9564db6edaa32c65334d3f2fc77"
+    }
+  ],
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Halve G/E and direct generator motion while preserving absolute D .018 and prior .030 rates, testing saved overshoot evidence without weakening the critic. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.",
+  "original_readout": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/original-readouts/readout-eadf45a11139ed0c285366ae.json",
+    "sha256": "00cb24fae0bb66855a223b6709ccc6455cc1ff250d92caff823c1ea4f561c973"
+  },
+  "original_source": {
+    "path": "reports/forge/attempts/002dcdd1918a433786bc1b7253c492e6/result.json"
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "002dcdd1918a433786bc1b7253c492e6",
+        "result_hash": "5cc80a330a96473683c39b41738362bea331524cc3cc9b4581fdb66b548deeea",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "10ffa79853034264b944a0da626a99ff",
+        "result_hash": "ef8fbfa912044d9d3cff17b04b4936a7029c4c4ef071357c13c0a5ecba2768d2",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3e32d034c6d74848945fc163f0365fae",
+        "result_hash": "78d96cdc57ff5c3a1fff96a6881f098a940e70c6166515b22533131e81879fb7",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "48537eb0efbb40f0a14cb349c6fe3fdb",
+        "result_hash": "0fea3e3fcec43204cf16eebeb244815d18fac4b294d89b1d6985bdfcb1c0eb35",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "7b921455802944aa9020d1960bd2ea61",
+        "result_hash": "32d82135f4544b07520716d639d96733a06192761df6cd2c688028e1f4183fcb",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "ce7f17c7f6e04750b30f0d742fdf5944",
+        "result_hash": "5542051bafd475b9552322d2f07d18f424b37b5b560f8592366b1691509d29ce",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f33ca58d224c4e3fbec1fba7ee4de4ea",
+        "result_hash": "8b2eafab5ffa00532b9f7319f8348694f5eaebd37081aebab38950112fd6e333",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_reuse": true,
+  "record_id": "readout-eadf45a11139ed0c285366ae",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-tier2-round6/results.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 220000,
+      "candidate_budget_seconds": 44000,
+      "id": "bcap-tier2-round6-v1"
+    },
+    "candidate": "bcap-tier2-round6-half-network-v1",
+    "competing_explanation": "Smaller motion or critic damping may improve a final endpoint while impairing acquisition, rare mass, local density, conditional identity or shifted reacquisition; all original sustained gates remain binding.",
+    "control": {
+      "candidate_id": "bcap-tier2-round6-control-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "precision",
+      "op": "<",
+      "phase": "final",
+      "task_id": "grid100",
+      "threshold": 0.97
+    },
+    "hypothesis": "Halve G/E and direct generator motion while preserving absolute D .018 and prior .030 rates, testing saved overshoot evidence without weakening the critic. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.",
+    "id": "bcap-tier2-round6-half-network-v1-study",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "precision",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "grid100",
+      "threshold": 0.97
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "scope": "recipe_prior_refactor_selected_leader_measurement"
+        },
+        "path": "reports/forge/recipe-prior-refactor/publication/results.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75"
+        },
+        "path": "reports/forge/bcap-default-baseline/results.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bcap-tier2-round6-half-network-v1-study",
+  "study_sha256": "95e8415b58e4b151c84443b0a98b346748add9564db6edaa32c65334d3f2fc77",
+  "summary_curation": "Compact numerical results retain original gates, costs, receipt hashes and source identity; bulk traces are archived.",
+  "task_results": [
+    {
+      "_attempt_id": "10ffa79853034264b944a0da626a99ff",
+      "api_version": "forge-api-v1",
+      "attempt_id": "10ffa79853034264b944a0da626a99ff",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "16b21991876501fdc214c476e0beb12577a992bc991ff60e96938896c74b3415",
+      "cost": {
+        "adapter_loop_seconds": 24.95997227000771,
+        "adapter_seconds": 25.279420949998894,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "0",
+        "execution_seconds": 31.053175657987595,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 24.21621590896393,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 1.870897258966579
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.028014124065521173
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 22.31730452593183
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 26.60944502899656,
+        "wall_seconds": 31.053175657987595
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.45875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 734,
+          "first_pass_step": 667,
+          "minimum_stable_checks": 5,
+          "observations": 96,
+          "passing_observations": 57,
+          "passing_suffix": 57,
+          "stable_from_seconds": null,
+          "stable_from_step": 667
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.5532890850678086,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.29671091493219137
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.44072518348693845,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.5907251834869385
+          },
+          "hq": {
+            "margin": 0.11728515625000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.96728515625
+          },
+          "mass_tv": {
+            "margin": 0.054785156249999994,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.09521484375
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.trainer.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1600
+        },
+        "state.trainer.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "component_core_covariance_error": 0.26096219941973686,
+        "component_core_min_eigen_ratio": 0.5907251834869385,
+        "component_covariance_error": 0.29671091493219137,
+        "component_min_eigen_ratio": 0.5907251834869385,
+        "covariance_error": 0.029919255524873734,
+        "hq": 0.96728515625,
+        "mass_tv": 0.09521484375,
+        "max_component_spill": 0.06138107553124428,
+        "mean_error": 0.11625847220420837,
+        "min_hq_mass_ratio": 0.5859375,
+        "min_mass_ratio": 0.60546875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.08011145853686692,
+        "target_scale": 3.0029242038726807
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "cbacf3e0787c2aebdd4da27837a27ecda0cb0e2f16d688d8c638de625f49ac06",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/10ffa79853034264b944a0da626a99ff/provenance",
+        "bytes": 110905,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "f318622016e9583810fe6978974186d00375d89f24c4974ebccc923394c03f89",
+        "state_sha256": "b86edf1342185e18c33c2c028c7bb542e0dc04a896b52f203aa1fa6df362fe83"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "6ba1c37e95c7525214b0e7333b725ebb0f4ce97c67e0ee4d5865fae084f976e4",
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "ce7f17c7f6e04750b30f0d742fdf5944",
+      "api_version": "forge-api-v1",
+      "attempt_id": "ce7f17c7f6e04750b30f0d742fdf5944",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "1e1cbed6784603bdd98e1ad567caa53efaed17c17ea757c5e5f8301747da75cf",
+      "cost": {
+        "adapter_loop_seconds": 771.5258363540052,
+        "adapter_seconds": 771.7871322889987,
+        "charged_task": "five_word_joint_smoke",
+        "completed_steps": 20001,
+        "device": "0",
+        "execution_seconds": 777.6553674500028,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "new_optimizer_updates": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 767.1044641705666,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.5416281690559117
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 766.5628360015107
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 773.1394309360039,
+        "wall_seconds": 777.6553674500028
+      },
+      "evaluator_summary": {
+        "confirmed_checks": 16,
+        "endpoint_passed": true,
+        "first_confirmed_step": 5834,
+        "observations": 24,
+        "passing_observations": 16
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.fixture.api_state.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 20001
+        },
+        "state.fixture.api_state.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.2109375,
+        "mass_berry": 0.1982421875,
+        "mass_grape": 0.2080078125,
+        "mass_lemon": 0.1875,
+        "mass_melon": 0.1953125,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9999129772186279,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 6.72754194054075e-06,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "4084b3f2d1a9b329512cecc2b46b3e4d82afd49f03970abedadd733a27be4f18",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/ce7f17c7f6e04750b30f0d742fdf5944/provenance",
+        "bytes": 841461,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "f7786497d24811379f70e53bd6485157a7d61eecf8c2eb71b551f243e61b72ea",
+        "state_sha256": "c5efb1e397b67e16c292cce70fe25e80662f4785c23ce74c0324574bb344c4e3"
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full joint pass plus independent same-state confirmation",
+      "reasons": [
+        "any scheduled full joint pass plus independent same-state confirmation"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "56fcf4011f2c38f9b122012b938b09aa6e5fd914b7ab2b257548438b1e55d9a2",
+      "task_id": "five_word_joint_smoke",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "48537eb0efbb40f0a14cb349c6fe3fdb",
+      "api_version": "forge-api-v1",
+      "attempt_id": "48537eb0efbb40f0a14cb349c6fe3fdb",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "2a8882400ab7b7fb98f9a5469b807bb9c9bd4bbf2a3d662c786173c4f5b33796",
+      "cost": {
+        "adapter_seconds": 3.7858139210002264,
+        "charged_task": "ae_gan_hold",
+        "device": "0",
+        "execution_seconds": 9.522614494999289,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.14192087999254,
+        "wall_seconds": 9.522614494999289
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.336,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 84,
+          "first_pass_step": 42,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 21,
+          "passing_suffix": 21,
+          "stable_from_seconds": null,
+          "stable_from_step": 42
+        },
+        "metric_checks": {
+          "hold": {
+            "margin": 0.34086299072951076,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.009137009270489216
+          },
+          "recon_mse": {
+            "margin": 0.04587527941912413,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0041247205808758736
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0028324136282121917,
+          "projected_steps": 15,
+          "steps": 250
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 15,
+          "conflict_steps": 15,
+          "max_retained_norm_ratio": 0.7742629762304447,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 11.431673904571115
+        }
+      },
+      "metrics": {
+        "hold": 0.009137009270489216,
+        "recon_mse": 0.0041247205808758736
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "9b7972e6d4d4efc5f4e92ea5a65de3508c2be2a4d72f94f7fc3656a0a266df4d",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/48537eb0efbb40f0a14cb349c6fe3fdb/provenance",
+        "bytes": 70137,
+        "completed_steps": 250,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "8cc61ecae88fecf1e82e325cbbaa1171dce9b099db95f7366b183d7d65584b4d",
+        "state_sha256": "ca043e837cc0d12b13f197f5b2425a501f6d5340bfc06c7dda174b9c2dfb30bd"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "9a3102b18aa6d10081a8ab4e2b15316436c0239fa8a971fadbcbc4800c4a9de9",
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "002dcdd1918a433786bc1b7253c492e6",
+      "api_version": "forge-api-v1",
+      "attempt_id": "002dcdd1918a433786bc1b7253c492e6",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "5162058af94c374c39801be7e8f03697f98ee23380f3b562ab0cf1faa8b855d9",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 1.056586924009025,
+        "adapter_seconds": 1.1034645740000997,
+        "charged_task": "clockfree_audit_measurement_v1",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "1",
+        "execution_seconds": 6.852691680993303,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.44237729399174,
+        "wall_seconds": 6.852691680993303
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "importance": "diagnostic",
+      "mechanism_stats": {},
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "provenance_checkpoint": null,
+      "raw_status": "completed",
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "reasons": [
+        "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "c2e6229a0b6287e436fd0faf18c5b48f2e2a9427ae8e6426eea61eed8be66df0",
+      "task_id": "clockfree_audit_measurement_v1",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "3e32d034c6d74848945fc163f0365fae",
+      "api_version": "forge-api-v1",
+      "attempt_id": "3e32d034c6d74848945fc163f0365fae",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "901459b6b132754a31942e95ed759937b9f9c1ad5fe8a533c28897ce56ac149a",
+      "cost": {
+        "adapter_seconds": 0.9760082900029374,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.795815063000191,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3180343979911413,
+        "wall_seconds": 6.795815063000191
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 54,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 6,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": -0.00749659538269043,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 1.0074965953826904
+          },
+          "mean_abs": {
+            "margin": 0.17940200567245485,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.47940200567245483
+          }
+        },
+        "passed": false,
+        "shortfall": 0.003748297691345215,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "grad_med": 1.0074965953826904,
+        "mean_abs": 0.47940200567245483
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "4af3a99a70cfb79ed73e2396708e078614896aa97a1a02c3c7d2f537a37c2e4d",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/3e32d034c6d74848945fc163f0365fae/provenance",
+        "bytes": 52079,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "842ac214e99b5d7e9be329f2dfd9ba4f4a7ab8d1531632d3656fb0947d36bc88",
+        "state_sha256": "482f6e7d6a996ce5ee8faad68c2b42f05f54db1d817c63709be40828925b6238"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "FAIL",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "4db59bf86489025f8c8b47db717753d59459db68973f563c8ac02ee19ab0637b",
+      "task_id": "two_pole",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "f33ca58d224c4e3fbec1fba7ee4de4ea",
+      "api_version": "forge-api-v1",
+      "attempt_id": "f33ca58d224c4e3fbec1fba7ee4de4ea",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "be15c34983438d0cc6f12e34cdfd54f32578d18cf566fd6413bed6c1fd0df4cd",
+      "cost": {
+        "adapter_seconds": 2.3618243200035067,
+        "charged_task": "unused_token_hold",
+        "device": "0",
+        "execution_seconds": 8.220467336999718,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.7668951710074907,
+        "wall_seconds": 8.220467336999718
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 92,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 11,
+          "passing_suffix": 3,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "concept_move": {
+            "margin": 0.09801019434854086,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9480101943485408
+          },
+          "unused_hold": {
+            "margin": 0.1435846538282931,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9935846538282931
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 4.506219180160933e-05,
+          "projected_steps": 192,
+          "steps": 200
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 192,
+          "conflict_steps": 192,
+          "max_retained_norm_ratio": 0.9313889039594724,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 177.60388216848602
+        }
+      },
+      "metrics": {
+        "concept_move": 0.9480101943485408,
+        "unused_hold": 0.9935846538282931
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "39589fe563833ca1000c4f4d4d73a21be9f676625a2bb93ce155810e80c473af",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f33ca58d224c4e3fbec1fba7ee4de4ea/provenance",
+        "bytes": 56327,
+        "completed_steps": 200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "29454d39cf4a28b6c6cc2b123ef47db73fc4100f5687f4a70039053ff796e9e0",
+        "state_sha256": "9360332c31e9624c5f1914f1b790ef80552dad55c9ce906c4047a5d332985a36"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "FAIL",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "e56581a783b898865ce73a2a293b3aac1acfcd42c1674fa9c54b5f3051ea952e",
+      "task_id": "unused_token_hold",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "7b921455802944aa9020d1960bd2ea61",
+      "api_version": "forge-api-v1",
+      "attempt_id": "7b921455802944aa9020d1960bd2ea61",
+      "candidate_id": "bcap-tier2-round6-half-network-v1",
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "eb93a78ed41bf8915816d88fe250b6cba48e29df17a8f2363392a350abeae6e2",
+      "cost": {
+        "adapter_loop_seconds": 11.452126386997406,
+        "adapter_seconds": 11.780548567010555,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 17.582740939003997,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.069875764878816,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4562717660155613
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.10012884400202893
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 10.513475154861226
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 13.116532840998843,
+        "wall_seconds": 17.582740939003997
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 209,
+        "observations": 24,
+        "passing_observations": 7
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.trainer.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1000
+        },
+        "state.trainer.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "cdf_ks": 0.06191319915381366,
+        "finite_fraction": 1.0,
+        "mean": 1.9381165990635054,
+        "mean_error_sigma": 0.12376680187298916,
+        "sample_count": 4096,
+        "std": 0.5066135090494,
+        "std_ratio": 1.0132270180988,
+        "step": 1000
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "4da93311722bc589c52404af0a17f14840b85245cfca78f71289f8e530013fcf",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/7b921455802944aa9020d1960bd2ea61/provenance",
+        "bytes": 66111,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "f0f40e61f2ac41cd34ef20c90325748df330262df6b8c0b3cbfc44753947480a",
+        "state_sha256": "330a376c497d2510c47e80fda0c2dd8aa1472058689f974ad79fc8e861bf5628"
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "reasons": [
+        "any scheduled full pass with independent same-state confirmation"
+      ],
+      "request_id": "939944e2492bc891ccaf04ad",
+      "role": "half_network",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-half-network-v1-study",
+      "task_contract_sha256": "18d095e7a9aff5358d7ef495403260ee1fb0d887246d5407fe8a6b73ed48ca42",
+      "task_id": "gaussian1d_smoke",
+      "tier": 1
+    }
+  ]
+}

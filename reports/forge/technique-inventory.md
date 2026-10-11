@@ -4,8 +4,6 @@ Recorded passes / required experiments, grouped by family and view. Click a fami
 
 A family is the high-level implementation and formulation. Optimizers, learning rates, momentum and other configuration choices stay within that family. Current benchmarks use the explicit family selection; BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain their separate evidence on the detail pages. Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.
 
-The [BCAP leader prior searches](bcap-prior-search/README.md) compare five opt-in mechanisms and fifteen global strengths, with every task measurement, score, target and source-bound repair or regression. Their [interpretation and recommendations](bcap-prior-search/findings.md) explain the results. The selected family configuration and its recorded counts remain unchanged.
-
 Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
@@ -249,5 +247,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `3cc0aeaa3d3bb5aaf0c0fd5f73168b3311c39ff4ff99ba96c1d1c78289030102`.
+Publication input digest `1fc820a973644fa02063526282e1794457152065e6de9941b1a22293197c8c4f`.
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

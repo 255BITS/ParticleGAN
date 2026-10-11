@@ -1,0 +1,1093 @@
+{
+  "attempt_ids": [
+    "0e386457921d483b90a36903359cece5",
+    "297a41250ca349adb369963316292162",
+    "6069108176db4632af970bfabf5e6ee4",
+    "85c2e2a5433b40029c905d934c38b349",
+    "9111fe0d836c4a3f813478f9f4f306b8",
+    "a73d8a7b6b0f4a88ab5bb10b245e539d",
+    "f3d4c01d90d24b3086a808728dfbb91f"
+  ],
+  "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+  "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Fails required Tier1; Tier2 is unmeasured, not a numerical regression. Fresh control passes6/6 and9/21.",
+  "conclusion": "5/6 required Tier1 passes; all21 Tier2 cells blocked and unmeasured.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "0e386457921d483b90a36903359cece5",
+        "297a41250ca349adb369963316292162",
+        "6069108176db4632af970bfabf5e6ee4",
+        "85c2e2a5433b40029c905d934c38b349",
+        "9111fe0d836c4a3f813478f9f4f306b8",
+        "a73d8a7b6b0f4a88ab5bb10b245e539d",
+        "f3d4c01d90d24b3086a808728dfbb91f"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "240cb1daa0cc579edbe31a38fd006fc259826d2612f8af1b3b60aef9522245dd",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "0e386457921d483b90a36903359cece5",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "d20deee3d2942b524639fbfee0670d3a576a0fdaae67f9c716a631ea70521e58",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "297a41250ca349adb369963316292162",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "4002fc2eb50419eb3a9187ad5d8241accb1dfc109d99ddcb7595bb87b5f2b385",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "6069108176db4632af970bfabf5e6ee4",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "81b876055259a8fef722a2d2cd33377947df7c970a6c2b99a705cf5483bcbf5b",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "85c2e2a5433b40029c905d934c38b349",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "7031054f9f2b69d97555ca4a6863cc95e764885c00a4e25b726bfd3cacb73d07",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9111fe0d836c4a3f813478f9f4f306b8",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "e634ad62516fa4288a2d66a0edd22459b5e257d70624c7f12552bb963e7b893d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a73d8a7b6b0f4a88ab5bb10b245e539d",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "afaf1a643ed69bf9611da3c19eabad2f67042998993e6252883b5c51da82b0d8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f3d4c01d90d24b3086a808728dfbb91f",
+          "producer_request_id": "91181e6d4e6e99e9dac03174",
+          "producer_study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+          "result_hash": "3dfef39e592a99e1e3101295c14b1201a8fa12c3e90e8e4c702622fe882f25ec",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "9c87281189f2204bb1ff087283f2b3f2b482dd787b3ed2618aa8b5681b970121",
+        "contract_sha256": "240cb1daa0cc579edbe31a38fd006fc259826d2612f8af1b3b60aef9522245dd",
+        "control_binding_sha256": "2d6209d1ede5500095dc8551b8b14cb46cd018f262f8782936598155445f6efd",
+        "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "2ea9fbd50a5cb3c35911968f7c6cea011b1cc57b56a429c73e411f86ee36e67b"
+      },
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "study_sha256": "2ea9fbd50a5cb3c35911968f7c6cea011b1cc57b56a429c73e411f86ee36e67b"
+    }
+  ],
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Keep network smoothing .001; prior row denominator .01 makes weak prior forces yield smaller actual travel while retaining learned locations and strong-force motion. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Retain current BCAP control; stop this fixed revision. Preserve local improvements and unavailable forecasts without promotion or unchanged reruns.",
+  "original_readout": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/original-readouts/readout-a0b8c7be1765d5862fd1adeb.json",
+    "sha256": "7a64232c6ee659922ee873283338a449ee7b8a5231f8ba9aeb841c4334a8fc93"
+  },
+  "original_source": {
+    "path": "reports/forge/attempts/0e386457921d483b90a36903359cece5/result.json"
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "0e386457921d483b90a36903359cece5",
+        "result_hash": "d20deee3d2942b524639fbfee0670d3a576a0fdaae67f9c716a631ea70521e58",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "297a41250ca349adb369963316292162",
+        "result_hash": "4002fc2eb50419eb3a9187ad5d8241accb1dfc109d99ddcb7595bb87b5f2b385",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "6069108176db4632af970bfabf5e6ee4",
+        "result_hash": "81b876055259a8fef722a2d2cd33377947df7c970a6c2b99a705cf5483bcbf5b",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "85c2e2a5433b40029c905d934c38b349",
+        "result_hash": "7031054f9f2b69d97555ca4a6863cc95e764885c00a4e25b726bfd3cacb73d07",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "9111fe0d836c4a3f813478f9f4f306b8",
+        "result_hash": "e634ad62516fa4288a2d66a0edd22459b5e257d70624c7f12552bb963e7b893d",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a73d8a7b6b0f4a88ab5bb10b245e539d",
+        "result_hash": "afaf1a643ed69bf9611da3c19eabad2f67042998993e6252883b5c51da82b0d8",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f3d4c01d90d24b3086a808728dfbb91f",
+        "result_hash": "3dfef39e592a99e1e3101295c14b1201a8fa12c3e90e8e4c702622fe882f25ec",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_reuse": true,
+  "record_id": "readout-a0b8c7be1765d5862fd1adeb",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-tier2-round6/results.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 220000,
+      "candidate_budget_seconds": 44000,
+      "id": "bcap-tier2-round6-v1"
+    },
+    "candidate": "bcap-tier2-round6-prior-smoothing-v1",
+    "competing_explanation": "Smaller motion or critic damping may improve a final endpoint while impairing acquisition, rare mass, local density, conditional identity or shifted reacquisition; all original sustained gates remain binding.",
+    "control": {
+      "candidate_id": "bcap-tier2-round6-control-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 0.9
+    },
+    "hypothesis": "Keep network smoothing .001; prior row denominator .01 makes weak prior forces yield smaller actual travel while retaining learned locations and strong-force motion. Global success requires all six Tier1 gates, all21 eligible Tier2 measurements, preservation of every matched control pass and at least one new sustained Tier2 pass.",
+    "id": "bcap-tier2-round6-prior-smoothing-v1-study",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "scope": "recipe_prior_refactor_selected_leader_measurement"
+        },
+        "path": "reports/forge/recipe-prior-refactor/publication/results.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75"
+        },
+        "path": "reports/forge/bcap-default-baseline/results.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+  "study_sha256": "2ea9fbd50a5cb3c35911968f7c6cea011b1cc57b56a429c73e411f86ee36e67b",
+  "summary_curation": "Compact numerical results retain original gates, costs, receipt hashes and source identity; bulk traces are archived.",
+  "task_results": [
+    {
+      "_attempt_id": "0e386457921d483b90a36903359cece5",
+      "api_version": "forge-api-v1",
+      "attempt_id": "0e386457921d483b90a36903359cece5",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "2f00be924de2c9828ccc034534a83ec5c56900d225ad8f035be84cfccf4faca4",
+      "cost": {
+        "adapter_loop_seconds": 755.8409356420016,
+        "adapter_seconds": 756.081800947999,
+        "charged_task": "five_word_joint_smoke",
+        "completed_steps": 20001,
+        "device": "1",
+        "execution_seconds": 761.7837925729982,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "new_optimizer_updates": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 751.4946129941964,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.5412879119394347
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 750.9533250822569
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 757.4236904149875,
+        "wall_seconds": 761.7837925729982
+      },
+      "evaluator_summary": {
+        "confirmed_checks": 22,
+        "endpoint_passed": true,
+        "first_confirmed_step": 2501,
+        "observations": 24,
+        "passing_observations": 22
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.fixture.api_state.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 20001
+        },
+        "state.fixture.api_state.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.2109375,
+        "mass_grape": 0.1953125,
+        "mass_lemon": 0.1982421875,
+        "mass_melon": 0.2080078125,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9765204787254333,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0015954275112023682,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "157fec596ca62ad8c56e361a9a303949208267da7b3c82f8c39e883236314238",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/0e386457921d483b90a36903359cece5/provenance",
+        "bytes": 841461,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "2e705ff6124def358cd0bb22a28d6cfc019638f21648b6f6f7b68da80f66c626",
+        "state_sha256": "cf4b67d7f37bd21c91459b537d6e970a12eee157d6bdea5981a0c2157b2a6be0"
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full joint pass plus independent same-state confirmation",
+      "reasons": [
+        "any scheduled full joint pass plus independent same-state confirmation"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "f3e28c40bd268c4c238a126c57e8fa08937020bed592f16cb93292ab50f3fd86",
+      "task_id": "five_word_joint_smoke",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "85c2e2a5433b40029c905d934c38b349",
+      "api_version": "forge-api-v1",
+      "attempt_id": "85c2e2a5433b40029c905d934c38b349",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "36e2247ade1c3d02be6c8afc1974bdf3eba0d50d9cdf85e7a56f6157c429483a",
+      "cost": {
+        "adapter_loop_seconds": 24.429928197991103,
+        "adapter_seconds": 24.741502263001166,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 30.449875984006212,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 23.723174178187037,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 1.8588951669808012
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.02750498102977872
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 21.836774030176457
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 26.07537098399189,
+        "wall_seconds": 30.449875984006212
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 96,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -0.1345339059829712,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.9845339059829712
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.019439971446990972,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.16943997144699097
+          },
+          "hq": {
+            "margin": 0.03989257812500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.889892578125
+          },
+          "mass_tv": {
+            "margin": 0.077734375,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.072265625
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": false,
+        "shortfall": 0.026379197251562986,
+        "status": "FAIL"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.trainer.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1600
+        },
+        "state.trainer.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "component_core_covariance_error": 0.7371815573424101,
+        "component_core_min_eigen_ratio": 0.15845927596092224,
+        "component_covariance_error": 0.9845339059829712,
+        "component_min_eigen_ratio": 0.16943997144699097,
+        "covariance_error": 0.05317813158035278,
+        "hq": 0.889892578125,
+        "mass_tv": 0.072265625,
+        "max_component_spill": 0.3255814015865326,
+        "mean_error": 0.01560845598578453,
+        "min_hq_mass_ratio": 0.56640625,
+        "min_mass_ratio": 0.78125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.031224844041493026,
+        "target_scale": 3.0029242038726807
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "49dd9015156bdcf16f6be028c18c392db2eb33ca938592dc3456a2b077f9ee6c",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/85c2e2a5433b40029c905d934c38b349/provenance",
+        "bytes": 110905,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b5e0b06959dfabe4cecd74d544f767791cabe61351ce86cbd037dd566716cce5",
+        "state_sha256": "311553bd7a20b39b2bdcfda9d33ed07f249a8b4b1d86c70e358c47d8c3475c8e"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "FAIL",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "bb74698739a8fd63807a735cb26a87d6a39e10c87ab7bfea6b17797f7e5bba7c",
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "a73d8a7b6b0f4a88ab5bb10b245e539d",
+      "api_version": "forge-api-v1",
+      "attempt_id": "a73d8a7b6b0f4a88ab5bb10b245e539d",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "3f57f4330d0d2a097f6726cc07840ad54a3d5716fec5f45b9c50555082d35b00",
+      "cost": {
+        "adapter_seconds": 0.9710500610090094,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 6.63752065099834,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.304368319004425,
+        "wall_seconds": 6.63752065099834
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 40,
+          "first_pass_step": 27,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 17,
+          "stable_from_seconds": null,
+          "stable_from_step": 27
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.04765427112579346,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.9523457288742065
+          },
+          "mean_abs": {
+            "margin": 0.6585024714469909,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.958502471446991
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "38e4ef81e2a7aa1bf3df8952e716aa446d972810e7b2a1659401704ae6a88a34",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/a73d8a7b6b0f4a88ab5bb10b245e539d/provenance",
+        "bytes": 52079,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "c2311610d502960d31fd623e610fb2bce4b50cc01ce46a37efdcb17148c24e16",
+        "state_sha256": "bb178d8a96bdac08010bd8312fc374d49611b20c27b3b1527e536c7739f04756"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "bd9b51b820c9b870e0bdf26806d521ff1be5bd76575d24ae9c36972650d5ff8f",
+      "task_id": "two_pole",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "297a41250ca349adb369963316292162",
+      "api_version": "forge-api-v1",
+      "attempt_id": "297a41250ca349adb369963316292162",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "4f9b17d7f9bbdda273cfcf8e98bc045afb8ba2086a2f8c1866863c846188b1c3",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 1.0181309420004254,
+        "adapter_seconds": 1.0638448060053634,
+        "charged_task": "clockfree_audit_measurement_v1",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "0",
+        "execution_seconds": 6.9138752830040175,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3734766770066926,
+        "wall_seconds": 6.9138752830040175
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "importance": "diagnostic",
+      "mechanism_stats": {},
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "provenance_checkpoint": null,
+      "raw_status": "completed",
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "reasons": [
+        "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "31dd12920cb6245e312d2a1344b74c237dda828e956a3a173598924090ab4bc6",
+      "task_id": "clockfree_audit_measurement_v1",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "6069108176db4632af970bfabf5e6ee4",
+      "api_version": "forge-api-v1",
+      "attempt_id": "6069108176db4632af970bfabf5e6ee4",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "6a26b688ad67ef6b6e8191b3ba8630b3e519cad53f52eb4972e793df37767cdc",
+      "cost": {
+        "adapter_loop_seconds": 11.329525759996613,
+        "adapter_seconds": 11.633068779003224,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "1",
+        "execution_seconds": 17.326767135004047,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 10.964840773973265,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4498910231050104
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.09771537894266658
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 10.417234371925588
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 12.972266070006299,
+        "wall_seconds": 17.326767135004047
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 125,
+        "observations": 24,
+        "passing_observations": 3
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.trainer.optimizers[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 1000
+        },
+        "state.trainer.optimizers[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      },
+      "metrics": {
+        "cdf_ks": 0.1718002310913601,
+        "finite_fraction": 1.0,
+        "mean": 2.0909745112003293,
+        "mean_error_sigma": 0.18194902240065858,
+        "sample_count": 4096,
+        "std": 0.37448268032568643,
+        "std_ratio": 0.7489653606513729,
+        "step": 1000
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "25597cbe6c9d9516a175fca9595c8625d7b6ec16ea1d648dcbf9634af6d798b3",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/6069108176db4632af970bfabf5e6ee4/provenance",
+        "bytes": 66111,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "928f9b7d0ccfe5301e93e6a0f6f6b18e2d0826aebc0d66c5f11cb1baca007c49",
+        "state_sha256": "2c44c23775230ad2a76a71944147ef8c9c3145497969763b0c22ab0ec7e63641"
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "reasons": [
+        "any scheduled full pass with independent same-state confirmation"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "ad0de3c34a4e9632e139606da217174cadb1e73bdac5886465f3948c6b547d77",
+      "task_id": "gaussian1d_smoke",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "f3d4c01d90d24b3086a808728dfbb91f",
+      "api_version": "forge-api-v1",
+      "attempt_id": "f3d4c01d90d24b3086a808728dfbb91f",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "930192866a52eaa549c0e055385dac6a77abaed5f0106d4f84c3948989d0a1b8",
+      "cost": {
+        "adapter_seconds": 3.710695638001198,
+        "charged_task": "ae_gan_hold",
+        "device": "1",
+        "execution_seconds": 9.5670434210042,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.053640041995095,
+        "wall_seconds": 9.5670434210042
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.292,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 73,
+          "first_pass_step": 32,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 32
+        },
+        "metric_checks": {
+          "hold": {
+            "margin": 0.33920233640819786,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.01079766359180212
+          },
+          "recon_mse": {
+            "margin": 0.04423606274649501,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0057639372535049915
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0018804939319864607,
+          "projected_steps": 12,
+          "steps": 250
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 12,
+          "conflict_steps": 12,
+          "max_retained_norm_ratio": 0.846903813278843,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 9.555095323420336
+        }
+      },
+      "metrics": {
+        "hold": 0.01079766359180212,
+        "recon_mse": 0.0057639372535049915
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "169bfe717c6a2d22bf0705f13eaa9465752584c417ff159f4d3299411f365aa3",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/f3d4c01d90d24b3086a808728dfbb91f/provenance",
+        "bytes": 70137,
+        "completed_steps": 250,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "c9c002b75c03c966c91ec728f0859e45e36d0907684e9b5fd76be201b04b9713",
+        "state_sha256": "93ce86983d345426969a4b617e2ddf20f434388cc64f6c463b9b5f976e1be7e6"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "e0acecdb51236fc55567978ca1a7f84becbd18e7fa7219b91b0605fc18483b5c",
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "_attempt_id": "9111fe0d836c4a3f813478f9f4f306b8",
+      "api_version": "forge-api-v1",
+      "attempt_id": "9111fe0d836c4a3f813478f9f4f306b8",
+      "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "d23f50075099b1e3e7f1fbcddaff7f7f6a0929896b68510682377316b7c9858a",
+      "cost": {
+        "adapter_seconds": 2.2819339699926786,
+        "charged_task": "unused_token_hold",
+        "device": "1",
+        "execution_seconds": 8.073106818002998,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.615225058005308,
+        "wall_seconds": 8.073106818002998
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 1.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 200,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 14,
+          "passing_suffix": 5,
+          "stable_from_seconds": null,
+          "stable_from_step": 167
+        },
+        "metric_checks": {
+          "concept_move": {
+            "margin": 0.10932529045366979,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9593252904536698
+          },
+          "unused_hold": {
+            "margin": 0.13670202866196635,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9867020286619663
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "importance": "required",
+      "mechanism_stats": {
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.00019371175630056303,
+          "projected_steps": 167,
+          "steps": 200
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 167,
+          "conflict_steps": 167,
+          "max_retained_norm_ratio": 0.933421727507776,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 154.40605323825247
+        }
+      },
+      "metrics": {
+        "concept_move": 0.9593252904536698,
+        "unused_hold": 0.9867020286619663
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest_sha256": "311635b7423ba420aaea86dcb7dc0b22bc328557b67bf17ac2b94604d074d5a6",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue/bcap-tier2-round6-v1/9111fe0d836c4a3f813478f9f4f306b8/provenance",
+        "bytes": 56327,
+        "completed_steps": 200,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "9828d63f0ed9164b26e9912572e162d833d9e15c83b675d2f1500c939e938a9d",
+        "state_sha256": "b702e31531d05c4e57880553b1d3c73933f4ae79c917c2fafb12a441eeb784a8"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "request_id": "91181e6d4e6e99e9dac03174",
+      "role": "prior_smoothing",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "scope": "ordinary",
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+      "status": "PASS",
+      "study_id": "bcap-tier2-round6-prior-smoothing-v1-study",
+      "task_contract_sha256": "b081ad1f6a4814ecd98117ef753647c427f1c44d22fac49f844b36fa9a28884b",
+      "task_id": "unused_token_hold",
+      "tier": 1
+    }
+  ]
+}

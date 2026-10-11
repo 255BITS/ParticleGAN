@@ -61,6 +61,8 @@ class Recipe:
     # fixed R1/R2 and BCap retain their released L2 units.
     reg_arm: str | None = None
     reg_coeff: float = 1.0
+    # Optional additive zero-centered real/fake slope damping on BCAP.
+    reg_zero_coeff: float = 0.0
     reg_kappa: float = 1.0
     reg_every: int = 1
     # Optional finite same-training-panel critic step guard; none preserves history.
@@ -213,6 +215,8 @@ class Recipe:
     # Fixed gradient scale for smoothed polar, bias and sampled-prior updates.
     # epsilon in the smoothed-polar paper is optimizer_smoothing ** 2.
     optimizer_smoothing: float = 0.0
+    # None inherits network smoothing; a value changes only learned-prior rows.
+    optimizer_prior_smoothing: float | None = None
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
     # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
@@ -534,6 +538,18 @@ class Recipe:
                              "for conditional dense banks")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
+        if (isinstance(self.reg_zero_coeff, bool) or not math.isfinite(self.reg_zero_coeff)
+                or self.reg_zero_coeff < 0):
+            raise ValueError("reg_zero_coeff must be finite and nonnegative")
+        if self.reg_zero_coeff and (self.effective_critic_formulation != "bcap" or self.reg_arm != "b_cap"):
+            raise ValueError("reg_zero_coeff requires the BCAP b_cap penalty")
+        if self.optimizer_prior_smoothing is not None:
+            if (isinstance(self.optimizer_prior_smoothing, bool)
+                    or not math.isfinite(self.optimizer_prior_smoothing)
+                    or self.optimizer_prior_smoothing < 0):
+                raise ValueError("optimizer_prior_smoothing must be None or finite and nonnegative")
+            if self.optimizer_family != "dualnorm":
+                raise ValueError("optimizer_prior_smoothing requires full DualNorm")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
                     "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
@@ -710,6 +726,8 @@ class Recipe:
                        "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                        "anchor_weight": self.reg_anchor_weight,
                        "lr_floor": floor if floor < .5 else 0., **overrides}
+            if self.reg_zero_coeff:
+                options.setdefault("zero_coeff", self.reg_zero_coeff)
             from .grad_regularizers import GradientPenalty
             GradientPenalty(**options)
             return options

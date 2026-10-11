@@ -75,6 +75,8 @@ class GradientPenalty:
     E relu(||g_f|| - kappa)²)``. Fixed arms use the v0.7.0 L2 kernels,
     without RMS rescaling, handover or EMA-anchor evaluation. Laziness
     applies to every arm. Other historical norms/methods are not supported.
+    For ``b_cap`` only, ``zero_coeff`` adds a separately weighted squared-L2
+    penalty on both real and fake slopes, including slopes below the cap.
 
     ``pen = coeff/2 * (s * A + (1 - s) * B)`` with
 
@@ -104,6 +106,8 @@ class GradientPenalty:
         record: a ``CriticStepRecord`` shared with the critic optimizer that
             records its own steps (the recipe's critic optimizer does). Its
             anchor is used. Default: a private record.
+        zero_coeff: optional zero-centered real/fake slope penalty strength
+            for ``b_cap``. Its coefficient follows the same lazy interval.
     """
 
     def __init__(
@@ -117,6 +121,7 @@ class GradientPenalty:
         record: Optional[CriticStepRecord] = None,
         *,
         arm: str = "k3p",
+        zero_coeff: float = 0.0,
     ) -> None:
         if arm not in ("k3p", "a_r1r2", "b_cap"):
             raise ValueError(f"unknown critic penalty arm: {arm!r}")
@@ -126,10 +131,13 @@ class GradientPenalty:
         self.lazy_k = int(lazy_k)
         self.lr_floor = float(lr_floor)
         self.anchor_weight = float(anchor_weight)
-        for name in ("coeff", "kappa", "anchor_weight"):
+        self.zero_coeff = float(zero_coeff)
+        for name in ("coeff", "kappa", "anchor_weight", "zero_coeff"):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
                 raise ValueError(f"{name} must be finite and nonnegative")
+        if self.zero_coeff and self.arm != "b_cap":
+            raise ValueError("zero_coeff requires arm='b_cap'")
         if self.lazy_k < 1:
             raise ValueError(f"lazy_k must be >= 1, got {lazy_k}")
         if not math.isfinite(self.lr_floor) or not 0.0 <= self.lr_floor < 0.5:
@@ -208,6 +216,8 @@ class GradientPenalty:
 
     def _fixed_penalty(self, D, x_real, x_fake, coefficient, collect_stats):
         """The released v0.7.0 R1/R2 and BCap formulas, operation for operation."""
+        if self.zero_coeff:
+            return self._bcap_zero_penalty(D, x_real, x_fake, coefficient, collect_stats)
         squared = self.arm == "a_r1r2"
         real_norm = self._grad_norm(D, x_real, squared=squared)
         fake_norm = self._grad_norm(D, x_fake, squared=squared)
@@ -224,6 +234,23 @@ class GradientPenalty:
             return pen, {}
         return pen, {"applied": True, "pen": float(pen.detach()), "center": center,
                      "phase": self.arm}
+
+    def _bcap_zero_penalty(self, D, x_real, x_fake, coefficient, collect_stats):
+        """BCAP and exact squared slopes share each panel's autograd pass."""
+        real_norm, real_squared = self._grad_norm_and_squared(D, x_real)
+        fake_norm, fake_squared = self._grad_norm_and_squared(D, x_fake)
+        real_term = F.relu(real_norm - self.kappa).pow(2)
+        fake_term = F.relu(fake_norm - self.kappa).pow(2)
+        cap_pen = (coefficient / 2.0) * (real_term.mean() + fake_term.mean())
+        zero_pen = (self.zero_coeff * self.lazy_k / 2.0) * (
+            real_squared.mean() + fake_squared.mean())
+        pen = cap_pen + zero_pen
+        self.record.calls += 1
+        if not collect_stats:
+            return pen, {}
+        return pen, {"applied": True, "pen": float(pen.detach()), "center": self.kappa,
+                     "phase": self.arm, "cap_pen": float(cap_pen.detach()),
+                     "zero_pen": float(zero_pen.detach())}
 
     def _k3p_penalty(self, D, x_real, x_fake, step, coefficient, collect_stats, ema_critic):
         """K3P, op for op the frozen reports/toy100/gap-fill-20260925 k3p rule."""
@@ -293,6 +320,14 @@ class GradientPenalty:
             return pen, {}
         return pen, {"applied": True, "pen": float(pen.detach()), "center": self.kappa, "s": s,
                      "prox": 0.0 if prox is None else float(prox.detach()), "phase": phase}
+
+    @staticmethod
+    def _grad_norm_and_squared(D: torch.nn.Module, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Return the historical epsilon norm and its exact unsmoothed square."""
+        x = x.detach().clone().requires_grad_(True)
+        g = torch.autograd.grad(_score_scalar(D(x)), x, create_graph=True)[0]
+        squared = g.pow(2).flatten(1).sum(dim=1)
+        return torch.sqrt(squared + 1e-12), squared
 
     @staticmethod
     def _grad_norm(D: torch.nn.Module, x: torch.Tensor, squared: bool = False) -> torch.Tensor:

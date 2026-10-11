@@ -32,6 +32,7 @@ TUNABLE_FIELDS = frozenset({
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
+    "reg_zero_coeff",
     "optimizer_svd_backend",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
@@ -46,6 +47,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "critic_step_mode",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "optimizer_prior_smoothing",
     "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
