@@ -42,3 +42,5 @@ execute through the ParticleGAN API, declare a numerical pass/fail metric, and
 provide an actual-training GIF that illustrates the test's goal. Reform an
 incompatible question into an explicitly scoped, runnable variant, retaining its
 useful controls and the original evidence identity.
+
+Each agent can queue experiments on the GPUs without waiting for it to be free. It's ok to run multiple in parallel.
