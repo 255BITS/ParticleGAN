@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 45000,
+    "candidate_budget_seconds": 45000,
+    "id": "bcap-stall-reach-base-v1"
+  },
+  "candidate": "bcap-stall-reach-base-v1",
+  "competing_explanation": "A wider generator read may blur mode resolution under BCAP's saturated slope, trading acquisition for density/hold quality.",
+  "control": {
+    "candidate_id": "bcap-stall-reach-control-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "modes",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "hypothesis": "Closed PR #107 'stall reach': the generator reads the critic through a 2d+1 axis stencil whose width widens with the critic's measured input slope (max(.15, .5 min(u, 1/u))/kappa) and jumps to .5/kappa after 50 consecutive saturated (u >= .6) critic updates. Widening the generator's critic read when acquisition stalls lets particles see the missing mode. On the PR84 line it gave warm 200/200 and cold ring 8; here it should convert mode_hold FAIL (suffix 3) to a sustained PASS (suffix >= 5) under the unchanged BCAP direction-blend leader.",
+  "id": "bcap-stall-reach-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "modes",
+    "op": "==",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_digest": "c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2"
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

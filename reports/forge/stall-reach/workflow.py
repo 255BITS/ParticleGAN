@@ -56,6 +56,12 @@ FALSIFIER = ("No matched Tier 2 FAIL->PASS, or any lost Tier 1 or control Tier 2
              "window tuning and no retries.")
 
 
+def _task_law(plan):
+    """Resolved tasks without the candidate's own recipe-field ownership receipt."""
+    return {name: stable_hash({k: v for k, v in card.items() if k != "field_ownership"})
+            for name, card in plan["tasks"].items()}
+
+
 def prepare(args):
     require(not (args.archive / "progress.json").exists(), "Admitted experiments are immutable.")
     view = load_view(ROOT, VIEW)
@@ -109,7 +115,7 @@ def prepare(args):
         require(plan_summary(resolved)["worst_case_seconds"] == FULL_RESERVATION, "Retain the full task reservation.")
     require(plans["control"]["source"]["digest"] == plans["base"]["source"]["digest"], "Identical source for both arms.")
     contracts = {name: stable_hash(card) for name, card in plans["control"]["tasks"].items()}
-    require(contracts == {name: stable_hash(card) for name, card in plans["base"]["tasks"].items()}, "Identical tasks.")
+    require(_task_law(plans["control"]) == _task_law(plans["base"]), "Identical task laws apart from candidate ownership.")
     spec = dict(schema_version=1, name="stall-reach", trainer_delta=delta, hypothesis=HYPOTHESIS, falsifier=FALSIFIER,
                 protocol_seed=0, initializer="deterministic_orthogonal", view=VIEW, view_revision=9, baseline=LEADER,
                 closed_pr=107, required_counts=dict(tier1=6, tier2=21, tier3=2), through_tier=2,
@@ -171,7 +177,8 @@ def run(args):
         for role, study_key in (("control", "control_study"), ("base", "base_study")):
             resolved = resolve_idea(ROOT, IDS[role], study=IDS[study_key], queue_root=queue.root, freeze_source=True)
             require(resolved["source"]["digest"] == registration["source_digest"], "Prepared source changed.")
-            require({n: stable_hash(c) for n, c in resolved["tasks"].items()} == spec["task_contracts"], "Tasks changed.")
+            if role == "control":
+                require({n: stable_hash(c) for n, c in resolved["tasks"].items()} == spec["task_contracts"], "Tasks changed.")
             declarations = [f"configs/forge/ideas/{IDS[role]}.json", f"configs/forge/studies/{IDS[study_key]}.json"]
             declarations += [f"configs/forge/tasks/{name}.json" for name in resolved["tasks"]]
             committed_source(resolved["source"], declarations)
