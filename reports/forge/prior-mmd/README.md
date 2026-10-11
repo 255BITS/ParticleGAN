@@ -4,8 +4,9 @@ This feature adds `Recipe.prior_regularizer="initial_mmd"`. Its hypothesis is
 that preserving the initial location distribution can limit prior/map
 coadaptation while permitting useful particle exchange. It is a distribution
 penalty, with no identity-position spring and no target-data or generator-output
-term. It is ready for a bounded search against the exact BCAP direction-blend
-leader. No Tier 2 training or new qualification is reported here.
+term. The completed bounded search against the exact BCAP direction-blend
+leader repaired no Tier 2 failure; full results and qualification limits are
+linked below.
 
 The baseline is `recipe-prior-refactor-bcap-pure-v1`: BCAP, direction blend,
 constant G/D/prior rates `.012/.018/.030`, zero-momentum DualNorm, smoothing
@@ -41,6 +42,9 @@ enter a larger thinned panel can change this approximation. Pair blocks are at
 most 64 by 64, and kernel work is bounded by the panels rather than 20,000².
 The kernel supplies gradients to current-panel rows only. The host's existing
 sampling and optimizer ownership rules still determine which rows may move.
+With the leader's row-normalized prior optimizer, actual regularizer motion is
+restricted to the intersection of panel rows and uniquely sampled owned rows;
+unsampled rows remain fixed even when a full-table penalty supplies gradients.
 Standard `GANTrainer` uses full raw locations up to 1,024 entries and its
 existing unique sampled rows above that size; caller-owned hosts retain their
 existing selection rules. Fixed MoG widths and mixture weights are untouched.
@@ -99,9 +103,21 @@ The [gradient probe](gradient-probe.json) suggests starting positive strengths
 row-gradient norm is `.00801`, versus DualNorm smoothing `.001`; these weights
 span ratios `.80, 8.01, 80.07`. This is a scale probe, not quality selection.
 DualNorm can turn a regularizer into a direction change without proportional
-changes in step magnitude. Actual adversarial gradients and panel statistics
-vary by task, so the forthcoming search must retain all full gates and
-regressions under one global recipe per candidate.
+changes in step magnitude. The prior update is
+`-.030 * g / sqrt(||g||² + .001²)` per owned sampled row, where `g` includes
+adversarial and weighted regularizer gradients. Smoothing gives nonlinear
+saturation rather than a strict unit step. Actual gradients and panel
+statistics vary by task.
+
+The completed [registered search](../bcap-prior-search/mmd/README.md) used the
+exact BCAP leader and protocol seed 0. Its control passed all six Tier 1 gates
+and nine of 21 Tier 2 tasks. Weight `.1` passed Tier 1, repaired none of the 12
+control failures, and regressed mandatory word hold, leaving eight Tier 2
+passes. Weights `1` and `10` failed Tier 1, so their Tier 2 tasks are unmeasured.
+Keep leader defaults; this bounded initial-distribution tether supplies no
+qualification gain in the registered bracket. The search includes all
+score/target measurements, original failure witnesses, immutable provenance
+checks, and saved actual-training GIFs.
 
 Validation includes the explicit biased-kernel formula and gradients, gradcheck,
 permutation/translation/scale behavior, 20,000-row panel bounds, collapsed
