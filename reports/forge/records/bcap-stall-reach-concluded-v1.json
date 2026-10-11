@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "record_id": "bcap-stall-reach-concluded-v1",
+  "record_type": "family_context",
+  "candidate_id": "bcap-stall-reach-base-v1",
+  "goal": "discriminator_stability",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "historical",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "reuse": false,
+  "cross_cohort_pooling": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Closed PR #107 stall reach rebuilt on the BCAP direction-blend leader: the generator reads the critic through a 2d+1 axis stencil of width max(.15,.5 min(u,1/u))/kappa, .5/kappa after 50 consecutive u>=.6 critic updates, converting mode_hold FAIL to a sustained PASS while keeping all six Tier 1 gates.",
+  "mechanism_class": "generator_critic_read_stencil",
+  "conclusion": "Falsified at Tier 1. Against its fresh matched leader control (same source cbba593bb98d, seed 0, deterministic_orthogonal, revision 9), stall_reach passes 4/6 Tier 1 versus 5/6: ring16_acquisition is lost (terminal suffix 0/5, 14/16 modes, HQ .530 versus control suffix 26, 16 modes, HQ .961, first pass 1184). 1545/1600 ring16 updates are stalled: under BCAP the critic's input slope sits near its cap, so the saturation-only stall rule (PR #107's G trust factor has no current counterpart) latches and pins the width at .5. Both arms' five_word_joint_smoke are INCOMPLETE at the 900 s allowance after acquiring words (control 17501/20001 updates under host CPU contention; stall_reach 10834, about 1.6x per-update cost from the 341-point read). All 21 Tier 2 tasks are BLOCKED for both arms; mode_hold is unmeasured. Public-API ring8 toy: off path PASS (7 modes, HQ 1.0), stall_reach FAIL (3 modes, HQ .24). Paid 1036.6 s control and 1048.1 s candidate; no retries.",
+  "next_action": "Keep generator_critic_read opt-in and off; do not tune widths or windows. A successor needs a stall signal that is selective under BCAP's saturated slope and a constant-cost read (a few random or antithetic directions, not every axis); screen it on ring8/ring16 toys first. Do not run CPU-heavy work beside the 900 s word smoke.",
+  "source": {
+    "path": "reports/forge/stall-reach/README.md",
+    "sha256": "75214274ae8ea5312d5af0e96c28bd2c31a1c74727a497cea703cbd8aa28dcb9",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/6991ed0dba49cdda712fbd4215ab8832633c91c2/reports/forge/stall-reach/README.md"
+  },
+  "provenance": {
+    "input_evidence_scope": "ordinary_source_bound_publication",
+    "publication_commit": "6991ed0dba49cdda712fbd4215ab8832633c91c2",
+    "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+    "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+    "protocol_seed": 0,
+    "default_adoption": false,
+    "qualification_reuse": false,
+    "binding_validation": "Exact publication Git bytes checked at construction; original qualification remains bound to the execution source. Compiler does not recursively certify these provenance pins.",
+    "documents": {
+      "results.json": {
+        "path": "reports/forge/stall-reach/results.json",
+        "sha256": "6e8ba32577ce1fcd37b873cd322f559ac28cae80725bb71b1f9f17f190e227f1",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/6991ed0dba49cdda712fbd4215ab8832633c91c2/reports/forge/stall-reach/results.json"
+      },
+      "spec.json": {
+        "path": "reports/forge/stall-reach/spec.json",
+        "sha256": "a3fa774bed932125e9278d86c258ebcd5df6dce5670edc4d97ff3cb6f7005295",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/6991ed0dba49cdda712fbd4215ab8832633c91c2/reports/forge/stall-reach/spec.json"
+      },
+      "registration.json": {
+        "path": "reports/forge/stall-reach/registration.json",
+        "sha256": "cdbd461a01773639cbb85cf55118f454dcf77877b09202eb3083e287f30cb4d0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/6991ed0dba49cdda712fbd4215ab8832633c91c2/reports/forge/stall-reach/registration.json"
+      },
+      "measurements.md": {
+        "path": "reports/forge/stall-reach/measurements.md",
+        "sha256": "e0e6f78d85021771a0e5ec79c9138ee9a89e7c5b8f03b551edfc4dd33123d2c2",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/6991ed0dba49cdda712fbd4215ab8832633c91c2/reports/forge/stall-reach/measurements.md"
+      }
+    }
+  },
+  "task_results": []
+}

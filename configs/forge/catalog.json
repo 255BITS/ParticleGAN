@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11782,
+    "files": 11785,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -11,7 +11,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 84,
+      "benchmark/toy_audit": 85,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -90,7 +90,7 @@
       "report/toy100/shared22": 201,
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
-      "report/toy_audit": 532,
+      "report/toy_audit": 534,
       "report/trajectory": 175,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
@@ -110,12 +110,12 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 996,
+      "narrative": 997,
       "structured_evidence": 5053,
-      "support": 1541,
+      "support": 1542,
       "support_artifact": 60,
       "visualization": 22,
-      "visualization_artifact": 725
+      "visualization_artifact": 726
     }
   },
   "coverage": {
@@ -1439,6 +1439,13 @@
       "suggested_tiers": [
         2
       ]
+    },
+    {
+      "path": "benchmarks/toy_audit/stall_reach_ring8.py",
+      "git_blob": "1e94c6b46360860fc980756d430c7cc70d43c366",
+      "family": "benchmark/toy_audit",
+      "role": "support",
+      "suggested_tiers": []
     },
     {
       "path": "benchmarks/toy_audit/tier1_batch_size.py",
@@ -77772,6 +77779,20 @@
       "git_blob": "808ad4b6b3278fae06801e69ca39390f5dadc05c",
       "family": "report/toy_audit",
       "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "path": "reports/toy_audit/api_contract/stall_reach/README.md",
+      "git_blob": "4cf15ea961d577425d216e21a926cb362196f20e",
+      "family": "report/toy_audit",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "path": "reports/toy_audit/api_contract/stall_reach/stall-reach-ring8.gif",
+      "git_blob": "3adb64056e04c643d723dc283d8c8b8480632df8",
+      "family": "report/toy_audit",
+      "role": "visualization_artifact",
       "suggested_tiers": []
     },
     {
