@@ -82,8 +82,10 @@ Mechanism (`particlegan/critic_read.py`):
 
 Public-API toy, run separately ([toy README](../../toy_audit/api_contract/stall_reach/README.md)):
 on the 8-mode ring through `GANTrainer`, the off path ends with 7 modes and HQ
-1.0 (PASS). stall_reach ends with 3 modes and HQ .24 (FAIL; gate is modes ≥ 7
-and HQ ≥ .90), with 964/1200 updates stalled.
+.917 (PASS). stall_reach ends with 6 modes and HQ .747 (FAIL; gate is modes ≥ 7
+and HQ ≥ .90), with 1093/1200 updates stalled. Both arms oscillate on this toy,
+so it only supports the ring16 result. (Corrected: the first toy version drew
+its particle table from the global RNG and its numbers did not reproduce.)
 
 ## Why it failed
 
@@ -91,7 +93,7 @@ PR #107's stall condition had two parts: D near its slope limit, **and** G's
 own-curvature trust factor averaging ≤ .1 over 50 updates. The current recipe
 has no G trust factor, so the approved rebuild used slope saturation alone.
 Under BCAP with `reg_kappa = 1`, the critic's measured slope on the fakes sits
-close to the cap (`u ≈ .93` on the ring8 toy) during ordinary training. The stall rule
+close to the cap (median `u ≈ .90` on the ring8 toy) during ordinary training. The stall rule
 therefore cannot tell "stalled" from "normal". Even before it latches,
 `min(u, 1/u)` at `u ≈ .9` gives a width near the .5 maximum. The PR84 setting,
 where `s ≤ .3` and the width was .15, does not occur under BCAP. At width .5 the

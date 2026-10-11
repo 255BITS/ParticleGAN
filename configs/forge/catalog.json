@@ -1442,7 +1442,7 @@
     },
     {
       "path": "benchmarks/toy_audit/stall_reach_ring8.py",
-      "git_blob": "1e94c6b46360860fc980756d430c7cc70d43c366",
+      "git_blob": "e2cfc06cffdaa23476320256ef788e991e094d3f",
       "family": "benchmark/toy_audit",
       "role": "support",
       "suggested_tiers": []
@@ -77783,14 +77783,21 @@
     },
     {
       "path": "reports/toy_audit/api_contract/stall_reach/README.md",
-      "git_blob": "4cf15ea961d577425d216e21a926cb362196f20e",
+      "git_blob": "27a1ece869c7a8254a8d3d84609c4216cdec2556",
       "family": "report/toy_audit",
       "role": "narrative",
       "suggested_tiers": []
     },
     {
+      "path": "reports/toy_audit/api_contract/stall_reach/none-ring8.gif",
+      "git_blob": "81084aa74898e66fcbdb4400b87cd86a028969c2",
+      "family": "report/toy_audit",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
       "path": "reports/toy_audit/api_contract/stall_reach/stall-reach-ring8.gif",
-      "git_blob": "3adb64056e04c643d723dc283d8c8b8480632df8",
+      "git_blob": "710db7811fd844bc2cdd39ea7ce9d72ad359a17c",
       "family": "report/toy_audit",
       "role": "visualization_artifact",
       "suggested_tiers": []

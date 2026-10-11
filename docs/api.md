@@ -1275,8 +1275,9 @@ caller.
 `generator_critic_read="stall_reach"` (closed PR #107; off by default, not in any
 preset). Then it returns a `particlegan.critic_read.StallReachRead`: the generator
 reads the mean critic over `x` and `x ± w·e_i` for every input coordinate, with a
-width set from D's measured input slope. D's own loss and penalty are unchanged,
-and the read draws no random numbers. In a familiar loop:
+width set from D's measured input slope. D's own loss and penalty are unchanged.
+`observe` draws no random numbers; if the critic you wrap adds input noise, each
+of the `2d + 1` stencil points takes its own noise draw. In a familiar loop:
 
 ```python
 read = recipe.make_generator_critic_read(D)

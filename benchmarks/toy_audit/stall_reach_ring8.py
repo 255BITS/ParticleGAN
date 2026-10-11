@@ -8,6 +8,7 @@ live samples (HQ = within 3 sigma of a ring center). Width and stall counts are
 diagnostics, not gates.
 
 Run: ``python -m benchmarks.toy_audit.stall_reach_ring8 --output runs/stall-reach-ring8``
+(add ``--read none`` for the matched off-path control arm).
 """
 from __future__ import annotations
 
@@ -46,7 +47,10 @@ def train(*, read="stall_reach", steps=STEPS, seed=0, frames=None):
     recipe = leader_recipe(read, steps)
     generator = deterministic_orthogonal_(SimpleMLPGenerator(Z_DIM, 96, 3, 2), seed=seed)
     critic = deterministic_orthogonal_(SimpleMLPDiscriminator(2, 96, 3, 3), seed=seed + 1)
-    trainer = GANTrainer(recipe, generator, critic, seed=seed)
+    # Deterministic R2 particle table: the default make_prior() draw uses the
+    # global torch RNG, which would make the toy irreproducible.
+    prior = deterministic_orthogonal_(recipe.make_prior())
+    trainer = GANTrainer(recipe, generator, critic, prior=prior, seed=seed)
     means = ring_means()
     data = torch.Generator().manual_seed(seed + 100)
     curve = []
@@ -64,7 +68,7 @@ def train(*, read="stall_reach", steps=STEPS, seed=0, frames=None):
                 gate={k: list(v) for k, v in GATE.items()}, critic_read=read_summary)
 
 
-def render_gif(frames, path):
+def render_gif(frames, path, read="stall_reach"):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -75,7 +79,7 @@ def render_gif(frames, path):
         fig, axes = plt.subplots(1, 2, figsize=(6.4, 3.3), dpi=80)
         target = sample_ring(means, 1024, SIGMA, torch.Generator().manual_seed(7))
         for ax, points, title in ((axes[0], target, "target: 8-mode ring"),
-                                  (axes[1], samples, f"stall_reach G, update {step}")):
+                                  (axes[1], samples, f"{read} G, update {step}")):
             ax.scatter(points[:, 0], points[:, 1], s=2, alpha=.4)
             ax.scatter(means[:, 0], means[:, 1], s=18, c="red", marker="x")
             ax.set_xlim(-3, 3), ax.set_ylim(-3, 3), ax.set_aspect("equal"), ax.set_title(title, fontsize=8)
@@ -93,15 +97,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--gif", type=Path)
+    parser.add_argument("--read", choices=("stall_reach", "none"), default="stall_reach",
+                        help="generator_critic_read arm; none is the matched control")
     args = parser.parse_args()
     torch.set_num_threads(1)
     args.output.mkdir(parents=True, exist_ok=True)
     frames = []
     with torch.autograd.set_multithreading_enabled(False):
-        result = train(frames=frames)
+        result = train(read=args.read, frames=frames)
     (args.output / "result.json").write_text(json.dumps({k: v for k, v in result.items() if k != "recipe"}, indent=1))
-    render_gif(frames, args.gif or args.output / "stall-reach-ring8.gif")
-    print(json.dumps(dict(event="stall_reach_ring8", passed=result["passed"], final=result["final"],
+    render_gif(frames, args.gif or args.output / f"{args.read.replace('_', '-')}-ring8.gif", args.read)
+    print(json.dumps(dict(event="stall_reach_ring8", read=args.read, passed=result["passed"], final=result["final"],
                           critic_read=result["critic_read"])), flush=True)
 
 
